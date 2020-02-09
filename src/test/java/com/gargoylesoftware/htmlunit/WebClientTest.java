@@ -2517,4 +2517,40 @@ public class WebClientTest extends SimpleWebTestCase {
         }
         verify(cache);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void webSocketDisabled() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        client.setWebConnection(conn);
+
+        final String html =
+                "<html>\n"
+                    + "  <head>\n"
+                    + "    <script>alert('WebSocket' in window);</script>\n"
+                    + "  </head>\n"
+                    + "  <body>\n"
+                    + "  </body>\n"
+                    + "</html>";
+        conn.setResponse(URL_FIRST, html);
+
+        final List<String> actual = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        assertEquals(new String[]{"true"}, actual);
+
+        actual.clear();
+        client.getOptions().setWebSocketEnabled(false);
+        client.getPage(URL_FIRST);
+        assertEquals(new String[]{"false"}, actual);
+
+        actual.clear();
+        client.getOptions().setWebSocketEnabled(true);
+        client.getPage(URL_FIRST);
+        assertEquals(new String[]{"true"}, actual);
+    }
 }

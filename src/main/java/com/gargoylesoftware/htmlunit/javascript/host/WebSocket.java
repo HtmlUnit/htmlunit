@@ -19,22 +19,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WEBSOCKET_SRC
 
 import java.io.IOException;
 import java.net.URI;
-import java.nio.ByteBuffer;
-import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.UpgradeException;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.api.WebSocketListener;
-import org.eclipse.jetty.websocket.api.WebSocketPolicy;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -48,6 +38,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
+import com.gargoylesoftware.htmlunit.websocket.JettyWebSocketAdapter;
+import com.gargoylesoftware.htmlunit.websocket.WebSocketAdapter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -93,10 +85,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     private String binaryType_ = "blob";
 
     private HtmlPage containingPage_;
-    private WebSocketClient client_;
-    private volatile Session incomingSession_;
-    private Session outgoingSession_;
-    private WebSocketListener listener_;
+    private WebSocketAdapter webSocketImpl_;
     private boolean srcElementSet_;
     private boolean originSet_;
 
@@ -104,24 +93,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * Creates a new instance.
      */
     public WebSocket() {
-    }
-
-    /**
-     * Sets the {@link WebSocketListener}.
-     *
-     * @param listener the {@link WebSocketListener}
-     */
-    public void setWebSocketListener(final WebSocketListener listener) {
-        listener_ = listener;
-    }
-
-    /**
-     * Returns the the {@link WebSocketListener}.
-     *
-     * @return the the {@link WebSocketListener}
-     */
-    public WebSocketListener getWebSocketListener() {
-        return listener_;
     }
 
     /**
@@ -140,57 +111,104 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             srcElementSet_ = webClient.getBrowserVersion().hasFeature(WEBSOCKET_SRC_ELEMENT_SET);
             originSet_ = webClient.getBrowserVersion().hasFeature(WEBSOCKET_ORIGIN_SET);
 
-            final WebClientOptions options = webClient.getOptions();
-            if (options.isUseInsecureSSL()) {
-                client_ = new WebSocketClient(new SslContextFactory(true), null, null);
-                // still use the deprecated method here to be backward compatible with older jersey versions
-                // see https://github.com/HtmlUnit/htmlunit/issues/36
-                // client_ = new WebSocketClient(new SslContextFactory.Client(true), null, null);
-            }
-            else {
-                client_ = new WebSocketClient();
-            }
-            client_.getHttpClient().setCookieStore(new WebSocketCookieStore(webClient));
+            webSocketImpl_ = new JettyWebSocketAdapter(webClient) {
 
-            final WebSocketPolicy policy = client_.getPolicy();
-            int size = options.getWebSocketMaxBinaryMessageSize();
-            if (size > 0) {
-                policy.setMaxBinaryMessageSize(size);
-            }
-            size = options.getWebSocketMaxBinaryMessageBufferSize();
-            if (size > 0) {
-                policy.setMaxBinaryMessageBufferSize(size);
-            }
-            size = options.getWebSocketMaxTextMessageSize();
-            if (size > 0) {
-                policy.setMaxTextMessageSize(size);
-            }
-            size = options.getWebSocketMaxTextMessageBufferSize();
-            if (size > 0) {
-                policy.setMaxTextMessageBufferSize(size);
-            }
+                @Override
+                public void onWebSocketConnecting() {
+                    setReadyState(CONNECTING);
+                }
 
-            client_.start();
+                @Override
+                public void onWebSocketConnect() {
+                    setReadyState(OPEN);
+
+                    final Event openEvent = new Event();
+                    openEvent.setType(Event.TYPE_OPEN);
+                    if (srcElementSet_) {
+                        openEvent.setSrcElement(WebSocket.this);
+                    }
+                    fire(openEvent);
+                    callFunction(openHandler_, new Object[] {openEvent});
+                }
+
+                @Override
+                public void onWebSocketClose(final int statusCode, final String reason) {
+                    setReadyState(CLOSED);
+
+                    final CloseEvent closeEvent = new CloseEvent();
+                    closeEvent.setCode(statusCode);
+                    closeEvent.setReason(reason);
+                    closeEvent.setWasClean(true);
+                    fire(closeEvent);
+                    callFunction(closeHandler_, new Object[] {closeEvent});
+                }
+
+                @Override
+                public void onWebSocketText(final String message) {
+                    final MessageEvent msgEvent = new MessageEvent(message);
+                    if (originSet_) {
+                        msgEvent.setOrigin(getUrl());
+                    }
+                    if (srcElementSet_) {
+                        msgEvent.setSrcElement(WebSocket.this);
+                    }
+                    fire(msgEvent);
+                    callFunction(messageHandler_, new Object[] {msgEvent});
+                }
+
+                @Override
+                public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
+                    final NativeArrayBuffer buffer = new NativeArrayBuffer(length);
+                    System.arraycopy(data, offset, buffer.getBuffer(), 0, length);
+                    buffer.setParentScope(getParentScope());
+                    buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
+
+                    final MessageEvent msgEvent = new MessageEvent(buffer);
+                    if (originSet_) {
+                        msgEvent.setOrigin(getUrl());
+                    }
+                    if (srcElementSet_) {
+                        msgEvent.setSrcElement(WebSocket.this);
+                    }
+                    fire(msgEvent);
+                    callFunction(messageHandler_, new Object[] {msgEvent});
+                }
+
+                @Override
+                public void onWebSocketConnectError(final Throwable cause) {
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("WS connect error for url '" + url + "':", cause);
+                    }
+                }
+
+                @Override
+                public void onWebSocketError(final Throwable cause) {
+                    setReadyState(CLOSED);
+
+                    final Event errorEvent = new Event();
+                    errorEvent.setType(Event.TYPE_ERROR);
+                    if (srcElementSet_) {
+                        errorEvent.setSrcElement(WebSocket.this);
+                    }
+                    fire(errorEvent);
+                    callFunction(errorHandler_, new Object[] {errorEvent});
+
+                    final CloseEvent closeEvent = new CloseEvent();
+                    closeEvent.setCode(1006);
+                    closeEvent.setReason(cause.getMessage());
+                    closeEvent.setWasClean(false);
+                    fire(closeEvent);
+                    callFunction(closeHandler_, new Object[] {closeEvent});
+                }
+            };
+
+            webSocketImpl_.start();
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);
 
             webClient.getInternals().created(this);
 
-            final Future<Session> connectFuture = client_.connect(new WebSocketImpl(), url_);
-            client_.getExecutor().execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        setReadyState(CONNECTING);
-                        incomingSession_ = connectFuture.get();
-                    }
-                    catch (final Exception e) {
-                        if (LOG.isErrorEnabled()) {
-                            LOG.error("WS connect error for url '" + url + "':", e);
-                        }
-                    }
-                }
-            });
+            webSocketImpl_.connect(url_);
         }
         catch (final Exception e) {
             if (LOG.isErrorEnabled()) {
@@ -379,35 +397,23 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void close(final Object code, final Object reason) {
         if (readyState_ != CLOSED) {
-            if (incomingSession_ != null) {
-                try {
-                    incomingSession_.close();
-                }
-                catch (final Throwable e) {
-                    LOG.error("WS close error - incomingSession_.close() failed", e);
-                }
+            try {
+                webSocketImpl_.closeIncommingSession();
             }
-            if (outgoingSession_ != null) {
-                try {
-                    outgoingSession_.close();
-                }
-                catch (final Throwable e) {
-                    LOG.error("WS close error - outgoingSession_.close() failed", e);
-                }
+            catch (final Throwable e) {
+                LOG.error("WS close error - incomingSession_.close() failed", e);
+            }
+
+            try {
+                webSocketImpl_.closeOutgoingSession();
+            }
+            catch (final Throwable e) {
+                LOG.error("WS close error - outgoingSession_.close() failed", e);
             }
         }
 
         try {
-            if (client_ != null) {
-                try {
-                    client_.stop();
-                    client_.destroy();
-                }
-                catch (final UpgradeException e) {
-                    LOG.error("WS stop error (connection was not established so far)", e);
-                }
-                client_ = null;
-            }
+            webSocketImpl_.closeClinet();
         }
         catch (final Exception e) {
             throw new RuntimeException(e);
@@ -421,147 +427,32 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void send(final Object content) {
         try {
-            if (content instanceof String) {
-                outgoingSession_.getRemote().sendString((String) content);
-            }
-            else if (content instanceof NativeArrayBuffer) {
-                final byte[] bytes = ((NativeArrayBuffer) content).getBuffer();
-                final ByteBuffer buffer = ByteBuffer.wrap(bytes);
-                outgoingSession_.getRemote().sendBytes(buffer);
-            }
-            else {
-                throw new IllegalStateException(
-                        "Not Yet Implemented: WebSocket.send() was used to send non-string value");
-            }
+            webSocketImpl_.send(content);
         }
         catch (final IOException e) {
             LOG.error("WS send error", e);
         }
     }
 
-    private class WebSocketImpl extends WebSocketAdapter {
+    private void fire(final Event evt) {
+        evt.setTarget(WebSocket.this);
+        evt.setParentScope(getParentScope());
+        evt.setPrototype(getPrototype(evt.getClass()));
 
-        @Override
-        public void onWebSocketConnect(final Session session) {
-            if (listener_ != null) {
-                listener_.onWebSocketConnect(session);
-            }
-            super.onWebSocketConnect(session);
-            setReadyState(OPEN);
-            outgoingSession_ = session;
+        final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+        engine.getContextFactory().call(cx -> {
+            executeEventLocally(evt);
+            return null;
+        });
+    }
 
-            final Event openEvent = new Event();
-            openEvent.setType(Event.TYPE_OPEN);
-            if (srcElementSet_) {
-                openEvent.setSrcElement(WebSocket.this);
-            }
-            fire(openEvent);
-            callFunction(openHandler_, new Object[] {openEvent});
+    private void callFunction(final Function function, final Object[] args) {
+        if (function == null) {
+            return;
         }
-
-        @Override
-        public void onWebSocketClose(final int statusCode, final String reason) {
-            if (listener_ != null) {
-                listener_.onWebSocketClose(statusCode, reason);
-            }
-            super.onWebSocketClose(statusCode, reason);
-            setReadyState(CLOSED);
-            outgoingSession_ = null;
-
-            final CloseEvent closeEvent = new CloseEvent();
-            closeEvent.setCode(statusCode);
-            closeEvent.setReason(reason);
-            closeEvent.setWasClean(true);
-            fire(closeEvent);
-            callFunction(closeHandler_, new Object[] {closeEvent});
-        }
-
-        @Override
-        public void onWebSocketText(final String message) {
-            if (listener_ != null) {
-                listener_.onWebSocketText(message);
-            }
-            super.onWebSocketText(message);
-
-            final MessageEvent msgEvent = new MessageEvent(message);
-            if (originSet_) {
-                msgEvent.setOrigin(getUrl());
-            }
-            if (srcElementSet_) {
-                msgEvent.setSrcElement(WebSocket.this);
-            }
-            fire(msgEvent);
-            callFunction(messageHandler_, new Object[] {msgEvent});
-        }
-
-        @Override
-        public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
-            if (listener_ != null) {
-                listener_.onWebSocketBinary(data, offset, length);
-            }
-            super.onWebSocketBinary(data, offset, length);
-
-            final NativeArrayBuffer buffer = new NativeArrayBuffer(length);
-            System.arraycopy(data, offset, buffer.getBuffer(), 0, length);
-            buffer.setParentScope(getParentScope());
-            buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
-
-            final MessageEvent msgEvent = new MessageEvent(buffer);
-            if (originSet_) {
-                msgEvent.setOrigin(getUrl());
-            }
-            if (srcElementSet_) {
-                msgEvent.setSrcElement(WebSocket.this);
-            }
-            fire(msgEvent);
-            callFunction(messageHandler_, new Object[] {msgEvent});
-        }
-
-        @Override
-        public void onWebSocketError(final Throwable cause) {
-            if (listener_ != null) {
-                listener_.onWebSocketError(cause);
-            }
-            super.onWebSocketError(cause);
-            setReadyState(CLOSED);
-            outgoingSession_ = null;
-
-            final Event errorEvent = new Event();
-            errorEvent.setType(Event.TYPE_ERROR);
-            if (srcElementSet_) {
-                errorEvent.setSrcElement(WebSocket.this);
-            }
-            fire(errorEvent);
-            callFunction(errorHandler_, new Object[] {errorEvent});
-
-            final CloseEvent closeEvent = new CloseEvent();
-            closeEvent.setCode(1006);
-            closeEvent.setReason(cause.getMessage());
-            closeEvent.setWasClean(false);
-            fire(closeEvent);
-            callFunction(closeHandler_, new Object[] {closeEvent});
-        }
-
-        private void fire(final Event evt) {
-            evt.setTarget(WebSocket.this);
-            evt.setParentScope(getParentScope());
-            evt.setPrototype(getPrototype(evt.getClass()));
-
-            final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-            engine.getContextFactory().call(cx -> {
-                executeEventLocally(evt);
-                return null;
-            });
-        }
-
-        private void callFunction(final Function function, final Object[] args) {
-            if (function == null) {
-                return;
-            }
-            final Scriptable scope = function.getParentScope();
-            final JavaScriptEngine engine
-                = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-            engine.callFunction(containingPage_, function, scope, WebSocket.this, args);
-        }
+        final Scriptable scope = function.getParentScope();
+        final JavaScriptEngine engine
+            = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+        engine.callFunction(containingPage_, function, scope, WebSocket.this, args);
     }
 }

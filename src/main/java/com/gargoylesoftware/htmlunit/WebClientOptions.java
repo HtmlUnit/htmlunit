@@ -26,6 +26,7 @@ import java.security.KeyStore;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Madis Pärn
+ * @author Ronald Brill
  */
 public class WebClientOptions implements Serializable {
 
@@ -59,6 +60,7 @@ public class WebClientOptions implements Serializable {
     private int screenWidth_ = 1024;
     private int screenHeight_ = 768;
 
+    private boolean webSocketEnabled_ = true;
     private int webSocketMaxTextMessageSize_ = -1;
     private int webSocketMaxTextMessageBufferSize_ = -1;
     private int webSocketMaxBinaryMessageSize_ = -1;
@@ -654,6 +656,24 @@ public class WebClientOptions implements Serializable {
      */
     public int getScreenHeight() {
         return screenHeight_;
+    }
+
+    /**
+     * Enables/disables WebSocket support. By default, this property is enabled.
+     *
+     * @param enabled {@code true} to enable WebSocket support
+     */
+    public void setWebSocketEnabled(final boolean enabled) {
+        webSocketEnabled_ = enabled;
+    }
+
+    /**
+     * Returns {@code true} if WebSockets are enabled.
+     *
+     * @return {@code true} if WebSockets are enabled
+     */
+    public boolean isWebSocketEnabled() {
+        return webSocketEnabled_;
     }
 
     /**

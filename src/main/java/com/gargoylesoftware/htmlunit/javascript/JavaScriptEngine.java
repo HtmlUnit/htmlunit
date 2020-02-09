@@ -477,6 +477,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
 
+        if (!webClient.getOptions().isWebSocketEnabled()) {
+            deleteProperties(window, "WebSocket");
+        }
+
         window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow);
     }

@@ -12,28 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 /**
- * An annotation to specify a supported browser.
- *
- * @author Ahmed Ashour
- * @author Ronald Brill
+ * WebSocket support.
  */
-public enum SupportedBrowser {
-
-    /** Latest version of Chrome. */
-    CHROME,
-
-    /** Internet Explorer 11. */
-    IE,
-
-    /** Firefox latest. */
-    FF,
-
-    /** Firefox 60. */
-    FF60,
-
-    /** Firefox 68. */
-    FF68
-}
+package com.gargoylesoftware.htmlunit.websocket;
