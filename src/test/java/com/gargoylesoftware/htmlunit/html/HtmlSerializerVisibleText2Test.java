@@ -1582,6 +1582,18 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
+    /**
+     * Verifies getVisibleText() for issue #128
+     * (https://github.com/HtmlUnit/htmlunit/issues/128).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("I have out of 2 stamps")
+    public void getVisibleTextInputInsideP() throws Exception {
+        getVisibleTextFormated("<p id='tester'>"
+                + " I have <input type='number' value='2'/> out of 2 stamps</p>");
+    }
+
     private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
         final String htmlContent
             = "<html>\n"
