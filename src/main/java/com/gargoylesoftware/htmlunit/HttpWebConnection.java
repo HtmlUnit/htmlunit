@@ -332,6 +332,27 @@ public class HttpWebConnection implements WebConnection {
                     postMethod.setEntity(urlEncodedEntity);
                 }
             }
+            else if (webRequest.getEncodingType() == FormEncodingType.TEXT_PLAIN && method instanceof HttpPost) {
+                final HttpPost postMethod = (HttpPost) method;
+                if (webRequest.getRequestBody() == null) {
+                    final StringBuilder body = new StringBuilder();
+                    for (final NameValuePair pair : webRequest.getRequestParameters()) {
+                        body.append(StringUtils.remove(StringUtils.remove(pair.getName(), '\r'), '\n'))
+                            .append("=")
+                            .append(StringUtils.remove(StringUtils.remove(pair.getValue(), '\r'), '\n'))
+                            .append("\r\n");
+                    }
+                    final StringEntity bodyEntity = new StringEntity(body.toString(), charset);
+                    bodyEntity.setContentType(MimeType.TEXT_PLAIN);
+                    postMethod.setEntity(bodyEntity);
+                }
+                else {
+                    final String body = StringUtils.defaultString(webRequest.getRequestBody());
+                    final StringEntity bodyEntity = new StringEntity(body, charset);
+                    bodyEntity.setContentType(MimeType.TEXT_PLAIN);
+                    postMethod.setEntity(bodyEntity);
+                }
+            }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
                 final Charset c = getCharset(charset, webRequest.getRequestParameters());
                 final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();

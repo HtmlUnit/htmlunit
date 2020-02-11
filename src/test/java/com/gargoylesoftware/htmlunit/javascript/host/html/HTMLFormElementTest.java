@@ -27,7 +27,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -1110,9 +1112,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     public void enctypeGet() throws Exception {
         // for GET, no Content-Type header should be sent
-        enctypeTest("", "get", null);
-        enctypeTest("application/x-www-form-urlencoded", "get", null);
-        enctypeTest("multipart/form-data", "get", null);
+        enctypeTest(false, null, "get", null);
+        enctypeTest(false, "", "get", null);
+        enctypeTest(false, "application/x-www-form-urlencoded", "get", null);
+        enctypeTest(false, "multipart/form-data", "get", null);
+        enctypeTest(false, MimeType.TEXT_PLAIN, "get", null);
+
+        enctypeTest(true, null, "get", null);
+        enctypeTest(true, "", "get", null);
+        enctypeTest(true, "application/x-www-form-urlencoded", "get", null);
+        enctypeTest(true, "multipart/form-data", "get", null);
+        enctypeTest(true, MimeType.TEXT_PLAIN, "get", null);
     }
 
     /**
@@ -1122,11 +1132,21 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"application/x-www-form-urlencoded",
                 "application/x-www-form-urlencoded",
-                "multipart/form-data"})
+                "application/x-www-form-urlencoded",
+                "multipart/form-data",
+                "text/plain"})
     public void enctypePost() throws Exception {
-        enctypeTest("", "post", getExpectedAlerts()[0]);
-        enctypeTest("application/x-www-form-urlencoded", "post", getExpectedAlerts()[1]);
-        enctypeTest("multipart/form-data", "post", getExpectedAlerts()[2]);
+//        enctypeTest(false, null, "post", getExpectedAlerts()[0]);
+//        enctypeTest(false, "", "post", getExpectedAlerts()[1]);
+//        enctypeTest(false, "application/x-www-form-urlencoded", "post", getExpectedAlerts()[2]);
+//        enctypeTest(false, "multipart/form-data", "post", getExpectedAlerts()[3]);
+        enctypeTest(false, MimeType.TEXT_PLAIN, "post", getExpectedAlerts()[4]);
+
+        enctypeTest(true, null, "post", getExpectedAlerts()[0]);
+        enctypeTest(true, "", "post", getExpectedAlerts()[1]);
+        enctypeTest(true, "application/x-www-form-urlencoded", "post", getExpectedAlerts()[2]);
+        enctypeTest(true, "multipart/form-data", "post", getExpectedAlerts()[3]);
+        enctypeTest(true, MimeType.TEXT_PLAIN, "post", getExpectedAlerts()[4]);
     }
 
     /**
@@ -1137,8 +1157,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void enctype_incorrect() throws Exception {
-        enctypeTest(MimeType.TEXT_HTML, "post", "application/x-www-form-urlencoded");
-        enctypeTest(MimeType.TEXT_HTML, "get", null);
+        enctypeTest(false, MimeType.TEXT_HTML, "post", "application/x-www-form-urlencoded");
+        enctypeTest(false, MimeType.TEXT_HTML, "get", null);
+
+        enctypeTest(true, MimeType.TEXT_HTML, "post", "application/x-www-form-urlencoded");
+        enctypeTest(true, MimeType.TEXT_HTML, "get", null);
     }
 
     /**
@@ -1156,14 +1179,23 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    private void enctypeTest(final String enctype, final String method, final String expectedCntType) throws Exception {
-        final String html = "<html><head><script>\n"
+    private void enctypeTest(final boolean html5, final String enctype,
+                    final String method, final String expectedCntType) throws Exception {
+        String html = "";
+        if (html5) {
+            html += "<!DOCTYPE html>\n";
+        }
+        html += "<html><head><script>\n"
             + "function test() {\n"
             + "  var f = document.forms[0];\n"
             + "  f.submit();\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
-            + "<form action='foo.html' enctype='" + enctype + "' method='" + method + "'>\n"
+            + "<form action='foo.html' ";
+        if (enctype != null) {
+            html += "enctype='" + enctype + "' ";
+        }
+        html += "method='" + method + "'>\n"
             + "  <input name='myField' value='some value'>\n"
             + "</form></body></html>";
 
@@ -1197,6 +1229,129 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "éèêäöü";
 
         assertTrue("Body: " + body, body.contains(expected));
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitPlainTextEmptyForm() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertNull(body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("myField=abcDEF\r\n")
+    public void submitPlainTextAsciiText() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input name='myField' value='abcDEF'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        Thread.sleep(400);
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[0], body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my\tField = abcDEF \t\r\n")
+    public void submitPlainTextSpecialChars() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input name='my\tField ' value=' ab\rcD\nEF \t'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        Thread.sleep(400);
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[0], body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("myField=éèêäöü\r\n")
+    public void submitPlainTextUnicode() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input name='myField' value='éèêäöü'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        Thread.sleep(400);
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[0], body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myFile=htmlunit-test", ".txt\r\n"})
+    public void submitPlainTextFile() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input type='file' id='f' name='myFile'>\n"
+                + "    <input id='clickMe' type='submit' value='Click Me'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        try {
+            String path = tmpFile.getAbsolutePath();
+            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+                path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+            }
+            driver.findElement(By.id("f")).sendKeys(path);
+            driver.findElement(By.id("clickMe")).click();
+        }
+        finally {
+            assertTrue(tmpFile.delete());
+        }
+
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertTrue(body, body.startsWith(getExpectedAlerts()[0]));
+        assertTrue(body, body.endsWith(getExpectedAlerts()[1]));
     }
 
     /**

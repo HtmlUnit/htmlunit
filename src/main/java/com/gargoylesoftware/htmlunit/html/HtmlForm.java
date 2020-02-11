@@ -147,7 +147,7 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        //html5 attribute's support
+        // html5 attribute's support
         if (submitElement != null) {
             updateHtml5Attributes(submitElement);
         }

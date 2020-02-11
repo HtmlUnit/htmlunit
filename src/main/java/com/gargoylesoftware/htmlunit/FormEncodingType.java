@@ -17,11 +17,14 @@ package com.gargoylesoftware.htmlunit;
 import java.io.Serializable;
 import java.util.Locale;
 
+import com.gargoylesoftware.htmlunit.util.MimeType;
+
 /**
  * A collection of constants that represent the various ways a form can be encoded when submitted.
  *
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class FormEncodingType implements Serializable {
 
@@ -30,6 +33,9 @@ public final class FormEncodingType implements Serializable {
 
     /** Multipart form encoding (used to be a constant in HttpClient but it was deprecated with no alternative). */
     public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
+
+    /** text/plain. */
+    public static final FormEncodingType TEXT_PLAIN = new FormEncodingType(MimeType.TEXT_PLAIN);
 
     private final String name_;
 
@@ -57,6 +63,10 @@ public final class FormEncodingType implements Serializable {
 
         if (MULTIPART.getName().equals(lowerCaseName)) {
             return MULTIPART;
+        }
+
+        if (TEXT_PLAIN.equals(lowerCaseName)) {
+            return TEXT_PLAIN;
         }
 
         return URL_ENCODED;
