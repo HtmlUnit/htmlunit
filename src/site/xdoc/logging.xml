@@ -56,6 +56,9 @@
 final WebClient webClient = new WebClient();
 webClient.setJavaScriptErrorListener(myJavaScriptErrorListener);]]></source>
                     If you only like to ignore all JavaScript problems use SilentJavaScriptErrorListener.
+                    <source><![CDATA[
+final WebClient webClient = new WebClient();
+webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());]]></source>
                 </p>
             </subsection>
     
@@ -81,6 +84,9 @@ webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
 final WebClient webClient = new WebClient();
 webClient.setCssErrorHandler(myCSSErrorHandler);]]></source>
                     If you only like to ignore all CSS parsing problems use SilentCssErrorHandler.
+                    <source><![CDATA[
+final WebClient webClient = new WebClient();
+webClient.setCssErrorHandler(new SilentCssErrorHandler());]]></source>
                 </p>
             </subsection>
         </section>
