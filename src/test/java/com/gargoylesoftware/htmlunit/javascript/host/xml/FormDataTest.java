@@ -33,12 +33,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -815,6 +817,130 @@ public class FormDataTest extends WebDriverTestCase {
             assertEquals("textxy", lines[3]);
             assertEquals(lines[0] + "--", lines[4]);
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void defaultEnctype() throws Exception {
+        enctype(null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void emptyEnctype() throws Exception {
+        enctype("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void blankEnctype() throws Exception {
+        enctype(" ");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void unknownEnctype() throws Exception {
+        enctype("unknown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void urlencodedEnctype() throws Exception {
+        enctype("application/x-www-form-urlencoded");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void multipartEnctype() throws Exception {
+        enctype("multipart/form-data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void plainEnctype() throws Exception {
+        enctype("text/plain");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void xmlEnctype() throws Exception {
+        enctype("text/xml");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void jsonEnctype() throws Exception {
+        enctype("application/json");
+    }
+
+    private void enctype(final String enctype) throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData(document.testForm);\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "  } catch (e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' enctype='" + enctype + "'>\n"
+            + "    <input type='text' id='myText' name='myText' value='textxy'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='doTest()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {});
+
+        driver.findElement(By.id("testBtn")).click();
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[0], headerValue);
     }
 
     /**

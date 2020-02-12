@@ -71,7 +71,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
-import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -852,7 +851,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             if (lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
                 || lcValue.startsWith(FormEncodingType.MULTIPART.getName())
-                || lcValue.startsWith(MimeType.TEXT_PLAIN)) {
+                || lcValue.startsWith(FormEncodingType.TEXT_PLAIN.getName())) {
                 return false;
             }
             return true;

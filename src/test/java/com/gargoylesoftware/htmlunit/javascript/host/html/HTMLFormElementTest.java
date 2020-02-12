@@ -1380,21 +1380,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         enctypeTest(true, MimeType.APPLICATION_JSON, "get", null);
     }
 
-    /**
-     * Verify the default value of enctype for a newly created form element.
-     * A similar test is used by jQuery-1.9.1 in its "feature support" detection.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("application/x-www-form-urlencoded")
-    public void enctype_defaultValue() throws Exception {
-        final String html = "<html><body><script>\n"
-            + "alert(document.createElement('form').enctype);\n"
-            + "</script></body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
     private void enctypeTest(final boolean html5, final String enctype,
                     final String method, final String expectedCntType) throws Exception {
         String html = "";
@@ -1424,6 +1409,35 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         // multipart/form-data; boundary=---------------------------42937861433140731107235900
         headerValue = StringUtils.substringBefore(headerValue, ";");
         assertEquals(expectedCntType, headerValue);
+    }
+
+    /**
+     * Verify the default value of enctype for a newly created form element.
+     * A similar test is used by jQuery-1.9.1 in its "feature support" detection.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void enctype_defaultValue_html5() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><body><script>\n"
+            + "alert(document.createElement('form').enctype);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception in case of error
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void enctype_defaultValue() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "alert(document.createElement('form').enctype);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
