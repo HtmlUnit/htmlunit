@@ -65,7 +65,7 @@ public final class FormEncodingType implements Serializable {
             return MULTIPART;
         }
 
-        if (TEXT_PLAIN.equals(lowerCaseName)) {
+        if (TEXT_PLAIN.getName().equals(lowerCaseName)) {
             return TEXT_PLAIN;
         }
 
