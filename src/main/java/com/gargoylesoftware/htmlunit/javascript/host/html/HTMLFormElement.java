@@ -280,7 +280,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
         WebAssert.notNull("encoding", enctype);
         if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)
                 && !FormEncodingType.URL_ENCODED.getName().equals(enctype)
-                && !FormEncodingType.MULTIPART.getName().equals(enctype)) {
+                && !FormEncodingType.MULTIPART.getName().equals(enctype)
+                && !FormEncodingType.TEXT_PLAIN.getName().equals(enctype)) {
             throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '" + enctype + "'");
         }
         getHtmlForm().setEnctypeAttribute(enctype);

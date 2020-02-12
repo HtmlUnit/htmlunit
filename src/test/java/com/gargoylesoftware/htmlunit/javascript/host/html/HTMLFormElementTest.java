@@ -255,7 +255,25 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts("text/plain")
     public void plainEnctype() throws Exception {
-        enctype(MimeType.TEXT_PLAIN);
+        enctype("text/plain");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void xmlEnctype() throws Exception {
+        enctype("text/xml");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void jsonEnctype() throws Exception {
+        enctype("application/json");
     }
 
     private void enctype(final String encoding) throws Exception {
@@ -275,6 +293,192 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"},
+            IE = {"exception", "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"})
+    public void jsDefaultEnctype() throws Exception {
+        jsEnctype(null);
+        jsEncoding(null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"},
+            IE = {"exception", "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"})
+    public void jsEmptyEnctype() throws Exception {
+        jsEnctype("");
+        jsEncoding("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"},
+            IE = {"exception", "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"})
+    public void jsBlankEnctype() throws Exception {
+        jsEnctype(" ");
+        jsEncoding(" ");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"},
+            IE = {"exception", "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"})
+    public void jsUnknownEnctype() throws Exception {
+        jsEnctype("unknown");
+        jsEncoding("unknown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded",
+                "application/x-www-form-urlencoded",
+                "application/x-www-form-urlencoded"})
+    public void jsUrlencodedEnctype() throws Exception {
+        jsEnctype("application/x-www-form-urlencoded");
+        jsEncoding("application/x-www-form-urlencoded");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"multipart/form-data", "multipart/form-data", "multipart/form-data"})
+    public void jsMultipartEnctype() throws Exception {
+        jsEnctype("multipart/form-data");
+        jsEncoding("multipart/form-data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain", "text/plain", "text/plain"})
+    public void jsPlainEnctype() throws Exception {
+        jsEnctype("text/plain");
+        jsEncoding("text/plain");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"},
+            IE = {"exception", "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"})
+    public void jsXmlEnctype() throws Exception {
+        jsEnctype("text/xml");
+        jsEncoding("text/xml");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"},
+            IE = {"exception", "application/x-www-form-urlencoded",
+                        "application/x-www-form-urlencoded"})
+    public void jsJsonEnctype() throws Exception {
+        jsEnctype("application/json");
+        jsEncoding("application/json");
+    }
+
+    private void jsEnctype(final String enctype) throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "  function doTest() {\n"
+            + "    try {\n"
+            + "      document.forms[0].enctype = '" + enctype + "';\n"
+            + "      alert(document.forms[0].enctype);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(document.forms[0].encoding);\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form id='testForm' name='testForm' method='post' action = 'page2.html'>\n"
+            + "    <input type='submit' name='submit1' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+
+        driver.findElement(By.name("submit1")).click();
+        assertTitle(driver, "Response");
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[2], headerValue);
+    }
+
+    private void jsEncoding(final String encoding) throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "  function doTest() {\n"
+            + "    try {\n"
+            + "      document.forms[0].encoding = '" + encoding + "';\n"
+            + "      alert(document.forms[0].encoding);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "    alert(document.forms[0].enctype);\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form id='testForm' name='testForm' method='post' action = 'page2.html'>\n"
+            + "    <input type='submit' name='submit1' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+
+        driver.findElement(By.name("submit1")).click();
+        assertTitle(driver, "Response");
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[2], headerValue);
     }
 
     /**
@@ -1136,10 +1340,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
                 "multipart/form-data",
                 "text/plain"})
     public void enctypePost() throws Exception {
-//        enctypeTest(false, null, "post", getExpectedAlerts()[0]);
-//        enctypeTest(false, "", "post", getExpectedAlerts()[1]);
-//        enctypeTest(false, "application/x-www-form-urlencoded", "post", getExpectedAlerts()[2]);
-//        enctypeTest(false, "multipart/form-data", "post", getExpectedAlerts()[3]);
+        enctypeTest(false, null, "post", getExpectedAlerts()[0]);
+        enctypeTest(false, "", "post", getExpectedAlerts()[1]);
+        enctypeTest(false, "application/x-www-form-urlencoded", "post", getExpectedAlerts()[2]);
+        enctypeTest(false, "multipart/form-data", "post", getExpectedAlerts()[3]);
         enctypeTest(false, MimeType.TEXT_PLAIN, "post", getExpectedAlerts()[4]);
 
         enctypeTest(true, null, "post", getExpectedAlerts()[0]);
@@ -1162,6 +1366,18 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         enctypeTest(true, MimeType.TEXT_HTML, "post", "application/x-www-form-urlencoded");
         enctypeTest(true, MimeType.TEXT_HTML, "get", null);
+
+        enctypeTest(false, MimeType.TEXT_XML, "post", "application/x-www-form-urlencoded");
+        enctypeTest(false, MimeType.TEXT_XML, "get", null);
+
+        enctypeTest(true, MimeType.TEXT_XML, "post", "application/x-www-form-urlencoded");
+        enctypeTest(true, MimeType.TEXT_XML, "get", null);
+
+        enctypeTest(false, MimeType.APPLICATION_JSON, "post", "application/x-www-form-urlencoded");
+        enctypeTest(false, MimeType.APPLICATION_JSON, "get", null);
+
+        enctypeTest(true, MimeType.APPLICATION_JSON, "post", "application/x-www-form-urlencoded");
+        enctypeTest(true, MimeType.APPLICATION_JSON, "get", null);
     }
 
     /**
@@ -1223,6 +1439,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
+        Thread.sleep(400);
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         final String expected = "Content-Disposition: form-data; name=\"myField\"\r\n"
             + "\r\n"
