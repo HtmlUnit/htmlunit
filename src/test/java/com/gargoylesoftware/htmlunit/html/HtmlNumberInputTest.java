@@ -91,6 +91,20 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void typeDouble() throws Exception {
+        final String html = "<html><head></head><body>\n"
+                + "<input type='number' step='0.01' id='t'/>\n"
+                + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+        t.sendKeys("1.23");
+        assertEquals("1.23", t.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input type='number' id='p' disabled='disabled'/></body></html>";
         final WebDriver driver = loadPage2(html);

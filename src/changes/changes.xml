@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.38.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#123">
+                HtmlNumberInput accepts decimals.
+            </action>
             <action type="add" dev="rbri" issue="#122">
                 New switch WebClientOptions.isWebSocketEnabled() added. This removes the WebSocket slot
                 from the Window object. If you disable WebSocket support for your client, the

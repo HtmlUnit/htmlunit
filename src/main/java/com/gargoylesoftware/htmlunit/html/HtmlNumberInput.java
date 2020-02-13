@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -188,11 +191,13 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
     public void setValueAttribute(final String newValue) {
         try {
             if (!newValue.isEmpty()) {
-                Long.parseLong(newValue);
+                final String lang = getPage().getWebClient().getBrowserVersion().getBrowserLanguage();
+                final NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag(lang));
+                format.parse(newValue);
             }
             super.setValueAttribute(newValue);
         }
-        catch (final NumberFormatException e) {
+        catch (final ParseException e) {
             // ignore
         }
     }
