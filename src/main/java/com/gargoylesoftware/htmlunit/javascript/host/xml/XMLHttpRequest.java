@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
@@ -82,6 +83,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
@@ -662,8 +664,29 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
             && !Undefined.isUndefined(content)) {
+
+            final boolean setEncodingType = webRequest_.getAdditionalHeader(HttpHeader.CONTENT_TYPE) == null;
             if (content instanceof FormData) {
                 ((FormData) content).fillRequest(webRequest_);
+            }
+            else if (content instanceof NativeArrayBufferView) {
+                final NativeArrayBufferView view = (NativeArrayBufferView) content;
+                webRequest_.setRequestBody(new String(view.getBuffer().getBuffer(), UTF_8));
+                if (setEncodingType) {
+                    webRequest_.setEncodingType(null);
+                }
+            }
+            else if (content instanceof URLSearchParams) {
+                final String body = Context.toString(content);
+                if (!body.isEmpty()) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Setting request body to: " + body);
+                    }
+                    webRequest_.setRequestBody(body);
+                    if (setEncodingType) {
+                        webRequest_.setEncodingType(FormEncodingType.URL_ENCODED);
+                    }
+                }
             }
             else {
                 final String body = Context.toString(content);
@@ -672,6 +695,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         LOG.debug("Setting request body to: " + body);
                     }
                     webRequest_.setRequestBody(body);
+                    if (setEncodingType) {
+                        webRequest_.setEncodingType(FormEncodingType.TEXT_PLAIN);
+                    }
                 }
             }
         }

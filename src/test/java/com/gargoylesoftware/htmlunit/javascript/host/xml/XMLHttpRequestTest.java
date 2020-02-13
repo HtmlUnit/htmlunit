@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
@@ -1755,5 +1756,259 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "application/json",
+            IE = "null")
+    @NotYetImplemented
+    public void enctypeBlob() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var debug = {hello: 'world'};\n"
+            + "    var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});\n"
+
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('post', '/test2', false);\n"
+            + "    xhr.send(blob);\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[0], "" + headerValue);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void enctypeBufferSource() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var typedArray = new Int8Array(8);\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('post', '/test2', false);\n"
+            + "    xhr.send(typedArray);\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[0], "" + headerValue);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "application/x-www-form-urlencoded"},
+            IE = {"error: URLSearchParams", "text/plain"})
+    @NotYetImplemented(IE)
+    public void enctypeURLSearchParams() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var searchParams = '1234';\n"
+            + "  try {\n"
+            + "    searchParams = new URLSearchParams('q=URLUtils.searchParams&topic=api');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: URLSearchParams');\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('post', '/test2', false);\n"
+            + "    xhr.send(searchParams);\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[1], "" + headerValue);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void enctypeFormData() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData(document.testForm);\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('post', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='text' id='myText' name='myText' value='textxy'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[0], headerValue);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain")
+    public void enctypeString() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('post', '/test2', false);\n"
+            + "    xhr.send('HtmlUnit');\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[0], headerValue);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/jpeg")
+    public void enctypeUserDefined() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('post', '/test2', false);\n"
+            + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
+            + "    xhr.send('HtmlUnit');\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+
+        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+            .get(HttpHeader.CONTENT_TYPE);
+        // Can't test equality for multipart/form-data as it will have the form:
+        // multipart/form-data; boundary=---------------------------42937861433140731107235900
+        headerValue = StringUtils.substringBefore(headerValue, ";");
+        assertEquals(getExpectedAlerts()[0], headerValue);
     }
 }
