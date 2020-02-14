@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -268,7 +269,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     private void appendToJSFile(final String str) throws IOException {
-        try (BufferedWriter jsFileWriter = Files.newBufferedWriter(javaScriptFile_.toPath(), StandardCharsets.UTF_8)) {
+        try (BufferedWriter jsFileWriter = Files.newBufferedWriter(javaScriptFile_.toPath(), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
             jsFileWriter.write(str);
         }
     }
