@@ -90,7 +90,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     private Map<String, String> namespaces_ = new HashMap<>();
 
     /** Cache for the styles. */
-    private String styleString_ = new String();
+    private String styleString_;
     private Map<String, StyleElement> styleMap_;
 
     /**
