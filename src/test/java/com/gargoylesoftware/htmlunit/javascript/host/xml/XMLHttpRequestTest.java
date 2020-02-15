@@ -2011,4 +2011,32 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         headerValue = StringUtils.substringBefore(headerValue, ";");
         assertEquals(getExpectedAlerts()[0], headerValue);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("error")
+    public void setRequestHeaderNotOpend() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
+            + "    alert('done');\n"
+            + "  } catch (e) {\n"
+            + "    alert('error');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
