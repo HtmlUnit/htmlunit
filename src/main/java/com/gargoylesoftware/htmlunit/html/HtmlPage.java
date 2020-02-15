@@ -161,7 +161,7 @@ public class HtmlPage extends SgmlPage {
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
-    private final Object lock_ = new String(); // used for synchronization
+    private final Object lock_ = new Object(); // used for synchronization
     private List<PostponedAction> afterLoadActions_ = Collections.synchronizedList(new ArrayList<PostponedAction>());
     private boolean cleaning_;
     private HtmlBase base_;
