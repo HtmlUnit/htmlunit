@@ -695,6 +695,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         LOG.debug("Setting request body to: " + body);
                     }
                     webRequest_.setRequestBody(body);
+                    webRequest_.setCharset(UTF_8);
                     if (setEncodingType) {
                         webRequest_.setEncodingType(FormEncodingType.TEXT_PLAIN);
                     }

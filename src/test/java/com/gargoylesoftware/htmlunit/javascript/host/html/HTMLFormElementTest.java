@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+import static java.nio.charset.StandardCharsets.UTF_16;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -1467,6 +1469,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("text/plain")
     public void submitPlainTextEmptyForm() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
@@ -1477,6 +1480,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         assertNull(body);
     }
@@ -1486,7 +1495,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("myField=abcDEF\r\n")
+    @Alerts({"text/plain", "myField=abcDEF\r\n"})
     public void submitPlainTextAsciiText() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
@@ -1499,8 +1508,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
         Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
-        assertEquals(getExpectedAlerts()[0], body);
+        assertEquals(getExpectedAlerts()[1], body);
     }
 
     /**
@@ -1508,7 +1522,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("my\tField = abcDEF \t\r\n")
+    @Alerts({"text/plain", "my\tField = abcDEF \t\r\n"})
     public void submitPlainTextSpecialChars() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
@@ -1521,8 +1535,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
         Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
-        assertEquals(getExpectedAlerts()[0], body);
+        assertEquals(getExpectedAlerts()[1], body);
     }
 
     /**
@@ -1530,7 +1549,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("myField=éèêäöü\r\n")
+    @Alerts({"text/plain", "myField=éèêäöü\r\n"})
     public void submitPlainTextUnicode() throws Exception {
         final String html = "<html>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
@@ -1543,8 +1562,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
         Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
-        assertEquals(getExpectedAlerts()[0], body);
+        assertEquals(getExpectedAlerts()[1], body);
     }
 
     /**
@@ -1552,7 +1576,61 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"myFile=htmlunit-test", ".txt\r\n"})
+    @Alerts({"text/plain", "myField=HtmlUnit \u00D0\u00BB\u00C6\u0089\r\n"})
+    public void submitPlainTextUnicodeUTF8() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input name='myField' value='HtmlUnit \u043B\u0189'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[1], body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain", "myField=HtmlUnit \u00D0\u00BB\u00C6\u0089\r\n"})
+    public void submitPlainTextUnicodeUTF16() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='text/plain' method='post'>\n"
+                + "    <input name='myField' value='HtmlUnit \u043B\u0189'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertEquals(getExpectedAlerts()[1], body);
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"text/plain", "myFile=htmlunit-test", ".txt\r\n"})
     public void submitPlainTextFile() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -1580,9 +1658,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             assertTrue(tmpFile.delete());
         }
 
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
-        assertTrue(body, body.startsWith(getExpectedAlerts()[0]));
-        assertTrue(body, body.endsWith(getExpectedAlerts()[1]));
+        assertTrue(body, body.startsWith(getExpectedAlerts()[1]));
+        assertTrue(body, body.endsWith(getExpectedAlerts()[2]));
     }
 
     /**

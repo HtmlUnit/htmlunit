@@ -348,8 +348,8 @@ public class HttpWebConnection implements WebConnection {
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
-                    final StringEntity bodyEntity = new StringEntity(body, charset);
-                    bodyEntity.setContentType(MimeType.TEXT_PLAIN);
+                    final StringEntity bodyEntity =
+                            new StringEntity(body, ContentType.create(MimeType.TEXT_PLAIN, charset));
                     postMethod.setEntity(bodyEntity);
                 }
             }

@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
+import static java.nio.charset.StandardCharsets.UTF_16;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -258,7 +260,10 @@ public class HtmlForm extends HtmlElement {
         String actionUrl = getActionAttribute();
         String anchor = null;
         String queryFormFields = "";
-        final Charset enc = getSubmitCharset();
+        Charset enc = getSubmitCharset();
+        if (UTF_16 == enc) {
+            enc = UTF_8;
+        }
 
         if (HttpMethod.GET == method) {
             if (actionUrl.contains("#")) {

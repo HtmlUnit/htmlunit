@@ -1937,7 +1937,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("text/plain")
+    @Alerts({"text/plain;charset=UTF-8", "HtmlUnit \u00D0\u00BB\u00C6\u0089"})
     public void enctypeString() throws Exception {
         final String html
             = "<html>\n"
@@ -1947,7 +1947,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
-            + "    xhr.send('HtmlUnit');\n"
+            + "    xhr.send('HtmlUnit \u043B\u0189');\n"
             + "    alert('done');\n"
             + "  } catch (e) {\n"
             + "    alert('error: ' + e.message);\n"
@@ -1961,15 +1961,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
-        final WebDriver driver = loadPage2(html);
+        // use utf8 here to be able to send all chars
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
         verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
 
-        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+        String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
-        // Can't test equality for multipart/form-data as it will have the form:
-        // multipart/form-data; boundary=---------------------------42937861433140731107235900
-        headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[0], headerValue);
+        headerContentType = headerContentType.replace("; ", ";"); // normalize
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
     /**
