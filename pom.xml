@@ -36,7 +36,7 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.29</checkstyle.version>
-        <spotbugs.version>3.1.12</spotbugs.version>
+        <spotbugs.version>4.0.0</spotbugs.version>
         <pmd.version>6.21.0</pmd.version>
     </properties>
 
@@ -55,7 +55,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
