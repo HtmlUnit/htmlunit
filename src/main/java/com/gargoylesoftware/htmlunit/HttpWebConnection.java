@@ -836,6 +836,12 @@ public class HttpWebConnection implements WebConnection {
                         list.add(new AcceptEncodingHeaderHttpRequestInterceptor(headerValue));
                     }
                 }
+                else if (HttpHeader.SEC_FETCH_DEST.equals(header)) {
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    if (headerValue != null) {
+                        list.add(new SecFetchDestHeaderHttpRequestInterceptor(headerValue));
+                    }
+                }
                 else if (HttpHeader.SEC_FETCH_MODE.equals(header)) {
                     final String headerValue = webRequest.getAdditionalHeader(header);
                     if (headerValue != null) {
@@ -1036,6 +1042,19 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_USER, value_);
+        }
+    }
+
+    private static final class SecFetchDestHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        SecFetchDestHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader(HttpHeader.SEC_FETCH_DEST, value_);
         }
     }
 

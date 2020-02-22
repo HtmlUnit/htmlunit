@@ -1530,6 +1530,10 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_DEST)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "document");
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
                 && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_MODE)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "navigate");
         }
