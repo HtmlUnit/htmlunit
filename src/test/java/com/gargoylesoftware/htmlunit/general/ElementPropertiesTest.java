@@ -1905,7 +1905,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "as,charset,crossOrigin,disabled,href,hreflang,"
-                + "imageSizes,imageSrcset,import,integrity,"
+                + "imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             FF = "as,charset,crossOrigin,disabled,href,hreflang,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
@@ -2752,7 +2752,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
                 + "canPlayType(),captureStream(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,disablePictureInPicture,disableRemotePlayback,duration,"
-                + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
+                + "ended,error,getVideoPlaybackQuality(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "onenterpictureinpicture,onleavepictureinpicture,"
@@ -3355,9 +3355,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onwebkitfullscreenerror,onwheel,open(),pictureInPictureElement,pictureInPictureEnabled,"
                 + "plugins,pointerLockElement,"
                 + "prepend(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
-                + "queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,registerElement(),"
-                + "releaseEvents(),rootElement,"
-                + "scripts,scrollingElement,styleSheets,title,URL,"
+                + "queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,"
+                + "releaseEvents(),rootElement,scripts,scrollingElement,styleSheets,title,URL,"
                 + "visibilityState,vlinkColor,wasDiscarded,"
                 + "webkitCancelFullScreen(),webkitCurrentFullScreenElement,webkitExitFullscreen(),"
                 + "webkitFullscreenElement,webkitFullscreenEnabled,webkitHidden,webkitIsFullScreen,"

@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.38.0" date="xxxx, 2020" description="Bugfixes">
+        <release version="2.38.0" date="xxxx, 2020" description="Bugfixes, CHROME 80">
             <action type="fix" dev="rbri" issue="#123">
                 HtmlNumberInput accepts decimals.
             </action>

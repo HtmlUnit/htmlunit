@@ -7003,10 +7003,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
     }

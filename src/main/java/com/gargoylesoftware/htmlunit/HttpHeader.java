@@ -98,6 +98,9 @@ public final class HttpHeader {
     /** Upgrade-Insecure-Requests. */
     public static final String UPGRADE_INSECURE_REQUESTS = "Upgrade-Insecure-Requests";
 
+    /** Sec-Fetch-Dest. */
+    public static final String SEC_FETCH_DEST = "Sec-Fetch-Dest";
+
     /** Sec-Fetch-Mode. */
     public static final String SEC_FETCH_MODE = "Sec-Fetch-Mode";
 

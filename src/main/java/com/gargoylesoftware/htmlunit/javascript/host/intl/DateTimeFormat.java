@@ -113,7 +113,6 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("it", ddSlash);
         commonFormats.put("iw", ddDot);
         commonFormats.put("ja", yyyySlash);
-        commonFormats.put("ja-JP-u-ca-japanese", "yy/MM/dd");
         commonFormats.put("ko", yyyyDotBlankDot);
         commonFormats.put("lt", yyyyDash);
         commonFormats.put("lv", yyyyDotDot);
@@ -139,6 +138,8 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
 
         CHROME_FORMATS_.putAll(commonFormats);
+
+        commonFormats.put("ja-JP-u-ca-japanese", "yy/MM/dd");
         IE_FORMATS_.putAll(commonFormats);
 
         commonFormats.put("en-CA", yyyyDash);
@@ -170,6 +171,7 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("in-ID", ddSlash);
         CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("iw", ddDot);
+        CHROME_FORMATS_.put("ja-JP-u-ca-japanese", "'H'yy/MM/dd");
         CHROME_FORMATS_.put("mk", mmSlash);
         CHROME_FORMATS_.put("nl-BE", ddSlash);
         CHROME_FORMATS_.put("sk", ddDotBlank);

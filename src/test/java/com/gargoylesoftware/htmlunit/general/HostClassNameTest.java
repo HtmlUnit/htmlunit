@@ -7210,7 +7210,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PeriodicSyncManager() { [native code] }")
     public void periodicSyncManager() throws Exception {
         test("PeriodicSyncManager");
     }
@@ -11127,6 +11128,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function VideoPlaybackQuality() { [native code] }",
             FF = "function VideoPlaybackQuality() {\n    [native code]\n}",
             FF60 = "function VideoPlaybackQuality() {\n    [native code]\n}",
             FF68 = "function VideoPlaybackQuality() {\n    [native code]\n}")

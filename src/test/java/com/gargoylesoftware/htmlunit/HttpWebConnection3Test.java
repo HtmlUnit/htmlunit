@@ -47,9 +47,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
-                        HttpHeader.USER_AGENT,
-                        HttpHeader.SEC_FETCH_USER, HttpHeader.ACCEPT,
-                        HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE,
+                        HttpHeader.USER_AGENT, HttpHeader.SEC_FETCH_DEST, HttpHeader.ACCEPT,
+                        HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
@@ -86,9 +85,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
-                    HttpHeader.USER_AGENT,
-                    HttpHeader.SEC_FETCH_USER, HttpHeader.ACCEPT,
-                    HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE,
+                    HttpHeader.USER_AGENT, HttpHeader.SEC_FETCH_DEST, HttpHeader.ACCEPT,
+                    HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER,
                     HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
                     HttpHeader.COOKIE},
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
