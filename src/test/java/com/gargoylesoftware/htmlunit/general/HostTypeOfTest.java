@@ -4454,6 +4454,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void periodicSyncManager() throws Exception {
+        test("PeriodicSyncManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
     public void periodicWave() throws Exception {
