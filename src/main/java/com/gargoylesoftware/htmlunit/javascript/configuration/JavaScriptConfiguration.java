@@ -321,6 +321,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamTrack;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioContext;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OscillatorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.PannerNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.PeriodicSyncManager;
 import com.gargoylesoftware.htmlunit.javascript.host.media.PeriodicWave;
 import com.gargoylesoftware.htmlunit.javascript.host.media.RemotePlayback;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ScriptProcessorNode;
@@ -510,7 +511,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceNavigationTiming.class,
         PerformanceObserver.class, PerformanceObserverEntryList.class,
         PerformanceResourceTiming.class, PerformanceTiming.class,
-        PeriodicWave.class, Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
+        PeriodicWave.class, PeriodicSyncManager.class,
+        Permissions.class, PermissionStatus.class, Plugin.class, PluginArray.class,
         PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
         PresentationConnectionCloseEvent.class, PresentationRequest.class,
