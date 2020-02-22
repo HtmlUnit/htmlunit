@@ -80,6 +80,17 @@ public class ErrorOutputChecker implements TestRule {
                     + ".*\\r\\n"
                     + ".*\\r\\n"
                     + ".*TLS certificate errors will be ignored for this session\\r\\n"),
+            Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
+                    + ".*\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*\\r\\n"
+                    + ".*TLS certificate errors will be ignored for this session\\r\\n"),
 
             // FF60
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
