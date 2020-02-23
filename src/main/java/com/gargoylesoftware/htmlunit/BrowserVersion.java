@@ -182,7 +182,7 @@ public final class BrowserVersion implements Serializable {
 
         // FF
         FIREFOX.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0";
+        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
         FIREFOX.buildId_ = "20181001000000";
         FIREFOX.productSub_ = "20100101";
         FIREFOX.headerNamesOrdered_ = new String[] {

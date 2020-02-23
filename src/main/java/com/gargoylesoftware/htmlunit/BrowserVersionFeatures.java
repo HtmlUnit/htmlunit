@@ -296,7 +296,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
 
-    /** Form submit includes the Cache-Control: cn-cache header. */
+    /** Form submit includes the Cache-Control: no-cache header. */
     @BrowserFeature(IE)
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
 

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -51,7 +49,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
+    // @NotYetImplemented(IE)
     public void formGet() throws Exception {
         final String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -78,6 +76,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
             expectedHeaders = "Connection: keep-alive\n"
                                 + "Host: localhost:" + PORT + "\n"
                                 + "Referer: http://localhost:" + PORT + "/\n"
+                                + "Sec-Fetch-Dest: document\n"
                                 + "Sec-Fetch-Mode: navigate\n"
                                 + "Sec-Fetch-Site: same-origin\n"
                                 + "Sec-Fetch-User: ?1\n"
@@ -93,7 +92,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         }
         if (getBrowserVersion().isIE()) {
             expectedHeaders = "Connection: keep-alive\n"
-                                + "DNT: 1\n"
                                 + "Host: localhost:" + PORT + "\n"
                                 + "Referer: http://localhost:" + PORT + "/\n"
                                 + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
@@ -120,7 +118,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
     public void formPost() throws Exception {
         final String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -150,6 +147,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                                 + "Host: localhost:" + PORT + "\n"
                                 + "Origin: http://localhost:" + PORT + "\n"
                                 + "Referer: http://localhost:" + PORT + "/\n"
+                                + "Sec-Fetch-Dest: document\n"
                                 + "Sec-Fetch-Mode: navigate\n"
                                 + "Sec-Fetch-Site: same-origin\n"
                                 + "Sec-Fetch-User: ?1\n"
@@ -170,7 +168,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                                 + "Connection: keep-alive\n"
                                 + "Content-Length: 48\n"
                                 + "Content-Type: application/x-www-form-urlencoded\n"
-                                + "DNT: 1\n"
                                 + "Host: localhost:" + PORT + "\n"
                                 + "Referer: http://localhost:" + PORT + "/\n"
                                 + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";

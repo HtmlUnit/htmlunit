@@ -333,12 +333,14 @@ public class HtmlForm extends HtmlElement {
                 }
             }
         }
-        if (HttpMethod.POST == method
-                && browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
-            request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
-        }
-        if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE)) {
-            request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "no-cache");
+        if (HttpMethod.POST == method) {
+            if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
+                request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
+            }
+
+            if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE)) {
+                request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "no-cache");
+            }
         }
 
         return request;
