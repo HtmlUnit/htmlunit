@@ -30,6 +30,5 @@ public enum BrowserName {
 
     /** Firefox. */
     FF
-
 }
 
