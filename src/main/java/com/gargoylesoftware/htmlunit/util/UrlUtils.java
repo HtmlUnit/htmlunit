@@ -481,6 +481,50 @@ public final class UrlUtils {
     }
 
     /**
+     * Creates and returns a new URL identical to the specified URL but with a changed user name.
+     * @param u the URL on which to base the returned URL
+     * @param newUserName the new user name
+     * @return a new URL identical to the specified URL; only user name updated
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithNewUserName(final URL u, final String newUserName) throws MalformedURLException {
+        String newUserInfo = newUserName;
+        final String userInfo = u.getUserInfo();
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
+            final int colonIdx = userInfo.indexOf(':');
+            if (colonIdx > -1) {
+                newUserInfo = newUserName + userInfo.substring(colonIdx);
+            }
+        }
+        return createNewUrl(u.getProtocol(), newUserInfo,
+                u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
+     * Creates and returns a new URL identical to the specified URL but with a changed user password.
+     * @param u the URL on which to base the returned URL
+     * @param newUserPassword the new user password
+     * @return a new URL identical to the specified URL; only user name updated
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithNewUserPassword(final URL u, final String newUserPassword)
+            throws MalformedURLException {
+        String newUserInfo = ':' + newUserPassword;
+        final String userInfo = u.getUserInfo();
+        if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
+            final int colonIdx = userInfo.indexOf(':');
+            if (colonIdx > -1) {
+                newUserInfo = userInfo.substring(0, colonIdx + 1) + newUserPassword;
+            }
+            else {
+                newUserInfo = userInfo + newUserInfo;
+            }
+        }
+        return createNewUrl(u.getProtocol(), newUserInfo,
+                u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
      * Creates a new URL based on the specified fragments.
      * @param protocol the protocol to use (may not be {@code null})
      * @param userInfo the user info to use (may be {@code null})

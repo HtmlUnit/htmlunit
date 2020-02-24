@@ -200,6 +200,66 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithNewUserName() throws Exception {
+        URL a = new URL("http://my.home.com/index.html?query");
+        URL b = UrlUtils.getUrlWithNewUserName(a, "abc");
+        assertEquals("http://abc@my.home.com/index.html?query", b.toExternalForm());
+
+        a = new URL("http://my.home.com");
+        b = UrlUtils.getUrlWithNewUserName(a, "xyz");
+        assertEquals("http://xyz@my.home.com", b.toExternalForm());
+
+        a = new URL("http://user:pw@my.home.com");
+        b = UrlUtils.getUrlWithNewUserName(a, "xyz");
+        assertEquals("http://xyz:pw@my.home.com", b.toExternalForm());
+
+        a = new URL("http://user:@my.home.com");
+        b = UrlUtils.getUrlWithNewUserName(a, "xyz");
+        assertEquals("http://xyz:@my.home.com", b.toExternalForm());
+
+        a = new URL("http://user@my.home.com");
+        b = UrlUtils.getUrlWithNewUserName(a, "xyz");
+        assertEquals("http://xyz@my.home.com", b.toExternalForm());
+
+        a = new URL("http://:pw@my.home.com");
+        b = UrlUtils.getUrlWithNewUserName(a, "xyz");
+        assertEquals("http://xyz:pw@my.home.com", b.toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithNewUserPassword() throws Exception {
+        URL a = new URL("http://my.home.com/index.html?query");
+        URL b = UrlUtils.getUrlWithNewUserPassword(a, "abc");
+        assertEquals("http://:abc@my.home.com/index.html?query", b.toExternalForm());
+
+        a = new URL("http://my.home.com");
+        b = UrlUtils.getUrlWithNewUserPassword(a, "xyz");
+        assertEquals("http://:xyz@my.home.com", b.toExternalForm());
+
+        a = new URL("http://user:pw@my.home.com");
+        b = UrlUtils.getUrlWithNewUserPassword(a, "xyz");
+        assertEquals("http://user:xyz@my.home.com", b.toExternalForm());
+
+        a = new URL("http://user:@my.home.com");
+        b = UrlUtils.getUrlWithNewUserPassword(a, "xyz");
+        assertEquals("http://user:xyz@my.home.com", b.toExternalForm());
+
+        a = new URL("http://user@my.home.com");
+        b = UrlUtils.getUrlWithNewUserPassword(a, "xyz");
+        assertEquals("http://user:xyz@my.home.com", b.toExternalForm());
+
+        a = new URL("http://:pw@my.home.com");
+        b = UrlUtils.getUrlWithNewUserPassword(a, "xyz");
+        assertEquals("http://:xyz@my.home.com", b.toExternalForm());
+    }
+
+    /**
      * Test {@link UrlUtils#resolveUrl(String, String)} with the normal examples taken from
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a> Section 5.1.
      */
