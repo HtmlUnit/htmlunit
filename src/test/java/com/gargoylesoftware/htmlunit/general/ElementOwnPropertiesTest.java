@@ -718,16 +718,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
                 + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,toString(),"
-                + "type,"
-                + "username",
+                + "type,username",
             FF60 = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
                 + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,toString(),"
-                + "type,"
-                + "username",
+                + "type,username",
             FF68 = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
                 + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,toString(),"
-                + "type,"
-                + "username",
+                + "type,username",
             IE = "charset,constructor,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,"
                 + "pathname,port,protocol,protocolLong,rel,rev,search,shape,target,text,toString(),type,"
                 + "urn")
@@ -867,10 +864,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "alt,constructor,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,"
                 + "target,"
                 + "toString()")
-    @HtmlUnitNYI(CHROME = "alt,constructor(),coords",
-            FF60 = "exception",
-            FF68 = "exception",
-            IE = "alt,constructor,coords")
+    @HtmlUnitNYI(CHROME = "alt,constructor(),coords,rel,relList",
+            FF60 = "alt,constructor(),coords,rel,relList",
+            FF68 = "alt,constructor(),coords,rel,relList",
+            IE = "alt,constructor,coords,rel")
     public void area() throws Exception {
         test("area");
     }
@@ -3756,9 +3753,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,integrity,media,referrerPolicy,rel,"
                 + "relList,rev,sheet,sizes,target,type",
             IE = "charset,constructor,href,hreflang,media,rel,rev,sheet,target,type")
-    @HtmlUnitNYI(CHROME = "constructor(),disabled,href,rel,rev,type",
-            FF60 = "exception",
-            FF68 = "exception",
+    @HtmlUnitNYI(CHROME = "constructor(),disabled,href,rel,relList,rev,type",
+            FF60 = "constructor(),disabled,href,rel,relList,rev,type",
+            FF68 = "constructor(),disabled,href,rel,relList,rev,type",
             IE = "constructor,disabled,href,rel,rev,type")
     public void link() throws Exception {
         test("link");

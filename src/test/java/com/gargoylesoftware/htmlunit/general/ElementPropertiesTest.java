@@ -1249,11 +1249,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
                 + "protocol,referrerPolicy,rel,relList,search,shape,target,username",
             IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target")
-    @HtmlUnitNYI(CHROME = "alt,coords,relList",
-            FF60 = "alt,coords,relList",
-            FF68 = "alt,coords,relList",
-            FF = "alt,coords,relList",
-            IE = "alt,coords")
+    @HtmlUnitNYI(CHROME = "alt,coords,rel,relList",
+            FF60 = "alt,coords,rel,relList",
+            FF68 = "alt,coords,rel,relList",
+            FF = "alt,coords,rel,relList",
+            IE = "alt,coords,rel")
     public void area() throws Exception {
         test("area");
     }
