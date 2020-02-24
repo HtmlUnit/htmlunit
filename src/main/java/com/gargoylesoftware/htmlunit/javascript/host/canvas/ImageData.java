@@ -53,11 +53,11 @@ public class ImageData extends SimpleScriptable {
     }
 
     ImageData(final RenderingBackend context, final int x, final int y, final int width, final int height) {
-        if (context != null) {
-            bytes_ = context.getBytes(width, height, x, y);
+        if (context == null) {
+            bytes_ = new byte[width * height * 4];
         }
         else {
-            bytes_ = null;
+            bytes_ = context.getBytes(width, height, x, y);
         }
 
         sx_ = x;

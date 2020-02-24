@@ -245,10 +245,16 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Creates a new, blank ImageData object with the specified dimensions.
+     * @param width the width
+     * @param height the height
+     * @return a new, blank ImageData object with the specified dimensions
      */
     @JsxFunction
-    public void createImageData() {
-        LOG.info("CanvasRenderingContext2D.createImageData() not yet implemented");
+    public ImageData createImageData(final int width, final int height) {
+        final ImageData imageData = new ImageData(null, 0, 0, width, height);
+        imageData.setParentScope(getParentScope());
+        imageData.setPrototype(getPrototype(imageData.getClass()));
+        return imageData;
     }
 
     /**

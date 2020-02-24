@@ -128,4 +128,33 @@ public class ImageDataTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"24", "2", "3",
+                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"})
+    public void createImageData() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  if (canvas.getContext) {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    var imageData = ctx.createImageData(2, 3);\n"
+            + "    alert(imageData.data.length);\n"
+            + "    alert(imageData.width);\n"
+            + "    alert(imageData.height);\n"
+            + "    for (var i = 0; i < imageData.data.length; i++) {\n"
+            + "      alert(imageData.data[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }
