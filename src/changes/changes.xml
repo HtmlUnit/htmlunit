@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.38.0" date="xxxx, 2020" description="Bugfixes, CHROME 80">
+            <action type="add" dev="rbri">
+                Support for anchor property 'relList' implemented.
+            </action>
+            <action type="add" dev="rbri">
+                Support for anchor property 'username' and 'password' added.
+            </action>
             <action type="fix" dev="rbri" issue="#123">
                 HtmlNumberInput accepts decimals.
             </action>

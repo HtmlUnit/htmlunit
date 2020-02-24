@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
@@ -647,7 +648,16 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF68, FF60})
     public String getUsername() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        try {
+            final String userName = getUrl().getUserInfo();
+            if (userName == null) {
+                return "";
+            }
+            return StringUtils.substringBefore(userName, ":");
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
     }
 
     /**
@@ -656,7 +666,19 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({CHROME, FF68, FF60})
     public void setUsername(final String username) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        try {
+            final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+            final String href = anchor.getHrefAttribute();
+            if (href == ATTRIBUTE_NOT_DEFINED) {
+                return;
+            }
+
+            final URL url = ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(href);
+            setUrl(UrlUtils.getUrlWithNewUserName(url, username));
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
     }
 
     /**
@@ -665,7 +687,16 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF68, FF60})
     public String getPassword() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        try {
+            final String userName = getUrl().getUserInfo();
+            if (userName == null) {
+                return "";
+            }
+            return StringUtils.substringAfter(userName, ":");
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
     }
 
     /**
@@ -674,7 +705,19 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({CHROME, FF68, FF60})
     public void setPassword(final String password) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        try {
+            final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+            final String href = anchor.getHrefAttribute();
+            if (href == ATTRIBUTE_NOT_DEFINED) {
+                return;
+            }
+
+            final URL url = ((HtmlPage) anchor.getPage()).getFullyQualifiedUrl(href);
+            setUrl(UrlUtils.getUrlWithNewUserPassword(url, password));
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
     }
 
     /**
@@ -683,7 +726,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF68, FF60})
     public String getDownload() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException("getDownload"));
     }
 
     /**
@@ -692,7 +735,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({CHROME, FF68, FF60})
     public void setDownload(final String download) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException("setDownload"));
     }
 
     /**
@@ -719,7 +762,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getShape() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException("getShape"));
     }
 
     /**
@@ -728,7 +771,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setShape(final String shape) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException("setShape"));
     }
 
     /**
@@ -755,7 +798,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF68, FF60})
     public DOMTokenList getRelList() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        return new DOMTokenList(this, "rel");
     }
 
     /**

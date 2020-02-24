@@ -41,6 +41,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1026,5 +1027,189 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             IOUtils.copy(reader, stringSriter);
             BODY_ = stringSriter.toString();
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    public void readWriteRel() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "alert(a1.rel);\n"
+            + "alert(a2.rel);\n"
+
+            + "a1.rel = 'prefetch';\n"
+            + "a2.rel = 'prefetch';\n"
+            + "alert(a1.rel);\n"
+            + "alert(a2.rel);\n"
+
+            + "a1.rel = 'not supported';\n"
+            + "a2.rel = 'notsupported';\n"
+            + "alert(a1.rel);\n"
+            + "alert(a2.rel);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
+            IE = "exception")
+    public void relList() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "try {\n"
+            + "  alert(a1.relList.length);\n"
+            + "  alert(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    alert(a2.relList[i]);\n"
+            + "  }\n"
+            + "} catch(e) { alert('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "user", "user", "",
+                "", "",
+                "Tester", "https://Tester:password@developer.mozilla.org/",
+                "Tester", "https://Tester@developer.mozilla.org/",
+                "Tester", "https://Tester@developer.mozilla.org/"},
+            IE = {"undefined", "undefined", "undefined", "undefined"})
+    @HtmlUnitNYI(CHROME = {"", "user", "user", "",
+                "", "",
+                "Tester", "https://Tester:password@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org"},
+            FF60 = {"", "user", "user", "",
+                "", "",
+                "Tester", "https://Tester:password@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org"},
+            FF68 = {"", "user", "user", "",
+                "", "",
+                "Tester", "https://Tester:password@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org"})
+    public void readWriteUsername() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a>"
+                    + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
+                    + "<a id='a3' href='https://user@developer.mozilla.org'>a3</a>"
+                    + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
+                    + "<script>\n"
+            + "var a1 = document.getElementById('a1'),"
+                + "a2 = document.getElementById('a2'),"
+                + "a3 = document.getElementById('a3'),"
+                + "a4 = document.getElementById('a4');\n"
+
+            + "alert(a1.username);\n"
+            + "alert(a2.username);\n"
+            + "alert(a3.username);\n"
+            + "alert(a4.username);\n"
+
+            + "if (a1.username != undefined) {\n"
+
+            + "a1.username = 'Tester';\n"
+            + "a2.username = 'Tester';\n"
+            + "a3.username = 'Tester';\n"
+            + "a4.username = 'Tester';\n"
+
+            + "alert(a1.username);\n"
+            + "alert(a1.href);\n"
+            + "alert(a2.username);\n"
+            + "alert(a2.href);\n"
+            + "alert(a3.username);\n"
+            + "alert(a3.href);\n"
+            + "alert(a4.username);\n"
+            + "alert(a4.href);\n"
+
+            + "}\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html, 77777);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "password", "password", "",
+                "", "",
+                "Tester", "https://user:Tester@developer.mozilla.org/",
+                "Tester", "https://:Tester@developer.mozilla.org/",
+                "Tester", "https://:Tester@developer.mozilla.org/"},
+            FF60 = {"", "password", "", "",
+                "", "",
+                "Tester", "https://user:Tester@developer.mozilla.org/",
+                "", "https://:password@developer.mozilla.org",
+                "", "https://developer.mozilla.org/"},
+            IE = {"undefined", "undefined", "undefined", "undefined"})
+    @HtmlUnitNYI(CHROME = {"", "password", "password", "",
+                "", "",
+                "Tester", "https://user:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org"},
+            FF60 = {"", "password", "password", "",
+                "", "",
+                "Tester", "https://user:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org"},
+            FF68 = {"", "password", "password", "",
+                "", "",
+                "Tester", "https://user:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org"})
+    public void readWritePassword() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a>"
+                    + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
+                    + "<a id='a3' href='https://:password@developer.mozilla.org'>a3</a>"
+                    + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
+                    + "<script>\n"
+            + "var a1 = document.getElementById('a1'),"
+                + "a2 = document.getElementById('a2'),"
+                + "a3 = document.getElementById('a3'),"
+                + "a4 = document.getElementById('a4');\n"
+
+            + "alert(a1.password);\n"
+            + "alert(a2.password);\n"
+            + "alert(a3.password);\n"
+            + "alert(a4.password);\n"
+
+            + "if (a1.password != undefined) {\n"
+
+            + "a1.password = 'Tester';\n"
+            + "a2.password = 'Tester';\n"
+            + "a3.password = 'Tester';\n"
+            + "a4.password = 'Tester';\n"
+
+            + "alert(a1.password);\n"
+            + "alert(a1.href);\n"
+            + "alert(a2.password);\n"
+            + "alert(a2.href);\n"
+            + "alert(a3.password);\n"
+            + "alert(a3.href);\n"
+            + "alert(a4.password);\n"
+            + "alert(a4.href);\n"
+
+            + "}\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html, 77777);
     }
 }
