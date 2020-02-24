@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8Clamped
 @JsxClass
 public class ImageData extends SimpleScriptable {
 
-    private final RenderingBackend renderingContext_;
+    private final byte[] bytes_;
     private final int sx_;
     private final int sy_;
     private final int width_;
@@ -53,7 +53,13 @@ public class ImageData extends SimpleScriptable {
     }
 
     ImageData(final RenderingBackend context, final int x, final int y, final int width, final int height) {
-        renderingContext_ = context;
+        if (context != null) {
+            bytes_ = context.getBytes(width, height, x, y);
+        }
+        else {
+            bytes_ = null;
+        }
+
         sx_ = x;
         sy_ = y;
         width_ = width;
@@ -86,11 +92,10 @@ public class ImageData extends SimpleScriptable {
     @JsxGetter
     public NativeUint8ClampedArray getData() {
         if (data_ == null) {
-            final byte[] bytes = renderingContext_.getBytes(width_, height_, sx_, sy_);
-            final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes.length);
-            System.arraycopy(bytes, 0, arrayBuffer.getBuffer(), 0, bytes.length);
+            final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes_.length);
+            System.arraycopy(bytes_, 0, arrayBuffer.getBuffer(), 0, bytes_.length);
 
-            data_ = new NativeUint8ClampedArray(arrayBuffer, 0, bytes.length);
+            data_ = new NativeUint8ClampedArray(arrayBuffer, 0, bytes_.length);
             data_.setParentScope(getParentScope());
             data_.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), data_.getClassName()));
         }

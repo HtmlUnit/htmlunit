@@ -66,6 +66,40 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"200", "100", "50", "255", "200", "100", "50", "255", "0", "0", "0", "0"})
+    public void getImageDataDrawAfter() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  if (canvas.getContext) {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    ctx.fillStyle = 'rgb(200,100,50)';\n"
+            + "    ctx.fillRect(0, 0, 2, 2);\n"
+            + "    var imageData = ctx.getImageData(0, 0, 3, 1);\n"
+
+            + "    ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';\n"
+            + "    ctx.fillRect(1, 0, 2, 2);\n"
+            + "    ctx.fillStyle = 'rgb(123,111,222)';\n"
+            + "    ctx.fillRect(2, 0, 2, 2);\n"
+
+            + "    var data = imageData.data;\n"
+            + "    for (var i = 0; i < data.length; i++) {\n"
+            + "      alert(data[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"})
     public void data() throws Exception {
         final String html =
