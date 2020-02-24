@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
  * The JavaScript object {@code HTMLAreaElement}.
  *
@@ -88,12 +86,30 @@ public class HTMLAreaElement extends HTMLElement {
     }
 
     /**
+     * Returns the value of the {@code rel} property.
+     * @return the value of the {@code rel} property
+     */
+    @JsxGetter
+    public String getRel() {
+        return getDomNodeOrDie().getAttributeDirect("rel");
+    }
+
+    /**
+     * Returns the value of the {@code rel} property.
+     * @param rel the value
+     */
+    @JsxSetter
+    public void setRel(final String rel) {
+        getDomNodeOrDie().setAttribute("rel", rel);
+    }
+
+    /**
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
     @JsxGetter({CHROME, FF, FF68, FF60})
     public DOMTokenList getRelList() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        return new DOMTokenList(this, "rel");
     }
 
     /**

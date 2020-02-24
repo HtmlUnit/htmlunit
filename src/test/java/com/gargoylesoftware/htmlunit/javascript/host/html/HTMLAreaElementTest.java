@@ -169,4 +169,55 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    public void readWriteRel() throws Exception {
+        final String html
+            = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "alert(a1.rel);\n"
+            + "alert(a2.rel);\n"
+
+            + "a1.rel = 'prefetch';\n"
+            + "a2.rel = 'prefetch';\n"
+            + "alert(a1.rel);\n"
+            + "alert(a2.rel);\n"
+
+            + "a1.rel = 'not supported';\n"
+            + "a2.rel = 'notsupported';\n"
+            + "alert(a1.rel);\n"
+            + "alert(a2.rel);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
+            IE = "exception")
+    public void relList() throws Exception {
+        final String html
+            = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "try {\n"
+            + "  alert(a1.relList.length);\n"
+            + "  alert(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    alert(a2.relList[i]);\n"
+            + "  }\n"
+            + "} catch(e) { alert('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
