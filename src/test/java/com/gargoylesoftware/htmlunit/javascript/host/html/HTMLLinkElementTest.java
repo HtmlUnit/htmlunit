@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLLinkElementTest extends WebDriverTestCase {
@@ -63,4 +64,54 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    public void readWriteRel() throws Exception {
+        final String html
+            = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
+            + "var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');\n"
+
+            + "alert(l1.rel);\n"
+            + "alert(l2.rel);\n"
+
+            + "l1.rel = 'prefetch';\n"
+            + "l2.rel = 'prefetch';\n"
+            + "alert(l1.rel);\n"
+            + "alert(l2.rel);\n"
+
+            + "l1.rel = 'not supported';\n"
+            + "l2.rel = 'notsupported';\n"
+            + "alert(l1.rel);\n"
+            + "alert(l2.rel);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
+            IE = "exception")
+    public void relList() throws Exception {
+        final String html
+            = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
+            + "var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');\n"
+
+            + "try {\n"
+            + "  alert(l1.relList.length);\n"
+            + "  alert(l2.relList.length);\n"
+
+            + "  for (var i = 0; i < l2.relList.length; i++) {\n"
+            + "    alert(l2.relList[i]);\n"
+            + "  }\n"
+            + "} catch(e) { alert('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

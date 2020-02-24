@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
  * The JavaScript object {@code HTMLLinkElement}.
  *
@@ -161,7 +159,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF, FF68, FF60})
     public DOMTokenList getRelList() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        return new DOMTokenList(this, "rel");
     }
 
     /**
