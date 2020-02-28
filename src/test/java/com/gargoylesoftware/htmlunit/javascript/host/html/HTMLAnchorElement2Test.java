@@ -1141,7 +1141,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "}\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html, 77777);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1210,6 +1210,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "}\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html, 77777);
+        loadPageWithAlerts2(html);
     }
 }
