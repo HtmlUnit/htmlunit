@@ -289,13 +289,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         }
 
         if (args.length > 1) {
-            final int width = (int) ScriptRuntime.toInteger(args, 0);
-            final int height = (int) ScriptRuntime.toInteger(args, 1);
+            final int width = Math.abs((int) ScriptRuntime.toInteger(args, 0));
+            final int height = Math.abs((int) ScriptRuntime.toInteger(args, 1));
             final ImageData imageData = new ImageData(null, 0, 0, width, height);
             imageData.setParentScope(canvas.getParentScope());
             imageData.setPrototype(canvas.getPrototype(imageData.getClass()));
             return imageData;
         }
+
         throw Context.reportRuntimeError(
                 "CanvasRenderingContext2D.getImageData() failed - "
                 + "wrong parameters given (" + StringUtils.join(args) + ")");

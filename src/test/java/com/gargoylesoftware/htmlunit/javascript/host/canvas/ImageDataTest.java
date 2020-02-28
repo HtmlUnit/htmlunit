@@ -34,6 +34,173 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"8", "1", "2",
+                "0", "190", "3", "255", "0", "190", "3", "255",
+              "8", "2", "1",
+              "0", "190", "3", "255", "0", "190", "3", "255"},
+            IE = "no ctor")
+    public void ctorArray() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (typeof ImageData != 'function') { alert('no ctor'); return; }"
+
+            + "  var arr = new Uint8ClampedArray(8);\n"
+            + "  for (var i = 0; i < arr.length; i += 4) {\n"
+            + "    arr[i + 0] = 0;\n"
+            + "    arr[i + 1] = 190;\n"
+            + "    arr[i + 2] = 3;\n"
+            + "    arr[i + 3] = 255;\n"
+            + "  }\n"
+
+            + "  var imageData = new ImageData(arr, 1);\n"
+            + "  alert(imageData.data.length);\n"
+            + "  alert(imageData.width);\n"
+            + "  alert(imageData.height);\n"
+
+            + "  var data = imageData.data;\n"
+            + "  for (var i = 0; i < data.length; i++) {\n"
+            + "    alert(data[i]);\n"
+            + "  }\n"
+
+            + "  var imageData = new ImageData(arr, 2);\n"
+            + "  alert(imageData.data.length);\n"
+            + "  alert(imageData.width);\n"
+            + "  alert(imageData.height);\n"
+
+            + "  var data = imageData.data;\n"
+            + "  for (var i = 0; i < data.length; i++) {\n"
+            + "    alert(data[i]);\n"
+            + "  }\n"
+
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"8", "1", "2",
+                "0", "190", "3", "255", "0", "190", "3", "255"},
+            IE = "no ctor")
+    public void ctorArrayWidthHeight() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (typeof ImageData != 'function') { alert('no ctor'); return; }"
+
+            + "  var arr = new Uint8ClampedArray(8);\n"
+            + "  for (var i = 0; i < arr.length; i += 4) {\n"
+            + "    arr[i + 0] = 0;\n"
+            + "    arr[i + 1] = 190;\n"
+            + "    arr[i + 2] = 3;\n"
+            + "    arr[i + 3] = 255;\n"
+            + "  }\n"
+
+            + "  var imageData = new ImageData(arr, 1, 2);\n"
+            + "  alert(imageData.data.length);\n"
+            + "  alert(imageData.width);\n"
+            + "  alert(imageData.height);\n"
+
+            + "  var data = imageData.data;\n"
+            + "  for (var i = 0; i < data.length; i++) {\n"
+            + "    alert(data[i]);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"exception", "exception", "exception", "exception", "exception", "exception", "exception"})
+    public void ctorArrayInvalid() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+
+            + "  try {\n"
+            + "    var imageData = new ImageData();\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "  try {\n"
+            + "    var imageData = new ImageData(-2, 1);\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "  try {\n"
+            + "    var imageData = new ImageData(2, -1);\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "  try {\n"
+            + "    var imageData = new ImageData(-2, -1);\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "  var arr = new Uint8ClampedArray(8);\n"
+            + "  try {\n"
+            + "    var imageData = new ImageData(arr, 3);\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "  arr = new Uint8ClampedArray(11);\n"
+            + "  try {\n"
+            + "    var imageData = new ImageData(arr, 2);\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "  arr = new Uint8ClampedArray(8);\n"
+            + "  try {\n"
+            + "    var imageData = new ImageData(arr, 2, 2);\n"
+            + "  } catch (e) { alert('exception');}\n"
+
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"8", "2", "1", "0", "0", "0", "0", "0", "0", "0", "0"},
+            IE = "no ctor")
+    public void ctorWidthHeight() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  if (typeof ImageData != 'function') { alert('no ctor'); return; }"
+
+            + "  var imageData = new ImageData(2, 1);\n"
+            + "  alert(imageData.data.length);\n"
+            + "  alert(imageData.width);\n"
+            + "  alert(imageData.height);\n"
+
+            + "  var data = imageData.data;\n"
+            + "  for (var i = 0; i < data.length; i++) {\n"
+            + "    alert(data[i]);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"200", "100", "50", "255", "100", "50", "125", "255", "123", "111", "222", "255"})
     public void getImageData() throws Exception {
         final String html =

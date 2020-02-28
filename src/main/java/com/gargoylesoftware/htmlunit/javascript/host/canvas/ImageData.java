@@ -24,6 +24,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8ClampedArray;
@@ -47,9 +51,70 @@ public class ImageData extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
     public ImageData() {
         this(null, 0, 0, 0, 0);
+    }
+
+    /**
+     * JavaScript constructor.
+     * @param cx the current context
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
+     */
+    @JsxConstructor({CHROME, FF68, FF60})
+    public static Scriptable jsConstructor(
+            final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) {
+
+        if (args.length < 2) {
+            throw Context.reportRuntimeError("ImageData ctor - too less arguments");
+        }
+
+        NativeUint8ClampedArray data = null;
+        final int width;
+        final int height;
+        if (args[0] instanceof NativeUint8ClampedArray) {
+            data = (NativeUint8ClampedArray) args[0];
+            if (data.getArrayLength() % 4 != 0) {
+                throw Context.reportRuntimeError("ImageData ctor - data length mod 4 not zero");
+            }
+
+            width = (int) ScriptRuntime.toInteger(args[1]);
+            if (args.length < 3) {
+                height = data.getArrayLength() / 4 / width;
+
+                if (data.getArrayLength() != 4 * width * height) {
+                    throw Context.reportRuntimeError("ImageData ctor - width not correct");
+                }
+            }
+            else {
+                height = (int) ScriptRuntime.toInteger(args[2]);
+            }
+
+            if (data.getArrayLength() != 4 * width * height) {
+                throw Context.reportRuntimeError("ImageData ctor - width/height not correct");
+            }
+        }
+        else {
+            width = (int) ScriptRuntime.toInteger(args[0]);
+            height = (int) ScriptRuntime.toInteger(args[1]);
+        }
+
+        if (width < 0) {
+            throw Context.reportRuntimeError("ImageData ctor - width negative");
+        }
+        if (height < 0) {
+            throw Context.reportRuntimeError("ImageData ctor - height negative");
+        }
+
+        final ImageData result = new ImageData(null, 0, 0, width, height);
+        if (data != null) {
+            final byte[] bytes = data.getBuffer().getBuffer();
+            System.arraycopy(bytes, 0, result.bytes_, 0, Math.min(bytes.length, result.bytes_.length));
+        }
+        return result;
     }
 
     ImageData(final RenderingBackend context, final int x, final int y, final int width, final int height) {
