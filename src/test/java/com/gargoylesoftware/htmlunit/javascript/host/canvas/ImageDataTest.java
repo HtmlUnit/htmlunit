@@ -132,20 +132,27 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"24", "2", "3",
-                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
-                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"})
-    public void createImageData() throws Exception {
+    @Alerts({"8", "1", "2",
+                "13", "0", "17", "0", "0", "0", "0", "42"})
+    public void setValues() throws Exception {
         final String html =
             "<html><head><script>\n"
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
             + "    var ctx = canvas.getContext('2d');\n"
-            + "    var imageData = ctx.createImageData(2, 3);\n"
+
+            + "    var imageData = ctx.createImageData(1, 2);\n"
             + "    alert(imageData.data.length);\n"
             + "    alert(imageData.width);\n"
             + "    alert(imageData.height);\n"
+
+            + "    imageData.data[0] = 13;\n"
+            + "    imageData.data[2] = 17;\n"
+            + "    imageData.data[7] = 42;\n"
+            + "    imageData.data[8] = 43;\n"
+            + "    imageData.data[-5] = 7;\n"
+            + "    imageData.data[100] = 11;\n"
             + "    for (var i = 0; i < imageData.data.length; i++) {\n"
             + "      alert(imageData.data[i]);\n"
             + "    }\n"
@@ -156,5 +163,111 @@ public class ImageDataTest extends WebDriverTestCase {
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"24", "2", "3",
+                "0", "0", "17", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"})
+    public void createImageData() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  if (canvas.getContext) {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    ctx.fillRect(1, 1, 13, 11);\n"
+
+            + "    var imageData = ctx.createImageData(2, 3);\n"
+            + "    alert(imageData.data.length);\n"
+            + "    alert(imageData.width);\n"
+            + "    alert(imageData.height);\n"
+
+            + "    imageData.data[2] = 17;\n"
+            + "    for (var i = 0; i < imageData.data.length; i++) {\n"
+            + "      alert(imageData.data[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"24", "2", "3",
+                "0", "0", "17", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"})
+    public void createImageDataFlipped() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  if (canvas.getContext) {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    ctx.fillRect(1, 1, 13, 11);\n"
+
+            + "    var imageData = ctx.createImageData(-2, -3);\n"
+            + "    alert(imageData.data.length);\n"
+            + "    alert(imageData.width);\n"
+            + "    alert(imageData.height);\n"
+
+            + "    imageData.data[2] = 17;\n"
+            + "    for (var i = 0; i < imageData.data.length; i++) {\n"
+            + "      alert(imageData.data[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"8",
+                "0", "0", "17", "0", "0", "0", "0", "0",
+                "8", "1", "2",
+                "0", "0", "0", "0", "0", "0", "0", "0"})
+    public void createImageDataFromImageData() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  if (canvas.getContext) {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    var imageData = ctx.createImageData(1, 2);\n"
+            + "    alert(imageData.data.length);\n"
+            + "    imageData.data[2] = 17;\n"
+            + "    for (var i = 0; i < imageData.data.length; i++) {\n"
+            + "      alert(imageData.data[i]);\n"
+            + "    }\n"
+
+            + "    var imageDataCopy = ctx.createImageData(imageData);\n"
+            + "    alert(imageDataCopy.data.length);\n"
+            + "    alert(imageDataCopy.width);\n"
+            + "    alert(imageDataCopy.height);\n"
+            + "    for (var i = 0; i < imageDataCopy.data.length; i++) {\n"
+            + "      alert(imageDataCopy.data[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html, 77777);
     }
 }

@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageReader;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -38,6 +39,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -255,6 +259,46 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         imageData.setParentScope(getParentScope());
         imageData.setPrototype(getPrototype(imageData.getClass()));
         return imageData;
+    }
+
+    /**
+     * Returns the {@code ImageData} object.
+     * this may accept a variable number of arguments.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return the {@code ImageData} object
+     */
+    @JsxFunction
+    public static ImageData createImageData(final Context context, final Scriptable thisObj, final Object[] args,
+        final Function function) {
+        if (!(thisObj instanceof CanvasRenderingContext2D)) {
+            throw Context.reportRuntimeError(
+                    "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
+        }
+        final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
+
+        if (args.length > 0 && args[0] instanceof ImageData) {
+            final ImageData imageDataParameter = (ImageData) args[0];
+            final ImageData imageData = new ImageData(null,
+                    0, 0, imageDataParameter.getWidth(), imageDataParameter.getHeight());
+            imageData.setParentScope(canvas.getParentScope());
+            imageData.setPrototype(canvas.getPrototype(imageData.getClass()));
+            return imageData;
+        }
+
+        if (args.length > 1) {
+            final int width = (int) ScriptRuntime.toInteger(args, 0);
+            final int height = (int) ScriptRuntime.toInteger(args, 1);
+            final ImageData imageData = new ImageData(null, 0, 0, width, height);
+            imageData.setParentScope(canvas.getParentScope());
+            imageData.setPrototype(canvas.getPrototype(imageData.getClass()));
+            return imageData;
+        }
+        throw Context.reportRuntimeError(
+                "CanvasRenderingContext2D.getImageData() failed - "
+                + "wrong parameters given (" + StringUtils.join(args) + ")");
     }
 
     /**
@@ -506,10 +550,23 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Dummy placeholder.
+     * Paints data from the given ImageData object onto the canvas.
+     * @param imageData an ImageData object containing the array of pixel values
+     * @param dx horizontal position (x coordinate) at which to place the image data in the destination canvas
+     * @param dy vertical position (y coordinate) at which to place the image data in the destination canvas
+     * @param dirtyX horizontal position (x coordinate) of the top-left corner
+     *  from which the image data will be extracted. Defaults to 0.
+     * @param dirtyY vertical position (y coordinate) of the top-left corner
+     *  from which the image data will be extracted. Defaults to 0.
+     * @param dirtyWidth width of the rectangle to be painted.
+     *  Defaults to the width of the image data.
+     * @param dirtyHeight height of the rectangle to be painted.
+     *  Defaults to the height of the image data.
      */
     @JsxFunction
-    public void putImageData() {
+    public void putImageData(final ImageData imageData,
+                final int dx, final int dy, final int dirtyX, final int dirtyY,
+                final int dirtyWidth, final int dirtyHeight) {
         LOG.info("CanvasRenderingContext2D.putImageData() not yet implemented");
     }
 
