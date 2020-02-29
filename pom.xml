@@ -29,8 +29,8 @@
         <htmlunitcorejs.version>2.37.0</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.11</httpcomponents.version>
-        <jetty.version>9.4.26.v20200117</jetty.version>
-        <log4j.version>2.13.0</log4j.version>
+        <jetty.version>9.4.27.v20200227</jetty.version>
+        <log4j.version>2.13.1</log4j.version>
         <slf4j.version>1.7.30</slf4j.version>
         <selenium.version>3.141.59</selenium.version>
 
