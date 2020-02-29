@@ -852,13 +852,6 @@ public class CodeStyleTest {
                 }
                 break;
 
-            case "FF":
-                if (previousList.contains("FF60") || previousList.contains("FF68")) {
-                    addFailure("FF must be before specifc FF version in "
-                            + relativePath + ", line: " + (lineIndex + 1));
-                }
-                break;
-
             default:
         }
     }
