@@ -552,9 +552,28 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void putImageData(final ImageData imageData,
-                final int dx, final int dy, final int dirtyX, final int dirtyY,
-                final int dirtyWidth, final int dirtyHeight) {
-        LOG.info("CanvasRenderingContext2D.putImageData() not yet implemented");
+                final int dx, final int dy, final Object dirtyX, final Object dirtyY,
+                final Object dirtyWidth, final Object dirtyHeight) {
+        int dirtyXArg = 0;
+        int dirtyYArg = 0;
+        int dirtyWidthArg = imageData.getWidth();
+        int dirtyHeightArg = imageData.getHeight();
+
+        if (!Undefined.isUndefined(dirtyX)) {
+            dirtyXArg = (int) ScriptRuntime.toInteger(dirtyX);
+
+            if (Undefined.isUndefined(dirtyY)
+                    || Undefined.isUndefined(dirtyWidth)
+                    || Undefined.isUndefined(dirtyHeight)) {
+                throw Context.reportRuntimeError(
+                        "CanvasRenderingContext2D.putImageData() failed - seven parameters expected");
+            }
+            dirtyYArg = (int) ScriptRuntime.toInteger(dirtyY);
+            dirtyWidthArg = (int) ScriptRuntime.toInteger(dirtyWidth);
+            dirtyHeightArg = (int) ScriptRuntime.toInteger(dirtyHeight);
+        }
+
+        getRenderingBackend().putImageData(imageData, dx, dy, dirtyXArg, dirtyYArg, dirtyWidthArg, dirtyHeightArg);
     }
 
     /**

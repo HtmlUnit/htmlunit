@@ -42,6 +42,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -312,6 +313,54 @@ public class AwtRenderingBackend implements RenderingBackend {
         final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
         subPath.moveTo(p.getX(), p.getY());
         subPaths_.add(subPath);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void putImageData(final ImageData imageData,
+            final int dx, final int dy, final int dirtyX, final int dirtyY,
+            final int dirtyWidth, final int dirtyHeight) {
+
+        final Color orgColor = graphics2D_.getColor();
+
+        final int width = dx + imageData.getWidth();
+        final int height = dy + imageData.getHeight();
+        final int imageWidth = dirtyX + dirtyWidth;
+        final int imageHeight = dirtyY + dirtyHeight;
+
+        final byte[] bytes = imageData.getData().getBuffer().getBuffer();
+        int byteIdx = 0;
+        int imageX = 0;
+        int imageY = 0;
+        for (int insertY = dy; insertY < height; insertY++) {
+            for (int insertX = dx; insertX < width; insertX++) {
+                if (0 <= insertX && insertX < image_.getWidth()
+                        && 0 <= insertY && insertY < image_.getHeight()
+                        && dirtyX <= imageX && imageX < imageWidth
+                        && dirtyY <= imageY && imageY < imageHeight) {
+                    final int r = bytes[byteIdx++] & 0xFF;
+                    final int g = bytes[byteIdx++] & 0xFF;
+                    final int b = bytes[byteIdx++] & 0xFF;
+                    final int a = bytes[byteIdx++] & 0xFF;
+                    final Color color = new Color(r, g, b, a);
+                    graphics2D_.setColor(color);
+                    graphics2D_.drawLine(insertX, insertY, insertX, insertY);
+                }
+                else {
+                    byteIdx += 4;
+                }
+
+                imageX++;
+                if (imageX == imageData.getWidth()) {
+                    imageX = 0;
+                    imageY++;
+                }
+            }
+        }
+
+        graphics2D_.setColor(orgColor);
     }
 
     /**
