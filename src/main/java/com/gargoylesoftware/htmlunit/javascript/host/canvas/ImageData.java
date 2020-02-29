@@ -42,8 +42,6 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8Clamped
 public class ImageData extends SimpleScriptable {
 
     private final byte[] bytes_;
-    private final int sx_;
-    private final int sy_;
     private final int width_;
     private final int height_;
     private NativeUint8ClampedArray data_;
@@ -125,8 +123,6 @@ public class ImageData extends SimpleScriptable {
             bytes_ = context.getBytes(width, height, x, y);
         }
 
-        sx_ = x;
-        sy_ = y;
         width_ = width;
         height_ = height;
     }

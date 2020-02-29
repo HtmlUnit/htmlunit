@@ -435,6 +435,6 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html, 77777);
+        loadPageWithAlerts2(html);
     }
 }
