@@ -18,6 +18,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageReader;
 
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
+
 /**
  * Interface to the rendering context used by
  * {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
@@ -153,6 +155,22 @@ public interface RenderingBackend {
      * @param y the y
      */
     void moveTo(double x, double y);
+
+    /**
+     * Paints data from the given ImageData object onto the canvas.
+     * @param imageData an ImageData object containing the array of pixel values
+     * @param dx horizontal position (x coordinate) at which to place the image data in the destination canvas
+     * @param dy vertical position (y coordinate) at which to place the image data in the destination canvas
+     * @param dirtyX horizontal position (x coordinate) of the top-left corner
+     *  from which the image data will be extracted. Defaults to 0.
+     * @param dirtyY vertical position (y coordinate) of the top-left corner
+     *  from which the image data will be extracted. Defaults to 0.
+     * @param dirtyWidth width of the rectangle to be painted.
+     *  Defaults to the width of the image data.
+     * @param dirtyHeight height of the rectangle to be painted.
+     *  Defaults to the height of the image data.
+     */
+    void putImageData(ImageData imageData, int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight);
 
     /**
      * Adds a quadratic Bézier curve to the current sub-path. It requires
