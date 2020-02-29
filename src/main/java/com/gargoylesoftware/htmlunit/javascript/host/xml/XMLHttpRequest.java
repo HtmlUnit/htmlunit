@@ -677,16 +677,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
             else if (content instanceof URLSearchParams) {
-                final String body = Context.toString(content);
-                if (!body.isEmpty()) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Setting request body to: " + body);
-                    }
-                    webRequest_.setRequestBody(body);
-                    if (setEncodingType) {
-                        webRequest_.setEncodingType(FormEncodingType.URL_ENCODED);
-                    }
-                }
+                ((URLSearchParams) content).fillRequest(webRequest_);
             }
             else {
                 final String body = Context.toString(content);

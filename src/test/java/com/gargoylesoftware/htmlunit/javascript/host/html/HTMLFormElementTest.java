@@ -36,6 +36,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -442,10 +443,16 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertTitle(driver, "Response");
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
-        // Can't test equality for multipart/form-data as it will have the form:
-        // multipart/form-data; boundary=---------------------------42937861433140731107235900
-        headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[2], headerValue);
+
+        if (headerValue.startsWith(FormEncodingType.MULTIPART.getName())) {
+            // Can't test equality for multipart/form-data as it will have the form:
+            // multipart/form-data; boundary=---------------------------42937861433140731107235900
+            headerValue = StringUtils.substringBefore(headerValue, ";");
+            assertEquals(getExpectedAlerts()[2], headerValue);
+        }
+        else {
+            assertEquals(getExpectedAlerts()[2], headerValue);
+        }
     }
 
     private void jsEncoding(final String encoding) throws Exception {
@@ -477,10 +484,15 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertTitle(driver, "Response");
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
-        // Can't test equality for multipart/form-data as it will have the form:
-        // multipart/form-data; boundary=---------------------------42937861433140731107235900
-        headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[2], headerValue);
+        if (headerValue.startsWith(FormEncodingType.MULTIPART.getName())) {
+            // Can't test equality for multipart/form-data as it will have the form:
+            // multipart/form-data; boundary=---------------------------42937861433140731107235900
+            headerValue = StringUtils.substringBefore(headerValue, ";");
+            assertEquals(getExpectedAlerts()[2], headerValue);
+        }
+        else {
+            assertEquals(getExpectedAlerts()[2], headerValue);
+        }
     }
 
     /**
@@ -1407,10 +1419,15 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertTitle(driver, "Response");
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
-        // Can't test equality for multipart/form-data as it will have the form:
-        // multipart/form-data; boundary=---------------------------42937861433140731107235900
-        headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(expectedCntType, headerValue);
+        if (headerValue != null && headerValue.startsWith(FormEncodingType.MULTIPART.getName())) {
+            // Can't test equality for multipart/form-data as it will have the form:
+            // multipart/form-data; boundary=---------------------------42937861433140731107235900
+            headerValue = StringUtils.substringBefore(headerValue, ";");
+            assertEquals(expectedCntType, headerValue);
+        }
+        else {
+            assertEquals(expectedCntType, headerValue);
+        }
     }
 
     /**
@@ -1462,6 +1479,217 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "éèêäöü";
 
         assertTrue("Body: " + body, body.contains(expected));
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void submitUrlEncodedEmptyForm() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        assertEquals(0, getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().size());
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded", "myField=abcDEF"})
+    public void submitUrlEncodedAsciiText() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "    <input name='myField' value='abcDEF'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().get(0).toString());
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded", "my\tFie ld = a b\tc \t"})
+    public void submitUrlEncodedSpecialChars() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "    <input name='my\tFie ld ' value=' a b\tc \t'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().get(0).toString());
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded", "myField=éèêäöü"})
+    public void submitUrlEncodedUnicode() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "    <input name='myField' value='éèêäöü'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().get(0).toString());
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded", "myField=HtmlUnit \u043B\u0189"})
+    public void submitUrlEncodedUnicodeUTF8() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "    <input name='myField' value='HtmlUnit \u043B\u0189'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().get(0).toString());
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded", "myField=HtmlUnit \u043B\u0189"})
+    public void submitUrlEncodedUnicodeUTF16() throws Exception {
+        final String html = "<html>\n"
+                + "<body onload='document.forms[0].submit()'>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "    <input name='myField' value='HtmlUnit \u043B\u0189'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
+        Thread.sleep(400);
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().get(0).toString());
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+    }
+
+    /**
+     * Ensure that text/plain form parameters are correctly encoded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded", "myFile=htmlunit-test", ".txt"})
+    public void submitUrlEncodedFile() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <form action='foo.html' enctype='application/x-www-form-urlencoded' method='post'>\n"
+                + "    <input type='file' id='f' name='myFile'>\n"
+                + "    <input id='clickMe' type='submit' value='Click Me'>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        try {
+            String path = tmpFile.getAbsolutePath();
+            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+                path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+            }
+            driver.findElement(By.id("f")).sendKeys(path);
+            driver.findElement(By.id("clickMe")).click();
+        }
+        finally {
+            assertTrue(tmpFile.delete());
+        }
+
+        final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+
+        final String body = getMockWebConnection().getLastWebRequest()
+                .getRequestParameters().get(0).toString();
+        assertTrue(body, body.startsWith(getExpectedAlerts()[1]));
+        assertTrue(body, body.endsWith(getExpectedAlerts()[2]));
+        assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
     /**

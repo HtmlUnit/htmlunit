@@ -1847,8 +1847,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"done", "application/x-www-form-urlencoded"},
-            IE = {"error: URLSearchParams", "text/plain"})
+    @Alerts(DEFAULT = {"done", "application/x-www-form-urlencoded;charset=UTF-8",
+                        "q=HtmlUnit", "u=\u043B\u0189"},
+            IE = {"error: URLSearchParams", "text/plain;charset=UTF-8"})
     @NotYetImplemented(IE)
     public void enctypeURLSearchParams() throws Exception {
         final String html
@@ -1858,7 +1859,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "function doTest() {\n"
             + "  var searchParams = '1234';\n"
             + "  try {\n"
-            + "    searchParams = new URLSearchParams('q=URLUtils.searchParams&topic=api');\n"
+            + "    searchParams = new URLSearchParams();\n"
+            + "    searchParams.append('q', 'HtmlUnit');\n"
+            + "    searchParams.append('u', '\u043B\u0189');\n"
             + "  } catch (e) {\n"
             + "    alert('error: URLSearchParams');\n"
             + "  }\n"
@@ -1879,15 +1882,20 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
         verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
 
-        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+        String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
-        // Can't test equality for multipart/form-data as it will have the form:
-        // multipart/form-data; boundary=---------------------------42937861433140731107235900
-        headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[1], "" + headerValue);
+        headerContentType = headerContentType.replace("; ", ";"); // normalize
+        assertEquals(getExpectedAlerts()[1], headerContentType);
+        if (getExpectedAlerts().length > 2) {
+            assertEquals(getExpectedAlerts()[2], getMockWebConnection().getLastWebRequest()
+                                .getRequestParameters().get(0).toString());
+            assertEquals(getExpectedAlerts()[3], getMockWebConnection().getLastWebRequest()
+                    .getRequestParameters().get(1).toString());
+            assertEquals(null, getMockWebConnection().getLastWebRequest().getRequestBody());
+        }
     }
 
     /**
@@ -1976,7 +1984,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("text/jpeg")
+    @Alerts({"text/jpeg", "HtmlUnit \u00D0\u00BB\u00C6\u0089"})
     public void enctypeUserDefined() throws Exception {
         final String html
             = "<html>\n"
@@ -1987,7 +1995,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
-            + "    xhr.send('HtmlUnit');\n"
+            + "    xhr.send('HtmlUnit \u043B\u0189');\n"
             + "    alert('done');\n"
             + "  } catch (e) {\n"
             + "    alert('error: ' + e.message);\n"
@@ -2001,15 +2009,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
         verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
 
-        String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-            .get(HttpHeader.CONTENT_TYPE);
-        // Can't test equality for multipart/form-data as it will have the form:
-        // multipart/form-data; boundary=---------------------------42937861433140731107235900
-        headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[0], headerValue);
+        String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
+                .get(HttpHeader.CONTENT_TYPE);
+        headerContentType = headerContentType.replace("; ", ";"); // normalize
+        assertEquals(getExpectedAlerts()[0], headerContentType);
+        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
     /**
