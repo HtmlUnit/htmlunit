@@ -248,20 +248,6 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Creates a new, blank ImageData object with the specified dimensions.
-     * @param width the width
-     * @param height the height
-     * @return a new, blank ImageData object with the specified dimensions
-     */
-    @JsxFunction
-    public ImageData createImageData(final int width, final int height) {
-        final ImageData imageData = new ImageData(null, 0, 0, width, height);
-        imageData.setParentScope(getParentScope());
-        imageData.setPrototype(getPrototype(imageData.getClass()));
-        return imageData;
-    }
-
-    /**
      * Returns the {@code ImageData} object.
      * this may accept a variable number of arguments.
      * @param context the JavaScript context
@@ -299,7 +285,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
         throw Context.reportRuntimeError(
                 "CanvasRenderingContext2D.getImageData() failed - "
-                + "wrong parameters given (" + StringUtils.join(args) + ")");
+                + "wrong parameters given (" + StringUtils.join(args, ", ") + ")");
     }
 
     /**
