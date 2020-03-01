@@ -755,9 +755,19 @@ public class Node extends EventTarget {
      * @return the first element child
      */
     protected Element getFirstElementChild() {
-        final DomElement child = ((DomElement) getDomNodeOrDie()).getFirstElementChild();
-        if (child != null) {
-            return (Element) child.getScriptableObject();
+        final DomNode domNode = getDomNodeOrDie();
+        if (domNode instanceof DomElement) {
+            final DomElement child = ((DomElement) domNode).getFirstElementChild();
+            if (child != null) {
+                return (Element) child.getScriptableObject();
+            }
+            return null;
+        }
+
+        for (DomNode child : domNode.getChildren()) {
+            if (child != null) {
+                return (Element) child.getScriptableObject();
+            }
         }
         return null;
     }
@@ -767,11 +777,22 @@ public class Node extends EventTarget {
      * @return the last element child
      */
     protected Element getLastElementChild() {
-        final DomElement child = ((DomElement) getDomNodeOrDie()).getLastElementChild();
-        if (child != null) {
-            return (Element) child.getScriptableObject();
+        final DomNode domNode = getDomNodeOrDie();
+        if (domNode instanceof DomElement) {
+            final DomElement child = ((DomElement) getDomNodeOrDie()).getLastElementChild();
+            if (child != null) {
+                return (Element) child.getScriptableObject();
+            }
+            return null;
         }
-        return null;
+
+        Element result = null;
+        for (DomNode child : domNode.getChildren()) {
+            if (child != null) {
+                result = (Element) child.getScriptableObject();
+            }
+        }
+        return result;
     }
 
     /**

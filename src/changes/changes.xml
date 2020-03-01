@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.38.0" date="xxxx, 2020" description="Bugfixes, CHROME 80">
+            <action type="fix" dev="rbri">
+                Methods firstElementChild() and lastElementChild() are no longer
+                failing because of a ClassCastException when calling for an xml document.
+            </action>
             <action type="add" dev="rbri" issue="#140">
                 CanvasRenderingContext2D.putImageData() implemented.
             </action>

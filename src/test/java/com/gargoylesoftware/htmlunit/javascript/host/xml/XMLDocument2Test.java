@@ -533,6 +533,68 @@ public class XMLDocument2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"foo", "fooc1", "null"},
+            IE = "not available")
+    public void firstElementChild() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+
+            + "    if (doc.firstElementChild == null) { alert('not available'); return };\n"
+
+            + "    alert(doc.firstElementChild.nodeName);\n"
+            + "    alert(doc.firstElementChild.firstElementChild.nodeName);\n"
+            + "    alert(doc.firstElementChild.firstElementChild.firstElementChild);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<foo>\n"
+            + "    <fooc1 name='first'>something</fooc1>\n"
+            + "    <fooc2 name='second'>something else</fooc2>\n"
+            + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"foo", "fooc2", "null"},
+            IE = "not available")
+    public void lastElementChild() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+
+            + "    if (doc.firstElementChild == null) { alert('not available'); return };\n"
+
+            + "    alert(doc.lastElementChild.nodeName);\n"
+            + "    alert(doc.firstElementChild.lastElementChild.nodeName);\n"
+            + "    alert(doc.firstElementChild.firstElementChild.lastElementChild);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<foo>\n"
+             + "    <fooc1 name='first'>something</fooc1>\n"
+             + "    <fooc2 name='second'>something else</fooc2>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test case for issue #1576.
      * @throws Exception if the test fails
      */
