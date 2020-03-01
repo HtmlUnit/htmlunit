@@ -453,6 +453,16 @@ public abstract class HtmlElement extends DomElement {
      * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {
+        // TODO IE
+        final String formId = getAttribute("form");
+        if (formId != ATTRIBUTE_NOT_DEFINED) {
+            final Element formById = getPage().getElementById(formId);
+            if (formById instanceof HtmlForm) {
+                return (HtmlForm) formById;
+            }
+            return null;
+        }
+
         if (owningForm_ != null) {
             return owningForm_;
         }

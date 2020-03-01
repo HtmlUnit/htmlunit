@@ -118,6 +118,7 @@ public class HtmlForm extends HtmlElement {
     Page submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final WebClient webClient = htmlPage.getWebClient();
+
         if (webClient.isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
@@ -427,6 +428,22 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
+        final String formId = getId();
+        if (formId != ATTRIBUTE_NOT_DEFINED) {
+            for (final DomNode domNode : ((HtmlPage) getPage()).getBody().getChildren()) {
+                if (domNode instanceof HtmlElement) {
+                    final HtmlElement element = (HtmlElement) domNode;
+                    final String formIdRef = element.getAttribute("form");
+                    if (formId.equals(formIdRef) && isSubmittable(element, submitElement)) {
+                        final SubmittableElement submittable = (SubmittableElement) element;
+                        if (!submittableElements.contains(submittable)) {
+                            submittableElements.add(submittable);
+                        }
+                    }
+                }
+            }
+        }
+
         for (final HtmlElement element : lostChildren_) {
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add((SubmittableElement) element);
@@ -479,7 +496,6 @@ public class HtmlForm extends HtmlElement {
      * @return {@code true} if the specified element gets submitted when this form is submitted
      */
     private static boolean isSubmittable(final HtmlElement element, final SubmittableElement submitElement) {
-        final String tagName = element.getTagName();
         if (!isValidForSubmission(element, submitElement)) {
             return false;
         }
@@ -496,7 +512,7 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        return !HtmlButton.TAG_NAME.equals(tagName);
+        return !HtmlButton.TAG_NAME.equals(element.getTagName());
     }
 
     /**
@@ -718,7 +734,7 @@ public class HtmlForm extends HtmlElement {
      * @param radioButtonInput the radio button to select
      */
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        if (!isAncestorOf(radioButtonInput) && !lostChildren_.contains(radioButtonInput)) {
+        if (radioButtonInput.getEnclosingForm() == null && !lostChildren_.contains(radioButtonInput)) {
             throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
         }
         final List<HtmlRadioButtonInput> radios = getRadioButtonsByName(radioButtonInput.getNameAttribute());

@@ -21,6 +21,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -974,5 +976,133 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(By.id("submit")).click();
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
+        "textareaParam#textarea value"},
+            IE = {})
+    public void submitUsingFormAttribute() throws Exception {
+        final String html =
+            "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form id='formId'>\n"
+            + "  </form>\n"
+
+            + "  <input form='formId' type='text' name='textParam' value='textValue'>\n"
+
+            + "  <fieldset form='formId'>\n"
+            + "    <input type='hidden' name='hiddenParam' value='hiddenValue'>\n"
+            + "    <input type='text' name='fieldsetTextParam' value='fieldsetTextValue'>\n"
+            + "  </fieldset>\n"
+
+            + "  <label for='radioId' form='formId'>Male</label>\n"
+            + "  <input id='radioId' type='radio' name='radioParam' value='radioValue'>\n"
+
+            + "  <input form='formId' type='radio' name='radioParam2' value='radioValue2' checked='checked'>\n"
+
+            + "  <select form='formId' name='selectParam'>\n"
+            + "    <option value='selectValue' selected='selected'>selected</option>\n"
+            + "  </select>\n"
+
+            + "  <textarea form='formId' name='textareaParam'>textarea value</textarea>\n"
+
+            + "  <input form='formId' id='mySubmit' type='submit' value='Submit'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ById("mySubmit")).click();
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+
+        assertEquals(getExpectedAlerts().length, requestedParams.size());
+
+        for (int i = 0; i < requestedParams.size(); i++) {
+            assertEquals(getExpectedAlerts()[i],
+                    requestedParams.get(i).getName() + '#' + requestedParams.get(i).getValue());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "hiddenParam#form1",
+            IE = "hiddenParam#form2")
+    public void submitFromInsideAnother() throws Exception {
+        final String html =
+            "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form id='formId'>\n"
+            + "    <input type='hidden' name='hiddenParam' value='form1'>\n"
+            + "  </form>\n"
+
+            + "  <form id='formId2'>\n"
+            + "    <input type='hidden' name='hiddenParam' value='form2'>\n"
+            + "    <input form='formId' id='mySubmit' type='submit' value='Submit'>\n"
+            + "  </form>\n"
+
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ById("mySubmit")).click();
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+
+        assertEquals(getExpectedAlerts().length, requestedParams.size());
+
+        for (int i = 0; i < requestedParams.size(); i++) {
+            assertEquals(getExpectedAlerts()[i],
+                    requestedParams.get(i).getName() + '#' + requestedParams.get(i).getValue());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "hiddenParam#form2")
+    public void submitFromInsideAnotherInvalidFormRef() throws Exception {
+        final String html =
+            "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form id='formId'>\n"
+            + "    <input type='hidden' name='hiddenParam' value='form1'>\n"
+            + "  </form>\n"
+
+            + "  <form id='formId2'>\n"
+            + "    <input type='hidden' name='hiddenParam' value='form2'>\n"
+            + "    <input form='formIdInvalid' id='mySubmit' type='submit' value='Submit'>\n"
+            + "  </form>\n"
+
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ById("mySubmit")).click();
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+
+        assertEquals(getExpectedAlerts().length, requestedParams.size());
+
+        for (int i = 0; i < requestedParams.size(); i++) {
+            assertEquals(getExpectedAlerts()[i],
+                    requestedParams.get(i).getName() + '#' + requestedParams.get(i).getValue());
+        }
     }
 }
