@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebRequest.HttpHint;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -678,6 +679,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             else if (content instanceof URLSearchParams) {
                 ((URLSearchParams) content).fillRequest(webRequest_);
+                webRequest_.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
             }
             else {
                 final String body = Context.toString(content);

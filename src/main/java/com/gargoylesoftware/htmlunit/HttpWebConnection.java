@@ -107,6 +107,7 @@ import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.TextUtils;
 
+import com.gargoylesoftware.htmlunit.WebRequest.HttpHint;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
@@ -321,8 +322,17 @@ public class HttpWebConnection implements WebConnection {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
                     final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
                     final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
-                    final StringEntity urlEncodedEntity = new StringEntity(query, charset);
-                    urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
+
+                    final StringEntity urlEncodedEntity;
+                    if (webRequest.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
+                        urlEncodedEntity = new StringEntity(query,
+                                ContentType.create(URLEncodedUtils.CONTENT_TYPE, charset));
+
+                    }
+                    else {
+                        urlEncodedEntity = new StringEntity(query, charset);
+                        urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
+                    }
                     postMethod.setEntity(urlEncodedEntity);
                 }
                 else {
