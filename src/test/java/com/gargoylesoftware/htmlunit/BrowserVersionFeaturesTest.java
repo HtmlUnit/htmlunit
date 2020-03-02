@@ -65,10 +65,11 @@ public class BrowserVersionFeaturesTest  {
     @Test
     public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<>();
-        browsers.add(BrowserVersion.FIREFOX_60);
-        browsers.add(BrowserVersion.FIREFOX_68);
-        browsers.add(BrowserVersion.INTERNET_EXPLORER);
         browsers.add(BrowserVersion.CHROME);
+        browsers.add(BrowserVersion.FIREFOX);
+        browsers.add(BrowserVersion.FIREFOX_68);
+        browsers.add(BrowserVersion.FIREFOX_60);
+        browsers.add(BrowserVersion.INTERNET_EXPLORER);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             int useCount = 0;
@@ -108,11 +109,14 @@ public class BrowserVersionFeaturesTest  {
         if (browser == BrowserVersion.CHROME) {
             return SupportedBrowser.CHROME;
         }
-        if (browser == BrowserVersion.FIREFOX_60) {
-            return SupportedBrowser.FF60;
+        if (browser == BrowserVersion.FIREFOX) {
+            return SupportedBrowser.FF;
         }
         if (browser == BrowserVersion.FIREFOX_68) {
             return SupportedBrowser.FF68;
+        }
+        if (browser == BrowserVersion.FIREFOX_60) {
+            return SupportedBrowser.FF60;
         }
 
         return SupportedBrowser.IE;
