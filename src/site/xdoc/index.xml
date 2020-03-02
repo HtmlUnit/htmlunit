@@ -159,7 +159,8 @@
         <section name="Installation">
             <p>
                 Place <a href="dependencies.html">all the required jars</a> in your classpath.
-                All of these can be found in the lib directory of the HtmlUnit installation.
+                All of these can be found in the lib directory of the HtmlUnit installation
+                (htmlunit-x.xx.x-bin.zip contains everything you need including all required dependencies).
             </p>
             <p>
                 For maven, you would add:
@@ -169,6 +170,18 @@
     <artifactId>htmlunit</artifactId>
     <version>2.37.0</version>
 </dependency>]]></source>
+            </p>
+
+            <p>
+                If you like to use the lastest available snapshot build you have to add the sonatype
+                snapshot repository to your pom distributionManagement section also (check
+                <a href="https://twitter.com/HtmlUnit">Twitter</a> for regular information about new
+                snapshot builds).
+            <source><![CDATA[
+<snapshotRepository>
+  <id>sonatype-nexus-snapshots</id>
+  <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+</snapshotRepository>]]></source>
             </p>
         </section>
 
