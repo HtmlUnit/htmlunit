@@ -432,7 +432,7 @@ public class HtmlForm extends HtmlElement {
         if (getPage().getWebClient().getBrowserVersion().hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE)) {
             final String formId = getId();
             if (formId != ATTRIBUTE_NOT_DEFINED) {
-                for (final DomNode domNode : ((HtmlPage) getPage()).getBody().getChildren()) {
+                for (final DomNode domNode : ((HtmlPage) getPage()).getBody().getDescendants()) {
                     if (domNode instanceof HtmlElement) {
                         final HtmlElement element = (HtmlElement) domNode;
                         final String formIdRef = element.getAttribute("form");
