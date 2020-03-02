@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_FORM_ATTRIBUTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
@@ -428,16 +429,18 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        final String formId = getId();
-        if (formId != ATTRIBUTE_NOT_DEFINED) {
-            for (final DomNode domNode : ((HtmlPage) getPage()).getBody().getChildren()) {
-                if (domNode instanceof HtmlElement) {
-                    final HtmlElement element = (HtmlElement) domNode;
-                    final String formIdRef = element.getAttribute("form");
-                    if (formId.equals(formIdRef) && isSubmittable(element, submitElement)) {
-                        final SubmittableElement submittable = (SubmittableElement) element;
-                        if (!submittableElements.contains(submittable)) {
-                            submittableElements.add(submittable);
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE)) {
+            final String formId = getId();
+            if (formId != ATTRIBUTE_NOT_DEFINED) {
+                for (final DomNode domNode : ((HtmlPage) getPage()).getBody().getChildren()) {
+                    if (domNode instanceof HtmlElement) {
+                        final HtmlElement element = (HtmlElement) domNode;
+                        final String formIdRef = element.getAttribute("form");
+                        if (formId.equals(formIdRef) && isSubmittable(element, submitElement)) {
+                            final SubmittableElement submittable = (SubmittableElement) element;
+                            if (!submittableElements.contains(submittable)) {
+                                submittableElements.add(submittable);
+                            }
                         }
                     }
                 }

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -291,6 +292,11 @@ public enum BrowserVersionFeatures {
     /** Form submit forces a real request also if only the hash was changed. */
     @BrowserFeature(CHROME)
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
+
+    /** Form submit takes care of fields outside the form linked to the form
+     * using the form attribute. */
+    @BrowserFeature({CHROME, FF, FF68, FF60})
+    FORM_SUBMISSION_FORM_ATTRIBUTE,
 
     /** Form submit includes the Cache-Control: max-age=0 header. */
     @BrowserFeature(CHROME)

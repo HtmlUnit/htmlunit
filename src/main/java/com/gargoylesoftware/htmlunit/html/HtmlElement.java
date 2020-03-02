@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_FORM_ATTRIBUTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
@@ -453,14 +454,16 @@ public abstract class HtmlElement extends DomElement {
      * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {
-        // TODO IE
-        final String formId = getAttribute("form");
-        if (formId != ATTRIBUTE_NOT_DEFINED) {
-            final Element formById = getPage().getElementById(formId);
-            if (formById instanceof HtmlForm) {
-                return (HtmlForm) formById;
+        final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+        if (browserVersion.hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE)) {
+            final String formId = getAttribute("form");
+            if (formId != ATTRIBUTE_NOT_DEFINED) {
+                final Element formById = getPage().getElementById(formId);
+                if (formById instanceof HtmlForm) {
+                    return (HtmlForm) formById;
+                }
+                return null;
             }
-            return null;
         }
 
         if (owningForm_ != null) {
