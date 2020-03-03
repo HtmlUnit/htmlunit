@@ -291,4 +291,16 @@ public class HtmlSerializerTest {
         serializer.append("\u200B", Mode.NORMALIZE);
         assertEquals("\u200B", serializer.getText());
     }
+
+    /**
+     * Test {@link HtmlSerializerTextBuilder} special spaces.
+     */
+    @Test
+    public void variousNewLines() {
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        serializer.appendNewLine();
+        serializer.append("\n", Mode.NORMALIZE);
+        serializer.appendBlockSeparator();
+        assertEquals("", serializer.getText());
+    }
 }

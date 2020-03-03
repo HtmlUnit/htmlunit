@@ -588,7 +588,7 @@ public class HtmlSerializer {
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
             state_ = State.EMPTY;
-            trimRightPos_ = 0;
+            trimRightPos_ = builder_.length();
         }
 
         public void append(final String content, final Mode mode) {
@@ -694,6 +694,7 @@ public class HtmlSerializer {
                     break;
                 case BLANK_AT_END_AFTER_NEWLINE:
                     builder_.setLength(trimRightPos_ - LINE_SEPARATOR_LENGTH);
+                    trimRightPos_ = trimRightPos_ - LINE_SEPARATOR_LENGTH;
                     if (builder_.length() == 0) {
                         state_ = State.EMPTY;
                     }
