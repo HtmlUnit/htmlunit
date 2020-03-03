@@ -1227,7 +1227,7 @@
         </dependency>
 
         <!-- for our tests we need the httpclient test jar because we use
-             the LocalServerTestBase -->
+            the LocalServerTestBase -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

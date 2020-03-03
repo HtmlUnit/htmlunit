@@ -2087,7 +2087,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void setAttributeFromJavaScript() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
             + "  input.setAttribute('value', 'text1');\n"
@@ -2108,8 +2108,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void sendKeys() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "</script></head>\n"
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
             + "</body></html>";
@@ -2127,8 +2126,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void clear() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "</script></head>\n"
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
             + "</body></html>";
