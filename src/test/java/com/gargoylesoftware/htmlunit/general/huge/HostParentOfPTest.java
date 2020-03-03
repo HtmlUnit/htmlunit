@@ -298,6 +298,17 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PeriodicSyncManager_PeriodicSyncManager() throws Exception {
+        test("PeriodicSyncManager", "PeriodicSyncManager");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _PeriodicWave_PeriodicWave() throws Exception {
