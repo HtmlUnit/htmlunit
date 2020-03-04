@@ -1266,7 +1266,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
+            CHROME = "3",
             IE = "3")
+    // sometimes real chrome returns 2
     public void submit_twice() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
