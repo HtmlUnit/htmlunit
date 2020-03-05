@@ -843,9 +843,9 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //     */
 //    @Test
 //    @Alerts("data:image/png;base64,"
-//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAUElEQVR42mNgGAUjHfxnMADi7UD8HIjf"
-//            + "A/F+IDahxLDPQIwOfwOxBTkG7sZiGAweJsfA53gMfD8oDKS6l6kcKQhDQS59DU02h8k3bBQMHwAAK9tu"
-//            + "aRzvBV4AAAAASUVORK5CYII=")
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAU0lEQVR42mNgGAUjHTQwGADxdiB+DsTvgXg/Qz2D"
+//            + "CSWGfQbi/2j4N9BQC3IM3I3FMBg+TI6Bz/EY+H5QGEh1L1M5UhCGglz6GppsDpNv2CgYPgAA3MZQoURRzTMAAAAA"
+//            + "SUVORK5CYII=")
 //    public void arcFillPath() throws Exception {
 //        final String html = "<html><head>\n"
 //            + "<script>\n"
@@ -873,10 +873,10 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //     */
 //    @Test
 //    @Alerts("data:image/png;base64,"
-//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoUlEQVR42mNgGLrgP4MKELcD8WUg/g7Ev"
-//            + "6FskJgOKQZxAHE31ABc8DfUYA5ChvEA8Wk8BqHD3UDMgs/A+SQYBoPduAwzIeBNfFADm4GTyTQMBPuxGX"
-//            + "iaAgNvYzPwOwUG/sdmILnhtxmIbbAZeJkEQ0C+mY49MkhLMs+BuAaIRYjJIfiSDcj1KeCET2L+XY0lJ7j"
-//            + "gzw2E8/FpqPc1GEbBgAAA5clFDZmvvgIAAAAASUVORK5CYII=")
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAp0lEQVR42mNgGLqgnkGFoYGhHYgvA/F3IP4NZYP"
+//            + "EdIg3qIGBA4i7oQb8x4F/Qw3mIGQYDxCfxmMQOt4NxCz4DJxPgmEw3I0rzEwIeBMf1sDmuslkGgbC/dgMPE2Bgb"
+//            + "exGfidAgP/YzOQ3PDbDMQ22Ay8TIIhIN9Mxx4ZpCWZ50BcA8QixGQ1fMkG5PoUcMInCTQwrMaSE1zw5wbC+fg01"
+//            + "PsaDKNgQAAAd7buKpKXkaMAAAAASUVORK5CYII=")
 //    public void arcFillPathAngle() throws Exception {
 //        final String html = "<html><head>\n"
 //            + "<script>\n"

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.38.0" date="xxxx, 2020" description="Bugfixes, CHROME 80">
+            <action type="fix" dev="rbri" issue="#140">
+                Use the correct color table from CanvasRenderingContext2D.fillStyle.
+            </action>
             <action type="fix" dev="rbri" issue="#134">
                 Fix StringIndexOutOfBoundsException when calculation text for dom nodes.
             </action>
