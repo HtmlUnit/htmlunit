@@ -28,7 +28,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -601,11 +600,8 @@ public class AwtRenderingBackend implements RenderingBackend {
                 color = Color.decode(tmpFillStyle);
             }
             else {
-                try {
-                    final Field f = Color.class.getField(tmpFillStyle);
-                    color = (Color) f.get(null);
-                }
-                catch (final Exception e) {
+                color = knownColors.get(tmpFillStyle.toLowerCase(Locale.ROOT));
+                if (color == null) {
                     if (LOG.isInfoEnabled()) {
                         LOG.info("Can not find color '" + tmpFillStyle + '\'');
                     }
