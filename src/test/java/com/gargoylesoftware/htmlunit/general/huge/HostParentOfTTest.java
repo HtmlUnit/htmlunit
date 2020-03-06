@@ -472,6 +472,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF68 = "true",
             FF60 = "true")
     public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
