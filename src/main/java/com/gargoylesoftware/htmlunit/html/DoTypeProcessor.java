@@ -90,7 +90,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         selectionStart = Math.max(0, Math.min(selectionStart, currentValue.length()));
 
         int selectionEnd = selectionDelegate.getSelectionEnd();
-        selectionStart = Math.max(selectionStart, Math.min(selectionEnd, currentValue.length()));
+        selectionEnd = Math.max(selectionStart, Math.min(selectionEnd, currentValue.length()));
 
         final StringBuilder newValue = new StringBuilder(currentValue);
         if (c == '\b') {
@@ -200,7 +200,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         selectionStart = Math.max(0, Math.min(selectionStart, currentValue.length()));
 
         int selectionEnd = selectionDelegate.getSelectionEnd();
-        selectionStart = Math.max(selectionStart, Math.min(selectionEnd, currentValue.length()));
+        selectionEnd = Math.max(selectionStart, Math.min(selectionEnd, currentValue.length()));
 
         final Character ch = SPECIAL_KEYS_MAP_.get(keyCode);
         if (ch != null) {
