@@ -74,4 +74,29 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
 
         assertEquals("xyz@email.com", input.getValueAttribute());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetValueAttribute() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='email' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlEmailInput input = (HtmlEmailInput) page.getElementById("foo");
+
+        input.type("abc@email.com");
+        input.setValueAttribute("");
+        input.type("xyz@email.com");
+
+        assertEquals("xyz@email.com", input.getValueAttribute());
+    }
 }

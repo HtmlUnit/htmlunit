@@ -364,4 +364,29 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
 
         assertEquals("0815", input.getTextContent());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetTextContent() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <textarea id='foo'></textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTextArea input = (HtmlTextArea) page.getElementById("foo");
+
+        input.type("4711");
+        input.setTextContent("");
+        input.type("0815");
+
+        assertEquals("0815", input.getTextContent());
+    }
 }

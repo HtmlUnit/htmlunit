@@ -74,4 +74,29 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
 
         assertEquals("0815", input.getValueAttribute());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetValueAttribute() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='tel' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTelInput input = (HtmlTelInput) page.getElementById("foo");
+
+        input.type("4711");
+        input.setValueAttribute("");
+        input.type("0815");
+
+        assertEquals("0815", input.getValueAttribute());
+    }
 }

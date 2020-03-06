@@ -87,7 +87,10 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             final char c, final HtmlElement element, final boolean lastType) {
 
         int selectionStart = selectionDelegate.getSelectionStart();
+        selectionStart = Math.max(0, Math.min(selectionStart, currentValue.length()));
+
         int selectionEnd = selectionDelegate.getSelectionEnd();
+        selectionStart = Math.max(selectionStart, Math.min(selectionEnd, currentValue.length()));
 
         final StringBuilder newValue = new StringBuilder(currentValue);
         if (c == '\b') {
@@ -192,8 +195,12 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
             final int keyCode, final HtmlElement element, final boolean lastType) {
 
         final StringBuilder newValue = new StringBuilder(currentValue);
+
         int selectionStart = selectionDelegate.getSelectionStart();
+        selectionStart = Math.max(0, Math.min(selectionStart, currentValue.length()));
+
         int selectionEnd = selectionDelegate.getSelectionEnd();
+        selectionStart = Math.max(selectionStart, Math.min(selectionEnd, currentValue.length()));
 
         final Character ch = SPECIAL_KEYS_MAP_.get(keyCode);
         if (ch != null) {
