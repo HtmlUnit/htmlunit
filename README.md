@@ -21,7 +21,7 @@ For maven, you would add:
     </dependency>
 
 ### Latest CI build
-The latest builds are availabler from our
+The latest builds are available from our
 [Jenkins CI build server][2]
 
 If you use maven please add:
