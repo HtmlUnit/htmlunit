@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend.WindingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 
@@ -233,10 +234,45 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Creates a new clipping region.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      */
     @JsxFunction
-    public void clip() {
-        LOG.info("CanvasRenderingContext2D.clip() not yet implemented");
+    public static void clip(final Context context, final Scriptable thisObj, final Object[] args,
+        final Function function) {
+        if (!(thisObj instanceof CanvasRenderingContext2D)) {
+            throw Context.reportRuntimeError(
+                    "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
+        }
+        final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
+
+        RenderingBackend.WindingRule windingRule = WindingRule.NON_ZERO;
+        if (args.length == 1) {
+            final String windingRuleParam = ScriptRuntime.toString(args[0]);
+            if ("evenodd".contentEquals(windingRuleParam)) {
+                windingRule = WindingRule.EVEN_ODD;
+            }
+            canvas.getRenderingBackend().clip(windingRule, null);
+        }
+
+        if (args.length > 1) {
+            if (!(args[0] instanceof Path2D)) {
+                throw Context.reportRuntimeError(
+                        "CanvasRenderingContext2D.clip() failed - the first parameter has to be a Path2D");
+            }
+
+            final String windingRuleParam = ScriptRuntime.toString(args[1]);
+            if ("evenodd".contentEquals(windingRuleParam)) {
+                windingRule = WindingRule.EVEN_ODD;
+            }
+
+            LOG.info("CanvasRenderingContext2D.clip(path, fillRule) not yet implemented");
+            // canvas.getRenderingBackend().clip(windingRule, (Path2D) args[0]);
+        }
+
+        canvas.getRenderingBackend().clip(WindingRule.NON_ZERO, null);
     }
 
     /**

@@ -709,6 +709,38 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    public void clip(final RenderingBackend.WindingRule windingRule,
+            final com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D path) {
+        if (path == null && subPaths_.isEmpty()) {
+            graphics2D_.setClip(null);
+            return;
+        }
+
+        final Path2D currentPath;
+        if (path == null) {
+            currentPath = subPaths_.get(subPaths_.size() - 1);
+        }
+        else {
+            // currentPath = path.getPath2D();
+            currentPath = null;
+        }
+        currentPath.closePath();
+
+        switch (windingRule) {
+            case NON_ZERO:
+                currentPath.setWindingRule(Path2D.WIND_NON_ZERO);
+                break;
+            default:
+                currentPath.setWindingRule(Path2D.WIND_EVEN_ODD);
+                break;
+        }
+
+        graphics2D_.clip(currentPath);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void closePath() {
         if (subPaths_.isEmpty()) {

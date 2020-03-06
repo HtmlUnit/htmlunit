@@ -1174,4 +1174,76 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //
 //        loadPageWithAlerts(html);
 //    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts(DEFAULT = "data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKUlEQVR42mNgGE7gP7UMwYapZh"
+//            + "BZhv8faAP/DwkD/48aOMxjeRQMdgAAX6aVa/a0+JAAAAAASUVORK5CYII=",
+//            IE = "no ctor")
+//    public void clip() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+//
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.arc(10, 10, 8, 0, 2 * Math.PI);\n"
+//            + "      context.clip();\n"
+//            + "      context.fillRect(4, 1, 19, 14);\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts(DEFAULT = "data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAYklEQVR42mNgGLLgv/Bkjf8ik/qpZ"
+//            + "6DI5N9A/J+aBv4fNXC4GQhLJugGIYvhw9gMvE2BgY+xGDipnwIDp+PIaghvk2Dg7/+iUw2wh6Po5M"
+//            + "lkGDh9wJINlQsHUJgCg4Bh2AEAu6/n02vT9rUAAAAASUVORK5CYII=",
+//            IE = "no ctor")
+//    public void clipWindingEvenOdd() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+//
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.rect(6, 2, 2, 16);\n"
+//            + "      context.rect(2, 10, 16, 5);\n"
+//            + "      context.clip('evenodd');\n"
+//
+//            + "      context.beginPath();\n"
+//            + "      context.arc(10, 10, 8, 0, 2 * Math.PI);\n"
+//            + "      context.fillStyle = 'deeppink';\n"
+//            + "      context.fill();\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
 }

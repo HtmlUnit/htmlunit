@@ -19,6 +19,7 @@ import java.io.IOException;
 import javax.imageio.ImageReader;
 
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
 
 /**
  * Interface to the rendering context used by
@@ -27,6 +28,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
  * @author Ronald Brill
  */
 public interface RenderingBackend {
+
+    enum WindingRule {
+        NON_ZERO,
+        EVEN_ODD
+    }
 
     /**
      * Starts a new path by emptying the list of sub-paths.
@@ -283,6 +289,15 @@ public interface RenderingBackend {
      * @param y the y
      */
     void translate(int x, int y);
+
+    /**
+     * Turns the current or given path into the current clipping region.
+     * It replaces any previous clipping region.
+     * @param windingRule the RenderingBackend.WindingRule {@link WindingRule}
+     * to be used
+     * @param path the path or null if the current path should be used
+     */
+    void clip(RenderingBackend.WindingRule windingRule, Path2D path);
 
     /**
      * Attempts to add a straight line from the current point to the start of the current sub-path.
