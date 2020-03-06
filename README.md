@@ -20,7 +20,25 @@ For maven, you would add:
         <version>2.37.0</version>
     </dependency>
 
-[Latest CI build][2]
+### Latest CI build
+The latest builds are availabler from our
+[Jenkins CI build server][2]
+
+If you use maven please add:
+
+    <dependency>
+        <groupId>net.sourceforge.htmlunit</groupId>
+        <artifactId>htmlunit</artifactId>
+        <version>2.38.0-SNAPSHOT</version>
+    </dependency>
+
+You have to add the sonatype snapshot repository to your pom distributionManagement section also:
+
+    <snapshotRepository>
+        <id>sonatype-nexus-snapshots</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+
 
 ## Features
 * Support for the HTTP and HTTPS protocols
