@@ -558,30 +558,7 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void setFillStyle(final String fillStyle) {
-        final String tmpFillStyle = fillStyle.replaceAll("\\s", "");
-        Color color = null;
-        if (tmpFillStyle.startsWith("rgb(")) {
-            final String[] colors = tmpFillStyle.substring(4, tmpFillStyle.length() - 1).split(",");
-            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]));
-        }
-        else if (tmpFillStyle.startsWith("rgba(")) {
-            final String[] colors = tmpFillStyle.substring(5, tmpFillStyle.length() - 1).split(",");
-            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]),
-                (int) (Float.parseFloat(colors[3]) * 255));
-        }
-        else if (tmpFillStyle.length() > 0 && tmpFillStyle.charAt(0) == '#') {
-            color = Color.decode(tmpFillStyle);
-        }
-        else {
-            color = knownColors.get(tmpFillStyle.toLowerCase(Locale.ROOT));
-            if (color == null) {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("Can not find color '" + tmpFillStyle + '\'');
-                }
-                color = Color.black;
-            }
-        }
-        fillColor_ = color;
+        fillColor_ = extractColor(fillStyle);
     }
 
     /**
@@ -589,27 +566,35 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void setStrokeStyle(final String strokeStyle) {
-        final String tmpFillStyle = strokeStyle.replaceAll("\\s", "");
-        Color color = StringUtils.findColorRGB(tmpFillStyle);
+        strokeColor_ = extractColor(strokeStyle);
+    }
+
+    private Color extractColor(final String style) {
+        final String tmpStyle = style.replaceAll("\\s", "");
+
+        Color color = StringUtils.findColorRGB(tmpStyle);
         if (color == null) {
-            color = StringUtils.findColorRGBA(tmpFillStyle);
+            color = StringUtils.findColorRGBA(tmpStyle);
+        }
+        if (color == null) {
+            color = StringUtils.findColorHSL(tmpStyle);
         }
 
         if (color == null) {
-            if (tmpFillStyle.length() > 0 && tmpFillStyle.charAt(0) == '#') {
-                color = Color.decode(tmpFillStyle);
+            if (tmpStyle.length() > 0 && tmpStyle.charAt(0) == '#') {
+                color = StringUtils.asColorHexadecimal(tmpStyle);
             }
             else {
-                color = knownColors.get(tmpFillStyle.toLowerCase(Locale.ROOT));
+                color = knownColors.get(tmpStyle.toLowerCase(Locale.ROOT));
                 if (color == null) {
                     if (LOG.isInfoEnabled()) {
-                        LOG.info("Can not find color '" + tmpFillStyle + '\'');
+                        LOG.info("Can not find color '" + tmpStyle + '\'');
                     }
                     color = Color.black;
                 }
             }
         }
-        strokeColor_ = color;
+        return color;
     }
 
     /**
