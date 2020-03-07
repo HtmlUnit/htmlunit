@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.38.0" date="xxxx, 2020" description="Bugfixes, CHROME 80">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpComponents to 4.5.12.
+            </action>
             <action type="fix" dev="rbri" issue="#140">
                 Improved color parsing to support hsl colors also for
                 CanvasRenderingContext2D strokeStyle and fillStyle property.

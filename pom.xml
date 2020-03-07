@@ -28,7 +28,7 @@
         <htmlunitneko.version>2.38.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.38.0</htmlunitcorejs.version>
 
-        <httpcomponents.version>4.5.11</httpcomponents.version>
+        <httpcomponents.version>4.5.12</httpcomponents.version>
         <jetty.version>9.4.27.v20200227</jetty.version>
         <log4j.version>2.13.1</log4j.version>
         <slf4j.version>1.7.30</slf4j.version>
