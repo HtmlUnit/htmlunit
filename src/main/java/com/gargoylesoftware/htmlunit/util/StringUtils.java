@@ -41,6 +41,10 @@ public final class StringUtils {
                                  + "\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
                                  + "\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
                                  + "\\s*((0?.[1-9])|[01])\\s*\\)");
+    private static final Pattern HSL_COLOR =
+            Pattern.compile("hsl\\(\\s*((0|[1-9]\\d?|[12]\\d\\d?|3[0-5]\\d)(.\\d*)?)\\s*,"
+                                + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*,"
+                                + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*\\)");
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
 
     /**
@@ -164,9 +168,9 @@ public final class StringUtils {
     }
 
     /**
-     * Returns a Color parsed from the given rgb notation.
+     * Returns a Color parsed from the given rgb notation if found inside the given string.
      * @param token the token to parse
-     * @return a Color whether the token is a color in RGB notation; otherwise null
+     * @return a Color whether the token contains a color in RGB notation; otherwise null
      */
     public static Color findColorRGB(final String token) {
         if (token == null) {
@@ -202,6 +206,78 @@ public final class StringUtils {
         final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
         final int tmpAlpha = (int) (Float.parseFloat(tmpMatcher.group(4)) * 255);
         return new Color(tmpRed, tmpGreen, tmpBlue, tmpAlpha);
+    }
+
+    /**
+     * Returns a Color parsed from the given hsl notation if found inside the given string.
+     * @param token the token to parse
+     * @return a Color whether the token contains a color in RGB notation; otherwise null
+     */
+    public static Color findColorHSL(final String token) {
+        if (token == null) {
+            return null;
+        }
+        final Matcher tmpMatcher = HSL_COLOR.matcher(token);
+        if (!tmpMatcher.find()) {
+            return null;
+        }
+
+        final float tmpHue = Float.parseFloat(tmpMatcher.group(1)) / 360f;
+        final float tmpSaturation = Float.parseFloat(tmpMatcher.group(4)) / 100f;
+        final float tmpLightness = Float.parseFloat(tmpMatcher.group(7)) / 100f;
+        return hslToRgb(tmpHue, tmpSaturation, tmpLightness);
+    }
+
+    /**
+     * Converts an HSL color value to RGB. Conversion formula
+     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+     * Assumes h, s, and l are contained in the set [0, 1]
+     *
+     * @param h the hue
+     * @param s the saturation
+     * @param l the lightness
+     * @return {@link Color}
+     */
+    private static Color hslToRgb(final float h, final float s, final float l) {
+        if (s == 0f) {
+            return new Color(to255(l), to255(l), to255(l));
+        }
+
+        final float q = l < 0.5f ? l * (1 + s) : l + s - l * s;
+        final float p = 2 * l - q;
+        final float r = hueToRgb(p, q, h + 1f / 3f);
+        final float g = hueToRgb(p, q, h);
+        final float b = hueToRgb(p, q, h - 1f / 3f);
+
+        return new Color(to255(r), to255(g), to255(b));
+    }
+
+    private static float hueToRgb(final float p, final float q, float t) {
+        if (t < 0f) {
+            t += 1f;
+        }
+
+        if (t > 1f) {
+            t -= 1f;
+        }
+
+        if (t < 1f / 6f) {
+            return p + (q - p) * 6f * t;
+        }
+
+        if (t < 1f / 2f) {
+            return q;
+        }
+
+        if (t < 2f / 3f) {
+            return p + (q - p) * (2f / 3f - t) * 6f;
+        }
+
+        return p;
+    }
+
+    private static int to255(final float value) {
+        return (int) Math.min(255, 256 * value);
     }
 
     /**

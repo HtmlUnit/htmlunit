@@ -82,6 +82,28 @@ public class StringUtilsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void findColorHSL() throws Exception {
+        assertNull(StringUtils.findColorHSL(null));
+        assertNull(StringUtils.findColorHSL(""));
+        assertNull(StringUtils.findColorHSL("    "));
+
+        assertNull(StringUtils.findColorHSL("#a1"));
+        assertNull(StringUtils.findColorHSL("hsl(1,12,256, .1)"));
+
+        assertEquals(new Color(255, 0, 0), StringUtils.findColorHSL("hsl(0, 100%, 50%)"));
+        assertEquals(new Color(255, 85, 0), StringUtils.findColorHSL("hsl(20, 100%, 50%)"));
+        assertEquals(new Color(204, 68, 0), StringUtils.findColorHSL("hsl(20, 100%, 40%)"));
+        assertEquals(new Color(51, 153, 153), StringUtils.findColorHSL("hsl( 180 ,50%, 40% )"));
+        assertEquals(new Color(51, 153, 153), StringUtils.findColorHSL("beforehsl(180,50%,40%)after"));
+
+        assertEquals(new Color(37, 58, 59), StringUtils.findColorHSL("hsl(181 , 22%, 19% )"));
+        assertEquals(new Color(38, 60, 60), StringUtils.findColorHSL("hsl(180.75 , 22.3%, 19.3333% )"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void formatColor() throws Exception {
         assertEquals("rgb(1, 12, 13)", StringUtils.formatColor(new Color(1, 12, 13)));
     }
