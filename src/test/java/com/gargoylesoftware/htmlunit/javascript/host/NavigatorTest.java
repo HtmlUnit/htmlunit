@@ -217,7 +217,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Shockwave Flash not available",
-            IE = {"Shockwave Flash", "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"})
+            IE = {"Shockwave Flash", "Shockwave Flash 32.0 r0", "32.0.0.330", "Flash32_32_0_0_330.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -384,7 +384,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "20181001000000",
             FF68 = "20181001000000",
-            FF60 = "20190124141046")
+            FF60 = "20190901094603")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
