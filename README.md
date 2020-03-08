@@ -6,7 +6,7 @@ It has fairly good JavaScript support (which is constantly improving) and is abl
 
 It is typically used for testing purposes or to retrieve information from web sites.
 
-### Project Hoepage
+### Project Homepage
 [htmlunit.sourceforge.net][4]
 
 ### Project News
