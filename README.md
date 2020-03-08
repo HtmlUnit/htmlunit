@@ -6,6 +6,9 @@ It has fairly good JavaScript support (which is constantly improving) and is abl
 
 It is typically used for testing purposes or to retrieve information from web sites.
 
+### Project Hoepage
+[htmlunit.sourceforge.net][4]
+
 ### Project News
 [HtmlUnit@Twitter][3]
 
@@ -65,3 +68,4 @@ This project is licensed under the Apache 2.0 License
 [1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.38.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/job/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
+[4]: http://htmlunit.sourceforge.net/ "http://htmlunit.sourceforge.net/"
