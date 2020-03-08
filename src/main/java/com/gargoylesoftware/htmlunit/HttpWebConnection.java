@@ -181,14 +181,16 @@ public class HttpWebConnection implements WebConnection {
                 throw new IOException("Unable to create URI from URL: " + request.getUrl().toExternalForm()
                         + " (reason: " + e.getMessage() + ")", e);
             }
-            final HttpHost hostConfiguration = getHostConfiguration(request);
+
+            final URL url = request.getUrl();
+            final HttpHost httpHost = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
             final long startTime = System.currentTimeMillis();
 
             final HttpContext httpContext = getHttpContext();
             HttpResponse httpResponse = null;
             try {
                 try (CloseableHttpClient closeableHttpClient = builder.build()) {
-                    httpResponse = closeableHttpClient.execute(hostConfiguration, httpMethod, httpContext);
+                    httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
                 }
             }
             catch (final SSLPeerUnverifiedException s) {
@@ -196,7 +198,7 @@ public class HttpWebConnection implements WebConnection {
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
                     try (CloseableHttpClient closeableHttpClient = builder.build()) {
-                        httpResponse = closeableHttpClient.execute(hostConfiguration, httpMethod, httpContext);
+                        httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
                     }
                 }
                 else {
@@ -229,16 +231,6 @@ public class HttpWebConnection implements WebConnection {
      * @param httpMethod the httpMethod used (can be null)
      */
     protected void onResponseGenerated(final HttpUriRequest httpMethod) {
-    }
-
-    /**
-     * Returns a new HttpClient host configuration, initialized based on the specified request.
-     * @param webRequest the request to use to initialize the returned host configuration
-     * @return a new HttpClient host configuration, initialized based on the specified request
-     */
-    private static HttpHost getHostConfiguration(final WebRequest webRequest) {
-        final URL url = webRequest.getUrl();
-        return new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
     }
 
     /**
