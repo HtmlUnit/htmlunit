@@ -2387,6 +2387,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
+        Thread.sleep(400);
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
@@ -2399,9 +2400,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             FF = "mouse over",
             FF68 = "mouse over",
             FF60 = "mouse over")
-    @BuggyWebDriver(FF = "mouse overmouse overmouse",
-            FF68 = "mouse overmouse overmouse overmouse overmouse over",
-            FF60 = "mouse overmouse overmouse overmouse overmouse over")
+    @BuggyWebDriver(FF = "mouse overmouse overmouse over",
+            FF68 = "mouse overmouse overmouse over",
+            FF60 = "mouse overmouse overmouse over")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
             "<html>\n"
@@ -2425,6 +2426,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         final Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
+        Thread.sleep(400);
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
