@@ -97,7 +97,7 @@ public final class BrowserVersion implements Serializable {
      * Firefox.
      * @since 2.38
      */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(72, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(73, "FF");
 
     /**
      * Firefox 60 ESR.
@@ -115,7 +115,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(79, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(80, "Chrome");
 
     /**
      * The best supported browser version at the moment.
@@ -129,7 +129,9 @@ public final class BrowserVersion implements Serializable {
     static {
         // FF60
         FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0";
+        FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
+                                    + FIREFOX_60.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
+                                    + FIREFOX_60.getBrowserVersionNumeric() + ".0";
         FIREFOX_60.buildId_ = "20190901094603";
         FIREFOX_60.productSub_ = "20100101";
         FIREFOX_60.headerNamesOrdered_ = new String[] {
@@ -155,7 +157,9 @@ public final class BrowserVersion implements Serializable {
 
         // FF68
         FIREFOX_68.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0";
+        FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
+                                    + FIREFOX_68.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
+                                    + FIREFOX_68.getBrowserVersionNumeric() + ".0";
         FIREFOX_68.buildId_ = "20181001000000";
         FIREFOX_68.productSub_ = "20100101";
         FIREFOX_68.headerNamesOrdered_ = new String[] {
@@ -182,7 +186,9 @@ public final class BrowserVersion implements Serializable {
 
         // FF
         FIREFOX.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
+        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
+                                            + FIREFOX.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
+                                            + FIREFOX.getBrowserVersionNumeric() + ".0";
         FIREFOX.buildId_ = "20181001000000";
         FIREFOX.productSub_ = "20100101";
         FIREFOX.headerNamesOrdered_ = new String[] {
@@ -208,7 +214,8 @@ public final class BrowserVersion implements Serializable {
             140, 141, 143, 143, 144, 145, 146, 148};
 
         // IE
-        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:"
+                                                    + INTERNET_EXPLORER.getBrowserVersionNumeric() + ".0) like Gecko";
         INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
         INTERNET_EXPLORER.platform_ = PLATFORM_WIN32;
         INTERNET_EXPLORER.headerNamesOrdered_ = new String[] {
@@ -234,8 +241,10 @@ public final class BrowserVersion implements Serializable {
             139, 140, 141, 143, 144, 145, 146, 147};
 
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + CHROME.getBrowserVersionNumeric() + ".0.3987.132 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + CHROME.getBrowserVersionNumeric() + ".0.3987.132 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
