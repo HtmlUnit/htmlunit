@@ -57,8 +57,23 @@ class BrowserConfiguration {
         return ff(defaultValue).upTo(67);
     }
 
+    static BrowserConfiguration ff68(final String defaultValue) {
+        final BrowserConfiguration bc = ff(defaultValue);
+        bc.minVersionNumber_ = 68;
+        bc.maxVersionNumber_ = 68;
+        return bc;
+    }
+
     static BrowserConfiguration ff68up(final String defaultValue) {
         return ff(defaultValue).startingWith(68);
+    }
+
+    static BrowserConfiguration ffBelowLatest(final String defaultValue) {
+        return ff(defaultValue).upTo(69);
+    }
+
+    static BrowserConfiguration ffLatest(final String defaultValue) {
+        return ff(defaultValue).startingWith(69);
     }
 
     static BrowserConfiguration getMatchingConfiguration(

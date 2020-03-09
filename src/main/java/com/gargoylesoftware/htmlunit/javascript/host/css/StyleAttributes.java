@@ -16,8 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff68;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff68up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow68;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelowLatest;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffLatest;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;
@@ -824,7 +827,10 @@ public final class StyleAttributes {
         COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff("0px")),
 
         /** The style property {@code columnSpan}. */
-        COLUMN_SPAN("columnSpan", "column-span", chrome("none"), ie("1")),
+        COLUMN_SPAN("columnSpan", "column-span", chrome("none"), ffLatest("none"), ie("1")),
+
+        /** The style property {@code column-span}. */
+        COLUMN_SPAN_("column-span", "column-span", ffLatest("none")),
 
         /** The style property {@code columnWidth}. */
         COLUMN_WIDTH("columnWidth", "column-width", chrome("auto"), ff("auto"), ie("auto")),
@@ -836,10 +842,10 @@ public final class StyleAttributes {
         COLUMNS("columns", "columns", chrome("auto auto"), ff(""), ie("")),
 
         /** The style property {@code contain}. */
-        CONTAIN("contain", "contain", chrome("none")),
+        CONTAIN("contain", "contain", chrome("none"), ffLatest("none")),
 
         /** The style property {@code content}. */
-        CONTENT("content", "content", ie("normal"), chrome("normal"), ff("none")),
+        CONTENT("content", "content", ie("normal"), chrome("normal"), ffLatest("normal"), ffBelowLatest("none")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none"), ff("none"), ie("none")),
@@ -879,10 +885,10 @@ public final class StyleAttributes {
         CURSOR("cursor", "cursor", chrome("auto"), ff("auto"), ie("auto")),
 
         /** The style property {@code cx}. */
-        CX("cx", "cx", chrome("0px")),
+        CX("cx", "cx", chrome("0px"), ffLatest("0px")),
 
         /** The style property {@code cy}. */
-        CY("cy", "cy", chrome("0px")),
+        CY("cy", "cy", chrome("0px"), ffLatest("0px")),
 
         /** The style property {@code d}. */
         D("d", "d", chrome("none")),
@@ -1349,14 +1355,17 @@ public final class StyleAttributes {
         LIGHTING_COLOR_("lighting-color", "lighting-color", ff("rgb(255, 255, 255)")),
 
         /** The style property {@code lineBreak}. */
-        LINE_BREAK("lineBreak", "line-break", ie("undefined"), chrome("auto")),
+        LINE_BREAK("lineBreak", "line-break", ie("undefined"), chrome("auto"), ffLatest("auto")),
+
+        /** The style property {@code line-break}. */
+        LINE_BREAK_("line-break", "line-break", ffLatest("auto")),
 
         /** The style property {@code lineHeight}. */
-        LINE_HEIGHT("lineHeight", "line-height", ffBelow68("20px"), ff68up("18px"),
+        LINE_HEIGHT("lineHeight", "line-height", ffBelow68("20px"), ff68("18px"), ffLatest("normal"),
                 ie("normal"), chrome("normal")),
 
         /** The style property {@code line-height}. */
-        LINE_HEIGHT_("line-height", "line-height", ffBelow68("20px"), ff68up("18px")),
+        LINE_HEIGHT_("line-height", "line-height", ffBelow68("20px"), ff68("18px"), ffLatest("normal")),
 
         /** The style property {@code listStyle}. */
         LIST_STYLE("listStyle", "list-style", chrome("outside none disc"), ff(""), ie("")),
@@ -1856,6 +1865,12 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-column-rule}. */
         MOZ_COLUMN_RULE__("-moz-column-rule", "-moz-column-rule", ff("")),
+
+        /** The style property {@code MozColumnSpan}. */
+        MOZ_COLUMN_SPAN("MozColumnSpan", "-moz-column-span", ffLatest("none")),
+
+        /** The style property {@code -moz-column-span}. */
+        MOZ_COLUMN_SPAN__("-moz-column-span", "-moz-column-span", ffLatest("none")),
 
         /** The style property {@code MozColumnRuleColor}. */
         MOZ_COLUMN_RULE_COLOR("MozColumnRuleColor", "-moz-column-rule-color",
@@ -2427,7 +2442,13 @@ public final class StyleAttributes {
         OBJECT_POSITION_("object-position", "object-position", ff("50% 50%")),
 
         /** The style property {@code offset}. */
-        OFFSET("offset", "offset", chrome("none 0px auto 0deg")),
+        OFFSET("offset", "offset", chrome("none 0px auto 0deg"), ffLatest("")),
+
+        /** The style property {@code offsetAnchor}. */
+        OFFSET_ANCHOR("offsetAnchor", "offset-anchor", ffLatest("auto")),
+
+        /** The style property {@code offset-anchor}. */
+        OFFSET_ANCHOR_("offset-anchor", "offset-anchor", ffLatest("auto")),
 
         /** The style property {@code offsetBlockEnd}. */
         OFFSET_BLOCK_END("offsetBlockEnd", "offset-block-end", ffBelow68("")),
@@ -2442,7 +2463,10 @@ public final class StyleAttributes {
         OFFSET_BLOCK_START_("offset-block-start", "offset-block-start", ffBelow68("")),
 
         /** The style property {@code offsetDistance}. */
-        OFFSET_DISTANCE("offsetDistance", "offsetDistance", chrome("0px")),
+        OFFSET_DISTANCE("offsetDistance", "offset-distance", chrome("0px"), ffLatest("0px")),
+
+        /** The style property {@code offset-distance}. */
+        OFFSET_DISTANCE_("offset-distance", "offset-distance", ffLatest("0px")),
 
         /** The style property {@code offsetInlineEnd}. */
         OFFSET_INLINE_END("offsetInlineEnd", "offset-inline-end", ffBelow68("")),
@@ -2457,10 +2481,16 @@ public final class StyleAttributes {
         OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start", ffBelow68("")),
 
         /** The style property {@code offsetPath}. */
-        OFFSET_PATH("offsetPath", "offsetPath", chrome("none")),
+        OFFSET_PATH("offsetPath", "offset-path", chrome("none"), ffLatest("none")),
+
+        /** The style property {@code offset-path}. */
+        OFFSET_PATH_("offset-path", "offset-path", ffLatest("none")),
+
+        /** The style property {@code offset-rotate}. */
+        OFFSET_ROTATE("offsetRotate", "offset-rotate", chrome("auto 0deg"), ffLatest("auto")),
 
         /** The style property {@code offsetRotate}. */
-        OFFSET_ROTATE("offsetRotate", "offsetRotate", chrome("auto 0deg")),
+        OFFSET_ROTATE_("offset-rotate", "offset-rotate", ffLatest("auto")),
 
         /** The style property {@code opacity}. */
         OPACITY("opacity", "opacity", chrome("1"), ff(""), ie("")),
@@ -2511,6 +2541,18 @@ public final class StyleAttributes {
         /** The style property {@code overflow-anchor}. */
         OVERFLOW_ANCHOR_("overflow-anchor", "overflow-anchor", ff68up("auto")),
 
+        /** The style property {@code overflowBlock}. */
+        OVERFLOW_BLOCK("overflowBlock", "overflow-block", ffLatest("visible")),
+
+        /** The style property {@code overflow-block}. */
+        OVERFLOW_BLOCK_("overflow-block", "overflow-block", ffLatest("visible")),
+
+        /** The style property {@code overflowInline}. */
+        OVERFLOW_INLINE("overflowInline", "overflow-inline", ffLatest("visible")),
+
+        /** The style property {@code overflow-inline}. */
+        OVERFLOW_INLINE_("overflow-inline", "overflow-inline", ffLatest("visible")),
+
         /** The style property {@code overflowWrap}. */
         OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal"), ff("normal")),
 
@@ -2536,10 +2578,18 @@ public final class StyleAttributes {
         OVERSCROLL_BEHAVIOR_("overscroll-behavior", "overscroll-behavior", ff("")),
 
         /** The style property {@code overscrollBehaviorBlock}. */
-        OVERSCROLL_BEHAVIOR_BLOCK("overscrollBehaviorBlock", "overscroll-behavior-block", chrome("auto")),
+        OVERSCROLL_BEHAVIOR_BLOCK("overscrollBehaviorBlock", "overscroll-behavior-block", chrome("auto"),
+                ffLatest("auto")),
+
+        /** The style property {@code overscroll-behavior-block}. */
+        OVERSCROLL_BEHAVIOR_BLOCK_("overscroll-behavior-block", "overscroll-behavior-block", ffLatest("auto")),
 
         /** The style property {@code overscrollBehaviorInline}. */
-        OVERSCROLL_BEHAVIOR_INLINR("overscrollBehaviorInline", "overscroll-behavior-inline", chrome("auto")),
+        OVERSCROLL_BEHAVIOR_INLINE("overscrollBehaviorInline", "overscroll-behavior-inline", chrome("auto"),
+                ffLatest("auto")),
+
+        /** The style property {@code overscroll-bBehavior-inline}. */
+        OVERSCROLL_BEHAVIOR_INLINE_("overscroll-behavior-inline", "overscroll-behavior-inline", ffLatest("auto")),
 
         /** The style property {@code overscrollBehaviorX}. */
         OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior-x", chrome("auto"), ff("auto")),
@@ -2734,10 +2784,11 @@ public final class StyleAttributes {
         POSITION("position", "position", chrome("static"), ff("static"), ie("static")),
 
         /** The style property {@code quotes}. */
-        QUOTES("quotes", "quotes", ff("\"“\" \"”\" \"‘\" \"’\""), ie(""), chrome("")),
+        QUOTES("quotes", "quotes", ffBelowLatest("\"“\" \"”\" \"‘\" \"’\""), ffLatest("auto"),
+                ie(""), chrome("")),
 
         /** The style property {@code r}. */
-        R("r", "r", chrome("0px")),
+        R("r", "r", chrome("0px"), ffLatest("0px")),
 
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ff("none"), chrome("none")),
@@ -2747,6 +2798,9 @@ public final class StyleAttributes {
 
         /** The style property {@code right}. */
         RIGHT("right", "right", chrome("auto"), ff(""), ie("")),
+
+        /** The style property {@code rotate}. */
+        ROTATE("rotate", "rotate", ffLatest("none")),
 
         /** The style property {@code rowGap}. */
         ROW_GAP("rowGap", "row-gap", chrome("normal"), ff68up("normal")),
@@ -2770,10 +2824,13 @@ public final class StyleAttributes {
         RUBY_POSITION_("ruby-position", "ruby-position", ff("over")),
 
         /** The style property {@code rx}. */
-        RX("rx", "rx", chrome("auto")),
+        RX("rx", "rx", chrome("auto"), ffLatest("auto")),
 
         /** The style property {@code ry}. */
-        RY("ry", "ry", chrome("auto")),
+        RY("ry", "ry", chrome("auto"), ffLatest("auto")),
+
+        /** The style property {@code scale}. */
+        SCALE("scale", "scale", ffLatest("none")),
 
         /** The style property {@code scrollBehavior}. */
         SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff("auto"), chrome("auto")),
@@ -3151,10 +3208,11 @@ public final class StyleAttributes {
         TEXT_COMBINE_UPRIGHT_("text-combine-upright", "text-combine-upright", ff("none")),
 
         /** The style property {@code textDecoration}. */
-        TEXT_DECORATION("textDecoration", "text-decoration", chrome("none solid rgb(0, 0, 0)"), ff("none"), ie("none")),
+        TEXT_DECORATION("textDecoration", "text-decoration", chrome("none solid rgb(0, 0, 0)"),
+                ffBelowLatest("none"), ffLatest("rgb(0, 0, 0)"), ie("none")),
 
         /** The style property {@code text-decoration}. */
-        TEXT_DECORATION_("text-decoration", "text-decoration", ff("none")),
+        TEXT_DECORATION_("text-decoration", "text-decoration", ffBelowLatest("none"), ffLatest("rgb(0, 0, 0)")),
 
         /** The style property {@code textDecorationBlink}. */
         TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false")),
@@ -3184,13 +3242,22 @@ public final class StyleAttributes {
                 ie("false")),
 
         /** The style property {@code textDecorationSkipInk}. */
-        TEXT_DECORATION_SKIP("textDecorationSkipInk", "text-decoration-skip-ink", chrome("auto")),
+        TEXT_DECORATION_SKIP_INK("textDecorationSkipInk", "text-decoration-skip-ink", chrome("auto"), ffLatest("auto")),
+
+        /** The style property {@code text-decoration-skip-ink}. */
+        TEXT_DECORATION_SKIP_INK_("text-decoration-skip-ink", "text-decoration-skip-ink", ffLatest("auto")),
 
         /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", chrome("solid"), ff("solid")),
 
         /** The style property {@code text-decoration-style}. */
         TEXT_DECORATION_STYLE_("text-decoration-style", "text-decoration-style", ff("solid")),
+
+        /** The style property {@code textDecorationThickness}. */
+        TEXT_DECORATION_THICKNESS("textDecorationThickness", "text-decoration-thickness", ffLatest("auto")),
+
+        /** The style property {@code text-decoration-thickness}. */
+        TEXT_DECORATION_THICKNESS_("text-decoration-thickness", "text-decoration-thickness", ffLatest("auto")),
 
         /** The style property {@code textDecorationUnderline}. */
         TEXT_DECORATION_UNDERLINE("textDecorationUnderline", "text-decoration-underline",
@@ -3274,6 +3341,12 @@ public final class StyleAttributes {
         /** The style property {@code text-transform}. */
         TEXT_TRANSFORM_("text-transform", "text-transform", ff("none")),
 
+        /** The style property {@code textUnderlineOffset}. */
+        TEXT_UNDERLINE_OFFSET("textUnderlineOffset", "text-underline-offset", ffLatest("auto")),
+
+        /** The style property {@code text-underline-offset}. */
+        TEXT_UNDERLINE_OFFSET_("text-underline-offset", "text-underline-offset", ffLatest("auto")),
+
         /** The style property {@code textUnderlinePosition}. */
         TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", chrome("auto"), ie("auto")),
 
@@ -3307,6 +3380,9 @@ public final class StyleAttributes {
 
         /** The style property {@code transform-style}. */
         TRANSFORM_STYLE_("transform-style", "transform-style", ff("flat")),
+
+        /** The style property {@code translate}. */
+        TRANSLATE("translate", "translate", ffLatest("none")),
 
         /** The style property {@code transition}. */
         TRANSITION("transition", "transition", ff(""), ie(""), chrome("all 0s ease 0s")),
@@ -3351,7 +3427,10 @@ public final class StyleAttributes {
         UNICODE_RANGE("unicodeRange", "unicode-range", chrome("")),
 
         /** The style property {@code userSelect}. */
-        USER_SELECT("userSelect", "user-select", chrome("auto")),
+        USER_SELECT("userSelect", "user-select", chrome("auto"), ffLatest("auto")),
+
+        /** The style property {@code user-select}. */
+        USER_SELECT_("user-select", "user-select", ffLatest("auto")),
 
         /** The style property {@code userZoom}. */
         USER_ZOOM("userZoom", "user-zoom", chrome("")),
@@ -4364,10 +4443,10 @@ public final class StyleAttributes {
         WRITING_MODE_("writing-mode", "writing-mode", ff("horizontal-tb")),
 
         /** The style property {@code x}. */
-        X("x", "x", chrome("0px")),
+        X("x", "x", chrome("0px"), ffLatest("0px")),
 
         /** The style property {@code y}. */
-        Y("y", "y", chrome("0px")),
+        Y("y", "y", chrome("0px"), ffLatest("0px")),
 
         /** The style property {@code zIndex}. */
         Z_INDEX("zIndex", "z-index", ff("auto"), chrome("auto"), ie("auto")),
