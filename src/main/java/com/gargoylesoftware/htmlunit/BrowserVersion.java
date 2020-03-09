@@ -100,16 +100,18 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX = new BrowserVersion(73, "FF");
 
     /**
-     * Firefox 60 ESR.
-     * @since 2.32
-     */
-    public static final BrowserVersion FIREFOX_60 = new BrowserVersion(60, "FF60");
-
-    /**
      * Firefox 68 ESR.
      * @since 2.37
      */
     public static final BrowserVersion FIREFOX_68 = new BrowserVersion(68, "FF68");
+
+    /**
+     * Firefox 60 ESR.
+     * @since 2.32
+     * @deprecated as of version 2.39
+     */
+    @Deprecated
+    public static final BrowserVersion FIREFOX_60 = new BrowserVersion(60, "FF60");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");

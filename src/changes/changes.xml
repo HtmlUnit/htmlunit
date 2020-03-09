@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.39.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="update" dev="rbri">
+                BrowserVersion FIREFOX_60 is now deprecated.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated constructor WebRequest.WebRequest(URL, String) removed.
+            </action>
         </release>
         <release version="2.38.0" date="March 8, 2020" description="Bugfixes, CHROME 80">
             <action type="update" dev="rbri">
