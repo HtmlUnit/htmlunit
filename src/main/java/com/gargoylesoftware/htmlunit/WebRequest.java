@@ -93,17 +93,6 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Instantiates a {@link WebRequest} for the specified URL.
-     * @param url the target URL
-     * @param acceptHeader the accept header to use
-     * @deprecated as of 2.36.0, use {@link #WebRequest(URL, String, String)} instead
-     */
-    @Deprecated
-    public WebRequest(final URL url, final String acceptHeader) {
-        this(url, acceptHeader, "gzip, deflate");
-    }
-
-    /**
      * @return a new request for about:blank
      */
     public static WebRequest newAboutBlankRequest() {
