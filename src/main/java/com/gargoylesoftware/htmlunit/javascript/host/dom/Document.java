@@ -35,6 +35,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -317,7 +318,7 @@ public class Document extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public Document() {
     }
 
@@ -570,7 +571,7 @@ public class Document extends Node {
      * @return an XPathNSResolver which resolves namespaces with respect to the definitions
      *         in scope for a specified node
      */
-    @JsxFunction({CHROME, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68, FF60})
     public XPathNSResolver createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
@@ -630,7 +631,7 @@ public class Document extends Node {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
-    @JsxFunction({CHROME, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68, FF60})
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
@@ -1126,7 +1127,7 @@ public class Document extends Node {
      * Returns the value of the {@code documentURI} property.
      * @return the value of the {@code documentURI} property
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public String getDocumentURI() {
         return getURL();
     }
@@ -1712,7 +1713,7 @@ public class Document extends Node {
      * Sets the {@code onresize} event handler for this element.
      * @param handler the {@code onresize} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOnresize(final Object handler) {
         setEventHandler("resize", handler);
     }
@@ -1721,7 +1722,7 @@ public class Document extends Node {
      * Returns the {@code onresize} event handler for this element.
      * @return the {@code onresize} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Object getOnresize() {
         return getEventHandler("resize");
     }
@@ -1775,7 +1776,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public int getChildElementCount() {
         int counter = 0;
         if (getPage().getDocumentElement() != null) {
@@ -1994,7 +1995,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -2003,7 +2004,7 @@ public class Document extends Node {
      * Returns the {@code contentType} property.
      * @return the {@code contentType} property
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public String getContentType() {
         return getPage().getContentType();
     }
@@ -2076,7 +2077,7 @@ public class Document extends Node {
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({FF68, FF60, IE})
+    @JsxFunction({FF, FF68, FF60, IE})
     public boolean releaseCapture() {
         return true;
     }
@@ -2222,7 +2223,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Element getLastElementChild() {
         return super.getLastElementChild();
     }
@@ -2231,7 +2232,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Element getFirstElementChild() {
         return super.getFirstElementChild();
     }
@@ -2455,7 +2456,7 @@ public class Document extends Node {
      * Returns the {@code oncopy} event handler for this element.
      * @return the {@code oncopy} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOncopy() {
         return getEventHandler("copy");
     }
@@ -2464,7 +2465,7 @@ public class Document extends Node {
      * Sets the {@code oncopy} event handler for this element.
      * @param oncopy the {@code oncopy} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOncopy(final Object oncopy) {
         setEventHandler("copy", oncopy);
     }
@@ -2491,7 +2492,7 @@ public class Document extends Node {
      * Returns the {@code oncut} event handler for this element.
      * @return the {@code oncut} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOncut() {
         return getEventHandler("cut");
     }
@@ -2500,7 +2501,7 @@ public class Document extends Node {
      * Sets the {@code oncut} event handler for this element.
      * @param oncut the {@code oncut} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOncut(final Object oncut) {
         setEventHandler("cut", oncut);
     }
@@ -2707,7 +2708,7 @@ public class Document extends Node {
      * Returns the {@code oninvalid} event handler for this element.
      * @return the {@code oninvalid} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOninvalid() {
         return getEventHandler("invalid");
     }
@@ -2716,7 +2717,7 @@ public class Document extends Node {
      * Sets the {@code oninvalid} event handler for this element.
      * @param oninvalid the {@code oninvalid} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOninvalid(final Object oninvalid) {
         setEventHandler("invalid", oninvalid);
     }
@@ -2815,7 +2816,7 @@ public class Document extends Node {
      * Returns the {@code onmouseenter} event handler for this element.
      * @return the {@code onmouseenter} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOnmouseenter() {
         return getEventHandler("mouseenter");
     }
@@ -2824,7 +2825,7 @@ public class Document extends Node {
      * Sets the {@code onmouseenter} event handler for this element.
      * @param onmouseenter the {@code onmouseenter} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOnmouseenter(final Object onmouseenter) {
         setEventHandler("mouseenter", onmouseenter);
     }
@@ -2833,7 +2834,7 @@ public class Document extends Node {
      * Returns the {@code onmouseleave} event handler for this element.
      * @return the {@code onmouseleave} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOnmouseleave() {
         return getEventHandler("mouseleave");
     }
@@ -2842,7 +2843,7 @@ public class Document extends Node {
      * Sets the {@code onmouseleave} event handler for this element.
      * @param onmouseleave the {@code onmouseleave} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOnmouseleave(final Object onmouseleave) {
         setEventHandler("mouseleave", onmouseleave);
     }
@@ -2869,7 +2870,7 @@ public class Document extends Node {
      * Returns the {@code onpaste} event handler for this element.
      * @return the {@code onpaste} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
@@ -2878,7 +2879,7 @@ public class Document extends Node {
      * Sets the {@code onpaste} event handler for this element.
      * @param onpaste the {@code onpaste} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOnpaste(final Object onpaste) {
         setEventHandler("paste", onpaste);
     }
@@ -3319,7 +3320,7 @@ public class Document extends Node {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -3328,7 +3329,7 @@ public class Document extends Node {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOnshow(final Object onshow) {
         setEventHandler("show", onshow);
     }
@@ -3517,7 +3518,7 @@ public class Document extends Node {
      * Returns the {@code onafterscriptexecute} event handler for this element.
      * @return the {@code onafterscriptexecute} event handler for this element
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnafterscriptexecute() {
         return getEventHandler("afterscriptexecute");
     }
@@ -3526,7 +3527,7 @@ public class Document extends Node {
      * Sets the {@code onafterscriptexecute} event handler for this element.
      * @param onafterscriptexecute the {@code onafterscriptexecute} event handler for this element
      */
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnafterscriptexecute(final Object onafterscriptexecute) {
         setEventHandler("afterscriptexecute", onafterscriptexecute);
     }
@@ -3535,7 +3536,7 @@ public class Document extends Node {
      * Returns the {@code onbeforescriptexecute} event handler for this element.
      * @return the {@code onbeforescriptexecute} event handler for this element
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnbeforescriptexecute() {
         return getEventHandler("beforescriptexecute");
     }
@@ -3544,7 +3545,7 @@ public class Document extends Node {
      * Sets the {@code onbeforescriptexecute} event handler for this element.
      * @param onbeforescriptexecute the {@code onbeforescriptexecute} event handler for this element
      */
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnbeforescriptexecute(final Object onbeforescriptexecute) {
         setEventHandler("beforescriptexecute", onbeforescriptexecute);
     }
@@ -3553,7 +3554,7 @@ public class Document extends Node {
      * Returns the {@code onmozfullscreenchange} event handler for this element.
      * @return the {@code onmozfullscreenchange} event handler for this element
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnmozfullscreenchange() {
         return getEventHandler("mozfullscreenchange");
     }
@@ -3562,7 +3563,7 @@ public class Document extends Node {
      * Sets the {@code onmozfullscreenchange} event handler for this element.
      * @param onmozfullscreenchange the {@code onmozfullscreenchange} event handler for this element
      */
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
         setEventHandler("mozfullscreenchange", onmozfullscreenchange);
     }
@@ -3571,7 +3572,7 @@ public class Document extends Node {
      * Returns the {@code onmozfullscreenerror} event handler for this element.
      * @return the {@code onmozfullscreenerror} event handler for this element
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnmozfullscreenerror() {
         return getEventHandler("mozfullscreenerror");
     }
@@ -3580,7 +3581,7 @@ public class Document extends Node {
      * Sets the {@code onmozfullscreenerror} event handler for this element.
      * @param onmozfullscreenerror the {@code onmozfullscreenerror} event handler for this element
      */
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
         setEventHandler("mozfullscreenerror", onmozfullscreenerror);
     }
@@ -4128,7 +4129,7 @@ public class Document extends Node {
     /**
      * @return the {@code currentScript}
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public ScriptableObject getCurrentScript() {
         return currentScript_;
     }
@@ -4143,7 +4144,7 @@ public class Document extends Node {
     /**
      * @return the {@code FontFaceSet}
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public ScriptableObject getFonts() {
         if (fonts_ == null) {
             final FontFaceSet fonts = new FontFaceSet();

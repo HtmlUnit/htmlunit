@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -40,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>
  * @see <a href="http://www.xulplanet.com/references/objref/DocumentType.html">XUL Planet</a>
  */
@@ -49,7 +51,7 @@ public class DocumentType extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public DocumentType() {
     }
 
@@ -140,7 +142,7 @@ public class DocumentType extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68, FF60})
     public void remove() {
         super.remove();
     }
@@ -153,7 +155,7 @@ public class DocumentType extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68, FF60})
     public static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.before(context, thisObj, args, function);
@@ -167,7 +169,7 @@ public class DocumentType extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68, FF60})
     public static void after(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.after(context, thisObj, args, function);
@@ -180,7 +182,7 @@ public class DocumentType extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68, FF60})
     public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.replaceWith(context, thisObj, args, function);

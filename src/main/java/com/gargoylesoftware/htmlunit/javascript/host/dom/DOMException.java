@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -128,7 +129,7 @@ public class DOMException extends SimpleScriptable {
     /**
      * Default constructor used to build the prototype.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public DOMException() {
         code_ = -1;
         message_ = null;
@@ -172,7 +173,7 @@ public class DOMException extends SimpleScriptable {
      * Gets the line at which the exception occurred.
      * @return the line of the exception
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
             return Undefined.instance;
@@ -184,7 +185,7 @@ public class DOMException extends SimpleScriptable {
      * Gets the name of the in which the exception occurred.
      * @return the name of the source file
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Object getFilename() {
         if (fileName_ == null) {
             return Undefined.instance;
