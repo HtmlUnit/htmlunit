@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * JavaScript object representing a Keyboard Event.
@@ -721,7 +720,7 @@ public class KeyboardEvent extends UIEvent {
     public static final int DOM_VK_WIN_ICO_00 = 228;
 
     /** Constant for {@code DOM_VK_PROCESSKEY}. */
-    @JsxConstant(SupportedBrowser.FF68)
+    @JsxConstant(FF68)
     public static final int DOM_VK_PROCESSKEY = 229;
 
     /** Constant for {@code DOM_VK_WIN_ICO_CLEAR}. */
