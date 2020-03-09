@@ -449,8 +449,11 @@ public final class BrowserVersion implements Serializable {
         else if (isFirefox60()) {
             expectedBrowser = SupportedBrowser.FF60;
         }
-        else if (isFirefox()) {
+        else if (isFirefox68()) {
             expectedBrowser = SupportedBrowser.FF68;
+        }
+        else if (isFirefox()) {
+            expectedBrowser = SupportedBrowser.FF;
         }
         else {
             expectedBrowser = SupportedBrowser.IE;
@@ -530,7 +533,15 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the short name of the browser like {@code FF3}, {@code IE}, etc.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * @return whether or not this version version 60 of a Firefox browser
+     */
+    public boolean isFirefox68() {
+        return isFirefox() && getBrowserVersionNumeric() == 68;
+    }
+
+    /**
+     * Returns the short name of the browser like {@code FF}, {@code IE}, etc.
      *
      * @return the short name (if any)
      */

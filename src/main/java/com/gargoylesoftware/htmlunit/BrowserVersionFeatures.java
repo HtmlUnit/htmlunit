@@ -86,7 +86,7 @@ public enum BrowserVersionFeatures {
     CSS_FONTFACERULE_CSSTEXT_IE_STYLE,
 
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF, IE})
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'input' tags of type
