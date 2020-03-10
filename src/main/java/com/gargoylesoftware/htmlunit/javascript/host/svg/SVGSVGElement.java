@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * A JavaScript object for {@code SVGSVGElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlSvg.class)
 public class SVGSVGElement extends SVGGraphicsElement {
@@ -45,7 +47,7 @@ public class SVGSVGElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public SVGSVGElement() {
     }
 

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -45,25 +46,25 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class MouseEvent extends UIEvent {
 
     /** Constant for {@code MOZ_SOURCE_UNKNOWN}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_UNKNOWN = 0;
     /** Constant for {@code MOZ_SOURCE_MOUSE}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_MOUSE = 1;
     /** Constant for {@code MOZ_SOURCE_PEN}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_PEN = 2;
     /** Constant for {@code MOZ_SOURCE_ERASER}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_ERASER = 3;
     /** Constant for {@code MOZ_SOURCE_CURSOR}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_CURSOR = 4;
     /** Constant for {@code MOZ_SOURCE_TOUCH}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_TOUCH = 5;
     /** Constant for {@code MOZ_SOURCE_KEYBOARD}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int MOZ_SOURCE_KEYBOARD = 6;
 
     /** The click event type, triggered by {@code onclick} event handlers. */
@@ -119,7 +120,7 @@ public class MouseEvent extends UIEvent {
     /**
      * Used to build the prototype.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public MouseEvent() {
         screenX_ = Integer.valueOf(0);
         screenY_ = Integer.valueOf(0);

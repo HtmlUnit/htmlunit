@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMarker;
  * A JavaScript object for {@code SVGMarkerElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = SvgMarker.class)
 public class SVGMarkerElement extends SVGElement {
@@ -53,7 +55,7 @@ public class SVGMarkerElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public SVGMarkerElement() {
     }
 }

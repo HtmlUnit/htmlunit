@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -26,8 +27,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * The JavaScript object {@code HTMLPictureElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlPicture.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlPicture.class, value = {CHROME, FF, FF68, FF60})
 public class HTMLPictureElement extends HTMLElement {
 
     /**

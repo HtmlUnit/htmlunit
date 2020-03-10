@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMerge;
  * A JavaScript object for {@code SVGFEMergeElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = SvgFeMerge.class)
 public class SVGFEMergeElement extends SVGElement {
@@ -33,7 +35,7 @@ public class SVGFEMergeElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public SVGFEMergeElement() {
     }
 }

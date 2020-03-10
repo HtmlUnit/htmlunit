@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -25,8 +26,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * The JavaScript object {@code HTMLMenuItemElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlMenuItem.class, value = {FF68, FF60})
+@JsxClass(domClass = HtmlMenuItem.class, value = {FF, FF68, FF60})
 public class HTMLMenuItemElement extends HTMLElement {
 
     /**

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -25,8 +26,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code InputEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass({FF68, FF60, CHROME})
+@JsxClass({FF, FF68, FF60, CHROME})
 public class InputEvent extends UIEvent {
 
     /**

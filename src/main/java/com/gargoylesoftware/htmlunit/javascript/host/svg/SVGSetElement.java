@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -27,8 +28,9 @@ import com.gargoylesoftware.htmlunit.svg.SvgSet;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@JsxClass(domClass = SvgSet.class, value = {FF68, FF60, CHROME})
+@JsxClass(domClass = SvgSet.class, value = {FF, FF68, FF60, CHROME})
 public class SVGSetElement extends SVGAnimationElement {
 
     /**

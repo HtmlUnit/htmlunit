@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -28,15 +29,16 @@ import com.gargoylesoftware.htmlunit.svg.SvgMask;
  * A JavaScript object for {@code SVGMaskElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = SvgMask.class)
 public class SVGMaskElement extends SVGElement {
 
     /** Constant for {@code SVG_MASKTYPE_LUMINANCE}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int SVG_MASKTYPE_LUMINANCE = 0;
     /** Constant for {@code SVG_MASKTYPE_ALPHA}. */
-    @JsxConstant({FF68, FF60})
+    @JsxConstant({FF, FF68, FF60})
     public static final int SVG_MASKTYPE_ALPHA = 1;
     /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
     @JsxConstant(IE)
@@ -51,7 +53,7 @@ public class SVGMaskElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public SVGMaskElement() {
     }
 }
