@@ -1866,12 +1866,6 @@ public final class StyleAttributes {
         /** The style property {@code -moz-column-rule}. */
         MOZ_COLUMN_RULE__("-moz-column-rule", "-moz-column-rule", ff("")),
 
-        /** The style property {@code MozColumnSpan}. */
-        MOZ_COLUMN_SPAN("MozColumnSpan", "-moz-column-span", ffLatest("none")),
-
-        /** The style property {@code -moz-column-span}. */
-        MOZ_COLUMN_SPAN__("-moz-column-span", "-moz-column-span", ffLatest("none")),
-
         /** The style property {@code MozColumnRuleColor}. */
         MOZ_COLUMN_RULE_COLOR("MozColumnRuleColor", "-moz-column-rule-color",
                 ff("rgb(0, 0, 0)")),
@@ -1895,6 +1889,12 @@ public final class StyleAttributes {
         /** The style property {@code -moz-column-rule-width}. */
         MOZ_COLUMN_RULE_WIDTH__("-moz-column-rule-width", "-moz-column-rule-width",
                 ff("0px")),
+
+        /** The style property {@code MozColumnSpan}. */
+        MOZ_COLUMN_SPAN("MozColumnSpan", "-moz-column-span", ffLatest("none")),
+
+        /** The style property {@code -moz-column-span}. */
+        MOZ_COLUMN_SPAN__("-moz-column-span", "-moz-column-span", ffLatest("none")),
 
         /** The style property {@code MozColumnWidth}. */
         MOZ_COLUMN_WIDTH("MozColumnWidth", "-moz-column-width", ff("auto")),
@@ -2486,10 +2486,10 @@ public final class StyleAttributes {
         /** The style property {@code offset-path}. */
         OFFSET_PATH_("offset-path", "offset-path", ffLatest("none")),
 
-        /** The style property {@code offset-rotate}. */
+        /** The style property {@code offsetRotate}. */
         OFFSET_ROTATE("offsetRotate", "offset-rotate", chrome("auto 0deg"), ffLatest("auto")),
 
-        /** The style property {@code offsetRotate}. */
+        /** The style property {@code offset-rotate}. */
         OFFSET_ROTATE_("offset-rotate", "offset-rotate", ffLatest("auto")),
 
         /** The style property {@code opacity}. */
@@ -2588,7 +2588,7 @@ public final class StyleAttributes {
         OVERSCROLL_BEHAVIOR_INLINE("overscrollBehaviorInline", "overscroll-behavior-inline", chrome("auto"),
                 ffLatest("auto")),
 
-        /** The style property {@code overscroll-bBehavior-inline}. */
+        /** The style property {@code overscroll-behavior-inline}. */
         OVERSCROLL_BEHAVIOR_INLINE_("overscroll-behavior-inline", "overscroll-behavior-inline", ffLatest("auto")),
 
         /** The style property {@code overscrollBehaviorX}. */
@@ -3381,9 +3381,6 @@ public final class StyleAttributes {
         /** The style property {@code transform-style}. */
         TRANSFORM_STYLE_("transform-style", "transform-style", ff("flat")),
 
-        /** The style property {@code translate}. */
-        TRANSLATE("translate", "translate", ffLatest("none")),
-
         /** The style property {@code transition}. */
         TRANSITION("transition", "transition", ff(""), ie(""), chrome("all 0s ease 0s")),
 
@@ -3415,6 +3412,9 @@ public final class StyleAttributes {
         /** The style property {@code transition-timing-function}. */
         TRANSITION_TIMING_FUNCTION_("transition-timing-function", "transition-timing-function",
                 ff("ease")),
+
+        /** The style property {@code translate}. */
+        TRANSLATE("translate", "translate", ffLatest("none")),
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",

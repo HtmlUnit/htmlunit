@@ -401,6 +401,8 @@ overflowWrap
 overflowX
 overflowY
 overscrollBehavior
+overscrollBehaviorBlock
+overscrollBehaviorInline
 overscrollBehaviorX
 overscrollBehaviorY
 padding
