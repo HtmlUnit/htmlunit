@@ -88,6 +88,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     public void _SecurityPolicyViolationEvent_SecurityPolicyViolationEvent() throws Exception {
         test("SecurityPolicyViolationEvent", "SecurityPolicyViolationEvent");
@@ -107,7 +108,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     public void _ServiceWorker_ServiceWorker() throws Exception {
         test("ServiceWorker", "ServiceWorker");
     }
@@ -117,7 +119,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     public void _ServiceWorkerContainer_ServiceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer", "ServiceWorkerContainer");
     }
@@ -127,7 +130,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     public void _ServiceWorkerRegistration_ServiceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration", "ServiceWorkerRegistration");
     }
@@ -157,6 +161,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     public void _ShadowRoot_ShadowRoot() throws Exception {
         test("ShadowRoot", "ShadowRoot");
@@ -197,6 +202,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _SpeechSynthesis_SpeechSynthesis() throws Exception {
@@ -248,6 +254,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _SpeechSynthesisVoice_SpeechSynthesisVoice() throws Exception {
@@ -288,6 +295,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _StorageManager_StorageManager() throws Exception {
@@ -1019,6 +1027,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _SVGElement_SVGGeometryElement() throws Exception {
@@ -1567,6 +1576,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGCircleElement() throws Exception {
@@ -1579,6 +1589,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGEllipseElement() throws Exception {
@@ -1591,6 +1602,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _SVGGeometryElement_SVGGeometryElement() throws Exception {
@@ -1603,6 +1615,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGLineElement() throws Exception {
@@ -1615,6 +1628,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _SVGGeometryElement_SVGPathElement() throws Exception {
@@ -1627,6 +1641,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGPolygonElement() throws Exception {
@@ -1639,6 +1654,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGPolylineElement() throws Exception {
@@ -1651,6 +1667,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGRectElement() throws Exception {
@@ -1761,6 +1778,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _SVGGraphicsElement_SVGGeometryElement() throws Exception {
@@ -2041,6 +2059,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSeg() throws Exception {
@@ -2053,6 +2072,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegArcAbs() throws Exception {
@@ -2065,6 +2085,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegArcRel() throws Exception {
@@ -2077,6 +2098,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegClosePath() throws Exception {
@@ -2089,6 +2111,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicAbs() throws Exception {
@@ -2101,6 +2124,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicRel() throws Exception {
@@ -2113,6 +2137,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
@@ -2125,6 +2150,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
@@ -2137,6 +2163,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticAbs() throws Exception {
@@ -2149,6 +2176,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticRel() throws Exception {
@@ -2161,6 +2189,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticSmoothAbs() throws Exception {
@@ -2173,6 +2202,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticSmoothRel() throws Exception {
@@ -2185,6 +2215,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegLinetoAbs() throws Exception {
@@ -2197,6 +2228,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegLinetoHorizontalAbs() throws Exception {
@@ -2209,6 +2241,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegLinetoHorizontalRel() throws Exception {
@@ -2221,6 +2254,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegLinetoRel() throws Exception {
@@ -2233,6 +2267,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegLinetoVerticalAbs() throws Exception {
@@ -2245,6 +2280,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegLinetoVerticalRel() throws Exception {
@@ -2257,6 +2293,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegMovetoAbs() throws Exception {
@@ -2269,6 +2306,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSeg_SVGPathSegMovetoRel() throws Exception {
@@ -2281,6 +2319,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegArcAbs_SVGPathSegArcAbs() throws Exception {
@@ -2293,6 +2332,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegArcRel_SVGPathSegArcRel() throws Exception {
@@ -2305,6 +2345,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegClosePath_SVGPathSegClosePath() throws Exception {
@@ -2317,6 +2358,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicAbs_SVGPathSegCurvetoCubicAbs() throws Exception {
@@ -2329,6 +2371,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicRel_SVGPathSegCurvetoCubicRel() throws Exception {
@@ -2341,6 +2384,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicSmoothAbs_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
@@ -2353,6 +2397,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicSmoothRel_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
@@ -2365,6 +2410,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "true",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoQuadraticAbs_SVGPathSegCurvetoQuadraticAbs() throws Exception {
@@ -2377,6 +2423,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoQuadraticRel_SVGPathSegCurvetoQuadraticRel() throws Exception {
@@ -2389,6 +2436,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoQuadraticSmoothAbs_SVGPathSegCurvetoQuadraticSmoothAbs() throws Exception {
@@ -2401,6 +2449,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoQuadraticSmoothRel_SVGPathSegCurvetoQuadraticSmoothRel() throws Exception {
@@ -2413,6 +2462,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegLinetoAbs_SVGPathSegLinetoAbs() throws Exception {
@@ -2425,6 +2475,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegLinetoHorizontalAbs_SVGPathSegLinetoHorizontalAbs() throws Exception {
@@ -2437,6 +2488,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegLinetoHorizontalRel_SVGPathSegLinetoHorizontalRel() throws Exception {
@@ -2449,6 +2501,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegLinetoRel_SVGPathSegLinetoRel() throws Exception {
@@ -2461,6 +2514,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegLinetoVerticalAbs_SVGPathSegLinetoVerticalAbs() throws Exception {
@@ -2473,6 +2527,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegLinetoVerticalRel_SVGPathSegLinetoVerticalRel() throws Exception {
@@ -2495,6 +2550,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegMovetoAbs_SVGPathSegMovetoAbs() throws Exception {
@@ -2507,6 +2563,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegMovetoRel_SVGPathSegMovetoRel() throws Exception {
@@ -2828,6 +2885,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGZoomEvent_SVGZoomEvent() throws Exception {
