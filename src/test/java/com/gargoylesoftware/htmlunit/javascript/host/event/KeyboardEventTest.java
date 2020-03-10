@@ -206,7 +206,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF68 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ",
+    @BuggyWebDriver(FF = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ",
+            FF68 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ",
             FF60 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"

@@ -89,7 +89,7 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
             IE = "AudioContext not available")
-    @BuggyWebDriver(FF68 = "Todo", FF60 = "Todo")
+    @BuggyWebDriver(FF = "Todo", FF68 = "Todo", FF60 = "Todo")
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
