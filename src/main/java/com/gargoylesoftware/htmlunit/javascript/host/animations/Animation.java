@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.animations;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -27,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF68, FF60})
+@JsxClass({CHROME, FF, FF68, FF60})
 public class Animation extends EventTarget {
 
     /**
