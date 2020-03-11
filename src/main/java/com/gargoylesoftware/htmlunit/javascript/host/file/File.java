@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILE_SHORT_DATE_FORMAT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * A JavaScript object for {@code File}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class File extends Blob {
@@ -47,7 +49,7 @@ public class File extends Blob {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public File() {
     }
 
@@ -88,7 +90,7 @@ public class File extends Blob {
      * Returns the {@code lastModified} property.
      * @return the {@code lastModified} property
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public long getLastModified() {
         return file_.lastModified();
     }
@@ -97,7 +99,7 @@ public class File extends Blob {
      * Returns the {@code webkitRelativePath} property.
      * @return the {@code webkitRelativePath} property
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public String getWebkitRelativePath() {
         return "";
     }

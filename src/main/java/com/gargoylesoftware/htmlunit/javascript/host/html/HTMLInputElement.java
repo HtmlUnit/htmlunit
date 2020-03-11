@@ -26,6 +26,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -83,7 +84,7 @@ public class HTMLInputElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public HTMLInputElement() {
     }
 
@@ -373,7 +374,7 @@ public class HTMLInputElement extends HTMLElement {
      * Gets the value of {@code textLength} attribute.
      * @return the text length
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public int getTextLength() {
         return getValue().length();
     }
@@ -493,7 +494,7 @@ public class HTMLInputElement extends HTMLElement {
      * Gets the {@code minLength}.
      * @return the {@code minLength}
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public int getMinLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("minLength");
         return NumberUtils.toInt(attrValue, -1);
@@ -503,7 +504,7 @@ public class HTMLInputElement extends HTMLElement {
      * Sets the value of {@code minLength} attribute.
      * @param length the new value
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setMinLength(final int length) {
         getDomNodeOrDie().setMinLength(length);
     }
@@ -893,7 +894,7 @@ public class HTMLInputElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
@@ -939,7 +940,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public boolean isDisabled() {
         return super.isDisabled();
     }
@@ -948,7 +949,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
     }

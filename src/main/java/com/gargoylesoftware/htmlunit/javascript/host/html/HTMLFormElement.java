@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJEC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -87,7 +88,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public HTMLFormElement() {
     }
 

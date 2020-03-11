@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -48,7 +49,7 @@ public class ProgressEvent extends Event {
      * {@inheritDoc}
      */
     @Override
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
