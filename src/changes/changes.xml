@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.39.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="add" dev="rbri">
+                First simple implementation for the anchor download and shape property added.
+            </action>
             <action type="update" dev="rbri">
                 BrowserVersion FIREFOX_60 is now deprecated.
             </action>
