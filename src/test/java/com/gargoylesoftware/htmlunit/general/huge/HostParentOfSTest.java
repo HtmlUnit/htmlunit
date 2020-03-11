@@ -2319,7 +2319,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegArcAbs_SVGPathSegArcAbs() throws Exception {
@@ -2332,7 +2332,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegArcRel_SVGPathSegArcRel() throws Exception {
@@ -2345,7 +2345,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegClosePath_SVGPathSegClosePath() throws Exception {
@@ -2358,7 +2358,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicAbs_SVGPathSegCurvetoCubicAbs() throws Exception {
@@ -2371,7 +2371,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicRel_SVGPathSegCurvetoCubicRel() throws Exception {
@@ -2384,7 +2384,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicSmoothAbs_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
@@ -2397,7 +2397,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoCubicSmoothRel_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
@@ -2410,7 +2410,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _SVGPathSegCurvetoQuadraticAbs_SVGPathSegCurvetoQuadraticAbs() throws Exception {
