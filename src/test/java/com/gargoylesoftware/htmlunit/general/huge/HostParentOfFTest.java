@@ -89,6 +89,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystem_FileSystem() throws Exception {
@@ -100,6 +101,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystemDirectoryEntry_FileSystemDirectoryEntry() throws Exception {
@@ -111,6 +113,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystemDirectoryReader_FileSystemDirectoryReader() throws Exception {
@@ -122,6 +125,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystemEntry_FileSystemDirectoryEntry() throws Exception {
@@ -133,6 +137,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystemEntry_FileSystemEntry() throws Exception {
@@ -144,6 +149,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystemEntry_FileSystemFileEntry() throws Exception {
@@ -155,6 +161,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FileSystemFileEntry_FileSystemFileEntry() throws Exception {
@@ -203,6 +210,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _FontFaceSet_FontFaceSet() throws Exception {
@@ -264,6 +272,7 @@ public class HostParentOfFTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             IE = "true")
     public void _Geolocation_Geolocation() throws Exception {
         test("Geolocation", "Geolocation");

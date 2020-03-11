@@ -264,7 +264,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     @NotYetImplemented(CHROME)
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
         test("WebKitCSSMatrix", "DOMMatrix");
@@ -397,7 +398,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     public void _webkitURL_URL() throws Exception {
         test("webkitURL", "URL");
     }
@@ -407,7 +409,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
     }

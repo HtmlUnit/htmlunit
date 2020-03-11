@@ -63,6 +63,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _BaseAudioContext_AudioContext() throws Exception {
@@ -75,6 +76,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _BaseAudioContext_BaseAudioContext() throws Exception {
@@ -87,6 +89,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _BaseAudioContext_OfflineAudioContext() throws Exception {
@@ -98,6 +101,7 @@ public class HostParentOfBTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF = "false",
             IE = "false")
     public void _BatteryManager_BatteryManager() throws Exception {
         test("BatteryManager", "BatteryManager");

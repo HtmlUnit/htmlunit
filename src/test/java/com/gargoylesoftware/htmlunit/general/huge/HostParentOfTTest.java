@@ -90,6 +90,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _TextEvent_TextEvent() throws Exception {
@@ -166,6 +167,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _TimeEvent_TimeEvent() throws Exception {
@@ -298,6 +300,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _UIEvent_MouseScrollEvent() throws Exception {
@@ -329,6 +332,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
@@ -340,6 +344,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF = "false",
             FF68 = "false",
             FF60 = "false")
     public void _UIEvent_TextEvent() throws Exception {
@@ -433,7 +438,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF = "true")
     public void _URL_webkitURL() throws Exception {
         test("URL", "webkitURL");
     }
@@ -473,6 +479,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {

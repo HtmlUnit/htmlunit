@@ -75,6 +75,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CanvasCaptureMediaStream_CanvasCaptureMediaStream() throws Exception {
@@ -123,6 +124,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CaretPosition_CaretPosition() throws Exception {
@@ -306,6 +308,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _Credential_Credential() throws Exception {
@@ -338,6 +341,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CredentialsContainer_CredentialsContainer() throws Exception {
@@ -379,6 +383,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CSS2Properties_CSS2Properties() throws Exception {
@@ -420,6 +425,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
@@ -554,6 +560,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CSSRule_CSSCounterStyleRule() throws Exception {
@@ -675,6 +682,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF = "true",
             FF68 = "true",
             FF60 = "true")
     public void _CSSStyleDeclaration_CSS2Properties() throws Exception {
@@ -764,6 +772,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            FF = "true",
             FF68 = "true")
     public void _CustomElementRegistry_CustomElementRegistry() throws Exception {
         test("CustomElementRegistry", "CustomElementRegistry");
