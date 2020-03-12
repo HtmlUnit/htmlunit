@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass({CHROME, FF68, FF60})
+@JsxClass({CHROME, FF, FF68, FF60})
 public class RTCSessionDescription extends SimpleScriptable {
 
     /**
