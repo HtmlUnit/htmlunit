@@ -359,6 +359,31 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_68.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
         FIREFOX_68.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
+        FIREFOX.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX.registerUploadMimeType("xml", MimeType.TEXT_XML);
+        FIREFOX.registerUploadMimeType("gif", "image/gif");
+        FIREFOX.registerUploadMimeType("jpeg", "image/jpeg");
+        FIREFOX.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX.registerUploadMimeType("png", "image/png");
+        FIREFOX.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX.registerUploadMimeType("ogm", "video/x-ogm");
+        FIREFOX.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX.registerUploadMimeType("webm", "video/webm");
+        FIREFOX.registerUploadMimeType("webp", "image/webp");
+        FIREFOX.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        FIREFOX.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
+
         INTERNET_EXPLORER.registerUploadMimeType("html", MimeType.TEXT_HTML);
         INTERNET_EXPLORER.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         INTERNET_EXPLORER.registerUploadMimeType("css", MimeType.TEXT_CSS);
