@@ -58,7 +58,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param defaultSelected Whether the option is initially selected
      * @param selected the current selection state of the option
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public void jsConstructor(final Object newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

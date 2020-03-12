@@ -38,9 +38,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlExample.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlExample.class, value = {CHROME, FF, FF68, FF60})
 @JsxClass(domClass = HtmlPreformattedText.class)
-@JsxClass(domClass = HtmlListing.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlListing.class, value = {CHROME, FF, FF68, FF60})
 public class HTMLPreElement extends HTMLElement {
 
     /** Valid values for the {@link #getClear() clear} property. */
@@ -49,7 +49,7 @@ public class HTMLPreElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public HTMLPreElement() {
     }
 

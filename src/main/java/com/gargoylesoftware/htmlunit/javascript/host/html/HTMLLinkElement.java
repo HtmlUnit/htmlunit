@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * The JavaScript object {@code HTMLLinkElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlLink.class)
 public class HTMLLinkElement extends HTMLElement {
@@ -47,7 +48,7 @@ public class HTMLLinkElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public HTMLLinkElement() {
     }
 

@@ -41,7 +41,7 @@ public class HTMLProgressElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public HTMLProgressElement() {
     }
 
@@ -76,7 +76,7 @@ public class HTMLProgressElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
