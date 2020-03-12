@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -64,7 +65,7 @@ public class MediaSourceTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "true", "true", "false" },
             CHROME = { "true", "false", "false" },
             IE = "MediaSource not available")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void isTypeSypported() throws Exception {
         final String html
             = "<html>\n"
