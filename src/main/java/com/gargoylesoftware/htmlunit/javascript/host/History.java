@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -55,7 +56,7 @@ public class History extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public History() {
     }
 
@@ -167,7 +168,7 @@ public class History extends SimpleScriptable {
      * Returns the {@code scrollRestoration} property.
      * @return the {@code scrollRestoration} property
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public String getScrollRestoration() {
         return scrollRestoration_;
     }
@@ -175,7 +176,7 @@ public class History extends SimpleScriptable {
     /**
      * @param scrollRestoration the new value
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setScrollRestoration(final String scrollRestoration) {
         if (SCROLL_RESTAURATION_AUTO.equals(scrollRestoration)) {
             scrollRestoration_ = SCROLL_RESTAURATION_AUTO;

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -55,8 +56,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * The scope for the execution of {@link Worker}s.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@JsxClass({CHROME, FF68, FF60})
+@JsxClass({CHROME, FF, FF68, FF60})
 @JsxClass(className = "WorkerGlobalScope", value = IE)
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 

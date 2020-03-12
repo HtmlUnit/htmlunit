@@ -3500,7 +3500,7 @@ public class Document extends Node {
      * Returns the {@code onwheel} event handler for this element.
      * @return the {@code onwheel} event handler for this element
      */
-    @JsxGetter({CHROME, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68, FF60})
     public Function getOnwheel() {
         return getEventHandler("wheel");
     }
@@ -3509,7 +3509,7 @@ public class Document extends Node {
      * Sets the {@code onwheel} event handler for this element.
      * @param onwheel the {@code onwheel} event handler for this element
      */
-    @JsxSetter({CHROME, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68, FF60})
     public void setOnwheel(final Object onwheel) {
         setEventHandler("wheel", onwheel);
     }
