@@ -783,7 +783,7 @@ public class SVGElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOncut() {
         return getEventHandler("cut");
     }
@@ -792,7 +792,7 @@ public class SVGElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOncut(final Object cut) {
         setEventHandler("cut", cut);
     }
@@ -927,7 +927,7 @@ public class SVGElement extends Element {
      * Returns the {@code onmozfullscreenerror} event handler.
      * @return the {@code onmozfullscreenerror} event handler
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnmozfullscreenerror() {
         return getEventHandler("mozfullscreenerror");
     }
@@ -936,7 +936,7 @@ public class SVGElement extends Element {
      * Sets the {@code onmozfullscreenerror} event handler.
      * @param mozfullscreenerror the {@code onmozfullscreenerror} event handler
      */
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnmozfullscreenerror(final Object mozfullscreenerror) {
         setEventHandler("mozfullscreenerror", mozfullscreenerror);
     }
@@ -1143,7 +1143,7 @@ public class SVGElement extends Element {
      * Returns the {@code onmozfullscreenchange} event handler.
      * @return the {@code onmozfullscreenchange} event handler
      */
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnmozfullscreenchange() {
         return getEventHandler("mozfullscreenchange");
     }
@@ -1152,7 +1152,7 @@ public class SVGElement extends Element {
      * Sets the {@code onmozfullscreenchange} event handler.
      * @param mozfullscreenchange the {@code onmozfullscreenchange} event handler
      */
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnmozfullscreenchange(final Object mozfullscreenchange) {
         setEventHandler("mozfullscreenchange", mozfullscreenchange);
     }
@@ -1269,7 +1269,7 @@ public class SVGElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOncopy() {
         return getEventHandler("copy");
     }
@@ -1278,7 +1278,7 @@ public class SVGElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOncopy(final Object copy) {
         setEventHandler("copy", copy);
     }
@@ -1287,7 +1287,7 @@ public class SVGElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({FF68, FF60})
+    @JsxGetter({FF, FF68, FF60})
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
@@ -1296,7 +1296,7 @@ public class SVGElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({FF68, FF60})
+    @JsxSetter({FF, FF68, FF60})
     public void setOnpaste(final Object paste) {
         setEventHandler("paste", paste);
     }

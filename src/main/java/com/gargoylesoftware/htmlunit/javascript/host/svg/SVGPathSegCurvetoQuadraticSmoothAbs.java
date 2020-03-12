@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -33,7 +34,7 @@ public class SVGPathSegCurvetoQuadraticSmoothAbs extends SVGPathSeg {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({FF68, FF60})
+    @JsxConstructor({FF, FF68, FF60})
     public SVGPathSegCurvetoQuadraticSmoothAbs() {
     }
 

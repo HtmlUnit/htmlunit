@@ -1964,7 +1964,7 @@ public class Element extends Node {
      * @param retargetToElement if true, all events are targeted directly to this element;
      * if false, events can also fire at descendants of this element
      */
-    @JsxFunction({FF68, FF60})
+    @JsxFunction({FF, FF68, FF60})
     public void setCapture(final boolean retargetToElement) {
         // empty
     }
@@ -1973,7 +1973,7 @@ public class Element extends Node {
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({FF68, FF60})
+    @JsxFunction({FF, FF68, FF60})
     public boolean releaseCapture() {
         return true;
     }
@@ -2053,7 +2053,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({FF68, FF60})
+    @JsxFunction({FF, FF68, FF60})
     public static boolean mozMatchesSelector(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, thisObj, args, function);
