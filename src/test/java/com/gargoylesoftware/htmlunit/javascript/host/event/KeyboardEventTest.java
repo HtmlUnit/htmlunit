@@ -47,7 +47,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"DOM3: [object KeyboardEvent]", "vendor: exception"},
-            FF = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"},
             FF68 = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"},
             FF60 = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
     public void createEvent() throws Exception {
@@ -70,7 +69,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception", "0-0", "undefined-undefined"},
-            FF = {"0-0", "0-0", "undefined-undefined"},
             FF68 = {"0-0", "0-0", "undefined-undefined"},
             FF60 = {"0-0", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
@@ -99,8 +97,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception", "exception"},
-            FF = {"keydown, true, true, true, true, true, true, 65, 0",
-                "keyup, false, false, false, false, false, false, 32, 0",
+            FF = {"exception",
                 "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0"},
             FF68 = {"keydown, true, true, true, true, true, true, 65, 0",
@@ -450,6 +447,18 @@ public class KeyboardEventTest extends WebDriverTestCase {
                             "keypress:13,0,13,Enter,undefined,,false",
                             "keyup:13,0,13,Enter,undefined,,false"},
                     FF68 = {  "keydown:65,0,65,A,undefined,,false",
+                            "keypress:65,65,65,A,undefined,,false",
+                            "keyup:65,0,65,A,undefined,,false",
+                            "keydown:65,0,65,a,undefined,,false",
+                            "keypress:97,97,97,a,undefined,,false",
+                            "keyup:65,0,65,a,undefined,,false",
+                            "keydown:190,0,190,.,undefined,,false",
+                            "keypress:46,46,46,.,undefined,,false",
+                            "keyup:190,0,190,.,undefined,,false",
+                            "keydown:13,0,13,Enter,undefined,,false",
+                            "keypress:13,13,13,Enter,undefined,,false",
+                            "keyup:13,0,13,Enter,undefined,,false"},
+                    FF = {  "keydown:65,0,65,A,undefined,,false",
                             "keypress:65,65,65,A,undefined,,false",
                             "keyup:65,0,65,A,undefined,,false",
                             "keydown:65,0,65,a,undefined,,false",
