@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.idb;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code IDBTransaction}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class IDBTransaction extends EventTarget {
@@ -33,7 +35,7 @@ public class IDBTransaction extends EventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68, FF60})
     public IDBTransaction() {
     }
 }
