@@ -216,7 +216,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_AudioOgg() throws Exception {
         canPlayType("audio/ogg");
     }
@@ -227,7 +227,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_VideoOgg() throws Exception {
         canPlayType("video/ogg");
     }
@@ -238,7 +238,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_ApplicationOgg() throws Exception {
         canPlayType("application/ogg");
     }
@@ -258,8 +258,10 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "maybe")
-    @NotYetImplemented(FF)
+            FF = "maybe",
+            FF68 = "maybe",
+            FF60 = "maybe")
+    @NotYetImplemented({FF, FF68, FF60})
     public void canPlayType_AudioWave() throws Exception {
         canPlayType("audio/wave");
     }
@@ -270,7 +272,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_AudioWav() throws Exception {
         canPlayType("audio/wav");
     }
@@ -281,7 +283,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_AudioXWav() throws Exception {
         canPlayType("audio/x-wav");
     }
@@ -291,8 +293,10 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "maybe")
-    @NotYetImplemented(FF)
+            FF = "maybe",
+            FF68 = "maybe",
+            FF60 = "maybe")
+    @NotYetImplemented({FF, FF68, FF60})
     public void canPlayType_AudioPnWav() throws Exception {
         canPlayType("audio/x-pn-wav");
     }
@@ -303,7 +307,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_AudioWebm() throws Exception {
         canPlayType("audio/webm");
     }
@@ -314,7 +318,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_VideoWebm() throws Exception {
         canPlayType("video/webm");
     }
@@ -336,8 +340,10 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             CHROME = "probably",
-            FF = "maybe")
-    @NotYetImplemented({CHROME, FF})
+            FF = "maybe",
+            FF68 = "maybe",
+            FF60 = "maybe")
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void canPlayType_AudioFlac() throws Exception {
         canPlayType("audio/flac");
     }
@@ -347,8 +353,10 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "maybe")
-    @NotYetImplemented(FF)
+            FF = "maybe",
+            FF68 = "maybe",
+            FF60 = "maybe")
+    @NotYetImplemented({FF, FF68, FF60})
     public void canPlayType_AudioXFlac() throws Exception {
         canPlayType("audio/x-flac");
     }
