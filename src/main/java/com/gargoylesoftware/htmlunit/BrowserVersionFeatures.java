@@ -627,7 +627,7 @@ public enum BrowserVersionFeatures {
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
     /** Indicates that the {@code Array} supports construction properties. */
-    @BrowserFeature({FF, FF68, FF60})
+    @BrowserFeature({FF68, FF60})
     JS_ARRAY_CONSTRUCTION_PROPERTIES,
 
     /** Indicates that Array.from() is supported. */
@@ -931,7 +931,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_USABLE_AS_FUNCTION,
 
     /** Indicates if the method toSource exists on the native objects. */
-    @BrowserFeature({FF, FF68, FF60})
+    @BrowserFeature({FF68, FF60})
     JS_FUNCTION_TOSOURCE,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
