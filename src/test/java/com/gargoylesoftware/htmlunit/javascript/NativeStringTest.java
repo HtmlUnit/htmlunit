@@ -81,7 +81,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"contains: undefined", "toSource: undefined", "trim: function"},
-            FF = {"contains: undefined", "toSource: function", "trim: function"},
+            FF = {"contains: undefined", "toSource: undefined", "trim: function"},
             FF68 = {"contains: undefined", "toSource: function", "trim: function"},
             FF60 = {"contains: undefined", "toSource: function", "trim: function"})
     public void methods_differences() throws Exception {

@@ -136,7 +136,9 @@ public class NativeErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "method (url)",
-            FF = "method@url")
+            FF = "method@url",
+            FF68 = "method@url",
+            FF60 = "method@url")
     @NotYetImplemented
     public void stackContent() throws Exception {
         final String html
@@ -172,7 +174,9 @@ public class NativeErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "method (url)",
-            FF = "method@url")
+            FF = "method@url",
+            FF68 = "method@url",
+            FF60 = "method@url")
     @NotYetImplemented
     public void stackContentNewError() throws Exception {
         final String html
