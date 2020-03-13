@@ -11689,7 +11689,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function DOMMatrix() {\n    [native code]\n}",
             FF68 = "function WebKitCSSMatrix() {\n    [native code]\n}",
             FF60 = "function WebKitCSSMatrix() {\n    [native code]\n}")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF})
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
     }
