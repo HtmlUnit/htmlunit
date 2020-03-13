@@ -853,7 +853,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
                 + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,"
                 + "type,username",
-            FF60 = "exception",
+            FF60 = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
+                + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,"
+                + "type,username",
             IE = "exception")
     public void a() throws Exception {
         test("a");
