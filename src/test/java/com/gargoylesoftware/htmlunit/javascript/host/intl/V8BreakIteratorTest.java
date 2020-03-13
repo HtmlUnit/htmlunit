@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link V8BreakIterator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  *
  * @see <a href="https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator">
  *          https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator</a>
@@ -40,7 +41,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"0", "none", "0", "none", "0", "none", "4", "letter", "5", "none", "8", "letter", "9", "none",
+    @Alerts(DEFAULT = "no support",
+            CHROME = {"0", "none", "0", "none", "0", "none", "4", "letter", "5", "none", "8", "letter", "9", "none",
             "13", "letter", "14", "none", "15", "none", "19", "letter", "20", "none", "24", "letter", "25", "none",
             "29", "letter", "30", "none", "30", "none"})
     public void sample() throws Exception {
@@ -51,7 +53,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"0", "none", "0", "none", "0", "none", "5", "none", "9", "none", "15", "none", "20", "none", "25",
+    @Alerts(DEFAULT = "no support",
+            CHROME = {"0", "none", "0", "none", "0", "none", "5", "none", "9", "none", "15", "none", "20", "none", "25",
             "none", "30", "none", "30", "none"})
     public void sampleLine() throws Exception {
         test("en", LINE_, "Jack and Jill, went over hill!");
@@ -61,7 +64,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"0", "none", "0", "none", "0", "none", "1", "none", "2", "none", "3", "none", "4", "none", "5",
+    @Alerts(DEFAULT = "no support",
+            CHROME = {"0", "none", "0", "none", "0", "none", "1", "none", "2", "none", "3", "none", "4", "none", "5",
             "none", "6", "none", "7", "none", "8", "none", "9", "none", "10", "none", "11", "none", "12", "none", "13",
             "none", "14", "none", "15", "none", "16", "none", "17", "none", "18", "none", "19", "none", "20", "none",
             "21", "none", "22", "none", "23", "none", "24", "none", "25", "none", "26", "none", "27", "none", "28",
@@ -74,7 +78,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"0", "none", "0", "none", "0", "none", "30", "none", "30", "none"})
+    @Alerts(DEFAULT = "no support",
+            CHROME = {"0", "none", "0", "none", "0", "none", "30", "none", "30", "none"})
     public void sampleSentence() throws Exception {
         test("en", SENTENCE_, "Jack and Jill, went over hill!");
     }
@@ -106,7 +111,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
             + "          break;\n"
             + "        }\n"
             + "      }\n"
-            + "    }\n"
+            + "    } else { alert('no support'); }\n"
             + "  }\n"
             + "  function log(iterator) {\n"
             + "    alert(iterator.current());\n"
@@ -123,7 +128,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "en-US")
+    @Alerts(DEFAULT = "no support",
+            CHROME = "en-US")
     public void defaultLocale() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -133,7 +139,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
             + "      var iterator = new Intl.v8BreakIterator([]);\n"
             + "      var options = iterator.resolvedOptions();\n"
             + "      alert(options.locale);\n"
-            + "    }\n"
+            + "    } else { alert('no support'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -146,7 +152,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"0", "none", "0", "none", "0", "none", "4", "letter", "5", "none", "8", "letter", "9", "none",
+    @Alerts(DEFAULT = "no support",
+            CHROME = {"0", "none", "0", "none", "0", "none", "4", "letter", "5", "none", "8", "letter", "9", "none",
             "13", "letter", "14", "none", "15", "none", "19", "letter", "20", "none", "24", "letter", "25", "none",
             "29", "letter", "30", "none", "31", "none", "34", "letter", "35", "none", "38", "letter", "39", "none",
             "43", "letter", "44", "none", "45", "none", "50", "letter", "51", "none", "51", "none"})
@@ -158,7 +165,8 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"0", "none", "0", "none", "0", "none", "1", "none", "2", "none", "3", "none", "4", "none", "5",
+    @Alerts(DEFAULT = "no support",
+            CHROME = {"0", "none", "0", "none", "0", "none", "1", "none", "2", "none", "3", "none", "4", "none", "5",
             "none", "6", "none", "7", "none", "8", "none", "9", "none", "10", "none", "11", "none", "12", "none", "13",
             "none", "14", "none", "15", "none", "15", "none"})
     public void zh() throws Exception {
