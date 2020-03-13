@@ -2053,7 +2053,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({FF, FF68, FF60})
+    @JsxFunction({FF68, FF60})
     public static boolean mozMatchesSelector(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, thisObj, args, function);

@@ -153,19 +153,19 @@ public class Event extends SimpleScriptable {
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF68, FF60})
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF68, FF60})
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF68, FF60})
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF68, FF60})
     public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
