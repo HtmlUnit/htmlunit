@@ -152,8 +152,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static List<BrowserVersion> ALL_BROWSERS_ = Collections.unmodifiableList(
             Arrays.asList(BrowserVersion.CHROME,
                     BrowserVersion.FIREFOX,
-                    BrowserVersion.FIREFOX_60,
                     BrowserVersion.FIREFOX_68,
+                    BrowserVersion.FIREFOX_60,
                     BrowserVersion.INTERNET_EXPLORER));
 
     /**
