@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -1127,7 +1128,7 @@ public class ElementTest extends WebDriverTestCase {
             FF60 = {"function Element() {\n    [native code]\n}",
                     "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
-    @NotYetImplemented({FF68, FF60, IE})
+    @NotYetImplemented({FF, FF68, FF60, IE})
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1165,7 +1166,7 @@ public class ElementTest extends WebDriverTestCase {
             FF60 = {"function Element() {\n    [native code]\n}",
                         "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
-    @NotYetImplemented({FF68, FF60, IE})
+    @NotYetImplemented({FF, FF68, FF60, IE})
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -116,7 +117,7 @@ public class RhinoTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "true", "true"},
             IE = {"true.constructor", "1.constructor", "test.constructor"})
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void isStrict_constructor() throws Exception {
         final String html
             = "<html>\n"
