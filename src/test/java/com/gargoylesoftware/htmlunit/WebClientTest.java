@@ -2045,7 +2045,8 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "Third page loaded")
+    @Alerts(DEFAULT = {},
+            IE = "Third page loaded")
     public void windowTracking_SpecialCase3() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
