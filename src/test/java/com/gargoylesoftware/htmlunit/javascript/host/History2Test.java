@@ -207,14 +207,15 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
-            FF = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+            DEFAULT = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
+            IE = {})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -455,10 +456,11 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
-            FF = {"[object PopStateEvent]", "null", "true",
+            DEFAULT = {"[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"})
+                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
+            IE = {})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
