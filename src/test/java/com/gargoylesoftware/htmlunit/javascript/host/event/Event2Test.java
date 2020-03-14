@@ -76,7 +76,9 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "")
     @BuggyWebDriver(CHROME = "",
-                    FF = "")
+                    FF = "",
+                    FF68 = "",
+                    FF60 = "")
     // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'>\n"

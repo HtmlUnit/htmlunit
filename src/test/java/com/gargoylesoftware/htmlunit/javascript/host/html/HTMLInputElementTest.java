@@ -120,10 +120,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF68 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "  ", "", "  ",
-                        "  ", "", "50", "  ", "", "  ", ""},
-            FF60 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
+    @Alerts(DEFAULT = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
                         "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "  ", "", "  ",
                         "  ", "", "50", "  ", "", "  ", ""},
             CHROME = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
@@ -1746,6 +1743,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"169", "17", "169", "17", "13", "13", "13", "13"},
+            FF = {"141", "20", "141", "20", "13", "13", "13", "13"},
             FF60 = {"141", "21", "141", "21", "13", "13", "13", "13"},
             FF68 = {"141", "20", "141", "20", "13", "13", "13", "13"},
             IE = {"143", "19", "145", "20", "13", "13", "13", "13"})
