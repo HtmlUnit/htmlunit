@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlRt}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlRtTest extends WebDriverTestCase {
@@ -34,6 +35,7 @@ public class HtmlRtTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"", "inline", "block"},
+            FF = {"", "ruby-text", "ruby-text"},
             FF60 = {"ruby-text", "ruby-text", "ruby-text"},
             FF68 = {"", "ruby-text", "ruby-text"},
             IE = {"ruby-text", "ruby-text", "ruby-text"})
@@ -68,6 +70,7 @@ public class HtmlRtTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"", "inline", "block"},
+            FF = {"", "ruby-text", "ruby-text"},
             FF60 = {"ruby-text", "ruby-text", "ruby-text"},
             FF68 = {"", "ruby-text", "ruby-text"},
             IE = {"ruby-text", "ruby-text", "ruby-text"})
