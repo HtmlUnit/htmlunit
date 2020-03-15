@@ -460,7 +460,7 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
-        IE = {})
+            IE = {})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

@@ -1537,7 +1537,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             FF60 = "captureStream(),getContext(),height,"
                     + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
-        IE = "getContext(),height,msToBlob(),toDataURL(),width")
+            IE = "getContext(),height,msToBlob(),toDataURL(),width")
     @HtmlUnitNYI(CHROME = "getContext(),height,toDataURL(),width",
             FF60 = "getContext(),height,toDataURL(),width",
             FF68 = "getContext(),height,toDataURL(),width",
