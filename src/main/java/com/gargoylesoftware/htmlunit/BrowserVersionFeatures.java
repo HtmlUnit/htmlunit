@@ -1475,7 +1475,7 @@ public enum BrowserVersionFeatures {
     KEYGEN_AS_BLOCK,
 
     /** Handle {@code <keygen>} as {@code <select>}. */
-    @BrowserFeature({FF, FF68, FF60})
+    @BrowserFeature({FF68, FF60})
     KEYGEN_AS_SELECT,
 
     /**

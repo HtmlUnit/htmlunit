@@ -86,7 +86,8 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "window.console.timeStamp not available")
+    @Alerts(DEFAULT = {},
+            IE = "window.console.timeStamp not available")
     public void timeStamp() throws Exception {
         final String html
             = "<html>\n"

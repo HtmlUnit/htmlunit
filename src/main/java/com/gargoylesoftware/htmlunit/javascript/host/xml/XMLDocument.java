@@ -110,7 +110,7 @@ public class XMLDocument extends Document {
      * Returns Whether or not to send the request to the server asynchronously.
      * @return the {@code async} attribute
      */
-    @JsxGetter({FF, FF68, FF60})
+    @JsxGetter({FF68, FF60})
     public boolean isAsync() {
         return async_;
     }
@@ -121,7 +121,7 @@ public class XMLDocument extends Document {
      * @param xmlSource a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
-    @JsxFunction({FF, FF68, FF60})
+    @JsxFunction({FF68, FF60})
     public boolean load(final String xmlSource) {
         if (async_) {
             if (LOG.isDebugEnabled()) {

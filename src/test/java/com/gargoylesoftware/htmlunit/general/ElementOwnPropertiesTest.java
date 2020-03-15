@@ -9412,5 +9412,4 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void documentFragment() throws Exception {
         testString("document.createDocumentFragment()");
     }
-
 }

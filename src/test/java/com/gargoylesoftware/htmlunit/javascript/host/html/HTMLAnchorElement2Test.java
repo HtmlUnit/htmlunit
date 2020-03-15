@@ -1104,6 +1104,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "", "",
                 "Tester", "https://Tester:password@developer.mozilla.org",
                 "Tester", "https://Tester@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org"},
+            FF = {"", "user", "user", "",
+                "", "",
+                "Tester", "https://Tester:password@developer.mozilla.org",
+                "Tester", "https://Tester@developer.mozilla.org",
                 "Tester", "https://Tester@developer.mozilla.org"})
     public void readWriteUsername() throws Exception {
         final String html
@@ -1170,6 +1175,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "Tester", "https://:Tester@developer.mozilla.org",
                 "Tester", "https://:Tester@developer.mozilla.org"},
             FF68 = {"", "password", "password", "",
+                "", "",
+                "Tester", "https://user:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org",
+                "Tester", "https://:Tester@developer.mozilla.org"},
+            FF = {"", "password", "password", "",
                 "", "",
                 "Tester", "https://user:Tester@developer.mozilla.org",
                 "Tester", "https://:Tester@developer.mozilla.org",
