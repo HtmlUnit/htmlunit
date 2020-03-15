@@ -202,7 +202,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.REFERER,
             HttpHeader.CONNECTION,
             HttpHeader.COOKIE};
-        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX.imgAcceptHeader_ = "image/webp,*/*";
         FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
