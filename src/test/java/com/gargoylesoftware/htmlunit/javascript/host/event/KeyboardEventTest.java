@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import java.util.Arrays;
@@ -319,7 +320,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"13", "13", "13"},
             FF60 = {"0", "13", "13"})
-    @NotYetImplemented(FF68)
+    @NotYetImplemented({FF, FF68})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

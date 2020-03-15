@@ -250,7 +250,7 @@ public enum BrowserVersionFeatures {
     EVENT_TYPE_HASHCHANGEEVENT,
 
     /** Supports vendor specific event type 'KeyEvents'. */
-    @BrowserFeature({FF, FF68, FF60})
+    @BrowserFeature({FF68, FF60})
     EVENT_TYPE_KEY_EVENTS,
 
     /** Supports vendor specific event type 'MouseWheelEvent'. */

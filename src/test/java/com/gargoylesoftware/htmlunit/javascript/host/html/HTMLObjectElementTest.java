@@ -81,7 +81,8 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"Javascript called this method!", "ActiveX is still alive"})
+    @Alerts(DEFAULT = {},
+            IE = {"Javascript called this method!", "ActiveX is still alive"})
     public void activeXInteraction() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
