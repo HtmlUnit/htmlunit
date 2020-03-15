@@ -98,6 +98,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,removeNode(),replaceNode(),replaceWholeText(),splitText(),swapNode(),wholeText")
     @HtmlUnitNYI(CHROME = "constructor(),splitText(),wholeText",
             FF68 = "constructor(),splitText(),wholeText",
+            FF = "constructor(),splitText(),wholeText",
             IE = "constructor,splitText(),text,wholeText")
     public void text() throws Exception {
         testString("document.createTextNode('some text')");
@@ -1022,6 +1023,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "alt,constructor(),coords,rel,relList",
             FF60 = "alt,constructor(),coords,rel,relList",
             FF68 = "alt,constructor(),coords,rel,relList",
+            FF = "alt,constructor(),coords,rel,relList",
             IE = "alt,constructor,coords,rel")
     public void area() throws Exception {
         test("area");
@@ -1850,6 +1852,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void big() throws Exception {
         test("big");
@@ -2030,6 +2042,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void b() throws Exception {
         test("b");
@@ -2071,6 +2093,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
             FF60 = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
             FF68 = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
+            FF = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
             IE = "checkValidity(),constructor,createTextRange(),form,name,type,value")
     public void button() throws Exception {
         test("button");
@@ -2093,6 +2116,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),getContext(),height,toDataURL(),width",
             FF60 = "constructor(),getContext(),height,toDataURL(),width",
             FF68 = "constructor(),getContext(),height,toDataURL(),width",
+            FF = "constructor(),getContext(),height,toDataURL(),width",
             IE = "constructor,getContext(),height,toDataURL(),width")
     public void canvas() throws Exception {
         test("canvas");
@@ -2338,6 +2362,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,"
                 + "tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,"
+                + "tabIndex,title",
             IE = "constructor")
     public void cite() throws Exception {
         test("cite");
@@ -2439,6 +2473,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,"
+                + "onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
+                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
+                + "parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -2589,6 +2633,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,"
                 + "tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,"
+                + "tabIndex,title",
             IE = "constructor")
     public void dfn() throws Exception {
         test("dfn");
@@ -2698,6 +2752,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
+                + "style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
                 + "style,tabIndex,title")
     public void dd() throws Exception {
         test("dd");
@@ -2765,6 +2829,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void dir() throws Exception {
         test("dir");
@@ -2796,6 +2861,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void dl() throws Exception {
         test("dl");
@@ -2905,6 +2971,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
+                + "oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
+                + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,"
+                + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
+                + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
+                + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,"
+                + "onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title")
     public void dt() throws Exception {
         test("dt");
@@ -2926,6 +3002,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "align,constructor(),height,name,width",
             FF60 = "align,constructor(),height,name,width",
             FF68 = "align,constructor(),height,name,width",
+            FF = "align,constructor(),height,name,width",
             IE = "constructor,height,name,width")
     public void embed() throws Exception {
         test("embed");
@@ -3036,6 +3113,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void em() throws Exception {
         test("em");
@@ -3064,6 +3151,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,name",
             FF60 = "checkValidity(),constructor(),disabled,form,name",
             FF68 = "checkValidity(),constructor(),disabled,form,name",
+            FF = "checkValidity(),constructor(),disabled,form,name",
             IE = "align,checkValidity(),constructor,disabled,form")
     public void fieldset() throws Exception {
         test("fieldset");
@@ -3183,6 +3271,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,onwheel,parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,"
+                + "ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,"
+                + "onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,"
+                + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
+                + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,"
@@ -3404,6 +3502,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "reset(),submit(),target",
             FF68 = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
                 + "reset(),submit(),target",
+            FF = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
+                + "reset(),submit(),target",
             IE = "action,checkValidity(),constructor,elements,encoding,enctype,item(),length,method,name,"
                 + "reset(),submit(),target")
     public void form() throws Exception {
@@ -3514,6 +3614,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
                 + "style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
+                + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hasAttribute(),hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -3558,6 +3668,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),contentDocument,contentWindow,name,src",
             FF60 = "constructor(),contentDocument,contentWindow,name,src",
             FF68 = "constructor(),contentDocument,contentWindow,name,src",
+            FF = "constructor(),contentDocument,contentWindow,name,src",
             IE = "border,constructor,contentDocument,contentWindow,name,src")
     public void frame() throws Exception {
         test("frame");
@@ -3735,6 +3846,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
                 + "style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
+                + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hasAttribute(),hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -3836,6 +3957,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "align,color,constructor(),width",
             FF60 = "align,color,constructor(),width",
             FF68 = "align,color,constructor(),width",
+            FF = "align,color,constructor(),width",
             IE = "align,color,constructor,width")
     public void hr() throws Exception {
         test("hr");
@@ -3886,6 +4008,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "align,constructor(),contentDocument,contentWindow,height,name,src,width",
             FF60 = "align,constructor(),contentDocument,contentWindow,height,name,src,width",
             FF68 = "align,constructor(),contentDocument,contentWindow,height,name,src,width",
+            FF = "align,constructor(),contentDocument,contentWindow,height,name,src,width",
             IE = "align,border,constructor,contentDocument,contentWindow,height,name,src,width")
     public void iframe() throws Exception {
         test("iframe");
@@ -3927,6 +4050,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF60 = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF68 = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
+            FF = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             IE = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width")
     public void img() throws Exception {
         test("img");
@@ -4006,6 +4130,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "onwheel,parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -4156,6 +4290,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void i() throws Exception {
         test("i");
@@ -4257,6 +4401,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -4383,6 +4537,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void li() throws Exception {
         test("li");
@@ -4407,6 +4562,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),disabled,href,rel,relList,rev,type",
             FF60 = "constructor(),disabled,href,rel,relList,rev,type",
             FF68 = "constructor(),disabled,href,rel,relList,rev,type",
+            FF = "constructor(),disabled,href,rel,relList,rev,type",
             IE = "constructor,disabled,href,rel,rev,type")
     public void link() throws Exception {
         test("link");
@@ -4508,6 +4664,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,parentElement,spellcheck,"
                 + "style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,"
+                + "tabIndex,title",
+           FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -4660,6 +4826,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hasAttribute(),hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -4698,6 +4874,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollDelay,start(),stop(),trueSpeed,vspace,"
                 + "width")
     @HtmlUnitNYI(CHROME = "bgColor,constructor(),height,width",
+            FF = "constructor()",
             FF68 = "constructor()",
             IE = "bgColor,constructor,height,width")
     public void marquee() throws Exception {
@@ -4718,6 +4895,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor(),label,type",
             FF68 = "constructor(),label,type",
+            FF = "constructor(),label,type",
             IE = "constructor,type")
     public void menu() throws Exception {
         test("menu");
@@ -4736,6 +4914,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void menuitem() throws Exception {
         test("menuitem");
@@ -4909,6 +5088,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),"
+                + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,"
+                + "offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,"
+                + "oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),hasAttribute(),"
                 + "hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
@@ -5046,6 +5236,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,"
                 + "title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,"
+                + "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,"
+                + "title",
             IE = "constructor")
     public void nobr() throws Exception {
         test("nobr");
@@ -5165,6 +5366,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,onvolumechange,onwaiting,onwheel,parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,"
+                + "onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
+                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
+                + "parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -5307,6 +5518,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "onwheel,parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,"
+                + "tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -5501,6 +5722,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,"
+                + "ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,"
+                + "onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,"
+                + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
+                + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,"
+                + "onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hasAttribute(),hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -5550,6 +5781,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "align,border,checkValidity(),constructor(),form,height,name,width",
             FF60 = "align,border,checkValidity(),constructor(),form,height,name,width",
             FF68 = "align,border,checkValidity(),constructor(),form,height,name,width",
+            FF = "align,border,checkValidity(),constructor(),form,height,name,width",
             IE = "align,alt,border,checkValidity(),classid,constructor,form,height,name,width")
     public void object() throws Exception {
         test("object");
@@ -5566,6 +5798,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),type",
             FF60 = "constructor(),type",
             FF68 = "constructor(),type",
+            FF = "constructor(),type",
             IE = "constructor,type")
     public void ol() throws Exception {
         test("ol");
@@ -5622,6 +5855,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),labels,name",
             FF60 = "checkValidity(),constructor(),labels,name",
             FF68 = "checkValidity(),constructor(),labels,name",
+            FF = "checkValidity(),constructor(),labels,name",
             IE = "constructor")
     public void output() throws Exception {
         test("output");
@@ -5759,6 +5993,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
                 + "style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
+                + "onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
+                + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
+                + "style,tabIndex,title",
             IE = "clear,constructor,width")
     public void plaintext() throws Exception {
         test("plaintext");
@@ -5790,6 +6034,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),labels,max,value",
             FF60 = "constructor(),labels,max,value",
             FF68 = "constructor(),labels,max,value",
+            FF = "constructor(),labels,max,value",
             IE = "constructor,max,value")
     public void progress() throws Exception {
         test("progress");
@@ -5882,6 +6127,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwaiting,onwheel,parentElement,style,tabIndex,title",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void rp() throws Exception {
         test("rp");
@@ -5974,6 +6220,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwaiting,onwheel,parentElement,style,tabIndex,title",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void rt() throws Exception {
         test("rt");
@@ -6066,6 +6313,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "parentElement,style,tabIndex,title",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void ruby() throws Exception {
         test("ruby");
@@ -6167,6 +6415,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -6286,6 +6544,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void samp() throws Exception {
         test("samp");
@@ -6310,6 +6578,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "async,constructor(),src,text,type",
             FF60 = "async,constructor(),src,text,type",
             FF68 = "async,constructor(),src,text,type",
+            FF = "async,constructor(),src,text,type",
             IE = "async,constructor,onreadystatechange,readyState,src,text,type")
     public void script() throws Exception {
         test("script");
@@ -6441,6 +6710,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
                 + "style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,"
+                + "offsetParent,offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,"
+                + "onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
+                + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,"
+                + "oninvalid,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,"
+                + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
+                + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,"
+                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,"
+                + "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,"
+                + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hasAttribute(),hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -6490,6 +6770,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
                 + "name,options,remove(),required,selectedIndex,size,type,value",
             FF68 = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
+                + "name,options,remove(),required,selectedIndex,size,type,value",
+            FF = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
                 + "name,options,remove(),required,selectedIndex,size,type,value",
             IE = "add(),checkValidity(),constructor,form,item(),length,multiple,"
                 + "name,options,remove(),required,selectedIndex,size,type,value")
@@ -6602,6 +6884,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,"
+                + "ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,"
+                + "onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,"
+                + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
+                + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "ontimeupdate,onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void small() throws Exception {
         test("small");
@@ -6621,6 +6913,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void source() throws Exception {
         test("source");
@@ -6743,6 +7036,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void strike() throws Exception {
         test("strike");
@@ -6844,6 +7147,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -6970,6 +7283,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF68 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -7208,6 +7531,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void sup() throws Exception {
         test("sup");
@@ -7265,6 +7598,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "bgColor,border,caption,cellPadding,cellSpacing,constructor(),createCaption(),createTBody(),"
                 + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),rules,summary,"
                 + "tBodies,tFoot,tHead,width",
+            FF = "bgColor,border,caption,cellPadding,cellSpacing,constructor(),createCaption(),createTBody(),"
+                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),rules,summary,"
+                + "tBodies,tFoot,tHead,width",
             IE = "bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,cellSpacing,"
                 + "constructor,createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
                 + "deleteTFoot(),deleteTHead(),rules,summary,tBodies,tFoot,tHead,width")
@@ -7286,6 +7622,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),span,width",
             FF60 = "constructor(),span,width",
             FF68 = "constructor(),span,width",
+            FF = "constructor(),span,width",
             IE = "constructor,span,width")
     public void col() throws Exception {
         test("col");
@@ -7305,6 +7642,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),span,width",
             FF60 = "constructor(),span,width",
             FF68 = "constructor(),span,width",
+            FF = "constructor(),span,width",
             IE = "constructor,span,width")
     public void colgroup() throws Exception {
         test("colgroup");
@@ -7324,6 +7662,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
             FF60 = "ch,chOff,constructor(),vAlign",
             FF68 = "ch,chOff,constructor(),vAlign",
+            FF = "ch,chOff,constructor(),vAlign",
             IE = "bgColor,ch,chOff,constructor,vAlign")
     public void tbody() throws Exception {
         test("tbody");
@@ -7351,7 +7690,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,"
                 + "scope,width",
             FF60 = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
-            FF68 = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width")
+            FF68 = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
+            FF = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width")
     public void td() throws Exception {
         test("td");
     }
@@ -7378,6 +7718,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
             FF60 = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
             FF68 = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
+            FF = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
             IE = "constructor")
     public void th() throws Exception {
         test("th");
@@ -7403,6 +7744,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
             FF60 = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
             FF68 = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
+            FF = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
             IE = "bgColor,borderColor,borderColorDark,borderColorLight,cells,constructor,"
                 + "deleteCell(),insertCell(),rowIndex,sectionRowIndex")
     public void tr() throws Exception {
@@ -7448,6 +7790,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
                 + "textLength,type,value",
+            FF = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
+                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
+                + "textLength,type,value",
             IE = "checkValidity(),cols,constructor,createTextRange(),defaultValue,form,maxLength,name,placeholder,"
                 + "readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),type,value")
     public void textarea() throws Exception {
@@ -7468,6 +7813,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
             FF60 = "ch,chOff,constructor(),vAlign",
             FF68 = "ch,chOff,constructor(),vAlign",
+            FF = "ch,chOff,constructor(),vAlign",
             IE = "bgColor,ch,chOff,constructor,vAlign")
     public void tfoot() throws Exception {
         test("tfoot");
@@ -7487,6 +7833,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
             FF60 = "ch,chOff,constructor(),vAlign",
             FF68 = "ch,chOff,constructor(),vAlign",
+            FF = "ch,chOff,constructor(),vAlign",
             IE = "bgColor,ch,chOff,constructor,vAlign")
     public void thead() throws Exception {
         test("thead");
@@ -7597,6 +7944,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
+                + "oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
+                + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,"
+                + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
+                + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
+                + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onvolumechange,onwaiting,parentElement,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void tt() throws Exception {
         test("tt");
@@ -7644,6 +8001,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),ERROR,LOADED,LOADING,NONE",
             FF60 = "constructor(),ERROR,LOADED,LOADING,NONE",
             FF68 = "constructor(),ERROR,LOADED,LOADING,NONE",
+            FF = "constructor(),ERROR,LOADED,LOADING,NONE",
             IE = "constructor,ERROR,LOADED,LOADING,NONE")
     public void track() throws Exception {
         test("track");
@@ -7754,6 +8112,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
                 + "spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentElement,"
+                + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void u() throws Exception {
         test("u");
@@ -7773,6 +8141,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),type",
             FF60 = "constructor(),type",
             FF68 = "constructor(),type",
+            FF = "constructor(),type",
             IE = "constructor,type")
     public void ul() throws Exception {
         test("ul");
@@ -7884,6 +8253,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,"
+                + "onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
+                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
+                + "parentElement,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void var() throws Exception {
         test("var");
@@ -7914,6 +8293,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),height,width",
             FF60 = "constructor(),height,width",
             FF68 = "constructor(),height,width",
+            FF = "constructor(),height,width",
             IE = "constructor,height,width")
     public void video() throws Exception {
         test("video");
@@ -8042,6 +8422,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "parentElement,spellcheck,style,tabIndex,title",
+            FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
+                + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,"
+                + "onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
+                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
+                + "parentElement,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),hasAttribute(),"
                 + "hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
@@ -8133,6 +8523,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "defaultValue,disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,"
                 + "readOnly,required,"
                 + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,textLength,type,value,width",
+            FF = "accept,align,alt,autocomplete,checked,checkValidity(),constructor(),defaultChecked,"
+                + "defaultValue,disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,"
+                + "readOnly,required,"
+                + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,textLength,type,value,width",
             IE = "accept,align,alt,autocomplete,border,checked,checkValidity(),constructor,createTextRange(),"
                 + "defaultChecked,defaultValue,files,form,height,max,maxLength,min,name,placeholder,readOnly,required,"
                 + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,type,value,width")
@@ -8201,6 +8595,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             CHROME = "constructor(),content,innerHTML",
             FF60 = "constructor(),content,innerHTML",
             FF68 = "constructor(),content,innerHTML",
+            FF = "constructor(),content,innerHTML",
             IE = "constructor")
     public void template() throws Exception {
         test("template");
@@ -8438,7 +8833,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,detail,initUIEvent(),view")
     @HtmlUnitNYI(CHROME = "constructor(),detail,initUIEvent(),view",
             FF60 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
-            FF68 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view")
+            FF68 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+            FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view")
     public void uiEvent() throws Exception {
         testString("document.createEvent('UIEvent')");
     }
@@ -8457,6 +8853,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void dragEvent() throws Exception {
         testString("document.createEvent('DragEvent')");
@@ -8482,6 +8879,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width",
             FF68 = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
+                + "tiltX,tiltY,width",
+            FF = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width",
             IE = "exception")
     public void pointerEvent() throws Exception {
@@ -8535,34 +8934,32 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "altKey,button,buttons,clientX,clientY,constructor(),ctrlKey,fromElement,getModifierState(),"
                 + "initMouseEvent(),layerX,layerY,metaKey,movementX,movementY,offsetX,offsetY,pageX,pageY,"
-                + "relatedTarget,screenX,screenY,shiftKey,toElement,x,"
-                + "y",
+                + "relatedTarget,screenX,screenY,shiftKey,toElement,x,y",
             FF = "altKey,button,buttons,clientX,clientY,constructor(),ctrlKey,getModifierState(),initMouseEvent(),"
                 + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
                 + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
                 + "mozInputSource,mozPressure,offsetX,offsetY,pageX,pageY,region,relatedTarget,screenX,screenY,"
-                + "shiftKey,x,"
-                + "y",
+                + "shiftKey,x,y",
             FF60 = "altKey,button,buttons,clientX,clientY,constructor(),ctrlKey,getModifierState(),initMouseEvent(),"
                 + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
                 + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
-                + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey,x,"
-                + "y",
+                + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey,x,y",
             FF68 = "altKey,button,buttons,clientX,clientY,constructor(),ctrlKey,getModifierState(),initMouseEvent(),"
                 + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
                 + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
-                + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey,x,"
-                + "y",
+                + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey,x,y",
             IE = "altKey,button,buttons,clientX,clientY,constructor,ctrlKey,fromElement,getModifierState(),"
                 + "initMouseEvent(),layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,screenX,screenY,"
-                + "shiftKey,toElement,which,x,"
-                + "y")
+                + "shiftKey,toElement,which,x,y")
     @HtmlUnitNYI(CHROME = "altKey,button,clientX,clientY,constructor(),ctrlKey,initMouseEvent(),metaKey,"
                 + "pageX,pageY,screenX,screenY,shiftKey,which",
             FF60 = "altKey,button,clientX,clientY,constructor(),ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
                 + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
                 + "MOZ_SOURCE_UNKNOWN,pageX,pageY,screenX,screenY,shiftKey,which",
             FF68 = "altKey,button,clientX,clientY,constructor(),ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
+                + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
+                + "MOZ_SOURCE_UNKNOWN,pageX,pageY,screenX,screenY,shiftKey,which",
+            FF = "altKey,button,clientX,clientY,constructor(),ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
                 + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
                 + "MOZ_SOURCE_UNKNOWN,pageX,pageY,screenX,screenY,shiftKey,which",
             IE = "altKey,button,clientX,clientY,constructor,ctrlKey,initMouseEvent(),metaKey,pageX,pageY,"
@@ -8585,6 +8982,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void compositionEvent() throws Exception {
         testString("document.createEvent('CompositionEvent')");
@@ -8604,6 +9002,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void focusEvent() throws Exception {
         testString("document.createEvent('FocusEvent')");
@@ -8622,7 +9021,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor()",
-            FF68 = "constructor()")
+            FF68 = "constructor()",
+            FF = "constructor()")
     public void inputEvent() throws Exception {
         testString("new InputEvent('input')");
     }
@@ -8672,6 +9072,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             FF60 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
             FF68 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+            FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
             IE = "constructor,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
                 + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
                 + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE")
@@ -8708,6 +9109,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(CHROME = "constructor()",
             FF68 = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void slot() throws Exception {
         test("slot");
@@ -8743,6 +9145,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
+            FF = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
+                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             IE = "all,clear(),constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),parentWindow,write(),writeln()")
     public void htmlDocument() throws Exception {
@@ -8763,6 +9169,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),getElementsByTagName()",
             FF60 = "async,constructor(),getElementsByTagName(),load()",
             FF68 = "async,constructor(),getElementsByTagName(),load()",
+            FF = "async,constructor(),getElementsByTagName(),load()",
             IE = "constructor,getElementsByTagName()")
     public void document() throws Exception {
         testString("xmlDocument");
@@ -8869,6 +9276,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
+            FF = "constructor(),onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,"
+                + "oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
+                + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
+                + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
+                + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
+                + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
             IE = "attributes,childElementCount,clientHeight,clientLeft,clientTop,clientWidth,constructor,"
                 + "firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),"
@@ -8958,6 +9372,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "detach(),END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),"
                 + "getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),selectNodeContents(),"
                 + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
+                + "START_TO_END,START_TO_START,startContainer,startOffset,surroundContents(),toString()",
+            FF = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+                + "compareBoundaryPoints(),constructor(),createContextualFragment(),deleteContents(),"
+                + "detach(),END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),"
+                + "getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),selectNodeContents(),"
+                + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
                 + "START_TO_END,START_TO_START,startContainer,startOffset,surroundContents(),toString()")
     public void range() throws Exception {
         testString("document.createRange()");
@@ -8985,6 +9405,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "childElementCount,children,constructor(),firstElementChild,getElementById(),"
                 + "lastElementChild,querySelector(),querySelectorAll()",
             FF68 = "childElementCount,children,constructor(),firstElementChild,getElementById()"
+                + ",lastElementChild,querySelector(),querySelectorAll()",
+            FF = "childElementCount,children,constructor(),firstElementChild,getElementById()"
                 + ",lastElementChild,querySelector(),querySelectorAll()",
             IE = "constructor,querySelector(),querySelectorAll()")
     public void documentFragment() throws Exception {
