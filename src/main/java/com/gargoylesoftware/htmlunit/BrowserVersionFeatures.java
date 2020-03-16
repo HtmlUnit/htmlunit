@@ -1431,7 +1431,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_TOP_WRITABLE,
 
     /**
-     * importScripts does not check the content type for js.
+     * Method importScripts does not check the content type for js.
      */
     @BrowserFeature({FF60, IE})
     JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL,
