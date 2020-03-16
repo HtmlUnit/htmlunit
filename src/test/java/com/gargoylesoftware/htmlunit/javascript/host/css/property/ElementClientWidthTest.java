@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -366,6 +367,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12",
             FF = "16",
+            FF68 = "16",
+            FF60 = "16",
             IE = "20")
     @NotYetImplemented
     public void button() throws Exception {
@@ -481,7 +484,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-56",
             FF68 = "0",
             FF60 = "0")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, FF, IE})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
@@ -1046,7 +1049,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "80",
             IE = "0")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void meter() throws Exception {
         loadPageWithAlerts2(test("meter"));
     }
@@ -1469,7 +1472,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "300",
             FF60 = "0",
             IE = "-16")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void svg() throws Exception {
         loadPageWithAlerts2(test("svg"));
     }
@@ -1572,6 +1575,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "159",
             FF = "181",
+            FF68 = "181",
+            FF60 = "181",
             IE = "164")
     @NotYetImplemented
     public void textarea() throws Exception {
@@ -1725,6 +1730,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12",
             FF = "16",
+            FF68 = "16",
+            FF60 = "16",
             IE = "20")
     @NotYetImplemented
     public void inputButton() throws Exception {
@@ -1749,6 +1756,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "253",
+            FF = "271",
+            FF68 = "240",
             FF60 = "235",
             IE = "262")
     @NotYetImplemented
@@ -1801,6 +1810,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "47",
+            FF = "91",
+            FF68 = "48",
             FF60 = "48",
             IE = "100")
     @NotYetImplemented
@@ -1830,6 +1841,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "54",
+            FF = "108",
+            FF68 = "94",
             FF60 = "94",
             IE = "114")
     @NotYetImplemented

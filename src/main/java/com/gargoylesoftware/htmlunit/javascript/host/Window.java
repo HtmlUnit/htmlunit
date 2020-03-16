@@ -2005,7 +2005,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code mozPaintCount} property.
      * @return the value of {@code mozPaintCount} property
      */
-    @JsxGetter({FF, FF68, FF60})
+    @JsxGetter({FF68, FF60})
     public int getMozPaintCount() {
         return 0;
     }

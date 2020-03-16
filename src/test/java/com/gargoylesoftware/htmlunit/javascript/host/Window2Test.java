@@ -856,8 +856,10 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"676", "1256", "659", "1239"},
+    @Alerts(CHROME = {"632", "1256", "615", "1239"},
             FF = {"682", "1258", "665", "1241"},
+            FF68 = {"682", "1258", "665", "1241"},
+            FF60 = {"682", "1258", "665", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -894,7 +896,7 @@ public class Window2Test extends WebDriverTestCase {
             FF = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"},
             FF68 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"},
             FF60 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1254"})
-    @NotYetImplemented({FF68, FF60})
+    @NotYetImplemented({FF, FF68, FF60})
     public void scrolling1() throws Exception {
         scrolling(true);
     }
@@ -1253,10 +1255,13 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {
                 "string string 7 number string",
                 "string string 8 number object"},
-            FF = {
-                "string string 0 number string",
-                "string string 0 number object"})
-    @NotYetImplemented(FF)
+            FF = {"string string 0 number string",
+                    "string string 0 number object"},
+            FF68 = {"string string 0 number string",
+                    "string string 0 number object"},
+            FF60 = {"string string 0 number string",
+                    "string string 0 number object"})
+    @NotYetImplemented({FF, FF68, FF60})
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"
@@ -2482,6 +2487,10 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
             FF = {"[object WindowPrototype]", "[object WindowProperties]", "[object EventTargetPrototype]",
                 "[object Object]"},
+            FF68 = {"[object WindowPrototype]", "[object WindowProperties]", "[object EventTargetPrototype]",
+                "[object Object]"},
+            FF60 = {"[object WindowPrototype]", "[object WindowProperties]", "[object EventTargetPrototype]",
+                    "[object Object]"},
             IE = "exception")
     @NotYetImplemented
     public void test__proto__() throws Exception {

@@ -50,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class DateTimeFormat extends SimpleScriptable {
 
+    private static Map<String, String> FF_FORMATS_ = new HashMap<>();
     private static Map<String, String> FF_68_FORMATS_ = new HashMap<>();
     private static Map<String, String> FF_60_FORMATS_ = new HashMap<>();
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
@@ -152,6 +153,11 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("sr", ddDotDot);
         commonFormats.put("sq", ddDot);
 
+        FF_FORMATS_.putAll(commonFormats);
+        FF_FORMATS_.put("ban", ddDot);
+        FF_FORMATS_.put("da", ddDot);
+        FF_FORMATS_.put("ja-JP-u-ca-japanese", "'H'yy/MM/dd");
+
         FF_68_FORMATS_.putAll(commonFormats);
         FF_68_FORMATS_.put("da", ddDot);
 
@@ -246,8 +252,11 @@ public class DateTimeFormat extends SimpleScriptable {
         else if (browserVersion.isFirefox60()) {
             formats = FF_60_FORMATS_;
         }
-        else {
+        else if (browserVersion.isFirefox68()) {
             formats = FF_68_FORMATS_;
+        }
+        else {
+            formats = FF_FORMATS_;
         }
 
         String locale = "";
