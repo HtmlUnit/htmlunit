@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -43,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -191,20 +193,28 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         final Object[] args, final Function funObj) throws IOException {
         final DedicatedWorkerGlobalScope scope = (DedicatedWorkerGlobalScope) thisObj;
 
+        final WebClient webClient = scope.owningWindow_.getWebWindow().getWebClient();
+        final boolean checkContentType = !webClient.getBrowserVersion()
+                .hasFeature(JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL);
+
         for (final Object arg : args) {
             final String url = Context.toString(arg);
-            scope.loadAndExecute(url, cx);
+            scope.loadAndExecute(webClient, url, cx, checkContentType);
         }
     }
 
-    void loadAndExecute(final String url, final Context context) throws IOException {
+    void loadAndExecute(final WebClient webClient, final String url,
+            final Context context, final boolean checkMimeType) throws IOException {
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         final URL fullUrl = page.getFullyQualifiedUrl(url);
 
-        final WebClient webClient = owningWindow_.getWebWindow().getWebClient();
-
         final WebRequest webRequest = new WebRequest(fullUrl);
         final WebResponse response = webClient.loadWebResponse(webRequest);
+        if (checkMimeType && !MimeType.isJavascriptMimeType(response.getContentType())) {
+            throw Context.reportRuntimeError(
+                    "NetworkError: importScripts response is not a javascript response");
+        }
+
         final String scriptCode = response.getContentAsString();
         final JavaScriptEngine javaScriptEngine = (JavaScriptEngine) webClient.getJavaScriptEngine();
 

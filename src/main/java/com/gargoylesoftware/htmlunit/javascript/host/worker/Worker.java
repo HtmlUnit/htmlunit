@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass
 public class Worker extends EventTarget {
@@ -54,7 +55,7 @@ public class Worker extends EventTarget {
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
         workerScope_ = new DedicatedWorkerGlobalScope(owningWindow, cx, webClient.getBrowserVersion(), this);
 
-        workerScope_.loadAndExecute(url, null);
+        workerScope_.loadAndExecute(webClient, url, null, false);
     }
 
     /**

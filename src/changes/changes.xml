@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.39.0" date="xxxx, 2020" description="Bugfixes, Firefox74">
+            <action type="fix" dev="rbri" issue="#140">
+                WorkerGlobalScope.importScripts() now checks the content type of the
+                script to import.
+            </action>
             <action type="add" dev="rbri">
                 First simple implementation for the anchor download and shape property added.
             </action>

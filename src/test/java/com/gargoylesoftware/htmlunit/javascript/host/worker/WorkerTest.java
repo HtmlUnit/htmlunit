@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -137,8 +135,35 @@ public class WorkerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "start worker import exception end worker",
             FF60 = "start worker in imported script1 end worker",
             IE = "start worker in imported script1 end worker")
-    @NotYetImplemented({CHROME, FF68})
     public void importScriptsWrongContentType() throws Exception {
+        importScripts(MimeType.TEXT_HTML);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("start worker in imported script1 end worker")
+    public void importScriptsContentType() throws Exception {
+        importScripts("application/ecmascript");
+        importScripts(MimeType.APPLICATION_JAVASCRIPT);
+        importScripts("application/x-ecmascript");
+        importScripts("application/x-javascript");
+        importScripts("text/ecmascript");
+        importScripts("text/javascript");
+        importScripts("text/javascript1.0");
+        importScripts("text/javascript1.1");
+        importScripts("text/javascript1.2");
+        importScripts("text/javascript1.3");
+        importScripts("text/javascript1.4");
+        importScripts("text/javascript1.5");
+        importScripts("text/jscript");
+        importScripts("text/livescript");
+        importScripts("text/x-ecmascript");
+        importScripts("text/x-javascript");
+    }
+
+    private void importScripts(final String contentType) throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -157,7 +182,8 @@ public class WorkerTest extends WebDriverTestCase {
         final String scriptToImportJs1 = "postMessage(' in imported script1');\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1,
+                contentType);
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
