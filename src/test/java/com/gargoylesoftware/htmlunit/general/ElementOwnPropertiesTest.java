@@ -434,7 +434,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clearInterval(),clearTimeout(),close(),closed,confirm(),console,constructor(),controllers,"
                 + "crypto,devicePixelRatio,document,dump(),event,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,localStorage,location,"
-                + "matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,mozPaintCount,name,navigator,"
+                + "matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,name,navigator,"
                 + "netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,onblur,oncanplay,oncanplaythrough,"
                 + "onchange,onclick,oncontextmenu,ondblclick,ondevicelight,ondevicemotion,ondeviceorientation,"
                 + "ondeviceproximity,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -9169,7 +9169,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),getElementsByTagName()",
             FF60 = "async,constructor(),getElementsByTagName(),load()",
             FF68 = "async,constructor(),getElementsByTagName(),load()",
-            FF = "async,constructor(),getElementsByTagName(),load()",
+            FF = "constructor(),getElementsByTagName()",
             IE = "constructor,getElementsByTagName()")
     public void document() throws Exception {
         testString("xmlDocument");

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -830,7 +831,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             FF = "A B C D EF G H I\nSecond",
             FF68 = "A B C D EF G H I\nSecond",
             FF60 = "A B C D EF G H I\nSecond")
-    @NotYetImplemented({FF68, FF60})
+    @NotYetImplemented({FF, FF68, FF60})
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
     }
@@ -844,7 +845,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             FF = "A B C D EF G H I\nSecond",
             FF68 = "A B C D EF G H I\nSecond",
             FF60 = "A B C D EF G H I\nSecond")
-    @NotYetImplemented({FF68, FF60})
+    @NotYetImplemented({FF, FF68, FF60})
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");
     }
