@@ -1118,7 +1118,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"underline", "none", "underline"},
             CHROME = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"},
             FF = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF})
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1539,7 +1539,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"true", "true"},
             FF68 = {"true", "true"},
             FF60 = {"true", "true"})
-    @NotYetImplemented({FF68, FF60})
+    @NotYetImplemented({FF, FF68, FF60})
     public void scrollbarHeight() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

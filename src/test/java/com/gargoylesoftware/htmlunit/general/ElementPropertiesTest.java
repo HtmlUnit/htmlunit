@@ -1131,7 +1131,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
-                + "mozPaintCount,name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
+                + "name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,"
                 + "ondevicelight,ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"

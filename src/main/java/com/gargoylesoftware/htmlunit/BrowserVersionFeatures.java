@@ -371,7 +371,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_SUPPORTS_PARANTHESES,
 
     /** Is the default display style {@code inline} for quirks mode. */
-    @BrowserFeature({FF, FF68, FF60})
+    @BrowserFeature({FF68, FF60})
     HTMLDEFINITION_INLINE_IN_QUIRKS,
 
     /** {@code document.applets} returns a NodeList. */

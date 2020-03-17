@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -39,6 +40,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -1247,6 +1249,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"32 commands supported", "not supported: foo, 123"})
+    @BuggyWebDriver({"31 commands supported", "not supported: Paste, foo, 123"})
     public void queryCommandSupported_common() throws Exception {
         final String[] commands = {"BackColor", "Bold",
             "Copy", "CreateLink", "Cut", "Delete",
@@ -2623,7 +2626,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF68 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             FF60 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             CHROME = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
-    @NotYetImplemented({CHROME, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68, FF60})
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
