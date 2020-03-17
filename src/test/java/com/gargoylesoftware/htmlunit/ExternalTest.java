@@ -196,6 +196,7 @@ public class ExternalTest {
         }
         try (WebClient webClient = buildWebClient()) {
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+
             final HtmlPage page = webClient.getPage(url);
             for (final HtmlAnchor anchor : page.getAnchors()) {
                 String itemVersion = anchor.getTextContent();
@@ -265,6 +266,11 @@ public class ExternalTest {
 
     private static boolean isIgnored(@SuppressWarnings("unused") final String groupId,
             @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
+        if ("junit".equals(groupId)
+                && "junit".equals(artifactId)
+                && !"4.12".equals(version)) {
+            return true;
+        }
         return false;
     }
 
