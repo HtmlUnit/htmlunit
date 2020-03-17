@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.39.0" date="xxxx, 2020" description="Bugfixes, Firefox74">
+            <action type="fix" dev="fdanek">
+                HtmlLabel.getReferencedElement() now also supports HtmlButton, HtmlMeter,
+                HtmlOutput, HtmlProgress, HtmlSelect and HtmlTextArea in nested variant
+                and ignores not labelable elements in both variants.
+            </action>
             <action type="fix" dev="rbri" issue="#140">
                 WorkerGlobalScope.importScripts() now checks the content type of the
                 script to import.

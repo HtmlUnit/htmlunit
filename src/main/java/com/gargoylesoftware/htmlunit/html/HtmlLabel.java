@@ -129,18 +129,33 @@ public class HtmlLabel extends HtmlElement {
         final String elementId = getForAttribute();
         if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
             try {
-                return ((HtmlPage) getPage()).getHtmlElementById(elementId);
+                HtmlElement element = ((HtmlPage) getPage()).getHtmlElementById(elementId);
+                if (isLabelableElement(element)) {
+                	return element;
+                }
             }
             catch (final ElementNotFoundException e) {
                 return null;
             }
-        }
-        for (final DomNode element : getChildren()) {
-            if (element instanceof HtmlInput) {
-                return (HtmlInput) element;
-            }
+        } else {
+	        for (final DomNode element : getChildren()) {
+	            if (isLabelableElement(element)) {
+	                return (HtmlElement) element;
+	            }
+	        }
         }
         return null;
+    }
+
+    private boolean isLabelableElement(DomNode element) {
+    	// TODO maybe we should introduce an interface LabelabelElement for this?
+    	return element instanceof HtmlButton
+			|| element instanceof HtmlInput && !(element instanceof HtmlHiddenInput)
+			|| element instanceof HtmlMeter
+			|| element instanceof HtmlOutput
+			|| element instanceof HtmlProgress
+			|| element instanceof HtmlSelect
+			|| element instanceof HtmlTextArea;
     }
 
     /**
