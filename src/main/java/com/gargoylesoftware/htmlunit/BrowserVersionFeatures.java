@@ -307,7 +307,7 @@ public enum BrowserVersionFeatures {
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
 
     /** Form submit includes the origin header. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF})
     FORM_SUBMISSION_HEADER_ORIGIN,
 
     /** Form submit is done without the hash part of the action url. */
@@ -428,7 +428,7 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
     /** Empty src attribute sets display to false. */
-    @BrowserFeature({IE, FF68, FF60})
+    @BrowserFeature({IE, FF, FF68, FF60})
     HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE,
 
     /** Is document.cretaeElement('image') an HTMLElement. */
