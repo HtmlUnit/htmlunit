@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -49,7 +50,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    // @NotYetImplemented(IE)
     public void formGet() throws Exception {
         final String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -118,6 +118,48 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "Cache-Control: max-age=0\n"
+                    + "Connection: keep-alive\n"
+                    + "Content-Length: 48\n"
+                    + "Content-Type: application/x-www-form-urlencoded\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Origin: http://localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Sec-Fetch-Dest: document\n"
+                    + "Sec-Fetch-Mode: navigate\n"
+                    + "Sec-Fetch-Site: same-origin\n"
+                    + "Sec-Fetch-User: ?1\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            FF = "Connection: keep-alive\n"
+                    + "Content-Length: 48\n"
+                    + "Content-Type: application/x-www-form-urlencoded\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Origin: http://localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            FF68 = "Connection: keep-alive\n"
+                    + "Content-Length: 48\n"
+                    + "Content-Type: application/x-www-form-urlencoded\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            FF60 = "Connection: keep-alive\n"
+                    + "Content-Length: 48\n"
+                    + "Content-Type: application/x-www-form-urlencoded\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            IE = "Cache-Control: no-cache\n"
+                    + "Connection: keep-alive\n"
+                    + "Content-Length: 48\n"
+                    + "Content-Type: application/x-www-form-urlencoded\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "User-Agent: §§USER_AGENT§§\n")
     public void formPost() throws Exception {
         final String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -138,40 +180,9 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertEquals(null, lastRequest.getRequestBody());
         assertEquals(URL_FIRST + "foo", lastRequest.getUrl());
 
-        String expectedHeaders = "";
-        if (getBrowserVersion().isChrome()) {
-            expectedHeaders = "Cache-Control: max-age=0\n"
-                                + "Connection: keep-alive\n"
-                                + "Content-Length: 48\n"
-                                + "Content-Type: application/x-www-form-urlencoded\n"
-                                + "Host: localhost:" + PORT + "\n"
-                                + "Origin: http://localhost:" + PORT + "\n"
-                                + "Referer: http://localhost:" + PORT + "/\n"
-                                + "Sec-Fetch-Dest: document\n"
-                                + "Sec-Fetch-Mode: navigate\n"
-                                + "Sec-Fetch-Site: same-origin\n"
-                                + "Sec-Fetch-User: ?1\n"
-                                + "Upgrade-Insecure-Requests: 1\n"
-                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
-        }
-        if (getBrowserVersion().isFirefox()) {
-            expectedHeaders = "Connection: keep-alive\n"
-                    + "Content-Length: 48\n"
-                    + "Content-Type: application/x-www-form-urlencoded\n"
-                    + "Host: localhost:" + PORT + "\n"
-                    + "Referer: http://localhost:" + PORT + "/\n"
-                    + "Upgrade-Insecure-Requests: 1\n"
-                    + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
-        }
-        if (getBrowserVersion().isIE()) {
-            expectedHeaders = "Cache-Control: no-cache\n"
-                                + "Connection: keep-alive\n"
-                                + "Content-Length: 48\n"
-                                + "Content-Type: application/x-www-form-urlencoded\n"
-                                + "Host: localhost:" + PORT + "\n"
-                                + "Referer: http://localhost:" + PORT + "/\n"
-                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
-        }
+        String expectedHeaders = getExpectedAlerts()[0];
+        expectedHeaders = expectedHeaders.replaceAll("§§PORT§§", "" + PORT);
+        expectedHeaders = expectedHeaders.replaceAll("§§USER_AGENT§§", getBrowserVersion().getUserAgent());
         assertEquals(expectedHeaders, headersToString(lastRequest));
 
         assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
