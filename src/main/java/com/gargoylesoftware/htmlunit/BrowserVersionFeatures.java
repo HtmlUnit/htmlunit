@@ -307,7 +307,7 @@ public enum BrowserVersionFeatures {
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
 
     /** Form submit includes the origin header. */
-    @BrowserFeature({CHROME, FF})
+    @BrowserFeature(CHROME)
     FORM_SUBMISSION_HEADER_ORIGIN,
 
     /** Form submit is done without the hash part of the action url. */
