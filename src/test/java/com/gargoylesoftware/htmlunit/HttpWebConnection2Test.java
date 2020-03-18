@@ -50,6 +50,34 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "Connection: keep-alive\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Sec-Fetch-Dest: document\n"
+                    + "Sec-Fetch-Mode: navigate\n"
+                    + "Sec-Fetch-Site: same-origin\n"
+                    + "Sec-Fetch-User: ?1\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            FF = "Connection: keep-alive\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            FF68 = "Connection: keep-alive\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            FF60 = "Connection: keep-alive\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "Upgrade-Insecure-Requests: 1\n"
+                    + "User-Agent: §§USER_AGENT§§\n",
+            IE = "Connection: keep-alive\n"
+                    + "Host: localhost:§§PORT§§\n"
+                    + "Referer: http://localhost:§§PORT§§/\n"
+                    + "User-Agent: §§USER_AGENT§§\n")
     public void formGet() throws Exception {
         final String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -71,31 +99,9 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         // we will check the parameters later on
         assertEquals(URL_FIRST + "foo", UrlUtils.getUrlWithNewQuery(lastRequest.getUrl(), null));
 
-        String expectedHeaders = "";
-        if (getBrowserVersion().isChrome()) {
-            expectedHeaders = "Connection: keep-alive\n"
-                                + "Host: localhost:" + PORT + "\n"
-                                + "Referer: http://localhost:" + PORT + "/\n"
-                                + "Sec-Fetch-Dest: document\n"
-                                + "Sec-Fetch-Mode: navigate\n"
-                                + "Sec-Fetch-Site: same-origin\n"
-                                + "Sec-Fetch-User: ?1\n"
-                                + "Upgrade-Insecure-Requests: 1\n"
-                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
-        }
-        if (getBrowserVersion().isFirefox()) {
-            expectedHeaders = "Connection: keep-alive\n"
-                    + "Host: localhost:" + PORT + "\n"
-                    + "Referer: http://localhost:" + PORT + "/\n"
-                    + "Upgrade-Insecure-Requests: 1\n"
-                    + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
-        }
-        if (getBrowserVersion().isIE()) {
-            expectedHeaders = "Connection: keep-alive\n"
-                                + "Host: localhost:" + PORT + "\n"
-                                + "Referer: http://localhost:" + PORT + "/\n"
-                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
-        }
+        String expectedHeaders = getExpectedAlerts()[0];
+        expectedHeaders = expectedHeaders.replaceAll("§§PORT§§", "" + PORT);
+        expectedHeaders = expectedHeaders.replaceAll("§§USER_AGENT§§", getBrowserVersion().getUserAgent());
         assertEquals(expectedHeaders, headersToString(lastRequest));
 
         assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
