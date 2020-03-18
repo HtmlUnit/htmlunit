@@ -95,6 +95,59 @@ public class NotYetImplementedTest {
                 entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser
                         + ';' + description);
             }
+            else if (line.startsWith("    @HtmlUnitNYI")) {
+                String browser = "All";
+                final StringBuilder nyi = new StringBuilder(line);
+
+                String methodName = null;
+                for (int i = index; i < lines.size(); i++) {
+                    final String l = lines.get(i);
+                    if (l.startsWith("    public ")) {
+                        methodName = l.split(" ")[6];
+                        break;
+                    }
+                    nyi.append(l);
+                }
+                final int lineNumber = getLineNumber(lines, index);
+                final String description = getDescription(lines, index);
+
+                final String nyiString = nyi.toString();
+                if (nyiString.startsWith("    @HtmlUnitNYI(")) {
+                    browser = "";
+                    if (nyiString.contains("CHROME = ")) {
+                        browser += "CHROME";
+                    }
+                    if (nyiString.contains("FF = ")) {
+                        if (browser.length() > 0) {
+                            browser += ", ";
+                        }
+                        browser += "FF";
+                    }
+                    if (nyiString.contains("FF68 = ")) {
+                        if (browser.length() > 0) {
+                            browser += ", ";
+                        }
+                        browser += "FF68";
+                    }
+                    if (nyiString.contains("FF60 = ")) {
+                        if (browser.length() > 0) {
+                            browser += ", ";
+                        }
+                        browser += "FF60";
+                    }
+                    if (nyiString.contains("IE = ")) {
+                        if (browser.length() > 0) {
+                            browser += ", ";
+                        }
+                        browser += "IE";
+                    }
+                }
+                if (browser.length() < 2) {
+                    System.out.println(browser);
+                }
+                entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser
+                        + ';' + description);
+            }
             index++;
         }
     }
@@ -165,7 +218,7 @@ public class NotYetImplementedTest {
             final String fileName = file.substring(file.lastIndexOf('/') + 1, file.length() - 5);
             final String method = values[1];
             final String line = values[2];
-            final String browser = values[3];
+            String browser = values[3];
             final String description = entry.endsWith(";") ? "&nbsp;"
                     : values[values.length - 1].replace("__semicolon__", ";");
             builder.append("  <tr>\n");
@@ -210,9 +263,11 @@ public class NotYetImplementedTest {
             }
 
             if (browser.contains("FF60")) {
+                browser = browser.replace("FF60", "");
                 countFF60++;
             }
             if (browser.contains("FF68")) {
+                browser = browser.replace("FF68", "");
                 countFF68++;
             }
             if (browser.contains("FF")) {
