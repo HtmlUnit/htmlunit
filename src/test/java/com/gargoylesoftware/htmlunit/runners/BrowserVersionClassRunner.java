@@ -59,9 +59,11 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  */
 public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
+    /** If no alerts defined. */
+    public static final String[] NO_ALERTS_DEFINED = new String[] {"no alerts defined"};
+
     private final BrowserVersion browserVersion_;
     private final boolean realBrowser_;
-    private static final String[] NO_ALERTS_DEFINED = new String[] {"no alerts defined"};
     static final boolean maven_ = System.getProperty("htmlunit.maven") != null;
 
     /**

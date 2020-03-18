@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     protected void runTest(final String testName) throws Exception {
         final String testNumber = readTestNumber(testName);
         if (testNumber == null) {
-            assertEquals("Test number not found for: " + testName, 0, getExpectedAlerts().length);
+            assertEquals("Test number not found for: " + testName, NO_ALERTS_DEFINED, getExpectedAlerts());
             return;
         }
         final long runTime = 60 * DEFAULT_WAIT_TIME;

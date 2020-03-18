@@ -80,7 +80,7 @@ public final class JQueryExtractor {
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        for (String browser : new String[] {"CHROME", "FF60", "FF68", "IE"}) {
+        for (String browser : new String[] {"CHROME", "FF", "FF68", "FF60", "IE"}) {
             final File out = new File(baseDir, browser + ".out");
             final File results = new File(baseDir, "results." + browser + ".txt");
             extractExpectations(out, results);
@@ -242,20 +242,6 @@ public final class JQueryExtractor {
 
                 // Hack a bit to avoid redundant alerts
                 final List<String> cleanedBrowserNames = new ArrayList<>(testExpectation.keySet());
-                if (cleanedBrowserNames.contains(TestedBrowser.FF68.name())
-                        && cleanedBrowserNames.contains(TestedBrowser.FF60.name())
-                        && StringUtils.equals(
-                                    testExpectation.get(TestedBrowser.FF68.name()),
-                                    testExpectation.get(TestedBrowser.FF60.name()))) {
-                    if (testExpectation.get(TestedBrowser.FF60.name()) != null) {
-                        testExpectation.put("FF", testExpectation.get(TestedBrowser.FF60.name()));
-                        testExpectation.remove(TestedBrowser.FF60.name());
-                        testExpectation.remove(TestedBrowser.FF68.name());
-                    }
-                    cleanedBrowserNames.remove(TestedBrowser.FF60.name());
-                    cleanedBrowserNames.remove(TestedBrowser.FF68.name());
-                    cleanedBrowserNames.add("FF");
-                }
                 Collections.sort(cleanedBrowserNames);
 
                 if (testExpectation.size() == 3) {
@@ -268,6 +254,19 @@ public final class JQueryExtractor {
                         cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
                         cleanedBrowserNames.remove("FF");
                         cleanedBrowserNames.add(0, "DEFAULT");
+
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.CHROME.name()),
+                                testExpectation.get("FF68"))) {
+                            testExpectation.remove("FF68");
+                            cleanedBrowserNames.remove("FF68");
+                        }
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.CHROME.name()),
+                                testExpectation.get("FF60"))) {
+                            testExpectation.remove("FF60");
+                            cleanedBrowserNames.remove("FF60");
+                        }
                     }
                     else if (StringUtils.equals(
                             testExpectation.get(TestedBrowser.CHROME.name()),
@@ -278,6 +277,25 @@ public final class JQueryExtractor {
                         cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
                         cleanedBrowserNames.remove(TestedBrowser.IE.name());
                         cleanedBrowserNames.add(0, "DEFAULT");
+
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.CHROME.name()),
+                                testExpectation.get("FF"))) {
+                            testExpectation.remove("FF");
+                            cleanedBrowserNames.remove("FF");
+                        }
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.CHROME.name()),
+                                testExpectation.get("FF68"))) {
+                            testExpectation.remove("FF68");
+                            cleanedBrowserNames.remove("FF68");
+                        }
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.CHROME.name()),
+                                testExpectation.get("FF60"))) {
+                            testExpectation.remove("FF60");
+                            cleanedBrowserNames.remove("FF60");
+                        }
                     }
                     else if (StringUtils.equals(
                             testExpectation.get("FF"),
@@ -288,6 +306,19 @@ public final class JQueryExtractor {
                         cleanedBrowserNames.remove("FF");
                         cleanedBrowserNames.remove(TestedBrowser.IE.name());
                         cleanedBrowserNames.add(0, "DEFAULT");
+
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.IE.name()),
+                                testExpectation.get("FF68"))) {
+                            testExpectation.remove("FF68");
+                            cleanedBrowserNames.remove("FF68");
+                        }
+                        if (StringUtils.equals(
+                                testExpectation.get(TestedBrowser.IE.name()),
+                                testExpectation.get("FF60"))) {
+                            testExpectation.remove("FF60");
+                            cleanedBrowserNames.remove("FF60");
+                        }
                     }
                 }
 
@@ -325,9 +356,11 @@ public final class JQueryExtractor {
                         Collections.sort(browserNames);
 
                         // TODO dirty hack
-                        if (browserNames.size() == 3
+                        if (browserNames.size() == 5
                                 && browserNames.contains("CHROME")
                                 && browserNames.contains("FF")
+                                && browserNames.contains("FF68")
+                                && browserNames.contains("FF60")
                                 && browserNames.contains("IE")) {
                             System.out.println("    @NotYetImplemented");
                         }
