@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.39.0" date="xxxx, 2020" description="Bugfixes, Firefox74">
+            <action type="remove" dev="rbri">
+                Enum com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName removed.
+            </action>
+            <action type="add" dev="rbri">
+                FIREFOX (latest) support added. Like we already do for CHROME we will support
+                the recent version of Firefox in addition to at least one ESR version.  
+            </action>
             <action type="fix" dev="fdanek">
                 HtmlLabel.getReferencedElement() now also supports HtmlButton, HtmlMeter,
                 HtmlOutput, HtmlProgress, HtmlSelect and HtmlTextArea in nested variant
