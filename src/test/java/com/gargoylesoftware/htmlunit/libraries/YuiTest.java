@@ -149,6 +149,7 @@ public class YuiTest extends WebDriverTestCase {
     @Alerts(CHROME = {"test_blank_image", "test_insertimage", "test_image_props",
                         "test_close_window",
                         "test_createlink", "test_selected_element", "test_dom_path"},
+            FF = "test_createlink",
             FF68 = "test_createlink",
             FF60 = "test_createlink",
             IE = {"test_bold", "test_createlink"})

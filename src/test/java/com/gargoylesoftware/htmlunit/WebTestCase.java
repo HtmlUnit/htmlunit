@@ -741,15 +741,7 @@ public abstract class WebTestCase {
             final String resourcePrefix, final String resourceSuffix) {
         final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
 
-        URL url = referenceClass.getResource(browserSpecificResource);
-        if (url != null) {
-            return url;
-        }
-
-        final String browserFamily = browserVersion.getNickname().replaceAll("[\\d\\.]", "");
-        final String browserFamilyResource = resourcePrefix + "." + browserFamily + resourceSuffix;
-
-        url = referenceClass.getResource(browserFamilyResource);
+        final URL url = referenceClass.getResource(browserSpecificResource);
         if (url != null) {
             return url;
         }
