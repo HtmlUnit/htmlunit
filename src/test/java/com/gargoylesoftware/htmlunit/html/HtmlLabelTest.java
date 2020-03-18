@@ -64,15 +64,745 @@ public class HtmlLabelTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNone() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item</label>\n"
+            + "  <input type='text' id='text1'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForEmpty() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for=''>Item</label>\n"
+            + "  <input type='text' id='text1'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForUnknown() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='unknwon'>Item</label>\n"
+            + "  <input type='text' id='text1'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForNotLabelable() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='div1'>Item</label>\n"
+            + "  <div id='div1'></div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForButton() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='button1'>Item</label>\n"
+            + "  <button id='button1'></button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("button1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForInput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text1'>Item</label>\n"
+            + "  <input type='text' id='text1'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("text1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForInputHidden() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='hidden1'>Item</label>\n"
+            + "  <input type='hidden' id='hidden1'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForMeter() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='meter1'>Item</label>\n"
+            + "  <meter id='meter1'></meter>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            if (getBrowserVersion().isIE()) {
+                assertNull(label.getReferencedElement());
+            } else {
+                assertEquals("meter1", label.getReferencedElement().getId());
+            }
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForOutput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='output1'>Item</label>\n"
+            + "  <output id='output1'></output>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            if (getBrowserVersion().isIE()) {
+                assertNull(label.getReferencedElement());
+            } else {
+                assertEquals("output1", label.getReferencedElement().getId());
+            }
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForProgress() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='progress1'>Item</label>\n"
+            + "  <progress id='progress1'></progress>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("progress1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForSelect() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='select1'>Item</label>\n"
+            + "  <select id='select1'><option>Option</option></select>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("select1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForTextArea() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text1'>Item</label>\n"
+            + "  <textarea id='text1'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("text1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedNotLabelable() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <div id='div1'></div>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedButton() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <button id='button1'></button>\n"
+            + "    <button id='button2'></button>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("button1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedInput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <input type='text' id='text1'>\n"
+            + "    <input type='text' id='text2'>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("text1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedInputHidden() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <input type='hidden' id='hidden1'>\n"
+            + "    <input type='hidden' id='hidden2'>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedMeter() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <meter id='meter1'></meter>\n"
+            + "    <meter id='meter2'></meter>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            if (getBrowserVersion().isIE()) {
+                assertNull(label.getReferencedElement());
+            } else {
+                assertEquals("meter1", label.getReferencedElement().getId());
+            }
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedOutput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <output id='output1'></output>\n"
+            + "    <output id='output2'></output>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            if (getBrowserVersion().isIE()) {
+                assertNull(label.getReferencedElement());
+            } else {
+                assertEquals("output1", label.getReferencedElement().getId());
+            }
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedProgress() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <progress id='progress1'></progress>\n"
+            + "    <progress id='progress2'></progress>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("progress1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedSelect() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <select id='select1'><option>Option</option></select>\n"
+            + "    <select id='select2'><option>Option</option></select>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("select1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedTextArea() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <textarea id='text1'></textarea>\n"
+            + "    <textarea id='text2'></textarea>\n"
+            + "  </label>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("text1", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForVersusNested() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text2'>Item\n"
+            + "    <input type='text' id='text1'>\n"
+            + "  </label>\n"
+            + "  <input type='text' id='text2'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("text2", label.getReferencedElement().getId());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForUnknownVersusNested() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='unknown'>Item\n"
+            + "    <input type='text' id='text1'>\n"
+            + "  </label>\n"
+            + "  <input type='text' id='text2'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForNotLabelableVersusNested() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='div1'>Item\n"
+            + "    <input type='text' id='text1'>\n"
+            + "  </label>\n"
+            + "  <div id='div1'></div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertNull(label.getReferencedElement());
+        }
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick", "chboxclick"})
-    public void clickFor() throws Exception {
+    @Alerts({"labelclick"})
+    public void clickNone() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
-            + "  <label id='label1' for='checkbox1' onclick='alert(\"labelclick\")'>Toggle checkbox</label>\n"
-            + "  <input type='checkbox' id='checkbox1' onclick='alert(\"chboxclick\")'>\n"
+            + "  <label id='label1' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <input type='text' id='text1' onclick='alert(\"textclick\")'>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick"})
+    public void clickForEmpty() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <input type='text' id='text1' onclick='alert(\"textclick\")'>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick"})
+    public void clickForUnknown() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='unknown' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <input type='text' id='text1' onclick='alert(\"textclick\")'>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick"})
+    public void clickForNotLabelable() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='div1' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <div id='div1' onclick='alert(\"textclick\")'></div>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "textclick"})
+    public void clickForInput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text1' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <input type='text' id='text1' onclick='alert(\"textclick\")'>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "textclick"})
+    public void clickForTextArea() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text1' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <textarea id='text1' onclick='alert(\"textclick\")'></textarea>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "selectclick"})
+    public void clickForSelect() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='select1' onclick='alert(\"labelclick\")'>Click me</label>\n"
+            + "  <select id='select1' onclick='alert(\"selectclick\")'><option>Option</option></select>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick"})
+    public void clickNestedNotLabelable() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <div id='div1' onclick='alert(\"textclick\")'></div>\n"
+            + "  </label>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "text1click"})
+    public void clickNestedInput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <input type='text' id='text1' onclick='alert(\"text1click\")'>\n"
+            + "    <input type='text' id='text2' onclick='alert(\"text2click\")'>\n"
+            + "  </label>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "text1click"})
+    public void clickNestedTextArea() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <textarea id='text1' onclick='alert(\"text1click\")'></textarea>\n"
+            + "    <textarea id='text2' onclick='alert(\"text2click\")'></textarea>\n"
+            + "  </label>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "select1click"})
+    public void clickNestedSelect() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <select id='select1' onclick='alert(\"select1click\")'><option>Option</option></select>\n"
+            + "    <select id='select2' onclick='alert(\"select2click\")'><option>Option</option></select>\n"
+            + "  </label>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick", "text2click"})
+    public void clickForVersusNested() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text2' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <input type='text' id='text1' onclick='alert(\"text1click\")'>\n"
+            + "  </label>\n"
+            + "  <input type='text' id='text2' onclick='alert(\"text2click\")'>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick"})
+    public void clickForUnknownVersusNested() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='unknown' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <input type='text' id='text1' onclick='alert(\"text1click\")'>\n"
+            + "  </label>\n"
+            + "  <input type='text' id='text2' onclick='alert(\"text2click\")'>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick"})
+    public void clickForNotLabelableVersusNested() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='div1' onclick='alert(\"labelclick\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <input type='text' id='text1' onclick='alert(\"text1click\")'>\n"
+            + "  </label>\n"
+            + "  <div id='div1' onclick='alert(\"textclick\")'></div>\n"
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("label1")).click();

@@ -129,15 +129,19 @@ public class HtmlLabel extends HtmlElement {
         final String elementId = getForAttribute();
         if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
             try {
-                return ((HtmlPage) getPage()).getHtmlElementById(elementId);
+                HtmlElement element = ((HtmlPage) getPage()).getHtmlElementById(elementId);
+                if (element instanceof LabelableElement) {
+                    return element;
+                }
             }
             catch (final ElementNotFoundException e) {
                 return null;
             }
-        }
-        for (final DomNode element : getChildren()) {
-            if (element instanceof HtmlInput) {
-                return (HtmlInput) element;
+        } else {
+            for (final DomNode element : getChildren()) {
+                if (element instanceof LabelableElement) {
+                    return (HtmlElement) element;
+                }
             }
         }
         return null;

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlButtonInput extends HtmlInput {
+public class HtmlButtonInput extends HtmlInput implements LabelableElement {
 
     /**
      * Creates an instance.

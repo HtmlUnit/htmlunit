@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlCheckBoxInput extends HtmlInput {
+public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
 
     /**
      * Value to use if no specified <tt>value</tt> attribute.

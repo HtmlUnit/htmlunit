@@ -25,8 +25,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
-public class HtmlRangeInput extends HtmlInput {
+public class HtmlRangeInput extends HtmlInput implements LabelableElement {
 
     /**
      * Creates an instance.

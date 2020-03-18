@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlSubmitInput extends HtmlInput {
+public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
 
     /**
      * Value to use if no specified <tt>value</tt> attribute.

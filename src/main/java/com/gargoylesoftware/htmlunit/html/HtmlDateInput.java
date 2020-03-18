@@ -32,8 +32,9 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
-public class HtmlDateInput extends HtmlInput implements SelectableTextInput {
+public class HtmlDateInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
     private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
