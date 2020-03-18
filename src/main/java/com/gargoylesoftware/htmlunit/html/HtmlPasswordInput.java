@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput {
+public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);

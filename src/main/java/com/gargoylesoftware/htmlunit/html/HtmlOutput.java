@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlOutput extends HtmlElement {
+public class HtmlOutput extends HtmlElement implements LabelableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "output";

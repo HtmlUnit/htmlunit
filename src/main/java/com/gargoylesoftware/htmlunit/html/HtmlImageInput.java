@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlImageInput extends HtmlInput {
+public class HtmlImageInput extends HtmlInput implements LabelableElement {
 
     // For click with x, y position.
     private boolean wasPositionSpecified_;

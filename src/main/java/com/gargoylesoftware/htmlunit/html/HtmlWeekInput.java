@@ -29,8 +29,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "input" where type is "week".
  *
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
-public class HtmlWeekInput extends HtmlInput {
+public class HtmlWeekInput extends HtmlInput implements LabelableElement {
 
     private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-'W'ww");
 

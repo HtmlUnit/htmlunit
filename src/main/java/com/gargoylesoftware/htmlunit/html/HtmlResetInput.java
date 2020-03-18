@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlResetInput extends HtmlInput {
+public class HtmlResetInput extends HtmlInput implements LabelableElement {
 
     /**
      * Value to use if no specified <tt>value</tt> attribute.

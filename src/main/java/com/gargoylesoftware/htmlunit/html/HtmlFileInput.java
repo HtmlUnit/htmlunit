@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class HtmlFileInput extends HtmlInput {
+public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     private String contentType_;
     private byte[] data_;

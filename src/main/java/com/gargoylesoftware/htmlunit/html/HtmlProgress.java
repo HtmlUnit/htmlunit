@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlProgress extends HtmlElement {
+public class HtmlProgress extends HtmlElement implements LabelableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "progress";

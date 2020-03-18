@@ -28,8 +28,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "input" where type is "time".
  *
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
-public class HtmlTimeInput extends HtmlInput {
+public class HtmlTimeInput extends HtmlInput implements LabelableElement {
 
     private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
 

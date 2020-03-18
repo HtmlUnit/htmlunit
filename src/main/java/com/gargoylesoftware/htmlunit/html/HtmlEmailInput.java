@@ -29,8 +29,9 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
-public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
+public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);

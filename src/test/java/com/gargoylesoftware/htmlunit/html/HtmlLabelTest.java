@@ -26,7 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -213,9 +212,9 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-            	assertNull(label.getReferencedElement());
+                assertNull(label.getReferencedElement());
             } else {
-            	assertEquals("meter1", label.getReferencedElement().getId());
+                assertEquals("meter1", label.getReferencedElement().getId());
             }
         }
     }
@@ -236,9 +235,9 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-            	assertNull(label.getReferencedElement());
+                assertNull(label.getReferencedElement());
             } else {
-            	assertEquals("output1", label.getReferencedElement().getId());
+                assertEquals("output1", label.getReferencedElement().getId());
             }
         }
     }
@@ -258,30 +257,30 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             HtmlLabel label = page.getHtmlElementById("label1");
-        	assertEquals("progress1", label.getReferencedElement().getId());
+            assertEquals("progress1", label.getReferencedElement().getId());
         }
     }
 
     /**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void getReferencedElementForSelect() throws Exception {
-	    final String html = "<html>\n"
-	        + "<body>\n"
-	        + "  <label id='label1' for='select1'>Item</label>\n"
-	        + "  <select id='select1'><option>Option</option></select>\n"
-	        + "</body></html>";
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementForSelect() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='select1'>Item</label>\n"
+            + "  <select id='select1'><option>Option</option></select>\n"
+            + "</body></html>";
 
-	    final WebDriver driver = loadPageWithAlerts2(html);
-	    if (driver instanceof HtmlUnitDriver) {
-	        final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-	        HtmlLabel label = page.getHtmlElementById("label1");
-	        assertEquals("select1", label.getReferencedElement().getId());
-	    }
-	}
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("select1", label.getReferencedElement().getId());
+        }
+    }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -320,7 +319,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         }
     }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -383,7 +382,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         }
     }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -401,14 +400,14 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-            	assertNull(label.getReferencedElement());
+                assertNull(label.getReferencedElement());
             } else {
-            	assertEquals("meter1", label.getReferencedElement().getId());
+                assertEquals("meter1", label.getReferencedElement().getId());
             }
         }
     }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -426,14 +425,14 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-            	assertNull(label.getReferencedElement());
+                assertNull(label.getReferencedElement());
             } else {
-            	assertEquals("output1", label.getReferencedElement().getId());
+                assertEquals("output1", label.getReferencedElement().getId());
             }
         }
     }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -450,32 +449,32 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             HtmlLabel label = page.getHtmlElementById("label1");
-        	assertEquals("progress1", label.getReferencedElement().getId());
+            assertEquals("progress1", label.getReferencedElement().getId());
         }
     }
 
     /**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void getReferencedElementNestedSelect() throws Exception {
-	    final String html = "<html>\n"
-	        + "<body>\n"
-	        + "  <label id='label1'>Item\n"
-	        + "    <select id='select1'><option>Option</option></select>\n"
-	        + "    <select id='select2'><option>Option</option></select>\n"
-	        + "  </label>\n"
-	        + "</body></html>";
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getReferencedElementNestedSelect() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <label id='label1'>Item\n"
+            + "    <select id='select1'><option>Option</option></select>\n"
+            + "    <select id='select2'><option>Option</option></select>\n"
+            + "  </label>\n"
+            + "</body></html>";
 
-	    final WebDriver driver = loadPageWithAlerts2(html);
-	    if (driver instanceof HtmlUnitDriver) {
-	        final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-	        HtmlLabel label = page.getHtmlElementById("label1");
-	        assertEquals("select1", label.getReferencedElement().getId());
-	    }
-	}
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            HtmlLabel label = page.getHtmlElementById("label1");
+            assertEquals("select1", label.getReferencedElement().getId());
+        }
+    }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
