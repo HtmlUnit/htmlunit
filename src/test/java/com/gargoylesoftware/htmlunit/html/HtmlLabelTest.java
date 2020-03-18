@@ -77,7 +77,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -96,7 +96,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -115,7 +115,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -134,7 +134,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -153,7 +153,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("button1", label.getReferencedElement().getId());
         }
     }
@@ -172,7 +172,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("text1", label.getReferencedElement().getId());
         }
     }
@@ -191,7 +191,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -210,10 +210,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
                 assertNull(label.getReferencedElement());
-            } else {
+            }
+            else {
                 assertEquals("meter1", label.getReferencedElement().getId());
             }
         }
@@ -233,10 +234,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
                 assertNull(label.getReferencedElement());
-            } else {
+            }
+            else {
                 assertEquals("output1", label.getReferencedElement().getId());
             }
         }
@@ -256,7 +258,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("progress1", label.getReferencedElement().getId());
         }
     }
@@ -275,7 +277,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("select1", label.getReferencedElement().getId());
         }
     }
@@ -294,7 +296,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("text1", label.getReferencedElement().getId());
         }
     }
@@ -314,7 +316,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -335,7 +337,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("button1", label.getReferencedElement().getId());
         }
     }
@@ -356,7 +358,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("text1", label.getReferencedElement().getId());
         }
     }
@@ -377,7 +379,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -398,10 +400,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
                 assertNull(label.getReferencedElement());
-            } else {
+            }
+            else {
                 assertEquals("meter1", label.getReferencedElement().getId());
             }
         }
@@ -423,10 +426,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
                 assertNull(label.getReferencedElement());
-            } else {
+            }
+            else {
                 assertEquals("output1", label.getReferencedElement().getId());
             }
         }
@@ -448,7 +452,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("progress1", label.getReferencedElement().getId());
         }
     }
@@ -469,7 +473,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("select1", label.getReferencedElement().getId());
         }
     }
@@ -490,7 +494,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("text1", label.getReferencedElement().getId());
         }
     }
@@ -511,7 +515,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertEquals("text2", label.getReferencedElement().getId());
         }
     }
@@ -532,7 +536,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -553,7 +557,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            HtmlLabel label = page.getHtmlElementById("label1");
+            final HtmlLabel label = page.getHtmlElementById("label1");
             assertNull(label.getReferencedElement());
         }
     }
@@ -562,7 +566,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickNone() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -578,7 +582,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickForEmpty() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -594,7 +598,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickForUnknown() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -610,7 +614,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickForNotLabelable() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -674,7 +678,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickNestedNotLabelable() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -773,7 +777,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickForUnknownVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -793,7 +797,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickForNotLabelableVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"

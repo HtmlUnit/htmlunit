@@ -45,7 +45,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement, LabelableElement, FormFieldWithNameHistory {
+public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
+                LabelableElement, FormFieldWithNameHistory {
 
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 

@@ -49,7 +49,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement, LabelableElement, FormFieldWithNameHistory {
+public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement,
+                LabelableElement, FormFieldWithNameHistory {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";

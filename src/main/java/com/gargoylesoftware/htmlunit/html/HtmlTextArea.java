@@ -51,7 +51,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, LabelableElement, SelectableTextInput,
+public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement,
+                LabelableElement, SelectableTextInput,
     FormFieldWithNameHistory {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
