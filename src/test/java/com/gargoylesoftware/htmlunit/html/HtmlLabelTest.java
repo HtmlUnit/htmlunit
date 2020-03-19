@@ -24,6 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -622,7 +623,9 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("labelclick")
+    @Alerts(DEFAULT = "labelclick",
+            IE = "labelclick;textclick")
+    @HtmlUnitNYI(IE = "labelclick")
     public void clickForNotLabelable() throws Exception {
         final String html =
               "  <label id='label1' for='div1' onclick='log(\"labelclick\")'>Click me</label>\n"
@@ -841,7 +844,9 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("labelclick")
+    @Alerts(DEFAULT = "labelclick",
+            IE = "labelclick;textclick")
+    @HtmlUnitNYI(IE = "labelclick")
     public void clickForNotLabelableVersusNested() throws Exception {
         final String html =
               "  <label id='label1' for='div1' onclick='log(\"labelclick\")'>Click me"
@@ -1622,7 +1627,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
     }
 
-    private String generatePage(String snippet) {
+    private String generatePage(final String snippet) {
         return "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
