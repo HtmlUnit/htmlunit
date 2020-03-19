@@ -74,7 +74,7 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
-    void clearRect(int x, int y, int w, int h);
+    void clearRect(double x, double y, double w, double h);
 
     /**
      * Draws images onto the context.
@@ -133,7 +133,7 @@ public interface RenderingBackend {
      * @param x the x
      * @param y the y
      */
-    void fillText(String text, int x, int y);
+    void fillText(String text, double x, double y);
 
     /**
      * Creates a byte array containing the (4) color values of all pixels.

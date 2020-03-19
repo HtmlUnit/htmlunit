@@ -229,7 +229,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void clearRect(final int x, final int y, final int w, final int h) {
+    public void clearRect(final double x, final double y, final double w, final double h) {
         getRenderingBackend().clearRect(x, y, w, h);
     }
 
@@ -486,7 +486,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the y
      */
     @JsxFunction
-    public void fillText(final String text, final int x, final int y) {
+    public void fillText(final String text, final double x, final double y) {
         getRenderingBackend().fillText(text, x, y);
     }
 

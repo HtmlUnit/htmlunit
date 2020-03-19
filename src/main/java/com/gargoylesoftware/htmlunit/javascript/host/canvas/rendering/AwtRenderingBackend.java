@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
@@ -235,6 +235,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      * @param imageHeight the height
      */
     public AwtRenderingBackend(final int imageWidth, final int imageHeight) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("AwtRenderingBackend(" + imageWidth + ", " + imageHeight + ")");
+        }
+
         image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D_ = image_.createGraphics();
 
@@ -242,7 +246,13 @@ public class AwtRenderingBackend implements RenderingBackend {
         graphics2D_.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         graphics2D_.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        reset();
+        // reset
+        fillColor_ = Color.black;
+        strokeColor_ = Color.black;
+        lineWidth_ = 1;
+        transformation_ = new AffineTransform();
+        setGlobalAlpha(1.0);
+        graphics2D_.setClip(null);
 
         graphics2D_.setBackground(new Color(0f, 0f, 0f, 0f));
         graphics2D_.setColor(Color.black);
@@ -250,14 +260,6 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         subPaths_ = new ArrayList<>();
         savedStates_ = new ArrayDeque<>();
-    }
-
-    private void reset() {
-        fillColor_ = Color.black;
-        strokeColor_ = Color.black;
-        lineWidth_ = 1;
-        transformation_ = new AffineTransform();
-        setGlobalAlpha(1.0);
     }
 
     /**
@@ -285,6 +287,9 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void beginPath() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("beginPath()");
+        }
         subPaths_.clear();
     }
 
@@ -296,6 +301,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             final double radiusX, final double radiusY,
             final double rotation, final double startAngle, final double endAngle,
             final boolean anticlockwise) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("ellipse()");
+        }
+
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
@@ -322,6 +331,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void bezierCurveTo(final double cp1x, final double cp1y,
             final double cp2x, final double cp2y, final double x, final double y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("bezierCurveTo()");
+        }
+
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D cp1 = transformation_.transform(new Point2D.Double(cp1x, cp1y), null);
@@ -337,6 +350,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void arc(final double x, final double y, final double radius, final double startAngle,
             final double endAngle, final boolean anticlockwise) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("arc()");
+        }
+
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
@@ -358,10 +375,14 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void clearRect(final int x, final int y, final int w, final int h) {
+    public void clearRect(final double x, final double y, final double w, final double h) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clearRect(" + x + ", " + y + ", " + w + ", " + h + ")");
+        }
+
         graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(fillColor_);
-        graphics2D_.clearRect(x, y, w, h);
+        graphics2D_.clearRect((int) x, (int) y, (int) w, (int) h);
     }
 
     /**
@@ -369,6 +390,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("drawImage()");
+        }
+
         if (imageReader.getNumImages(true) != 0) {
             final BufferedImage img = imageReader.read(0);
             graphics2D_.setTransform(transformation_);
@@ -399,7 +424,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void fill() {
-        graphics2D_.setTransform(new AffineTransform());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("fill()");
+        }
+
         graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(fillColor_);
         for (Path2D path2d : subPaths_) {
@@ -412,6 +440,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void fillRect(final int x, final int y, final int w, final int h) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("fillRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
+        }
+
         graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(fillColor_);
         graphics2D_.fillRect(x, y, w, h);
@@ -421,19 +453,14 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void fillText(final String text, final int x, final int y) {
-        graphics2D_.setTransform(new AffineTransform());
-
-        final FontMetrics metrics = graphics2D_.getFontMetrics();
-        final int width = metrics.stringWidth(text);
-        final int ascent = metrics.getAscent();
-
-        final float posX = x - width / 2;
-        final float posY = y + ascent / 2;
+    public void fillText(final String text, final double x, final double y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("fillText('" + text + "', "  + x + ", "  + y + ")");
+        }
 
         graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(fillColor_);
-        graphics2D_.drawString(text, posX, posY);
+        graphics2D_.drawString(text, (int) x, (int) y);
     }
 
     /**
@@ -460,6 +487,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void lineTo(final double x, final double y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("lineTo(" + x + ", " + y + ")");
+        }
+
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
@@ -472,6 +503,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void moveTo(final double x, final double y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("moveTo(" + x + ", " + y + ")");
+        }
+
         final Path2D subPath = new Path2D.Double();
         final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
         subPath.moveTo(p.getX(), p.getY());
@@ -532,6 +567,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void quadraticCurveTo(final double cpx, final double cpy,
                     final double x, final double y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("quadraticCurveTo()");
+        }
+
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D cp = transformation_.transform(new Point2D.Double(cpx, cpy), null);
@@ -545,6 +584,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void rect(final double x, final double y, final double w, final double h) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("rect()");
+        }
+
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
@@ -610,6 +653,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void restore() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("restore()");
+        }
+
         if (savedStates_.isEmpty()) {
             return;
         }
@@ -622,6 +669,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void rotate(final double angle) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("rotate()");
+        }
+
         transformation_.rotate(angle);
     }
 
@@ -630,8 +681,11 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void save() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("save()");
+        }
+
         savedStates_.push(new SaveState(this));
-        reset();
     }
 
     /**
@@ -648,6 +702,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void setTransform(final double m11, final double m12,
                     final double m21, final double m22, final double dx, final double dy) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("setTransform(" + m11 + ", "  + m12 + ", "  + m21 + ", "  + m22 + ", "  + dx + ", "  + dy + ")");
+        }
+
         transformation_ = new AffineTransform(m11, m12, m21, m22, dx, dy);
     }
 
@@ -656,6 +714,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void stroke() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("stroke()");
+        }
+
         graphics2D_.setTransform(new AffineTransform());
         graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(strokeColor_);
@@ -669,6 +731,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void strokeRect(final int x, final int y, final int w, final int h) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
+        }
+
         graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(strokeColor_);
         graphics2D_.drawRect(x, y, w, h);
@@ -680,6 +746,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void transform(final double m11, final double m12,
                     final double m21, final double m22, final double dx, final double dy) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("transform()");
+        }
+
         transformation_.concatenate(new AffineTransform(m11, m12, m21, m22, dx, dy));
     }
 
@@ -688,6 +758,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void translate(final int x, final int y) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("translate()");
+        }
+
         transformation_.translate(x, y);
     }
 
@@ -696,6 +770,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     public void clip(final RenderingBackend.WindingRule windingRule,
             final com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D path) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clip(" + windingRule + ", " + path + ")");
+        }
+
         if (path == null && subPaths_.isEmpty()) {
             graphics2D_.setClip(null);
             return;
@@ -728,6 +806,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void closePath() {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("closePath()");
+        }
+
         if (subPaths_.isEmpty()) {
             return;
         }
@@ -749,6 +831,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         private int lineWidth_;
         private Color fillColor_;
         private Color strokeColor_;
+        private Shape clip_;
 
         private SaveState(final AwtRenderingBackend backend) {
             transformation_ = backend.transformation_;
@@ -756,6 +839,8 @@ public class AwtRenderingBackend implements RenderingBackend {
             lineWidth_ = backend.lineWidth_;
             fillColor_ = backend.fillColor_;
             strokeColor_ = backend.strokeColor_;
+
+            clip_ = backend.graphics2D_.getClip();
         }
 
         private void applyOn(final AwtRenderingBackend backend) {
@@ -764,6 +849,8 @@ public class AwtRenderingBackend implements RenderingBackend {
             backend.lineWidth_ = lineWidth_;
             backend.fillColor_ = fillColor_;
             backend.strokeColor_ = strokeColor_;
+
+            backend.graphics2D_.setClip(clip_);
         }
     }
 }

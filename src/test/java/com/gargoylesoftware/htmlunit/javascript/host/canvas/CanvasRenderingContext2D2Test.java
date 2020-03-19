@@ -1246,4 +1246,212 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //
 //        loadPageWithAlerts(html);
 //    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts(DEFAULT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAA"
+//            + "AiklEQVR42mNgYGD4T2UMBygcagBaGPgfhH2A+AsQ7wdiURyKSoD4PhD/AmIPQgbOBmImII4H4mk4"
+//            + "FHUAMRPIMJChhAyUhHLZgPgDDkUsyHwCBqII/cKmCB8fmwv5kFz4khoG9kC5oDDso4aBaUD8A4g3I"
+//            + "FxLmoFIqfw/tXMKyGWDO6eMGjhqIDEAALK8kB4mQXliAAAAAElFTkSuQmCC",
+//            IE = "no ctor")
+//    public void fillTextAndTransform() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+//
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.moveTo(0, 0);\n"
+//            + "      context.lineTo(20, 0);\n"
+//            + "      context.moveTo(2, 0);\n"
+//            + "      context.lineTo(2, 20);\n"
+//            + "      context.moveTo(0, 10);\n"
+//            + "      context.lineTo(20, 10);\n"
+//            + "      context.stroke();\n"
+//
+//            + "      context.fillStyle = 'blue';\n"
+//            + "      context.fillText('p', 2, 10);\n"
+//
+//            + "      context.fillStyle = 'red';\n"
+//            + "      context.setTransform(1.0, 0.0, -0.0, 1.0, 11.0, 10.0);\n"
+//            + "      context.fillText('n', 0, 0);\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXElEQVR42tXUSwrAIAxFUZd2d/6WVh"
+//            + "12IKLxQmkg03BCPq39KTLyKWZmBbkoiKnMqm1MXUWZneFg6k6UOVkhTN2OMpVFx9StlLk5R0zdTBnj"
+//            + "aWDq3sqYrw1T92109w9/gbiYNMcAAAAASUVORK5CYII=")
+//    public void pathFill() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.moveTo(2, 2);\n"
+//            + "      context.lineTo(10, 18);\n"
+//            + "      context.lineTo(18, 2);\n"
+//            + "      context.closePath();\n"
+//            + "      context.fill();\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbUlEQVR42mNgGErgMhD/Jx"
+//            + "KvJsbAGiINew3EEsQYqEGkgRHU9PZqUsOxhoRwJMoiDTIMIximl0k0MIKa3l5NzdgmOvkg"
+//            + "e3sHtZJPDZILLlMj+WgguaCGEq8SE6YR1Cw4VlOrJKqhhldxhekQBwCxR4E7tKSxGgAAAA"
+//            + "BJRU5ErkJggg==")
+//    public void pathFillTransform() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.moveTo(2, 2);\n"
+//            + "      context.lineTo(6, 14);\n"
+//            + "      context.lineTo(14, 2);\n"
+//            + "      context.closePath();\n"
+//
+//            + "      context.setTransform(1.0, 0.0, 0.0, 1.0, 4.0, 4.0);\n"
+//            + "      context.moveTo(2, 2);\n"
+//            + "      context.lineTo(6, 14);\n"
+//            + "      context.lineTo(14, 2);\n"
+//            + "      context.closePath();\n"
+//
+//            + "      context.fill();\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAhElEQVR42t3SQQ3AIAwF0MqYBBzMCmLqqAbmAxmI6BoOO8AI"
+//            + "H8pla/KP/eEBRF+aZFEwghQyWJYtB1IYwMK4ky2z9/iwrVkVjwzZjJdlHdxpYQe8MO5ky9Rrs5PasE+iy0Ot2eUD22Japdbs"
+//            + "cgJbZg+1GVsOHmqvNK1Se4Xspr6wI/1ibuTa0+hbsogUAAAAAElFTkSuQmCC")
+//    public void pathFillTransform2() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.beginPath();\n"
+//            + "      context.moveTo(2, 2);\n"
+//            + "      context.lineTo(6, 14);\n"
+//            + "      context.lineTo(14, 2);\n"
+//            + "      context.closePath();\n"
+//            + "      context.fill();\n"
+//
+//            + "      context.setTransform(1.0, 0.0, 0.0, 1.0, 4.0, 4.0);\n"
+//            + "      context.fillStyle = 'red';"
+//            + "      context.beginPath();\n"
+//            + "      context.moveTo(2, 2);\n"
+//            + "      context.lineTo(6, 14);\n"
+//            + "      context.lineTo(14, 2);\n"
+//            + "      context.closePath();\n"
+//            + "      context.fill();\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQklEQVR42mNgGAXUBw0M/1HwoDUQaBIKHkQGQgHC"
+//            + "IHSzB4uBSEYPegOxBwXVI4v6sU+tDEB1A3FmUYoNprqB9CqdACh5i4mujJYUAAAAAElFTkSuQmCC")
+//    public void saveRestore() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//
+//            + "      context.fillStyle = 'green';\n"
+//            + "      context.save();\n"
+//            + "      context.fillRect(4, 4, 4, 4);\n"
+//
+//            + "      context.fillStyle = 'red';\n"
+//            + "      context.fillRect(6, 6, 4, 4);\n"
+//            + "      context.save();\n"
+//
+//            + "      context.fillStyle = 'blue';\n"
+//            + "      context.fillRect(8, 8, 4, 4);\n"
+//
+//            + "      context.restore();\n"
+//            + "      context.fillRect(12, 12, 4, 4);\n"
+//
+//            + "      context.restore();\n"
+//            + "      context.fillRect(14, 14, 4, 4);\n"
+//
+//            + "      context.restore();\n"
+//            + "      context.fillRect(16, 16, 4, 4);\n"
+//
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
 }
