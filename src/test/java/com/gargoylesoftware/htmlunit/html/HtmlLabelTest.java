@@ -564,11 +564,27 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick"})
+    @Alerts("labelclick")
     public void clickNone() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")'>Click me</label>\n"
             + "  <input type='text' id='text1' onclick='log(\"textclick\")'>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick:label1", "parentclick:label1"})
+    public void clickNoneEventBubbling() throws Exception {
+        final String html =
+              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
+            + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)'>Click me</label>\n"
+            + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)'>\n"
+            + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -662,6 +678,22 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"labelclick:label1", "parentclick:label1", "textclick:text1", "parentclick:text1"})
+    public void clickForEventBubbling() throws Exception {
+        final String html =
+              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
+            + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)'>Click me</label>\n"
+            + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)'>\n"
+            + "  </div>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("labelclick")
     public void clickNestedNotLabelable() throws Exception {
         final String html =
@@ -724,6 +756,46 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "    <select id='select1' onclick='log(\"select1click\")'><option>Option</option></select>\n"
             + "    <select id='select2' onclick='log(\"select2click\")'><option>Option</option></select>\n"
             + "  </label>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick:label1", "parentclick:label1", "text1click:text1", "labelclick:text1", "parentclick:text1"})
+    public void clickNestedEventBubbling() throws Exception {
+        final String html =
+              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
+            + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)'>\n"
+            + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)'>\n"
+            + "    </label>\n"
+            + "  </div>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"labelclick:label1", "parentclick:label1", "text1click:text1", "labelclick:text1", "parentclick:text1"})
+    public void clickForAndNestedEventBubbling() throws Exception {
+        final String html =
+              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
+            + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)'>\n"
+            + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)'>\n"
+            + "    </label>\n"
+            + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
