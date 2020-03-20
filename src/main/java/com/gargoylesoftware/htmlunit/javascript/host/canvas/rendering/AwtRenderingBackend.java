@@ -18,6 +18,8 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Toolkit;
@@ -75,6 +77,20 @@ public class AwtRenderingBackend implements RenderingBackend {
 
     static {
 System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
+
+GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+GraphicsDevice[] devices = env.getScreenDevices();
+int sequence = 1;
+
+for (GraphicsDevice device : devices) {
+    System.out.println("Screen Number [" + (sequence++) + "]");
+    System.out.println("Width       : " + device.getDisplayMode().getWidth());
+    System.out.println("Height      : " + device.getDisplayMode().getHeight());
+    System.out.println("Refresh Rate: " + device.getDisplayMode().getRefreshRate());
+    System.out.println("Bit Depth   : " + device.getDisplayMode().getBitDepth());
+    System.out.println("");
+}
+
         // see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
 
         // CSS Level 1
