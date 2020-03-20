@@ -1198,4 +1198,142 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     requestedParams.get(i).getName() + '#' + requestedParams.get(i).getValue());
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"button#foo", "textfield#"})
+    public void submit_NoDefaultValue() throws Exception {
+        final String controls =
+                "  <input type='text' name='textfield'/>\n"
+                + "  <input type='submit' id='mySubmit' name='button' value='foo'/>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("button#foo")
+    public void submit_NoNameOnControl() throws Exception {
+        final String controls =
+                "  <input type='text' id='textfield' value='blah' />\n"
+                + "  <input type='submit' id='mySubmit' name='button' value='foo'/>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("textfield#blah")
+    public void submit_NoNameOnButton() throws Exception {
+        final String controls =
+                "  <input type='text' id='textfield' value='blah' name='textfield' />\n"
+                + "  <button type='submit' id='mySubmit' value='Go'>Go</button>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"submit#submit", "textfield#blah", "textfield2#blaha"})
+    public void submit_NestedInput() throws Exception {
+        final String controls =
+                "  <table><tr><td>\n"
+                + "    <input type='text' name='textfield' value='blah'/>\n"
+                + "    </td><td>\n"
+                + "    <input type='text' name='textfield2' value='blaha'/>\n"
+                + "    </td></tr>\n"
+
+                + "    <tr><td>\n"
+                + "    <input type='submit' name='submit' id='mySubmit' value='submit'/>\n"
+                + "    </td><td></td></tr>\n"
+                + "  </table>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("submit#submit")
+    public void submit_IgnoresDisabledControls() throws Exception {
+        final String controls =
+                "  <input type='text' name='textfield' value='blah' disabled />\n"
+                + "  <input type='submit' name='submit' id='mySubmit' value='submit'/>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hidden#blah", "submit#submit"})
+    public void submit_IgnoresDisabledHiddenControls() throws Exception {
+        final String controls =
+                "  <input type='text' name='textfield' value='blah' disabled />\n"
+                + "  <input type='hidden' name='disabledHidden' value='blah' disabled />\n"
+                + "  <input type='hidden' name='hidden' value='blah' />\n"
+                + "  <input type='submit' name='submit' id='mySubmit' value='submit'/>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * Reset buttons should not be submitted.
+     * @see <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2">Spec</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("submit#submit")
+    public void submit_IgnoresResetControl() throws Exception {
+        final String controls =
+                "  <input type='reset' name='reset' value='reset'/>\n"
+                + "  <input type='submit' name='submit' id='mySubmit' value='submit'/>\n";
+
+        submitParams(controls);
+    }
+
+    /**
+     * Reset buttons should not be submitted.
+     * @see <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2">Spec</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("submit#submit")
+    public void submit_IgnoresResetButtonControl() throws Exception {
+        final String controls =
+                "  <button type='reset' name='buttonreset' value='buttonreset'>Reset</button>\n"
+                + "  <input type='submit' name='submit' id='mySubmit' value='submit'/>\n";
+
+        submitParams(controls);
+    }
+
+    private void submitParams(final String controls) throws Exception {
+        final String html = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' method='post'>\n"
+            + controls
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ById("mySubmit")).click();
+
+        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+
+        assertEquals(getExpectedAlerts().length, requestedParams.size());
+
+        for (int i = 0; i < requestedParams.size(); i++) {
+            assertEquals(getExpectedAlerts()[i],
+                    requestedParams.get(i).getName() + '#' + requestedParams.get(i).getValue());
+        }
+    }
 }
