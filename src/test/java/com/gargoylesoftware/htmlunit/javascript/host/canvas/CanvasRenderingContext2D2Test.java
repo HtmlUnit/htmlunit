@@ -250,6 +250,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "7CcQjvjwZFxhyQINzxQgng/E14H4OxEG+pCaAhyg4TwfGhnoBkpQmmZ5gNgFiCuAePrQyr8APsZfqrO3m6kAAAAASU"
                 + "VORK5CYII=")
     public void rotateTranslateFillRect() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -280,6 +282,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "s2AzdDsQ/ybTUAt84akDxDnQcDpNpCUVpKQCASA2IGDJYUrTrgA0GYEsWQ3E54FYZAQWCgBOMlmQm3"
                 + "NMhgAAAABJRU5ErkJggg==")
     public void transformTranslateFillRect() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -436,6 +440,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "ajDVgAY0U1DVlYepHes1QDybmgbaAPFpahqoAM1FVAM80BKLquD/4C+lAU3wGvNN"
             + "UrLUAAAAAElFTkSuQmCC")
     public void moveToQuadraticCurveToStroke() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -707,6 +713,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "dTFGaSmSVzptACao+aTmmuGKQAA9NQeZdHpsYYAAAAASUVORK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseStroke() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -868,6 +876,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "IccBlR9YF1I9DEGxeBopljmgLgMZdp2SpNMANQCWDrvJNWwUDBAAAFFYGYXPy8e+AAAAAElF"
             + "TkSuQmCC")
     public void arcCircleAnticlockwiseStroke() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -896,6 +906,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "CSWGfQbi/2j4N9BQC3IM3I3FMBg+TI6Bz/EY+H5QGEh1L1M5UhCGglz6GppsDpNv2CgYPgAA3MZQoURRzTMAAAAA"
             + "SUVORK5CYII=")
     public void arcFillPath() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -927,6 +939,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "exGfidAgP/YzOQ3PDbDMQ22Ay8TIIhIN9Mxx4ZpCWZ50BcA8QixGQ1fMkG5PoUcMInCTQwrMaSE1zw5wbC+fg01"
             + "PsaDKNgQAAAd7buKpKXkaMAAAAASUVORK5CYII=")
     public void arcFillPathAngle() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1014,6 +1028,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
     @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
             + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
     public void closePathPointOnly() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1363,6 +1379,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "12IKLxQmkg03BCPq39KTLyKWZmBbkoiKnMqm1MXUWZneFg6k6UOVkhTN2OMpVFx9StlLk5R0zdTBnj"
             + "aWDq3sqYrw1T92109w9/gbiYNMcAAAAASUVORK5CYII=")
     public void pathFill() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1397,6 +1415,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "e3sHtZJPDZILLlMj+WgguaCGEq8SE6YR1Cw4VlOrJKqhhldxhekQBwCxR4E7tKSxGgAAAA"
             + "BJRU5ErkJggg==")
     public void pathFillTransform() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
