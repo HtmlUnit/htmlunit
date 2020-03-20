@@ -471,6 +471,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "NgGAWjYHAAByBuoCIGE/+piIeAgVQPw1EwCkgEAB1tTchSTfsUAAAAAElF"
             + "TkSuQmCC")
     public void lineWidthMoveToLineToStroke() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
