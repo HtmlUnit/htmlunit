@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -31,6 +35,20 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
+
+    private static boolean SKIP_ = false;
+
+    {
+        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice[] devices = env.getScreenDevices();
+
+        if (devices.length == 1) {
+            final GraphicsDevice device = devices[0];
+            if (device.getDisplayMode().getBitDepth() < 0) {
+                SKIP_ = true;
+            }
+        }
+    }
 
     /**
      * @throws Exception if the test fails
@@ -200,6 +218,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR42mNg"
                 + "GAUjF/ynAI8aOFQMHAWjgJ4AABYtWaeMf5H/AAAAAElFTkSuQmCC")
     public void translateFillRect() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -468,6 +488,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "aslkqIHYMMySElIMdMBjIDJWIcXQx0QYmEOKgdOJMHA/KQYGEOltGWIN5AHizUD8nICBGeTEugzUxc1YLFlPrbQK"
             + "s6RitCwYBVQAABQ1QYDFZuLyAAAAAElFTkSuQmCC")
     public void setTransformFillRect() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -553,6 +575,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "Dmob9h6IbwPxaiCuAeIAIFag1FADII4B4n4g3g3Er6EWHQbiyUCcAcQWQMxDiUUSQOwB"
             + "xCVAvBiILwPxZ0oNRQc8o0lupAEAZ+MMgTDcUPEAAAAASUVORK5CYII=")
     public void transformMoveToLineToStroke() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -613,6 +637,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "CVDXngdiD2q5FpS0CqDhux+ITahlMCgFNENTxGZoCqEKAKXZyVAXUzVj8DCMglEwEgAA1S0T6X"
             + "hdMmMAAAAASUVORK5CYII=")
     public void rotateMoveToLineToStroke() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -706,6 +732,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "RygAA45xHqtsvRxIAAAAASUVORK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseFill() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -914,6 +942,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "IMt1+FxClutwuYYi12FzEUWuQ3elBzVch+zK/9RwHbIr/1PLdTBgMzzKPwBs1inGPcAUbg"
             + "AAAABJRU5ErkJggg==")
     public void closePath() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1025,6 +1055,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "8hkIuZIcF+N0pQcO2wnJ43Tlfzy2E5LH6sr/eGwnJI8V2FAoPwpGwSjACwDUtCTLu8r4"
             + "+AAAAABJRU5ErkJggg==")
     public void closePathClosesOnlyLastSubpath() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1227,6 +1259,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "lkGDh9wJINlQsHUJgCg4Bh2AEAu6/n02vT9rUAAAAASUVORK5CYII=",
             IE = "no ctor")
     public void clipWindingEvenOdd() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
