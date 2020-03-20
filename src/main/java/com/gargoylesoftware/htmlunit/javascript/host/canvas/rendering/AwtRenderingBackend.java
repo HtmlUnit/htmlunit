@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
@@ -55,9 +56,11 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class AwtRenderingBackend implements RenderingBackend {
 
     private static final Log LOG = LogFactory.getLog(AwtRenderingBackend.class);
+    private static int ID_GENERATOR_ = 0;
 
     private static final Map<String, Color> knownColors = new HashMap<>();
 
+    private final int id_;
     private final BufferedImage image_;
     private final Graphics2D graphics2D_;
 
@@ -71,6 +74,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     private Deque<SaveState> savedStates_;
 
     static {
+System.out.println(Toolkit.getDefaultToolkit().getScreenSize());
         // see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
 
         // CSS Level 1
@@ -235,8 +239,9 @@ public class AwtRenderingBackend implements RenderingBackend {
      * @param imageHeight the height
      */
     public AwtRenderingBackend(final int imageWidth, final int imageHeight) {
+        id_ = ID_GENERATOR_++;
         if (LOG.isDebugEnabled()) {
-            LOG.debug("AwtRenderingBackend(" + imageWidth + ", " + imageHeight + ")");
+            LOG.debug("[" + id_ + "] AwtRenderingBackend(" + imageWidth + ", " + imageHeight + ")");
         }
 
         image_ = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
@@ -275,6 +280,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void setGlobalAlpha(final double globalAlpha) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setGlobalAlpha(" + globalAlpha + ")");
+        }
+
         if (globalAlpha >= 0 && globalAlpha <= 1) {
             globalAlpha_ = (float) globalAlpha;
             final AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, globalAlpha_);
@@ -288,7 +297,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void beginPath() {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("beginPath()");
+            LOG.debug("[" + id_ + "] beginPath()");
         }
         subPaths_.clear();
     }
@@ -302,7 +311,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             final double rotation, final double startAngle, final double endAngle,
             final boolean anticlockwise) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("ellipse()");
+            LOG.debug("[" + id_ + "] ellipse()");
         }
 
         final Path2D subPath = getCurrentSubPath();
@@ -332,7 +341,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void bezierCurveTo(final double cp1x, final double cp1y,
             final double cp2x, final double cp2y, final double x, final double y) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("bezierCurveTo()");
+            LOG.debug("[" + id_ + "] bezierCurveTo()");
         }
 
         final Path2D subPath = getCurrentSubPath();
@@ -351,7 +360,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void arc(final double x, final double y, final double radius, final double startAngle,
             final double endAngle, final boolean anticlockwise) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("arc()");
+            LOG.debug("[" + id_ + "] arc()");
         }
 
         final Path2D subPath = getCurrentSubPath();
@@ -377,12 +386,12 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void clearRect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("clearRect(" + x + ", " + y + ", " + w + ", " + h + ")");
+            LOG.debug("[" + id_ + "] clearRect(" + x + ", " + y + ", " + w + ", " + h + ")");
         }
 
-        graphics2D_.setTransform(transformation_);
-        graphics2D_.setColor(fillColor_);
-        graphics2D_.clearRect((int) x, (int) y, (int) w, (int) h);
+        graphics2D_.setColor(Color.WHITE);
+        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
+        graphics2D_.fill(transformation_.createTransformedShape(rect));
     }
 
     /**
@@ -391,14 +400,21 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("drawImage()");
+            LOG.debug("[" + id_ + "] drawImage()");
         }
 
         if (imageReader.getNumImages(true) != 0) {
             final BufferedImage img = imageReader.read(0);
-            graphics2D_.setTransform(transformation_);
-            graphics2D_.setColor(fillColor_);
-            graphics2D_.drawImage(img, dxI, dyI, image_.getWidth(), image_.getHeight(), null);
+
+            final AffineTransform savedTransform = graphics2D_.getTransform();
+            try {
+                graphics2D_.setTransform(transformation_);
+                graphics2D_.setColor(fillColor_);
+                graphics2D_.drawImage(img, dxI, dyI, image_.getWidth(), image_.getHeight(), null);
+            }
+            finally {
+                graphics2D_.setTransform(savedTransform);
+            }
         }
     }
 
@@ -425,7 +441,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void fill() {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("fill()");
+            LOG.debug("[" + id_ + "] fill()");
         }
 
         graphics2D_.setStroke(new BasicStroke(getLineWidth()));
@@ -441,12 +457,12 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void fillRect(final int x, final int y, final int w, final int h) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("fillRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
+            LOG.debug("[" + id_ + "] fillRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
-        graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(fillColor_);
-        graphics2D_.fillRect(x, y, w, h);
+        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
+        graphics2D_.fill(transformation_.createTransformedShape(rect));
     }
 
     /**
@@ -455,12 +471,18 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void fillText(final String text, final double x, final double y) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("fillText('" + text + "', "  + x + ", "  + y + ")");
+            LOG.debug("[" + id_ + "] fillText('" + text + "', "  + x + ", "  + y + ")");
         }
 
-        graphics2D_.setTransform(transformation_);
-        graphics2D_.setColor(fillColor_);
-        graphics2D_.drawString(text, (int) x, (int) y);
+        final AffineTransform savedTransform = graphics2D_.getTransform();
+        try {
+            graphics2D_.setTransform(transformation_);
+            graphics2D_.setColor(fillColor_);
+            graphics2D_.drawString(text, (int) x, (int) y);
+        }
+        finally {
+            graphics2D_.setTransform(savedTransform);
+        }
     }
 
     /**
@@ -488,7 +510,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void lineTo(final double x, final double y) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("lineTo(" + x + ", " + y + ")");
+            LOG.debug("[" + id_ + "] lineTo(" + x + ", " + y + ")");
         }
 
         final Path2D subPath = getCurrentSubPath();
@@ -504,7 +526,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void moveTo(final double x, final double y) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("moveTo(" + x + ", " + y + ")");
+            LOG.debug("[" + id_ + "] moveTo(" + x + ", " + y + ")");
         }
 
         final Path2D subPath = new Path2D.Double();
@@ -568,7 +590,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void quadraticCurveTo(final double cpx, final double cpy,
                     final double x, final double y) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("quadraticCurveTo()");
+            LOG.debug("[" + id_ + "] quadraticCurveTo()");
         }
 
         final Path2D subPath = getCurrentSubPath();
@@ -585,7 +607,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void rect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("rect()");
+            LOG.debug("[" + id_ + "] rect()");
         }
 
         final Path2D subPath = getCurrentSubPath();
@@ -601,6 +623,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void setFillStyle(final String fillStyle) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setFillStyle(" + fillStyle + ")");
+        }
+
         fillColor_ = extractColor(fillStyle);
     }
 
@@ -609,6 +635,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void setStrokeStyle(final String strokeStyle) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setStrokeStyle(" + strokeStyle + ")");
+        }
+
         strokeColor_ = extractColor(strokeStyle);
     }
 
@@ -654,7 +684,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void restore() {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("restore()");
+            LOG.debug("[" + id_ + "] restore()");
         }
 
         if (savedStates_.isEmpty()) {
@@ -670,7 +700,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void rotate(final double angle) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("rotate()");
+            LOG.debug("[" + id_ + "] rotate()");
         }
 
         transformation_.rotate(angle);
@@ -682,7 +712,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void save() {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("save()");
+            LOG.debug("[" + id_ + "] save()");
         }
 
         savedStates_.push(new SaveState(this));
@@ -693,6 +723,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void setLineWidth(final int lineWidth) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] setLineWidth(" + lineWidth + ")");
+        }
+
         lineWidth_ = lineWidth;
     }
 
@@ -703,7 +737,8 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void setTransform(final double m11, final double m12,
                     final double m21, final double m22, final double dx, final double dy) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("setTransform(" + m11 + ", "  + m12 + ", "  + m21 + ", "  + m22 + ", "  + dx + ", "  + dy + ")");
+            LOG.debug("[" + id_ + "] setTransform("
+                        + m11 + ", "  + m12 + ", "  + m21 + ", "  + m22 + ", "  + dx + ", "  + dy + ")");
         }
 
         transformation_ = new AffineTransform(m11, m12, m21, m22, dx, dy);
@@ -715,10 +750,9 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void stroke() {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("stroke()");
+            LOG.debug("[" + id_ + "] stroke()");
         }
 
-        graphics2D_.setTransform(new AffineTransform());
         graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(strokeColor_);
         for (Path2D path2d : subPaths_) {
@@ -732,12 +766,12 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void strokeRect(final int x, final int y, final int w, final int h) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
+            LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
-        graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(strokeColor_);
-        graphics2D_.drawRect(x, y, w, h);
+        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
+        graphics2D_.draw(transformation_.createTransformedShape(rect));
     }
 
     /**
@@ -747,7 +781,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void transform(final double m11, final double m12,
                     final double m21, final double m22, final double dx, final double dy) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("transform()");
+            LOG.debug("[" + id_ + "] transform()");
         }
 
         transformation_.concatenate(new AffineTransform(m11, m12, m21, m22, dx, dy));
@@ -759,7 +793,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void translate(final int x, final int y) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("translate()");
+            LOG.debug("[" + id_ + "] translate()");
         }
 
         transformation_.translate(x, y);
@@ -771,7 +805,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void clip(final RenderingBackend.WindingRule windingRule,
             final com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D path) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("clip(" + windingRule + ", " + path + ")");
+            LOG.debug("[" + id_ + "] clip(" + windingRule + ", " + path + ")");
         }
 
         if (path == null && subPaths_.isEmpty()) {
@@ -807,7 +841,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void closePath() {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("closePath()");
+            LOG.debug("[" + id_ + "] closePath()");
         }
 
         if (subPaths_.isEmpty()) {
