@@ -38,13 +38,15 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 
     private static boolean SKIP_ = false;
 
-    {
+    static {
         final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         final GraphicsDevice[] devices = env.getScreenDevices();
-
+System.out.println(devices.length);
         if (devices.length == 1) {
             final GraphicsDevice device = devices[0];
+System.out.println(device.getDisplayMode().getBitDepth());
             if (device.getDisplayMode().getBitDepth() < 0) {
+System.out.println("SKIP_ = true");
                 SKIP_ = true;
             }
         }
