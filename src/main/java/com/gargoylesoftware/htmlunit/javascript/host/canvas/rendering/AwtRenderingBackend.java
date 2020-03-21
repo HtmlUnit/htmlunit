@@ -488,6 +488,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public byte[] getBytes(final int width, final int height, final int sx, final int sy) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] getBytes(" + width + ", " + height + ", " + sx + ", " + sy + ")");
+        }
+
         final byte[] array = new byte[width * height * 4];
         int index = 0;
         for (int x = 0; x < width; x++) {
@@ -540,6 +544,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     public void putImageData(final ImageData imageData,
             final int dx, final int dy, final int dirtyX, final int dirtyY,
             final int dirtyWidth, final int dirtyHeight) {
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] putImageData()");
+        }
 
         final Color orgColor = graphics2D_.getColor();
 
