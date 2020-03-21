@@ -207,7 +207,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlVariable.class, value = {CHROME, FF, FF68, FF60})
 public class HTMLElement extends Element {
 
-    private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
+    private static final Class<?>[] METHOD_PARAMS_OBJECT = {Object.class};
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
     /* http://msdn.microsoft.com/en-us/library/ie/aa358802.aspx */
     private static final Map<String, String> COLORS_MAP_IE = new HashMap<>();

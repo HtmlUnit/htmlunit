@@ -870,7 +870,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         animationFrames_.clear();
 
         final double now = System.nanoTime() / 1_000_000d;
-        final Object[] args = new Object[] {now};
+        final Object[] args = {now};
 
         final WebWindow ww = getWindow().getWebWindow();
         final JavaScriptEngine jsEngine = (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
@@ -1529,7 +1529,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 jsError = err;
             }
 
-            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
+            final Object[] args = {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
             f.call(Context.getCurrentContext(), this, this, args);
         }
     }

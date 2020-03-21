@@ -92,7 +92,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
         final TestCharset[] charsetAttribute = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final TestCharset[] charsetResponseHeader = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final TestCharset[] charsetResponseEncoding = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
-        final String[] bom = new String[] {null, BOM_UTF_8, BOM_UTF_16LE, BOM_UTF_16BE};
+        final String[] bom = {null, BOM_UTF_8, BOM_UTF_16LE, BOM_UTF_16BE};
 
         for (final Object charsetHtml : charsetHtmlResponseHeader) {
             for (final Object attribute : charsetAttribute) {

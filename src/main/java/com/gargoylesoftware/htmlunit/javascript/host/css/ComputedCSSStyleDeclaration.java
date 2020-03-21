@@ -119,7 +119,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
@@ -1115,8 +1114,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (domNode instanceof BaseFrameElement) {
             final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                final HtmlPage htmlPage = (HtmlPage) enclosedPage;
-                children = htmlPage.getChildren();
+                children = ((DomNode) enclosedPage).getChildren();
             }
         }
         for (final DomNode child : children) {

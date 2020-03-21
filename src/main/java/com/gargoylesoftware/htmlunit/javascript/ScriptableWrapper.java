@@ -38,8 +38,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  */
 public class ScriptableWrapper extends ScriptableObject {
-    private static final Class<?>[] METHOD_PARAMS_INT = new Class[] {Integer.TYPE};
-    private static final Class<?>[] METHOD_PARAMS_STRING = new Class[] {String.class};
+    private static final Class<?>[] METHOD_PARAMS_INT = {Integer.TYPE};
+    private static final Class<?>[] METHOD_PARAMS_STRING = {String.class};
 
     private final Map<String, Method> properties_ = new HashMap<>();
 

@@ -532,7 +532,7 @@ public abstract class WebTestCase {
      */
     private Method findRunningJUnitTestMethod() {
         final Class<?> cl = getClass();
-        final Class<?>[] args = new Class[] {};
+        final Class<?>[] args = {};
 
         // search the initial junit test
         final Throwable t = new Exception();

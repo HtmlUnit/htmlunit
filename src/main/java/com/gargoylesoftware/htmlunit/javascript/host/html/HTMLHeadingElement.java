@@ -50,7 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class HTMLHeadingElement extends HTMLElement {
 
     /** Valid values for the {@link #getClear() clear} property. */
-    private static final String[] VALID_CLEAR_VALUES = new String[] {"left", "right", "all", "none"};
+    private static final String[] VALID_CLEAR_VALUES = {"left", "right", "all", "none"};
 
     /**
      * Creates an instance.

@@ -210,7 +210,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
             }
 
-            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
+            final Object[] params = {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
             jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
 
             if (LOG.isDebugEnabled()) {
@@ -222,7 +222,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
             final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
-            final Object[] params = new Event[] {event};
+            final Object[] params = {event};
             final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
             if (lengthComputable) {
                 event.setLengthComputable(true);
@@ -274,7 +274,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final Scriptable scope = onError.getParentScope();
             final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
-            final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
+            final Object[] params = {new ProgressEvent(this, Event.TYPE_ERROR)};
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");

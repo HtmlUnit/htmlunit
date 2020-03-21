@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     /** If no alerts defined. */
-    public static final String[] NO_ALERTS_DEFINED = new String[] {"no alerts defined"};
+    public static final String[] NO_ALERTS_DEFINED = {"no alerts defined"};
 
     private final BrowserVersion browserVersion_;
     private final boolean realBrowser_;

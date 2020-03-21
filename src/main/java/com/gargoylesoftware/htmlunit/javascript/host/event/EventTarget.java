@@ -93,7 +93,7 @@ public class EventTarget extends SimpleScriptable {
     public void executeEventLocally(final Event event) {
         final EventListenersContainer eventListenersContainer = getEventListenersContainer();
         final Window window = getWindow();
-        final Object[] args = new Object[] {event};
+        final Object[] args = {event};
 
         final Event previousEvent = window.getCurrentEvent();
         window.setCurrentEvent(event);

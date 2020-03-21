@@ -61,7 +61,7 @@ public final class EncodingSniffer {
     };
 
     /** Sequence(s) of bytes indicating the beginning of a <tt>meta</tt> HTML tag. */
-    private static final byte[][] META_START = new byte[][] {
+    private static final byte[][] META_START = {
         new byte[] {'<'},
         new byte[] {'m', 'M'},
         new byte[] {'e', 'E'},
@@ -71,13 +71,13 @@ public final class EncodingSniffer {
     };
 
     /** Sequence(s) of bytes indicating the beginning of miscellaneous HTML content. */
-    private static final byte[][] OTHER_START = new byte[][] {
+    private static final byte[][] OTHER_START = {
         new byte[] {'<'},
         new byte[] {'!', '/', '?'}
     };
 
     /** Sequence(s) of bytes indicating the beginning of a charset specification. */
-    private static final byte[][] CHARSET_START = new byte[][] {
+    private static final byte[][] CHARSET_START = {
         new byte[] {'c', 'C'},
         new byte[] {'h', 'H'},
         new byte[] {'a', 'A'},
@@ -87,8 +87,8 @@ public final class EncodingSniffer {
         new byte[] {'t', 'T'}
     };
 
-    private static final byte[] WHITESPACE = new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E};
-    private static final byte[] COMMENT_END = new byte[] {'-', '-', '>'};
+    private static final byte[] WHITESPACE = {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E};
+    private static final byte[] COMMENT_END = {'-', '-', '>'};
 
     /** <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a> */
     private static final Map<String, String> ENCODING_FROM_LABEL;

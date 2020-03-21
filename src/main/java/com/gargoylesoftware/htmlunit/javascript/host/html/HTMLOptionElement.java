@@ -22,13 +22,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlOptionGroup;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -62,7 +62,7 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxConstructor({CHROME, FF, FF68, FF60})
     public void jsConstructor(final Object newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
-        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
         AttributesImpl attributes = null;
         if (defaultSelected) {
             attributes = new AttributesImpl();
