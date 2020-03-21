@@ -109,6 +109,9 @@ public class ErrorOutputChecker implements TestRule {
             // jetty
             Pattern.compile(".*Logging initialized .* to org.eclipse.jetty.util.log.StdErrLog.*\r?\n"),
 
+            // slf4j
+            Pattern.compile("SLF4J: .*\r?\n"),
+
             // Quercus
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
             Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r?\n"),
