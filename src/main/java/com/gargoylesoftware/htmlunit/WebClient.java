@@ -2290,7 +2290,7 @@ public class WebClient implements Serializable, AutoCloseable {
             if (!updatedWindows.contains(window)) {
                 final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, "_self");
                 if (loadJob.urlWithOnlyHashChange_ != null) {
-                    final HtmlPage page = (HtmlPage) loadJob.requestingWindow_.getEnclosedPage();
+                    final Page page = loadJob.requestingWindow_.getEnclosedPage();
                     final String oldURL = page.getUrl().toExternalForm();
 
                     // update request url

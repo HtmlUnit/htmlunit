@@ -114,9 +114,8 @@ public class HtmlForm extends HtmlElement {
      * {@link HtmlElement#click()} or {@link HtmlElement#dblClick()}.</p>
      *
      * @param submitElement the element that caused the submit to occur
-     * @return a new page that reflects the results of this submission
      */
-    Page submit(final SubmittableElement submitElement) {
+    void submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final WebClient webClient = htmlPage.getWebClient();
 
@@ -125,29 +124,28 @@ public class HtmlForm extends HtmlElement {
                 isPreventDefault_ = false;
                 if (getAttributeDirect("novalidate") == ATTRIBUTE_NOT_DEFINED
                         && !areChildrenValid()) {
-                    return htmlPage;
+                    return;
                 }
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
                 if (isPreventDefault_) {
                     // null means 'nothing executed'
                     if (scriptResult == null) {
-                        return htmlPage;
+                        return;
                     }
-                    return htmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
+                    return;
                 }
             }
 
             final String action = getActionAttribute().trim();
             if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
-                return htmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
+                return;
             }
         }
         else {
             if (StringUtils.startsWithIgnoreCase(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
-                // Return the current page.
-                return htmlPage;
+                return;
             }
         }
 
@@ -164,7 +162,6 @@ public class HtmlForm extends HtmlElement {
         final boolean checkHash =
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
         webClient.download(webWindow, target, request, checkHash, false, "JS form.submit()");
-        return htmlPage;
     }
 
     /**
