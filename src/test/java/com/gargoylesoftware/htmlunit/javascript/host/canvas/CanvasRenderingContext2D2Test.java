@@ -159,9 +159,9 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkElEQVR42mNgGApAAIhZqGngfCC+DMQe1DLwNxD/h+LzQOxA"
-                + "qYH/seD1QKxCTQP/Q10+mRyD/xPAIIO7oZFHFQNh+DUQ5xCTIhKgiok1+DkQZxAyGOSdBiB+T4LBi4lN5LPRkhIu7EJKRKlA"
-                + "Ezwuw7aTm6RsgHg/FgMtKE38oNxzHSnRUwWwQFOEAsMooCkAAEbJWqpV55gjAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAg0lEQVR42mNgGAW0ABrUNMwGiH8D8WYgVqGGgYeB+D8Ugwxe"
+                + "TonBLkiG/UczeDIQC5Bq4HEcBsLwayBOAWIWYgyLIWAYMn5MjME8QNwAxJ9JMHg5MS6VAeJuIg12ISU8QQbPh0YINsO2kxvz"
+                + "Bjgiy4LS9OmBZPB6auakACBWGC2daAsAdH9H/STLcEwAAAAASUVORK5CYII=")
     public void rotateFillRect() throws Exception {
         Assume.assumeFalse(SKIP_);
 
@@ -172,7 +172,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "    if (canvas.getContext) {\n"
             + "      var context = canvas.getContext('2d');\n"
             + "      context.rotate(.5);\n"
-            + "      context.fillRect(2, 2, 16, 6);\n"
+            + "      context.fillRect(6, 2, 12, 6);\n"
             + "      alert(canvas.toDataURL());\n"
             + "    }\n"
             + "  }\n"
