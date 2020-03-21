@@ -42,6 +42,8 @@ public final class MimeType {
     /** "text/plain". */
     public static final String TEXT_PLAIN = "text/plain";
 
+    private static final Map<String, String> type2extension = buildMap();
+
     /**
      * See https://mimesniff.spec.whatwg.org/#javascript-mime-type.
      *
@@ -71,8 +73,6 @@ public final class MimeType {
                 || "text/x-ecmascript".equals(mimeTypeLC)
                 || "text/x-javascript".equals(mimeTypeLC);
     }
-
-    private static final Map<String, String> type2extension = buildMap();
 
     private static Map<String, String> buildMap() {
         final Map<String, String> map = new HashMap<>();
