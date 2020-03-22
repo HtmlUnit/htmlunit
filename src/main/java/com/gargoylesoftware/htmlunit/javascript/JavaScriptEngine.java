@@ -44,7 +44,6 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.InvalidArgumentException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -137,7 +136,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public JavaScriptEngine(final WebClient webClient) {
         if (webClient == null) {
-            throw new InvalidArgumentException("JavaScriptEngine ctor requires a webClient");
+            throw new IllegalArgumentException("JavaScriptEngine ctor requires a webClient");
         }
 
         webClient_ = webClient;
