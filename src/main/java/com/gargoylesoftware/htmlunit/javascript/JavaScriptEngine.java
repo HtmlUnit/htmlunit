@@ -44,6 +44,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.InvalidArgumentException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -135,6 +136,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param webClient the client that will own this engine
      */
     public JavaScriptEngine(final WebClient webClient) {
+        if (webClient == null) {
+            throw new InvalidArgumentException("JavaScriptEngine ctor requires a webClient");
+        }
+
         webClient_ = webClient;
         contextFactory_ = new HtmlUnitContextFactory(webClient);
         initTransientFields();
@@ -147,7 +152,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * Returns the web client that this engine is associated with.
      * @return the web client
      */
-    public final WebClient getWebClient() {
+    private WebClient getWebClient() {
         return webClient_;
     }
 
@@ -646,9 +651,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
-        if (webClient_ != null) {
+        final WebClient webClient = getWebClient();
+        if (webClient != null) {
             if (javaScriptExecutor_ == null) {
-                javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
+                javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient);
             }
             javaScriptExecutor_.addWindow(webWindow);
         }
@@ -887,11 +893,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 return null;
             }
             catch (final TimeoutError e) {
-                getWebClient().getJavaScriptErrorListener().timeoutError(page_, e.getAllowedTime(), e.getExecutionTime());
-                if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
-                    throw new RuntimeException(e);
-                }
-                LOG.info("Caught script timeout error", e);
+                handleJavaScriptTimeoutError(page_, e);
                 return null;
             }
             finally {
@@ -908,6 +910,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         holdPostponedActions_ = false;
 
         final WebClient webClient = getWebClient();
+        // shutdown was already called
         if (webClient == null) {
             postponedActions_.set(null);
             return;
@@ -964,6 +967,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param triggerOnError if true, this triggers the onerror handler
      */
     protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
+        // shutdown was already called
+        final WebClient webClient = getWebClient();
+        if (webClient == null) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("handleJavaScriptException('" + scriptException.getMessage()
+                    + "') called after the shutdown of the Javascript engine - exception ignored.");
+            }
+
+            return;
+        }
+
         // Trigger window.onerror, if it has been set.
         final HtmlPage page = scriptException.getPage();
         if (triggerOnError && page != null) {
@@ -980,12 +994,34 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
             }
         }
-        final WebClient webClient = getWebClient();
+
         webClient.getJavaScriptErrorListener().scriptException(page, scriptException);
         // Throw a Java exception if the user wants us to.
         if (webClient.getOptions().isThrowExceptionOnScriptError()) {
             throw scriptException;
         }
+    }
+
+    /**
+     * Handles an exception that occurred during execution of JavaScript code.
+     * @param page the page in which the script causing this exception was executed
+     * @param e the timeout error that was thrown from the script engine
+     */
+    protected void handleJavaScriptTimeoutError(final HtmlPage page, final TimeoutError e) {
+        final WebClient webClient = getWebClient();
+        // shutdown was already called
+        if (webClient == null) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("Caught script timeout error after the shutdown of the Javascript engine - ignored.");
+            }
+            return;
+        }
+
+        webClient.getJavaScriptErrorListener().timeoutError(page, e.getAllowedTime(), e.getExecutionTime());
+        if (webClient.getOptions().isThrowExceptionOnScriptError()) {
+            throw new RuntimeException(e);
+        }
+        LOG.info("Caught script timeout error", e);
     }
 
     /**
