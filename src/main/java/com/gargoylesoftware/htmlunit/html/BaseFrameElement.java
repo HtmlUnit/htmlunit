@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.FrameContentHandler;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -167,13 +168,21 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         setContentLoaded();
-        if (!src.isEmpty()) {
+
+        String source = src;
+        final WebClient webClient = getPage().getWebClient();
+        final FrameContentHandler handler = webClient.getFrameContentHandler();
+        if (null != handler && !handler.loadFrameDocument(this)) {
+            source = WebClient.ABOUT_BLANK;
+        }
+
+        if (!source.isEmpty()) {
             final URL url;
             try {
-                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);
+                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(source);
             }
             catch (final MalformedURLException e) {
-                notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
+                notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
 
@@ -182,11 +191,11 @@ public abstract class BaseFrameElement extends HtmlElement {
             request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
-                notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
+                notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
             try {
-                getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
+                webClient.getPage(enclosedWindow_, request);
             }
             catch (final IOException e) {
                 if (LOG.isErrorEnabled()) {
@@ -370,7 +379,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObserver);
 
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
