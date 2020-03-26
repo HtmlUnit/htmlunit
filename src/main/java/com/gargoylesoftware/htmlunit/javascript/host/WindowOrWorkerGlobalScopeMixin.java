@@ -26,14 +26,17 @@ import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
  *
  * @author Ronald Brill
  */
-public class WindowOrWorkerGlobalScopeMixin {
+public final class WindowOrWorkerGlobalScopeMixin {
+
+    private WindowOrWorkerGlobalScopeMixin() {
+    }
 
     /**
      * Decodes a string of data which has been encoded using base-64 encoding.
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    public String atob(final String encodedData) {
+    public static String atob(final String encodedData) {
         final int l = encodedData.length();
         for (int i = 0; i < l; i++) {
             if (encodedData.charAt(i) > 255) {
@@ -49,7 +52,7 @@ public class WindowOrWorkerGlobalScopeMixin {
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    public String btoa(final String stringToEncode) {
+    public static String btoa(final String stringToEncode) {
         final int l = stringToEncode.length();
         for (int i = 0; i < l; i++) {
             if (stringToEncode.charAt(i) > 255) {

@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
 
 import org.apache.commons.logging.Log;
@@ -72,9 +71,6 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
     private final String origin_;
     private final Worker worker_;
 
-    private transient WindowOrWorkerGlobalScopeMixin windowOrWorkerGlobalScopeMixin_
-                                                            = new WindowOrWorkerGlobalScopeMixin();
-
     /**
      * For prototype instantiation.
      */
@@ -123,7 +119,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
      */
     @JsxFunction
     public String btoa(final String stringToEncode) {
-        return windowOrWorkerGlobalScopeMixin_.btoa(stringToEncode);
+        return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
     }
 
     /**
@@ -133,7 +129,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
      */
     @JsxFunction
     public String atob(final String encodedData) {
-        return windowOrWorkerGlobalScopeMixin_.atob(encodedData);
+        return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
     }
 
     /**
@@ -264,17 +260,6 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
 
             owningWindow_.getWebWindow().getJobManager().addJob(job, page);
         }
-    }
-
-    /**
-     * Restores the transient fields during deserialization.
-     * @param stream the stream to read the object from
-     * @throws IOException if an IO error occurs
-     * @throws ClassNotFoundException if a class is not found
-     */
-    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        stream.defaultReadObject();
-        windowOrWorkerGlobalScopeMixin_ = new WindowOrWorkerGlobalScopeMixin();
     }
 }
 

@@ -205,8 +205,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
 
     private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
 
-    private transient WindowOrWorkerGlobalScopeMixin windowOrWorkerGlobalScopeMixin_
-                                                        = new WindowOrWorkerGlobalScopeMixin();
     private transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
 
     private static final class AnimationFrame {
@@ -330,7 +328,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         cssPropertiesCache_ = new CSSPropertiesCache();
-        windowOrWorkerGlobalScopeMixin_ = new WindowOrWorkerGlobalScopeMixin();
         animationFrames_ = new ArrayList<>();
     }
 
@@ -391,7 +388,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction
     public String btoa(final String stringToEncode) {
-        return windowOrWorkerGlobalScopeMixin_.btoa(stringToEncode);
+        return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
     }
 
     /**
@@ -401,7 +398,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction
     public String atob(final String encodedData) {
-        return windowOrWorkerGlobalScopeMixin_.atob(encodedData);
+        return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
     }
 
     /**
