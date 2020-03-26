@@ -379,7 +379,9 @@ public abstract class BaseFrameElement extends HtmlElement {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObserver);
 
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
+        // do not use equals() here
+        // see HTMLIFrameElement2Test.documentCreateElement_onLoad_srcAboutBlank()
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {
                 loadSrc();
             }

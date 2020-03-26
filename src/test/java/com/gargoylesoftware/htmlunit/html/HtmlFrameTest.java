@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFrameTest extends SimpleWebTestCase {
@@ -219,16 +220,10 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"default", ""})
     public void frameContentHandler() throws Exception {
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
-        webClient.setFrameContentHandler(new FrameContentHandler() {
-            @Override
-            public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
-                return false;
-            }
-        });
 
         final String html =
                 "<html><head><title>frames</title></head>\n"
@@ -240,10 +235,23 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
         webConnection.setResponse(URL_FIRST, html);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
+        HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("frames", page.getTitleText());
 
-        final HtmlFrame frame1 = page.getHtmlElementById("frame1");
-        assertEquals("frame1", "", ((HtmlPage) frame1.getEnclosedPage()).asXml());
+        HtmlFrame frame1 = page.getHtmlElementById("frame1");
+        assertEquals(getExpectedAlerts()[0], ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
+
+        webClient.setFrameContentHandler(new FrameContentHandler() {
+            @Override
+            public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
+                return false;
+            }
+        });
+
+        page = webClient.getPage(URL_FIRST);
+        assertEquals("frames", page.getTitleText());
+
+        frame1 = page.getHtmlElementById("frame1");
+        assertEquals(getExpectedAlerts()[1], ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
     }
 }
