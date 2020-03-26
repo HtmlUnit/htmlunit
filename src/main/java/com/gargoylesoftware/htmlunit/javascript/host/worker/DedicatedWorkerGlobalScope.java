@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 
 import org.apache.commons.logging.Log;
@@ -42,6 +43,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
+import com.gargoylesoftware.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -62,12 +65,15 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass({CHROME, FF, FF68, FF60})
 @JsxClass(className = "WorkerGlobalScope", value = IE)
-public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
+public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements WindowOrWorkerGlobalScope {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
     private final Window owningWindow_;
     private final String origin_;
     private final Worker worker_;
+
+    private transient WindowOrWorkerGlobalScopeMixin windowOrWorkerGlobalScopeMixin_
+                                                            = new WindowOrWorkerGlobalScopeMixin();
 
     /**
      * For prototype instantiation.
@@ -108,6 +114,26 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
     @JsxGetter
     public Object getSelf() {
         return this;
+    }
+
+    /**
+     * Creates a base-64 encoded ASCII string from a string of binary data.
+     * @param stringToEncode string to encode
+     * @return the encoded string
+     */
+    @JsxFunction
+    public String btoa(final String stringToEncode) {
+        return windowOrWorkerGlobalScopeMixin_.btoa(stringToEncode);
+    }
+
+    /**
+     * Decodes a string of data which has been encoded using base-64 encoding.
+     * @param encodedData the encoded string
+     * @return the decoded value
+     */
+    @JsxFunction
+    public String atob(final String encodedData) {
+        return windowOrWorkerGlobalScopeMixin_.atob(encodedData);
     }
 
     /**
@@ -238,6 +264,17 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
             owningWindow_.getWebWindow().getJobManager().addJob(job, page);
         }
+    }
+
+    /**
+     * Restores the transient fields during deserialization.
+     * @param stream the stream to read the object from
+     * @throws IOException if an IO error occurs
+     * @throws ClassNotFoundException if a class is not found
+     */
+    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        windowOrWorkerGlobalScopeMixin_ = new WindowOrWorkerGlobalScopeMixin();
     }
 }
 

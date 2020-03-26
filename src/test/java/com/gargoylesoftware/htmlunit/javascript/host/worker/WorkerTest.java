@@ -288,4 +288,101 @@ public class WorkerTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SGVsbG8gV29ybGQh", "Hello World!"})
+    public void atob() throws Exception {
+        final String workerJs
+            = "  var data = btoa('Hello World!');\n"
+            + "  postMessage(data);\n"
+            + "  postMessage(atob(data));\n";
+        testJs(workerJs);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"exception", "exception"})
+    public void atobUnicode() throws Exception {
+        final String workerJs
+            = "  try {\n"
+            + "    btoa('I \\u2661 Unicode!');\n"
+            + "  } catch(e) {postMessage('exception')}\n"
+            + "  try {\n"
+            + "    atob('I \\u2661 Unicode!');\n"
+            + "  } catch(e) {postMessage('exception')}\n";
+        testJs(workerJs);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"M8OuwqY=", "3\u00C3\u00AE\u00C2\u00A6"})
+    public void atobUnicodeOutput() throws Exception {
+        final String workerJs
+            = "  var data = btoa('3\u00C3\u00AE\u00C2\u00A6');\n"
+            + "  postMessage(data);\n"
+            + "  postMessage(atob(data));\n";
+        testJs(workerJs);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"CSAe", "\t \u001e"})
+    public void atobControlChar() throws Exception {
+        final String workerJs
+            = "  var data = btoa('\\t \\u001e');\n"
+            + "  postMessage(data);\n"
+            + "  postMessage(atob(data));\n";
+        testJs(workerJs);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"bnVsbA==", "null"})
+    public void atobNull() throws Exception {
+        final String workerJs
+            = "  var data = btoa(null);\n"
+            + "  postMessage(data);\n"
+            + "  postMessage(atob(data));\n";
+        testJs(workerJs);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"dW5kZWZpbmVk", "undefined"})
+    public void atobUndefined() throws Exception {
+        final String workerJs
+            = "  var data = btoa(undefined);\n"
+            + "  postMessage(data);\n"
+            + "  postMessage(atob(data));\n";
+        testJs(workerJs);
+    }
+
+    private void testJs(final String workerJs) throws Exception {
+        final String html = "<html><body>\n"
+            + "<script async>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    alert(e.data);\n"
+            + "  };\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+
+        loadPageWithAlerts2(html, 2000);
+    }
 }

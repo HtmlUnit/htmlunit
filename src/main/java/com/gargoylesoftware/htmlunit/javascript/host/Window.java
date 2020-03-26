@@ -32,7 +32,6 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -45,7 +44,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -127,7 +125,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
@@ -158,7 +155,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends EventTarget implements Function, AutoCloseable {
+public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Function, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
@@ -208,7 +205,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
 
     private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
 
-    private final transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
+    private transient WindowOrWorkerGlobalScopeMixin windowOrWorkerGlobalScopeMixin_
+                                                        = new WindowOrWorkerGlobalScopeMixin();
+    private transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
 
     private static final class AnimationFrame {
         private long id_;
@@ -323,7 +322,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * Restores the transient {@link #cssPropertiesCache_} map during deserialization.
+     * Restores the transient fields during deserialization.
      * @param stream the stream to read the object from
      * @throws IOException if an IO error occurs
      * @throws ClassNotFoundException if a class is not found
@@ -331,6 +330,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         cssPropertiesCache_ = new CSSPropertiesCache();
+        windowOrWorkerGlobalScopeMixin_ = new WindowOrWorkerGlobalScopeMixin();
+        animationFrames_ = new ArrayList<>();
     }
 
     /**
@@ -390,31 +391,17 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public String btoa(final String stringToEncode) {
-        final int l = stringToEncode.length();
-        for (int i = 0; i < l; i++) {
-            if (stringToEncode.charAt(i) > 255) {
-                throw new EvaluatorException("Function btoa supports only latin1 characters");
-            }
-        }
-        final byte[] bytes = stringToEncode.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
+        return windowOrWorkerGlobalScopeMixin_.btoa(stringToEncode);
     }
 
     /**
-     * Decodes a string of data which has been encoded using base-64 encoding..
+     * Decodes a string of data which has been encoded using base-64 encoding.
      * @param encodedData the encoded string
      * @return the decoded value
      */
     @JsxFunction
     public String atob(final String encodedData) {
-        final int l = encodedData.length();
-        for (int i = 0; i < l; i++) {
-            if (encodedData.charAt(i) > 255) {
-                throw new EvaluatorException("Function atob supports only latin1 characters");
-            }
-        }
-        final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.decodeBase64(bytes), StandardCharsets.ISO_8859_1);
+        return windowOrWorkerGlobalScopeMixin_.atob(encodedData);
     }
 
     /**
