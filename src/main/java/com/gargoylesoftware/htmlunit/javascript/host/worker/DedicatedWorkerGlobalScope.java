@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,10 +42,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -64,7 +67,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass({CHROME, FF, FF68, FF60})
 @JsxClass(className = "WorkerGlobalScope", value = IE)
-public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements WindowOrWorkerGlobalScope {
+public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
     private final Window owningWindow_;
@@ -91,9 +94,15 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
             final Worker worker) throws Exception {
         context.initSafeStandardObjects(this);
 
-        final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                DedicatedWorkerGlobalScope.class, browserVersion);
+        ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
+                (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
+                browserVersion);
+        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, null, browserVersion);
+
+        config = AbstractJavaScriptConfiguration.getClassConfiguration(
+                                DedicatedWorkerGlobalScope.class, browserVersion);
         final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, null, browserVersion);
+        prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
 
         owningWindow_ = owningWindow;
@@ -110,6 +119,24 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
     @JsxGetter
     public Object getSelf() {
         return this;
+    }
+
+    /**
+     * Returns the {@code onmessage} event handler.
+     * @return the {@code onmessage} event handler
+     */
+    @JsxGetter
+    public Function getOnmessage() {
+        return getEventHandler(Event.TYPE_MESSAGE);
+    }
+
+    /**
+     * Sets the {@code onmessage} event handler.
+     * @param onmessage the {@code onmessage} event handler
+     */
+    @JsxSetter
+    public void setOnmessage(final Object onmessage) {
+        setEventHandler(Event.TYPE_MESSAGE, onmessage);
     }
 
     /**
@@ -179,7 +206,8 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
         final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
-                return executeEvent(cx, event);
+                executeEvent(cx, event);
+                return null;
             }
         };
 
@@ -191,15 +219,24 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable implements Wi
         owningWindow_.getWebWindow().getJobManager().addJob(job, page);
     }
 
-    private Object executeEvent(final Context cx, final MessageEvent event) {
-        final Object handler = get("onmessage", this);
+    private void executeEvent(final Context cx, final MessageEvent event) {
+        final List<Scriptable> handlers = getEventListenersContainer().getListeners(Event.TYPE_MESSAGE, false);
+        if (handlers != null) {
+            for (final Scriptable scriptable : handlers) {
+                if (scriptable instanceof Function) {
+                    final Function handlerFunction = (Function) scriptable;
+                    final Object[] args = {event};
+                    handlerFunction.call(cx, this, this, args);
+                }
+            }
+        }
 
+        final Object handler = getEventHandler(Event.TYPE_MESSAGE);
         if (handler != null && handler instanceof Function) {
             final Function handlerFunction = (Function) handler;
             final Object[] args = {event};
             handlerFunction.call(cx, this, this, args);
         }
-        return null;
     }
 
     /**

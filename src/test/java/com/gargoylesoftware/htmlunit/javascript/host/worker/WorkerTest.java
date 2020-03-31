@@ -74,6 +74,29 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Received:worker loaded")
+    public void postMessageFromWorker2() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script async>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.addEventListener('message', (e) => {\n"
+            + "    alert('Received:' + e.data);\n"
+            + "  });\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "postMessage('worker loaded');\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+
+        loadPageWithAlerts2(html, 2000);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("Received: Result = 15")
     public void postMessageToWorker() throws Exception {
         final String html = "<html><body><script>\n"
