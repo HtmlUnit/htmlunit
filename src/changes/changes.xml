@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.39.0" date="xxxx, 2020" description="Bugfixes, Firefox74">
+            <action type="fix" dev="rbri">
+                Neko: fix encoding of blanks in file uri's.
+            </action>
             <action type="fix" dev="rbri" issue=" #150">
                 DedicatedWorkerGlobalScope now extends EventTarget.
             </action>
