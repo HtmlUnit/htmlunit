@@ -62,10 +62,23 @@ mvn clean deploy -Dmaven.test.skip=true
                 </ol>
             </p>
             <p>
-                Now do this for each release:
+                Do this for each release:
                 <ol>
                     <li>
                         Update maven to latest version, and delete ~/.m2/repository folder.
+                    </li>
+                    <li>
+                        Because of the circular dependency to the HtmlUnitDriver you have to create a local release
+                        of the driver first.
+                        <ol>
+                            <li>
+                                Update the version number in pom.xml
+                            </li>
+                            <li>
+                                Build the release and store it in the local repository
+                                <source>mvn -up clean install -Dmaven.test.skip=true</source>
+                            </li>
+                        </ol>
                     </li>
                     <li>
                         Update the version number in pom.xml
@@ -75,6 +88,9 @@ mvn clean deploy -Dmaven.test.skip=true
                     </li>
                     <li>
                         Update the release date in src/changes/changes.xml
+                    </li>
+                    <li>
+                        Update the version number, release date, and maven dependency in README.md
                     </li>
                     <li>
                         Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
@@ -89,19 +105,30 @@ mvn clean deploy -Dmaven.test.skip=true
                         and make sure the binary file is the default download for all platforms.
                     </li>
                     <li>
-                        Make sure everything is checked in and tag the release:
-                    <source>
-mvn scm:tag
-</source>
+                        Make sure everything is checked in.
                     </li>
                     <li>
                         Ensure HtmlUnit-related dependencies are 'tagged' in the repository.
                     </li>
                     <li>Deploy the release to Sonatype OSS Maven repository.
-                    <source>
-mvn deploy -Dmaven.test.skip=true
-</source>
-                    and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories" target="_blank">Sonatype OSS staging repository</a> to close and release the artifacts.
+                        <source>mvn deploy -Dmaven.test.skip=true</source>
+                        and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories" target="_blank">Sonatype OSS staging repository</a>
+                        to close and release the artifacts.
+                    </li>
+                    <li>Create the version on Github
+                      <ol>
+                        <li>login to Github and open project <a href="https://github.com/HtmlUnit/htmlunit">https://github.com/HtmlUnit/htmlunit</a></li>
+                        <li>click Releases > Draft new release</li>
+                        <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
+                        <li>append
+                          <ull>
+                            <li>login to Github and open project <a href="https://github.com/HtmlUnit/htmlunit">https://github.com/HtmlUnit/htmlunit</a></li>
+                            <li>click Releases > Draft new release</li>
+                            <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
+                          </ull>
+                        </li>
+                        <li>publish the release</li>
+                      </ol>
                     </li>
                     <li>
                         Create a shell to shell.sourceforge.net with your username and project group
