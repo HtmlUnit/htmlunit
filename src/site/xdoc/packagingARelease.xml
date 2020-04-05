@@ -122,12 +122,11 @@ mvn clean deploy -Dmaven.test.skip=true
                         <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
                         <li>append
                           <ull>
-                            <li>login to Github and open project <a href="https://github.com/HtmlUnit/htmlunit">https://github.com/HtmlUnit/htmlunit</a></li>
-                            <li>click Releases > Draft new release</li>
-                            <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
+                            <li>htmlunit-2.39.0-bin.zip</li>
+                            <li>htmlunit-2.39.0-src.zip</li>
                           </ull>
                         </li>
-                        <li>publish the release</li>
+                        <li>do not publish the release now, we have to add a file later on</li>
                       </ol>
                     </li>
                     <li>
@@ -151,10 +150,16 @@ mvn clean deploy -Dmaven.test.skip=true
                     </li>
                     <li>
                         Rename 'htmlunit-x.y.jar' to 'htmlunit-x.y-OSGi.jar',
-                        and upload it to SourceForge files.
+                        and upload it to SourceForge files and to the Github release.
                     </li>
                     <li>
-                        Add a new Milestone in SourceForge bugs system (for both Bugs and Feature-Requests).
+                        publish the Github release
+                    </li>
+                    <li>
+                        Send out the usual email to the mailing list and inform via twitter also.
+                    </li>
+                    <li>
+                        Update the version number in pom.xml to start next snapshot development.
                     </li>
                 </ol>
             </p>
