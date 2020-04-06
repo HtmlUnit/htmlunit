@@ -41,4 +41,30 @@ public class HtmlParagraphTest extends SimpleWebTestCase {
         final HtmlElement element = page.getHtmlElementById("foo");
         assertTrue(element.asXml().contains("</p>"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_getTextContent() throws Exception {
+        final String html = "<html><body>\n"
+                + "<p id='p1'></p>\n"
+                + "<p id='p2'>abc</p>\n"
+                + "<p id='p3'>$24.43</p>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        HtmlParagraph paragraph = page.getHtmlElementById("p1");
+        assertEquals("", paragraph.asText());
+        assertEquals("", paragraph.getTextContent());
+
+        paragraph = page.getHtmlElementById("p2");
+        assertEquals("abc", paragraph.asText());
+        assertEquals("abc", paragraph.getTextContent());
+
+        paragraph = page.getHtmlElementById("p3");
+        assertEquals("$24.43", paragraph.asText());
+        assertEquals("$24.43", paragraph.getTextContent());
+    }
 }
