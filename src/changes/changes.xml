@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.40.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="add" dev="rbri">
+                New method AttachmentHandler.handleAttachment(WebResponse) added. By implementing your
+                own AttachmentHandler you now can process the attachment response by your code without
+                opening a new WebClinet window.
+            </action>
         </release>
         <release version="2.39.0" date="April 5, 2020" description="Bugfixes, Firefox74">
             <action type="fix" dev="rbri">

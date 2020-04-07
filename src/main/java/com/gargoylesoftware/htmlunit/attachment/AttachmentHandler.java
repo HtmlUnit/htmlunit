@@ -49,9 +49,25 @@ public interface AttachmentHandler extends Serializable {
 
     /**
      * Handles the specified attached page.
+     * This method will only be called if {@link #handleAttachment(WebResponse)}
+     * has retund false for the response..
      * @param page an attached page, which doesn't get loaded inline
      */
     void handleAttachment(Page page);
+
+    /**
+     * Process the specified attachment. If this method returns false,
+     * the client will open a new window with a page created from this
+     * response as content.
+     * Overwrite this method (and return true) if you do not need to create
+     * a new window for the response.
+     * @param response the response to process
+     * @return {@code true} if the specified response represents is handled by this method
+     * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
+     */
+    default boolean handleAttachment(final WebResponse response) {
+        return false;
+    }
 
     /**
      * Returns {@code true} if the specified response represents an attachment.

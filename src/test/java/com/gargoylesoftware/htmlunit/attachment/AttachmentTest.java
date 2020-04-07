@@ -80,6 +80,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         assertEquals(result, clickResult);
         assertEquals(1, attachments.size());
         assertTrue(HtmlPage.class.isInstance(attachments.get(0).getPage()));
+        // the attachment is opened inside a new window
+        assertEquals(2, client.getWebWindows().size());
 
         final Attachment attachment = attachments.get(0);
         final Page attachedPage = attachment.getPage();
@@ -210,5 +212,59 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         final HtmlElement htmlElement = (HtmlElement) page.getFirstByXPath("//input");
         htmlElement.click(); // exception was occurring here
+    }
+
+    /**
+     * Tests attachment callbacks and the contents of attachments.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void handleResponseFromHanlder() throws Exception {
+        final String content1 = "<html><body>\n"
+            + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
+            + "<input type='submit' value='ok'>\n"
+            + "</form>\n"
+            + "<a href='#' onclick='document.form.submit()'>click me</a>\n"
+            + "</body></html>";
+        final String content2 = "download file contents";
+
+        final WebClient client = getWebClient();
+        final List<WebResponse> attachments = new ArrayList<>();
+
+        client.setAttachmentHandler(new AttachmentHandler() {
+            @Override
+            public boolean handleAttachment(final WebResponse response) {
+                attachments.add(response);
+                return true;
+            }
+
+            @Override
+            public void handleAttachment(final Page page) {
+                throw new IllegalAccessError("handleAttachment(Page) called");
+            }
+        });
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Disposition", "attachment"));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, content1);
+        conn.setResponse(URL_SECOND, content2, 200, "OK", MimeType.TEXT_HTML, headers);
+        client.setWebConnection(conn);
+        assertTrue(attachments.isEmpty());
+
+        final HtmlPage result = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = result.getAnchors().get(0);
+        final Page clickResult = anchor.click();
+        assertEquals(result, clickResult);
+        assertEquals(1, attachments.size());
+        assertEquals(1, client.getWebWindows().size());
+
+        final WebResponse attachmentResponse = attachments.get(0);
+        final InputStream attachmentStream = attachmentResponse.getContentAsStream();
+        HttpWebConnectionTest.assertEquals(new ByteArrayInputStream(content2.getBytes()), attachmentStream);
+        assertEquals(MimeType.TEXT_HTML, attachmentResponse.getContentType());
+        assertEquals(200, attachmentResponse.getStatusCode());
+        assertEquals(URL_SECOND, attachmentResponse.getWebRequest().getUrl());
     }
 }
