@@ -1634,10 +1634,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
 
-    /** Indicates that the XPath attribute is case sensitive. */
-    @BrowserFeature(CHROME)
-    XPATH_ATTRIBUTE_CASE_SENSITIVE,
-
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({IE, CHROME})
     XPATH_SELECTION_NAMESPACES,

@@ -2289,7 +2289,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLHeadingElement]",
-            CHROME = "null",
             IE = "not available")
     public void evaluate_caseInsensitiveAttribute() throws Exception {
         final String html = "<html><head><script>\n"

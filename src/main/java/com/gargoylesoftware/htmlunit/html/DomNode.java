@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
 
 import java.io.IOException;
@@ -1610,7 +1609,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
             }
         }
-        return XPathHelper.getByXPath(this, xpathExpr, prefixResolver, hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE));
+        return XPathHelper.getByXPath(this, xpathExpr, prefixResolver);
     }
 
     /**
@@ -1623,7 +1622,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getCanonicalXPath()
      */
     public List<?> getByXPath(final String xpathExpr, final PrefixResolver resolver) {
-        return XPathHelper.getByXPath(this, xpathExpr, resolver, hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE));
+        return XPathHelper.getByXPath(this, xpathExpr, resolver);
     }
 
     /**
