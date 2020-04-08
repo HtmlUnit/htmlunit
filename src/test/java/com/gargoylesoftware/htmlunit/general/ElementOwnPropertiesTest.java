@@ -1533,8 +1533,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
-                + "hasAttribute(),hidden,innerText,isContentEditable,lang,nonce,"
-                + "offsetHeight,offsetLeft,offsetParent,"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
                 + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
@@ -3524,13 +3523,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "length,method,name,namedItem(),noValidate,reset(),submit(),tags(),target,"
                 + "urns()")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,"
-                + "name,reset(),submit(),target",
+                + "name,requestSubmit(),reset(),submit(),target",
             FF60 = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
                 + "reset(),submit(),target",
             FF68 = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
                 + "reset(),submit(),target",
             FF = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
-                + "reset(),submit(),target",
+                + "requestSubmit(),reset(),submit(),target",
             IE = "action,checkValidity(),constructor,elements,encoding,enctype,item(),length,method,name,"
                 + "reset(),submit(),target")
     public void form() throws Exception {

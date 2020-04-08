@@ -189,6 +189,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     //https://github.com/SeleniumHQ/selenium/issues/639
     @BuggyWebDriver(FF60 = "down: 49,0 press: 0,33 up: 49,0 down: 220,0 press: 0,124 up: 220,0",
                 FF68 = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
+                FF = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
                 IE = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0 down: 17,0 "
                         + "down: 18,0 down: 226,0 press: 124,124 up: 226,0 up: 17,0 up: 18,0")
     public void shiftKeys() throws Exception {
