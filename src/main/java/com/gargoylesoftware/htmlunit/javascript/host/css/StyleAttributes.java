@@ -781,6 +781,9 @@ public final class StyleAttributes {
         /** The style property {@code colorRendering}. */
         COLOR_RENDERING("colorRendering", "color-rendering", chrome("auto")),
 
+        /** The style property {@code colorScheme}. */
+        COLOR_SCHEME("colorScheme", "color-scheme", chrome("normal")),
+
         /** The style property {@code columnCount}. */
         COLUMN_COUNT("columnCount", "column-count", chrome("auto"), ff("auto"), ie("auto")),
 
@@ -1230,7 +1233,8 @@ public final class StyleAttributes {
         HYPHENS("hyphens", "hyphens", ff("manual"), chrome("manual")),
 
         /** The style property {@code imageOrientation}. */
-        IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff60("0deg"), ff68AndUp("none")),
+        IMAGE_ORIENTATION("imageOrientation", "image-orientation", chrome("from-image"),
+                ff60("0deg"), ff68AndUp("none")),
 
         /** The style property {@code image-orientation}. */
         IMAGE_ORIENTATION_("image-orientation", "image-orientation", ff60("0deg"), ff68AndUp("none")),
@@ -3984,31 +3988,14 @@ public final class StyleAttributes {
         /** The style property {@code webkitMarginAfter}. */
         WEBKIT_MARGIN_AFTER("webkitMarginAfter", "webkit-margin-after", chrome("0px")),
 
-        /** The style property {@code webkitMarginAfterCollapse}. */
-        WEBKIT_MARGIN_AFTER_COLLAPSE("webkitMarginAfterCollapse", "webkit-margin-after-collapse", chrome("collapse")),
-
         /** The style property {@code webkitMarginBefore}. */
         WEBKIT_MARGIN_BEFORE("webkitMarginBefore", "webkit-margin-before", chrome("0px")),
-
-        /** The style property {@code webkitMarginBeforeCollapse}. */
-        WEBKIT_MARGIN_BEFORE_COLLAPSE("webkitMarginBeforeCollapse", "webkit-margin-before-collapse",
-                chrome("collapse")),
-
-        /** The style property {@code webkitMarginBottomCollapse}. */
-        WEBKIT_MARGIN_BOTTOM_COLLAPSE("webkitMarginBottomCollapse", "webkit-margin-bottom-collapse",
-                chrome("collapse")),
-
-        /** The style property {@code webkitMarginCollapse}. */
-        WEBKIT_MARGIN_COLLAPSE("webkitMarginCollapse", "webkit-margin-collapse", chrome("")),
 
         /** The style property {@code webkitMarginEnd}. */
         WEBKIT_MARGIN_END("webkitMarginEnd", "webkit-margin-end", chrome("0px")),
 
         /** The style property {@code webkitMarginStart}. */
         WEBKIT_MARGIN_START("webkitMarginStart", "webkit-margin-start", chrome("0px")),
-
-        /** The style property {@code webkitMarginTopCollapse}. */
-        WEBKIT_MARGIN_TOP_COLLAPSE("webkitMarginTopCollapse", "webkit-margin-top-collapse", chrome("collapse")),
 
         /** The style property {@code webkitMask}. */
         WEBKIT_MASK("webkitMask", "webkit-mask", chrome(""), ff("none")),

@@ -217,7 +217,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF = "function AnimationTimeline() {\n    [native code]\n}")
     public void animationTimeline() throws Exception {
         test("AnimationTimeline");
     }
@@ -1976,7 +1977,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF = "function DocumentTimeline() {\n    [native code]\n}")
     public void documentTimeline() throws Exception {
         test("DocumentTimeline");
     }
@@ -9057,8 +9059,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGDiscardElement() { [native code] }")
+    @Alerts("exception")
     public void svgDiscardElement() throws Exception {
         test("SVGDiscardElement");
     }

@@ -442,8 +442,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerrawupdate,onpointerup,onprogress,"
                 + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,"
-                + "onvolumechange,onwaiting,onwheel,outerText,"
-                + "spellcheck,style,tabIndex,title,translate",
+                + "onvolumechange,onwaiting,"
+                + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
+                + "onwheel,outerText,spellcheck,style,tabIndex,title,translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,draggable,focus(),"
                 + "hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
                 + "offsetWidth,"
@@ -582,8 +583,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "animate(),append(),attachShadow(),attributes,attributeStyleMap,"
-                + "childElementCount,children,classList,className,"
+    @Alerts(CHROME = "animate(),append(),"
+                + "ariaAtomic,ariaAutoComplete,ariaBusy,ariaChecked,ariaColCount,ariaColIndex,ariaColSpan,"
+                + "ariaCurrent,ariaDisabled,ariaExpanded,ariaHasPopup,ariaHidden,ariaKeyShortcuts,ariaLabel,"
+                + "ariaLevel,ariaLive,ariaModal,ariaMultiLine,ariaMultiSelectable,ariaOrientation,"
+                + "ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,ariaRelevant,ariaRequired,"
+                + "ariaRoleDescription,ariaRowCount,ariaRowIndex,ariaRowSpan,ariaSelected,ariaSort,"
+                + "ariaValueMax,ariaValueMin,ariaValueNow,ariaValueText,"
+                + "attachShadow(),attributes,attributeStyleMap,childElementCount,children,classList,className,"
                 + "clientHeight,clientLeft,clientTop,clientWidth,closest(),computedStyleMap(),createShadowRoot(),"
                 + "elementTiming,firstElementChild,getAttribute(),getAttributeNames(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
@@ -712,8 +719,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "after(),animate(),assignedSlot,attachShadow(),attributes,attributeStyleMap,"
-                + "before(),classList,className,"
+    @Alerts(CHROME = "after(),animate(),"
+                + "ariaAtomic,ariaAutoComplete,ariaBusy,ariaChecked,ariaColCount,ariaColIndex,ariaColSpan,ariaCurrent,"
+                + "ariaDisabled,ariaExpanded,ariaHasPopup,ariaHidden,ariaKeyShortcuts,ariaLabel,ariaLevel,ariaLive,"
+                + "ariaModal,ariaMultiLine,ariaMultiSelectable,ariaOrientation,ariaPlaceholder,ariaPosInSet,"
+                + "ariaPressed,ariaReadOnly,ariaRelevant,ariaRequired,ariaRoleDescription,ariaRowCount,ariaRowIndex,"
+                + "ariaRowSpan,ariaSelected,ariaSort,ariaValueMax,ariaValueMin,ariaValueNow,ariaValueText,"
+                + "assignedSlot,attachShadow(),attributes,attributeStyleMap,before(),classList,className,"
                 + "clientHeight,clientLeft,clientTop,clientWidth,closest(),computedStyleMap(),createShadowRoot(),"
                 + "elementTiming,getAttribute(),"
                 + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
@@ -907,8 +919,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
-                + "cancelIdleCallback(),captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),"
+                + "cancelIdleCallback(),captureEvents(),"
+                + "cdc_adoQpoasnfa76pfcZLmcfl_Array(),cdc_adoQpoasnfa76pfcZLmcfl_Promise(),"
+                + "cdc_adoQpoasnfa76pfcZLmcfl_Symbol(),"
+                + "chrome,clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
                 + "createImageBitmap(),crypto,customElements,"
                 + "defaultstatus,defaultStatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
@@ -3950,10 +3964,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerout,onpointerover,onpointerrawupdate,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,"
                 + "onresume,onscroll,onsearch,onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,"
-                + "onselectstart,onstalled,"
-                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvisibilitychange,"
-                + "onvolumechange,onwaiting,onwebkitfullscreenchange,"
-                + "onwebkitfullscreenerror,onwheel,open(),pictureInPictureElement,pictureInPictureEnabled,"
+                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvisibilitychange,"
+                + "onvolumechange,onwaiting,"
+                + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkitfullscreenchange,"
+                + "onwebkitfullscreenerror,onwebkittransitionend,"
+                + "onwheel,open(),pictureInPictureElement,pictureInPictureEnabled,"
                 + "plugins,pointerLockElement,"
                 + "prepend(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
                 + "queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,"
@@ -4213,9 +4228,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerrawupdate,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onselectionchange,onselectstart,onstalled,"
-                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvolumechange,onwaiting,onwheel,"
-                + "ownerSVGElement,style,tabIndex,"
-                + "viewportElement",
+                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvolumechange,onwaiting,"
+                + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
+                + "onwheel,ownerSVGElement,style,tabIndex,viewportElement",
             FF = "blur(),dataset,focus(),nonce,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"

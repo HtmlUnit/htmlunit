@@ -538,7 +538,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGAnimationElement.class,
         SVGCircleElement.class,
         SVGClipPathElement.class, SVGComponentTransferFunctionElement.class,
-        SVGDefsElement.class, SVGDescElement.class, SVGDiscardElement.class, SVGElement.class,
+        SVGDefsElement.class, SVGDescElement.class, SVGElement.class,
         SVGEllipseElement.class, SVGFEBlendElement.class, SVGFEColorMatrixElement.class,
         SVGFEComponentTransferElement.class, SVGFECompositeElement.class, SVGFEConvolveMatrixElement.class,
         SVGFEDiffuseLightingElement.class, SVGFEDisplacementMapElement.class, SVGFEDistantLightElement.class,

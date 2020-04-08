@@ -70,6 +70,11 @@ public class ErrorOutputChecker implements TestRule {
                     + ".*\\r\\n"
                     + ".*\\r\\n"),
 
+            // https://github.com/mozilla/geckodriver/issues/1376
+            Pattern.compile("[0-9]*\\sMarionette\\sINFO\\sStopped listening on port.*\\r\\n\\r\\n"
+                    + ".*\\r\\n\\r\\n\\r\\n"
+                    + ".*\\r\\n\\r\\n"),
+
             // FF68
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
                     + ".*\\n"
