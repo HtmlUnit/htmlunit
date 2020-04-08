@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -219,6 +220,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function AnimationTimeline() {\n    [native code]\n}")
+    @HtmlUnitNYI(FF = "exception")
     public void animationTimeline() throws Exception {
         test("AnimationTimeline");
     }
@@ -1979,6 +1981,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function DocumentTimeline() {\n    [native code]\n}")
+    @HtmlUnitNYI(FF = "exception")
     public void documentTimeline() throws Exception {
         test("DocumentTimeline");
     }
