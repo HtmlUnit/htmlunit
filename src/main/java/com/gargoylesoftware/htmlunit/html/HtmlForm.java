@@ -115,7 +115,7 @@ public class HtmlForm extends HtmlElement {
      *
      * @param submitElement the element that caused the submit to occur
      */
-    void submit(final SubmittableElement submitElement) {
+    public void submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final WebClient webClient = htmlPage.getWebClient();
 

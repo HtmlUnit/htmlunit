@@ -2210,6 +2210,235 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"Response", "param1=value1"},
+            FF68 = "requestSubmit() not available",
+            FF60 = "requestSubmit() not available",
+            IE = "requestSubmit() not available")
+    public void requestSubmit() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var myForm = document.getElementById('form1');\n"
+            + "  if (myForm.requestSubmit) {\n"
+            + "    myForm.requestSubmit();\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  alert('requestSubmit() not available');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body onload='doTest()'>\n"
+            + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
+            + "    <input name='param1' type='hidden' value='value1'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        if (getExpectedAlerts().length == 1) {
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            return;
+        }
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        final String params = getMockWebConnection().getLastWebRequest().getUrl().getQuery();
+        assertEquals(getExpectedAlerts()[1], params);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"Response", "param1=value1"},
+            FF68 = "requestSubmit() not available",
+            FF60 = "requestSubmit() not available",
+            IE = "requestSubmit() not available")
+    public void requestSubmitWithSubmit() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var myForm = document.getElementById('form1');\n"
+            + "  if (myForm.requestSubmit) {\n"
+            + "    var sub = document.getElementById('submit1');\n"
+            + "    myForm.requestSubmit(sub);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  alert('requestSubmit() not available');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body onload='doTest()'>\n"
+            + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
+            + "    <input name='param1' type='hidden' value='value1'>\n"
+            + "    <input id='submit1' type='submit' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        if (getExpectedAlerts().length == 1) {
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            return;
+        }
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        final String params = getMockWebConnection().getLastWebRequest().getUrl().getQuery();
+        assertEquals(getExpectedAlerts()[1], params);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"Response", "param1=value1&submit1="},
+            FF68 = "requestSubmit() not available",
+            FF60 = "requestSubmit() not available",
+            IE = "requestSubmit() not available")
+    public void requestSubmitWithButton() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var myForm = document.getElementById('form1');\n"
+            + "  if (myForm.requestSubmit) {\n"
+            + "    var sub = document.getElementById('submit1');\n"
+            + "    try {\n"
+            + "      myForm.requestSubmit(sub);\n"
+            + "    } catch (e) { alert('requestSubmit failed' + e); }\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  alert('requestSubmit() not available');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body onload='doTest()'>\n"
+            + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
+            + "    <input name='param1' type='hidden' value='value1'>\n"
+            + "    <button type='submit' id='submit1' name='submit1'>submit1</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        if (getExpectedAlerts().length == 1) {
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            return;
+        }
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        final String params = getMockWebConnection().getLastWebRequest().getUrl().getQuery();
+        assertEquals(getExpectedAlerts()[1], params);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"first", "requestSubmit failed"},
+            FF68 = "requestSubmit() not available",
+            FF60 = "requestSubmit() not available",
+            IE = "requestSubmit() not available")
+    public void requestSubmitNotMember() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var myForm = document.getElementById('form1');\n"
+            + "  if (myForm.requestSubmit) {\n"
+            + "    var sub = document.getElementById('submit2');\n"
+            + "    try {\n"
+            + "      myForm.requestSubmit(sub);\n"
+            + "    } catch (e) { alert('requestSubmit failed'); }\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  alert('requestSubmit() not available');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body onload='doTest()'>\n"
+            + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
+            + "    <input name='param1' type='hidden' value='value1'>\n"
+            + "  </form>\n"
+
+            + "  <form id='form2' name='form2' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
+            + "    <input type='submit' id='submit2' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        if (getExpectedAlerts().length == 1) {
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            return;
+        }
+
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"first", "requestSubmit failed"},
+            FF68 = "requestSubmit() not available",
+            FF60 = "requestSubmit() not available",
+            IE = "requestSubmit() not available")
+    public void requestSubmitNotSubmit() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>first</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var myForm = document.getElementById('form1');\n"
+            + "  if (myForm.requestSubmit) {\n"
+            + "    var sub = document.getElementById('param1');\n"
+            + "    try {\n"
+            + "      myForm.requestSubmit(sub);\n"
+            + "    } catch (e) { alert('requestSubmit failed'); }\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  alert('requestSubmit() not available');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body onload='doTest()'>\n"
+            + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
+            + "    <input id='param1' name='param1' type='hidden' value='value1'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+
+        final WebDriver driver = loadPage2(html);
+        if (getExpectedAlerts().length == 1) {
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            return;
+        }
+
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"1", "false", "true", "false", "false"})
     public void in() throws Exception {
         final String html = "<html>\n"
