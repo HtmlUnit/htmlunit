@@ -96,21 +96,16 @@ class XPathAdapter {
      * @return the processed XPath expression
      */
     private static String preProcessXPath(final String xpath, final boolean caseSensitive) {
-
-        String path;
-        if (!caseSensitive) {
-            path = processOutsideBrackets(xpath);
-        }
-        else {
-            path = xpath;
+        if (caseSensitive) {
+            return xpath;
         }
 
+        String path = processOutsideBrackets(xpath);
         final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(path);
         while (matcher.find()) {
             final String attribute = matcher.group(1);
             path = path.replace(attribute, attribute.toLowerCase(Locale.ROOT));
         }
-
         return path;
     }
 
