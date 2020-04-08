@@ -445,7 +445,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onvolumechange,onwaiting,onwheel,outerText,"
                 + "spellcheck,style,tabIndex,title,translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,draggable,focus(),"
-                + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,"
+                + "hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
+                + "offsetWidth,"
                 + "onabort,onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onauxclick,onblur,"
                 + "oncanplay,oncanplaythrough,onchange,onclick,onclose,oncontextmenu,oncopy,oncuechange,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragexit,ondragleave,ondragover,ondragstart,ondrop,"
@@ -600,8 +601,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
                 + "webkitMatchesSelector(),webkitRequestFullscreen(),webkitRequestFullScreen()",
             FF = "animate(),append(),attachShadow(),attributes,childElementCount,children,classList,className,"
-                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),firstElementChild,getAttribute(),"
-                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),firstElementChild,getAnimations(),"
+                + "getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),"
                 + "id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
@@ -733,8 +734,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tagName,toggleAttribute(),"
                 + "webkitMatchesSelector(),webkitRequestFullscreen(),webkitRequestFullScreen()",
             FF = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,clientHeight,"
-                + "clientLeft,clientTop,clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),"
-                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "clientLeft,clientTop,clientWidth,closest(),getAnimations(),getAttribute(),getAttributeNames(),"
+                + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),localName,matches(),mozMatchesSelector(),"
@@ -1819,13 +1820,18 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             CHROME = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reportValidity(),requestSubmit(),reset(),submit(),"
                 + "target",
+            FF = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
+                + "noValidate,reportValidity(),requestSubmit(),reset(),submit(),"
+                + "target",
             IE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
-    @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
+    @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
+                    + "requestSubmit(),reset(),submit(),target",
             FF60 = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
             FF68 = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
-            FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
+            FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
+                    + "requestSubmit(),reset(),submit(),target",
             IE = "action,checkValidity(),elements,encoding,enctype,item(),length,method,name,reset(),submit(),target")
     public void form() throws Exception {
         test("form");
@@ -2072,7 +2078,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "height,hspace,isMap,loading,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
-            FF = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,"
+            FF = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,loading,"
                 + "longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
                 + "useMap,vspace,width,x,y",
             FF68 = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,"
@@ -3964,7 +3970,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createRange(),createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,dir,"
                 + "doctype,documentElement,documentURI,domain,elementFromPoint(),elementsFromPoint(),embeds,"
                 + "enableStyleSheetsForSet(),evaluate(),execCommand(),exitFullscreen(),exitPointerLock(),fgColor,"
-                + "firstElementChild,fonts,forms,fullscreen,fullscreenElement,fullscreenEnabled,getElementById(),"
+                + "firstElementChild,fonts,forms,fullscreen,fullscreenElement,fullscreenEnabled,getAnimations(),"
+                + "getElementById(),"
                 + "getElementsByClassName(),getElementsByName(),getElementsByTagName(),getElementsByTagNameNS(),"
                 + "getSelection(),hasFocus(),hasStorageAccess(),head,hidden,images,implementation,importNode(),"
                 + "inputEncoding,lastElementChild,lastModified,lastStyleSheetSet,linkColor,links,location,"
@@ -3989,7 +3996,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "queryCommandState(),queryCommandSupported(),queryCommandValue(),querySelector(),"
                 + "querySelectorAll(),readyState,referrer,releaseCapture(),releaseEvents(),requestStorageAccess(),"
                 + "rootElement,scripts,scrollingElement,selectedStyleSheetSet,styleSheets,styleSheetSets,"
-                + "title,URL,visibilityState,vlinkColor,write(),writeln()",
+                + "timeline,title,URL,visibilityState,vlinkColor,write(),writeln()",
             FF68 = "activeElement,adoptNode(),anchors,append(),applets,async,body,caretPositionFromPoint(),"
                 + "characterSet,charset,childElementCount,children,compatMode,contentType,cookie,createAttribute(),"
                 + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
@@ -4209,7 +4216,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvolumechange,onwaiting,onwheel,"
                 + "ownerSVGElement,style,tabIndex,"
                 + "viewportElement",
-            FF = "blur(),dataset,focus(),onabort,onanimationcancel,onanimationend,onanimationiteration,"
+            FF = "blur(),dataset,focus(),nonce,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
                 + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"

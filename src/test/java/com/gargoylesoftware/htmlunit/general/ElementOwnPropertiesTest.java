@@ -186,8 +186,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "webkitRequestFullScreen()",
             FF = "after(),animate(),append(),assignedSlot,attachShadow(),attributes,before(),childElementCount,"
                 + "children,classList,className,clientHeight,clientLeft,clientTop,clientWidth,closest(),"
-                + "constructor(),firstElementChild,getAttribute(),getAttributeNames(),getAttributeNode(),"
-                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "constructor(),firstElementChild,getAnimations(),getAttribute(),getAttributeNames(),"
+                + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,matches(),"
@@ -607,7 +607,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -727,7 +728,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -884,7 +886,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1051,7 +1054,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1203,7 +1207,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1436,7 +1441,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1520,7 +1526,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "parentElement,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
-                + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "hasAttribute(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,"
                 + "oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
                 + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
@@ -1555,7 +1562,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1649,7 +1657,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1769,7 +1778,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -1959,7 +1969,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -2159,7 +2170,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -2279,7 +2291,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -2399,7 +2412,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -2550,7 +2564,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -2670,7 +2685,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -2889,7 +2905,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -3030,7 +3047,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -3179,7 +3197,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -3331,7 +3350,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -3485,7 +3505,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "method,name,noValidate,reportValidity(),requestSubmit(),reset(),submit(),"
                 + "target",
             FF = "acceptCharset,action,autocomplete,checkValidity(),constructor(),elements,encoding,enctype,length,"
-                + "method,name,noValidate,reportValidity(),reset(),submit(),"
+                + "method,name,noValidate,reportValidity(),requestSubmit(),reset(),submit(),"
                 + "target",
             FF60 = "acceptCharset,action,autocomplete,checkValidity(),constructor(),elements,encoding,enctype,length,"
                 + "method,name,noValidate,reportValidity(),reset(),submit(),"
@@ -3532,7 +3552,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -3745,7 +3766,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -4034,19 +4056,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,height,hspace,"
                 + "isMap,loading,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
-                + "useMap,vspace,width,x,"
-                + "y",
+                + "useMap,vspace,width,x,y",
             FF = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,height,hspace,"
-                + "isMap,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,"
-                + "vspace,width,x,"
-                + "y",
+                + "isMap,loading,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
+                + "useMap,vspace,width,x,y",
             FF60 = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,height,hspace,isMap,longDesc,"
                 + "lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             FF68 = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,height,hspace,"
                 + "isMap,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,"
-                + "vspace,width,x,"
-                + "y")
+                + "vspace,width,x,y")
     @HtmlUnitNYI(CHROME = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF60 = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF68 = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
@@ -4064,7 +4083,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "constructor()",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -4207,7 +4227,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -4327,7 +4348,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -4590,7 +4612,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -4725,7 +4748,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -4986,7 +5010,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -5152,7 +5177,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -5274,7 +5300,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -5426,7 +5453,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -5621,7 +5649,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -5910,7 +5939,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6062,7 +6092,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6155,7 +6186,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6248,7 +6280,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6341,7 +6374,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6461,7 +6495,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6606,7 +6641,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6801,7 +6837,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -6953,7 +6990,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -7073,7 +7111,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -7209,7 +7248,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -7329,7 +7369,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -7448,7 +7489,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -7861,7 +7903,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -8029,7 +8072,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -8169,7 +8213,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -8321,7 +8366,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
             FF = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,contextMenu,dataset,dir,"
-                + "draggable,focus(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
+                + "draggable,focus(),hidden,innerText,isContentEditable,lang,nonce,"
+                + "offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
@@ -9192,7 +9238,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontimeupdate,ontoggle,ontransitionend,onvolumechange,onwaiting,onwheel,ownerSVGElement,style,"
                 + "tabIndex,"
                 + "viewportElement",
-            FF = "blur(),className,constructor(),dataset,focus(),id,onabort,onanimationcancel,onanimationend,"
+            FF = "blur(),className,constructor(),dataset,focus(),id,nonce,onabort,onanimationcancel,onanimationend,"
                 + "onanimationiteration,onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,onclose,oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,"
                 + "ondragexit,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,"

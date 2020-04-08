@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.40.0" date="xxxx, 2020" description="Bugfixes">
+        <release version="2.40.0" date="xxxx, 2020" description="Bugfixes, Firefox75">
+            <action type="add" dev="rbri">
+                HTMLFormElement.requestSubmit() for FF and CHROME added.
+            </action>
             <action type="add" dev="rbri">
                 New method AttachmentHandler.handleAttachment(WebResponse) added. By implementing your
                 own AttachmentHandler you now can process the attachment response by your code without
