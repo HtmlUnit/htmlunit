@@ -343,7 +343,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Submits the form by submitted using a specific submit button.
      * @param submitter The submit button whose attributes describe the method
      * by which the form is to be submitted. This may be either
-     * an <input> or <button> element whose type attribute is submit.
+     * an &lt;input&gt; or &lt;button&gt; element whose type attribute is submit.
      * If you omit the submitter parameter, the form element itself is used as the submitter.
      */
     @JsxFunction({CHROME, FF})
