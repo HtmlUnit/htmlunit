@@ -1375,16 +1375,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Element_SVGDiscardElement() throws Exception {
-        test("Element", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Element_SVGElement() throws Exception {
         test("Element", "SVGElement");
@@ -2988,15 +2978,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _EventTarget_HTMLAppletElement() throws Exception {
-        test("EventTarget", "HTMLAppletElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_HTMLAreaElement() throws Exception {
@@ -4402,16 +4383,6 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_SVGDescElement() throws Exception {
         test("EventTarget", "SVGDescElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _EventTarget_SVGDiscardElement() throws Exception {
-        test("EventTarget", "SVGDiscardElement");
     }
 
     /**

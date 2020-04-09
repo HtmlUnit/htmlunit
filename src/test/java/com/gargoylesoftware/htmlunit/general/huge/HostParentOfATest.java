@@ -206,15 +206,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _AudioContext_OfflineAudioContext() throws Exception {
-        test("AudioContext", "OfflineAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _AudioDestinationNode_AudioDestinationNode() throws Exception {

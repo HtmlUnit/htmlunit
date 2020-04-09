@@ -640,16 +640,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SVGDiscardElement_SVGDiscardElement() throws Exception {
-        test("SVGDiscardElement", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGElement_SVGAElement() throws Exception {
         test("SVGElement", "SVGAElement");
@@ -738,16 +728,6 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGElement_SVGDescElement() throws Exception {
         test("SVGElement", "SVGDescElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SVGElement_SVGDiscardElement() throws Exception {
-        test("SVGElement", "SVGDiscardElement");
     }
 
     /**
