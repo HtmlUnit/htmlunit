@@ -122,8 +122,8 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     protected void onAddedToPage() {
-        doOnLoad();
         super.onAddedToPage();
+        doOnLoad();
     }
 
     /**
@@ -254,6 +254,12 @@ public class HtmlImage extends HtmlElement {
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage == null) {
             return; // nothing to do if embedded in XML code
+        }
+
+        if (!isAttachedToPage()) {
+            // nothing to do if not attached to a page
+            // attaching will trigger this again
+            return;
         }
 
         final WebClient client = htmlPage.getWebClient();

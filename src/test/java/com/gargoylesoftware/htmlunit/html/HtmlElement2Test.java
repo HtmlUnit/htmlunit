@@ -16,16 +16,25 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -284,6 +293,62 @@ public class HtmlElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * Another nasty trick from one of these trackers.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"before appendChild;after appendChild;image onload;after removeChild;", "2"})
+    // HtmlUnit loads images synchron
+    @HtmlUnitNYI(CHROME = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
+            FF = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
+            FF68 = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
+            FF60 = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
+            IE = {"before appendChild;image onload;after removeChild;after appendChild;", "2"})
+    public void addRemove() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html =
+                HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var elem = document.createElement('img');\n"
+                + "  elem.setAttribute('alt', '');\n"
+                + "  elem.setAttribute('src', 'img.jpg');\n"
+                + "  elem.style.display = 'none';\n"
+                + "  elem.onload = function() {\n"
+                + "      document.title += 'image onload;';"
+                + "      document.body.removeChild(elem);\n"
+                + "      document.title += 'after removeChild;';"
+                + "    }\n"
+                + "  document.title += 'before appendChild;';"
+                + "  document.body.appendChild(elem);\n"
+                + "  document.title += 'after appendChild;';"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
     }
 
     /**
