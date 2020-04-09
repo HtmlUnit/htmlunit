@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.40.0" date="xxxx, 2020" description="Bugfixes, Chrome 81, Firefox75">
+            <action type="fix" dev="rbri">
+                Fix image onLoad handling / image is not loaded if the element is not attached to a page.
+                This fixes a problem with a common tracker trick (adding an image and removing it afterwards
+                from the onLoad handler).
+            </action>
             <action type="add" dev="rbri">
                 HTMLFormElement.requestSubmit() for FF and CHROME added.
             </action>
