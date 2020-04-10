@@ -730,6 +730,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html, 7777777);
+        loadPageWithAlerts2(html);
     }
 }

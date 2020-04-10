@@ -162,6 +162,9 @@ public class HtmlImage extends HtmlElement {
                     htmlPage.addAfterLoadAction(action);
                     return;
                 }
+
+                super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
+                        notifyMutationObservers);
                 doOnLoad();
                 return;
             }
@@ -243,9 +246,14 @@ public class HtmlImage extends HtmlElement {
             return; // nothing to do if embedded in XML code
         }
 
+        final WebClient client = htmlPage.getWebClient();
+        if (!client.isJavaScriptEnabled()) {
+            onloadProcessed_ = true;
+            return;
+        }
+
         boolean loadSuccessful = false;
         if (hasAttribute(SRC_ATTRIBUTE)) {
-            onloadProcessed_ = true;
             if (!StringUtils.isBlank(getSrcAttribute())) {
                 // We need to download the image and then call the resulting handler.
                 try {
@@ -265,13 +273,8 @@ public class HtmlImage extends HtmlElement {
             }
         }
 
-        final WebClient client = htmlPage.getWebClient();
-        if (!client.isJavaScriptEnabled()) {
-            onloadProcessed_ = true;
-            return;
-        }
-
         if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
+            onloadProcessed_ = true;
             final Event event = new Event(this, loadSuccessful ? Event.TYPE_LOAD : Event.TYPE_ERROR);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Firing the " + event.getType() + " event for '" + this + "'.");
