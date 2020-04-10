@@ -36,6 +36,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -636,6 +637,58 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         }
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that image's width and height are numbers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"error2;error3;error4;load5;", "3"},
+            FF = {"error2;error3;error4;load5;", "4"},
+            FF68 = {"error2;error3;error4;load5;", "4"},
+            FF60 = {"error2;error3;error4;load5;", "4"})
+    // at the moment we do not check the image content
+    @HtmlUnitNYI(CHROME = {"error2;error3;load4;load5;", "3"},
+            FF = {"error2;error3;load4;load5;", "4"},
+            FF68 = {"error2;error3;load4;load5;", "4"},
+            FF60 = {"error2;error3;load4;load5;", "4"},
+            IE = {"error2;error3;load4;load5;", "3"})
+    public void onload() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final URL urlImage = new URL(URL_SECOND, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function showInfo(text) {\n"
+            + "    document.title += text + ';';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <img id='myImage1' onload='showInfo(\"load1\")' onerror='showInfo(\"error1\")'>\n"
+            + "  <img id='myImage2' src='' onload='showInfo(\"load2\")' onerror='showInfo(\"error2\")'>\n"
+            + "  <img id='myImage3' src='  ' onload='showInfo(\"load3\")' onerror='showInfo(\"error3\")'>\n"
+            + "  <img id='myImage4' src='" + URL_SECOND + "' onload='showInfo(\"load4\")' "
+                    + "onerror='showInfo(\"error4\")'>\n"
+            + "  <img id='myImage5' src='" + URL_SECOND + "img.jpg' onload='showInfo(\"load5\")' "
+                    + "onerror='showInfo(\"error5\")'>\n"
+            + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
     }
 
     /**

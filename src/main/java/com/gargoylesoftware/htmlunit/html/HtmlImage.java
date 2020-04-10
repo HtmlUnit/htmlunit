@@ -262,10 +262,18 @@ public class HtmlImage extends HtmlElement {
             return;
         }
 
-        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
+        final boolean hasEventHandler = hasEventHandlers("onload") || hasEventHandlers("onerror");
+        if (hasEventHandler && hasAttribute(SRC_ATTRIBUTE)) {
             onloadProcessed_ = true;
             boolean loadSuccessful = false;
-            if (!getSrcAttribute().isEmpty()) {
+            final boolean tryDownload;
+            if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)) {
+                tryDownload = !StringUtils.isBlank(getSrcAttribute());
+            }
+            else {
+                tryDownload = !getSrcAttribute().isEmpty();
+            }
+            if (tryDownload) {
                 // We need to download the image and then call the resulting handler.
                 try {
                     downloadImageIfNeeded();
