@@ -122,8 +122,8 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     protected void onAddedToPage() {
-        super.onAddedToPage();
         doOnLoad();
+        super.onAddedToPage();
     }
 
     /**
@@ -162,9 +162,6 @@ public class HtmlImage extends HtmlElement {
                     htmlPage.addAfterLoadAction(action);
                     return;
                 }
-
-                super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
-                        notifyMutationObservers);
                 doOnLoad();
                 return;
             }
@@ -218,7 +215,20 @@ public class HtmlImage extends HtmlElement {
             createdByJavascript_ = true;
         }
 
-        doOnLoad();
+        if (htmlPage == null) {
+            return; // nothing to do if embedded in XML code
+        }
+
+        if (htmlPage.getWebClient().getOptions().isDownloadImages()) {
+            try {
+                downloadImageIfNeeded();
+            }
+            catch (final IOException e) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Unable to download image for element " + this);
+                }
+            }
+        }
     }
 
     /**
@@ -252,19 +262,10 @@ public class HtmlImage extends HtmlElement {
             return;
         }
 
-        boolean loadSuccessful = false;
-        final String src = getSrcAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != src) {
-            boolean tryDownload = false;
-            if (!downloaded_) {
-                if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)) {
-                    tryDownload = !StringUtils.isBlank(src);
-                }
-                else {
-                    tryDownload = !src.isEmpty();
-                }
-            }
-            if (tryDownload) {
+        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
+            onloadProcessed_ = true;
+            boolean loadSuccessful = false;
+            if (!getSrcAttribute().isEmpty()) {
                 // We need to download the image and then call the resulting handler.
                 try {
                     downloadImageIfNeeded();
@@ -281,10 +282,7 @@ public class HtmlImage extends HtmlElement {
                     }
                 }
             }
-        }
 
-        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
-            onloadProcessed_ = true;
             final Event event = new Event(this, loadSuccessful ? Event.TYPE_LOAD : Event.TYPE_ERROR);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Firing the " + event.getType() + " event for '" + this + "'.");
