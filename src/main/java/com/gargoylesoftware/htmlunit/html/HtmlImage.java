@@ -253,8 +253,18 @@ public class HtmlImage extends HtmlElement {
         }
 
         boolean loadSuccessful = false;
-        if (hasAttribute(SRC_ATTRIBUTE)) {
-            if (!StringUtils.isBlank(getSrcAttribute())) {
+        final String src = getSrcAttribute();
+        if (ATTRIBUTE_NOT_DEFINED != src) {
+            boolean tryDownload = false;
+            if (!downloaded_) {
+                if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)) {
+                    tryDownload = !StringUtils.isBlank(src);
+                }
+                else {
+                    tryDownload = !src.isEmpty();
+                }
+            }
+            if (tryDownload) {
                 // We need to download the image and then call the resulting handler.
                 try {
                     downloadImageIfNeeded();
