@@ -215,20 +215,7 @@ public class HtmlImage extends HtmlElement {
             createdByJavascript_ = true;
         }
 
-        if (htmlPage == null) {
-            return; // nothing to do if embedded in XML code
-        }
-
-        if (htmlPage.getWebClient().getOptions().isDownloadImages()) {
-            try {
-                downloadImageIfNeeded();
-            }
-            catch (final IOException e) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Unable to download image for element " + this);
-                }
-            }
-        }
+        doOnLoad();
     }
 
     /**
@@ -256,22 +243,10 @@ public class HtmlImage extends HtmlElement {
             return; // nothing to do if embedded in XML code
         }
 
-        if (!isAttachedToPage()) {
-            // nothing to do if not attached to a page
-            // attaching will trigger this again
-            return;
-        }
-
-        final WebClient client = htmlPage.getWebClient();
-        if (!client.isJavaScriptEnabled()) {
+        boolean loadSuccessful = false;
+        if (hasAttribute(SRC_ATTRIBUTE)) {
             onloadProcessed_ = true;
-            return;
-        }
-
-        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
-            onloadProcessed_ = true;
-            boolean loadSuccessful = false;
-            if (!getSrcAttribute().isEmpty()) {
+            if (!StringUtils.isBlank(getSrcAttribute())) {
                 // We need to download the image and then call the resulting handler.
                 try {
                     downloadImageIfNeeded();
@@ -288,7 +263,15 @@ public class HtmlImage extends HtmlElement {
                     }
                 }
             }
+        }
 
+        final WebClient client = htmlPage.getWebClient();
+        if (!client.isJavaScriptEnabled()) {
+            onloadProcessed_ = true;
+            return;
+        }
+
+        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
             final Event event = new Event(this, loadSuccessful ? Event.TYPE_LOAD : Event.TYPE_ERROR);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Firing the " + event.getType() + " event for '" + this + "'.");

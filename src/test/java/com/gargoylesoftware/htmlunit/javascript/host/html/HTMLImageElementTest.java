@@ -731,4 +731,277 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done;", "2"})
+    public void img_download() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = new Image();\n"
+            + "  i.src = 'img.jpg';\n"
+            + "  document.title += 'done;';\n"
+            + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+        assertEquals(URL_FIRST + "img.jpg", getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done;onload;", "2"})
+    public void img_download_onloadBefore() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = new Image();\n"
+            + "  i.onload = function() { document.title += 'onload;'; };\n"
+            + "  i.src = 'img.jpg';\n"
+            + "  document.title += 'done;';\n"
+            + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+        assertEquals(URL_FIRST + "img.jpg", getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done;onload;", "2"})
+    public void img_download_onloadAfter() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = new Image();\n"
+            + "  i.src = 'img.jpg';\n"
+            + "  document.title += 'done;';\n"
+            + "  i.onload = function() { document.title += 'onload;'; };\n"
+            + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+        assertEquals(URL_FIRST + "img.jpg", getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done;onload;", "2"})
+    public void img_onLoad_calledWhenImageDownloaded_dynamic() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+            urlImage = new URL(URL_FIRST, "img2.jpg");
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = new Image();\n"
+            + "  i.src = 'img.jpg';\n"
+            + "  i.src = 'img2.jpg';\n"
+            + "  document.title += 'done;';\n"
+            + "  i.onload = function() { document.title += 'onload;'; };\n"
+            + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+        assertEquals(URL_FIRST + "img2.jpg", getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done;onload;", "2"})
+    public void img_onLoad_calledWhenImageDownloaded_dynamic2() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+            urlImage = new URL(URL_FIRST, "img2.jpg");
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = new Image();\n"
+            + "  i.onload = function() { document.title += 'onload;'; };\n"
+            + "  i.src = 'img.jpg';\n"
+            + "  i.src = 'img2.jpg';\n"
+            + "  document.title += 'done;';\n"
+            + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+        assertEquals(URL_FIRST + "img2.jpg", getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image is created if the page is already
+     * finished, the onload handler is called.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done;onload;onload2;", "3"})
+    public void img_onLoad_calledWhenImageDownloaded_dynamic_twoSteps() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+            urlImage = new URL(URL_FIRST, "img2.jpg");
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + "  var i = new Image();\n"
+                + "  i.src = 'img.jpg';\n"
+                + "  i.onload = function() {\n"
+                + "    document.title += 'onload;';\n"
+                + "    var i2 = document.createElement('img');\n"
+                + "    i2.src = 'img2.jpg';\n"
+                + "    i2.onload = function() {\n"
+                + "      document.title += 'onload2;';\n"
+                + "    };\n"
+                + "  };\n"
+                + "  document.title += 'done;';\n"
+                + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+        assertEquals(URL_FIRST + "img2.jpg", getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute set from a script, it gets downloaded
+     * and the <tt>onload</tt> handler gets invoked.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"image one;image two;", "3"})
+    public void img_onLoad_calledWhenImageDownloaded_mixed() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+            urlImage = new URL(URL_FIRST, "img2.jpg");
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html
+                = "<html><body><img id='img' name='img'/><script>\n"
+                + "  var i = new Image();\n"
+                + "  i.onload = function() {\n"
+                + "    document.title += 'image one;';\n"
+                + "    i.onload = function() {\n"
+                + "      document.title += 'image two;';\n"
+                + "    };\n"
+                + "    i.src = 'img2.jpg';\n"
+                + "  };\n"
+                + "  i.setAttribute('src','img.jpg');\n"
+                + "  var t = setTimeout(function() {clearTimeout(t);}, 500);\n"
+                + "</script></body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+
+        final List<String> requestedUrls = getMockWebConnection().getRequestedUrls(URL_FIRST);
+        assertEquals("", requestedUrls.get(0));
+        assertEquals("img.jpg", requestedUrls.get(1));
+        assertEquals("img2.jpg", requestedUrls.get(2));
+    }
 }

@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -693,7 +694,13 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts({"before import", "after import", "1"})
+    // HtmlUnit loads images synchron
+    @HtmlUnitNYI(CHROME = {"before import", "1", "after import"},
+            FF = {"before import", "1", "after import"},
+            FF68 = {"before import", "1", "after import"},
+            FF60 = {"before import", "1", "after import"},
+            IE = {"before import", "1", "after import"})
     public void createHTMLDocumentInnerAddImgAddDocToIframe1() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -709,7 +716,9 @@ public class DOMImplementationTest extends WebDriverTestCase {
                          // Copy the new HTML document into the frame
                 + "      var destDocument = frame.contentDocument;\n"
                 + "      var srcNode = doc.documentElement;\n"
+                + "      alert('before import');\n"
                 + "      var newNode = destDocument.importNode(srcNode, true);\n"
+                + "      alert('after import');\n"
                 + "      destDocument.replaceChild(newNode, destDocument.documentElement);\n"
 
                 + "    } catch(e) { alert('exception'); }\n"
@@ -721,6 +730,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 7777777);
     }
 }
