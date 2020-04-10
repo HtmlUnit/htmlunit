@@ -596,7 +596,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that image's width and height are numbers.
      * @throws Exception if the test fails
      */
     @Test
@@ -640,7 +639,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that image's width and height are numbers.
      * @throws Exception if the test fails
      */
     @Test
@@ -650,9 +648,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF60 = {"error2;error3;error4;load5;", "4"})
     // at the moment we do not check the image content
     @HtmlUnitNYI(CHROME = {"error2;error3;load4;load5;", "3"},
-            FF = {"error2;error3;load4;load5;", "4"},
-            FF68 = {"error2;error3;load4;load5;", "4"},
-            FF60 = {"error2;error3;load4;load5;", "4"},
+            FF = {"error2;load3;load4;load5;", "4"},
+            FF68 = {"error2;load3;load4;load5;", "4"},
+            FF60 = {"error2;load3;load4;load5;", "4"},
             IE = {"error2;error3;load4;load5;", "3"})
     public void onload() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
@@ -661,7 +659,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             final URL urlImage = new URL(URL_SECOND, "img.jpg");
             final List<NameValuePair> emptyList = Collections.emptyList();
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
+            getMockWebConnection().setResponse(URL_SECOND, "Test", 200, "OK", MimeType.TEXT_HTML, emptyList);
+            getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         }
 
         final String html = "<html><head>\n"
@@ -678,6 +677,80 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                     + "onerror='showInfo(\"error4\")'>\n"
             + "  <img id='myImage5' src='" + URL_SECOND + "img.jpg' onload='showInfo(\"load5\")' "
                     + "onerror='showInfo(\"error5\")'>\n"
+            + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"load;", "2"})
+    public void emptyMimeType() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final URL urlImage = new URL(URL_SECOND, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function showInfo(text) {\n"
+            + "    document.title += text + ';';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <img id='myImage5' src='" + URL_SECOND + "img.jpg' onload='showInfo(\"load\")' "
+                    + "onerror='showInfo(\"error\")'>\n"
+            + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        assertTitle(driver, getExpectedAlerts()[0]);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"load;", "2"})
+    public void wrongMimeType() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final URL urlImage = new URL(URL_SECOND, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "text/html", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function showInfo(text) {\n"
+            + "    document.title += text + ';';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <img id='myImage5' src='" + URL_SECOND + "img.jpg' onload='showInfo(\"load\")' "
+                    + "onerror='showInfo(\"error\")'>\n"
             + "</body></html>";
 
         final int count = getMockWebConnection().getRequestCount();
