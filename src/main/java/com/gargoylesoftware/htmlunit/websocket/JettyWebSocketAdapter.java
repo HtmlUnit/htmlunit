@@ -54,6 +54,9 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
             client_ = new WebSocketClient();
         }
 
+        // use the same executor as the rest
+        client_.setExecutor(webClient.getExecutor());
+
         client_.getHttpClient().setCookieStore(new WebSocketCookieStore(webClient));
 
         final WebSocketPolicy policy = client_.getPolicy();
