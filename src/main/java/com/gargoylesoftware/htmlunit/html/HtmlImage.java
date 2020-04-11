@@ -263,7 +263,7 @@ public class HtmlImage extends HtmlElement {
         }
 
         final boolean hasEventHandler = hasEventHandlers("onload") || hasEventHandlers("onerror");
-        if (hasEventHandler && hasAttribute(SRC_ATTRIBUTE)) {
+        if ((hasEventHandler || client.getOptions().isDownloadImages()) && hasAttribute(SRC_ATTRIBUTE)) {
             onloadProcessed_ = true;
             boolean loadSuccessful = false;
             final boolean tryDownload;
