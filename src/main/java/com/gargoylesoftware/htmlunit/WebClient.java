@@ -49,6 +49,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
@@ -156,6 +161,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
+    private transient ExecutorService executor_;
 
     private AlertHandler alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -277,6 +283,26 @@ public class WebClient implements Serializable, AutoCloseable {
             if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
                 initMSXMLActiveX();
             }
+        }
+    }
+
+    /**
+     * Our simple impl of a ThreadFactory (decorator) to be able to name
+     * our threads.
+     */
+    private static final class ThreadNamingFactory implements ThreadFactory {
+        private static int ID_ = 1;
+        private ThreadFactory baseFactory_;
+
+        private ThreadNamingFactory(final ThreadFactory aBaseFactory) {
+            baseFactory_ = aBaseFactory;
+        }
+
+        @Override
+        public Thread newThread(final Runnable aRunnable) {
+            final Thread thread = baseFactory_.newThread(aRunnable);
+            thread.setName("WebClient Thread " + ID_++);
+            return thread;
         }
     }
 
@@ -765,6 +791,21 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public StatusHandler getStatusHandler() {
         return statusHandler_;
+    }
+
+    /**
+     * Returns the executor for this webclient.
+     * @return the executor
+     */
+    public synchronized Executor getExecutor() {
+        if (executor_ == null) {
+            final ThreadPoolExecutor tmpThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+            tmpThreadPool.setThreadFactory(new ThreadNamingFactory(tmpThreadPool.getThreadFactory()));
+            // tmpThreadPool.prestartAllCoreThreads();
+            executor_ = tmpThreadPool;
+        }
+
+        return executor_;
     }
 
     /**
@@ -2006,6 +2047,17 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         catch (final Exception e) {
             LOG.error("Exception while closing the connection", e);
+        }
+
+        synchronized (this) {
+            if (executor_ != null) {
+                try {
+                    executor_.shutdownNow();
+                }
+                catch (final Exception e) {
+                    LOG.error("Exception while shutdown the executor service", e);
+                }
+            }
         }
 
         cache_.clear();
