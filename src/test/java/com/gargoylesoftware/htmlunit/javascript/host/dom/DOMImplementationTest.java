@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -695,12 +694,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"before import", "after import", "1"})
-    // HtmlUnit loads images synchron
-    @HtmlUnitNYI(CHROME = {"before import", "1", "after import"},
-            FF = {"before import", "1", "after import"},
-            FF68 = {"before import", "1", "after import"},
-            FF60 = {"before import", "1", "after import"},
-            IE = {"before import", "1", "after import"})
     public void createHTMLDocumentInnerAddImgAddDocToIframe1() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
