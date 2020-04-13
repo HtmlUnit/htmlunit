@@ -50,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public final class ScriptElementSupport {
 
@@ -75,6 +76,13 @@ public final class ScriptElementSupport {
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("Script node added: " + element.asXml());
+        }
+
+        if (!element.getPage().getWebClient().isJavaScriptEngineEnabled()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("SvgScript found but not executed because javascript engine is disabled");
+            }
+            return;
         }
 
         final PostponedAction action = new PostponedAction(element.getPage(), "Execution of script " + element) {
