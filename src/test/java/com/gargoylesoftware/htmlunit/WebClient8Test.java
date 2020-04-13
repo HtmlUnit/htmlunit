@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * Tests for {@link WebClient} running with js disabled.
  *
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 @RunWith(BrowserRunner.class)
 public class WebClient8Test extends SimpleWebTestCase {

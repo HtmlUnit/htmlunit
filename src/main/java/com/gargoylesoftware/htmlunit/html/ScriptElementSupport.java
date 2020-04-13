@@ -50,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Ronny Shapiro
  */
 public final class ScriptElementSupport {
 
