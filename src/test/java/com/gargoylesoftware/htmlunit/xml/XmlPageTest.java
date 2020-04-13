@@ -116,7 +116,7 @@ public class XmlPageTest extends WebServerTestCase {
         final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
 
         final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
-        assertNotNull("No element found by XPaht '//msg'", msg);
+        assertNotNull("No element found by XPath '//msg'", msg);
         assertEquals(expected, msg.asText());
     }
 
