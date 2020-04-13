@@ -77,6 +77,13 @@ public final class ScriptElementSupport {
             LOG.debug("Script node added: " + element.asXml());
         }
 
+        if (!element.getPage().getWebClient().isJavaScriptEngineEnabled()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("SvgScript found but not executed because javascript engine is disabled");
+            }
+            return;
+        }
+
         final PostponedAction action = new PostponedAction(element.getPage(), "Execution of script " + element) {
             @Override
             public void execute() {

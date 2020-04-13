@@ -287,4 +287,25 @@ public class WebClient8Test extends SimpleWebTestCase {
             webClient.getPage(URL_FIRST);
         }
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void svgScript() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+                + "    <script id='myId'></script>\n"
+                + "  </svg>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            assertEquals(page.getBody().getChildElementCount(), 1);
+        }
+    }
 }
