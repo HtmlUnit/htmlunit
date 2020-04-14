@@ -1081,6 +1081,9 @@
         <contributor>
             <name>Alex Gorbatovsky</name>
         </contributor>
+        <contributor>
+            <name>Ronny Shapiro</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
