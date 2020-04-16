@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ronny Shapiro
  */
 public abstract class HtmlElement extends DomElement {
 
