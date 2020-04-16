@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.html.HtmlImage.ImageData;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -60,7 +59,6 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
     private int xPosition_;
     private int yPosition_;
     private WebResponse imageWebResponse_;
-    private transient ImageData imageData_;
     private boolean downloaded_;
 
     /**
@@ -234,10 +232,6 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
                 imageWebResponse_ = webClient.loadWebResponse(request);
             }
 
-            if (imageData_ != null) {
-                imageData_.close();
-                imageData_ = null;
-            }
             downloaded_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
                     || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
         }

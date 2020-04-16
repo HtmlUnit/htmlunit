@@ -231,9 +231,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             }
         }
 
-        final Object handler = getEventHandler(Event.TYPE_MESSAGE);
-        if (handler != null && handler instanceof Function) {
-            final Function handlerFunction = (Function) handler;
+        final Function handlerFunction = getEventHandler(Event.TYPE_MESSAGE);
+        if (handlerFunction != null) {
             final Object[] args = {event};
             handlerFunction.call(cx, this, this, args);
         }
