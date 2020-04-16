@@ -201,8 +201,11 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
 
                 final ClassConfiguration classConfiguration
-                    = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
-                            className, extendedClassName);
+                    = new ClassConfiguration(klass,
+                            domClasses.toArray(new Class<?>[domClasses.size()]),
+                            jsxClass.isJSObject(),
+                            className,
+                            extendedClassName);
 
                 process(classConfiguration, hostClassName, expectedBrowser);
                 return classConfiguration;
