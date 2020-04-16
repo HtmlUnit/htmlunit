@@ -1382,7 +1382,9 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
-        newnode.attributeListeners_ = new LinkedHashSet<>(attributeListeners_);
+        synchronized (attributeListeners_) {
+            newnode.attributeListeners_ = new LinkedHashSet<>(attributeListeners_);
+        }
 
         return newnode;
     }
