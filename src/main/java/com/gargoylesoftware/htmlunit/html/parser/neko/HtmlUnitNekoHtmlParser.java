@@ -150,7 +150,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         }
 
         domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
-        domBuilder.setProperty(HTMLTagBalancer.FRAGMENT_CONTEXT_STACK, ancestors.toArray(new QName[] {}));
+        domBuilder.setProperty(HTMLTagBalancer.FRAGMENT_CONTEXT_STACK, ancestors.toArray(new QName[ancestors.size()]));
 
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
 

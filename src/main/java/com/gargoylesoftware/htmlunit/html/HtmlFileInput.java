@@ -120,7 +120,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
             keyDataPair.setData(data_);
             list.add(keyDataPair);
         }
-        return list.toArray(new NameValuePair[0]);
+        return list.toArray(new NameValuePair[list.size()]);
     }
 
     /**

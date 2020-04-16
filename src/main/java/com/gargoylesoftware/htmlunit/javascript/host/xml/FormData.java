@@ -161,7 +161,7 @@ public class FormData extends SimpleScriptable {
             }
         }
 
-        final Object[] stringValues = values.toArray(new Object[0]);
+        final Object[] stringValues = values.toArray(new Object[values.size()]);
         return Context.getCurrentContext().newArray(this, stringValues);
     }
 

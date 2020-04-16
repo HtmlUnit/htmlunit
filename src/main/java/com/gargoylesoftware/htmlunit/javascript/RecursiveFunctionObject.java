@@ -86,7 +86,7 @@ public class RecursiveFunctionObject extends FunctionObject {
                 }
             }
         }
-        return objects.toArray(new Object[0]);
+        return objects.toArray(new Object[objects.size()]);
     }
 
     /**
