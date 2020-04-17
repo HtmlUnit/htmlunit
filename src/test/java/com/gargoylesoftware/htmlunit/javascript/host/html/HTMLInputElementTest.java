@@ -1281,13 +1281,44 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void readOnly() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  var input = document.getElementById('myInput');\n"
-            + "  alert(input.readOnly);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<input id='myInput' value='some test' readonly='false'>\n"
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.readOnly);\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='some test' readonly='false'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void readOnlyInputFile() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.readOnly);\n"
+            + "    input = document.getElementById('myReadonlyInput');\n"
+            + "    alert(input.readOnly);\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='file' value='some test'>\n"
+            + "  <input id='myReadonlyInput' type='file' value='some test' readonly='false'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
