@@ -581,9 +581,33 @@ public class WebClient implements Serializable, AutoCloseable {
             // Remove the old windows before create new ones.
             oldPage.cleanUp();
         }
+
         Page newPage = null;
+        boolean pageDenied = false;
         if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(WINDOW_EXECUTE_EVENTS)) {
-            newPage = pageCreator_.createPage(webResponse, webWindow);
+            if (webWindow instanceof FrameWindow) {
+                final String xFrameOptions = webResponse.getResponseHeaderValue(HttpHeader.X_FRAME_OPTIONS);
+                if ("DENY".equalsIgnoreCase(xFrameOptions)) {
+                    try {
+                        final WebResponse aboutBlank = loadWebResponse(WebRequest.newAboutBlankRequest());
+                        newPage = pageCreator_.createPage(aboutBlank, webWindow);
+                        // TODO - maybe we have to attach to original request/response to the page
+                        ((FrameWindow) webWindow).setPageDenied(true);
+                        pageDenied = true;
+                        if (LOG.isWarnEnabled()) {
+                            LOG.warn("Load denied by X-Frame-Options: '"
+                                    + webResponse.getWebRequest().getUrl() + "' does not permit framing.");
+                        }
+                    }
+                    catch (final IOException e) {
+                        // ignore
+                    }
+                }
+            }
+
+            if (!pageDenied) {
+                newPage = pageCreator_.createPage(webResponse, webWindow);
+            }
 
             if (windows_.contains(webWindow)) {
                 fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));

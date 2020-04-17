@@ -930,6 +930,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_FORM_USABLE_AS_FUNCTION,
 
+    /** contentDocument throws if the frame document access is denied. */
+    @BrowserFeature(IE)
+    JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS,
+
     /** Indicates if the method toSource exists on the native objects. */
     @BrowserFeature({FF68, FF60})
     JS_FUNCTION_TOSOURCE,

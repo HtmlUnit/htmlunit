@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +27,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HTMLFrameElement} when used for {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}.
@@ -693,6 +697,47 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "left.html"), left);
+
+        loadPageWithAlerts2(html);
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"loaded", "null"},
+            FF60 = {"loaded", "[object HTMLDocument]"},
+            IE = {"loaded", "error"})
+    public void deny() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Deny</title>\n"
+            + "  <script>\n"
+            + "    function check() {\n"
+            + "      try {\n"
+            + "        alert(document.getElementById(\"frame1\").contentDocument);\n"
+            + "      } catch (e) { alert('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<frameset cols='42%' >\n"
+            + "  <frame name='frame1' id='frame1' src='content.html' "
+                      + "onLoad='alert(\"loaded\");check()' onError='alert(\"error\")'>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String left = "<html><head><title>Frame Title</title></head>\n"
+                + "<body>Frame Content</body>\n"
+                + "</html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("X-Frame-Options", "DENY"));
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), left,
+                200, "OK", MimeType.TEXT_HTML, headers);
 
         loadPageWithAlerts2(html);
         assertEquals(2, getMockWebConnection().getRequestCount());

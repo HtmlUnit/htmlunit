@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -36,6 +38,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HTMLIFrameElement}.
@@ -726,5 +730,47 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         driver.switchTo().defaultContent();
         jsExecutor.executeScript("check();");
         verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"loaded", "null"},
+            FF60 = {"loaded", "[object HTMLDocument]"},
+            IE = {"loaded", "error"})
+    @NotYetImplemented(FF60)
+    public void deny() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Deny</title>\n"
+            + "  <script>\n"
+            + "    function check() {\n"
+            + "      try {\n"
+            + "        alert(document.getElementById(\"frame1\").contentDocument);\n"
+            + "      } catch (e) { alert('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='frame1' src='content.html' "
+                    + "onLoad='alert(\"loaded\");check()' onError='alert(\"error\")'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String left = "<html><head><title>IFrame Title</title></head>\n"
+                + "<body>IFrame Content</body>\n"
+                + "</html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("X-Frame-Options", "DENY"));
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), left,
+                200, "OK", MimeType.TEXT_HTML, headers);
+
+        loadPageWithAlerts2(html);
+        assertEquals(2, getMockWebConnection().getRequestCount());
     }
 }

@@ -127,6 +127,9 @@ public final class HttpHeader {
     /** Ping-From. */
     public static final String PING_TO = "Ping-To";
 
+    /** X-Frame-Options. */
+    public static final String X_FRAME_OPTIONS = "X-Frame-Options";
+
     private HttpHeader() {
     }
 }
