@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -35,6 +36,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -52,6 +54,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLIFrameElement3Test extends WebDriverTestCase {
+
+    @Override
+    protected boolean needThreeConnections() {
+        return true;
+    }
 
     /**
      * @throws Exception if the test fails
@@ -741,6 +748,85 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = {"loaded", "error"})
     @NotYetImplemented(FF60)
     public void deny() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "DENY"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = {"loaded", "null"},
+            IE = {"loaded", "[object HTMLDocument]"})
+    public void csp_None() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "[object HTMLDocument]"})
+    public void csp_Self() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(URL_FIRST, "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "[object HTMLDocument]"})
+    public void csp_SelfDifferentPath() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(URL_FIRST, "/path2/content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loaded", "[object HTMLDocument]"})
+    public void csp_Url() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(new URL("http://localhost:" + PORT + "/"), "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = {"loaded", "null"},
+            IE = {"loaded", "[object HTMLDocument]"})
+    public void csp_UrlDifferentPort() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = {"loaded", "null"},
+            IE = {"loaded", "[object HTMLDocument]"})
+    public void csp_many() throws Exception {
+        retrictByHeader(
+                new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
+                        "default-src 'none'; script-src 'self'; frame-ancestors 'self';"),
+                new URL(new URL("http://localhost:" + PORT2 + "/"), "content.html"));
+    }
+
+    private void retrictByHeader(final NameValuePair header, final URL contentUrl) throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
             + "<html>\n"
@@ -755,22 +841,29 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <iframe id='frame1' src='content.html' "
-                    + "onLoad='alert(\"loaded\");check()' onError='alert(\"error\")'></iframe>\n"
+            + "  <iframe id='frame1' src='" + contentUrl + "' "
+                    + "onLoad='alert(\"loaded\")' onError='alert(\"error\")'></iframe>\n"
+            + "  <button type='button' id='clickme' onClick='check()'>Click me</a>\n"
             + "</body>\n"
             + "</html>";
 
-        final String left = "<html><head><title>IFrame Title</title></head>\n"
+        final String content = "<html><head><title>IFrame Title</title></head>\n"
                 + "<body>IFrame Content</body>\n"
                 + "</html>";
 
         final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("X-Frame-Options", "DENY"));
+        headers.add(header);
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), left,
+        getMockWebConnection().setResponse(contentUrl, content,
                 200, "OK", MimeType.TEXT_HTML, headers);
 
-        loadPageWithAlerts2(html);
+        final String[] expectedAlerts = getExpectedAlerts();
+        setExpectedAlerts(Arrays.copyOf(expectedAlerts, expectedAlerts.length - 1));
+        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_FIRST, "path"), DEFAULT_WAIT_TIME);
+
+        driver.findElement(By.id("clickme")).click();
+        verifyAlerts(driver, expectedAlerts[expectedAlerts.length - 1]);
+
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 }

@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.FrameWindow.PageDenied;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -83,7 +84,7 @@ public class HTMLIFrameElement extends HTMLElement {
     @JsxGetter
     public DocumentProxy getContentDocument() {
         final FrameWindow frameWindow = getFrame().getEnclosedWindow();
-        if (frameWindow.isPageDenied()) {
+        if (PageDenied.NONE != frameWindow.getPageDenied()) {
             if (getBrowserVersion().hasFeature(JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS)) {
                 throw Context.reportRuntimeError("Error access denied");
             }

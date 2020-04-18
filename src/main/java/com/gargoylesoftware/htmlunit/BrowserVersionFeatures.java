@@ -49,6 +49,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     ANCHOR_SEND_PING_REQUEST,
 
+    /** Browser does not check the cps. */
+    @BrowserFeature(IE)
+    CONTENT_SECURIRY_POLICY_IGNORED,
+
     /** Background image is 'initial'. */
     @BrowserFeature(CHROME)
     CSS_BACKGROUND_INITIAL,
@@ -893,6 +897,11 @@ public enum BrowserVersionFeatures {
     /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
     @BrowserFeature({FF, FF68, FF60})
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
+
+    /** do not trigger the onload event if the frame content
+     * was not shown because of the csp. */
+    @BrowserFeature({FF, FF68, FF60})
+    JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY,
 
     /** Whether {@code FileReader} includes content type or not. */
     @BrowserFeature({FF, FF68, FF60})

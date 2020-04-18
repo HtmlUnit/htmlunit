@@ -1158,6 +1158,11 @@
             <artifactId>dec</artifactId>
             <version>0.1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.shapesecurity</groupId>
+            <artifactId>salvation</artifactId>
+            <version>2.7.1</version>
+        </dependency>
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>

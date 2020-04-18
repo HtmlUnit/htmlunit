@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECURIRY_POLICY_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
@@ -77,6 +78,7 @@ import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.FrameWindow.PageDenied;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
@@ -101,6 +103,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.TextUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
+import com.shapesecurity.salvation.Parser;
+import com.shapesecurity.salvation.data.Policy;
+import com.shapesecurity.salvation.data.URI;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -583,29 +588,53 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         Page newPage = null;
-        boolean pageDenied = false;
+        FrameWindow.PageDenied pageDenied = PageDenied.NONE;
         if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(WINDOW_EXECUTE_EVENTS)) {
             if (webWindow instanceof FrameWindow) {
-                final String xFrameOptions = webResponse.getResponseHeaderValue(HttpHeader.X_FRAME_OPTIONS);
-                if ("DENY".equalsIgnoreCase(xFrameOptions)) {
-                    try {
-                        final WebResponse aboutBlank = loadWebResponse(WebRequest.newAboutBlankRequest());
-                        newPage = pageCreator_.createPage(aboutBlank, webWindow);
-                        // TODO - maybe we have to attach to original request/response to the page
-                        ((FrameWindow) webWindow).setPageDenied(true);
-                        pageDenied = true;
+                final String contentSecurityPolicy =
+                        webResponse.getResponseHeaderValue(HttpHeader.CONTENT_SECURIRY_POLICY);
+                if (StringUtils.isNotBlank(contentSecurityPolicy)
+                        && !getBrowserVersion().hasFeature(CONTENT_SECURIRY_POLICY_IGNORED)) {
+                    final URL origin = UrlUtils.getUrlWithoutPathRefQuery(
+                            ((FrameWindow) webWindow).getEnclosingPage().getUrl());
+                    final URL source = UrlUtils.getUrlWithoutPathRefQuery(webResponse.getWebRequest().getUrl());
+                    final Policy policy = Parser.parse(contentSecurityPolicy, origin.toExternalForm());
+                    if (!policy.allowsFrameAncestor(URI.parse(source.toExternalForm()))) {
+                        pageDenied = PageDenied.BY_CONTENT_SECURIRY_POLICY;
+
                         if (LOG.isWarnEnabled()) {
-                            LOG.warn("Load denied by X-Frame-Options: '"
+                            LOG.warn("Load denied by Content-Security-Policy: '" + contentSecurityPolicy + "' - "
                                     + webResponse.getWebRequest().getUrl() + "' does not permit framing.");
                         }
                     }
-                    catch (final IOException e) {
-                        // ignore
+                }
+
+                if (pageDenied == PageDenied.NONE) {
+                    final String xFrameOptions = webResponse.getResponseHeaderValue(HttpHeader.X_FRAME_OPTIONS);
+                    if ("DENY".equalsIgnoreCase(xFrameOptions)) {
+                        pageDenied = PageDenied.BY_X_FRAME_OPTIONS;
+
+                        if (LOG.isWarnEnabled()) {
+                            LOG.warn("Load denied by X-Frame-Options: DENY; - '"
+                                    + webResponse.getWebRequest().getUrl() + "' does not permit framing.");
+                        }
                     }
                 }
             }
 
-            if (!pageDenied) {
+            if (pageDenied != PageDenied.NONE) {
+                try {
+                    final WebResponse aboutBlank = loadWebResponse(WebRequest.newAboutBlankRequest());
+                    newPage = pageCreator_.createPage(aboutBlank, webWindow);
+                    // TODO - maybe we have to attach to original request/response to the page
+
+                    ((FrameWindow) webWindow).setPageDenied(pageDenied);
+                }
+                catch (final IOException e) {
+                    // ignore
+                }
+            }
+            else {
                 newPage = pageCreator_.createPage(webResponse, webWindow);
             }
 

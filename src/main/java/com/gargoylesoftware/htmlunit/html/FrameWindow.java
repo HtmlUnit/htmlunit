@@ -29,8 +29,11 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
  */
 public class FrameWindow extends WebWindowImpl {
 
+    /** The different deny states. */
+    public enum PageDenied { NONE, BY_X_FRAME_OPTIONS, BY_CONTENT_SECURIRY_POLICY }
+
     private final BaseFrameElement frame_;
-    private boolean pageDenied_;
+    private PageDenied pageDenied_;
 
     /**
      * Creates an instance for a given frame.
@@ -103,7 +106,7 @@ public class FrameWindow extends WebWindowImpl {
      */
     @Override
     public void setEnclosedPage(final Page page) {
-        setPageDenied(false);
+        setPageDenied(PageDenied.NONE);
         super.setEnclosedPage(page);
 
         // we have updated a frame window by javascript write();
@@ -149,14 +152,14 @@ public class FrameWindow extends WebWindowImpl {
      * Marks that the page content as denied.
      * @param pageDenied the new state
      */
-    public void setPageDenied(final boolean pageDenied) {
+    public void setPageDenied(final PageDenied pageDenied) {
         pageDenied_ = pageDenied;
     }
 
     /**
      * @return true if the page was denied
      */
-    public boolean isPageDenied() {
+    public PageDenied getPageDenied() {
         return pageDenied_;
     }
 }
