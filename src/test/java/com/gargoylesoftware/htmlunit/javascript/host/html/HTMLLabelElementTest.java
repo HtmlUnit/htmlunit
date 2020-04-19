@@ -156,17 +156,22 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE = "[object HTMLFormElement]")
+    @Alerts(DEFAULT = {"null", "[object HTMLFormElement]"},
+            IE = {"[object HTMLFormElement]", "[object HTMLFormElement]"})
     public void form() throws Exception {
         final String html
             = "<html>\n"
             + "<body>\n"
             + "  <form>\n"
             + "    <label id='a'>a</label>"
+
+            + "    <label id='b' for='checkbox1'>My Label</label>\n"
+            + "    <input type='checkbox' id='checkbox1'>\n"
             + "  </form>"
+
             + "  <script>\n"
             + "    alert(document.getElementById('a').form);\n"
+            + "    alert(document.getElementById('b').form);\n"
             + "  </script>"
             + "</body>"
             + "</html>";

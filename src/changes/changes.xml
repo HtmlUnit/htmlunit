@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.40.0" date="xxxx, 2020" description="Bugfixes, Chrome 81, Firefox75">
+            <action type="fix" dev="rbri">
+                Label form property has to work based on the element referenced by the label.
+            </action>
             <action type="fix" dev="rbri" due-to="Ronny Shapiro">
                 Fix possible ConcurrentModificationException when cloning an HtmlPage / HtmlElement.
             </action>

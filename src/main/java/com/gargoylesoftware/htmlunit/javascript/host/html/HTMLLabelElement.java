@@ -90,13 +90,25 @@ public class HTMLLabelElement extends HTMLElement {
      */
     @JsxGetter
     public HTMLFormElement getForm() {
-        if (getBrowserVersion().hasFeature(JS_LABEL_FORM_NULL)) {
-            return null;
+        final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
+        final HtmlElement referencedElement = label.getReferencedElement();
+
+        if (referencedElement == null) {
+            if (getBrowserVersion().hasFeature(JS_LABEL_FORM_NULL)) {
+                return null;
+            }
+            final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+            if (form == null) {
+                return null;
+            }
+            return (HTMLFormElement) getScriptableFor(form);
         }
-        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+
+        final HtmlForm form = referencedElement.getEnclosingForm();
         if (form == null) {
             return null;
         }
+
         return (HTMLFormElement) getScriptableFor(form);
     }
 }
