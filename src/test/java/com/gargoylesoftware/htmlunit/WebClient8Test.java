@@ -339,8 +339,10 @@ public class WebClient8Test extends SimpleWebTestCase {
                 + "  <title>foo</title>\n"
                 + "</head>\n"
                 + "<frameset cols='200,*' frameborder='0' framespacing='0' border='0' >"
-                + "  <frame src='menu.html' marginheight=0 marginwidth=0 frameborder=0 scrolling='no' noresize name='leftarea'>"
-                + "  <frame src='intro.html' marginheight=0 marginwidth=0 frameborder=0 noresize name='mainarea'>"
+                + "  <frame src='menu.html' marginheight=0 marginwidth=0"
+                                    + " frameborder=0 scrolling='no' noresize name='leftarea'>"
+                + "  <frame src='intro.html' marginheight=0 marginwidth=0"
+                                    + " frameborder=0 noresize name='mainarea'>"
                 + "</frameset>"
                 + "</html>";
 
