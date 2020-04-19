@@ -331,4 +331,24 @@ public class WebClient8Test extends SimpleWebTestCase {
             loadPage(webClient, html, null, URL_FIRST);
         }
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void invalidElementEventWithNoJS() throws Exception {
+        final String html = "<html>"
+                + "<head>"
+                + "  <title>foo</title>"
+                + "</head>"
+                + "<body>"
+                + "  <body onLoad=\"ready()\">"
+                + "  </body>"
+                + "</body>"
+                + "</html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            loadPage(webClient, html, null, URL_FIRST);
+        }
+    }
 }
