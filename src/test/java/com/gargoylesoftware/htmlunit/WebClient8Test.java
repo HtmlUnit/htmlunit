@@ -320,7 +320,7 @@ public class WebClient8Test extends SimpleWebTestCase {
                 + "  <title>foo</title>"
                 + "</head>"
                 + "<body>"
-                + "  <body onLoad=\"ready()\">"
+                + "  <body onLoad='ready()'>"
                 + "  </body>"
                 + "</body>"
                 + "</html>";
