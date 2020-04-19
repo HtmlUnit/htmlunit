@@ -11,6 +11,9 @@
             <action type="fix" dev="rbri" due-to="Ronny Shapiro">
                 Fix exception when handling invalid body element with no JS engine.
             </action>
+            <action type="fix" dev="rbri" due-to="Ronny Shapiro">
+                Fix frameset exception with no JS engine.
+            </action>
             <action type="fix" dev="rbri">
                 Label form property has to work based on the element referenced by the label.
             </action>
