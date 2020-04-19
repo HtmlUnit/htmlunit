@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ronny Shapiro
  */
 public abstract class HtmlElement extends DomElement {
 
@@ -1382,7 +1383,9 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
-        newnode.attributeListeners_ = new LinkedHashSet<>(attributeListeners_);
+        synchronized (attributeListeners_) {
+            newnode.attributeListeners_ = new LinkedHashSet<>(attributeListeners_);
+        }
 
         return newnode;
     }
