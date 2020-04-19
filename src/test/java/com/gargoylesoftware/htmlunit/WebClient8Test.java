@@ -309,4 +309,26 @@ public class WebClient8Test extends SimpleWebTestCase {
             assertEquals(page.getBody().getChildElementCount(), 1);
         }
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void frameSetWithNoJS() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "</head>\n"
+                + "<frameset cols='200,*' frameborder='0' framespacing='0' border='0' >"
+                + "<frame src='menu.html' marginheight=0 marginwidth=0 frameborder=0 scrolling='no' noresize name='leftarea'>"
+                + "<frame src='intro.html' marginheight=0 marginwidth=0 frameborder=0 noresize name='mainarea'>"
+                + "</frameset>"
+                + "<body>"
+                + "</body>"
+                + "</html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            loadPage(webClient, html, null, URL_FIRST);
+        }
+    }
 }

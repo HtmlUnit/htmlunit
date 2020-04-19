@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronny Shapiro
  */
 public class HtmlFrameSet extends HtmlElement {
 
@@ -44,7 +45,9 @@ public class HtmlFrameSet extends HtmlElement {
         super(qualifiedName, page, attributes);
 
         // force script object creation now to forward onXXX handlers to window
-        getScriptableObject();
+        if (getPage().getWebClient().isJavaScriptEngineEnabled()) {
+            getScriptableObject();
+        }
     }
 
     /**
