@@ -99,7 +99,6 @@ import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul
- * @author Ronny Shapiro
  */
 final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         implements ContentHandler, LexicalHandler, HTMLTagBalancingListener, HTMLParserDOMBuilder {
@@ -740,8 +739,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
             if (to.getAttributes().getNamedItem(attrName) == null) {
                 to.setAttribute(attrName, attrs.getValue(i));
-                if (attrName.startsWith("on") && to.getPage().getWebClient().isJavaScriptEngineEnabled() &&
-                        to.getScriptableObject() instanceof HTMLBodyElement) {
+                if (attrName.startsWith("on") && to.getScriptableObject() instanceof HTMLBodyElement) {
                     final HTMLBodyElement jsBody = to.getScriptableObject();
                     jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
                 }
