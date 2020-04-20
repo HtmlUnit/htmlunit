@@ -107,7 +107,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     public void getReferencedElementForUnknown() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
-            + "  <label id='label1' for='unknwon'>Item</label>\n"
+            + "  <label id='label1' for='unknown'>Item</label>\n"
             + "  <input type='text' id='text1'>\n"
             + "</body></html>";
 
