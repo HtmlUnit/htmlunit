@@ -66,7 +66,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNone() throws Exception {
+    public void getLabeledElementNone() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item</label>\n"
@@ -77,7 +77,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -85,7 +85,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForEmpty() throws Exception {
+    public void getLabeledElementForEmpty() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for=''>Item</label>\n"
@@ -96,7 +96,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -104,7 +104,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForUnknown() throws Exception {
+    public void getLabeledElementForUnknown() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='unknown'>Item</label>\n"
@@ -115,7 +115,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -123,7 +123,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForNotLabelable() throws Exception {
+    public void getLabeledElementForNotLabelable() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='div1'>Item</label>\n"
@@ -134,7 +134,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -142,7 +142,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForButton() throws Exception {
+    public void getLabeledElementForButton() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='button1'>Item</label>\n"
@@ -153,7 +153,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("button1", label.getReferencedElement().getId());
+            assertEquals("button1", label.getLabeledElement().getId());
         }
     }
 
@@ -161,7 +161,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForInput() throws Exception {
+    public void getLabeledElementForInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text1'>Item</label>\n"
@@ -172,7 +172,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -180,7 +180,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForInputHidden() throws Exception {
+    public void getLabeledElementForInputHidden() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='hidden1'>Item</label>\n"
@@ -191,7 +191,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -199,7 +199,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForMeter() throws Exception {
+    public void getLabeledElementForMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='meter1'>Item</label>\n"
@@ -211,10 +211,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("meter1", label.getReferencedElement().getId());
+                assertEquals("meter1", label.getLabeledElement().getId());
             }
         }
     }
@@ -223,7 +223,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForOutput() throws Exception {
+    public void getLabeledElementForOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='output1'>Item</label>\n"
@@ -235,10 +235,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("output1", label.getReferencedElement().getId());
+                assertEquals("output1", label.getLabeledElement().getId());
             }
         }
     }
@@ -247,7 +247,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForProgress() throws Exception {
+    public void getLabeledElementForProgress() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='progress1'>Item</label>\n"
@@ -258,7 +258,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("progress1", label.getReferencedElement().getId());
+            assertEquals("progress1", label.getLabeledElement().getId());
         }
     }
 
@@ -266,7 +266,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForSelect() throws Exception {
+    public void getLabeledElementForSelect() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='select1'>Item</label>\n"
@@ -277,7 +277,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("select1", label.getReferencedElement().getId());
+            assertEquals("select1", label.getLabeledElement().getId());
         }
     }
 
@@ -285,7 +285,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForTextArea() throws Exception {
+    public void getLabeledElementForTextArea() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text1'>Item</label>\n"
@@ -296,7 +296,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -304,7 +304,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedNotLabelable() throws Exception {
+    public void getLabeledElementNestedNotLabelable() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -316,7 +316,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -324,7 +324,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedButton() throws Exception {
+    public void getLabeledElementNestedButton() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -337,7 +337,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("button1", label.getReferencedElement().getId());
+            assertEquals("button1", label.getLabeledElement().getId());
         }
     }
 
@@ -345,7 +345,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedInput() throws Exception {
+    public void getLabeledElementNestedInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -358,7 +358,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -366,7 +366,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedInputHidden() throws Exception {
+    public void getLabeledElementNestedInputHidden() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -379,7 +379,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -387,7 +387,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedMeter() throws Exception {
+    public void getLabeledElementNestedMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -401,10 +401,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("meter1", label.getReferencedElement().getId());
+                assertEquals("meter1", label.getLabeledElement().getId());
             }
         }
     }
@@ -413,7 +413,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedOutput() throws Exception {
+    public void getLabeledElementNestedOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -427,10 +427,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("output1", label.getReferencedElement().getId());
+                assertEquals("output1", label.getLabeledElement().getId());
             }
         }
     }
@@ -439,7 +439,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedProgress() throws Exception {
+    public void getLabeledElementNestedProgress() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -452,7 +452,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("progress1", label.getReferencedElement().getId());
+            assertEquals("progress1", label.getLabeledElement().getId());
         }
     }
 
@@ -460,7 +460,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedSelect() throws Exception {
+    public void getLabeledElementNestedSelect() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -473,7 +473,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("select1", label.getReferencedElement().getId());
+            assertEquals("select1", label.getLabeledElement().getId());
         }
     }
 
@@ -481,7 +481,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedTextArea() throws Exception {
+    public void getLabeledElementNestedTextArea() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -494,7 +494,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -502,7 +502,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForVersusNested() throws Exception {
+    public void getLabeledElementForVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text2'>Item\n"
@@ -515,7 +515,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text2", label.getReferencedElement().getId());
+            assertEquals("text2", label.getLabeledElement().getId());
         }
     }
 
@@ -523,7 +523,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForUnknownVersusNested() throws Exception {
+    public void getLabeledElementForUnknownVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='unknown'>Item\n"
@@ -536,7 +536,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -544,7 +544,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForNotLabelableVersusNested() throws Exception {
+    public void getLabeledElementForNotLabelableVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='div1'>Item\n"
@@ -557,7 +557,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 

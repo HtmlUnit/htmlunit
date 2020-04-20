@@ -67,7 +67,7 @@ public class HTMLLabelElement extends HTMLElement {
     }
 
     /**
-     * @return the HTMLElement to which the given label object is assigned
+     * @return the HTMLElement labeled by the given label object
      */
     @JsxGetter({CHROME, FF, FF68, FF60})
     public HTMLElement getControl() {
@@ -91,9 +91,9 @@ public class HTMLLabelElement extends HTMLElement {
     @JsxGetter
     public HTMLFormElement getForm() {
         final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
-        final HtmlElement referencedElement = label.getReferencedElement();
+        final HtmlElement labeledElement = label.getLabeledElement();
 
-        if (referencedElement == null) {
+        if (labeledElement == null) {
             if (getBrowserVersion().hasFeature(JS_LABEL_FORM_NULL)) {
                 return null;
             }
@@ -104,7 +104,7 @@ public class HTMLLabelElement extends HTMLElement {
             return (HTMLFormElement) getScriptableFor(form);
         }
 
-        final HtmlForm form = referencedElement.getEnclosingForm();
+        final HtmlForm form = labeledElement.getEnclosingForm();
         if (form == null) {
             return null;
         }
