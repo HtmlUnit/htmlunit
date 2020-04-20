@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_NULL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_OF_SELF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -71,16 +71,24 @@ public class HTMLLabelElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF, FF68, FF60})
     public HTMLElement getControl() {
-        final String id = getHtmlFor();
-        if (StringUtils.isBlank(id)) {
+        final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
+        final HtmlElement labeledElement = label.getLabeledElement();
+
+        if (labeledElement == null) {
             return null;
         }
-        final HtmlElement htmlElem = getDomNodeOrDie();
-        final Element elem = htmlElem.getPage().getElementById(id);
-        if (null == elem || !(elem instanceof HtmlElement)) {
-            return null;
-        }
-        return ((HtmlElement) elem).getScriptableObject();
+
+        return (HTMLElement) getScriptableFor(labeledElement);
+    }
+
+    /**
+     * The control attribute is read-only.
+     *
+     * @param control ignored
+     */
+    @JsxSetter({CHROME, FF, FF68, FF60})
+    public void setControl(HTMLElement control) {
+        // the control attribute is read-only
     }
 
     /**
@@ -90,18 +98,19 @@ public class HTMLLabelElement extends HTMLElement {
      */
     @JsxGetter
     public HTMLFormElement getForm() {
-        final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
-        final HtmlElement labeledElement = label.getLabeledElement();
-
-        if (labeledElement == null) {
-            if (getBrowserVersion().hasFeature(JS_LABEL_FORM_NULL)) {
-                return null;
-            }
+        if (getBrowserVersion().hasFeature(JS_LABEL_FORM_OF_SELF)) {
             final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
             if (form == null) {
                 return null;
             }
             return (HTMLFormElement) getScriptableFor(form);
+        }
+
+        final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
+        final HtmlElement labeledElement = label.getLabeledElement();
+
+        if (labeledElement == null) {
+            return null;
         }
 
         final HtmlForm form = labeledElement.getEnclosingForm();
@@ -110,5 +119,15 @@ public class HTMLLabelElement extends HTMLElement {
         }
 
         return (HTMLFormElement) getScriptableFor(form);
+    }
+
+    /**
+     * The form attribute is read-only.
+     *
+     * @param form ignored
+     */
+    @JsxSetter
+    public void setForm(HTMLFormElement form) {
+        // the form attribute is read-only
     }
 }

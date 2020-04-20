@@ -1056,9 +1056,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF60, IE})
     JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
 
-    /** Property form for label always returns null. */
-    @BrowserFeature({CHROME, FF, FF68, FF60})
-    JS_LABEL_FORM_NULL,
+    /** The property form of a label returns the form the label is assigned to. */
+    @BrowserFeature(IE)
+    JS_LABEL_FORM_OF_SELF,
 
     /** location.hash returns an encoded hash. */
     @BrowserFeature({CHROME, FF, FF68, FF60})
