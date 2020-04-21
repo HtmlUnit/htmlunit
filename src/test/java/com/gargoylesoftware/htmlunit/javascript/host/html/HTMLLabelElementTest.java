@@ -925,8 +925,33 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests that clicking the label by JavaScript does not change 'htmlFor' attribute in FF!!
-     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickAfterNestedByJS() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function doTest() {\n"
+            + "        document.getElementById('label1').appendChild(document.getElementById('checkbox1'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "    <label id='label1'>Item</label>\n"
+            + "    <input type='checkbox' id='checkbox1'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("checkbox1"));
+        assertFalse(checkbox.isSelected());
+        driver.findElement(By.id("label1")).click();
+        assertTrue(checkbox.isSelected());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -937,6 +962,39 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      function doTest() {\n"
             + "        document.getElementById('label1').htmlFor = 'checkbox1';\n"
+            + "      }\n"
+            + "      function delegateClick() {\n"
+            + "        try {\n"
+            + "          document.getElementById('label1').click();\n"
+            + "        } catch (e) {}\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "    <label id='label1'>My Label</label>\n"
+            + "    <input type='checkbox' id='checkbox1'><br>\n"
+            + "    <input type=button id='button1' value='Test' onclick='delegateClick()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("checkbox1"));
+        assertFalse(checkbox.isSelected());
+        driver.findElement(By.id("button1")).click();
+        assertTrue(checkbox.isSelected());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickByJSAfterNestedByJS() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function doTest() {\n"
+            + "        document.getElementById('label1').appendChild(document.getElementById('checkbox1'));\n"
             + "      }\n"
             + "      function delegateClick() {\n"
             + "        try {\n"
