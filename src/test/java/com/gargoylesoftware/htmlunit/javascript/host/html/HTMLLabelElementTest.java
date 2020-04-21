@@ -152,8 +152,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "unknown", "null", "null" },
-            IE = { "unknown", "undefined", "null" })
+    @Alerts(DEFAULT = {"unknown", "null", "null"},
+            IE = {"unknown", "undefined", "null"})
     public void htmlForSetToUnknown() throws Exception {
         final String html
             = "<html>\n"
@@ -190,8 +190,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "div1", "null", "null" },
-            IE = { "div1", "undefined", "null" })
+    @Alerts(DEFAULT = {"div1", "null", "null"},
+            IE = {"div1", "undefined", "null"})
     public void htmlForSetToNotLabelable() throws Exception {
         final String html
             = "<html>\n"
@@ -228,8 +228,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "text1", "[object HTMLInputElement]", "[object HTMLFormElement]" },
-            IE = { "text1", "undefined", "null" })
+    @Alerts(DEFAULT = {"text1", "[object HTMLInputElement]", "[object HTMLFormElement]"},
+            IE = {"text1", "undefined", "null"})
     public void htmlForSetToLabelable() throws Exception {
         final String html
             = "<html>\n"
