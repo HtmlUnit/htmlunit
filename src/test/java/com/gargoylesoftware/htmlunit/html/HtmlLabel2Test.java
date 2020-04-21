@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlLabel2Test extends SimpleWebTestCase {

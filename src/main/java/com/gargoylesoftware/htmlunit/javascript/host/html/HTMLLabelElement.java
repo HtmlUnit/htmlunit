@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlLabel.class)
 public class HTMLLabelElement extends HTMLElement {
