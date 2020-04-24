@@ -425,7 +425,8 @@ public abstract class HtmlElement extends DomElement {
             final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
             if (index != ATTRIBUTE_NOT_DEFINED && browserVersion.hasFeature(HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE)) {
                 index = "-1";
-            } else {
+            }
+            else {
                 return null;
             }
         }

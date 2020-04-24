@@ -869,32 +869,32 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void formSet() throws Exception {
         final String html
-        = "<html>\n"
-        + "  <head>\n"
-        + "    <script>\n"
-        + "      function log(x) {\n"
-        + "        document.title += x + ';';\n"
-        + "      }\n"
-        + "      function doTest() {\n"
-        + "        try {\n"
-        + "          document.getElementById('label1').form = document.getElementById('form1');\n"
-        + "        } catch (e) {"
-        + "          log('exception');\n"
-        + "        }\n"
-        + "        log(document.getElementById('label1').form);\n"
-        + "      }\n"
-        + "    </script>\n"
-        + "  </head>\n"
-        + "  <body onload='doTest()'>\n"
-        + "    <label id='label1'>Item</label>\n"
-        + "    <form id='form1'>\n"
-        + "      <input type='text' id='text1'>\n"
-        + "    </form>\n"
-        + "  </body>\n"
-        + "</html>";
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function log(x) {\n"
+            + "        document.title += x + ';';\n"
+            + "      }\n"
+            + "      function doTest() {\n"
+            + "        try {\n"
+            + "          document.getElementById('label1').form = document.getElementById('form1');\n"
+            + "        } catch (e) {"
+            + "          log('exception');\n"
+            + "        }\n"
+            + "        log(document.getElementById('label1').form);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "    <label id='label1'>Item</label>\n"
+            + "    <form id='form1'>\n"
+            + "      <input type='text' id='text1'>\n"
+            + "    </form>\n"
+            + "  </body>\n"
+            + "</html>";
 
-    final WebDriver driver = loadPage2(html);
-    assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
     }
 
     /**

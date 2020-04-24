@@ -300,7 +300,7 @@ public class HtmlPage extends SgmlPage {
 
             if (!isAboutBlank && enclosingWindow.getWebClient().isJavaScriptEnabled()
                     && hasFeature(EVENT_FOCUS_ON_LOAD)) {
-            final HtmlElement body = getBody();
+                final HtmlElement body = getBody();
                 if (body != null) {
                     final Event event = new Event((Window) enclosingWindow.getScriptableObject(), Event.TYPE_FOCUS);
                     body.fireEvent(event);

@@ -580,10 +580,13 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts({"labelclick:label1", "parentclick:label1"})
     public void clickNoneEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)' onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
-            + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)' onfocus='log(\"labelfocus:\" + event.target.id)'>Click me</label>\n"
-            + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)' onfocus='log(\"textfocus:\" + event.target.id)'>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                      + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)' "
+                      + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me</label>\n"
+              + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)' "
+                      + "onfocus='log(\"textfocus:\" + event.target.id)'>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -597,8 +600,9 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickForEmpty() throws Exception {
         final String html =
-              "  <label id='label1' for='' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
+              "  <label id='label1' for='' onclick='log(\"labelclick\")' "
+                      + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -612,8 +616,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickForUnknown() throws Exception {
         final String html =
-              "  <label id='label1' for='unknown' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
+              "  <label id='label1' for='unknown' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -629,8 +635,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "labelclick")
     public void clickForNotLabelable() throws Exception {
         final String html =
-              "  <label id='label1' for='div1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <div id='div1' onclick='log(\"divclick\")' onfocus='log(\"divfocus\")'></div>\n";
+              "  <label id='label1' for='div1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <div id='div1' onclick='log(\"divclick\")' "
+                          + "onfocus='log(\"divfocus\")'></div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -646,8 +654,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = {"labelclick", "textfocus", "textclick"})
     public void clickForInput() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -663,8 +673,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = {"labelclick", "selectfocus", "selectclick"})
     public void clickForSelect() throws Exception {
         final String html =
-              "  <label id='label1' for='select1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <select id='select1' onclick='log(\"selectclick\")' onfocus='log(\"selectfocus\")'><option>Option</option></select>\n";
+              "  <label id='label1' for='select1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <select id='select1' onclick='log(\"selectclick\")' "
+                          + "onfocus='log(\"selectfocus\")'><option>Option</option></select>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -680,8 +692,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = {"labelclick", "textfocus", "textclick"})
     public void clickForTextArea() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <textarea id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'></textarea>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <textarea id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")'></textarea>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -695,8 +709,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickForDisabled() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")' disabled>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' disabled>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -710,8 +726,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts({"labelclick", "textclick"})
     public void clickForNotDisplayed() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")' style='display: none;'>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' style='display: none;'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -725,8 +743,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts({"labelclick", "textclick"})
     public void clickForNotVisible() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")' style='visibility: hidden;'>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' style='visibility: hidden;'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -740,8 +760,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts({"labelclick", "textclick"})
     public void clickForHidden() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")' hidden>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' hidden>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -752,15 +774,21 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "textfocus:text1", "textclick:text1", "parentclick:text1"},
-            IE = {"labelclick:label1", "parentclick:label1", "textclick:text1", "parentclick:text1", "textfocus:text1"})
-    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "textfocus:text1", "textclick:text1", "parentclick:text1"})
+    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
+                    "textclick:text1", "parentclick:text1"},
+            IE = {"labelclick:label1", "parentclick:label1", "textclick:text1",
+                    "parentclick:text1", "textfocus:text1"})
+    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
+                    "textclick:text1", "parentclick:text1"})
     public void clickForEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)' onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
-            + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)' onfocus='log(\"labelfocus:\" + event.target.id)'>Click me</label>\n"
-            + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)' onfocus='log(\"textfocus:\" + event.target.id)'>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                          + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)' "
+                          + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me</label>\n"
+              + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)' "
+                          + "onfocus='log(\"textfocus:\" + event.target.id)'>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -816,11 +844,13 @@ public class HtmlLabelTest extends WebDriverTestCase {
     public void clickNestedSelect() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <select id='select1' onclick='log(\"select1click\")' onfocus='log(\"select1focus\")'><option>Option</option></select>\n"
-            + "    <select id='select2' onclick='log(\"select2click\")' onfocus='log(\"select2focus\")'><option>Option</option></select>\n"
-            + "  </label>\n";
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "    <select id='select1' onclick='log(\"select1click\")' "
+                          + "onfocus='log(\"select1focus\")'><option>Option</option></select>\n"
+              + "    <select id='select2' onclick='log(\"select2click\")' "
+                          + "onfocus='log(\"select2focus\")'><option>Option</option></select>\n"
+              + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -860,8 +890,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")' disabled>\n"
-            + "    <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' "
+                        + "onfocus='log(\"text1focus\")' disabled>\n"
+            + "    <input type='text' id='text2' onclick='log(\"text2click\")' "
+                        + "onfocus='log(\"text2focus\")'>\n"
             + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
@@ -877,11 +909,13 @@ public class HtmlLabelTest extends WebDriverTestCase {
     public void clickNestedNotDisplayed() throws Exception {
         final String html =
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")' style='display: none;'>\n"
-            + "    <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n"
-            + "  </label>\n";
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "    <input type='text' id='text1' onclick='log(\"text1click\")' "
+                          + "onfocus='log(\"text1focus\")' style='display: none;'>\n"
+              + "    <input type='text' id='text2' onclick='log(\"text2click\")' "
+                          + "onfocus='log(\"text2focus\")'>\n"
+              + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -898,7 +932,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
               "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")' style='visibility: hidden;'>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' "
+                        + "onfocus='log(\"text1focus\")' style='visibility: hidden;'>\n"
             + "    <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n"
             + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
@@ -930,19 +965,26 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1", "text1click:text1", "labelclick:text1", "parentclick:text1"},
-            IE = {"labelclick:label1", "parentclick:label1", "text1click:text1", "labelclick:text1", "parentclick:text1", "text1focus:text1"})
-    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1", "text1click:text1", "labelclick:text1", "parentclick:text1"})
+    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                        "text1click:text1", "labelclick:text1", "parentclick:text1"},
+            IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
+                        "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                        "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickNestedEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)' onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
-            + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)' onfocus='log(\"labelfocus:\" + event.target.id)'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)' onfocus='log(\"text1focus:\" + event.target.id)'>\n"
-            + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)' onfocus='log(\"text2focus:\" + event.target.id)'>\n"
-            + "    </label>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                      + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)' "
+                          + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me"
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)' "
+                          + "onfocus='log(\"text1focus:\" + event.target.id)'>\n"
+              + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)' "
+                          + "onfocus='log(\"text2focus:\" + event.target.id)'>\n"
+              + "    </label>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
@@ -953,19 +995,26 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1", "text1click:text1", "labelclick:text1", "parentclick:text1"},
-            IE = {"labelclick:label1", "parentclick:label1", "text1click:text1", "labelclick:text1", "parentclick:text1", "text1focus:text1"})
-    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1", "text1click:text1", "labelclick:text1", "parentclick:text1"})
+    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                    "text1click:text1", "labelclick:text1", "parentclick:text1"},
+            IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
+                    "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                    "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickForAndNestedEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)' onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
-            + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)' onfocus='log(\"labelfocus:\" + event.target.id)'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)' onfocus='log(\"text1focus:\" + event.target.id)'>\n"
-            + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)' onfocus='log(\"text2focus:\" + event.target.id)'>\n"
-            + "    </label>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                          + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)' "
+                          + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me"
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)' "
+                          + "onfocus='log(\"text1focus:\" + event.target.id)'>\n"
+              + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)' "
+                          + "onfocus='log(\"text2focus:\" + event.target.id)'>\n"
+              + "    </label>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");

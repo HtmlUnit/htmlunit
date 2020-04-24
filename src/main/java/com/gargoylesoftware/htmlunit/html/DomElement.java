@@ -960,7 +960,8 @@ public class DomElement extends DomNamespaceNode implements Element {
             // give focus to current element (if possible) or only remove it from previous one
             DomElement elementToFocus = null;
             if (this instanceof SubmittableElement
-                || this instanceof HtmlAnchor && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                || this instanceof HtmlAnchor
+                    && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
                 || this instanceof HtmlArea
                     && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
                         || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
@@ -973,7 +974,8 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             if (elementToFocus == null) {
                 ((HtmlPage) page).setFocusedElement(null);
-            } else {
+            }
+            else {
                 elementToFocus.focus();
             }
 

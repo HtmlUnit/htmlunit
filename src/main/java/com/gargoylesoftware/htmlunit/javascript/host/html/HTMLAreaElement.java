@@ -123,7 +123,8 @@ public class HTMLAreaElement extends HTMLElement {
         final HtmlArea area = (HtmlArea) getDomNodeOrDie();
         final String hrefAttr = area.getHrefAttribute();
 
-        if (hrefAttr != DomElement.ATTRIBUTE_NOT_DEFINED || getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE)) {
+        if (hrefAttr != DomElement.ATTRIBUTE_NOT_DEFINED
+                || getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE)) {
             area.focus();
         }
     }

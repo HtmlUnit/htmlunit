@@ -20,9 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Element;
-
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
@@ -88,7 +85,7 @@ public class HTMLLabelElement extends HTMLElement {
      * @param control ignored
      */
     @JsxSetter({CHROME, FF, FF68, FF60})
-    public void setControl(HTMLElement control) {
+    public void setControl(final HTMLElement control) {
         // the control attribute is read-only
     }
 
@@ -128,7 +125,7 @@ public class HTMLLabelElement extends HTMLElement {
      * @param form ignored
      */
     @JsxSetter
-    public void setForm(HTMLFormElement form) {
+    public void setForm(final HTMLFormElement form) {
         // the form attribute is read-only
     }
 }
