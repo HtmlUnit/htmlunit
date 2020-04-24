@@ -213,7 +213,13 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     private boolean isAlreadyLoadedByAncestor(final URL url, final Charset charset) {
         WebWindow window = getPage().getEnclosingWindow();
-        while (window != null) {
+        int nesting = 0;
+        while (window != null && window instanceof FrameWindow) {
+            nesting++;
+            if (nesting > 9) {
+                return true;
+            }
+
             final URL encUrl = UrlUtils.encodeUrl(url,
                     window.getWebClient().getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
                     charset);

@@ -35,6 +35,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -865,5 +867,133 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         verifyAlerts(driver, expectedAlerts[expectedAlerts.length - 1]);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"loaded", "[object HTMLDocument]", "2"},
+            IE = {"loaded", "[object HTMLDocument]", "1"})
+    @HtmlUnitNYI(IE = {"loaded", "[object HTMLDocument]", "2"})
+    public void recursive() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Deny</title>\n"
+            + "  <script>\n"
+            + "    function check() {\n"
+            + "      try {\n"
+            + "        alert(document.getElementById(\"frame1\").contentDocument);\n"
+            + "      } catch (e) { alert('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='frame1' src='" + URL_FIRST + "' "
+                        + "onLoad='alert(\"loaded\")'></iframe>\n"
+            + "  <button type='button' id='clickme' onClick='check()'>Click me</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        setExpectedAlerts(Arrays.copyOf(expectedAlerts, 1));
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        driver.findElement(By.id("clickme")).click();
+        verifyAlerts(driver, expectedAlerts[1]);
+
+        assertEquals(Integer.parseInt(expectedAlerts[2]), getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"loaded", "3"},
+            IE = {"loaded", "2"})
+    @HtmlUnitNYI(
+            CHROME = {"loaded", "2"},
+            FF = {"loaded", "2"},
+            FF68 = {"loaded", "2"},
+            FF60 = {"loaded", "2"})
+    public void recursiveContent() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Deny</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='frame1' src='content.html' "
+                        + "onLoad='alert(\"loaded\")'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String content = "<html>"
+                + "<head><title>IFrame Title</title></head>\n"
+                + "<body>IFrame Content\n"
+                + "  <iframe id='frame1' src='content.html'></iframe>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse(content);
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        setExpectedAlerts(Arrays.copyOf(expectedAlerts, 1));
+        loadPageWithAlerts2(html);
+
+        assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"loaded", "6"},
+            FF60 = {"loaded", "19"},
+            FF68 = {"loaded", "19"},
+            FF = {"loaded", "19"},
+            IE = {"loaded", "2"})
+    @BuggyWebDriver(IE = "")
+    // this kill the real ie
+    @HtmlUnitNYI(CHROME = {"loaded", "21"},
+            FF = {"loaded", "21"},
+            FF68 = {"loaded", "21"},
+            FF60 = {"loaded", "21"},
+            IE = {"loaded", "21"})
+    public void recursiveContentRedirectHeader() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Deny</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='frame1' src='content.html' "
+                        + "onLoad='alert(\"loaded\")'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String content = "<html>"
+                + "<head><title>IFrame Title</title></head>\n"
+                + "<body>IFrame Content\n"
+                + "  <iframe id='frame1' src='content.html'></iframe>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse(content);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", "content2.html"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), "",
+                    302, "Moved", MimeType.TEXT_HTML, headers);
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        setExpectedAlerts(Arrays.copyOf(expectedAlerts, 1));
+        loadPageWithAlerts2(html);
+
+        assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount());
     }
 }
