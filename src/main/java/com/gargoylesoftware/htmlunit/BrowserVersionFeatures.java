@@ -49,9 +49,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     ANCHOR_SEND_PING_REQUEST,
 
-    /** Browser does not check the cps. */
+    /** Browser does not check the CSP. */
     @BrowserFeature(IE)
-    CONTENT_SECURIRY_POLICY_IGNORED,
+    CONTENT_SECURITY_POLICY_IGNORED,
 
     /** Background image is 'initial'. */
     @BrowserFeature(CHROME)
