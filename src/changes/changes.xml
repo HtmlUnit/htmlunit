@@ -22,6 +22,9 @@
                 Label control property has to look for a nested labelable control as fallback if no for
                 attribute is given. Additionally it is not available in IE11.
             </action>
+            <action type="fix" dev="rbri" issue="156">
+                Better handling of recursive iframes content.
+            </action>
             <action type="fix" dev="rbri" due-to="Ronny Shapiro">
                 Fix exception when handling invalid body element with no JS engine.
             </action>

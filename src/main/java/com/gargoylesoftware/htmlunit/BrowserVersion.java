@@ -244,9 +244,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME
         CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.92 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.122 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.92 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.122 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -258,11 +258,11 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.CONNECTION,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
-            HttpHeader.SEC_FETCH_DEST,
             HttpHeader.ACCEPT,
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_MODE,
             HttpHeader.SEC_FETCH_USER,
+            HttpHeader.SEC_FETCH_DEST,
             HttpHeader.REFERER,
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
@@ -295,7 +295,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("mp4", "video/mp4");
         CHROME.registerUploadMimeType("m4v", "video/mp4");
         CHROME.registerUploadMimeType("m4a", "audio/x-m4a");
-        CHROME.registerUploadMimeType("mp3", "audio/mp3");
+        CHROME.registerUploadMimeType("mp3", "audio/mpeg");
         CHROME.registerUploadMimeType("ogv", "video/ogg");
         CHROME.registerUploadMimeType("ogm", "video/ogg");
         CHROME.registerUploadMimeType("ogg", "audio/ogg");
