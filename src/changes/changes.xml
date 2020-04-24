@@ -12,7 +12,7 @@
                 Improve focus and blur handling.
             </action>
             <action type="fix" dev="fdanek">
-                HtmlLabel.getReferencedElement() is not deprecated. Use HtmlLabel.getLabeledElement()
+                HtmlLabel.getReferencedElement() is now deprecated. Use HtmlLabel.getLabeledElement()
                 instead.
             </action>
             <action type="fix" dev="fdanek">
