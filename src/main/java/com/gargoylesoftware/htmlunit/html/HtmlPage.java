@@ -298,10 +298,13 @@ public class HtmlPage extends SgmlPage {
         if (!isFrameWindow) {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
 
+            if (!isAboutBlank && enclosingWindow.getWebClient().isJavaScriptEnabled()
+                    && hasFeature(EVENT_FOCUS_ON_LOAD)) {
             final HtmlElement body = getBody();
-            if (!isAboutBlank && body != null && hasFeature(EVENT_FOCUS_ON_LOAD)) {
-                final Event event = new Event((Window) enclosingWindow.getScriptableObject(), Event.TYPE_FOCUS);
-                body.fireEvent(event);
+                if (body != null) {
+                    final Event event = new Event((Window) enclosingWindow.getScriptableObject(), Event.TYPE_FOCUS);
+                    body.fireEvent(event);
+                }
             }
         }
 
