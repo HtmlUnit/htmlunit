@@ -8,6 +8,20 @@
 
     <body>
         <release version="2.40.0" date="xxxx, 2020" description="Bugfixes, Chrome 81, Firefox75">
+            <action type="fix" dev="fdanek">
+                Improve focus and blur handling.
+            </action>
+            <action type="fix" dev="fdanek">
+                HtmlLabel.getReferencedElement() is now deprecated. Use HtmlLabel.getLabeledElement()
+                instead.
+            </action>
+            <action type="fix" dev="fdanek">
+                Label form property has to work based in it's own form in IE11.
+            </action>
+            <action type="fix" dev="fdanek">
+                Label control property has to look for a nested labelable control as fallback if no for
+                attribute is given. Additionally it is not available in IE11.
+            </action>
             <action type="fix" dev="rbri" issue="156">
                 Better handling of recursive iframes content.
             </action>
@@ -18,7 +32,7 @@
                 Fix frameset exception with no JS engine.
             </action>
             <action type="fix" dev="rbri">
-                Label form property has to work based on the element referenced by the label.
+                Label form property has to work based on the element labeled by the label.
             </action>
             <action type="fix" dev="rbri" due-to="Ronny Shapiro">
                 Fix possible ConcurrentModificationException when cloning an HtmlPage / HtmlElement.

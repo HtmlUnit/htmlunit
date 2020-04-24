@@ -243,6 +243,10 @@ public class Event extends SimpleScriptable {
             // https://www.w3.org/TR/DOM-Level-3-Events/#event-type-error
             bubbles_ = false;
         }
+        else if (TYPE_FOCUS.equals(type) || TYPE_BLUR.equals(type)) {
+            bubbles_ = false;
+            cancelable_ = false;
+        }
     }
 
     /**
