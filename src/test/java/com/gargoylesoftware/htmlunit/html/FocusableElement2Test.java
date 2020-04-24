@@ -997,7 +997,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body",
                 "onfocus2:focusId2", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
                 "after", "active: focusId2"},
-        IE = {"before", "active: body",
+            IE = {"before", "active: body",
                 "onfocusin1:focusId1", "active: focusId1", "onfocusout1:focusId1", "active: focusId2",
                 "onfocusin2:focusId2", "active: focusId2",
                 "after", "active: focusId2",
@@ -1111,21 +1111,21 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"before", "active: body", "after", "active: body"})
     @HtmlUnitNYI(CHROME = {"before", "active: body",
-            "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
-            "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
-            "after", "active: body"},
-        FF = {"before", "active: body",
-            "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
-            "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
-            "after", "active: body"},
-        FF68 = {"before", "active: body",
-            "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
-            "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
-            "after", "active: body"},
-        IE = {"before", "active: body",
-            "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
-            "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
-            "after", "active: body"})
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            FF = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            FF68 = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
     // FIXME click for either divs or inputs seems broken... :(
     public void jsClickOnNotFocusableWithTabIndex() throws Exception {
         testWithCallClick("<div tabindex='0' id='focusId'>div</div>");
