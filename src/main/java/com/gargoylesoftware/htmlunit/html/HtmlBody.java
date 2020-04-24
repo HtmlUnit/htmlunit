@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
  * Wrapper for the HTML element "body".
@@ -149,5 +150,16 @@ public class HtmlBody extends HtmlElement {
      */
     public final boolean isTemporary() {
         return temporary_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handles(final Event event) {
+        if (Event.TYPE_BLUR.equals(event.getType()) || Event.TYPE_FOCUS.equals(event.getType())) {
+            return true;
+        }
+        return super.handles(event);
     }
 }

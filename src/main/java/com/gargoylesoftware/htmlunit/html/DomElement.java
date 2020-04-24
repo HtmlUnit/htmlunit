@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,7 +62,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Marc Guillemot
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class DomElement extends DomNamespaceNode implements Element {
 
@@ -958,15 +959,23 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             // give focus to current element (if possible) or only remove it from previous one
             DomElement elementToFocus = null;
-            if (this instanceof SubmittableElement || this instanceof HtmlAnchor
-                    || (this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
+            if (this instanceof SubmittableElement
+                || this instanceof HtmlAnchor && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                || this instanceof HtmlArea
+                    && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                        || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
+                || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
                 elementToFocus = this;
             }
             else if (this instanceof HtmlOption) {
                 elementToFocus = ((HtmlOption) this).getEnclosingSelect();
             }
 
-            ((HtmlPage) page).setFocusedElement(elementToFocus);
+            if (elementToFocus == null) {
+                ((HtmlPage) page).setFocusedElement(null);
+            } else {
+                elementToFocus.focus();
+            }
 
             if (triggerMouseEvents) {
                 mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
@@ -1469,22 +1478,33 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Sets the focus on this element.
      */
     public void focus() {
+        if (!(this instanceof SubmittableElement
+            || this instanceof HtmlAnchor && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+            || this instanceof HtmlArea
+                && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                    || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
+            || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
+            return;
+        }
+
+        if (!isDisplayed() || isDisabledElementAndDisabled()) {
+            return;
+        }
+
         final HtmlPage page = (HtmlPage) getPage();
         page.setFocusedElement(this);
-
-        if (page.getWebClient().isJavaScriptEnabled()) {
-            final Object o = getScriptableObject();
-            if (o instanceof HTMLElement) {
-                ((HTMLElement) o).setActive();
-            }
-        }
     }
 
     /**
      * Removes focus from this element.
      */
     public void blur() {
-        ((HtmlPage) getPage()).setFocusedElement(null);
+        final HtmlPage page = (HtmlPage) getPage();
+        if (page.getFocusedElement() != this) {
+            return;
+        }
+
+        page.setFocusedElement(null);
     }
 
     /**

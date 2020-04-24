@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
@@ -90,6 +91,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -295,6 +297,12 @@ public class HtmlPage extends SgmlPage {
 
         if (!isFrameWindow) {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+
+            final HtmlElement body = getBody();
+            if (!isAboutBlank && body != null && hasFeature(EVENT_FOCUS_ON_LOAD)) {
+                final Event event = new Event((Window) enclosingWindow.getScriptableObject(), Event.TYPE_FOCUS);
+                body.fireEvent(event);
+            }
         }
 
         try {
@@ -2457,6 +2465,13 @@ public class HtmlPage extends SgmlPage {
         final DomElement oldFocusedElement = elementWithFocus_;
         elementWithFocus_ = null;
 
+        if (getWebClient().isJavaScriptEnabled()) {
+            final Object o = getScriptableObject();
+            if (o instanceof HTMLDocument) {
+                ((HTMLDocument) o).setActiveElement(null);
+            }
+        }
+
         if (!windowActivated) {
             if (hasFeature(EVENT_FOCUS_IN_FOCUS_OUT_BLUR)) {
                 if (oldFocusedElement != null) {
@@ -2471,6 +2486,10 @@ public class HtmlPage extends SgmlPage {
             if (oldFocusedElement != null) {
                 oldFocusedElement.removeFocus();
                 oldFocusedElement.fireEvent(Event.TYPE_BLUR);
+
+                if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+                    oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+                }
             }
         }
 
@@ -2483,17 +2502,21 @@ public class HtmlPage extends SgmlPage {
         }
 
         if (elementWithFocus_ != null) {
-            elementWithFocus_.focus();
-            elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
-        }
-
-        if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
-            if (oldFocusedElement != null) {
-                oldFocusedElement.fireEvent(Event.TYPE_FOCUS_OUT);
+            if (getWebClient().isJavaScriptEnabled()) {
+                final Object o = getScriptableObject();
+                if (o instanceof HTMLDocument) {
+                    final Object e = elementWithFocus_.getScriptableObject();
+                    if (e instanceof HTMLElement) {
+                        ((HTMLDocument) o).setActiveElement((HTMLElement) e);
+                    }
+                }
             }
 
-            if (newElement != null) {
-                newElement.fireEvent(Event.TYPE_FOCUS_IN);
+            elementWithFocus_.focus();
+            elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
+
+            if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
+                elementWithFocus_.fireEvent(Event.TYPE_FOCUS_IN);
             }
         }
 

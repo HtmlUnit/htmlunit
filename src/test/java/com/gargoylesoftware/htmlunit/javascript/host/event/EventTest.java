@@ -851,7 +851,6 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "blur INPUT",
             IE = {"blur BODY", "blur INPUT"})
-    @NotYetImplemented(IE)
     public void document_input_blur() throws Exception {
         document_input("blur");
     }

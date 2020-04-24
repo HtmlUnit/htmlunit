@@ -110,7 +110,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
-import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -1324,12 +1323,7 @@ public class HTMLElement extends Element {
      */
     @JsxFunction
     public void focus() {
-        final HtmlElement domNode = getDomNodeOrDie();
-        if (domNode instanceof SubmittableElement) {
-            domNode.focus();
-        }
-
-        // no action otherwise!
+        getDomNodeOrDie().focus();
     }
 
     /**

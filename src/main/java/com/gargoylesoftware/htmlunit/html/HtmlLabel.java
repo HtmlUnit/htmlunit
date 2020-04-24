@@ -99,17 +99,6 @@ public class HtmlLabel extends HtmlElement {
     }
 
     /**
-     * Remove focus from this element.
-     */
-    @Override
-    public void blur() {
-        final HtmlElement element = getLabeledElement();
-        if (element != null) {
-            element.blur();
-        }
-    }
-
-    /**
      * Sets the focus to this element.
      */
     @Override
