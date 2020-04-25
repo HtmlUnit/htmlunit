@@ -6619,7 +6619,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 42, 42")
-    @NotYetImplemented
     public void Sizzle__selector__pseudo___misc() throws Exception {
         runTest("Sizzle: selector: pseudo - misc");
     }
