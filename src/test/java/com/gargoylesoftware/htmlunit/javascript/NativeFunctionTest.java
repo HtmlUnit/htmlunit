@@ -150,6 +150,29 @@ public class NativeFunctionTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function foo(){return 1;}", "function foo( )  { \treturn 1  \n ;\n    ; }" })
+    @NotYetImplemented
+    public void functionToStringMinimized() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  var my = function foo(){return 1;}\n"
+            + "  alert(my.toString());\n"
+
+            + "  var my = function foo( )  { \treturn 1  \n ;\n"
+            + "    ; }\n"
+            + "  alert(my.toString());\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Function properties "arguments" and "caller" were wrongly enumerated.
      * @throws Exception if the test fails
      */
