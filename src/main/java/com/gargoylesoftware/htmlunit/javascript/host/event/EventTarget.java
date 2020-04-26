@@ -244,7 +244,10 @@ public class EventTarget extends SimpleScriptable {
      * @return the handler function, or {@code null} if the property is null or not a function
      */
     public Function getEventHandler(final String eventType) {
-        return getEventListenersContainer().getEventHandler(eventType);
+        if (eventListenersContainer_ == null) {
+            return null;
+        }
+        return eventListenersContainer_.getEventHandler(eventType);
     }
 
     /**
@@ -285,13 +288,14 @@ public class EventTarget extends SimpleScriptable {
      */
     @JsxFunction
     public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        EventListenersContainer container;
         if (isEventHandlerOnWindow()) {
-            container = getWindow().getEventListenersContainer();
-            container.removeEventListener(type, listener, useCapture);
+            getWindow().getEventListenersContainer().removeEventListener(type, listener, useCapture);
         }
-        container = getEventListenersContainer();
-        container.removeEventListener(type, listener, useCapture);
+
+        if (eventListenersContainer_ == null) {
+            return;
+        }
+        eventListenersContainer_.removeEventListener(type, listener, useCapture);
     }
 
     /**
@@ -300,14 +304,15 @@ public class EventTarget extends SimpleScriptable {
      * @param value the property ({@code null} to reset it)
      */
     public void setEventHandler(final String eventName, final Object value) {
-        final EventListenersContainer container;
         if (isEventHandlerOnWindow()) {
-            container = getWindow().getEventListenersContainer();
+            getWindow().getEventListenersContainer().setEventHandler(eventName, value);
+            return;
         }
-        else {
-            container = getEventListenersContainer();
+
+        if (eventListenersContainer_ == null) {
+            return;
         }
-        container.setEventHandler(eventName, value);
+        eventListenersContainer_.setEventHandler(eventName, value);
     }
 
     /**
