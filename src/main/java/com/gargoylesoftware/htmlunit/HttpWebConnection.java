@@ -644,6 +644,12 @@ public class HttpWebConnection implements WebConnection {
             configureTimeout(httpClientBuilder, timeout);
         }
 
+        final long connectionTimeToLive = webClient_.getOptions().getConnectionTimeToLive();
+        if (connectionTimeToLive != usedOptions_.getConnectionTimeToLive()) {
+            httpClientBuilder.setConnectionTimeToLive(connectionTimeToLive, TimeUnit.MILLISECONDS);
+            usedOptions_.setConnectionTimeToLive(connectionTimeToLive);
+        }
+
         if (connectionManager_ == null) {
             connectionManager_ = createConnectionManager(httpClientBuilder);
         }
