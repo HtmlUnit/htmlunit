@@ -308,11 +308,7 @@ public class EventTarget extends SimpleScriptable {
             getWindow().getEventListenersContainer().setEventHandler(eventName, value);
             return;
         }
-
-        if (eventListenersContainer_ == null) {
-            return;
-        }
-        eventListenersContainer_.setEventHandler(eventName, value);
+        getEventListenersContainer().setEventHandler(eventName, value);
     }
 
     /**
