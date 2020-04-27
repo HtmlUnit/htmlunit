@@ -27,6 +27,8 @@ For maven, you would add:
 The latest builds are available from our
 [Jenkins CI build server][2]
 
+[![Build Status](https://jenkins.wetator.org/buildStatus/icon?job=HtmlUnit)](https://jenkins.wetator.org/job/HtmlUnit/)
+
 If you use maven please add:
 
     <dependency>
