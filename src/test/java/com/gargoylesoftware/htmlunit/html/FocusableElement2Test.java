@@ -1331,8 +1331,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onfocusout1:focusId1", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
                 "onblur1:focusId1", "active: focusId2", "onfocus2:focusId2", "active: focusId2"})
     @HtmlUnitNYI(IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
-                "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body",
-                "onfocusin2:focusId2", "active: body", "onfocus2:focusId2", "active: focusId2"})
+                "onfocusout1:focusId1", "active: body", "onfocusin2:focusId2", "active: body",
+                "onblur1:focusId1", "active: body", "onfocus2:focusId2", "active: focusId2"})
     public void clickFromFocusableToFocusable() throws Exception {
         testSwitchWithClick("<input type='text' id='focusId1'>\n"
             + "<input type='text' id='focusId2'>");
@@ -1347,15 +1347,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body"},
             IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
                 "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
-    @HtmlUnitNYI(FF = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
-                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body"},
-            FF68 = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
-                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body"},
-            IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
-                "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
-    // TODO FF & FF68 fail due to a bug in HtmlUnitDriver
-    // the driver always triggers a blur on the previously focused element
-    // see HtmlUnitMouse.moveOutIfNeeded(element)
+    @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1"})
     public void clickFromFocusableToFocusableDisabled() throws Exception {
         testSwitchWithClick("<input type='text' id='focusId1'>\n"
             + "<input type='text' disabled id='focusId2'>");
@@ -1372,8 +1365,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onfocusout1:focusId1", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
                 "onblur1:focusId1", "active: focusId2", "onfocus2:focusId2", "active: focusId2"})
     @HtmlUnitNYI(IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
-                "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body",
-                "onfocusin2:focusId2", "active: body", "onfocus2:focusId2", "active: focusId2"})
+                "onfocusout1:focusId1", "active: body", "onfocusin2:focusId2", "active: body",
+                "onblur1:focusId1", "active: body", "onfocus2:focusId2", "active: focusId2"})
     public void clickFromFocusableToFocusableReadonly() throws Exception {
         testSwitchWithClick("<input type='text' id='focusId1'>\n"
             + "<input type='text' readonly id='focusId2'>");
