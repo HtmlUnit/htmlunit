@@ -2556,7 +2556,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final List<org.apache.http.cookie.Cookie> cookies =
                         cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
 
-                for (org.apache.http.cookie.Cookie cookie : cookies) {
+                for (final org.apache.http.cookie.Cookie cookie : cookies) {
                     final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
                     cookieManager.addCookie(htmlUnitCookie);
 

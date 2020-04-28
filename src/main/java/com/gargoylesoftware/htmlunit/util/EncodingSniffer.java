@@ -509,7 +509,7 @@ public final class EncodingSniffer {
                     value = value.substring(0, i);
                 }
                 value = value.trim().toLowerCase(Locale.ROOT);
-                for (String ending : contentTypeEndings) {
+                for (final String ending : contentTypeEndings) {
                     if (value.endsWith(ending.toLowerCase(Locale.ROOT))) {
                         return true;
                     }
@@ -1012,7 +1012,7 @@ public final class EncodingSniffer {
         for (int x = 0; x < sought.length; x++) {
             final byte[] possibilities = sought[x];
             boolean match = false;
-            for (byte possibility : possibilities) {
+            for (final byte possibility : possibilities) {
                 if (bytes[i + x] == possibility) {
                     match = true;
                     break;

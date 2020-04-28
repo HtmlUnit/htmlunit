@@ -252,7 +252,7 @@ public class Cookie implements Serializable {
      */
     public static List<Cookie> fromHttpClient(final List<org.apache.http.cookie.Cookie> cookies) {
         final List<Cookie> list = new ArrayList<>(cookies.size());
-        for (org.apache.http.cookie.Cookie c : cookies) {
+        for (final org.apache.http.cookie.Cookie c : cookies) {
             list.add(new Cookie((ClientCookie) c));
         }
         return list;

@@ -442,7 +442,7 @@ public class RegExpJsToJavaConverter {
             // change subexpression to make it java compatible
             int insertPos = back.start_ - 1;
             tape_.insertAt("(?:", insertPos);
-            for (Subexpresion subexp : subexpressions_) {
+            for (final Subexpresion subexp : subexpressions_) {
                 if (subexp.start_ > insertPos) {
                     subexp.start_ = subexp.start_ + 3;
                 }
@@ -453,7 +453,7 @@ public class RegExpJsToJavaConverter {
 
             insertPos = back.end_ + 1;
             tape_.insertAt(")", insertPos);
-            for (Subexpresion subexp : subexpressions_) {
+            for (final Subexpresion subexp : subexpressions_) {
                 if (subexp.start_ > insertPos) {
                     subexp.start_ = subexp.start_ + 1;
                 }
