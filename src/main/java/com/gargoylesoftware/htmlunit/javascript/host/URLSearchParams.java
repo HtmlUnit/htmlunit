@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -54,7 +53,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class URLSearchParams extends SimpleScriptable {
 
     private static final String ITERATOR_NAME = "URLSearchParams Iterator";
-    private static com.gargoylesoftware.htmlunit.javascript.host.Iterator ITERATOR_PROTOTYPE_;
+    private static com.gargoylesoftware.htmlunit.javascript.host.Iterator ITERATOR_PROTOTYPE_
+        = new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, null);
 
     private final List<Entry<String, String>> params_ = new LinkedList<>();
 
@@ -239,7 +239,7 @@ public class URLSearchParams extends SimpleScriptable {
         final SimpleScriptable object =
                 new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, params_.iterator());
         object.setParentScope(getParentScope());
-        setIteratorPrototype(object);
+        object.setPrototype(ITERATOR_PROTOTYPE_);
         return object;
     }
 
@@ -259,7 +259,7 @@ public class URLSearchParams extends SimpleScriptable {
         final SimpleScriptable object =
                 new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, keys.iterator());
         object.setParentScope(getParentScope());
-        setIteratorPrototype(object);
+        object.setPrototype(ITERATOR_PROTOTYPE_);
         return object;
     }
 
@@ -279,15 +279,8 @@ public class URLSearchParams extends SimpleScriptable {
         final SimpleScriptable object =
                 new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, values.iterator());
         object.setParentScope(getParentScope());
-        setIteratorPrototype(object);
+        object.setPrototype(ITERATOR_PROTOTYPE_);
         return object;
-    }
-
-    private static void setIteratorPrototype(final Scriptable scriptable) {
-        if (ITERATOR_PROTOTYPE_ == null) {
-            ITERATOR_PROTOTYPE_ = new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, null);
-        }
-        scriptable.setPrototype(ITERATOR_PROTOTYPE_);
     }
 
     /**

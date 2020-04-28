@@ -298,7 +298,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final String behavior = getStyleAttribute(BEHAVIOR);
             if (StringUtils.isNotBlank(behavior)) {
                 try {
-                    final Object[] url = URL_FORMAT.parse(behavior);
+                    final Object[] url;
+                    synchronized (URL_FORMAT) {
+                        url = URL_FORMAT.parse(behavior);
+                    }
                     if (url.length > 0) {
                         htmlElement.addBehavior((String) url[0]);
                     }
