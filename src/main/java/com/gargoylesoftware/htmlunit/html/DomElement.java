@@ -116,8 +116,9 @@ public class DomElement extends DomNamespaceNode implements Element {
             for (final DomAttr entry : attributes_.values()) {
                 entry.setParentNode(this);
                 final String attrNamespaceURI = entry.getNamespaceURI();
-                if (attrNamespaceURI != null) {
-                    namespaces_.put(attrNamespaceURI, entry.getPrefix());
+                final String prefix = entry.getPrefix();
+                if (attrNamespaceURI != null && prefix != null) {
+                    namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
         }
