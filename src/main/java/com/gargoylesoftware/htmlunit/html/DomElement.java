@@ -22,6 +22,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -32,7 +33,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -88,7 +88,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     private NamedAttrNodeMapImpl attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
 
     /** The map holding the namespaces, keyed by URI. */
-    private ConcurrentHashMap<String, String> namespaces_ = new ConcurrentHashMap<>();
+    private Map<String, String> namespaces_ = new HashMap<>();
 
     /** Cache for the styles. */
     private String styleString_;

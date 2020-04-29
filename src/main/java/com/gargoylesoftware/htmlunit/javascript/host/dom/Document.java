@@ -48,12 +48,12 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -199,14 +199,14 @@ public class Document extends Node {
 
     /** Initializes the supported event type map. */
     static {
-        final ConcurrentHashMap<String, Class<? extends Event>> dom2EventMap = new ConcurrentHashMap<>();
+        final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
         dom2EventMap.put("HTMLEvents", Event.class);
         dom2EventMap.put("MouseEvents", MouseEvent.class);
         dom2EventMap.put("MutationEvents", MutationEvent.class);
         dom2EventMap.put("UIEvents", UIEvent.class);
         SUPPORTED_DOM2_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom2EventMap);
 
-        final ConcurrentHashMap<String, Class<? extends Event>> dom3EventMap = new ConcurrentHashMap<>();
+        final Map<String, Class<? extends Event>> dom3EventMap = new HashMap<>();
         dom3EventMap.put("Event", Event.class);
         dom3EventMap.put("KeyboardEvent", KeyboardEvent.class);
         dom3EventMap.put("MouseEvent", MouseEvent.class);
@@ -220,7 +220,7 @@ public class Document extends Node {
         dom3EventMap.put("TextEvent", TextEvent.class);
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
 
-        final ConcurrentHashMap<String, Class<? extends Event>> additionalEventMap = new ConcurrentHashMap<>();
+        final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();
         additionalEventMap.put("BeforeUnloadEvent", BeforeUnloadEvent.class);
         additionalEventMap.put("Events", Event.class);
         additionalEventMap.put("HashChangeEvent", HashChangeEvent.class);
