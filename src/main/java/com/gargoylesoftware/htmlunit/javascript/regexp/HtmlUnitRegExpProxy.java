@@ -178,16 +178,15 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         final StaticStringMatcher matcher = new StaticStringMatcher(originalString, searchString);
         if (matcher.start() > -1) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(originalString.substring(0, matcher.start_));
+            final StringBuilder sb = new StringBuilder()
+                .append(originalString, 0, matcher.start_);
 
             String localReplacement = replacement;
             if (replacement.contains("$")) {
                 localReplacement = computeReplacementValue(localReplacement, originalString, matcher, false);
             }
-
-            sb.append(localReplacement);
-            sb.append(originalString.substring(matcher.end_));
+            sb.append(localReplacement)
+                .append(originalString, matcher.end_, originalString.length());
             return sb.toString();
         }
         return originalString;

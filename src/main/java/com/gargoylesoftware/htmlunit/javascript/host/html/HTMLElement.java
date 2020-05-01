@@ -484,9 +484,9 @@ public class HTMLElement extends Element {
             final String prefix = domNode.getPrefix();
             if (prefix != null) {
                 // create string builder only if needed (performance)
-                final StringBuilder localName = new StringBuilder(prefix.toLowerCase(Locale.ROOT));
-                localName.append(':');
-                localName.append(domNode.getLocalName().toLowerCase(Locale.ROOT));
+                final StringBuilder localName = new StringBuilder(prefix.toLowerCase(Locale.ROOT))
+                    .append(':')
+                    .append(domNode.getLocalName().toLowerCase(Locale.ROOT));
                 return localName.toString();
             }
             return domNode.getLocalName().toLowerCase(Locale.ROOT);

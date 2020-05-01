@@ -340,7 +340,7 @@ public class HttpWebConnection implements WebConnection {
                     final StringBuilder body = new StringBuilder();
                     for (final NameValuePair pair : webRequest.getRequestParameters()) {
                         body.append(StringUtils.remove(StringUtils.remove(pair.getName(), '\r'), '\n'))
-                            .append("=")
+                            .append('=')
                             .append(StringUtils.remove(StringUtils.remove(pair.getValue(), '\r'), '\n'))
                             .append("\r\n");
                     }

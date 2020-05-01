@@ -929,13 +929,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
                 // because this is a strange case we like to provide as many info as possible
-                msg.append(" class: '");
-                msg.append(page.getClass().getName());
-                msg.append('\'');
+                msg.append(" class: '")
+                    .append(page.getClass().getName())
+                    .append('\'');
                 try {
-                    msg.append(" url: '").append(page.getUrl()).append('\'');
-                    msg.append(" content: ");
-                    msg.append(page.getWebResponse().getContentAsString());
+                    msg.append(" url: '")
+                        .append(page.getUrl()).append('\'')
+                        .append(" content: ")
+                        .append(page.getWebResponse().getContentAsString());
                 }
                 catch (final Exception e) {
                     // ok bad luck with detail

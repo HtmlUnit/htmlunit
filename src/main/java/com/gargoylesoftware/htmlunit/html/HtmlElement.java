@@ -400,9 +400,9 @@ public abstract class HtmlElement extends DomElement {
         final String prefix = getPrefix();
         if (prefix != null) {
             // create string builder only if needed (performance)
-            final StringBuilder name = new StringBuilder(prefix.toLowerCase(Locale.ROOT));
-            name.append(':');
-            name.append(getLocalName().toLowerCase(Locale.ROOT));
+            final StringBuilder name = new StringBuilder(prefix.toLowerCase(Locale.ROOT))
+                .append(':')
+                .append(getLocalName().toLowerCase(Locale.ROOT));
             return name.toString();
         }
         return getLocalName().toLowerCase(Locale.ROOT);

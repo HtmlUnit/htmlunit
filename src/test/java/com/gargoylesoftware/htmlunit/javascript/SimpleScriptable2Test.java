@@ -197,7 +197,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
         final int minutes = Integer.parseInt(strMinutes);
         final StringBuilder sb = new StringBuilder();
         if (minutes != 0) {
-            sb.append(hour.substring(1));
+            sb.append(hour, 1, hour.length());
             strMinutes = String.valueOf((double) minutes / 60);
             strMinutes = strMinutes.substring(1);
             sb.append(strMinutes);

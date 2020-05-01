@@ -802,10 +802,10 @@ public class CodeStyleTest {
 
                 if (!insideString && token.contains("}")) {
                     final int curlyIndex = token.indexOf('}') + 1;
-                    currentToken.append(token.substring(0, curlyIndex));
+                    currentToken.append(token, 0, curlyIndex);
                     list.add(currentToken.toString());
                     currentToken.setLength(0);
-                    currentToken.append(token.substring(curlyIndex));
+                    currentToken.append(token, curlyIndex, token.length());
                 }
                 else {
                     if (!insideString && token.contains(",") && !startsWithBraces) {
