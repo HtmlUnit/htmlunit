@@ -394,6 +394,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             = "<html><head><title>first</title></head><body>\n"
             + "  <p>hello world</p>\n"
             + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <input name='text' type='text'>\n"
             + "    <button type='submit' id='myButton'>Explicit Submit</button>\n"
             + "  </form>\n"
             + "</body></html>";
@@ -408,7 +409,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         driver.findElement(By.id("myButton")).click();
 
         assertEquals(2, getMockWebConnection().getRequestCount());
-        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(URL_SECOND.toString() + "?text=", getMockWebConnection().getLastWebRequest().getUrl());
     }
 
     /**
