@@ -309,41 +309,46 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     @Override
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
-        final StringBuilder status = new StringBuilder(110);
         final String lineSeparator = System.lineSeparator();
-        status.append("------ JavaScript job status -----");
-        status.append(lineSeparator);
+
+        final StringBuilder status = new StringBuilder(110)
+                .append("------ JavaScript job status -----")
+                .append(lineSeparator);
+
         if (null != currentlyRunningJob_ && (filter == null || filter.passes(currentlyRunningJob_))) {
-            status.append("  current running job: ").append(currentlyRunningJob_.toString());
-            status.append("      job id: " + currentlyRunningJob_.getId());
-            status.append(lineSeparator);
-            status.append(lineSeparator);
-            status.append(lineSeparator);
+            status.append("  current running job: ").append(currentlyRunningJob_.toString())
+                .append("      job id: " + currentlyRunningJob_.getId())
+                .append(lineSeparator)
+                .append(lineSeparator)
+                .append(lineSeparator);
         }
-        status.append("  number of jobs on the queue: " + scheduledJobsQ_.size());
-        status.append(lineSeparator);
+        status.append("  number of jobs on the queue: ")
+            .append(Integer.toString(scheduledJobsQ_.size()))
+            .append(lineSeparator);
+
         int count = 1;
         for (final JavaScriptJob job : scheduledJobsQ_) {
             if (filter == null || filter.passes(job)) {
                 final long now = System.currentTimeMillis();
                 final long execTime = job.getTargetExecutionTime();
-                status.append("  " + count);
-                status.append(")  Job target execution time: " + execTime);
-                status.append(" (should start in " + ((execTime - now) / 1000d) + "s)");
-                status.append(lineSeparator);
-                status.append("      job to string: ").append(job.toString());
-                status.append(lineSeparator);
-                status.append("      job id: " + job.getId());
-                status.append(lineSeparator);
+                status.append("  " + count)
+                    .append(")  Job target execution time: " + execTime)
+                    .append(" (should start in " + ((execTime - now) / 1000d) + "s)")
+                    .append(lineSeparator)
+                    .append("      job to string: ").append(job.toString())
+                    .append(lineSeparator)
+                    .append("      job id: " + job.getId())
+                    .append(lineSeparator);
                 if (job.isPeriodic()) {
-                    status.append("      period: " + job.getPeriod().intValue());
-                    status.append(lineSeparator);
+                    status.append("      period: ")
+                        .append(job.getPeriod().toString())
+                        .append(lineSeparator);
                 }
                 count++;
             }
         }
-        status.append("------------------------------------------");
-        status.append(lineSeparator);
+        status.append("------------------------------------------")
+            .append(lineSeparator);
 
         return status.toString();
     }

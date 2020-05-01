@@ -444,8 +444,10 @@ public class HTMLDocument extends Document {
                 final StringBuilder message = new StringBuilder()
                     .append("canAlreadyBeParsed() retruns false for content: '")
                     .append(StringUtils.abbreviateMiddle(content, ".", 100))
-                    .append("' (scriptTagCount: " + scriptTagCount)
-                    .append(" tagState: " + tagState)
+                    .append("' (scriptTagCount: ")
+                        .append(Integer.toString(scriptTagCount))
+                    .append(" tagState: ")
+                        .append(tagState)
                     .append(')');
                 LOG.debug(message.toString());
             }

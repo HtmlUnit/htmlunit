@@ -1946,11 +1946,11 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("HtmlPage(");
-        builder.append(getUrl());
-        builder.append(")@");
-        builder.append(hashCode());
+        final StringBuilder builder = new StringBuilder()
+            .append("HtmlPage(")
+            .append(getUrl())
+            .append(")@")
+            .append(hashCode());
         return builder.toString();
     }
 
