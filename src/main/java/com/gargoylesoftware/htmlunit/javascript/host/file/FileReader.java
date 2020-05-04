@@ -24,6 +24,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
+import java.util.Locale;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.Charsets;
@@ -203,7 +204,7 @@ public class FileReader extends EventTarget {
             final String encAsString = Context.toString(encoding);
             if (StringUtils.isNotBlank(encAsString)) {
                 try {
-                    charset = Charsets.toCharset(encAsString.trim().toLowerCase());
+                    charset = Charsets.toCharset(encAsString.trim().toLowerCase(Locale.ROOT));
                 }
                 catch (final UnsupportedCharsetException e) {
                     if (LOG.isWarnEnabled()) {

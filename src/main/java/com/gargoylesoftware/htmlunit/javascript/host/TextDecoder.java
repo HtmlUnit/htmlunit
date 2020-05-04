@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -377,7 +378,7 @@ public class TextDecoder extends SimpleScriptable {
         if (name != null) {
             return name;
         }
-        return encoding_.toLowerCase();
+        return encoding_.toLowerCase(Locale.ROOT);
     }
 
     /**
