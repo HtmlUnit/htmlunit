@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -687,6 +688,18 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
+    @Alerts(DEFAULT = "before1after1\nbefore2\nbefore3\nbefore4after4\nbefore5after5\nbefore6< >after6",
+            IE = "before1after1\n \nbefore2 \nbefore3 \nbefore4after4\n \nbefore5after5\n \nbefore6< >after6\n ")
+    @HtmlUnitNYI(CHROME = "\n  before1after1\n  \n  before2\n  before3\n"
+                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
+            FF = "\n  before1after1\n  \n  before2\n  before3\n"
+                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
+            FF68 = "\n  before1after1\n  \n  before2\n  before3\n"
+                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
+            FF60 = "\n  before1after1\n  \n  before2\n  before3\n"
+                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
+            IE = "\n  before1after1\n  \n  before2\n  before3\n"
+                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n")
     public void specialComments2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
@@ -715,14 +728,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        final String alerts = getCollectedAlerts(driver, 1).get(0);
-
-        assertTrue(alerts, alerts.contains("before1after1"));
-        assertTrue(alerts, alerts.contains("before2\n"));
-        assertTrue(alerts, alerts.contains("before3\n"));
-        assertTrue(alerts, alerts.contains("before4after4"));
-        assertTrue(alerts, alerts.contains("before5after5"));
-        assertTrue(alerts, alerts.contains("before6< >after6"));
+        loadPageWithAlerts2(html);
     }
 }

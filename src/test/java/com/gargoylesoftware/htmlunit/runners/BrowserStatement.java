@@ -100,30 +100,58 @@ class BrowserStatement extends Statement {
                         && BrowserVersionClassRunner.isDefined(alerts.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts.IE()));
 
-                assertNotEquals(alerts.IE(), alerts.DEFAULT());
-                assertNotEquals(alerts.CHROME(), alerts.DEFAULT());
-                assertNotEquals(alerts.FF(), alerts.DEFAULT());
-                assertNotEquals(alerts.FF60(), alerts.DEFAULT());
-                assertNotEquals(alerts.FF68(), alerts.DEFAULT());
+                assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.IE(), alerts.DEFAULT());
+                assertNotEquals(BrowserVersion.CHROME, alerts.CHROME(), alerts.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX, alerts.FF(), alerts.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX_60, alerts.FF60(), alerts.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX_68, alerts.FF68(), alerts.DEFAULT());
             }
 
             final HtmlUnitNYI nyiAlerts = method_.getAnnotation(HtmlUnitNYI.class);
             if (nyiAlerts != null) {
                 if (BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(nyiAlerts.CHROME())) {
-                    assertNotEquals(alerts.CHROME(), nyiAlerts.CHROME());
+                    assertNotEquals(BrowserVersion.CHROME, alerts.CHROME(), nyiAlerts.CHROME());
                 }
+                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.CHROME())) {
+                    assertNotEquals(BrowserVersion.CHROME, alerts.DEFAULT(), nyiAlerts.CHROME());
+                }
+
                 if (BrowserVersionClassRunner.isDefined(alerts.FF60())
                         && BrowserVersionClassRunner.isDefined(nyiAlerts.FF60())) {
-                    assertNotEquals(alerts.FF60(), nyiAlerts.FF60());
+                    assertNotEquals(BrowserVersion.FIREFOX_60, alerts.FF60(), nyiAlerts.FF60());
                 }
+                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF60())) {
+                    assertNotEquals(BrowserVersion.FIREFOX_60, alerts.DEFAULT(), nyiAlerts.FF60());
+                }
+
                 if (BrowserVersionClassRunner.isDefined(alerts.FF68())
                         && BrowserVersionClassRunner.isDefined(nyiAlerts.FF68())) {
-                    assertNotEquals(alerts.FF68(), nyiAlerts.FF68());
+                    assertNotEquals(BrowserVersion.FIREFOX_68, alerts.FF68(), nyiAlerts.FF68());
                 }
-                if (BrowserVersionClassRunner.isDefined(alerts.FF68())
+                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF68())) {
+                    assertNotEquals(BrowserVersion.FIREFOX_68, alerts.DEFAULT(), nyiAlerts.FF68());
+                }
+
+                if (BrowserVersionClassRunner.isDefined(alerts.FF())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF())) {
+                    assertNotEquals(BrowserVersion.FIREFOX, alerts.FF(), nyiAlerts.FF());
+                }
+                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF())) {
+                    assertNotEquals(BrowserVersion.FIREFOX, alerts.DEFAULT(), nyiAlerts.FF());
+                }
+
+                if (BrowserVersionClassRunner.isDefined(alerts.IE())
                         && BrowserVersionClassRunner.isDefined(nyiAlerts.IE())) {
-                    assertNotEquals(alerts.IE(), nyiAlerts.IE());
+                    assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.IE(), nyiAlerts.IE());
+                }
+                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.IE())) {
+                    assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.DEFAULT(), nyiAlerts.IE());
                 }
             }
         }
@@ -139,20 +167,20 @@ class BrowserStatement extends Statement {
                         && BrowserVersionClassRunner.isDefined(alerts2.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts2.IE()));
 
-                assertNotEquals(alerts2.IE(), alerts2.DEFAULT());
-                assertNotEquals(alerts2.CHROME(), alerts2.DEFAULT());
-                assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
-                assertNotEquals(alerts2.FF60(), alerts2.DEFAULT());
-                assertNotEquals(alerts2.FF68(), alerts2.DEFAULT());
+                assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts2.IE(), alerts2.DEFAULT());
+                assertNotEquals(BrowserVersion.CHROME, alerts2.CHROME(), alerts2.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX, alerts2.FF(), alerts2.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX_60, alerts2.FF60(), alerts2.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX_68, alerts2.FF68(), alerts2.DEFAULT());
             }
         }
     }
 
-    private void assertNotEquals(final String[] value1, final String[] value2) {
+    private void assertNotEquals(final BrowserVersion browser, final String[] value1, final String[] value2) {
         if (value1.length != 0 && !BrowserRunner.EMPTY_DEFAULT.equals(value1[0])
                 && value1.length == value2.length
                 && Arrays.asList(value1).toString().equals(Arrays.asList(value2).toString())) {
-            throw new AssertionError("Redundant alert in "
+            throw new AssertionError("Redundant alert for " + browser.getNickname() + " in "
                     + method_.getDeclaringClass().getSimpleName() + '.' + method_.getName() + "()");
         }
     }

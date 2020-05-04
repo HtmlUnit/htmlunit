@@ -55,7 +55,7 @@ public class ExternalTest {
     /** Gecko driver. */
     static String GECKO_DRIVER_ = "0.26.0";
     /** IE driver. */
-    static String IE_DRIVER_ = "3.14.0.0";
+    static String IE_DRIVER_ = "3.150.1.0";
 
     /**
      * Tests the current environment matches the expected setup.

@@ -175,7 +175,7 @@ public class NotYetImplementedTest {
                 if (builder.length() != 0) {
                     builder.append(' ');
                 }
-                builder.append(line.substring(start, line.length() - (end ? 2 : 0)));
+                builder.append(line, start, line.length() - (end ? 2 : 0));
             }
             if (end) {
                 break;

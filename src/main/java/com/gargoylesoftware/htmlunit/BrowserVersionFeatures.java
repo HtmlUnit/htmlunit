@@ -49,9 +49,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     ANCHOR_SEND_PING_REQUEST,
 
-    /** Browser does not check the cps. */
+    /** Browser does not check the CSP. */
     @BrowserFeature(IE)
-    CONTENT_SECURIRY_POLICY_IGNORED,
+    CONTENT_SECURITY_POLICY_IGNORED,
 
     /** Background image is 'initial'. */
     @BrowserFeature(CHROME)
@@ -170,12 +170,16 @@ public enum BrowserVersionFeatures {
     EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE,
 
     /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF, FF68, FF60})
     EVENT_FOCUS_FOCUS_IN_BLUR_OUT,
 
     /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
     @BrowserFeature(IE)
     EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
+
+    /** Triggers the onfocus event when focusing the body on load. */
+    @BrowserFeature({IE, FF, FF68, FF60})
+    EVENT_FOCUS_ON_LOAD,
 
     /** Indicates whether returning 'null' from a property handler is meaningful. */
     @BrowserFeature(IE)
@@ -427,6 +431,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
 
+    /** An empty (but given) tabindex attribute is treated as -1. */
+    @BrowserFeature({FF, FF68, FF60})
+    HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE,
+
     /** Handle blank source like empty. */
     @BrowserFeature({IE, CHROME})
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
@@ -625,6 +633,10 @@ public enum BrowserVersionFeatures {
     /** The anchor protocol property returns 'http' for broken http(s) url's. */
     @BrowserFeature({FF, FF68, FF60})
     JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL,
+
+    /** An area element without a href attribute is focusable. */
+    @BrowserFeature({FF, FF68, FF60})
+    JS_AREA_WITHOUT_HREF_FOCUSABLE,
 
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
     @BrowserFeature({CHROME, FF, FF68, FF60})
@@ -1056,9 +1068,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF60, IE})
     JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
 
-    /** Property form for label always returns null. */
-    @BrowserFeature({CHROME, FF, FF68, FF60})
-    JS_LABEL_FORM_NULL,
+    /** The property form of a label returns the form the label is assigned to. */
+    @BrowserFeature(IE)
+    JS_LABEL_FORM_OF_SELF,
 
     /** location.hash returns an encoded hash. */
     @BrowserFeature({CHROME, FF, FF68, FF60})

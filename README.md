@@ -12,7 +12,7 @@ It is typically used for testing purposes or to retrieve information from web si
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.39.0 / April 5, 2020
+### Latest release Version 2.40.0 / May 2, 2020
 [Download from Sourceforge][1]
 
 For maven, you would add:
@@ -20,19 +20,21 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.39.0</version>
+        <version>2.40.0</version>
     </dependency>
 
 ### Latest CI build
 The latest builds are available from our
 [Jenkins CI build server][2]
 
+[![Build Status](https://jenkins.wetator.org/buildStatus/icon?job=HtmlUnit)](https://jenkins.wetator.org/job/HtmlUnit/)
+
 If you use maven please add:
 
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.40.0-SNAPSHOT</version>
+        <version>2.41.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
@@ -65,7 +67,7 @@ You have to add the sonatype snapshot repository to your pom distributionManagem
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.39.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.40.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/job/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: http://htmlunit.sourceforge.net/ "http://htmlunit.sourceforge.net/"

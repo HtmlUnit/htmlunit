@@ -189,7 +189,7 @@ public final class MozillaTestGenerator {
                 if (builder.length() != 0) {
                     builder.append(',');
                 }
-                builder.append(line.substring(p0, p1));
+                builder.append(line, p0, p1);
                 if (terminator != '"' && terminator != '\'') {
                     break;
                 }

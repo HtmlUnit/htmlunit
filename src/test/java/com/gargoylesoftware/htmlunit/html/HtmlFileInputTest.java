@@ -186,8 +186,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/mpeg", "charset"},
-            CHROME = {"CONTENT_TYPE:audio/mp3", "charset"})
+    @Alerts({"CONTENT_TYPE:audio/mpeg", "charset"})
     public void contentTypeMp3() throws Exception {
         contentType("mp3");
     }

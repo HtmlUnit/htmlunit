@@ -141,7 +141,13 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         // the nested frame should not have been loaded
         final HtmlInlineFrame iframeIn2 = iframePage.getHtmlElementById("iframe2_1");
         assertEquals(URL_FIRST.toExternalForm(), iframeIn2.getSrcAttribute());
-        assertEquals("about:blank", iframeIn2.getEnclosedPage().getUrl());
+        final HtmlPage iframePage2 = (HtmlPage) iframeIn2.getEnclosedPage();
+        assertEquals(URL_FIRST.toExternalForm(), iframeIn2.getEnclosedPage().getUrl());
+
+        // the nested nested frame should not have been loaded
+        final HtmlInlineFrame iframeIn3 = iframePage2.getHtmlElementById("iframe1");
+        assertEquals(URL_SECOND.toExternalForm(), iframeIn3.getSrcAttribute());
+        assertEquals("about:blank", iframeIn3.getEnclosedPage().getUrl());
     }
 
     /**

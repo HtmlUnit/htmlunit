@@ -85,7 +85,7 @@ public final class ProxyAutoConfig {
     }
 
     private void defineMethod(final String methodName, final Scriptable scope) {
-        for (Method method : getClass().getMethods()) {
+        for (final Method method : getClass().getMethods()) {
             if (method.getName().equals(methodName)) {
                 final FunctionObject functionObject = new FunctionObject(methodName, method, scope);
                 ((ScriptableObject) scope).defineProperty(methodName, functionObject, ScriptableObject.EMPTY);

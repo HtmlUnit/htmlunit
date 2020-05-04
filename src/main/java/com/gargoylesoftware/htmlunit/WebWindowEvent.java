@@ -142,10 +142,10 @@ public final class WebWindowEvent extends EventObject {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder(80);
-        builder.append("WebWindowEvent(source=[");
-        builder.append(getSource());
-        builder.append("] type=[");
+        final StringBuilder builder = new StringBuilder(80)
+            .append("WebWindowEvent(source=[")
+            .append(getSource())
+            .append("] type=[");
         switch (type_) {
             case OPEN:
                 builder.append("OPEN");
@@ -160,11 +160,11 @@ public final class WebWindowEvent extends EventObject {
                 builder.append(type_);
                 break;
         }
-        builder.append("] oldPage=[");
-        builder.append(getOldPage());
-        builder.append("] newPage=[");
-        builder.append(getNewPage());
-        builder.append("])");
+        builder.append("] oldPage=[")
+            .append(getOldPage())
+            .append("] newPage=[")
+            .append(getNewPage())
+            .append("])");
 
         return builder.toString();
     }

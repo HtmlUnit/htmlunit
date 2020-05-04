@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -25,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -66,7 +63,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNone() throws Exception {
+    public void getLabeledElementNone() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item</label>\n"
@@ -77,7 +74,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -85,7 +82,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForEmpty() throws Exception {
+    public void getLabeledElementForEmpty() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for=''>Item</label>\n"
@@ -96,7 +93,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -104,10 +101,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForUnknown() throws Exception {
+    public void getLabeledElementForUnknown() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
-            + "  <label id='label1' for='unknwon'>Item</label>\n"
+            + "  <label id='label1' for='unknown'>Item</label>\n"
             + "  <input type='text' id='text1'>\n"
             + "</body></html>";
 
@@ -115,7 +112,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -123,7 +120,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForNotLabelable() throws Exception {
+    public void getLabeledElementForNotLabelable() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='div1'>Item</label>\n"
@@ -134,7 +131,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -142,7 +139,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForButton() throws Exception {
+    public void getLabeledElementForButton() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='button1'>Item</label>\n"
@@ -153,7 +150,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("button1", label.getReferencedElement().getId());
+            assertEquals("button1", label.getLabeledElement().getId());
         }
     }
 
@@ -161,7 +158,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForInput() throws Exception {
+    public void getLabeledElementForInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text1'>Item</label>\n"
@@ -172,7 +169,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -180,7 +177,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForInputHidden() throws Exception {
+    public void getLabeledElementForInputHidden() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='hidden1'>Item</label>\n"
@@ -191,7 +188,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -199,7 +196,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForMeter() throws Exception {
+    public void getLabeledElementForMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='meter1'>Item</label>\n"
@@ -211,10 +208,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("meter1", label.getReferencedElement().getId());
+                assertEquals("meter1", label.getLabeledElement().getId());
             }
         }
     }
@@ -223,7 +220,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForOutput() throws Exception {
+    public void getLabeledElementForOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='output1'>Item</label>\n"
@@ -235,10 +232,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("output1", label.getReferencedElement().getId());
+                assertEquals("output1", label.getLabeledElement().getId());
             }
         }
     }
@@ -247,7 +244,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForProgress() throws Exception {
+    public void getLabeledElementForProgress() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='progress1'>Item</label>\n"
@@ -258,7 +255,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("progress1", label.getReferencedElement().getId());
+            assertEquals("progress1", label.getLabeledElement().getId());
         }
     }
 
@@ -266,7 +263,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForSelect() throws Exception {
+    public void getLabeledElementForSelect() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='select1'>Item</label>\n"
@@ -277,7 +274,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("select1", label.getReferencedElement().getId());
+            assertEquals("select1", label.getLabeledElement().getId());
         }
     }
 
@@ -285,7 +282,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForTextArea() throws Exception {
+    public void getLabeledElementForTextArea() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text1'>Item</label>\n"
@@ -296,7 +293,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -304,7 +301,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedNotLabelable() throws Exception {
+    public void getLabeledElementNestedNotLabelable() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -316,7 +313,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -324,7 +321,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedButton() throws Exception {
+    public void getLabeledElementNestedButton() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -337,7 +334,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("button1", label.getReferencedElement().getId());
+            assertEquals("button1", label.getLabeledElement().getId());
         }
     }
 
@@ -345,7 +342,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedInput() throws Exception {
+    public void getLabeledElementNestedInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -358,7 +355,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -366,7 +363,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedInputHidden() throws Exception {
+    public void getLabeledElementNestedInputHidden() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -379,7 +376,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -387,7 +384,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedMeter() throws Exception {
+    public void getLabeledElementNestedMeter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -401,10 +398,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("meter1", label.getReferencedElement().getId());
+                assertEquals("meter1", label.getLabeledElement().getId());
             }
         }
     }
@@ -413,7 +410,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedOutput() throws Exception {
+    public void getLabeledElementNestedOutput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -427,10 +424,10 @@ public class HtmlLabelTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
             if (getBrowserVersion().isIE()) {
-                assertNull(label.getReferencedElement());
+                assertNull(label.getLabeledElement());
             }
             else {
-                assertEquals("output1", label.getReferencedElement().getId());
+                assertEquals("output1", label.getLabeledElement().getId());
             }
         }
     }
@@ -439,7 +436,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedProgress() throws Exception {
+    public void getLabeledElementNestedProgress() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -452,7 +449,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("progress1", label.getReferencedElement().getId());
+            assertEquals("progress1", label.getLabeledElement().getId());
         }
     }
 
@@ -460,7 +457,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedSelect() throws Exception {
+    public void getLabeledElementNestedSelect() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -473,7 +470,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("select1", label.getReferencedElement().getId());
+            assertEquals("select1", label.getLabeledElement().getId());
         }
     }
 
@@ -481,7 +478,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementNestedTextArea() throws Exception {
+    public void getLabeledElementNestedTextArea() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1'>Item\n"
@@ -494,7 +491,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text1", label.getReferencedElement().getId());
+            assertEquals("text1", label.getLabeledElement().getId());
         }
     }
 
@@ -502,7 +499,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForVersusNested() throws Exception {
+    public void getLabeledElementForVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='text2'>Item\n"
@@ -515,7 +512,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertEquals("text2", label.getReferencedElement().getId());
+            assertEquals("text2", label.getLabeledElement().getId());
         }
     }
 
@@ -523,7 +520,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForUnknownVersusNested() throws Exception {
+    public void getLabeledElementForUnknownVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='unknown'>Item\n"
@@ -536,7 +533,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -544,7 +541,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getReferencedElementForNotLabelableVersusNested() throws Exception {
+    public void getLabeledElementForNotLabelableVersusNested() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <label id='label1' for='div1'>Item\n"
@@ -557,7 +554,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             final HtmlLabel label = page.getHtmlElementById("label1");
-            assertNull(label.getReferencedElement());
+            assertNull(label.getLabeledElement());
         }
     }
 
@@ -568,11 +565,12 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickNone() throws Exception {
         final String html =
-              "  <label id='label1' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")'>\n";
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me</label>\n"
+            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -582,13 +580,17 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts({"labelclick:label1", "parentclick:label1"})
     public void clickNoneEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
-            + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)'>Click me</label>\n"
-            + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)'>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                      + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)' "
+                      + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me</label>\n"
+              + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)' "
+                      + "onfocus='log(\"textfocus:\" + event.target.id)'>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -598,11 +600,13 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickForEmpty() throws Exception {
         final String html =
-              "  <label id='label1' for='' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")'>\n";
+              "  <label id='label1' for='' onclick='log(\"labelclick\")' "
+                      + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -612,11 +616,14 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickForUnknown() throws Exception {
         final String html =
-              "  <label id='label1' for='unknown' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")'>\n";
+              "  <label id='label1' for='unknown' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -624,29 +631,92 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "labelclick",
-            IE = "labelclick;textclick")
+            IE = "labelclick;divclick")
     @HtmlUnitNYI(IE = "labelclick")
     public void clickForNotLabelable() throws Exception {
         final String html =
-              "  <label id='label1' for='div1' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <div id='div1' onclick='log(\"textclick\")'></div>\n";
+              "  <label id='label1' for='div1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <div id='div1' onclick='log(\"divclick\")' "
+                          + "onfocus='log(\"divfocus\")'></div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick", "textclick"})
+    @Alerts(DEFAULT = {"labelclick", "textfocus", "textclick"},
+            IE = {"labelclick", "textclick", "textfocus"})
+    @HtmlUnitNYI(IE = {"labelclick", "textfocus", "textclick"})
     public void clickForInput() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")'>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"labelclick", "selectfocus", "selectclick"},
+            IE = {"labelclick", "selectclick", "selectfocus"})
+    @HtmlUnitNYI(IE = {"labelclick", "selectfocus", "selectclick"})
+    public void clickForSelect() throws Exception {
+        final String html =
+              "  <label id='label1' for='select1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <select id='select1' onclick='log(\"selectclick\")' "
+                          + "onfocus='log(\"selectfocus\")'><option>Option</option></select>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("select1")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"labelclick", "textfocus", "textclick"},
+            IE = {"labelclick", "textclick", "textfocus"})
+    @HtmlUnitNYI(IE = {"labelclick", "textfocus", "textclick"})
+    public void clickForTextArea() throws Exception {
+        final String html =
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <textarea id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")'></textarea>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("labelclick")
+    public void clickForDisabled() throws Exception {
+        final String html =
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' disabled>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -654,43 +724,75 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"labelclick", "textclick"})
-    public void clickForTextArea() throws Exception {
+    public void clickForNotDisplayed() throws Exception {
         final String html =
-              "  <label id='label1' for='text1' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <textarea id='text1' onclick='log(\"textclick\")'></textarea>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' style='display: none;'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick", "selectclick"})
-    public void clickForSelect() throws Exception {
+    @Alerts({"labelclick", "textclick"})
+    public void clickForNotVisible() throws Exception {
         final String html =
-              "  <label id='label1' for='select1' onclick='log(\"labelclick\")'>Click me</label>\n"
-            + "  <select id='select1' onclick='log(\"selectclick\")'><option>Option</option></select>\n";
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' style='visibility: hidden;'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick:label1", "parentclick:label1", "textclick:text1", "parentclick:text1"})
+    @Alerts({"labelclick", "textclick"})
+    public void clickForHidden() throws Exception {
+        final String html =
+              "  <label id='label1' for='text1' onclick='log(\"labelclick\")' "
+                          + "onfocus='log(\"labelfocus\")'>Click me</label>\n"
+              + "  <input type='text' id='text1' onclick='log(\"textclick\")' "
+                          + "onfocus='log(\"textfocus\")' hidden>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
+                    "textclick:text1", "parentclick:text1"},
+            IE = {"labelclick:label1", "parentclick:label1", "textclick:text1",
+                    "parentclick:text1", "textfocus:text1"})
+    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
+                    "textclick:text1", "parentclick:text1"})
     public void clickForEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
-            + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)'>Click me</label>\n"
-            + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)'>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                          + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)' "
+                          + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me</label>\n"
+              + "    <input type='text' id='text1' onclick='log(\"textclick:\" + event.target.id)' "
+                          + "onfocus='log(\"textfocus:\" + event.target.id)'>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
     }
 
     /**
@@ -700,32 +802,103 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickNestedNotLabelable() throws Exception {
         final String html =
-              "  <label id='label1' onclick='log(\"labelclick\")'>Click me"
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <div id='div1' onclick='log(\"textclick\")'></div>\n"
+            + "    <div id='div1' onclick='log(\"divclick\")' onfocus='log(\"divfocus\")'></div>\n"
             + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick", "text1click", "labelclick"})
+    @Alerts(DEFAULT = {"labelclick", "text1focus", "text1click", "labelclick"},
+            IE = {"labelclick", "text1click", "labelclick", "text1focus"})
+    @HtmlUnitNYI(IE = {"labelclick", "text1focus", "text1click", "labelclick"})
     public void clickNestedInput() throws Exception {
         final String html =
-              "  <label id='label1' onclick='log(\"labelclick\")'>Click me"
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")'>\n"
-            + "    <input type='text' id='text2' onclick='log(\"text2click\")'>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")'>\n"
+            + "    <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n"
             + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"labelclick", "select1focus", "select1click", "labelclick"},
+            IE = {"labelclick", "select1click", "labelclick", "select1focus"})
+    @HtmlUnitNYI(IE = {"labelclick", "select1focus", "select1click", "labelclick"})
+    public void clickNestedSelect() throws Exception {
+        final String html =
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "    <select id='select1' onclick='log(\"select1click\")' "
+                          + "onfocus='log(\"select1focus\")'><option>Option</option></select>\n"
+              + "    <select id='select2' onclick='log(\"select2click\")' "
+                          + "onfocus='log(\"select2focus\")'><option>Option</option></select>\n"
+              + "  </label>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("select1")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"labelclick", "text1focus", "text1click", "labelclick"},
+            IE = {"labelclick", "text1click", "labelclick", "text1focus"})
+    @HtmlUnitNYI(IE = {"labelclick", "text1focus", "text1click", "labelclick"})
+    public void clickNestedTextArea() throws Exception {
+        final String html =
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <textarea id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")'></textarea>\n"
+            + "    <textarea id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'></textarea>\n"
+            + "  </label>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "labelclick",
+            IE = {"labelclick", "labelclick"})
+    @HtmlUnitNYI(IE = "labelclick")
+    public void clickNestedDisabled() throws Exception {
+        final String html =
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' "
+                        + "onfocus='log(\"text1focus\")' disabled>\n"
+            + "    <input type='text' id='text2' onclick='log(\"text2click\")' "
+                        + "onfocus='log(\"text2focus\")'>\n"
+            + "  </label>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -733,93 +906,140 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"labelclick", "text1click", "labelclick"})
-    public void clickNestedTextArea() throws Exception {
+    public void clickNestedNotDisplayed() throws Exception {
         final String html =
-              "  <label id='label1' onclick='log(\"labelclick\")'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <textarea id='text1' onclick='log(\"text1click\")'></textarea>\n"
-            + "    <textarea id='text2' onclick='log(\"text2click\")'></textarea>\n"
-            + "  </label>\n";
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "    <input type='text' id='text1' onclick='log(\"text1click\")' "
+                          + "onfocus='log(\"text1focus\")' style='display: none;'>\n"
+              + "    <input type='text' id='text2' onclick='log(\"text2click\")' "
+                          + "onfocus='log(\"text2focus\")'>\n"
+              + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick", "select1click", "labelclick"})
-    public void clickNestedSelect() throws Exception {
+    @Alerts({"labelclick", "text1click", "labelclick"})
+    public void clickNestedNotVisible() throws Exception {
         final String html =
-              "  <label id='label1' onclick='log(\"labelclick\")'>Click me"
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <select id='select1' onclick='log(\"select1click\")'><option>Option</option></select>\n"
-            + "    <select id='select2' onclick='log(\"select2click\")'><option>Option</option></select>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' "
+                        + "onfocus='log(\"text1focus\")' style='visibility: hidden;'>\n"
+            + "    <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n"
             + "  </label>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick:label1", "parentclick:label1", "text1click:text1", "labelclick:text1", "parentclick:text1"})
+    @Alerts({"labelclick", "text1click", "labelclick"})
+    public void clickNestedHidden() throws Exception {
+        final String html =
+              "  <label id='label1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
+            // we have to add some extra text to make Selenium click the label and not the nested element
+            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")' hidden>\n"
+            + "    <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n"
+            + "  </label>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("label1")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                        "text1click:text1", "labelclick:text1", "parentclick:text1"},
+            IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
+                        "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                        "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickNestedEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
-            + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)'>\n"
-            + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)'>\n"
-            + "    </label>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                      + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' onclick='log(\"labelclick:\" + event.target.id)' "
+                          + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me"
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)' "
+                          + "onfocus='log(\"text1focus:\" + event.target.id)'>\n"
+              + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)' "
+                          + "onfocus='log(\"text2focus:\" + event.target.id)'>\n"
+              + "    </label>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick:label1", "parentclick:label1", "text1click:text1", "labelclick:text1", "parentclick:text1"})
+    @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                    "text1click:text1", "labelclick:text1", "parentclick:text1"},
+            IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
+                    "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+    @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
+                    "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickForAndNestedEventBubbling() throws Exception {
         final String html =
-              "  <div onclick='log(\"parentclick:\" + event.target.id)'>\n"
-            + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)'>Click me"
-            // we have to add some extra text to make Selenium click the label and not the nested element
-            + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)'>\n"
-            + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)'>\n"
-            + "    </label>\n"
-            + "  </div>\n";
+              "  <div onclick='log(\"parentclick:\" + event.target.id)' "
+                          + "onfocus='log(\"parentfocus:\" + event.target.id)'>\n"
+              + "    <label id='label1' for='text1' onclick='log(\"labelclick:\" + event.target.id)' "
+                          + "onfocus='log(\"labelfocus:\" + event.target.id)'>Click me"
+              // we have to add some extra text to make Selenium click the label and not the nested element
+              + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
+              + "      <input type='text' id='text1' onclick='log(\"text1click:\" + event.target.id)' "
+                          + "onfocus='log(\"text1focus:\" + event.target.id)'>\n"
+              + "      <input type='text' id='text2' onclick='log(\"text2click:\" + event.target.id)' "
+                          + "onfocus='log(\"text2focus:\" + event.target.id)'>\n"
+              + "    </label>\n"
+              + "  </div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text1")), driver.switchTo().activeElement());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"labelclick", "text2click"})
+    @Alerts(DEFAULT = {"labelclick", "text2focus", "text2click"},
+            IE = {"labelclick", "text2click", "text2focus"})
+    @HtmlUnitNYI(IE = {"labelclick", "text2focus", "text2click"})
     public void clickForVersusNested() throws Exception {
         final String html =
-              "  <label id='label1' for='text2' onclick='log(\"labelclick\")'>Click me"
+              "  <label id='label1' for='text2' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")'>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")'>\n"
             + "  </label>\n"
-            + "  <input type='text' id='text2' onclick='log(\"text2click\")'>\n";
+            + "  <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("text2")), driver.switchTo().activeElement());
     }
 
     /**
@@ -829,15 +1049,16 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Alerts("labelclick")
     public void clickForUnknownVersusNested() throws Exception {
         final String html =
-              "  <label id='label1' for='unknown' onclick='log(\"labelclick\")'>Click me"
+              "  <label id='label1' for='unknown' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")'>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")'>\n"
             + "  </label>\n"
-            + "  <input type='text' id='text2' onclick='log(\"text2click\")'>\n";
+            + "  <input type='text' id='text2' onclick='log(\"text2click\")' onfocus='log(\"text2focus\")'>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -845,68 +1066,20 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "labelclick",
-            IE = "labelclick;textclick")
+            IE = "labelclick;div1click")
     @HtmlUnitNYI(IE = "labelclick")
     public void clickForNotLabelableVersusNested() throws Exception {
         final String html =
-              "  <label id='label1' for='div1' onclick='log(\"labelclick\")'>Click me"
+              "  <label id='label1' for='div1' onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Click me"
             // we have to add some extra text to make Selenium click the label and not the nested element
             + " (we have to add some extra text to make Selenium click the label and not the nested element)\n"
-            + "    <input type='text' id='text1' onclick='log(\"text1click\")'>\n"
+            + "    <input type='text' id='text1' onclick='log(\"text1click\")' onfocus='log(\"text1focus\")'>\n"
             + "  </label>\n"
-            + "  <div id='div1' onclick='log(\"textclick\")'></div>\n";
+            + "  <div id='div1' onclick='log(\"div1click\")' onfocus='log(\"div1focus\")'></div>\n";
         final WebDriver driver = loadPage2(generatePage(html));
         driver.findElement(By.id("label1")).click();
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = {"labelclick", "textfocus", "textclick"},
-            IE = {"labelclick", "textclick", "textfocus"})
-    @NotYetImplemented(IE)
-    public void clickForSetFocusToInput() throws Exception {
-        final String html =
-              "  <label id='label1' for='text1' "
-                    + "onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Focus input</label>\n"
-            + "  <input type='text' id='text1' onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
-        final WebDriver driver = loadPage2(generatePage(html));
-        driver.findElement(By.id("label1")).click();
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("labelclick")
-    public void clickForSetFocusToDisabledInput() throws Exception {
-        final String html =
-              "  <label id='label1' for='text1' "
-                    + "onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Focus input</label>\n"
-            + "  <input type='text' id='text1' disabled='disabled' "
-                    + "onclick='log(\"textclick\")' onfocus='log(\"textfocus\")'>\n";
-        final WebDriver driver = loadPage2(generatePage(html));
-        driver.findElement(By.id("label1")).click();
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("labelclick")
-    public void clickForSetFocusToDisabledCheckbox() throws Exception {
-        final String html =
-              "  <label id='label1' for='check1' "
-                    + "onclick='log(\"labelclick\")' onfocus='log(\"labelfocus\")'>Focus input</label>\n"
-            + "  <input type='checkbox' id='check1' disabled='disabled' "
-                    + "onclick='log(\"checkclick\")' onfocus='log(\"checkfocus\")'>\n";
-        final WebDriver driver = loadPage2(generatePage(html));
-        driver.findElement(By.id("label1")).click();
-        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+        assertEquals(driver.findElement(By.id("body")), driver.switchTo().activeElement());
     }
 
     /**
@@ -915,7 +1088,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click listItem1", "click list", "true"})
-    public void triggerRadio() throws Exception {
+    public void triggerRadioFor() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -937,7 +1110,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click radio1Label", "click listItem1", "click list", "true"})
-    public void triggerRadioInside() throws Exception {
+    public void triggerRadioNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -960,7 +1133,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click radio1Label", "click listItem1", "click list", "true"})
-    public void triggerRadioForAndInside() throws Exception {
+    public void triggerRadioForAndNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -983,7 +1156,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click listItem1", "click list", "true"})
-    public void triggerRadioChecked() throws Exception {
+    public void triggerRadioCheckedFor() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1005,7 +1178,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click radio1Label", "click listItem1", "click list", "true"})
-    public void triggerRadioCheckedInside() throws Exception {
+    public void triggerRadioCheckedNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1028,7 +1201,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click radio1Label", "click listItem1", "click list", "true"})
-    public void triggerRadioCheckedForAndInside() throws Exception {
+    public void triggerRadioCheckedForAndNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1049,14 +1222,57 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list", "false"})
+    public void triggerRadioDisabled() throws Exception {
+        final String html =
+              "  <ul onclick='log(\"click list\")'>\n"
+            + "    <li onclick='log(\"click listItem1\")'>\n"
+            + "      <label id='radio1Label' for='radio1' onclick='log(\"click radio1Label\")'>Radio 1</label>\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio' disabled "
+                        + "onclick='log(\"click radio1\");'>\n"
+            + "    </li>\n"
+            + "  </ul>\n"
+            + "  <button id='check' onclick='log(document.getElementById(\"radio1\").checked)'>Check</button>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("radio1Label")).click();
+        driver.findElement(By.id("check")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click listItem1", "click list", "true"})
-    public void triggerRadioInvisible() throws Exception {
+    public void triggerRadioNotDisplayed() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
             + "      <label id='radio1Label' for='radio1' onclick='log(\"click radio1Label\")'>Radio 1</label>\n"
             + "      <input id='radio1' name='radios' value='1' type='radio' style='display: none;' "
+                        + "onclick='log(\"click radio1\");'>\n"
+            + "    </li>\n"
+            + "  </ul>\n"
+            + "  <button id='check' onclick='log(document.getElementById(\"radio1\").checked)'>Check</button>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("radio1Label")).click();
+        driver.findElement(By.id("check")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list",
+                "click radio1", "click listItem1", "click list", "true"})
+    public void triggerRadioNotVisible() throws Exception {
+        final String html =
+              "  <ul onclick='log(\"click list\")'>\n"
+            + "    <li onclick='log(\"click listItem1\")'>\n"
+            + "      <label id='radio1Label' for='radio1' onclick='log(\"click radio1Label\")'>Radio 1</label>\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio' style='visibility: hidden;' "
                         + "onclick='log(\"click radio1\");'>\n"
             + "    </li>\n"
             + "  </ul>\n"
@@ -1274,7 +1490,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click listItem1", "click list", "true"})
-    public void triggerCheckbox() throws Exception {
+    public void triggerCheckboxFor() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1296,7 +1512,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click check1Label", "click listItem1", "click list", "true"})
-    public void triggerCheckboxInside() throws Exception {
+    public void triggerCheckboxNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1319,7 +1535,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click check1Label", "click listItem1", "click list", "true"})
-    public void triggerCheckboxForAndInside() throws Exception {
+    public void triggerCheckboxForAndNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1342,7 +1558,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click listItem1", "click list", "false"})
-    public void triggerCheckboxChecked() throws Exception {
+    public void triggerCheckboxCheckedFor() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1364,7 +1580,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click check1Label", "click listItem1", "click list", "false"})
-    public void triggerCheckboxCheckedInside() throws Exception {
+    public void triggerCheckboxCheckedNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1387,7 +1603,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click check1Label", "click listItem1", "click list", "false"})
-    public void triggerCheckboxCheckedForAndInside() throws Exception {
+    public void triggerCheckboxCheckedForAndNested() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
@@ -1408,14 +1624,57 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"click check1Label", "click listItem1", "click list", "false"})
+    public void triggerCheckboxDisabled() throws Exception {
+        final String html =
+              "  <ul onclick='log(\"click list\")'>\n"
+            + "    <li onclick='log(\"click listItem1\")'>\n"
+            + "      <label id='check1Label' for='check1' onclick='log(\"click check1Label\")'>Checkbox 1</label>\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox' disabled "
+                        + "onclick='log(\"click check1\");'>\n"
+            + "    </li>\n"
+            + "  </ul>\n"
+            + "  <button id='check' onclick='log(document.getElementById(\"check1\").checked)'>Check</button>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("check1Label")).click();
+        driver.findElement(By.id("check")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click listItem1", "click list", "true"})
-    public void triggerCheckboxInvisible() throws Exception {
+    public void triggerCheckboxNotDisplayed() throws Exception {
         final String html =
               "  <ul onclick='log(\"click list\")'>\n"
             + "    <li onclick='log(\"click listItem1\")'>\n"
             + "      <label id='check1Label' for='check1' onclick='log(\"click check1Label\")'>Checkbox 1</label>\n"
             + "      <input id='check1' name='checks' value='1' type='checkbox' style='display: none;' "
+                        + "onclick='log(\"click check1\");'>\n"
+            + "    </li>\n"
+            + "  </ul>\n"
+            + "  <button id='check' onclick='log(document.getElementById(\"check1\").checked)'>Check</button>\n";
+        final WebDriver driver = loadPage2(generatePage(html));
+        driver.findElement(By.id("check1Label")).click();
+        driver.findElement(By.id("check")).click();
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1Label", "click listItem1", "click list",
+                "click check1", "click listItem1", "click list", "true"})
+    public void triggerCheckboxNotVisible() throws Exception {
+        final String html =
+              "  <ul onclick='log(\"click list\")'>\n"
+            + "    <li onclick='log(\"click listItem1\")'>\n"
+            + "      <label id='check1Label' for='check1' onclick='log(\"click check1Label\")'>Checkbox 1</label>\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox' style='visibility: hidden;' "
                         + "onclick='log(\"click check1\");'>\n"
             + "    </li>\n"
             + "  </ul>\n"
@@ -1636,7 +1895,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body>\n"
+            + "  <body id='body'>\n"
             + snippet
             + "  </body>\n"
             + "</html>";

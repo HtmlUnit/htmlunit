@@ -340,7 +340,7 @@ public class HttpWebConnection implements WebConnection {
                     final StringBuilder body = new StringBuilder();
                     for (final NameValuePair pair : webRequest.getRequestParameters()) {
                         body.append(StringUtils.remove(StringUtils.remove(pair.getName(), '\r'), '\n'))
-                            .append("=")
+                            .append('=')
                             .append(StringUtils.remove(StringUtils.remove(pair.getValue(), '\r'), '\n'))
                             .append("\r\n");
                     }
@@ -642,6 +642,12 @@ public class HttpWebConnection implements WebConnection {
         final int timeout = getTimeout();
         if (timeout != usedOptions_.getTimeout()) {
             configureTimeout(httpClientBuilder, timeout);
+        }
+
+        final long connectionTimeToLive = webClient_.getOptions().getConnectionTimeToLive();
+        if (connectionTimeToLive != usedOptions_.getConnectionTimeToLive()) {
+            httpClientBuilder.setConnectionTimeToLive(connectionTimeToLive, TimeUnit.MILLISECONDS);
+            usedOptions_.setConnectionTimeToLive(connectionTimeToLive);
         }
 
         if (connectionManager_ == null) {

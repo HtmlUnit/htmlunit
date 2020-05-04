@@ -69,7 +69,7 @@ public class WebClientInternals implements Serializable {
     public void created(final WebSocket webSocket) {
         if (listeners_ != null) {
             synchronized (listeners_) {
-                for (Listener l : listeners_) {
+                for (final Listener l : listeners_) {
                     l.webSocketCreated(webSocket);
                 }
             }

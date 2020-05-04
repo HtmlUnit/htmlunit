@@ -60,7 +60,7 @@ public class SvgElementFactory implements ElementFactory {
 
     static {
         try {
-            for (Class<?> klass : CLASSES_) {
+            for (final Class<?> klass : CLASSES_) {
                 ELEMENTS_.put(klass.getField("TAG_NAME").get(null).toString().toLowerCase(Locale.ROOT), klass);
             }
         }

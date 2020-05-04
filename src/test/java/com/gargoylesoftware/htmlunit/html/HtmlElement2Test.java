@@ -32,10 +32,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link HtmlElement}.
@@ -302,12 +301,9 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"before appendChild;after appendChild;image onload;after removeChild;", "2"})
-    // HtmlUnit loads images synchron
-    @HtmlUnitNYI(CHROME = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
-            FF = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
-            FF68 = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
-            FF60 = {"before appendChild;image onload;after removeChild;after appendChild;", "2"},
-            IE = {"before appendChild;image onload;after removeChild;after appendChild;", "2"})
+    // HtmlUnit loads images synchron - because of this the removeChild is called before the
+    // node is appended and fails
+    @NotYetImplemented
     public void addRemove() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

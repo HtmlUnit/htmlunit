@@ -81,7 +81,7 @@ public class RecursiveFunctionObject extends FunctionObject {
                 c != null; c = c.getSuperclass()) {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);
             if (scripatble instanceof Scriptable) {
-                for (Object id : ((Scriptable) scripatble).getIds()) {
+                for (final Object id : ((Scriptable) scripatble).getIds()) {
                     objects.add(id);
                 }
             }

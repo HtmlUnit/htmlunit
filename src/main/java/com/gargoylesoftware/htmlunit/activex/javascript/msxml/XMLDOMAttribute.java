@@ -185,10 +185,10 @@ public class XMLDOMAttribute extends XMLDOMNode {
      */
     @Override
     public String getXml() {
-        final StringBuilder sb = new StringBuilder(getName());
-        sb.append('=').append('"');
-        sb.append(StringUtils.escapeXmlAttributeValue(getValue()));
-        sb.append('"');
+        final StringBuilder sb = new StringBuilder(getName())
+                .append("=\"")
+                .append(StringUtils.escapeXmlAttributeValue(getValue()))
+                .append('"');
         return sb.toString();
     }
 

@@ -14,14 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
-import java.util.Arrays;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -29,8 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -40,302 +31,1383 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class FocusableElement2Test extends WebDriverTestCase {
-    private static final String COMMON_ID = " id='focusId'";
-    private static final String COMMON_EVENTS = " onblur=\"alert('onblur')\" "
-                                                    + "onfocusin=\"alert('onfocusin')\" "
-                                                    + "onfocusout=\"alert('onfocusout')\" "
-                                                    + "onfocus=\"alert('onfocus')\"";
-    private static final String COMMON_ATTRIBUTES = COMMON_ID + COMMON_EVENTS;
-
     /**
-     * Full page driver for onblur and onfocus tests.
-     *
-     * @param html HTML fragment for body of page with a focusable element identified by a focusId ID attribute
-     * Must have onfocus event that raises an alert of "foo1 onfocus" and an onblur event that raises an alert of "foo
-     * onblur" on the second element.
      * @throws Exception if the test fails
      */
-    private void testTagWithClick(String tag) throws Exception {
-        tag = tag.replaceFirst(">", COMMON_ATTRIBUTES + ">");
-        testWithClick(tag);
+    @Test
+    @Alerts(DEFAULT = {"body", "active: body", "onload", "active: body",
+                "onfocus:[object Window]", "active: body"},
+            CHROME = {"body", "active: body", "onload", "active: body"},
+            IE = {"body", "active: null", "onfocusin:body", "active: body", "onload", "active: body",
+                "onfocus:[object Window]", "active: body"})
+    @HtmlUnitNYI(FF = {"body", "active: body", "onload", "active: body"},
+            FF68 = {"body", "active: body", "onload", "active: body"},
+            IE = {"body", "active: body", "onload", "active: body"})
+    // TODO FF & FF68 fail due to wrong body vs. window event handling
+    public void bodyLoad() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('onload');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()' " + logEvents("") + ">\n"
+            + "    <script>\n"
+            + "      log('body');"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
     }
 
-    private void testWithClick(final String body) throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>\n"
-                + body
-                + "<div id='other'>other</div>\n"
-                + "</body></html>";
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:[object Window]", "active: focusId",
+                "before", "active: focusId", "after", "active: focusId"},
+            CHROME = {"before", "active: focusId", "after", "active: focusId"},
+            IE = {"onfocusin:focusId", "active: focusId", "onfocus:[object Window]", "active: focusId",
+                "before", "active: focusId", "after", "active: focusId"})
+    @HtmlUnitNYI(FF = {"before", "active: focusId", "after", "active: focusId"},
+            FF68 = {"before", "active: focusId", "after", "active: focusId"},
+            IE = {"before", "active: focusId", "onfocusout:focusId", "active: focusId", "after", "active: focusId"})
+    // TODO FF & FF68 fail due to wrong body vs. window event handling
+    public void body() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId').focus();\n"
+            + "        document.getElementById('focusId').focus();\n"
+            + "        document.getElementById('focusId').blur();\n"
+            + "        document.getElementById('focusId').blur();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='focusId' onload='setTimeout(test, 10)' " + logEvents("") + ">\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body",
+                "before", "active: body", "after", "active: body"},
+            CHROME = {"before", "active: body", "after", "active: body"},
+            IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
+                "before", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(FF = {"before", "active: body", "after", "active: body"},
+            FF68 = {"before", "active: body", "after", "active: body"},
+            IE = {"before", "active: body", "after", "active: body"})
+    // TODO FF & FF68 fail due to wrong body vs. window event handling
+    public void bodySwitchFromBodyToNotFocusable() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId').focus();\n"
+            + "        document.getElementById('focusId').blur();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='setTimeout(test, 10)' " + logEvents("") + ">\n"
+            + "    <div id='focusId' " + logEvents("F") + ">div</div>\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body",
+                "before", "active: body",
+                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            CHROME = {"before", "active: body",
+                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
+                "before", "active: body", "onfocusout:body", "active: focusId",
+                "onfocusinF:focusId", "active: focusId", "onfocusin:focusId",
+                "active: focusId", "onfocusoutF:focusId", "active: body",
+                "onfocusout:focusId", "active: body", "onfocusin:body", "active: body", "after", "active: body",
+                "onfocusF:focusId", "active: body", "onblurF:focusId", "active: body"})
+    @HtmlUnitNYI(FF = {"before", "active: body",
+                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            FF68 = {"before", "active: body",
+                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body", "onfocusout:body", "active: body",
+                "onfocusinF:focusId", "active: body", "onfocusin:focusId",
+                "active: body", "onfocusF:focusId", "active: focusId",
+                "onfocusoutF:focusId", "active: body", "onfocusout:focusId",
+                "active: body", "onblurF:focusId", "active: body",
+                "after", "active: body"})
+    // TODO FF & FF68 fail due to wrong body vs. window event handling
+    public void bodySwitchFromBodyToFocusable() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId').focus();\n"
+            + "        document.getElementById('focusId').blur();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='setTimeout(test, 10)' " + logEvents("") + ">\n"
+            + "    <input type='text' id='focusId' " + logEvents("F") + ">\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body",
+                "before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
+            CHROME = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
+            IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
+                "before", "active: body", "onfocusout:body", "active: focusId1",
+                "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"})
+    @HtmlUnitNYI(FF = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
+            FF68 = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
+            IE = {"before", "active: body", "onfocusout:body", "active: body", "onfocusin:focusId1",
+                "active: body", "after", "active: focusId1"})
+    // TODO FF & FF68 fail due to wrong body vs. window event handling
+    public void bodySwitchFromFocusableToNotFocusable() throws Exception {
+        testBodySwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<div id='focusId2'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body", "before", "active: body",
+                "onfocusin:focusId1", "active: focusId1",
+                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                "after", "active: focusId2"},
+            CHROME = {"before", "active: body",
+                "onfocusin:focusId1", "active: focusId1",
+                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                "after", "active: focusId2"},
+            IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
+                "before", "active: body", "onfocusout:body", "active: focusId1",
+                "onfocusin:focusId1", "active: focusId1", "onfocusout:focusId1", "active: focusId2",
+                "onfocusin:focusId2", "active: focusId2",
+                "after", "active: focusId2"})
+    @HtmlUnitNYI(FF = {"before", "active: body",
+                "onfocusin:focusId1", "active: focusId1",
+                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                "after", "active: focusId2"},
+            FF68 = {"before", "active: body",
+                "onfocusin:focusId1", "active: focusId1",
+                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                "after", "active: focusId2"},
+            IE = {"before", "active: body", "onfocusout:body", "active: body",
+                "onfocusin:focusId1", "active: body",
+                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: body",
+                "after", "active: focusId2"})
+    // TODO FF & FF68 fail due to wrong body vs. window event handling
+    public void bodySwitchFromFocusableToFocusable() throws Exception {
+        testBodySwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' id='focusId2'>");
+    }
+
+    private void testBodySwitchWithCallFocusAndBlur(final String snippet) throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId1').focus();\n"
+            + "        document.getElementById('focusId2').focus();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='setTimeout(test, 10)' " + logEvents("") + ">\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void notFocusable() throws Exception {
+        testWithCallFocusAndBlur("<div id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body", "between", "active: body", "after", "active: body"},
+            FF68 = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            FF = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"})
+    public void notFocusableWithTabIndexEmpty() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void notFocusableWithTabIndexNegative() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='-1' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void notFocusableWithTabIndexZero() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='0' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void notFocusableWithTabIndexPositive() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='1' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void notFocusableWithTabIndexNotDisplayed() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='0' style='display: none;' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void notFocusableWithTabIndexNotVisible() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='0' style='visibility: hidden;' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void notFocusableWithTabIndexHidden() throws Exception {
+        testWithCallFocusAndBlur("<div tabindex='0' hidden id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void anchor() throws Exception {
+        testWithCallFocusAndBlur("<a href='#' id='focusId'>link</a>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void anchorWithEmptyHref() throws Exception {
+        testWithCallFocusAndBlur("<a href='' id='focusId'>link</a>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void anchorWithoutHref() throws Exception {
+        testWithCallFocusAndBlur("<a id='focusId'>link</a>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void area() throws Exception {
+        testWithCallFocusAndBlur("<map name='dot'><area shape='rect' coords='0,0,5,5' href='#' id='focusId' /></map>"
+            + "<img usemap='#dot'"
+            + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+            + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void areaWithEmptyHref() throws Exception {
+        testWithCallFocusAndBlur("<img usemap='#dot'"
+            + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+            + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "<map name='dot'><area shape='rect' coords='0,0,1,1' href='' id='focusId' /></map>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body", "between", "active: body", "after", "active: body"},
+            FF = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId",
+                "active: body", "after", "active: body"},
+            FF68 = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId",
+                "active: body", "after", "active: body"})
+    public void areaWithoutHref() throws Exception {
+        testWithCallFocusAndBlur("<img usemap='#dot'"
+            + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+            + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "<map name='dot'><area shape='rect' coords='0,0,1,1' id='focusId' /></map>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void button() throws Exception {
+        testWithCallFocusAndBlur("<button id='focusId'>button</button>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void input() throws Exception {
+        testWithCallFocusAndBlur("<input type='text' id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void inputHidden() throws Exception {
+        testWithCallFocusAndBlur("<input type='hidden' id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelFor() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label><input type='text' id='textId' "
+                + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelForDisabled() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label>"
+                + "<input type='text' disabled id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelForReadonly() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label>"
+                + "<input type='text' readonly id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelForNotDisplayed() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label"
+                + "</label><input type='text' style='display: none;' id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelForNotVisible() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label>"
+                + "<input type='text' style='visibility: hidden;' id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelForHidden() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label</label>"
+                + "<input type='text' hidden id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelNotDisplayedFor() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' style='display: none;' id='focusId'>label</label>"
+                + "<input type='text' id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelNotVisibleFor() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' style='visibility: hidden;' id='focusId'>label</label>"
+                + "<input type='text' id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelHiddenFor() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' hidden id='focusId'>label</label>"
+                + "<input type='text' id='textId' " + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId",
+                "active: textId", "onfocusin:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusin:textId",
+                "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelNested() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label <input type='text' id='textId' "
+                + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelNestedDisabled() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label "
+                + "<input type='text' disabled id='textId' " + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocusT:textId", "active: textId", "onfocusinT:textId",
+                "active: textId", "onfocusin:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"},
+            IE = {"before", "active: body", "between", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusinT:textId", "active: body", "onfocusin:textId",
+                "active: body", "onfocusT:textId", "active: textId",
+                "between", "active: textId", "after", "active: textId"})
+    public void labelNestedReadonly() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label <input type='text' readonly id='textId' "
+                + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelNestedNotDisplayed() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label "
+                + "<input type='text' style='display: none;' id='textId' " + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelNestedNotVisible() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label "
+                + "<input type='text' style='display: none;' id='textId' "
+                + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelNestedHidden() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' id='focusId'>label <input type='text' hidden id='textId' "
+                + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelNotDisplayedNested() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' style='display: none;' id='focusId'>label "
+                + "<input type='text' id='textId' " + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelNotVisibleNested() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' style='visibility: hidden;' id='focusId'>label "
+                + "<input type='text' id='textId' " + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void labelHiddenNested() throws Exception {
+        testWithCallFocusAndBlur("<label for='textId' hidden id='focusId'>label "
+                + "<input type='text' id='textId' " + logEvents("T") + "></label>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void optionGroup() throws Exception {
+        testWithCallFocusAndBlur("<select><optgroup label='group' id='focusId'><option>1</option></optgroup></select>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void option() throws Exception {
+        testWithCallFocusAndBlur("<select><option id='focusId'>1</option></select>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void select() throws Exception {
+        testWithCallFocusAndBlur("<select id='focusId'><option>1</option></select>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void textArea() throws Exception {
+        testWithCallFocusAndBlur("<textarea id='focusId'></textarea>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void focusableDisabled() throws Exception {
+        testWithCallFocusAndBlur("<input type='text' disabled id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: focusId", "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "after", "active: body",
+                "onfocus:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "between", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    public void focusableReadonly() throws Exception {
+        testWithCallFocusAndBlur("<input type='text' readonly id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void focusableNotDisplayed() throws Exception {
+        testWithCallFocusAndBlur("<input type='text' style='display: none;' id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void focusableNotVisible() throws Exception {
+        testWithCallFocusAndBlur("<input type='text' style='visibility: hidden;' id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "between", "active: body", "after", "active: body"})
+    public void focusableHidden() throws Exception {
+        testWithCallFocusAndBlur("<input type='text' hidden id='focusId'>");
+    }
+
+    private void testWithCallFocusAndBlur(String snippet) throws Exception {
+        snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
+
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId').focus();\n"
+            + "        document.getElementById('focusId').focus();\n"
+            + "        log('between');\n"
+            + "        document.getElementById('focusId').blur();\n"
+            + "        document.getElementById('focusId').blur();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='setTimeout(test, 10)'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1",
+                "onfocus1:focusId1", "active: focusId1"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "after", "active: focusId1"})
+    public void switchFromFocusableToNotFocusable() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<div id='focusId2'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body",
+                "onfocus2:focusId2", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
+                "after", "active: focusId2"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1", "onfocusout1:focusId1", "active: focusId2",
+                "onfocusin2:focusId2", "active: focusId2",
+                "after", "active: focusId2",
+                "onfocus1:focusId1", "active: focusId2", "onblur1:focusId1", "active: focusId2",
+                "onfocus2:focusId2", "active: focusId2"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: body", "onfocusin2:focusId2", "active: body",
+                "onblur1:focusId1", "active: body", "onfocus2:focusId2", "active: focusId2",
+                "after", "active: focusId2"})
+    public void switchFromFocusableToFocusable() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' id='focusId2'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1",
+                "onfocus1:focusId1", "active: focusId1"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "after", "active: focusId1"})
+    public void switchFromFocusableToFocusableDisabled() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' disabled id='focusId2'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body",
+                "onfocus2:focusId2", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
+                "after", "active: focusId2"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1", "onfocusout1:focusId1", "active: focusId2",
+                "onfocusin2:focusId2", "active: focusId2",
+                "after", "active: focusId2",
+                "onfocus1:focusId1", "active: focusId2", "onblur1:focusId1", "active: focusId2",
+                "onfocus2:focusId2", "active: focusId2"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: body", "onfocusin2:focusId2", "active: body",
+                "onblur1:focusId1", "active: body", "onfocus2:focusId2", "active: focusId2",
+                "after", "active: focusId2"})
+    public void switchFromFocusableToFocusableReadonly() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' readonly id='focusId2'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1",
+                "onfocus1:focusId1", "active: focusId1"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "after", "active: focusId1"})
+    public void switchFromFocusableToFocusableNotDisplayed() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' style='display: none;' id='focusId2'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1",
+                "onfocus1:focusId1", "active: focusId1"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "after", "active: focusId1"})
+    public void switchFromFocusableToFocusableNotVisible() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' style='visibility: hidden;' id='focusId2'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before", "active: body",
+                "onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1"},
+            IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: focusId1",
+                "after", "active: focusId1",
+                "onfocus1:focusId1", "active: focusId1"})
+    @HtmlUnitNYI(IE = {"before", "active: body",
+                "onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "after", "active: focusId1"})
+    public void switchFromFocusableToFocusableHidden() throws Exception {
+        testSwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
+            + "<input type='text' hidden id='focusId2'>");
+    }
+
+    private void testSwitchWithCallFocusAndBlur(String snippet) throws Exception {
+        snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
+        snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
+
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId1').focus();\n"
+            + "        document.getElementById('focusId2').focus();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='setTimeout(test, 10)'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "after", "active: body"})
+    public void jsClickOnNotFocusable() throws Exception {
+        testWithCallClick("<div id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "after", "active: body"})
+    @HtmlUnitNYI(CHROME = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            FF = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            FF68 = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
+            IE = {"before", "active: body",
+                "onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body",
+                "after", "active: body"})
+    // FIXME click for either divs or inputs seems broken... :(
+    public void jsClickOnNotFocusableWithTabIndex() throws Exception {
+        testWithCallClick("<div tabindex='0' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "active: body", "after", "active: body"})
+    public void jsClickOnFocusable() throws Exception {
+        testWithCallClick("<input type='text' id='focusId'>");
+    }
+
+    private void testWithCallClick(String snippet) throws Exception {
+        snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
+
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "      function test() {\n"
+            + "        log('before');\n"
+            + "        document.getElementById('focusId').click();\n"
+            + "        document.getElementById('focusId').click();\n"
+            + "        document.getElementById('otherId').click();\n"
+            + "        log('after');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='setTimeout(test, 10)'>\n"
+            + snippet
+            + "    <div id='otherId'>div</div>\n"
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickOnNotFocusable() throws Exception {
+        testWithClick("<div id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body"},
+            IE = {"onfocusin:focusId", "active: focusId", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body"})
+    public void clickOnNotFocusableWithTabIndex() throws Exception {
+        testWithClick("<div tabindex='0' id='focusId'>div</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body"},
+            IE = {"onfocusin:focusId", "active: focusId", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body"})
+    public void clickOnFocusable() throws Exception {
+        testWithClick("<input type='text' id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickOnFocusableDisabled() throws Exception {
+        testWithClick("<input type='text' disabled id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body"},
+            IE = {"onfocusin:focusId", "active: focusId", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body"})
+    @HtmlUnitNYI(IE = {"onfocusin:focusId", "active: body", "onfocus:focusId", "active: focusId",
+                "onfocusout:focusId", "active: body", "onblur:focusId", "active: body"})
+    public void clickOnFocusableReadonly() throws Exception {
+        testWithClick("<input type='text' readonly id='focusId'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocusT:textId", "active: textId", "onfocusinT:textId", "active: textId",
+                "onblurT:textId", "active: body", "onfocusoutT:textId", "active: body"},
+            IE = {"onfocusinT:textId", "active: textId", "onfocusT:textId", "active: textId",
+                "onfocusoutT:textId", "active: body", "onblurT:textId", "active: body"})
+    @HtmlUnitNYI(IE = {"onfocusinT:textId", "active: body", "onfocusT:textId", "active: textId",
+                "onfocusoutT:textId", "active: body", "onblurT:textId", "active: body"})
+    public void clickOnLabelFor() throws Exception {
+        testWithClick("<label for='textId' id='focusId'>label</label><input type='text' id='textId' "
+                + logEvents("T") + ">");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onfocusT:textId", "active: textId", "onfocusinT:textId",
+                "active: textId", "onfocusin:textId", "active: textId",
+                "onblurT:textId", "active: body", "onfocusoutT:textId",
+                "active: body", "onfocusout:textId", "active: body"},
+            IE = {"onfocusinT:textId", "active: textId", "onfocusin:textId",
+                "active: textId", "onfocusT:textId", "active: textId",
+                "onfocusoutT:textId", "active: body", "onfocusout:textId",
+                "active: body", "onblurT:textId", "active: body"})
+    @HtmlUnitNYI(IE = {"onfocusinT:textId", "active: body", "onfocusin:textId",
+                "active: body", "onfocusT:textId", "active: textId",
+                "onfocusoutT:textId", "active: body", "onfocusout:textId",
+                "active: body", "onblurT:textId", "active: body"})
+    public void clickOnLabelNested() throws Exception {
+        testWithClick("<label for='textId' id='focusId'>label <input type='text' id='textId' "
+                + logEvents("T") + "></label>");
+    }
+
+    private void testWithClick(String snippet) throws Exception {
+        snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
+
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body'>\n"
+            + snippet
+            + "    <div id='otherId'>div</div>\n"
+            + "  </body>\n"
+            + "</html>\n";
 
         final WebDriver driver = loadPage2(html);
 
         driver.findElement(By.id("focusId")).click();
-        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("otherId")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
-    }
-
-    private void testWithCallFocusBlur(String tag) throws Exception {
-        tag = tag.replaceFirst(">", COMMON_ATTRIBUTES + ">");
-
-        final String html = "<html><head><title>foo</title></head><body>\n"
-            + tag
-            + "<script type=\"text/javascript\" language=\"JavaScript\">\n"
-            + "  document.getElementById('focusId').focus();\n"
-            + "  document.getElementById('focusId').blur();\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-     /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of anchor element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why and not in div?")
-    public void anchor_onblur_onfocus() throws Exception {
-        testTagWithClick("<a href='javascript:void(0)'>link</a>");
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
     }
 
     /**
-    * Test onblur and onfocus handlers and blur() and focus() methods of anchor element.
-    *
-    * @throws Exception if the test fails
-    */
-    @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocusout", "onfocus", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why and not in div?")
-    // TODO: why it passes in HtmlUnit?
-    @NotYetImplemented(IE)
-    public void anchor_onblur_onfocus_methodsCalls() throws Exception {
-        testWithCallFocusBlur("<a href='.'>link</a>");
-    }
-
-    /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of div element.
-     *
      * @throws Exception if the test fails
      */
     @Test
-    public void div_onblur_onfocus() throws Exception {
-        testTagWithClick("<div>hello</div>");
+    @Alerts(DEFAULT = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body",
+                "onfocus2:focusId2", "active: focusId2", "onfocusin2:focusId2", "active: focusId2"},
+            IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
+                "onblur1:focusId1", "active: focusId2", "onfocus2:focusId2", "active: focusId2"})
+    @HtmlUnitNYI(IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: body", "onfocusin2:focusId2", "active: body",
+                "onblur1:focusId1", "active: body", "onfocus2:focusId2", "active: focusId2"})
+    public void clickFromFocusableToFocusable() throws Exception {
+        testSwitchWithClick("<input type='text' id='focusId1'>\n"
+            + "<input type='text' id='focusId2'>");
     }
 
     /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of div element.
-     *
      * @throws Exception if the test fails
      */
     @Test
-    public void div_onblur_onfocus_methods() throws Exception {
-        testTagWithClick("<div>hello</div>");
+    @Alerts(DEFAULT = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body"},
+            IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
+    @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1"})
+    public void clickFromFocusableToFocusableDisabled() throws Exception {
+        testSwitchWithClick("<input type='text' id='focusId1'>\n"
+            + "<input type='text' disabled id='focusId2'>");
     }
 
     /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of button element.
-     *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
-    public void button_onblur_onfocus() throws Exception {
-        testTagWithClick("<button name='foo' value='bar' type='button'>button</button>");
+    @Alerts(DEFAULT = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+                "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body",
+                "onfocus2:focusId2", "active: focusId2", "onfocusin2:focusId2", "active: focusId2"},
+            IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: focusId2", "onfocusin2:focusId2", "active: focusId2",
+                "onblur1:focusId1", "active: focusId2", "onfocus2:focusId2", "active: focusId2"})
+    @HtmlUnitNYI(IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1",
+                "onfocusout1:focusId1", "active: body", "onfocusin2:focusId2", "active: body",
+                "onblur1:focusId1", "active: body", "onfocus2:focusId2", "active: focusId2"})
+    public void clickFromFocusableToFocusableReadonly() throws Exception {
+        testSwitchWithClick("<input type='text' id='focusId1'>\n"
+            + "<input type='text' readonly id='focusId2'>");
     }
 
-    /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of label element surrounding input element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
-    public void labelContainsInput_onblur_onfocus() throws Exception {
-        final String body = "<form><label " + COMMON_ID + ">\n"
-                + "Foo<input type=\"text\" name=\"foo\"" + COMMON_EVENTS + "></label></form>\n";
-        testWithClick(body);
-    }
+    private void testSwitchWithClick(String snippet) throws Exception {
+        snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
+        snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
 
-    /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of label element referencing an input element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
-    public void labelReferencesInput_onblur_onfocus() throws Exception {
-        final String body = "<form><label " + COMMON_ID + " for=\"fooId\">Foo</label>\n"
-                + "<input type=\"text\" name=\"foo\" id=\"fooId\"" + COMMON_EVENTS + "></form>\n";
-        testWithClick(body);
-    }
-
-    /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of select element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
-    public void select_onblur_onfocus() throws Exception {
-        testTagWithClick("<select><option>1</option></select>");
-    }
-
-    /**
-     * Test onblur and onfocus handlers and blur() and focus() methods of textarea element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"onfocus", "onblur"},
-            CHROME = {"onfocus", "onfocusin", "onblur", "onfocusout"},
-            IE = {"onfocusin", "onfocus", "onfocusout", "onblur"})
-    @Ignore("In real browsers, clicking an alert triggers focus/blur, also why not in div?")
-    public void textarea_onblur_onfocus() throws Exception {
-        testTagWithClick("<textarea>Text</textarea>");
-    }
-
-    /**
-     * Test that focus() called on a non focusable element doesn't trigger document's focus handlers.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "done\nfocus",
-            CHROME = "done")
-    @NotYetImplemented({FF, FF68, FF60, IE})
-    public void focusOnNonFocusableElementShouldNotTriggerDocumentFocus() throws Exception {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log').value += x + '\\n';\n"
-                + "  }\n"
-                + "  function ff() {\n"
-                + "    log('focus');\n"
-                + "  }\n"
-                + "</script>\n"
-
-                + "</head><body>\n"
-                + "<div id='it'>div</div>\n"
-                + "<textarea id='log'></textarea>\n"
-
-                + "<script>\n"
-                + "  document.addEventListener('focus', ff, true);\n"
-                + "  document.getElementById('it').focus();\n"
-                + "  document.getElementById('it').blur();\n"
-                + "  log('done');\n"
-                + "</script>\n"
-                + "</body></html>";
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("log")).getAttribute("value").trim());
+
+        driver.findElement(By.id("focusId1")).click();
+        driver.findElement(By.id("focusId2")).click();
+
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
     }
 
-    /**
-     * Test that focus() called on a non focusable element doesn't let focused element loose the focus.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"input1", "focus1", "div", "input2", "blur1", "focus2"})
-    @BuggyWebDriver(IE = {"input1", "div", "input2", "focus1", "blur1", "focus2"})
-    public void focusOnNonFocusableElementShouldNotChangeCurrentFocus() throws Exception {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function log(x) {\n"
-                + "    document.getElementById('log').value += x + '\\n';\n"
-                + "  }\n"
-                + "</script>\n"
-
-                + "</head><body>\n"
-                + "<textarea id='log'></textarea>\n"
-                + "<div id='div' onblur=\"log('blur')\" onfocus=\"log('focus')\">div</div>\n"
-                + "<input id='input1' onblur=\"log('blur1')\" onfocus=\"log('focus1')\">\n"
-                + "<input id='input2' onblur=\"log('blur2')\" onfocus=\"log('focus2')\">\n"
-                + "<script>\n"
-                + "  log('input1');\n"
-                + "  document.getElementById('input1').focus();\n"
-                + "  log('div');\n"
-                + "  document.getElementById('div').focus();\n"
-                + "  log('input2');\n"
-                + "  document.getElementById('input2').focus();\n"
-                + "</script></body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        final String[] alerts = driver.findElement(By.id("log")).getAttribute("value").split("\r?\n");
-        assertEquals(getExpectedAlerts(), Arrays.asList(alerts));
+    private String logger() {
+        return  "      function log(x, e) {\n"
+            + "        document.title += x + (e ? ':' + (e.target.id ? e.target.id : e.target) : '') + ';';\n"
+            + "        document.title += 'active: ' "
+                        + "+ (document.activeElement ? document.activeElement.id : 'null') + ';';\n"
+            + "      }\n";
     }
 
-    /**
-     * Test that click called on a non focusable element removes focus from focused element.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"focus1", "blur1"})
-    public void clickOnNonFocusableElementChangesCurrentFocus() throws Exception {
-        final String html = "<html><body>\n"
-            + "<textarea id='log'></textarea>\n"
-            + "<div id='div' onblur=\"log('blur')\" onfocus=\"log('focus')\">div</div>\n"
-            + "<input id='input1' onblur=\"log('blur1')\" onfocus=\"log('focus1')\">\n"
-            + "<script>\n"
-            + "  function log(x) {\n"
-            + "    document.getElementById('log').value += x + '\\n';\n"
-            + "  }\n"
-            + "  \n"
-            + "</script></body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("input1")).click();
-        driver.findElement(By.id("div")).click();
-        final String[] alerts = driver.findElement(By.id("log")).getAttribute("value").split("\r?\n");
-        assertEquals(getExpectedAlerts(), Arrays.asList(alerts));
-    }
-
-    /**
-     * Test focus on all types of elements.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"true", "true"})
-    public void onAllElements() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<title>focus/blur on all elements</title>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('foo1').focus != null);\n"
-            + "    alert(document.getElementById('foo2').focus != null);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test(); focus()'>\n"
-            + "  <span id='foo1'>X</span>\n"
-            + "  <form action=''>\n"
-            + "    <input id='foo2'>\n"
-            + "  </form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    private String logEvents(final String aSuffix) {
+        return "onblur=\"log('onblur" + aSuffix + "', event)\" "
+            + "onfocusin=\"log('onfocusin" + aSuffix + "', event)\" "
+            + "onfocusout=\"log('onfocusout" + aSuffix + "', event)\" "
+            + "onfocus=\"log('onfocus" + aSuffix + "', event)\"";
     }
 }

@@ -55,7 +55,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class NodeList extends AbstractList {
 
     private static final String ITERATOR_NAME = "Iterator";
-    private static Iterator ITERATOR_PROTOTYPE_;
+    private static Iterator ITERATOR_PROTOTYPE_ = new Iterator(ITERATOR_NAME, null);
 
     /**
      * Creates an instance.
@@ -122,7 +122,7 @@ public class NodeList extends AbstractList {
         }
         final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
         object.setParentScope(getParentScope());
-        setIteratorPrototype(object);
+        object.setPrototype(ITERATOR_PROTOTYPE_);
         return object;
     }
 
@@ -135,7 +135,7 @@ public class NodeList extends AbstractList {
         final List<DomNode> list = getElements();
         final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
         object.setParentScope(getParentScope());
-        setIteratorPrototype(object);
+        object.setPrototype(ITERATOR_PROTOTYPE_);
         return object;
     }
 
@@ -156,15 +156,8 @@ public class NodeList extends AbstractList {
         }
         final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
         object.setParentScope(scope);
-        setIteratorPrototype(object);
+        object.setPrototype(ITERATOR_PROTOTYPE_);
         return object;
-    }
-
-    private static void setIteratorPrototype(final Scriptable scriptable) {
-        if (ITERATOR_PROTOTYPE_ == null) {
-            ITERATOR_PROTOTYPE_ = new Iterator(ITERATOR_NAME, null);
-        }
-        scriptable.setPrototype(ITERATOR_PROTOTYPE_);
     }
 
     /**

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECURIRY_POLICY_IGNORED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECURITY_POLICY_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
@@ -594,7 +594,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final String contentSecurityPolicy =
                         webResponse.getResponseHeaderValue(HttpHeader.CONTENT_SECURIRY_POLICY);
                 if (StringUtils.isNotBlank(contentSecurityPolicy)
-                        && !getBrowserVersion().hasFeature(CONTENT_SECURIRY_POLICY_IGNORED)) {
+                        && !getBrowserVersion().hasFeature(CONTENT_SECURITY_POLICY_IGNORED)) {
                     final URL origin = UrlUtils.getUrlWithoutPathRefQuery(
                             ((FrameWindow) webWindow).getEnclosingPage().getUrl());
                     final URL source = UrlUtils.getUrlWithoutPathRefQuery(webResponse.getWebRequest().getUrl());
@@ -2556,7 +2556,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final List<org.apache.http.cookie.Cookie> cookies =
                         cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
 
-                for (org.apache.http.cookie.Cookie cookie : cookies) {
+                for (final org.apache.http.cookie.Cookie cookie : cookies) {
                     final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
                     cookieManager.addCookie(htmlUnitCookie);
 

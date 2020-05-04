@@ -4561,7 +4561,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='under'><p id='contents'>Hello</p></div>\n"
+            + "  <div id='under'>\n"
+            + "    <p id='contents'>Hello</p>"
+            + "  </div>\n"
             + "  <div id='over'>abc</div>\n"
             + "</body>\n"
             + "</html>";
@@ -4569,6 +4571,182 @@ public class HTMLElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("over")).click();
         verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDivElement]", "[object HTMLBodyElement]"})
+    public void currentTargetBody() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "  function handler(ev) {\n"
+            + "    alert(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var byId = document.getElementById.bind(document);\n"
+
+            + "    var under = byId('under');\n"
+            + "    var over = byId('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    var types = ['click'];\n"
+            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
+            + "      over.addEventListener(type, handler);\n"
+            + "      body.addEventListener(type, handler);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("over")).click();
+        verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDivElement]", "[object Window]"})
+    public void currentTargetWindow() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "  function handler(ev) {\n"
+            + "    alert(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var byId = document.getElementById.bind(document);\n"
+
+            + "    var under = byId('under');\n"
+            + "    var over = byId('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    var types = ['click'];\n"
+            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
+            + "      over.addEventListener(type, handler);\n"
+            + "      window.addEventListener(type, handler);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("over")).click();
+        verifyAlerts(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"added", "removed"})
+    public void addRemoveEventListenerFromBody() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "  function handler(ev) {\n"
+            + "    alert(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var byId = document.getElementById.bind(document);\n"
+
+            + "    var under = byId('under');\n"
+            + "    var over = byId('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    var types = ['click'];\n"
+            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
+            + "      over.addEventListener(type, handler);\n"
+            + "      body.addEventListener(type, handler);\n"
+            + "      window.addEventListener(type, handler);\n"
+            + "      alert('added');\n"
+
+            + "      body.removeEventListener(type, handler);\n"
+            + "      alert('removed');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+
+        webDriver.findElement(By.id("over")).click();
+        verifyAlerts(webDriver, new String[] {"[object HTMLDivElement]"});
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"added", "removed"})
+    public void addRemoveEventListenerFromWindow() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>Test</title>\n"
+            + "<script>\n"
+            + "  function handler(ev) {\n"
+            + "    alert(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var byId = document.getElementById.bind(document);\n"
+
+            + "    var under = byId('under');\n"
+            + "    var over = byId('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    var types = ['click'];\n"
+            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
+            + "      over.addEventListener(type, handler);\n"
+            + "      body.addEventListener(type, handler);\n"
+            + "      window.addEventListener(type, handler);\n"
+            + "      alert('added');\n"
+
+            + "      window.removeEventListener(type, handler);\n"
+            + "      alert('removed');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+
+        webDriver.findElement(By.id("over")).click();
+        verifyAlerts(webDriver, new String[] {"[object HTMLDivElement]", "[object HTMLBodyElement]"});
     }
 
     /**
