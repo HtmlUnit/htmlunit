@@ -960,9 +960,12 @@ public abstract class HtmlElement extends DomElement {
      * @return true if an event handler has been defined otherwise false
      */
     public final boolean hasEventHandlers(final String eventName) {
-        final Object jsObj = getScriptableObject();
-        if (jsObj instanceof EventTarget) {
-            return ((EventTarget) jsObj).hasEventHandlers(eventName);
+
+        if (getPage().getWebClient().isJavaScriptEngineEnabled()) {
+            final Object jsObj = getScriptableObject();
+            if (jsObj instanceof EventTarget) {
+                return ((EventTarget) jsObj).hasEventHandlers(eventName);
+            }
         }
         return false;
     }
