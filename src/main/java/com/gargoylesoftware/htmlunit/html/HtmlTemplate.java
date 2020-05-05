@@ -67,7 +67,13 @@ public class HtmlTemplate extends HtmlElement {
     public void onAllChildrenAddedToPage(final boolean postponed) {
         while (getFirstChild() != null) {
             final DomNode child = getFirstChild();
+
             child.basicRemove();
+            final HtmlPage htmlPage = getHtmlPageOrNull();
+            if (htmlPage != null) {
+                htmlPage.notifyNodeRemoved(child);
+            }
+
             domDocumentFragment_.appendChild(child);
         }
     }

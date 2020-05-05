@@ -195,4 +195,93 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"myTemplate", "null"},
+            IE = {"myTemplate", "[object HTMLDivElement]"})
+    public void getElementById() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var template = document.getElementById('myTemplate');\n"
+            + "        alert(template.id);\n"
+
+            + "        outer = document.getElementById('outerDiv');\n"
+            + "        alert(outer);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <template id='myTemplate'>\n"
+            + "      <div id='outerDiv'>HtmlUnit <div id='innerDiv'>is great</div></div>\n"
+            + "    </template>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"myTemplate", "0"},
+            IE = {"myTemplate", "2"})
+    public void getElementsByTagName() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var template = document.getElementById('myTemplate');\n"
+            + "        alert(template.id);\n"
+
+            + "        var children = template.getElementsByTagName('div');"
+            + "        alert(children.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <template id='myTemplate'>\n"
+            + "      <div id='outerDiv'>HtmlUnit <div id='innerDiv'>is great</div></div>\n"
+            + "    </template>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"myTemplate", "0"},
+            IE = {"myTemplate", "3"})
+    public void childNodes() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var template = document.getElementById('myTemplate');\n"
+            + "        alert(template.id);\n"
+
+            + "        alert(template.childNodes.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <template id='myTemplate'>\n"
+            + "      <div id='outerDiv'>HtmlUnit <div id='innerDiv'>is great</div></div>\n"
+            + "    </template>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
