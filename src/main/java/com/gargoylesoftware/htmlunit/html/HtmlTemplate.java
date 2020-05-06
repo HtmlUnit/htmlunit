@@ -82,16 +82,13 @@ public class HtmlTemplate extends HtmlElement {
 
     @Override
     protected boolean isEmptyXmlTagExpanded() {
-        // Force printing expanded tag if children in content
-        return getContent().getFirstChild() != null;
+        // Always print expanded tag to force printing of
+        // children if available
+        return true;
     }
 
     @Override
     protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
-        DomNode child = getContent().getFirstChild();
-        while (child != null) {
-            child.printXml(indent + "  ", printWriter);
-            child = child.getNextSibling();
-        }
+        domDocumentFragment_.printChildrenAsXml(indent, printWriter);
     }
 }
