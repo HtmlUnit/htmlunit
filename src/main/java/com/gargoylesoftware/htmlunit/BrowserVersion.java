@@ -97,7 +97,7 @@ public final class BrowserVersion implements Serializable {
      * Firefox.
      * @since 2.38
      */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(75, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(76, "FF");
 
     /**
      * Firefox 68 ESR.
@@ -244,9 +244,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME
         CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.122 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.138 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.122 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.138 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";

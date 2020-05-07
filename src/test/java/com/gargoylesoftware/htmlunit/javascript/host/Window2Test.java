@@ -1255,13 +1255,11 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {
                 "string string 7 number string",
                 "string string 8 number object"},
-            FF = {"string string 0 number string",
-                    "string string 0 number object"},
             FF68 = {"string string 0 number string",
                     "string string 0 number object"},
             FF60 = {"string string 0 number string",
                     "string string 0 number object"})
-    @NotYetImplemented({FF, FF68, FF60})
+    @NotYetImplemented({FF68, FF60})
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"
