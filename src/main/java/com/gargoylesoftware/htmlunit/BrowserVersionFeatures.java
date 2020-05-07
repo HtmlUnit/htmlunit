@@ -210,7 +210,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF, IE})
     EVENT_ONHASHCHANGE_BUBBLES_FALSE,
 
     /** Triggers "onload" event if internal javascript loaded. */
@@ -1442,10 +1442,10 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_86,
 
     /**
-     * Difference of window.outer/inner height is 92.
+     * Difference of window.outer/inner height is 136.
      */
     @BrowserFeature(CHROME)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_92,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136,
 
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF68, FF60})

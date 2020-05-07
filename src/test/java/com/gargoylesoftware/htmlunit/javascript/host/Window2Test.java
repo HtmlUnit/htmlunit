@@ -655,12 +655,12 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"window1", "window2"})
+    @Alerts("window1window2")
     public void openWindowParamReplace() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function info(msg) {\n"
-            + "    alert(msg);\n"
+            + "    document.title += msg;\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -677,7 +677,10 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        Thread.sleep(400);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
         releaseResources();
@@ -750,7 +753,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "92", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "136", "true", "true", "16"},
             FF = {"true", "true", "86", "true", "true", "14"},
             FF68 = {"true", "true", "86", "true", "true", "14"},
             FF60 = {"true", "true", "86", "true", "true", "14"},
