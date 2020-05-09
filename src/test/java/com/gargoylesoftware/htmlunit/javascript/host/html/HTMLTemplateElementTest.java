@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -183,6 +184,62 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
 
             + "        template = document.getElementById('tDiv');\n"
             + "        alert(template.innerHTML);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <template id='tEmpty'></template>\n"
+            + "    <template id='tText'>HtmlUnit</template>\n"
+            + "    <template id='tDiv'><div>HtmlUnit</div><div>is great</div></template>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<template></template>", "<template></template>",
+                    "<template><p></p></template>", "<template id=\"tEmpty\"></template>",
+                    "<template id=\"tText\">HtmlUnit</template>",
+                    "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"},
+            IE = {"<?XML:NAMESPACE PREFIX = \"PUBLIC\" NS = \"URN:COMPONENT\" /><template></template>",
+                    "<template><div></div></template>", "<template id=\"tEmpty\"></template>",
+                    "<template id=\"tText\">HtmlUnit</template>",
+                    "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
+    @HtmlUnitNYI(IE = {"<template></template>", "<template><div></div></template>",
+                    "<template id=\"tEmpty\"></template>",
+                    "<template id=\"tText\">HtmlUnit</template>",
+                    "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
+    public void outerHTML() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var template = document.createElement('template');\n"
+            + "        alert(template.outerHTML);\n"
+
+            + "        var div = document.createElement('div');\n"
+            + "        template.appendChild(div);\n"
+            + "        alert(template.outerHTML);\n"
+
+            + "        var p = document.createElement('p');\n"
+            + "        if ('content' in template) {\n"
+            + "          template.content.appendChild(p);\n"
+            + "          alert(template.outerHTML);\n"
+            + "        }\n"
+
+            + "        template = document.getElementById('tEmpty');\n"
+            + "        alert(template.outerHTML);\n"
+
+            + "        template = document.getElementById('tText');\n"
+            + "        alert(template.outerHTML);\n"
+
+            + "        template = document.getElementById('tDiv');\n"
+            + "        alert(template.outerHTML);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

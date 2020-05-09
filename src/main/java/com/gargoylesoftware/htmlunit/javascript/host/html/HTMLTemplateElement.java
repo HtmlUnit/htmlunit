@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.HtmlTemplate;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -64,14 +64,13 @@ public class HTMLTemplateElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getInnerHTML() {
-        final DomNode domNode;
         try {
-            domNode = ((HtmlTemplate) getDomNodeOrDie()).getContent();
+            final DomDocumentFragment fragment = ((HtmlTemplate) getDomNodeOrDie()).getContent();
+            return getInnerHTML(fragment);
         }
         catch (final IllegalStateException e) {
             Context.throwAsScriptRuntimeEx(e);
             return "";
         }
-        return getInnerHTML(domNode);
     }
 }

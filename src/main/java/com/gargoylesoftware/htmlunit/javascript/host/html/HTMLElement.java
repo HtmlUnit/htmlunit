@@ -721,7 +721,7 @@ public class HTMLElement extends Element {
     public String getInnerText() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, getDomNodeOrDie(), false);
+        printChildren(buf, getDomNodeOrDie(), false, false);
         return buf.toString();
     }
 
