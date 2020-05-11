@@ -693,7 +693,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"before import", "after import", "1"})
+    @Alerts("before import;after import;1")
     public void createHTMLDocumentInnerAddImgAddDocToIframe1() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
@@ -704,17 +704,17 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "      var frame = document.getElementById('theFrame');\n"
 
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
-                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"alert(1)\">';\n"
+                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"window.parent.document.title += 1\">';\n"
 
                          // Copy the new HTML document into the frame
                 + "      var destDocument = frame.contentDocument;\n"
                 + "      var srcNode = doc.documentElement;\n"
-                + "      alert('before import');\n"
+                + "      document.title += 'before import;';\n"
                 + "      var newNode = destDocument.importNode(srcNode, true);\n"
-                + "      alert('after import');\n"
+                + "      document.title += 'after import;';\n"
                 + "      destDocument.replaceChild(newNode, destDocument.documentElement);\n"
 
-                + "    } catch(e) { alert('exception'); }\n"
+                + "    } catch(e) { document.title += 'exception'; }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -723,6 +723,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 }
