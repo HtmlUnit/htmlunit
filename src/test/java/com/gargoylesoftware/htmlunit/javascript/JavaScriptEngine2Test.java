@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 
 import org.junit.Test;
@@ -336,7 +334,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver
+    @Alerts("WebDriverException thrown")
+    @BuggyWebDriver("WebDriverException NOT thrown")
     public void function_object_method() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -352,14 +351,17 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "</body></html>";
 
+        final String[] expected = getExpectedAlerts();
+
         try {
+            setExpectedAlerts();
             loadPageWithAlerts2(html);
-            if (getExpectedAlerts().length == 0) {
-                fail("WebDriverException expected");
-            }
+
+            // at the moment we do not get the syntax exception when running in selenium
+            assertEquals("WebDriverException NOT thrown", expected[0]);
         }
         catch (final WebDriverException e) {
-            // at the moment we do not get the syntax exception when running in selenium
+            assertEquals("WebDriverException thrown", expected[0]);
         }
     }
 
