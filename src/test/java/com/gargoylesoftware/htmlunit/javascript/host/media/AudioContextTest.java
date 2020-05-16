@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -87,68 +89,85 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
+    @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
             IE = "AudioContext not available")
-    @BuggyWebDriver(FF = "Todo", FF68 = "Todo", FF60 = "Todo")
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + "    function log(msg) {\n"
+            + "      var ta = document.getElementById('myTextArea');\n"
+            + "      ta.value += msg + '; ';\n"
+            + "    }\n"
+
             + "    function test() {\n"
             + "      if (!('AudioContext' in window)) {\n"
-            + "        alert('AudioContext not available');\n"
+            + "        log('AudioContext not available');\n"
             + "        return;\n"
             + "      }\n"
 
             + "      var audioCtx = new AudioContext();\n"
             + "      var audioData = new ArrayBuffer(0);\n"
             + "      audioCtx.decodeAudioData(audioData,\n"
-            + "             function(buffer) { alert('Decoding audio data done'); },\n"
-            + "             function(e) { alert('Error with decoding audio data'); }\n"
+            + "             function(buffer) { log('Decoding audio data done'); },\n"
+            + "             function(e) { log('Error with decoding audio data'); }\n"
             + "           );\n"
-            + "      alert('AudioContext prep done');\n"
+            + "      log('AudioContext prep done');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
+    @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
             IE = "AudioContext not available")
     public void decodeAudioData2() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + "    function log(msg) {\n"
+            + "      var ta = document.getElementById('myTextArea');\n"
+            + "      ta.value += msg + '; ';\n"
+            + "    }\n"
+
             + "    function test() {\n"
             + "      if (!('AudioContext' in window)) {\n"
-            + "        alert('AudioContext not available');\n"
+            + "        log('AudioContext not available');\n"
             + "        return;\n"
             + "      }\n"
 
             + "      var audioCtx = new AudioContext();\n"
             + "      var audioData = new ArrayBuffer(0);\n"
             + "      audioCtx.decodeAudioData(audioData).then(\n"
-            + "             function(buffer) { alert('Decoding audio data done'); },\n"
-            + "             function(e) { alert('Error with decoding audio data'); }\n"
+            + "             function(buffer) { log('Decoding audio data done'); },\n"
+            + "             function(e) { log('Error with decoding audio data'); }\n"
             + "           );\n"
-            + "      alert('AudioContext prep done');\n"
+            + "      log('AudioContext prep done');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
     }
 }

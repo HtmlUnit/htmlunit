@@ -48,6 +48,9 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*\\sorg.openqa.selenium.remote.ProtocolHandshake createSession\r?\n"),
             Pattern.compile("INFO(RMATION)?: Detected dialect: W3C\r?\n"),
 
+            Pattern.compile("JavaScript error: , line [0-9]*: EncodingError: "
+                    + "The given encoding is not supported.\r?\n"),
+
             // FF
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
                     + ".*\\n"
