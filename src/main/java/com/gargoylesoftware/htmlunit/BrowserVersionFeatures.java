@@ -298,7 +298,7 @@ public enum BrowserVersionFeatures {
     FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
 
     /** Form submit forces a real request also if only the hash was changed. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF})
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
 
     /** Form submit takes care of fields outside the form linked to the form
