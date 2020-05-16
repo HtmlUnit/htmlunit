@@ -964,6 +964,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"done;onload;", "2"})
     public void img_onLoad_calledWhenImageDownloaded_dynamic() throws Exception {
+        // this seems to need a fresh browser to pass
+        shutDownAll();
+
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
@@ -1004,6 +1007,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"done;onload;", "2"})
     public void img_onLoad_calledWhenImageDownloaded_dynamic2() throws Exception {
+        // this seems to need a fresh browser to pass
+        shutDownAll();
+
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
