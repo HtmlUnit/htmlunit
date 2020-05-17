@@ -90,7 +90,7 @@ public class AudioContextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
-            IE = "AudioContext not available")
+            IE = "AudioContext not available; ")
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
@@ -125,7 +125,7 @@ public class AudioContextTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
+        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
     }
 
     /**
@@ -133,7 +133,7 @@ public class AudioContextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
-            IE = "AudioContext not available")
+            IE = "AudioContext not available; ")
     public void decodeAudioData2() throws Exception {
         final String html
             = "<html>\n"
@@ -168,6 +168,6 @@ public class AudioContextTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
+        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
     }
 }
