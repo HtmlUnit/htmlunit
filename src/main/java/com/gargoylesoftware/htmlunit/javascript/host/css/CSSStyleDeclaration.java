@@ -440,19 +440,28 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
         final String[] values = StringUtils.split(value);
         if (name1.name().contains("TOP")) {
-            return values[0];
+            if (values.length > 0) {
+                return values[0];
+            }
+            return "";
         }
         else if (name1.name().contains("RIGHT")) {
             if (values.length > 1) {
                 return values[1];
             }
-            return values[0];
+            else if (values.length > 0) {
+                return values[0];
+            }
+            return "";
         }
         else if (name1.name().contains("BOTTOM")) {
             if (values.length > 2) {
                 return values[2];
             }
-            return values[0];
+            else if (values.length > 0) {
+                return values[0];
+            }
+            return "";
         }
         else if (name1.name().contains("LEFT")) {
             if (values.length > 3) {
@@ -461,12 +470,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             else if (values.length > 1) {
                 return values[1];
             }
-            else {
+            else if (values.length > 0) {
                 return values[0];
+            }
+            else {
+                return "";
             }
         }
         else {
-            throw new IllegalStateException("Unsupported definitino: " + name1);
+            throw new IllegalStateException("Unsupported definition: " + name1);
         }
     }
 

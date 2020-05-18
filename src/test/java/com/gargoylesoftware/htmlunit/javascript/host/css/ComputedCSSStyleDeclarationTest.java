@@ -2376,4 +2376,26 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * See https://github.com/HtmlUnit/htmlunit/issues/173.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void offsetLeft() throws Exception {
+        final String html = "<html>\n"
+            + "<body style='padding:'>\n"
+            + "  <div id='mydiv' >Heho</div>\n"
+
+            + "<script>\n"
+            + "  var d1 = document.getElementById('mydiv');\n"
+            + "  alert(d1.offsetLeft < 10);\n"
+            + "</script>\n"
+
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

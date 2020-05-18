@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Firefox76">
+            <action type="fix" dev="rbri" issue="173">
+                Possible ArrayIndexOutOfBoundsException fixed.
+            </action>
             <action type="fix" dev="rbri">
                 HTMLTemplateElement.outerHTML() fixed.
             </action>
