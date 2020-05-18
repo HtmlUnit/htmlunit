@@ -50,6 +50,8 @@ public class ErrorOutputChecker implements TestRule {
 
             Pattern.compile("JavaScript error: , line [0-9]*: EncodingError: "
                     + "The given encoding is not supported.\r?\n"),
+            Pattern.compile("JavaScript error: http://localhost:[0-9]*/, line [0-9]*: "
+                    + "SyntaxError: missing \\( before formal parameters\r?\n"),
 
             // FF
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
