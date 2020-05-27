@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.general;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -33,16 +36,27 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 @StandardsMode
 public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
 
-    private static String test(final String tagName) {
-        return "<html><head><script>\n"
+    private void test(final String tagName) throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var e = document.createElement('" + tagName + "');\n"
-            + "    alert(window.getComputedStyle(e, null).display);\n"
+            + "    log(window.getComputedStyle(e, null).display);\n"
             + "    document.body.appendChild(e);\n"
-            + "    alert(window.getComputedStyle(e, null).display);\n"
+            + "    log(window.getComputedStyle(e, null).display);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -55,7 +69,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void abbr() throws Exception {
-        loadPageWithAlerts2(test("abbr"));
+        test("abbr");
     }
 
     /**
@@ -68,7 +82,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void acronym() throws Exception {
-        loadPageWithAlerts2(test("acronym"));
+        test("acronym");
     }
 
     /**
@@ -81,7 +95,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void a() throws Exception {
-        loadPageWithAlerts2(test("a"));
+        test("a");
     }
 
     /**
@@ -95,7 +109,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void address() throws Exception {
-        loadPageWithAlerts2(test("address"));
+        test("address");
     }
 
     /**
@@ -108,7 +122,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void applet() throws Exception {
-        loadPageWithAlerts2(test("applet"));
+        test("applet");
     }
 
     /**
@@ -123,7 +137,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void area() throws Exception {
-        loadPageWithAlerts2(test("area"));
+        test("area");
     }
 
     /**
@@ -137,7 +151,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void article() throws Exception {
-        loadPageWithAlerts2(test("article"));
+        test("article");
     }
 
     /**
@@ -151,7 +165,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void aside() throws Exception {
-        loadPageWithAlerts2(test("aside"));
+        test("aside");
     }
 
     /**
@@ -165,7 +179,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void audio() throws Exception {
-        loadPageWithAlerts2(test("audio"));
+        test("audio");
     }
 
     /**
@@ -178,7 +192,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void bgsound() throws Exception {
-        loadPageWithAlerts2(test("bgsound"));
+        test("bgsound");
     }
 
     /**
@@ -193,7 +207,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void base() throws Exception {
-        loadPageWithAlerts2(test("base"));
+        test("base");
     }
 
     /**
@@ -208,7 +222,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void basefont() throws Exception {
-        loadPageWithAlerts2(test("basefont"));
+        test("basefont");
     }
 
     /**
@@ -221,7 +235,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void bdi() throws Exception {
-        loadPageWithAlerts2(test("bdi"));
+        test("bdi");
     }
 
     /**
@@ -234,7 +248,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void bdo() throws Exception {
-        loadPageWithAlerts2(test("bdo"));
+        test("bdo");
     }
 
     /**
@@ -247,7 +261,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void big() throws Exception {
-        loadPageWithAlerts2(test("big"));
+        test("big");
     }
 
     /**
@@ -260,7 +274,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void blink() throws Exception {
-        loadPageWithAlerts2(test("blink"));
+        test("blink");
     }
 
     /**
@@ -274,7 +288,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void blockquote() throws Exception {
-        loadPageWithAlerts2(test("blockquote"));
+        test("blockquote");
     }
 
     /**
@@ -288,7 +302,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void body() throws Exception {
-        loadPageWithAlerts2(test("body"));
+        test("body");
     }
 
     /**
@@ -301,7 +315,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void b() throws Exception {
-        loadPageWithAlerts2(test("b"));
+        test("b");
     }
 
     /**
@@ -314,7 +328,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void br() throws Exception {
-        loadPageWithAlerts2(test("br"));
+        test("br");
     }
 
     /**
@@ -327,7 +341,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline-block", "inline-block"},
             IE = {"inline-block", "inline-block"})
     public void button() throws Exception {
-        loadPageWithAlerts2(test("button"));
+        test("button");
     }
 
     /**
@@ -340,7 +354,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void canvas() throws Exception {
-        loadPageWithAlerts2(test("canvas"));
+        test("canvas");
     }
 
     /**
@@ -353,7 +367,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-caption", "table-caption"},
             IE = {"table-caption", "table-caption"})
     public void caption() throws Exception {
-        loadPageWithAlerts2(test("caption"));
+        test("caption");
     }
 
     /**
@@ -367,7 +381,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void center() throws Exception {
-        loadPageWithAlerts2(test("center"));
+        test("center");
     }
 
     /**
@@ -380,7 +394,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void cite() throws Exception {
-        loadPageWithAlerts2(test("cite"));
+        test("cite");
     }
 
     /**
@@ -393,7 +407,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void code() throws Exception {
-        loadPageWithAlerts2(test("code"));
+        test("code");
     }
 
     /**
@@ -406,7 +420,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void command() throws Exception {
-        loadPageWithAlerts2(test("command"));
+        test("command");
     }
 
     /**
@@ -420,7 +434,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void datalist() throws Exception {
-        loadPageWithAlerts2(test("datalist"));
+        test("datalist");
     }
 
     /**
@@ -433,7 +447,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void dfn() throws Exception {
-        loadPageWithAlerts2(test("dfn"));
+        test("dfn");
     }
 
     /**
@@ -451,7 +465,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void dd() throws Exception {
-        loadPageWithAlerts2(test("dd"));
+        test("dd");
     }
 
     /**
@@ -464,7 +478,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void del() throws Exception {
-        loadPageWithAlerts2(test("del"));
+        test("del");
     }
 
     /**
@@ -477,7 +491,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void details() throws Exception {
-        loadPageWithAlerts2(test("details"));
+        test("details");
     }
 
     /**
@@ -490,7 +504,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void dialog() throws Exception {
-        loadPageWithAlerts2(test("dialog"));
+        test("dialog");
     }
 
     /**
@@ -504,7 +518,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void dir() throws Exception {
-        loadPageWithAlerts2(test("dir"));
+        test("dir");
     }
 
     /**
@@ -518,7 +532,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void div() throws Exception {
-        loadPageWithAlerts2(test("div"));
+        test("div");
     }
 
     /**
@@ -532,7 +546,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void dl() throws Exception {
-        loadPageWithAlerts2(test("dl"));
+        test("dl");
     }
 
     /**
@@ -546,7 +560,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void dt() throws Exception {
-        loadPageWithAlerts2(test("dt"));
+        test("dt");
     }
 
     /**
@@ -559,7 +573,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void embed() throws Exception {
-        loadPageWithAlerts2(test("embed"));
+        test("embed");
     }
 
     /**
@@ -572,7 +586,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void em() throws Exception {
-        loadPageWithAlerts2(test("em"));
+        test("em");
     }
 
     /**
@@ -586,7 +600,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void fieldset() throws Exception {
-        loadPageWithAlerts2(test("fieldset"));
+        test("fieldset");
     }
 
     /**
@@ -600,7 +614,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void figcaption() throws Exception {
-        loadPageWithAlerts2(test("figcaption"));
+        test("figcaption");
     }
 
     /**
@@ -614,7 +628,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void figure() throws Exception {
-        loadPageWithAlerts2(test("figure"));
+        test("figure");
     }
 
     /**
@@ -627,7 +641,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void font() throws Exception {
-        loadPageWithAlerts2(test("font"));
+        test("font");
     }
 
     /**
@@ -641,7 +655,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void form() throws Exception {
-        loadPageWithAlerts2(test("form"));
+        test("form");
     }
 
     /**
@@ -655,7 +669,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void footer() throws Exception {
-        loadPageWithAlerts2(test("footer"));
+        test("footer");
     }
 
     /**
@@ -670,7 +684,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"block", "block"})
     public void frame() throws Exception {
-        loadPageWithAlerts2(test("frame"));
+        test("frame");
     }
 
     /**
@@ -684,7 +698,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void frameset() throws Exception {
-        loadPageWithAlerts2(test("frameset"));
+        test("frameset");
     }
 
     /**
@@ -698,7 +712,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void head() throws Exception {
-        loadPageWithAlerts2(test("head"));
+        test("head");
     }
 
     /**
@@ -712,7 +726,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void header() throws Exception {
-        loadPageWithAlerts2(test("header"));
+        test("header");
     }
 
     /**
@@ -726,7 +740,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void h1() throws Exception {
-        loadPageWithAlerts2(test("h1"));
+        test("h1");
     }
 
     /**
@@ -740,7 +754,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void h2() throws Exception {
-        loadPageWithAlerts2(test("h2"));
+        test("h2");
     }
 
     /**
@@ -754,7 +768,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void h3() throws Exception {
-        loadPageWithAlerts2(test("h3"));
+        test("h3");
     }
 
     /**
@@ -768,7 +782,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void h4() throws Exception {
-        loadPageWithAlerts2(test("h4"));
+        test("h4");
     }
 
     /**
@@ -782,7 +796,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void h5() throws Exception {
-        loadPageWithAlerts2(test("h5"));
+        test("h5");
     }
 
     /**
@@ -796,7 +810,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void h6() throws Exception {
-        loadPageWithAlerts2(test("h6"));
+        test("h6");
     }
 
     /**
@@ -810,7 +824,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void hr() throws Exception {
-        loadPageWithAlerts2(test("hr"));
+        test("hr");
     }
 
     /**
@@ -824,7 +838,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void html() throws Exception {
-        loadPageWithAlerts2(test("html"));
+        test("html");
     }
 
     /**
@@ -837,7 +851,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void iframe() throws Exception {
-        loadPageWithAlerts2(test("iframe"));
+        test("iframe");
     }
 
     /**
@@ -850,7 +864,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void q() throws Exception {
-        loadPageWithAlerts2(test("q"));
+        test("q");
     }
 
     /**
@@ -863,7 +877,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void img() throws Exception {
-        loadPageWithAlerts2(test("img"));
+        test("img");
     }
 
     /**
@@ -876,7 +890,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void image() throws Exception {
-        loadPageWithAlerts2(test("image"));
+        test("image");
     }
 
     /**
@@ -889,7 +903,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void ins() throws Exception {
-        loadPageWithAlerts2(test("ins"));
+        test("ins");
     }
 
     /**
@@ -902,7 +916,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void isindex() throws Exception {
-        loadPageWithAlerts2(test("isindex"));
+        test("isindex");
     }
 
     /**
@@ -915,7 +929,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void i() throws Exception {
-        loadPageWithAlerts2(test("i"));
+        test("i");
     }
 
     /**
@@ -928,7 +942,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void kbd() throws Exception {
-        loadPageWithAlerts2(test("kbd"));
+        test("kbd");
     }
 
     /**
@@ -939,7 +953,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void keygen() throws Exception {
-        loadPageWithAlerts2(test("keygen"));
+        test("keygen");
     }
 
     /**
@@ -952,7 +966,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void label() throws Exception {
-        loadPageWithAlerts2(test("label"));
+        test("label");
     }
 
     /**
@@ -967,7 +981,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void layer() throws Exception {
-        loadPageWithAlerts2(test("layer"));
+        test("layer");
     }
 
     /**
@@ -980,7 +994,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void legend() throws Exception {
-        loadPageWithAlerts2(test("legend"));
+        test("legend");
     }
 
     /**
@@ -994,7 +1008,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void listing() throws Exception {
-        loadPageWithAlerts2(test("listing"));
+        test("listing");
     }
 
     /**
@@ -1007,7 +1021,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"list-item", "list-item"},
             IE = {"list-item", "list-item"})
     public void li() throws Exception {
-        loadPageWithAlerts2(test("li"));
+        test("li");
     }
 
     /**
@@ -1020,7 +1034,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void link() throws Exception {
-        loadPageWithAlerts2(test("link"));
+        test("link");
     }
 
     /**
@@ -1033,7 +1047,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void main() throws Exception {
-        loadPageWithAlerts2(test("main"));
+        test("main");
     }
 
     /**
@@ -1046,7 +1060,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void map() throws Exception {
-        loadPageWithAlerts2(test("map"));
+        test("map");
     }
 
     /**
@@ -1059,7 +1073,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void mark() throws Exception {
-        loadPageWithAlerts2(test("mark"));
+        test("mark");
     }
 
     /**
@@ -1072,7 +1086,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline-block", "inline-block"},
             IE = {"block", "block"})
     public void marquee() throws Exception {
-        loadPageWithAlerts2(test("marquee"));
+        test("marquee");
     }
 
     /**
@@ -1086,7 +1100,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void menu() throws Exception {
-        loadPageWithAlerts2(test("menu"));
+        test("menu");
     }
 
     /**
@@ -1099,7 +1113,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void menuitem() throws Exception {
-        loadPageWithAlerts2(test("menuitem"));
+        test("menuitem");
     }
 
     /**
@@ -1113,7 +1127,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void meta() throws Exception {
-        loadPageWithAlerts2(test("meta"));
+        test("meta");
     }
 
     /**
@@ -1126,7 +1140,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline-block", "inline-block"},
             IE = {"inline", "inline"})
     public void meter() throws Exception {
-        loadPageWithAlerts2(test("meter"));
+        test("meter");
     }
 
     /**
@@ -1141,7 +1155,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void multicol() throws Exception {
-        loadPageWithAlerts2(test("multicol"));
+        test("multicol");
     }
 
     /**
@@ -1155,7 +1169,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void nav() throws Exception {
-        loadPageWithAlerts2(test("nav"));
+        test("nav");
     }
 
     /**
@@ -1168,7 +1182,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void nextid() throws Exception {
-        loadPageWithAlerts2(test("nextid"));
+        test("nextid");
     }
 
     /**
@@ -1181,7 +1195,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void nobr() throws Exception {
-        loadPageWithAlerts2(test("nobr"));
+        test("nobr");
     }
 
     /**
@@ -1195,7 +1209,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void noembed() throws Exception {
-        loadPageWithAlerts2(test("noembed"));
+        test("noembed");
     }
 
     /**
@@ -1209,7 +1223,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void noframes() throws Exception {
-        loadPageWithAlerts2(test("noframes"));
+        test("noframes");
     }
 
     /**
@@ -1222,7 +1236,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void nolayer() throws Exception {
-        loadPageWithAlerts2(test("nolayer"));
+        test("nolayer");
     }
 
     /**
@@ -1236,7 +1250,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void noscript() throws Exception {
-        loadPageWithAlerts2(test("noscript"));
+        test("noscript");
     }
 
     /**
@@ -1249,7 +1263,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void object() throws Exception {
-        loadPageWithAlerts2(test("object"));
+        test("object");
     }
 
     /**
@@ -1263,7 +1277,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void ol() throws Exception {
-        loadPageWithAlerts2(test("ol"));
+        test("ol");
     }
 
     /**
@@ -1276,7 +1290,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void optgroup() throws Exception {
-        loadPageWithAlerts2(test("optgroup"));
+        test("optgroup");
     }
 
     /**
@@ -1289,7 +1303,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void option() throws Exception {
-        loadPageWithAlerts2(test("option"));
+        test("option");
     }
 
     /**
@@ -1302,7 +1316,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void output() throws Exception {
-        loadPageWithAlerts2(test("output"));
+        test("output");
     }
 
     /**
@@ -1316,7 +1330,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void p() throws Exception {
-        loadPageWithAlerts2(test("p"));
+        test("p");
     }
 
     /**
@@ -1329,7 +1343,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void param() throws Exception {
-        loadPageWithAlerts2(test("param"));
+        test("param");
     }
 
     /**
@@ -1343,7 +1357,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void plaintext() throws Exception {
-        loadPageWithAlerts2(test("plaintext"));
+        test("plaintext");
     }
 
     /**
@@ -1357,7 +1371,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void pre() throws Exception {
-        loadPageWithAlerts2(test("pre"));
+        test("pre");
     }
 
     /**
@@ -1370,7 +1384,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline-block", "inline-block"},
             IE = {"inline", "inline"})
     public void progress() throws Exception {
-        loadPageWithAlerts2(test("progress"));
+        test("progress");
     }
 
     /**
@@ -1383,7 +1397,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void rp() throws Exception {
-        loadPageWithAlerts2(test("rp"));
+        test("rp");
     }
 
     /**
@@ -1398,7 +1412,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"ruby-text", "ruby-text"},
             IE = {"ruby-text", "ruby-text"})
     public void rt() throws Exception {
-        loadPageWithAlerts2(test("rt"));
+        test("rt");
     }
 
     /**
@@ -1413,7 +1427,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"ruby", "ruby"},
             IE = {"ruby", "ruby"})
     public void ruby() throws Exception {
-        loadPageWithAlerts2(test("ruby"));
+        test("ruby");
     }
 
     /**
@@ -1426,7 +1440,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void s() throws Exception {
-        loadPageWithAlerts2(test("s"));
+        test("s");
     }
 
     /**
@@ -1439,7 +1453,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void samp() throws Exception {
-        loadPageWithAlerts2(test("samp"));
+        test("samp");
     }
 
     /**
@@ -1453,7 +1467,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void script() throws Exception {
-        loadPageWithAlerts2(test("script"));
+        test("script");
     }
 
     /**
@@ -1467,7 +1481,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void section() throws Exception {
-        loadPageWithAlerts2(test("section"));
+        test("section");
     }
 
     /**
@@ -1480,7 +1494,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline-block", "inline-block"},
             IE = {"inline-block", "inline-block"})
     public void select() throws Exception {
-        loadPageWithAlerts2(test("select"));
+        test("select");
     }
 
     /**
@@ -1493,7 +1507,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void small() throws Exception {
-        loadPageWithAlerts2(test("small"));
+        test("small");
     }
 
     /**
@@ -1506,7 +1520,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void source() throws Exception {
-        loadPageWithAlerts2(test("source"));
+        test("source");
     }
 
     /**
@@ -1519,7 +1533,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void span() throws Exception {
-        loadPageWithAlerts2(test("span"));
+        test("span");
     }
 
     /**
@@ -1532,7 +1546,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void strike() throws Exception {
-        loadPageWithAlerts2(test("strike"));
+        test("strike");
     }
 
     /**
@@ -1545,7 +1559,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void strong() throws Exception {
-        loadPageWithAlerts2(test("strong"));
+        test("strong");
     }
 
     /**
@@ -1559,7 +1573,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void style() throws Exception {
-        loadPageWithAlerts2(test("style"));
+        test("style");
     }
 
     /**
@@ -1572,7 +1586,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void sub() throws Exception {
-        loadPageWithAlerts2(test("sub"));
+        test("sub");
     }
 
     /**
@@ -1585,7 +1599,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"block", "block"},
             IE = {"inline", "inline"})
     public void summary() throws Exception {
-        loadPageWithAlerts2(test("summary"));
+        test("summary");
     }
 
     /**
@@ -1598,7 +1612,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void sup() throws Exception {
-        loadPageWithAlerts2(test("sup"));
+        test("sup");
     }
 
     /**
@@ -1611,7 +1625,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void svg() throws Exception {
-        loadPageWithAlerts2(test("svg"));
+        test("svg");
     }
 
     /**
@@ -1625,7 +1639,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "table"},
             FF68 = {"", "table"})
     public void table() throws Exception {
-        loadPageWithAlerts2(test("table"));
+        test("table");
     }
 
     /**
@@ -1638,7 +1652,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-column", "table-column"},
             IE = {"table-column", "table-column"})
     public void col() throws Exception {
-        loadPageWithAlerts2(test("col"));
+        test("col");
     }
 
     /**
@@ -1651,7 +1665,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-column-group", "table-column-group"},
             IE = {"table-column-group", "table-column-group"})
     public void colgroup() throws Exception {
-        loadPageWithAlerts2(test("colgroup"));
+        test("colgroup");
     }
 
     /**
@@ -1664,7 +1678,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-row-group", "table-row-group"},
             IE = {"table-row-group", "table-row-group"})
     public void tbody() throws Exception {
-        loadPageWithAlerts2(test("tbody"));
+        test("tbody");
     }
 
     /**
@@ -1677,7 +1691,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-cell", "table-cell"},
             IE = {"table-cell", "table-cell"})
     public void td() throws Exception {
-        loadPageWithAlerts2(test("td"));
+        test("td");
     }
 
     /**
@@ -1690,7 +1704,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-cell", "table-cell"},
             IE = {"table-cell", "table-cell"})
     public void th() throws Exception {
-        loadPageWithAlerts2(test("th"));
+        test("th");
     }
 
     /**
@@ -1703,7 +1717,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-row", "table-row"},
             IE = {"table-row", "table-row"})
     public void tr() throws Exception {
-        loadPageWithAlerts2(test("tr"));
+        test("tr");
     }
 
     /**
@@ -1718,7 +1732,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline-block", "inline-block"})
     public void textarea() throws Exception {
-        loadPageWithAlerts2(test("textarea"));
+        test("textarea");
     }
 
     /**
@@ -1731,7 +1745,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-footer-group", "table-footer-group"},
             IE = {"table-footer-group", "table-footer-group"})
     public void tfoot() throws Exception {
-        loadPageWithAlerts2(test("tfoot"));
+        test("tfoot");
     }
 
     /**
@@ -1744,7 +1758,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"table-header-group", "table-header-group"},
             IE = {"table-header-group", "table-header-group"})
     public void thead() throws Exception {
-        loadPageWithAlerts2(test("thead"));
+        test("thead");
     }
 
     /**
@@ -1757,7 +1771,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void tt() throws Exception {
-        loadPageWithAlerts2(test("tt"));
+        test("tt");
     }
 
     /**
@@ -1770,7 +1784,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void time() throws Exception {
-        loadPageWithAlerts2(test("time"));
+        test("time");
     }
 
     /**
@@ -1784,7 +1798,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "none"},
             FF68 = {"", "none"})
     public void title() throws Exception {
-        loadPageWithAlerts2(test("title"));
+        test("title");
     }
 
     /**
@@ -1797,7 +1811,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void track() throws Exception {
-        loadPageWithAlerts2(test("track"));
+        test("track");
     }
 
     /**
@@ -1810,7 +1824,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void u() throws Exception {
-        loadPageWithAlerts2(test("u"));
+        test("u");
     }
 
     /**
@@ -1824,7 +1838,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void ul() throws Exception {
-        loadPageWithAlerts2(test("ul"));
+        test("ul");
     }
 
     /**
@@ -1837,7 +1851,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void var() throws Exception {
-        loadPageWithAlerts2(test("var"));
+        test("var");
     }
 
     /**
@@ -1850,7 +1864,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void video() throws Exception {
-        loadPageWithAlerts2(test("video"));
+        test("video");
     }
 
     /**
@@ -1863,7 +1877,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void wbr() throws Exception {
-        loadPageWithAlerts2(test("wbr"));
+        test("wbr");
     }
 
     /**
@@ -1877,7 +1891,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF = {"", "block"},
             FF68 = {"", "block"})
     public void xmp() throws Exception {
-        loadPageWithAlerts2(test("xmp"));
+        test("xmp");
     }
 
     /**
@@ -1891,7 +1905,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF68 = {"", "inline"},
             IE = {"inline-block", "inline-block"})
     public void input() throws Exception {
-        loadPageWithAlerts2(test("input"));
+        test("input");
     }
 
     /**
@@ -1904,7 +1918,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void data() throws Exception {
-        loadPageWithAlerts2(test("data"));
+        test("data");
     }
 
     /**
@@ -1917,7 +1931,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void content() throws Exception {
-        loadPageWithAlerts2(test("content"));
+        test("content");
     }
 
     /**
@@ -1930,7 +1944,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void picture() throws Exception {
-        loadPageWithAlerts2(test("picture"));
+        test("picture");
     }
 
     /**
@@ -1943,7 +1957,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void template() throws Exception {
-        loadPageWithAlerts2(test("template"));
+        test("template");
     }
 
     /**
@@ -1956,6 +1970,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             FF60 = {"contents", "contents"},
             IE = {"inline", "inline"})
     public void slot() throws Exception {
-        loadPageWithAlerts2(test("slot"));
+        test("slot");
     }
 }
