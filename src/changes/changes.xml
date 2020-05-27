@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Firefox76">
+            <action type="fix" dev="rbri" issue="175">
+                WebResponse.getContentAsString() fails for compressed responses because of the
+                BOM header detection.
+            </action>
             <action type="fix" dev="rbri" issue="173">
                 Possible ArrayIndexOutOfBoundsException fixed.
             </action>

@@ -25,7 +25,9 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -92,7 +94,7 @@ public class WebResponseData implements Serializable {
     }
 
     private InputStream getStream(final DownloadedContent downloadedContent,
-                final List<NameValuePair> headers) throws IOException {
+                final List<NameValuePair> headers, final ByteOrderMark[] bomHeaders) throws IOException {
         InputStream stream = downloadedContent_.getInputStream();
         if (downloadedContent.isEmpty()) {
             return stream;
@@ -121,8 +123,10 @@ public class WebResponseData implements Serializable {
                                  + "</body>\n"
                                  + "</html>", ISO_8859_1);
                 }
+                return stream;
             }
-            else if ("br".equals(encoding)) {
+
+            if ("br".equals(encoding)) {
                 try {
                     stream = new BrotliInputStream(stream);
                 }
@@ -139,8 +143,10 @@ public class WebResponseData implements Serializable {
                                  + "</body>\n"
                                  + "</html>", ISO_8859_1);
                 }
+                return stream;
             }
-            else if (StringUtils.contains(encoding, "deflate")) {
+
+            if (StringUtils.contains(encoding, "deflate")) {
                 boolean zlibHeader = false;
                 if (stream.markSupported()) { // should be always the case as the content is in a byte[] or in a file
                     stream.mark(2);
@@ -155,7 +161,12 @@ public class WebResponseData implements Serializable {
                 else {
                     stream = new InflaterInputStream(stream, new Inflater(true));
                 }
+                return stream;
             }
+        }
+
+        if (stream != null && bomHeaders != null) {
+            stream = new BOMInputStream(stream, bomHeaders);
         }
         return stream;
     }
@@ -191,7 +202,18 @@ public class WebResponseData implements Serializable {
      * @throws IOException in case of IO problems
      */
     public InputStream getInputStream() throws IOException {
-        return getStream(downloadedContent_, getResponseHeaders());
+        return getStream(downloadedContent_, getResponseHeaders(), null);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param bomHeaders the supported bomHeaders
+     * @return the associated InputStream wrapped with a bom input stream if applicable
+     * @throws IOException in case of IO problems
+     */
+    public InputStream getInputStreamWithBomIfApplicable(final ByteOrderMark[] bomHeaders) throws IOException {
+        return getStream(downloadedContent_, getResponseHeaders(), bomHeaders);
     }
 
     /**
