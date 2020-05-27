@@ -1713,7 +1713,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "169",
+    @Alerts(CHROME = "173",
             FF = "141",
             FF68 = "141",
             FF60 = "141",
@@ -1782,7 +1782,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "169",
+    @Alerts(CHROME = "173",
             FF = "141",
             FF68 = "141",
             FF60 = "141",
@@ -1825,7 +1825,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "169",
+    @Alerts(CHROME = "173",
             FF = "141",
             FF68 = "141",
             FF60 = "141",
@@ -1856,7 +1856,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "169",
+    @Alerts(DEFAULT = "173",
             FF = "141",
             FF68 = "141",
             FF60 = "141",

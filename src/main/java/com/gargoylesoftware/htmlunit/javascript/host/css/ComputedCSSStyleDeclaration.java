@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITIO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_21;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_169;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
@@ -1071,8 +1071,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_143)) {
                     return 143;
                 }
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_169)) {
-                    return 169;
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
+                    return 173;
                 }
                 width = 141; // FF60
             }

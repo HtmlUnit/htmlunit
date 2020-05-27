@@ -43,8 +43,9 @@ public class ErrorOutputChecker implements TestRule {
                     + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
                     + " \\(.*\\) on port \\d*\r?\n"
                     + "Only local connections are allowed\\.\r?\n"
-                    + "Please protect ports used by ChromeDriver and related test "
-                            + "frameworks to prevent access by malicious code\\.\r?\n"),
+                    + "Please see https://chromedriver.chromium.org/security-considerations"
+                        + " for suggestions on keeping ChromeDriver safe\\.\r?\n"
+                    + "ChromeDriver was started successfully\\.\r?\n"),
             Pattern.compile(".*\\sorg.openqa.selenium.remote.ProtocolHandshake createSession\r?\n"),
             Pattern.compile("INFO(RMATION)?: Detected dialect: W3C\r?\n"),
 

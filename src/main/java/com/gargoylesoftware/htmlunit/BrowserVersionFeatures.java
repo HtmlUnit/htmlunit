@@ -698,9 +698,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_CLIENTWIDTH_INPUT_TEXT_143,
 
-    /** ClientWidth for text/password input is 169. */
+    /** ClientWidth for text/password input is 173. */
     @BrowserFeature(CHROME)
-    JS_CLIENTWIDTH_INPUT_TEXT_169,
+    JS_CLIENTWIDTH_INPUT_TEXT_173,
 
     /** Is window can be used as Console. */
     @BrowserFeature({CHROME, FF, FF68, FF60})
