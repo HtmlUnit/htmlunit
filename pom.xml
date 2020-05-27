@@ -29,14 +29,14 @@
         <htmlunitcorejs.version>2.41.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.12</httpcomponents.version>
-        <jetty.version>9.4.28.v20200408</jetty.version>
+        <jetty.version>9.4.29.v20200521</jetty.version>
         <log4j.version>2.13.3</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.32</checkstyle.version>
         <spotbugs.version>4.0.3</spotbugs.version>
-        <pmd.version>6.23.0</pmd.version>
+        <pmd.version>6.24.0</pmd.version>
     </properties>
 
     <build>
@@ -1185,7 +1185,7 @@
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
-            <version>0.13.1</version>
+            <version>0.14.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>

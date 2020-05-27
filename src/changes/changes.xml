@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Firefox76">
+        <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox76">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.29.v20200521.
+            </action>
             <action type="fix" dev="rbri" issue="175">
                 WebResponse.getContentAsString() fails for compressed responses because of the
                 BOM header detection.
