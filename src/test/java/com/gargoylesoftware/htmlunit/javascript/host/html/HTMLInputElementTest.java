@@ -1773,7 +1773,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"169", "17", "169", "17", "13", "13", "13", "13"},
+    @Alerts(CHROME = {"173", "17", "169", "17", "13", "13", "13", "13"},
             FF = {"141", "20", "141", "20", "13", "13", "13", "13"},
             FF60 = {"141", "21", "141", "21", "13", "13", "13", "13"},
             FF68 = {"141", "20", "141", "20", "13", "13", "13", "13"},

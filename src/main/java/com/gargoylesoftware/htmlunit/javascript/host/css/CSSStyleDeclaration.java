@@ -86,7 +86,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_LEFT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PADDING_TOP;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.PAGE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.POSITION;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RUBY_ALIGN;
@@ -1956,24 +1955,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setPaddingTop(final Object paddingTop) {
         setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false);
-    }
-
-    /**
-     * Gets the {@code page} style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(CHROME)
-    public String getPage() {
-        return getStyleAttribute(PAGE);
-    }
-
-    /**
-     * Sets the {@code page} style attribute.
-     * @param page the new attribute
-     */
-    @JsxSetter(CHROME)
-    public void setPage(final String page) {
-        setStyleAttribute(PAGE.getAttributeName(), page);
     }
 
     /**

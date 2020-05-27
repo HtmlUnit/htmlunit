@@ -1707,7 +1707,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
+    @Alerts(CHROME = "177",
             FF = "143",
             FF68 = "143",
             FF60 = "143",
@@ -1774,7 +1774,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
+    @Alerts(CHROME = "177",
             FF = "143",
             FF68 = "143",
             FF60 = "143",
@@ -1817,7 +1817,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
+    @Alerts(CHROME = "177",
             FF = "143",
             FF68 = "143",
             FF60 = "143",
@@ -1849,7 +1849,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
+    @Alerts(CHROME = "177",
             FF = "143",
             FF68 = "143",
             FF60 = "143",

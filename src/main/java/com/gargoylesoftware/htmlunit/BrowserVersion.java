@@ -117,7 +117,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(81, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(83, "Chrome");
 
     /**
      * The best supported browser version at the moment.
@@ -244,9 +244,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME
         CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.138 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4044.138 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";

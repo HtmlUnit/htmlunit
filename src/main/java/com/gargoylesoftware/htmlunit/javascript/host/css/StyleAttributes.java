@@ -442,7 +442,7 @@ public final class StyleAttributes {
         BORDER_IMAGE_("border-image", "border-image", ff("")),
 
         /** The style property {@code borderImageOutset}. */
-        BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ie("0"), chrome("0px"),
+        BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ie("0"), chrome("0"),
                 ff("0")),
 
         /** The style property {@code border-image-outset}. */
@@ -844,6 +844,9 @@ public final class StyleAttributes {
 
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chrome("none"), ffLatest("none")),
+
+        /** The style property {@code containIntrinsicSize}. */
+        CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chrome("auto")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chrome("normal"), ffLatest("normal"), ff60And68("none")),
@@ -2659,9 +2662,6 @@ public final class StyleAttributes {
         /** The style property {@code padding-top}. */
         PADDING_TOP_("padding-top", "padding-top", ff("0px")),
 
-        /** The style property {@code page}. */
-        PAGE("page", "page", chrome("")),
-
         /** The style property {@code pageBreakAfter}. */
         PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chrome("auto"), ff("auto"), ie("auto")),
 
@@ -4010,7 +4010,7 @@ public final class StyleAttributes {
         WEBKIT_MASK_BOX_IMAGE("webkitMaskBoxImage", "webkit-mask-box-image", chrome("none")),
 
         /** The style property {@code webkitMaskBoxImageOutset}. */
-        WEBKIT_MASK_BOX_IMAGE_OUTSET("webkitMaskBoxImageOutset", "webkit-mask-box-image-outset", chrome("0px")),
+        WEBKIT_MASK_BOX_IMAGE_OUTSET("webkitMaskBoxImageOutset", "webkit-mask-box-image-outset", chrome("0")),
 
         /** The style property {@code webkitMaskBoxImageRepeat}. */
         WEBKIT_MASK_BOX_IMAGE_REPEAT("webkitMaskBoxImageRepeat", "webkit-mask-box-image-repeat", chrome("stretch")),
