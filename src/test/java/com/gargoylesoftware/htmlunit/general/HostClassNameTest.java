@@ -95,7 +95,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "\nfunction ActiveXObject() {\n    [native code]\n}\n")
+            IE = "function ActiveXObject() {\n    [native code]\n}\n")
     public void activeXObject() throws Exception {
         test("ActiveXObject");
     }
@@ -297,7 +297,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Array() { [native code] }",
             FF = "function Array() {\n    [native code]\n}",
-            IE = "\nfunction Array() {\n    [native code]\n}\n",
+            IE = "function Array() {\n    [native code]\n}\n",
             FF60 = "function Array() {\n    [native code]\n}",
             FF68 = "function Array() {\n    [native code]\n}")
     public void array() throws Exception {
@@ -312,7 +312,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function ArrayBuffer() { [native code] }",
             FF = "function ArrayBuffer() {\n    [native code]\n}",
-            IE = "\nfunction ArrayBuffer() {\n    [native code]\n}\n",
+            IE = "function ArrayBuffer() {\n    [native code]\n}\n",
             FF60 = "function ArrayBuffer() {\n    [native code]\n}",
             FF68 = "function ArrayBuffer() {\n    [native code]\n}")
     public void arrayBuffer() throws Exception {
@@ -385,7 +385,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Audio() {\n    [native code]\n}",
             FF68 = "function Audio() {\n    [native code]\n}",
             FF60 = "function Audio() {\n    [native code]\n}",
-            IE = "\nfunction Audio() {\n    [native code]\n}\n")
+            IE = "function Audio() {\n    [native code]\n}\n")
     public void audio() throws Exception {
         test("Audio");
     }
@@ -618,7 +618,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Blob() { [native code] }",
             FF = "function Blob() {\n    [native code]\n}",
-            IE = "\nfunction Blob() {\n    [native code]\n}\n",
+            IE = "function Blob() {\n    [native code]\n}\n",
             FF60 = "function Blob() {\n    [native code]\n}",
             FF68 = "function Blob() {\n    [native code]\n}")
     public void blob() throws Exception {
@@ -1762,7 +1762,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function DataView() { [native code] }",
             FF = "function DataView() {\n    [native code]\n}",
-            IE = "\nfunction DataView() {\n    [native code]\n}\n",
+            IE = "function DataView() {\n    [native code]\n}\n",
             FF60 = "function DataView() {\n    [native code]\n}",
             FF68 = "function DataView() {\n    [native code]\n}")
     public void dataView() throws Exception {
@@ -1775,7 +1775,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Date() { [native code] }",
             FF = "function Date() {\n    [native code]\n}",
-            IE = "\nfunction Date() {\n    [native code]\n}\n",
+            IE = "function Date() {\n    [native code]\n}\n",
             FF60 = "function Date() {\n    [native code]\n}",
             FF68 = "function Date() {\n    [native code]\n}")
     public void date() throws Exception {
@@ -1788,7 +1788,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function decodeURI() { [native code] }",
             FF = "function decodeURI() {\n    [native code]\n}",
-            IE = "\nfunction decodeURI() {\n    [native code]\n}\n",
+            IE = "function decodeURI() {\n    [native code]\n}\n",
             FF60 = "function decodeURI() {\n    [native code]\n}",
             FF68 = "function decodeURI() {\n    [native code]\n}")
     public void decodeURI() throws Exception {
@@ -1801,7 +1801,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function decodeURIComponent() { [native code] }",
             FF = "function decodeURIComponent() {\n    [native code]\n}",
-            IE = "\nfunction decodeURIComponent() {\n    [native code]\n}\n",
+            IE = "function decodeURIComponent() {\n    [native code]\n}\n",
             FF60 = "function decodeURIComponent() {\n    [native code]\n}",
             FF68 = "function decodeURIComponent() {\n    [native code]\n}")
     public void decodeURIComponent() throws Exception {
@@ -2210,7 +2210,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function DOMParser() { [native code] }",
             FF = "function DOMParser() {\n    [native code]\n}",
-            IE = "\nfunction DOMParser() {\n    [native code]\n}\n",
+            IE = "function DOMParser() {\n    [native code]\n}\n",
             FF60 = "function DOMParser() {\n    [native code]\n}",
             FF68 = "function DOMParser() {\n    [native code]\n}")
     public void domParser() throws Exception {
@@ -2439,7 +2439,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function encodeURI() { [native code] }",
             FF = "function encodeURI() {\n    [native code]\n}",
-            IE = "\nfunction encodeURI() {\n    [native code]\n}\n",
+            IE = "function encodeURI() {\n    [native code]\n}\n",
             FF60 = "function encodeURI() {\n    [native code]\n}",
             FF68 = "function encodeURI() {\n    [native code]\n}")
     public void encodeURI() throws Exception {
@@ -2452,7 +2452,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function encodeURIComponent() { [native code] }",
             FF = "function encodeURIComponent() {\n    [native code]\n}",
-            IE = "\nfunction encodeURIComponent() {\n    [native code]\n}\n",
+            IE = "function encodeURIComponent() {\n    [native code]\n}\n",
             FF60 = "function encodeURIComponent() {\n    [native code]\n}",
             FF68 = "function encodeURIComponent() {\n    [native code]\n}")
     public void encodeURIComponent() throws Exception {
@@ -2502,7 +2502,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "\nfunction Enumerator() {\n    [native code]\n}\n")
+            IE = "function Enumerator() {\n    [native code]\n}\n")
     public void enumerator() throws Exception {
         test("Enumerator");
     }
@@ -2513,7 +2513,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Error() { [native code] }",
             FF = "function Error() {\n    [native code]\n}",
-            IE = "\nfunction Error() {\n    [native code]\n}\n",
+            IE = "function Error() {\n    [native code]\n}\n",
             FF60 = "function Error() {\n    [native code]\n}",
             FF68 = "function Error() {\n    [native code]\n}")
     public void error() throws Exception {
@@ -2539,7 +2539,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function escape() { [native code] }",
             FF = "function escape() {\n    [native code]\n}",
-            IE = "\nfunction escape() {\n    [native code]\n}\n",
+            IE = "function escape() {\n    [native code]\n}\n",
             FF60 = "function escape() {\n    [native code]\n}",
             FF68 = "function escape() {\n    [native code]\n}")
     public void escape() throws Exception {
@@ -2552,7 +2552,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function eval() { [native code] }",
             FF = "function eval() {\n    [native code]\n}",
-            IE = "\nfunction eval() {\n    [native code]\n}\n",
+            IE = "function eval() {\n    [native code]\n}\n",
             FF60 = "function eval() {\n    [native code]\n}",
             FF68 = "function eval() {\n    [native code]\n}")
     public void eval() throws Exception {
@@ -2565,7 +2565,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function EvalError() { [native code] }",
             FF = "function EvalError() {\n    [native code]\n}",
-            IE = "\nfunction EvalError() {\n    [native code]\n}\n",
+            IE = "function EvalError() {\n    [native code]\n}\n",
             FF60 = "function EvalError() {\n    [native code]\n}",
             FF68 = "function EvalError() {\n    [native code]\n}")
     public void evalError() throws Exception {
@@ -2830,7 +2830,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function FileReader() { [native code] }",
             FF = "function FileReader() {\n    [native code]\n}",
-            IE = "\nfunction FileReader() {\n    [native code]\n}\n",
+            IE = "function FileReader() {\n    [native code]\n}\n",
             FF60 = "function FileReader() {\n    [native code]\n}",
             FF68 = "function FileReader() {\n    [native code]\n}")
     public void fileReader() throws Exception {
@@ -2941,7 +2941,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Float32Array() { [native code] }",
             FF = "function Float32Array() {\n    [native code]\n}",
-            IE = "\nfunction Float32Array() {\n    [native code]\n}\n",
+            IE = "function Float32Array() {\n    [native code]\n}\n",
             FF60 = "function Float32Array() {\n    [native code]\n}",
             FF68 = "function Float32Array() {\n    [native code]\n}")
     public void float32Array() throws Exception {
@@ -2956,7 +2956,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Float64Array() { [native code] }",
             FF = "function Float64Array() {\n    [native code]\n}",
-            IE = "\nfunction Float64Array() {\n    [native code]\n}\n",
+            IE = "function Float64Array() {\n    [native code]\n}\n",
             FF60 = "function Float64Array() {\n    [native code]\n}",
             FF68 = "function Float64Array() {\n    [native code]\n}")
     public void float64Array() throws Exception {
@@ -3027,7 +3027,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function FormData() { [native code] }",
             FF = "function FormData() {\n    [native code]\n}",
-            IE = "\nfunction FormData() {\n    [native code]\n}\n",
+            IE = "function FormData() {\n    [native code]\n}\n",
             FF60 = "function FormData() {\n    [native code]\n}",
             FF68 = "function FormData() {\n    [native code]\n}")
     public void formData() throws Exception {
@@ -3049,7 +3049,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Function() { [native code] }",
             FF = "function Function() {\n    [native code]\n}",
-            IE = "\nfunction Function() {\n    [native code]\n}\n",
+            IE = "function Function() {\n    [native code]\n}\n",
             FF60 = "function Function() {\n    [native code]\n}",
             FF68 = "function Function() {\n    [native code]\n}")
     public void function() throws Exception {
@@ -4949,7 +4949,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Image() {\n    [native code]\n}",
             FF68 = "function Image() {\n    [native code]\n}",
             FF60 = "function Image() {\n    [native code]\n}",
-            IE = "\nfunction Image() {\n    [native code]\n}\n")
+            IE = "function Image() {\n    [native code]\n}\n")
     public void image() throws Exception {
         test("Image");
     }
@@ -5099,7 +5099,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Int16Array() { [native code] }",
             FF = "function Int16Array() {\n    [native code]\n}",
-            IE = "\nfunction Int16Array() {\n    [native code]\n}\n",
+            IE = "function Int16Array() {\n    [native code]\n}\n",
             FF60 = "function Int16Array() {\n    [native code]\n}",
             FF68 = "function Int16Array() {\n    [native code]\n}")
     public void int16Array() throws Exception {
@@ -5114,7 +5114,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Int32Array() { [native code] }",
             FF = "function Int32Array() {\n    [native code]\n}",
-            IE = "\nfunction Int32Array() {\n    [native code]\n}\n",
+            IE = "function Int32Array() {\n    [native code]\n}\n",
             FF60 = "function Int32Array() {\n    [native code]\n}",
             FF68 = "function Int32Array() {\n    [native code]\n}")
     public void int32Array() throws Exception {
@@ -5129,7 +5129,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Int8Array() { [native code] }",
             FF = "function Int8Array() {\n    [native code]\n}",
-            IE = "\nfunction Int8Array() {\n    [native code]\n}\n",
+            IE = "function Int8Array() {\n    [native code]\n}\n",
             FF60 = "function Int8Array() {\n    [native code]\n}",
             FF68 = "function Int8Array() {\n    [native code]\n}")
     public void int8Array() throws Exception {
@@ -5192,7 +5192,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Collator() { [native code] }",
             FF = "function Collator() {\n    [native code]\n}",
-            IE = "\nfunction Collator() {\n    [native code]\n}\n",
+            IE = "function Collator() {\n    [native code]\n}\n",
             FF60 = "function Collator() {\n    [native code]\n}",
             FF68 = "function Collator() {\n    [native code]\n}")
     public void intl_Collator() throws Exception {
@@ -5205,7 +5205,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
             FF = "function DateTimeFormat() {\n    [native code]\n}",
-            IE = "\nfunction DateTimeFormat() {\n    [native code]\n}\n",
+            IE = "function DateTimeFormat() {\n    [native code]\n}\n",
             FF60 = "function DateTimeFormat() {\n    [native code]\n}",
             FF68 = "function DateTimeFormat() {\n    [native code]\n}")
     public void intl_DateTimeFormat() throws Exception {
@@ -5218,7 +5218,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
             FF = "function NumberFormat() {\n    [native code]\n}",
-            IE = "\nfunction NumberFormat() {\n    [native code]\n}\n",
+            IE = "function NumberFormat() {\n    [native code]\n}\n",
             FF60 = "function NumberFormat() {\n    [native code]\n}",
             FF68 = "function NumberFormat() {\n    [native code]\n}")
     public void intl_NumberFormat() throws Exception {
@@ -5231,7 +5231,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function isFinite() { [native code] }",
             FF = "function isFinite() {\n    [native code]\n}",
-            IE = "\nfunction isFinite() {\n    [native code]\n}\n",
+            IE = "function isFinite() {\n    [native code]\n}\n",
             FF60 = "function isFinite() {\n    [native code]\n}",
             FF68 = "function isFinite() {\n    [native code]\n}")
     public void isFinite() throws Exception {
@@ -5244,7 +5244,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function isNaN() { [native code] }",
             FF = "function isNaN() {\n    [native code]\n}",
-            IE = "\nfunction isNaN() {\n    [native code]\n}\n",
+            IE = "function isNaN() {\n    [native code]\n}\n",
             FF60 = "function isNaN() {\n    [native code]\n}",
             FF68 = "function isNaN() {\n    [native code]\n}")
     public void isNaN() throws Exception {
@@ -5469,7 +5469,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Map() { [native code] }",
             FF = "function Map() {\n    [native code]\n}",
-            IE = "\nfunction Map() {\n    [native code]\n}\n",
+            IE = "function Map() {\n    [native code]\n}\n",
             FF60 = "function Map() {\n    [native code]\n}",
             FF68 = "function Map() {\n    [native code]\n}")
     public void map() throws Exception {
@@ -5843,7 +5843,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function MessageChannel() { [native code] }",
             FF = "function MessageChannel() {\n    [native code]\n}",
-            IE = "\nfunction MessageChannel() {\n    [native code]\n}\n",
+            IE = "function MessageChannel() {\n    [native code]\n}\n",
             FF60 = "function MessageChannel() {\n    [native code]\n}",
             FF68 = "function MessageChannel() {\n    [native code]\n}")
     public void messageChannel() throws Exception {
@@ -6498,7 +6498,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function MutationObserver() { [native code] }",
             FF = "function MutationObserver() {\n    [native code]\n}",
-            IE = "\nfunction MutationObserver() {\n    [native code]\n}\n",
+            IE = "function MutationObserver() {\n    [native code]\n}\n",
             FF60 = "function MutationObserver() {\n    [native code]\n}",
             FF68 = "function MutationObserver() {\n    [native code]\n}")
     public void mutationObserver() throws Exception {
@@ -6776,7 +6776,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Number() { [native code] }",
             FF = "function Number() {\n    [native code]\n}",
-            IE = "\nfunction Number() {\n    [native code]\n}\n",
+            IE = "function Number() {\n    [native code]\n}\n",
             FF60 = "function Number() {\n    [native code]\n}",
             FF68 = "function Number() {\n    [native code]\n}")
     public void number() throws Exception {
@@ -6789,7 +6789,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Object() { [native code] }",
             FF = "function Object() {\n    [native code]\n}",
-            IE = "\nfunction Object() {\n    [native code]\n}\n",
+            IE = "function Object() {\n    [native code]\n}\n",
             FF60 = "function Object() {\n    [native code]\n}",
             FF68 = "function Object() {\n    [native code]\n}")
     public void object() throws Exception {
@@ -6924,7 +6924,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Option() {\n    [native code]\n}",
             FF68 = "function Option() {\n    [native code]\n}",
             FF60 = "function Option() {\n    [native code]\n}",
-            IE = "\nfunction Option() {\n    [native code]\n}\n")
+            IE = "function Option() {\n    [native code]\n}\n")
     public void option() throws Exception {
         test("Option");
     }
@@ -7001,7 +7001,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function parseFloat() { [native code] }",
             FF = "function parseFloat() {\n    [native code]\n}",
-            IE = "\nfunction parseFloat() {\n    [native code]\n}\n",
+            IE = "function parseFloat() {\n    [native code]\n}\n",
             FF60 = "function parseFloat() {\n    [native code]\n}",
             FF68 = "function parseFloat() {\n    [native code]\n}")
     public void parseFloat() throws Exception {
@@ -7014,7 +7014,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function parseInt() { [native code] }",
             FF = "function parseInt() {\n    [native code]\n}",
-            IE = "\nfunction parseInt() {\n    [native code]\n}\n",
+            IE = "function parseInt() {\n    [native code]\n}\n",
             FF60 = "function parseInt() {\n    [native code]\n}",
             FF68 = "function parseInt() {\n    [native code]\n}")
     public void parseInt() throws Exception {
@@ -7705,7 +7705,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function RangeError() { [native code] }",
             FF = "function RangeError() {\n    [native code]\n}",
-            IE = "\nfunction RangeError() {\n    [native code]\n}\n",
+            IE = "function RangeError() {\n    [native code]\n}\n",
             FF60 = "function RangeError() {\n    [native code]\n}",
             FF68 = "function RangeError() {\n    [native code]\n}")
     public void rangeError() throws Exception {
@@ -7739,7 +7739,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function ReferenceError() { [native code] }",
             FF = "function ReferenceError() {\n    [native code]\n}",
-            IE = "\nfunction ReferenceError() {\n    [native code]\n}\n",
+            IE = "function ReferenceError() {\n    [native code]\n}\n",
             FF60 = "function ReferenceError() {\n    [native code]\n}",
             FF68 = "function ReferenceError() {\n    [native code]\n}")
     public void referenceError() throws Exception {
@@ -7762,7 +7762,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function RegExp() { [native code] }",
             FF = "function RegExp() {\n    [native code]\n}",
-            IE = "\nfunction RegExp() {\n    [native code]\n}\n",
+            IE = "function RegExp() {\n    [native code]\n}\n",
             FF60 = "function RegExp() {\n    [native code]\n}",
             FF68 = "function RegExp() {\n    [native code]\n}")
     public void regExp() throws Exception {
@@ -8129,7 +8129,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Set() { [native code] }",
             FF = "function Set() {\n    [native code]\n}",
-            IE = "\nfunction Set() {\n    [native code]\n}\n",
+            IE = "function Set() {\n    [native code]\n}\n",
             FF60 = "function Set() {\n    [native code]\n}",
             FF68 = "function Set() {\n    [native code]\n}")
     public void set() throws Exception {
@@ -8659,7 +8659,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function String() { [native code] }",
             FF = "function String() {\n    [native code]\n}",
-            IE = "\nfunction String() {\n    [native code]\n}\n",
+            IE = "function String() {\n    [native code]\n}\n",
             FF60 = "function String() {\n    [native code]\n}",
             FF68 = "function String() {\n    [native code]\n}")
     public void string() throws Exception {
@@ -10585,7 +10585,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SyntaxError() { [native code] }",
             FF = "function SyntaxError() {\n    [native code]\n}",
-            IE = "\nfunction SyntaxError() {\n    [native code]\n}\n",
+            IE = "function SyntaxError() {\n    [native code]\n}\n",
             FF60 = "function SyntaxError() {\n    [native code]\n}",
             FF68 = "function SyntaxError() {\n    [native code]\n}")
     public void syntaxError() throws Exception {
@@ -10735,7 +10735,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function TextTrackCue() { [native code] }",
             FF = "function TextTrackCue() {\n    [native code]\n}",
-            IE = "\nfunction TextTrackCue() {\n    [native code]\n}\n",
+            IE = "function TextTrackCue() {\n    [native code]\n}\n",
             FF60 = "function TextTrackCue() {\n    [native code]\n}",
             FF68 = "function TextTrackCue() {\n    [native code]\n}")
     public void textTrackCue() throws Exception {
@@ -10906,7 +10906,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function TypeError() { [native code] }",
             FF = "function TypeError() {\n    [native code]\n}",
-            IE = "\nfunction TypeError() {\n    [native code]\n}\n",
+            IE = "function TypeError() {\n    [native code]\n}\n",
             FF60 = "function TypeError() {\n    [native code]\n}",
             FF68 = "function TypeError() {\n    [native code]\n}")
     public void typeError() throws Exception {
@@ -10954,7 +10954,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Uint16Array() { [native code] }",
             FF = "function Uint16Array() {\n    [native code]\n}",
-            IE = "\nfunction Uint16Array() {\n    [native code]\n}\n",
+            IE = "function Uint16Array() {\n    [native code]\n}\n",
             FF60 = "function Uint16Array() {\n    [native code]\n}",
             FF68 = "function Uint16Array() {\n    [native code]\n}")
     public void uint16Array() throws Exception {
@@ -10969,7 +10969,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Uint32Array() { [native code] }",
             FF = "function Uint32Array() {\n    [native code]\n}",
-            IE = "\nfunction Uint32Array() {\n    [native code]\n}\n",
+            IE = "function Uint32Array() {\n    [native code]\n}\n",
             FF60 = "function Uint32Array() {\n    [native code]\n}",
             FF68 = "function Uint32Array() {\n    [native code]\n}")
     public void uint32Array() throws Exception {
@@ -10984,7 +10984,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Uint8Array() { [native code] }",
             FF = "function Uint8Array() {\n    [native code]\n}",
-            IE = "\nfunction Uint8Array() {\n    [native code]\n}\n",
+            IE = "function Uint8Array() {\n    [native code]\n}\n",
             FF60 = "function Uint8Array() {\n    [native code]\n}",
             FF68 = "function Uint8Array() {\n    [native code]\n}")
     public void uint8Array() throws Exception {
@@ -10999,7 +10999,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Uint8ClampedArray() { [native code] }",
             FF = "function Uint8ClampedArray() {\n    [native code]\n}",
-            IE = "\nfunction Uint8ClampedArray() {\n    [native code]\n}\n",
+            IE = "function Uint8ClampedArray() {\n    [native code]\n}\n",
             FF60 = "function Uint8ClampedArray() {\n    [native code]\n}",
             FF68 = "function Uint8ClampedArray() {\n    [native code]\n}")
     public void uint8ClampedArray() throws Exception {
@@ -11021,7 +11021,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function unescape() { [native code] }",
             FF = "function unescape() {\n    [native code]\n}",
-            IE = "\nfunction unescape() {\n    [native code]\n}\n",
+            IE = "function unescape() {\n    [native code]\n}\n",
             FF60 = "function unescape() {\n    [native code]\n}",
             FF68 = "function unescape() {\n    [native code]\n}")
     public void unescape() throws Exception {
@@ -11045,7 +11045,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function URIError() { [native code] }",
             FF = "function URIError() {\n    [native code]\n}",
-            IE = "\nfunction URIError() {\n    [native code]\n}\n",
+            IE = "function URIError() {\n    [native code]\n}\n",
             FF60 = "function URIError() {\n    [native code]\n}",
             FF68 = "function URIError() {\n    [native code]\n}")
     public void uriError() throws Exception {
@@ -11298,7 +11298,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function WeakMap() { [native code] }",
             FF = "function WeakMap() {\n    [native code]\n}",
-            IE = "\nfunction WeakMap() {\n    [native code]\n}\n",
+            IE = "function WeakMap() {\n    [native code]\n}\n",
             FF60 = "function WeakMap() {\n    [native code]\n}",
             FF68 = "function WeakMap() {\n    [native code]\n}")
     public void weakMap() throws Exception {
@@ -11481,7 +11481,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function WebGLContextEvent() { [native code] }",
-            IE = "\nfunction WebGLContextEvent() {\n    [native code]\n}\n",
+            IE = "function WebGLContextEvent() {\n    [native code]\n}\n",
             FF = "function WebGLContextEvent() {\n    [native code]\n}",
             FF60 = "function WebGLContextEvent() {\n    [native code]\n}",
             FF68 = "function WebGLContextEvent() {\n    [native code]\n}")
@@ -11917,7 +11917,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function WebSocket() { [native code] }",
             FF = "function WebSocket() {\n    [native code]\n}",
-            IE = "\nfunction WebSocket() {\n    [native code]\n}\n",
+            IE = "function WebSocket() {\n    [native code]\n}\n",
             FF60 = "function WebSocket() {\n    [native code]\n}",
             FF68 = "function WebSocket() {\n    [native code]\n}")
     public void webSocket() throws Exception {
@@ -12050,7 +12050,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Worker() { [native code] }",
             FF = "function Worker() {\n    [native code]\n}",
-            IE = "\nfunction Worker() {\n    [native code]\n}\n",
+            IE = "function Worker() {\n    [native code]\n}\n",
             FF60 = "function Worker() {\n    [native code]\n}",
             FF68 = "function Worker() {\n    [native code]\n}")
     public void worker() throws Exception {
@@ -12116,7 +12116,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function XMLHttpRequest() { [native code] }",
             FF = "function XMLHttpRequest() {\n    [native code]\n}",
-            IE = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
+            IE = "function XMLHttpRequest() {\n    [native code]\n}\n",
             FF60 = "function XMLHttpRequest() {\n    [native code]\n}",
             FF68 = "function XMLHttpRequest() {\n    [native code]\n}")
     public void xmlHttpRequest() throws Exception {
@@ -12166,7 +12166,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function XMLSerializer() { [native code] }",
             FF = "function XMLSerializer() {\n    [native code]\n}",
-            IE = "\nfunction XMLSerializer() {\n    [native code]\n}\n",
+            IE = "function XMLSerializer() {\n    [native code]\n}\n",
             FF60 = "function XMLSerializer() {\n    [native code]\n}",
             FF68 = "function XMLSerializer() {\n    [native code]\n}")
     public void xmlSerializer() throws Exception {
