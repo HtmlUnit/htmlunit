@@ -8,6 +8,34 @@
 
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox76">
+            <action type="fix" dev="rbri">
+                core-js: Fix for a side effect between different regular expressions.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Many fixes for array calls using this pattern Array.prototype.foo.call(null, ....);.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Do not save/share an instance of NativeArrayBuffer in a static variable because this
+                creates side effects.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: An error should be thrown when defining a property for a read-only variable in strict mode.
+            </action>
+            <action type="fix" dev="rbri" issue="174">
+                core-js: The values of present properties of a sealed object can be changed as long as they are writable.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Symbol.length should be 0.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Calling String.substr with undefined as length fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Using a regex like a function should throw a TypeError.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Calling String.split with zero as limit fixed.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.7.
             </action>
