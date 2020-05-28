@@ -51,7 +51,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             }
         }
         catch (final HeadlessException e) {
-            // skip most of the tests
+            // skip most of the tests in headless mode
+            SKIP_ = true;
         }
     }
 
