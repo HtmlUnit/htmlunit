@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -36,7 +35,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test1() throws Exception {
         test("/[0-9]{3}/('23 2 34 678 9 09')");
     }
@@ -47,7 +45,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test2() throws Exception {
         test("/3.{4}8/('23 2 34 678 9 09')");
     }
@@ -58,7 +55,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test3() throws Exception {
         test("(/3.{4}8/('23 2 34 678 9 09')).length");
     }
@@ -69,7 +65,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test4() throws Exception {
         test("var re = /[0-9]{3}/", "re('23 2 34 678 9 09')");
     }
@@ -80,7 +75,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test5() throws Exception {
         test("var re = /3.{4}8/", "re('23 2 34 678 9 09')");
     }
@@ -91,7 +85,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test6() throws Exception {
         test("/3.{4}8/('23 2 34 678 9 09')");
     }
@@ -102,7 +95,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test7() throws Exception {
         test("var re =/3.{4}8/", "(re('23 2 34 678 9 09')).length");
     }
@@ -113,7 +105,6 @@ public class SimpleFormTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented
     public void test8() throws Exception {
         test("(/3.{4}8/('23 2 34 678 9 09')).length");
     }
