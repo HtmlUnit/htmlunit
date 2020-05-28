@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -1166,15 +1167,25 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
     private void styleShorthand(final String style, final String attribute, final String expectedValue)
         throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "function test() {\n"
             + "  var style = document.getElementById('d').style;\n"
-            + "  alert(style." + attribute + ");\n"
-            + "}\n</script></head>\n"
-            + "<body onload='test()'><div id='d' style='" + style + "'>foo</div></body></html>";
+            + "  log(style." + attribute + ");\n"
+            + "}\n</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><div id='d' style='" + style + "'>foo</div>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body></html>";
 
-        setExpectedAlerts(expectedValue);
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(expectedValue + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -2316,18 +2327,25 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
             + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var node = document.getElementById('a');\n"
             + "    try {\n"
             + "      node.style.setProperty('" + cssProp + "', " + params + ");\n"
-            + "      alert(node.style." + prop + ");\n"
-            + "    } catch(e) { alert(e); }\n"
+            + "      log(node.style." + prop + ");\n"
+            + "    } catch(e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
+            + "<textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        setExpectedAlerts(expected);
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", expected) + "; ", textArea.getAttribute("value"));
     }
 
     private void setLength(final String cssProp, final String prop,
@@ -2336,18 +2354,25 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
             + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var node = document.getElementById('a');\n"
             + "    try {\n"
             + "      node.style." + prop + " = " + params + ";\n"
-            + "      alert(node.style." + prop + ");\n"
-            + "    } catch(e) { alert(e); }\n"
+            + "      log(node.style." + prop + ");\n"
+            + "    } catch(e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
+            + "<textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        setExpectedAlerts(expected);
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", expected) + "; ", textArea.getAttribute("value"));
     }
 
     /**
