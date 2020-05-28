@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.awt.GraphicsEnvironment;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -37,12 +39,23 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 @RunWith(BrowserRunner.class)
 public class HTMLAppletElement2Test extends SimpleWebTestCase {
 
+    private static boolean SKIP_ = false;
+
+    static {
+        if (GraphicsEnvironment.isHeadless()) {
+            // skip the tests in headless mode
+            SKIP_ = true;
+        }
+    }
+
     /**
      * Tests calling applet method from JavaScript code.
      * @throws Exception if the test fails
      */
     @Test
     public void callAppletMethodFromJS() throws Exception {
+        Assume.assumeFalse(SKIP_);
+
         if (getBrowserVersion().isChrome() || getBrowserVersion().isFirefox()) {
             return;
         }
