@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
 
 import org.junit.Assume;
 import org.junit.Test;
@@ -39,13 +40,18 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
     private static boolean SKIP_ = false;
 
     static {
-        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        final GraphicsDevice[] devices = env.getScreenDevices();
-        if (devices.length == 1) {
-            final GraphicsDevice device = devices[0];
-            if (device.getDisplayMode().getBitDepth() < 0) {
-                SKIP_ = true;
+        try {
+            final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            final GraphicsDevice[] devices = env.getScreenDevices();
+            if (devices.length == 1) {
+                final GraphicsDevice device = devices[0];
+                if (device.getDisplayMode().getBitDepth() < 0) {
+                    SKIP_ = true;
+                }
             }
+        }
+        catch (final HeadlessException e) {
+            // skip most of the tests
         }
     }
 
