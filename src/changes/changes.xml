@@ -9,6 +9,9 @@
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox76">
             <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.7.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.29.v20200521.
             </action>
             <action type="fix" dev="rbri" issue="175">
