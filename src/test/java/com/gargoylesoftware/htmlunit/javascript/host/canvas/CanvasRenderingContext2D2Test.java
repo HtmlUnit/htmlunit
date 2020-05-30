@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
 
 import org.junit.Assume;
 import org.junit.Test;
@@ -29,8 +27,8 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
  *
- * Most of the test are disabled because the renderer on
- * the build server Ubuntu/Xvfb produces different results.
+ * Most of the test are disabled when not running in headless
+ * mode because we will get different results.
  *
  * @author Ronald Brill
  */
@@ -40,18 +38,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
     private static boolean SKIP_ = false;
 
     static {
-        try {
-            final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            final GraphicsDevice[] devices = env.getScreenDevices();
-            if (devices.length == 1) {
-                final GraphicsDevice device = devices[0];
-                if (device.getDisplayMode().getBitDepth() < 0) {
-                    SKIP_ = true;
-                }
-            }
-        }
-        catch (final HeadlessException e) {
-            // skip most of the tests in headless mode
+        if (!GraphicsEnvironment.isHeadless()) {
+            // expectations are written for the headless mode
             SKIP_ = true;
         }
     }
@@ -170,7 +158,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "TonBLkiG/UczeDIQC5Bq4HEcBsLwayBOAWIWYgyLIWAYMn5MjME8QNwAxJ9JMHg5MS6VAeJuIg12ISU8QQbPh0YINsO2kxvz"
                 + "Bjgiy4LS9OmBZPB6auakACBWGC2daAsAdH9H/STLcEwAAAAASUVORK5CYII=")
     public void rotateFillRect() throws Exception {
-        // Assume.assumeFalse(SKIP_);
+        Assume.assumeFalse(SKIP_);
 
         final String html = "<html><head>\n"
             + "<script>\n"
