@@ -170,7 +170,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "TonBLkiG/UczeDIQC5Bq4HEcBsLwayBOAWIWYgyLIWAYMn5MjME8QNwAxJ9JMHg5MS6VAeJuIg12ISU8QQbPh0YINsO2kxvz"
                 + "Bjgiy4LS9OmBZPB6auakACBWGC2daAsAdH9H/STLcEwAAAAASUVORK5CYII=")
     public void rotateFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
+        // Assume.assumeFalse(SKIP_);
 
         final String html = "<html><head>\n"
             + "<script>\n"
