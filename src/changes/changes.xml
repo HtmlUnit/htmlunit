@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox76">
+            <action type="update" dev="rbri">
+                Maven Fluido Skin used for the web page updated to version 1.9.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Fix for a side effect between different regular expressions.
             </action>
