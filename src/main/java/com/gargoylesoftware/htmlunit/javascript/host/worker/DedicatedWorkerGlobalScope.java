@@ -297,6 +297,45 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             owningWindow_.getWebWindow().getJobManager().addJob(job, page);
         }
     }
+
+    /**
+     * Sets a chunk of JavaScript to be invoked at some specified time later.
+     * The invocation occurs only if the window is opened after the delay
+     * and does not contain an other page than the one that originated the setTimeout.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
+     * MDN web docs</a>
+     *
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return the id of the created timer
+     */
+    @JsxFunction
+    public static Object setTimeout(final Context context, final Scriptable thisObj,
+            final Object[] args, final Function function) {
+        return WindowOrWorkerGlobalScopeMixin.setTimeout(context, ((DedicatedWorkerGlobalScope)thisObj).owningWindow_, args, function);
+    }
+    
+    
+
+    /**
+     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
+     * MDN web docs</a>
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return the id of the created interval
+     */
+    @JsxFunction
+    public static Object setInterval(final Context context, final Scriptable thisObj,
+            final Object[] args, final Function function) {
+        return WindowOrWorkerGlobalScopeMixin.setInterval(context, ((DedicatedWorkerGlobalScope)thisObj).owningWindow_, args, function);
+    }
 }
 
 class WorkerJob extends BasicJavaScriptJob {

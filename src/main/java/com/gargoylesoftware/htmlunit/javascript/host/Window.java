@@ -90,8 +90,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -126,7 +124,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -173,13 +170,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     /** To be documented. */
     @JsxConstant(CHROME)
     public static final short PERSISTENT = 1;
-
-    /**
-     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
-     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
-     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
-     */
-    private static final int MIN_TIMER_DELAY = 1;
 
     private Document document_;
     private DocumentProxy documentProxy_;
@@ -596,15 +586,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     @JsxFunction
     public static Object setTimeout(final Context context, final Scriptable thisObj,
             final Object[] args, final Function function) {
-        if (args.length < 1) {
-            throw ScriptRuntime.typeError("Function not provided");
-        }
-
-        final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
-        final Object[] params = (args.length > 2)
-                ? Arrays.copyOfRange(args, 2, args.length)
-                : ScriptRuntime.emptyArgs;
-        return ((Window) thisObj).setTimeoutIntervalImpl(args[0], timeout, true, params);
+        return WindowOrWorkerGlobalScopeMixin.setTimeout(context, thisObj, args, function);
     }
 
     /**
@@ -621,58 +603,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     @JsxFunction
     public static Object setInterval(final Context context, final Scriptable thisObj,
             final Object[] args, final Function function) {
-        if (args.length < 1) {
-            throw ScriptRuntime.typeError("Function not provided");
-        }
-
-        final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
-        final Object[] params = (args.length > 2)
-                ? Arrays.copyOfRange(args, 2, args.length)
-                : ScriptRuntime.emptyArgs;
-        return ((Window) thisObj).setTimeoutIntervalImpl(args[0], timeout, false, params);
-    }
-
-    private int setTimeoutIntervalImpl(final Object code, int timeout, final boolean isTimeout, final Object[] params) {
-        if (timeout < MIN_TIMER_DELAY) {
-            timeout = MIN_TIMER_DELAY;
-        }
-
-        final WebWindow webWindow = getWebWindow();
-        final Page page = (Page) getDomNodeOrNull();
-        Integer period = null;
-        if (!isTimeout) {
-            period = Integer.valueOf(timeout);
-        }
-
-        if (code instanceof String) {
-            final String s = (String) code;
-            final String description = "window.set"
-                                        + (isTimeout ? "Timeout" : "Interval")
-                                        + "(" + s + ", " + timeout + ")";
-            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, period, description, webWindow, s);
-            return webWindow.getJobManager().addJob(job, page);
-        }
-
-        if (code instanceof Function) {
-            final Function f = (Function) code;
-            final String functionName;
-            if (f instanceof FunctionObject) {
-                functionName = ((FunctionObject) f).getFunctionName();
-            }
-            else {
-                functionName = String.valueOf(f); // can this happen?
-            }
-
-            final String description = "window.set"
-                                        + (isTimeout ? "Timeout" : "Interval")
-                                        + "(" + functionName + ", " + timeout + ")";
-            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, period, description, webWindow, f, params);
-            return webWindow.getJobManager().addJob(job, page);
-        }
-
-        throw Context.reportRuntimeError("Unknown type for function.");
+        return WindowOrWorkerGlobalScopeMixin.setInterval(context, thisObj, args, function);
     }
 
     /**
