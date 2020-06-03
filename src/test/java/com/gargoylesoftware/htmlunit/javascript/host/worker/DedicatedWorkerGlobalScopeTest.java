@@ -160,12 +160,13 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>\n";
 
-        final String workerJs = "self.setInterval(function() {\n"
+        final String workerJs = "var id = self.setInterval(function() {\n"
                 + "  postMessage('interval');\n"
+                + "  clearInterval(id);\n"
                 + "}, 10);\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPageWithAlerts2(html, 20000);
     }
 }
