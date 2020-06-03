@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Unit tests for {@code DedicatedWorkerGlobalScope}.
  *
  * @author Ronald Brill
+ * @author Rural Hunter
  */
 @RunWith(BrowserRunner.class)
 public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {

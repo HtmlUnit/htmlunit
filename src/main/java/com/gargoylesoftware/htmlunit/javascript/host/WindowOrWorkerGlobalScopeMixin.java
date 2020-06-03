@@ -15,27 +15,29 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.javascript.background.*;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The implementation of {@code WindowOrWorkerGlobalScope}
  * to be used by the implementers of the mixin.
  *
  * @author Ronald Brill
+ * @author Rural Hunter
  */
 public final class WindowOrWorkerGlobalScopeMixin {
 
@@ -132,7 +134,8 @@ public final class WindowOrWorkerGlobalScopeMixin {
         return setTimeoutIntervalImpl((Window) thisObj, args[0], timeout, false, params);
     }
 
-    private static int setTimeoutIntervalImpl(Window window, final Object code, int timeout, final boolean isTimeout, final Object[] params) {
+    private static int setTimeoutIntervalImpl(final Window window, final Object code,
+            int timeout, final boolean isTimeout, final Object[] params) {
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }

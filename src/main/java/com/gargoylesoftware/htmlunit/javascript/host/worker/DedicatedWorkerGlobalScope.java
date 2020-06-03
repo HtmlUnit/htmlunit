@@ -64,6 +64,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Rural Hunter
  */
 @JsxClass({CHROME, FF, FF68, FF60})
 @JsxClass(className = "WorkerGlobalScope", value = IE)
@@ -315,10 +316,9 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     @JsxFunction
     public static Object setTimeout(final Context context, final Scriptable thisObj,
             final Object[] args, final Function function) {
-        return WindowOrWorkerGlobalScopeMixin.setTimeout(context, ((DedicatedWorkerGlobalScope)thisObj).owningWindow_, args, function);
+        return WindowOrWorkerGlobalScopeMixin.setTimeout(context,
+                ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
     }
-    
-    
 
     /**
      * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
@@ -334,7 +334,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     @JsxFunction
     public static Object setInterval(final Context context, final Scriptable thisObj,
             final Object[] args, final Function function) {
-        return WindowOrWorkerGlobalScopeMixin.setInterval(context, ((DedicatedWorkerGlobalScope)thisObj).owningWindow_, args, function);
+        return WindowOrWorkerGlobalScopeMixin.setInterval(context,
+                ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
     }
 }
 
