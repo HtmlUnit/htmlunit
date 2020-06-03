@@ -34,7 +34,7 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.32</checkstyle.version>
+        <checkstyle.version>8.33</checkstyle.version>
         <spotbugs.version>4.0.3</spotbugs.version>
         <pmd.version>6.24.0</pmd.version>
     </properties>
