@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox76">
+            <action type="fix" dev="rbri" issue="178">
+                Invoking getImageData with coordinates outside the drawing area no longer produces exceptions.
+            </action>
             <action type="add" dev="rbri" issue="177" due-to="Rural Hunter">
                 Support for setTimeout and setInterval added to DedicatedWorkerGlobalScope.
             </action>
