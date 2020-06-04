@@ -8,6 +8,21 @@
 
     <body>
         <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox76">
+            <action type="fix" dev="rbri">
+                core-js:  It should be not possible to change the prototype of a non-extensible object.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix handling of undefined parameter value in String.normalize().
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Improved regexp parser.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Function.__proto__ property ignores write access.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix Object.getOwnPropertyDescriptor for index properties on native strings.
+            </action>
             <action type="fix" dev="rbri" issue="178">
                 Invoking getImageData with coordinates outside the drawing area no longer produces exceptions.
             </action>
