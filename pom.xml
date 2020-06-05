@@ -23,10 +23,10 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>2.40.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.41.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.5.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.41.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitcorejs.version>2.41.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitneko.version>2.41.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.41.0</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.12</httpcomponents.version>
         <jetty.version>9.4.29.v20200521</jetty.version>
