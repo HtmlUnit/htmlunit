@@ -1237,10 +1237,11 @@ public final class StyleAttributes {
 
         /** The style property {@code imageOrientation}. */
         IMAGE_ORIENTATION("imageOrientation", "image-orientation", chrome("from-image"),
-                ff60("0deg"), ff68AndUp("none")),
+                ff60("0deg"), ff68("none"), ffLatest("from-image")),
 
         /** The style property {@code image-orientation}. */
-        IMAGE_ORIENTATION_("image-orientation", "image-orientation", ff60("0deg"), ff68AndUp("none")),
+        IMAGE_ORIENTATION_("image-orientation", "image-orientation",
+                ff60("0deg"), ff68("none"), ffLatest("from-image")),
 
         /** The style property {@code imageRendering}. */
         IMAGE_RENDERING("imageRendering", "image-rendering", ff("auto"), chrome("auto")),

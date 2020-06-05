@@ -100,9 +100,6 @@ public abstract class WebTestCase {
     public static final boolean GEOLOCATION_IGNORE = Boolean.valueOf(
             System.getProperty("htmlunit.test.geolocation.ignore", "false"));
 
-    /** Property to use nashorn. */
-    protected static final String NASHRON = "htmlunit.nashorn";
-
     /** The default time used to wait for the expected alerts. */
     protected static final long DEFAULT_WAIT_TIME = 1000;
 

@@ -304,11 +304,6 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "between", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
-                "after", "active: body"},
-            FF = {"before", "active: body",
-                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
-                "between", "active: focusId",
-                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
                 "after", "active: body"})
     public void notFocusableWithTabIndexEmpty() throws Exception {
         testWithCallFocusAndBlur("<div tabindex='' id='focusId'>div</div>");
@@ -1342,9 +1337,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
-            CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
+    @Alerts(DEFAULT = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
                 "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body"},
+            FF68 = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
                 "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
     @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
