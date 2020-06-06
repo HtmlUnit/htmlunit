@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -35,6 +36,16 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class FocusableElement2Test extends WebDriverTestCase {
+
+    /**
+     * We like to start with a new browser for each test.
+     * @throws Exception If an error occurs
+     */
+    @After
+    public void shutDownRealBrowsers() throws Exception {
+        super.shutDownAll();
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1343,6 +1354,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
             IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
                 "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
     @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            FF = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1"})
     public void clickFromFocusableToFocusableDisabled() throws Exception {
         testSwitchWithClick("<input type='text' id='focusId1'>\n"

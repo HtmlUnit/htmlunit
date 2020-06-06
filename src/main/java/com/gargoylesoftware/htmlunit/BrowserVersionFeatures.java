@@ -432,7 +432,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
 
     /** An empty (but given) tabindex attribute is treated as -1. */
-    @BrowserFeature({FF, FF68, FF60})
+    @BrowserFeature({FF68, FF60})
     HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE,
 
     /** Handle blank source like empty. */
