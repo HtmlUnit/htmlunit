@@ -121,10 +121,10 @@ mvn clean deploy -Dmaven.test.skip=true
                         <li>click Releases > Draft new release</li>
                         <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
                         <li>append
-                          <ull>
-                            <li>htmlunit-2.39.0-bin.zip</li>
-                            <li>htmlunit-2.39.0-src.zip</li>
-                          </ull>
+                          <ul>
+                            <li>htmlunit-2.41.0-bin.zip</li>
+                            <li>htmlunit-2.41.0-src.zip</li>
+                          </ul>
                         </li>
                         <li>do not publish the release now, we have to add a file later on</li>
                       </ol>

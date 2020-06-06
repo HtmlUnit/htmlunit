@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.41.0" date="xxxx, 2020" description="Bugfixes, Chrome 83, Firefox77">
+        <release version="2.41.0" date="June 6, 2020" description="Bugfixes, Chrome 83, Firefox77">
             <action type="fix" dev="rbri">
                 core-js:  It should be not possible to change the prototype of a non-extensible object.
             </action>
