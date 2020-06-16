@@ -29,13 +29,13 @@
         <htmlunitcorejs.version>2.42.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.12</httpcomponents.version>
-        <jetty.version>9.4.29.v20200521</jetty.version>
+        <jetty.version>9.4.30.v20200611</jetty.version>
         <log4j.version>2.13.3</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.33</checkstyle.version>
-        <spotbugs.version>4.0.3</spotbugs.version>
+        <spotbugs.version>4.0.4</spotbugs.version>
         <pmd.version>6.24.0</pmd.version>
     </properties>
 
