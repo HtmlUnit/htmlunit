@@ -35,7 +35,7 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.33</checkstyle.version>
-        <spotbugs.version>4.0.4</spotbugs.version>
+        <spotbugs.version>4.0.6</spotbugs.version>
         <pmd.version>6.24.0</pmd.version>
     </properties>
 
@@ -71,7 +71,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>4.0.4</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
