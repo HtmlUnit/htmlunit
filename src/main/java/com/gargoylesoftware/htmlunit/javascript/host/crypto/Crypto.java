@@ -68,6 +68,12 @@ public class Crypto extends SimpleScriptable {
         if (array == null) {
             throw Context.reportRuntimeError("TypeError: Argument 1 of Crypto.getRandomValues is not an object.");
         }
+        if (array.getByteLength() > 65536) {
+            throw Context.reportRuntimeError("Error: Failed to execute 'getRandomValues' on 'Crypto': "
+                    + "The ArrayBufferView's byte length "
+                    + "(" + array.getByteLength() + ") exceeds the number of bytes "
+                    + "of entropy available via this API (65536).");
+        }
 
         final Random random = new Random();
         for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {

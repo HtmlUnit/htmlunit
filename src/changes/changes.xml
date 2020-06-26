@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.42.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                The method Crypto.getRandomValues misses a ArrayBufferView byte length check.
+            </action>
             <action type="fix" dev="rbri" issue="183">
                 The method Crypto.getRandomValues has to return the modified array.
             </action>

@@ -61,6 +61,23 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("exception")
+    public void getRandomValuesQuotaExceeded() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "try {\n"
+            + "  var array = new Uint32Array(16385);\n"
+            + "  window.crypto.getRandomValues(array);\n"
+            + "}\n"
+            + "catch(e) { alert('exception'); }\n"
+            + "</script></head></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "[object SubtleCrypto]",
             IE = "exception")
     public void subtle() throws Exception {
