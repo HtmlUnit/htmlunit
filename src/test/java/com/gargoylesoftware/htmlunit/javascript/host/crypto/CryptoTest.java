@@ -34,7 +34,7 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false"},
+    @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "10", "true"},
             IE = {"true", "true", "true", "exception"})
     public void getRandomValues() throws Exception {
         final String html = "<html><head><script>\n"
@@ -43,10 +43,13 @@ public class CryptoTest extends WebDriverTestCase {
             + "  alert(array[0] == 0);\n"
             + "  alert(array[3] == 0);\n"
             + "  alert(array[9] == 0);\n"
-            + "  window.crypto.getRandomValues(array);\n"
+            + "  var res = window.crypto.getRandomValues(array);\n"
             + "  alert(array[0] == 0);\n"
             + "  alert(array[3] == 0);\n"
             + "  alert(array[9] == 0);\n"
+
+            + "  alert(res.length);\n"
+            + "  alert(res === array);\n"
             + "}\n"
             + "catch(e) { alert('exception'); }\n"
             + "</script></head></html>";

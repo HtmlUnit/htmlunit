@@ -60,10 +60,11 @@ public class Crypto extends SimpleScriptable {
     /**
      * Fills array with random values.
      * @param array the array to fill
+     * @return the modified array
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">MDN Doc</a>
      */
     @JsxFunction
-    public void getRandomValues(final NativeTypedArrayView<?> array) {
+    public NativeTypedArrayView<?> getRandomValues(final NativeTypedArrayView<?> array) {
         if (array == null) {
             throw Context.reportRuntimeError("TypeError: Argument 1 of Crypto.getRandomValues is not an object.");
         }
@@ -72,6 +73,7 @@ public class Crypto extends SimpleScriptable {
         for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {
             array.put(i, array, random.nextInt());
         }
+        return array;
     }
 
     /**
