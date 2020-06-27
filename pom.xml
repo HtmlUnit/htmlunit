@@ -36,7 +36,7 @@
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.33</checkstyle.version>
         <spotbugs.version>4.0.6</spotbugs.version>
-        <pmd.version>6.24.0</pmd.version>
+        <pmd.version>6.25.0</pmd.version>
     </properties>
 
     <build>
@@ -134,7 +134,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>3.9.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
