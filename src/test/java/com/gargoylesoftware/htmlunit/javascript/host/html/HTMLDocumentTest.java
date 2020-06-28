@@ -14,11 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
@@ -41,7 +36,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -420,7 +415,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"imported: [object HTMLScriptElement]", "replaced"},
             CHROME = {"imported: [object HTMLScriptElement]", "o", "replaced"})
-    @NotYetImplemented(CHROME)
+    @HtmlUnitNYI(CHROME = {"imported: [object HTMLScriptElement]", "replaced"})
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -452,7 +447,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"imported: [object HTMLDivElement]", "replaced"},
             CHROME = {"imported: [object HTMLDivElement]", "o", "replaced"})
-    @NotYetImplemented(CHROME)
+    @HtmlUnitNYI(CHROME = {"imported: [object HTMLDivElement]", "replaced"})
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -2202,7 +2197,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "BackCompat", "function", "function"},
             IE = {"8", "CSS1Compat", "object", "object"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"8", "CSS1Compat", "function", "function"})
     public void documentMode_metaIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
@@ -2213,7 +2208,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "CSS1Compat", "function", "function"},
             IE = {"8", "CSS1Compat", "object", "object"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"8", "CSS1Compat", "function", "function"})
     public void documentMode_metaIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
@@ -2601,7 +2596,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "false",
+            FF = "false",
+            FF68 = "false",
+            FF60 = "false",
+            IE = "false")
     public void hasFocus() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2626,7 +2625,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF68 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             FF60 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             CHROME = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
-    @NotYetImplemented({CHROME, FF, FF68, FF60})
+    @HtmlUnitNYI(CHROME = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
+            FF = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
+            FF68 = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
+            FF60 = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +31,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -202,7 +195,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             FF = {"false", "false", "true", "false", "false", "object", "undefined"},
             FF68 = {"false", "false", "true", "false", "false", "object", "undefined"},
             FF60 = {"false", "false", "true", "false", "true", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF68, FF60})
+    @HtmlUnitNYI(FF = {"false", "false", "true", "true", "true", "object", "object"},
+            FF68 = {"false", "false", "true", "true", "true", "object", "object"},
+            FF60 = {"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -408,7 +403,10 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"uninitialized", "complete"},
             CHROME = {"complete", "complete"},
             IE = {"loading", "complete"})
-    @NotYetImplemented({CHROME, FF, FF68, FF60})
+    @HtmlUnitNYI(CHROME = {"loading", "complete"},
+            FF = {"loading", "complete"},
+            FF68 = {"loading", "complete"},
+            FF60 = {"loading", "complete"})
     public void readyState_IFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -479,7 +477,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""},
             IE = {"[object Window]", "[object HTMLIFrameElement]", "undefined", ""})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""})
     public void idByName() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -748,7 +746,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"loaded", "null"},
             FF60 = {"loaded", "[object HTMLDocument]"},
             IE = {"loaded", "error"})
-    @NotYetImplemented(FF60)
+    @HtmlUnitNYI(FF60 = {"loaded", "null"})
     public void deny() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "DENY"),
