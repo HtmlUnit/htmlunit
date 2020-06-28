@@ -105,6 +105,94 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts({"H2", "TABLE"})
+    public void htmlTableMisplacedElementInside() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var tmp = document.body.firstChild;\n"
+            + "  alert(tmp.tagName);\n"
+            + "  tmp = document.body.firstChild.nextSibling;\n"
+            + "  alert(tmp.tagName);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><table><tr><td></td><h2>Wrong Place</h2></tr></table>\n"
+            + "</div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"H2", "TABLE"})
+    public void htmlTableMisplacedElementInside2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var tmp = document.body.firstChild;\n"
+            + "  alert(tmp.tagName);\n"
+            + "  tmp = document.body.firstChild.nextSibling;\n"
+            + "  alert(tmp.tagName);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><table><tr><td></td><h2>Wrong Place</h2><td></td></tr></table>\n"
+            + "</div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"H2", "TABLE"})
+    public void htmlTableMisplacedElementInside3() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var tmp = document.body.firstChild;\n"
+            + "  alert(tmp.tagName);\n"
+            + "  tmp = document.body.firstChild.nextSibling;\n"
+            + "  alert(tmp.tagName);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><table><tr><td></td></tr><h2>Wrong Place</h2></table>\n"
+            + "</div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"H2", "TABLE"})
+    public void htmlTableMisplacedElementInside4() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var tmp = document.body.firstChild;\n"
+            + "  alert(tmp.tagName);\n"
+            + "  tmp = document.body.firstChild.nextSibling;\n"
+            + "  alert(tmp.tagName);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><table><tr><td></td></tr><h2>Wrong Place</h2><tr><td></td></tr></table>\n"
+            + "</div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
     @Alerts("Hi!")
     @NotYetImplemented
     public void unclosedCommentsInScript() throws Exception {
