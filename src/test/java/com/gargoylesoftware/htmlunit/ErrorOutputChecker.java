@@ -59,11 +59,11 @@ public class ErrorOutputChecker implements TestRule {
                     + ".*\\n"
                     + ".*\\r\\n"
                     + ".*\\r\\n"
+                    + "(.*\\r\\n"
                     + ".*\\r\\n"
                     + ".*\\r\\n"
                     + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
+                    + ".*\\r\\n)?"
                     + ".*TLS certificate errors will be ignored for this session\\r\\n"),
             Pattern.compile(".*\\sINFO\\sStopped listening on port.*\\r\\n"
                     + ".*\\r\\n"
