@@ -145,6 +145,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  * @author Joerg Werner
  * @author Atsushi Nakagawa
+ * @author Rural Hunter
  */
 public class HtmlPage extends SgmlPage {
 
@@ -248,6 +249,11 @@ public class HtmlPage extends SgmlPage {
                     baseUrl_ = openerWindow.getEnclosedPage().getWebResponse().getWebRequest().getUrl();
                 }
             }
+        }
+
+        if (!isAboutBlank) {
+            setReadyState(READY_STATE_INTERACTIVE);
+            getDocumentElement().setReadyState(READY_STATE_INTERACTIVE);
         }
 
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);

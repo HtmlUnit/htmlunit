@@ -493,4 +493,25 @@ public class HtmlPage3Test extends WebDriverTestCase {
         }
         assertEquals(getExpectedAlerts()[0], actual);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("interactive")
+    public void readyStateInDOMContentLoaded() throws Exception {
+        final String html =
+                "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      document.addEventListener('DOMContentLoaded', function () {\n"
+                + "        alert(document.readyState);\n"
+                + "      });\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body>test</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
