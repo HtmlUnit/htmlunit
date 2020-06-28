@@ -249,6 +249,11 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
+        
+        if (!isAboutBlank) {
+            setReadyState(READY_STATE_INTERACTIVE);
+            getDocumentElement().setReadyState(READY_STATE_INTERACTIVE);
+        }
 
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
 

@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+import static com.gargoylesoftware.htmlunit.WebTestCase.URL_FIRST;
+import static com.gargoylesoftware.htmlunit.html.DomNode.READY_STATE_INTERACTIVE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
@@ -1943,5 +1945,36 @@ public class HtmlPageTest extends SimpleWebTestCase {
         path = "details/abc;jsessionid=42?x=y&z=z";
         page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void readyStateInDOMContentLoaded() throws Exception {
+        final String htmlContent = 
+                "<html>\n" +
+                "    <head>\n" +
+                "        <title></title>\n" +
+                "        <script>\n" +
+                "document.addEventListener('DOMContentLoaded', function () {\n" +
+                "    alert(document.readyState);\n" +
+                "});\n" +
+                "        </script>\n" +
+                "    </head>\n" +
+                "    <body>test</body>\n" +
+                "</html>";
+
+        final String[] expectedAlerts = {READY_STATE_INTERACTIVE};
+        final List<String> collectedAlerts = new ArrayList<>();
+        final WebClient client = getWebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, htmlContent);
+        client.setWebConnection(conn);
+
+        client.getPage(URL_FIRST);
+
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 }
