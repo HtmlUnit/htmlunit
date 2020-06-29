@@ -767,7 +767,10 @@ public class Node extends EventTarget {
 
         for (DomNode child : domNode.getChildren()) {
             if (child != null) {
-                return (Element) child.getScriptableObject();
+                final Scriptable scriptable = child.getScriptableObject();
+                if (scriptable instanceof Element) {
+                    return (Element) scriptable;
+                }
             }
         }
         return null;
@@ -789,8 +792,9 @@ public class Node extends EventTarget {
 
         Element result = null;
         for (DomNode child : domNode.getChildren()) {
-            if (child != null) {
-                result = (Element) child.getScriptableObject();
+            final Scriptable scriptable = child.getScriptableObject();
+            if (scriptable instanceof Element) {
+                result = (Element) scriptable;
             }
         }
         return result;

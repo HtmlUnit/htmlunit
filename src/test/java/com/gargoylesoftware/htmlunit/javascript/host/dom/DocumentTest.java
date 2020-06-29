@@ -2812,4 +2812,51 @@ public class DocumentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "[object HTMLHtmlElement]", "[object HTMLHtmlElement]"},
+            IE = {"undefined", "undefined", "undefined"})
+    public void firstElementChild() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.childElementCount);\n"
+            + "      alert(document.firstElementChild);\n"
+            + "      alert(document.lastElementChild);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "[object HTMLHtmlElement]", "[object HTMLHtmlElement]"},
+            IE = {"undefined", "undefined", "undefined"})
+    public void firstElementChildDoctype() throws Exception {
+        final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
+            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.childElementCount);\n"
+            + "      alert(document.firstElementChild);\n"
+            + "      alert(document.lastElementChild);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
