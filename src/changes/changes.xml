@@ -8,6 +8,33 @@
 
     <body>
         <release version="2.42.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="update" dev="rbri">
+                core-js: Improved regex range handling.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: String.trimStart String.strimEnd added.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: String.fromCodePoint() added.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Bunch of fixes for JDK 11.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Regular expressions are not functions in the context of string replace.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Class 'BodyCodegen' moved into a file.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: TypedArray constructors are only callable via new.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Improved handling of negative ArrayBuffer size.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: code cleanup; use the RangeError construction helper, avoid autoboxing and new Double() calls.
+            </action>
             <action type="fix" dev="rbri" issue="182">
                 Fix ClassCastException in Document.firstElementChild and Document.lastElementChild for
                 documents with doctype.
