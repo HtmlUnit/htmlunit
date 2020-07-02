@@ -57,55 +57,7 @@ public class ErrorOutputChecker implements TestRule {
             // FF
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
                     + ".*\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + "(.*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n)?"
-                    + ".*TLS certificate errors will be ignored for this session\\r\\n"),
-            Pattern.compile(".*\\sINFO\\sStopped listening on port.*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"),
-
-            // https://github.com/mozilla/geckodriver/issues/1376
-            Pattern.compile("[0-9]*\\sMarionette\\sINFO\\sStopped listening on port.*\\r\\n\\r\\n"
-                    + ".*\\r\\n\\r\\n\\r\\n"
-                    + ".*\\r\\n\\r\\n"),
-
-            // FF68
-            Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
-                    + ".*\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*TLS certificate errors will be ignored for this session\\r\\n"),
-            Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
-                    + ".*\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*\\r\\n"
-                    + ".*TLS certificate errors will be ignored for this session\\r\\n"),
-
-            // FF60
-            Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
-                    + ".*\\n.*\\r\\n.*TLS certificate errors will be ignored for this session\\r\\n"),
+                    + "(.*\\r\\n)*"),
 
             Pattern.compile("Unable to read VR Path Registry from .*\\r\\n"
                     + ".*\\r\\n"),
