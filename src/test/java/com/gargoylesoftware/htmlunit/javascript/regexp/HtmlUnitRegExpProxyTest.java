@@ -1120,4 +1120,76 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         // [^] matches any character in JS
         testEvaluate("'ab]cd'.replace(/[^]]/g, 'x')");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("axbxc d efg 1 23")
+    public void regExMinusInRangeBorderCase1() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("axbxcxdxefgx1x23")
+    public void regExMinusInRangeBorderCase2() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\s]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x x x x x")
+    public void regExMinusInRangeBorderCase3() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\S]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x x x x x")
+    public void regExMinusInRangeBorderCase4() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\w]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("axbxcxdxefgx1x23")
+    public void regExMinusInRangeBorderCase5() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\W]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("axbxc d efg x x")
+    public void regExMinusInRangeBorderCase6() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\d]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x1x23")
+    public void regExMinusInRangeBorderCase7() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\D]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x-bxc d efg 1 23")
+    public void regExMinusInRangeBorderCase8() throws Exception {
+        testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\a]+/g, 'x')");
+    }
 }
