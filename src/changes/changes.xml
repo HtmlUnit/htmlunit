@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.42.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Did a dirty hack in the code to disable parts of Rhino's const handling.
+                Hopefully a futher Rhino version will make some progress here and we get real
+                up to date const support.
+            </action>
             <action type="update" dev="rbri">
                 core-js: Improved regex range handling.
             </action>
