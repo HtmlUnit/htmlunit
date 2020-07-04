@@ -951,4 +951,28 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html, 2000);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"#0", "#1", "2"})
+    public void constInLoop() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var i;\n"
+                + "  for (i = 0; i < 2; i++) {\n"
+                + "    const x = '#' + i;\n"
+                + "    alert(x);\n"
+                + "  }\n"
+                + "  alert(i);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
