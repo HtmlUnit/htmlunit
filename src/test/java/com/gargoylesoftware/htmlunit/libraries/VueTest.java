@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -38,9 +37,22 @@ public class VueTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello World")
-    @NotYetImplemented
     public void hello() throws Exception {
         final String url = URL_FIRST + "hello.html";
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url);
+
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("app")).getText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Hello World")
+    public void helloMin() throws Exception {
+        final String url = URL_FIRST + "hello.min.html";
 
         final WebDriver driver = getWebDriver();
         driver.get(url);
