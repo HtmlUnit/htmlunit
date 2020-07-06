@@ -61,6 +61,36 @@ public class VueTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Hello from HtmlUnit!")
+    public void helloButton() throws Exception {
+        final String url = URL_FIRST + "hello_button.html";
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url);
+
+        driver.findElement(By.id("tester")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Hello from HtmlUnit!")
+    public void helloButtonMin() throws Exception {
+        final String url = URL_FIRST + "hello_button.min.html";
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url);
+
+        driver.findElement(By.id("tester")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
      * Performs pre-test initialization.
      * @throws Exception if an error occurs
      */
