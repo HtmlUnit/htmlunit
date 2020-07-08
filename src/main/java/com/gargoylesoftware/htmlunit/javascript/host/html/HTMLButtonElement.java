@@ -20,8 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.util.Locale;
-
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -70,20 +68,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        String type = ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
-        if (null != type) {
-            type = type.toLowerCase(Locale.ROOT);
-        }
-        if ("reset".equals(type)) {
-            return "reset";
-        }
-        if ("submit".equals(type)) {
-            return "submit";
-        }
-        if ("button".equals(type)) {
-            return "button";
-        }
-        return "submit";
+        return ((HtmlButton) getDomNodeOrDie()).getType();
     }
 
     /**

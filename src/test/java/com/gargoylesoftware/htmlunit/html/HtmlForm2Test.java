@@ -982,6 +982,87 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("second")
+    public void submitFormnovalidate() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
+            + "    <input type='submit' id='submit' formnovalidate>\n"
+            + "    <input name='test' value='' required='required' >"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void submitButtonFormnovalidate() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
+            + "    <button type='submit' id='submit' formnovalidate>submit</button>\n"
+            + "    <input name='test' value='' required='required' >"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void defaultButtonFormnovalidate() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
+            + "    <button id='submit' formnovalidate>submit</button>\n"
+            + "    <input name='test' value='' required='required' >"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"radioParam2#radioValue2", "selectParam#selectValue", "textParam#textValue",
         "textareaParam#textarea value"},
             IE = {})

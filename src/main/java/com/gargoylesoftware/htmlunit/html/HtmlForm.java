@@ -122,10 +122,30 @@ public class HtmlForm extends HtmlElement {
         if (webClient.isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
-                if (getAttributeDirect("novalidate") == ATTRIBUTE_NOT_DEFINED
-                        && !areChildrenValid()) {
+
+                boolean validate = true;
+                if (submitElement instanceof HtmlSubmitInput
+                        && ((HtmlSubmitInput) submitElement).getAttributeDirect("formnovalidate")
+                                != ATTRIBUTE_NOT_DEFINED) {
+                    validate = false;
+                }
+                else if (submitElement instanceof HtmlButton) {
+                    final HtmlButton htmlButton = (HtmlButton) submitElement;
+                    if ("submit".equalsIgnoreCase(htmlButton.getType())
+                            && htmlButton.getAttributeDirect("formnovalidate") != ATTRIBUTE_NOT_DEFINED) {
+                        validate = false;
+                    }
+                }
+
+                if (validate
+                        && getAttributeDirect("novalidate") != ATTRIBUTE_NOT_DEFINED) {
+                    validate = false;
+                }
+
+                if (validate && !areChildrenValid()) {
                     return;
                 }
+
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
                 if (isPreventDefault_) {
                     // null means 'nothing executed'
