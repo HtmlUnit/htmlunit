@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.42.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#191">
+                Fix NPE in XMLSerializer.serializeToString().
+            </action>
+            <action type="fix" dev="rbri">
+                Make sure XMLSerializer.serializeToString() serializes all elements
+                of a given document fragment.
+            </action>
             <action type="fix" dev="rbri" issue="#189">
                 Respect button 'formnovalidate' attribute.
             </action>
