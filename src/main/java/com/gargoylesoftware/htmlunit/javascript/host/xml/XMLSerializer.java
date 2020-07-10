@@ -126,42 +126,39 @@ public class XMLSerializer extends SimpleScriptable {
             if (root == null) {
                 return "";
             }
-        }
 
-        final StringBuilder builder = new StringBuilder();
-        while (root != null) {
-            if (root instanceof Element) {
-                final DomNode node = root.getDomNodeOrDie();
-                final SgmlPage page = node.getPage();
-                final boolean isHtmlPage = page != null && page.isHtmlPage();
-
-                String forcedNamespace = null;
-                if (isHtmlPage) {
-                    forcedNamespace = "http://www.w3.org/1999/xhtml";
-                }
-                toXml(1, node, builder, forcedNamespace);
-
+            final StringBuilder builder = new StringBuilder();
+            while (root != null) {
+                builder.append(serializeToString(root));
                 root = root.getNextSibling();
-                continue;
             }
-
-            if (root instanceof CDATASection
-                && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
-                final DomCDataSection domCData = (DomCDataSection) root.getDomNodeOrDie();
-                final String data = domCData.getData();
-                if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
-                    builder.append(StringUtils.escapeXmlChars(data));
-
-                    root = root.getNextSibling();
-                    continue;
-                }
-            }
-
-            builder.append(root.getDomNodeOrDie().asXml());
-
-            root = root.getNextSibling();
+            return builder.toString();
         }
-        return builder.toString();
+
+        if (root instanceof Element) {
+            final StringBuilder builder = new StringBuilder();
+            final DomNode node = root.getDomNodeOrDie();
+            final SgmlPage page = node.getPage();
+            final boolean isHtmlPage = page != null && page.isHtmlPage();
+
+            String forcedNamespace = null;
+            if (isHtmlPage) {
+                forcedNamespace = "http://www.w3.org/1999/xhtml";
+            }
+            toXml(1, node, builder, forcedNamespace);
+
+            return builder.toString();
+        }
+
+        if (root instanceof CDATASection
+            && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
+            final DomCDataSection domCData = (DomCDataSection) root.getDomNodeOrDie();
+            final String data = domCData.getData();
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
+                return StringUtils.escapeXmlChars(data);
+            }
+        }
+        return root.getDomNodeOrDie().asXml();
     }
 
     private void toXml(final int indent,
