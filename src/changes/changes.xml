@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.42.0" date="xxxx, 2020" description="Bugfixes, many Rhino fixes">
+        <release version="2.42.0" date="July 11, 2020" description="Bugfixes, many Rhino fixes">
             <action type="fix" dev="rbri">
                 core-js: Fix wrong start object for getter in Object.assign().
             </action>
