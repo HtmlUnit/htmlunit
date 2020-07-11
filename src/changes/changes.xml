@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.42.0" date="xxxx, 2020" description="Bugfixes">
+        <release version="2.42.0" date="xxxx, 2020" description="Bugfixes, many Rhino fixes">
+            <action type="fix" dev="rbri">
+                core-js: Fix wrong start object for getter in Object.assign().
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: No longer inherit strict mode when parsing a function body.
+            </action>
             <action type="fix" dev="rbri" issue="#191">
                 Fix NPE in XMLSerializer.serializeToString().
             </action>
