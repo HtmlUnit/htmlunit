@@ -34,9 +34,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF60 = {"[object CSSFontFaceRule]", "5",
-                "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"Delicious-Bold.otf\");\n}"},
-            FF68 = {"[object CSSFontFaceRule]", "5",
+    @Alerts(FF68 = {"[object CSSFontFaceRule]", "5",
                 "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
             FF = {"[object CSSFontFaceRule]", "5",
                 "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
@@ -69,8 +67,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF60 = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"//:\");\n}",
-            FF68 = "@font-face {\n  font-family: Delicious;\n  src: url(\"//:\");\n}",
+    @Alerts(FF68 = "@font-face {\n  font-family: Delicious;\n  src: url(\"//:\");\n}",
             FF = "@font-face {\n  font-family: Delicious;\n  src: url(\"//:\");\n}",
             CHROME = "@font-face { font-family: Delicious; src: url(\"//:\"); }",
             IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(//:);\n}\n")
@@ -97,8 +94,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF60 = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"/:\");\n}",
-            FF68 = "@font-face {\n  font-family: Delicious;\n  src: url(\"/:\");\n}",
+    @Alerts(FF68 = "@font-face {\n  font-family: Delicious;\n  src: url(\"/:\");\n}",
             FF = "@font-face {\n  font-family: Delicious;\n  src: url(\"/:\");\n}",
             CHROME = "@font-face { font-family: Delicious; src: url(\"/:\"); }",
             IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(/:);\n}\n")
@@ -125,8 +121,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF60 = "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"//\");\n}",
-            FF68 = "@font-face {\n  font-family: Delicious;\n  src: url(\"//\");\n}",
+    @Alerts(FF68 = "@font-face {\n  font-family: Delicious;\n  src: url(\"//\");\n}",
             FF = "@font-face {\n  font-family: Delicious;\n  src: url(\"//\");\n}",
             CHROME = "@font-face { font-family: Delicious; src: url(\"//\"); }",
             IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(//);\n}\n")

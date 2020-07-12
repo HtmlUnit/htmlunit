@@ -68,7 +68,6 @@ public class BrowserVersionFeaturesTest  {
         browsers.add(BrowserVersion.CHROME);
         browsers.add(BrowserVersion.FIREFOX);
         browsers.add(BrowserVersion.FIREFOX_68);
-        browsers.add(BrowserVersion.FIREFOX_60);
         browsers.add(BrowserVersion.INTERNET_EXPLORER);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
@@ -114,9 +113,6 @@ public class BrowserVersionFeaturesTest  {
         }
         if (browser == BrowserVersion.FIREFOX_68) {
             return SupportedBrowser.FF68;
-        }
-        if (browser == BrowserVersion.FIREFOX_60) {
-            return SupportedBrowser.FF60;
         }
 
         return SupportedBrowser.IE;

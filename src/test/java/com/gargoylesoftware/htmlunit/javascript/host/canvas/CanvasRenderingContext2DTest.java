@@ -158,19 +158,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "I8d3Ewk+vCzy3jdBjgzd5/2LkwyPJ8hublOt1fD9g/YJo3eDvbbjYjsupuWQL5RYzWQJJpaYmFtiObOJrChUazU8z+PgoMl"
             + "oYOIf4Novt046ZRfHreBWqlSqtdepVKnWarys19lvNPA8H98/oNlscuXHG6dbQHd39/E//gwkpEgs3Uo0lpai8bQUjafD/0"
             + "4snh6/F0x1dXV90AJ6enre6evrO/w6g4cHB/8/b/719/e/KwiC8Dc3QqPsSaO0rwAAAABJRU5ErkJggg=="},
-            FF60 = {"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAEklEQVQ4jWNgGAWjYB"
-            + "SMAggAAAQQAAF/TXiOAAAAAElFTkSuQmCC",
-            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACvElEQVQ4jXXPu29TZxzG8TO0Q"
-            + "vwFmVAlEEOHDu2SpSoJajdgqaKO3SIhpRJZGpUgkKiaoRSB2qK2MEDSVjEEOznkOL5ARGwjRBIrN6UmdhKUxJdzv/jYxvE5"
-            + "Md8OCLeu6Ss92/v76HkEQRCEmZmZQ9HZ1NDck4WR5NOFkeSz9MiTt0SKPf5SeNsTw7OfaIZFSdGRVQNFM1A1E0230AwL3bT"
-            + "RDQvTshEjj37uAO6KUq+iGeRLKkVZa4d0s4WUXRfLtgmJke87AFU3Kchq63hpWyGeUYhnVBa3VQzLYTdf4PlGltzm1qvp6O"
-            + "xHbcCbCXslnUC6wJ21MsGcx/1cg1jOJrxWpKDZ2I6L45QJhB6cagN0w0JWDULpXW7Ma4yu15nee8Wi6rNadElkFcae7eJWq"
-            + "tTr++1AUJR6ddMml1f5ejrL8GyRmysVJrd9StUmK/JLkjmVsaebrOdN6vuNzgaGaZPK5PkqtM5Q9AXfJlTG1hxkt0GlVmdx"
-            + "S+ZcaJWp5Tz7DY9AKNwOmJZN8q89rkWWWd/a4WpihwHpBWcfbPEoU2RyIceJn5JMLe3R8LzOBqbtsFNU+fzXOR7PL/PF7Xk"
-            + "+u7nAp7/N80NkhYHfU3x89SEbeR3P+0+DoCj1WrZDUVa4PpXizPUIR4ZFjl4Kc/SSxLELIscvipwfT2KaFp7vd06wnDK6Yf"
-            + "F8I8d3Ewk+vCzy3jdBjgzd5/2LkwyPJ8hublOt1fD9g/YJo3eDvbbjYjsupuWQL5RYzWQJJpaYmFtiObOJrChUazU8z+Pgo"
-            + "MloYOIf4Novt046ZRfHreBWqlSqtdepVKnWarys19lvNPA8H98/oNlscuXHG6dbQHd39/E//gwkpEgs3Uo0lpai8bQUjafD"
-            + "/04snh6/F0x1dXV90AJ6enre6evrO/w6g4cHB/8/b/719/e/KwiC8Dc3QqPsSaO0rwAAAABJRU5ErkJggg=="},
             IE = {"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAA"
             + "RnQU1BAACxjwv8YQUAAAATSURBVDhPYxgFo2AUjAIwYGAAAAQQAAGnRHxjAAAAAElFTkSuQmCC",
             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BA"
@@ -307,8 +294,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             FF68 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
-            FF60 = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
                 + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
@@ -331,8 +316,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             FF68 = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
-            FF60 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
@@ -394,10 +377,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "Nmws7L/o3aNOvhqukXK61LpexmOf2Y44Etb1b69coaA6G39FaV9ma6AR6QW24uhHSBUfv67bBeh80BfO"
             + "3BJU+u/5y91GvS4L6f3Qk6Kz97zSfCQoAAAAAAAAAwMO9AbwlTKQXMPMUAAAAAElFTkSuQmCC",
             FF68 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAn0lEQVR"
-            + "Yhe3S4Q2DIBCG4W+WzuEgTuIozOIw7kJ/FJLzehSpJibmfRJixOP8BKW9SVJyc6nMS9KiMdvBvr31X3o"
-            + "Nmws7L/o3aNOvhqukXK61LpexmOf2Y44Etb1b69coaA6G39FaV9ma6AR6QW24uhHSBUfv67bBeh80BfO"
-            + "3BJU+u/5y91GvS4L6f3Qk6Kz97zSfCQoAAAAAAAAAwMO9AbwlTKQXMPMUAAAAAElFTkSuQmCC",
-            FF60 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAn0lEQVR"
             + "Yhe3S4Q2DIBCG4W+WzuEgTuIozOIw7kJ/FJLzehSpJibmfRJixOP8BKW9SVJyc6nMS9KiMdvBvr31X3o"
             + "Nmws7L/o3aNOvhqukXK61LpexmOf2Y44Etb1b69coaA6G39FaV9ma6AR6QW24uhHSBUfv67bBeh80BfO"
             + "3BJU+u/5y91GvS4L6f3Qk6Kz97zSfCQoAAAAAAAAAwMO9AbwlTKQXMPMUAAAAAElFTkSuQmCC",

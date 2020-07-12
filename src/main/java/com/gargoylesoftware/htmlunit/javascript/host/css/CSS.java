@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -31,13 +30,13 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF, FF68, FF60})
+@JsxClass({CHROME, FF, FF68})
 public class CSS extends SimpleScriptable {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF60})
+    @JsxConstructor(CHROME)
     public CSS() {
     }
 

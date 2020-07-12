@@ -49,8 +49,6 @@ public class FileTest extends WebDriverTestCase {
                             "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             FF68 = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 10:21:47 GMT-0400",
                     "1437920507000", "", "14", MimeType.TEXT_PLAIN},
-            FF60 = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 10:21:47 GMT-0400",
-                    "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             IE = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
                             "undefined", "undefined", "14", MimeType.TEXT_PLAIN})

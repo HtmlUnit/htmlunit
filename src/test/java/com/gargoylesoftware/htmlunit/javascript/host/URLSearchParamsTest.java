@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -261,10 +260,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                     "key1", "key2", "key1", "", "true"},
             FF68 = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
-            FF60 = {"function keys() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
-                    "key1", "key2", "key1", "", "true"},
             IE = {})
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented(CHROME)
     public void keys() throws Exception {
         final String html =
             "<html>\n"
@@ -308,10 +305,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                     "val1", "", "val3", "val4", "true"},
             FF68 = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
-            FF60 = {"function values() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
-                    "val1", "", "val3", "val4", "true"},
             IE = {})
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented(CHROME)
     public void values() throws Exception {
         final String html =
             "<html>\n"
@@ -355,10 +350,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF68 = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            FF60 = {"function entries() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
-                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented(CHROME)
     public void entries() throws Exception {
         final String html =
             "<html>\n"

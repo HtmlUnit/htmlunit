@@ -81,8 +81,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"4", "0", "1", "2", "3", "length", "item"},
             FF = {"4", "0", "1", "2", "3", "item", "length"},
-            FF68 = {"4", "0", "1", "2", "3", "item", "length"},
-            FF60 = {"4", "0", "1", "2", "3", "item", "length"})
+            FF68 = {"4", "0", "1", "2", "3", "item", "length"})
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -195,8 +194,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "false", "-1", "div", "color: red;", "2"},
-            IE = {"1", "false", "1", "div", "color: red;", "2"},
-            FF60 = {"1", "true", "1"})
+            IE = {"1", "false", "1", "div", "color: red;", "2"})
     public void addRule() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -228,8 +226,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "-1", "div", "", "3"},
-            IE = {"2", "2", "div", "", "3"},
-            FF60 = {"2", "2"})
+            IE = {"2", "2", "div", "", "3"})
     public void addRuleInvalidRule() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -260,8 +257,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "added")
+    @Alerts("exception")
     public void addInvalidRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -374,8 +370,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "false", "false", "undefined", "1", "div", "color: red;"},
-            FF60 = {"2", "false", "true", "undefined", "1", "div", "color: red;"})
+    @Alerts({"2", "false", "false", "undefined", "1", "div", "color: red;"})
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"

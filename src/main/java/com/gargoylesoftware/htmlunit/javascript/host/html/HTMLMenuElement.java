@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_PASS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -47,7 +46,7 @@ public class HTMLMenuElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public HTMLMenuElement() {
         label_ = "";
     }
@@ -57,7 +56,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @return the value of the {@code type} property
      */
     @Override
-    @JsxGetter({FF, FF68, FF60, IE})
+    @JsxGetter({FF, FF68, IE})
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             return "";
@@ -83,7 +82,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @param type the value of the {@code type} property
      */
     @Override
-    @JsxSetter({FF, FF68, FF60, IE})
+    @JsxSetter({FF, FF68, IE})
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             if (StringUtils.isEmpty(type)) {
@@ -113,7 +112,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code label} property.
      * @return the value of the {@code label} property
      */
-    @JsxGetter({FF, FF68, FF60})
+    @JsxGetter({FF, FF68})
     public String getLabel() {
         return label_;
     }
@@ -122,7 +121,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code label} property.
      * @param label the value of the {@code label} property
      */
-    @JsxSetter({FF, FF68, FF60})
+    @JsxSetter({FF, FF68})
     public void setLabel(final String label) {
         label_ = label;
     }

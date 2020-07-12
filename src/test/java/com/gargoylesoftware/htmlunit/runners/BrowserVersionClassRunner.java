@@ -40,8 +40,8 @@ import org.junit.runners.model.TestClass;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
@@ -92,9 +92,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
-                    expectedAlerts = firstDefined(alerts.FF60(), alerts.DEFAULT());
-                }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
                     expectedAlerts = firstDefined(alerts.FF68(), alerts.DEFAULT());
                 }
@@ -118,10 +115,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.IE(), buggyWebDriver.DEFAULT());
                     }
-                    else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
-                        expectedAlerts = firstDefinedOrGiven(expectedAlerts,
-                                            buggyWebDriver.FF60(), buggyWebDriver.DEFAULT());
-                    }
                     else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.FF68(), buggyWebDriver.DEFAULT());
@@ -142,9 +135,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             if (htmlUnitNYI != null) {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.IE());
-                }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
-                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF60());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF68());
@@ -171,9 +161,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             else {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
-                    expectedAlerts = firstDefined(alerts.FF60(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
                     expectedAlerts = firstDefined(alerts.FF68(), alerts.DEFAULT());
@@ -325,12 +312,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             switch (browser) {
                 case IE:
                     if (browserVersion_.isIE()) {
-                        return true;
-                    }
-                    break;
-
-                case FF60:
-                    if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                         return true;
                     }
                     break;

@@ -15,11 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_FF60_STYLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_IE_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.util.regex.Pattern;
@@ -48,7 +46,7 @@ public class CSSFontFaceRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public CSSFontFaceRule() {
     }
 
@@ -86,13 +84,6 @@ public class CSSFontFaceRule extends CSSRule {
             cssText = StringUtils.replace(cssText, "}", "; }");
             cssText = StringUtils.replace(cssText, "; ", "; ");
             cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: $1;");
-            cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
-        }
-        else if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_FF60_STYLE)) {
-            cssText = StringUtils.replace(cssText, "{", "{\n  ");
-            cssText = StringUtils.replace(cssText, "}", ";\n}");
-            cssText = StringUtils.replace(cssText, "; ", ";\n  ");
-            cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: \"$1\";");
             cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
         }
         else {

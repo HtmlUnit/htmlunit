@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -106,9 +105,6 @@ public abstract class AbstractJavaScriptConfiguration {
             }
             else if (browser.isIE()) {
                 expectedBrowser = IE;
-            }
-            else if (browser.isFirefox60()) {
-                expectedBrowser = FF60;
             }
             else if (browser.isFirefox68()) {
                 expectedBrowser = FF68;

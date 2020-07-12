@@ -101,8 +101,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
             FF = "exception",
-            FF68 = "exception",
-            FF60 = "exception")
+            FF68 = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -125,8 +124,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
             FF = "exception",
-            FF68 = "exception",
-            FF60 = "exception")
+            FF68 = "exception")
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -150,8 +148,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "dispatched",
             FF = "exception ctor",
-            FF68 = "exception ctor",
-            FF60 = "exception ctor")
+            FF68 = "exception ctor")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -182,8 +179,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "exception ctor",
-            FF68 = "exception ctor",
-            FF60 = "exception ctor")
+            FF68 = "exception ctor")
     @NotYetImplemented({CHROME, IE})
     public void dispatchEventWithoutInit() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -215,7 +211,6 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no initPopStateEvent",
             FF = "exception ctor",
             FF68 = "exception ctor",
-            FF60 = "exception ctor",
             IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "html"})
     public void initPopStateEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

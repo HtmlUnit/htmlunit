@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import java.net.URL;
@@ -43,9 +42,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF68 = {"134", "[object Element]"},
-            FF60 = {"134", "[object Element]"})
-    @NotYetImplemented({FF68, FF60})
+            FF68 = {"134", "[object Element]"})
+    @NotYetImplemented(FF68)
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -154,8 +152,6 @@ public class XSLTProcessorTest extends WebDriverTestCase {
                 "[object XSLTProcessor]"},
             FF68 = {"function", "function XSLTProcessor() {\n    [native code]\n}",
                 "[object XSLTProcessor]"},
-            FF60 = {"function", "function XSLTProcessor() {\n    [native code]\n}",
-                "[object XSLTProcessor]"},
             IE = {"undefined", "exception"})
     public void type() throws Exception {
         final String html = "<html><head><script>\n"
@@ -179,7 +175,6 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts(CHROME = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
             FF = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
             FF68 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
-            FF60 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
             IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"

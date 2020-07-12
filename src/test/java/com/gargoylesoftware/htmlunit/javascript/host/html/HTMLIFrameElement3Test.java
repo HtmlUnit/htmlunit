@@ -193,11 +193,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "true", "true", "object", "object"},
             FF = {"false", "false", "true", "false", "false", "object", "undefined"},
-            FF68 = {"false", "false", "true", "false", "false", "object", "undefined"},
-            FF60 = {"false", "false", "true", "false", "true", "undefined", "undefined"})
+            FF68 = {"false", "false", "true", "false", "false", "object", "undefined"})
     @HtmlUnitNYI(FF = {"false", "false", "true", "true", "true", "object", "object"},
-            FF68 = {"false", "false", "true", "true", "true", "object", "object"},
-            FF60 = {"false", "false", "true", "true", "true", "object", "object"})
+            FF68 = {"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -405,8 +403,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = {"loading", "complete"})
     @HtmlUnitNYI(CHROME = {"loading", "complete"},
             FF = {"loading", "complete"},
-            FF68 = {"loading", "complete"},
-            FF60 = {"loading", "complete"})
+            FF68 = {"loading", "complete"})
     public void readyState_IFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -744,9 +741,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"loaded", "null"},
-            FF60 = {"loaded", "[object HTMLDocument]"},
             IE = {"loaded", "error"})
-    @HtmlUnitNYI(FF60 = {"loaded", "null"})
     public void deny() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.X_FRAME_OPTIONS, "DENY"),
@@ -914,8 +909,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @HtmlUnitNYI(
             CHROME = {"loaded", "2"},
             FF = {"loaded", "2"},
-            FF68 = {"loaded", "2"},
-            FF60 = {"loaded", "2"})
+            FF68 = {"loaded", "2"})
     public void recursiveContent() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -950,7 +944,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"loaded", "6"},
-            FF60 = {"loaded", "19"},
             FF68 = {"loaded", "19"},
             FF = {"loaded", "19"},
             IE = {"loaded", "2"})
@@ -959,7 +952,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"loaded", "21"},
             FF = {"loaded", "21"},
             FF68 = {"loaded", "21"},
-            FF60 = {"loaded", "21"},
             IE = {"loaded", "21"})
     public void recursiveContentRedirectHeader() throws Exception {
         final String html

@@ -34,7 +34,6 @@ public class ClientRectListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DOMRectList]", "1", "[object DOMRect]", "[object DOMRect]"},
-            FF60 = {"[object DOMRect]", "1", "[object DOMRect]", "[object DOMRect]"},
             IE = {"[object ClientRectList]", "1", "[object ClientRect]", "[object ClientRect]"})
     public void getClientRects() throws Exception {
         final String html =
@@ -59,7 +58,6 @@ public class ClientRectListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DOMRectList]", "1", "null", "null"},
-            FF60 = {"[object DOMRect]", "1", "null", "null"},
             IE = {"[object ClientRectList]", "1", "exception", "exception"})
     public void itemOutside() throws Exception {
         final String html =
@@ -91,7 +89,6 @@ public class ClientRectListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DOMRectList]", "1", "undefined", "undefined"},
-            FF60 = {"[object DOMRect]", "1", "undefined", "undefined"},
             IE = {"[object ClientRectList]", "1", "undefined", "undefined"})
     public void indexOutside() throws Exception {
         final String html =
@@ -123,8 +120,7 @@ public class ClientRectListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DOMRectList]", "0", "undefined", "undefined"},
-            IE = {"[object ClientRectList]", "0", "undefined", "undefined"},
-            FF60 = {"", "0", "undefined", "undefined"})
+            IE = {"[object ClientRectList]", "0", "undefined", "undefined"})
     public void empty() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"

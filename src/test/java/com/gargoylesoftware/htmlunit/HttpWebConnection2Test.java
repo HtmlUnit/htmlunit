@@ -69,11 +69,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                     + "Referer: http://localhost:§§PORT§§/\n"
                     + "Upgrade-Insecure-Requests: 1\n"
                     + "User-Agent: §§USER_AGENT§§\n",
-            FF60 = "Connection: keep-alive\n"
-                    + "Host: localhost:§§PORT§§\n"
-                    + "Referer: http://localhost:§§PORT§§/\n"
-                    + "Upgrade-Insecure-Requests: 1\n"
-                    + "User-Agent: §§USER_AGENT§§\n",
             IE = "Connection: keep-alive\n"
                     + "Host: localhost:§§PORT§§\n"
                     + "Referer: http://localhost:§§PORT§§/\n"
@@ -146,13 +141,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                     + "Upgrade-Insecure-Requests: 1\n"
                     + "User-Agent: §§USER_AGENT§§\n",
             FF68 = "Connection: keep-alive\n"
-                    + "Content-Length: 48\n"
-                    + "Content-Type: application/x-www-form-urlencoded\n"
-                    + "Host: localhost:§§PORT§§\n"
-                    + "Referer: http://localhost:§§PORT§§/\n"
-                    + "Upgrade-Insecure-Requests: 1\n"
-                    + "User-Agent: §§USER_AGENT§§\n",
-            FF60 = "Connection: keep-alive\n"
                     + "Content-Length: 48\n"
                     + "Content-Type: application/x-www-form-urlencoded\n"
                     + "Host: localhost:§§PORT§§\n"

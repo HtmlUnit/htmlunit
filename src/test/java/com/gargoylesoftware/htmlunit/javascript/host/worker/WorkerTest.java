@@ -156,7 +156,6 @@ public class WorkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "start worker import exception end worker",
-            FF60 = "start worker in imported script1 end worker",
             IE = "start worker in imported script1 end worker")
     public void importScriptsWrongContentType() throws Exception {
         importScripts(MimeType.TEXT_HTML);

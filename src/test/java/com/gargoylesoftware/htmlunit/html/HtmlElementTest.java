@@ -813,8 +813,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-2-mouseup-2-contextmenu-2-",
-            FF60 = "mousedown-3-mouseup-3-contextmenu-3-")
+    @Alerts("mousedown-2-mouseup-2-contextmenu-2-")
     public void rightClick() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -851,8 +850,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown-0-mouseup-0-",
-            FF60 = "mousedown-1-mouseup-1-")
+    @Alerts("mousedown-0-mouseup-0-")
     public void mouse_Down_Up() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

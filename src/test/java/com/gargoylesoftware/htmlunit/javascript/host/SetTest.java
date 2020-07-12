@@ -73,8 +73,6 @@ public class SetTest extends WebDriverTestCase {
                     "[object Set Iterator]", "0", "1", "[object Object]"},
             FF68 = {"function values() {\n    [native code]\n}",
                     "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF60 = {"function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
     public void iterator() throws Exception {
         final String html =
@@ -112,8 +110,6 @@ public class SetTest extends WebDriverTestCase {
             FF = {"function values() {\n    [native code]\n}",
                 "[object Set Iterator]", "0", "1", "[object Object]"},
             FF68 = {"function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF60 = {"function values() {\n    [native code]\n}",
                 "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
     public void values() throws Exception {

@@ -332,11 +332,6 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLHeadingElement]-attributes",
-            FF60 = "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLHeadingElement]-attributes")
     public void attributeValue2() throws Exception {
         final String html = "<html><head><script>\n"

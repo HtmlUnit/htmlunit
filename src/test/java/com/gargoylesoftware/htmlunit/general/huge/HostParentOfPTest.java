@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -179,8 +178,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     @NotYetImplemented(IE)
     public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
         test("PerformanceEntry", "PerformanceNavigationTiming");
@@ -243,8 +241,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _PerformanceObserver_PerformanceObserver() throws Exception {
         test("PerformanceObserver", "PerformanceObserver");
     }
@@ -257,8 +254,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _PerformanceObserverEntryList_PerformanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList", "PerformanceObserverEntryList");
     }
@@ -271,8 +267,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     @NotYetImplemented(IE)
     public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceNavigationTiming");
@@ -635,9 +630,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
-    @NotYetImplemented({FF, FF68, FF60})
+            FF68 = "true")
+    @NotYetImplemented({FF, FF68})
     public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -659,9 +653,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
-    @NotYetImplemented({FF, FF68, FF60})
+            FF68 = "true")
+    @NotYetImplemented({FF, FF68})
     public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -704,9 +697,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
-    @NotYetImplemented({FF, FF68, FF60})
+            FF68 = "true")
+    @NotYetImplemented({FF, FF68})
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -52,43 +51,43 @@ public class SVGFEBlendElement extends SVGElement {
     @JsxConstant
     public static final int SVG_FEBLEND_MODE_LIGHTEN = 5;
     /** The constant {@code SVG_FEBLEND_MODE_OVERLAY}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_OVERLAY = 6;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR_DODGE}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_COLOR_DODGE = 7;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR_BURN}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_COLOR_BURN = 8;
     /** The constant {@code SVG_FEBLEND_MODE_HARD_LIGHT}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_HARD_LIGHT = 9;
     /** The constant {@code SVG_FEBLEND_MODE_SOFT_LIGHT}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_SOFT_LIGHT = 10;
     /** The constant {@code SVG_FEBLEND_MODE_DIFFERENCE}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_DIFFERENCE = 11;
     /** The constant {@code SVG_FEBLEND_MODE_EXCLUSION}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_EXCLUSION = 12;
     /** The constant {@code SVG_FEBLEND_MODE_HUE}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_HUE = 13;
     /** The constant {@code SVG_FEBLEND_MODE_SATURATION}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_SATURATION = 14;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_COLOR = 15;
     /** The constant {@code SVG_FEBLEND_MODE_LUMINOSITY}. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final int SVG_FEBLEND_MODE_LUMINOSITY = 16;
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public SVGFEBlendElement() {
     }
 }

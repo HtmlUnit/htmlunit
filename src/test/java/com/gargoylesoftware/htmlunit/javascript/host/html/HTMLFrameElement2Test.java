@@ -707,7 +707,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"loaded", "null"},
-            FF60 = {"loaded", "[object HTMLDocument]"},
             IE = {"loaded", "error"})
     public void deny() throws Exception {
         final String html

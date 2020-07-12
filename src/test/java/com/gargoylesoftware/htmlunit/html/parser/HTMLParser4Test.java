@@ -696,8 +696,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
             FF68 = "\n  before1after1\n  \n  before2\n  before3\n"
                 + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
-            FF60 = "\n  before1after1\n  \n  before2\n  before3\n"
-                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
             IE = "\n  before1after1\n  \n  before2\n  before3\n"
                 + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n")
     public void specialComments2() throws Exception {

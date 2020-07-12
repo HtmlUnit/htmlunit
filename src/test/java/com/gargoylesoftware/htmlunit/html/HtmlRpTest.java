@@ -35,7 +35,6 @@ public class HtmlRpTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "none", "none"},
-            FF60 = {"none", "none", "none"},
             IE = {"inline", "inline", "inline"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.html.HtmlOutput;
@@ -33,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlOutput.class, value = {FF, FF68, FF60, CHROME})
+@JsxClass(domClass = HtmlOutput.class, value = {FF, FF68, CHROME})
 public class HTMLOutputElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
@@ -68,7 +67,7 @@ public class HTMLOutputElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());

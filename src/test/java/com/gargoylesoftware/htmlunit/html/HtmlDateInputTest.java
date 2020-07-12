@@ -18,12 +18,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import org.openqa.selenium.WebElement;
 
 /**
  * Tests for {@link HtmlDateInput}.
@@ -112,8 +112,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"text-datetime", "text-Date"},
             CHROME = {"text-datetime", "date-Date"},
             FF = {"text-datetime", "date-Date"},
-            FF68 = {"text-datetime", "date-Date"},
-            FF60 = {"text-datetime", "date-Date"})
+            FF68 = {"text-datetime", "date-Date"})
     public void type() throws Exception {
         final String html =
               "<html>\n"

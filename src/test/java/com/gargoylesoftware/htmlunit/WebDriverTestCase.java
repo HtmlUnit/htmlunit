@@ -153,7 +153,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             Arrays.asList(BrowserVersion.CHROME,
                     BrowserVersion.FIREFOX,
                     BrowserVersion.FIREFOX_68,
-                    BrowserVersion.FIREFOX_60,
                     BrowserVersion.INTERNET_EXPLORER));
 
     /**
@@ -477,10 +476,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return createFirefoxDriver(FF68_BIN_);
             }
 
-            if (BrowserVersion.FIREFOX_60 == getBrowserVersion()) {
-                return createFirefoxDriver(FF60_BIN_);
-            }
-
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
         }
         if (webDriver_ == null) {
@@ -516,9 +511,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
         }
         if (browserVersion == BrowserVersion.FIREFOX_68) {
-            return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
-        }
-        else if (browserVersion == BrowserVersion.FIREFOX_60) {
             return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
         }
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {

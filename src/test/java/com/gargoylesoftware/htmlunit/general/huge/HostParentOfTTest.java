@@ -91,8 +91,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF68 = "false",
-            FF60 = "false")
+            FF68 = "false")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -168,8 +167,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _TimeEvent_TimeEvent() throws Exception {
         test("TimeEvent", "TimeEvent");
     }
@@ -301,8 +299,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _UIEvent_MouseScrollEvent() throws Exception {
         test("UIEvent", "MouseScrollEvent");
     }
@@ -333,8 +330,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Alerts(DEFAULT = "true",
             CHROME = "false",
             FF = "false",
-            FF68 = "false",
-            FF60 = "false")
+            FF68 = "false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }
@@ -345,8 +341,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF68 = "false",
-            FF60 = "false")
+            FF68 = "false")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }
@@ -458,8 +453,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF60 = "true")
+    @Alerts("false")
     public void _UserProximityEvent_UserProximityEvent() throws Exception {
         test("UserProximityEvent", "UserProximityEvent");
     }
@@ -480,8 +474,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }

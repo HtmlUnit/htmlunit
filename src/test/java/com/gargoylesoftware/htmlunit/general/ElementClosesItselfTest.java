@@ -414,8 +414,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF68 = "1",
-            FF60 = "1")
+            FF68 = "1")
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -814,8 +813,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             CHROME = "1",
             FF = "1",
-            FF68 = "1",
-            FF60 = "1")
+            FF68 = "1")
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -847,8 +845,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF68 = "2",
-            FF60 = "2")
+            FF68 = "2")
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

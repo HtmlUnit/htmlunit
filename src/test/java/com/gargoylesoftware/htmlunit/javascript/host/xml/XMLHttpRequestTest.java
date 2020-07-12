@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -1642,10 +1641,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function onreadystatechange() {\n    [native code]\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
-            FF60 = {"[object Object]", "undefined", "undefined",
-                        "function get onreadystatechange() {\n    [native code]\n}",
-                        "function set onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
             CHROME = {"[object Object]", "undefined", "undefined",
                         "function get onreadystatechange() { [native code] }",
                         "function set onreadystatechange() { [native code] }",
@@ -1654,7 +1649,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                     "true", "true"})
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented(CHROME)
     public void getOwnPropertyDescriptor() throws Exception {
         final String html =
               "<html>\n"
@@ -1692,10 +1687,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             FF68 = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
                         "function onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
-            FF60 = {"[object Object]", "undefined", "undefined",
-                        "function() { return !0 }",
-                        "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             CHROME = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
@@ -1745,7 +1736,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequestPrototype]",
             CHROME = "[object XMLHttpRequest]")
-    @NotYetImplemented({FF, FF68, FF60, IE})
+    @NotYetImplemented({FF, FF68, IE})
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"

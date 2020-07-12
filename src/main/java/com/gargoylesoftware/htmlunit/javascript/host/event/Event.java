@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -137,7 +136,7 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_OPEN = "open";
 
     /** No event phase. */
-    @JsxConstant({CHROME, FF, FF68, FF60})
+    @JsxConstant({CHROME, FF, FF68})
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
@@ -153,19 +152,19 @@ public class Event extends SimpleScriptable {
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
@@ -282,7 +281,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public void jsConstructor(final String type, final ScriptableObject details) {
         boolean bubbles = false;
         boolean cancelable = false;

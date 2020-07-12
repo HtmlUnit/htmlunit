@@ -88,7 +88,6 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts.FF60())
                         && BrowserVersionClassRunner.isDefined(alerts.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts.IE()));
 
@@ -96,14 +95,12 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts.FF60())
                         && BrowserVersionClassRunner.isDefined(alerts.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts.IE()));
 
                 assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts.IE(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.CHROME, alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX, alerts.FF(), alerts.DEFAULT());
-                assertNotEquals(BrowserVersion.FIREFOX_60, alerts.FF60(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX_68, alerts.FF68(), alerts.DEFAULT());
             }
 
@@ -116,15 +113,6 @@ class BrowserStatement extends Statement {
                 else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(nyiAlerts.CHROME())) {
                     assertNotEquals(BrowserVersion.CHROME, alerts.DEFAULT(), nyiAlerts.CHROME());
-                }
-
-                if (BrowserVersionClassRunner.isDefined(alerts.FF60())
-                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF60())) {
-                    assertNotEquals(BrowserVersion.FIREFOX_60, alerts.FF60(), nyiAlerts.FF60());
-                }
-                else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
-                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF60())) {
-                    assertNotEquals(BrowserVersion.FIREFOX_60, alerts.DEFAULT(), nyiAlerts.FF60());
                 }
 
                 if (BrowserVersionClassRunner.isDefined(alerts.FF68())
@@ -163,14 +151,12 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF60())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts2.IE()));
 
                 assertNotEquals(BrowserVersion.INTERNET_EXPLORER, alerts2.IE(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.CHROME, alerts2.CHROME(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX, alerts2.FF(), alerts2.DEFAULT());
-                assertNotEquals(BrowserVersion.FIREFOX_60, alerts2.FF60(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX_68, alerts2.FF68(), alerts2.DEFAULT());
             }
         }

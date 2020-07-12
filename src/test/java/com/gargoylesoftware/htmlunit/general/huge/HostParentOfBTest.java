@@ -64,8 +64,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _BaseAudioContext_AudioContext() throws Exception {
         test("BaseAudioContext", "AudioContext");
     }
@@ -77,8 +76,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _BaseAudioContext_BaseAudioContext() throws Exception {
         test("BaseAudioContext", "BaseAudioContext");
     }
@@ -90,8 +88,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF = "true",
-            FF68 = "true",
-            FF60 = "true")
+            FF68 = "true")
     public void _BaseAudioContext_OfflineAudioContext() throws Exception {
         test("BaseAudioContext", "OfflineAudioContext");
     }

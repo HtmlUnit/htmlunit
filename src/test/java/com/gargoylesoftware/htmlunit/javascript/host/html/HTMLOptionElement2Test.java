@@ -50,8 +50,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
-    @BuggyWebDriver(CHROME = "",
-                    FF60 = "")
+    @BuggyWebDriver(CHROME = "")
     //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
@@ -853,8 +852,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "[object Text]", "null"},
-            FF60 = {"[object Text]", "[object Text]", "null"})
+    @Alerts({"null", "[object Text]", "null"})
     public void setText() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1387,7 +1385,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "o-mouse over [option1]",
             FF = "o-mouse over [option1] s-mouse over [option1]",
             FF68 = "o-mouse over [option1] s-mouse over [option1]",
-            FF60 = "o-mouse over [option1] s-mouse over [option1]",
             IE = "")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
@@ -1441,8 +1438,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            FF68 = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            FF60 = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
+            FF68 = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
     public void mouseOverDisabledOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

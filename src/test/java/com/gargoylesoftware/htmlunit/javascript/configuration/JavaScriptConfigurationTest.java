@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_68;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
@@ -259,9 +259,9 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void obsoleteJsxClasses() {
-        final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX_60);
+        final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX);
         final BrowserVersion[] browsers = new BrowserVersion[]
-        {FIREFOX_60, FIREFOX_68, CHROME, INTERNET_EXPLORER};
+        {FIREFOX, FIREFOX_68, CHROME, INTERNET_EXPLORER};
 
         for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
             boolean found = false;
@@ -312,7 +312,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void cloned() throws Exception {
-        final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_60)
+        final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
                                                     .build();
 
         test(browserVersion);
@@ -325,7 +325,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedAndModified() throws Exception {
-        final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_60)
+        final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
                                                     .setUserAgent("foo")
                                                     .build();
 

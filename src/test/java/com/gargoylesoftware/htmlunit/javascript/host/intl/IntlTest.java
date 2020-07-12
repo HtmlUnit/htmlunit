@@ -62,7 +62,6 @@ public class IntlTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Collator() { [native code] }",
             FF = "function Collator() {\n    [native code]\n}",
             FF68 = "function Collator() {\n    [native code]\n}",
-            FF60 = "function Collator() {\n    [native code]\n}",
             IE = "\nfunction Collator() {\n    [native code]\n}\n")
     public void collator() throws Exception {
         test("Intl.Collator");
@@ -75,7 +74,6 @@ public class IntlTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
             FF = "function DateTimeFormat() {\n    [native code]\n}",
             FF68 = "function DateTimeFormat() {\n    [native code]\n}",
-            FF60 = "function DateTimeFormat() {\n    [native code]\n}",
             IE = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
     public void dateTimeFormat() throws Exception {
         test("Intl.DateTimeFormat");
@@ -88,7 +86,6 @@ public class IntlTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
             FF = "function NumberFormat() {\n    [native code]\n}",
             FF68 = "function NumberFormat() {\n    [native code]\n}",
-            FF60 = "function NumberFormat() {\n    [native code]\n}",
             IE = "\nfunction NumberFormat() {\n    [native code]\n}\n")
     public void numberFormat() throws Exception {
         test("Intl.NumberFormat");

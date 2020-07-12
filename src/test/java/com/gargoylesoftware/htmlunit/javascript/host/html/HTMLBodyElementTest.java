@@ -46,8 +46,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"},
             FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"},
-            FF68 = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"},
-            FF60 = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
+            FF68 = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
     @NotYetImplemented(CHROME)
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
@@ -304,13 +303,6 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
             FF68 = {"function HTMLBodyElement() {\n    [native code]\n}", ""
-                    + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
-                    + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
-                    + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
-                    + "DOCUMENT_POSITION_PRECEDING, "
-                    + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
-                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
-            FF60 = {"function HTMLBodyElement() {\n    [native code]\n}", ""
                     + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
                     + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
                     + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "

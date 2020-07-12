@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -165,7 +164,7 @@ public class HtmlMonthInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "8",
             CHROME = "")
-    @NotYetImplemented({FF, FF68, FF60, IE})
+    @NotYetImplemented({FF, FF68, IE})
     public void typing() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

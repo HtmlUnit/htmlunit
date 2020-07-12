@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.crypto;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.util.Random;
@@ -44,7 +43,7 @@ public class Crypto extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public Crypto() {
     }
 
@@ -86,7 +85,7 @@ public class Crypto extends SimpleScriptable {
      * Returns the {@code subtle} property.
      * @return the {@code stuble} property
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public SubtleCrypto getSubtle() {
         final SubtleCrypto stuble = new SubtleCrypto();
         final Window window = getWindow();

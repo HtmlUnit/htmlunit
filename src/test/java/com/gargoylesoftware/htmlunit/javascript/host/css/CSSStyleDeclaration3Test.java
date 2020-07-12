@@ -67,8 +67,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"},
             CHROME = {"initial", "url(\"myImage.png\")", "initial", "initial", "initial"},
             FF = {"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"})
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
     }
@@ -80,8 +79,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat-x", "0% 0%", "scroll"},
             CHROME = {"initial", "initial", "repeat-x", "initial", "initial"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"})
     public void backgroundRepeat() throws Exception {
         background("repeat-x");
     }
@@ -93,8 +91,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "20px 100%", "scroll"},
             CHROME = {"initial", "initial", "initial", "20px 100%", "initial"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"})
     public void backgroundPosition() throws Exception {
         background("20px 100%");
     }
@@ -106,8 +103,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "right bottom", "scroll"},
             CHROME = {"initial", "initial", "initial", "right bottom", "initial"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "right bottom", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "right bottom", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "right bottom", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "right bottom", "scroll"})
     public void backgroundPosition2() throws Exception {
         background("bottom right");
     }
@@ -119,8 +115,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "10em bottom", "scroll"},
             CHROME = {"initial", "initial", "initial", "10em bottom", "initial"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em bottom", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em bottom", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em bottom", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em bottom", "scroll"})
     public void backgroundPosition3() throws Exception {
         background("10em bottom");
     }
@@ -132,7 +127,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"initial", "initial", "initial", "10em center", "initial"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em center", "scroll"},
             FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em center", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "10em center", "scroll"},
             IE = {"transparent", "none", "repeat", "10em", "scroll"})
     public void backgroundPosition4() throws Exception {
         background("10em center");
@@ -145,8 +139,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "0% 0%", "fixed"},
             CHROME = {"initial", "initial", "initial", "initial", "fixed"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"})
     public void backgroundAttachment() throws Exception {
         background("fixed");
     }
@@ -208,8 +201,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "0% 0%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll"})
     public void backgroundCssEmpty() throws Exception {
         backgroundCss("");
     }
@@ -239,8 +231,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"},
             FF = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"})
     public void backgroundCssImage() throws Exception {
         backgroundCss("url(myImage.png)");
     }
@@ -252,8 +243,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat-x", "0% 0%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"})
     public void backgroundCssRepeat() throws Exception {
         backgroundCss("repeat-x");
     }
@@ -265,8 +255,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "20px 100%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"})
     public void backgroundCssPosition() throws Exception {
         backgroundCss("20px 100%");
     }
@@ -278,8 +267,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "100% 100%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"})
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");
     }
@@ -291,8 +279,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "0% 100%", "scroll"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll"})
     public void backgroundCssPosition3() throws Exception {
         backgroundCss("left bottom");
     }
@@ -314,8 +301,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"transparent", "none", "repeat", "0% 0%", "fixed"},
             CHROME = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"},
             FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"},
-            FF60 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"})
+            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"})
     public void backgroundCssAttachment() throws Exception {
         backgroundCss("fixed");
     }

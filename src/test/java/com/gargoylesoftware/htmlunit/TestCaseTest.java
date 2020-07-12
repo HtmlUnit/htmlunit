@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_68;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -91,7 +91,7 @@ public final class TestCaseTest {
     public static Set<String> getAllClassNames() throws Exception {
         final Set<String> names = new HashSet<>();
 
-        for (BrowserVersion browser : new BrowserVersion[] {CHROME, FIREFOX_60, FIREFOX_68, INTERNET_EXPLORER}) {
+        for (BrowserVersion browser : new BrowserVersion[] {CHROME, FIREFOX, FIREFOX_68, INTERNET_EXPLORER}) {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(browser);
             for (ClassConfiguration config : jsConfig.getAll()) {
                 names.add(config.getClassName());

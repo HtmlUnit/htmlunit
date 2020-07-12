@@ -835,8 +835,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
-            FF60 = {"2", "Two*", "Three"})
+    @Alerts({"3", "One", "Two*", "Three"})
     public void removeThree() throws Exception {
         remove("3", false, false);
     }
@@ -845,8 +844,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
-            FF60 = {"2", "Two*", "Three*"})
+    @Alerts({"3", "One", "Two*", "Three*"})
     public void removeThreeMulti() throws Exception {
         remove("3", false, true);
     }
@@ -873,8 +871,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
-            FF60 = {"2", "Two*", "Three"})
+    @Alerts({"3", "One", "Two*", "Three"})
     public void removeTen() throws Exception {
         remove("10", false, false);
     }
@@ -883,8 +880,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
-            FF60 = {"2", "Two*", "Three*"})
+    @Alerts({"3", "One", "Two*", "Three*"})
     public void removeTenMuti() throws Exception {
         remove("10", false, true);
     }
@@ -967,7 +963,6 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0", "1", "One", "3", "One", "Two", "Three"},
             FF = {"exception", "exception", "exception"},
             FF68 = {"exception", "exception", "exception"},
-            FF60 = {"exception", "exception", "exception"},
             IE = {"exception", "exception", "exception"})
     public void setLengthMinusOne() throws Exception {
         setLength("-1");
@@ -1075,8 +1070,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "", "4", "One", "1", "", "0"},
-            FF60 = {"1", "", "4", "One", "1", "", "1"})
+    @Alerts({"1", "", "4", "One", "1", "", "0"})
     public void setLength_increase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

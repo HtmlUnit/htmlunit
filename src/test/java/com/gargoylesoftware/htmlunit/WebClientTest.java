@@ -1754,7 +1754,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void urlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_60, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%C3%A9%20d", wrs.getUrl());
     }

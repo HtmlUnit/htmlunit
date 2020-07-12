@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -30,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMPath;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(domClass = SvgMPath.class, value = {FF, FF68, FF60, CHROME})
+@JsxClass(domClass = SvgMPath.class, value = {FF, FF68, CHROME})
 public class SVGMPathElement extends SVGElement {
 
     /**

@@ -264,8 +264,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"15", "15"},
             FF = {"12", "12"},
-            FF68 = {"12", "12"},
-            FF60 = {"12", "12"})
+            FF68 = {"12", "12"})
     @NotYetImplemented({CHROME, IE})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
@@ -574,8 +573,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "18"},
-            FF60 = {"0", "20"})
+    @Alerts({"0", "18"})
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -591,8 +589,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"75", "2", "5", "20", "50", "50", "18"},
-            FF60 = {"77", "2", "5", "20", "50", "50", "20"})
+    @Alerts({"75", "2", "5", "20", "50", "50", "18"})
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"

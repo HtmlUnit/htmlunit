@@ -418,8 +418,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = {},
-            FF68 = {},
-            FF60 = {})
+            FF68 = {})
     public void scrollByLines() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -438,8 +437,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = {},
-            FF68 = {},
-            FF60 = {})
+            FF68 = {})
     public void scrollByPages() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

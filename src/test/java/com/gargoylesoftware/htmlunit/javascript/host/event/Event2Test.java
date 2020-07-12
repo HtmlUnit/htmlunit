@@ -52,8 +52,6 @@ public class Event2Test extends WebDriverTestCase {
                 + " [object PointerEvent] click b:true c:true [select] [1]")
     @BuggyWebDriver(FF68 = "[object Event] change b:true c:true [select] [-]"
                 + " [object Event] click b:true c:true [select] [-]",
-            FF60 = "[object Event] change b:true c:true [select] [-]"
-                + " [object Event] click b:true c:true [select] [-]",
             IE = "[object Event] change b:true c:false [select] [-]"
                 + " [object MouseEvent] click b:true c:true [select] [1]")
     @NotYetImplemented(CHROME)
@@ -77,8 +75,7 @@ public class Event2Test extends WebDriverTestCase {
             IE = "")
     @BuggyWebDriver(CHROME = "",
                     FF = "",
-                    FF68 = "",
-                    FF60 = "")
+                    FF68 = "")
     // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'>\n"
@@ -600,8 +597,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "SPAN"},
-            FF60 = {"false", "true", "SPAN"})
+    @Alerts(DEFAULT = {"false", "false", "SPAN"})
     public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"
@@ -866,8 +862,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Event]",
-            FF60 = "undefined")
+    @Alerts("[object Event]")
     public void windowEvent() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

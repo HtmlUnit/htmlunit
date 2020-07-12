@@ -144,7 +144,6 @@ public class AlphanumericTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\n",
-            FF60 = "\r",
             IE = "\r")
     public void test11() throws Exception {
         final String[] exp = getExpectedAlerts();

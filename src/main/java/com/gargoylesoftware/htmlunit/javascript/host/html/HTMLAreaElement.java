@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -42,7 +41,7 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public HTMLAreaElement() {
     }
 
@@ -109,7 +108,7 @@ public class HTMLAreaElement extends HTMLElement {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public DOMTokenList getRelList() {
         return new DOMTokenList(this, "rel");
     }

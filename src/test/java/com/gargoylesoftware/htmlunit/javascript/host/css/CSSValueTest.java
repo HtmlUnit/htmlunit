@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.w3c.dom.css.CSSValue;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -33,8 +34,7 @@ public class CSSValueTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = {"function CSSValue() {\n    [native code]\n}", "0123"})
+    @Alerts("exception")
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"

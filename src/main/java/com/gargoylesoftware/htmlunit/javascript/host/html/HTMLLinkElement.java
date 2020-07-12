@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.net.MalformedURLException;
@@ -48,7 +47,7 @@ public class HTMLLinkElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public HTMLLinkElement() {
     }
 
@@ -158,7 +157,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public DOMTokenList getRelList() {
         return new DOMTokenList(this, "rel");
     }

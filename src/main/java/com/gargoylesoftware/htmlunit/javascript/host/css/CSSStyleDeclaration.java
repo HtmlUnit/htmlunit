@@ -28,7 +28,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
@@ -100,7 +99,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -122,10 +120,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.CSSValueImpl;
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
@@ -255,7 +249,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public CSSStyleDeclaration() {
     }
 
@@ -2195,7 +2189,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code rubyAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({IE, FF, FF68, FF60})
+    @JsxGetter({IE, FF, FF68})
     public String getRubyAlign() {
         return getStyleAttribute(RUBY_ALIGN);
     }
@@ -2204,7 +2198,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code rubyAlign} style attribute.
      * @param rubyAlign the new attribute
      */
-    @JsxSetter({IE, FF, FF68, FF60})
+    @JsxSetter({IE, FF, FF68})
     public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(RUBY_ALIGN.getAttributeName(), rubyAlign);
     }
@@ -2560,48 +2554,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             }
         }
         return getStyleAttributeImpl(name);
-    }
-
-    /**
-     * Gets the CSS property value.
-     * @param name the name of the property to retrieve
-     * @return the value
-     */
-    @JsxFunction(FF60)
-    public CSSValue getPropertyCSSValue(final String name) {
-        if (LOG.isInfoEnabled()) {
-            LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
-        }
-
-        // following is a hack, just to have basic support for getPropertyCSSValue
-        // TODO: rework the whole CSS processing here! we should *always* parse the style!
-        if (styleDeclaration_ == null) {
-            final String styleAttribute = jsElement_.getDomNodeOrDie().getAttributeDirect("style");
-            final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
-            try {
-                styleDeclaration_ = parser.parseStyleDeclaration(styleAttribute);
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        CSSValueImpl cssValue = styleDeclaration_.getPropertyCSSValue(name);
-        if (cssValue == null) {
-            final CSSValueImpl newValue = new CSSValueImpl(null, false);
-            newValue.setDoubleValue(0);
-            cssValue = newValue;
-        }
-
-        // FF has spaces next to ","
-        final String cssText = cssValue.getCssText();
-        if (cssText.startsWith("rgb(")) {
-            final String formatedCssText = StringUtils.replace(cssText, ",", ", ");
-            cssValue.setCssText(formatedCssText);
-        }
-
-        return new CSSPrimitiveValue(jsElement_, cssValue);
     }
 
     /**

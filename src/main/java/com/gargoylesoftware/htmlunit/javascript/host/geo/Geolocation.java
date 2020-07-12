@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -55,7 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, IE})
-@JsxClass(isJSObject = false, value = {FF68, FF60})
+@JsxClass(isJSObject = false, value = FF68)
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);
@@ -149,7 +148,7 @@ public class Geolocation extends SimpleScriptable {
                 LOG.info("Invoking URL: " + url);
             }
 
-            try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX_60)) {
+            try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 final Page page = webClient.getPage(url);
                 final String content = page.getWebResponse().getContentAsString();
                 if (LOG.isDebugEnabled()) {

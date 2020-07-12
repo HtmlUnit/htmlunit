@@ -37,8 +37,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object ApplicationCache]",
             FF = "[object OfflineResourceList]",
-            FF68 = "[object OfflineResourceList]",
-            FF60 = "[object OfflineResourceList]")
+            FF68 = "[object OfflineResourceList]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

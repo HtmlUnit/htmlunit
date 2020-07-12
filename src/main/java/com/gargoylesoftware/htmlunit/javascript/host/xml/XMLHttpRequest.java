@@ -25,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -998,7 +997,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * Returns the {@code upload} property.
      * @return the {@code upload} property
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public XMLHttpRequestUpload getUpload() {
         final XMLHttpRequestUpload upload = new XMLHttpRequestUpload();
         upload.setParentScope(getParentScope());

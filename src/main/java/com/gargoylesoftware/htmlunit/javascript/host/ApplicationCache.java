@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -44,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClass({CHROME, IE})
-@JsxClass(className = "OfflineResourceList", value = {FF, FF68, FF60})
+@JsxClass(className = "OfflineResourceList", value = {FF, FF68})
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
@@ -71,7 +70,7 @@ public class ApplicationCache extends EventTarget {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public ApplicationCache() {
     }
 

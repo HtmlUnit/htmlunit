@@ -126,8 +126,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
     // manual test are showing something different
     @BuggyWebDriver(CHROME = "sUp,dUp,",
                     FF = "sDown,dDown,sUp,dUp,",
-                    FF68 = "sDown,dDown,sUp,dUp,",
-                    FF60 = "sDown,dDown,sUp,dUp,")
+                    FF68 = "sDown,dDown,sUp,dUp,")
     public void onMouse() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

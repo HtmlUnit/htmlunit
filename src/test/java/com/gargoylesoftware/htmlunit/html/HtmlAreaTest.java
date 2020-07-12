@@ -79,7 +79,6 @@ public class HtmlAreaTest extends WebDriverTestCase {
     @Alerts("§§URL§§")
     @BuggyWebDriver(FF = "WebDriverException",
                     FF68 = "WebDriverException",
-                    FF60 = "WebDriverException",
                     IE = "WebDriverException")
     public void referer() throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
@@ -248,7 +247,6 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF60 = "")
     public void click_javascriptUrl() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -289,7 +287,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("clicked")
-    @BuggyWebDriver(FF = "Todo", FF68 = "Todo", FF60 = "Todo")
+    @BuggyWebDriver(FF = "Todo", FF68 = "Todo")
     public void click_javascriptUrlMixedCase() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -331,7 +329,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("clicked")
-    @BuggyWebDriver(FF = "Todo", FF68 = "Todo", FF60 = "Todo")
+    @BuggyWebDriver(FF = "Todo", FF68 = "Todo")
     public void click_javascriptUrlLeadingWhitespace() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -373,7 +371,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @BuggyWebDriver(FF = "Todo", FF68 = "Todo", FF60 = "Todo")
+    @BuggyWebDriver(FF = "Todo", FF68 = "Todo")
     public void thisInJavascriptHref() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

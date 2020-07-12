@@ -182,10 +182,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             FF68 = {"function Window() {\n    [native code]\n}",
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
-                "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
-            FF60 = {"function Window() {\n    [native code]\n}",
-                "function Window() {\n    [native code]\n}", "true",
-                "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function"})
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"

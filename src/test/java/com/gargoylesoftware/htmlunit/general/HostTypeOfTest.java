@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -129,8 +128,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "object",
             CHROME = "function",
             FF = "undefined",
-            FF68 = "undefined",
-            FF60 = "undefined")
+            FF68 = "undefined")
     public void applicationCache() throws Exception {
         test("ApplicationCache");
     }
@@ -484,8 +482,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void canvasCaptureMediaStream() throws Exception {
         test("CanvasCaptureMediaStream");
     }
@@ -538,8 +535,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void caretPosition() throws Exception {
         test("CaretPosition");
     }
@@ -787,8 +783,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void css2Properties() throws Exception {
         test("CSS2Properties");
     }
@@ -818,8 +813,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void cssCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule");
     }
@@ -916,8 +910,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void cssPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue");
     }
@@ -998,8 +991,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void cssValue() throws Exception {
         test("CSSValue");
     }
@@ -1008,8 +1000,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void cssValueList() throws Exception {
         test("CSSValueList");
     }
@@ -1100,8 +1091,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void deviceLightEvent() throws Exception {
         test("DeviceLightEvent");
     }
@@ -1130,8 +1120,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void deviceProximityEvent() throws Exception {
         test("DeviceProximityEvent");
     }
@@ -1196,8 +1185,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void domCursor() throws Exception {
         test("DOMCursor");
     }
@@ -1326,8 +1314,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void domRequest() throws Exception {
         test("DOMRequest");
     }
@@ -1592,8 +1579,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void fileSystem() throws Exception {
         test("FileSystem");
     }
@@ -1604,8 +1590,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void fileSystemDirectoryEntry() throws Exception {
         test("FileSystemDirectoryEntry");
     }
@@ -1616,8 +1601,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void fileSystemDirectoryReader() throws Exception {
         test("FileSystemDirectoryReader");
     }
@@ -1628,8 +1612,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void fileSystemEntry() throws Exception {
         test("FileSystemEntry");
     }
@@ -1640,8 +1623,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void fileSystemFileEntry() throws Exception {
         test("FileSystemFileEntry");
     }
@@ -1694,8 +1676,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void fontFaceSet() throws Exception {
         test("FontFaceSet");
     }
@@ -2474,7 +2455,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF60 = "undefined",
             IE = "object")
     public void htmlMarqueeElement() throws Exception {
         test("HTMLMarqueeElement");
@@ -2512,8 +2492,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");
     }
@@ -3098,8 +3077,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void idbMutableFile() throws Exception {
         test("IDBMutableFile");
     }
@@ -3241,8 +3219,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "object",
-            FF68 = "object",
-            FF60 = "object")
+            FF68 = "object")
     public void installTrigger() throws Exception {
         test("InstallTrigger");
     }
@@ -3359,8 +3336,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void localMediaStream() throws Exception {
         test("LocalMediaStream");
     }
@@ -3460,8 +3436,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void mediaKeyError() throws Exception {
         test("MediaKeyError");
     }
@@ -3794,8 +3769,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void mouseScrollEvent() throws Exception {
         test("MouseScrollEvent");
     }
@@ -3879,8 +3853,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate");
     }
@@ -3891,8 +3864,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection");
     }
@@ -3903,8 +3875,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription");
     }
@@ -4232,8 +4203,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
@@ -4524,8 +4494,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "object",
             CHROME = "function",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void pointerEvent() throws Exception {
         test("PointerEvent");
     }
@@ -4682,7 +4651,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    @NotYetImplemented({CHROME, FF, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68})
     public void proxy() throws Exception {
         test("Proxy");
     }
@@ -5154,8 +5123,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void speechSynthesis() throws Exception {
         test("SpeechSynthesis");
     }
@@ -5196,8 +5164,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void speechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice");
     }
@@ -6313,7 +6280,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "function",
             FF68 = "function",
-            FF60 = "function",
             IE = "object")
     public void svgPathSegList() throws Exception {
         test("SVGPathSegList");
@@ -6806,8 +6772,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function",
-            FF68 = "function",
-            FF60 = "function")
+            FF68 = "function")
     public void timeEvent() throws Exception {
         test("TimeEvent");
     }
@@ -6993,8 +6958,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF60 = "function")
+    @Alerts("undefined")
     public void userProximityEvent() throws Exception {
         test("UserProximityEvent");
     }

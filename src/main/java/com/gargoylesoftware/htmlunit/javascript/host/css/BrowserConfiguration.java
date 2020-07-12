@@ -77,14 +77,6 @@ abstract class BrowserConfiguration {
         return new FFNotIterable(defaultValue);
     }
 
-    static BrowserConfiguration ff60(final String defaultValue) {
-        return new FF60(defaultValue);
-    }
-
-    static BrowserConfiguration ff60And68(final String defaultValue) {
-        return new FF60And68(defaultValue);
-    }
-
     static BrowserConfiguration ff68(final String defaultValue) {
         return new FF68(defaultValue);
     }
@@ -170,17 +162,6 @@ abstract class BrowserConfiguration {
         }
     }
 
-    private static class FF60 extends BrowserConfiguration {
-        FF60(final String defaultValue) {
-            super(defaultValue);
-        }
-
-        @Override
-        public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isFirefox() && browserVersion.getBrowserVersionNumeric() == 60;
-        }
-    }
-
     private static class FF68 extends BrowserConfiguration {
         FF68(final String defaultValue) {
             super(defaultValue);
@@ -189,17 +170,6 @@ abstract class BrowserConfiguration {
         @Override
         public boolean matches(final BrowserVersion browserVersion) {
             return browserVersion.isFirefox() && browserVersion.getBrowserVersionNumeric() == 68;
-        }
-    }
-
-    private static class FF60And68 extends BrowserConfiguration {
-        FF60And68(final String defaultValue) {
-            super(defaultValue);
-        }
-
-        @Override
-        public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isFirefox() && browserVersion.getBrowserVersionNumeric() <= 68;
         }
     }
 

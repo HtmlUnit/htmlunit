@@ -105,14 +105,6 @@ public final class BrowserVersion implements Serializable {
      */
     public static final BrowserVersion FIREFOX_68 = new BrowserVersion(68, "FF68");
 
-    /**
-     * Firefox 60 ESR.
-     * @since 2.32
-     * @deprecated as of version 2.39
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_60 = new BrowserVersion(60, "FF60");
-
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
@@ -129,34 +121,6 @@ public final class BrowserVersion implements Serializable {
 
     /** Register plugins for the browser versions. */
     static {
-        // FF60
-        FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
-                                    + FIREFOX_60.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
-                                    + FIREFOX_60.getBrowserVersionNumeric() + ".0";
-        FIREFOX_60.buildId_ = "20190901094603";
-        FIREFOX_60.productSub_ = "20100101";
-        FIREFOX_60.headerNamesOrdered_ = new String[] {
-            HttpHeader.HOST,
-            HttpHeader.USER_AGENT,
-            HttpHeader.ACCEPT,
-            HttpHeader.ACCEPT_LANGUAGE,
-            HttpHeader.ACCEPT_ENCODING,
-            HttpHeader.REFERER,
-            HttpHeader.COOKIE,
-            HttpHeader.CONNECTION};
-        FIREFOX_60.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX_60.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX_60.imgAcceptHeader_ = "*/*";
-        FIREFOX_60.cssAcceptHeader_ = "text/css,*/*;q=0.1";
-        FIREFOX_60.fontHeights_ = new int[] {
-            0, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-            30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 53, 55, 57, 58,
-            59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 84, 85, 86, 87, 88,
-            89, 90, 91, 93, 94, 95, 96, 96, 98, 99, 100, 101, 103, 104, 105, 106, 106, 108, 109, 111, 112, 113, 115,
-            116, 117, 118, 119, 120, 121, 122, 123, 125, 126, 127, 128, 129, 130, 131, 132, 133, 135, 136, 138, 139,
-            139, 141, 142, 143, 144, 146, 147, 148, 149};
-
         // FF68
         FIREFOX_68.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
@@ -310,30 +274,6 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
         CHROME.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
-        FIREFOX_60.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        FIREFOX_60.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        FIREFOX_60.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        FIREFOX_60.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX_60.registerUploadMimeType("gif", "image/gif");
-        FIREFOX_60.registerUploadMimeType("jpeg", "image/jpeg");
-        FIREFOX_60.registerUploadMimeType("jpg", "image/jpeg");
-        FIREFOX_60.registerUploadMimeType("png", "image/png");
-        FIREFOX_60.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX_60.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX_60.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_60.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX_60.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX_60.registerUploadMimeType("ogm", "video/x-ogm");
-        FIREFOX_60.registerUploadMimeType("ogg", "video/ogg");
-        FIREFOX_60.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX_60.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX_60.registerUploadMimeType("webm", "video/webm");
-        FIREFOX_60.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_60.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX_60.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_60.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        FIREFOX_60.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
-
         FIREFOX_68.registerUploadMimeType("html", MimeType.TEXT_HTML);
         FIREFOX_68.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         FIREFOX_68.registerUploadMimeType("css", MimeType.TEXT_CSS);
@@ -470,9 +410,6 @@ public final class BrowserVersion implements Serializable {
         final SupportedBrowser expectedBrowser;
         if (isChrome()) {
             expectedBrowser = SupportedBrowser.CHROME;
-        }
-        else if (isFirefox60()) {
-            expectedBrowser = SupportedBrowser.FF60;
         }
         else if (isFirefox68()) {
             expectedBrowser = SupportedBrowser.FF68;

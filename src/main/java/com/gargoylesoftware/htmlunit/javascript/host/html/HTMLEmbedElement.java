@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
@@ -37,7 +36,7 @@ public class HTMLEmbedElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public HTMLEmbedElement() {
     }
 
@@ -45,7 +44,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Returns the value of the {@code align} property.
      * @return the value of the {@code align} property
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public String getAlign() {
         return getAlign(true);
     }
@@ -54,7 +53,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Sets the value of the {@code align} property.
      * @param align the value of the {@code align} property
      */
-    @JsxSetter({CHROME, FF, FF68, FF60})
+    @JsxSetter({CHROME, FF, FF68})
     public void setAlign(final String align) {
         setAlign(align, false);
     }

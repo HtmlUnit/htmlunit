@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.util.List;
@@ -39,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF, FF68, FF60})
+@JsxClass({CHROME, FF, FF68})
 public class XPathResult extends SimpleScriptable {
 
     /**

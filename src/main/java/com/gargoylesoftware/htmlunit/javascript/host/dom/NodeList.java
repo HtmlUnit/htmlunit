@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class NodeList extends AbstractList {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public NodeList() {
     }
 
@@ -113,7 +112,7 @@ public class NodeList extends AbstractList {
      * Returns an {@link Iterator} allowing to go through all keys contained in this object.
      * @return an {@link Iterator}
      */
-    @JsxFunction({CHROME, FF, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68})
     public Iterator keys() {
         final int length = getElements().size();
         final List<Integer> list = new ArrayList<>();
@@ -130,7 +129,7 @@ public class NodeList extends AbstractList {
      * Returns an {@link Iterator} allowing to go through all keys contained in this object.
      * @return an {@link Iterator}
      */
-    @JsxFunction({CHROME, FF, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68})
     public Iterator values() {
         final List<DomNode> list = getElements();
         final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
@@ -143,7 +142,7 @@ public class NodeList extends AbstractList {
      * Returns an {@link Iterator} allowing to go through all key/value pairs contained in this object.
      * @return an {@link Iterator}
      */
-    @JsxFunction({CHROME, FF, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68})
     public Iterator entries() {
         final List<DomNode> elements = getElements();
         final Context context = Context.getCurrentContext();
@@ -164,7 +163,7 @@ public class NodeList extends AbstractList {
      * Calls the {@code callback} given in parameter once for each value pair in the list, in insertion order.
      * @param callback function to execute for each element
      */
-    @JsxFunction({CHROME, FF, FF68, FF60})
+    @JsxFunction({CHROME, FF, FF68})
     public void forEach(final Object callback) {
         final List<DomNode> nodes = getElements();
 

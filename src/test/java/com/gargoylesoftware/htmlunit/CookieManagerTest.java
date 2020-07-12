@@ -305,7 +305,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "fourth=4; third=3",
             FF = "first=1; second=2; third=3",
             FF68 = "first=1; second=2; third=3",
-            FF60 = "first=1; second=2; third=3",
             IE = "first=1; fourth=4; second=2; third=3")
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -327,7 +326,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "cookie1=1",
             FF = "cookie1=1; cookie2=2; cookie3=3",
             FF68 = "cookie1=1; cookie2=2; cookie3=3",
-            FF60 = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -352,7 +350,6 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "cookie1=1",
             FF = "cookie1=1; cookie2=2; cookie3=3",
             FF68 = "cookie1=1; cookie2=2; cookie3=3",
-            FF60 = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();

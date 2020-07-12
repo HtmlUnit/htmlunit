@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import java.util.List;
@@ -165,8 +164,7 @@ public class StorageTest extends WebDriverTestCase {
     @Alerts("I was here")
     @BuggyWebDriver(CHROME = "null",
                     FF = "null",
-                    FF68 = "null",
-                    FF60 = "null")
+                    FF68 = "null")
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
     // But when executed manually the LocalStorage is shared.
     @NotYetImplemented
@@ -258,9 +256,8 @@ public class StorageTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function", "null", "string", "value", "1"},
             CHROME = {"function", "null", "string", "null", "0"},
             FF = {"function", "null", "function", "value", "1"},
-            FF68 = {"function", "null", "function", "value", "1"},
-            FF60 = {"function", "null", "function", "value", "1"})
-    @NotYetImplemented({FF, FF68, FF60})
+            FF68 = {"function", "null", "function", "value", "1"})
+    @NotYetImplemented({FF, FF68})
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

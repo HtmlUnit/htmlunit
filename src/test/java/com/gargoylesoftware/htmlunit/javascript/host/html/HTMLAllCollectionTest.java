@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -490,8 +489,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHtml-undefined",
-            FF60 = "null")
+    @Alerts("myHtml-undefined")
     public void functionIndex_ZeroIndex() throws Exception {
         functionIndex("0");
     }
@@ -500,8 +498,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            FF60 = "null")
+    @Alerts("myHead-undefined")
     public void functionIndex_ValidIndex() throws Exception {
         functionIndex("1");
     }
@@ -530,8 +527,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myTitle-undefined",
-            FF60 = "null")
+    @Alerts("myTitle-undefined")
     public void functionIndex_IndexAsString() throws Exception {
         functionIndex("'2'");
     }
@@ -577,8 +573,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"},
             CHROME = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
             FF = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"},
-            FF68 = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"},
-            FF60 = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
+            FF68 = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -604,9 +599,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function () { [native code] }",
             FF = "function () {\n    [native code]\n}",
             FF68 = "function () {\n    [native code]\n}",
-            FF60 = "function () {\n}",
             IE = "[object Object]")
-    @NotYetImplemented({FF60, IE})
+    @NotYetImplemented(IE)
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"

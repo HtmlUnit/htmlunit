@@ -39,7 +39,6 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined"},
-            FF60 = {"[object HTMLUnknownElement]", "[object NodeList]", "0", "undefined"},
             IE = {"[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_DISTINGUISH_PRINTABLE_KEY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -69,655 +68,655 @@ public class KeyboardEvent extends UIEvent {
     public static final int DOM_KEY_LOCATION_JOYSTICK = 5;
 
     /** Constant for {@code DOM_VK_CANCEL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CANCEL = 3;
 
     /** Constant for {@code DOM_VK_HELP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_HELP = 6;
 
     /** Constant for {@code DOM_VK_TAB}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_TAB = 9;
 
     /** Constant for {@code DOM_VK_CLEAR}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CLEAR = 12;
 
     /** Constant for {@code DOM_VK_RETURN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_RETURN = 13;
 
     /** Constant for {@code DOM_VK_SHIFT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SHIFT = 16;
 
     /** Constant for {@code DOM_VK_CONTROL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CONTROL = 17;
 
     /** Constant for {@code DOM_VK_ALT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ALT = 18;
 
     /** Constant for {@code DOM_VK_PAUSE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PAUSE = 19;
 
     /** Constant for {@code DOM_VK_CAPS_LOCK}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CAPS_LOCK = 20;
 
     /** Constant for {@code DOM_VK_HANGUL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_HANGUL = 21;
 
     /** Constant for {@code DOM_VK_KANA}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_KANA = 21;
 
     /** Constant for {@code DOM_VK_EISU}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_EISU = 22;
 
     /** Constant for {@code DOM_VK_FINAL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_FINAL = 24;
 
     /** Constant for {@code DOM_VK_JUNJA}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_JUNJA = 23;
 
     /** Constant for {@code DOM_VK_HANJA}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_HANJA = 25;
 
     /** Constant for {@code DOM_VK_KANJI}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_KANJI = 25;
 
     /** Constant for {@code DOM_VK_ESCAPE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ESCAPE = 27;
 
     /** Constant for {@code DOM_VK_CONVERT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CONVERT = 28;
 
     /** Constant for {@code DOM_VK_NONCONVERT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NONCONVERT = 29;
 
     /** Constant for {@code DOM_VK_ACCEPT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ACCEPT = 30;
 
     /** Constant for {@code DOM_VK_MODECHANGE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_MODECHANGE = 31;
 
     /** Constant for {@code DOM_VK_SPACE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SPACE = 32;
 
     /** Constant for {@code DOM_VK_PAGE_UP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PAGE_UP = 33;
 
     /** Constant for {@code DOM_VK_PAGE_DOWN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PAGE_DOWN = 34;
 
     /** Constant for {@code DOM_VK_END}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_END = 35;
 
     /** Constant for {@code DOM_VK_HOME}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_HOME = 36;
 
     /** Constant for {@code DOM_VK_LEFT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_LEFT = 37;
 
     /** Constant for {@code DOM_VK_UP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_UP = 38;
 
     /** Constant for {@code DOM_VK_RIGHT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_RIGHT = 39;
 
     /** Constant for {@code DOM_VK_SELECT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SELECT = 41;
 
     /** Constant for {@code DOM_VK_DOWN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_DOWN = 40;
 
     /** Constant for {@code DOM_VK_PRINT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PRINT = 42;
 
     /** Constant for {@code DOM_VK_EXECUTE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_EXECUTE = 43;
 
     /** Constant for {@code DOM_VK_PRINTSCREEN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PRINTSCREEN = 44;
 
     /** Constant for {@code DOM_VK_INSERT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_INSERT = 45;
 
     /** Constant for {@code DOM_VK_DELETE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_DELETE = 46;
 
     /** Constant for {@code DOM_VK_0}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_0 = 48;
 
     /** Constant for {@code DOM_VK_1}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_1 = 49;
 
     /** Constant for {@code DOM_VK_2}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_2 = 50;
 
     /** Constant for {@code DOM_VK_3}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_3 = 51;
 
     /** Constant for {@code DOM_VK_4}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_4 = 52;
 
     /** Constant for {@code DOM_VK_5}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_5 = 53;
 
     /** Constant for {@code DOM_VK_6}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_6 = 54;
 
     /** Constant for {@code DOM_VK_7}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_7 = 55;
 
     /** Constant for {@code DOM_VK_8}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_8 = 56;
 
     /** Constant for {@code DOM_VK_9}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_9 = 57;
 
     /** Constant for {@code DOM_VK_COLON}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_COLON = 58;
 
     /** Constant for {@code DOM_VK_SEMICOLON}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SEMICOLON = 59;
 
     /** Constant for {@code DOM_VK_LESS_THAN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_LESS_THAN = 60;
 
     /** Constant for {@code DOM_VK_EQUALS}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_EQUALS = 61;
 
     /** Constant for {@code DOM_VK_GREATER_THAN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_GREATER_THAN = 62;
 
     /** Constant for {@code DOM_VK_QUESTION_MARK}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_QUESTION_MARK = 63;
 
     /** Constant for {@code DOM_VK_AT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_AT = 64;
 
     /** Constant for {@code DOM_VK_A}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_A = 65;
 
     /** Constant for {@code DOM_VK_B}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_B = 66;
 
     /** Constant for {@code DOM_VK_C}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_C = 67;
 
     /** Constant for {@code DOM_VK_D}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_D = 68;
 
     /** Constant for {@code DOM_VK_E}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_E = 69;
 
     /** Constant for {@code DOM_VK_F}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F = 70;
 
     /** Constant for {@code DOM_VK_G}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_G = 71;
 
     /** Constant for {@code DOM_VK_H}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_H = 72;
 
     /** Constant for {@code DOM_VK_I}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_I = 73;
 
     /** Constant for {@code DOM_VK_J}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_J = 74;
 
     /** Constant for {@code DOM_VK_K}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_K = 75;
 
     /** Constant for {@code DOM_VK_L}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_L = 76;
 
     /** Constant for {@code DOM_VK_M}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_M = 77;
 
     /** Constant for {@code DOM_VK_N}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_N = 78;
 
     /** Constant for {@code DOM_VK_O}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_O = 79;
 
     /** Constant for {@code DOM_VK_BACK_SPACE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_BACK_SPACE = 8;
 
     /** Constant for {@code DOM_VK_P}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_P = 80;
 
     /** Constant for {@code DOM_VK_Q}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_Q = 81;
 
     /** Constant for {@code DOM_VK_R}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_R = 82;
 
     /** Constant for {@code DOM_VK_S}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_S = 83;
 
     /** Constant for {@code DOM_VK_T}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_T = 84;
 
     /** Constant for {@code DOM_VK_U}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_U = 85;
 
     /** Constant for {@code DOM_VK_V}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_V = 86;
 
     /** Constant for {@code DOM_VK_W}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_W = 87;
 
     /** Constant for {@code DOM_VK_X}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_X = 88;
 
     /** Constant for {@code DOM_VK_Y}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_Y = 89;
 
     /** Constant for {@code DOM_VK_Z}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_Z = 90;
 
     /** Constant for {@code DOM_VK_WIN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN = 91;
 
     /** Constant for {@code DOM_VK_CONTEXT_MENU}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CONTEXT_MENU = 93;
 
     /** Constant for {@code DOM_VK_SLEEP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SLEEP = 95;
 
     /** Constant for {@code DOM_VK_NUMPAD0}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD0 = 96;
 
     /** Constant for {@code DOM_VK_NUMPAD1}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD1 = 97;
 
     /** Constant for {@code DOM_VK_NUMPAD2}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD2 = 98;
 
     /** Constant for {@code DOM_VK_NUMPAD3}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD3 = 99;
 
     /** Constant for {@code DOM_VK_NUMPAD4}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD4 = 100;
 
     /** Constant for {@code DOM_VK_NUMPAD5}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD5 = 101;
 
     /** Constant for {@code DOM_VK_NUMPAD6}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD6 = 102;
 
     /** Constant for {@code DOM_VK_NUMPAD7}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD7 = 103;
 
     /** Constant for {@code DOM_VK_NUMPAD8}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD8 = 104;
 
     /** Constant for {@code DOM_VK_NUMPAD9}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUMPAD9 = 105;
 
     /** Constant for {@code DOM_VK_MULTIPLY}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_MULTIPLY = 106;
 
     /** Constant for {@code DOM_VK_ADD}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ADD = 107;
 
     /** Constant for {@code DOM_VK_SEPARATOR}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SEPARATOR = 108;
 
     /** Constant for {@code DOM_VK_SUBTRACT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SUBTRACT = 109;
 
     /** Constant for {@code DOM_VK_DECIMAL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_DECIMAL = 110;
 
     /** Constant for {@code DOM_VK_DIVIDE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_DIVIDE = 111;
 
     /** Constant for {@code DOM_VK_F1}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F1 = 112;
 
     /** Constant for {@code DOM_VK_F2}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F2 = 113;
 
     /** Constant for {@code DOM_VK_F3}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F3 = 114;
 
     /** Constant for {@code DOM_VK_F4}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F4 = 115;
 
     /** Constant for {@code DOM_VK_F5}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F5 = 116;
 
     /** Constant for {@code DOM_VK_F6}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F6 = 117;
 
     /** Constant for {@code DOM_VK_F7}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F7 = 118;
 
     /** Constant for {@code DOM_VK_F8}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F8 = 119;
 
     /** Constant for {@code DOM_VK_F9}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F9 = 120;
 
     /** Constant for {@code DOM_VK_F10}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F10 = 121;
 
     /** Constant for {@code DOM_VK_F11}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F11 = 122;
 
     /** Constant for {@code DOM_VK_F12}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F12 = 123;
 
     /** Constant for {@code DOM_VK_F13}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F13 = 124;
 
     /** Constant for {@code DOM_VK_F14}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F14 = 125;
 
     /** Constant for {@code DOM_VK_F15}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F15 = 126;
 
     /** Constant for {@code DOM_VK_F16}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F16 = 127;
 
     /** Constant for {@code DOM_VK_F17}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F17 = 128;
 
     /** Constant for {@code DOM_VK_F18}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F18 = 129;
 
     /** Constant for {@code DOM_VK_F19}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F19 = 130;
 
     /** Constant for {@code DOM_VK_F20}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F20 = 131;
 
     /** Constant for {@code DOM_VK_F21}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F21 = 132;
 
     /** Constant for {@code DOM_VK_F22}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F22 = 133;
 
     /** Constant for {@code DOM_VK_F23}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F23 = 134;
 
     /** Constant for {@code DOM_VK_F24}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_F24 = 135;
 
     /** Constant for {@code DOM_VK_NUM_LOCK}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_NUM_LOCK = 144;
 
     /** Constant for {@code DOM_VK_SCROLL_LOCK}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SCROLL_LOCK = 145;
 
     /** Constant for {@code DOM_VK_WIN_OEM_FJ_JISHO}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_FJ_JISHO = 146;
 
     /** Constant for {@code DOM_VK_WIN_OEM_FJ_MASSHOU}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_FJ_MASSHOU = 147;
 
     /** Constant for {@code DOM_VK_WIN_OEM_FJ_TOUROKU}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_FJ_TOUROKU = 148;
 
     /** Constant for {@code DOM_VK_WIN_OEM_FJ_LOYA}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_FJ_LOYA = 149;
 
     /** Constant for {@code DOM_VK_WIN_OEM_FJ_ROYA}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_FJ_ROYA = 150;
 
     /** Constant for {@code DOM_VK_CIRCUMFLEX}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CIRCUMFLEX = 160;
 
     /** Constant for {@code DOM_VK_EXCLAMATION}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_EXCLAMATION = 161;
 
     /** Constant for {@code DOM_VK_DOUBLE_QUOTE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_DOUBLE_QUOTE = 162;
 
     /** Constant for {@code DOM_VK_HASH}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_HASH = 163;
 
     /** Constant for {@code DOM_VK_DOLLAR}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_DOLLAR = 164;
 
     /** Constant for {@code DOM_VK_PERCENT}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PERCENT = 165;
 
     /** Constant for {@code DOM_VK_AMPERSAND}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_AMPERSAND = 166;
 
     /** Constant for {@code DOM_VK_UNDERSCORE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_UNDERSCORE = 167;
 
     /** Constant for {@code DOM_VK_OPEN_PAREN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_OPEN_PAREN = 168;
 
     /** Constant for {@code DOM_VK_CLOSE_PAREN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CLOSE_PAREN = 169;
 
     /** Constant for {@code DOM_VK_ASTERISK}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ASTERISK = 170;
 
     /** Constant for {@code DOM_VK_PLUS}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PLUS = 171;
 
     /** Constant for {@code DOM_VK_PIPE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PIPE = 172;
 
     /** Constant for {@code DOM_VK_HYPHEN_MINUS}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_HYPHEN_MINUS = 173;
 
     /** Constant for {@code DOM_VK_OPEN_CURLY_BRACKET}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_OPEN_CURLY_BRACKET = 174;
 
     /** Constant for {@code DOM_VK_CLOSE_CURLY_BRACKET}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CLOSE_CURLY_BRACKET = 175;
 
     /** Constant for {@code DOM_VK_TILDE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_TILDE = 176;
 
     /** Constant for {@code DOM_VK_VOLUME_MUTE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_VOLUME_MUTE = 181;
 
     /** Constant for {@code DOM_VK_VOLUME_DOWN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_VOLUME_DOWN = 182;
 
     /** Constant for {@code DOM_VK_VOLUME_UP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_VOLUME_UP = 183;
 
     /** Constant for {@code DOM_VK_COMMA}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_COMMA = 188;
 
     /** Constant for {@code DOM_VK_PERIOD}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PERIOD = 190;
 
     /** Constant for {@code DOM_VK_SLASH}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_SLASH = 191;
 
     /** Constant for {@code DOM_VK_BACK_QUOTE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_BACK_QUOTE = 192;
 
     /** Constant for {@code DOM_VK_OPEN_BRACKET}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_OPEN_BRACKET = 219;
 
     /** Constant for {@code DOM_VK_BACK_SLASH}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_BACK_SLASH = 220;
 
     /** Constant for {@code DOM_VK_CLOSE_BRACKET}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CLOSE_BRACKET = 221;
 
     /** Constant for {@code DOM_VK_QUOTE}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_QUOTE = 222;
 
     /** Constant for {@code DOM_VK_META}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_META = 224;
 
     /** Constant for {@code DOM_VK_ALTGR}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ALTGR = 225;
 
     /** Constant for {@code DOM_VK_WIN_ICO_HELP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_ICO_HELP = 227;
 
     /** Constant for {@code DOM_VK_WIN_ICO_00}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_ICO_00 = 228;
 
     /** Constant for {@code DOM_VK_PROCESSKEY}. */
@@ -725,91 +724,91 @@ public class KeyboardEvent extends UIEvent {
     public static final int DOM_VK_PROCESSKEY = 229;
 
     /** Constant for {@code DOM_VK_WIN_ICO_CLEAR}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_ICO_CLEAR = 230;
 
     /** Constant for {@code DOM_VK_WIN_OEM_RESET}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_RESET = 233;
 
     /** Constant for {@code DOM_VK_WIN_OEM_JUMP}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_JUMP = 234;
 
     /** Constant for {@code DOM_VK_WIN_OEM_PA1}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_PA1 = 235;
 
     /** Constant for {@code DOM_VK_WIN_OEM_PA2}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_PA2 = 236;
 
     /** Constant for {@code DOM_VK_WIN_OEM_PA3}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_PA3 = 237;
 
     /** Constant for {@code DOM_VK_WIN_OEM_WSCTRL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_WSCTRL = 238;
 
     /** Constant for {@code DOM_VK_WIN_OEM_CUSEL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_CUSEL = 239;
 
     /** Constant for {@code DOM_VK_WIN_OEM_ATTN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_ATTN = 240;
 
     /** Constant for {@code DOM_VK_WIN_OEM_FINISH}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_FINISH = 241;
 
     /** Constant for {@code DOM_VK_WIN_OEM_COPY}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_COPY = 242;
 
     /** Constant for {@code DOM_VK_WIN_OEM_AUTO}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_AUTO = 243;
 
     /** Constant for {@code DOM_VK_WIN_OEM_ENLW}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_ENLW = 244;
 
     /** Constant for {@code DOM_VK_WIN_OEM_BACKTAB}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_BACKTAB = 245;
 
     /** Constant for {@code DOM_VK_ATTN}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ATTN = 246;
 
     /** Constant for {@code DOM_VK_CRSEL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_CRSEL = 247;
 
     /** Constant for {@code DOM_VK_EXSEL}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_EXSEL = 248;
 
     /** Constant for {@code DOM_VK_EREOF}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_EREOF = 249;
 
     /** Constant for {@code DOM_VK_PLAY}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PLAY = 250;
 
     /** Constant for {@code DOM_VK_ZOOM}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_ZOOM = 251;
 
     /** Constant for {@code DOM_VK_PA1}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_PA1 = 253;
 
     /** Constant for {@code DOM_VK_WIN_OEM_CLEAR}. */
-    @JsxConstant({FF, FF68, FF60})
+    @JsxConstant({FF, FF68})
     public static final int DOM_VK_WIN_OEM_CLEAR = 254;
 
     /**
@@ -863,7 +862,7 @@ public class KeyboardEvent extends UIEvent {
     /**
      * Creates a new keyboard event instance.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public KeyboardEvent() {
     }
 
@@ -975,7 +974,7 @@ public class KeyboardEvent extends UIEvent {
      * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
      * @param charCode the Unicode character associated with the depressed key otherwise zero
      */
-    @JsxFunction({FF, FF68, FF60})
+    @JsxFunction({FF, FF68})
     public void initKeyEvent(
             final String type,
             final boolean bubbles,
@@ -1119,7 +1118,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns a physical key on the keyboard.
      * @return a physical key on the keyboard
      */
-    @JsxGetter({CHROME, FF, FF68, FF60})
+    @JsxGetter({CHROME, FF, FF68})
     public String getCode() {
         int code = getKeyCode();
         if (code == 0) {

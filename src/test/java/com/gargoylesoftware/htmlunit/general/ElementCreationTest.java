@@ -691,8 +691,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLImageElement]",
             CHROME = "[object HTMLUnknownElement]",
             FF = "[object HTMLElement]",
-            FF68 = "[object HTMLElement]",
-            FF60 = "[object HTMLElement]")
+            FF68 = "[object HTMLElement]")
     public void image() throws Exception {
         test("image");
     }
@@ -885,8 +884,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMarqueeElement]",
-            FF60 = "[object HTMLDivElement]")
+    @Alerts("[object HTMLMarqueeElement]")
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -910,8 +908,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLMenuItemElement]",
-            FF68 = "[object HTMLMenuItemElement]",
-            FF60 = "[object HTMLMenuItemElement]")
+            FF68 = "[object HTMLMenuItemElement]")
     public void menuitem() throws Exception {
         test("menuitem");
     }

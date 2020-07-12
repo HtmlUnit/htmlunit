@@ -67,8 +67,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Alerts(IE = {"", "[object HTMLAreaElement]"},
             CHROME = {"", "function HTMLAreaElement() { [native code] }"},
             FF = {"", "function HTMLAreaElement() {\n    [native code]\n}"},
-            FF68 = {"", "function HTMLAreaElement() {\n    [native code]\n}"},
-            FF60 = {"", "function HTMLAreaElement() {\n    [native code]\n}"})
+            FF68 = {"", "function HTMLAreaElement() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -96,8 +95,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HTMLButtonElement]", "[object HTMLButtonElement]",
                 "§§URL§§", "http://srv/htmlunit.org"},
             FF = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"},
-            FF68 = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"},
-            FF60 = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"})
+            FF68 = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

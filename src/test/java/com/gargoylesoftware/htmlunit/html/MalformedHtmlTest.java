@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import org.junit.Test;
@@ -795,7 +794,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "1b", "1a", "1c", "0", "TABLE"},
             IE = {"3", "1a", "1b", "1c", "0", "TABLE"})
-    @NotYetImplemented({CHROME, FF, FF68, FF60})
+    @NotYetImplemented({CHROME, FF, FF68})
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -46,11 +45,9 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             FF = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
-            FF60 = {"left", "right", "bottom", "middle", "top",
-                    "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF68, FF60})
+    @NotYetImplemented({FF, FF68})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -84,10 +81,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop"},
             FF68 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                    "bottom", "absmiddle", "baseline", "texttop"},
-            FF60 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                    "absbottom", "absmiddle", "bottom", "texttop"})
-    @NotYetImplemented({FF, FF68, FF60})
+                    "bottom", "absmiddle", "baseline", "texttop"})
+    @NotYetImplemented({FF, FF68})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

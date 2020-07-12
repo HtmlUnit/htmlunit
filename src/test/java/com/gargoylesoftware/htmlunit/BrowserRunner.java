@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -79,9 +78,6 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
                 }
-                if (browsers.contains("ff60")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, true));
-                }
                 if (browsers.contains("ff68")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_68, true));
                 }
@@ -98,9 +94,6 @@ public class BrowserRunner extends Suite {
             }
             if (browsers.contains("hu-ff")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
-            }
-            if (browsers.contains("hu-ff60")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, false));
             }
             if (browsers.contains("hu-ff68")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_68, false));
@@ -168,9 +161,6 @@ public class BrowserRunner extends Suite {
         /** Firefox. */
         FF,
 
-        /** Firefox 60. */
-        FF60,
-
         /** Firefox 68. */
         FF68
     }
@@ -205,12 +195,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Firefox 60. If not defined, {@link #FF()} is used.
-         * @return the alerts
-         */
-        String[] FF60() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
@@ -259,12 +243,6 @@ public class BrowserRunner extends Suite {
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 60.
-         * @return the alerts
-         */
-        String[] FF60() default { EMPTY_DEFAULT };
-
-        /**
          * Alerts for Firefox 68.
          * @return the alerts
          */
@@ -298,7 +276,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         TestedBrowser[] value() default {
-            IE, FF60, FF68, FF, CHROME
+            IE, FF68, FF, CHROME
         };
     }
 
@@ -326,12 +304,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Firefox 60.
-         * @return the alerts
-         */
-        String[] FF60() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Firefox 68.
@@ -376,12 +348,6 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
-
-        /**
-         * Alerts for Firefox 60.
-         * @return the alerts
-         */
-        String[] FF60() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Firefox 68.

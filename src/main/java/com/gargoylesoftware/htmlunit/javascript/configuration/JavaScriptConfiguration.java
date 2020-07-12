@@ -131,15 +131,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSKeyframesRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSNamespaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPageRule;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValueList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
@@ -153,7 +150,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.CDATASection;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Comment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CustomElementRegistry;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMError;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation;
@@ -200,10 +196,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.ClipboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CompositionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceLightEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceMotionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceOrientationEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -248,7 +242,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TouchEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.TrackEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.TransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebkitSpeechRecognitionError;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent;
@@ -302,7 +295,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNod
 import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.IIRFilterNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.InputDeviceCapabilities;
-import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDeviceInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
@@ -427,14 +419,13 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CryptoKey.class, CSS.class, CSS2Properties.class, CSSConditionRule.class,
         CSSCounterStyleRule.class, CSSFontFaceRule.class, CSSGroupingRule.class, CSSImportRule.class,
         CSSKeyframeRule.class, CSSKeyframesRule.class, CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class,
-        CSSPrimitiveValue.class, CSSRule.class, CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class,
+        CSSRule.class, CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class,
         CSSStyleSheet.class,
-        CSSSupportsRule.class, CSSValue.class, CSSValueList.class, CustomElementRegistry.class,
+        CSSSupportsRule.class, CustomElementRegistry.class,
         CustomEvent.class, DataTransfer.class,
-        DataTransferItem.class, DataTransferItemList.class,
-        DelayNode.class, DeviceLightEvent.class,
-        DeviceMotionEvent.class, DeviceOrientationEvent.class, DeviceProximityEvent.class,
-        Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
+        DataTransferItem.class, DataTransferItemList.class, DelayNode.class,
+        DeviceMotionEvent.class, DeviceOrientationEvent.class,
+        Document.class, DocumentFragment.class, DocumentType.class, DOMError.class, DOMException.class,
         DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMPoint.class,
         DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
@@ -485,7 +476,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         InstallTrigger.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
         KeyboardEvent.class, KeyframeEffect.class,
-        LocalMediaStream.class, Location.class,
+        Location.class,
         MediaDeviceInfo.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
@@ -573,7 +564,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,
         UIEvent.class,
         URL.class,
-        URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VideoPlaybackQuality.class,
+        URLSearchParams.class, ValidityState.class, VideoPlaybackQuality.class,
         VTTCue.class, WaveShaperNode.class, WebGL2RenderingContext.class,
         WEBGL_compressed_texture_s3tc.class, WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class,
         WebGLContextEvent.class, WebGLFramebuffer.class, WebGLProgram.class,

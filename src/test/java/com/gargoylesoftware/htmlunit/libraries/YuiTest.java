@@ -151,7 +151,6 @@ public class YuiTest extends WebDriverTestCase {
                         "test_createlink", "test_selected_element", "test_dom_path"},
             FF = "test_createlink",
             FF68 = "test_createlink",
-            FF60 = "test_createlink",
             IE = {"test_bold", "test_createlink"})
     @NotYetImplemented
     public void editor() throws Exception {

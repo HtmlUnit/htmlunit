@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -390,7 +389,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "2",
             FF = "2",
-            FF60 = "2",
             FF68 = "2",
             IE = "0")
     public void core__isPlainObject_Symbol_() throws Exception {
@@ -414,7 +412,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1",
             FF = "1",
-            FF60 = "1",
             FF68 = "1",
             IE = "0")
     public void core__isPlainObject_Object_assign______() throws Exception {
@@ -1411,7 +1408,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, FF60 })
+    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_catch() throws Exception {
         runTest("deferred: jQuery.Deferred.catch");
     }
@@ -1515,7 +1512,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1",
             FF = "1",
-            FF60 = "1",
             FF68 = "1",
             IE = "0")
     public void deferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
@@ -1742,7 +1738,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "2",
             FF = "2",
-            FF60 = "2",
             FF68 = "2",
             IE = "0")
     public void deprecated__type_for__Symbol_() throws Exception {
@@ -1776,7 +1771,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1",
             FF = "1",
-            FF60 = "1",
             FF68 = "1",
             IE = "0")
     @NotYetImplemented({ CHROME, FF })
@@ -1791,7 +1785,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1",
             FF = "1",
-            FF60 = "1",
             FF68 = "1",
             IE = "0")
     @NotYetImplemented({ CHROME, FF })
@@ -1806,7 +1799,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "2",
             FF = "2",
-            FF60 = "2",
             FF68 = "2",
             IE = "0")
     public void deprecated__isFunction_custom___toStringTag_() throws Exception {
@@ -1870,7 +1862,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "2",
             FF = "2",
-            FF60 = "2",
             FF68 = "2",
             IE = "0")
     public void deprecated__isNumeric_Symbol_() throws Exception {
@@ -1905,7 +1896,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "15",
             FF = "1, 14, 15",
-            FF60 = "15",
             FF68 = "1, 14, 15",
             IE = "15")
     @NotYetImplemented
@@ -2419,7 +2409,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, FF60 })
+    @NotYetImplemented(CHROME)
     public void queue__fn_promise___queue______waits_for_animation_to_complete_before_resolving() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - waits for animation to complete before resolving");
     }
@@ -2732,7 +2722,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "4",
             FF = "4",
-            FF60 = "4",
             FF68 = "4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
@@ -4645,7 +4634,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "2",
             FF = "2",
-            FF60 = "2",
             FF68 = "2",
             IE = "0")
     public void traversing__contents___for__template____remains_inert() throws Exception {
@@ -5711,10 +5699,9 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "4",
             FF = "4",
-            FF60 = "4",
             FF68 = "4",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF60 })
+    @NotYetImplemented(CHROME)
     public void manipulation__html_script_type_module_() throws Exception {
         runTest("manipulation: html(script type module)");
     }
@@ -6787,7 +6774,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "3",
             FF = "3",
-            FF60 = "3",
             FF68 = "3",
             IE = "2")
     @NotYetImplemented(CHROME)
@@ -6812,7 +6798,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "8",
             FF = "10",
-            FF60 = "10",
             FF68 = "10",
             IE = "0")
     @NotYetImplemented
@@ -7845,7 +7830,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1, 0, 1",
             FF = "1",
-            FF60 = "1",
             FF68 = "1",
             IE = "1")
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
@@ -9334,7 +9318,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "2",
             FF = "2",
-            FF60 = "2",
             FF68 = "2",
             IE = "1")
     @NotYetImplemented(IE)
@@ -10196,7 +10179,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "4",
             FF = "4, 0, 4",
-            FF60 = "4",
             FF68 = "4",
             IE = "4")
     @NotYetImplemented

@@ -1216,7 +1216,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1, 1, 2",
             FF = "1, 1, 2",
-            FF60 = "1, 1, 2",
             FF68 = "0, 2, 2",
             IE = "0, 2, 2")
     @NotYetImplemented({ FF68, IE })
@@ -1862,7 +1861,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "0, 4, 4",
             FF = "0, 4, 4",
-            FF60 = "0, 4, 4",
             FF68 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
@@ -5209,7 +5207,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "0, 2, 2",
             FF = "0, 1, 1",
-            FF60 = "0, 1, 1",
             FF68 = "0, 1, 1",
             IE = "0, 2, 2")
     public void css__widows___orphans__8936() throws Exception {
@@ -6273,7 +6270,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1, 0, 1",
             FF = "0, 1, 1",
-            FF60 = "0, 1, 1",
             FF68 = "0, 1, 1",
             IE = "0, 1, 1")
     @NotYetImplemented(CHROME)
@@ -7628,7 +7624,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "0, 2, 2",
             FF = "0, 2, 2",
-            FF60 = "0, 2, 2",
             FF68 = "0, 2, 2",
             IE = "0, 1, 1")
     @NotYetImplemented(IE)
@@ -7918,7 +7913,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1, 1, 2",
             FF = "0, 2, 2",
-            FF60 = "0, 2, 2",
             FF68 = "0, 2, 2",
             IE = "0, 2, 2")
     @NotYetImplemented(CHROME)

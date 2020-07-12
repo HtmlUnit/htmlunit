@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.net.MalformedURLException;
@@ -60,7 +59,7 @@ public class URL extends SimpleScriptable {
      * @param base a string representing the base URL to use in case url
      * is a relative URL. If not specified, it defaults to ''.
      */
-    @JsxConstructor({CHROME, FF, FF68, FF60})
+    @JsxConstructor({CHROME, FF, FF68})
     public URL(final String url, final Object base) {
         String baseStr = null;
         if (!Undefined.isUndefined(base)) {
