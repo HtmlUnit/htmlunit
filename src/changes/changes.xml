@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, FF60 removed">
+            <action type="remove" dev="rbri">
+                FF60 support removed.
+            </action>
+        </release>
         <release version="2.42.0" date="July 11, 2020" description="Bugfixes, many Rhino fixes">
             <action type="fix" dev="rbri">
                 core-js: Fix wrong start object for getter in Object.assign().

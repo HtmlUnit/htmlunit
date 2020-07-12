@@ -597,7 +597,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "SPAN"})
+    @Alerts({"false", "false", "SPAN"})
     public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WEBSOCKET_ORIGIN_SET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WEBSOCKET_SRC_ELEMENT_SET;
 
 import java.io.IOException;
 import java.net.URI;
@@ -86,7 +85,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
     private HtmlPage containingPage_;
     private WebSocketAdapter webSocketImpl_;
-    private boolean srcElementSet_;
     private boolean originSet_;
 
     /**
@@ -108,7 +106,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             setDomNode(containingPage_.getDocumentElement(), false);
 
             final WebClient webClient = webWindow.getWebClient();
-            srcElementSet_ = webClient.getBrowserVersion().hasFeature(WEBSOCKET_SRC_ELEMENT_SET);
             originSet_ = webClient.getBrowserVersion().hasFeature(WEBSOCKET_ORIGIN_SET);
 
             webSocketImpl_ = new JettyWebSocketAdapter(webClient) {
@@ -124,9 +121,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                     final Event openEvent = new Event();
                     openEvent.setType(Event.TYPE_OPEN);
-                    if (srcElementSet_) {
-                        openEvent.setSrcElement(WebSocket.this);
-                    }
+                    openEvent.setSrcElement(WebSocket.this);
                     fire(openEvent);
                     callFunction(openHandler_, new Object[] {openEvent});
                 }
@@ -149,9 +144,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     if (originSet_) {
                         msgEvent.setOrigin(getUrl());
                     }
-                    if (srcElementSet_) {
-                        msgEvent.setSrcElement(WebSocket.this);
-                    }
+                    msgEvent.setSrcElement(WebSocket.this);
                     fire(msgEvent);
                     callFunction(messageHandler_, new Object[] {msgEvent});
                 }
@@ -167,9 +160,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     if (originSet_) {
                         msgEvent.setOrigin(getUrl());
                     }
-                    if (srcElementSet_) {
-                        msgEvent.setSrcElement(WebSocket.this);
-                    }
+                    msgEvent.setSrcElement(WebSocket.this);
                     fire(msgEvent);
                     callFunction(messageHandler_, new Object[] {msgEvent});
                 }
@@ -187,9 +178,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
                     final Event errorEvent = new Event();
                     errorEvent.setType(Event.TYPE_ERROR);
-                    if (srcElementSet_) {
-                        errorEvent.setSrcElement(WebSocket.this);
-                    }
+                    errorEvent.setSrcElement(WebSocket.this);
                     fire(errorEvent);
                     callFunction(errorHandler_, new Object[] {errorEvent});
 

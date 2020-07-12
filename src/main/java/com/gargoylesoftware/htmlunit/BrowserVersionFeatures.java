@@ -1224,10 +1224,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF, FF68})
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
 
-    /** Indicates that select.options.remove ignores the call if index is too large. */
-    @BrowserFeature({CHROME, FF, FF68, IE})
-    JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE,
-
     /** Indicates that select.options[i] throws an exception if the requested index is negative. */
     @BrowserFeature(IE)
     JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV,
@@ -1252,10 +1248,6 @@ public enum BrowserVersionFeatures {
     /** Stylesheet list contains only active style sheets. */
     @BrowserFeature(CHROME)
     JS_STYLESHEETLIST_ACTIVE_ONLY,
-
-    /** Indicates if style.setProperty ignores case when determining the priority. */
-    @BrowserFeature({CHROME, FF, FF68, IE})
-    JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE,
 
     /** IE supports accessing unsupported style elements via getter
      * like val = elem.style.htmlunit;.
@@ -1583,10 +1575,6 @@ public enum BrowserVersionFeatures {
     /** Set the origin property for web socket events. */
     @BrowserFeature({CHROME, FF, FF68})
     WEBSOCKET_ORIGIN_SET,
-
-    /** Set the srcElement property for web socket events. */
-    @BrowserFeature({CHROME, FF, FF68, IE})
-    WEBSOCKET_SRC_ELEMENT_SET,
 
     /** Execute window events. */
     @BrowserFeature(IE)

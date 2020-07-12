@@ -908,10 +908,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)"},
-            CHROME = {"", "", "none", "rgb(0, 128, 0)"},
-            FF = {"", "", "none", "rgb(0, 128, 0)"},
-            FF68 = {"", "", "none", "rgb(0, 128, 0)"},
+    @Alerts(DEFAULT = {"", "", "none", "rgb(0, 128, 0)"},
             IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)"})
     @NotYetImplemented(IE)
     public void displayDefaultOverwritesNone() throws Exception {

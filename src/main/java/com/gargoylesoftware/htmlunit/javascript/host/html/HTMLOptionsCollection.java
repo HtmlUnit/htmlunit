@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IN_ALWAYS_TRUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -318,11 +317,9 @@ public class HTMLOptionsCollection extends SimpleScriptable {
 
         idx = Math.max(idx, 0);
         if (idx >= getLength()) {
-            if (browser.hasFeature(JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE)) {
-                return;
-            }
-            idx = 0;
+            return;
         }
+
         htmlSelect_.removeOption(idx);
     }
 

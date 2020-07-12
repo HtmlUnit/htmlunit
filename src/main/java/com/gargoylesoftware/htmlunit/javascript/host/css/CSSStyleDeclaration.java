@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_ALIGN_SUPPORTS_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
@@ -2577,15 +2576,8 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     public void setProperty(final String name, final Object value, final String important) {
         String imp = "";
         if (!StringUtils.isEmpty(important) && !"null".equals(important)) {
-            if (getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
-                if (!StyleElement.PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
-                    return;
-                }
-            }
-            else {
-                if (!StyleElement.PRIORITY_IMPORTANT.equals(important)) {
-                    return;
-                }
+            if (!StyleElement.PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
+                return;
             }
             imp = StyleElement.PRIORITY_IMPORTANT;
         }

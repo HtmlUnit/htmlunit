@@ -755,10 +755,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "Two*", "Three"},
-            CHROME = {"3", "One", "Two*", "Three"},
-            FF = {"3", "One", "Two*", "Three"},
-            FF68 = {"3", "One", "Two*", "Three"},
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three"},
             IE = "exception")
     public void removeMinusOne() throws Exception {
         remove("-1", false, false);
@@ -768,10 +765,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "Two*", "Three*"},
-            CHROME = {"3", "One", "Two*", "Three*"},
-            FF = {"3", "One", "Two*", "Three*"},
-            FF68 = {"3", "One", "Two*", "Three*"},
+    @Alerts(DEFAULT = {"3", "One", "Two*", "Three*"},
             IE = "exception")
     public void removeMinusOneMulti() throws Exception {
         remove("-1", false, true);
