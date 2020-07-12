@@ -490,14 +490,6 @@ public final class BrowserVersion implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * @return whether or not this version version 60 of a Firefox browser
      */
-    public boolean isFirefox60() {
-        return isFirefox() && getBrowserVersionNumeric() == 60;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether or not this version version 60 of a Firefox browser
-     */
     public boolean isFirefox68() {
         return isFirefox() && getBrowserVersionNumeric() == 68;
     }
