@@ -4133,7 +4133,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_ScreenOrientation() throws Exception {
         test("EventTarget", "ScreenOrientation");
     }
