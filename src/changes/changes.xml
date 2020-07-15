@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, FF60 removed">
+            <action type="fix" dev="rbri" issue="#192">
+                Improved encoding and BOM handling when loading a stylesheet.
+            </action>
             <action type="remove" dev="rbri">
                 FF60 support removed.
             </action>

@@ -48,6 +48,7 @@
     <suppress checks="LineLength" files="XMLSerializerTest.java"/>
     <suppress checks="LineLength" files="XSLProcessorTest.java"/>
 
+    <suppress checks="MethodName" files="CSSStyleSheet3Test.java"/>
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
     <suppress checks="MethodName" files="HostParentOf.Test.java"/>
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>

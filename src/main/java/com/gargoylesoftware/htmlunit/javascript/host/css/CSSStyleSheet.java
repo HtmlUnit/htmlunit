@@ -24,13 +24,18 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
+import static java.nio.charset.StandardCharsets.UTF_16BE;
+import static java.nio.charset.StandardCharsets.UTF_16LE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,7 +47,9 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
@@ -114,6 +121,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -331,12 +339,45 @@ public class CSSStyleSheet extends StyleSheet {
 
                 final String contentType = response.getContentType();
                 if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
-                    try (InputSource source =
-                            new InputSource(
-                                    new InputStreamReader(response.getContentAsStream(),
-                                                            response.getContentCharset().name()))) {
-                        source.setURI(uri);
-                        sheet = new CSSStyleSheet(element, source, uri);
+
+                    final InputStream in = response.getContentAsStreamWithBomIfApplicable();
+                    try {
+                        Charset cssEncoding = Charset.forName("windows-1252");
+                        final Charset contentCharset =
+                                EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
+                        if (contentCharset == null && request.getCharset() != null) {
+                            cssEncoding = request.getCharset();
+                        }
+                        else if (contentCharset != null) {
+                            cssEncoding = contentCharset;
+                        }
+
+                        sheet = null;
+                        if (in instanceof BOMInputStream) {
+                            try (BOMInputStream bomIn = (BOMInputStream) in) {
+                                // there seems to be a bug in BOMInputStream
+                                // we have to call this before hasBOM(ByteOrderMark)
+                                if (bomIn.hasBOM()) {
+                                    if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
+                                        cssEncoding = UTF_8;
+                                    }
+                                    else if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
+                                        cssEncoding = UTF_16BE;
+                                    }
+                                    else if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
+                                        cssEncoding = UTF_16LE;
+                                    }
+                                }
+                            }
+                        }
+
+                        try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding))) {
+                            source.setURI(uri);
+                            sheet = new CSSStyleSheet(element, source, uri);
+                        }
+                    }
+                    finally {
+                        in.close();
                     }
                 }
                 else {

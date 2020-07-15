@@ -275,6 +275,19 @@ public class WebResponse implements Serializable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return the associated InputStream wrapped with a bom input stream if applicable
+     * @throws IOException in case of IO problems
+     */
+    public InputStream getContentAsStreamWithBomIfApplicable() throws IOException {
+        if (responseData_ != null) {
+            return responseData_.getInputStreamWithBomIfApplicable(BOM_HEADERS);
+        }
+        return null;
+    }
+
+    /**
      * Returns the time it took to load this web response, in milliseconds.
      * @return the time it took to load this web response, in milliseconds
      */
