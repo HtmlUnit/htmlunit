@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
@@ -305,7 +304,8 @@ public class HtmlLink extends HtmlElement {
             @Override
             public void execute() {
                 final HTMLLinkElement linkElem = HtmlLink.this.getScriptableObject();
-                CSSStyleSheet.loadStylesheet(linkElem, HtmlLink.this, null);
+                // force loading, caching inside the link
+                linkElem.getSheet();
             }
         };
 
