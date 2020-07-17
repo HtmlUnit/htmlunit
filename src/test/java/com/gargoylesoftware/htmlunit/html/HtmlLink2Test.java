@@ -17,7 +17,13 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -26,10 +32,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlLink}.
@@ -368,5 +377,57 @@ public class HtmlLink2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], element.getAttribute("href"));
         assertEquals(getExpectedAlerts()[1], element.getText());
+    }
+
+    /**
+     * This is a WebDriver test because we need an OnFile
+     * cache entry.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testReloadAfterRemovalFromCache() throws Exception {
+        final WebDriver driver = getWebDriver();
+
+        int maxInMemory = 0;
+        if (driver instanceof HtmlUnitDriver) {
+            final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+            maxInMemory = webClient.getOptions().getMaxInMemory();
+        }
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Expires", new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").format(new Date(
+                System.currentTimeMillis()
+                    + (12 * DateUtils.MILLIS_PER_MINUTE)))));
+        final String bigContent = ".someRed { color: red; }" + StringUtils.repeat(' ', maxInMemory);
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"),
+                bigContent,  200, "OK", MimeType.TEXT_CSS, headers);
+
+        final String html = "<html><head>\n"
+            + "<link id='myId' href='simple.css'></link>\n"
+            + "</head><body>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+
+            final HtmlPage page = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+            final HtmlLink link = page.getFirstByXPath("//link");
+
+            assertTrue(webClient.getCache().getSize() == 0);
+            WebResponse respCss = link.getWebResponse(true);
+            assertEquals(bigContent, respCss.getContentAsString());
+
+            assertTrue(webClient.getCache().getSize() > 0);
+
+            webClient.getCache().clear();
+
+            respCss = link.getWebResponse(true);
+            // assertTrue(getWebClient().getCache().getSize() > 1);
+            assertEquals(bigContent, respCss.getContentAsString());
+        }
     }
 }

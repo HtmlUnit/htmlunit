@@ -55,7 +55,6 @@ public class HtmlLink extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "link";
-    private WebResponse cachedWebResponse_;
 
     /**
      * Creates an instance of HtmlLink
@@ -192,14 +191,15 @@ public class HtmlLink extends HtmlElement {
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request) throws IOException {
-        if (downloadIfNeeded && cachedWebResponse_ == null) {
-            final WebClient webclient = getPage().getWebClient();
-            if (null == request) {
-                request = getWebRequest();
-            }
+        final WebClient webclient = getPage().getWebClient();
+        if (null == request) {
+            request = getWebRequest();
+        }
+
+        if (downloadIfNeeded) {
             try {
-                cachedWebResponse_ = webclient.loadWebResponse(request);
-                final int statusCode = cachedWebResponse_.getStatusCode();
+                final WebResponse response = webclient.loadWebResponse(request);
+                final int statusCode = response.getStatusCode();
                 final boolean successful = statusCode >= HttpStatus.SC_OK
                                                 && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
                 if (successful) {
@@ -208,13 +208,16 @@ public class HtmlLink extends HtmlElement {
                 else {
                     executeEvent(Event.TYPE_ERROR);
                 }
+                return response;
             }
             catch (final IOException e) {
                 executeEvent(Event.TYPE_ERROR);
                 throw e;
             }
         }
-        return cachedWebResponse_;
+
+        // retrieve the response, from the cache if available
+        return webclient.getCache().getCachedResponse(request);
     }
 
     /**
