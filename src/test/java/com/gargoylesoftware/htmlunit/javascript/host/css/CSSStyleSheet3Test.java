@@ -315,7 +315,7 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""},
             IE = {"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void _ISO88591_ISO88591__BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }

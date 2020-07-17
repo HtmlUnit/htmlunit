@@ -287,7 +287,6 @@ public class CSSStyleSheet extends StyleSheet {
      * @return the loaded stylesheet
      */
     public static CSSStyleSheet loadStylesheet(final HTMLElement element, final HtmlLink link, final String url) {
-        CSSStyleSheet sheet;
         final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage();
         String uri = page.getUrl().toExternalForm();
         try {
@@ -329,80 +328,79 @@ public class CSSStyleSheet extends StyleSheet {
             final Object fromCache = cache.getCachedObject(request);
             if (fromCache instanceof CSSStyleSheetImpl) {
                 uri = request.getUrl().toExternalForm();
-                sheet = new CSSStyleSheet(element, (CSSStyleSheetImpl) fromCache, uri);
+                return new CSSStyleSheet(element, (CSSStyleSheetImpl) fromCache, uri);
             }
-            else {
-                uri = response.getWebRequest().getUrl().toExternalForm();
-                client.printContentIfNecessary(response);
-                client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-                // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
 
-                final String contentType = response.getContentType();
-                if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
+            uri = response.getWebRequest().getUrl().toExternalForm();
+            client.printContentIfNecessary(response);
+            client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+            // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
 
-                    final InputStream in = response.getContentAsStreamWithBomIfApplicable();
-                    try {
-                        Charset cssEncoding = Charset.forName("windows-1252");
-                        final Charset contentCharset =
-                                EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
-                        if (contentCharset == null && request.getCharset() != null) {
-                            cssEncoding = request.getCharset();
-                        }
-                        else if (contentCharset != null) {
-                            cssEncoding = contentCharset;
-                        }
+            final CSSStyleSheet sheet;
+            final String contentType = response.getContentType();
+            if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
 
-                        sheet = null;
-                        if (in instanceof BOMInputStream) {
-                            try (BOMInputStream bomIn = (BOMInputStream) in) {
-                                // there seems to be a bug in BOMInputStream
-                                // we have to call this before hasBOM(ByteOrderMark)
-                                if (bomIn.hasBOM()) {
-                                    if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
-                                        cssEncoding = UTF_8;
-                                    }
-                                    else if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
-                                        cssEncoding = UTF_16BE;
-                                    }
-                                    else if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
-                                        cssEncoding = UTF_16LE;
-                                    }
-                                }
+                final InputStream in = response.getContentAsStreamWithBomIfApplicable();
+                try {
+                    Charset cssEncoding = Charset.forName("windows-1252");
+                    final Charset contentCharset =
+                            EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
+                    if (contentCharset == null && request.getCharset() != null) {
+                        cssEncoding = request.getCharset();
+                    }
+                    else if (contentCharset != null) {
+                        cssEncoding = contentCharset;
+                    }
+
+                    if (in instanceof BOMInputStream) {
+                        final BOMInputStream bomIn = (BOMInputStream) in;
+                        // there seems to be a bug in BOMInputStream
+                        // we have to call this before hasBOM(ByteOrderMark)
+                        if (bomIn.hasBOM()) {
+                            if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
+                                cssEncoding = UTF_8;
+                            }
+                            else if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
+                                cssEncoding = UTF_16BE;
+                            }
+                            else if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
+                                cssEncoding = UTF_16LE;
                             }
                         }
-
-                        try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding))) {
-                            source.setURI(uri);
-                            sheet = new CSSStyleSheet(element, source, uri);
-                        }
                     }
-                    finally {
-                        in.close();
+                    try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding))) {
+                        source.setURI(uri);
+                        sheet = new CSSStyleSheet(element, source, uri);
                     }
                 }
-                else {
-                    sheet = new CSSStyleSheet(element, "", uri);
-                }
-
-                // cache the style sheet
-                if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
-                    response.cleanUp();
+                finally {
+                    in.close();
                 }
             }
+            else {
+                sheet = new CSSStyleSheet(element, "", uri);
+            }
+
+            // cache the style sheet
+            if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
+                response.cleanUp();
+            }
+
+            return sheet;
         }
         catch (final FailingHttpStatusCodeException e) {
             // Got a 404 response or something like that; behave nicely.
             if (LOG.isErrorEnabled()) {
                 LOG.error("Exception loading " + uri, e);
             }
-            sheet = new CSSStyleSheet(element, "", uri);
+            return new CSSStyleSheet(element, "", uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
             if (LOG.isErrorEnabled()) {
                 LOG.error("IOException loading " + uri, e);
             }
-            sheet = new CSSStyleSheet(element, "", uri);
+            return new CSSStyleSheet(element, "", uri);
         }
         catch (final RuntimeException e) {
             // Got something unexpected; we can throw an exception in this case.
@@ -418,7 +416,6 @@ public class CSSStyleSheet extends StyleSheet {
             }
             throw Context.reportRuntimeError("Exception: " + e);
         }
-        return sheet;
     }
 
     /**
@@ -930,6 +927,7 @@ public class CSSStyleSheet extends StyleSheet {
             final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null);
+            System.out.println(errorHandler);
         }
         catch (final Throwable t) {
             if (LOG.isErrorEnabled()) {
