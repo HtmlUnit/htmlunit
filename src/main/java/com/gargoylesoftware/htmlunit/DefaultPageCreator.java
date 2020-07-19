@@ -277,7 +277,11 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @throws IOException if the page could not be created
      */
     protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        return htmlParser_.parseHtml(webResponse, webWindow);
+        final HtmlPage page = new HtmlPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+
+        htmlParser_.parse(webResponse, page, false);
+        return page;
     }
 
     /**
@@ -289,7 +293,11 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @throws IOException if the page could not be created
      */
     protected XHtmlPage createXHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        return htmlParser_.parseXHtml(webResponse, webWindow);
+        final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+
+        htmlParser_.parse(webResponse, page, true);
+        return page;
     }
 
     /**

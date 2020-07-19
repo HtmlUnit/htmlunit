@@ -20,11 +20,9 @@ import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 
 /**
  * <p>Interface for the parser used to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
@@ -93,34 +91,12 @@ public interface HTMLParser {
     void parseFragment(DomNode parent, DomNode context, String source) throws SAXException, IOException;
 
     /**
-     * Parses the HTML content from the specified <tt>WebResponse</tt> into an object tree representation.
+     * Parses the WebResponse into an object tree representation.
      *
      * @param webResponse the response data
-     * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which is the root of the DOM tree
+     * @param page the HtmlPage to add the nodes
+     * @param xhtml if true use the XHtml parser
      * @throws IOException if there is an IO error
      */
-    HtmlPage parseHtml(WebResponse webResponse, WebWindow webWindow) throws IOException;
-
-    /**
-     * Parses the HTML content from the specified <tt>WebResponse</tt> into an object tree representation.
-     * Same as {@link #parseHtml(WebResponse, WebWindow)} but without replacing the windows enclosed page.
-     *
-     * @param webResponse the response data
-     * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which is the root of the DOM tree
-     * @throws IOException if there is an IO error
-     */
-    HtmlPage parseHtmlWithoutReplacingEnclosedPage(WebResponse webResponse, WebWindow webWindow) throws IOException;
-
-    /**
-     * Parses the XHTML content from the specified <tt>WebResponse</tt> into an object tree representation.
-     *
-     * @param webResponse the response data
-     * @param webWindow the web window into which the page is to be loaded
-     * @return the page object which is the root of the DOM tree
-     * @throws IOException if there is an IO error
-     */
-    XHtmlPage parseXHtml(WebResponse webResponse, WebWindow webWindow) throws IOException;
-
+    void parse(WebResponse webResponse, HtmlPage page, boolean xhtml) throws IOException;
 }

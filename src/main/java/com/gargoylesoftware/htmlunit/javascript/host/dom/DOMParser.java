@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -84,10 +85,24 @@ public class DOMParser extends SimpleScriptable {
             final WebWindow webWindow = getWindow().getWebWindow();
             final WebClient webClient = webWindow.getWebClient();
             final WebResponse webResponse = new StringWebResponse(str, webWindow.getEnclosedPage().getUrl());
+
+            // a similar impl is in
+            // com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation.createHTMLDocument(Object)
             try {
+                final HtmlPage page = new HtmlPage(webResponse, webWindow);
+                page.setEnclosingWindow(null);
+                final Window window = webWindow.getScriptableObject();
+
+                // document knows the window but is not the windows document
+                final HTMLDocument document = new HTMLDocument();
+                document.setParentScope(window);
+                document.setPrototype(window.getPrototype(document.getClass()));
+                // document.setWindow(window);
+                document.setDomNode(page);
+
                 final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-                final HtmlPage htmlPage = htmlParser.parseHtmlWithoutReplacingEnclosedPage(webResponse, webWindow);
-                return (HTMLDocument) htmlPage.getScriptableObject();
+                htmlParser.parse(webResponse, page, false);
+                return (HTMLDocument) page.getScriptableObject();
             }
             catch (final IOException e) {
                 throw Context.reportRuntimeError("Parsing failed" + e.getMessage());

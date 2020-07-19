@@ -42,19 +42,19 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
+import java.io.IOException;
+
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -267,32 +267,38 @@ public class DOMImplementation extends SimpleScriptable {
             throw Context.reportRuntimeError("Title is required");
         }
 
-        final HTMLDocument document = new HTMLDocument();
-        document.setParentScope(getParentScope());
-        document.setPrototype(getPrototype(document.getClass()));
+        // a similar impl is in
+        // com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser.parseFromString(String, Object)
+        try {
+            final WebWindow webWindow = getWindow().getWebWindow();
+            final String html;
+            if (Undefined.isUndefined(titleObj)) {
+                html = "<html><head></head><body></body></html>";
+            }
+            else {
+                html = "<html><head><title>"
+                        + Context.toString(titleObj)
+                        + "</title></head><body></body></html>";
+            }
+            final WebResponse webResponse = new StringWebResponse(html, WebClient.URL_ABOUT_BLANK);
+            final HtmlPage page = new HtmlPage(webResponse, webWindow);
+            // According to spec and behavior of function in browsers new document
+            // has no location object and is not connected with any window
+            page.setEnclosingWindow(null);
 
-        // According to spec and behavior of function in browsers new document
-        // has no location object and is not connected with any window
-        final WebResponse resp = new StringWebResponse("", WebClient.URL_ABOUT_BLANK);
-        final HtmlPage page = new HtmlPage(resp, getWindow().getWebWindow());
-        page.setEnclosingWindow(null);
-        document.setDomNode(page);
+            // document knows the window but is not the windows document
+            final HTMLDocument document = new HTMLDocument();
+            document.setParentScope(getWindow());
+            document.setPrototype(getPrototype(document.getClass()));
+            // document.setWindow(getWindow());
+            document.setDomNode(page);
 
-        final HTMLHtmlElement html = (HTMLHtmlElement) document.createElement("html");
-        page.appendChild(html.getDomNodeOrDie());
-
-        final HTMLHeadElement head = (HTMLHeadElement) document.createElement("head");
-        html.appendChild(head);
-
-        if (!Undefined.isUndefined(titleObj)) {
-            final HTMLTitleElement title = (HTMLTitleElement) document.createElement("title");
-            head.appendChild(title);
-            title.setTextContent(Context.toString(titleObj));
+            final HTMLParser htmlParser = webWindow.getWebClient().getPageCreator().getHtmlParser();
+            htmlParser.parse(webResponse, page, false);
+            return (HTMLDocument) page.getScriptableObject();
         }
-
-        final HTMLBodyElement body = (HTMLBodyElement) document.createElement("body");
-        html.appendChild(body);
-
-        return document;
+        catch (final IOException e) {
+            throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
+        }
     }
 }
