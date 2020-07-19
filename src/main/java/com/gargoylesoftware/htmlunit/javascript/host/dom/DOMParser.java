@@ -14,10 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import java.io.IOException;
+
+import com.gargoylesoftware.htmlunit.StringWebResponse;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -29,6 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  *
  * @see <a href="http://www.w3.org/TR/DOM-Parsing/">W3C Spec</a>
  * @see <a href="http://domparsing.spec.whatwg.org/">WhatWG Spec</a>
@@ -55,19 +65,35 @@ public class DOMParser extends SimpleScriptable {
      * @return the generated document
      */
     @JsxFunction
-    public XMLDocument parseFromString(final String str, final Object type) {
+    public Document parseFromString(final String str, final Object type) {
         if (type == null || Undefined.isUndefined(type)) {
             throw Context.reportRuntimeError("Missing 'type' parameter");
         }
-        if (!MimeType.TEXT_HTML.equals(type) && !MimeType.TEXT_XML.equals(type) && !"application/xml".equals(type)
-            && !MimeType.APPLICATION_XHTML.equals(type) && !"image/svg+xml".equals(type)) {
-            throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
+        if (MimeType.TEXT_XML.equals(type)
+                || "application/xml".equals(type)
+                || MimeType.APPLICATION_XHTML.equals(type)
+                || "image/svg+xml".equals(type)) {
+            final XMLDocument document = new XMLDocument();
+            document.setParentScope(getParentScope());
+            document.setPrototype(getPrototype(XMLDocument.class));
+            document.loadXML(str);
+            return document;
         }
 
-        final XMLDocument document = new XMLDocument();
-        document.setParentScope(getParentScope());
-        document.setPrototype(getPrototype(XMLDocument.class));
-        document.loadXML(str);
-        return document;
+        if (MimeType.TEXT_HTML.equals(type)) {
+            final WebWindow webWindow = getWindow().getWebWindow();
+            final WebClient webClient = webWindow.getWebClient();
+            final WebResponse webResponse = new StringWebResponse(str, webWindow.getEnclosedPage().getUrl());
+            try {
+                final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+                final HtmlPage htmlPage = htmlParser.parseHtmlWithoutReplacingEnclosedPage(webResponse, webWindow);
+                return (HTMLDocument) htmlPage.getScriptableObject();
+            }
+            catch (final IOException e) {
+                throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
+            }
+        }
+
+        throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
     }
 }

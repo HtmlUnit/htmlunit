@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -29,6 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DOMParserTest extends WebDriverTestCase {
@@ -56,8 +56,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLDocument]")
-    @NotYetImplemented
+    @Alerts({"[object HTMLDocument]", "", "§§URL§§"})
     public void parseFromString_text_html() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -67,6 +66,32 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/html');\n"
             + "      alert(doc);\n"
+            + "      alert(doc.body.innerHTML);\n"
+            + "      alert(doc.URL);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLDocument]", "<div></div>", "§§URL§§"})
+    public void parseFromString_text_html_div() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<div></div>';\n"
+            + "    try {\n"
+            + "      var parser = new DOMParser();\n"
+            + "      var doc = parser.parseFromString(text, 'text/html');\n"
+            + "      alert(doc);\n"
+            + "      alert(doc.body.innerHTML);\n"
+            + "      alert(doc.URL);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

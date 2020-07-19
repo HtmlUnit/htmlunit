@@ -58,6 +58,8 @@ import com.gargoylesoftware.htmlunit.html.UnknownElementFactory;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
 import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
@@ -176,7 +178,37 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     @Override
     public HtmlPage parseHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
-        parse(webResponse, webWindow, page, false);
+        webWindow.setEnclosedPage(page);
+
+        parse(webResponse, page, false);
+        return page;
+    }
+
+    /**
+     * Parses the HTML content from the specified <tt>WebResponse</tt> into an object tree representation.
+     * Same as {@link #parseHtml(WebResponse, WebWindow)} but without replacing the windows enclosed page.
+     *
+     * @param webResponse the response data
+     * @param webWindow the web window into which the page is to be loaded
+     * @return the page object which is the root of the DOM tree
+     * @throws IOException if there is an IO error
+     */
+    @Override
+    public HtmlPage parseHtmlWithoutReplacingEnclosedPage(final WebResponse webResponse,
+                final WebWindow webWindow) throws IOException {
+        final HtmlPage page = new HtmlPage(webResponse, webWindow);
+
+        final Window window = page.getEnclosingWindow().getScriptableObject();
+
+        // document knows the window but is not the windows document
+        final HTMLDocument document = new HTMLDocument();
+        document.setParentScope(window);
+        document.setPrototype(window.getPrototype(document.getClass()));
+        document.setWindow(window);
+
+        document.setDomNode(page);
+
+        parse(webResponse, page, false);
         return page;
     }
 
@@ -191,15 +223,15 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     @Override
     public XHtmlPage parseXHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
-        parse(webResponse, webWindow, page, true);
+        webWindow.setEnclosedPage(page);
+
+        parse(webResponse, page, true);
         return page;
     }
 
-    private void parse(final WebResponse webResponse, final WebWindow webWindow, final HtmlPage page,
+    private void parse(final WebResponse webResponse, final HtmlPage page,
             final boolean xhtml)
         throws IOException {
-
-        webWindow.setEnclosedPage(page);
 
         final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitNekoDOMBuilder domBuilder = new HtmlUnitNekoDOMBuilder(this, page, url, null);

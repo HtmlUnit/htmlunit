@@ -103,6 +103,17 @@ public interface HTMLParser {
     HtmlPage parseHtml(WebResponse webResponse, WebWindow webWindow) throws IOException;
 
     /**
+     * Parses the HTML content from the specified <tt>WebResponse</tt> into an object tree representation.
+     * Same as {@link #parseHtml(WebResponse, WebWindow)} but without replacing the windows enclosed page.
+     *
+     * @param webResponse the response data
+     * @param webWindow the web window into which the page is to be loaded
+     * @return the page object which is the root of the DOM tree
+     * @throws IOException if there is an IO error
+     */
+    HtmlPage parseHtmlWithoutReplacingEnclosedPage(WebResponse webResponse, WebWindow webWindow) throws IOException;
+
+    /**
      * Parses the XHTML content from the specified <tt>WebResponse</tt> into an object tree representation.
      *
      * @param webResponse the response data
