@@ -217,6 +217,7 @@ public class Cache implements Serializable {
      */
     protected boolean isCacheable(final WebRequest request, final WebResponse response) {
         return HttpMethod.GET == response.getWebRequest().getHttpMethod()
+            && WebClient.URL_ABOUT_BLANK != request.getUrl()
             && isCacheableContent(response);
     }
 
