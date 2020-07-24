@@ -8,6 +8,24 @@
 
     <body>
         <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, FF60 removed">
+            <action type="fix" dev="rbri">
+                core-js: Throw if the lastIndex prop of an regex is readonly.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Support RegEx[Symbol.match]() and RegEx[Symbol.search]().
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Object.setPrototypeOf() arg[0] has to be coercible.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Reduce auto boxing, make some more methods static and general code cleanup.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: String.prototype[Symbol.iterator].call(undefined) has to throw because undefined is not coercible.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix String.indexOf and String.includes when searching for an empty string.
+            </action>
             <action type="fix" dev="rbri" issue="#193">
                 DOMParser.parseFromString now supports the creation of HTMLDocuments also.
             </action>
