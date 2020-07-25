@@ -1247,13 +1247,13 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                        "null", "null", "no ActiveX"},
-            CHROME = {"null", "text/html,application/xhtml+xml,application/xml;"
+    @Alerts(DEFAULT = {"null", "text/html,application/xhtml+xml,application/xml;"
                     + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                         "null", "null", "no ActiveX"},
             FF = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                         "null", "null", "no ActiveX"},
+    		FF68 = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    					"null", "null", "no ActiveX"},
             IE = {"bar",
                    "application/javascript",
                    "null",
