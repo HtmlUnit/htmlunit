@@ -188,10 +188,10 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
+    @Alerts(DEFAULT = "[object HTMLElement]",
             FF = "[object HTMLElement]",
-            FF68 = "[object HTMLElement]")
+            FF68 = "[object HTMLElement]",
+            IE = "[object HTMLUnknownElement]")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -688,10 +688,10 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLImageElement]",
-            CHROME = "[object HTMLUnknownElement]",
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLElement]",
-            FF68 = "[object HTMLElement]")
+            FF68 = "[object HTMLElement]",
+            IE = "[object HTMLImageElement]")
     public void image() throws Exception {
         test("image");
     }
@@ -780,9 +780,9 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            CHROME = "[object HTMLUnknownElement]",
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLUnknownElement]",
+            FF68= "[object HTMLSpanElement]",
             IE = "[object HTMLBlockElement]")
     public void keygen() throws Exception {
         test("keygen");
@@ -1669,7 +1669,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLDialogElement]")
+            CHROME = "[object HTMLDialogElement]",
+            EDGE = "[object HTMLDialogElement]")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -1770,7 +1771,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+            CHROME = "[object HTMLElement]",
+            EDGE = "[object HTMLElement]")
     public void layer() throws Exception {
         test("layer");
     }
@@ -1816,7 +1818,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+            CHROME = "[object HTMLElement]",
+            EDGE = "[object HTMLElement]")
     public void noLayer() throws Exception {
         test("nolayer");
     }
@@ -2022,7 +2025,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLContentElement]")
+            CHROME = "[object HTMLContentElement]",
+            EDGE = "[object HTMLContentElement]")
     public void content() throws Exception {
         test("content");
     }
@@ -2057,10 +2061,10 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLSlotElement]",
+    @Alerts(DEFAULT = "[object HTMLSlotElement]",
             FF = "[object HTMLSlotElement]",
-            FF68 = "[object HTMLSlotElement]")
+            FF68 = "[object HTMLSlotElement]",
+            EDGE = "[object HTMLUnknownElement]")
     public void slot() throws Exception {
         test("slot");
     }

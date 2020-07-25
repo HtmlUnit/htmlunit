@@ -108,6 +108,9 @@ public final class BrowserVersion implements Serializable {
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
+    /** Edge */
+    public static final BrowserVersion EDGE = new BrowserVersion(84, "Edge");
+
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(83, "Chrome");
 
@@ -246,6 +249,46 @@ public final class BrowserVersion implements Serializable {
             113, 115, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 136, 137,
             138, 139, 140, 142, 142, 143, 144, 145, 147};
 
+        // EDGE
+        EDGE.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
+        EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
+
+        EDGE.applicationCodeName_ = "Mozilla";
+        EDGE.vendor_ = "Google Inc.";
+        EDGE.platform_ = PLATFORM_WIN32;
+        EDGE.cpuClass_ = null;
+        EDGE.productSub_ = "20030107";
+        EDGE.headerNamesOrdered_ = new String[] {
+            HttpHeader.HOST,
+            HttpHeader.CONNECTION,
+            "Upgrade-Insecure-Requests",
+            HttpHeader.USER_AGENT,
+            HttpHeader.ACCEPT,
+            HttpHeader.SEC_FETCH_SITE,
+            HttpHeader.SEC_FETCH_MODE,
+            HttpHeader.SEC_FETCH_USER,
+            HttpHeader.SEC_FETCH_DEST,
+            HttpHeader.REFERER,
+            HttpHeader.ACCEPT_ENCODING,
+            HttpHeader.ACCEPT_LANGUAGE,
+            HttpHeader.COOKIE};
+        EDGE.acceptEncodingHeader_ = "gzip, deflate, br";
+        EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;"
+                                            + "q=0.8,application/signed-exchange;v=b3;q=0.9";
+        EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
+        EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        EDGE.scriptAcceptHeader_ = "*/*";
+        // there are other issues with Chrome; a different productSub, etc.
+        EDGE.fontHeights_ = new int[] {
+            0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
+            27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
+            58, 58, 59, 60, 62, 63, 64, 65, 67, 69, 69, 70, 71, 73, 74, 75, 76, 77, 79, 79, 80, 81, 83, 84, 85, 86,
+            87, 89, 90, 90, 91, 93, 94, 96, 97, 98, 100, 101, 101, 102, 103, 105, 106, 107, 108, 110, 111, 111, 112,
+            113, 115, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 136, 137,
+            138, 139, 140, 142, 142, 143, 144, 145, 147};
+
         // default file upload mime types
         CHROME.registerUploadMimeType("html", MimeType.TEXT_HTML);
         CHROME.registerUploadMimeType("htm", MimeType.TEXT_HTML);
@@ -273,6 +316,33 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("xhtm", "application/xhtml+xml");
         CHROME.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
         CHROME.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
+
+        EDGE.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        EDGE.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        EDGE.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        EDGE.registerUploadMimeType("xml", MimeType.TEXT_XML);
+        EDGE.registerUploadMimeType("gif", "image/gif");
+        EDGE.registerUploadMimeType("jpeg", "image/jpeg");
+        EDGE.registerUploadMimeType("jpg", "image/jpeg");
+        EDGE.registerUploadMimeType("png", "image/png");
+        EDGE.registerUploadMimeType("webp", "image/webp");
+        EDGE.registerUploadMimeType("mp4", "video/mp4");
+        EDGE.registerUploadMimeType("m4v", "video/mp4");
+        EDGE.registerUploadMimeType("m4a", "audio/x-m4a");
+        EDGE.registerUploadMimeType("mp3", "audio/mpeg");
+        EDGE.registerUploadMimeType("ogv", "video/ogg");
+        EDGE.registerUploadMimeType("ogm", "video/ogg");
+        EDGE.registerUploadMimeType("ogg", "audio/ogg");
+        EDGE.registerUploadMimeType("oga", "audio/ogg");
+        EDGE.registerUploadMimeType("opus", "audio/ogg");
+        EDGE.registerUploadMimeType("webm", "video/webm");
+        EDGE.registerUploadMimeType("wav", "audio/wav");
+        EDGE.registerUploadMimeType("flac", "audio/flac");
+        EDGE.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        EDGE.registerUploadMimeType("xht", "application/xhtml+xml");
+        EDGE.registerUploadMimeType("xhtm", "application/xhtml+xml");
+        EDGE.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        EDGE.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
         FIREFOX_68.registerUploadMimeType("html", MimeType.TEXT_HTML);
         FIREFOX_68.registerUploadMimeType("htm", MimeType.TEXT_HTML);

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -87,6 +88,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, true));
                 }
+                if (browsers.contains("edge")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.EDGE, true));
+                }
             }
 
             if (browsers.contains("hu-chrome")) {
@@ -100,6 +104,9 @@ public class BrowserRunner extends Suite {
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
+            }
+            if (browsers.contains("hu-edge")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.EDGE, false));
             }
         }
         else {
@@ -158,6 +165,9 @@ public class BrowserRunner extends Suite {
         /** Internet Explorer 11. */
         IE,
 
+        /** Edge. */
+        EDGE,
+
         /** Firefox. */
         FF,
 
@@ -191,13 +201,19 @@ public class BrowserRunner extends Suite {
         String[] IE() default { EMPTY_DEFAULT };
 
         /**
+         * Alerts for latest Edge.
+         * @return the alerts
+         */
+        String[] EDGE() default { EMPTY_DEFAULT };
+
+        /**
          * Alerts for latest Firefox.
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 68.
          * @return the alerts
          */
         String[] FF68() default { EMPTY_DEFAULT };
@@ -231,13 +247,19 @@ public class BrowserRunner extends Suite {
         String[] value() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for any Internet Explorer, it can be overridden by specific IE version.
+         * Alerts for Internet Explorer 11.
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for any Firefox, it can be overridden by specific FF version.
+         * Alerts for latest Edge.
+         * @return the alerts
+         */
+        String[] EDGE() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for latest Firefox.
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
@@ -276,7 +298,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         TestedBrowser[] value() default {
-            IE, FF68, FF, CHROME
+            IE, EDGE, FF68, FF, CHROME
         };
     }
 
@@ -298,6 +320,12 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for latest Edge.
+         * @return the alerts
+         */
+        String[] EDGE() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for any Firefox, it can be overridden by specific FF version.
@@ -343,8 +371,15 @@ public class BrowserRunner extends Suite {
          */
         String[] IE() default { EMPTY_DEFAULT };
 
+
         /**
-         * Alerts for Firefox.
+         * Alerts for latest Edge.
+         * @return the alerts
+         */
+        String[] EDGE() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for latest Firefox.
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
