@@ -102,7 +102,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            EDGE = {"block", "block"})
+            IE = {"block", "block"})
     public void address() throws Exception {
         test("address");
     }
@@ -140,7 +140,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            EDGE = {"block", "block"})
+            IE = {"block", "block"})
     public void article() throws Exception {
         test("article");
     }
@@ -152,7 +152,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            EDGE = {"block", "block"})
+            IE = {"block", "block"})
     public void aside() throws Exception {
         test("aside");
     }
@@ -263,10 +263,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void blockquote() throws Exception {
         test("blockquote");
     }
@@ -277,10 +275,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void body() throws Exception {
         test("body");
     }
@@ -351,10 +347,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void center() throws Exception {
         test("center");
     }
@@ -401,10 +395,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void datalist() throws Exception {
         test("datalist");
     }
@@ -430,10 +422,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "block"},
             FF68 = {"", "inline"},
             IE = {"block", "block"})
-    @AlertsStandards(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @AlertsStandards(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void dd() throws Exception {
         test("dd");
     }
@@ -480,10 +470,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void dir() throws Exception {
         test("dir");
     }
@@ -494,10 +482,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void div() throws Exception {
         test("div");
     }
@@ -508,10 +494,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void dl() throws Exception {
         test("dl");
     }
@@ -522,10 +506,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void dt() throws Exception {
         test("dt");
     }
@@ -560,10 +542,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -574,10 +554,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void figcaption() throws Exception {
         test("figcaption");
     }
@@ -588,10 +566,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void figure() throws Exception {
         test("figure");
     }
@@ -614,10 +590,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void form() throws Exception {
         test("form");
     }
@@ -628,10 +602,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void footer() throws Exception {
         test("footer");
     }
@@ -656,10 +628,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void frameset() throws Exception {
         test("frameset");
     }
@@ -670,10 +640,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void head() throws Exception {
         test("head");
     }
@@ -684,10 +652,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void header() throws Exception {
         test("header");
     }
@@ -698,10 +664,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void h1() throws Exception {
         test("h1");
     }
@@ -712,10 +676,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void h2() throws Exception {
         test("h2");
     }
@@ -726,10 +688,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void h3() throws Exception {
         test("h3");
     }
@@ -740,10 +700,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void h4() throws Exception {
         test("h4");
     }
@@ -754,10 +712,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void h5() throws Exception {
         test("h5");
     }
@@ -768,10 +724,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void h6() throws Exception {
         test("h6");
     }
@@ -782,10 +736,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void hr() throws Exception {
         test("hr");
     }
@@ -796,10 +748,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void html() throws Exception {
         test("html");
     }
@@ -954,10 +904,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void listing() throws Exception {
         test("listing");
     }
@@ -1040,10 +988,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void menu() throws Exception {
         test("menu");
     }
@@ -1066,10 +1012,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void meta() throws Exception {
         test("meta");
     }
@@ -1106,10 +1050,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void nav() throws Exception {
         test("nav");
     }
@@ -1144,10 +1086,10 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "inline"},
+    @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "none"},
-            FF68 = {"", "none"})
+            FF68 = {"", "none"},
+            IE = {"none", "none"})
     public void noembed() throws Exception {
         test("noembed");
     }
@@ -1158,10 +1100,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void noframes() throws Exception {
         test("noframes");
     }
@@ -1184,10 +1124,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "inline"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            EDGE = {"", "inline"},
+            IE = {"none", "none"})
     public void noscript() throws Exception {
         test("noscript");
     }
@@ -1210,10 +1149,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void ol() throws Exception {
         test("ol");
     }
@@ -1260,10 +1197,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void p() throws Exception {
         test("p");
     }
@@ -1286,10 +1221,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void plaintext() throws Exception {
         test("plaintext");
     }
@@ -1300,10 +1233,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void pre() throws Exception {
         test("pre");
     }
@@ -1390,10 +1321,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void script() throws Exception {
         test("script");
     }
@@ -1404,10 +1333,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void section() throws Exception {
         test("section");
     }
@@ -1490,10 +1417,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void style() throws Exception {
         test("style");
     }
@@ -1552,10 +1477,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"table", "table"},
-            CHROME = {"", "table"},
-            FF = {"", "table"},
-            FF68 = {"", "table"})
+    @Alerts(DEFAULT = {"", "table"},
+            IE = {"table", "table"})
     public void table() throws Exception {
         test("table");
     }
@@ -1700,10 +1623,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"none", "none"},
-            CHROME = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"})
+    @Alerts(DEFAULT = {"", "none"},
+            IE = {"none", "none"})
     public void title() throws Exception {
         test("title");
     }
@@ -1738,10 +1659,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void ul() throws Exception {
         test("ul");
     }
@@ -1788,10 +1707,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "block"},
-            CHROME = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"})
+    @Alerts(DEFAULT = {"", "block"},
+            IE = {"block", "block"})
     public void xmp() throws Exception {
         test("xmp");
     }
