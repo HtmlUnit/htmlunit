@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.general.HostExtractor;
  * or the {@link com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 final class TestCaseCorrector {
 
@@ -199,7 +200,7 @@ final class TestCaseCorrector {
                 }
             }
             else {
-                final List<String> allBrowsers = new ArrayList<>(Arrays.asList("CHROME", "IE", "FF60"));
+                final List<String> allBrowsers = new ArrayList<>(Arrays.asList("CHROME", "EDGE", "FF", "FF68", "IE"));
                 for (final Iterator<String> it = allBrowsers.iterator(); it.hasNext();) {
                     if (it.next().equals(browserString)) {
                         it.remove();

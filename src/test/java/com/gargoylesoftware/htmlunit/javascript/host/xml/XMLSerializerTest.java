@@ -176,6 +176,12 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>",
+            EDGE = "<?xml32version=\"1.0\"32encoding=\"UTF-8\"?><html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                    + "<head><title>html</title></head>"
+                    + "<body32id=\"bodyId\">"
+                    + "<span32class=\"spanClass\">foo</span>"
+                    + "</body>"
+                    + "</html>",
             IE = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body>"
@@ -521,6 +527,12 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "    <artist>Bob Dylan</artist>\n"
                     + "  </cd>\n"
                     + "</catalog>",
+            EDGE = "<catalog>\n"
+                    + "  <cd>\n"
+                    + "    <title>Empire Burlesque</title>\n"
+                    + "    <artist>Bob Dylan</artist>\n"
+                    + "  </cd>\n"
+                    + "</catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
             FF68 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -558,6 +570,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = "exception",
             CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
             FF68 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -584,6 +597,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = "exception",
             CHROME = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
+            EDGE = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
             FF68 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"

@@ -864,7 +864,8 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            CHROME = "§§URL§§a.html?p1=sieben&p2")
+            CHROME = "§§URL§§a.html?p1=sieben&p2",
+            EDGE = "§§URL§§a.html?p1=sieben&p2")
     public void reloadGet() throws Exception {
         final String html =
               "<html>\n"
@@ -903,8 +904,9 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "null", "§§URL§§/"},
-            FF = {"3", "§§URL§§", "§§URL§§/"},
-            CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"})
+            CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
+            EDGE = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
+            FF = {"3", "§§URL§§", "§§URL§§/"})
     // FF opens a confirmation window for the post
     @BuggyWebDriver(FF68 = {"2", "null", "§§URL§§/"})
     public void reloadPost() throws Exception {

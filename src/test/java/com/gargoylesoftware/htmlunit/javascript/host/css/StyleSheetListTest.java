@@ -239,7 +239,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "2"},
-            CHROME = {"1", "1"})
+            CHROME = {"1", "1"},
+            EDGE = {"1", "1"})
     @NotYetImplemented(CHROME)
     public void dynamicAddedStyleSheet() throws Exception {
         final String html =

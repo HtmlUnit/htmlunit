@@ -35,10 +35,11 @@ public class SVGTextElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTextElement]",
+    @Alerts(CHROME = "function SVGTextElement() { [native code] }",
+            EDGE = "function SVGTextElement() { [native code] }",
             FF = "function SVGTextElement() {\n    [native code]\n}",
             FF68 = "function SVGTextElement() {\n    [native code]\n}",
-            CHROME = "function SVGTextElement() { [native code] }")
+            IE = "[object SVGTextElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

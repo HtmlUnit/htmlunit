@@ -38,7 +38,7 @@ public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
-            // chrome
+            // Chrome
             Pattern.compile("Starting ChromeDriver "
                     + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
                     + " \\(.*\\) on port \\d*\r?\n"
@@ -53,6 +53,15 @@ public class ErrorOutputChecker implements TestRule {
                     + "The given encoding is not supported.\r?\n"),
             Pattern.compile("JavaScript error: http://localhost:[0-9]*/, line [0-9]*: "
                     + "SyntaxError: missing \\( before formal parameters\r?\n"),
+
+            // Edge
+            Pattern.compile("Starting MSEdgeDriver "
+                    + ExternalTest.EDGE_DRIVER_.replace(".", "\\.")
+                    + " \\(.*\\) on port \\d*\r?\n"
+                    + "Only local connections are allowed\\.\r?\n"
+                    + "Please see https://chromedriver.chromium.org/security-considerations"
+                        + " for suggestions on keeping MSEdgeDriver safe\\.\r?\n"
+                    + "MSEdgeDriver was started successfully\\.\r?\n"),
 
             // FF
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"

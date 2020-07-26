@@ -35,10 +35,10 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTSpanElement]",
+    @Alerts(DEFAULT = "function SVGTSpanElement() { [native code] }",
             FF = "function SVGTSpanElement() {\n    [native code]\n}",
             FF68 = "function SVGTSpanElement() {\n    [native code]\n}",
-            CHROME = "function SVGTSpanElement() { [native code] }")
+            IE = "[object SVGTSpanElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

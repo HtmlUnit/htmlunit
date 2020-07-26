@@ -1560,6 +1560,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "true",
+            EDGE = "true",
             IE = "auto")
     public void offscreenBuffering() throws Exception {
         final String html
@@ -2237,12 +2238,12 @@ public class Window3Test extends WebDriverTestCase {
                 "listener: return true",
                 "property: return false",
                 "listener: return true",
-                "listener: prevented=false returnValue: undefined -> false (false)",
-                "listener: prevented=false returnValue: false -> true (true)",
-                "listener: prevented=false returnValue: true -> preventDefault() (true)",
-                "property: prevented=true returnValue: true -> return true",
-                "listener: prevented=true returnValue: true -> x (x)",
-                "listener: prevented=true returnValue: x -> null (null)"},
+                "listener: prevented=false returnValue: true -> false (false)",
+                "listener: prevented=true returnValue: false -> true (false)",
+                "listener: prevented=true returnValue: false -> preventDefault() (false)",
+                "property: prevented=true returnValue: false -> return true",
+                "listener: prevented=true returnValue: false -> x (false)",
+                "listener: prevented=true returnValue: false -> null (false)"},
             FF = {"listener: stop propagation & return false",
                 "FIRED a1",
                 "listener: return true",
@@ -2265,17 +2266,17 @@ public class Window3Test extends WebDriverTestCase {
                 "property: prevented=true returnValue: false -> return true",
                 "listener: prevented=true returnValue: false -> x (false)",
                 "listener: prevented=true returnValue: false -> null (false)"},
-            CHROME = {"listener: stop propagation & return false",
+            IE = {"listener: stop propagation & return false",
                 "FIRED a1",
                 "listener: return true",
                 "property: return false",
                 "listener: return true",
-                "listener: prevented=false returnValue: true -> false (false)",
-                "listener: prevented=true returnValue: false -> true (false)",
-                "listener: prevented=true returnValue: false -> preventDefault() (false)",
-                "property: prevented=true returnValue: false -> return true",
-                "listener: prevented=true returnValue: false -> x (false)",
-                "listener: prevented=true returnValue: false -> null (false)"})
+                "listener: prevented=false returnValue: undefined -> false (false)",
+                "listener: prevented=false returnValue: false -> true (true)",
+                "listener: prevented=false returnValue: true -> preventDefault() (true)",
+                "property: prevented=true returnValue: true -> return true",
+                "listener: prevented=true returnValue: true -> x (x)",
+                "listener: prevented=true returnValue: x -> null (null)"})
     public void stopPropagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
