@@ -36,7 +36,7 @@
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.34</checkstyle.version>
         <spotbugs.version>4.0.6</spotbugs.version>
-        <pmd.version>6.25.0</pmd.version>
+        <pmd.version>6.26.0</pmd.version>
     </properties>
 
     <build>
@@ -1112,7 +1112,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.8</version>
+            <version>1.9</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>

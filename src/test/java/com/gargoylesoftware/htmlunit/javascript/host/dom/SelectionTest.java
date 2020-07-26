@@ -150,9 +150,9 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                  	"2:s2/1/s2/1/true/Caret/1/["},
+                        "2:s2/1/s2/1/true/Caret/1/["},
             IE = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
-                    "2:s2/1/s2/1/true/undefined/1/["})
+                        "2:s2/1/s2/1/true/undefined/1/["})
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
