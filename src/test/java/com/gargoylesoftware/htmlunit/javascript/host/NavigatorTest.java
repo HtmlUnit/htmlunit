@@ -98,6 +98,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string", "20100101"},
             CHROME = {"string", "20030107"},
+            EDGE = {"string", "20030107"},
             IE = {"undefined", "undefined"})
     public void productSub() throws Exception {
         final String html = "<html><head><script>\n"
@@ -254,7 +255,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "exception")
+            CHROME = "exception",
+            EDGE = "exception")
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -402,7 +404,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"Google Inc.", ""},
+    @Alerts(DEFAULT = {"Google Inc.", ""},
             FF = {"", ""},
             FF68 = {"", ""},
             IE = {"", "undefined"})
@@ -447,7 +449,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            CHROME = {"[object NetworkInformation]", "undefined", "undefined"})
+            CHROME = {"[object NetworkInformation]", "undefined", "undefined"},
+            EDGE = {"[object NetworkInformation]", "undefined", "undefined"})
     public void connection() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -470,6 +473,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"unspecified", "undefined", "undefined"},
             CHROME = {"null", "undefined", "undefined"},
+            EDGE = {"null", "undefined", "undefined"},
             IE = {"undefined", "undefined", "null"})
     public void doNotTrack() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

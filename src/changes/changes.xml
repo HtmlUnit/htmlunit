@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, Rhino fixes, Edge added, FF60 removed">
+        <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, Rhino fixes, Chrome 84, Edge added, FF60 removed">
             <action type="fix" dev="rbri">
                 core-js: Throw if the lastIndex prop of an regex is readonly.
             </action>

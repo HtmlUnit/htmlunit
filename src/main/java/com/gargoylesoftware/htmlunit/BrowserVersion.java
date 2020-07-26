@@ -112,7 +112,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion EDGE = new BrowserVersion(84, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(83, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(84, "Chrome");
 
     /**
      * The best supported browser version at the moment.
@@ -209,11 +209,11 @@ public final class BrowserVersion implements Serializable {
             115, 116, 117, 118, 120, 121, 122, 123, 124, 125, 126, 128, 129, 130, 131, 132, 133, 135, 136, 137, 138,
             139, 140, 141, 143, 144, 145, 146, 147};
 
-        // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
+        // CHROME (Win10 64bit)
+        CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -249,11 +249,13 @@ public final class BrowserVersion implements Serializable {
             113, 115, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 136, 137,
             138, 139, 140, 142, 142, 143, 144, 145, 147};
 
-        // EDGE
-        EDGE.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
-        EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4103.61 Safari/537.36";
+        // EDGE (Win10 64bit)
+        EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.522.44";
+        EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.522.44";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";

@@ -189,8 +189,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
-            FF = "[object HTMLElement]",
-            FF68 = "[object HTMLElement]",
             IE = "[object HTMLUnknownElement]")
     public void bdi() throws Exception {
         test("bdi");
@@ -781,7 +779,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLUnknownElement]",
             FF68= "[object HTMLSpanElement]",
             IE = "[object HTMLBlockElement]")
     public void keygen() throws Exception {
@@ -2062,8 +2059,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLSlotElement]",
-            FF = "[object HTMLSlotElement]",
-            FF68 = "[object HTMLSlotElement]",
             EDGE = "[object HTMLUnknownElement]")
     public void slot() throws Exception {
         test("slot");

@@ -102,8 +102,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"},
             EDGE = {"block", "block"})
     public void address() throws Exception {
         test("address");
@@ -142,8 +140,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"},
             EDGE = {"block", "block"})
     public void article() throws Exception {
         test("article");
@@ -156,8 +152,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF = {"", "block"},
-            FF68 = {"", "block"},
             EDGE = {"block", "block"})
     public void aside() throws Exception {
         test("aside");
@@ -170,8 +164,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "none"},
-            FF = {"", "none"},
-            FF68 = {"", "none"},
             IE = {"none", "none"})
     public void audio() throws Exception {
         test("audio");

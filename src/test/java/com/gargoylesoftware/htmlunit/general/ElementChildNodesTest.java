@@ -739,8 +739,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
-            FF = {"3", "2", "2", "3", "2", "2"},
-            FF68 = {"3", "2", "2", "3", "2", "2"},
     		IE = {"1", "0", "1", "1", "0", "1"})
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));

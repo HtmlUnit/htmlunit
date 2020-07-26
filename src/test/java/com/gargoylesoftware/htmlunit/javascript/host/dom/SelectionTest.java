@@ -89,10 +89,6 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
                     "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
-            FF = {"1:null/0/null/0/true/None/0/",
-                    "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
-            FF68 = {"1:null/0/null/0/true/None/0/",
-                    "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
             IE = {"1:null/0/null/0/true/undefined/0/",
                     "2:s2/0/s2/1/false/undefined/1/xyz[xyz"})
     public void selectAllChildren() throws Exception {
@@ -137,10 +133,6 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
                         "2:s2/0/s2/0/true/Caret/1/["},
-            FF = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                    "2:s2/0/s2/0/true/Caret/1/["},
-            FF68 = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                    "2:s2/0/s2/0/true/Caret/1/["},
             IE = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
                     "2:s2/0/s2/0/true/undefined/1/["})
     public void collapseToStart() throws Exception {
@@ -159,10 +151,6 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1:s2/0/s2/1/false/Range/1/xyz[xyz",
                   	"2:s2/1/s2/1/true/Caret/1/["},
-            FF = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                    "2:s2/1/s2/1/true/Caret/1/["},
-            FF68 = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                    "2:s2/1/s2/1/true/Caret/1/["},
             IE = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
                     "2:s2/1/s2/1/true/undefined/1/["})
     public void collapseToEnd() throws Exception {
@@ -199,12 +187,6 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
                         "2:null/0/null/0/true/None/0/",
                         "3:s2/1/s3/1/false/Range/1/foo[foo"},
-            FF = {"1:null/0/null/0/true/None/0/",
-                        "2:null/0/null/0/true/None/0/",
-                        "3:s2/1/s3/1/false/Range/1/foo[foo"},
-            FF68 = {"1:null/0/null/0/true/None/0/",
-                        "2:null/0/null/0/true/None/0/",
-                        "3:s2/1/s3/1/false/Range/1/[foo"},
             IE = {"1:null/0/null/0/true/undefined/0/",
                         "2:null/0/null/0/true/undefined/0/",
                         "3:s2/1/s3/1/false/undefined/1/foo[foo"})
@@ -230,12 +212,6 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
                         "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "3:null/0/null/0/true/None/0/"},
-            FF = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "3:null/0/null/0/true/None/0/"},
-            FF68 = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/1/[xyzfoo",
                         "3:null/0/null/0/true/None/0/"},
             IE = {"1:null/0/null/0/true/undefined/0/",
                     "2:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
@@ -263,10 +239,6 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "2:null/0/null/0/true/None/0/"},
-            FF = {"1:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "2:null/0/null/0/true/None/0/"},
-            FF68 = {"1:s1/1/s3/1/false/Range/1/[xyzfoo",
                         "2:null/0/null/0/true/None/0/"},
             IE = {"1:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
                         "2:null/0/null/0/true/undefined/0/"})
@@ -399,12 +371,6 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
-                    "2:null/0/null/0/true/None/0/",
-                    "false", "true"},
-            FF = {"1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
-                    "2:null/0/null/0/true/None/0/",
-                    "false", "true"},
-            FF68 = {"1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
                     "2:null/0/null/0/true/None/0/",
                     "false", "true"},
             IE = {"1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo[yzfo",
