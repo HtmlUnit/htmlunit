@@ -127,7 +127,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
- *   <li>ff60.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+ *   <li>ff.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ff68.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <li>edge.bin (optional): is the location of the Edge binary, use double back-slashes</li>
@@ -171,8 +171,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String CHROME_BIN_;
     private static String IE_BIN_;
     private static String EDGE_BIN_;
+    private static String GECKO_DRIVER_;
     private static String FF_BIN_;
-    private static String FF60_BIN_;
     private static String FF68_BIN_;
 
     /** The driver cache. */
@@ -229,8 +229,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
+
+                    GECKO_DRIVER_ = properties.getProperty("gecko.driver");
                     FF_BIN_ = properties.getProperty("ff.bin");
-                    FF60_BIN_ = properties.getProperty("ff60.bin");
                     FF68_BIN_ = properties.getProperty("ff68.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
@@ -482,11 +483,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             if (BrowserVersion.FIREFOX == getBrowserVersion()) {
-                return createFirefoxDriver(FF_BIN_);
+                return createFirefoxDriver(GECKO_DRIVER_, FF_BIN_);
             }
 
             if (BrowserVersion.FIREFOX_68 == getBrowserVersion()) {
-                return createFirefoxDriver(FF68_BIN_);
+                return createFirefoxDriver(GECKO_DRIVER_, FF68_BIN_);
             }
 
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
@@ -510,12 +511,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return webDriver_;
     }
 
-    private static FirefoxDriver createFirefoxDriver(final String binary) {
+    private static FirefoxDriver createFirefoxDriver(final String geckoDriverPath, final String binary) {
+        if (geckoDriverPath != null
+                && !geckoDriverPath.equals(System.getProperty("webdriver.gecko.driver"))) {
+            System.setProperty("webdriver.gecko.driver", geckoDriverPath);
+        }
+
         if (binary != null) {
             final FirefoxOptions options = new FirefoxOptions();
             options.setBinary(binary);
             return new FirefoxDriver(options);
         }
+
         return new FirefoxDriver();
     }
 

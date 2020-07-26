@@ -898,9 +898,9 @@ public class CodeStyleTest {
         for (int i = 0; i + 1 < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.startsWith("        CHROME = ")
+                    || line.startsWith("        EDGE = ")
                     || line.startsWith("        IE = ")
                     || line.startsWith("        FF = ")
-                    || line.startsWith("        FF60 = ")
                     || line.startsWith("        FF68 = ")) {
                 addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
             }

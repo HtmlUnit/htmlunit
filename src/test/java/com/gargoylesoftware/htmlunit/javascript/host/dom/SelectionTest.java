@@ -234,7 +234,6 @@ public class SelectionTest extends WebDriverTestCase {
     }
 
     /**
-     * The toString impl in FF60 seems to be buggy.
      * @throws Exception if an error occurs
      */
     @Test
