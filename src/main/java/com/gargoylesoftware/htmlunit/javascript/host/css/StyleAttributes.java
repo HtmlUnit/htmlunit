@@ -2779,7 +2779,7 @@ public final class StyleAttributes {
         RUBY_OVERHANG("rubyOverhang", "ruby-overhang", ie("auto")),
 
         /** The style property {@code rubyPosition}. */
-        RUBY_POSITION("rubyPosition", "ruby-position", ie("above"), ff("over")),
+        RUBY_POSITION("rubyPosition", "ruby-position", chrome("over"), ie("above"), ff("over")),
 
         /** The style property {@code ruby-position}. */
         RUBY_POSITION_("ruby-position", "ruby-position", ff("over")),

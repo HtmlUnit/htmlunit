@@ -207,14 +207,6 @@ public class History2Test extends WebDriverTestCase {
                     "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
                     "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
                     "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
-            CHROME = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                    "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                    "[object PopStateEvent]", "null", "true",
-                    "[object PopStateEvent]", "null", "true",
-                    "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                    "[object PopStateEvent]", "{\"hi\":\"there\"}", "false",
-                    "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
-                    "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
             IE = {})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
@@ -456,10 +448,6 @@ public class History2Test extends WebDriverTestCase {
                         "[object PopStateEvent]", "null", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
                         "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
-            CHROME = {"[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "false"},
             IE = {})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
