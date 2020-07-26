@@ -12,6 +12,7 @@ animationIterationCount
 animationName
 animationPlayState
 animationTimingFunction
+appearance
 backdropFilter
 backfaceVisibility
 background
@@ -265,6 +266,7 @@ r
 resize
 right
 rowGap
+rubyPosition
 rx
 ry
 scrollBehavior

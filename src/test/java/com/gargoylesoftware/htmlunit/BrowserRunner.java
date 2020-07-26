@@ -371,7 +371,6 @@ public class BrowserRunner extends Suite {
          */
         String[] IE() default { EMPTY_DEFAULT };
 
-
         /**
          * Alerts for latest Edge.
          * @return the alerts
