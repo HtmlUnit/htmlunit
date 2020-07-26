@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +55,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_84";
 
     static String EDGE_DRIVER_ = "84.0.524.0";
-    static String EDGE_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_84";
+    static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
     static String GECKO_DRIVER_ = "0.26.0";
@@ -135,6 +137,31 @@ public class ExternalTest {
             final AbstractPage page = webClient.getPage(CHROME_DRIVER_URL_);
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
+        }
+    }
+
+    /**
+     * Tests that we use the latest edge driver.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void assertEdgeDriver() throws Exception {
+        try (WebClient webClient = buildWebClient()) {
+            final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
+            String content = page.asText();
+            content = content.substring(content.indexOf("Release " + BrowserVersion.EDGE.getBrowserVersionNumeric()));
+            content = content.substring(0, content.indexOf("Microsoft Edge Legacy"));
+            content = content.replace("\r\n", "");
+
+            String version = "0.0.0.0";
+            final Pattern regex = Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*) \\|");
+            final Matcher matcher = regex.matcher(content);
+            while (matcher.find()) {
+                if (version.compareTo(matcher.group(1)) < 0) {
+                    version = matcher.group(1);
+                }
+            }
+            assertEquals("Edge Driver", version, EDGE_DRIVER_);
         }
     }
 

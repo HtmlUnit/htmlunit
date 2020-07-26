@@ -51254,7 +51254,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({FF68})
+    @NotYetImplemented(FF68)
     public void _table_keygen() throws Exception {
         test("table", "keygen");
     }

@@ -1125,6 +1125,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "none"},
+            CHROME = {"", "inline"},
             EDGE = {"", "inline"},
             IE = {"none", "none"})
     public void noscript() throws Exception {
