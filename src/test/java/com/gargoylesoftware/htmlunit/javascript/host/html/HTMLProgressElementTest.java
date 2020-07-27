@@ -34,8 +34,6 @@ public class HTMLProgressElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "2", "1", "2", "1", "1"},
-            FF = {"0", "2", "1", "2", "1", "1"},
-            FF68 = {"0", "2", "1", "2", "1", "1"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void labels() throws Exception {
         final String html =
