@@ -34,7 +34,8 @@ public class PeriodicSyncManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

@@ -57,16 +57,16 @@ abstract class BrowserConfiguration {
         return null;
     }
 
-    static BrowserConfiguration chrome(final String defaultValue) {
-        return new Chrome(defaultValue);
+    static BrowserConfiguration chromeAndEdge(final String defaultValue) {
+        return new ChromeAndEdge(defaultValue);
     }
 
-    static BrowserConfiguration chromeAndFirefox(final String defaultValue) {
-        return new ChromeAndFirefox(defaultValue);
+    static BrowserConfiguration chromeAndEdgeAndFirefox(final String defaultValue) {
+        return new ChromeAndEdgeAndFirefox(defaultValue);
     }
 
-    static BrowserConfiguration chromeNotIterable(final String defaultValue) {
-        return new ChromeNotIterable(defaultValue);
+    static BrowserConfiguration chromeAndEdgeNotIterable(final String defaultValue) {
+        return new ChromeAndEdgeNotIterable(defaultValue);
     }
 
     static BrowserConfiguration ff(final String defaultValue) {
@@ -97,25 +97,14 @@ abstract class BrowserConfiguration {
         return new IENotIterable(defaultValue);
     }
 
-    private static class Chrome extends BrowserConfiguration {
-        Chrome(final String defaultValue) {
+    static class ChromeAndEdgeNotIterable extends BrowserConfiguration {
+        ChromeAndEdgeNotIterable(final String defaultValue) {
             super(defaultValue);
         }
 
         @Override
         public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isChrome();
-        }
-    }
-
-    static class ChromeNotIterable extends BrowserConfiguration {
-        ChromeNotIterable(final String defaultValue) {
-            super(defaultValue);
-        }
-
-        @Override
-        public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isChrome();
+            return browserVersion.isChrome() || browserVersion == BrowserVersion.EDGE;
         }
 
         @Override
@@ -124,14 +113,27 @@ abstract class BrowserConfiguration {
         }
     }
 
-    private static class ChromeAndFirefox extends BrowserConfiguration {
-        ChromeAndFirefox(final String defaultValue) {
+    private static class ChromeAndEdge extends BrowserConfiguration {
+        ChromeAndEdge(final String defaultValue) {
             super(defaultValue);
         }
 
         @Override
         public boolean matches(final BrowserVersion browserVersion) {
-            return browserVersion.isChrome() || browserVersion.isFirefox();
+            return browserVersion.isChrome() || browserVersion == BrowserVersion.EDGE;
+        }
+    }
+
+    private static class ChromeAndEdgeAndFirefox extends BrowserConfiguration {
+        ChromeAndEdgeAndFirefox(final String defaultValue) {
+            super(defaultValue);
+        }
+
+        @Override
+        public boolean matches(final BrowserVersion browserVersion) {
+            return browserVersion.isChrome()
+                    || browserVersion == BrowserVersion.EDGE
+                    || browserVersion.isFirefox();
         }
     }
 

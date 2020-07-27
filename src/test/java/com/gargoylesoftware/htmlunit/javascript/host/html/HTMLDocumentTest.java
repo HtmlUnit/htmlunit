@@ -413,7 +413,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"imported: [object HTMLScriptElement]", "replaced"},
-            CHROME = {"imported: [object HTMLScriptElement]", "o", "replaced"})
+            CHROME = {"imported: [object HTMLScriptElement]", "o", "replaced"},
+            EDGE = {"imported: [object HTMLScriptElement]", "o", "replaced"})
     @HtmlUnitNYI(CHROME = {"imported: [object HTMLScriptElement]", "replaced"})
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -445,7 +446,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"imported: [object HTMLDivElement]", "replaced"},
-            CHROME = {"imported: [object HTMLDivElement]", "o", "replaced"})
+            CHROME = {"imported: [object HTMLDivElement]", "o", "replaced"},
+            EDGE = {"imported: [object HTMLDivElement]", "o", "replaced"})
     @HtmlUnitNYI(CHROME = {"imported: [object HTMLDivElement]", "replaced"})
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2315,7 +2317,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "releaseCapture available",
-            CHROME = "exception")
+            CHROME = "exception",
+            EDGE = "exception")
     public void releaseCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
@@ -2340,6 +2343,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"[object HTMLDocument]", "[object HTMLDocument]"},
             CHROME = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
+            EDGE = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             FF = {"[object HTMLDocument]", "function HTMLDocument() {\n    [native code]\n}"},
             FF68 = {"[object HTMLDocument]", "function HTMLDocument() {\n    [native code]\n}"})
     public void type() throws Exception {
@@ -2613,10 +2617,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
+    @Alerts(DEFAULT = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             FF68 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
-            CHROME = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
+            IE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     @HtmlUnitNYI(CHROME = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF68 = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")

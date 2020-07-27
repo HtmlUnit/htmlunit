@@ -336,6 +336,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
             CHROME = {"undefined", "false", "undefined", "exception"},
+            EDGE = {"undefined", "false", "undefined", "exception"},
             IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
     @NotYetImplemented(CHROME)
     public void lookupGetter() throws Exception {

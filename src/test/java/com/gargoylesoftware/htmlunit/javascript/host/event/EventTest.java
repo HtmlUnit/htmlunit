@@ -1046,10 +1046,10 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined"},
-            CHROME = {"true", "boolean"},
+    @Alerts(DEFAULT = {"true", "boolean"},
             FF = {"true", "boolean"},
-            FF68 = {"true", "boolean"})
+            FF68 = {"true", "boolean"},
+            IE = {"undefined", "undefined"})
     public void returnValue() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
