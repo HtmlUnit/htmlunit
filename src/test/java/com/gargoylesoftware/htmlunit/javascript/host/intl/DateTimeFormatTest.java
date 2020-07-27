@@ -169,9 +169,10 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "24/12/20",
-            CHROME = "H24/12/20",
+    @Alerts(CHROME = "H24/12/20",
+            EDGE = "H24/12/20",
             FF = "H24/12/20",
+            FF68 = "24/12/20",
             IE = "\u200e\u5e73\u6210\u200e\u0020\u200e24\u200e\u5e74\u200e12\u200e\u6708\u200e20\u200e\u65e5")
     public void format_ja_jp_u_ca_japanese() throws Exception {
         test("new Intl.DateTimeFormat('ja-JP-u-ca-japanese').format(date)");
@@ -306,6 +307,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2012 "
                 + "\u0645\u064a\u0644\u0627\u062f\u064a 4:00:00 \u0635",
+            EDGE = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2012 "
+                + "\u0645\u064a\u0644\u0627\u062f\u064a 4:00:00 \u0635",
             FF68 = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0662 \u0645\u064a\u0644\u0627\u062f\u064a"
                 + " \u0664:\u0660\u0660:\u0660\u0660 \u0635",
@@ -375,6 +378,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
             CHROME = "20\u200f/12\u200f/2012",
+            EDGE = "20\u200f/12\u200f/2012",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664")
     @NotYetImplemented(CHROME)
     public void format_ar() throws Exception {
