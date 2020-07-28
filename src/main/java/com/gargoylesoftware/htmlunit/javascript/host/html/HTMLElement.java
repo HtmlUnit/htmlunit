@@ -2005,7 +2005,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter
+    @JsxGetter(IE)
     public Element getParentElement() {
         return super.getParentElement();
     }
