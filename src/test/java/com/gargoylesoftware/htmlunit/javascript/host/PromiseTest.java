@@ -103,7 +103,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "function () { [native code] }",
+    @Alerts(DEFAULT = { "function () { [native code] }",
                         "function () { [native code] }",
                         "[object Window]",
                         "done", "resolved value"},

@@ -64,10 +64,10 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"", "[object HTMLAreaElement]"},
-            CHROME = {"", "function HTMLAreaElement() { [native code] }"},
+    @Alerts(DEFAULT = {"", "function HTMLAreaElement() { [native code] }"},
             FF = {"", "function HTMLAreaElement() {\n    [native code]\n}"},
-            FF68 = {"", "function HTMLAreaElement() {\n    [native code]\n}"})
+            FF68 = {"", "function HTMLAreaElement() {\n    [native code]\n}"},
+            IE = {"", "[object HTMLAreaElement]"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

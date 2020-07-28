@@ -1118,7 +1118,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"function Element() { [native code] }", "[object Element]",
+    @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
             FF = {"function Element() {\n    [native code]\n}",
                     "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},

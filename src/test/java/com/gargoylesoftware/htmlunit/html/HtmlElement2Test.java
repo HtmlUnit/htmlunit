@@ -223,6 +223,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLInputElement] [object HTMLBodyElement]",
             CHROME = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]",
+            EDGE = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]",
             IE = "[object HTMLInputElement] null")
     @NotYetImplemented(IE)
     public void removeActiveElement() throws Exception {
@@ -257,6 +258,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLInputElement] [object HTMLBodyElement]",
             CHROME = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]",
+            EDGE = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]",
             IE = "[object HTMLInputElement] null")
     @NotYetImplemented(IE)
     public void removeParentOfActiveElement() throws Exception {

@@ -2058,8 +2058,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSlotElement]",
-            EDGE = "[object HTMLUnknownElement]")
+    @Alerts("[object HTMLSlotElement]")
     public void slot() throws Exception {
         test("slot");
     }

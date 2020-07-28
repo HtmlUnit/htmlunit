@@ -132,7 +132,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "function Array() { [native code] }",
+    @Alerts(DEFAULT = "function Array() { [native code] }",
             FF = "function Array() {\n    [native code]\n}",
             FF68 = "function Array() {\n    [native code]\n}",
             IE = "\nfunction Array() {\n    [native code]\n}\n")

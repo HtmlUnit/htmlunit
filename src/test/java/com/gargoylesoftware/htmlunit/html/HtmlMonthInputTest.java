@@ -163,7 +163,8 @@ public class HtmlMonthInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "8",
-            CHROME = "")
+            CHROME = "",
+            EDGE = "")
     @NotYetImplemented({FF, FF68, IE})
     public void typing() throws Exception {
         final String htmlContent

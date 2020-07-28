@@ -129,6 +129,19 @@ final class TestCaseCorrector {
         }
 
         Collections.sort(alerts);
+        String defaultAlert = null;
+        for (String alert : alerts) {
+            if (alert.startsWith("DEFAULT = ")) {
+                defaultAlert = alert;
+                break;
+            }
+        }
+
+        if (defaultAlert != null) {
+            alerts.remove(defaultAlert);
+            alerts.add(0, defaultAlert);
+        }
+
         for (int x = 0; x < alerts.size(); x++) {
             String line = alerts.get(x);
             if (x == 0) {

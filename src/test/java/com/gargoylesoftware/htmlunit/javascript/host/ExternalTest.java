@@ -102,7 +102,8 @@ public class ExternalTest extends WebDriverTestCase {
             FF68 = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     // fail with missing permission
     @BuggyWebDriver(IE = {"IsSearchProviderInstalled defined", "exception"},
-                    CHROME = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
+                    CHROME = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"},
+                    EDGE = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     public void isSearchProviderInstalled() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

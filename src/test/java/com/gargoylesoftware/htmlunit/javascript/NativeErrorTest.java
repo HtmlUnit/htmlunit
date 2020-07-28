@@ -259,7 +259,8 @@ public class NativeErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function captureStackTrace() { [native code] }")
+            CHROME = "function captureStackTrace() { [native code] }",
+            EDGE = "function captureStackTrace() { [native code] }")
     public void captureStackTrace() throws Exception {
         final String html
             = "<html><head><script>\n"

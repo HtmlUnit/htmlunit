@@ -348,9 +348,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"null", "§§URL§§/path?query"},
-            CHROME = {"§§URL§§", "§§URL§§/path?query"},
-            FF = {"§§URL§§", "§§URL§§/path?query"})
+    @Alerts(DEFAULT = {"§§URL§§", "§§URL§§/path?query"},
+            FF68 = {"null", "§§URL§§/path?query"},
+            IE = {"null", "§§URL§§/path?query"})
     public void originRefererHeaderPost() throws Exception {
         final String firstHtml
             = "<html>\n"
@@ -383,7 +383,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "text/html,application/xhtml+xml,application/xml;q=0.9,"
+    @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             FF68 = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -434,7 +434,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "gzip, deflate",
-            CHROME = "gzip, deflate, br")
+            CHROME = "gzip, deflate, br",
+            EDGE = "gzip, deflate, br")
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

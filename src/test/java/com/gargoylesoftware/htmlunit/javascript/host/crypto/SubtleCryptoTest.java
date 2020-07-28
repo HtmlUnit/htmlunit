@@ -39,7 +39,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"[object Crypto]", "public", "true", "verify",
+    @Alerts(DEFAULT = {"[object Crypto]", "public", "true", "verify",
                         "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
                         "publicExponent 1,0,1",
                         "private", "false", "sign",

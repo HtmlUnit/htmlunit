@@ -259,10 +259,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myHead-undefined",
-            CHROME = "null",
-            FF = "null",
-            FF68 = "null")
+    @Alerts(DEFAULT = "null",
+            IE = "myHead-undefined")
     public void item_DoubleIndex() throws Exception {
         item("1.1");
     }
@@ -280,10 +278,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = "myHead-undefined",
-            FF = "myHead-undefined",
-            FF68 = "myHead-undefined")
+    @Alerts(DEFAULT = "myHead-undefined",
+            IE = "null")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }

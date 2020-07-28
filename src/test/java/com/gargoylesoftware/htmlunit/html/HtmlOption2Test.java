@@ -51,6 +51,8 @@ public class HtmlOption2Test extends WebDriverTestCase {
                 "option1\nNumber Three\nNumber 4"},
             CHROME = {"option1", "      ", "Number Three", "Number 4",
                 "      option1\n      \n      Number Three\n      Number 4\n    "},
+            EDGE = {"option1", "      ", "Number Three", "Number 4",
+                "      option1\n      \n      Number Three\n      Number 4\n    "},
             IE = {"option1", "", "Number Three", "Number 4",
                 "option1 Number Three Number 4"})
     @NotYetImplemented({CHROME, IE})
@@ -125,6 +127,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
     // for Chrome selenium shows only "sUp,dUp," but again
     // manual test are showing something different
     @BuggyWebDriver(CHROME = "sUp,dUp,",
+                    EDGE = "sUp,dUp,",
                     FF = "sDown,dDown,sUp,dUp,",
                     FF68 = "sDown,dDown,sUp,dUp,")
     public void onMouse() throws Exception {
