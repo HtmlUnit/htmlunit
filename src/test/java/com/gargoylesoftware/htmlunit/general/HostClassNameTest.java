@@ -207,12 +207,11 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function AnimationPlaybackEvent() { [native code] }",
-            EDGE = "function AnimationPlaybackEvent() { [native code] }",
+    @Alerts(DEFAULT = "function AnimationPlaybackEvent() { [native code] }",
             FF = "function AnimationPlaybackEvent() {\n    [native code]\n}",
-            FF68 = "function AnimationPlaybackEvent() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF68})
+            FF68 = "function AnimationPlaybackEvent() {\n    [native code]\n}",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception", FF = "exception", FF68 = "exception")
     public void animationPlaybackEvent() throws Exception {
         test("AnimationPlaybackEvent");
     }
@@ -234,7 +233,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function AnimationTimeline() { [native code] }",
             EDGE = "function AnimationTimeline() { [native code] }",
             FF = "function AnimationTimeline() {\n    [native code]\n}")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception", FF = "exception")
     public void animationTimeline() throws Exception {
         test("AnimationTimeline");
     }
@@ -642,6 +641,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function Bluetooth() { [native code] }",
             EDGE = "function Bluetooth() { [native code] }")
+    @HtmlUnitNYI(CHROME = "exception")
     public void bluetooth() throws Exception {
         test("Bluetooth");
     }
@@ -671,6 +671,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function BluetoothCharacteristicProperties() { [native code] }",
             EDGE = "function BluetoothCharacteristicProperties() { [native code] }")
+    @HtmlUnitNYI(CHROME = "exception")
     public void bluetoothCharacteristicProperties() throws Exception {
         test("BluetoothCharacteristicProperties");
     }
@@ -682,6 +683,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function BluetoothDevice() { [native code] }",
             EDGE = "function BluetoothDevice() { [native code] }")
+    @HtmlUnitNYI(CHROME = "exception")
     public void bluetoothDevice() throws Exception {
         test("BluetoothDevice");
     }
@@ -729,6 +731,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function BluetoothRemoteGATTCharacteristic() { [native code] }",
             EDGE = "function BluetoothRemoteGATTCharacteristic() { [native code] }")
+    @HtmlUnitNYI(CHROME = "exception")
     public void bluetoothRemoteGATTCharacteristic() throws Exception {
         test("BluetoothRemoteGATTCharacteristic");
     }
@@ -740,6 +743,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function BluetoothRemoteGATTServer() { [native code] }",
             EDGE = "function BluetoothRemoteGATTServer() { [native code] }")
+    @HtmlUnitNYI(CHROME = "exception")
     public void bluetoothRemoteGATTServer() throws Exception {
         test("BluetoothRemoteGATTServer");
     }
@@ -1951,7 +1955,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function DocumentTimeline() { [native code] }",
             EDGE = "function DocumentTimeline() { [native code] }",
             FF = "function DocumentTimeline() {\n    [native code]\n}")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception", FF = "exception")
     public void documentTimeline() throws Exception {
         test("DocumentTimeline");
     }

@@ -54,7 +54,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxGetter
     public int getAvailHeight() {
-        return 768;
+        return 1040;
     }
 
     /**
@@ -108,7 +108,7 @@ public class Screen extends SimpleScriptable {
      */
     @JsxGetter
     public int getAvailWidth() {
-        return 1024;
+        return 1920;
     }
 
     /**

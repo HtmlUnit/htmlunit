@@ -58,8 +58,8 @@ public class WebClientOptions implements Serializable {
     private int historyPageCacheLimit_ = Integer.MAX_VALUE;
     private InetAddress localAddress_;
     private boolean downloadImages_;
-    private int screenWidth_ = 1024;
-    private int screenHeight_ = 768;
+    private int screenWidth_ = 1920;
+    private int screenHeight_ = 1080;
 
     private boolean webSocketEnabled_ = true;
     private int webSocketMaxTextMessageSize_ = -1;
