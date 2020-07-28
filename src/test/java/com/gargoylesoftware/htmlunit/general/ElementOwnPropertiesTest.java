@@ -3257,7 +3257,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,"
                 + "onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
                 + "onscroll,onseeked,onseeking,onselect,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
-                + "onvolumechange,onwaiting,outerHTML,releaseCapture(),removeNode(),runtimeStyle,"
+                + "onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,"
                 + "scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
     public void figure() throws Exception {
         test("figure");
@@ -3428,7 +3428,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,"
                 + "onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
                 + "onscroll,onseeked,onseeking,onselect,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
-                + "onvolumechange,onwaiting,outerHTML,releaseCapture(),removeNode(),runtimeStyle,"
+                + "onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,"
                 + "scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
     public void footer() throws Exception {
         test("footer");
