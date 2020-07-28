@@ -856,10 +856,11 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"680", "1256", "663", "1239"},
-            FF = {"682", "1258", "665", "1241"},
-            FF68 = {"682", "1258", "665", "1241"},
-            IE = {"705", "1256", "688", "1239"})
+    @Alerts(CHROME = {"636", "1256", "619", "1239"},
+            EDGE = {"680", "1256", "663", "1239"},
+            FF = {"688", "1260", "671", "1243"},
+            FF68 = {"687", "1260", "670", "1243"},
+            IE = {"682", "1256", "665", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
