@@ -58,6 +58,7 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function startRendering() {\n    [native code]\n}",
             CHROME =  "function startRendering() { [native code] }",
+            EDGE =  "function startRendering() { [native code] }",
             IE = "OfflineAudioContext not available")
     public void startRendering() throws Exception {
         final String html

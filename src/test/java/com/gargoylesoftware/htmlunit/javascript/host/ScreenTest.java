@@ -37,7 +37,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"768", "768"})
+    @Alerts({"1040", "1040"})
     public void availHeight() throws Exception {
         testNumericProperty("availHeight");
     }
@@ -66,7 +66,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"1024", "1024"})
+    @Alerts({"1920", "1920"})
     public void availWidth() throws Exception {
         testNumericProperty("availWidth");
     }
@@ -124,7 +124,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"768", "768"})
+    @Alerts({"1080", "1080"})
     public void height() throws Exception {
         testNumericProperty("height");
     }
@@ -213,7 +213,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"1024", "1024"})
+    @Alerts({"1920", "1920"})
     public void width() throws Exception {
         testNumericProperty("width");
     }

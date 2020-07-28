@@ -46,6 +46,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGMatrix() {\n    [native code]\n}",
             CHROME = "function SVGMatrix() { [native code] }",
+            EDGE = "function SVGMatrix() { [native code] }",
             IE = "[object SVGMatrix]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -240,6 +241,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1.2322946786880493, 2.307671070098877, 2.912292957305908, 3.8307511806488037, 5, 6",
             CHROME = "1.2322946209166628, 2.307671050377636, 2.912292905471539, 3.8307511434768218, 5, 6",
+            EDGE = "1.2322946209166628, 2.307671050377636, 2.912292905471539, 3.8307511434768218, 5, 6",
             IE = "1.2322945594787597, 2.307671070098877, 2.912292718887329, 3.8307509422302246, 5, 6")
     public void rotate() throws Exception {
         transformTest("rotate(4.5)");
@@ -251,6 +253,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "3.147735595703125, 4.346245765686035, -0.3029201924800873, -1.0536353588104248, 5, 6",
             CHROME = "3.1477355949224934, 4.346245800520598, -0.302920161854466, -1.053635345580751, 5, 6",
+            EDGE = "3.1477355949224934, 4.346245800520598, -0.302920161854466, -1.053635345580751, 5, 6",
             IE = "3.147735595703125, 4.346245765686035, -0.30292022228240967, -1.0536353588104248, 5, 6")
     public void rotateFromVector() throws Exception {
         transformTest("rotateFromVector(17, 74)");
@@ -311,6 +314,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1, 2, 3.0699267387390137, 4.139853477478027, 5, 6",
             CHROME = "1, 2, 3.0699268119435104, 4.139853623887021, 5, 6",
+            EDGE = "1, 2, 3.0699268119435104, 4.139853623887021, 5, 6",
             IE = "1, 2, 3.0699267387390136, 4.139853477478027, 5, 6")
     public void skewX() throws Exception {
         transformTest("skewX(4)");

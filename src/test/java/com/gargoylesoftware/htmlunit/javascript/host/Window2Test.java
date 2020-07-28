@@ -751,7 +751,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "136", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
             FF = {"true", "true", "86", "true", "true", "14"},
             FF68 = {"true", "true", "86", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
@@ -856,7 +856,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"632", "1256", "615", "1239"},
+    @Alerts(CHROME = {"680", "1256", "663", "1239"},
             FF = {"682", "1258", "665", "1241"},
             FF68 = {"682", "1258", "665", "1241"},
             IE = {"705", "1256", "688", "1239"})

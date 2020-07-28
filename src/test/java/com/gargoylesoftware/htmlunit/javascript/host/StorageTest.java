@@ -163,6 +163,7 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts("I was here")
     @BuggyWebDriver(CHROME = "null",
+                    EDGE = "null",
                     FF = "null",
                     FF68 = "null")
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
@@ -253,10 +254,10 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "null", "string", "value", "1"},
-            CHROME = {"function", "null", "string", "null", "0"},
+    @Alerts(DEFAULT = {"function", "null", "string", "null", "0"},
             FF = {"function", "null", "function", "value", "1"},
-            FF68 = {"function", "null", "function", "value", "1"})
+            FF68 = {"function", "null", "function", "value", "1"},
+            IE = {"function", "null", "string", "value", "1"})
     @NotYetImplemented({FF, FF68})
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"

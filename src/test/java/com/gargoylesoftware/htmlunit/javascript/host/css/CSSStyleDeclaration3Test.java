@@ -261,9 +261,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(EDGE = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
-            FF = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
-            FF68 = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
+    @Alerts(DEFAULT = {"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"},
             IE = {"transparent", "none", "repeat", "100% 100%", "scroll"})
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");

@@ -220,7 +220,6 @@ public class HashChangeEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HashChangeEvent]", "hashchange", "false", "false", "§§URL§§", "§§URL§§#1"},
-            FF = {"[object HashChangeEvent]", "hashchange", "false", "false", "§§URL§§", "§§URL§§#1"},
             FF68 = {"[object HashChangeEvent]", "hashchange", "true", "false", "§§URL§§", "§§URL§§#1"},
             IE = {"[object Event]", "hashchange", "false", "false", "undefined", "undefined"})
     public void onHashChange() throws Exception {

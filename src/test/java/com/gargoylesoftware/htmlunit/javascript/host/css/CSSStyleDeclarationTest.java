@@ -940,8 +940,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "inline", "rgb(0, 0, 0)"},
-            FF = {"", "", "inline", "rgb(0, 0, 0)"},
-            FF68 = {"", "", "inline", "rgb(0, 0, 0)"},
             IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
@@ -2663,8 +2661,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"auto", ""},
-            FF = {"auto", ""},
-            FF68 = {"auto", ""},
             IE = {"auto", "auto"})
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
