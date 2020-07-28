@@ -170,9 +170,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "[object Window]", "true",
-                "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"},
-            CHROME = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
+    @Alerts(DEFAULT = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
                 "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
                 "true", "function"},
             FF = {"function Window() {\n    [native code]\n}",
@@ -182,7 +180,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             FF68 = {"function Window() {\n    [native code]\n}",
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
-                "function HTMLDocument() {\n    [native code]\n}", "true", "function"})
+                "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
+            IE = {"[object Window]", "[object Window]", "true",
+                "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"})
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"

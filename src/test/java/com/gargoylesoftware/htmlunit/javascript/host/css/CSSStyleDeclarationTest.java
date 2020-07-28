@@ -89,6 +89,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;"},
             CHROME = {"black", "pink", "color: pink; background: blue;"},
+            EDGE = {"black", "pink", "color: pink; background: blue;"},
             IE = {"black", "pink", "background: blue; color: pink; foo: bar;"})
     @NotYetImplemented
     public void style_MultipleCssAttributes() throws Exception {
@@ -938,10 +939,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
-            CHROME = {"", "", "inline", "rgb(0, 0, 0)"},
+    @Alerts(DEFAULT = {"", "", "inline", "rgb(0, 0, 0)"},
             FF = {"", "", "inline", "rgb(0, 0, 0)"},
-            FF68 = {"", "", "inline", "rgb(0, 0, 0)"})
+            FF68 = {"", "", "inline", "rgb(0, 0, 0)"},
+            IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2545,6 +2546,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "none"},
             CHROME = {"undefined", "before", "none", "exception"},
+            EDGE = {"undefined", "before", "none", "exception"},
             IE = {"function", "before", "none", "after", "none"})
     @NotYetImplemented
     public void interceptSetter() throws Exception {
@@ -2660,10 +2662,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"auto", "auto"},
-            CHROME = {"auto", ""},
+    @Alerts(DEFAULT = {"auto", ""},
             FF = {"auto", ""},
-            FF68 = {"auto", ""})
+            FF68 = {"auto", ""},
+            IE = {"auto", "auto"})
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

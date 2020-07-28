@@ -123,10 +123,10 @@ public class CloseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CloseEvent]", "close", "true", "false", "42", "time to close", "true"},
-            CHROME = "no initCloseEvent",
+    @Alerts(DEFAULT = "no initCloseEvent",
             FF = "exception",
-            FF68 = "exception")
+            FF68 = "exception",
+            IE = {"[object CloseEvent]", "close", "true", "false", "42", "time to close", "true"})
     public void initCloseEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

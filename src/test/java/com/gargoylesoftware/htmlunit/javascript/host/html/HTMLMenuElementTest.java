@@ -109,7 +109,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined",
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined",
                     "null", "", "blah", "context", "ToolBar", "list",
                     "context", "toolbar", "ConText", "", "unknown"},
             FF = {"", "", "blah", "context", "ToolBar", "null", "", "blah",

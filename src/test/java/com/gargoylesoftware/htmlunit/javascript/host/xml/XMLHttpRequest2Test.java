@@ -954,26 +954,26 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"", "",
-                "Date XYZ GMT\n"
-                + "Content-Type: text/xml;charset=iso-8859-1\n"
-                + "Transfer-Encoding: chunked\n"
-                + "Server: Jetty(XXX)\n\n"},
-            CHROME = {"", "",
+    @Alerts(DEFAULT = {"", "",
                 "content-type: text/xml;charset=iso-8859-1\n"
                 + "date XYZ GMT\n"
                 + "server: Jetty(XXX)\n"
                 + "transfer-encoding: chunked\n"},
             FF68 = {"", "",
-                    "content-type: text/xml;charset=iso-8859-1\n"
-                    + "date XYZ GMT\n"
-                    + "server: Jetty(XXX)\n"
-                    + "transfer-encoding: chunked\n"},
+                "content-type: text/xml;charset=iso-8859-1\n"
+                + "date XYZ GMT\n"
+                + "server: Jetty(XXX)\n"
+                + "transfer-encoding: chunked\n"},
             FF = {"", "",
-                    "content-type: text/xml;charset=iso-8859-1\n"
-                    + "date XYZ GMT\n"
-                    + "server: Jetty(XXX)\n"
-                    + "transfer-encoding: chunked\n"})
+                "content-type: text/xml;charset=iso-8859-1\n"
+                + "date XYZ GMT\n"
+                + "server: Jetty(XXX)\n"
+                + "transfer-encoding: chunked\n"},
+            IE = {"", "",
+                "Date XYZ GMT\n"
+                + "Content-Type: text/xml;charset=iso-8859-1\n"
+                + "Transfer-Encoding: chunked\n"
+                + "Server: Jetty(XXX)\n\n"})
     @NotYetImplemented({CHROME, FF, FF68})
     public void getAllResponseHeaders() throws Exception {
         final String html =

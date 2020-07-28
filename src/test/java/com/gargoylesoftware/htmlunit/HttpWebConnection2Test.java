@@ -50,7 +50,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Connection: keep-alive\n"
+    @Alerts(DEFAULT = "Connection: keep-alive\n"
                     + "Host: localhost:§§PORT§§\n"
                     + "Referer: http://localhost:§§PORT§§/\n"
                     + "Sec-Fetch-Dest: document\n"
@@ -119,7 +119,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Cache-Control: max-age=0\n"
+    @Alerts(DEFAULT = "Cache-Control: max-age=0\n"
                     + "Connection: keep-alive\n"
                     + "Content-Length: 48\n"
                     + "Content-Type: application/x-www-form-urlencoded\n"

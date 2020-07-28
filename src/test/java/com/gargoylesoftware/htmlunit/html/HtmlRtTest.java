@@ -34,7 +34,7 @@ public class HtmlRtTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"", "inline", "block"},
+    @Alerts(DEFAULT = {"", "inline", "block"},
             FF = {"", "ruby-text", "ruby-text"},
             FF68 = {"", "ruby-text", "ruby-text"},
             IE = {"ruby-text", "ruby-text", "ruby-text"})
@@ -68,7 +68,7 @@ public class HtmlRtTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"", "inline", "block"},
+    @Alerts(DEFAULT = {"", "inline", "block"},
             FF = {"", "ruby-text", "ruby-text"},
             FF68 = {"", "ruby-text", "ruby-text"},
             IE = {"ruby-text", "ruby-text", "ruby-text"})

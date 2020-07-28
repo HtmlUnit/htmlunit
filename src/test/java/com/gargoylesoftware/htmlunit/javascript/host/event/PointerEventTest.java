@@ -53,13 +53,13 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = {"[object PointerEvent]", "click", "false", "false",
+    @Alerts(DEFAULT = {"[object PointerEvent]", "click", "false", "false",
                             "0", "1", "1", "0", "0", "0", "", "false"},
             FF = {"[object PointerEvent]", "click", "false", "false",
                             "0", "1", "1", "0", "0", "0", "", "false"},
             FF68 = {"[object PointerEvent]", "click", "false", "false",
-                    "0", "1", "1", "0", "0", "0", "", "false"})
+                    "0", "1", "1", "0", "0", "0", "", "false"},
+            IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -80,13 +80,13 @@ public class PointerEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = {"[object PointerEvent]", "click", "true", "false",
+    @Alerts(DEFAULT = {"[object PointerEvent]", "click", "true", "false",
                             "2", "1", "1", "0", "0", "0", "mouse", "false"},
             FF = {"[object PointerEvent]", "click", "true", "false",
                             "2", "1", "1", "0", "0", "0", "mouse", "false"},
             FF68 = {"[object PointerEvent]", "click", "true", "false",
-                    "2", "1", "1", "0", "0", "0", "mouse", "false"})
+                    "2", "1", "1", "0", "0", "0", "mouse", "false"},
+            IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

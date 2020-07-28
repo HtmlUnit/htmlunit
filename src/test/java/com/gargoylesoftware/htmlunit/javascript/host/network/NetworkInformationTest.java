@@ -35,7 +35,8 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            CHROME = {"[object NetworkInformation]", "undefined", "undefined"})
+            CHROME = {"[object NetworkInformation]", "undefined", "undefined"},
+            EDGE = {"[object NetworkInformation]", "undefined", "undefined"})
     public void navigatorConnection() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -57,7 +58,8 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "undefined")
+            CHROME = "undefined",
+            EDGE = "undefined")
     public void type() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -82,7 +84,8 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "undefined")
+            CHROME = "undefined",
+            EDGE = "undefined")
     public void downlinkMax() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -107,7 +110,8 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "4g")
+            CHROME = "4g",
+            EDGE = "4g")
     public void effectiveType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -132,7 +136,8 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "10")
+            CHROME = "10",
+            EDGE = "10")
     public void downlink() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -157,7 +162,8 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "50")
+            CHROME = "50",
+            EDGE = "50")
     public void rtt() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

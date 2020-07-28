@@ -96,7 +96,8 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function v8BreakIterator() { [native code] }")
+            CHROME = "function v8BreakIterator() { [native code] }",
+            EDGE = "function v8BreakIterator() { [native code] }")
     public void v8BreakIterator() throws Exception {
         test("Intl.v8BreakIterator");
     }

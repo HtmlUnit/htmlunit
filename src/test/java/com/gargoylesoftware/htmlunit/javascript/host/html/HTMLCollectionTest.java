@@ -764,7 +764,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "b6-button6",
-            CHROME = "button6-button6_2")
+            CHROME = "button6-button6_2",
+            EDGE = "button6-button6_2")
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("button6");
     }
