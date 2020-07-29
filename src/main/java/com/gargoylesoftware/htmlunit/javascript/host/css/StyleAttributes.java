@@ -177,6 +177,9 @@ public final class StyleAttributes {
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
 
+        /** The style property {@code appearance}. */
+        APPEARANCE("appearance", "appearance", chromeAndEdge("none")),
+
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
 
@@ -830,7 +833,7 @@ public final class StyleAttributes {
         COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff("0px")),
 
         /** The style property {@code columnSpan}. */
-        COLUMN_SPAN("columnSpan", "column-span", chromeAndEdge("none"), ffLatest("none"), ie("1")),
+        COLUMN_SPAN("columnSpan", "column-span", chromeAndEdge("none"), ffLatest("none"), ie("none")),
 
         /** The style property {@code column-span}. */
         COLUMN_SPAN_("column-span", "column-span", ffLatest("none")),
@@ -1029,7 +1032,10 @@ public final class StyleAttributes {
         FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ff("normal")),
 
         /** The style property {@code fontOpticalSizing}. */
-        FONT_OPTICAL_SIZING("fontOpticalSizing", "font-optical-sizing", chromeAndEdge("auto")),
+        FONT_OPTICAL_SIZING("fontOpticalSizing", "font-optical-sizing", chromeAndEdge("auto"), ff("auto")),
+
+        /** The style property {@code font-optical-sizing}. */
+        FONT_OPTICAL_SIZING_("font-optical-sizing", "font-optical-sizing", ff("auto")),
 
         /** The style property {@code fontSize}. */
         FONT_SIZE("fontSize", "font-size", chromeAndEdge("16px"), ff("16px"), ie("16px")),
@@ -1106,7 +1112,11 @@ public final class StyleAttributes {
         FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ff("normal")),
 
         /** The style property {@code fontVariationSettings}. */
-        FONT_VARIATION_SETTING("fontVariationSettings", "font-variation-settings", chromeAndEdge("normal")),
+        FONT_VARIATION_SETTING("fontVariationSettings", "font-variation-settings",
+                chromeAndEdge("normal"), ff("normal")),
+
+        /** The style property {@code fontVariationSettings}. */
+        FONT_VARIATION_SETTING_("font-variation-settings", "font-variation-settings", ff("normal")),
 
         /** The style property {@code fontWeight}. */
         FONT_WEIGHT("fontWeight", "font-weight", chromeAndEdge("400"), ff("400"), ie("400")),
@@ -1260,10 +1270,10 @@ public final class StyleAttributes {
         IME_MODE_("ime-mode", "ime-mode", ff("auto")),
 
         /** The style property {@code inlineSize}. */
-        INLINE_SIZE("inlineSize", "inline-size", ff68AndUp("1242px"), chromeAndEdge("913px")),
+        INLINE_SIZE("inlineSize", "inline-size", ff68AndUp("1244px"), chromeAndEdge("1240px")),
 
         /** The style property {@code inline-size}. */
-        INLINE_SIZE_("inline-size", "inline-size", ff68AndUp("1242px")),
+        INLINE_SIZE_("inline-size", "inline-size", ff68AndUp("1244px")),
 
         /** The style property {@code inset}. */
         INSET("inset", "inset", ff68AndUp("")),
@@ -2038,11 +2048,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff68AndUp("621px 171.5px")),
+                "-moz-perspective-origin", ff68AndUp("622px 171.5px")),
 
         /** The style property {@code -moz-perspective-origin}. */
         MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin",
-                "-moz-perspective-origin", ff68AndUp("621px 171.5px")),
+                "-moz-perspective-origin", ff68AndUp("622px 171.5px")),
 
         /** The style property {@code MozStackSizing}. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing", ff68("stretch-to-fit")),
@@ -2080,11 +2090,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozTransformOrigin}. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code -moz-transform-origin}. */
         MOZ_TRANSFORM_ORIGIN__("-moz-transform-origin", "-moz-transform-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -2376,6 +2386,9 @@ public final class StyleAttributes {
 
         /** The style property {@code msTextCombineHorizontal}. */
         MS_TEXT_COMBINE_HORIZONTAL("msTextCombineHorizontal", "-ms-text-combine-horizontal", ie("none")),
+
+        /** The style property {@code msTextSizeAdjust}. */
+        MS_TEXT_SIZE_ADJUST("msTextSizeAdjust", "-ms-text-size-adjust", ie("auto")),
 
         /** The style property {@code msTouchAction}. */
         MS_TOUCH_ACTION("msTouchAction", "-ms-touch-action", ie("auto")),
@@ -2675,11 +2688,11 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff68AndUp("621px 171.5px"), ie("620px 163.2px"), chromeAndEdge("456.5px 161px")),
+                ff68AndUp("622px 171.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
@@ -3309,10 +3322,10 @@ public final class StyleAttributes {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff68AndUp("621px 171.5px"), ie("620px 163.2px"), chromeAndEdge("456.5px 161px")),
+                ff68AndUp("622px 171.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
 
         /** The style property {@code transform-origin}. */
-        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff68AndUp("621px 171.5px")),
+        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff68AndUp("622px 171.5px")),
 
         /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie("flat"), chromeAndEdge("flat")),
@@ -3930,7 +3943,7 @@ public final class StyleAttributes {
         WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("322px")),
 
         /** The style property {@code webkitLogicalWidth}. */
-        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chromeAndEdge("913px")),
+        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chromeAndEdge("1240px")),
 
         /** The style property {@code webkitMarginAfter}. */
         WEBKIT_MARGIN_AFTER("webkitMarginAfter", "webkit-margin-after", chromeAndEdge("0px")),
@@ -4106,15 +4119,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                chromeAndEdge("456.5px 161px"), ff68AndUp("621px 171.5px")),
+                chromeAndEdge("620px 161px"), ff68AndUp("622px 171.5px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code -webkit-perspective-origin}. */
         WEBKIT_PERSPECTIVE_ORIGIN__("-webkit-perspective-origin", "webkit-perspective-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chromeAndEdge("")),
@@ -4234,15 +4247,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                chromeAndEdge("620px 161px"), ff68AndUp("621px 171.5px")),
+                chromeAndEdge("620px 161px"), ff68AndUp("622px 171.5px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code -webkit-transform-origin}. */
         WEBKIT_TRANSFORM_ORIGIN__("-webkit-transform-origin", "webkit-transform-origin",
-                ff68AndUp("621px 171.5px")),
+                ff68AndUp("622px 171.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chromeAndEdge("")),
