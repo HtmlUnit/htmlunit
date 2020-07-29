@@ -34055,10 +34055,10 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "2",
+    @Alerts(DEFAULT = "2",
             FF = "1",
-            FF68 = "1")
+            FF68 = "1",
+            IE = "0")
     @NotYetImplemented(IE)
     public void _isindex_command() throws Exception {
         test("isindex", "command");
