@@ -117,7 +117,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _ApplicationCacheErrorEvent_ApplicationCacheErrorEvent() throws Exception {
         test("ApplicationCacheErrorEvent", "ApplicationCacheErrorEvent");
     }
@@ -264,10 +265,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _AudioNode_AudioScheduledSourceNode() throws Exception {
         test("AudioNode", "AudioScheduledSourceNode");
     }
@@ -466,10 +465,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _AudioScheduledSourceNode_AudioBufferSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioBufferSourceNode");
     }
@@ -478,10 +475,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _AudioScheduledSourceNode_AudioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioScheduledSourceNode");
     }
@@ -490,10 +485,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _AudioScheduledSourceNode_ConstantSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "ConstantSourceNode");
     }
@@ -502,10 +495,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _AudioScheduledSourceNode_OscillatorNode() throws Exception {
         test("AudioScheduledSourceNode", "OscillatorNode");
     }
