@@ -86,7 +86,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _CanvasCaptureMediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
         test("CanvasCaptureMediaStreamTrack", "CanvasCaptureMediaStreamTrack");
     }
@@ -304,10 +305,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Credential_Credential() throws Exception {
         test("Credential", "Credential");
     }
@@ -317,7 +316,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _Credential_FederatedCredential() throws Exception {
         test("Credential", "FederatedCredential");
     }
@@ -327,7 +327,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _Credential_PasswordCredential() throws Exception {
         test("Credential", "PasswordCredential");
     }
@@ -336,10 +337,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CredentialsContainer_CredentialsContainer() throws Exception {
         test("CredentialsContainer", "CredentialsContainer");
     }
@@ -368,7 +367,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     @NotYetImplemented(CHROME)
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
@@ -757,10 +757,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CustomElementRegistry_CustomElementRegistry() throws Exception {
         test("CustomElementRegistry", "CustomElementRegistry");
     }
