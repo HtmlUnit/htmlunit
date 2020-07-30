@@ -58,7 +58,7 @@ public class ExternalTest {
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.26.0";
+    static String GECKO_DRIVER_ = "0.27.0";
     /** IE driver. */
     static String IE_DRIVER_ = "3.150.1.0";
 
@@ -175,7 +175,7 @@ public class ExternalTest {
             try {
                 final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
                 final DomNodeList<DomNode> divs = page.querySelectorAll(".release-header div");
-                assertEquals("Gecko Driver", divs.get(0).asText(), "v" + GECKO_DRIVER_);
+                assertEquals("Gecko Driver", divs.get(0).asText(), GECKO_DRIVER_);
             }
             catch (final FailingHttpStatusCodeException e) {
                 // ignore
