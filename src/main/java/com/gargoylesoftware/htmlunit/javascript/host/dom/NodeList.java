@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -33,7 +32,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArrayIterator;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -52,9 +53,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 @JsxClass
 public class NodeList extends AbstractList {
-
-    private static final String ITERATOR_NAME = "Iterator";
-    private static Iterator ITERATOR_PROTOTYPE_ = new Iterator(ITERATOR_NAME, null);
 
     /**
      * Creates an instance.
@@ -113,16 +111,8 @@ public class NodeList extends AbstractList {
      * @return an {@link Iterator}
      */
     @JsxFunction({CHROME, FF, FF68})
-    public Iterator keys() {
-        final int length = getElements().size();
-        final List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            list.add(i);
-        }
-        final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
-        object.setParentScope(getParentScope());
-        object.setPrototype(ITERATOR_PROTOTYPE_);
-        return object;
+    public ES6Iterator keys() {
+        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
     }
 
     /**
@@ -130,12 +120,8 @@ public class NodeList extends AbstractList {
      * @return an {@link Iterator}
      */
     @JsxFunction({CHROME, FF, FF68})
-    public Iterator values() {
-        final List<DomNode> list = getElements();
-        final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
-        object.setParentScope(getParentScope());
-        object.setPrototype(ITERATOR_PROTOTYPE_);
-        return object;
+    public ES6Iterator values() {
+        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }
 
     /**
@@ -143,20 +129,8 @@ public class NodeList extends AbstractList {
      * @return an {@link Iterator}
      */
     @JsxFunction({CHROME, FF, FF68})
-    public Iterator entries() {
-        final List<DomNode> elements = getElements();
-        final Context context = Context.getCurrentContext();
-        final Scriptable scope = getParentScope();
-
-        final List<Scriptable> list = new ArrayList<>();
-        for (int i = 0; i < elements.size(); i++) {
-            final Object[] array = new Object[] {i, elements.get(i).getScriptableObject()};
-            list.add(context.newArray(scope, array));
-        }
-        final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
-        object.setParentScope(scope);
-        object.setPrototype(ITERATOR_PROTOTYPE_);
-        return object;
+    public ES6Iterator entries() {
+        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
 
     /**
