@@ -52,7 +52,8 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _FederatedCredential_FederatedCredential() throws Exception {
         test("FederatedCredential", "FederatedCredential");
     }
@@ -262,10 +263,8 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            IE = "true")
+    @Alerts(DEFAULT = "true",
+            FF68 = "false")
     public void _Geolocation_Geolocation() throws Exception {
         test("Geolocation", "Geolocation");
     }
