@@ -1848,7 +1848,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals(new String[] {"Hello World"}, collectedAlerts);
 
         webClient.getPage("javascript:void(document.body.setAttribute('foo', window.screen.availWidth))");
-        assertEquals("1024", ((HtmlPage) page).getBody().getAttribute("foo"));
+        assertEquals("1920", ((HtmlPage) page).getBody().getAttribute("foo"));
     }
 
     /**
