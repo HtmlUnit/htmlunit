@@ -1706,8 +1706,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "173",
-            FF = "141",
-            FF68 = "141",
+            FF = "145",
+            FF68 = "145",
             IE = "143")
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
@@ -1772,8 +1772,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "173",
-            FF = "141",
-            FF68 = "141",
+            FF = "145",
+            FF68 = "145",
             IE = "145")
     @NotYetImplemented(IE)
     public void inputPassword() throws Exception {
@@ -1813,8 +1813,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "173",
-            FF = "141",
-            FF68 = "141",
+            FF = "145",
+            FF68 = "145",
             IE = "143")
     public void inputSelect() throws Exception {
         loadPageWithAlerts2(testInput("select"));
@@ -1842,8 +1842,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "173",
-            FF = "141",
-            FF68 = "141",
+            FF = "145",
+            FF68 = "145",
             IE = "143")
     public void inputText() throws Exception {
         loadPageWithAlerts2(testInput("text"));

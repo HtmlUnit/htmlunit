@@ -387,9 +387,10 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElementPrototype]",
                         "[object Object]", "function"},
-            CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
-    @HtmlUnitNYI(FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
-            FF68 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
+            CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
+            EDGE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
+            FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
+    @HtmlUnitNYI(FF68 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             IE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     public void getOwnPropertyDescriptor() throws Exception {
         final String html = ""
@@ -420,10 +421,10 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "x = [object Object]",
                         "x.get = function get value() { [native code] }",
                         "x.get.call = function call() { [native code] }"},
-            FF = {"[object HTMLInputElementPrototype]", "x = [object Object]",
+            FF = {"[object HTMLInputElement]", "x = [object Object]",
                         "x.get = function value() {\n    [native code]\n}",
                         "x.get.call = function call() {\n    [native code]\n}"},
             FF68 = {"[object HTMLInputElementPrototype]", "x = [object Object]",

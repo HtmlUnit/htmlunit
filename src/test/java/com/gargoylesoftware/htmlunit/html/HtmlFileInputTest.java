@@ -206,7 +206,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:video/x-ogm", "charset"},
-            CHROME = {"CONTENT_TYPE:video/ogg", "charset"})
+            CHROME = {"CONTENT_TYPE:video/ogg", "charset"},
+            FF = {"CONTENT_TYPE:video/ogg", "charset"})
     public void contentTypeOgm() throws Exception {
         contentType("ogm");
     }
@@ -267,7 +268,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
-            CHROME = {"CONTENT_TYPE:audio/flac", "charset"})
+            CHROME = {"CONTENT_TYPE:audio/flac", "charset"},
+            FF = {"CONTENT_TYPE:audio/x-flac", "charset"})
     public void contentTypeFlac() throws Exception {
         contentType("flac");
     }

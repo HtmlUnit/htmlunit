@@ -752,7 +752,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
-            FF = {"true", "true", "86", "true", "true", "14"},
+            FF = {"true", "true", "80", "true", "true", "12"},
             FF68 = {"true", "true", "86", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
@@ -984,7 +984,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF = {"11", "83"},
+            FF = {"10", "79"},
             FF68 = {"11", "83"})
     public void mozInnerScreen() throws Exception {
         final String html
@@ -2475,7 +2475,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
-            FF = {"[object WindowPrototype]", "[object WindowProperties]", "[object EventTargetPrototype]",
+            FF = {"[object WindowProperties]", "[object WindowProperties]", "[object EventTarget]",
                 "[object Object]"},
             FF68 = {"[object WindowPrototype]", "[object WindowProperties]", "[object EventTargetPrototype]",
                 "[object Object]"},

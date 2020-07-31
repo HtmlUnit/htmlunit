@@ -1735,7 +1735,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequestPrototype]",
-            CHROME = "[object XMLHttpRequest]")
+            CHROME = "[object XMLHttpRequest]",
+            FF = "[object XMLHttpRequest]")
     @NotYetImplemented({FF, FF68, IE})
     public void defineProperty2() throws Exception {
         final String html =

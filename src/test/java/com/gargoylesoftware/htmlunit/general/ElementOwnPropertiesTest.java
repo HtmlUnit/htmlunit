@@ -225,7 +225,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "mozMatchesSelector(),mozRequestFullScreen(),namespaceURI,nextElementSibling,onfullscreenchange,"
                 + "onfullscreenerror,outerHTML,part,prefix,prepend(),previousElementSibling,querySelector(),"
                 + "querySelectorAll(),releaseCapture(),releasePointerCapture(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),requestFullscreen(),requestPointerLock(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "requestFullscreen(),requestPointerLock(),"
                 + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,"
                 + "scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
                 + "setCapture(),setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
@@ -281,7 +282,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),"
                 + "insertAdjacentText(),lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,"
                 + "nextElementSibling,outerHTML,prefix,previousElementSibling,querySelector(),querySelectorAll(),"
-                + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceWith(),"
+                + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),replaceChildren(),replaceWith(),"
                 + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
             FF68 = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,clientLeft,"
@@ -4299,8 +4301,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,"
                 + "type",
-            FF = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,integrity,media,referrerPolicy,rel,"
-                + "relList,rev,sheet,sizes,target,"
+            FF = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,"
+                + "integrity,media,referrerPolicy,rel,relList,rev,sheet,sizes,target,"
                 + "type",
             FF68 = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,integrity,media,referrerPolicy,rel,"
                 + "relList,rev,sheet,sizes,target,type",
@@ -8821,7 +8823,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "querySelectorAll()",
             FF = "append(),childElementCount,children,constructor(),firstElementChild,getElementById(),"
                 + "lastElementChild,prepend(),querySelector(),"
-                + "querySelectorAll()",
+                + "querySelectorAll(),replaceChildren()",
             FF68 = "append(),childElementCount,children,constructor(),firstElementChild,getElementById(),"
                 + "lastElementChild,prepend(),querySelector(),"
                 + "querySelectorAll()",
