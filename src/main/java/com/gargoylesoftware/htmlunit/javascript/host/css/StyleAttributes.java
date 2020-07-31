@@ -1115,7 +1115,7 @@ public final class StyleAttributes {
         FONT_VARIATION_SETTING("fontVariationSettings", "font-variation-settings",
                 chromeAndEdge("normal"), ff("normal")),
 
-        /** The style property {@code fontVariationSettings}. */
+        /** The style property {@code font-variation-settings}. */
         FONT_VARIATION_SETTING_("font-variation-settings", "font-variation-settings", ff("normal")),
 
         /** The style property {@code fontWeight}. */

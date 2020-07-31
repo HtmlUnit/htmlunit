@@ -97,7 +97,7 @@ public final class BrowserVersion implements Serializable {
      * Firefox.
      * @since 2.38
      */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(77, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(79, "FF");
 
     /**
      * Firefox 68 ESR.
@@ -126,7 +126,7 @@ public final class BrowserVersion implements Serializable {
     static {
         // FF68
         FIREFOX_68.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
+        FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
                                     + FIREFOX_68.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
                                     + FIREFOX_68.getBrowserVersionNumeric() + ".0";
         FIREFOX_68.buildId_ = "20181001000000";
@@ -155,7 +155,7 @@ public final class BrowserVersion implements Serializable {
 
         // FF
         FIREFOX.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:"
+        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
                                             + FIREFOX.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
                                             + FIREFOX.getBrowserVersionNumeric() + ".0";
         FIREFOX.buildId_ = "20181001000000";
@@ -183,9 +183,9 @@ public final class BrowserVersion implements Serializable {
             140, 141, 143, 143, 144, 145, 146, 148};
 
         // IE
-        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:"
+        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 10.0; Trident/7.0; rv:"
                                                     + INTERNET_EXPLORER.getBrowserVersionNumeric() + ".0) like Gecko";
-        INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+        INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko";
         INTERNET_EXPLORER.platform_ = PLATFORM_WIN32;
         INTERNET_EXPLORER.headerNamesOrdered_ = new String[] {
             HttpHeader.ACCEPT,
@@ -211,9 +211,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.105 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.105 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -252,10 +252,10 @@ public final class BrowserVersion implements Serializable {
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
                                         + EDGE.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.522.44";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.522.48";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
                                         + EDGE.getBrowserVersionNumeric() + ".0.4147.89 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.522.44";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.522.48";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
