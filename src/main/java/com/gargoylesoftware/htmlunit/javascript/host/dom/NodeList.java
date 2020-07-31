@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -108,8 +107,8 @@ public class NodeList extends AbstractList {
     }
 
     /**
-     * Returns an {@link Iterator} allowing to go through all keys contained in this object.
-     * @return an {@link Iterator}
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return an {@link NativeArrayIterator}
      */
     @JsxFunction({CHROME, FF, FF68})
     public ES6Iterator keys() {
@@ -117,8 +116,8 @@ public class NodeList extends AbstractList {
     }
 
     /**
-     * Returns an {@link Iterator} allowing to go through all keys contained in this object.
-     * @return an {@link Iterator}
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return an {@link NativeArrayIterator}
      */
     @JsxFunction({CHROME, FF, FF68})
     public ES6Iterator values() {
@@ -126,8 +125,8 @@ public class NodeList extends AbstractList {
     }
 
     /**
-     * Returns an {@link Iterator} allowing to go through all key/value pairs contained in this object.
-     * @return an {@link Iterator}
+     * Returns an Iterator allowing to go through all key/value pairs contained in this object.
+     * @return an {@link NativeArrayIterator}
      */
     @JsxFunction({CHROME, FF, FF68})
     public ES6Iterator entries() {

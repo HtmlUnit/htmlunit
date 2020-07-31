@@ -588,7 +588,7 @@ public class NodeListTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>\n";
 
-        loadPageWithAlerts2(html, 777777);
+        loadPageWithAlerts2(html);
     }
 
     /**
