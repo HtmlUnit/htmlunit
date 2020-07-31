@@ -266,6 +266,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     @NotYetImplemented({CHROME, FF})
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
@@ -287,7 +288,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     @NotYetImplemented(CHROME)
     public void _webkitMediaStream_MediaStream() throws Exception {
         test("webkitMediaStream", "MediaStream");
@@ -298,7 +300,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitMediaStream_webkitMediaStream() throws Exception {
         test("webkitMediaStream", "webkitMediaStream");
     }
@@ -308,7 +311,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _WebKitMutationObserver_MutationObserver() throws Exception {
         test("WebKitMutationObserver", "MutationObserver");
     }
@@ -318,7 +322,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _WebKitMutationObserver_WebKitMutationObserver() throws Exception {
         test("WebKitMutationObserver", "WebKitMutationObserver");
     }
@@ -328,7 +333,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     @NotYetImplemented(CHROME)
     public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "RTCPeerConnection");
@@ -339,7 +345,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
     }
@@ -349,7 +356,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitSpeechGrammar_webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar", "webkitSpeechGrammar");
     }
@@ -359,7 +367,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
     }
@@ -369,7 +378,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition", "webkitSpeechRecognition");
     }
@@ -379,7 +389,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitSpeechRecognitionError_webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError", "webkitSpeechRecognitionError");
     }
@@ -389,7 +400,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _webkitSpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
     }
@@ -400,6 +412,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     public void _webkitURL_URL() throws Exception {
         test("webkitURL", "URL");
@@ -411,6 +424,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
