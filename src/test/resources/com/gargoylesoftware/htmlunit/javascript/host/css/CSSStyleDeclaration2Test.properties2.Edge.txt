@@ -153,6 +153,7 @@ fontVariantLigatures
 fontVariantNumeric
 fontVariationSettings
 fontWeight
+forcedColorAdjust
 gap
 grid
 gridArea

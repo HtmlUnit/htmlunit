@@ -215,6 +215,7 @@ msScrollSnapX
 msScrollSnapY
 msScrollTranslation
 msTextCombineHorizontal
+msTextSizeAdjust
 msTouchAction
 msTouchSelect
 msTransform

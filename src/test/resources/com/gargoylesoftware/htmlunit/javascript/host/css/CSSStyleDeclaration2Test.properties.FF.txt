@@ -275,6 +275,7 @@ fontFamily
 fontFeatureSettings
 fontKerning
 fontLanguageOverride
+fontOpticalSizing
 fontSize
 fontSizeAdjust
 fontStretch
@@ -287,6 +288,7 @@ fontVariantEastAsian
 fontVariantLigatures
 fontVariantNumeric
 fontVariantPosition
+fontVariationSettings
 fontWeight
 gap
 grid
