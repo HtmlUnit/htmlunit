@@ -1124,14 +1124,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
-    /** Children are enumerated. */
-    @BrowserFeature(IE)
-    JS_NODE_LIST_ENUMERATE_CHILDREN,
-
-    /** Functions are enumerated. */
-    @BrowserFeature({CHROME, FF, FF68})
-    JS_NODE_LIST_ENUMERATE_FUNCTIONS,
-
     /** Indicates that Object.getOwnPropertySymbols() is supported. */
     @BrowserFeature({CHROME, FF, FF68})
     JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS,
