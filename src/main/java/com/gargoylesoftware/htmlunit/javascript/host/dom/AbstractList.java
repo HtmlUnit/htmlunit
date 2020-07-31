@@ -15,17 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_CHILDREN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -35,13 +30,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -57,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass(isJSObject = false)
-public class AbstractList extends SimpleScriptable implements Function {
+public class AbstractList extends SimpleScriptable implements Function, ExternalArrayData {
 
     /**
      * Cache effect of some changes.
@@ -83,7 +77,6 @@ public class AbstractList extends SimpleScriptable implements Function {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
     public AbstractList() {
     }
 
@@ -131,6 +124,7 @@ public class AbstractList extends SimpleScriptable implements Function {
         if (initialElements != null) {
             registerListener();
         }
+        setExternalArrayData(this);
     }
 
     /**
@@ -189,20 +183,6 @@ public class AbstractList extends SimpleScriptable implements Function {
         }
         final String key = String.valueOf(o);
         return get(key, this);
-    }
-
-    /**
-     * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
-     * {@inheritDoc}
-     */
-    @Override
-    public final Object get(final int index, final Scriptable start) {
-        final AbstractList array = (AbstractList) start;
-        final List<DomNode> elements = array.getElements();
-        if (index >= 0 && index < elements.size()) {
-            return getScriptableForElement(elements.get(index));
-        }
-        return NOT_FOUND;
     }
 
     @Override
@@ -437,128 +417,6 @@ public class AbstractList extends SimpleScriptable implements Function {
         return super.equivalentValues(other);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean has(final int index, final Scriptable start) {
-        return index >= 0 && index < getElements().size();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean has(final String name, final Scriptable start) {
-        // let's Rhino work normally if current instance is the prototype
-        if (isPrototype()) {
-            return super.has(name, start);
-        }
-
-        try {
-            return has(Integer.parseInt(name), start);
-        }
-        catch (final NumberFormatException e) {
-            // Ignore.
-        }
-
-        if ("length".equals(name)) {
-            return true;
-        }
-        final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
-            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
-                    .getJavaScriptEngine().getJavaScriptConfiguration();
-            if (jsConfig.getClassConfiguration(getClassName()).getFunctionKeys().contains(name)) {
-                return true;
-            }
-        }
-
-        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_CHILDREN)) {
-            for (final Object next : getElements()) {
-                if (next instanceof DomElement) {
-                    final DomElement element = (DomElement) next;
-                    if (name.equals(element.getAttributeDirect("name"))) {
-                        return true;
-                    }
-
-                    final String id = element.getId();
-                    if (name.equals(id)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return getWithPreemption(name) != NOT_FOUND;
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public Object[] getIds() {
-        // let's Rhino work normally if current instance is the prototype
-        if (isPrototype()) {
-            return super.getIds();
-        }
-
-        final List<String> idList = new ArrayList<>();
-        final List<DomNode> elements = getElements();
-
-        final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
-            final int length = elements.size();
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
-
-            idList.add("length");
-            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
-                .getJavaScriptEngine().getJavaScriptConfiguration();
-            for (final String name : jsConfig.getClassConfiguration(getClassName()).getFunctionKeys()) {
-                idList.add(name);
-            }
-        }
-        else {
-            idList.add("length");
-        }
-        if (browserVersion.hasFeature(JS_NODE_LIST_ENUMERATE_CHILDREN)) {
-            addElementIds(idList, elements);
-        }
-
-        return idList.toArray();
-    }
-
-    private boolean isPrototype() {
-        return !(getPrototype() instanceof AbstractList);
-    }
-
-    /**
-     * Adds the ids of the collection's elements to the idList.
-     * @param idList the list to add the ids to
-     * @param elements the collection's elements
-     */
-    protected void addElementIds(final List<String> idList, final List<DomNode> elements) {
-        int index = 0;
-        for (final DomNode next : elements) {
-            if (next instanceof DomElement) {
-                final DomElement element = (DomElement) next;
-                final String name = element.getAttributeDirect("name");
-                if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                    idList.add(name);
-                }
-                final String id = element.getId();
-                if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                    idList.add(id);
-                }
-            }
-            if (!getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
-                idList.add(Integer.toString(index));
-            }
-            index++;
-        }
-    }
-
     private static final class DomHtmlAttributeChangeListenerImpl
                                     implements DomChangeListener, HtmlAttributeChangeListener {
 
@@ -659,5 +517,38 @@ public class AbstractList extends SimpleScriptable implements Function {
             return (Scriptable) object;
         }
         return getScriptableFor(object);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void defineProperty(final String propertyName, final Object delegateTo,
+            final Method getter, final Method setter, final int attributes) {
+        // length is defined on the prototype, don't define it again
+        if ("length" == propertyName) {
+            return;
+        }
+
+        super.defineProperty(propertyName, delegateTo, getter, setter, attributes);
+    }
+
+    @Override
+    public Object getArrayElement(final int index) {
+        final List<DomNode> elements = getElements();
+        if (index >= 0 && index < elements.size()) {
+            return getScriptableForElement(elements.get(index));
+        }
+        return NOT_FOUND;
+    }
+
+    @Override
+    public void setArrayElement(final int index, final Object value) {
+        // ignored
+    }
+
+    @Override
+    public int getArrayLength() {
+        return getElements().size();
     }
 }

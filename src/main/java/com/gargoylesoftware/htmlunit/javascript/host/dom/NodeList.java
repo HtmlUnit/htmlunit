@@ -88,6 +88,7 @@ public class NodeList extends AbstractList {
     private NodeList(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
+        setExternalArrayData(this);
     }
 
     /**

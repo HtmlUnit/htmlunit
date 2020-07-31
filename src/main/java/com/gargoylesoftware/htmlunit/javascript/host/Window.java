@@ -4508,16 +4508,4 @@ class HTMLCollectionFrames extends HTMLCollection {
 
         return NOT_FOUND;
     }
-
-    @Override
-    protected void addElementIds(final List<String> idList, final List<DomNode> elements) {
-        for (final DomNode next : elements) {
-            final BaseFrameElement frameElt = (BaseFrameElement) next;
-            final WebWindow window = frameElt.getEnclosedWindow();
-            final String windowName = window.getName();
-            if (windowName != null) {
-                idList.add(windowName);
-            }
-        }
-    }
 }
