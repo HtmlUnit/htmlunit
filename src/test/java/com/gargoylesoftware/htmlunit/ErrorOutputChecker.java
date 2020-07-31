@@ -64,6 +64,8 @@ public class ErrorOutputChecker implements TestRule {
                     + "MSEdgeDriver was started successfully\\.\r?\n"),
 
             // FF
+            Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sListening on 127.0.0.1:[0-9]*(\\n)*"),
+
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
                     + ".*\\n"
                     + "(.*\\r\\n)*"),
