@@ -1150,7 +1150,7 @@ public enum BrowserVersionFeatures {
     JS_PHRASE_COMMON_CLASS_NAME,
 
     /** Indicates that the {@link PopStateEvent}.{@code state} is cloned. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature(IE)
     JS_POP_STATE_EVENT_CLONE_STATE,
 
     /** Indicates that the {@code pre.width} is string. */
