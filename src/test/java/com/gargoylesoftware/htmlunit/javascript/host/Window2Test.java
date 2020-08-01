@@ -390,6 +390,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}"},
             CHROME = {"function Node() { [native code] }", "function Element() { [native code] }"},
+            EDGE = {"function Node() { [native code] }", "function Element() { [native code] }"},
             IE = {"[object Node]", "[object Element]"})
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -752,9 +753,10 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
+            EDGE = {"true", "true", "130", "true", "true", "16"},
             FF = {"true", "true", "80", "true", "true", "12"},
-            FF68 = {"true", "true", "86", "true", "true", "14"},
-            IE = {"true", "true", "63", "true", "true", "16"})
+            FF68 = {"true", "true", "81", "true", "true", "12"},
+            IE = {"true", "true", "86", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -796,7 +798,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
-            IE = {"true", "705"})
+            IE = {"true", "682"})
     @NotYetImplemented(IE)
     public void setInnerHeight() throws Exception {
         final String html
@@ -857,7 +859,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"636", "1256", "619", "1239"},
-            EDGE = {"680", "1256", "663", "1239"},
+            EDGE = {"638", "1256", "621", "1239"},
             FF = {"688", "1260", "671", "1243"},
             FF68 = {"687", "1260", "670", "1243"},
             IE = {"682", "1256", "665", "1239"})
@@ -893,8 +895,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"},
-            FF68 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"})
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1274"},
+            FF68 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1272"})
     @NotYetImplemented({FF, FF68})
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -985,7 +987,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
             FF = {"10", "79"},
-            FF68 = {"11", "83"})
+            FF68 = {"10", "79"})
     public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -2173,11 +2175,11 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "[object Window]", ""},
-            CHROME = {"[object Window]", "function Window() { [native code] }",
-            "TEMPORARY, PERSISTENT, "},
+    @Alerts(DEFAULT = {"[object Window]", "function Window() { [native code] }",
+                        "TEMPORARY, PERSISTENT, "},
             FF = {"[object Window]", "function Window() {\n    [native code]\n}", ""},
-            FF68 = {"[object Window]", "function Window() {\n    [native code]\n}", ""})
+            FF68 = {"[object Window]", "function Window() {\n    [native code]\n}", ""},
+            IE = {"[object Window]", "[object Window]", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"

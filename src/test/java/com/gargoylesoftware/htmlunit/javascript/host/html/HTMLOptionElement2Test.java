@@ -50,7 +50,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
-    @BuggyWebDriver(CHROME = "")
+    @BuggyWebDriver(CHROME = "",
+            EDGE = "")
     //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
@@ -154,7 +155,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
             IE = "onchange-select; onclick-select;")
     @BuggyWebDriver(CHROME = "onchange-select; onclick-select;",
-                    FF = "onchange-select; onclick-select;")
+            EDGE = "onchange-select; onclick-select;",
+            FF = "onchange-select; onclick-select;",
+            FF68 = "onchange-select; onclick-select;")
     public void clickOptionEventSequence1() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -196,7 +199,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
             IE = "change-SELECT; click-SELECT;")
     @BuggyWebDriver(CHROME = "change-SELECT; click-SELECT;",
-                    FF = "change-SELECT; click-SELECT;")
+            EDGE = "change-SELECT; click-SELECT;",
+            FF = "change-SELECT; click-SELECT;",
+            FF68 = "change-SELECT; click-SELECT;")
     public void clickOptionEventSequence2() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -253,7 +258,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
             IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
     @BuggyWebDriver(CHROME = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
-                    FF = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+            EDGE = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
+            FF = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
+            FF68 = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
     public void clickOptionEventSequence3() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1232,6 +1239,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"false-null", "true-true", "true-null",
                         "false-selected", "false-null", "true-true"},
             FF = {"false-null", "true-true", "true-null",
+                    "false-selected", "false-null", "false-true"},
+            FF68 = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"})
     @NotYetImplemented(FF)
     public void setSelectedAttribute() throws Exception {

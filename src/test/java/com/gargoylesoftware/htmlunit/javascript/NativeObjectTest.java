@@ -184,7 +184,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "function () { [native code] }",
+    @Alerts(DEFAULT = "function () { [native code] }",
             FF = "function () {\n    [native code]\n}",
             FF68 = "function () {\n    [native code]\n}",
             IE = "\nfunction() {\n    [native code]\n}\n")
@@ -436,9 +436,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
                         "x.get = function value() { [native code] }",
                         "x.get.call = function call() { [native code] }"},
-            FF = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() {\n    [native code]\n}",
-                        "x.get.call = function call() {\n    [native code]\n}"},
             FF68 = {"[object HTMLInputElement]", "x = [object Object]",
                         "x.get = function value() {\n    [native code]\n}",
                         "x.get.call = function call() {\n    [native code]\n}"},
