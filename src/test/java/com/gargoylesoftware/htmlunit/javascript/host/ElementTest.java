@@ -1121,7 +1121,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
             FF = {"function Element() {\n    [native code]\n}",
-                    "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+                    "[object Element]", "function Element() {\n    [native code]\n}"},
             FF68 = {"function Element() {\n    [native code]\n}",
                     "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})

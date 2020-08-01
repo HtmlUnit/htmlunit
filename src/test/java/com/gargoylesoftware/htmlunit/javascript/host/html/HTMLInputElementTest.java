@@ -1764,7 +1764,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"173", "17", "173", "17", "13", "13", "13", "13"},
             FF = {"145", "20", "145", "20", "13", "13", "13", "13"},
-            FF68 = {"141", "20", "141", "20", "13", "13", "13", "13"},
+            FF68 = {"145", "20", "145", "20", "13", "13", "13", "13"},
             IE = {"143", "19", "145", "20", "13", "13", "13", "13"})
     @NotYetImplemented(IE)
     public void defaultClientWidthHeight() throws Exception {

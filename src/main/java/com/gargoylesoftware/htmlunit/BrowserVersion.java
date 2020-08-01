@@ -186,7 +186,6 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 10.0; Trident/7.0; rv:"
                                                     + INTERNET_EXPLORER.getBrowserVersionNumeric() + ".0) like Gecko";
         INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko";
-        INTERNET_EXPLORER.platform_ = PLATFORM_WIN32;
         INTERNET_EXPLORER.headerNamesOrdered_ = new String[] {
             HttpHeader.ACCEPT,
             HttpHeader.REFERER,
@@ -217,7 +216,6 @@ public final class BrowserVersion implements Serializable {
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
-        CHROME.platform_ = PLATFORM_WIN32;
         CHROME.cpuClass_ = null;
         CHROME.productSub_ = "20030107";
         CHROME.headerNamesOrdered_ = new String[] {
@@ -259,7 +257,6 @@ public final class BrowserVersion implements Serializable {
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
-        EDGE.platform_ = PLATFORM_WIN32;
         EDGE.cpuClass_ = null;
         EDGE.productSub_ = "20030107";
         EDGE.headerNamesOrdered_ = new String[] {
@@ -436,7 +433,7 @@ public final class BrowserVersion implements Serializable {
     private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
-    private String platform_ = PLATFORM_WIN64;
+    private String platform_ = PLATFORM_WIN32;
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
