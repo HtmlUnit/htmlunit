@@ -1633,17 +1633,17 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"[object Object]", "undefined", "undefined",
+    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
+                        "function get onreadystatechange() { [native code] }",
+                        "function set onreadystatechange() { [native code] }",
+                        "true", "true"},
+            FF = {"[object Object]", "undefined", "undefined",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             FF68 = {"[object Object]", "undefined", "undefined",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
-            CHROME = {"[object Object]", "undefined", "undefined",
-                        "function get onreadystatechange() { [native code] }",
-                        "function set onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
@@ -1680,17 +1680,17 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"[object Object]", "undefined", "undefined",
+    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
+                        "function() { return !0 }",
+                        "function set onreadystatechange() { [native code] }",
+                        "true", "true"},
+            FF = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             FF68 = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
                         "function onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
-            CHROME = {"[object Object]", "undefined", "undefined",
-                        "function() { return !0 }",
-                        "function set onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
                     "function() { return !0 }",
@@ -1734,10 +1734,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLHttpRequestPrototype]",
-            CHROME = "[object XMLHttpRequest]",
-            FF = "[object XMLHttpRequest]")
-    @NotYetImplemented({FF, FF68, IE})
+    @Alerts(DEFAULT = "[object XMLHttpRequest]",
+            FF68 = "[object XMLHttpRequestPrototype]",
+            IE = "[object XMLHttpRequestPrototype]")
+    @NotYetImplemented({FF68, IE})
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"

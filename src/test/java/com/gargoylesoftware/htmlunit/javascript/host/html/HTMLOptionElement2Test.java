@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.LinkedList;
@@ -1242,7 +1243,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "false-selected", "false-null", "false-true"},
             FF68 = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF, FF68})
     public void setSelectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
