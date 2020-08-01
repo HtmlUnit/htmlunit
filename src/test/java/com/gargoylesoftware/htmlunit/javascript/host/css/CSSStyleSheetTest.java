@@ -1425,8 +1425,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"none", "1"},
-            CHROME = {"block", "1"},
-            EDGE = {"block", "1"},
             IE = {"block", "1"})
     @NotYetImplemented(IE)
     public void mediaRule_resolution_match() throws Exception {
