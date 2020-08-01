@@ -1072,7 +1072,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
                     return 173;
                 }
-                width = 141; // FF60
+                width = 145; // FF
             }
             else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
                 width = 13;

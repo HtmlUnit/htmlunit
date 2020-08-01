@@ -251,7 +251,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
                 + "lastElementChild,msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),"
                 + "msMatchesSelector(),msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),"
-                + "msSetPointerCapture(),nextElementSibling,ongotpointercapture,onlostpointercapture,"
+                + "msSetPointerCapture(),msZoomTo(),nextElementSibling,ongotpointercapture,onlostpointercapture,"
                 + "onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,onmsgesturestart,"
                 + "onmsgesturetap,onmsgotpointercapture,onmsinertiastart,onmslostpointercapture,onmspointercancel,"
                 + "onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,"
@@ -283,7 +283,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "insertAdjacentText(),lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,"
                 + "nextElementSibling,outerHTML,prefix,previousElementSibling,querySelector(),querySelectorAll(),"
                 + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),"
-                + "removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "removeAttributeNS(),replaceWith(),"
                 + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
             FF68 = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,clientLeft,"
@@ -751,8 +751,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,"
                 + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
-                + "title")
+                + "tabIndex,title",
+            IE = "cite,constructor,dateTime")
     @HtmlUnitNYI(CHROME = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
@@ -2012,7 +2012,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "captureStream(),constructor(),getContext(),height,"
                     + "mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             FF68 = "captureStream(),constructor(),getContext(),height,"
-                    + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width")
+                    + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
+            IE = "constructor,getContext(),height,msToBlob(),toDataURL(),width")
     @HtmlUnitNYI(CHROME = "constructor(),getContext(),height,toDataURL(),width",
             FF68 = "constructor(),getContext(),height,toDataURL(),width",
             FF = "constructor(),getContext(),height,toDataURL(),width",
@@ -3384,7 +3385,27 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
                 + "tabIndex,"
-                + "title")
+                + "title",
+            IE = "accessKey,applyElement(),blur(),canHaveChildren,canHaveHTML,children,classList,className,"
+                + "clearAttributes(),click(),componentFromPoint(),constructor,contains(),contentEditable,"
+                + "createControlRange(),currentStyle,dataset,dir,disabled,dragDrop(),draggable,focus(),"
+                + "getAdjacentText(),getElementsByClassName(),hidden,hideFocus,id,innerHTML,innerText,"
+                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),isContentEditable,"
+                + "isDisabled,isMultiLine,isTextEdit,lang,language,mergeAttributes(),msGetInputContext(),"
+                + "offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onactivate,"
+                + "onbeforeactivate,onbeforecopy,onbeforecut,onbeforedeactivate,onbeforepaste,onblur,"
+                + "oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncuechange,oncut,"
+                + "ondblclick,ondeactivate,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,"
+                + "ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onfocusin,onfocusout,onhelp,"
+                + "oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,"
+                + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
+                + "onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,"
+                + "onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
+                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
+                + "outerHTML,outerText,parentElement,parentTextEdit,recordNumber,releaseCapture(),"
+                + "removeNode(),replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),"
+                + "setActive(),setCapture(),sourceIndex,spellcheck,style,swapNode(),tabIndex,title,"
+                + "uniqueID,uniqueNumber")
     @HtmlUnitNYI(CHROME = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
@@ -3825,7 +3846,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "useMap,vspace,width,x,y",
             FF68 = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,height,hspace,"
                 + "isMap,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,"
-                + "vspace,width,x,y")
+                + "vspace,width,x,y",
+            IE = "align,alt,border,complete,constructor,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,"
+                + "fileUpdatedDate,height,href,hspace,isMap,longDesc,loop,lowsrc,mimeType,msPlayToDisabled,"
+                + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,"
+                + "protocol,src,start,useMap,vrml,vspace,width")
     @HtmlUnitNYI(CHROME = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF68 = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
@@ -3916,8 +3941,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "cite,constructor(),dateTime",
             EDGE = "cite,constructor(),dateTime",
             FF = "cite,constructor(),dateTime",
-            FF68 = "cite,constructor(),dateTime")
-    @HtmlUnitNYI(IE = "cite,constructor,dateTime")
+            FF68 = "cite,constructor(),dateTime",
+            IE = "cite,constructor,dateTime")
     public void ins() throws Exception {
         test("ins");
     }
@@ -6229,7 +6254,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "type",
             FF68 = "async,charset,constructor(),crossOrigin,defer,event,htmlFor,"
                         + "integrity,noModule,referrerPolicy,src,text,type",
-            IE = "async,charset,constructor,defer,event,htmlFor,src,text,type")
+            IE = "async,charset,constructor,crossOrigin,defer,event,htmlFor,src,text,type")
     @HtmlUnitNYI(CHROME = "async,constructor(),src,text,type",
             FF68 = "async,constructor(),src,text,type",
             FF = "async,constructor(),src,text,type",
@@ -6540,7 +6565,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),media,sizes,src,srcset,type",
             FF = "constructor(),media,sizes,src,srcset,type",
             FF68 = "constructor(),media,sizes,src,srcset,type",
-            IE = "constructor,media,src,type")
+            IE = "constructor,media,msKeySystem,src,type")
     @HtmlUnitNYI(CHROME = "constructor()",
             FF68 = "constructor()",
             FF = "constructor()",
@@ -6977,8 +7002,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,"
                 + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
-                + "title")
+                + "tabIndex,title",
+            IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(CHROME = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
@@ -7827,7 +7852,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "constructor(),getVideoPlaybackQuality(),height,mozDecodedFrames,mozFrameDelay,mozHasAudio,"
                 + "mozPaintedFrames,mozParsedFrames,mozPresentedFrames,poster,videoHeight,videoWidth,"
                 + "width",
-            IE = "constructor,height,msZoom,poster,videoHeight,videoWidth,width")
+            IE = "constructor,getVideoPlaybackQuality(),height,msZoom,poster,videoHeight,videoWidth,width")
     @HtmlUnitNYI(CHROME = "constructor(),height,width",
             FF68 = "constructor(),height,width",
             FF = "constructor(),height,width",
@@ -8203,7 +8228,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,"
                 + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,"
                 + "getModifierState(),initKeyboardEvent(),initKeyEvent(),isComposing,"
-                + "key,keyCode,location,metaKey,repeat,shiftKey")
+                + "key,keyCode,location,metaKey,repeat,shiftKey",
+            IE = "altKey,char,charCode,constructor,ctrlKey,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,"
+                + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
+                + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,which")
     @HtmlUnitNYI(CHROME = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
             FF68 = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
@@ -8289,10 +8317,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "constructor(),detail,initUIEvent(),layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,"
                 + "which",
-            IE = "constructor,detail,initUIEvent(),view")
+            IE = "constructor,detail,deviceSessionId,initUIEvent(),view")
     @HtmlUnitNYI(CHROME = "constructor(),detail,initUIEvent(),view",
             FF68 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
-            FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view")
+            FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+            IE = "constructor,detail,initUIEvent(),view")
     public void uiEvent() throws Exception {
         testString("document.createEvent('UIEvent')");
     }
@@ -8331,14 +8360,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             FF68 = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
-                + "tangentialPressure,tiltX,tiltY,twist,width")
+                + "tangentialPressure,tiltX,tiltY,twist,width",
+            IE = "exception")
     @HtmlUnitNYI(CHROME = "constructor(),height,isPrimary,pointerId,pointerType,"
                 + "pressure,tiltX,tiltY,width",
             FF68 = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width",
             FF = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
-                + "tiltX,tiltY,width",
-            IE = "exception")
+                + "tiltX,tiltY,width")
     public void pointerEvent() throws Exception {
         testString("new PointerEvent('click')");
     }
@@ -8683,7 +8712,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
                 + "lastElementChild,msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),"
                 + "msMatchesSelector(),msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),"
-                + "msSetPointerCapture(),nextElementSibling,ongotpointercapture,onlostpointercapture,"
+                + "msSetPointerCapture(),msZoomTo(),nextElementSibling,ongotpointercapture,onlostpointercapture,"
                 + "onmsgesturechange,onmsgesturedoubletap,onmsgestureend,onmsgesturehold,onmsgesturestart,"
                 + "onmsgesturetap,onmsgotpointercapture,onmsinertiastart,onmslostpointercapture,onmspointercancel,"
                 + "onmspointerdown,onmspointerenter,onmspointerleave,onmspointermove,onmspointerout,onmspointerover,"
