@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONT
 import java.lang.reflect.Executable;
 import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -170,10 +171,13 @@ public class RecursiveFunctionObject extends FunctionObject {
                 final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
                         klass.asSubclass(HtmlUnitScriptable.class), browserVersion);
                 if (config != null) {
-                    for (final ConstantInfo constantInfo : config.getConstants()) {
-                        if (constantInfo.getName().equals(name)) {
-                            value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
-                            break;
+                    final List<ConstantInfo> constants = config.getConstants();
+                    if (constants != null) {
+                        for (final ConstantInfo constantInfo : constants) {
+                            if (constantInfo.getName().equals(name)) {
+                                value = ScriptableObject.getProperty((Scriptable) getPrototypeProperty(), name);
+                                break;
+                            }
                         }
                     }
                 }

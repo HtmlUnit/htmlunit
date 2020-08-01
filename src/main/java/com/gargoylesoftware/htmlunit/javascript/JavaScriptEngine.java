@@ -597,50 +597,63 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static void configureFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
         final int attributes = ScriptableObject.EMPTY;
         // the functions
-        for (final Entry<String, Method> functionInfo : config.getFunctionEntries()) {
-            final String functionName = functionInfo.getKey();
-            final Method method = functionInfo.getValue();
-            final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
-            scriptable.defineProperty(functionName, functionObject, attributes);
+        final Map<String, Method> functionMap = config.getFunctionMap();
+        if (functionMap != null) {
+            for (final Entry<String, Method> functionInfo : functionMap.entrySet()) {
+                final String functionName = functionInfo.getKey();
+                final Method method = functionInfo.getValue();
+                final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
+                scriptable.defineProperty(functionName, functionObject, attributes);
+            }
         }
     }
 
     private static void configureConstants(final ClassConfiguration config, final ScriptableObject scriptable) {
-        for (final ConstantInfo constantInfo : config.getConstants()) {
-            scriptable.defineProperty(constantInfo.getName(), constantInfo.getValue(), constantInfo.getFlag());
+        final List<ConstantInfo> constants = config.getConstants();
+        if (constants != null) {
+            for (final ConstantInfo constantInfo : constants) {
+                scriptable.defineProperty(constantInfo.getName(), constantInfo.getValue(), constantInfo.getFlag());
+            }
         }
     }
 
     private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
-        for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
-            final PropertyInfo info = propertyEntry.getValue();
-            final Method readMethod = info.getReadMethod();
-            final Method writeMethod = info.getWriteMethod();
-            scriptable.defineProperty(propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
+        if (propertyMap != null) {
+            for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
+                final PropertyInfo info = propertyEntry.getValue();
+                final Method readMethod = info.getReadMethod();
+                final Method writeMethod = info.getWriteMethod();
+                scriptable.defineProperty(propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
+            }
         }
     }
 
     private static void configureStaticProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
-                : config.getStaticPropertyEntries()) {
-            final String propertyName = propertyEntry.getKey();
-            final Method readMethod = propertyEntry.getValue().getReadMethod();
-            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
-            final int flag = ScriptableObject.EMPTY;
+        final Map<String, PropertyInfo> staticPropertyMap = config.getStaticPropertyMap();
+        if (staticPropertyMap != null) {
+            for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : staticPropertyMap.entrySet()) {
+                final String propertyName = propertyEntry.getKey();
+                final Method readMethod = propertyEntry.getValue().getReadMethod();
+                final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+                final int flag = ScriptableObject.EMPTY;
 
-            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+                scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+            }
         }
     }
 
     private static void configureStaticFunctions(final ClassConfiguration config,
             final ScriptableObject scriptable) {
-        for (final Entry<String, Method> staticfunctionInfo : config.getStaticFunctionEntries()) {
-            final String functionName = staticfunctionInfo.getKey();
-            final Method method = staticfunctionInfo.getValue();
-            final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
-                    scriptable);
-            scriptable.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
+        final Map<String, Method> staticFunctionMap = config.getStaticFunctionMap();
+        if (staticFunctionMap != null) {
+            for (final Entry<String, Method> staticfunctionInfo : staticFunctionMap.entrySet()) {
+                final String functionName = staticfunctionInfo.getKey();
+                final Method method = staticfunctionInfo.getValue();
+                final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
+                        scriptable);
+                scriptable.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
+            }
         }
     }
 

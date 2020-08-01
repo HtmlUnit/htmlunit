@@ -9,6 +9,11 @@
     <body>
         <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, Rhino fixes, Chrome 84, Edge added, FF60 removed">
             <action type="update" dev="rbri">
+                ClassConfiguration is changed a bit, the fields propertyMap_, functionMap_,
+                staticPropertyMap_, staticFunctionMap_ and constants_ are now lazy initialized
+                to save some memory.
+            </action>
+            <action type="update" dev="rbri">
                 Simulated screen resolution is now 1920x1080.
             </action>
             <action type="fix" dev="rbri" issue="#199">

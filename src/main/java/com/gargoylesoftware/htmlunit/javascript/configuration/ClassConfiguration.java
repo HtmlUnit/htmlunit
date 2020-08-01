@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
@@ -37,11 +35,11 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  */
 public final class ClassConfiguration {
-    private Map<String, PropertyInfo> propertyMap_ = new HashMap<>();
-    private Map<String, Method> functionMap_ = new HashMap<>();
-    private Map<String, PropertyInfo> staticPropertyMap_ = new HashMap<>();
-    private Map<String, Method> staticFunctionMap_ = new HashMap<>();
-    private List<ConstantInfo> constants_ = new ArrayList<>();
+    private Map<String, PropertyInfo> propertyMap_;
+    private Map<String, Method> functionMap_;
+    private Map<String, PropertyInfo> staticPropertyMap_;
+    private Map<String, Method> staticFunctionMap_;
+    private List<ConstantInfo> constants_;
     private String extendedClassName_;
     private final Class<? extends HtmlUnitScriptable> hostClass_;
     private final String hostClassSimpleName_;
@@ -94,6 +92,9 @@ public final class ClassConfiguration {
      */
     public void addProperty(final String name, final Method getter, final Method setter) {
         final PropertyInfo info = new PropertyInfo(getter, setter);
+        if (propertyMap_ == null) {
+            propertyMap_ = new HashMap<>();
+        }
         propertyMap_.put(name, info);
     }
 
@@ -105,6 +106,9 @@ public final class ClassConfiguration {
      */
     public void addStaticProperty(final String name, final Method getter, final Method setter) {
         final PropertyInfo info = new PropertyInfo(getter, setter);
+        if (staticPropertyMap_ == null) {
+            staticPropertyMap_ = new HashMap<>();
+        }
         staticPropertyMap_.put(name, info);
     }
 
@@ -113,6 +117,9 @@ public final class ClassConfiguration {
      * @param name - Name of the configuration
      */
     public void addConstant(final String name) {
+        if (constants_ == null) {
+            constants_ = new ArrayList<>();
+        }
         try {
             final Object value = getHostClass().getField(name).get(null);
             int flag = ScriptableObject.READONLY | ScriptableObject.PERMANENT;
@@ -144,32 +151,24 @@ public final class ClassConfiguration {
      * Returns the set of entries for the defined static properties.
      * @return a set
      */
-    public Set<Entry<String, PropertyInfo>> getStaticPropertyEntries() {
-        return staticPropertyMap_.entrySet();
+    public Map<String, PropertyInfo> getStaticPropertyMap() {
+        return staticPropertyMap_;
     }
 
     /**
      * Returns the set of entries for the defined functions.
      * @return a set
      */
-    public Set<Entry<String, Method>> getFunctionEntries() {
-        return functionMap_.entrySet();
+    public Map<String, Method> getFunctionMap() {
+        return functionMap_;
     }
 
     /**
      * Returns the set of entries for the defined static functions.
      * @return a set
      */
-    public Set<Entry<String, Method>> getStaticFunctionEntries() {
-        return staticFunctionMap_.entrySet();
-    }
-
-    /**
-     * Returns the set of keys for the defined functions.
-     * @return a set
-     */
-    public Set<String> getFunctionKeys() {
-        return functionMap_.keySet();
+    public Map<String, Method> getStaticFunctionMap() {
+        return staticFunctionMap_;
     }
 
     /**
@@ -186,6 +185,9 @@ public final class ClassConfiguration {
      * @param method the method
      */
     public void addFunction(final String name, final Method method) {
+        if (functionMap_ == null) {
+            functionMap_ = new HashMap<>();
+        }
         functionMap_.put(name, method);
     }
 
@@ -195,6 +197,9 @@ public final class ClassConfiguration {
      * @param method the method
      */
     public void addStaticFunction(final String name, final Method method) {
+        if (staticFunctionMap_ == null) {
+            staticFunctionMap_ = new HashMap<>();
+        }
         staticFunctionMap_.put(name, method);
     }
 
