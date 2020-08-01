@@ -151,7 +151,7 @@ public class HostConstantsTest extends WebDriverTestCase {
             }
             if (first || classConfig.getJsConstructor() != null) {
                 final List<ConstantInfo> constantInfos = classConfig.getConstants();
-                if (constants != null) {
+                if (constantInfos != null) {
                     for (final ConstantInfo constantInfo : constantInfos) {
                         constants.add(constantInfo.getName() + ":" + constantInfo.getValue());
                     }
