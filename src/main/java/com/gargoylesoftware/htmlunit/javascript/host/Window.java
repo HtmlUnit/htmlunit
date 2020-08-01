@@ -1903,7 +1903,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF68})
     public int getMozInnerScreenX() {
-        return 11;
+        return 10;
     }
 
     /**
@@ -1912,7 +1912,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF68})
     public int getMozInnerScreenY() {
-        return 83;
+        return 79;
     }
 
     /**

@@ -1388,21 +1388,27 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
     /**
-     * Difference of window.outer/inner height is 136.
+     * Difference of window.outer/inner height is 132.
      */
     @BrowserFeature(CHROME)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132,
 
     /**
-     * Difference of window.outer/inner height is 63.
+     * Difference of window.outer/inner height is 80.
      */
-    @BrowserFeature(IE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63,
+    @BrowserFeature(FF)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_80,
+
+    /**
+     * Difference of window.outer/inner height is 81.
+     */
+    @BrowserFeature(FF68)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_81,
 
     /**
      * Difference of window.outer/inner height is 86.
      */
-    @BrowserFeature({FF, FF68})
+    @BrowserFeature(IE)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_86,
 
     /** Window.getSelection returns null, if the window is not visible. */
