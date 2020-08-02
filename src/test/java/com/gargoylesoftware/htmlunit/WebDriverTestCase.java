@@ -946,7 +946,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-    private void resizeIfNeeded(final WebDriver driver) {
+    protected void resizeIfNeeded(final WebDriver driver) {
         final Dimension size = driver.manage().window().getSize();
         if (size.getWidth() != 1272 || size.getHeight() != 768) {
             // only resize if needed because it may be quite expensive (e.g. IE)
