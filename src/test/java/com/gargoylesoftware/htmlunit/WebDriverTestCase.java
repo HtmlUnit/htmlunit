@@ -522,6 +522,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (binary != null) {
             final FirefoxOptions options = new FirefoxOptions();
             options.setBinary(binary);
+
+            // at least FF79 is not stable when using a profile
+            // final FirefoxProfile profile = new FirefoxProfile();
+            // profile.setPreference("intl.accept_languages", "en-US");
+            // options.setProfile(profile);
             return new FirefoxDriver(options);
         }
 
