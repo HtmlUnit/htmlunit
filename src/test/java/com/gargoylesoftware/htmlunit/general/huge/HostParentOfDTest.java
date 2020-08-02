@@ -2447,8 +2447,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _Event_SVGZoomEvent() throws Exception {
         test("Event", "SVGZoomEvent");
     }
