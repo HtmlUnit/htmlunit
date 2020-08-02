@@ -474,8 +474,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
+    @Alerts("true")
     public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }
