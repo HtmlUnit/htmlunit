@@ -157,7 +157,7 @@ public class MSXMLJavaScriptEnvironment {
      */
     @SuppressWarnings("unchecked")
     public Class<? extends MSXMLScriptable> getJavaScriptClass(final Class<?> c) {
-        return (Class<? extends MSXMLScriptable>) config_.getDomJavaScriptMapping().get(c);
+        return (Class<? extends MSXMLScriptable>) config_.getDomJavaScriptMappingFor(c);
     }
 
     /**

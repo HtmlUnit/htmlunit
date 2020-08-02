@@ -1074,7 +1074,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return {@code null} if none found
      */
     public Class<? extends HtmlUnitScriptable> getJavaScriptClass(final Class<?> c) {
-        return jsConfig_.getDomJavaScriptMapping().get(c);
+        return jsConfig_.getDomJavaScriptMappingFor(c);
     }
 
     /**

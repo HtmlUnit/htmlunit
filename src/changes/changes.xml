@@ -9,6 +9,11 @@
     <body>
         <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, Rhino fixes, Chrome 84, Edge added, FF60 removed">
             <action type="update" dev="rbri">
+                Minor changes of AbstractJavaScriptConfiguration better encapsulate the used maps;
+                internal maps are now concurrent maps and no longer encapsulated as unmodifiable
+                to make access faster.
+            </action>
+            <action type="update" dev="rbri">
                 ClassConfiguration is changed a bit, the fields propertyMap_, functionMap_,
                 staticPropertyMap_, staticFunctionMap_ and constants_ are now lazy initialized
                 to save some memory.

@@ -23,12 +23,11 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,7 +49,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private static final Log LOG = LogFactory.getLog(AbstractJavaScriptConfiguration.class);
 
-    private static final Map<String, String> CLASS_NAME_MAP_ = new HashMap<>();
+    private static final Map<String, String> CLASS_NAME_MAP_ = new ConcurrentHashMap<>();
 
     private Map<Class<?>, Class<? extends HtmlUnitScriptable>> domJavaScriptMap_;
 
@@ -78,7 +77,7 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
-        final Map<String, ClassConfiguration> classMap = new HashMap<>(getClasses().length);
+        final Map<String, ClassConfiguration> classMap = new ConcurrentHashMap<>(getClasses().length);
 
         for (final Class<? extends SimpleScriptable> klass : getClasses()) {
             final ClassConfiguration config = getClassConfiguration(klass, browser);
@@ -86,7 +85,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 classMap.put(config.getClassName(), config);
             }
         }
-        return Collections.unmodifiableMap(classMap);
+        return classMap;
     }
 
     /**
@@ -215,8 +214,8 @@ public abstract class AbstractJavaScriptConfiguration {
         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
 
         CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
-        final Map<String, Method> allGetters = new HashMap<>();
-        final Map<String, Method> allSetters = new HashMap<>();
+        final Map<String, Method> allGetters = new ConcurrentHashMap<>();
+        final Map<String, Method> allSetters = new ConcurrentHashMap<>();
         for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
             for (final Annotation annotation : constructor.getAnnotations()) {
                 if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
@@ -341,29 +340,29 @@ public abstract class AbstractJavaScriptConfiguration {
      * Returns an immutable map containing the DOM to JavaScript mappings. Keys are
      * java classes for the various DOM classes (e.g. HtmlInput.class) and the values
      * are the JavaScript class names (e.g. "HTMLAnchorElement").
+     * @param clazz the class to get the scriptable for
      * @return the mappings
      */
-    public Map<Class<?>, Class<? extends HtmlUnitScriptable>> getDomJavaScriptMapping() {
-        if (domJavaScriptMap_ != null) {
-            return domJavaScriptMap_;
-        }
+    public Class<? extends HtmlUnitScriptable> getDomJavaScriptMappingFor(final Class<?> clazz) {
+        if (domJavaScriptMap_ == null) {
+            final Map<Class<?>, Class<? extends HtmlUnitScriptable>> map =
+                    new ConcurrentHashMap<>(configuration_.size());
 
-        final Map<Class<?>, Class<? extends HtmlUnitScriptable>> map = new HashMap<>(configuration_.size());
-
-        final boolean debug = LOG.isDebugEnabled();
-        for (final String hostClassName : configuration_.keySet()) {
-            final ClassConfiguration classConfig = getClassConfiguration(hostClassName);
-            for (final Class<?> domClass : classConfig.getDomClasses()) {
-                // preload and validate that the class exists
-                if (debug) {
-                    LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
+            final boolean debug = LOG.isDebugEnabled();
+            for (final String hostClassName : configuration_.keySet()) {
+                final ClassConfiguration classConfig = getClassConfiguration(hostClassName);
+                for (final Class<?> domClass : classConfig.getDomClasses()) {
+                    // preload and validate that the class exists
+                    if (debug) {
+                        LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
+                    }
+                    map.put(domClass, classConfig.getHostClass());
                 }
-                map.put(domClass, classConfig.getHostClass());
             }
+
+            domJavaScriptMap_ = map;
         }
 
-        domJavaScriptMap_ = Collections.unmodifiableMap(map);
-
-        return domJavaScriptMap_;
+        return domJavaScriptMap_.get(clazz);
     }
 }
