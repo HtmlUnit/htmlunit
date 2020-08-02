@@ -86,10 +86,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SecurityPolicyViolationEvent_SecurityPolicyViolationEvent() throws Exception {
         test("SecurityPolicyViolationEvent", "SecurityPolicyViolationEvent");
     }
@@ -109,6 +107,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     public void _ServiceWorker_ServiceWorker() throws Exception {
         test("ServiceWorker", "ServiceWorker");
@@ -120,6 +119,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     public void _ServiceWorkerContainer_ServiceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer", "ServiceWorkerContainer");
@@ -131,6 +131,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     public void _ServiceWorkerRegistration_ServiceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration", "ServiceWorkerRegistration");
@@ -150,7 +151,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _SharedArrayBuffer_SharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer", "SharedArrayBuffer");
     }
@@ -159,10 +161,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _ShadowRoot_ShadowRoot() throws Exception {
         test("ShadowRoot", "ShadowRoot");
     }
@@ -291,10 +291,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _StorageManager_StorageManager() throws Exception {
         test("StorageManager", "StorageManager");
     }
@@ -1002,10 +1000,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGElement_SVGGeometryElement() throws Exception {
         test("SVGElement", "SVGGeometryElement");
     }
@@ -1550,10 +1546,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGCircleElement() throws Exception {
         test("SVGGeometryElement", "SVGCircleElement");
     }
@@ -1562,10 +1556,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGEllipseElement() throws Exception {
         test("SVGGeometryElement", "SVGEllipseElement");
     }
@@ -1574,10 +1566,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGGeometryElement() throws Exception {
         test("SVGGeometryElement", "SVGGeometryElement");
     }
@@ -1586,10 +1576,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGLineElement() throws Exception {
         test("SVGGeometryElement", "SVGLineElement");
     }
@@ -1598,10 +1586,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGPathElement() throws Exception {
         test("SVGGeometryElement", "SVGPathElement");
     }
@@ -1610,10 +1596,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGPolygonElement() throws Exception {
         test("SVGGeometryElement", "SVGPolygonElement");
     }
@@ -1622,10 +1606,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGPolylineElement() throws Exception {
         test("SVGGeometryElement", "SVGPolylineElement");
     }
@@ -1634,10 +1616,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGeometryElement_SVGRectElement() throws Exception {
         test("SVGGeometryElement", "SVGRectElement");
     }
@@ -1694,7 +1674,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     @NotYetImplemented(CHROME)
     public void _SVGGraphicsElement_SVGClipPathElement() throws Exception {
         test("SVGGraphicsElement", "SVGClipPathElement");
@@ -1744,10 +1725,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SVGGraphicsElement_SVGGeometryElement() throws Exception {
         test("SVGGraphicsElement", "SVGGeometryElement");
     }
@@ -2024,10 +2003,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSeg() throws Exception {
         test("SVGPathSeg", "SVGPathSeg");
     }
@@ -2036,10 +2013,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegArcAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegArcAbs");
     }
@@ -2048,10 +2023,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegArcRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegArcRel");
     }
@@ -2060,10 +2033,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegClosePath() throws Exception {
         test("SVGPathSeg", "SVGPathSegClosePath");
     }
@@ -2072,10 +2043,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoCubicAbs");
     }
@@ -2084,10 +2053,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoCubicRel");
     }
@@ -2096,10 +2063,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoCubicSmoothAbs");
     }
@@ -2108,10 +2073,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoCubicSmoothRel");
     }
@@ -2120,10 +2083,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoQuadraticAbs");
     }
@@ -2132,10 +2093,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoQuadraticRel");
     }
@@ -2144,10 +2103,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticSmoothAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoQuadraticSmoothAbs");
     }
@@ -2156,10 +2113,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegCurvetoQuadraticSmoothRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegCurvetoQuadraticSmoothRel");
     }
@@ -2168,10 +2123,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegLinetoAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegLinetoAbs");
     }
@@ -2180,10 +2133,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegLinetoHorizontalAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegLinetoHorizontalAbs");
     }
@@ -2192,10 +2143,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegLinetoHorizontalRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegLinetoHorizontalRel");
     }
@@ -2204,10 +2153,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegLinetoRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegLinetoRel");
     }
@@ -2216,10 +2163,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegLinetoVerticalAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegLinetoVerticalAbs");
     }
@@ -2228,10 +2173,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegLinetoVerticalRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegLinetoVerticalRel");
     }
@@ -2240,10 +2183,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegMovetoAbs() throws Exception {
         test("SVGPathSeg", "SVGPathSegMovetoAbs");
     }
@@ -2252,10 +2193,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSeg_SVGPathSegMovetoRel() throws Exception {
         test("SVGPathSeg", "SVGPathSegMovetoRel");
     }
@@ -2264,10 +2203,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegArcAbs_SVGPathSegArcAbs() throws Exception {
         test("SVGPathSegArcAbs", "SVGPathSegArcAbs");
     }
@@ -2276,10 +2213,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegArcRel_SVGPathSegArcRel() throws Exception {
         test("SVGPathSegArcRel", "SVGPathSegArcRel");
     }
@@ -2288,10 +2223,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegClosePath_SVGPathSegClosePath() throws Exception {
         test("SVGPathSegClosePath", "SVGPathSegClosePath");
     }
@@ -2300,10 +2233,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoCubicAbs_SVGPathSegCurvetoCubicAbs() throws Exception {
         test("SVGPathSegCurvetoCubicAbs", "SVGPathSegCurvetoCubicAbs");
     }
@@ -2312,10 +2243,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoCubicRel_SVGPathSegCurvetoCubicRel() throws Exception {
         test("SVGPathSegCurvetoCubicRel", "SVGPathSegCurvetoCubicRel");
     }
@@ -2324,10 +2253,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoCubicSmoothAbs_SVGPathSegCurvetoCubicSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothAbs", "SVGPathSegCurvetoCubicSmoothAbs");
     }
@@ -2336,10 +2263,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoCubicSmoothRel_SVGPathSegCurvetoCubicSmoothRel() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothRel", "SVGPathSegCurvetoCubicSmoothRel");
     }
@@ -2348,10 +2273,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoQuadraticAbs_SVGPathSegCurvetoQuadraticAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticAbs", "SVGPathSegCurvetoQuadraticAbs");
     }
@@ -2360,10 +2283,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoQuadraticRel_SVGPathSegCurvetoQuadraticRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticRel", "SVGPathSegCurvetoQuadraticRel");
     }
@@ -2372,10 +2293,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoQuadraticSmoothAbs_SVGPathSegCurvetoQuadraticSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothAbs", "SVGPathSegCurvetoQuadraticSmoothAbs");
     }
@@ -2384,10 +2303,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegCurvetoQuadraticSmoothRel_SVGPathSegCurvetoQuadraticSmoothRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothRel", "SVGPathSegCurvetoQuadraticSmoothRel");
     }
@@ -2396,10 +2313,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegLinetoAbs_SVGPathSegLinetoAbs() throws Exception {
         test("SVGPathSegLinetoAbs", "SVGPathSegLinetoAbs");
     }
@@ -2408,10 +2323,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegLinetoHorizontalAbs_SVGPathSegLinetoHorizontalAbs() throws Exception {
         test("SVGPathSegLinetoHorizontalAbs", "SVGPathSegLinetoHorizontalAbs");
     }
@@ -2420,10 +2333,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegLinetoHorizontalRel_SVGPathSegLinetoHorizontalRel() throws Exception {
         test("SVGPathSegLinetoHorizontalRel", "SVGPathSegLinetoHorizontalRel");
     }
@@ -2432,10 +2343,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegLinetoRel_SVGPathSegLinetoRel() throws Exception {
         test("SVGPathSegLinetoRel", "SVGPathSegLinetoRel");
     }
@@ -2444,10 +2353,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegLinetoVerticalAbs_SVGPathSegLinetoVerticalAbs() throws Exception {
         test("SVGPathSegLinetoVerticalAbs", "SVGPathSegLinetoVerticalAbs");
     }
@@ -2456,10 +2363,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegLinetoVerticalRel_SVGPathSegLinetoVerticalRel() throws Exception {
         test("SVGPathSegLinetoVerticalRel", "SVGPathSegLinetoVerticalRel");
     }
@@ -2469,7 +2374,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            EDGE = "false")
     public void _SVGPathSegList_SVGPathSegList() throws Exception {
         test("SVGPathSegList", "SVGPathSegList");
     }
@@ -2478,10 +2384,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegMovetoAbs_SVGPathSegMovetoAbs() throws Exception {
         test("SVGPathSegMovetoAbs", "SVGPathSegMovetoAbs");
     }
@@ -2490,10 +2394,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGPathSegMovetoRel_SVGPathSegMovetoRel() throws Exception {
         test("SVGPathSegMovetoRel", "SVGPathSegMovetoRel");
     }
@@ -2783,7 +2685,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     @NotYetImplemented({FF, FF68, IE})
     public void _SVGUnitTypes_SVGUnitTypes() throws Exception {
         test("SVGUnitTypes", "SVGUnitTypes");
@@ -2811,10 +2714,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _SVGZoomEvent_SVGZoomEvent() throws Exception {
         test("SVGZoomEvent", "SVGZoomEvent");
     }
@@ -2834,7 +2735,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _SyncManager_SyncManager() throws Exception {
         test("SyncManager", "SyncManager");
     }

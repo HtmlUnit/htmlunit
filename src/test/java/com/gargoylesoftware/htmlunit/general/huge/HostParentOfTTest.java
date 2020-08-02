@@ -186,7 +186,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _Touch_Touch() throws Exception {
         test("Touch", "Touch");
     }
@@ -196,7 +197,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _TouchEvent_TouchEvent() throws Exception {
         test("TouchEvent", "TouchEvent");
     }
@@ -206,7 +208,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _TouchList_TouchList() throws Exception {
         test("TouchList", "TouchList");
     }
@@ -327,10 +330,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false",
-            FF68 = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }
@@ -351,7 +352,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            EDGE = "true")
     public void _UIEvent_TouchEvent() throws Exception {
         test("UIEvent", "TouchEvent");
     }
@@ -434,6 +436,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
+            EDGE = "true",
             FF = "true")
     public void _URL_webkitURL() throws Exception {
         test("URL", "webkitURL");
@@ -472,9 +475,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true",
-            FF68 = "true")
+            IE = "true")
     public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }
