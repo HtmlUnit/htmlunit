@@ -183,9 +183,9 @@ public final class BrowserVersion implements Serializable {
             140, 141, 143, 143, 144, 145, 146, 148};
 
         // IE
-        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 10.0; Trident/7.0; rv:"
+        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:"
                                                     + INTERNET_EXPLORER.getBrowserVersionNumeric() + ".0) like Gecko";
-        INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko";
+        INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
         INTERNET_EXPLORER.headerNamesOrdered_ = new String[] {
             HttpHeader.ACCEPT,
             HttpHeader.REFERER,

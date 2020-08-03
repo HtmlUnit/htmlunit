@@ -421,8 +421,8 @@ public class WebSocketTest extends WebDriverTestCase {
                       "[object ArrayBuffer]", "", "undefined", "null",
                   "onMessageBinary", "message", "[object WebSocket]", "[object WebSocket]",
                       "[object ArrayBuffer]", "", "undefined", "null",
-                  "onCloseListener code: 1005",
-                  "onClose code: 1005"})
+                  "onCloseListener code: 1000",
+                  "onClose code: 1000"})
     @NotYetImplemented(IE)
     public void events() throws Exception {
         expandExpectedAlertsVariables("ws://localhost:" + PORT);
@@ -506,8 +506,8 @@ public class WebSocketTest extends WebDriverTestCase {
                     "[object ArrayBuffer]", "", "undefined", "null",
                 "onMessageBinary", "message", "[object WebSocket]", "[object WebSocket]",
                     "[object ArrayBuffer]", "", "undefined", "null",
-                "onCloseListener code: 1005  wasClean: true",
-                "onClose code: 1005  wasClean: true"})
+                "onCloseListener code: 1000  wasClean: true",
+                "onClose code: 1000  wasClean: true"})
     @NotYetImplemented({FF, FF68, IE})
     public void wasClean() throws Exception {
         expandExpectedAlertsVariables("ws://localhost:" + PORT);
