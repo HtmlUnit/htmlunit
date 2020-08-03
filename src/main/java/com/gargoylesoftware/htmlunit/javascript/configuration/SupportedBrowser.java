@@ -25,6 +25,9 @@ public enum SupportedBrowser {
     /** Latest version of Chrome. */
     CHROME,
 
+    /** Latest version of Edge. */
+    EDGE,
+
     /** Internet Explorer 11. */
     IE,
 

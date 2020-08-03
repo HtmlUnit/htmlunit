@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +37,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArrayIterator;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -49,7 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ween Jiann
  */
 @JsxClass({CHROME, FF, FF68})
-public class URLSearchParams extends SimpleScriptable {
+public class URLSearchParams extends SimpleScriptable implements ExternalArrayData {
 
     private static final String ITERATOR_NAME = "URLSearchParams Iterator";
     private static com.gargoylesoftware.htmlunit.javascript.host.Iterator ITERATOR_PROTOTYPE_
@@ -80,6 +83,7 @@ public class URLSearchParams extends SimpleScriptable {
         }
 
         splitQuery(Context.toString(params));
+        setExternalArrayData(this);
     }
 
     private void splitQuery(String params) {
@@ -235,11 +239,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public Object entries() {
-        final SimpleScriptable object =
-                new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, params_.iterator());
-        object.setParentScope(getParentScope());
-        object.setPrototype(ITERATOR_PROTOTYPE_);
-        return object;
+        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
 
     /**
@@ -321,5 +321,26 @@ public class URLSearchParams extends SimpleScriptable {
             }
             webRequest.setRequestParameters(params);
         }
+    }
+
+    @Override
+    public Object getArrayElement(final int index) {
+        if (index >= 0 && index < params_.size()) {
+            final Map.Entry<String, String> entry = params_.get(index);
+            final NativeArray array = new NativeArray(new Object[] {entry.getKey(), entry.getValue()});
+            ScriptRuntime.setBuiltinProtoAndParent(array, getParentScope(), TopLevel.Builtins.Object);
+            return array;
+        }
+        return NOT_FOUND;
+    }
+
+    @Override
+    public void setArrayElement(final int index, final Object value) {
+        // ignored
+    }
+
+    @Override
+    public int getArrayLength() {
+        return params_.size();
     }
 }

@@ -10837,11 +10837,11 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function VideoPlaybackQuality() { [native code] }",
+    @Alerts(CHROME = "function VideoPlaybackQuality() { [native code] }",
             EDGE = "function VideoPlaybackQuality() { [native code] }",
             FF = "function VideoPlaybackQuality() {\n    [native code]\n}",
-            FF68 = "function VideoPlaybackQuality() {\n    [native code]\n}")
+            FF68 = "function VideoPlaybackQuality() {\n    [native code]\n}",
+            IE = "[object VideoPlaybackQuality]")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
     }

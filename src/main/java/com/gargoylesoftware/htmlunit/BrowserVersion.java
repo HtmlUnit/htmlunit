@@ -487,6 +487,9 @@ public final class BrowserVersion implements Serializable {
         if (isChrome()) {
             expectedBrowser = SupportedBrowser.CHROME;
         }
+        else if (isEdge()) {
+            expectedBrowser = SupportedBrowser.EDGE;
+        }
         else if (isFirefox68()) {
             expectedBrowser = SupportedBrowser.FF68;
         }
@@ -551,6 +554,15 @@ public final class BrowserVersion implements Serializable {
      */
     public boolean isChrome() {
         return getNickname().startsWith("Chrome");
+    }
+
+    /**
+     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
+     * version of Microsoft Edge.
+     * @return whether or not this version is a version of a Chrome browser
+     */
+    public boolean isEdge() {
+        return getNickname().startsWith("Edge");
     }
 
     /**
