@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -31,6 +32,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 
 /**
  * A JavaScript object for {@code File}.
@@ -43,13 +47,36 @@ public class File extends Blob {
     private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
     private static final String LAST_MODIFIED_DATE_FORMAT_FF = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z";
 
+    private static final String OPTIONS_TYPE_NAME = "type";
+    //default according to https://developer.mozilla.org/en-US/docs/Web/API/File/File
+    private static final String OPTIONS_TYPE_DEFAULT = "";
+    private static final String OPTIONS_LASTMODIFIED = "lastModified";
+
     private java.io.File file_;
 
-    /**
-     * Creates an instance.
-     */
-    @JsxConstructor({CHROME, FF, FF68})
+    private String name;
+
+    private String fileType;
+
+    private long lastModified;
+
+    private long length;
+
     public File() {
+    }
+
+    @JsxConstructor({CHROME, FF, FF68})
+    public File(NativeArray bytes, String name, NativeObject options) {
+        this.name = name;
+        this.length = bytes.getLength();
+        
+        this.fileType = options != null ? (String) options.getOrDefault(OPTIONS_TYPE_NAME, OPTIONS_TYPE_DEFAULT) : OPTIONS_TYPE_DEFAULT;
+        String secondsSince1970 = options != null ? (String) options.get(OPTIONS_LASTMODIFIED) : null;
+        if (StringUtils.isNumeric(secondsSince1970)) {
+            this.lastModified = Long.parseLong(secondsSince1970);
+        } else {
+            this.lastModified = System.currentTimeMillis() / 1000;
+        }
     }
 
     File(final String pathname) {
@@ -62,7 +89,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public String getName() {
-        return file_.getName();
+        return file_ == null ? name : file_.getName();
     }
 
     /**
@@ -91,7 +118,7 @@ public class File extends Blob {
      */
     @JsxGetter({CHROME, FF, FF68})
     public long getLastModified() {
-        return file_.lastModified();
+        return file_ == null ? lastModified : file_.lastModified();
     }
 
     /**
@@ -109,7 +136,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public long getSize() {
-        return file_.length();
+        return file_ == null ? length : file_.length();
     }
 
     /**
@@ -118,7 +145,7 @@ public class File extends Blob {
      */
     @JsxGetter
     public String getType() {
-        return getBrowserVersion().getUploadMimeType(file_);
+        return file_ == null ? fileType : getBrowserVersion().getUploadMimeType(file_);
     }
 
     /**

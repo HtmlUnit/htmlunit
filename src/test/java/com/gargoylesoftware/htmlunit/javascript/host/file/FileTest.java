@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
@@ -26,6 +28,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -136,6 +139,40 @@ public class FileTest extends WebDriverTestCase {
     public void typeEmpty() throws Exception {
         type("");
     }
+    
+    @Test
+    @Alerts({"myfilename", "application/octet-stream", "1000", "0"})
+    @NotYetImplemented(IE)
+    public void fileConstructor() throws Exception {
+
+		final String html = "<html><head><script>\n" + "	function test() {\n"
+				+ "		var newFile = new File([], 'myfilename', {type: 'application/octet-stream', lastModified: '1000'});"
+				+ "     alert(newFile.name);"
+				+ "     alert(newFile.type);"
+				+ "     alert(newFile.lastModified);"
+				+ "     alert(newFile.size);"
+				+ " } "
+				+ "</script></head><body onload='test()'>\n"
+				+ "</body>\n" + "</html>";
+		loadPageWithAlerts2(html);
+	}
+
+    @Test
+    @Alerts({"myfilename", "", "true", "0"})
+    @NotYetImplemented(IE)
+    public void fileConstructorNoOptionals() throws Exception {
+
+		final String html = "<html><head><script>\n" + "	function test() {\n"
+				+ "		var newFile = new File([], 'myfilename');"
+				+ "     alert(newFile.name);"
+				+ "     alert(newFile.type);"
+				+ "     alert(newFile.lastModified > 0);"
+				+ "     alert(newFile.size);"
+				+ " } "
+				+ "</script></head><body onload='test()'>\n"
+				+ "</body>\n" + "</html>";
+		loadPageWithAlerts2(html);
+	}
 
     private void type(final String extension) throws Exception {
         final String html
