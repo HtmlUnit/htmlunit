@@ -1347,6 +1347,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF, FF68})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
+    /** URLSearchParams iterator is named only Iterator in Chrome. */
+    @BrowserFeature(CHROME)
+    JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME,
+
     /** Setting the property valign converts to lowercase. */
     @BrowserFeature(IE)
     JS_VALIGN_CONVERTS_TO_LOWERCASE,

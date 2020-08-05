@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
@@ -62,6 +63,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
+import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
@@ -240,6 +242,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
         if (!browserVersion.hasFeature(JS_ERROR_CAPTURE_STACK_TRACE)) {
             ScriptableObject.deleteProperty(errorObject, "captureStackTrace");
+        }
+
+        if (browserVersion.hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
+            URLSearchParams.NativeParamsIterator.init(window, "Iterator");
+        }
+        else {
+            URLSearchParams.NativeParamsIterator.init(window, "URLSearchParams Iterator");
         }
 
         final Intl intl = new Intl();
