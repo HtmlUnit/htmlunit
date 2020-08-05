@@ -903,7 +903,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            CHROME = "-16")
+            CHROME = "-16",
+            EDGE = "-16")
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
     }
@@ -1705,7 +1706,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
+    @Alerts(DEFAULT = "173",
             FF = "145",
             FF68 = "145",
             IE = "143")
@@ -1745,10 +1746,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "253",
+    @Alerts(DEFAULT = "253",
             FF = "271",
             FF68 = "240",
-            IE = "262")
+            IE = "228")
     @NotYetImplemented
     public void inputFile() throws Exception {
         loadPageWithAlerts2(testInput("file"));
@@ -1771,7 +1772,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "173",
+    @Alerts(DEFAULT = "173",
             FF = "145",
             FF68 = "145",
             IE = "145")
@@ -1797,10 +1798,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "47",
+    @Alerts(DEFAULT = "47",
             FF = "91",
             FF68 = "48",
-            IE = "100")
+            IE = "55")
     @NotYetImplemented
     public void inputReset() throws Exception {
         loadPageWithAlerts2(testInput("reset"));
@@ -1813,6 +1814,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "173",
+            EDGE = "173",
             FF = "145",
             FF68 = "145",
             IE = "143")
@@ -1826,10 +1828,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "54",
+    @Alerts(DEFAULT = "54",
             FF = "108",
             FF68 = "94",
-            IE = "114")
+            IE = "101")
     @NotYetImplemented
     public void inputSubmit() throws Exception {
         loadPageWithAlerts2(testInput("submit"));

@@ -365,7 +365,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            CHROME = "16")
+            CHROME = "16",
+            EDGE = "16")
     @NotYetImplemented
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
@@ -793,7 +794,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "25",
-            CHROME = "19")
+            CHROME = "19",
+            EDGE = "19")
     @NotYetImplemented
     public void q() throws Exception {
         loadPageWithAlerts2(test("q"));
@@ -900,7 +902,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            CHROME = "-16")
+            CHROME = "-16",
+            EDGE = "-16")
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
     }
@@ -1144,7 +1147,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            CHROME = "300")
+            CHROME = "300",
+            EDGE = "300")
     @NotYetImplemented(CHROME)
     public void object() throws Exception {
         loadPageWithAlerts2(test("object"));
@@ -1565,7 +1569,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "183",
-            CHROME = "161")
+            CHROME = "161",
+            EDGE = "161")
     @NotYetImplemented
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
@@ -1701,7 +1706,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "177",
+    @Alerts(DEFAULT = "177",
             FF = "147",
             FF68 = "147",
             IE = "145")
@@ -1717,7 +1722,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            CHROME = "16")
+            CHROME = "16",
+            EDGE = "16")
     @NotYetImplemented
     public void inputButton() throws Exception {
         loadPageWithAlerts2(testInput("button"));
@@ -1743,7 +1749,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "253",
             FF = "271",
             FF68 = "240",
-            IE = "262")
+            IE = "228")
     @NotYetImplemented
     public void inputFile() throws Exception {
         loadPageWithAlerts2(testInput("file"));
@@ -1766,7 +1772,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "177",
+    @Alerts(DEFAULT = "177",
             FF = "147",
             FF68 = "147",
             IE = "147")
@@ -1795,7 +1801,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "51",
             FF = "97",
             FF68 = "54",
-            IE = "102")
+            IE = "57")
     @NotYetImplemented
     public void inputReset() throws Exception {
         loadPageWithAlerts2(testInput("reset"));
@@ -1807,7 +1813,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "177",
+    @Alerts(DEFAULT = "177",
             FF = "147",
             FF68 = "147",
             IE = "145")
@@ -1825,7 +1831,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "58",
             FF = "114",
             FF68 = "100",
-            IE = "116")
+            IE = "103")
     @NotYetImplemented
     public void inputSubmit() throws Exception {
         loadPageWithAlerts2(testInput("submit"));
@@ -1837,7 +1843,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "177",
+    @Alerts(DEFAULT = "177",
             FF = "147",
             FF68 = "147",
             IE = "145")
