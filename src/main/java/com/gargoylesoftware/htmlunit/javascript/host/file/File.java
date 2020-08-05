@@ -70,17 +70,37 @@ public class File extends Blob {
         this.name = name;
         this.length = bytes.getLength();
         
-        this.fileType = options != null ? (String) options.getOrDefault(OPTIONS_TYPE_NAME, OPTIONS_TYPE_DEFAULT) : OPTIONS_TYPE_DEFAULT;
-        String secondsSince1970 = options != null ? (String) options.get(OPTIONS_LASTMODIFIED) : null;
-        if (StringUtils.isNumeric(secondsSince1970)) {
-            this.lastModified = Long.parseLong(secondsSince1970);
-        } else {
-            this.lastModified = System.currentTimeMillis() / 1000;
-        }
+        this.fileType = extractFileTypeOrDefault(options);
+        this.lastModified = extractLastModifiedOrDefault(options);
     }
 
     File(final String pathname) {
         file_ = new java.io.File(pathname);
+    }
+    
+    private String extractFileTypeOrDefault(NativeObject options) {
+        String returnValue = OPTIONS_TYPE_DEFAULT;
+        
+        if (options != null) {
+            Object optionsType = options.get(OPTIONS_TYPE_NAME);
+            if (optionsType instanceof String && optionsType != null) {
+                returnValue = (String) optionsType;
+            }
+        }
+        
+        return returnValue;
+    }
+    
+    private long extractLastModifiedOrDefault(NativeObject options) {
+        long returnValue = System.currentTimeMillis() / 1000;
+        if (options != null) {
+            Object lastModified = options.get(OPTIONS_LASTMODIFIED);
+            if (lastModified instanceof String && StringUtils.isNumeric((String) lastModified)) {
+                returnValue = Long.parseLong((String) lastModified);
+            }
+        }
+        
+        return returnValue;
     }
 
     /**
