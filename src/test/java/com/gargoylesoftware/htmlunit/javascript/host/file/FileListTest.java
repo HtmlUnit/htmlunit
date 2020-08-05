@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link File}.
+ * Tests for {@link FileList}.
  *
  * @author Ronald Brill
  */
