@@ -205,8 +205,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
-        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
         final Window window = new Window();
         ((SimpleScriptable) window).setClassName("Window");
@@ -264,6 +262,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
             reflect.defineProperties();
         }
+
+        final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
+        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
         final String windowClassName = Window.class.getName();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
@@ -476,7 +477,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
         deleteProperties(window, "isXMLName");
 
-        NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
+        NativeFunctionToStringFunction.installFix(window, browserVersion);
 
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
