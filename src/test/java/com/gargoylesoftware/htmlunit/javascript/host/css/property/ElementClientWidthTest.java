@@ -1802,7 +1802,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "91",
             FF68 = "48",
             IE = "55")
-    @NotYetImplemented
     public void inputReset() throws Exception {
         loadPageWithAlerts2(testInput("reset"));
     }
