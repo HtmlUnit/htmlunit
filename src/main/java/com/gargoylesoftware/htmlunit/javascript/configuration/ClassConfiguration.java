@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 
 /**
  * A container for all the JavaScript configuration information for one class.
@@ -36,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public final class ClassConfiguration {
     private Map<String, PropertyInfo> propertyMap_;
+    private Map<Symbol, Method> symbolMap_;
     private Map<String, Method> functionMap_;
     private Map<String, PropertyInfo> staticPropertyMap_;
     private Map<String, Method> staticFunctionMap_;
@@ -148,6 +150,14 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Returns the Map of entries for the defined symbols.
+     * @return the map
+     */
+    public Map<Symbol, Method> getSymbolMap() {
+        return symbolMap_;
+    }
+
+    /**
      * Returns the set of entries for the defined static properties.
      * @return a set
      */
@@ -177,6 +187,18 @@ public final class ClassConfiguration {
      */
     public List<ConstantInfo> getConstants() {
         return constants_;
+    }
+
+    /**
+     * Add the function to the configuration.
+     * @param symbol the symbol
+     * @param method the method
+     */
+    public void addSymbol(final Symbol symbol, final Method method) {
+        if (symbolMap_ == null) {
+            symbolMap_ = new HashMap<>();
+        }
+        symbolMap_.put(symbol, method);
     }
 
     /**

@@ -37,6 +37,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
+import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
+
 /**
  * An abstract container for all the JavaScript configuration information.
  *
@@ -257,6 +259,28 @@ public abstract class AbstractJavaScriptConfiguration {
                             property = jsxSetter.propertyName();
                         }
                         allSetters.put(property, method);
+                    }
+                }
+                if (annotation instanceof JsxSymbol) {
+                    final JsxSymbol jsxSymbol = (JsxSymbol) annotation;
+                    if (isSupported(jsxSymbol.value(), expectedBrowser)) {
+                        final String symbolKeyName;
+                        if (jsxSymbol.symbolName().isEmpty()) {
+                            symbolKeyName = method.getName();
+                        }
+                        else {
+                            symbolKeyName = jsxSymbol.symbolName();
+                        }
+
+                        final SymbolKey symbolKey;
+                        if ("iterator".equalsIgnoreCase(symbolKeyName)) {
+                            symbolKey = SymbolKey.ITERATOR;
+                        }
+                        else {
+                            throw new RuntimeException("Invalid JsxSymbol annotation; unsupported '"
+                                    + symbolKeyName + "' symbol name.");
+                        }
+                        classConfiguration.addSymbol(symbolKey, method);
                     }
                 }
                 else if (annotation instanceof JsxFunction) {

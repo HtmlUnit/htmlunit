@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSymbol;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -131,6 +132,11 @@ public class NodeList extends AbstractList {
     @JsxFunction({CHROME, FF, FF68})
     public ES6Iterator entries() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
+    }
+
+    @JsxSymbol({CHROME, FF, FF68})
+    public ES6Iterator iterator() {
+        return values();
     }
 
     /**

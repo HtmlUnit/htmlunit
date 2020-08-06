@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -78,6 +79,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 /**
@@ -600,6 +602,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
         configureProperties(config, scriptable);
+        configureSymbols(config, scriptable);
         configureFunctions(config, scriptable);
     }
 
@@ -656,12 +659,24 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final ScriptableObject scriptable) {
         final Map<String, Method> staticFunctionMap = config.getStaticFunctionMap();
         if (staticFunctionMap != null) {
-            for (final Entry<String, Method> staticfunctionInfo : staticFunctionMap.entrySet()) {
-                final String functionName = staticfunctionInfo.getKey();
-                final Method method = staticfunctionInfo.getValue();
+            for (final Entry<String, Method> staticFunctionInfo : staticFunctionMap.entrySet()) {
+                final String functionName = staticFunctionInfo.getKey();
+                final Method method = staticFunctionInfo.getValue();
                 final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
                         scriptable);
                 scriptable.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
+            }
+        }
+    }
+
+    private static void configureSymbols(final ClassConfiguration config,
+            final ScriptableObject scriptable) {
+        final Map<Symbol, Method> symbolMap = config.getSymbolMap();
+        if (symbolMap != null) {
+            for (final Entry<Symbol, Method> symbolInfo : symbolMap.entrySet()) {
+                final Callable symbolFunction = new FunctionObject(
+                                    symbolInfo.getKey().toString(), symbolInfo.getValue(), scriptable);
+                scriptable.defineProperty(symbolInfo.getKey(), symbolFunction, ScriptableObject.DONTENUM);
             }
         }
     }

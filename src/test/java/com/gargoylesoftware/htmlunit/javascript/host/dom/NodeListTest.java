@@ -204,35 +204,35 @@ public class NodeListTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-//    /**
-//     * @throws Exception on test failure
-//     */
-//    @Test
-//    @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
-//                "[object HTMLTitleElement]", "[object HTMLScriptElement]",
-//                "[object HTMLBodyElement]", "[object HTMLDivElement]"},
-//            IE = "no for..of")
-//    public void iterator() throws Exception {
-//        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
-//                + "<script>\n"
-//                + "  function test() {\n"
-//                + "    var nodeList = document.querySelectorAll('*');\n"
-//                + "    if (!nodeList.forEach) {\n"
-//                + "      alert('no for..of');\n"
-//                + "      return;\n"
-//                + "    }\n"
-//
-//                + "    for (var i of nodeList) {\n"
-//                + "      alert(i);\n"
-//                + "    }\n"
-//                + "  }\n"
-//                + "</script>\n"
-//                + "</head><body onload='test()'>\n"
-//                + "  <div></div>\n"
-//                + "</body></html>";
-//
-//        loadPageWithAlerts2(html);
-//    }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
+                "[object HTMLTitleElement]", "[object HTMLScriptElement]",
+                "[object HTMLBodyElement]", "[object HTMLDivElement]"},
+            IE = "no for..of")
+    public void iterator() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var nodeList = document.querySelectorAll('*');\n"
+                + "    if (!nodeList.forEach) {\n"
+                + "      alert('no for..of');\n"
+                + "      return;\n"
+                + "    }\n"
+
+                + "    for (var i of nodeList) {\n"
+                + "      alert(i);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div></div>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * @throws Exception if an error occurs
