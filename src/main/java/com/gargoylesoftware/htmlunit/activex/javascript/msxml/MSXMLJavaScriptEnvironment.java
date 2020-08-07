@@ -67,7 +67,6 @@ public class MSXMLJavaScriptEnvironment {
         }
 
         // once all prototypes have been build, it's possible to configure the chains
-//        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
         for (final Map.Entry<String, ScriptableObject> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = config_.getClassConfiguration(name);
