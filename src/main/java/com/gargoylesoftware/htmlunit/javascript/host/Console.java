@@ -137,7 +137,7 @@ public class Console extends SimpleScriptable {
         if (thisObj instanceof Console) {
             return ((Console) thisObj).getWebConsole();
         }
-        throw Context.reportRuntimeError("TypeError: object does not implemennt interface Console");
+        throw ScriptRuntime.typeError("object does not implemennt interface Console");
     }
 
     /**

@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -122,7 +123,7 @@ public class HTMLCollection extends AbstractList {
             return super.call(cx, scope, thisObj, args);
         }
 
-        throw Context.reportRuntimeError("TypeError - HTMLCollection does nont support function like access");
+        throw ScriptRuntime.typeError("HTMLCollection does nont support function like access");
     }
 
     /**

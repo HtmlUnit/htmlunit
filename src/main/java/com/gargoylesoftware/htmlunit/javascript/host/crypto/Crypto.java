@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayView;
 
 /**
@@ -65,7 +66,7 @@ public class Crypto extends SimpleScriptable {
     @JsxFunction
     public NativeTypedArrayView<?> getRandomValues(final NativeTypedArrayView<?> array) {
         if (array == null) {
-            throw Context.reportRuntimeError("TypeError: Argument 1 of Crypto.getRandomValues is not an object.");
+            throw ScriptRuntime.typeError("Argument 1 of Crypto.getRandomValues is not an object.");
         }
         if (array.getByteLength() > 65536) {
             throw Context.reportRuntimeError("Error: Failed to execute 'getRandomValues' on 'Crypto': "

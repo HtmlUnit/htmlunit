@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -367,15 +368,15 @@ public class HTMLFormElement extends HTMLElement implements Function {
             }
 
             if (submittable != null && subHtmlElement.getForm() != this) {
-                throw Context.reportRuntimeError("TypeError: "
-                        + "Failed to execute 'requestSubmit' on 'HTMLFormElement': "
+                throw ScriptRuntime.typeError(
+                        "Failed to execute 'requestSubmit' on 'HTMLFormElement': "
                         + "The specified element is not owned by this form element.");
             }
         }
 
         if (submittable == null) {
-            throw Context.reportRuntimeError("TypeError: "
-                    + "Failed to execute 'requestSubmit' on 'HTMLFormElement': "
+            throw ScriptRuntime.typeError(
+                    "Failed to execute 'requestSubmit' on 'HTMLFormElement': "
                     + "The specified element is not a submit button.");
         }
 

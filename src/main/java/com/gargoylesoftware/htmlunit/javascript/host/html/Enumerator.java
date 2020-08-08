@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -54,7 +54,7 @@ public class Enumerator extends SimpleScriptable {
             collection_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
         else if (getBrowserVersion().hasFeature(JS_ENUMERATOR_CONSTRUCTOR_THROWS)) {
-            throw Context.reportRuntimeError("TypeError: object is not enumerable");
+            throw ScriptRuntime.typeError("object is not enumerable");
         }
         else if (o instanceof HTMLCollection) {
             collection_ = (HTMLCollection) o;
@@ -63,7 +63,7 @@ public class Enumerator extends SimpleScriptable {
             collection_ = ((HTMLFormElement) o).getElements();
         }
         else {
-            throw Context.reportRuntimeError("TypeError: object is not enumerable (" + String.valueOf(o) + ")");
+            throw ScriptRuntime.typeError("object is not enumerable (" + String.valueOf(o) + ")");
         }
     }
 

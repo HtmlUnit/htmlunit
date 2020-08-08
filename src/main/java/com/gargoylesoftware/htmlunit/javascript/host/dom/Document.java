@@ -1806,7 +1806,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw Context.reportRuntimeError("TypeError: document.forms is not a function");
+                throw ScriptRuntime.typeError("document.forms is not a function");
             }
         };
     }
@@ -1829,7 +1829,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw Context.reportRuntimeError("TypeError: document.embeds is not a function");
+                throw ScriptRuntime.typeError("document.embeds is not a function");
             }
         };
     }
@@ -1852,7 +1852,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw Context.reportRuntimeError("TypeError: document.images is not a function");
+                throw ScriptRuntime.typeError("document.images is not a function");
             }
         };
     }
@@ -1875,7 +1875,7 @@ public class Document extends Node {
                 if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
                     return super.call(cx, scope, thisObj, args);
                 }
-                throw Context.reportRuntimeError("TypeError: document.scripts is not a function");
+                throw ScriptRuntime.typeError("document.scripts is not a function");
             }
         };
     }
