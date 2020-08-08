@@ -1087,6 +1087,9 @@
         <contributor>
             <name>Rural Hunter</name>
         </contributor>
+        <contributor>
+            <name>Thorsten Wendelmuth</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.43.0" date="xxxx, 2020" description="Bugfixes, Rhino fixes, Chrome 84, Edge added, FF60 removed">
+            <action type="add" dev="rbri" issue="" due-to="Thorsten Wendelmuth">
+                Initial support for new File(bits, name[, options]);.
+            </action>
+            <action type="fix" dev="rbri">
+                File.lastModifiedDate is no longer available in FF.
+            </action>
             <action type="add" dev="rbri">
                 Using a node list directly inside a for..of operation is now supported like 'for (var entry of nodeList) {...}'.
             </action>

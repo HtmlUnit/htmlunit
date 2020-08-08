@@ -902,10 +902,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_FILEREADER_EMPTY_NULL,
 
-    /** FF uses a different date format for file.lastModifiedDate. */
-    @BrowserFeature({FF, FF68})
-    JS_FILE_SHORT_DATE_FORMAT,
-
     /** Indicates that the action property will not be expanded if defined as empty string. */
     @BrowserFeature({CHROME, FF, FF68})
     JS_FORM_ACTION_EXPANDURL_NOT_DEFINED,
