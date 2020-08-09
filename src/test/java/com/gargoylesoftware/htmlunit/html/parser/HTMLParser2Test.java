@@ -580,4 +580,34 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * As of version 2.43.0 this fails with a stack overflow.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"1", "1-1#P"})
+    public void innerHtmlParagraph() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('myP');\n"
+            + "  tmp.innerHTML = '<p>HtmlUnit</p>';\n"
+            + "  alert(tmp.childNodes.length);\n"
+
+            + "  var child = tmp.childNodes[0];\n"
+            + "  alert(child.childNodes.length + '-' + child.nodeType + '#' + child.nodeName);\n"
+
+            + "} catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "  <p id='myP'>Test</p>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
