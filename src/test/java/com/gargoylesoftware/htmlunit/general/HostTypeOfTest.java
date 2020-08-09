@@ -919,7 +919,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue}.
+     * Test CSSPrimitiveValue.
      *
      * @throws Exception if an error occurs
      */
@@ -1000,7 +1000,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue}.
+     * Test CSSValue.
      *
      * @throws Exception if an error occurs
      */
@@ -1192,7 +1192,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor}.
+     * Test DOMCursor.
      *
      * @throws Exception if the test fails
      */
@@ -3344,7 +3344,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream}.
+     * Test LocalMediaStream.
      *
      * @throws Exception if the test fails
      */

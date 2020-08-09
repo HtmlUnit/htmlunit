@@ -132,7 +132,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   <li>ff.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ff68.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
- *   <li>edge.bin (optional): is the location of the Edge binary, use double back-slashes</li>
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
  *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
  *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
