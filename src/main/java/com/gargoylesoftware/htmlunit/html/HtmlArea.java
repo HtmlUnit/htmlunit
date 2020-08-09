@@ -93,7 +93,7 @@ public class HtmlArea extends HtmlElement {
             }
             catch (final MalformedURLException e) {
                 throw new IllegalStateException(
-                        "Not a valid url: " + getHrefAttribute());
+                        "Not a valid url: " + getHrefAttribute(), e);
             }
             final WebRequest request = new WebRequest(url);
             request.setCharset(page.getCharset());

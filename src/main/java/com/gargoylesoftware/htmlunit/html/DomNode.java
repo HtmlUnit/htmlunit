@@ -891,7 +891,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             newnode = (DomNode) clone();
         }
         catch (final CloneNotSupportedException e) {
-            throw new IllegalStateException("Clone not supported for node [" + this + "]");
+            throw new IllegalStateException("Clone not supported for node [" + this + "]", e);
         }
 
         newnode.parent_ = null;

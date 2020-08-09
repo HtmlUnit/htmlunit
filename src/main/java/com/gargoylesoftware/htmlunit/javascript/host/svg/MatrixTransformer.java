@@ -65,7 +65,7 @@ class MatrixTransformer {
         }
         catch (final NoninvertibleTransformException e) {
             throw new IllegalArgumentException(
-                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.");
+                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.", e);
         }
     }
 

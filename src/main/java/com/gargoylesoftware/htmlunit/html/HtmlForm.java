@@ -326,7 +326,7 @@ public class HtmlForm extends HtmlElement {
             }
         }
         catch (final MalformedURLException e) {
-            throw new IllegalArgumentException("Not a valid url: " + actionUrl);
+            throw new IllegalArgumentException("Not a valid url: " + actionUrl, e);
         }
 
         final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader(),
