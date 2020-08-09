@@ -234,7 +234,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @param bytes the bytes to check
      */
     private static boolean isBinary(final byte[] bytes) {
-        for (byte b : bytes) {
+        for (final byte b : bytes) {
             if (b < 0x08
                 || b == 0x0B
                 || (b >= 0x0E && b <= 0x1A)

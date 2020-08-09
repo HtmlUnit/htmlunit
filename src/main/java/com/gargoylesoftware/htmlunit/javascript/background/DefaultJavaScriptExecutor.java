@@ -110,7 +110,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
         synchronized (jobManagerList_) {
             // iterate over the list and find the earliest job to run.
-            for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+            for (final WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
                 final JavaScriptJobManager jobManager = weakReference.get();
                 if (jobManager != null) {
                     final JavaScriptJob newJob = jobManager.getEarliestJob();
@@ -187,7 +187,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     private void updateJobMangerList(final JavaScriptJobManager newJobManager) {
         final List<WeakReference<JavaScriptJobManager>> managers = new LinkedList<>();
         synchronized (jobManagerList_) {
-            for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+            for (final WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
                 final JavaScriptJobManager manager = weakReference.get();
                 if (newJobManager == manager) {
                     return;

@@ -65,7 +65,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
      */
     protected boolean testFinished(final WebDriver driver) {
         final List<WebElement> status = driver.findElements(By.cssSelector("div.logsummary"));
-        for (WebElement webElement : status) {
+        for (final WebElement webElement : status) {
             if (!webElement.getText().contains("errors")) {
                 return false;
             }

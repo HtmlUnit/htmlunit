@@ -326,7 +326,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     @AfterClass
     public static void shutDownAll() throws Exception {
-        for (WebDriver driver : WEB_DRIVERS_.values()) {
+        for (final WebDriver driver : WEB_DRIVERS_.values()) {
             driver.quit();
         }
         WEB_DRIVERS_.clear();
@@ -341,7 +341,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     private static void shutDownRealBrowsers() {
         synchronized (WEB_DRIVERS_REAL_BROWSERS) {
-            for (WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
+            for (final WebDriver driver : WEB_DRIVERS_REAL_BROWSERS.values()) {
                 quit(driver);
             }
             WEB_DRIVERS_REAL_BROWSERS.clear();

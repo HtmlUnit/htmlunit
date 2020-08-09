@@ -83,7 +83,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
             final List<WebElement> lines = output.findElements(By.xpath(".//div"));
 
             final StringBuilder result = new StringBuilder();
-            for (WebElement webElement : lines) {
+            for (final WebElement webElement : lines) {
                 final String text = webElement.getText();
                 if (StringUtils.isNotBlank(text)) {
                     result.append(text);

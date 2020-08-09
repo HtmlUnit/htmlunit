@@ -125,7 +125,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
             final byte[] certificateBytes = new byte[2048];
             certificateInputStream.read(certificateBytes);
 
-            try (InputStream is = new ByteArrayInputStream(certificateBytes);) {
+            try (InputStream is = new ByteArrayInputStream(certificateBytes)) {
                 webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
                 webClient.getOptions().setUseInsecureSSL(true);
                 webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()

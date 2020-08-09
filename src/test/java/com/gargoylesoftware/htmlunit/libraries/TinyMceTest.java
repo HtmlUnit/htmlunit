@@ -86,7 +86,7 @@ public class TinyMceTest extends WebDriverTestCase {
 
         final List<WebElement> failures = driver.findElements(By.xpath("//li[@class='fail']"));
         final StringBuilder msg = new StringBuilder();
-        for (WebElement failure : failures) {
+        for (final WebElement failure : failures) {
             msg.append(failure.getText());
             msg.append("\n\n");
         }

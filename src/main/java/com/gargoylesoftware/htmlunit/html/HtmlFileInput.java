@@ -104,7 +104,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
         }
 
         final List<NameValuePair> list = new ArrayList<>();
-        for (File file : files_) {
+        for (final File file : files_) {
             String contentType;
             if (contentType_ == null) {
                 contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);

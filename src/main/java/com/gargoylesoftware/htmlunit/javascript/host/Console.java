@@ -241,7 +241,7 @@ public class Console extends SimpleScriptable {
             final Object[] ids = obj.getIds();
             if (ids != null && ids.length > 0) {
                 final StringBuilder sb = new StringBuilder();
-                for (Object id : ids) {
+                for (final Object id : ids) {
                     final Object value = obj.get(id);
                     if (value instanceof Delegator) {
                         sb.append(id + ": " + ((Delegator) value).getClassName() + "\n");
@@ -354,7 +354,7 @@ public class Console extends SimpleScriptable {
                 final Object[] ids = obj.getIds();
                 if (ids != null && ids.length > 0) {
                     boolean needsSeparator = false;
-                    for (Object key : ids) {
+                    for (final Object key : ids) {
                         if (needsSeparator) {
                             sb.append(", ");
                         }

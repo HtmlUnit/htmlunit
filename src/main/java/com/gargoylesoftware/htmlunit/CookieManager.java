@@ -177,7 +177,7 @@ public class CookieManager implements Serializable {
             return null;
         }
 
-        for (Cookie cookie : cookies_) {
+        for (final Cookie cookie : cookies_) {
             if (StringUtils.equals(cookie.getName(), name)) {
                 return cookie;
             }

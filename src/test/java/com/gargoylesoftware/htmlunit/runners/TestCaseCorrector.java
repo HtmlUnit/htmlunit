@@ -130,7 +130,7 @@ final class TestCaseCorrector {
 
         Collections.sort(alerts);
         String defaultAlert = null;
-        for (String alert : alerts) {
+        for (final String alert : alerts) {
             if (alert.startsWith("DEFAULT = ")) {
                 defaultAlert = alert;
                 break;

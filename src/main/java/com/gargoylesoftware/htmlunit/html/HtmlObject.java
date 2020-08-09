@@ -390,7 +390,7 @@ public class HtmlObject extends HtmlElement {
             List<URL> archiveUrls = new LinkedList<>();
             String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
             if (null != archives) {
-                for (String tmpArchive : archives) {
+                for (final String tmpArchive : archives) {
                     final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
@@ -400,7 +400,7 @@ public class HtmlObject extends HtmlElement {
             }
             archives = StringUtils.split(params.get(CACHE_ARCHIVE), ',');
             if (null != archives) {
-                for (String tmpArchive : archives) {
+                for (final String tmpArchive : archives) {
                     final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 

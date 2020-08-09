@@ -207,7 +207,7 @@ public class NavigatorTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         final String alerts = driver.findElement(By.id("myTextarea")).getAttribute("value");
 
-        for (PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
+        for (final PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
             assertTrue(plugin.getName() + " not found", alerts.contains(plugin.getName()));
         }
     }

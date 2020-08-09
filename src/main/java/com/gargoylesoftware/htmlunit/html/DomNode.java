@@ -1193,7 +1193,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         previousSibling_ = null;
         parent_ = null;
         attachedToPage_ = false;
-        for (DomNode descendant : getDescendants()) {
+        for (final DomNode descendant : getDescendants()) {
             descendant.attachedToPage_ = false;
         }
     }
@@ -1856,7 +1856,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final List<DomNode> elements = new ArrayList<>();
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
-                    for (Selector selector : selectorList) {
+                    for (final Selector selector : selectorList) {
                         if (CSSStyleSheet.selects(browserVersion, selector, child, null, true)) {
                             elements.add(child);
                             break;
@@ -1960,7 +1960,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             errorDetected_ = false;
         }
 
-        protected boolean errorDetected() {
+        private boolean errorDetected() {
             return errorDetected_;
         }
 

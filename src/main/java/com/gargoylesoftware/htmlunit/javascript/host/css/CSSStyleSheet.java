@@ -273,7 +273,7 @@ public class CSSStyleSheet extends StyleSheet {
         final DomElement e = element.getDomNodeOrDie();
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
                 selects(getRuleIndex(), this, browser, e, pseudoElement, false);
-        for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+        for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
             final CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
             style.applyStyleFromSelector(dec, entry.getSelector());
         }
@@ -437,7 +437,7 @@ public class CSSStyleSheet extends StyleSheet {
                 if (name == null || name.equals(element.getLowercaseName())) {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
-                        for (Condition condition : conditions) {
+                        for (final Condition condition : conditions) {
                             if (!selects(browserVersion, condition, element, fromQuerySelectorAll)) {
                                 return false;
                             }
@@ -1136,7 +1136,7 @@ public class CSSStyleSheet extends StyleSheet {
         final CSSRuleListImpl ruleList = getWrappedSheet().getCssRules();
         final List<AbstractCSSRuleImpl> rules = ruleList.getRules();
         int pos = 0;
-        for (AbstractCSSRuleImpl rule : rules) {
+        for (final AbstractCSSRuleImpl rule : rules) {
             if (rule instanceof CSSCharsetRuleImpl) {
                 cssRulesIndexFix_.add(pos);
                 continue;
@@ -1517,7 +1517,7 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
-        for (Selector selector : selectorList) {
+        for (final Selector selector : selectorList) {
             if (!isValidSelector(selector, documentMode, domNode)) {
                 throw new CSSException("Invalid selector: " + selector);
             }
@@ -1532,7 +1532,7 @@ public class CSSStyleSheet extends StyleSheet {
             case ELEMENT_NODE_SELECTOR:
                 final List<Condition> conditions = ((ElementSelector) selector).getConditions();
                 if (conditions != null) {
-                    for (Condition condition : conditions) {
+                    for (final Condition condition : conditions) {
                         if (!isValidCondition(condition, documentMode, domNode)) {
                             return false;
                         }
@@ -1639,11 +1639,11 @@ public class CSSStyleSheet extends StyleSheet {
     private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList,
             final Set<String> alreadyProcessing) {
 
-        for (AbstractCSSRuleImpl rule : ruleList.getRules()) {
+        for (final AbstractCSSRuleImpl rule : ruleList.getRules()) {
             if (rule instanceof CSSStyleRuleImpl) {
                 final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
                 final SelectorList selectors = styleRule.getSelectors();
-                for (Selector selector : selectors) {
+                for (final Selector selector : selectors) {
                     final SimpleSelector simpleSel = selector.getSimpleSelector();
                     if (SelectorType.ELEMENT_NODE_SELECTOR == simpleSel.getSelectorType()) {
                         final ElementSelector es = (ElementSelector) simpleSel;
@@ -1725,7 +1725,7 @@ public class CSSStyleSheet extends StyleSheet {
                 entry = iter.next();
             }
 
-            for (CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
+            for (final CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
                 matchingRules.addAll(selects(child, scriptable, browserVersion,
                                                     element, pseudoElement, fromQuerySelectorAll));
             }

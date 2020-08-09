@@ -789,7 +789,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final WebWindow ww = getWindow().getWebWindow();
         final JavaScriptEngine jsEngine = (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
 
-        for (AnimationFrame animationFrame : animationFrames) {
+        for (final AnimationFrame animationFrame : animationFrames) {
             jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(),
                         animationFrame.callback_, this, getParentScope(), args);
         }
@@ -1576,7 +1576,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
                 final List<DomElement> expElements = page.getElementsByName(expElementName);
                 final List<DomNode> result = new ArrayList<>(expElements.size());
 
-                for (DomElement domElement : expElements) {
+                for (final DomElement domElement : expElements) {
                     if (filter.matches(domElement)) {
                         result.add(domElement);
                     }

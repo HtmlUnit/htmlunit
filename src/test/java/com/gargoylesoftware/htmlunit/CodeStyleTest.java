@@ -527,7 +527,7 @@ public class CodeStyleTest {
             return;
         }
         int i = 0;
-        for (String line : lines) {
+        for (final String line : lines) {
             if (line.contains("LOG.trace(")) {
                 loggingEnabled(lines, i, "Trace", relativePath);
             }
@@ -752,19 +752,20 @@ public class CodeStyleTest {
         }
         else {
             final List<String> names = new ArrayList<>();
-            for (String alert : alerts) {
+            for (final String alert : alerts) {
+                String cleanedAlert = alert;
                 if (alert.charAt(0) == ',') {
                     if (alert.charAt(1) != '\n') {
                         addFailure("Expectation must be in a separate line in "
                                 + relativePath + ", line: " + (lineIndex + 1));
                     }
-                    alert = alert.substring(1).trim();
+                    cleanedAlert = alert.substring(1).trim();
                 }
 
-                final int quoteIndex = alert.indexOf('"');
-                final int equalsIndex = alert.indexOf('=');
+                final int quoteIndex = cleanedAlert.indexOf('"');
+                final int equalsIndex = cleanedAlert.indexOf('=');
                 if (equalsIndex != -1 && equalsIndex < quoteIndex) {
-                    final String name = alert.substring(0, equalsIndex - 1);
+                    final String name = cleanedAlert.substring(0, equalsIndex - 1);
                     alertVerifyOrder(name, names, relativePath, lineIndex);
                     names.add(name);
                 }

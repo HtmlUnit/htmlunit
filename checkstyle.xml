@@ -1,6 +1,6 @@
 <!DOCTYPE module PUBLIC
-    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
-    "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
 
@@ -223,7 +223,10 @@
         <module name="SimplifyBooleanExpression"/>
 
         <module name="UnnecessaryParentheses"/>
+        <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
         <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+        <module name="UnnecessarySemicolonInEnumeration"/>
+        <module name="UnnecessarySemicolonInTryWithResources"/>
 
         <!-- module name="ParameterAssignment"/-->
         <module name="SuperFinalize"/>
@@ -243,6 +246,8 @@
 
         <module name="FinalLocalVariable">
             <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
+            <property name="validateEnhancedForLoopVariable" value="true"/>
         </module>
+        <module name="HiddenField"/>
     </module>
 </module>

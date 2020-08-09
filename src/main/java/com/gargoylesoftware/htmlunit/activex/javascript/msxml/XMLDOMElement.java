@@ -374,7 +374,7 @@ public class XMLDOMElement extends XMLDOMNode {
     }
 
     private void normalize(final DomElement domElement) {
-        for (DomNode domNode : domElement.getChildren()) {
+        for (final DomNode domNode : domElement.getChildren()) {
             if (domNode instanceof DomElement) {
                 domNode.normalize();
                 normalize((DomElement) domNode);

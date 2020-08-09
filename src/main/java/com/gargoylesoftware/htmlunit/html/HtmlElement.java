@@ -1291,7 +1291,7 @@ public abstract class HtmlElement extends DomElement {
                 }
             }
             else {
-                for (DomNode child : getChildNodes()) {
+                for (final DomNode child : getChildNodes()) {
                     if (activeElement == child.getScriptableObject()) {
                         doc.setActiveElement(null);
                         if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {

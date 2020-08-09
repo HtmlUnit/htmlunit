@@ -118,7 +118,7 @@ public class ErrorOutputChecker implements TestRule {
             String output = baos_.toString();
 
             // remove webdriver messages
-            for (Pattern pattern : PATTERNS) {
+            for (final Pattern pattern : PATTERNS) {
                 output = pattern.matcher(output).replaceAll("");
             }
 

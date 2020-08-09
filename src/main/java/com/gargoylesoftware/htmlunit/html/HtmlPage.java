@@ -1972,7 +1972,7 @@ public class HtmlPage extends SgmlPage {
         final String nameLC = httpEquiv.toLowerCase(Locale.ROOT);
         final List<HtmlMeta> tags = getDocumentElement().getElementsByTagNameImpl("meta");
         final List<HtmlMeta> foundTags = new ArrayList<>();
-        for (HtmlMeta htmlMeta : tags) {
+        for (final HtmlMeta htmlMeta : tags) {
             if (nameLC.equals(htmlMeta.getHttpEquivAttribute().toLowerCase(Locale.ROOT))) {
                 foundTags.add(htmlMeta);
             }

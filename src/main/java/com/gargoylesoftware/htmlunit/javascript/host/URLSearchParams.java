@@ -142,7 +142,7 @@ public class URLSearchParams extends SimpleScriptable {
 
         // TODO: encoding
         final String[] parts = StringUtils.split(params, '&');
-        for (String part : parts) {
+        for (final String part : parts) {
             params_.add(splitQueryParameter(part));
         }
     }
@@ -201,7 +201,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public String get(final String name) {
-        for (Entry<String, String> param : params_) {
+        for (final Entry<String, String> param : params_) {
             if (param.getKey().equals(name)) {
                 return param.getValue();
             }
@@ -219,7 +219,7 @@ public class URLSearchParams extends SimpleScriptable {
     @JsxFunction
     public Scriptable getAll(final String name) {
         final List<String> result = new LinkedList<>();
-        for (Entry<String, String> param : params_) {
+        for (final Entry<String, String> param : params_) {
             if (param.getKey().equals(name)) {
                 result.add(param.getValue());
             }
@@ -268,7 +268,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public boolean has(final String name) {
-        for (Entry<String, String> param : params_) {
+        for (final Entry<String, String> param : params_) {
             if (param.getKey().equals(name)) {
                 return true;
             }
@@ -338,7 +338,7 @@ public class URLSearchParams extends SimpleScriptable {
     public Object getDefaultValue(final Class<?> hint) {
         final StringBuilder paramStr = new StringBuilder();
         String delim = "";
-        for (Entry<String, String> param : params_) {
+        for (final Entry<String, String> param : params_) {
             paramStr.append(delim);
             delim = "&";
             paramStr.append(param.getKey());
@@ -362,7 +362,7 @@ public class URLSearchParams extends SimpleScriptable {
 
         if (params_.size() > 0) {
             final List<NameValuePair> params = new ArrayList<NameValuePair>();
-            for (Entry<String, String> entry : params_) {
+            for (final Entry<String, String> entry : params_) {
                 params.add(new NameValuePair(entry.getKey(), entry.getValue()));
             }
             webRequest.setRequestParameters(params);

@@ -267,7 +267,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public void applyStyleFromSelector(final CSSStyleDeclarationImpl declaration, final Selector selector) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = selector.getSelectorSpecificity();
-        for (Property prop : declaration.getProperties()) {
+        for (final Property prop : declaration.getProperties()) {
             final String name = prop.getName();
             if (!browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX) || !"z-index".equals(name)) {
                 final String value = declaration.getPropertyValue(name);

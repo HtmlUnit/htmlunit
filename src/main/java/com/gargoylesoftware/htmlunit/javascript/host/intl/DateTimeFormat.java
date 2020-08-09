@@ -256,7 +256,7 @@ public class DateTimeFormat extends SimpleScriptable {
         String locale = "";
         String pattern = null;
 
-        for (String l : locales) {
+        for (final String l : locales) {
             pattern = getPattern(formats, l);
             if (pattern != null) {
                 locale = l;

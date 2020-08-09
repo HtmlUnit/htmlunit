@@ -90,7 +90,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         if (currentlyRunningJob_ != null && filter.passes(currentlyRunningJob_)) {
             count++;
         }
-        for (JavaScriptJob job : scheduledJobsQ_) {
+        for (final JavaScriptJob job : scheduledJobsQ_) {
             if (filter.passes(job)) {
                 count++;
             }
@@ -370,7 +370,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             return scheduledJobsQ_.peek();
         }
 
-        for (JavaScriptJob job : scheduledJobsQ_) {
+        for (final JavaScriptJob job : scheduledJobsQ_) {
             if (filter.passes(job)) {
                 return job;
             }

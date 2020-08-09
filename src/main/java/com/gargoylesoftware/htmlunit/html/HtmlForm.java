@@ -241,7 +241,7 @@ public class HtmlForm extends HtmlElement {
 
     private boolean areChildrenValid() {
         boolean valid = true;
-        for (HtmlElement element : getFormHtmlElementDescendants()) {
+        for (final HtmlElement element : getFormHtmlElementDescendants()) {
             if (element instanceof HtmlInput && !((HtmlInput) element).isValid()) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("Form validation failed; element '" + element + "' was not valid. Submit cancelled.");

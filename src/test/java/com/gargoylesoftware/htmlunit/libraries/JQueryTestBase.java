@@ -87,7 +87,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 System.out.println("--------------------------------------------");
                 System.out.println("Failures:");
                 final List<WebElement> failures = webdriver.findElements(By.cssSelector(".qunit-assert-list li.fail"));
-                for (WebElement webElement : failures) {
+                for (final WebElement webElement : failures) {
                     System.out.println("  " + webElement.getText());
                 }
                 System.out.println("--------------------------------------------");

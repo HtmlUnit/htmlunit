@@ -251,12 +251,12 @@ public class XSLTProcessor extends SimpleScriptable {
     }
 
     private static DomNode findOutputNode(final DomNode xsltDomNode) {
-        for (DomNode child : xsltDomNode.getChildren()) {
+        for (final DomNode child : xsltDomNode.getChildren()) {
             if ("output".equals(child.getLocalName())) {
                 return child;
             }
 
-            for (DomNode child1 : child.getChildren()) {
+            for (final DomNode child1 : child.getChildren()) {
                 if ("output".equals(child1.getLocalName())) {
                     return child1;
                 }

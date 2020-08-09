@@ -830,7 +830,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals("Incorrect number of openned window", 2, driver.getWindowHandles().size());
 
         String newWindowId = "";
-        for (String id : driver.getWindowHandles()) {
+        for (final String id : driver.getWindowHandles()) {
             if (!firstWindowId.equals(id)) {
                 newWindowId = id;
                 break;
@@ -871,7 +871,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals("Incorrect number of openned window", 2, driver.getWindowHandles().size());
 
         String newWindowId = "";
-        for (String id : driver.getWindowHandles()) {
+        for (final String id : driver.getWindowHandles()) {
             if (!firstWindowId.equals(id)) {
                 newWindowId = id;
                 break;
@@ -915,7 +915,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
                 Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
 
         String newWindowId = "";
-        for (String id : driver.getWindowHandles()) {
+        for (final String id : driver.getWindowHandles()) {
             if (!firstWindowId.equals(id)) {
                 newWindowId = id;
                 break;

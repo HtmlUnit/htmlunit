@@ -73,7 +73,7 @@ public class BrowserVersionFeaturesTest  {
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             int useCount = 0;
-            for (BrowserVersion browserVersion : browsers) {
+            for (final BrowserVersion browserVersion : browsers) {
                 if (browserVersion.hasFeature(feature)) {
                     useCount++;
                 }
@@ -90,7 +90,7 @@ public class BrowserVersionFeaturesTest  {
             if (browserFeature != null) {
                 for (final SupportedBrowser annotatedBrowser : browserFeature.value()) {
                     boolean inUse = false;
-                    for (BrowserVersion supportedBrowser : browsers) {
+                    for (final BrowserVersion supportedBrowser : browsers) {
                         if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowserName(supportedBrowser),
                                 annotatedBrowser)) {
                             inUse = true;

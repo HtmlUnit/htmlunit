@@ -265,7 +265,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
         for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
             boolean found = false;
-            for (BrowserVersion browser : browsers) {
+            for (final BrowserVersion browser : browsers) {
                 if (AbstractJavaScriptConfiguration.getClassConfiguration(klass, browser) != null) {
                     found = true;
                     break;

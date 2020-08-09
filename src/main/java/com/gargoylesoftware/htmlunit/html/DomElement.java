@@ -1537,7 +1537,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (mouseOver_) {
             return true;
         }
-        for (DomElement child : getChildElements()) {
+        for (final DomElement child : getChildElements()) {
             if (child.isMouseOver()) {
                 return true;
             }
@@ -1556,7 +1556,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
 
             if (selectorList != null) {
-                for (Selector selector : selectorList) {
+                for (final Selector selector : selectorList) {
                     if (CSSStyleSheet.selects(browserVersion, selector, this, null, true)) {
                         return true;
                     }

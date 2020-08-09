@@ -764,7 +764,7 @@ public class Node extends EventTarget {
             return null;
         }
 
-        for (DomNode child : domNode.getChildren()) {
+        for (final DomNode child : domNode.getChildren()) {
             if (child != null) {
                 final Scriptable scriptable = child.getScriptableObject();
                 if (scriptable instanceof Element) {
@@ -790,7 +790,7 @@ public class Node extends EventTarget {
         }
 
         Element result = null;
-        for (DomNode child : domNode.getChildren()) {
+        for (final DomNode child : domNode.getChildren()) {
             final Scriptable scriptable = child.getScriptableObject();
             if (scriptable instanceof Element) {
                 result = (Element) scriptable;
@@ -810,7 +810,7 @@ public class Node extends EventTarget {
             @Override
             protected List<DomNode> computeElements() {
                 final List<DomNode> children = new LinkedList<>();
-                for (DomNode domNode : node.getChildNodes()) {
+                for (final DomNode domNode : node.getChildNodes()) {
                     if (domNode instanceof DomElement) {
                         children.add(domNode);
                     }
@@ -834,7 +834,7 @@ public class Node extends EventTarget {
         final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
         final DomNode parentNode = thisDomNode.getParentNode();
         final DomNode nextSibling = thisDomNode.getNextSibling();
-        for (Object arg : args) {
+        for (final Object arg : args) {
             final Node node = toNodeOrTextNode((Node) thisObj, arg);
             final DomNode newNode = node.getDomNodeOrDie();
             if (nextSibling != null) {
@@ -864,7 +864,7 @@ public class Node extends EventTarget {
      */
     protected static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        for (Object arg : args) {
+        for (final Object arg : args) {
             final Node node = toNodeOrTextNode((Node) thisObj, arg);
             ((Node) thisObj).getDomNodeOrDie().insertBefore(node.getDomNodeOrDie());
         }
@@ -883,7 +883,7 @@ public class Node extends EventTarget {
         final DomNode parentNode = thisDomNode.getParentNode();
         final DomNode nextSibling = thisDomNode.getNextSibling();
         boolean isFirst = true;
-        for (Object arg : args) {
+        for (final Object arg : args) {
             final DomNode newNode = toNodeOrTextNode((Node) thisObj, arg).getDomNodeOrDie();
             if (isFirst) {
                 isFirst = false;

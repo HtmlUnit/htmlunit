@@ -444,7 +444,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 writer.write("No Cookies");
             }
             else {
-                for (javax.servlet.http.Cookie c : request.getCookies()) {
+                for (final javax.servlet.http.Cookie c : request.getCookies()) {
                     writer.write(c.getName() + '=' + c.getValue());
                 }
             }

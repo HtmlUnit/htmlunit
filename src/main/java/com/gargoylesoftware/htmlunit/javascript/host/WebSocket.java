@@ -424,7 +424,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     }
 
     private void fire(final Event evt) {
-        evt.setTarget(WebSocket.this);
+        evt.setTarget(this);
         evt.setParentScope(getParentScope());
         evt.setPrototype(getPrototype(evt.getClass()));
 
@@ -442,6 +442,6 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         final Scriptable scope = function.getParentScope();
         final JavaScriptEngine engine
             = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-        engine.callFunction(containingPage_, function, scope, WebSocket.this, args);
+        engine.callFunction(containingPage_, function, scope, this, args);
     }
 }

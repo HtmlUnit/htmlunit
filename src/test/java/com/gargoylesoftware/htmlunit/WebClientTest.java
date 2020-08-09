@@ -2387,7 +2387,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getPage(URL_FIRST);
         final List<TopLevelWindow> windows = client.getTopLevelWindows();
         for (int i = 0; i < 100; i++) {
-            for (TopLevelWindow window : windows) {
+            for (final TopLevelWindow window : windows) {
                 Thread.sleep(13);
                 window.getName();
             }

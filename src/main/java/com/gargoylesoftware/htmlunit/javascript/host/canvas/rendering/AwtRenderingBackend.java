@@ -444,7 +444,7 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(fillColor_);
-        for (Path2D path2d : subPaths_) {
+        for (final Path2D path2d : subPaths_) {
             graphics2D_.fill(path2d);
         }
     }
@@ -777,7 +777,7 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(strokeColor_);
-        for (Path2D path2d : subPaths_) {
+        for (final Path2D path2d : subPaths_) {
             graphics2D_.draw(path2d);
         }
     }

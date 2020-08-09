@@ -147,7 +147,7 @@ public abstract class AbstractJavaScriptConfiguration {
                     extendedClassName = superClass.getSimpleName();
                 }
 
-                for (JsxClass jsxClass : jsxClassValues) {
+                for (final JsxClass jsxClass : jsxClassValues) {
                     if (jsxClass != null && isSupported(jsxClass.value(), expectedBrowser)) {
                         domClasses.add(jsxClass.domClass());
                         if (jsxClass.isJSObject()) {

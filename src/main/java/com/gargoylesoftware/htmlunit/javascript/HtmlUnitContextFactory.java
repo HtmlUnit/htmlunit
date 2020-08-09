@@ -282,7 +282,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             public boolean visibleToScripts(final String fullClassName) {
                 final  Map<String, String> activeXObjectMap = webClient_.getActiveXObjectMap();
                 if (activeXObjectMap != null) {
-                    for (String mappedClass : activeXObjectMap.values()) {
+                    for (final String mappedClass : activeXObjectMap.values()) {
                         if (fullClassName.equals(mappedClass)) {
                             return true;
                         }

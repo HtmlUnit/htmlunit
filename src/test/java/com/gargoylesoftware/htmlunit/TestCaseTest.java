@@ -91,9 +91,9 @@ public final class TestCaseTest {
     public static Set<String> getAllClassNames() throws Exception {
         final Set<String> names = new HashSet<>();
 
-        for (BrowserVersion browser : new BrowserVersion[] {CHROME, FIREFOX, FIREFOX_68, INTERNET_EXPLORER}) {
+        for (final BrowserVersion browser : new BrowserVersion[] {CHROME, FIREFOX, FIREFOX_68, INTERNET_EXPLORER}) {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(browser);
-            for (ClassConfiguration config : jsConfig.getAll()) {
+            for (final ClassConfiguration config : jsConfig.getAll()) {
                 names.add(config.getClassName());
             }
         }

@@ -115,7 +115,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
      * Returns the method with the specified name.
      */
     private static Method findMethod(final Method[] methods, final String name) {
-        for (Method m : methods) {
+        for (final Method m : methods) {
             if (m.getName().equals(name)) {
                 return m;
             }

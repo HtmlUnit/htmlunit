@@ -124,7 +124,7 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, FF, FF68})
     public Element getFirstElementChild() {
-        for (DomNode child : getDomNodeOrDie().getChildren()) {
+        for (final DomNode child : getDomNodeOrDie().getChildren()) {
             return (Element) child.getScriptableObject();
         }
         return null;
@@ -137,7 +137,7 @@ public class DocumentFragment extends Node {
     @JsxGetter({CHROME, FF, FF68})
     public Element getLastElementChild() {
         DomNode lastChild = null;
-        for (DomNode child : getDomNodeOrDie().getChildren()) {
+        for (final DomNode child : getDomNodeOrDie().getChildren()) {
             lastChild = child;
         }
 
@@ -170,7 +170,7 @@ public class DocumentFragment extends Node {
         if (idString == null || idString.length() == 0) {
             return null;
         }
-        for (DomNode child : getDomNodeOrDie().getChildren()) {
+        for (final DomNode child : getDomNodeOrDie().getChildren()) {
             final Element elem = (Element) child.getScriptableObject();
             if (idString.equals(elem.getId())) {
                 return elem;
