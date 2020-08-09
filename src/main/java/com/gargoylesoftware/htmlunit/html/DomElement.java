@@ -88,7 +88,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     private NamedAttrNodeMapImpl attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
 
     /** The map holding the namespaces, keyed by URI. */
-    private Map<String, String> namespaces_ = new HashMap<>();
+    private final Map<String, String> namespaces_ = new HashMap<>();
 
     /** Cache for the styles. */
     private String styleString_;

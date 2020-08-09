@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  */
 public class XMLSerializer {
 
-    private boolean preserveWhiteSpace_;
+    private final boolean preserveWhiteSpace_;
 
     /**
      * @param preserveWhiteSpace whether to preserve whitespaces or not

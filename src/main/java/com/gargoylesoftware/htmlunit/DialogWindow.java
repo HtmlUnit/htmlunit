@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class DialogWindow extends WebWindowImpl {
 
     /** The arguments object exposed via the <tt>dialogArguments</tt> JavaScript property. */
-    private Object arguments_;
+    private final Object arguments_;
 
     /**
      * Creates a new instance.

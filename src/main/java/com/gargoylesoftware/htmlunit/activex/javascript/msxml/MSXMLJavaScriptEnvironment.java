@@ -41,7 +41,7 @@ public class MSXMLJavaScriptEnvironment {
 
     private final MSXMLConfiguration config_;
 
-    private Map<Class<? extends MSXMLScriptable>, Scriptable> prototypes_;
+    private final Map<Class<? extends MSXMLScriptable>, Scriptable> prototypes_;
 
     /**
      * Creates an instance for the given {@link BrowserVersion}.

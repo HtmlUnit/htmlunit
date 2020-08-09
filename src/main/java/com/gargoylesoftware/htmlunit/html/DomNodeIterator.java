@@ -22,12 +22,13 @@ import org.w3c.dom.traversal.NodeIterator;
  * An implementation of {@link NodeIterator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DomNodeIterator implements NodeIterator {
 
-    private DomNode root_;
-    private int whatToShow_;
-    private NodeFilter filter_;
+    private final DomNode root_;
+    private final int whatToShow_;
+    private final NodeFilter filter_;
     private DomNode referenceNode_;
     private final boolean expandEntityReferences_;
     private boolean pointerBeforeReferenceNode_;

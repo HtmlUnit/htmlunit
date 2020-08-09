@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class AppletContextImpl implements AppletContext {
     private static final Enumeration<Applet> EMPTY_ENUMERATION
         = Collections.enumeration(Collections.<Applet>emptyList());
-    private HtmlPage htmlPage_;
+    private final HtmlPage htmlPage_;
 
     AppletContextImpl(final HtmlPage page) {
         htmlPage_ = page;

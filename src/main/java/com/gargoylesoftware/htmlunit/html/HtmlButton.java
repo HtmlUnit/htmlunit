@@ -52,7 +52,8 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
-    private String originalName_;
+
+    private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
 
     /**

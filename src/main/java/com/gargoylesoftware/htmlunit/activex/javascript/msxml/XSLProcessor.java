@@ -59,7 +59,7 @@ public class XSLProcessor extends MSXMLScriptable {
     private XMLDOMNode style_;
     private XMLDOMNode input_;
     private Object output_;
-    private Map<String, Object> parameters_ = new HashMap<>();
+    private final Map<String, Object> parameters_ = new HashMap<>();
 
     /**
      * Specifies which XML input tree to transform.

@@ -24,7 +24,7 @@ import java.net.URL;
 public class AbstractPage implements Page {
 
     private final WebResponse webResponse_;
-    private WebWindow enclosingWindow_;
+    private final WebWindow enclosingWindow_;
 
     /**
      * Creates an instance.

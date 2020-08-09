@@ -61,7 +61,7 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
     /**
      * Either {@link HtmlElement} or {@link DomText}.
      */
-    private DomNode domNode_;
+    private final DomNode domNode_;
 
     static {
         SPECIAL_KEYS_MAP_.put(DOM_VK_ADD, '+');

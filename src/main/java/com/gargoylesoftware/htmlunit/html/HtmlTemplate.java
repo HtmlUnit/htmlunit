@@ -31,7 +31,7 @@ public class HtmlTemplate extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "template";
 
-    private DomDocumentFragment domDocumentFragment_;
+    private final DomDocumentFragment domDocumentFragment_;
 
     /**
      * Creates a new instance.

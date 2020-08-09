@@ -59,7 +59,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     private String defaultValue_;
     private String valueAtFocus_;
-    private String originalName_;
+    private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);

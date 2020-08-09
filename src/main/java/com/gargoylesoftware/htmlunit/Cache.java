@@ -63,10 +63,10 @@ public class Cache implements Serializable {
      */
     private static class Entry implements Comparable<Entry>, Serializable {
         private final String key_;
-        private WebResponse response_;
-        private Object value_;
+        private final WebResponse response_;
+        private final Object value_;
         private long lastAccess_;
-        private long createdAt_;
+        private final long createdAt_;
 
         Entry(final String key, final WebResponse response, final Object value) {
             key_ = key;
