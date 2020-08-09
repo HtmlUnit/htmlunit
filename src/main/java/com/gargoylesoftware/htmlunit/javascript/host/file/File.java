@@ -20,11 +20,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -32,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
@@ -39,6 +43,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 
 /**
  * A JavaScript object for {@code File}.
@@ -60,12 +66,13 @@ public class File extends Blob {
         abstract long getLastModified();
         abstract long getSize();
         abstract String getType(BrowserVersion browserVersion);
+        abstract String getText() throws IOException;
 
         // TODO
         abstract java.io.File getFile();
     }
 
-    private static class FileBackend extends Backend {
+    private static class FileBackend extends Backend implements Serializable {
         private java.io.File file_;
 
         FileBackend(final String pathname) {
@@ -88,6 +95,10 @@ public class File extends Blob {
             return browserVersion.getUploadMimeType(file_);
         }
 
+        public String getText() throws IOException {
+            return FileUtils.readFileToString(file_, StandardCharsets.UTF_8);
+        }
+
         public java.io.File getFile() {
             return file_;
         }
@@ -107,23 +118,23 @@ public class File extends Blob {
 
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             for (long i = 0; i < fileBits.getLength(); i++) {
-                final String bits = Context.toString(fileBits.get(i));
-                // Todo normalize line breaks
-                final byte[] bytes = bits.getBytes(StandardCharsets.UTF_8);
-                out.write(bytes, 0, bytes.length);
+                final Object fileBit = fileBits.get(i);
+                if (fileBit instanceof NativeArrayBuffer) {
+                    final byte[] bytes = ((NativeArrayBuffer) fileBit).getBuffer();
+                    out.write(bytes, 0, bytes.length);
+                }
+                else if (fileBit instanceof NativeArrayBufferView) {
+                    final byte[] bytes = ((NativeArrayBufferView) fileBit).getBuffer().getBuffer();
+                    out.write(bytes, 0, bytes.length);
+                }
+                else {
+                    final String bits = Context.toString(fileBits.get(i));
+                    // Todo normalize line breaks
+                    final byte[] bytes = bits.getBytes(StandardCharsets.UTF_8);
+                    out.write(bytes, 0, bytes.length);
+                }
             }
             bytes_ = out.toByteArray();
-//            NativeArrayBuffer arrayBuffer = null;
-//            if (buffer instanceof NativeArrayBuffer) {
-//                arrayBuffer = (NativeArrayBuffer) buffer;
-//            }
-//            else if (buffer instanceof NativeArrayBufferView) {
-//                arrayBuffer = ((NativeArrayBufferView) buffer).getBuffer();
-//            }
-//
-//            if (arrayBuffer != null) {
-//                return new String(arrayBuffer.getBuffer(), Charset.forName(encoding_));
-//            }
         }
 
         public String getName() {
@@ -140,6 +151,10 @@ public class File extends Blob {
 
         public String getType(final BrowserVersion browserVersion) {
             return type_;
+        }
+
+        public String getText() throws IOException {
+            return new String(bytes_, StandardCharsets.UTF_8);
         }
 
         public java.io.File getFile() {
@@ -271,6 +286,20 @@ public class File extends Blob {
     @JsxGetter
     public String getType() {
         return backend_.getType(getBrowserVersion());
+    }
+
+    /**
+     * @return a Promise that resolves with a string containing the
+     * contents of the blob, interpreted as UTF-8.
+     */
+    @JsxFunction({CHROME, FF})
+    public Promise text() {
+        try {
+            return Promise.resolve(null, this, new Object[] {backend_.getText()}, null);
+        }
+        catch (final IOException e) {
+            return Promise.reject(null, this, new Object[] {e.getMessage()}, null);
+        }
     }
 
     /**
