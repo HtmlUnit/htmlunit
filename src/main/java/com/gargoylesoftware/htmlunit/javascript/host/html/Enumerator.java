@@ -63,7 +63,7 @@ public class Enumerator extends SimpleScriptable {
             collection_ = ((HTMLFormElement) o).getElements();
         }
         else {
-            throw ScriptRuntime.typeError("object is not enumerable (" + String.valueOf(o) + ")");
+            throw ScriptRuntime.typeError("object is not enumerable (" + o + ")");
         }
     }
 

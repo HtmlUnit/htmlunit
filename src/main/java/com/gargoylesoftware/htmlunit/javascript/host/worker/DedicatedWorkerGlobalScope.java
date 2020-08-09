@@ -145,6 +145,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * @return the encoded string
      */
     @JsxFunction
+    @Override
     public String btoa(final String stringToEncode) {
         return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
     }
@@ -155,6 +156,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * @return the decoded value
      */
     @JsxFunction
+    @Override
     public String atob(final String encodedData) {
         return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
     }

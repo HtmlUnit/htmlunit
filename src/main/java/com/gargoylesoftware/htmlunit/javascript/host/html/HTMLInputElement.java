@@ -923,6 +923,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc}
      */
     @JsxGetter
+    @Override
     public String getName() {
         return super.getName();
     }
@@ -931,6 +932,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc}
      */
     @JsxSetter
+    @Override
     public void setName(final String newName) {
         super.setName(newName);
     }
@@ -957,6 +959,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc}
      */
     @JsxGetter
+    @Override
     public HTMLFormElement getForm() {
         return super.getForm();
     }

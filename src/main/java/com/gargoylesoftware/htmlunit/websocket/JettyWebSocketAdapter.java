@@ -76,10 +76,12 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         }
     }
 
+    @Override
     public void start() throws Exception {
         client_.start();
     }
 
+    @Override
     public void connect(final URI url) throws Exception {
         final Future<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
         client_.getExecutor().execute(new Runnable() {
@@ -96,6 +98,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         });
     }
 
+    @Override
     public void send(final Object content) throws IOException {
         if (content instanceof String) {
             outgoingSession_.getRemote().sendString((String) content);
@@ -111,18 +114,21 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         }
     }
 
+    @Override
     public void closeIncommingSession() throws Exception {
         if (incomingSession_ != null) {
             incomingSession_.close();
         }
     }
 
+    @Override
     public void closeOutgoingSession() throws Exception {
         if (outgoingSession_ != null) {
             outgoingSession_.close();
         }
     }
 
+    @Override
     public void closeClinet() throws Exception {
         if (client_ != null) {
             client_.stop();

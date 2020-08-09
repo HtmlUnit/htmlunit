@@ -79,26 +79,32 @@ public class File extends Blob {
             file_ = new java.io.File(pathname);
         }
 
+        @Override
         public String getName() {
             return file_.getName();
         }
 
+        @Override
         public long getLastModified() {
             return file_.lastModified();
         }
 
+        @Override
         public long getSize() {
             return file_.length();
         }
 
+        @Override
         public String getType(final BrowserVersion browserVersion) {
             return browserVersion.getUploadMimeType(file_);
         }
 
+        @Override
         public String getText() throws IOException {
             return FileUtils.readFileToString(file_, StandardCharsets.UTF_8);
         }
 
+        @Override
         public java.io.File getFile() {
             return file_;
         }
@@ -137,26 +143,32 @@ public class File extends Blob {
             bytes_ = out.toByteArray();
         }
 
+        @Override
         public String getName() {
             return fileName_;
         }
 
+        @Override
         public long getLastModified() {
             return lastModified_;
         }
 
+        @Override
         public long getSize() {
             return bytes_.length;
         }
 
+        @Override
         public String getType(final BrowserVersion browserVersion) {
             return type_;
         }
 
+        @Override
         public String getText() throws IOException {
             return new String(bytes_, StandardCharsets.UTF_8);
         }
 
+        @Override
         public java.io.File getFile() {
             throw new UnsupportedOperationException(
                     "com.gargoylesoftware.htmlunit.javascript.host.file.File.InMemoryBackend.getFile()");

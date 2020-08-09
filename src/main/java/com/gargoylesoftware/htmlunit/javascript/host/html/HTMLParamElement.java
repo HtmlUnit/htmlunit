@@ -44,6 +44,7 @@ public class HTMLParamElement extends HTMLElement {
      * @return the {@code name} attribute
      */
     @JsxGetter
+    @Override
     public String getName() {
         return getDomNodeOrDie().getAttributeDirect("name");
     }
@@ -53,6 +54,7 @@ public class HTMLParamElement extends HTMLElement {
      * @return the {@code value} attribute
      */
     @JsxGetter
+    @Override
     public String getValue() {
         return getDomNodeOrDie().getAttributeDirect("value");
     }

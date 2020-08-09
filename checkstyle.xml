@@ -249,5 +249,6 @@
             <property name="validateEnhancedForLoopVariable" value="true"/>
         </module>
         <module name="HiddenField"/>
+        <module name="MissingOverride"/>
     </module>
 </module>

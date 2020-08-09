@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebResponse implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(WebResponse.class);
-    private static final ByteOrderMark[] BOM_HEADERS = new ByteOrderMark[] {
+    private static final ByteOrderMark[] BOM_HEADERS = {
         ByteOrderMark.UTF_8,
         ByteOrderMark.UTF_16LE,
         ByteOrderMark.UTF_16BE};

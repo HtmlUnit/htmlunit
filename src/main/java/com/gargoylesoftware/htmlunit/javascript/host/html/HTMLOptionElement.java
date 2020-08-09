@@ -89,6 +89,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the value property
      */
     @JsxGetter
+    @Override
     public String getValue() {
         String value = getDomNodeOrNull().getAttributeDirect("value");
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
@@ -273,6 +274,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @return the value of the JavaScript {@code form} attribute
      */
     @JsxGetter
+    @Override
     public HTMLFormElement getForm() {
         final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
         if (form == null) {

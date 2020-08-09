@@ -108,6 +108,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this property
      */
     @JsxGetter
+    @Override
     public String getName() {
         return getHtmlForm().getNameAttribute();
     }
@@ -117,6 +118,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param name the new value
      */
     @JsxSetter
+    @Override
     public void setName(final String name) {
         getHtmlForm().setNameAttribute(name);
     }

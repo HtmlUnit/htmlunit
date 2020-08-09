@@ -65,6 +65,7 @@ public class HTMLLegendElement extends HTMLElement {
      * @return the value of the JavaScript {@code form} attribute
      */
     @JsxGetter
+    @Override
     public HTMLFormElement getForm() {
         final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
         if (form == null) {

@@ -70,7 +70,7 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
             }
-            final Object[] args = new Object[] {content};
+            final Object[] args = {content};
             final ContextFactory cf = ((JavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory();
             cf.call(cx -> {
                 callback_.call(cx, scope, scope, args);

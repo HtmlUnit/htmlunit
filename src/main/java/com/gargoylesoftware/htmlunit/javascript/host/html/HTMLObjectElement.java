@@ -325,6 +325,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * @return the {@code name} attribute
      */
     @JsxGetter
+    @Override
     public String getName() {
         return getDomNodeOrDie().getAttributeDirect("name");
     }
@@ -334,6 +335,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * @param name the {@code name} attribute
      */
     @JsxSetter
+    @Override
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }
@@ -344,6 +346,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * @return the value of the JavaScript {@code form} attribute
      */
     @JsxGetter
+    @Override
     public HTMLFormElement getForm() {
         final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
         if (form == null) {

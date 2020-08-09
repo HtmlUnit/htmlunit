@@ -1260,7 +1260,7 @@ public class Document extends Node {
             filterWrapper = new org.w3c.dom.traversal.NodeFilter() {
                 @Override
                 public short acceptNode(final org.w3c.dom.Node n) {
-                    final Object[] args = new Object[] {((DomNode) n).getScriptableObject()};
+                    final Object[] args = {((DomNode) n).getScriptableObject()};
                     final Object response;
                     if (filter instanceof Callable) {
                         response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);

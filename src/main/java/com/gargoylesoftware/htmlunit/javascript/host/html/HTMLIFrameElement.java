@@ -108,6 +108,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of this attribute
      */
     @JsxGetter
+    @Override
     public String getName() {
         return getFrame().getNameAttribute();
     }
@@ -117,6 +118,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param name the new value
      */
     @JsxSetter
+    @Override
     public void setName(final String name) {
         getFrame().setNameAttribute(name);
     }

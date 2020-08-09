@@ -824,6 +824,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void clip(final RenderingBackend.WindingRule windingRule,
             final com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D path) {
         if (LOG.isDebugEnabled()) {

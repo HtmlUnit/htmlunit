@@ -53,7 +53,7 @@ public final class EncodingSniffer {
     private static final Log LOG = LogFactory.getLog(EncodingSniffer.class);
 
     /** Sequence(s) of bytes indicating the beginning of a comment. */
-    private static final byte[][] COMMENT_START = new byte[][] {
+    private static final byte[][] COMMENT_START = {
         new byte[] {'<'},
         new byte[] {'!'},
         new byte[] {'-'},

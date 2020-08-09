@@ -50,6 +50,7 @@ public class HTMLOutputElement extends HTMLElement {
      * @return the {@code name} attribute
      */
     @JsxGetter
+    @Override
     public String getName() {
         return getDomNodeOrDie().getAttributeDirect("name");
     }
@@ -59,6 +60,7 @@ public class HTMLOutputElement extends HTMLElement {
      * @param name the {@code name} attribute
      */
     @JsxSetter
+    @Override
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }

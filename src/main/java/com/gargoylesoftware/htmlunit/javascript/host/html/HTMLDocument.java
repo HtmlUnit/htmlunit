@@ -686,6 +686,7 @@ public class HTMLDocument extends Document {
      * @return the element, or {@code null} if it could not be found
      */
     @JsxFunction
+    @Override
     public Object getElementById(final String id) {
         implicitCloseIfNecessary();
         Object result = null;

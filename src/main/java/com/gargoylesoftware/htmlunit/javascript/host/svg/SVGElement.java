@@ -1449,6 +1449,7 @@ public class SVGElement extends Element {
      * @return the {@code onwheel} event handler for this element
      */
     @JsxGetter(CHROME)
+    @Override
     public Function getOnwheel() {
         return getEventHandler("wheel");
     }
@@ -1458,6 +1459,7 @@ public class SVGElement extends Element {
      * @param onwheel the {@code onwheel} event handler for this element
      */
     @JsxSetter(CHROME)
+    @Override
     public void setOnwheel(final Object onwheel) {
         setEventHandler("wheel", onwheel);
     }

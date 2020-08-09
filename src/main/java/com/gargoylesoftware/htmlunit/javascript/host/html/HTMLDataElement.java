@@ -54,6 +54,7 @@ public class HTMLDataElement extends HTMLElement {
      * @return the {@code value} property
      */
     @JsxGetter
+    @Override
     public String getValue() {
         return getDomNodeOrDie().getAttributeDirect("value");
     }

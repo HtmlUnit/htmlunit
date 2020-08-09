@@ -94,6 +94,7 @@ public class HTMLLabelElement extends HTMLElement {
      * @return the value of the JavaScript {@code form} attribute
      */
     @JsxGetter
+    @Override
     public HTMLFormElement getForm() {
         if (getBrowserVersion().hasFeature(JS_LABEL_FORM_OF_SELF)) {
             final HtmlForm form = getDomNodeOrDie().getEnclosingForm();

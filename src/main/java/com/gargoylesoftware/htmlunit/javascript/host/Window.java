@@ -376,6 +376,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @return the encoded string
      */
     @JsxFunction
+    @Override
     public String btoa(final String stringToEncode) {
         return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
     }
@@ -386,6 +387,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @return the decoded value
      */
     @JsxFunction
+    @Override
     public String atob(final String encodedData) {
         return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
     }
