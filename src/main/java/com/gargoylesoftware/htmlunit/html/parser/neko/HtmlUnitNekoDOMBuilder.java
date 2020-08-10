@@ -530,7 +530,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                 return;
             }
             if (stack_.size() == initialSize_) {
-                snippetStartNodeOverwritten_ = true;
+                // a <p> inside a <p> is valid for innerHTML processing
+                // see HTMLParser2Test for more cases
+                snippetStartNodeOverwritten_ = !"p".equals(tagLower);
                 return;
             }
         }
