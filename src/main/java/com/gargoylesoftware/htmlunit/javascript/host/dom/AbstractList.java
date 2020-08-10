@@ -526,7 +526,7 @@ public class AbstractList extends SimpleScriptable implements Function, External
     public void defineProperty(final String propertyName, final Object delegateTo,
             final Method getter, final Method setter, final int attributes) {
         // length is defined on the prototype, don't define it again
-        if ("length".equals(propertyName)) {
+        if ("length".equals(propertyName) && getPrototype() != null) {
             return;
         }
 
