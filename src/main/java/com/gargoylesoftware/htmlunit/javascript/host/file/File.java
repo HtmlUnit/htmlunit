@@ -61,7 +61,7 @@ public class File extends Blob {
     private static final String OPTIONS_TYPE_DEFAULT = "";
     private static final String OPTIONS_LASTMODIFIED = "lastModified";
 
-    private abstract static class Backend {
+    private abstract static class Backend implements Serializable {
         abstract String getName();
         abstract long getLastModified();
         abstract long getSize();
@@ -72,7 +72,7 @@ public class File extends Blob {
         abstract java.io.File getFile();
     }
 
-    private static class FileBackend extends Backend implements Serializable {
+    private static class FileBackend extends Backend {
         private java.io.File file_;
 
         FileBackend(final String pathname) {
