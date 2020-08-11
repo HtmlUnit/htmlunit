@@ -938,6 +938,85 @@ public class FormDataTest extends WebDriverTestCase {
         headerValue = StringUtils.substringBefore(headerValue, ";");
         assertEquals(getExpectedAlerts()[0], headerValue);
     }
+    
+    /**
+     * Going through entries() via suggested for ... of method
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            IE = "no entries")
+    public void entries_forOf() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.get) { alert('no entries'); return; }\n"
+
+            + "    formData.append('myKey', 'myValue');\n"
+            + "    formData.append('myKey2', '');\n"
+            + "    formData.append('myKey', 'myvalue2');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "     for (var pair of formData.entries()) {\n"
+            + "     alert(pair[0]);\n"
+            + "     alert(pair[1]);\n"
+            + "     }\n"
+            + "  } catch (e) {\n"
+            + "    alert('entries var of: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Checks if the iterator works correctly.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            IE = "no entries")
+    public void entries_iterator() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    if (!formData.get) { alert('no entries'); return; }\n"
+
+            + "    formData.append('myKey', 'myValue');\n"
+            + "    formData.append('myKey2', '');\n"
+            + "    formData.append('myKey', 'myvalue2');\n"
+            + "  } catch (e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "     var iterator = formData.entries();\n"
+            + "     var nextItem = iterator.next();\n"
+            + "     while (nextItem.done == false) {\n"
+            + "        alert(nextItem.value[0]);\n"
+            + "        alert(nextItem.value[1]);\n"
+            + "        nextItem = iterator.next();\n"
+            + "     }\n"
+            + "  } catch (e) {\n"
+            + "    alert('entries using iterator: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * Servlet for post().
