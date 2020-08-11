@@ -284,7 +284,7 @@ public class FormData extends SimpleScriptable {
     }
 
     /**
-     * @return An Iterator that contains all the requestParameters name[0] & value[1]
+     * @return An Iterator that contains all the requestParameters name[0] and value[1]
      */
     @JsxFunction({CHROME, FF, FF68})
     public Scriptable entries() {
