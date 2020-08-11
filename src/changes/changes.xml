@@ -8,12 +8,15 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="add" dev="rbri" issue="#205" due-to="Thorsten Wendelmuth">
+                FormData.entries() support added.
+            </action>
             <action type="fix" dev="rbri">
                 neko: Setting innerHtml produces sometimes a stack overflow.
             </action>
         </release>
         <release version="2.43.0" date="August 8, 2020" description="Bugfixes, Rhino fixes, Chrome 84, FF79, Edge added, FF60 removed">
-            <action type="add" dev="rbri" issue="" due-to="Thorsten Wendelmuth">
+            <action type="add" dev="rbri" issue="#202" due-to="Thorsten Wendelmuth">
                 Initial support for new File(bits, name[, options]);.
             </action>
             <action type="fix" dev="rbri">
