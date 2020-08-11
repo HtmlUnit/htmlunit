@@ -15,12 +15,14 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,17 +43,67 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code FormData}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Thorsten Wendelmuth
  */
 @JsxClass
 public class FormData extends SimpleScriptable {
 
+    /** Constant used to register the prototype in the context. */
+    public static final String FORM_DATA_TAG = "FormData";
+
     private final List<NameValuePair> requestParameters_ = new ArrayList<>();
+
+    public static final class FormDataIterator extends ES6Iterator {
+
+        private String className_;
+        private List<NameValuePair> nameValuePairList_;
+        private int index_;
+
+        public static void init(final ScriptableObject scope, final String className) {
+            ES6Iterator.init(scope, false, new FormDataIterator(className), FORM_DATA_TAG);
+        }
+
+        public FormDataIterator(final String className) {
+            index_ = 0;
+            nameValuePairList_ = Collections.emptyList();
+            className_ = className;
+        }
+
+        public FormDataIterator(final Scriptable scope, final String className,
+                final List<NameValuePair> nameValuePairList) {
+            super(scope, FORM_DATA_TAG);
+            index_ = 0;
+            nameValuePairList_ = nameValuePairList;
+            className_ = className;
+        }
+
+        @Override
+        public String getClassName() {
+            return className_;
+        }
+
+        @Override
+        protected boolean isDone(final Context cx, final Scriptable scope) {
+            return index_ >= nameValuePairList_.size();
+        }
+
+        @Override
+        protected Object nextValue(final Context cx, final Scriptable scope) {
+            if (isDone(cx, scope)) {
+                return Context.getUndefinedValue();
+            }
+
+            final NameValuePair nextNameValuePair = nameValuePairList_.get(index_++);
+            return cx.newArray(scope, new Object[] {nextNameValuePair.getName(), nextNameValuePair.getValue()});
+        }
+    }
 
     /**
      * Default constructor.
@@ -236,7 +288,11 @@ public class FormData extends SimpleScriptable {
      */
     @JsxFunction({CHROME, FF, FF68})
     public Scriptable entries() {
-        return new FormDataIterator(this, requestParameters_);
+        if (getBrowserVersion().hasFeature(JS_FORM_DATA_ITERATOR_SIMPLE_NAME)) {
+            return new FormDataIterator(this, "Iterator", requestParameters_);
+        }
+
+        return new FormDataIterator(this, "FormData Iterator", requestParameters_);
     }
 
     /**
@@ -247,45 +303,4 @@ public class FormData extends SimpleScriptable {
         webRequest.setEncodingType(FormEncodingType.MULTIPART);
         webRequest.setRequestParameters(requestParameters_);
     }
-
-    private static class FormDataIterator extends ES6Iterator {
-        private static final long serialVersionUID = 1L;
-        private static final String ITERATOR_TAG = "ArrayIterator";
-
-        private List<NameValuePair> nameValuePairList;
-        private int index;
-
-        public FormDataIterator(Scriptable scope, List<NameValuePair> nameValuePairList) {
-            super(scope, ITERATOR_TAG);
-            this.index = 0;
-            this.nameValuePairList = nameValuePairList;
-        }
-
-        @Override
-        public String getClassName() {
-            return "FormData Iterator";
-        }
-
-        @Override
-        protected boolean isDone(Context cx, Scriptable scope) {
-            return index >= nameValuePairList.size();
-        }
-
-        @Override
-        protected Object nextValue(Context cx, Scriptable scope) {
-            if (isDone(cx, scope)) {
-                return Context.getUndefinedValue();
-            }
-
-            NameValuePair nextNameValuePair = nameValuePairList.get(index++);
-            return cx.newArray(scope, new Object[] { nextNameValuePair.getName(), nextNameValuePair.getValue() });
-        }
-
-        @Override
-        protected String getTag() {
-            return ITERATOR_TAG;
-        }
-
-    }
-
 }

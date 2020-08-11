@@ -41,6 +41,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -52,6 +53,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Thorsten Wendelmuth
  */
 @RunWith(BrowserRunner.class)
 public class FormDataTest extends WebDriverTestCase {
@@ -938,7 +940,7 @@ public class FormDataTest extends WebDriverTestCase {
         headerValue = StringUtils.substringBefore(headerValue, ";");
         assertEquals(getExpectedAlerts()[0], headerValue);
     }
-    
+
     /**
      * Going through entries() via suggested for ... of method
      * @throws Exception if an error occurs
@@ -951,28 +953,25 @@ public class FormDataTest extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
-            + "    var formData = new FormData();\n"
-            + "    if (!formData.get) { alert('no entries'); return; }\n"
-
-            + "    formData.append('myKey', 'myValue');\n"
-            + "    formData.append('myKey2', '');\n"
-            + "    formData.append('myKey', 'myvalue2');\n"
-            + "  } catch (e) {\n"
-            + "    alert('create: ' + e.message);\n"
-            + "    return;\n"
+            + "  var formData = new FormData();\n"
+            + "  if (!formData.get) {\n"
+            + "    alert('no entries');\n"
+            + "    return;"
             + "  }\n"
-            + "  try {\n"
-            + "     for (var pair of formData.entries()) {\n"
-            + "     alert(pair[0]);\n"
-            + "     alert(pair[1]);\n"
-            + "     }\n"
-            + "  } catch (e) {\n"
-            + "    alert('entries var of: ' + e.message);\n"
-            + "    return;\n"
+
+            + "  formData.append('myKey', 'myValue');\n"
+            + "  formData.append('myKey2', '');\n"
+            + "  formData.append('myKey', 'myvalue2');\n"
+
+            + "  for (var pair of formData.entries()) {\n"
+            + "    alert(pair[0]);\n"
+            + "    alert(pair[1]);\n"
             + "  }\n"
             + "}\n"
-            + "</script></head><body onload='test()'></body></html>";
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }
@@ -982,38 +981,53 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+    @Alerts(DEFAULT = {"[object Iterator]", "done", "value",
+                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            FF = {"[object FormData Iterator]", "done", "value",
+                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            FF68 = {"[object FormData Iterator]", "done", "value",
+                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             IE = "no entries")
-    public void entries_iterator() throws Exception {
+    @HtmlUnitNYI(CHROME = {"[object Iterator]", "value", "done",
+                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            FF = {"[object FormData Iterator]", "value", "done",
+                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            FF68 = {"[object FormData Iterator]", "value", "done",
+                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
+    public void entriesIterator() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
-            + "    var formData = new FormData();\n"
-            + "    if (!formData.get) { alert('no entries'); return; }\n"
+            + "  var formData = new FormData();\n"
+            + "  if (!formData.get) {\n"
+            + "    alert('no entries');\n"
+            + "    return;"
+            + "  }\n"
 
-            + "    formData.append('myKey', 'myValue');\n"
-            + "    formData.append('myKey2', '');\n"
-            + "    formData.append('myKey', 'myvalue2');\n"
-            + "  } catch (e) {\n"
-            + "    alert('create: ' + e.message);\n"
-            + "    return;\n"
+            + "  formData.append('myKey', 'myValue');\n"
+            + "  formData.append('myKey2', '');\n"
+            + "  formData.append('myKey', 'myvalue2');\n"
+
+            + "  var iterator = formData.entries();\n"
+            + "  alert(iterator);\n"
+
+            + "  var nextItem = iterator.next();\n"
+            + "  for (var x in nextItem) {\n"
+            + "    alert(x);\n"
             + "  }\n"
-            + "  try {\n"
-            + "     var iterator = formData.entries();\n"
-            + "     var nextItem = iterator.next();\n"
-            + "     while (nextItem.done == false) {\n"
-            + "        alert(nextItem.value[0]);\n"
-            + "        alert(nextItem.value[1]);\n"
-            + "        nextItem = iterator.next();\n"
-            + "     }\n"
-            + "  } catch (e) {\n"
-            + "    alert('entries using iterator: ' + e.message);\n"
-            + "    return;\n"
+
+            + "  while (nextItem.done == false) {\n"
+            + "    alert(nextItem.value[0]);\n"
+            + "    alert(nextItem.value[1]);\n"
+            + "    nextItem = iterator.next();\n"
             + "  }\n"
+
             + "}\n"
-            + "</script></head><body onload='test()'></body></html>";
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }
