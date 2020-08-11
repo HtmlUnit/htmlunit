@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -143,7 +144,7 @@ public class FormData extends SimpleScriptable {
 
     /**
      * @param name the name of the field to check
-     * @return the first value found for the give name
+     * @return the values found for the give name
      */
     @JsxFunction({CHROME, FF, FF68})
     public Scriptable getAll(final String name) {
@@ -231,6 +232,14 @@ public class FormData extends SimpleScriptable {
     }
 
     /**
+     * @return An Iterator that contains all the requestParameters name[0] & value[1]
+     */
+    @JsxFunction({CHROME, FF, FF68})
+    public Scriptable entries() {
+        return new FormDataIterator(this, requestParameters_);
+    }
+
+    /**
      * Sets the specified request with the parameters in this {@code FormData}.
      * @param webRequest the web request to fill
      */
@@ -238,4 +247,45 @@ public class FormData extends SimpleScriptable {
         webRequest.setEncodingType(FormEncodingType.MULTIPART);
         webRequest.setRequestParameters(requestParameters_);
     }
+
+    private static class FormDataIterator extends ES6Iterator {
+        private static final long serialVersionUID = 1L;
+        private static final String ITERATOR_TAG = "ArrayIterator";
+
+        private List<NameValuePair> nameValuePairList;
+        private int index;
+
+        public FormDataIterator(Scriptable scope, List<NameValuePair> nameValuePairList) {
+            super(scope, ITERATOR_TAG);
+            this.index = 0;
+            this.nameValuePairList = nameValuePairList;
+        }
+
+        @Override
+        public String getClassName() {
+            return "FormData Iterator";
+        }
+
+        @Override
+        protected boolean isDone(Context cx, Scriptable scope) {
+            return index >= nameValuePairList.size();
+        }
+
+        @Override
+        protected Object nextValue(Context cx, Scriptable scope) {
+            if (isDone(cx, scope)) {
+                return Context.getUndefinedValue();
+            }
+
+            NameValuePair nextNameValuePair = nameValuePairList.get(index++);
+            return cx.newArray(scope, new Object[] { nextNameValuePair.getName(), nextNameValuePair.getValue() });
+        }
+
+        @Override
+        protected String getTag() {
+            return ITERATOR_TAG;
+        }
+
+    }
+
 }
