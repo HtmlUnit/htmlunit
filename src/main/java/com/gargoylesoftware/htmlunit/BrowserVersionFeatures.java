@@ -910,6 +910,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN,
 
+    /** FormData entries() iterator is named only Iterator in Chrome. */
+    @BrowserFeature(CHROME)
+    JS_FORM_DATA_ITERATOR_SIMPLE_NAME,
+
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF68})
     JS_FORM_DISPATCHEVENT_SUBMITS,

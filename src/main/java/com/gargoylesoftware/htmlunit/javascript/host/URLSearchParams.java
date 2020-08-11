@@ -57,7 +57,7 @@ public class URLSearchParams extends SimpleScriptable {
     /** Constant used to register the prototype in the context. */
     public static final String URL_SEARCH_PARMS_TAG = "URLSearchParams";
 
-    public static class NativeParamsIterator extends ES6Iterator {
+    public static final class NativeParamsIterator extends ES6Iterator {
         private Type type_;
         private String className_;
         private transient Iterator<Map.Entry<String, String>> iterator_ = Collections.emptyIterator();
