@@ -140,7 +140,7 @@ public class RegExpJsToJavaConverter {
         private int start_;
         private int end_;
 
-        private Subexpresion() {
+        Subexpresion() {
             closed_ = false;
             optional_ = false;
             enhanced_ = false;

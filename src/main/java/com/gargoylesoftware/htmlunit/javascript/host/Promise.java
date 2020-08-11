@@ -211,7 +211,7 @@ public class Promise extends SimpleScriptable {
         return promise;
     }
 
-    private void settle(final boolean fulfilled, final Object newValue, final Window window) {
+    void settle(final boolean fulfilled, final Object newValue, final Window window) {
         if (state_ != PromiseState.PENDING) {
             return;
         }

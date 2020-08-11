@@ -127,7 +127,7 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
 
         private final transient WeakReference<AbstractDomNodeList<?>> nodeList_;
 
-        private DomHtmlAttributeChangeListenerImpl(final AbstractDomNodeList<?> nodeList) {
+        DomHtmlAttributeChangeListenerImpl(final AbstractDomNodeList<?> nodeList) {
             super();
 
             nodeList_ = new WeakReference<>(nodeList);

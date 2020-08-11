@@ -481,7 +481,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         private final int start_;
         private final int end_;
 
-        private StaticStringMatcher(final String originalString, final String searchString) {
+        StaticStringMatcher(final String originalString, final String searchString) {
             final int pos = originalString.indexOf(searchString);
             group_ = searchString;
             start_ = pos;

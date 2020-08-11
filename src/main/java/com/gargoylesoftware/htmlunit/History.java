@@ -65,7 +65,7 @@ public class History implements Serializable {
         private final WebRequest webRequest_;
         private Object state_;
 
-        private HistoryEntry(final Page page) {
+        HistoryEntry(final Page page) {
 
             // verify cache-control header values before storing
             if (HeaderUtils.containsNoStore(page.getWebResponse())) {
@@ -80,26 +80,26 @@ public class History implements Serializable {
             webRequest_.setRequestParameters(request.getRequestParameters());
         }
 
-        private Page getPage() {
+        Page getPage() {
             if (page_ == null) {
                 return null;
             }
             return page_.get();
         }
 
-        private void clearPage() {
+        void clearPage() {
             page_ = null;
         }
 
-        private WebRequest getWebRequest() {
+        WebRequest getWebRequest() {
             return webRequest_;
         }
 
-        private URL getUrl() {
+        URL getUrl() {
             return webRequest_.getUrl();
         }
 
-        private void setUrl(final URL url) {
+        void setUrl(final URL url) {
             if (url != null) {
                 webRequest_.setUrl(url);
                 final Page page = getPage();
@@ -112,7 +112,7 @@ public class History implements Serializable {
         /**
          * @return the state object
          */
-        private Object getState() {
+        Object getState() {
             return state_;
         }
 
@@ -120,7 +120,7 @@ public class History implements Serializable {
          * Sets the state object.
          * @param state the state object to use
          */
-        private void setState(final Object state) {
+        void setState(final Object state) {
             state_ = state;
         }
     }

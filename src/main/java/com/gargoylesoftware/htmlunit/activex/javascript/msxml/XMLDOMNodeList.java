@@ -94,7 +94,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      * @param description a text useful for debugging
      */
-    private XMLDOMNodeList(final ScriptableObject parentScope, final boolean attributeChangeSensitive,
+    XMLDOMNodeList(final ScriptableObject parentScope, final boolean attributeChangeSensitive,
             final String description) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
@@ -493,7 +493,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
 
         private final transient WeakReference<XMLDOMNodeList> nodeList_;
 
-        private DomHtmlAttributeChangeListenerImpl(final XMLDOMNodeList nodeList) {
+        DomHtmlAttributeChangeListenerImpl(final XMLDOMNodeList nodeList) {
             super();
 
             nodeList_ = new WeakReference<>(nodeList);

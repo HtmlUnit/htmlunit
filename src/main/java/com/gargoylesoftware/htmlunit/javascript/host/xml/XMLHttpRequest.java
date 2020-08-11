@@ -701,7 +701,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * The real send job.
      * @param context the current context
      */
-    private void doSend(final Context context) {
+    void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
@@ -1021,7 +1021,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         private final WebRequest request_;
         private final IOException error_;
 
-        private NetworkErrorWebResponse(final WebRequest webRequest, final IOException error) {
+        NetworkErrorWebResponse(final WebRequest webRequest, final IOException error) {
             super(null, null, 0);
             request_ = webRequest;
             error_ = error;

@@ -126,7 +126,7 @@ public class Cache implements Serializable {
          * @param createdAt
          * @return freshnessLifetime
          */
-        private boolean isStillFresh(final long now) {
+        boolean isStillFresh(final long now) {
             long freshnessLifetime = 0;
             if (!HeaderUtils.containsPrivate(response_) && HeaderUtils.containsSMaxage(response_)) {
                 // check s-maxage

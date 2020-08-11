@@ -200,7 +200,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         private long id_;
         private Function callback_;
 
-        private AnimationFrame(final long id, final Function callback) {
+        AnimationFrame(final long id, final Function callback) {
             id_ = id;
             callback_ = callback;
         }
@@ -213,6 +213,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     private static final class CSSPropertiesCache implements Serializable {
         private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
+
+        CSSPropertiesCache() {
+        }
 
         public synchronized CSS2Properties get(final Element element, final String normalizedPseudo) {
             final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
@@ -1929,11 +1932,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private static final class Filter {
         private final boolean includeFormFields_;
 
-        private Filter(final boolean includeFormFields) {
+        Filter(final boolean includeFormFields) {
             includeFormFields_ = includeFormFields;
         }
 
-        private boolean matches(final Object object) {
+        boolean matches(final Object object) {
             if (object instanceof HtmlEmbed
                 || object instanceof HtmlForm
                 || object instanceof HtmlImage
@@ -2015,6 +2018,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * removed, all elements should be removed from the computed style cache.</p>
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+
+        DomHtmlAttributeChangeListenerImpl() {
+        }
 
         /**
          * {@inheritDoc}

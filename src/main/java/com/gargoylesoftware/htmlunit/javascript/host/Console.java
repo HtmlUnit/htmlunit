@@ -523,6 +523,9 @@ public class Console extends SimpleScriptable {
             }
         }
 
+        ConsoleFormatter() {
+        }
+
         @Override
         public String printObject(final Object o) {
             final StringBuilder sb = new StringBuilder();

@@ -1087,6 +1087,9 @@ public class HttpWebConnection implements WebConnection {
      */
     private static final class SynchronizedAuthCache extends BasicAuthCache {
 
+        SynchronizedAuthCache() {
+        }
+
         @Override
         public synchronized void put(final HttpHost host, final AuthScheme authScheme) {
             super.put(host, authScheme);

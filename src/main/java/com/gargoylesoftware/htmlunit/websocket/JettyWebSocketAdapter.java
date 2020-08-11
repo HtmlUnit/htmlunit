@@ -141,6 +141,9 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
 
     private class JettyWebSocketAdapterImpl extends org.eclipse.jetty.websocket.api.WebSocketAdapter {
 
+        JettyWebSocketAdapterImpl() {
+        }
+
         @Override
         public void onWebSocketConnect(final Session session) {
             super.onWebSocketConnect(session);

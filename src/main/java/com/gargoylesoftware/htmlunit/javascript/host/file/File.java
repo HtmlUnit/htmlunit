@@ -68,6 +68,9 @@ public class File extends Blob {
         abstract String getType(BrowserVersion browserVersion);
         abstract String getText() throws IOException;
 
+        Backend() {
+        }
+
         // TODO
         abstract java.io.File getFile();
     }

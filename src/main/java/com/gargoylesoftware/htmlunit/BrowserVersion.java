@@ -463,7 +463,7 @@ public final class BrowserVersion implements Serializable {
      * @param browserVersionNumeric the floating number version of the browser
      * @param nickname the short name of the browser (like "FF68", "IE", ...) - has to be unique
      */
-    private BrowserVersion(final int browserVersionNumeric, final String nickname) {
+    BrowserVersion(final int browserVersionNumeric, final String nickname) {
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
 

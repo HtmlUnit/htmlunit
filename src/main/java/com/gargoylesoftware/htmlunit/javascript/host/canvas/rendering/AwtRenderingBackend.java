@@ -890,7 +890,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         private Color strokeColor_;
         private Shape clip_;
 
-        private SaveState(final AwtRenderingBackend backend) {
+        SaveState(final AwtRenderingBackend backend) {
             transformation_ = backend.transformation_;
             globalAlpha_ = backend.globalAlpha_;
             lineWidth_ = backend.lineWidth_;

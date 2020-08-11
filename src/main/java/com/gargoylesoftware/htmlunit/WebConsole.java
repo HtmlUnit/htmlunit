@@ -335,6 +335,9 @@ public class WebConsole implements Serializable {
      */
     private static class DefaultFormatter implements Formatter, Serializable {
 
+        DefaultFormatter() {
+        }
+
         @Override
         public String printObject(final Object o) {
             return parameterAsString(o);
@@ -387,6 +390,9 @@ public class WebConsole implements Serializable {
     private static class DefaultLogger implements Logger, Serializable {
         /** Logging support. */
         private static final Log LOG = LogFactory.getLog(WebConsole.class);
+
+        DefaultLogger() {
+        }
 
         @Override
         public boolean isTraceEnabled() {

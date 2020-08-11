@@ -88,7 +88,7 @@ public class EventListenersContainer implements Serializable {
             handler_ = handler;
         }
 
-        private List<Scriptable> getListeners(final int eventPhase) {
+        List<Scriptable> getListeners(final int eventPhase) {
             switch (eventPhase) {
                 case Event.CAPTURING_PHASE:
                     return capturingListeners_;

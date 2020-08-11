@@ -318,7 +318,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         return readyState_;
     }
 
-    private void setReadyState(final int readyState) {
+    void setReadyState(final int readyState) {
         readyState_ = readyState;
     }
 
@@ -423,7 +423,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
     }
 
-    private void fire(final Event evt) {
+    void fire(final Event evt) {
         evt.setTarget(this);
         evt.setParentScope(getParentScope());
         evt.setPrototype(getPrototype(evt.getClass()));
@@ -435,7 +435,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         });
     }
 
-    private void callFunction(final Function function, final Object[] args) {
+    void callFunction(final Function function, final Object[] args) {
         if (function == null) {
             return;
         }

@@ -85,7 +85,7 @@ public class NodeList extends AbstractList {
      * Creates an instance.
      * @param parentScope the parent scope
      */
-    private NodeList(final ScriptableObject parentScope) {
+    NodeList(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
         setExternalArrayData(this);

@@ -299,7 +299,7 @@ public class WebClient implements Serializable, AutoCloseable {
         private static int ID_ = 1;
         private ThreadFactory baseFactory_;
 
-        private ThreadNamingFactory(final ThreadFactory aBaseFactory) {
+        ThreadNamingFactory(final ThreadFactory aBaseFactory) {
             baseFactory_ = aBaseFactory;
         }
 
@@ -1974,7 +1974,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private static final class CurrentWindowTracker implements WebWindowListener, Serializable {
         private final WebClient webClient_;
 
-        private CurrentWindowTracker(final WebClient webClient) {
+        CurrentWindowTracker(final WebClient webClient) {
             webClient_ = webClient;
         }
 
