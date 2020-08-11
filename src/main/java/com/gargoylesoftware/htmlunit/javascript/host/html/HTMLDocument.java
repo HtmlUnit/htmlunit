@@ -820,7 +820,7 @@ public class HTMLDocument extends Document {
         };
     }
 
-    private static List<DomNode> getItComputeElements(final HtmlPage page, final String name,
+    static List<DomNode> getItComputeElements(final HtmlPage page, final String name,
             final boolean forIDAndOrName, final boolean alsoFrames) {
         final List<DomElement> elements;
         if (forIDAndOrName) {

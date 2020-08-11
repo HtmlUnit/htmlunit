@@ -221,7 +221,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         owningWindow_.getWebWindow().getJobManager().addJob(job, page);
     }
 
-    private void executeEvent(final Context cx, final MessageEvent event) {
+    void executeEvent(final Context cx, final MessageEvent event) {
         final List<Scriptable> handlers = getEventListenersContainer().getListeners(Event.TYPE_MESSAGE, false);
         if (handlers != null) {
             for (final Scriptable scriptable : handlers) {

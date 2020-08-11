@@ -123,7 +123,7 @@ public class Geolocation extends SimpleScriptable {
     public void clearWatch(final int watchId) {
     }
 
-    private void doGetPosition() {
+    void doGetPosition() {
         final String os = System.getProperty("os.name").toLowerCase(Locale.ROOT);
         String wifiStringString = null;
         if (os.contains("win")) {

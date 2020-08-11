@@ -664,7 +664,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         strokeColor_ = extractColor(strokeStyle);
     }
 
-    private Color extractColor(final String style) {
+    private static Color extractColor(final String style) {
         final String tmpStyle = style.replaceAll("\\s", "");
 
         Color color = StringUtils.findColorRGB(tmpStyle);
@@ -900,7 +900,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             clip_ = backend.graphics2D_.getClip();
         }
 
-        private void applyOn(final AwtRenderingBackend backend) {
+        void applyOn(final AwtRenderingBackend backend) {
             backend.transformation_ = transformation_;
             backend.globalAlpha_ = globalAlpha_;
             backend.lineWidth_ = lineWidth_;

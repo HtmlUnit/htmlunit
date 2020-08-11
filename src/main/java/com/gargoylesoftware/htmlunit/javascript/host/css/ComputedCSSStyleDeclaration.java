@@ -363,7 +363,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param defaultValue the default value of the string
      * @return the string, or {@code toReturnIfEmptyOrDefault}
      */
-    private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
+    String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
         if (!getElement().getDomNodeOrDie().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
             return EMPTY_FINAL;

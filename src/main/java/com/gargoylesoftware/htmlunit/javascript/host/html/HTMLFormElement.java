@@ -446,7 +446,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         };
     }
 
-    private List<HtmlElement> findElements(final String name) {
+    List<HtmlElement> findElements(final String name) {
         final List<HtmlElement> elements = new ArrayList<>();
         addElements(name, getHtmlForm().getHtmlElementDescendants(), elements);
         addElements(name, getHtmlForm().getLostChildren(), elements);

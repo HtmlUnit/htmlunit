@@ -951,7 +951,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         protected abstract String getSourceCode(Context cx);
     }
 
-    private void doProcessPostponedActions() {
+    void doProcessPostponedActions() {
         holdPostponedActions_ = false;
 
         final WebClient webClient = getWebClient();

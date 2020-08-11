@@ -1960,7 +1960,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             errorDetected_ = false;
         }
 
-        private boolean errorDetected() {
+        boolean errorDetected() {
             return errorDetected_;
         }
 

@@ -125,6 +125,10 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * Connection refused WebConnection for URL_SECOND.
      */
     private static final class DisconnectedMockWebConnection extends MockWebConnection {
+
+        DisconnectedMockWebConnection() {
+        }
+
         /** {@inheritDoc} */
         @Override
         public WebResponse getResponse(final WebRequest request) throws IOException {

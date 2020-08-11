@@ -226,6 +226,9 @@ public class WebSocketTest extends WebDriverTestCase {
 
         private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<>();
 
+        ChatWebSocketHandler() {
+        }
+
         @Override
         public void configure(final WebSocketServletFactory factory) {
             factory.register(ChatWebSocket.class);
@@ -240,6 +243,9 @@ public class WebSocketTest extends WebDriverTestCase {
 
         private class ChatWebSocket extends WebSocketAdapter {
             private Session session_;
+
+            ChatWebSocket() {
+            }
 
             @Override
             public void onWebSocketConnect(final Session session) {
@@ -350,6 +356,9 @@ public class WebSocketTest extends WebDriverTestCase {
 
         private final Set<CookiesWebSocket> webSockets_ = new CopyOnWriteArraySet<>();
 
+        CookiesWebSocketHandler() {
+        }
+
         @Override
         public void configure(final WebSocketServletFactory factory) {
             factory.register(CookiesWebSocket.class);
@@ -365,6 +374,9 @@ public class WebSocketTest extends WebDriverTestCase {
         private class CookiesWebSocket extends WebSocketAdapter {
             private Session session_;
             private int counter_ = 1;
+
+            CookiesWebSocket() {
+            }
 
             @Override
             public void onWebSocketConnect(final Session session) {
@@ -579,6 +591,9 @@ public class WebSocketTest extends WebDriverTestCase {
 
     private static class EventsWebSocketHandler extends WebSocketHandler {
 
+        EventsWebSocketHandler() {
+        }
+
         @Override
         public void configure(final WebSocketServletFactory factory) {
             factory.register(EventsWebSocket.class);
@@ -592,6 +607,10 @@ public class WebSocketTest extends WebDriverTestCase {
         }
 
         private static class EventsWebSocket extends WebSocketAdapter {
+
+            EventsWebSocket() {
+            }
+
             @Override
             public void onWebSocketText(final String data) {
                 if ("text".equals(data)) {
