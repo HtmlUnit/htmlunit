@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -158,7 +159,7 @@ public class CharacterData extends Node {
      * Returns the next element sibling.
      * @return the next element sibling
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
@@ -171,7 +172,7 @@ public class CharacterData extends Node {
      * Returns the previous element sibling.
      * @return the previous element sibling
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
@@ -184,7 +185,7 @@ public class CharacterData extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public void remove() {
         super.remove();
     }
@@ -197,7 +198,7 @@ public class CharacterData extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.before(context, thisObj, args, function);
@@ -211,7 +212,7 @@ public class CharacterData extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static void after(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.after(context, thisObj, args, function);
@@ -224,7 +225,7 @@ public class CharacterData extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.replaceWith(context, thisObj, args, function);

@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -2014,7 +2015,7 @@ public class HTMLElement extends Element {
      * Returns the {@code dataset} attribute.
      * @return the {@code dataset} attribute
      */
-    @JsxGetter({CHROME, FF, FF68, IE})
+    @JsxGetter({CHROME, EDGE, FF, FF68, IE})
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }
@@ -2076,7 +2077,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onwheel} event handler for this element.
      * @return the {@code onwheel} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     @Override
     public Function getOnwheel() {
         return super.getOnwheel();
@@ -2086,7 +2087,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onwheel} event handler for this element.
      * @param onwheel the {@code onwheel} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     @Override
     public void setOnwheel(final Object onwheel) {
         super.setOnwheel(onwheel);
@@ -2474,7 +2475,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onresize} event handler for this element.
      * @param handler the {@code onresize} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnresize(final Object handler) {
         setEventHandler("resize", handler);
     }
@@ -2483,7 +2484,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onresize} event handler for this element.
      * @return the {@code onresize} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnresize() {
         return getEventHandler("resize");
     }
@@ -2596,7 +2597,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onauxclick} event handler for this element.
      * @return the {@code onauxclick} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnauxclick() {
         return getEventHandler("auxclick");
     }
@@ -2605,7 +2606,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onauxclick} event handler for this element.
      * @param onauxclick the {@code onauxclick} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnauxclick(final Object onauxclick) {
         setEventHandler("auxclick", onauxclick);
     }
@@ -2614,7 +2615,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncancel} event handler for this element.
      * @return the {@code oncancel} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncancel() {
         return getEventHandler("cancel");
     }
@@ -2623,7 +2624,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncancel} event handler for this element.
      * @param oncancel the {@code oncancel} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncancel(final Object oncancel) {
         setEventHandler("cancel", oncancel);
     }
@@ -2668,7 +2669,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onclose} event handler for this element.
      * @return the {@code onclose} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -2677,7 +2678,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onclose} event handler for this element.
      * @param onclose the {@code onclose} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnclose(final Object onclose) {
         setEventHandler(Event.TYPE_CLOSE, onclose);
     }
@@ -2885,7 +2886,7 @@ public class HTMLElement extends Element {
      * @return the {@code ongotpointercapture} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
         return getEventHandler("gotpointercapture");
     }
@@ -2895,7 +2896,7 @@ public class HTMLElement extends Element {
      * @param ongotpointercapture the {@code ongotpointercapture} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object ongotpointercapture) {
         setEventHandler("gotpointercapture", ongotpointercapture);
     }
@@ -2904,7 +2905,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oninvalid} event handler for this element.
      * @return the {@code oninvalid} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOninvalid() {
         return getEventHandler("invalid");
     }
@@ -2913,7 +2914,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oninvalid} event handler for this element.
      * @param oninvalid the {@code oninvalid} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOninvalid(final Object oninvalid) {
         setEventHandler("invalid", oninvalid);
     }
@@ -2995,7 +2996,7 @@ public class HTMLElement extends Element {
      * @return the {@code onlostpointercapture} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
         return getEventHandler("lostpointercapture");
     }
@@ -3005,7 +3006,7 @@ public class HTMLElement extends Element {
      * @param onlostpointercapture the {@code onlostpointercapture} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object onlostpointercapture) {
         setEventHandler("lostpointercapture", onlostpointercapture);
     }
@@ -3123,7 +3124,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointercancel} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointercancel() {
         return getEventHandler("pointercancel");
     }
@@ -3133,7 +3134,7 @@ public class HTMLElement extends Element {
      * @param onpointercancel the {@code onpointercancel} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointercancel(final Object onpointercancel) {
         setEventHandler("pointercancel", onpointercancel);
     }
@@ -3143,7 +3144,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointerdown} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerdown() {
         return getEventHandler("pointerdown");
     }
@@ -3153,7 +3154,7 @@ public class HTMLElement extends Element {
      * @param onpointerdown the {@code onpointerdown} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerdown(final Object onpointerdown) {
         setEventHandler("pointerdown", onpointerdown);
     }
@@ -3163,7 +3164,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointerenter} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerenter() {
         return getEventHandler("pointerenter");
     }
@@ -3173,7 +3174,7 @@ public class HTMLElement extends Element {
      * @param onpointerenter the {@code onpointerenter} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerenter(final Object onpointerenter) {
         setEventHandler("pointerenter", onpointerenter);
     }
@@ -3183,7 +3184,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointerleave} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerleave() {
         return getEventHandler("pointerleave");
     }
@@ -3193,7 +3194,7 @@ public class HTMLElement extends Element {
      * @param onpointerleave the {@code onpointerleave} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerleave(final Object onpointerleave) {
         setEventHandler("pointerleave", onpointerleave);
     }
@@ -3203,7 +3204,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointermove} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
         return getEventHandler("pointermove");
     }
@@ -3213,7 +3214,7 @@ public class HTMLElement extends Element {
      * @param onpointermove the {@code onpointermove} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object onpointermove) {
         setEventHandler("pointermove", onpointermove);
     }
@@ -3223,7 +3224,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointerout} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerout() {
         return getEventHandler("pointerout");
     }
@@ -3233,7 +3234,7 @@ public class HTMLElement extends Element {
      * @param onpointerout the {@code onpointerout} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerout(final Object onpointerout) {
         setEventHandler("pointerout", onpointerout);
     }
@@ -3243,7 +3244,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointerover} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
         return getEventHandler("pointerover");
     }
@@ -3253,7 +3254,7 @@ public class HTMLElement extends Element {
      * @param onpointerover the {@code onpointerover} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object onpointerover) {
         setEventHandler("pointerover", onpointerover);
     }
@@ -3263,7 +3264,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpointerup} event handler for this element
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerup() {
         return getEventHandler("pointerup");
     }
@@ -3273,7 +3274,7 @@ public class HTMLElement extends Element {
      * @param onpointerup the {@code onpointerup} event handler for this element
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerup(final Object onpointerup) {
         setEventHandler("pointerup", onpointerup);
     }
@@ -3408,7 +3409,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -3417,7 +3418,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnshow(final Object onshow) {
         setEventHandler("show", onshow);
     }
@@ -3480,7 +3481,7 @@ public class HTMLElement extends Element {
      * Returns the {@code ontoggle} event handler for this element.
      * @return the {@code ontoggle} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOntoggle() {
         return getEventHandler("toggle");
     }
@@ -3489,7 +3490,7 @@ public class HTMLElement extends Element {
      * Sets the {@code ontoggle} event handler for this element.
      * @param ontoggle the {@code ontoggle} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOntoggle(final Object ontoggle) {
         setEventHandler("toggle", ontoggle);
     }

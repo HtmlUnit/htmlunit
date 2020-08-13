@@ -34,6 +34,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -569,7 +570,7 @@ public class Document extends Node {
      * @return an XPathNSResolver which resolves namespaces with respect to the definitions
      *         in scope for a specified node
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public XPathNSResolver createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
@@ -629,7 +630,7 @@ public class Document extends Node {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
@@ -922,7 +923,7 @@ public class Document extends Node {
      *
      * @throws IOException if an IO problem occurs
      */
-    @JsxFunction({CHROME, IE})
+    @JsxFunction({CHROME, EDGE, IE})
     public void close() throws IOException {
     }
 
@@ -1041,7 +1042,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command is supported
      */
-    @JsxFunction({CHROME, IE})
+    @JsxFunction({CHROME, EDGE, IE})
     public boolean queryCommandSupported(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1067,7 +1068,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command can be successfully executed
      */
-    @JsxFunction({CHROME, IE})
+    @JsxFunction({CHROME, EDGE, IE})
     public boolean queryCommandEnabled(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1080,7 +1081,7 @@ public class Document extends Node {
      * @param value the string, number, or other value to assign (possible values depend on the command)
      * @return {@code true} if the command was successful, {@code false} otherwise
      */
-    @JsxFunction({CHROME, IE})
+    @JsxFunction({CHROME, EDGE, IE})
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
         if (!hasCommand(cmd, false)) {
             return false;
@@ -1117,7 +1118,7 @@ public class Document extends Node {
      * Returns the value of the {@code documentURI} property.
      * @return the value of the {@code documentURI} property
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public String getDocumentURI() {
         return getURL();
     }
@@ -1703,7 +1704,7 @@ public class Document extends Node {
      * Sets the {@code onresize} event handler for this element.
      * @param handler the {@code onresize} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnresize(final Object handler) {
         setEventHandler("resize", handler);
     }
@@ -1712,7 +1713,7 @@ public class Document extends Node {
      * Returns the {@code onresize} event handler for this element.
      * @return the {@code onresize} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Object getOnresize() {
         return getEventHandler("resize");
     }
@@ -1766,7 +1767,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public int getChildElementCount() {
         int counter = 0;
         if (getPage().getDocumentElement() != null) {
@@ -1949,7 +1950,7 @@ public class Document extends Node {
      * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a {@code name} attribute with the specified value
      */
-    @JsxFunction({CHROME, IE})
+    @JsxFunction({CHROME, EDGE, IE})
     public HTMLCollection getElementsByName(final String elementName) {
         return null;
     }
@@ -1985,7 +1986,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -1994,7 +1995,7 @@ public class Document extends Node {
      * Returns the {@code contentType} property.
      * @return the {@code contentType} property
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public String getContentType() {
         return getPage().getContentType();
     }
@@ -2213,7 +2214,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Element getLastElementChild() {
         return super.getLastElementChild();
     }
@@ -2222,7 +2223,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Element getFirstElementChild() {
         return super.getFirstElementChild();
     }
@@ -2284,7 +2285,7 @@ public class Document extends Node {
      * Returns the {@code onauxclick} event handler for this element.
      * @return the {@code onauxclick} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnauxclick() {
         return getEventHandler("auxclick");
     }
@@ -2293,7 +2294,7 @@ public class Document extends Node {
      * Sets the {@code onauxclick} event handler for this element.
      * @param onauxclick the {@code onauxclick} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnauxclick(final Object onauxclick) {
         setEventHandler("auxclick", onauxclick);
     }
@@ -2302,7 +2303,7 @@ public class Document extends Node {
      * Returns the {@code onbeforecopy} event handler for this element.
      * @return the {@code onbeforecopy} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnbeforecopy() {
         return getEventHandler("beforecopy");
     }
@@ -2311,7 +2312,7 @@ public class Document extends Node {
      * Sets the {@code onbeforecopy} event handler for this element.
      * @param onbeforecopy the {@code onbeforecopy} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnbeforecopy(final Object onbeforecopy) {
         setEventHandler("beforecopy", onbeforecopy);
     }
@@ -2320,7 +2321,7 @@ public class Document extends Node {
      * Returns the {@code onbeforecut} event handler for this element.
      * @return the {@code onbeforecut} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnbeforecut() {
         return getEventHandler("beforecut");
     }
@@ -2329,7 +2330,7 @@ public class Document extends Node {
      * Sets the {@code onbeforecut} event handler for this element.
      * @param onbeforecut the {@code onbeforecut} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnbeforecut(final Object onbeforecut) {
         setEventHandler("beforecut", onbeforecut);
     }
@@ -2338,7 +2339,7 @@ public class Document extends Node {
      * Returns the {@code onbeforepaste} event handler for this element.
      * @return the {@code onbeforepaste} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnbeforepaste() {
         return getEventHandler("beforepaste");
     }
@@ -2347,7 +2348,7 @@ public class Document extends Node {
      * Sets the {@code onbeforepaste} event handler for this element.
      * @param onbeforepaste the {@code onbeforepaste} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnbeforepaste(final Object onbeforepaste) {
         setEventHandler("beforepaste", onbeforepaste);
     }
@@ -2356,7 +2357,7 @@ public class Document extends Node {
      * Returns the {@code oncancel} event handler for this element.
      * @return the {@code oncancel} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncancel() {
         return getEventHandler("cancel");
     }
@@ -2365,7 +2366,7 @@ public class Document extends Node {
      * Sets the {@code oncancel} event handler for this element.
      * @param oncancel the {@code oncancel} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncancel(final Object oncancel) {
         setEventHandler("cancel", oncancel);
     }
@@ -2428,7 +2429,7 @@ public class Document extends Node {
      * Returns the {@code onclose} event handler for this element.
      * @return the {@code onclose} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -2437,7 +2438,7 @@ public class Document extends Node {
      * Sets the {@code onclose} event handler for this element.
      * @param onclose the {@code onclose} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnclose(final Object onclose) {
         setEventHandler(Event.TYPE_CLOSE, onclose);
     }
@@ -2446,7 +2447,7 @@ public class Document extends Node {
      * Returns the {@code oncopy} event handler for this element.
      * @return the {@code oncopy} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOncopy() {
         return getEventHandler("copy");
     }
@@ -2455,7 +2456,7 @@ public class Document extends Node {
      * Sets the {@code oncopy} event handler for this element.
      * @param oncopy the {@code oncopy} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOncopy(final Object oncopy) {
         setEventHandler("copy", oncopy);
     }
@@ -2464,7 +2465,7 @@ public class Document extends Node {
      * Returns the {@code oncuechange} event handler for this element.
      * @return the {@code oncuechange} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
         return getEventHandler("cuechange");
     }
@@ -2473,7 +2474,7 @@ public class Document extends Node {
      * Sets the {@code oncuechange} event handler for this element.
      * @param oncuechange the {@code oncuechange} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object oncuechange) {
         setEventHandler("cuechange", oncuechange);
     }
@@ -2482,7 +2483,7 @@ public class Document extends Node {
      * Returns the {@code oncut} event handler for this element.
      * @return the {@code oncut} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOncut() {
         return getEventHandler("cut");
     }
@@ -2491,7 +2492,7 @@ public class Document extends Node {
      * Sets the {@code oncut} event handler for this element.
      * @param oncut the {@code oncut} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOncut(final Object oncut) {
         setEventHandler("cut", oncut);
     }
@@ -2680,7 +2681,7 @@ public class Document extends Node {
      * Returns the {@code ongotpointercapture} event handler for this element.
      * @return the {@code ongotpointercapture} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
         return getEventHandler("gotpointercapture");
     }
@@ -2689,7 +2690,7 @@ public class Document extends Node {
      * Sets the {@code ongotpointercapture} event handler for this element.
      * @param ongotpointercapture the {@code ongotpointercapture} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object ongotpointercapture) {
         setEventHandler("gotpointercapture", ongotpointercapture);
     }
@@ -2698,7 +2699,7 @@ public class Document extends Node {
      * Returns the {@code oninvalid} event handler for this element.
      * @return the {@code oninvalid} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOninvalid() {
         return getEventHandler("invalid");
     }
@@ -2707,7 +2708,7 @@ public class Document extends Node {
      * Sets the {@code oninvalid} event handler for this element.
      * @param oninvalid the {@code oninvalid} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOninvalid(final Object oninvalid) {
         setEventHandler("invalid", oninvalid);
     }
@@ -2788,7 +2789,7 @@ public class Document extends Node {
      * Returns the {@code onlostpointercapture} event handler for this element.
      * @return the {@code onlostpointercapture} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
         return getEventHandler("lostpointercapture");
     }
@@ -2797,7 +2798,7 @@ public class Document extends Node {
      * Sets the {@code onlostpointercapture} event handler for this element.
      * @param onlostpointercapture the {@code onlostpointercapture} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object onlostpointercapture) {
         setEventHandler("lostpointercapture", onlostpointercapture);
     }
@@ -2806,7 +2807,7 @@ public class Document extends Node {
      * Returns the {@code onmouseenter} event handler for this element.
      * @return the {@code onmouseenter} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnmouseenter() {
         return getEventHandler("mouseenter");
     }
@@ -2815,7 +2816,7 @@ public class Document extends Node {
      * Sets the {@code onmouseenter} event handler for this element.
      * @param onmouseenter the {@code onmouseenter} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnmouseenter(final Object onmouseenter) {
         setEventHandler("mouseenter", onmouseenter);
     }
@@ -2824,7 +2825,7 @@ public class Document extends Node {
      * Returns the {@code onmouseleave} event handler for this element.
      * @return the {@code onmouseleave} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnmouseleave() {
         return getEventHandler("mouseleave");
     }
@@ -2833,7 +2834,7 @@ public class Document extends Node {
      * Sets the {@code onmouseleave} event handler for this element.
      * @param onmouseleave the {@code onmouseleave} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnmouseleave(final Object onmouseleave) {
         setEventHandler("mouseleave", onmouseleave);
     }
@@ -2860,7 +2861,7 @@ public class Document extends Node {
      * Returns the {@code onpaste} event handler for this element.
      * @return the {@code onpaste} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
@@ -2869,7 +2870,7 @@ public class Document extends Node {
      * Sets the {@code onpaste} event handler for this element.
      * @param onpaste the {@code onpaste} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnpaste(final Object onpaste) {
         setEventHandler("paste", onpaste);
     }
@@ -3004,7 +3005,7 @@ public class Document extends Node {
      * Returns the {@code onpointerlockchange} event handler for this element.
      * @return the {@code onpointerlockchange} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerlockchange() {
         return getEventHandler("pointerlockchange");
     }
@@ -3013,7 +3014,7 @@ public class Document extends Node {
      * Sets the {@code onpointerlockchange} event handler for this element.
      * @param onpointerlockchange the {@code onpointerlockchange} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerlockchange(final Object onpointerlockchange) {
         setEventHandler("pointerlockchange", onpointerlockchange);
     }
@@ -3022,7 +3023,7 @@ public class Document extends Node {
      * Returns the {@code onpointerlockerror} event handler for this element.
      * @return the {@code onpointerlockerror} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpointerlockerror() {
         return getEventHandler("pointerlockerror");
     }
@@ -3031,7 +3032,7 @@ public class Document extends Node {
      * Sets the {@code onpointerlockerror} event handler for this element.
      * @param onpointerlockerror the {@code onpointerlockerror} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpointerlockerror(final Object onpointerlockerror) {
         setEventHandler("pointerlockerror", onpointerlockerror);
     }
@@ -3202,7 +3203,7 @@ public class Document extends Node {
      * Returns the {@code onsearch} event handler for this element.
      * @return the {@code onsearch} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnsearch() {
         return getEventHandler("search");
     }
@@ -3211,7 +3212,7 @@ public class Document extends Node {
      * Sets the {@code onsearch} event handler for this element.
      * @param onsearch the {@code onsearch} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnsearch(final Object onsearch) {
         setEventHandler("search", onsearch);
     }
@@ -3310,7 +3311,7 @@ public class Document extends Node {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -3319,7 +3320,7 @@ public class Document extends Node {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnshow(final Object onshow) {
         setEventHandler("show", onshow);
     }
@@ -3400,7 +3401,7 @@ public class Document extends Node {
      * Returns the {@code ontoggle} event handler for this element.
      * @return the {@code ontoggle} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOntoggle() {
         return getEventHandler("toggle");
     }
@@ -3409,7 +3410,7 @@ public class Document extends Node {
      * Sets the {@code ontoggle} event handler for this element.
      * @param ontoggle the {@code ontoggle} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOntoggle(final Object ontoggle) {
         setEventHandler("toggle", ontoggle);
     }
@@ -3454,7 +3455,7 @@ public class Document extends Node {
      * Returns the {@code onwebkitfullscreenchange} event handler for this element.
      * @return the {@code onwebkitfullscreenchange} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitfullscreenchange() {
         return getEventHandler("webkitfullscreenchange");
     }
@@ -3463,7 +3464,7 @@ public class Document extends Node {
      * Sets the {@code onwebkitfullscreenchange} event handler for this element.
      * @param onwebkitfullscreenchange the {@code onwebkitfullscreenchange} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkitfullscreenchange(final Object onwebkitfullscreenchange) {
         setEventHandler("webkitfullscreenchange", onwebkitfullscreenchange);
     }
@@ -3472,7 +3473,7 @@ public class Document extends Node {
      * Returns the {@code onwebkitfullscreenerror} event handler for this element.
      * @return the {@code onwebkitfullscreenerror} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitfullscreenerror() {
         return getEventHandler("webkitfullscreenerror");
     }
@@ -3490,7 +3491,7 @@ public class Document extends Node {
      * Returns the {@code onwheel} event handler for this element.
      * @return the {@code onwheel} event handler for this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnwheel() {
         return getEventHandler("wheel");
     }
@@ -3499,7 +3500,7 @@ public class Document extends Node {
      * Sets the {@code onwheel} event handler for this element.
      * @param onwheel the {@code onwheel} event handler for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnwheel(final Object onwheel) {
         setEventHandler("wheel", onwheel);
     }
@@ -4083,7 +4084,7 @@ public class Document extends Node {
     /**
      * @return the {@code currentScript}
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public ScriptableObject getCurrentScript() {
         return currentScript_;
     }
@@ -4098,7 +4099,7 @@ public class Document extends Node {
     /**
      * @return the {@code FontFaceSet}
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public ScriptableObject getFonts() {
         if (fonts_ == null) {
             final FontFaceSet fonts = new FontFaceSet();

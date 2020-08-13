@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import java.text.BreakIterator;
 import java.util.Locale;
@@ -34,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(CHROME)
+@JsxClass({CHROME, EDGE})
 public class V8BreakIterator extends SimpleScriptable {
 
     private transient BreakIterator breakIterator_;

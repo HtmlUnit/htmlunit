@@ -26,6 +26,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSU
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -2206,7 +2207,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code size} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public String getSize() {
         return getStyleAttribute(SIZE);
     }
@@ -2215,7 +2216,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code size} style attribute.
      * @param size the new attribute
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setSize(final String size) {
         setStyleAttribute(SIZE.getAttributeName(), size);
     }

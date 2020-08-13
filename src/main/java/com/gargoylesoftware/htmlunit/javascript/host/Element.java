@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -303,7 +304,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public boolean hasAttributes() {
         return super.hasAttributes();
     }
@@ -426,7 +427,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -435,7 +436,7 @@ public class Element extends Node {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -644,7 +645,7 @@ public class Element extends Node {
      * @param className the name to search for
      * @return all the descendant elements with the specified class name
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public HTMLCollection getElementsByClassName(final String className) {
         final DomElement elt = getDomNodeOrDie();
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
@@ -732,7 +733,7 @@ public class Element extends Node {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
@@ -759,7 +760,7 @@ public class Element extends Node {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public void insertAdjacentText(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
@@ -847,7 +848,7 @@ public class Element extends Node {
      *      >Mozilla Developer Network</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536452.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public void insertAdjacentHTML(final String position, final String text) {
         final Object[] values = getInsertAdjacentLocation(position);
         final DomNode domNode = (DomNode) values[0];
@@ -883,7 +884,7 @@ public class Element extends Node {
      * Gets the {@code innerHTML} attribute.
      * @return the contents of this node as HTML
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public String getInnerHTML() {
         final DomNode domNode;
         try {
@@ -900,7 +901,7 @@ public class Element extends Node {
      * Replaces all child elements of this element with the supplied value.
      * @param value the new value for the contents of this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setInnerHTML(final Object value) {
         final DomNode domNode;
         try {
@@ -944,7 +945,7 @@ public class Element extends Node {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @return the contents of this node as HTML
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public String getOuterHTML() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
@@ -956,7 +957,7 @@ public class Element extends Node {
      * Replaces this element (including all child elements) with the supplied value.
      * @param value the new value for replacing this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOuterHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode parent = domNode.getParentNode();
@@ -1107,7 +1108,7 @@ public class Element extends Node {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public String getId() {
         return getDomNodeOrDie().getId();
     }
@@ -1116,7 +1117,7 @@ public class Element extends Node {
      * Sets the id value for this element.
      * @param newId the newId value for this element
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setId(final String newId) {
         getDomNodeOrDie().setId(newId);
     }
@@ -1239,7 +1240,7 @@ public class Element extends Node {
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public void scrollIntoView() {
         /* do nothing at the moment */
     }
@@ -1257,7 +1258,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1266,7 +1267,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1275,7 +1276,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
@@ -1284,7 +1285,7 @@ public class Element extends Node {
      * Returns the {@code onbeforecopy} event handler for this element.
      * @return the {@code onbeforecopy} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnbeforecopy() {
         return getEventHandler("beforecopy");
     }
@@ -1293,7 +1294,7 @@ public class Element extends Node {
      * Sets the {@code onbeforecopy} event handler for this element.
      * @param onbeforecopy the {@code onbeforecopy} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnbeforecopy(final Object onbeforecopy) {
         setEventHandler("beforecopy", onbeforecopy);
     }
@@ -1302,7 +1303,7 @@ public class Element extends Node {
      * Returns the {@code onbeforecut} event handler for this element.
      * @return the {@code onbeforecut} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnbeforecut() {
         return getEventHandler("beforecut");
     }
@@ -1311,7 +1312,7 @@ public class Element extends Node {
      * Sets the {@code onbeforecut} event handler for this element.
      * @param onbeforecut the {@code onbeforecut} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnbeforecut(final Object onbeforecut) {
         setEventHandler("beforecut", onbeforecut);
     }
@@ -1320,7 +1321,7 @@ public class Element extends Node {
      * Returns the {@code onbeforepaste} event handler for this element.
      * @return the {@code onbeforepaste} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnbeforepaste() {
         return getEventHandler("beforepaste");
     }
@@ -1329,7 +1330,7 @@ public class Element extends Node {
      * Sets the {@code onbeforepaste} event handler for this element.
      * @param onbeforepaste the {@code onbeforepaste} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnbeforepaste(final Object onbeforepaste) {
         setEventHandler("beforepaste", onbeforepaste);
     }
@@ -1338,7 +1339,7 @@ public class Element extends Node {
      * Returns the {@code oncopy} event handler for this element.
      * @return the {@code oncopy} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncopy() {
         return getEventHandler("copy");
     }
@@ -1347,7 +1348,7 @@ public class Element extends Node {
      * Sets the {@code oncopy} event handler for this element.
      * @param oncopy the {@code oncopy} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncopy(final Object oncopy) {
         setEventHandler("copy", oncopy);
     }
@@ -1356,7 +1357,7 @@ public class Element extends Node {
      * Returns the {@code oncut} event handler for this element.
      * @return the {@code oncut} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncut() {
         return getEventHandler("cut");
     }
@@ -1365,7 +1366,7 @@ public class Element extends Node {
      * Sets the {@code oncut} event handler for this element.
      * @param oncut the {@code oncut} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncut(final Object oncut) {
         setEventHandler("cut", oncut);
     }
@@ -1374,7 +1375,7 @@ public class Element extends Node {
      * Returns the {@code onpaste} event handler for this element.
      * @return the {@code onpaste} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
@@ -1383,7 +1384,7 @@ public class Element extends Node {
      * Sets the {@code onpaste} event handler for this element.
      * @param onpaste the {@code onpaste} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnpaste(final Object onpaste) {
         setEventHandler("paste", onpaste);
     }
@@ -1392,7 +1393,7 @@ public class Element extends Node {
      * Returns the {@code onsearch} event handler for this element.
      * @return the {@code onsearch} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnsearch() {
         return getEventHandler("search");
     }
@@ -1401,7 +1402,7 @@ public class Element extends Node {
      * Sets the {@code onsearch} event handler for this element.
      * @param onsearch the {@code onsearch} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnsearch(final Object onsearch) {
         setEventHandler("search", onsearch);
     }
@@ -1410,7 +1411,7 @@ public class Element extends Node {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnselectstart() {
         return getEventHandler("selectstart");
     }
@@ -1419,7 +1420,7 @@ public class Element extends Node {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler("selectstart", onselectstart);
     }
@@ -1428,7 +1429,7 @@ public class Element extends Node {
      * Returns the {@code onwebkitfullscreenchange} event handler for this element.
      * @return the {@code onwebkitfullscreenchange} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitfullscreenchange() {
         return getEventHandler("webkitfullscreenchange");
     }
@@ -1437,7 +1438,7 @@ public class Element extends Node {
      * Sets the {@code onwebkitfullscreenchange} event handler for this element.
      * @param onwebkitfullscreenchange the {@code onwebkitfullscreenchange} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkitfullscreenchange(final Object onwebkitfullscreenchange) {
         setEventHandler("webkitfullscreenchange", onwebkitfullscreenchange);
     }
@@ -1446,7 +1447,7 @@ public class Element extends Node {
      * Returns the {@code onwebkitfullscreenerror} event handler for this element.
      * @return the {@code onwebkitfullscreenerror} event handler for this element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitfullscreenerror() {
         return getEventHandler("webkitfullscreenerror");
     }
@@ -1455,7 +1456,7 @@ public class Element extends Node {
      * Sets the {@code onwebkitfullscreenerror} event handler for this element.
      * @param onwebkitfullscreenerror the {@code onwebkitfullscreenerror} event handler for this element
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkitfullscreenerror(final Object onwebkitfullscreenerror) {
         setEventHandler("webkitfullscreenerror", onwebkitfullscreenerror);
     }
@@ -1966,7 +1967,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public void remove() {
         super.remove();
     }
@@ -1998,7 +1999,7 @@ public class Element extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.before(context, thisObj, args, function);
@@ -2012,7 +2013,7 @@ public class Element extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static void after(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.after(context, thisObj, args, function);
@@ -2025,7 +2026,7 @@ public class Element extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.replaceWith(context, thisObj, args, function);
@@ -2039,7 +2040,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static boolean matches(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String selectorString = (String) args[0];
@@ -2079,7 +2080,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public static boolean webkitMatchesSelector(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, thisObj, args, function);

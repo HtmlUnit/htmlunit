@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_OF_SELF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -66,7 +67,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * @return the HTMLElement labeled by the given label object
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public HTMLElement getControl() {
         final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
         final HtmlElement labeledElement = label.getLabeledElement();
@@ -83,7 +84,7 @@ public class HTMLLabelElement extends HTMLElement {
      *
      * @param control ignored
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setControl(final HTMLElement control) {
         // the control attribute is read-only
     }

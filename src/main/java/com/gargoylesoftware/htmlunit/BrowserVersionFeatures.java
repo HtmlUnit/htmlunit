@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -45,7 +46,7 @@ public enum BrowserVersionFeatures {
     ANCHOR_EMPTY_HREF_NO_FILENAME,
 
     /** Ignore target when {@code href} is a javascript snippet. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     ANCHOR_SEND_PING_REQUEST,
 
     /** Browser does not check the CSP. */
@@ -53,7 +54,7 @@ public enum BrowserVersionFeatures {
     CONTENT_SECURITY_POLICY_IGNORED,
 
     /** Background image is 'initial'. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_BACKGROUND_INITIAL,
 
     /** Background image is 'rgba(0, 0, 0, 0)'. */
@@ -61,11 +62,11 @@ public enum BrowserVersionFeatures {
     CSS_BACKGROUND_RGBA,
 
     /** Computed {@code zIndex} is not considered. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_COMPUTED_NO_Z_INDEX,
 
     /** Is display style of HtmlDialog is 'none'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     CSS_DIALOG_NONE,
 
     /** Is display style 'block'. */
@@ -73,11 +74,11 @@ public enum BrowserVersionFeatures {
     CSS_DISPLAY_BLOCK,
 
     /** Is display style 'block'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     CSS_DISPLAY_BLOCK2,
 
     /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE,
 
     /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
@@ -85,7 +86,7 @@ public enum BrowserVersionFeatures {
     CSS_FONTFACERULE_CSSTEXT_IE_STYLE,
 
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
-    @BrowserFeature({CHROME, FF, IE})
+    @BrowserFeature({CHROME, EDGE, FF, IE})
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'input' tags of type
@@ -94,15 +95,15 @@ public enum BrowserVersionFeatures {
     CSS_INPUT_DISPLAY_RADIO_CHECKBOX_INLINE_BLOCK,
 
     /** 'initial' is a valid length value. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     CSS_LENGTH_INITIAL,
 
     /** Is display style of HtmlNoEmbed is 'inline'. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_NOEMBED_INLINE,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_NOSCRIPT_DISPLAY_INLINE,
 
     /** Unit is not required when setting outline-width style. */
@@ -122,7 +123,7 @@ public enum BrowserVersionFeatures {
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_RUBY_DISPLAY_INLINE,
 
     /** Throws exception on setting a CSS style value to null. */
@@ -130,11 +131,11 @@ public enum BrowserVersionFeatures {
     CSS_SET_NULL_THROWS,
 
     /** For disconnectd items style properties are blank. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
     /** For disconnectd items style font property is blank. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
@@ -153,7 +154,7 @@ public enum BrowserVersionFeatures {
     CSS_ZINDEX_TYPE_INTEGER,
 
     /** Add the 'Referer' header to a request triggered by window.showModalDialog. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     DIALOGWINDOW_REFERER,
 
     /** IE removes all child text nodes, but FF preserves the first. */
@@ -161,11 +162,11 @@ public enum BrowserVersionFeatures {
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
     /** Indicates whether returnValue behaves HTML5-like with an empty string default. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE,
 
     /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     EVENT_FOCUS_FOCUS_IN_BLUR_OUT,
 
     /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
@@ -185,7 +186,7 @@ public enum BrowserVersionFeatures {
     EVENT_MOUSE_ON_DISABLED,
 
     /** Triggers "onchange" event handler after "onclick" event handler. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     EVENT_ONCHANGE_AFTER_ONCLICK,
 
     /** Triggers "onclick" event handler for the select only, not for the clicked option. */
@@ -205,7 +206,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
-    @BrowserFeature({CHROME, FF, IE})
+    @BrowserFeature({CHROME, EDGE, FF, IE})
     EVENT_ONHASHCHANGE_BUBBLES_FALSE,
 
     /** Triggers "onload" event if internal javascript loaded. */
@@ -213,7 +214,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
 
     /** MessageEvent default data value is null. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
@@ -245,11 +246,11 @@ public enum BrowserVersionFeatures {
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
     /** Supports event type 'BeforeUnloadEvent'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     EVENT_TYPE_BEFOREUNLOADEVENT,
 
     /** Supports event type 'HashChangeEvent'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     EVENT_TYPE_HASHCHANGEEVENT,
 
     /** Supports vendor specific event type 'KeyEvents'. */
@@ -277,15 +278,15 @@ public enum BrowserVersionFeatures {
     FOCUS_BODY_ELEMENT_AT_START,
 
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
     /** Indicates if a form field is directly reachable by its original name once this has been changed. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
 
     /** Form elements are able to refer to the for by using the from attribute. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
     /** Form formxxx parameters not supported for input type image. */
@@ -293,16 +294,16 @@ public enum BrowserVersionFeatures {
     FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
 
     /** Form submit forces a real request also if only the hash was changed. */
-    @BrowserFeature({CHROME, FF})
+    @BrowserFeature({CHROME, EDGE, FF})
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
 
     /** Form submit takes care of fields outside the form linked to the form
      * using the form attribute. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     FORM_SUBMISSION_FORM_ATTRIBUTE,
 
     /** Form submit includes the Cache-Control: max-age=0 header. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
 
     /** Form submit includes the Cache-Control: no-cache header. */
@@ -310,7 +311,7 @@ public enum BrowserVersionFeatures {
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
 
     /** Form submit includes the origin header. */
-    @BrowserFeature({CHROME, FF})
+    @BrowserFeature({CHROME, EDGE, FF})
     FORM_SUBMISSION_HEADER_ORIGIN,
 
     /** Form submit is done without the hash part of the action url. */
@@ -326,7 +327,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlAllCollection.item(int) requires int parameter. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLALLCOLLECTION_INTEGER_INDEX,
 
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
@@ -334,7 +335,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
@@ -358,11 +359,11 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO,
 
     /** HtmlCollection.namedItem searches by id first. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
 
     /** HtmlAllCollection(int) is not supported. */
@@ -407,7 +408,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
 
     /** Allows invalid 'align' values. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLELEMENT_ALIGN_INVALID,
 
     /** Detaching the active element from the dom tree triggers no keyup event. */
@@ -415,7 +416,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
 
     /** An empty (but given) tabindex attribute is treated as -1. */
@@ -435,19 +436,19 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_HTMLELEMENT,
 
     /** Is document.cretaeElement('image') an HTMLUnknownElement. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
     /** Mark the image as invisible if no src attribute defined. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLIMAGE_INVISIBLE_NO_SRC,
 
     /** Clicking an image input submits the value as param if defined. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
     /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 
     /** When clicking a input the surrounding anchor is not clicked. */
@@ -459,7 +460,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_FILES_UNDEFINED,
 
     /** HTMLInputElement: type {@code file} selectionSart/End are null. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
     /** HTMLInputElement color type is not supported. */
@@ -467,7 +468,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
 
     /** HTMLInputElement date and time types are supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLINPUT_TYPE_DATETIME_SUPPORTED,
 
     /** HTMLInputElement date and time types are not supported. */
@@ -479,7 +480,7 @@ public enum BrowserVersionFeatures {
     HTMLKEYGEN_END_TAG_FORBIDDEN,
 
     /** If the type is present for a link only use if type is text/css. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
 
     /** */
@@ -487,15 +488,15 @@ public enum BrowserVersionFeatures {
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Removing the selected attribute, de selects the option. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
     /** Trims the value of the type attribute before to verify it. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLSCRIPT_TRIM_TYPE,
 
     /** Setting defaultValue updates the value also. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
     /** When calculation the value of a text area ie uses a recursive approach. */
@@ -507,7 +508,7 @@ public enum BrowserVersionFeatures {
     HTMLTRACK_END_TAG_FORBIDDEN,
 
     /** HTML attributes are always lower case. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTML_ATTRIBUTE_LOWER_CASE,
 
     /** Expand #0 to #000000. */
@@ -527,7 +528,7 @@ public enum BrowserVersionFeatures {
     HTML_COMMAND_TAG,
 
     /** HTML parser supports the 'isindex' tag. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTML_ISINDEX_TAG,
 
     /** HTML parser supports the 'main' tag. */
@@ -543,7 +544,7 @@ public enum BrowserVersionFeatures {
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
 
     /** Dates format pattern 2. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
     /** Indicates that the path is extracted from the location.
@@ -560,23 +561,23 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTTP_COOKIE_START_DATE_1970,
 
     /** Browser sends Sec-Fetch headers. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTTP_HEADER_SEC_FETCH,
 
     /** Browser sends Upgrade-Insecure-Requests header. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTTP_HEADER_UPGRADE_INSECURE_REQUEST,
 
     /** Supports redirect via 308 code. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTTP_REDIRECT_308,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
 
     /** Setting the property align of an input element ignores the value
@@ -598,7 +599,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
 
     /** The anchor pathname property returns nothing for none http(s) url's. */
@@ -610,11 +611,11 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL,
 
     /** The anchor protocol property converts drive letters to uppercase. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS,
 
     /** The anchor protocol property returns 'http' for broken http(s) url's. */
@@ -626,7 +627,7 @@ public enum BrowserVersionFeatures {
     JS_AREA_WITHOUT_HREF_FOCUSABLE,
 
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
     /** Indicates that the {@code Array} supports construction properties. */
@@ -634,11 +635,11 @@ public enum BrowserVersionFeatures {
     JS_ARRAY_CONSTRUCTION_PROPERTIES,
 
     /** Indicates that Array.from() is supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_ARRAY_FROM,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
@@ -654,7 +655,7 @@ public enum BrowserVersionFeatures {
     JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED,
 
     /** toDataURL for canvas returns the CHROME version of the PNG. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_CANVAS_DATA_URL_CHROME_PNG,
 
     /** toDataURL for canvas returns the IE version of the PNG. */
@@ -666,7 +667,7 @@ public enum BrowserVersionFeatures {
     JS_CLEAR_RESTRICT,
 
     /** ClientHeight for input is 17. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_CLIENTHIGHT_INPUT_17,
 
     /** ClientRectList.item throws instead of returning null if an element was not found. */
@@ -678,11 +679,11 @@ public enum BrowserVersionFeatures {
     JS_CLIENTWIDTH_INPUT_TEXT_143,
 
     /** ClientWidth for text/password input is 173. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
 
     /** Is window can be used as Console. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_CONSOLE_HANDLE_WINDOW,
 
     /** item is enumerated before length property of CSSRuleList. */
@@ -690,7 +691,7 @@ public enum BrowserVersionFeatures {
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DATE_LOCALE_DATE_SHORT,
 
     /** {@link DateTimeFormat} uses the Unicode Character {@code 'LEFT-TO-RIGHT MARK'}. */
@@ -710,7 +711,7 @@ public enum BrowserVersionFeatures {
     JS_DOCTYPE_NOTATIONS_NULL,
 
     /** Indicates that document.createAttribute converts the local name to lowercase. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
     /** The browser supports the design mode 'Inherit'. */
@@ -734,99 +735,99 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CORE_3,
 
     /** If document.implementation.hasFeature() supports 'CSS2 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
 
     /** If document.implementation.hasFeature() supports 'CSS3 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_1,
 
     /** If document.implementation.hasFeature() supports 'CSS3 2.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_2,
 
     /** If document.implementation.hasFeature() supports 'CSS3 3.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_3,
 
     /** If document.implementation.hasFeature() supports 'CSS 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_1,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_2,
 
     /** If document.implementation.hasFeature() supports 'CSS 3.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_3,
 
     /** If document.implementation.hasFeature() supports 'Events 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'KeyboardEvents'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS,
 
     /** If document.implementation.hasFeature() supports 'LS'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_LS,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS,
 
     /** If document.implementation.hasFeature() supports 'Range 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_1,
 
     /** If document.implementation.hasFeature() supports 'Range 3.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_RANGE_3,
 
     /** If document.implementation.hasFeature() supports 'StyleSheets 2.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS,
 
     /** If document.implementation.hasFeature() supports 'UIEvents 2.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2,
 
     /** If document.implementation.hasFeature() supports 'Validation'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_VALIDATION,
 
     /** If document.implementation.hasFeature() supports 'Views 1.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1,
 
     /** If document.implementation.hasFeature() supports 'Views 3.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3,
 
     /** If document.implementation.hasFeature() supports 'XPath 3.0'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMIMPLEMENTATION_FEATURE_XPATH,
 
     /** <code>DOMParser.parseFromString(..)</code> handles an empty String as error. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMPARSER_EMPTY_STRING_IS_ERROR,
 
     /** <code>DOMParser.parseFromString(..)</code> throws an exception if an error occurs. */
@@ -834,11 +835,11 @@ public enum BrowserVersionFeatures {
     JS_DOMPARSER_EXCEPTION_ON_ERROR,
 
     /** {@code DOMParser.parseFromString(..)} creates a document containing a {@code parsererror} element. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
     /** DOMTokenList returns false instead of throwing an exception when receiver is blank. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK,
 
     /** DOMTokenList uses an enhanced set of whitespace chars. */
@@ -850,15 +851,15 @@ public enum BrowserVersionFeatures {
     JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE,
 
     /** DOMTokenList ignores duplicates when determining the length. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES,
 
     /** DOMTokenList removed all whitespace chars during add. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD,
 
     /** DOMTokenList removed all whitespace chars during remove. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE,
 
     /** Javascript property function {@code delete} throws an exception if the given count is negative. */
@@ -874,11 +875,11 @@ public enum BrowserVersionFeatures {
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
 
     /** Javascript {@code Error.captureStackTrace}. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_ERROR_CAPTURE_STACK_TRACE,
 
     /** Javascript {@code Error.stack}. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_ERROR_STACK,
 
     /** Javascript {@code Error.stackTraceLimit}. */
@@ -903,7 +904,7 @@ public enum BrowserVersionFeatures {
     JS_FILEREADER_EMPTY_NULL,
 
     /** Indicates that the action property will not be expanded if defined as empty string. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_FORM_ACTION_EXPANDURL_NOT_DEFINED,
 
     /** use content-type text/plain if the file type is unknown'. */
@@ -911,7 +912,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN,
 
     /** FormData entries() iterator is named only Iterator in Chrome. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_FORM_DATA_ITERATOR_SIMPLE_NAME,
 
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
@@ -939,11 +940,11 @@ public enum BrowserVersionFeatures {
     JS_FUNCTION_TOSOURCE,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
     /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
@@ -962,7 +963,7 @@ public enum BrowserVersionFeatures {
      * The complete property returns also true, if the image download was failing
      * or if there was no src at all.
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
 
     /**
@@ -975,14 +976,14 @@ public enum BrowserVersionFeatures {
     /**
      * Getting the width and height of an image tag with an empty source returns 0x0.
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0,
 
     /**
      * Getting the width and height of an image tag without a source returns 16x16;
      * for invalid values returns 0.
      */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0,
 
     /**
@@ -1008,15 +1009,15 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_LF,
 
     /** Indicates that innerText setter supports null values. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INNER_TEXT_VALUE_NULL,
 
     /** Ignore negative selection starts. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
 
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INPUT_NUMBER_SELECTION_START_END_NULL,
 
     /** Setting the type property of an input converts the type to lowercase. */
@@ -1024,11 +1025,11 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_TYPE_LOWERCASE,
 
     /** Setting the value of an Input Date will check for correct format. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INPUT_SET_VALUE_DATE_SUPPORTED,
 
     /** Setting the value of an Input Email to blank will result in an empty value. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INPUT_SET_VALUE_EMAIL_TRIMMED,
 
     /** Setting the value of an Input Text/Password/TextArea resets the selection. */
@@ -1036,11 +1037,11 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
 
     /** Setting the value of an Input URL to blank will result in an empty value. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INPUT_SET_VALUE_URL_TRIMMED,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
 
     /** Indicates that isSearchProviderInstalled returns zero instead of undefined. */
@@ -1052,7 +1053,7 @@ public enum BrowserVersionFeatures {
     JS_LABEL_FORM_OF_SELF,
 
     /** location.hash returns an encoded hash. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_LOCATION_HASH_HASH_IS_ENCODED,
 
     /**
@@ -1061,7 +1062,7 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#%C3%BC'.<br>
      * IE evaluates to #%C3%BC.
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
@@ -1077,11 +1078,11 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#&uuml;'.<br>
      * IE evaluates to #&uuml;.
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
     /** Reload sends a referrer header. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_LOCATION_RELOAD_REFERRER,
 
     /** Indicates that an empty media list is represented by the string 'all'. */
@@ -1089,7 +1090,7 @@ public enum BrowserVersionFeatures {
     JS_MEDIA_LIST_ALL,
 
     /** Indicates that an empty media list is represented by the string 'all'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_MEDIA_LIST_EMPTY_STRING,
 
     /** Type property of menu has always '' as value. */
@@ -1101,7 +1102,7 @@ public enum BrowserVersionFeatures {
     JS_MENU_TYPE_PASS,
 
     /** Indicates if the String representation of a native function is without newline. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
     /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
@@ -1125,7 +1126,7 @@ public enum BrowserVersionFeatures {
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
     /** Indicates that Object.getOwnPropertySymbols() is supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
@@ -1141,7 +1142,7 @@ public enum BrowserVersionFeatures {
     JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED,
 
     /** element.outerHTML removes all children from detached node. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
@@ -1166,7 +1167,7 @@ public enum BrowserVersionFeatures {
     JS_PROPERTY_DESCRIPTOR_NEW_LINE,
 
     /** Support {@code Reflect}. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_REFLECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
@@ -1193,7 +1194,7 @@ public enum BrowserVersionFeatures {
     JS_SELECTOR_TEXT_LOWERCASE,
 
     /** Indicates that setting the value to null has no effect. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_SELECT_FILE_THROWS,
 
     /** Indicates that select.options has a wong class name. */
@@ -1201,7 +1202,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
     /** Ignore negative value when setting the length. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** The 'in' operator returns always true for HtmlOptionsCollection. */
@@ -1213,7 +1214,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
 
     /** Indicates that select.options.remove ignores the call if index is too large. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
 
     /** Indicates that select.options[i] throws an exception if the requested index is negative. */
@@ -1238,7 +1239,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Stylesheet list contains only active style sheets. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_STYLESHEETLIST_ACTIVE_ONLY,
 
     /** IE supports accessing unsupported style elements via getter
@@ -1253,11 +1254,11 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that trying to access the style property with a wrong index returns undefined
      * instead of "". */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
 
     /** Supports Symbol. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_SYMBOL,
 
     /** The width cell height does not return negative values. */
@@ -1277,15 +1278,15 @@ public enum BrowserVersionFeatures {
     JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
 
     /** The width column property has a value of 'null' for null. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_TABLE_COLUMN_WIDTH_NULL_STRING,
 
     /** Calling deleteCell without an index throws an exception. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
     /** Set span zo zero if provided value is invalid. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
 
     /** Throws an exception if the value for column span is less than one. */
@@ -1315,7 +1316,7 @@ public enum BrowserVersionFeatures {
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
 
     /** Setting the property {@code rows} throws an exception, if the provided value is less than 0. */
@@ -1329,11 +1330,11 @@ public enum BrowserVersionFeatures {
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Setting the value processes null as null value. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_TEXT_AREA_SET_VALUE_NULL,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 
     /**
@@ -1344,11 +1345,11 @@ public enum BrowserVersionFeatures {
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
     /** URLSearchParams iterator is named only Iterator in Chrome. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME,
 
     /** Setting the property valign converts to lowercase. */
@@ -1357,11 +1358,11 @@ public enum BrowserVersionFeatures {
 
     /** Allow inheriting parent constants
      * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_WEBGL_CONTEXT_EVENT_CONSTANTS,
 
     /** Setting the property width/height to arbitrary values is allowed. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /**
@@ -1376,7 +1377,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,
 
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
 
     /** <code>window.name</code> returns also form fields (e.g. input, textarea). */
@@ -1394,7 +1395,7 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 132.
      */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132,
 
     /**
@@ -1430,7 +1431,7 @@ public enum BrowserVersionFeatures {
     JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL,
 
     /** Supports XML. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_XML,
 
     /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
@@ -1438,7 +1439,7 @@ public enum BrowserVersionFeatures {
     JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
@@ -1462,7 +1463,7 @@ public enum BrowserVersionFeatures {
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
     /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     JS_XSLT_TRANSFORM_INDENT,
 
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
@@ -1511,23 +1512,23 @@ public enum BrowserVersionFeatures {
     RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
     /** The default display style of slot is 'content'. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     SLOT_CONTENTS,
 
     /** Indicates that string.includes() is supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     STRING_INCLUDES,
 
     /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     STRING_REPEAT,
 
     /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     STRING_STARTS_ENDS_WITH,
 
     /** Indicates that string.trimLeft() and .trimRight() are supported. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     STRING_TRIM_LEFT_RIGHT,
 
     /**
@@ -1556,14 +1557,14 @@ public enum BrowserVersionFeatures {
      * Indicates, that the pathname for the url 'blank' is empty;
      * instead of 'blank'.
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     URL_ABOUT_BLANK_HAS_BLANK_PATH,
 
     /**
      * Indicates, that the browser supports username and password as
      * part of the url (e.g. http://john.smith:secret@localhost).
      */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     URL_AUTH_CREDENTIALS,
 
     /** Replace only ' ' with %20 when encode the query part of a url. */
@@ -1571,11 +1572,11 @@ public enum BrowserVersionFeatures {
     URL_MINIMAL_QUERY_ENCODING,
 
     /** Handles missing slashes. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     URL_MISSING_SLASHES,
 
     /** Set the origin property for web socket events. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     WEBSOCKET_ORIGIN_SET,
 
     /** Execute window events. */
@@ -1612,11 +1613,11 @@ public enum BrowserVersionFeatures {
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates if an empty url is allowed as url param for the open method. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates that the content charset is used for response parsing. */
-    @BrowserFeature({CHROME, FF, FF68})
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
     XHR_USE_CONTENT_CHARSET,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */

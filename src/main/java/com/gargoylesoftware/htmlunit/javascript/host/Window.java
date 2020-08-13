@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -2127,7 +2128,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * (currently empty implementation)
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public void stop() {
         //empty
     }
@@ -2154,7 +2155,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code scrollX} property.
      * @return the value of {@code scrollX} property
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public int getScrollX() {
         return 0;
     }
@@ -2163,7 +2164,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code scrollY} property.
      * @return the value of {@code scrollY} property
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public int getScrollY() {
         return 0;
     }
@@ -2371,7 +2372,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param showDialog if true, specifies a show Dialog.
      * @return false
      */
-    @JsxFunction({CHROME, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF68})
     public boolean find(final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
@@ -2382,7 +2383,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code speechSynthesis} property.
      * @return the {@code speechSynthesis} property
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public SpeechSynthesis getSpeechSynthesis() {
         final SpeechSynthesis speechSynthesis = new SpeechSynthesis();
         speechSynthesis.setParentScope(this);
@@ -2406,7 +2407,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code crypto} property.
      * @return the {@code crypto} property
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Crypto getCrypto() {
         if (crypto_ == null) {
             crypto_ = new Crypto(this);
@@ -2488,7 +2489,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code oninvalid} event handler.
      * @return the {@code oninvalid} event handler
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOninvalid() {
         return getEventHandler("invalid");
     }
@@ -2497,7 +2498,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code oninvalid} event handler.
      * @param oninvalid the {@code oninvalid} event handler
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOninvalid(final Object oninvalid) {
         setHandlerForJavaScript("invalid", oninvalid);
     }
@@ -2560,7 +2561,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onanimationiteration} event handler.
      * @return the {@code onanimationiteration} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnanimationiteration() {
         return getEventHandler("animationiteration");
     }
@@ -2569,7 +2570,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onanimationiteration} event handler.
      * @param onanimationiteration the {@code onanimationiteration} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnanimationiteration(final Object onanimationiteration) {
         setHandlerForJavaScript("animationiteration", onanimationiteration);
     }
@@ -2596,7 +2597,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code oncancel} event handler.
      * @return the {@code oncancel} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncancel() {
         return getEventHandler("cancel");
     }
@@ -2605,7 +2606,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code oncancel} event handler.
      * @param oncancel the {@code oncancel} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncancel(final Object oncancel) {
         setHandlerForJavaScript("cancel", oncancel);
     }
@@ -2650,7 +2651,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onauxclick} event handler.
      * @return the {@code onauxclick} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnauxclick() {
         return getEventHandler("auxclick");
     }
@@ -2659,7 +2660,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onauxclick} event handler.
      * @param onauxclick the {@code onauxclick} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnauxclick(final Object onauxclick) {
         setHandlerForJavaScript("auxclick", onauxclick);
     }
@@ -2722,7 +2723,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onwebkitanimationstart} event handler.
      * @return the {@code onwebkitanimationstart} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitanimationstart() {
         return getEventHandler("webkitanimationstart");
     }
@@ -2731,7 +2732,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onwebkitanimationstart} event handler.
      * @param onwebkitanimationstart the {@code onwebkitanimationstart} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkitanimationstart(final Object onwebkitanimationstart) {
         setHandlerForJavaScript("webkitanimationstart", onwebkitanimationstart);
     }
@@ -2902,7 +2903,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondeviceorientation} event handler.
      * @return the {@code ondeviceorientation} event handler
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOndeviceorientation() {
         return getEventHandler("deviceorientation");
     }
@@ -2911,7 +2912,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondeviceorientation} event handler.
      * @param ondeviceorientation the {@code ondeviceorientation} event handler
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOndeviceorientation(final Object ondeviceorientation) {
         setHandlerForJavaScript("deviceorientation", ondeviceorientation);
     }
@@ -2920,7 +2921,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ontoggle} event handler.
      * @return the {@code ontoggle} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOntoggle() {
         return getEventHandler("toggle");
     }
@@ -2929,7 +2930,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ontoggle} event handler.
      * @param ontoggle the {@code ontoggle} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOntoggle(final Object ontoggle) {
         setHandlerForJavaScript("toggle", ontoggle);
     }
@@ -3100,7 +3101,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onlostpointercapture} event handler.
      * @return the {@code onlostpointercapture} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
         return getEventHandler("lostpointercapture");
     }
@@ -3109,7 +3110,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onlostpointercapture} event handler.
      * @param onlostpointercapture the {@code onlostpointercapture} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object onlostpointercapture) {
         setHandlerForJavaScript("lostpointercapture", onlostpointercapture);
     }
@@ -3136,7 +3137,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onclose} event handler.
      * @return the {@code onclose} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -3145,7 +3146,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onclose} event handler.
      * @param onclose the {@code onclose} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnclose(final Object onclose) {
         setHandlerForJavaScript(Event.TYPE_CLOSE, onclose);
     }
@@ -3154,7 +3155,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onanimationend} event handler.
      * @return the {@code onanimationend} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnanimationend() {
         return getEventHandler("animationend");
     }
@@ -3163,7 +3164,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onanimationend} event handler.
      * @param onanimationend the {@code onanimationend} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnanimationend(final Object onanimationend) {
         setHandlerForJavaScript("animationend", onanimationend);
     }
@@ -3280,7 +3281,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code oncuechange} event handler.
      * @return the {@code oncuechange} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
         return getEventHandler("cuechange");
     }
@@ -3289,7 +3290,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code oncuechange} event handler.
      * @param oncuechange the {@code oncuechange} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object oncuechange) {
         setHandlerForJavaScript("cuechange", oncuechange);
     }
@@ -3424,7 +3425,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onunhandledrejection} event handler.
      * @return the {@code onunhandledrejection} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnunhandledrejection() {
         return getEventHandler("unhandledrejection");
     }
@@ -3433,7 +3434,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onunhandledrejection} event handler.
      * @param onunhandledrejection the {@code onunhandledrejection} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnunhandledrejection(final Object onunhandledrejection) {
         setHandlerForJavaScript("unhandledrejection", onunhandledrejection);
     }
@@ -3532,7 +3533,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onlanguagechange} event handler.
      * @return the {@code onlanguagechange} event handler
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnlanguagechange() {
         return getEventHandler("languagechange");
     }
@@ -3541,7 +3542,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onlanguagechange} event handler.
      * @param onlanguagechange the {@code onlanguagechange} event handler
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnlanguagechange(final Object onlanguagechange) {
         setHandlerForJavaScript("languagechange", onlanguagechange);
     }
@@ -3568,7 +3569,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onrejectionhandled} event handler.
      * @return the {@code onrejectionhandled} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnrejectionhandled() {
         return getEventHandler("rejectionhandled");
     }
@@ -3577,7 +3578,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onrejectionhandled} event handler.
      * @param onrejectionhandled the {@code onrejectionhandled} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnrejectionhandled(final Object onrejectionhandled) {
         setHandlerForJavaScript("rejectionhandled", onrejectionhandled);
     }
@@ -3712,7 +3713,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onwheel} event handler.
      * @return the {@code onwheel} event handler
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnwheel() {
         return getEventHandler("wheel");
     }
@@ -3721,7 +3722,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onwheel} event handler.
      * @param onwheel the {@code onwheel} event handler
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnwheel(final Object onwheel) {
         setHandlerForJavaScript("wheel", onwheel);
     }
@@ -3820,7 +3821,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onanimationstart} event handler.
      * @return the {@code onanimationstart} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnanimationstart() {
         return getEventHandler("animationstart");
     }
@@ -3829,7 +3830,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onanimationstart} event handler.
      * @param onanimationstart the {@code onanimationstart} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnanimationstart(final Object onanimationstart) {
         setHandlerForJavaScript("animationstart", onanimationstart);
     }
@@ -3892,7 +3893,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onwebkitanimationiteration} event handler.
      * @return the {@code onwebkitanimationiteration} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitanimationiteration() {
         return getEventHandler("webkitanimationiteration");
     }
@@ -3901,7 +3902,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onwebkitanimationiteration} event handler.
      * @param onwebkitanimationiteration the {@code onwebkitanimationiteration} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkitanimationiteration(final Object onwebkitanimationiteration) {
         setHandlerForJavaScript("webkitanimationiteration", onwebkitanimationiteration);
     }
@@ -4072,7 +4073,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onsearch} event handler.
      * @return the {@code onsearch} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnsearch() {
         return getEventHandler("search");
     }
@@ -4081,7 +4082,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onsearch} event handler.
      * @param onsearch the {@code onsearch} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnsearch(final Object onsearch) {
         setHandlerForJavaScript("search", onsearch);
     }
@@ -4108,7 +4109,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onwebkittransitionend} event handler.
      * @return the {@code onwebkittransitionend} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkittransitionend() {
         return getEventHandler("webkittransitionend");
     }
@@ -4117,7 +4118,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onwebkittransitionend} event handler.
      * @param onwebkittransitionend the {@code onwebkittransitionend} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkittransitionend(final Object onwebkittransitionend) {
         setHandlerForJavaScript("webkittransitionend", onwebkittransitionend);
     }
@@ -4144,7 +4145,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondevicemotion} event handler.
      * @return the {@code ondevicemotion} event handler
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOndevicemotion() {
         return getEventHandler("devicemotion");
     }
@@ -4153,7 +4154,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondevicemotion} event handler.
      * @param ondevicemotion the {@code ondevicemotion} event handler
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOndevicemotion(final Object ondevicemotion) {
         setHandlerForJavaScript("devicemotion", ondevicemotion);
     }
@@ -4270,7 +4271,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onwebkitanimationend} event handler.
      * @return the {@code onwebkitanimationend} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitanimationend() {
         return getEventHandler("webkitanimationend");
     }
@@ -4279,7 +4280,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onwebkitanimationend} event handler.
      * @param onwebkitanimationend the {@code onwebkitanimationend} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOnwebkitanimationend(final Object onwebkitanimationend) {
         setHandlerForJavaScript("webkitanimationend", onwebkitanimationend);
     }
@@ -4306,7 +4307,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ontransitionend} event handler.
      * @return the {@code ontransitionend} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOntransitionend() {
         return getEventHandler("transitionend");
     }
@@ -4315,7 +4316,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ontransitionend} event handler.
      * @param ontransitionend the {@code ontransitionend} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOntransitionend(final Object ontransitionend) {
         setHandlerForJavaScript("transitionend", ontransitionend);
     }
@@ -4342,7 +4343,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondeviceorientationabsolute} event handler.
      * @return the {@code ondeviceorientationabsolute} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOndeviceorientationabsolute() {
         return getEventHandler("deviceorientationabsolute");
     }
@@ -4351,7 +4352,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondeviceorientationabsolute} event handler.
      * @param ondeviceorientationabsolute the {@code ondeviceorientationabsolute} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOndeviceorientationabsolute(final Object ondeviceorientationabsolute) {
         setHandlerForJavaScript("deviceorientationabsolute", ondeviceorientationabsolute);
     }
@@ -4360,7 +4361,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onshow} event handler.
      * @return the {@code onshow} event handler
      */
-    @JsxGetter({CHROME, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF68})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -4369,7 +4370,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onshow} event handler.
      * @param onshow the {@code onshow} event handler
      */
-    @JsxSetter({CHROME, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF68})
     public void setOnshow(final Object onshow) {
         setHandlerForJavaScript("show", onshow);
     }
@@ -4414,7 +4415,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ongotpointercapture} event handler.
      * @return the {@code ongotpointercapture} event handler
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
         return getEventHandler("gotpointercapture");
     }
@@ -4423,7 +4424,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ongotpointercapture} event handler.
      * @param ongotpointercapture the {@code ongotpointercapture} event handler
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object ongotpointercapture) {
         setHandlerForJavaScript("gotpointercapture", ongotpointercapture);
     }
