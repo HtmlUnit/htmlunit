@@ -1622,6 +1622,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(IE)
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
+    
+    /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header */
+    @BrowserFeature({CHROME, FF, FF68})
+    XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({IE, CHROME})

@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -40,10 +41,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -72,6 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -680,6 +684,29 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             else if (content instanceof URLSearchParams) {
                 ((URLSearchParams) content).fillRequest(webRequest_);
                 webRequest_.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
+            }
+            else if (content instanceof Blob) {
+                final Blob blob = (Blob) content;
+                final String mimeType = blob.getMimeType();
+                
+                String body = "";
+                
+                //nativeArray.toString() would give us a comma separated string - this is not what we want here.
+                ListIterator it = blob.getNativeArray().listIterator();
+                while (it.hasNext()) {
+                    Object next = it.next();
+                    body += Context.toString(next);
+                }
+                
+                webRequest_.setRequestBody(body);
+                
+                if (setEncodingType) {
+                    if (getBrowserVersion().hasFeature(XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE)
+                            && StringUtils.isNotBlank(mimeType)) {
+                        webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, mimeType);
+                    }
+                    webRequest_.setEncodingType(null);
+                }
             }
             else {
                 final String body = Context.toString(content);

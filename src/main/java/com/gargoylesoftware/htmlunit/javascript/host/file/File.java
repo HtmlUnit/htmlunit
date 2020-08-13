@@ -56,9 +56,6 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferV
 public class File extends Blob {
     private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
 
-    private static final String OPTIONS_TYPE_NAME = "type";
-    //default according to https://developer.mozilla.org/en-US/docs/Web/API/File/File
-    private static final String OPTIONS_TYPE_DEFAULT = "";
     private static final String OPTIONS_LASTMODIFIED = "lastModified";
 
     private abstract static class Backend implements Serializable {
@@ -194,6 +191,7 @@ public class File extends Blob {
      */
     @JsxConstructor({CHROME, FF, FF68})
     public File(final NativeArray fileBits, final String fileName, final ScriptableObject properties) {
+        super(fileBits, properties);
         if (fileBits == null
                 || Undefined.isUndefined(fileBits)
                 || fileName == null
@@ -202,22 +200,8 @@ public class File extends Blob {
         }
 
         backend_ = new InMemoryBackend(fileBits, fileName,
-                            extractFileTypeOrDefault(properties),
+                            getMimeType(),
                             extractLastModifiedOrDefault(properties));
-    }
-
-    private String extractFileTypeOrDefault(final ScriptableObject properties) {
-        if (properties == null || Undefined.isUndefined(properties)) {
-            return OPTIONS_TYPE_DEFAULT;
-        }
-
-        final Object optionsType = properties.get(OPTIONS_TYPE_NAME, properties);
-        if (optionsType != null && properties != Scriptable.NOT_FOUND
-                && !Undefined.isUndefined(optionsType)) {
-            return Context.toString(optionsType);
-        }
-
-        return OPTIONS_TYPE_DEFAULT;
     }
 
     private long extractLastModifiedOrDefault(final ScriptableObject properties) {
