@@ -306,7 +306,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
         throw ScriptRuntime.typeError("Illegal constructor");
@@ -2339,7 +2339,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code styleMedia} property.
      * @return the {@code styleMedia} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public StyleMedia getStyleMedia() {
         final StyleMedia styleMedia = new StyleMedia();
         styleMedia.setParentScope(this);
@@ -2395,7 +2395,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code offscreenBuffering} property.
      * @return the {@code offscreenBuffering} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getOffscreenBuffering() {
         if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
             return "auto";
@@ -2507,7 +2507,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointerout} event handler.
      * @return the {@code onpointerout} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerout() {
         return getEventHandler("pointerout");
     }
@@ -2516,7 +2516,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointerout} event handler.
      * @param onpointerout the {@code onpointerout} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerout(final Object onpointerout) {
         setHandlerForJavaScript("pointerout", onpointerout);
     }
@@ -2615,7 +2615,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointerenter} event handler.
      * @return the {@code onpointerenter} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerenter() {
         return getEventHandler("pointerenter");
     }
@@ -2624,7 +2624,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointerenter} event handler.
      * @param onpointerenter the {@code onpointerenter} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerenter(final Object onpointerenter) {
         setHandlerForJavaScript("pointerenter", onpointerenter);
     }
@@ -3029,7 +3029,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointermove} event handler.
      * @return the {@code onpointermove} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointermove() {
         return getEventHandler("pointermove");
     }
@@ -3038,7 +3038,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointermove} event handler.
      * @param onpointermove the {@code onpointermove} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointermove(final Object onpointermove) {
         setHandlerForJavaScript("pointermove", onpointermove);
     }
@@ -3119,7 +3119,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointerover} event handler.
      * @return the {@code onpointerover} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerover() {
         return getEventHandler("pointerover");
     }
@@ -3128,7 +3128,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointerover} event handler.
      * @param onpointerover the {@code onpointerover} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerover(final Object onpointerover) {
         setHandlerForJavaScript("pointerover", onpointerover);
     }
@@ -3245,7 +3245,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onmousewheel} event handler.
      * @return the {@code onmousewheel} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnmousewheel() {
         return getEventHandler("mousewheel");
     }
@@ -3254,7 +3254,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onmousewheel} event handler.
      * @param onmousewheel the {@code onmousewheel} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
         setHandlerForJavaScript("mousewheel", onmousewheel);
     }
@@ -3587,7 +3587,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointercancel} event handler.
      * @return the {@code onpointercancel} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointercancel() {
         return getEventHandler("pointercancel");
     }
@@ -3596,7 +3596,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointercancel} event handler.
      * @param onpointercancel the {@code onpointercancel} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointercancel(final Object onpointercancel) {
         setHandlerForJavaScript("pointercancel", onpointercancel);
     }
@@ -3695,7 +3695,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointerup} event handler.
      * @return the {@code onpointerup} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerup() {
         return getEventHandler("pointerup");
     }
@@ -3704,7 +3704,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointerup} event handler.
      * @param onpointerup the {@code onpointerup} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerup(final Object onpointerup) {
         setHandlerForJavaScript("pointerup", onpointerup);
     }
@@ -3749,7 +3749,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointerleave} event handler.
      * @return the {@code onpointerleave} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerleave() {
         return getEventHandler("pointerleave");
     }
@@ -3758,7 +3758,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointerleave} event handler.
      * @param onpointerleave the {@code onpointerleave} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerleave(final Object onpointerleave) {
         setHandlerForJavaScript("pointerleave", onpointerleave);
     }
@@ -4217,7 +4217,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onpointerdown} event handler.
      * @return the {@code onpointerdown} event handler
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerdown() {
         return getEventHandler("pointerdown");
     }
@@ -4226,7 +4226,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onpointerdown} event handler.
      * @param onpointerdown the {@code onpointerdown} event handler
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerdown(final Object onpointerdown) {
         setHandlerForJavaScript("pointerdown", onpointerdown);
     }

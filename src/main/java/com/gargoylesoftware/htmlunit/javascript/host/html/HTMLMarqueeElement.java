@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -31,13 +32,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMarquee.class, value = {CHROME, FF, FF68, IE})
+@JsxClass(domClass = HtmlMarquee.class, value = {CHROME, EDGE, FF, FF68, IE})
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public HTMLMarqueeElement() {
     }
 
@@ -46,7 +47,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * @return the {@code width} property
      */
     @Override
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public int getWidth() {
         final String value = getDomNodeOrDie().getAttributeDirect("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
@@ -60,7 +61,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Sets the {@code width} property.
      * @param width the {@code width} property
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setWidth(final int width) {
         getDomNodeOrDie().setAttribute("width", Integer.toString(width));
     }
@@ -70,7 +71,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * @return the {@code height} property
      */
     @Override
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public int getHeight() {
         final String value = getDomNodeOrDie().getAttributeDirect("height");
         final Integer intValue = HTMLCanvasElement.getValue(value);
@@ -84,7 +85,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Sets the {@code height} property.
      * @param height the {@code height} property
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setHeight(final int height) {
         getDomNodeOrDie().setAttribute("height", Integer.toString(height));
     }
@@ -93,7 +94,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Returns the value of the {@code bgColor} property.
      * @return the value of the {@code bgColor} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getBgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -102,7 +103,7 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Sets the value of the {@code bgColor} property.
      * @param bgColor the value of the {@code bgColor} property
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }

@@ -863,7 +863,7 @@ public class KeyboardEvent extends UIEvent {
     /**
      * Creates a new keyboard event instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public KeyboardEvent() {
     }
 

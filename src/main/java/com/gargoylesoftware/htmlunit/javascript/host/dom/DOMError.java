@@ -35,7 +35,7 @@ public class DOMError extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF68})
+    @JsxConstructor({CHROME, EDGE, FF68})
     public DOMError() {
     }
 

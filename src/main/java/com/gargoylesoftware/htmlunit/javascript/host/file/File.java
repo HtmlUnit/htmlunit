@@ -193,7 +193,7 @@ public class File extends Blob {
      * @param fileName the Name
      * @param properties the properties
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public File(final NativeArray fileBits, final String fileName, final ScriptableObject properties) {
         if (fileBits == null
                 || Undefined.isUndefined(fileBits)
@@ -257,7 +257,7 @@ public class File extends Blob {
      * Returns the {@code lastModifiedDate} property.
      * @return the {@code lastModifiedDate} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getLastModifiedDate() {
         final Date date = new Date(getLastModified());
         final BrowserVersion browser = getBrowserVersion();

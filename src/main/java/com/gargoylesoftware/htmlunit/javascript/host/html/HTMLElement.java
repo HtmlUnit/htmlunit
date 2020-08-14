@@ -154,56 +154,56 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlAbbreviated.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlAcronym.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlAddress.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlAbbreviated.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlAcronym.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlAddress.class, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(domClass = HtmlArticle.class)
 @JsxClass(domClass = HtmlAside.class)
-@JsxClass(domClass = HtmlBaseFont.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlBidirectionalIsolation.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlBig.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlBold.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlCitation.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlCode.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlDefinition.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlDefinitionDescription.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlDefinitionTerm.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlBaseFont.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlBidirectionalIsolation.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlBig.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlBold.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlCenter.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlCitation.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlCode.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlDefinition.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlDefinitionDescription.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlDefinitionTerm.class, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(domClass = HtmlElement.class, value = {FF, FF68, IE})
-@JsxClass(domClass = HtmlEmphasis.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlEmphasis.class, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(domClass = HtmlFigure.class)
 @JsxClass(domClass = HtmlFigureCaption.class)
 @JsxClass(domClass = HtmlFooter.class)
 @JsxClass(domClass = HtmlHeader.class)
-@JsxClass(domClass = HtmlItalic.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlKeyboard.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlLayer.class, value = CHROME)
+@JsxClass(domClass = HtmlItalic.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlKeyboard.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlLayer.class, value = {CHROME, EDGE})
 @JsxClass(domClass = HtmlMark.class)
 @JsxClass(domClass = HtmlNav.class)
-@JsxClass(domClass = HtmlNoBreak.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlNoBreak.class, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(domClass = HtmlNoEmbed.class)
 @JsxClass(domClass = HtmlNoFrames.class)
-@JsxClass(domClass = HtmlNoLayer.class, value = CHROME)
+@JsxClass(domClass = HtmlNoLayer.class, value = {CHROME, EDGE})
 @JsxClass(domClass = HtmlNoScript.class)
-@JsxClass(domClass = HtmlPlainText.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlRuby.class, value = CHROME)
-@JsxClass(domClass = HtmlRp.class, value = CHROME)
-@JsxClass(domClass = HtmlRt.class, value = CHROME)
-@JsxClass(domClass = HtmlS.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlSample.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlPlainText.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlRuby.class, value = {CHROME, EDGE})
+@JsxClass(domClass = HtmlRp.class, value = {CHROME, EDGE})
+@JsxClass(domClass = HtmlRt.class, value = {CHROME, EDGE})
+@JsxClass(domClass = HtmlS.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlSample.class, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(domClass = HtmlSection.class)
-@JsxClass(domClass = HtmlSmall.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlStrike.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlStrong.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlSubscript.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlSummary.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlSuperscript.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlTeletype.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlUnderlined.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlSmall.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlStrike.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlStrong.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlSubscript.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlSummary.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlSuperscript.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlTeletype.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlUnderlined.class, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(domClass = HtmlWordBreak.class)
-@JsxClass(domClass = HtmlMain.class, value = {CHROME, FF, FF68})
-@JsxClass(domClass = HtmlVariable.class, value = {CHROME, FF, FF68})
+@JsxClass(domClass = HtmlMain.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlVariable.class, value = {CHROME, EDGE, FF, FF68})
 public class HTMLElement extends Element {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = {Object.class};
@@ -388,7 +388,7 @@ public class HTMLElement extends Element {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public HTMLElement() {
     }
 
@@ -2687,7 +2687,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncuechange} event handler for this element.
      * @return the {@code oncuechange} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOncuechange() {
         return getEventHandler("cuechange");
     }
@@ -2696,7 +2696,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncuechange} event handler for this element.
      * @param oncuechange the {@code oncuechange} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOncuechange(final Object oncuechange) {
         setEventHandler("cuechange", oncuechange);
     }
@@ -3051,7 +3051,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmousewheel} event handler for this element.
      * @return the {@code onmousewheel} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnmousewheel() {
         return getEventHandler("mousewheel");
     }
@@ -3060,7 +3060,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmousewheel} event handler for this element.
      * @param onmousewheel the {@code onmousewheel} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
         setEventHandler("mousewheel", onmousewheel);
     }

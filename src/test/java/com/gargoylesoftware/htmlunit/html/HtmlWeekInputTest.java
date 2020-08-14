@@ -114,7 +114,8 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "36",
-            CHROME = "")
+            CHROME = "",
+            EDGE = "")
     @NotYetImplemented({FF, FF68, IE})
     public void typing() throws Exception {
         final String htmlContent

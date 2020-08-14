@@ -65,7 +65,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public CanvasRenderingContext2D() {
         canvas_ = null;
         renderingBackend_ = null;

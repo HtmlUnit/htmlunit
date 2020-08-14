@@ -270,7 +270,7 @@ public enum BrowserVersionFeatures {
     EVENT_TYPE_PROGRESSEVENT,
 
     /** Supports event type 'WheelEvent'. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     EVENT_TYPE_WHEELEVENT,
 
     /** For new pages the focus points to the body node. */
@@ -524,7 +524,7 @@ public enum BrowserVersionFeatures {
     HTML_COLOR_TO_LOWER,
 
     /** HTML parser supports the 'command' tag. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     HTML_COMMAND_TAG,
 
     /** HTML parser supports the 'isindex' tag. */
@@ -595,7 +595,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
     /** The anchor pathname detects url's starting with one letter as file url's. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
@@ -607,7 +607,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL,
 
     /** The anchor pathname prefixes file url's with '/'. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
@@ -883,7 +883,7 @@ public enum BrowserVersionFeatures {
     JS_ERROR_STACK,
 
     /** Javascript {@code Error.stackTraceLimit}. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_ERROR_STACK_TRACE_LIMIT,
 
     /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
@@ -924,7 +924,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_REJECT_INVALID_ENCODING,
 
     /** Calling form.submit() twice forces double download. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_FORM_SUBMIT_FORCES_DOWNLOAD,
 
     /** Support for document.formName('inputName'). */
@@ -1045,7 +1045,7 @@ public enum BrowserVersionFeatures {
     JS_INTL_V8_BREAK_ITERATOR,
 
     /** Indicates that isSearchProviderInstalled returns zero instead of undefined. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
 
     /** The property form of a label returns the form the label is assigned to. */
@@ -1130,7 +1130,7 @@ public enum BrowserVersionFeatures {
     JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /** element.outerHTML handles null value as string "null". */
@@ -1190,7 +1190,7 @@ public enum BrowserVersionFeatures {
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 
     /** Javascript selectorText property returns selectors in lower case. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     JS_SELECTOR_TEXT_LOWERCASE,
 
     /** Indicates that setting the value to null has no effect. */

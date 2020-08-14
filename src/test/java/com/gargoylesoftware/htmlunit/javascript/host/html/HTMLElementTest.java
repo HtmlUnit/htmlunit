@@ -226,7 +226,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined"},
             IE = {"text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined"},
-            CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
+            CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
+            EDGE = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
     @NotYetImplemented({FF, FF68, IE})
     public void attributesAccess() throws Exception {
         final String html
@@ -1462,6 +1463,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
             IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = "<html>\n"
@@ -1495,6 +1497,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
             IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
@@ -1528,6 +1531,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
             IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementEmpty() throws Exception {
         final String html = "<html>\n"
@@ -1561,6 +1565,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
             IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = "<html>\n"
@@ -1594,6 +1599,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
             CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "exception"},
             IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = "<html>\n"
@@ -4345,7 +4351,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "setCapture available",
-            CHROME = "exception")
+            CHROME = "exception",
+            EDGE = "exception")
     public void setCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
@@ -4373,7 +4380,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "releaseCapture available",
-            CHROME = "exception")
+            CHROME = "exception",
+            EDGE = "exception")
     public void releaseCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"

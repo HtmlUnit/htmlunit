@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlContent;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlContent.class, value = CHROME)
+@JsxClass(domClass = HtmlContent.class, value = {CHROME, EDGE})
 public class HTMLContentElement extends HTMLElement {
 
     /**

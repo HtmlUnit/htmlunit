@@ -317,7 +317,7 @@ public class Document extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public Document() {
     }
 
@@ -418,7 +418,7 @@ public class Document extends Node {
      * Returns a value which indicates whether or not the document can be edited.
      * @return a value which indicates whether or not the document can be edited
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getDesignMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
@@ -435,7 +435,7 @@ public class Document extends Node {
      * Sets a value which indicates whether or not the document can be edited.
      * @param mode a value which indicates whether or not the document can be edited
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setDesignMode(final String mode) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
@@ -856,7 +856,7 @@ public class Document extends Node {
      * Gecko DOM reference</a>
      * @return the value of this property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getAnchors() {
         return new HTMLCollection(getDomNodeOrDie(), true) {
             @Override
@@ -889,7 +889,7 @@ public class Document extends Node {
      * Gecko DOM reference</a>
      * @return the value of this property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getApplets() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -903,7 +903,7 @@ public class Document extends Node {
      * Returns this document's {@code body} element.
      * @return this document's {@code body} element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public HTMLElement getBody() {
         final Page page = getPage();
         if (page instanceof HtmlPage) {
@@ -1167,7 +1167,7 @@ public class Document extends Node {
      * Returns the {@code cookie} property.
      * @return the {@code cookie} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getCookie() {
         return "";
     }
@@ -1350,7 +1350,7 @@ public class Document extends Node {
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
      * W3C documentation</a>
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getDomain() {
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
@@ -1397,7 +1397,7 @@ public class Document extends Node {
      * trimming to co.uk should not be possible.
      * @param newDomain the new domain to set
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setDomain(String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
@@ -1793,7 +1793,7 @@ public class Document extends Node {
      * Returns the value of the {@code forms} property.
      * @return the value of the {@code forms} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getForms() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1816,7 +1816,7 @@ public class Document extends Node {
      * Returns the value of the {@code embeds} property.
      * @return the value of the {@code embeds} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getEmbeds() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1839,7 +1839,7 @@ public class Document extends Node {
      * Returns the value of the {@code embeds} property.
      * @return the value of the {@code embeds} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getImages() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1862,7 +1862,7 @@ public class Document extends Node {
      * Returns the value of the {@code scripts} property.
      * @return the value of the {@code scripts} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getScripts() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1900,7 +1900,7 @@ public class Document extends Node {
      * Returns the value of the {@code plugins} property.
      * @return the value of the {@code plugins} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getPlugins() {
         return getEmbeds();
     }
@@ -1910,7 +1910,7 @@ public class Document extends Node {
      * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
      * @return the value of this property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getLinks() {
         return new HTMLCollection(getDomNodeOrDie(), true) {
             @Override
@@ -2013,7 +2013,7 @@ public class Document extends Node {
      * Returns this document's {@code head} element.
      * @return this document's {@code head} element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Object getHead() {
         return null;
     }
@@ -2232,7 +2232,7 @@ public class Document extends Node {
      * Returns the {@code xmlEncoding} property.
      * @return the {@code xmlEncoding} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getXmlEncoding() {
         String encoding = getPage().getXmlEncoding();
         if (encoding == null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
@@ -2245,7 +2245,7 @@ public class Document extends Node {
      * Returns the {@code xmlStandalone} property.
      * @return the {@code xmlStandalone} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public boolean isXmlStandalone() {
         return getPage().getXmlStandalone();
     }
@@ -2254,7 +2254,7 @@ public class Document extends Node {
      * Returns the {@code xmlVersion} property.
      * @return the {@code xmlVersion} property
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getXmlVersion() {
         String version = getPage().getXmlVersion();
         if (version == null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
@@ -2843,7 +2843,7 @@ public class Document extends Node {
      * Returns the {@code onmousewheel} event handler for this element.
      * @return the {@code onmousewheel} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnmousewheel() {
         return getEventHandler("mousewheel");
     }
@@ -2852,7 +2852,7 @@ public class Document extends Node {
      * Sets the {@code onmousewheel} event handler for this element.
      * @param onmousewheel the {@code onmousewheel} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
         setEventHandler("mousewheel", onmousewheel);
     }
@@ -2933,7 +2933,7 @@ public class Document extends Node {
      * Returns the {@code onpointercancel} event handler for this element.
      * @return the {@code onpointercancel} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointercancel() {
         return getEventHandler("pointercancel");
     }
@@ -2942,7 +2942,7 @@ public class Document extends Node {
      * Sets the {@code onpointercancel} event handler for this element.
      * @param onpointercancel the {@code onpointercancel} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointercancel(final Object onpointercancel) {
         setEventHandler("pointercancel", onpointercancel);
     }
@@ -2951,7 +2951,7 @@ public class Document extends Node {
      * Returns the {@code onpointerdown} event handler for this element.
      * @return the {@code onpointerdown} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerdown() {
         return getEventHandler("pointerdown");
     }
@@ -2960,7 +2960,7 @@ public class Document extends Node {
      * Sets the {@code onpointerdown} event handler for this element.
      * @param onpointerdown the {@code onpointerdown} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerdown(final Object onpointerdown) {
         setEventHandler("pointerdown", onpointerdown);
     }
@@ -2969,7 +2969,7 @@ public class Document extends Node {
      * Returns the {@code onpointerenter} event handler for this element.
      * @return the {@code onpointerenter} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerenter() {
         return getEventHandler("pointerenter");
     }
@@ -2978,7 +2978,7 @@ public class Document extends Node {
      * Sets the {@code onpointerenter} event handler for this element.
      * @param onpointerenter the {@code onpointerenter} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerenter(final Object onpointerenter) {
         setEventHandler("pointerenter", onpointerenter);
     }
@@ -2987,7 +2987,7 @@ public class Document extends Node {
      * Returns the {@code onpointerleave} event handler for this element.
      * @return the {@code onpointerleave} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerleave() {
         return getEventHandler("pointerleave");
     }
@@ -2996,7 +2996,7 @@ public class Document extends Node {
      * Sets the {@code onpointerleave} event handler for this element.
      * @param onpointerleave the {@code onpointerleave} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerleave(final Object onpointerleave) {
         setEventHandler("pointerleave", onpointerleave);
     }
@@ -3041,7 +3041,7 @@ public class Document extends Node {
      * Returns the {@code onpointermove} event handler for this element.
      * @return the {@code onpointermove} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointermove() {
         return getEventHandler("pointermove");
     }
@@ -3050,7 +3050,7 @@ public class Document extends Node {
      * Sets the {@code onpointermove} event handler for this element.
      * @param onpointermove the {@code onpointermove} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointermove(final Object onpointermove) {
         setEventHandler("pointermove", onpointermove);
     }
@@ -3059,7 +3059,7 @@ public class Document extends Node {
      * Returns the {@code onpointerout} event handler for this element.
      * @return the {@code onpointerout} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerout() {
         return getEventHandler("pointerout");
     }
@@ -3068,7 +3068,7 @@ public class Document extends Node {
      * Sets the {@code onpointerout} event handler for this element.
      * @param onpointerout the {@code onpointerout} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerout(final Object onpointerout) {
         setEventHandler("pointerout", onpointerout);
     }
@@ -3077,7 +3077,7 @@ public class Document extends Node {
      * Returns the {@code onpointerover} event handler for this element.
      * @return the {@code onpointerover} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerover() {
         return getEventHandler("pointerover");
     }
@@ -3086,7 +3086,7 @@ public class Document extends Node {
      * Sets the {@code onpointerover} event handler for this element.
      * @param onpointerover the {@code onpointerover} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerover(final Object onpointerover) {
         setEventHandler("pointerover", onpointerover);
     }
@@ -3095,7 +3095,7 @@ public class Document extends Node {
      * Returns the {@code onpointerup} event handler for this element.
      * @return the {@code onpointerup} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerup() {
         return getEventHandler("pointerup");
     }
@@ -3104,7 +3104,7 @@ public class Document extends Node {
      * Sets the {@code onpointerup} event handler for this element.
      * @param onpointerup the {@code onpointerup} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerup(final Object onpointerup) {
         setEventHandler("pointerup", onpointerup);
     }
@@ -3275,7 +3275,7 @@ public class Document extends Node {
      * Returns the {@code onselectionchange} event handler for this element.
      * @return the {@code onselectionchange} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnselectionchange() {
         return getEventHandler("selectionchange");
     }
@@ -3284,7 +3284,7 @@ public class Document extends Node {
      * Sets the {@code onselectionchange} event handler for this element.
      * @param onselectionchange the {@code onselectionchange} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnselectionchange(final Object onselectionchange) {
         setEventHandler("selectionchange", onselectionchange);
     }
@@ -3293,7 +3293,7 @@ public class Document extends Node {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnselectstart() {
         return getEventHandler("selectstart");
     }
@@ -3302,7 +3302,7 @@ public class Document extends Node {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler("selectstart", onselectstart);
     }

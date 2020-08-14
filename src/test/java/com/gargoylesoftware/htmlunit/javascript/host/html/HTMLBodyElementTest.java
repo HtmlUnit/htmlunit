@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +48,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"},
             FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"},
             FF68 = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
             "<html>\n"

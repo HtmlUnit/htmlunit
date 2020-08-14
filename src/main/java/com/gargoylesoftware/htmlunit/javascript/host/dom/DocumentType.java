@@ -51,7 +51,7 @@ public class DocumentType extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public DocumentType() {
     }
 

@@ -70,7 +70,7 @@ public class Geolocation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, EDGE, FF})
     public Geolocation() {
     }
 

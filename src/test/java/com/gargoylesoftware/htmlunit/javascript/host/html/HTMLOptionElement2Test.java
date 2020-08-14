@@ -1338,19 +1338,21 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"o-mouse over [option1]", "s-mouse over [option1]"},
+    @Alerts(DEFAULT = "o-mouse over [option1]s-mouse over [option1]",
+            FF = "s-mouse over [select1]o-mouse over [option1]s-mouse over [option1]",
+            FF68 = "s-mouse over [select1]o-mouse over [option1]s-mouse over [option1]",
             IE = {})
+    @BuggyWebDriver(FF68 = "o-mouse over [option1]s-mouse over [option1]")
     public void mouseOver() throws Exception {
-        shutDownRealIE();
+        shutDownAll();
 
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
+            + "    <title></title>\n"
             + "    <script>\n"
             + "    function dumpEvent(event, pre) {\n"
-            + "      // target\n"
             + "      var eTarget;\n"
             + "      if (event.target) {\n"
             + "        eTarget = event.target;\n"
@@ -1367,7 +1369,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      alert(msg);\n"
+            + "      document.title += msg;\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1385,7 +1387,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1397,6 +1399,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             FF68 = "o-mouse over [option1] s-mouse over [option1]",
             IE = "")
     public void mouseOverDisabledSelect() throws Exception {
+        shutDownAll();
+
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -1450,6 +1454,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
             FF68 = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
     public void mouseOverDisabledOption() throws Exception {
+        shutDownAll();
+
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"

@@ -74,7 +74,7 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public HTMLAnchorElement() {
     }
 

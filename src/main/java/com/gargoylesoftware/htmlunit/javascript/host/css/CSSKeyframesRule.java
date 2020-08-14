@@ -37,7 +37,7 @@ public class CSSKeyframesRule extends CSSRule {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public CSSKeyframesRule() {
     }
 

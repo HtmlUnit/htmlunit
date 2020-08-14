@@ -83,7 +83,7 @@ public class MessageEvent extends Event {
      * @param details the event details (optional)
      */
     @Override
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 

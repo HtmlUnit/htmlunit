@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMeter.class, value = {FF, FF68, CHROME})
+@JsxClass(domClass = HtmlMeter.class, value = {CHROME, EDGE, FF, FF68})
 public class HTMLMeterElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
@@ -41,7 +41,7 @@ public class HTMLMeterElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public HTMLMeterElement() {
     }
 

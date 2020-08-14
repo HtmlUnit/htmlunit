@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -180,7 +181,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "exception ctor",
             FF68 = "exception ctor")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void dispatchEventWithoutInit() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

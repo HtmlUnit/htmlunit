@@ -53,7 +53,7 @@ public class UIEvent extends Event {
     /**
      * Creates a new UI event instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public UIEvent() {
     }
 

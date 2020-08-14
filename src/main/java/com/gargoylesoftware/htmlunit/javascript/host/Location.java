@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_H
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -87,7 +88,7 @@ public class Location extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public Location() {
     }
 

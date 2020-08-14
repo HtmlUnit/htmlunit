@@ -52,7 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Andrea Martino
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, value = {CHROME, FF, FF68})
+@JsxClass(isJSObject = false, value = {CHROME, EDGE, FF, FF68})
 @JsxClass(IE)
 public class Console extends SimpleScriptable {
 

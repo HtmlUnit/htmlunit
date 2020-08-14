@@ -34,7 +34,7 @@ public class CSSSupportsRule extends CSSConditionRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public CSSSupportsRule() {
     }
 }

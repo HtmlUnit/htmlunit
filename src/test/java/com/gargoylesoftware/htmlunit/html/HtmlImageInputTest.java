@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.InputStream;
@@ -31,6 +32,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -54,7 +56,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             CHROME = "§§URL§§?button.x=16&button.y=8",
             EDGE = "§§URL§§?button.x=16&button.y=8",
             IE = "§§URL§§?button.x=14&button.y=15")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void click_NoPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -78,7 +80,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             CHROME = "§§URL§§?button.x=28&button.y=8",
             EDGE = "§§URL§§?button.x=28&button.y=8",
             IE = "§§URL§§?button.x=14&button.y=15")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void click_NoPosition_NoValue() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

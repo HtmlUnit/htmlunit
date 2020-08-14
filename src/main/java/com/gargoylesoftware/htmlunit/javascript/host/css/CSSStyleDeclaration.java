@@ -249,7 +249,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public CSSStyleDeclaration() {
     }
 
@@ -2388,7 +2388,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code widows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getWidows() {
         return getStyleAttribute(WIDOWS);
     }
@@ -2397,7 +2397,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code widows} style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setWidows(final String widows) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {
@@ -2416,7 +2416,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, EDGE, IE})
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -2425,7 +2425,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({CHROME, IE})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOrphans(final String orphans) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {

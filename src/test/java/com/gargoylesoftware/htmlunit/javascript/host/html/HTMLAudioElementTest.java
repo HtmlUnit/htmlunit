@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -42,10 +43,10 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object HTMLAudioElement]", "[object HTMLAudioElement]"},
-            CHROME = {"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"},
+    @Alerts(DEFAULT = {"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"},
             FF = {"[object HTMLAudioElement]", "function HTMLAudioElement() {\n    [native code]\n}"},
-            FF68 = {"[object HTMLAudioElement]", "function HTMLAudioElement() {\n    [native code]\n}"})
+            FF68 = {"[object HTMLAudioElement]", "function HTMLAudioElement() {\n    [native code]\n}"},
+            IE = {"[object HTMLAudioElement]", "[object HTMLAudioElement]"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -214,7 +215,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_AudioOgg() throws Exception {
         canPlayType("audio/ogg");
     }
@@ -225,7 +226,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_VideoOgg() throws Exception {
         canPlayType("video/ogg");
     }
@@ -236,7 +237,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_ApplicationOgg() throws Exception {
         canPlayType("application/ogg");
     }
@@ -269,7 +270,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_AudioWav() throws Exception {
         canPlayType("audio/wav");
     }
@@ -280,7 +281,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_AudioXWav() throws Exception {
         canPlayType("audio/x-wav");
     }
@@ -303,7 +304,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_AudioWebm() throws Exception {
         canPlayType("audio/webm");
     }
@@ -314,7 +315,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_VideoWebm() throws Exception {
         canPlayType("video/webm");
     }
@@ -324,7 +325,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "maybe",
-            CHROME = "probably")
+            CHROME = "probably",
+            EDGE = "probably")
     @NotYetImplemented
     public void canPlayType_AudioMpeg() throws Exception {
         canPlayType("audio/mpeg");
@@ -334,11 +336,11 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            CHROME = "probably",
+    @Alerts(DEFAULT = "probably",
             FF = "maybe",
-            FF68 = "maybe")
-    @NotYetImplemented({CHROME, FF, FF68})
+            FF68 = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void canPlayType_AudioFlac() throws Exception {
         canPlayType("audio/flac");
     }

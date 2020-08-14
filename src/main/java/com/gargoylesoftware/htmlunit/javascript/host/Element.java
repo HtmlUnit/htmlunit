@@ -108,7 +108,7 @@ public class Element extends Node {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF68})
     public Element() {
         // Empty.
     }
@@ -575,7 +575,7 @@ public class Element extends Node {
      * Returns the class defined for this element.
      * @return the class name
      */
-    @JsxGetter(propertyName = "className", value = {CHROME, FF, FF68})
+    @JsxGetter(propertyName = "className", value = {CHROME, EDGE, FF, FF68})
     public Object getClassName_js() {
         return getDomNodeOrDie().getAttributeDirect("class");
     }
@@ -584,7 +584,7 @@ public class Element extends Node {
      * Sets the class attribute for this element.
      * @param className the new class name
      */
-    @JsxSetter(propertyName = "className", value = {CHROME, FF, FF68})
+    @JsxSetter(propertyName = "className", value = {CHROME, EDGE, FF, FF68})
     public void setClassName_js(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
     }

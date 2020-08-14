@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -51,7 +52,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "",
             EDGE = "",
             IE = "<foo>\n<bar>baz</bar>\n</foo>")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void xmlPage() throws Exception {
         final String xml = "<xml>\n"
                 + "  <foo>\n"
@@ -792,7 +793,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
         getVisibleTextWhiteSpaceSelect(null);
     }
@@ -806,7 +807,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -820,7 +821,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }

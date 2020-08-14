@@ -40,11 +40,11 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top",
-                    "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
-            CHROME = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             FF = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
+            FF68 = {"left", "right", "bottom", "middle", "top",
+                    "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined"})
     @NotYetImplemented({FF, FF68})

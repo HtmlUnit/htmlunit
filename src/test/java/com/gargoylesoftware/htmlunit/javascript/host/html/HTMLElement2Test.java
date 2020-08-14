@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -265,7 +266,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"15", "15"},
             FF = {"12", "12"},
             FF68 = {"12", "12"})
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"

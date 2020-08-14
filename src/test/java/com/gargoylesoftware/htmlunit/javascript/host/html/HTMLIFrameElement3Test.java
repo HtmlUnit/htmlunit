@@ -400,6 +400,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"uninitialized", "complete"},
             CHROME = {"complete", "complete"},
+            EDGE = {"complete", "complete"},
             IE = {"loading", "complete"})
     @HtmlUnitNYI(CHROME = {"loading", "complete"},
             FF = {"loading", "complete"},
@@ -754,6 +755,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = {"loaded", "null"},
+            EDGE = {"loaded", "null"},
             IE = {"loaded", "[object HTMLDocument]"})
     public void csp_None() throws Exception {
         retrictByHeader(
@@ -800,6 +802,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = {"loaded", "null"},
+            EDGE = {"loaded", "null"},
             IE = {"loaded", "[object HTMLDocument]"})
     public void csp_UrlDifferentPort() throws Exception {
         retrictByHeader(
@@ -813,6 +816,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             CHROME = {"loaded", "null"},
+            EDGE = {"loaded", "null"},
             IE = {"loaded", "[object HTMLDocument]"})
     public void csp_many() throws Exception {
         retrictByHeader(

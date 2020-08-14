@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
@@ -33,7 +34,7 @@ import com.gargoylesoftware.htmlunit.util.XmlUtils;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, value = {CHROME, FF, FF68})
+@JsxClass(isJSObject = false, value = {CHROME, EDGE, FF, FF68})
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Node element_;
