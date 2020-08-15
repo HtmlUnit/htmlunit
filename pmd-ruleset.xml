@@ -16,6 +16,7 @@
         <exclude name="CallSuperInConstructor"/>
         <exclude name="ClassNamingConventions"/>
         <exclude name="CommentDefaultAccessModifier"/>
+        <exclude name="DefaultPackage"/>
         <exclude name="FieldNamingConventions"/>
         <exclude name="LongVariable"/>
         <exclude name="MethodNamingConventions"/>
