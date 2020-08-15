@@ -86,6 +86,18 @@ public class File extends Blob {
         public java.io.File getFile() {
             return file_;
         }
+
+        @Override
+        byte[] getBytes(final int start, final int end) {
+            final byte[] result = new byte[end - start];
+            try {
+                System.arraycopy(FileUtils.readFileToByteArray(file_), start, result, 0, result.length);
+            }
+            catch (final IOException e) {
+                // TODO
+            }
+            return result;
+        }
     }
 
     /**
@@ -109,7 +121,7 @@ public class File extends Blob {
             throw ScriptRuntime.typeError("Failed to construct 'File': 2 arguments required.");
         }
 
-        setBackend(new InMemoryBackend(fileBits, fileName,
+        setBackend(InMemoryBackend.create(fileBits, fileName,
                             extractFileTypeOrDefault(properties),
                             extractLastModifiedOrDefault(properties)));
     }

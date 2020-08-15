@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -59,6 +61,8 @@ public class Blob extends SimpleScriptable {
         abstract String getType(BrowserVersion browserVersion);
         abstract String getText() throws IOException;
 
+        abstract byte[] getBytes(int start, int end);
+
         Backend() {
         }
 
@@ -72,33 +76,39 @@ public class Blob extends SimpleScriptable {
         private final long lastModified_;
         private final byte[] bytes_;
 
-        protected InMemoryBackend(final NativeArray fileBits, final String fileName,
+        protected InMemoryBackend(final byte[] bytes, final String fileName,
                 final String type, final long lastModified) {
             fileName_ = fileName;
             type_ = type;
             lastModified_ = lastModified;
+            bytes_ = bytes;
+        }
+
+        protected static InMemoryBackend create(final NativeArray fileBits, final String fileName,
+                final String type, final long lastModified) {
+            if (fileBits == null) {
+                return new InMemoryBackend(new byte[0], fileName, type, lastModified);
+            }
 
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
-            if (fileBits != null) {
-                for (long i = 0; i < fileBits.getLength(); i++) {
-                    final Object fileBit = fileBits.get(i);
-                    if (fileBit instanceof NativeArrayBuffer) {
-                        final byte[] bytes = ((NativeArrayBuffer) fileBit).getBuffer();
-                        out.write(bytes, 0, bytes.length);
-                    }
-                    else if (fileBit instanceof NativeArrayBufferView) {
-                        final byte[] bytes = ((NativeArrayBufferView) fileBit).getBuffer().getBuffer();
-                        out.write(bytes, 0, bytes.length);
-                    }
-                    else {
-                        final String bits = Context.toString(fileBits.get(i));
-                        // Todo normalize line breaks
-                        final byte[] bytes = bits.getBytes(StandardCharsets.UTF_8);
-                        out.write(bytes, 0, bytes.length);
-                    }
+            for (long i = 0; i < fileBits.getLength(); i++) {
+                final Object fileBit = fileBits.get(i);
+                if (fileBit instanceof NativeArrayBuffer) {
+                    final byte[] bytes = ((NativeArrayBuffer) fileBit).getBuffer();
+                    out.write(bytes, 0, bytes.length);
+                }
+                else if (fileBit instanceof NativeArrayBufferView) {
+                    final byte[] bytes = ((NativeArrayBufferView) fileBit).getBuffer().getBuffer();
+                    out.write(bytes, 0, bytes.length);
+                }
+                else {
+                    final String bits = Context.toString(fileBits.get(i));
+                    // Todo normalize line breaks
+                    final byte[] bytes = bits.getBytes(StandardCharsets.UTF_8);
+                    out.write(bytes, 0, bytes.length);
                 }
             }
-            bytes_ = out.toByteArray();
+            return new InMemoryBackend(out.toByteArray(), fileName, type, lastModified);
         }
 
         @Override
@@ -130,6 +140,13 @@ public class Blob extends SimpleScriptable {
         public java.io.File getFile() {
             throw new UnsupportedOperationException(
                     "com.gargoylesoftware.htmlunit.javascript.host.file.File.InMemoryBackend.getFile()");
+        }
+
+        @Override
+        public byte[] getBytes(final int start, final int end) {
+            final byte[] result = new byte[end - start];
+            System.arraycopy(bytes_, start, result, 0, result.length);
+            return result;
         }
     }
 
@@ -186,7 +203,7 @@ public class Blob extends SimpleScriptable {
             nativeBits = null;
         }
 
-        setBackend(new InMemoryBackend(nativeBits, null,
+        setBackend(InMemoryBackend.create(nativeBits, null,
                             extractFileTypeOrDefault(properties),
                             extractLastModifiedOrDefault(properties)));
     }
@@ -207,6 +224,45 @@ public class Blob extends SimpleScriptable {
     @JsxGetter
     public String getType() {
         return getBackend().getType(getBrowserVersion());
+    }
+
+    @JsxFunction
+    public Blob slice(final Object start, final Object end, final Object contentType) {
+        final Blob blob = new Blob();
+        blob.setParentScope(getParentScope());
+        blob.setPrototype(getPrototype(Blob.class));
+
+        final int size = (int) getSize();
+        int usedStart = 0;
+        int usedEnd = size;
+        if (start != null && !Undefined.isUndefined(start)) {
+            usedStart = ScriptRuntime.toInt32(start);
+            if (usedStart < 0) {
+                usedStart = size + usedStart;
+            }
+            usedStart = Math.max(0, usedStart);
+        }
+
+        if (end != null && !Undefined.isUndefined(end)) {
+            usedEnd = ScriptRuntime.toInt32(end);
+            if (usedEnd < 0) {
+                usedEnd = size + usedEnd;
+            }
+            usedEnd = Math.min(size, usedEnd);
+        }
+
+        String usedContentType = "";
+        if (contentType != null && !Undefined.isUndefined(contentType)) {
+            usedContentType = ScriptRuntime.toString(contentType).toLowerCase(Locale.ROOT);
+        }
+
+        if (usedEnd <= usedStart || usedStart >= getSize()) {
+            blob.setBackend(new InMemoryBackend(new byte[0], null, usedContentType, 0L));
+            return blob;
+        }
+
+        blob.setBackend(new InMemoryBackend(getBackend().getBytes(usedStart, usedEnd), null, usedContentType, 0L));
+        return blob;
     }
 
     /**

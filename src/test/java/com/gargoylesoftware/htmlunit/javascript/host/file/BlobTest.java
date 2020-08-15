@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -325,6 +326,223 @@ public class BlobTest extends WebDriverTestCase {
                 + "    alert(blob.type);\n"
                 + "    try {\n"
                 + "      blob.text().then(function(text) { alert(text); });\n"
+                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "function", "3", "", "tml"},
+            FF68 = {"12", "", "function", "3", "", "TypeError true"},
+            IE = {"12", "", "function", "3", "", "TypeError true"})
+    public void slice() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var nab = new ArrayBuffer(2);\n"
+                + "    var nabv = new Uint8Array(nab, 0, 2);\n"
+                + "    nabv.set([77, 77], 0);\n"
+                + "    var blob = new Blob(['HtmlUnit',"
+                                        + "nab, new Int8Array([77,75])]);\n"
+
+                + "    alert(blob.size);\n"
+                + "    alert(blob.type);\n"
+
+                + "    alert(typeof blob.slice);\n"
+
+                + "    var sliced = blob.slice(1,4);\n"
+                + "    alert(sliced.size);\n"
+                + "    alert(sliced.type);\n"
+
+                + "    try {\n"
+                + "      sliced.text().then(function(text) { alert(text); });\n"
+                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "12", "", "HtmlUnitMMMK"},
+            FF68 = {"12", "", "12", "", "TypeError true"},
+            IE = {"12", "", "12", "", "TypeError true"})
+    public void sliceWhole() throws Exception {
+        slice("blob.slice();");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "9", "", "lUnitMMMK"},
+            FF68 = {"12", "", "9", "", "TypeError true"},
+            IE = {"12", "", "9", "", "TypeError true"})
+    public void sliceStartOnly() throws Exception {
+        slice("blob.slice(3);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "7", "", "nitMMMK"},
+            FF68 = {"12", "", "7", "", "TypeError true"},
+            IE = {"12", "", "7", "", "TypeError true"})
+    public void sliceStartOnlyNegative() throws Exception {
+        slice("blob.slice(-7);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "12", "", "HtmlUnitMMMK"},
+            FF68 = {"12", "", "12", "", "TypeError true"},
+            IE = {"12", "", "12", "", "TypeError true"})
+    public void sliceStartOnlyNegativeOutside() throws Exception {
+        slice("blob.slice(-123);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "3", "", "mlU"},
+            FF68 = {"12", "", "3", "", "TypeError true"},
+            IE = {"12", "", "3", "", "TypeError true"})
+    public void sliceEndNegative() throws Exception {
+        slice("blob.slice(2, -7);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "10", "", "mlUnitMMMK"},
+            FF68 = {"12", "", "10", "", "TypeError true"},
+            IE = {"12", "", "10", "", "TypeError true"})
+    public void sliceEndOutside() throws Exception {
+        slice("blob.slice(2, 1234);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "0", "", ""},
+            FF68 = {"12", "", "0", "", "TypeError true"},
+            IE = {"12", "", "0", "", "TypeError true"})
+    public void sliceBothOutside() throws Exception {
+        slice("blob.slice(123, 1234);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "0", "", ""},
+            FF68 = {"12", "", "0", "", "TypeError true"},
+            IE = {"12", "", "0", "", "TypeError true"})
+    public void sliceNoIntersection() throws Exception {
+        slice("blob.slice(5, 4);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "1", "", "U"},
+            FF68 = {"12", "", "1", "", "TypeError true"},
+            IE = {"12", "", "1", "", "TypeError true"})
+    public void sliceEmptyIntersection() throws Exception {
+        slice("blob.slice(4, 5);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "12", "", "HtmlUnitMMMK"},
+            FF68 = {"12", "", "12", "", "TypeError true"},
+            IE = {"12", "", "12", "", "TypeError true"})
+    public void sliceWrongStart() throws Exception {
+        slice("blob.slice('four');");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "0", "", ""},
+            FF68 = {"12", "", "0", "", "TypeError true"},
+            IE = {"12", "", "0", "", "TypeError true"})
+    public void sliceWrongEnd() throws Exception {
+        slice("blob.slice(1, 'four');");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "1", "type", "t"},
+            FF68 = {"12", "", "1", "type", "TypeError true"},
+            IE = {"12", "", "1", "tyPE", "TypeError true"})
+    @HtmlUnitNYI(IE = {"12", "", "1", "type", "TypeError true"})
+    public void sliceContentType() throws Exception {
+        slice("blob.slice(1, 2, 'tyPE');");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12", "", "1", "7", "t"},
+            FF68 = {"12", "", "1", "7", "TypeError true"},
+            IE = {"12", "", "1", "7", "TypeError true"})
+    public void sliceContentTypeNotString() throws Exception {
+        slice("blob.slice(1, 2, 7);");
+    }
+
+    private void slice(final String slice) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var nab = new ArrayBuffer(2);\n"
+                + "    var nabv = new Uint8Array(nab, 0, 2);\n"
+                + "    nabv.set([77, 77], 0);\n"
+                + "    var blob = new Blob(['HtmlUnit',"
+                                        + "nab, new Int8Array([77,75])]);\n"
+
+                + "    alert(blob.size);\n"
+                + "    alert(blob.type);\n"
+
+                + "    var sliced = " + slice + "\n"
+                + "    alert(sliced.size);\n"
+                + "    alert(sliced.type);\n"
+
+                + "    try {\n"
+                + "      sliced.text().then(function(text) { alert(text); });\n"
                 + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
