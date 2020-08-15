@@ -341,6 +341,41 @@ public class BlobTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"34", "", "HtmlUnitHtmlUnitMMMKMKHtmlUnitMMMK"},
+            FF68 = {"34", "", "TypeError true"},
+            IE = {"34", "", "TypeError true"})
+    public void ctorMixedBlobs() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var nab = new ArrayBuffer(2);\n"
+                + "    var nabv = new Uint8Array(nab, 0, 2);\n"
+                + "    nabv.set([77, 77], 0);\n"
+                + "    var blob = new Blob(['HtmlUnit',"
+                                        + "nab, new Int8Array([77,75])]);\n"
+                + "    blob = new Blob(['HtmlUnit',"
+                                    + "blob, new Int8Array([77,75]), blob]);\n"
+                + "    alert(blob.size);\n"
+                + "    alert(blob.type);\n"
+                + "    try {\n"
+                + "      blob.text().then(function(text) { alert(text); });\n"
+                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"12", "", "function", "3", "", "tml"},
             FF68 = {"12", "", "function", "3", "", "TypeError true"},
             IE = {"12", "", "function", "3", "", "TypeError true"})

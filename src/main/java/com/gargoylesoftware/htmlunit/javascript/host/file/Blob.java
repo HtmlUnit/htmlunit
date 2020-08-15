@@ -101,6 +101,11 @@ public class Blob extends SimpleScriptable {
                     final byte[] bytes = ((NativeArrayBufferView) fileBit).getBuffer().getBuffer();
                     out.write(bytes, 0, bytes.length);
                 }
+                else if (fileBit instanceof Blob) {
+                    final Blob blob = (Blob) fileBit;
+                    final byte[] bytes = blob.getBackend().getBytes(0, (int) blob.getSize());
+                    out.write(bytes, 0, bytes.length);
+                }
                 else {
                     final String bits = Context.toString(fileBits.get(i));
                     // Todo normalize line breaks
