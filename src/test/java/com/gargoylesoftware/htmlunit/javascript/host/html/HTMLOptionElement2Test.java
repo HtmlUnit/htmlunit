@@ -1339,10 +1339,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "o-mouse over [option1]s-mouse over [option1]",
-            FF = "s-mouse over [select1]o-mouse over [option1]s-mouse over [option1]",
-            FF68 = "s-mouse over [select1]o-mouse over [option1]s-mouse over [option1]",
-            IE = {})
-    @BuggyWebDriver(FF68 = "o-mouse over [option1]s-mouse over [option1]")
+            IE = "")
     public void mouseOver() throws Exception {
         shutDownAll();
 
