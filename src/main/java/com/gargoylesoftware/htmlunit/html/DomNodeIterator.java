@@ -126,25 +126,22 @@ public class DomNodeIterator implements NodeIterator {
                 }
                 else {
                     final DomNode leftChild = getChild(node, true);
-                    if (leftChild != null) {
-                        node = leftChild;
-                    }
-                    else {
+                    if (leftChild == null) {
                         final DomNode rightSibling = getSibling(node, false);
-                        if (rightSibling != null) {
-                            node = rightSibling;
-                        }
-                        else {
+                        if (rightSibling == null) {
                             node = getFirstUncleNode(node);
                         }
+                        else {
+                            node = rightSibling;
+                        }
+                    }
+                    else {
+                        node = leftChild;
                     }
                 }
             }
             else {
-                if (!beforeNode) {
-                    beforeNode = true;
-                }
-                else {
+                if (beforeNode) {
                     final DomNode left = getSibling(node, true);
                     if (left == null) {
                         final Node parent = node.getParentNode();
@@ -164,6 +161,9 @@ public class DomNodeIterator implements NodeIterator {
                         }
                     }
                     node = follow;
+                }
+                else {
+                    beforeNode = true;
                 }
             }
         }

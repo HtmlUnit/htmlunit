@@ -49,16 +49,16 @@ public abstract class DomNamespaceNode extends DomNode {
         WebAssert.notNull("qualifiedName", qualifiedName);
         qualifiedName_ = qualifiedName;
 
-        if (qualifiedName.indexOf(':') != -1) {
+        if (qualifiedName.indexOf(':') == -1) {
+            namespaceURI_ = namespaceURI;
+            localName_ = qualifiedName_;
+            prefix_ = null;
+        }
+        else {
             namespaceURI_ = namespaceURI;
             final int colonPosition = qualifiedName_.indexOf(':');
             localName_ = qualifiedName_.substring(colonPosition + 1);
             prefix_ = qualifiedName_.substring(0, colonPosition);
-        }
-        else {
-            namespaceURI_ = namespaceURI;
-            localName_ = qualifiedName_;
-            prefix_ = null;
         }
 
         localNameLC_ = localName_.toLowerCase(Locale.ROOT);

@@ -804,19 +804,19 @@ public class HtmlPage extends SgmlPage {
                 final Short i2 = element2.getTabIndex();
 
                 final short index1;
-                if (i1 != null) {
-                    index1 = i1.shortValue();
+                if (i1 == null) {
+                    index1 = -1;
                 }
                 else {
-                    index1 = -1;
+                    index1 = i1.shortValue();
                 }
 
                 final short index2;
-                if (i2 != null) {
-                    index2 = i2.shortValue();
+                if (i2 == null) {
+                    index2 = -1;
                 }
                 else {
-                    index2 = -1;
+                    index2 = i2.shortValue();
                 }
 
                 final int result;
@@ -1107,12 +1107,12 @@ public class HtmlPage extends SgmlPage {
                 ignoreBom = ISO_8859_1 != scriptCharset;
             }
         }
-        else if (ISO_8859_1 != contentCharset) {
+        else if (ISO_8859_1 == contentCharset) {
             ignoreBom = true;
-            scriptEncoding = contentCharset;
         }
         else {
             ignoreBom = true;
+            scriptEncoding = contentCharset;
         }
 
         final String scriptCode = response.getContentAsString(scriptEncoding,

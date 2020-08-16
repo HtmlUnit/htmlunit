@@ -449,21 +449,21 @@ public class XMLDOMNode extends MSXMLScriptable {
                 }
                 refChildNode = null;
             }
-            else if (refChildObject != null) {
-                refChildNode = ((XMLDOMNode) refChildObject).getDomNodeOrDie();
+            else if (refChildObject == null) {
+                refChildNode = null;
             }
             else {
-                refChildNode = null;
+                refChildNode = ((XMLDOMNode) refChildObject).getDomNodeOrDie();
             }
 
             final DomNode domNode = getDomNodeOrDie();
             // Append the child to the parent node
-            if (refChildNode != null) {
-                refChildNode.insertBefore(newChildNode);
+            if (refChildNode == null) {
+                domNode.appendChild(newChildNode);
                 appendedChild = newChildObject;
             }
             else {
-                domNode.appendChild(newChildNode);
+                refChildNode.insertBefore(newChildNode);
                 appendedChild = newChildObject;
             }
 

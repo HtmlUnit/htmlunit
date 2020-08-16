@@ -137,21 +137,21 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
 
     private static void add(final StringBuilder newValue, final char c, final int selectionStart,
             final int selectionEnd) {
-        if (selectionStart != newValue.length()) {
-            newValue.replace(selectionStart, selectionEnd, Character.toString(c));
+        if (selectionStart == newValue.length()) {
+            newValue.append(c);
         }
         else {
-            newValue.append(c);
+            newValue.replace(selectionStart, selectionEnd, Character.toString(c));
         }
     }
 
     private static void add(final StringBuilder newValue, final String string, final int selectionStart,
             final int selectionEnd) {
-        if (selectionStart != newValue.length()) {
-            newValue.replace(selectionStart, selectionEnd, string);
+        if (selectionStart == newValue.length()) {
+            newValue.append(string);
         }
         else {
-            newValue.append(string);
+            newValue.replace(selectionStart, selectionEnd, string);
         }
     }
 

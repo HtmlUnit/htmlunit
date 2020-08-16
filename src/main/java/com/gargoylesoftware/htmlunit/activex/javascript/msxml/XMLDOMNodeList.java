@@ -380,7 +380,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      */
     @Override
     public String toString() {
-        return description_ != null ? description_ : super.toString();
+        return description_ == null ? super.toString() : description_;
     }
 
     /**
@@ -472,17 +472,17 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         for (final DomNode next : elements) {
             final HtmlElement element = (HtmlElement) next;
             final String name = element.getAttributeDirect("name");
-            if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                idList.add(name);
-            }
-            else {
+            if (name == DomElement.ATTRIBUTE_NOT_DEFINED) {
                 final String id = element.getId();
-                if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                    idList.add(id);
-                }
-                else {
+                if (id == DomElement.ATTRIBUTE_NOT_DEFINED) {
                     idList.add(Integer.toString(index));
                 }
+                else {
+                    idList.add(id);
+                }
+            }
+            else {
+                idList.add(name);
             }
             index++;
         }

@@ -140,16 +140,16 @@ public class XMLSerializer {
 
             }
         }
-        if (!startTagClosed) {
-            builder.append(optionalPrefix).append("/>");
-        }
-        else {
+        if (startTagClosed) {
             if (!preserveWhiteSpace_ && builder.charAt(builder.length() - 1) == '\n') {
                 for (int i = 0; i < indent - 1; i++) {
                     builder.append('\t');
                 }
             }
             builder.append('<').append('/').append(nodeName).append('>');
+        }
+        else {
+            builder.append(optionalPrefix).append("/>");
         }
     }
 
