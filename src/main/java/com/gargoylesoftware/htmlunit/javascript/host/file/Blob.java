@@ -15,9 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,7 +27,11 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpHeader;
+import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -290,6 +296,21 @@ public class Blob extends SimpleScriptable {
 
     public byte[] getBytes() {
         return getBackend().getBytes(0, (int) getBackend().getSize());
+    }
+
+    /**
+     * Sets the specified request with the parameters in this {@code FormData}.
+     * @param webRequest the web request to fill
+     */
+    public void fillRequest(final WebRequest webRequest) {
+        webRequest.setRequestBody(new String(getBytes(), UTF_8));
+
+        final String mimeType = getType();
+        if (getBrowserVersion().hasFeature(XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE)
+                && StringUtils.isNotBlank(mimeType)) {
+            webRequest.setAdditionalHeader(HttpHeader.CONTENT_TYPE, mimeType);
+        }
+        webRequest.setEncodingType(null);
     }
 
     protected Backend getBackend() {

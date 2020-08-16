@@ -73,6 +73,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -681,6 +682,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             else if (content instanceof URLSearchParams) {
                 ((URLSearchParams) content).fillRequest(webRequest_);
                 webRequest_.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
+            }
+            else if (content instanceof Blob) {
+                ((Blob) content).fillRequest(webRequest_);
             }
             else {
                 final String body = Context.toString(content);

@@ -1620,6 +1620,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     XHR_OPEN_ALLOW_EMTPY_URL,
 
+    /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header. */
+    @BrowserFeature({CHROME, FF, FF68})
+    XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE,
+
     /** Indicates that the content charset is used for response parsing. */
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     XHR_USE_CONTENT_CHARSET,

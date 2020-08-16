@@ -74,7 +74,7 @@ public class FileReaderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("data:text/plain;base64,SHRtbFVuaXQ=")
-    public void readAsDataURL() throws Exception {
+    public void readAsDataURL_file() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -115,6 +115,95 @@ public class FileReaderTest extends WebDriverTestCase {
         finally {
             FileUtils.deleteQuietly(tstFile);
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:application/octet-stream;base64,SHRtbFVuaXRpcyBncmVhdA==",
+            IE = "data:;base64,SHRtbFVuaXRpcyBncmVhdA==")
+    public void readAsDataURL_blob() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var blob = new Blob(['Html', 'Unit', 'is great']);\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        var dataURL = reader.result;\n"
+            + "        alert(dataURL);\n"
+            + "      };\n"
+            + "      reader.readAsDataURL(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:text/plain;base64,SHRtbFVuaXRpcyBncmVhdA==")
+    public void readAsDataURL_blobMimeType() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var blob = new Blob(['Html', 'Unit', 'is great'], {type : 'text/plain'});\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        var dataURL = reader.result;\n"
+            + "        alert(dataURL);\n"
+            + "      };\n"
+            + "      reader.readAsDataURL(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:unknown;base64,SHRtbFVuaXRpcyBncmVhdA==",
+            IE = "data:unKNown;base64,SHRtbFVuaXRpcyBncmVhdA==")
+    public void readAsDataURL_blobMimeTypeUnknown() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var blob = new Blob(['Html', 'Unit', 'is great'], {type : 'unKNown'});\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        var dataURL = reader.result;\n"
+            + "        alert(dataURL);\n"
+            + "      };\n"
+            + "      reader.readAsDataURL(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
