@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -133,6 +134,9 @@ public class Blob extends SimpleScriptable {
 
         @Override
         public String getType(final BrowserVersion browserVersion) {
+            if (!browserVersion.hasFeature(JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE)) {
+                return type_.toLowerCase(Locale.ROOT);
+            }
             return type_;
         }
 
@@ -282,6 +286,10 @@ public class Blob extends SimpleScriptable {
         catch (final IOException e) {
             return Promise.reject(null, this, new Object[] {e.getMessage()}, null);
         }
+    }
+
+    public byte[] getBytes() {
+        return getBackend().getBytes(0, (int) getBackend().getSize());
     }
 
     protected Backend getBackend() {

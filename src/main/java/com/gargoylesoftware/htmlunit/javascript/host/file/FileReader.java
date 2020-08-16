@@ -110,18 +110,20 @@ public class FileReader extends EventTarget {
     @JsxFunction
     public void readAsDataURL(final Object object) throws IOException {
         readyState_ = LOADING;
-        final java.io.File file = ((File) object).getFile();
 
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            FileUtils.copyFile(file, bos);
+        result_ = "data:";
 
-            final byte[] bytes = bos.toByteArray();
-            final String value = new String(new Base64().encode(bytes), StandardCharsets.US_ASCII);
-            final BrowserVersion browserVersion = getBrowserVersion();
+        final byte[] bytes = ((Blob) object).getBytes();
+        final String value = new String(new Base64().encode(bytes), StandardCharsets.US_ASCII);
+        final BrowserVersion browserVersion = getBrowserVersion();
 
-            result_ = "data:";
+        String contentType = ((Blob) object).getType();
+        if (StringUtils.isEmpty(contentType) && !browserVersion.hasFeature(JS_FILEREADER_EMPTY_NULL)) {
+            contentType = MimeType.APPLICATION_OCTET_STREAM;
+        }
 
-            String contentType;
+        if (object instanceof File) {
+            final java.io.File file = ((File) object).getFile();
             if (value.isEmpty()) {
                 contentType = URLConnection.guessContentTypeFromName(file.getName());
             }
@@ -131,26 +133,26 @@ public class FileReader extends EventTarget {
                 // e.g. 'application/octet-stream' for a file with random bits
                 // instead of null on windows
             }
+        }
 
-            if (getBrowserVersion().hasFeature(JS_FILEREADER_EMPTY_NULL)) {
-                if (value.isEmpty()) {
-                    result_ = "null";
-                }
-                else {
-                    if (contentType != null) {
-                        result_ += contentType;
-                    }
-                    result_ += ";base64," + value;
-                }
+        if (browserVersion.hasFeature(JS_FILEREADER_EMPTY_NULL)) {
+            if (value.isEmpty()) {
+                result_ = "null";
             }
             else {
-                final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
-                if (!value.isEmpty() || includeConentType) {
-                    if (contentType == null) {
-                        contentType = MimeType.APPLICATION_OCTET_STREAM;
-                    }
-                    result_ += contentType + ";base64," + value;
+                if (contentType != null) {
+                    result_ += contentType;
                 }
+                result_ += ";base64," + value;
+            }
+        }
+        else {
+            final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
+            if (!value.isEmpty() || includeConentType) {
+                if (contentType == null) {
+                    contentType = MimeType.APPLICATION_OCTET_STREAM;
+                }
+                result_ += contentType + ";base64," + value;
             }
         }
         readyState_ = DONE;

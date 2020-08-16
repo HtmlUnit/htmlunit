@@ -646,6 +646,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF68})
     JS_BGSOUND_AS_UNKNOWN,
 
+    /** Whether {@code Blob} stores the content type case sensitive. */
+    @BrowserFeature(IE)
+    JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE,
+
     /** Body {@code margin} is 8px. */
     @BrowserFeature(IE)
     JS_BODY_MARGINS_8,
