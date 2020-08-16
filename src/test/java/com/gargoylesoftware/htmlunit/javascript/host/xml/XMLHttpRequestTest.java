@@ -245,7 +245,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         assertLog(driver, expected);
     }
 
-    private void assertLog(final WebDriver driver, final String expected) throws InterruptedException {
+    private static void assertLog(final WebDriver driver, final String expected) throws InterruptedException {
         final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
         while (true) {
             try {
@@ -1692,9 +1692,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                    "function() { return !0 }",
-                    "\nfunction onreadystatechange() {\n    [native code]\n}\n",
-                    "true", "true"})
+                        "function() { return !0 }",
+                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                        "true", "true"})
     @NotYetImplemented
     public void defineProperty() throws Exception {
         final String html =
@@ -1764,7 +1764,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "application/json",
             IE = "null")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void enctypeBlob() throws Exception {
         final String html
             = "<html>\n"
