@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
-@JsxClass({CHROME, IE})
+@JsxClass({CHROME, EDGE, IE})
 @JsxClass(className = "OfflineResourceList", value = {FF, FF68})
 public class ApplicationCache extends EventTarget {
 

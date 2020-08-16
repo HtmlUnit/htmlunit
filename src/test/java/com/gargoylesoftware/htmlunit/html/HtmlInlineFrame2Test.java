@@ -208,6 +208,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "about:blank",
             CHROME = "about://unsupported",
+            EDGE = "about://unsupported",
             IE = "exception")
     @NotYetImplemented({CHROME, IE})
     public void aboutSrc() throws Exception {

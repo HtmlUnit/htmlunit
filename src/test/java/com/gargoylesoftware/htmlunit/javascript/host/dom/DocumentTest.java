@@ -2262,7 +2262,8 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false"},
-            CHROME = {"false", "false"})
+            CHROME = {"false", "false"},
+            EDGE = {"false", "false"})
     public void execCommand() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

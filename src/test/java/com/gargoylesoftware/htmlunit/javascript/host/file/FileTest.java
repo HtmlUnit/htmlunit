@@ -42,7 +42,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1", "ScriptExceptionTest1.txt",
+    @Alerts(DEFAULT = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
                             "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             FF = {"1", "ScriptExceptionTest1.txt", "undefined",

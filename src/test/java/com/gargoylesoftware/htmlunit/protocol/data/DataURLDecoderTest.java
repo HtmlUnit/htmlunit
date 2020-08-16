@@ -71,6 +71,10 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8fjSERg4iIC1dgoE1BRFQeCrcA"
                 + "AIVvHwN4kUse7wBpZNRo1QMgssMecD9YAfTboYROtTqbYSzvGDAtRCYO5rRB7Xj6Az14DRCINTblQZSFL0Fyk2h17xI5BekL"
                 + "YHfV61ee8pnRMQN+rwAAAABJRU5ErkJggg==",
+            EDGE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8fjSERg4iIC1dgoE1BRFQeCrcA"
+                + "AIVvHwN4kUse7wBpZNRo1QMgssMecD9YAfTboYROtTqbYSzvGDAtRCYO5rRB7Xj6Az14DRCINTblQZSFL0Fyk2h17xI5BekL"
+                + "YHfV61ee8pnRMQN+rwAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABwSURBVDhP"
                 + "pZPbDsAgCENh///P27qsxhFEGCcxPiht8aLnjTQ43rmMqj5zWQCFGAw+WqBihrnrj8C8YLEG3JtqgcWegSuAgpWjZZvACllc"

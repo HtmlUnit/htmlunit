@@ -43,7 +43,7 @@ public class Notification extends EventTarget {
     /**
      * The maximum number of actions supported.
      */
-    @JsxConstant(CHROME)
+    @JsxConstant({CHROME, EDGE})
     public static final short maxActions            = 2;
 
     /**

@@ -338,7 +338,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"keydown:16,0,16,Shift,undefined,ShiftLeft,true",
+    @Alerts(DEFAULT = {"keydown:16,0,16,Shift,undefined,ShiftLeft,true",
                     "keydown:65,0,65,A,undefined,KeyA,true",
                     "keypress:65,65,65,A,undefined,KeyA,true",
                     "keyup:65,0,65,A,undefined,KeyA,true",
@@ -397,6 +397,20 @@ public class KeyboardEventTest extends WebDriverTestCase {
             )
     // https://github.com/SeleniumHQ/selenium/issues/2531
     @BuggyWebDriver(CHROME = {"keydown:16,0,16,Shift,undefined,ShiftLeft,false",
+                            "keydown:65,0,65,A,undefined,KeyA,true",
+                            "keypress:65,65,65,A,undefined,KeyA,true",
+                            "keyup:65,0,65,A,undefined,KeyA,true",
+                            "keyup:16,0,16,Shift,undefined,ShiftLeft,false",
+                            "keydown:65,0,65,a,undefined,KeyA,false",
+                            "keypress:97,97,97,a,undefined,KeyA,false",
+                            "keyup:65,0,65,a,undefined,KeyA,false",
+                            "keydown:190,0,190,.,undefined,Period,false",
+                            "keypress:46,46,46,.,undefined,Period,false",
+                            "keyup:190,0,190,.,undefined,Period,false",
+                            "keydown:13,0,13,Enter,undefined,Enter,false",
+                            "keypress:13,13,13,Enter,undefined,Enter,false",
+                            "keyup:13,0,13,Enter,undefined,Enter,false"},
+                    EDGE = {"keydown:16,0,16,Shift,undefined,ShiftLeft,false",
                             "keydown:65,0,65,A,undefined,KeyA,true",
                             "keypress:65,65,65,A,undefined,KeyA,true",
                             "keyup:65,0,65,A,undefined,KeyA,true",

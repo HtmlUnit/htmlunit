@@ -137,7 +137,7 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_OPEN = "open";
 
     /** No event phase. */
-    @JsxConstant({CHROME, FF, FF68})
+    @JsxConstant({CHROME, EDGE, FF, FF68})
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
@@ -327,7 +327,7 @@ public class Event extends SimpleScriptable {
      * Returns the object that fired the event.
      * @return the object that fired the event
      */
-    @JsxGetter({IE, CHROME, FF, FF68})
+    @JsxGetter
     public Object getSrcElement() {
         return srcElement_;
     }

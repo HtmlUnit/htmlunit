@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass({CHROME, IE})
+@JsxClass({CHROME, EDGE, IE})
 public class TextEvent extends UIEvent {
 
     /** Constant for {@code DOM_INPUT_METHOD_UNKNOWN}. */
@@ -63,7 +64,7 @@ public class TextEvent extends UIEvent {
     /**
      * Default constructor.
      */
-    @JsxConstructor(CHROME)
+    @JsxConstructor({CHROME, EDGE})
     public TextEvent() {
     }
 }

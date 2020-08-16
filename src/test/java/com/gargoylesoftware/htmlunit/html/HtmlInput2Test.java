@@ -188,6 +188,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"mousedown; onfocus; mouseup; onchange; onclick;", ""})
     @BuggyWebDriver(CHROME = {"onfocus; onchange; mouseup; onclick;", ""},
+                    EDGE = {"onfocus; onchange; mouseup; onclick;", ""},
                     FF = {"mousedown; onfocus; onchange; mouseup; onclick;", ""},
                     FF68 = {"mousedown; onfocus; onchange; mouseup; onclick;", ""},
                     IE = {"mousedown; onchange; mouseup; onclick; onfocus;", ""})

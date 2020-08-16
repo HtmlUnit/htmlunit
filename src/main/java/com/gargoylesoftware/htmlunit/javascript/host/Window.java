@@ -164,11 +164,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             "width"));
 
     /** To be documented. */
-    @JsxConstant(CHROME)
+    @JsxConstant({CHROME, EDGE})
     public static final short TEMPORARY = 0;
 
     /** To be documented. */
-    @JsxConstant(CHROME)
+    @JsxConstant({CHROME, EDGE})
     public static final short PERSISTENT = 1;
 
     private Document document_;

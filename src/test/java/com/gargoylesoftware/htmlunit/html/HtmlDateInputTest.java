@@ -109,10 +109,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"text-datetime", "text-Date"},
-            CHROME = {"text-datetime", "date-Date"},
-            FF = {"text-datetime", "date-Date"},
-            FF68 = {"text-datetime", "date-Date"})
+    @Alerts(DEFAULT = {"text-datetime", "date-Date"},
+            IE = {"text-datetime", "text-Date"})
     public void type() throws Exception {
         final String html =
               "<html>\n"
@@ -140,6 +138,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts("2018-03-22")
     @BuggyWebDriver(CHROME = "80322-02-01",
+                    EDGE = "80322-02-01",
                 IE = "")
     public void typeInto() throws Exception {
         final String html =

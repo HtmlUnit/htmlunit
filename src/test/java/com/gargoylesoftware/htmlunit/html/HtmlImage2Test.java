@@ -107,7 +107,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            CHROME = "1")
+            CHROME = "1",
+            EDGE = "1")
     @NotYetImplemented(CHROME)
     public void loadImageUnknown2() throws Exception {
         loadImageImportNodeHtml("src='unknown'");
@@ -164,6 +165,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             CHROME = "1",
+            EDGE = "1",
             IE = "1")
     @NotYetImplemented({CHROME, IE})
     public void loadImageWrongType2() throws Exception {
@@ -306,7 +308,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            EDGE = "false")
     public void isDisplayedBlankSource() throws Exception {
         isDisplayed("src=' '");
     }

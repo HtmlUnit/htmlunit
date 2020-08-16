@@ -119,7 +119,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSSupportsRule}.
      */
-    @JsxConstant({CHROME, FF, FF68})
+    @JsxConstant({CHROME, EDGE, FF, FF68})
     public static final short SUPPORTS_RULE             = 12;
 
     /**
