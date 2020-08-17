@@ -468,7 +468,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "resizeTo()",
                 "screen,scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
                 + "setTimeout(),speechSynthesis,status,stop(),styleMedia,TEMPORARY,top,window"},
-        EDGE = {"alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
+            EDGE = {"alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),close(),closed,confirm(),console,constructor(),"
                 + "crypto,devicePixelRatio,document,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),"
@@ -8657,7 +8657,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
-        EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
+            EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"

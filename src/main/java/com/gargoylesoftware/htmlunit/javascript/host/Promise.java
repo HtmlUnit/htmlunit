@@ -106,7 +106,7 @@ public class Promise extends SimpleScriptable {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
                                         final Object[] args) {
-                thisPromise.settle(true, args.length != 0 ? args[0] : Undefined.instance, window);
+                thisPromise.settle(true, args.length == 0 ? Undefined.instance : args[0], window);
                 return thisPromise;
             }
         };
@@ -115,7 +115,7 @@ public class Promise extends SimpleScriptable {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
                                         final Object[] args) {
-                thisPromise.settle(false, args.length != 0 ? args[0] : Undefined.instance, window);
+                thisPromise.settle(false, args.length == 0 ? Undefined.instance : args[0], window);
                 return thisPromise;
             }
         };
@@ -186,13 +186,13 @@ public class Promise extends SimpleScriptable {
             if (arg instanceof NativeObject) {
                 final NativeObject nativeObject = (NativeObject) arg;
                 final Object thenFunction = nativeObject.get("then", nativeObject);
-                if (thenFunction != NOT_FOUND) {
-                    promise = new Promise(thenFunction);
-                }
-                else {
+                if (thenFunction == NOT_FOUND) {
                     promise = new Promise();
                     promise.value_ = arg;
                     promise.state_ = state;
+                }
+                else {
+                    promise = new Promise(thenFunction);
                 }
             }
             else {

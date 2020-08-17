@@ -253,7 +253,11 @@ public class HttpWebConnection implements WebConnection {
         final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
         final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout(), localAddress);
 
-        if (webRequest.getProxyHost() != null) {
+        if (webRequest.getProxyHost() == null) {
+            requestBuilder.setProxy(null);
+            httpRequest.setConfig(requestBuilder.build());
+        }
+        else {
             final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
             if (webRequest.isSocksProxy()) {
                 SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
@@ -262,10 +266,6 @@ public class HttpWebConnection implements WebConnection {
                 requestBuilder.setProxy(proxy);
                 httpRequest.setConfig(requestBuilder.build());
             }
-        }
-        else {
-            requestBuilder.setProxy(null);
-            httpRequest.setConfig(requestBuilder.build());
         }
     }
 
@@ -295,17 +295,8 @@ public class HttpWebConnection implements WebConnection {
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
 
-        if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
-            // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (!webRequest.getRequestParameters().isEmpty()) {
-                final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
-                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
-                uri = UrlUtils.toURI(url, query);
-                httpMethod.setURI(uri);
-            }
-        }
-        else { // POST as well as PUT and PATCH
+        if (httpMethod instanceof HttpEntityEnclosingRequest) {
+            // POST as well as PUT and PATCH
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
             if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
@@ -378,6 +369,16 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
         }
+        else {
+            // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
+            if (!webRequest.getRequestParameters().isEmpty()) {
+                final List<NameValuePair> pairs = webRequest.getRequestParameters();
+                final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
+                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
+                uri = UrlUtils.toURI(url, query);
+                httpMethod.setURI(uri);
+            }
+        }
 
         configureHttpProcessorBuilder(httpClientBuilder, webRequest);
 
@@ -447,11 +448,11 @@ public class HttpWebConnection implements WebConnection {
             if (file == null) {
                 filename = pairWithFile.getValue();
             }
-            else if (pairWithFile.getFileName() != null) {
-                filename = pairWithFile.getFileName();
+            else if (pairWithFile.getFileName() == null) {
+                filename = file.getName();
             }
             else {
-                filename = file.getName();
+                filename = pairWithFile.getFileName();
             }
 
             builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(pairWithFile.getData()),
@@ -475,11 +476,11 @@ public class HttpWebConnection implements WebConnection {
         if (pairWithFile.getFile() == null) {
             filename = pairWithFile.getValue();
         }
-        else if (pairWithFile.getFileName() != null) {
-            filename = pairWithFile.getFileName();
+        else if (pairWithFile.getFileName() == null) {
+            filename = pairWithFile.getFile().getName();
         }
         else {
-            filename = pairWithFile.getFile().getName();
+            filename = pairWithFile.getFileName();
         }
         builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getFile(), contentType, filename);
     }
@@ -818,7 +819,12 @@ public class HttpWebConnection implements WebConnection {
         // make sure the headers are added in the right order
         final String userAgent = webClient_.getBrowserVersion().getUserAgent();
         final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
-        if (headerNames != null) {
+        if (headerNames == null) {
+            list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
+            list.add(new RequestAddCookies());
+            list.add(new RequestClientConnControl());
+        }
+        else {
             for (final String header : headerNames) {
                 if (HttpHeader.HOST.equals(header)) {
                     list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
@@ -890,11 +896,6 @@ public class HttpWebConnection implements WebConnection {
                     list.add(new DntHeaderHttpRequestInterceptor("1"));
                 }
             }
-        }
-        else {
-            list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
-            list.add(new RequestAddCookies());
-            list.add(new RequestClientConnControl());
         }
 
         // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
@@ -1160,11 +1161,7 @@ public class HttpWebConnection implements WebConnection {
                 if (hostnameVerifier == null) {
                     hostnameVerifier = new DefaultHostnameVerifier(publicSuffixMatcher);
                 }
-                if (sslcontext != null) {
-                    sslSocketFactory = new SSLConnectionSocketFactory(
-                            sslcontext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
-                }
-                else {
+                if (sslcontext == null) {
                     if (systemProperties) {
                         sslSocketFactory = new SSLConnectionSocketFactory(
                                 (SSLSocketFactory) SSLSocketFactory.getDefault(),
@@ -1175,6 +1172,10 @@ public class HttpWebConnection implements WebConnection {
                                 SSLContexts.createDefault(),
                                 hostnameVerifier);
                     }
+                }
+                else {
+                    sslSocketFactory = new SSLConnectionSocketFactory(
+                            sslcontext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
                 }
             }
 

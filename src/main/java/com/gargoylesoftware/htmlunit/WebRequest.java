@@ -131,43 +131,43 @@ public class WebRequest implements Serializable {
      * @param url the target URL
      */
     public void setUrl(URL url) {
-        if (url != null) {
-            final String path = url.getPath();
-            if (path.isEmpty()) {
-                if (!url.getFile().isEmpty() || url.getProtocol().startsWith("http")) {
-                    url = buildUrlWithNewPath(url, "/");
-                }
-            }
-            else if (path.contains("/.")) {
-                url = buildUrlWithNewPath(url, removeDots(path));
-            }
-            final String idn = IDN.toASCII(url.getHost());
-            if (!idn.equals(url.getHost())) {
-                try {
-                    url = UrlUtils.getUrlWithNewHost(url, idn);
-                }
-                catch (final Exception e) {
-                    throw new RuntimeException("Cannot change hostname of URL: " + url.toExternalForm(), e);
-                }
-            }
-            url_ = url.toExternalForm();
+        if (url == null) {
+            url_ = null;
+            return;
+        }
 
-            // http://john.smith:secret@localhost
-            final String userInfo = url.getUserInfo();
-            if (userInfo != null) {
-                final int splitPos = userInfo.indexOf(':');
-                if (splitPos == -1) {
-                    urlCredentials_ = new UsernamePasswordCredentials(userInfo, "");
-                }
-                else {
-                    final String username = userInfo.substring(0, splitPos);
-                    final String password = userInfo.substring(splitPos + 1);
-                    urlCredentials_ = new UsernamePasswordCredentials(username, password);
-                }
+        final String path = url.getPath();
+        if (path.isEmpty()) {
+            if (!url.getFile().isEmpty() || url.getProtocol().startsWith("http")) {
+                url = buildUrlWithNewPath(url, "/");
             }
         }
-        else {
-            url_ = null;
+        else if (path.contains("/.")) {
+            url = buildUrlWithNewPath(url, removeDots(path));
+        }
+        final String idn = IDN.toASCII(url.getHost());
+        if (!idn.equals(url.getHost())) {
+            try {
+                url = UrlUtils.getUrlWithNewHost(url, idn);
+            }
+            catch (final Exception e) {
+                throw new RuntimeException("Cannot change hostname of URL: " + url.toExternalForm(), e);
+            }
+        }
+        url_ = url.toExternalForm();
+
+        // http://john.smith:secret@localhost
+        final String userInfo = url.getUserInfo();
+        if (userInfo != null) {
+            final int splitPos = userInfo.indexOf(':');
+            if (splitPos == -1) {
+                urlCredentials_ = new UsernamePasswordCredentials(userInfo, "");
+            }
+            else {
+                final String username = userInfo.substring(0, splitPos);
+                final String password = userInfo.substring(splitPos + 1);
+                urlCredentials_ = new UsernamePasswordCredentials(username, password);
+            }
         }
     }
 

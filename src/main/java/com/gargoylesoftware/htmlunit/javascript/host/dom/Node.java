@@ -341,11 +341,11 @@ public class Node extends EventTarget {
                             "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 1 present.");
                 }
             }
-            else if (refChildObject != null) {
-                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
+            else if (refChildObject == null) {
+                refChildNode = null;
             }
             else {
-                refChildNode = null;
+                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
             }
 
             final DomNode domNode = getDomNodeOrDie();
@@ -838,11 +838,11 @@ public class Node extends EventTarget {
         for (final Object arg : args) {
             final Node node = toNodeOrTextNode((Node) thisObj, arg);
             final DomNode newNode = node.getDomNodeOrDie();
-            if (nextSibling != null) {
-                nextSibling.insertBefore(newNode);
+            if (nextSibling == null) {
+                parentNode.appendChild(newNode);
             }
             else {
-                parentNode.appendChild(newNode);
+                nextSibling.insertBefore(newNode);
             }
         }
     }
@@ -891,11 +891,11 @@ public class Node extends EventTarget {
                 thisDomNode.replace(newNode);
             }
             else {
-                if (nextSibling != null) {
-                    nextSibling.insertBefore(newNode);
+                if (nextSibling == null) {
+                    parentNode.appendChild(newNode);
                 }
                 else {
-                    parentNode.appendChild(newNode);
+                    nextSibling.insertBefore(newNode);
                 }
             }
         }
