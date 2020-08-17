@@ -1223,11 +1223,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return windowHeight;
         }
 
-        if (NONE.equals(display)) {
-            width_ = Integer.valueOf(0);
-            return 0;
-        }
-
         final boolean isInline = "inline".equals(display);
         // height is ignored for inline elements
         final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
