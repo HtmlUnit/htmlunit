@@ -89,6 +89,10 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WORD_SPACING;
 
+import java.awt.font.FontRenderContext;
+import java.awt.font.LineBreakMeasurer;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
@@ -121,6 +125,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -1204,7 +1209,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        if (NONE.equals(getDisplay())) {
+        final String display = getDisplay();
+        if (NONE.equals(display)) {
             height2_ = Integer.valueOf(0);
             return 0;
         }
@@ -1217,7 +1223,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return windowHeight;
         }
 
-        final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
+        if (NONE.equals(display)) {
+            width_ = Integer.valueOf(0);
+            return 0;
+        }
+
+        final boolean isInline = "inline".equals(display);
+        // height is ignored for inline elements
+        final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
 
         int defaultHeight;
         if (node instanceof HtmlDivision && StringUtils.isBlank(node.getTextContent())) {
@@ -1254,8 +1267,42 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             defaultHeight = getBrowserVersion().getFontHeight(getFontSize());
-            if (node instanceof HtmlDivision) {
-                defaultHeight *= StringUtils.countMatches(node.asText(), '\n') + 1;
+
+            if (node instanceof HtmlDivision
+                    || node instanceof HtmlSpan) {
+                String width = getStyleAttribute(WIDTH, false);
+
+                // maybe we are enclosed someting that forces a width
+                while (width.isEmpty()) {
+                    final Element parent = getElement().getParentElement();
+                    if (parent == null) {
+                        break;
+                    }
+                    width = getWindow().getComputedStyle(parent, null).getStyleAttribute(WIDTH, false);
+                }
+                final int pixelWidth = pixelValue(width);
+                final String content = node.asText();
+
+                if (pixelWidth > 0
+                        && !width.isEmpty()
+                        && StringUtils.isNotBlank(content)) {
+                    // width is specified, we have to to some line breaking
+                    final AttributedString attributedString = new AttributedString(content);
+                    attributedString.addAttribute(TextAttribute.SIZE, (int) (defaultHeight / 1.2));
+                    final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, false);
+                    final LineBreakMeasurer lineBreakMeasurer = new LineBreakMeasurer(attributedString.getIterator(),
+                                                                        fontRenderCtx);
+                    lineBreakMeasurer.nextLayout(pixelWidth);
+                    int lineCount = 1;
+                    while (lineBreakMeasurer.getPosition() < content.length() && lineCount < 1000) {
+                        lineBreakMeasurer.nextLayout(pixelWidth);
+                        lineCount++;
+                    }
+                    defaultHeight *= lineCount;
+                }
+                else {
+                    defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
+                }
             }
         }
 
@@ -1266,6 +1313,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final Element element = style.getElement();
                 if (element instanceof HTMLBodyElement) {
                     return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
+                }
+                // height is ignored for inline elements
+                if (isInline) {
+                    return "";
                 }
                 return style.getStyleAttribute(HEIGHT, true);
             }
