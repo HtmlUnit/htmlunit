@@ -28,6 +28,8 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 ### Project News
 [HtmlUnit@Twitter][3]
 
+[HtmlUnit Kanban Board][6]
+
 ### Latest release Version 2.43.0 / August 8, 2020
 [Download from Sourceforge][1]
 
@@ -73,3 +75,4 @@ This project is licensed under the Apache 2.0 License
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
 [5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
+[6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
