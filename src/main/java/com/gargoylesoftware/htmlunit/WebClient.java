@@ -49,6 +49,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -103,9 +104,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.TextUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
-import com.shapesecurity.salvation.Parser;
-import com.shapesecurity.salvation.data.Policy;
-import com.shapesecurity.salvation.data.URI;
+import com.shapesecurity.salvation2.Policy;
+import com.shapesecurity.salvation2.URLs.URI;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -598,8 +598,11 @@ public class WebClient implements Serializable, AutoCloseable {
                     final URL origin = UrlUtils.getUrlWithoutPathRefQuery(
                             ((FrameWindow) webWindow).getEnclosingPage().getUrl());
                     final URL source = UrlUtils.getUrlWithoutPathRefQuery(webResponse.getWebRequest().getUrl());
-                    final Policy policy = Parser.parse(contentSecurityPolicy, origin.toExternalForm());
-                    if (!policy.allowsFrameAncestor(URI.parse(source.toExternalForm()))) {
+                    final Policy policy = Policy.parseSerializedCSP(contentSecurityPolicy,
+                                                    Policy.PolicyErrorConsumer.ignored);
+                    if (!policy.allowsFrameAncestor(
+                            Optional.of(URI.parseURI(source.toExternalForm()).orElse(null)),
+                            Optional.of(URI.parseURI(origin.toExternalForm()).orElse(null)))) {
                         pageDenied = PageDenied.BY_CONTENT_SECURIRY_POLICY;
 
                         if (LOG.isWarnEnabled()) {

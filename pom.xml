@@ -1166,8 +1166,8 @@
         </dependency>
         <dependency>
             <groupId>com.shapesecurity</groupId>
-            <artifactId>salvation</artifactId>
-            <version>2.7.2</version>
+            <artifactId>salvation2</artifactId>
+            <version>3.0.0</version>
         </dependency>
         <!-- Jetty -->
         <dependency>
