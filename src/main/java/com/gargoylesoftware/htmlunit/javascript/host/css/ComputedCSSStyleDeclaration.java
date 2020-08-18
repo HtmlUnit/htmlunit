@@ -1279,17 +1279,27 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (pixelWidth > 0
                         && !width.isEmpty()
                         && StringUtils.isNotBlank(content)) {
-                    // width is specified, we have to to some line breaking
-                    final AttributedString attributedString = new AttributedString(content);
-                    attributedString.addAttribute(TextAttribute.SIZE, (int) (defaultHeight / 1.2));
-                    final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, false);
-                    final LineBreakMeasurer lineBreakMeasurer = new LineBreakMeasurer(attributedString.getIterator(),
-                                                                        fontRenderCtx);
-                    lineBreakMeasurer.nextLayout(pixelWidth);
-                    int lineCount = 1;
-                    while (lineBreakMeasurer.getPosition() < content.length() && lineCount < 1000) {
-                        lineBreakMeasurer.nextLayout(pixelWidth);
-                        lineCount++;
+                    final String[] lines = StringUtils.split(content, '\n');
+                    int lineCount = 0;
+                    for (int i = 0; i < lines.length; i++) {
+                        final String line = lines[i];
+                        if (StringUtils.isBlank(line)) {
+                            lineCount++;
+                        }
+                        else {
+                            // width is specified, we have to to some line breaking
+                            final AttributedString attributedString = new AttributedString(line);
+                            attributedString.addAttribute(TextAttribute.SIZE, (int) (defaultHeight / 1.2));
+                            final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, false);
+                            final LineBreakMeasurer lineBreakMeasurer =
+                                    new LineBreakMeasurer(attributedString.getIterator(), fontRenderCtx);
+                            lineBreakMeasurer.nextLayout(pixelWidth);
+                            lineCount++;
+                            while (lineBreakMeasurer.getPosition() < line.length() && lineCount < 1000) {
+                                lineBreakMeasurer.nextLayout(pixelWidth);
+                                lineCount++;
+                            }
+                        }
                     }
                     defaultHeight *= lineCount;
                 }
