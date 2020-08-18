@@ -1267,13 +1267,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     || node instanceof HtmlSpan) {
                 String width = getStyleAttribute(WIDTH, false);
 
-                // maybe we are enclosed someting that forces a width
-                while (width.isEmpty()) {
-                    final Element parent = getElement().getParentElement();
-                    if (parent == null) {
-                        break;
-                    }
+                // maybe we are enclosed something that forces a width
+                Element parent = getElement().getParentElement();
+                while (width.isEmpty() && parent != null) {
                     width = getWindow().getComputedStyle(parent, null).getStyleAttribute(WIDTH, false);
+                    parent = parent.getParentElement();
                 }
                 final int pixelWidth = pixelValue(width);
                 final String content = node.asText();
