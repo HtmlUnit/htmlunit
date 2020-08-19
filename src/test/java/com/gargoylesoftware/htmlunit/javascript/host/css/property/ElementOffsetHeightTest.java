@@ -70,10 +70,11 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
             FF68 = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
             IE = "14, 28, 46, 55, 81, 110, 124, 161, 202, 221, 269, 290, 345, 405")
-    @HtmlUnitNYI(CHROME = "12, 27, 44, 75, 80, 108, 126, 161, 208, 216, 300, 320, 374, 407",
-            FF = "14, 30, 48, 75, 80, 108, 126, 161, 208, 224, 310, 363, 385, 418",
-            FF68 = "14, 30, 48, 75, 80, 108, 126, 161, 208, 224, 310, 363, 385, 418",
-            IE = "14, 27, 48, 56, 80, 108, 126, 161, 200, 224, 300, 320, 385, 407")
+    @HtmlUnitNYI(CHROME = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 320, 374, 407",
+            EDGE = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 320, 374, 407",
+            FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 330, 385, 418",
+            FF68 = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 330, 385, 418",
+            IE = "14, 27, 48, 56, 80, 108, 126, 161, 200, 224, 270, 320, 385, 407")
     public void offsetHeightLineBreaks() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -107,10 +108,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "60, 120",
             IE = "55, 110")
-    @HtmlUnitNYI(CHROME = "75, 120",
-            FF = "75, 120",
-            FF68 = "75, 120",
-            IE = "56, 112")
+    @HtmlUnitNYI(IE = "56, 112")
     public void offsetHeightManualLineBreaks() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -157,10 +155,11 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"549", "273"},
             IE = {"552", "276"})
     @HtmlUnitNYI(CHROME = {"552", "294"},
+            EDGE = {"552", "294"},
             FF = {"552", "294"},
             FF68 = {"552", "294"},
             IE = {"552", "294"})
-    public void offsetHeightLineBreaksTest() throws Exception {
+    public void issue124() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
             + "<html>\n"

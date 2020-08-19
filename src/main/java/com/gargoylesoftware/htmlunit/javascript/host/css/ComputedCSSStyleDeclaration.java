@@ -1292,7 +1292,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         else {
                             // width is specified, we have to to some line breaking
                             final AttributedString attributedString = new AttributedString(line);
-                            attributedString.addAttribute(TextAttribute.SIZE, (int) (defaultHeight / 1.2));
+                            final String fontSize = getFontSize();
+                            final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
+                            attributedString.addAttribute(TextAttribute.SIZE, fontSizeInt / 1.1);
                             final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, false);
                             final LineBreakMeasurer lineBreakMeasurer =
                                     new LineBreakMeasurer(attributedString.getIterator(), fontRenderCtx);
