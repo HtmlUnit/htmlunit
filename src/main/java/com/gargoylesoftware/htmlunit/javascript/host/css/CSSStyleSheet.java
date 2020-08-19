@@ -1045,7 +1045,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter({IE, CHROME})
+    @JsxGetter({CHROME, EDGE, IE})
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getRules() {
         return getCssRules();
     }

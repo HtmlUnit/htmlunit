@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -241,7 +242,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "2"},
             CHROME = {"1", "1"},
             EDGE = {"1", "1"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void dynamicAddedStyleSheet() throws Exception {
         final String html =
               "<html>\n"

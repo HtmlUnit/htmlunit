@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -223,7 +224,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B",
             CHROME = "§§URL§§",
             EDGE = "§§URL§§")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void locationQueryUTF8Encoded() throws Exception {
         final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
 

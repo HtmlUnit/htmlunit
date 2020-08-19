@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -481,7 +482,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-56",
             FF68 = "0")
-    @NotYetImplemented({CHROME, FF, IE})
+    @NotYetImplemented({CHROME, EDGE, FF, IE})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
@@ -1046,7 +1047,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "80",
             IE = "0")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void meter() throws Exception {
         loadPageWithAlerts2(test("meter"));
     }
@@ -1137,7 +1138,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void noscript() throws Exception {
         loadPageWithAlerts2(test("noscript"));
     }
@@ -1285,7 +1286,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -1466,7 +1467,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "300",
             IE = "-16")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void svg() throws Exception {
         loadPageWithAlerts2(test("svg"));
     }
@@ -1802,7 +1803,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "91",
             FF68 = "48",
             IE = "55")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void inputReset() throws Exception {
         loadPageWithAlerts2(testInput("reset"));
     }

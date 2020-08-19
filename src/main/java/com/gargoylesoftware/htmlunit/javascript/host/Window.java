@@ -655,14 +655,14 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
-    @JsxGetter({IE, CHROME})
+    @JsxGetter({CHROME, EDGE, IE})
     public Navigator getClientInformation() {
         return navigator_;
     }
 
     /**
      * Special setter for IE to ignore this call.
-     * @param ignore parame gets ignored
+     * @param ignore param gets ignored
      */
     @JsxSetter(IE)
     public void setClientInformation(final Object ignore) {

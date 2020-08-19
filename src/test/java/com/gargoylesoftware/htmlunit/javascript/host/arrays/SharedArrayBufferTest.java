@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -60,7 +61,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = {"1234", "1234", "6789", "1234"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void slice() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -89,7 +90,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = {"2", "1234", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidStartIndexNumberString() throws Exception {
         sliceInvalidIndex("'4'");
     }
@@ -110,7 +111,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = {"3", "0", "1234", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidStartIndexString() throws Exception {
         sliceInvalidIndex("'four'");
     }
@@ -131,7 +132,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidStartIndexPositiveInfinity() throws Exception {
         sliceInvalidIndex("Number.POSITIVE_INFINITY");
     }
@@ -142,7 +143,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = {"3", "0", "1234", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidStartIndexNegativeInfinity() throws Exception {
         sliceInvalidIndex("Number.NEGATIVE_INFINITY");
     }
@@ -153,7 +154,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = {"3", "0", "1234", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidStartIndexNaN() throws Exception {
         sliceInvalidIndex("NaN");
     }
@@ -164,7 +165,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = {"3", "0", "1234", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidStartIndexNull() throws Exception {
         sliceInvalidIndex("null");
     }
@@ -175,7 +176,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidEndIndexNumberString() throws Exception {
         sliceInvalidIndex("4, '4'");
     }
@@ -186,7 +187,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidEndIndexString() throws Exception {
         sliceInvalidIndex("4, 'four'");
     }
@@ -197,7 +198,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidEndIndexTrue() throws Exception {
         sliceInvalidIndex("4, true");
     }
@@ -208,7 +209,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidEndIndexNaN() throws Exception {
         sliceInvalidIndex("4, NaN");
     }
@@ -219,7 +220,7 @@ public class SharedArrayBufferTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no SharedArrayBuffer",
             CHROME = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void sliceInvalidEndIndexNull() throws Exception {
         sliceInvalidIndex("4, null");
     }

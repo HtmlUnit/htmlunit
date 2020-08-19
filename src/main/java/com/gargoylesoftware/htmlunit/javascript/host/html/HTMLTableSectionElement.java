@@ -162,7 +162,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param value the new value for the contents of this node
      */
     @Override
-    @JsxSetter({IE, CHROME})
+    @JsxSetter({CHROME, EDGE, IE})
     public void setInnerText(final Object value) {
         super.setInnerText(value);
     }

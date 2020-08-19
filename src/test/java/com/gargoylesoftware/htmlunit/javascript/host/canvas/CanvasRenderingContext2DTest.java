@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -456,7 +457,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "0.5", "0", "0.699999988079071", "0"},
             CHROME = {"1", "0.5", "0", "0.7", "0"},
             EDGE = {"1", "0.5", "0", "0.7", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void globalAlpha() throws Exception {
         final String html =
             "<html><head><script>\n"

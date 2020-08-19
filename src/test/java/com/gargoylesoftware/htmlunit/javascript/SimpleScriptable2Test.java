@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -338,7 +339,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             CHROME = {"undefined", "false", "undefined", "exception"},
             EDGE = {"undefined", "false", "undefined", "exception"},
             IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

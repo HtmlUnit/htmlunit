@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.crypto;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -46,7 +47,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
                         "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
                         "publicExponent 1,0,1"},
             IE = "undefined")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void rsassa() throws Exception {
         final String html
             = "<html><head><script>\n"

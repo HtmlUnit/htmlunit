@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -6722,7 +6723,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function OffscreenCanvas() { [native code] }",
             EDGE = "function OffscreenCanvas() { [native code] }")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }
@@ -7298,7 +7299,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PresentationConnectionList() { [native code] }",
             EDGE = "function PresentationConnectionList() { [native code] }")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void presentationConnectionList() throws Exception {
         test("PresentationConnectionList");
     }
@@ -7310,7 +7311,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PresentationReceiver() { [native code] }",
             EDGE = "function PresentationReceiver() { [native code] }")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void presentationReceiver() throws Exception {
         test("PresentationReceiver");
     }
@@ -7404,7 +7405,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Proxy() {\n    [native code]\n}",
             IE = "exception",
             FF68 = "function Proxy() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void proxy() throws Exception {
         test("Proxy");
     }
@@ -7664,7 +7665,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function RTCDataChannel() { [native code] }",
             FF = "function RTCDataChannel() {\n    [native code]\n}",
             FF68 = "function RTCDataChannel() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
@@ -7764,7 +7765,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSctpTransport() { [native code] }",
             EDGE = "function RTCSctpTransport() { [native code] }")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void rtcSctpTransport() throws Exception {
         test("RTCSctpTransport");
     }
@@ -11379,7 +11380,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function DOMMatrix() { [native code] }",
             FF = "function DOMMatrix() {\n    [native code]\n}",
             FF68 = "function WebKitCSSMatrix() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, EDGE, FF})
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
     }

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -191,7 +192,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
             FF68 = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void minimalFontFamilyReversed() throws Exception {
         font("xyz 1px", "fontFamily", "abc");
     }
@@ -205,7 +206,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void minimalLineHeight() throws Exception {
         font("1px/2px xyz", "lineHeight", "normal");
     }
@@ -219,7 +220,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void minimalLineHeightSpace() throws Exception {
         font("1px / 2px xyz", "lineHeight", "normal");
     }
@@ -233,7 +234,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void minimalLineHeightSpace2() throws Exception {
         font("1px/ 2px xyz", "lineHeight", "normal");
     }

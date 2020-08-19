@@ -393,7 +393,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_FUNCTION_DETACHED,
 
     /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature({IE, CHROME})
+    @BrowserFeature({CHROME, EDGE, IE})
     HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
@@ -424,7 +424,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE,
 
     /** Handle blank source like empty. */
-    @BrowserFeature({IE, CHROME})
+    @BrowserFeature({CHROME, EDGE, IE})
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
     /** Empty src attribute sets display to false. */
@@ -1633,6 +1633,6 @@ public enum BrowserVersionFeatures {
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
-    @BrowserFeature({IE, CHROME})
+    @BrowserFeature({CHROME, EDGE, IE})
     XPATH_SELECTION_NAMESPACES,
 }

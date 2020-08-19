@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.InputStream;
@@ -109,7 +110,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "2",
             CHROME = "1",
             EDGE = "1")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void loadImageUnknown2() throws Exception {
         loadImageImportNodeHtml("src='unknown'");
     }
