@@ -1,8 +1,8 @@
 jQuery Test Suite
 Hide passed testsCheck for GlobalsNo try-catchminnoqsaModule:
 < All Modules >
-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36
-Tests completed in 71818 milliseconds.
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36 Edg/84.0.522.61
+Tests completed in 68495 milliseconds.
 6917 tests of 6920 passed, 3 failed.
 
 core: Unit Testing Environment (0, 2, 2)Rerun

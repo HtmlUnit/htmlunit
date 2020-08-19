@@ -3,540 +3,540 @@ jQuery Test Suite
 Hide passed testsCheck for GlobalsNo try-catchLoad with AMDLoad unminifiedAlways check jQuery.data
 Filter:
 Module:
-QUnit 1.23.1; Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0
+QUnit 1.23.1; Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0
 
-Tests completed in 115094 milliseconds.
+Tests completed in 101785 milliseconds.
 8943 assertions of 8956 passed, 13 failed.
 
     ready: jQuery.isReady (2)Rerun [fc73fe42]1 ms
-    ready: jQuery ready (10)Rerun [b6c34eda]25 ms
-    ready: jQuery.when(jQuery.ready) (2)Rerun [2abf4f9f]33 ms
-    ready: Promise.resolve(jQuery.ready) (2)Rerun [cdc6ad2e]17 ms
-    ready: Error in ready callback does not halt all future executions (gh-1823) (1)Rerun [4d1242b7]18 ms
-    ready: holdReady test needs to be a standalone test since it deals with DOM ready (2)Rerun [216c3c4d]408 ms
-    basic: ajax (4)Rerun [b948dcce]741 ms
-    basic: attributes (6)Rerun [0b3d9985]3 ms
-    basic: css (1)Rerun [9a9f4995]14 ms
-    basic: show/hide (2)Rerun [201dfb26]8 ms
-    basic: core (18)Rerun [b949da4d]4 ms
-    basic: data (4)Rerun [b94a1a58]2 ms
-    basic: dimensions (3)Rerun [0bc22ffb]13 ms
-    basic: event (1)Rerun [70109dac]2 ms
+    ready: jQuery ready (10)Rerun [b6c34eda]24 ms
+    ready: jQuery.when(jQuery.ready) (2)Rerun [2abf4f9f]24 ms
+    ready: Promise.resolve(jQuery.ready) (2)Rerun [cdc6ad2e]13 ms
+    ready: Error in ready callback does not halt all future executions (gh-1823) (1)Rerun [4d1242b7]10 ms
+    ready: holdReady test needs to be a standalone test since it deals with DOM ready (2)Rerun [216c3c4d]344 ms
+    basic: ajax (4)Rerun [b948dcce]41 ms
+    basic: attributes (6)Rerun [0b3d9985]2 ms
+    basic: css (1)Rerun [9a9f4995]7 ms
+    basic: show/hide (2)Rerun [201dfb26]3 ms
+    basic: core (18)Rerun [b949da4d]3 ms
+    basic: data (4)Rerun [b94a1a58]1 ms
+    basic: dimensions (3)Rerun [0bc22ffb]8 ms
+    basic: event (1)Rerun [70109dac]1 ms
     basic: manipulation (5)Rerun [4555384b]2 ms
-    basic: offset (3)Rerun [a2329bc1]14 ms
-    basic: selector (2)Rerun [5410178d]3 ms
-    basic: serialize (2)Rerun [720bb8f2]3 ms
-    basic: traversing (12)Rerun [1c17bddd]3 ms
-    basic: wrap (3)Rerun [b952faf8]2 ms
-    core: Basic requirements (7)Rerun [b8dae67f]1 ms
-    core: jQuery() (29)Rerun [0680cf5c]6 ms
+    basic: offset (3)Rerun [a2329bc1]6 ms
+    basic: selector (2)Rerun [5410178d]2 ms
+    basic: serialize (2)Rerun [720bb8f2]2 ms
+    basic: traversing (12)Rerun [1c17bddd]1 ms
+    basic: wrap (3)Rerun [b952faf8]0 ms
+    core: Basic requirements (7)Rerun [b8dae67f]0 ms
+    core: jQuery() (29)Rerun [0680cf5c]4 ms
     core: jQuery(selector, context) (3)Rerun [196dd81a]1 ms
-    core: globalEval (3)Rerun [0440d2fc]1 ms
-    core: globalEval with 'use strict' (1)Rerun [8ca57754]1 ms
-    core: globalEval execution after script injection (#7862) (1)Rerun [d8523463]1 ms
-    core: noConflict (7)Rerun [59f980d0]1 ms
-    core: trim (13)Rerun [9dba41ff]1 ms
-    core: isPlainObject (23)Rerun [887480e2]67 ms
-    core: isPlainObject(Symbol) (2)Rerun [26db572b]0 ms
-    core: isPlainObject(localStorage) (1)Rerun [119383d3]0 ms
+    core: globalEval (3)Rerun [0440d2fc]2 ms
+    core: globalEval with 'use strict' (1)Rerun [8ca57754]0 ms
+    core: globalEval execution after script injection (#7862) (1)Rerun [d8523463]0 ms
+    core: noConflict (7)Rerun [59f980d0]0 ms
+    core: trim (13)Rerun [9dba41ff]0 ms
+    core: isPlainObject (23)Rerun [887480e2]24 ms
+    core: isPlainObject(Symbol) (2)Rerun [26db572b]1 ms
+    core: isPlainObject(localStorage) (1)Rerun [119383d3]1 ms
     core: isPlainObject(Object.assign(...)) (1)Rerun [c93c077e]0 ms
-    core: isXMLDoc - HTML (4)Rerun [e01cfc16]3 ms
-    core: XSS via location.hash (1)Rerun [78959170]28 ms
-    core: isXMLDoc - XML (3)Rerun [59cf9e2c]2 ms
-    core: jQuery('html') (18)Rerun [a16831a7]4 ms
-    core: jQuery(element with non-alphanumeric name) (36)Rerun [cbf4e276]4 ms
-    core: jQuery('massive html #7990') (3)Rerun [9798de1f]42 ms
+    core: isXMLDoc - HTML (4)Rerun [e01cfc16]2 ms
+    core: XSS via location.hash (1)Rerun [78959170]12 ms
+    core: isXMLDoc - XML (3)Rerun [59cf9e2c]1 ms
+    core: jQuery('html') (18)Rerun [a16831a7]2 ms
+    core: jQuery(element with non-alphanumeric name) (36)Rerun [cbf4e276]2 ms
+    core: jQuery('massive html #7990') (3)Rerun [9798de1f]22 ms
     core: jQuery('html', context) (1)Rerun [21c16e10]0 ms
-    core: jQuery(selector, xml).text(str) - loaded via xml document (2)Rerun [fafab1b5]1 ms
+    core: jQuery(selector, xml).text(str) - loaded via xml document (2)Rerun [fafab1b5]0 ms
     core: end() (3)Rerun [18b8b0df]0 ms
-    core: length (1)Rerun [09d60583]2 ms
-    core: get() (1)Rerun [18d1049a]1 ms
+    core: length (1)Rerun [09d60583]0 ms
+    core: get() (1)Rerun [18d1049a]0 ms
     core: toArray() (1)Rerun [1809f262]0 ms
     core: inArray() (19)Rerun [51380078]1 ms
-    core: get(Number) (2)Rerun [56995191]1 ms
-    core: get(-Number) (2)Rerun [17b75382]2 ms
-    core: each(Function) (1)Rerun [0fa24667]2 ms
+    core: get(Number) (2)Rerun [56995191]0 ms
+    core: get(-Number) (2)Rerun [17b75382]0 ms
+    core: each(Function) (1)Rerun [0fa24667]0 ms
     core: slice() (7)Rerun [aedfaf16]1 ms
     core: first()/last() (4)Rerun [976fc3d2]1 ms
-    core: map() (2)Rerun [1923b120]1 ms
-    core: jQuery.map (25)Rerun [698e2e09]3 ms
+    core: map() (2)Rerun [1923b120]0 ms
+    core: jQuery.map (25)Rerun [698e2e09]1 ms
     core: jQuery.merge() (10)Rerun [8265e566]1 ms
     core: jQuery.grep() (8)Rerun [8f4e4e8a]0 ms
     core: jQuery.grep(Array-like) (7)Rerun [ac3d13ff]1 ms
-    core: jQuery.extend(Object, Object) (28)Rerun [bbeda45c]3 ms
+    core: jQuery.extend(Object, Object) (28)Rerun [bbeda45c]2 ms
     core: jQuery.extend(Object, Object {created with "defineProperties"}) (2)Rerun [c487b9d8]0 ms
-    core: jQuery.extend(true,{},{a:[], o:{}}); deep copy with array, followed by object (2)Rerun [a33dcb83]1 ms
-    core: jQuery.each(Object,Function) (23)Rerun [5889c4d8]2 ms
+    core: jQuery.extend(true,{},{a:[], o:{}}); deep copy with array, followed by object (2)Rerun [a33dcb83]0 ms
+    core: jQuery.each(Object,Function) (23)Rerun [5889c4d8]1 ms
     core: jQuery.each/map(undefined/null,Function) (1)Rerun [8a0df372]0 ms
-    core: JIT compilation does not interfere with length retrieval (gh-2145) (4)Rerun [35566d78]1 ms
-    core: jQuery.makeArray (15)Rerun [696f93f8]3 ms
+    core: JIT compilation does not interfere with length retrieval (gh-2145) (4)Rerun [35566d78]0 ms
+    core: jQuery.makeArray (15)Rerun [696f93f8]2 ms
     core: jQuery.inArray (3)Rerun [bb7b4e61]1 ms
     core: jQuery.isEmptyObject (2)Rerun [f2b417cf]1 ms
-    core: jQuery.parseHTML (23)Rerun [b2541bcb]34 ms
-    core: jQuery.parseHTML(<a href>) - gh-2965 (1)Rerun [68983673]2 ms
-    core: jQuery.parseHTML (1)Rerun [982f5db5]2015 ms
-    core: jQuery.parseXML (8)Rerun [2f0b33d7]1 ms
-    core: Conditional compilation compatibility (#13274) (3)Rerun [a911fa9b]260 ms
-    core: document ready when jQuery loaded asynchronously (#13655) (1)Rerun [377d9701]143 ms
-    core: Tolerating alias-masked DOM properties (#14074) (1)Rerun [676cffc3]144 ms
-    core: Don't call window.onready (#14802) (1)Rerun [3cfc6632]138 ms
+    core: jQuery.parseHTML (23)Rerun [b2541bcb]16 ms
+    core: jQuery.parseHTML(<a href>) - gh-2965 (1)Rerun [68983673]0 ms
+    core: jQuery.parseHTML (1)Rerun [982f5db5]2016 ms
+    core: jQuery.parseXML (8)Rerun [2f0b33d7]0 ms
+    core: Conditional compilation compatibility (#13274) (3)Rerun [a911fa9b]52 ms
+    core: document ready when jQuery loaded asynchronously (#13655) (1)Rerun [377d9701]72 ms
+    core: Tolerating alias-masked DOM properties (#14074) (1)Rerun [676cffc3]63 ms
+    core: Don't call window.onready (#14802) (1)Rerun [3cfc6632]59 ms
     core: Iterability of jQuery objects (gh-1693) (1)Rerun [d6e53216]2 ms
-    core: jQuery.readyException (original) (1)Rerun [0b62e4f1]4 ms
-    core: jQuery.readyException (custom) (1)Rerun [98c3e191]52 ms
-    callbacks: jQuery.Callbacks( '' ) - no filter (29)Rerun [7e717211]5 ms
+    core: jQuery.readyException (original) (1)Rerun [0b62e4f1]2 ms
+    core: jQuery.readyException (custom) (1)Rerun [98c3e191]33 ms
+    callbacks: jQuery.Callbacks( '' ) - no filter (29)Rerun [7e717211]3 ms
     callbacks: jQuery.Callbacks( { } ) - no filter (29)Rerun [379676d3]2 ms
-    callbacks: jQuery.Callbacks( '' ) - filter (29)Rerun [e676825e]1 ms
-    callbacks: jQuery.Callbacks( { } ) - filter (29)Rerun [e55384dc]3 ms
+    callbacks: jQuery.Callbacks( '' ) - filter (29)Rerun [e676825e]2 ms
+    callbacks: jQuery.Callbacks( { } ) - filter (29)Rerun [e55384dc]1 ms
     callbacks: jQuery.Callbacks( 'once' ) - no filter (29)Rerun [b69b7af0]1 ms
-    callbacks: jQuery.Callbacks( { 'once': true } ) - no filter (29)Rerun [2c977bc6]2 ms
-    callbacks: jQuery.Callbacks( 'once' ) - filter (29)Rerun [9a493ddf]2 ms
-    callbacks: jQuery.Callbacks( { 'once': true } ) - filter (29)Rerun [5ceadcc9]2 ms
-    callbacks: jQuery.Callbacks( 'memory' ) - no filter (29)Rerun [18655130]3 ms
-    callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter (29)Rerun [aff804c6]2 ms
-    callbacks: jQuery.Callbacks( 'memory' ) - filter (29)Rerun [15790f9f]2 ms
-    callbacks: jQuery.Callbacks( { 'memory': true } ) - filter (29)Rerun [6b7ef3c9]2 ms
-    callbacks: jQuery.Callbacks( 'unique' ) - no filter (29)Rerun [46f00860]2 ms
-    callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter (29)Rerun [6cb08bf6]2 ms
-    callbacks: jQuery.Callbacks( 'unique' ) - filter (29)Rerun [40cd266f]2 ms
+    callbacks: jQuery.Callbacks( { 'once': true } ) - no filter (29)Rerun [2c977bc6]0 ms
+    callbacks: jQuery.Callbacks( 'once' ) - filter (29)Rerun [9a493ddf]1 ms
+    callbacks: jQuery.Callbacks( { 'once': true } ) - filter (29)Rerun [5ceadcc9]0 ms
+    callbacks: jQuery.Callbacks( 'memory' ) - no filter (29)Rerun [18655130]1 ms
+    callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter (29)Rerun [aff804c6]1 ms
+    callbacks: jQuery.Callbacks( 'memory' ) - filter (29)Rerun [15790f9f]1 ms
+    callbacks: jQuery.Callbacks( { 'memory': true } ) - filter (29)Rerun [6b7ef3c9]0 ms
+    callbacks: jQuery.Callbacks( 'unique' ) - no filter (29)Rerun [46f00860]1 ms
+    callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter (29)Rerun [6cb08bf6]0 ms
+    callbacks: jQuery.Callbacks( 'unique' ) - filter (29)Rerun [40cd266f]1 ms
     callbacks: jQuery.Callbacks( { 'unique': true } ) - filter (29)Rerun [5bf73a99]1 ms
-    callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter (29)Rerun [a8ca7f15]2 ms
-    callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter (29)Rerun [afdb5241]2 ms
-    callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter (29)Rerun [64ac33da]1 ms
-    callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter (29)Rerun [d264102e]1 ms
-    callbacks: jQuery.Callbacks( 'once memory' ) - no filter (29)Rerun [15ef8bf7]4 ms
-    callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter (29)Rerun [ff40c7ed]2 ms
-    callbacks: jQuery.Callbacks( 'once memory' ) - filter (29)Rerun [28232238]2 ms
-    callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter (29)Rerun [644e5a02]2 ms
-    callbacks: jQuery.Callbacks( 'once unique' ) - no filter (29)Rerun [447a4327]1 ms
-    callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter (29)Rerun [bbf94f1d]2 ms
+    callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter (29)Rerun [a8ca7f15]1 ms
+    callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter (29)Rerun [afdb5241]0 ms
+    callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter (29)Rerun [64ac33da]0 ms
+    callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter (29)Rerun [d264102e]0 ms
+    callbacks: jQuery.Callbacks( 'once memory' ) - no filter (29)Rerun [15ef8bf7]1 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter (29)Rerun [ff40c7ed]0 ms
+    callbacks: jQuery.Callbacks( 'once memory' ) - filter (29)Rerun [28232238]0 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter (29)Rerun [644e5a02]1 ms
+    callbacks: jQuery.Callbacks( 'once unique' ) - no filter (29)Rerun [447a4327]0 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter (29)Rerun [bbf94f1d]0 ms
     callbacks: jQuery.Callbacks( 'once unique' ) - filter (29)Rerun [53773908]1 ms
-    callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter (29)Rerun [54c6a0d2]2 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter (29)Rerun [54c6a0d2]1 ms
     callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - no filter (29)Rerun [de28e8ae]1 ms
-    callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter (29)Rerun [b1216f7a]2 ms
-    callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter (29)Rerun [2892d8e1]2 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter (29)Rerun [b1216f7a]0 ms
+    callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter (29)Rerun [2892d8e1]0 ms
     callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - filter (29)Rerun [7288a595]1 ms
-    callbacks: jQuery.Callbacks( 'memory unique' ) - no filter (29)Rerun [325ee4e7]1 ms
+    callbacks: jQuery.Callbacks( 'memory unique' ) - no filter (29)Rerun [325ee4e7]2 ms
     callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - no filter (29)Rerun [6727d81d]1 ms
     callbacks: jQuery.Callbacks( 'memory unique' ) - filter (29)Rerun [73ebef48]2 ms
-    callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter (29)Rerun [fe4cb7d2]1 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter (29)Rerun [fe4cb7d2]0 ms
     callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - no filter (29)Rerun [02a35eee]1 ms
-    callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter (29)Rerun [9aa0867a]2 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter (29)Rerun [9aa0867a]1 ms
     callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - filter (29)Rerun [2fd60aa1]1 ms
-    callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter (29)Rerun [0c38ee95]1 ms
-    callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter (29)Rerun [1464ce1e]2 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter (29)Rerun [0c38ee95]0 ms
+    callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter (29)Rerun [1464ce1e]1 ms
     callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - no filter (29)Rerun [3f655d4a]0 ms
-    callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter (29)Rerun [0a2e6971]0 ms
+    callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter (29)Rerun [0a2e6971]1 ms
     callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - filter (29)Rerun [747009c5]1 ms
-    callbacks: jQuery.Callbacks( options ) - options are copied (1)Rerun [923a6442]1 ms
-    callbacks: jQuery.Callbacks.fireWith - arguments are copied (1)Rerun [78b2320f]0 ms
-    callbacks: jQuery.Callbacks.remove - should remove all instances (1)Rerun [cb02f2c3]1 ms
-    callbacks: jQuery.Callbacks.has (13)Rerun [6fd17bf8]1 ms
+    callbacks: jQuery.Callbacks( options ) - options are copied (1)Rerun [923a6442]0 ms
+    callbacks: jQuery.Callbacks.fireWith - arguments are copied (1)Rerun [78b2320f]1 ms
+    callbacks: jQuery.Callbacks.remove - should remove all instances (1)Rerun [cb02f2c3]0 ms
+    callbacks: jQuery.Callbacks.has (13)Rerun [6fd17bf8]0 ms
     callbacks: jQuery.Callbacks() - adding a string doesn't cause a stack overflow (1)Rerun [5258dfa5]0 ms
-    callbacks: jQuery.Callbacks() - disabled callback doesn't fire (gh-1790) (1)Rerun [2e3f4299]1 ms
+    callbacks: jQuery.Callbacks() - disabled callback doesn't fire (gh-1790) (1)Rerun [2e3f4299]0 ms
     callbacks: jQuery.Callbacks() - list with memory stays locked (gh-3469) (3)Rerun [e8f0d272]0 ms
-    deferred: jQuery.Deferred (23)Rerun [09ee1fb2]3 ms
-    deferred: jQuery.Deferred - new operator (23)Rerun [62d20265]2 ms
-    deferred: jQuery.Deferred - chainability (10)Rerun [8f1ac28a]1 ms
-    deferred: jQuery.Deferred.then - filtering (done) (4)Rerun [d0d4d16f]98 ms
-    deferred: jQuery.Deferred.then - filtering (fail) (4)Rerun [d0ea9153]44 ms
-    deferred: jQuery.Deferred.catch (4)Rerun [5ccfed7f]44 ms
-    deferred: [PIPE ONLY] jQuery.Deferred.pipe - filtering (fail) (4)Rerun [d952535c]28 ms
-    deferred: jQuery.Deferred.then - filtering (progress) (3)Rerun [357d8424]23 ms
-    deferred: jQuery.Deferred.then - deferred (done) (3)Rerun [877e85a6]42 ms
-    deferred: jQuery.Deferred.then - deferred (fail) (3)Rerun [8794458a]40 ms
-    deferred: jQuery.Deferred.then - deferred (progress) (3)Rerun [5b3444db]62 ms
-    deferred: [PIPE ONLY] jQuery.Deferred.pipe - deferred (progress) (3)Rerun [7da15a32]23 ms
-    deferred: jQuery.Deferred.then - context (11)Rerun [d230e435]38 ms
-    deferred: [PIPE ONLY] jQuery.Deferred.pipe - context (11)Rerun [244a040c]4 ms
-    deferred: jQuery.Deferred.then - spec compatibility (1)Rerun [c0116f85]23 ms
-    deferred: jQuery.Deferred.then - IsCallable determination (gh-3596) (1)Rerun [85d85b05]70 ms
-    deferred: jQuery.Deferred.exceptionHook (2)Rerun [c41974d6]56 ms
-    deferred: jQuery.Deferred.exceptionHook with stack hooks (2)Rerun [8330b5c8]42 ms
-    deferred: jQuery.Deferred - 1.x/2.x compatibility (8)Rerun [613da4d7]56 ms
-    deferred: jQuery.Deferred.then - progress and thenables (2)Rerun [aebd675a]69 ms
-    deferred: jQuery.Deferred - notify and resolve (7)Rerun [8db308cd]40 ms
-    deferred: jQuery.Deferred - resolved to a notifying deferred (2)Rerun [e3695363]50 ms
-    deferred: jQuery.when(nonThenable) - like Promise.resolve (44)Rerun [91fdbd03]38 ms
-    deferred: jQuery.when(thenable) - like Promise.resolve (68)Rerun [0bbc26ac]96 ms
-    deferred: jQuery.when(a, b) - like Promise.all (196)Rerun [94478157]87 ms
-    deferred: jQuery.when - always returns a new promise (42)Rerun [fe345314]3 ms
-    deferred: jQuery.when - notify does not affect resolved (3)Rerun [142cc340]1 ms
-    deferred: jQuery.when(...) - opportunistically synchronous (5)Rerun [d779dead]39 ms
-    deprecated: bind/unbind (4)Rerun [7e81b3ff]3 ms
-    deprecated: delegate/undelegate (2)Rerun [5f1b027f]5 ms
-    deprecated: hover() mouseenter mouseleave (1)Rerun [fd2a1553]2 ms
-    deprecated: trigger() shortcuts (5)Rerun [e295cadd]2 ms
-    deprecated: Event aliases (18)Rerun [6cee512f]21 ms
+    deferred: jQuery.Deferred (23)Rerun [09ee1fb2]2 ms
+    deferred: jQuery.Deferred - new operator (23)Rerun [62d20265]1 ms
+    deferred: jQuery.Deferred - chainability (10)Rerun [8f1ac28a]0 ms
+    deferred: jQuery.Deferred.then - filtering (done) (4)Rerun [d0d4d16f]51 ms
+    deferred: jQuery.Deferred.then - filtering (fail) (4)Rerun [d0ea9153]27 ms
+    deferred: jQuery.Deferred.catch (4)Rerun [5ccfed7f]28 ms
+    deferred: [PIPE ONLY] jQuery.Deferred.pipe - filtering (fail) (4)Rerun [d952535c]14 ms
+    deferred: jQuery.Deferred.then - filtering (progress) (3)Rerun [357d8424]11 ms
+    deferred: jQuery.Deferred.then - deferred (done) (3)Rerun [877e85a6]28 ms
+    deferred: jQuery.Deferred.then - deferred (fail) (3)Rerun [8794458a]29 ms
+    deferred: jQuery.Deferred.then - deferred (progress) (3)Rerun [5b3444db]49 ms
+    deferred: [PIPE ONLY] jQuery.Deferred.pipe - deferred (progress) (3)Rerun [7da15a32]14 ms
+    deferred: jQuery.Deferred.then - context (11)Rerun [d230e435]26 ms
+    deferred: [PIPE ONLY] jQuery.Deferred.pipe - context (11)Rerun [244a040c]3 ms
+    deferred: jQuery.Deferred.then - spec compatibility (1)Rerun [c0116f85]13 ms
+    deferred: jQuery.Deferred.then - IsCallable determination (gh-3596) (1)Rerun [85d85b05]28 ms
+    deferred: jQuery.Deferred.exceptionHook (2)Rerun [c41974d6]42 ms
+    deferred: jQuery.Deferred.exceptionHook with stack hooks (2)Rerun [8330b5c8]31 ms
+    deferred: jQuery.Deferred - 1.x/2.x compatibility (8)Rerun [613da4d7]42 ms
+    deferred: jQuery.Deferred.then - progress and thenables (2)Rerun [aebd675a]45 ms
+    deferred: jQuery.Deferred - notify and resolve (7)Rerun [8db308cd]25 ms
+    deferred: jQuery.Deferred - resolved to a notifying deferred (2)Rerun [e3695363]39 ms
+    deferred: jQuery.when(nonThenable) - like Promise.resolve (44)Rerun [91fdbd03]30 ms
+    deferred: jQuery.when(thenable) - like Promise.resolve (68)Rerun [0bbc26ac]91 ms
+    deferred: jQuery.when(a, b) - like Promise.all (196)Rerun [94478157]75 ms
+    deferred: jQuery.when - always returns a new promise (42)Rerun [fe345314]2 ms
+    deferred: jQuery.when - notify does not affect resolved (3)Rerun [142cc340]0 ms
+    deferred: jQuery.when(...) - opportunistically synchronous (5)Rerun [d779dead]18 ms
+    deprecated: bind/unbind (4)Rerun [7e81b3ff]1 ms
+    deprecated: delegate/undelegate (2)Rerun [5f1b027f]2 ms
+    deprecated: hover() mouseenter mouseleave (1)Rerun [fd2a1553]1 ms
+    deprecated: trigger() shortcuts (5)Rerun [e295cadd]0 ms
+    deprecated: Event aliases (18)Rerun [6cee512f]10 ms
     deprecated: jQuery.parseJSON (20)Rerun [6097b574]2 ms
     deprecated: jQuery.isArray (1)Rerun [fe0068e8]0 ms
-    deprecated: jQuery.nodeName (8)Rerun [30cbb534]1 ms
-    deprecated: type (28)Rerun [fe775383]1 ms
-    deprecated: type for `Symbol` (2)Rerun [a918d83c]1 ms
-    deprecated: isFunction (20)Rerun [cc4bc4ab]3 ms
-    deprecated: isFunction(cross-realm function) (1)Rerun [46f5c2b6]61 ms
+    deprecated: jQuery.nodeName (8)Rerun [30cbb534]0 ms
+    deprecated: type (28)Rerun [fe775383]0 ms
+    deprecated: type for `Symbol` (2)Rerun [a918d83c]0 ms
+    deprecated: isFunction (20)Rerun [cc4bc4ab]2 ms
+    deprecated: isFunction(cross-realm function) (1)Rerun [46f5c2b6]35 ms
     deprecated: isFunction(GeneratorFunction) (1)Rerun [353ef97b]1 ms
     deprecated: isFunction(AsyncFunction) (1)Rerun [1bcb8672]0 ms
     deprecated: isFunction(custom @@toStringTag) (2)Rerun [ee44842d]0 ms
-    deprecated: jQuery.isWindow (14)Rerun [e716b741]2 ms
-    deprecated: jQuery.camelCase() (7)Rerun [dd6c29a0]1 ms
-    deprecated: jQuery.now (1)Rerun [db5ba8ef]1 ms
+    deprecated: jQuery.isWindow (14)Rerun [e716b741]1 ms
+    deprecated: jQuery.camelCase() (7)Rerun [dd6c29a0]0 ms
+    deprecated: jQuery.now (1)Rerun [db5ba8ef]0 ms
     deprecated: jQuery.proxy (9)Rerun [7332a647]1 ms
-    deprecated: isNumeric (43)Rerun [4260e3da]2 ms
+    deprecated: isNumeric (43)Rerun [4260e3da]0 ms
     deprecated: isNumeric(Symbol) (2)Rerun [09914223]0 ms
-    support: body background is not lost if set prior to loading jQuery (#9239) (2)Rerun [3bc9b579]129 ms
-    support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions (1, 1, 2)Rerun [93b1cb37]60110 ms
-        No violations of CSP polices@ 94 ms
-        Test timed out@ 60095 ms
+    support: body background is not lost if set prior to loading jQuery (#9239) (2)Rerun [3bc9b579]56 ms
+    support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions (1, 1, 2)Rerun [93b1cb37]60056 ms
+        No violations of CSP polices@ 41 ms
+        Test timed out@ 60042 ms
 
     Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/support.js:40:11
-    support: Verify that support tests resolve as expected per browser (1, 14, 15)Rerun [e1b3f3c8]5 ms
+    support: Verify that support tests resolve as expected per browser (1, 14, 15)Rerun [e1b3f3c8]2 ms
 
     Source: @http://localhost:22222/jquery/test/unit/support.js:282:8 @http://localhost:22222/jquery/test/unit/support.js:308:4
     data: expando (1)Rerun [59d58323]0 ms
-    data: jQuery.data & removeData, expected returns (4)Rerun [d974fccf]1 ms
-    data: jQuery._data & _removeData, expected returns (4)Rerun [c8c6a12d]1 ms
+    data: jQuery.data & removeData, expected returns (4)Rerun [d974fccf]2 ms
+    data: jQuery._data & _removeData, expected returns (4)Rerun [c8c6a12d]0 ms
     data: jQuery.hasData no side effects (1)Rerun [471c0b3e]0 ms
-    data: jQuery.data(div) (25)Rerun [f1b20eb8]3 ms
-    data: jQuery.data({}) (25)Rerun [419abc07]2 ms
-    data: jQuery.data(window) (25)Rerun [4c810139]3 ms
+    data: jQuery.data(div) (25)Rerun [f1b20eb8]1 ms
+    data: jQuery.data({}) (25)Rerun [419abc07]0 ms
+    data: jQuery.data(window) (25)Rerun [4c810139]1 ms
     data: jQuery.data(document) (25)Rerun [7572f16e]1 ms
     data: jQuery.data(<embed>) (25)Rerun [7d4b0988]0 ms
     data: jQuery.data(object/flash) (25)Rerun [92bd1609]0 ms
     data: jQuery().data() === undefined (#14101) (2)Rerun [bc9e4320]0 ms
-    data: .data() (5)Rerun [d972e5e7]2 ms
-    data: jQuery(Element).data(String, Object).data(String) (18)Rerun [45a0b398]2 ms
+    data: .data() (5)Rerun [d972e5e7]0 ms
+    data: jQuery(Element).data(String, Object).data(String) (18)Rerun [45a0b398]1 ms
     data: jQuery(plain Object).data(String, Object).data(String) (16)Rerun [eaf0a56f]2 ms
     data: .data(object) does not retain references. #13815 (2)Rerun [72d78710]1 ms
-    data: data-* attributes (46)Rerun [e11170de]7 ms
-    data: .data(Object) (4)Rerun [b21f7be8]1 ms
+    data: data-* attributes (46)Rerun [e11170de]3 ms
+    data: .data(Object) (4)Rerun [b21f7be8]0 ms
     data: jQuery.removeData (10)Rerun [842bb84c]1 ms
-    data: .removeData() (6)Rerun [dde09a8b]1 ms
-    data: JSON serialization (#8108) (1)Rerun [c57d2337]0 ms
+    data: .removeData() (6)Rerun [dde09a8b]0 ms
+    data: JSON serialization (#8108) (1)Rerun [c57d2337]1 ms
     data: .data should follow html5 specification regarding camel casing (12)Rerun [c4a6bca3]2 ms
-    data: .data should not miss preset data-* w/ hyphenated property names (2)Rerun [ff4fd96d]0 ms
-    data: jQuery.data should not miss data-* w/ hyphenated property names #14047 (1)Rerun [717197e5]0 ms
-    data: .data should not miss attr() set data-* with hyphenated property names (2)Rerun [6c4bf070]0 ms
-    data: .data always sets data with the camelCased key (gh-2257) (18)Rerun [dcf053cb]1 ms
-    data: .data should not strip more than one hyphen when camelCasing (gh-2070) (3)Rerun [ac8fcc43]1 ms
-    data: .data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values (24)Rerun [5b1a3e22]1 ms
-    data: .data supports interoperable removal of hyphenated/camelCase properties (27)Rerun [887816e1]2 ms
+    data: .data should not miss preset data-* w/ hyphenated property names (2)Rerun [ff4fd96d]1 ms
+    data: jQuery.data should not miss data-* w/ hyphenated property names #14047 (1)Rerun [717197e5]1 ms
+    data: .data should not miss attr() set data-* with hyphenated property names (2)Rerun [6c4bf070]1 ms
+    data: .data always sets data with the camelCased key (gh-2257) (18)Rerun [dcf053cb]0 ms
+    data: .data should not strip more than one hyphen when camelCasing (gh-2070) (3)Rerun [ac8fcc43]0 ms
+    data: .data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values (24)Rerun [5b1a3e22]2 ms
+    data: .data supports interoperable removal of hyphenated/camelCase properties (27)Rerun [887816e1]0 ms
     data: .data supports interoperable removal of properties SET TWICE #13850 (9)Rerun [142dcb9a]1 ms
     data: .removeData supports removal of hyphenated properties via array (#12786, gh-2257) (4)Rerun [87e4396f]0 ms
-    data: .removeData should not throw exceptions. (#10080) (1)Rerun [658fbcef]78 ms
-    data: .data only checks element attributes once. #8909 (2)Rerun [34c8ba90]0 ms
-    data: data-* with JSON value can have newlines (1)Rerun [10b63653]0 ms
+    data: .removeData should not throw exceptions. (#10080) (1)Rerun [658fbcef]39 ms
+    data: .data only checks element attributes once. #8909 (2)Rerun [34c8ba90]1 ms
+    data: data-* with JSON value can have newlines (1)Rerun [10b63653]1 ms
     data: .data doesn't throw when calling selection is empty. #13551 (1)Rerun [26b4ed79]0 ms
     data: acceptData (10)Rerun [ac476404]2 ms
     data: Check proper data removal of non-element descendants nodes (#8335) (1)Rerun [a94b9c6f]1 ms
-    data: enumerate data attrs on body (#14894) (1)Rerun [b8c46997]108 ms
+    data: enumerate data attrs on body (#14894) (1)Rerun [b8c46997]56 ms
     data: Check that the expando is removed when there's no more data (2)Rerun [8a4bac1f]1 ms
-    data: Check that the expando is removed when there's no more data on non-nodes (1)Rerun [9cc57911]1 ms
-    data: .data(prop) does not create expando (1)Rerun [ae22eba9]1 ms
-    queue: queue() with other types (14)Rerun [cfea7bc8]40 ms
-    queue: queue(name) passes in the next item in the queue as a parameter (2)Rerun [a0b7b5e8]1 ms
-    queue: queue() passes in the next item in the queue as a parameter to fx queues (3)Rerun [b635b198]516 ms
-    queue: callbacks keep their place in the queue (5)Rerun [b44ac744]416 ms
+    data: Check that the expando is removed when there's no more data on non-nodes (1)Rerun [9cc57911]0 ms
+    data: .data(prop) does not create expando (1)Rerun [ae22eba9]0 ms
+    queue: queue() with other types (14)Rerun [cfea7bc8]16 ms
+    queue: queue(name) passes in the next item in the queue as a parameter (2)Rerun [a0b7b5e8]0 ms
+    queue: queue() passes in the next item in the queue as a parameter to fx queues (3)Rerun [b635b198]515 ms
+    queue: callbacks keep their place in the queue (5)Rerun [b44ac744]417 ms
     queue: jQuery.queue should return array while manipulating the queue (1)Rerun [62814786]0 ms
-    queue: delay() (2)Rerun [67daca39]116 ms
-    queue: clearQueue(name) clears the queue (2)Rerun [cbec94c3]36 ms
-    queue: clearQueue() clears the fx queue (1)Rerun [43a0847c]2 ms
-    queue: fn.promise() - called when fx queue is empty (3)Rerun [3d95283f]61 ms
-    queue: fn.promise( "queue" ) - called whenever last queue function is dequeued (5)Rerun [bd53cbc7]51 ms
-    queue: fn.promise( "queue" ) - waits for animation to complete before resolving (2)Rerun [8c35be6e]37 ms
+    queue: delay() (2)Rerun [67daca39]114 ms
+    queue: clearQueue(name) clears the queue (2)Rerun [cbec94c3]15 ms
+    queue: clearQueue() clears the fx queue (1)Rerun [43a0847c]1 ms
+    queue: fn.promise() - called when fx queue is empty (3)Rerun [3d95283f]30 ms
+    queue: fn.promise( "queue" ) - called whenever last queue function is dequeued (5)Rerun [bd53cbc7]41 ms
+    queue: fn.promise( "queue" ) - waits for animation to complete before resolving (2)Rerun [8c35be6e]21 ms
     queue: .promise(obj) (2)Rerun [5302fde2]0 ms
-    queue: delay() can be stopped (3)Rerun [6927c207]1516 ms
-    queue: queue stop hooks (2)Rerun [a3692fac]28 ms
-    attributes: jQuery.propFix integrity test (1)Rerun [6ba2179e]1 ms
-    attributes: attr(String) (50)Rerun [e3b0c806]11 ms
+    queue: delay() can be stopped (3)Rerun [6927c207]1517 ms
+    queue: queue stop hooks (2)Rerun [a3692fac]15 ms
+    attributes: jQuery.propFix integrity test (1)Rerun [6ba2179e]0 ms
+    attributes: attr(String) (50)Rerun [e3b0c806]3 ms
     attributes: attr(String) on cloned elements, #9646 (4)Rerun [d30b9b85]1 ms
     attributes: attr(String) in XML Files (3)Rerun [cbf8a58d]2 ms
-    attributes: attr(String, Function) (2)Rerun [e7a05bda]2 ms
-    attributes: attr(Hash) (3)Rerun [ce0ca229]2 ms
-    attributes: attr(String, Object) (71)Rerun [dd42a793]20 ms
+    attributes: attr(String, Function) (2)Rerun [e7a05bda]0 ms
+    attributes: attr(Hash) (3)Rerun [ce0ca229]1 ms
+    attributes: attr(String, Object) (71)Rerun [dd42a793]6 ms
     attributes: attr(non-ASCII) (2)Rerun [2454216a]0 ms
-    attributes: attr - extending the boolean attrHandle (1)Rerun [951743f5]2 ms
-    attributes: attr(String, Object) - Loaded via XML document (2)Rerun [39a11351]1 ms
-    attributes: attr(String, Object) - Loaded via XML fragment (2)Rerun [a3e72486]1 ms
-    attributes: attr('tabindex') (8)Rerun [4e40e254]1 ms
-    attributes: attr('tabindex', value) (9)Rerun [ac9022c1]1 ms
-    attributes: removeAttr(String) (12)Rerun [88bb7eea]3 ms
+    attributes: attr - extending the boolean attrHandle (1)Rerun [951743f5]1 ms
+    attributes: attr(String, Object) - Loaded via XML document (2)Rerun [39a11351]0 ms
+    attributes: attr(String, Object) - Loaded via XML fragment (2)Rerun [a3e72486]0 ms
+    attributes: attr('tabindex') (8)Rerun [4e40e254]0 ms
+    attributes: attr('tabindex', value) (9)Rerun [ac9022c1]0 ms
+    attributes: removeAttr(String) (12)Rerun [88bb7eea]4 ms
     attributes: removeAttr(String) in XML (7)Rerun [5ce00072]1 ms
     attributes: removeAttr(Multi String, variable space width) (8)Rerun [0c02eb67]1 ms
-    attributes: removeAttr(Multi String, non-HTML whitespace is valid in attribute names (gh-3003) (8)Rerun [e2788740]1 ms
-    attributes: prop(String, Object) (17)Rerun [5c3c4d05]2 ms
-    attributes: prop(String, Object) on null/undefined (14)Rerun [f72c08ce]1 ms
-    attributes: prop('tabindex') (11)Rerun [8bbb10c6]2 ms
-    attributes: image.prop( 'tabIndex' ) (1)Rerun [8ce93dbf]2 ms
-    attributes: prop('tabindex', value) (10)Rerun [ea2c300f]0 ms
-    attributes: option.prop('selected', true) affects select.selectedIndex (gh-2732) (2)Rerun [65dc3157]2 ms
+    attributes: removeAttr(Multi String, non-HTML whitespace is valid in attribute names (gh-3003) (8)Rerun [e2788740]0 ms
+    attributes: prop(String, Object) (17)Rerun [5c3c4d05]1 ms
+    attributes: prop(String, Object) on null/undefined (14)Rerun [f72c08ce]0 ms
+    attributes: prop('tabindex') (11)Rerun [8bbb10c6]0 ms
+    attributes: image.prop( 'tabIndex' ) (1)Rerun [8ce93dbf]0 ms
+    attributes: prop('tabindex', value) (10)Rerun [ea2c300f]1 ms
+    attributes: option.prop('selected', true) affects select.selectedIndex (gh-2732) (2)Rerun [65dc3157]1 ms
     attributes: removeProp(String) (6)Rerun [e462b65c]0 ms
-    attributes: val() after modification (1)Rerun [6376b503]1 ms
-    attributes: val() (26)Rerun [b03d455d]6 ms
-    attributes: val() with non-matching values on dropdown list (3)Rerun [e1a731fe]2 ms
+    attributes: val() after modification (1)Rerun [6376b503]0 ms
+    attributes: val() (26)Rerun [b03d455d]3 ms
+    attributes: val() with non-matching values on dropdown list (3)Rerun [e1a731fe]0 ms
     attributes: val() respects numbers without exception (Bug #9319) (4)Rerun [114aac89]1 ms
-    attributes: val(String/Number) (9)Rerun [6de1bd4e]1 ms
+    attributes: val(String/Number) (9)Rerun [6de1bd4e]0 ms
     attributes: val(Function) (9)Rerun [221ff865]1 ms
-    attributes: val(Array of Numbers) (Bug #7123) (4)Rerun [c6dd91b4]1 ms
+    attributes: val(Array of Numbers) (Bug #7123) (4)Rerun [c6dd91b4]0 ms
     attributes: val(Function) with incoming value (10)Rerun [41db3b56]1 ms
     attributes: val(select) after form.reset() (Bug #2551) (3)Rerun [4e5c2644]1 ms
-    attributes: select.val(space characters) (gh-2978) (37)Rerun [d60711ee]10 ms
-    attributes: addClass(String) (9)Rerun [fe5d0aec]2 ms
+    attributes: select.val(space characters) (gh-2978) (37)Rerun [d60711ee]4 ms
+    attributes: addClass(String) (9)Rerun [fe5d0aec]0 ms
     attributes: addClass(Function) (9)Rerun [de2e1305]1 ms
     attributes: addClass(Array) (9)Rerun [2b7189bc]1 ms
-    attributes: addClass(Function) with incoming value (52)Rerun [d371c5f6]3 ms
-    attributes: removeClass(String) - simple (8)Rerun [926c1586]8 ms
-    attributes: removeClass(Function) - simple (8)Rerun [b788da4d]8 ms
-    attributes: removeClass(Array) - simple (8)Rerun [67dddf7c]5 ms
-    attributes: removeClass(Function) with incoming value (52)Rerun [6f69a149]3 ms
-    attributes: removeClass() removes duplicates (1)Rerun [2f658969]1 ms
-    attributes: removeClass(undefined) is a no-op (1)Rerun [9a4915c6]0 ms
-    attributes: toggleClass(String|boolean|undefined[, boolean]) (19)Rerun [2b9e011f]1 ms
+    attributes: addClass(Function) with incoming value (52)Rerun [d371c5f6]2 ms
+    attributes: removeClass(String) - simple (8)Rerun [926c1586]5 ms
+    attributes: removeClass(Function) - simple (8)Rerun [b788da4d]4 ms
+    attributes: removeClass(Array) - simple (8)Rerun [67dddf7c]3 ms
+    attributes: removeClass(Function) with incoming value (52)Rerun [6f69a149]2 ms
+    attributes: removeClass() removes duplicates (1)Rerun [2f658969]0 ms
+    attributes: removeClass(undefined) is a no-op (1)Rerun [9a4915c6]1 ms
+    attributes: toggleClass(String|boolean|undefined[, boolean]) (19)Rerun [2b9e011f]2 ms
     attributes: toggleClass(Function[, boolean]) (19)Rerun [0c5ee926]1 ms
-    attributes: toggleClass(Array[, boolean]) (19)Rerun [fafa92f5]2 ms
-    attributes: toggleClass(Function[, boolean]) with incoming value (14)Rerun [86934197]2 ms
-    attributes: addClass, removeClass, hasClass (17)Rerun [a56f0856]2 ms
-    attributes: addClass, removeClass, hasClass on many elements (19)Rerun [cb2313a1]2 ms
-    attributes: addClass, removeClass, hasClass on many elements - Array (16)Rerun [ce6c7f07]1 ms
-    attributes: addClass, removeClass, hasClass on elements with classes with non-HTML whitespace (gh-3072, gh-3003) (9)Rerun [71f47773]1 ms
+    attributes: toggleClass(Array[, boolean]) (19)Rerun [fafa92f5]1 ms
+    attributes: toggleClass(Function[, boolean]) with incoming value (14)Rerun [86934197]1 ms
+    attributes: addClass, removeClass, hasClass (17)Rerun [a56f0856]1 ms
+    attributes: addClass, removeClass, hasClass on many elements (19)Rerun [cb2313a1]0 ms
+    attributes: addClass, removeClass, hasClass on many elements - Array (16)Rerun [ce6c7f07]0 ms
+    attributes: addClass, removeClass, hasClass on elements with classes with non-HTML whitespace (gh-3072, gh-3003) (9)Rerun [71f47773]0 ms
     attributes: contents().hasClass() returns correct values (2)Rerun [c32ecd68]0 ms
-    attributes: hasClass correctly interprets non-space separators (#13835) (4)Rerun [3dc381d0]0 ms
+    attributes: hasClass correctly interprets non-space separators (#13835) (4)Rerun [3dc381d0]1 ms
     attributes: coords returns correct values in IE6/IE7, see #10828 (1)Rerun [7e4920d6]0 ms
     attributes: should not throw at $(option).val() (#14686) (1)Rerun [822ce1ad]0 ms
     attributes: option value not trimmed when setting via parent select (1)Rerun [2bbe56e2]1 ms
-    attributes: Insignificant white space returned for $(option).val() (#14858, gh-2978) (16)Rerun [8f794d6a]3 ms
+    attributes: Insignificant white space returned for $(option).val() (#14858, gh-2978) (16)Rerun [8f794d6a]1 ms
     attributes: SVG class manipulation (gh-2199) (12)Rerun [15a10f8c]1 ms
     attributes: non-lowercase boolean attribute getters should not crash (3)Rerun [2ffb29b5]1 ms
-    event: null or undefined handler (4)Rerun [4f7c55f4]15 ms
-    event: on() with non-null,defined data (2)Rerun [a75c7c8a]14 ms
-    event: Handler changes and .trigger() order (1)Rerun [92be6c97]9 ms
-    event: on(), with data (4)Rerun [67870fae]9 ms
-    event: click(), with data (3)Rerun [1bb483e9]8 ms
-    event: on(), with data, trigger with data (4)Rerun [e110c4fa]8 ms
-    event: on(), multiple events at once (2)Rerun [73ce31c1]9 ms
-    event: on(), five events at once (1)Rerun [83218ddf]9 ms
-    event: on(), multiple events at once and namespaces (7)Rerun [a567b4a0]9 ms
-    event: on(), namespace with special add (27)Rerun [5357ecdb]10 ms
-    event: on(), no data (1)Rerun [f9acca13]7 ms
-    event: on/one/off(Object) (6)Rerun [97deefda]9 ms
-    event: on/off(Object), on/off(Object, String) (6)Rerun [25945833]10 ms
-    event: on immediate propagation (2)Rerun [03abeb1e]9 ms
-    event: on bubbling, isDefaultPrevented, stopImmediatePropagation (3)Rerun [cc6b914d]10 ms
-    event: triggered events stopPropagation() for natively-bound events (1)Rerun [8b26f3dc]8 ms
-    event: trigger() works with events that were previously stopped (0)Rerun [75619d2b]8 ms
-    event: on(), iframes (1)Rerun [e65459b9]9 ms
-    event: on(), trigger change on select (5)Rerun [1452ed2b]8 ms
-    event: on(), namespaced events, cloned events (18)Rerun [83c2eae4]12 ms
-    event: on(), multi-namespaced events (6)Rerun [dd022686]10 ms
-    event: namespace-only event binding is a no-op (2)Rerun [dddfcdb9]9 ms
-    event: Empty namespace is ignored (1)Rerun [dd96e316]9 ms
-    event: on(), with same function (2)Rerun [0b544ace]8 ms
-    event: on(), make sure order is maintained (1)Rerun [0f22ec1f]9 ms
-    event: on(), with different this object (4)Rerun [13398616]8 ms
-    event: on(name, false), off(name, false) (3)Rerun [d4d7a3fe]9 ms
-    event: on(name, selector, false), off(name, selector, false) (3)Rerun [b1e4caa4]10 ms
-    event: on()/trigger()/off() on plain object (7)Rerun [2be9b583]10 ms
-    event: off(type) (1)Rerun [3378a8b4]9 ms
-    event: off(eventObject) (4)Rerun [39bba8ab]9 ms
-    event: mouseover triggers mouseenter (1)Rerun [1ad46faf]8 ms
-    event: pointerover triggers pointerenter (1)Rerun [fc52722f]7 ms
-    event: withinElement implemented with jQuery.contains() (1)Rerun [976ee805]8 ms
-    event: mouseenter, mouseleave don't catch exceptions (2)Rerun [7700a8fe]8 ms
-    event: trigger() bubbling (18)Rerun [2b1e2612]13 ms
-    event: trigger(type, [data], [fn]) (16)Rerun [5bfbb1c3]15 ms
-    event: submit event bubbles on copied forms (#11649) (3)Rerun [8e85e03a]17 ms
-    event: change event bubbles on copied forms (#11796) (3)Rerun [ec9b3869]13 ms
-    event: trigger(eventObject, [data], [fn]) (28)Rerun [f8fcfbc8]10 ms
-    event: .trigger() bubbling on disconnected elements (#10489) (2)Rerun [57fcf00f]9 ms
-    event: .trigger() doesn't bubble load event (#10717) (1)Rerun [5b3fa683]9 ms
-    event: Delegated events in SVG (#10791; #13180) (2)Rerun [c841373e]13 ms
-    event: Delegated events with malformed selectors (gh-3071) (3)Rerun [c5a573c7]8 ms
-    event: Delegated events in forms (#10844; #11145; #8165; #11382, #11764) (5)Rerun [7304f0a8]158 ms
-    event: Submit event can be stopped (#11049) (1)Rerun [85069023]9 ms
-    event: on(beforeunload) (1)Rerun [c4ca9de4]212 ms
-    event: jQuery.Event( type, props ) (6)Rerun [9ee7af47]10 ms
-    event: jQuery.Event properties (12)Rerun [4862ed07]14 ms
-    event: .on()/.off() (65)Rerun [86f809e5]49 ms
-    event: jQuery.off using dispatched jQuery.Event (1)Rerun [a6cd39f6]8 ms
-    event: delegated event with delegateTarget-relative selector (3)Rerun [72cc648d]15 ms
-    event: delegated event with selector matching Object.prototype property (#13203) (1)Rerun [02402d82]8 ms
-    event: delegated event with intermediate DOM manipulation (#13208) (1)Rerun [99091f7b]9 ms
-    event: ignore comment nodes in event delegation (gh-2055) (1)Rerun [d59d93f4]9 ms
-    event: stopPropagation() stops directly-bound events on delegated target (1)Rerun [97a76f1f]8 ms
-    event: off all bound delegated events (2)Rerun [fbfed32e]8 ms
-    event: on with multiple delegated events (1)Rerun [e8bc1bef]9 ms
-    event: delegated on with change (8)Rerun [825bc50c]12 ms
-    event: delegated on with submit (2)Rerun [9e60f174]9 ms
-    event: delegated off() with only namespaces (2)Rerun [478bcc85]10 ms
-    event: Non DOM element events (1)Rerun [c54cd510]8 ms
-    event: inline handler returning false stops default (1)Rerun [f2abf84c]8 ms
-    event: window resize (2)Rerun [50fdc562]8 ms
-    event: focusin bubbles (2)Rerun [e1fefb42]30 ms
-    event: custom events with colons (#3533, #8272) (1)Rerun [8e42386e]9 ms
-    event: .on and .off (9)Rerun [fa721d1f]11 ms
-    event: special on name mapping (7)Rerun [3334c871]10 ms
-    event: .on and .off, selective mixed removal (#10705) (7)Rerun [7bd80ad7]8 ms
-    event: .on( event-map, null-selector, data ) #11130 (1)Rerun [1f7323b9]9 ms
-    event: clone() delegated events (#11076) (3)Rerun [3233ef57]10 ms
-    event: checkbox state (#3827) (9)Rerun [40ec06fa]9 ms
-    event: event object properties on natively-triggered event (3)Rerun [5448f455]8 ms
-    event: addProp extensions (2)Rerun [4d23f252]9 ms
-    event: drag/drop events copy mouse-related event properties (gh-1925, gh-2009) (4)Rerun [6578e967]9 ms
-    event: focusin using non-element targets (2)Rerun [5b20ac5d]9 ms
-    event: focusin from an iframe (1)Rerun [109716c6]221 ms
-    event: jQuery.ready promise (1)Rerun [8839a7f0]156 ms
-    event: jQuery.ready uses interactive (1)Rerun [14360559]1070 ms
-    event: Focusing iframe element (1)Rerun [cdac1534]180 ms
-    event: triggerHandler(onbeforeunload) (1)Rerun [de3c3bb8]154 ms
-    event: jQuery.ready synchronous load with long loading subresources (1)Rerun [cffde38b]1092 ms
-    event: change handler should be detached from element (2)Rerun [8f6e8420]11 ms
-    event: trigger click on checkbox, fires change event (1)Rerun [473c1b43]42 ms
-    event: Namespace preserved when passed an Event (#12739) (4)Rerun [e9f2ca08]12 ms
-    event: make sure events cloned correctly (18)Rerun [ba0e96ca]24 ms
-    event: String.prototype.namespace does not cause trigger() to throw (#13360) (1)Rerun [fee4a372]7 ms
-    event: Inline event result is returned (#13993) (1)Rerun [5b66d7c6]9 ms
-    event: .off() removes the expando when there's no more data (2)Rerun [b0e64fe5]10 ms
-    event: jQuery.Event( src ) does not require a target property (2)Rerun [2ecd082d]8 ms
-    event: preventDefault() on focusin does not throw exception (1)Rerun [f524efb1]50 ms
-    event: Donor event interference (8)Rerun [53dca324]10 ms
-    event: simulated events shouldn't forward stopPropagation/preventDefault methods (3)Rerun [3683edb8]11 ms
-    event: originalEvent type of simulated event (2)Rerun [bd17e43e]56 ms
-    event: trigger('click') on radio passes extra params (1)Rerun [71dda69c]11 ms
-    event: VML with special event handlers (trac-7071) (1)Rerun [079e1194]10 ms
-    event: Check order of focusin/focusout events (2)Rerun [33414734]27 ms
-    event: focus-blur order (#12868) (5)Rerun [36f5c33f]141 ms
-    selector: element (7)Rerun [8883ac3f]1 ms
-    selector: id (26)Rerun [0db701f8]6 ms
-    selector: class (4)Rerun [037eab7b]9 ms
-    selector: name (5)Rerun [7c00ac28]4 ms
-    selector: selectors with comma (4)Rerun [83b7e1c4]3 ms
-    selector: child and adjacent (27)Rerun [484374cc]41 ms
-    selector: attributes (54)Rerun [48c47134]31 ms
-    selector: disconnected nodes (1)Rerun [610f9769]1 ms
+    event: null or undefined handler (4)Rerun [4f7c55f4]8 ms
+    event: on() with non-null,defined data (2)Rerun [a75c7c8a]10 ms
+    event: Handler changes and .trigger() order (1)Rerun [92be6c97]6 ms
+    event: on(), with data (4)Rerun [67870fae]7 ms
+    event: click(), with data (3)Rerun [1bb483e9]5 ms
+    event: on(), with data, trigger with data (4)Rerun [e110c4fa]5 ms
+    event: on(), multiple events at once (2)Rerun [73ce31c1]5 ms
+    event: on(), five events at once (1)Rerun [83218ddf]6 ms
+    event: on(), multiple events at once and namespaces (7)Rerun [a567b4a0]6 ms
+    event: on(), namespace with special add (27)Rerun [5357ecdb]7 ms
+    event: on(), no data (1)Rerun [f9acca13]4 ms
+    event: on/one/off(Object) (6)Rerun [97deefda]7 ms
+    event: on/off(Object), on/off(Object, String) (6)Rerun [25945833]6 ms
+    event: on immediate propagation (2)Rerun [03abeb1e]5 ms
+    event: on bubbling, isDefaultPrevented, stopImmediatePropagation (3)Rerun [cc6b914d]5 ms
+    event: triggered events stopPropagation() for natively-bound events (1)Rerun [8b26f3dc]5 ms
+    event: trigger() works with events that were previously stopped (0)Rerun [75619d2b]5 ms
+    event: on(), iframes (1)Rerun [e65459b9]5 ms
+    event: on(), trigger change on select (5)Rerun [1452ed2b]4 ms
+    event: on(), namespaced events, cloned events (18)Rerun [83c2eae4]7 ms
+    event: on(), multi-namespaced events (6)Rerun [dd022686]5 ms
+    event: namespace-only event binding is a no-op (2)Rerun [dddfcdb9]5 ms
+    event: Empty namespace is ignored (1)Rerun [dd96e316]5 ms
+    event: on(), with same function (2)Rerun [0b544ace]6 ms
+    event: on(), make sure order is maintained (1)Rerun [0f22ec1f]5 ms
+    event: on(), with different this object (4)Rerun [13398616]5 ms
+    event: on(name, false), off(name, false) (3)Rerun [d4d7a3fe]5 ms
+    event: on(name, selector, false), off(name, selector, false) (3)Rerun [b1e4caa4]5 ms
+    event: on()/trigger()/off() on plain object (7)Rerun [2be9b583]5 ms
+    event: off(type) (1)Rerun [3378a8b4]6 ms
+    event: off(eventObject) (4)Rerun [39bba8ab]5 ms
+    event: mouseover triggers mouseenter (1)Rerun [1ad46faf]4 ms
+    event: pointerover triggers pointerenter (1)Rerun [fc52722f]4 ms
+    event: withinElement implemented with jQuery.contains() (1)Rerun [976ee805]5 ms
+    event: mouseenter, mouseleave don't catch exceptions (2)Rerun [7700a8fe]5 ms
+    event: trigger() bubbling (18)Rerun [2b1e2612]7 ms
+    event: trigger(type, [data], [fn]) (16)Rerun [5bfbb1c3]5 ms
+    event: submit event bubbles on copied forms (#11649) (3)Rerun [8e85e03a]9 ms
+    event: change event bubbles on copied forms (#11796) (3)Rerun [ec9b3869]8 ms
+    event: trigger(eventObject, [data], [fn]) (28)Rerun [f8fcfbc8]6 ms
+    event: .trigger() bubbling on disconnected elements (#10489) (2)Rerun [57fcf00f]5 ms
+    event: .trigger() doesn't bubble load event (#10717) (1)Rerun [5b3fa683]6 ms
+    event: Delegated events in SVG (#10791; #13180) (2)Rerun [c841373e]8 ms
+    event: Delegated events with malformed selectors (gh-3071) (3)Rerun [c5a573c7]4 ms
+    event: Delegated events in forms (#10844; #11145; #8165; #11382, #11764) (5)Rerun [7304f0a8]13 ms
+    event: Submit event can be stopped (#11049) (1)Rerun [85069023]5 ms
+    event: on(beforeunload) (1)Rerun [c4ca9de4]166 ms
+    event: jQuery.Event( type, props ) (6)Rerun [9ee7af47]6 ms
+    event: jQuery.Event properties (12)Rerun [4862ed07]6 ms
+    event: .on()/.off() (65)Rerun [86f809e5]24 ms
+    event: jQuery.off using dispatched jQuery.Event (1)Rerun [a6cd39f6]7 ms
+    event: delegated event with delegateTarget-relative selector (3)Rerun [72cc648d]8 ms
+    event: delegated event with selector matching Object.prototype property (#13203) (1)Rerun [02402d82]6 ms
+    event: delegated event with intermediate DOM manipulation (#13208) (1)Rerun [99091f7b]6 ms
+    event: ignore comment nodes in event delegation (gh-2055) (1)Rerun [d59d93f4]6 ms
+    event: stopPropagation() stops directly-bound events on delegated target (1)Rerun [97a76f1f]5 ms
+    event: off all bound delegated events (2)Rerun [fbfed32e]4 ms
+    event: on with multiple delegated events (1)Rerun [e8bc1bef]5 ms
+    event: delegated on with change (8)Rerun [825bc50c]6 ms
+    event: delegated on with submit (2)Rerun [9e60f174]4 ms
+    event: delegated off() with only namespaces (2)Rerun [478bcc85]5 ms
+    event: Non DOM element events (1)Rerun [c54cd510]6 ms
+    event: inline handler returning false stops default (1)Rerun [f2abf84c]5 ms
+    event: window resize (2)Rerun [50fdc562]5 ms
+    event: focusin bubbles (2)Rerun [e1fefb42]14 ms
+    event: custom events with colons (#3533, #8272) (1)Rerun [8e42386e]4 ms
+    event: .on and .off (9)Rerun [fa721d1f]7 ms
+    event: special on name mapping (7)Rerun [3334c871]6 ms
+    event: .on and .off, selective mixed removal (#10705) (7)Rerun [7bd80ad7]5 ms
+    event: .on( event-map, null-selector, data ) #11130 (1)Rerun [1f7323b9]5 ms
+    event: clone() delegated events (#11076) (3)Rerun [3233ef57]7 ms
+    event: checkbox state (#3827) (9)Rerun [40ec06fa]5 ms
+    event: event object properties on natively-triggered event (3)Rerun [5448f455]5 ms
+    event: addProp extensions (2)Rerun [4d23f252]4 ms
+    event: drag/drop events copy mouse-related event properties (gh-1925, gh-2009) (4)Rerun [6578e967]5 ms
+    event: focusin using non-element targets (2)Rerun [5b20ac5d]6 ms
+    event: focusin from an iframe (1)Rerun [109716c6]72 ms
+    event: jQuery.ready promise (1)Rerun [8839a7f0]66 ms
+    event: jQuery.ready uses interactive (1)Rerun [14360559]1066 ms
+    event: Focusing iframe element (1)Rerun [cdac1534]56 ms
+    event: triggerHandler(onbeforeunload) (1)Rerun [de3c3bb8]62 ms
+    event: jQuery.ready synchronous load with long loading subresources (1)Rerun [cffde38b]1042 ms
+    event: change handler should be detached from element (2)Rerun [8f6e8420]6 ms
+    event: trigger click on checkbox, fires change event (1)Rerun [473c1b43]22 ms
+    event: Namespace preserved when passed an Event (#12739) (4)Rerun [e9f2ca08]8 ms
+    event: make sure events cloned correctly (18)Rerun [ba0e96ca]11 ms
+    event: String.prototype.namespace does not cause trigger() to throw (#13360) (1)Rerun [fee4a372]5 ms
+    event: Inline event result is returned (#13993) (1)Rerun [5b66d7c6]4 ms
+    event: .off() removes the expando when there's no more data (2)Rerun [b0e64fe5]6 ms
+    event: jQuery.Event( src ) does not require a target property (2)Rerun [2ecd082d]5 ms
+    event: preventDefault() on focusin does not throw exception (1)Rerun [f524efb1]28 ms
+    event: Donor event interference (8)Rerun [53dca324]6 ms
+    event: simulated events shouldn't forward stopPropagation/preventDefault methods (3)Rerun [3683edb8]7 ms
+    event: originalEvent type of simulated event (2)Rerun [bd17e43e]36 ms
+    event: trigger('click') on radio passes extra params (1)Rerun [71dda69c]5 ms
+    event: VML with special event handlers (trac-7071) (1)Rerun [079e1194]7 ms
+    event: Check order of focusin/focusout events (2)Rerun [33414734]14 ms
+    event: focus-blur order (#12868) (5)Rerun [36f5c33f]127 ms
+    selector: element (7)Rerun [8883ac3f]0 ms
+    selector: id (26)Rerun [0db701f8]4 ms
+    selector: class (4)Rerun [037eab7b]4 ms
+    selector: name (5)Rerun [7c00ac28]2 ms
+    selector: selectors with comma (4)Rerun [83b7e1c4]0 ms
+    selector: child and adjacent (27)Rerun [484374cc]23 ms
+    selector: attributes (54)Rerun [48c47134]19 ms
+    selector: disconnected nodes (1)Rerun [610f9769]0 ms
     selector: disconnected nodes (3)Rerun [c0e355d7]1 ms
-    selector: attributes - jQuery.attr (38)Rerun [ebf56202]150 ms
-    selector: jQuery.contains (16)Rerun [c8b315d2]2 ms
-    selector: jQuery.uniqueSort (15)Rerun [7cee2402]3 ms
-    selector: Sizzle cache collides with multiple Sizzles on a page (4)Rerun [406ea9a4]174 ms
-    selector: Iframe dispatch should not affect jQuery (#13936) (1)Rerun [958e0234]193 ms
+    selector: attributes - jQuery.attr (38)Rerun [ebf56202]88 ms
+    selector: jQuery.contains (16)Rerun [c8b315d2]1 ms
+    selector: jQuery.uniqueSort (15)Rerun [7cee2402]1 ms
+    selector: Sizzle cache collides with multiple Sizzles on a page (4)Rerun [406ea9a4]70 ms
+    selector: Iframe dispatch should not affect jQuery (#13936) (1)Rerun [958e0234]114 ms
     selector: Ensure escapeSelector exists (escape tests in Sizzle) (1)Rerun [e5da7c7e]1 ms
-    traversing: find(String) (1)Rerun [44dc4676]0 ms
+    traversing: find(String) (1)Rerun [44dc4676]1 ms
     traversing: find(String) under non-elements (2)Rerun [8a165e29]0 ms
-    traversing: find(leading combinator) (4)Rerun [6c067eb1]4 ms
-    traversing: find(node|jQuery object) (13)Rerun [165911c0]4 ms
-    traversing: is(String|undefined) (23)Rerun [53d824d3]4 ms
-    traversing: is() against non-elements (#10178) (14)Rerun [32648f33]2 ms
-    traversing: is(jQuery) (19)Rerun [09b3677a]15 ms
-    traversing: is() with :has() selectors (6)Rerun [6b8baba7]7 ms
-    traversing: is() with positional selectors (27)Rerun [435ba0da]14 ms
+    traversing: find(leading combinator) (4)Rerun [6c067eb1]1 ms
+    traversing: find(node|jQuery object) (13)Rerun [165911c0]2 ms
+    traversing: is(String|undefined) (23)Rerun [53d824d3]0 ms
+    traversing: is() against non-elements (#10178) (14)Rerun [32648f33]1 ms
+    traversing: is(jQuery) (19)Rerun [09b3677a]9 ms
+    traversing: is() with :has() selectors (6)Rerun [6b8baba7]3 ms
+    traversing: is() with positional selectors (27)Rerun [435ba0da]5 ms
     traversing: index() (2)Rerun [2a27d866]0 ms
-    traversing: index(Object|String|undefined) (16)Rerun [c3ba094a]3 ms
+    traversing: index(Object|String|undefined) (16)Rerun [c3ba094a]1 ms
     traversing: filter(Selector|undefined) (9)Rerun [47ce3153]5 ms
-    traversing: filter(Function) (2)Rerun [33bf57ce]1 ms
+    traversing: filter(Function) (2)Rerun [33bf57ce]0 ms
     traversing: filter(Element) (1)Rerun [5405ec90]0 ms
-    traversing: filter(Array) (1)Rerun [5296a193]0 ms
+    traversing: filter(Array) (1)Rerun [5296a193]1 ms
     traversing: filter(jQuery) (1)Rerun [40f92948]1 ms
-    traversing: filter() with positional selectors (19)Rerun [9a4c6fa8]4 ms
-    traversing: closest() (14)Rerun [53163f6d]4 ms
+    traversing: filter() with positional selectors (19)Rerun [9a4c6fa8]2 ms
+    traversing: closest() (14)Rerun [53163f6d]2 ms
     traversing: closest() with positional selectors (3)Rerun [818a3e8f]0 ms
-    traversing: closest(jQuery) (8)Rerun [588031af]1 ms
-    traversing: not(Selector) (7)Rerun [acb590c8]4 ms
-    traversing: not(undefined) (4)Rerun [579ef7db]5 ms
+    traversing: closest(jQuery) (8)Rerun [588031af]0 ms
+    traversing: not(Selector) (7)Rerun [acb590c8]2 ms
+    traversing: not(undefined) (4)Rerun [579ef7db]2 ms
     traversing: not(Element) (1)Rerun [ce912c4f]0 ms
-    traversing: not(Function) (1)Rerun [0a9c0fef]0 ms
-    traversing: not(Array) (2)Rerun [961cc512]13 ms
-    traversing: not(jQuery) (1)Rerun [6e3775a9]38 ms
-    traversing: not(Selector) excludes non-element nodes (gh-2808) (3)Rerun [1789ab15]4 ms
-    traversing: not(arraylike) passes non-element nodes (gh-3226) (5)Rerun [01c00773]2 ms
-    traversing: has(Element) (3)Rerun [879c1468]2 ms
-    traversing: has(Selector) (5)Rerun [1507abcf]4 ms
-    traversing: has(Arrayish) (4)Rerun [266a38e9]4 ms
-    traversing: addBack() (5)Rerun [51c2327c]3 ms
-    traversing: siblings([String]) (6)Rerun [9243394e]3 ms
+    traversing: not(Function) (1)Rerun [0a9c0fef]1 ms
+    traversing: not(Array) (2)Rerun [961cc512]9 ms
+    traversing: not(jQuery) (1)Rerun [6e3775a9]17 ms
+    traversing: not(Selector) excludes non-element nodes (gh-2808) (3)Rerun [1789ab15]2 ms
+    traversing: not(arraylike) passes non-element nodes (gh-3226) (5)Rerun [01c00773]1 ms
+    traversing: has(Element) (3)Rerun [879c1468]3 ms
+    traversing: has(Selector) (5)Rerun [1507abcf]2 ms
+    traversing: has(Arrayish) (4)Rerun [266a38e9]3 ms
+    traversing: addBack() (5)Rerun [51c2327c]1 ms
+    traversing: siblings([String]) (6)Rerun [9243394e]1 ms
     traversing: siblings([String]) (2)Rerun [b623f092]1 ms
     traversing: children([String]) (2)Rerun [7c54abdc]0 ms
     traversing: children([String]) (1)Rerun [0e40cfc4]0 ms
-    traversing: parent([String]) (6)Rerun [a93e9c07]3 ms
-    traversing: parents([String]) (6)Rerun [29f562ac]3 ms
-    traversing: parentsUntil([String]) (10)Rerun [c1716bb2]4 ms
+    traversing: parent([String]) (6)Rerun [a93e9c07]1 ms
+    traversing: parents([String]) (6)Rerun [29f562ac]1 ms
+    traversing: parentsUntil([String]) (10)Rerun [c1716bb2]2 ms
     traversing: next([String]) (6)Rerun [2604c650]1 ms
-    traversing: prev([String]) (5)Rerun [9e01cd90]1 ms
-    traversing: nextAll([String]) (5)Rerun [29363911]4 ms
+    traversing: prev([String]) (5)Rerun [9e01cd90]0 ms
+    traversing: nextAll([String]) (5)Rerun [29363911]2 ms
     traversing: prevAll([String]) (5)Rerun [5764e9d1]2 ms
-    traversing: nextUntil([String]) (12)Rerun [fe62ae8e]8 ms
-    traversing: prevUntil([String]) (11)Rerun [5ba82f4e]5 ms
-    traversing: contents() (12)Rerun [993eada8]3 ms
+    traversing: nextUntil([String]) (12)Rerun [fe62ae8e]2 ms
+    traversing: prevUntil([String]) (11)Rerun [5ba82f4e]3 ms
+    traversing: contents() (12)Rerun [993eada8]2 ms
     traversing: contents() for <template /> (4)Rerun [67cb9308]2 ms
-    traversing: contents() for <template /> remains inert (2)Rerun [189ba531]0 ms
-    traversing: sort direction (12)Rerun [b377110a]5 ms
-    traversing: add(String selector) (2)Rerun [17cf5c6f]0 ms
-    traversing: add(String selector, String context) (1)Rerun [46df2fbb]0 ms
-    traversing: add(String html) (3)Rerun [f23daca3]2 ms
-    traversing: add(jQuery) (4)Rerun [1b2b9577]2 ms
-    traversing: add(Element) (2)Rerun [c0210641]0 ms
+    traversing: contents() for <template /> remains inert (2)Rerun [189ba531]1 ms
+    traversing: sort direction (12)Rerun [b377110a]4 ms
+    traversing: add(String selector) (2)Rerun [17cf5c6f]1 ms
+    traversing: add(String selector, String context) (1)Rerun [46df2fbb]1 ms
+    traversing: add(String html) (3)Rerun [f23daca3]1 ms
+    traversing: add(jQuery) (4)Rerun [1b2b9577]0 ms
+    traversing: add(Element) (2)Rerun [c0210641]1 ms
     traversing: add(Array elements) (1)Rerun [a613a4f7]1 ms
-    traversing: add(Window) (1)Rerun [56a65a25]3 ms
-    traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement) (4)Rerun [b1b47397]3 ms
-    traversing: add(String, Context) (6)Rerun [5c1fe653]1 ms
-    traversing: eq('-1') #10616 (3)Rerun [abea487b]3 ms
-    traversing: index(no arg) #10977 (2)Rerun [88c07b48]1 ms
-    traversing: traversing non-elements with attribute filters (#12523) (5)Rerun [fd8d0eed]1 ms
-    manipulation: text() (5)Rerun [79abb7cd]7 ms
+    traversing: add(Window) (1)Rerun [56a65a25]1 ms
+    traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement) (4)Rerun [b1b47397]2 ms
+    traversing: add(String, Context) (6)Rerun [5c1fe653]0 ms
+    traversing: eq('-1') #10616 (3)Rerun [abea487b]2 ms
+    traversing: index(no arg) #10977 (2)Rerun [88c07b48]0 ms
+    traversing: traversing non-elements with attribute filters (#12523) (5)Rerun [fd8d0eed]0 ms
+    manipulation: text() (5)Rerun [79abb7cd]6 ms
     manipulation: text(undefined) (1)Rerun [b76b69b5]1 ms
-    manipulation: text(String) (6)Rerun [b853a6bc]1 ms
-    manipulation: text(Function) (6)Rerun [f4ecfad5]1 ms
+    manipulation: text(String) (6)Rerun [b853a6bc]0 ms
+    manipulation: text(Function) (6)Rerun [f4ecfad5]0 ms
     manipulation: text(Function) with incoming value (2)Rerun [60fea5c6]0 ms
-    manipulation: append(String|Element|Array<Element>|jQuery) (78)Rerun [d1fdf7d0]25 ms
-    manipulation: append(Function) (78)Rerun [72a7c4c2]28 ms
-    manipulation: append(param) to object, see #11280 (5)Rerun [65c5f097]2 ms
-    manipulation: append(Function) returns String (4)Rerun [750e10cc]1 ms
+    manipulation: append(String|Element|Array<Element>|jQuery) (78)Rerun [d1fdf7d0]13 ms
+    manipulation: append(Function) (78)Rerun [72a7c4c2]14 ms
+    manipulation: append(param) to object, see #11280 (5)Rerun [65c5f097]0 ms
+    manipulation: append(Function) returns String (4)Rerun [750e10cc]0 ms
     manipulation: append(Function) returns Element (2)Rerun [39c085a1]0 ms
     manipulation: append(Function) returns Array<Element> (2)Rerun [29c710a0]0 ms
     manipulation: append(Function) returns jQuery (2)Rerun [9a619f19]1 ms
     manipulation: append(Function) returns Number (2)Rerun [6c918c04]0 ms
-    manipulation: XML DOM manipulation (#9960) (5)Rerun [5daa93d7]3 ms
-    manipulation: append HTML5 sectioning elements (Bug #6485) (2)Rerun [2831131c]2 ms
-    manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (1)Rerun [6118970a]11 ms
+    manipulation: XML DOM manipulation (#9960) (5)Rerun [5daa93d7]1 ms
+    manipulation: append HTML5 sectioning elements (Bug #6485) (2)Rerun [2831131c]3 ms
+    manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (1)Rerun [6118970a]6 ms
     manipulation: html(String) with HTML5 (Bug #6485) (2)Rerun [9dd21615]1 ms
-    manipulation: html(String) tag-hyphenated elements (Bug #1987) (27)Rerun [5a5a29ad]3 ms
-    manipulation: Tag name processing respects the HTML Standard (gh-2005) (240)Rerun [371f058f]26 ms
+    manipulation: html(String) tag-hyphenated elements (Bug #1987) (27)Rerun [5a5a29ad]1 ms
+    manipulation: Tag name processing respects the HTML Standard (gh-2005) (240)Rerun [371f058f]12 ms
     manipulation: IE8 serialization bug (2)Rerun [7eedaf01]1 ms
     manipulation: html() object element #10324 (1)Rerun [4c0b7603]0 ms
     manipulation: append(xml) (1)Rerun [15c79ec1]1 ms
-    manipulation: appendTo(String) (4)Rerun [78206d44]3 ms
-    manipulation: appendTo(Element|Array<Element>) (2)Rerun [498a1bd0]1 ms
-    manipulation: appendTo(jQuery) (10)Rerun [fd3ea897]8 ms
-    manipulation: prepend(String) (2)Rerun [fefaf07f]1 ms
-    manipulation: prepend(Element) (1)Rerun [74e63b46]1 ms
+    manipulation: appendTo(String) (4)Rerun [78206d44]1 ms
+    manipulation: appendTo(Element|Array<Element>) (2)Rerun [498a1bd0]0 ms
+    manipulation: appendTo(jQuery) (10)Rerun [fd3ea897]4 ms
+    manipulation: prepend(String) (2)Rerun [fefaf07f]0 ms
+    manipulation: prepend(Element) (1)Rerun [74e63b46]0 ms
     manipulation: prepend(Array<Element>) (1)Rerun [ced9292b]0 ms
-    manipulation: prepend(jQuery) (1)Rerun [84192bd2]3 ms
-    manipulation: prepend(Array<jQuery>) (1)Rerun [d2e2c485]2 ms
-    manipulation: prepend(Function) with incoming value -- String (4)Rerun [a2fa629a]2 ms
-    manipulation: prepend(Function) with incoming value -- Element (2)Rerun [c95e6d93]1 ms
+    manipulation: prepend(jQuery) (1)Rerun [84192bd2]2 ms
+    manipulation: prepend(Array<jQuery>) (1)Rerun [d2e2c485]1 ms
+    manipulation: prepend(Function) with incoming value -- String (4)Rerun [a2fa629a]1 ms
+    manipulation: prepend(Function) with incoming value -- Element (2)Rerun [c95e6d93]0 ms
     manipulation: prepend(Function) with incoming value -- Array<Element> (2)Rerun [a1e3b46e]1 ms
-    manipulation: prepend(Function) with incoming value -- jQuery (2)Rerun [c84df0e7]2 ms
-    manipulation: prependTo(String) (2)Rerun [3461885a]2 ms
+    manipulation: prepend(Function) with incoming value -- jQuery (2)Rerun [c84df0e7]0 ms
+    manipulation: prependTo(String) (2)Rerun [3461885a]0 ms
     manipulation: prependTo(Element) (1)Rerun [ec529ecb]0 ms
-    manipulation: prependTo(Array<Element>) (1)Rerun [7243b606]1 ms
+    manipulation: prependTo(Array<Element>) (1)Rerun [7243b606]0 ms
     manipulation: prependTo(jQuery) (1)Rerun [b97fc3ad]2 ms
-    manipulation: prependTo(Array<jQuery>) (1)Rerun [8dd5b04a]2 ms
+    manipulation: prependTo(Array<jQuery>) (1)Rerun [8dd5b04a]1 ms
     manipulation: before(String) (1)Rerun [7bc7434e]0 ms
     manipulation: before(Element) (1)Rerun [91a44257]0 ms
-    manipulation: before(Array<Element>) (1)Rerun [8e893cfa]1 ms
-    manipulation: before(jQuery) (1)Rerun [00e57ea1]3 ms
+    manipulation: before(Array<Element>) (1)Rerun [8e893cfa]0 ms
+    manipulation: before(jQuery) (1)Rerun [00e57ea1]0 ms
     manipulation: before(Array<jQuery>) (1)Rerun [b8097ad6]2 ms
-    manipulation: before(Function) -- Returns String (1)Rerun [7c1eb755]1 ms
+    manipulation: before(Function) -- Returns String (1)Rerun [7c1eb755]0 ms
     manipulation: before(Function) -- Returns Element (1)Rerun [14c4b038]0 ms
     manipulation: before(Function) -- Returns Array<Element> (1)Rerun [d9711e29]0 ms
     manipulation: before(Function) -- Returns jQuery (1)Rerun [a17245a2]2 ms
-    manipulation: before(Function) -- Returns Array<jQuery> (1)Rerun [a85fb759]2 ms
+    manipulation: before(Function) -- Returns Array<jQuery> (1)Rerun [a85fb759]1 ms
     manipulation: before(no-op) (2)Rerun [be0e6066]1 ms
     manipulation: before and after w/ empty object (#10812) (1)Rerun [e9f42ddf]1 ms
     manipulation: .before() and .after() disconnected node (2)Rerun [bff98b50]0 ms
     manipulation: insert with .before() on disconnected node last (1)Rerun [3197d82c]0 ms
     manipulation: insert with .before() on disconnected node first (1)Rerun [01123fda]1 ms
-    manipulation: insert with .before() on disconnected node last (1)Rerun [01632d74]0 ms
+    manipulation: insert with .before() on disconnected node last (1)Rerun [01632d74]1 ms
     manipulation: insert with .before() on disconnected node last (1)Rerun [2b02812c]0 ms
-    manipulation: insertBefore(String) (1)Rerun [2884f727]1 ms
+    manipulation: insertBefore(String) (1)Rerun [2884f727]0 ms
     manipulation: insertBefore(Element) (1)Rerun [7c9d099e]1 ms
     manipulation: insertBefore(Array<Element>) (1)Rerun [b5e607d3]0 ms
     manipulation: insertBefore(jQuery) (1)Rerun [ada3327a]1 ms
@@ -550,493 +550,493 @@ Tests completed in 115094 milliseconds.
     manipulation: .after(Function) returns jQuery (1)Rerun [fb0d2245]1 ms
     manipulation: .after(disconnected node) (2)Rerun [1de765fd]0 ms
     manipulation: insertAfter(String) (1)Rerun [58a72614]0 ms
-    manipulation: insertAfter(Element) (1)Rerun [50c0b851]1 ms
+    manipulation: insertAfter(Element) (1)Rerun [50c0b851]0 ms
     manipulation: insertAfter(Array<Element>) (1)Rerun [3354f9c0]0 ms
-    manipulation: insertAfter(jQuery) (1)Rerun [ddc56167]2 ms
-    manipulation: replaceWith(String|Element|Array<Element>|jQuery) (29)Rerun [819c8672]17 ms
-    manipulation: replaceWith(Function) (30)Rerun [85c93a64]14 ms
-    manipulation: replaceWith(string) for more than one element (3)Rerun [691afae2]1 ms
-    manipulation: Empty replaceWith (trac-13401; trac-13596; gh-2204) (25)Rerun [b34e46dc]7 ms
+    manipulation: insertAfter(jQuery) (1)Rerun [ddc56167]1 ms
+    manipulation: replaceWith(String|Element|Array<Element>|jQuery) (29)Rerun [819c8672]8 ms
+    manipulation: replaceWith(Function) (30)Rerun [85c93a64]7 ms
+    manipulation: replaceWith(string) for more than one element (3)Rerun [691afae2]0 ms
+    manipulation: Empty replaceWith (trac-13401; trac-13596; gh-2204) (25)Rerun [b34e46dc]3 ms
     manipulation: replaceAll(String) (2)Rerun [8a81309c]0 ms
     manipulation: replaceAll(Element) (2)Rerun [5a27fec9]0 ms
     manipulation: replaceAll(Array<Element>) (3)Rerun [5bdffc48]0 ms
-    manipulation: replaceAll(jQuery) (3)Rerun [0f9f6bef]2 ms
-    manipulation: jQuery.clone() (#8017) (2)Rerun [420b951d]1 ms
-    manipulation: append to multiple elements (#8070) (2)Rerun [1423a5a6]1 ms
-    manipulation: table manipulation (2)Rerun [cb6ffd0e]176 ms
-    manipulation: clone() (45)Rerun [43f2961f]45 ms
-    manipulation: clone(script type=non-javascript) (#11359) (3)Rerun [ba6bf709]1 ms
+    manipulation: replaceAll(jQuery) (3)Rerun [0f9f6bef]0 ms
+    manipulation: jQuery.clone() (#8017) (2)Rerun [420b951d]0 ms
+    manipulation: append to multiple elements (#8070) (2)Rerun [1423a5a6]0 ms
+    manipulation: table manipulation (2)Rerun [cb6ffd0e]20 ms
+    manipulation: clone() (45)Rerun [43f2961f]26 ms
+    manipulation: clone(script type=non-javascript) (#11359) (3)Rerun [ba6bf709]0 ms
     manipulation: clone(form element) (Bug #3879, #6655) (5)Rerun [5b5d57f1]1 ms
-    manipulation: clone(multiple selected options) (Bug #8129) (1)Rerun [b4779b24]2 ms
-    manipulation: clone() on XML nodes (2)Rerun [549e70a8]2 ms
-    manipulation: clone() on local XML nodes with html5 nodename (2)Rerun [14569a30]2 ms
+    manipulation: clone(multiple selected options) (Bug #8129) (1)Rerun [b4779b24]0 ms
+    manipulation: clone() on XML nodes (2)Rerun [549e70a8]1 ms
+    manipulation: clone() on local XML nodes with html5 nodename (2)Rerun [14569a30]0 ms
     manipulation: html(undefined) (1)Rerun [3ff2cc77]0 ms
-    manipulation: html() on empty set (1)Rerun [efc42543]1 ms
-    manipulation: html(String|Number) (40)Rerun [177371b3]8 ms
-    manipulation: html(Function) (40)Rerun [5c6d37d3]6 ms
-    manipulation: html(script type module) (4)Rerun [409487ae]1017 ms
+    manipulation: html() on empty set (1)Rerun [efc42543]0 ms
+    manipulation: html(String|Number) (40)Rerun [177371b3]3 ms
+    manipulation: html(Function) (40)Rerun [5c6d37d3]3 ms
+    manipulation: html(script type module) (4)Rerun [409487ae]1015 ms
     manipulation: html(Function) with incoming value -- direct selection (4)Rerun [3bbe8a39]1 ms
-    manipulation: html(Function) with incoming value -- jQuery.contents() (14)Rerun [bf0a0767]3 ms
-    manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858) (2)Rerun [9c138b84]2 ms
+    manipulation: html(Function) with incoming value -- jQuery.contents() (14)Rerun [bf0a0767]1 ms
+    manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858) (2)Rerun [9c138b84]1 ms
     manipulation: remove() no filters (2)Rerun [3b3ef098]1 ms
-    manipulation: remove() with filters (8)Rerun [90ccaf9d]2 ms
-    manipulation: remove() event cleaning (1)Rerun [4ba995c5]3 ms
-    manipulation: remove() in document order #13779 (1)Rerun [9233c3ec]3 ms
+    manipulation: remove() with filters (8)Rerun [90ccaf9d]1 ms
+    manipulation: remove() event cleaning (1)Rerun [4ba995c5]0 ms
+    manipulation: remove() in document order #13779 (1)Rerun [9233c3ec]2 ms
     manipulation: detach() no filters (3)Rerun [d4e901e9]1 ms
-    manipulation: detach() with filters (8)Rerun [6837b0ae]2 ms
-    manipulation: detach() event cleaning (1)Rerun [b8daaf14]1 ms
+    manipulation: detach() with filters (8)Rerun [6837b0ae]0 ms
+    manipulation: detach() event cleaning (1)Rerun [b8daaf14]0 ms
     manipulation: empty() (3)Rerun [af85020f]1 ms
-    manipulation: jQuery.cleanData (14)Rerun [3cbc3042]4 ms
-    manipulation: jQuery.cleanData eliminates all private data (gh-2127) (3)Rerun [60994e58]2 ms
+    manipulation: jQuery.cleanData (14)Rerun [3cbc3042]2 ms
+    manipulation: jQuery.cleanData eliminates all private data (gh-2127) (3)Rerun [60994e58]1 ms
     manipulation: jQuery.cleanData eliminates all public data (3)Rerun [c18e2e11]1 ms
-    manipulation: domManip plain-text caching (trac-6779) (1)Rerun [aa495812]1 ms
+    manipulation: domManip plain-text caching (trac-6779) (1)Rerun [aa495812]0 ms
     manipulation: domManip executes scripts containing html comments or CDATA (trac-9221) (3)Rerun [7bbe762d]1 ms
-    manipulation: domManip tolerates window-valued document[0] in IE9/10 (trac-12266) (1)Rerun [416079f7]193 ms
-    manipulation: domManip executes scripts in iframes in the iframes' context (2)Rerun [3096991d]154 ms
+    manipulation: domManip tolerates window-valued document[0] in IE9/10 (trac-12266) (1)Rerun [416079f7]81 ms
+    manipulation: domManip executes scripts in iframes in the iframes' context (2)Rerun [3096991d]48 ms
     manipulation: jQuery.clone - no exceptions for object elements #9587 (1)Rerun [0202079b]0 ms
-    manipulation: Cloned, detached HTML5 elems (#10667,10670) (7)Rerun [bc2d65ae]3 ms
-    manipulation: Guard against exceptions when clearing safeChildNodes (1)Rerun [a093336a]1 ms
-    manipulation: Ensure oldIE creates a new set on appendTo (#8894) (5)Rerun [bab3ba63]1 ms
-    manipulation: html() - script exceptions bubble (#11743) (2)Rerun [af5cc233]1015 ms
-    manipulation: checked state is cloned with clone() (2)Rerun [0c51698e]2 ms
+    manipulation: Cloned, detached HTML5 elems (#10667,10670) (7)Rerun [bc2d65ae]2 ms
+    manipulation: Guard against exceptions when clearing safeChildNodes (1)Rerun [a093336a]0 ms
+    manipulation: Ensure oldIE creates a new set on appendTo (#8894) (5)Rerun [bab3ba63]0 ms
+    manipulation: html() - script exceptions bubble (#11743) (2)Rerun [af5cc233]1014 ms
+    manipulation: checked state is cloned with clone() (2)Rerun [0c51698e]0 ms
     manipulation: manipulate mixed jQuery and text (#12384, #12346) (2)Rerun [4cb95a05]2 ms
-    manipulation: script evaluation (#11795) (13)Rerun [f3ac54bf]40 ms
-    manipulation: jQuery._evalUrl (#12838) (5)Rerun [6789cde3]2 ms
+    manipulation: script evaluation (#11795) (13)Rerun [f3ac54bf]17 ms
+    manipulation: jQuery._evalUrl (#12838) (5)Rerun [6789cde3]0 ms
     manipulation: jQuery.htmlPrefilter (gh-1747) (5)Rerun [8657f31b]115 ms
-    manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087) (10)Rerun [b9e8f29b]89 ms
+    manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087) (10)Rerun [b9e8f29b]6 ms
     manipulation: Index for function argument should be received (#13094) (2)Rerun [5719b78b]0 ms
-    manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment (1)Rerun [8c121d4d]0 ms
-    manipulation: Make sure specific elements with content created correctly (#13232) (20)Rerun [2f6e1104]6 ms
-    manipulation: Validate creation of multiple quantities of certain elements (#13818) (44)Rerun [da9adc23]4 ms
-    manipulation: Make sure tr element will be appended to tbody element of table when present (1)Rerun [0eeb7ea7]1 ms
-    manipulation: Make sure tr elements will be appended to tbody element of table when present (1)Rerun [f86836b6]0 ms
-    manipulation: Make sure tfoot element will not be appended to tbody element of table when present (1)Rerun [a120bd88]1 ms
+    manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment (1)Rerun [8c121d4d]1 ms
+    manipulation: Make sure specific elements with content created correctly (#13232) (20)Rerun [2f6e1104]3 ms
+    manipulation: Validate creation of multiple quantities of certain elements (#13818) (44)Rerun [da9adc23]0 ms
+    manipulation: Make sure tr element will be appended to tbody element of table when present (1)Rerun [0eeb7ea7]0 ms
+    manipulation: Make sure tr elements will be appended to tbody element of table when present (1)Rerun [f86836b6]1 ms
+    manipulation: Make sure tfoot element will not be appended to tbody element of table when present (1)Rerun [a120bd88]0 ms
     manipulation: Make sure document fragment will be appended to tbody element of table when present (1)Rerun [abf62c12]0 ms
-    manipulation: Make sure col element is appended correctly (1)Rerun [960a5aca]31 ms
-    manipulation: Make sure tr is not appended to the wrong tbody (gh-3439) (1)Rerun [84a4f35b]2 ms
-    manipulation: Insert script with data-URI (gh-1887) (1)Rerun [d6c835b5]118 ms
-    wrap: wrap(String|Element) (19)Rerun [3ad4676c]6 ms
-    wrap: wrap(Function) (19)Rerun [14b24165]4 ms
-    wrap: wrap(Function) with index (#10177) (6)Rerun [e82d35bf]2 ms
-    wrap: wrap(String) consecutive elements (#10177) (12)Rerun [199d8111]3 ms
-    wrap: wrapAll(String) (5)Rerun [62f06b95]4 ms
-    wrap: wrapAll(Function) (5)Rerun [6b6bed6e]5 ms
-    wrap: wrapAll(Function) check execution characteristics (3)Rerun [2b4b8966]3 ms
+    manipulation: Make sure col element is appended correctly (1)Rerun [960a5aca]15 ms
+    manipulation: Make sure tr is not appended to the wrong tbody (gh-3439) (1)Rerun [84a4f35b]0 ms
+    manipulation: Insert script with data-URI (gh-1887) (1)Rerun [d6c835b5]117 ms
+    wrap: wrap(String|Element) (19)Rerun [3ad4676c]2 ms
+    wrap: wrap(Function) (19)Rerun [14b24165]2 ms
+    wrap: wrap(Function) with index (#10177) (6)Rerun [e82d35bf]0 ms
+    wrap: wrap(String) consecutive elements (#10177) (12)Rerun [199d8111]1 ms
+    wrap: wrapAll(String) (5)Rerun [62f06b95]3 ms
+    wrap: wrapAll(Function) (5)Rerun [6b6bed6e]3 ms
+    wrap: wrapAll(Function) check execution characteristics (3)Rerun [2b4b8966]1 ms
     wrap: wrapAll(Element) (3)Rerun [8fa022f0]2 ms
-    wrap: wrapInner(String) (6)Rerun [13d74a4a]1 ms
+    wrap: wrapInner(String) (6)Rerun [13d74a4a]2 ms
     wrap: wrapInner(Element) (5)Rerun [fb951adb]0 ms
     wrap: wrapInner(Function) returns String (6)Rerun [a98bbc8b]0 ms
     wrap: wrapInner(Function) returns Element (5)Rerun [94f851c2]1 ms
-    wrap: unwrap() (9)Rerun [d4a4e9b6]15 ms
-    wrap: unwrap( selector ) (5)Rerun [ba3af195]2 ms
-    wrap: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (2)Rerun [df27d084]1 ms
+    wrap: unwrap() (9)Rerun [d4a4e9b6]5 ms
+    wrap: unwrap( selector ) (5)Rerun [ba3af195]1 ms
+    wrap: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (2)Rerun [df27d084]0 ms
     wrap: wrapping scripts (#10470) (2)Rerun [52f4a540]2 ms
-    css: css(String|Hash) (42)Rerun [bd70ccae]45 ms
-    css: css() explicit and relative values (29)Rerun [55e67956]45 ms
-    css: css() non-px relative values (gh-1711) (17)Rerun [43c9c8b2]55 ms
-    css: css() mismatched relative values with bounded styles (gh-2144) (1)Rerun [b5b5e83d]30 ms
-    css: css(String, Object) (19)Rerun [040f8367]12 ms
-    css: css(String, Object) with negative values (4)Rerun [9fd1072c]29 ms
-    css: css(Array) (2)Rerun [b21d870e]30 ms
-    css: css(String, Function) (3)Rerun [8ea592ae]10 ms
-    css: css(String, Function) with incoming value (3)Rerun [d52dd71f]10 ms
-    css: css(Object) where values are Functions (3)Rerun [90ac0dfe]9 ms
-    css: css(Object) where values are Functions with incoming values (3)Rerun [b8bbc3e4]10 ms
-    css: show() (18)Rerun [50a55477]19 ms
-    css: show/hide detached nodes (19)Rerun [f482cc88]19 ms
-    css: hide hidden elements (bug #7141) (3)Rerun [03e6c6eb]10 ms
-    css: show() after hide() should always set display to initial value (#14750) (1)Rerun [57252375]9 ms
-    css: show/hide 3.0, default display (36)Rerun [a7c2699f]15 ms
-    css: show/hide 3.0, default body display (2)Rerun [24d1dd87]44 ms
-    css: show/hide 3.0, cascade display (36)Rerun [fe4e7712]16 ms
-    css: show/hide 3.0, inline display (96)Rerun [a91016ff]22 ms
-    css: show/hide 3.0, cascade hidden (72)Rerun [edf8355a]21 ms
-    css: show/hide 3.0, inline hidden (84)Rerun [fbbc63cd]23 ms
-    css: toggle() (9)Rerun [886670ce]78 ms
-    css: detached toggle() (6)Rerun [658232ea]4 ms
-    css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (4)Rerun [b2ecf73b]31 ms
-    css: internal ref to elem.runtimeStyle (bug #7608) (1)Rerun [088cf83d]14 ms
-    css: computed margins (trac-3333; gh-2237) (2)Rerun [0d71fe58]13 ms
-    css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (2)Rerun [9d1b7146]30 ms
-    css: jQuery.cssProps behavior, (bug #8402) (2)Rerun [bf0079da]29 ms
+    css: css(String|Hash) (42)Rerun [bd70ccae]21 ms
+    css: css() explicit and relative values (29)Rerun [55e67956]23 ms
+    css: css() non-px relative values (gh-1711) (17)Rerun [43c9c8b2]30 ms
+    css: css() mismatched relative values with bounded styles (gh-2144) (1)Rerun [b5b5e83d]14 ms
+    css: css(String, Object) (19)Rerun [040f8367]7 ms
+    css: css(String, Object) with negative values (4)Rerun [9fd1072c]14 ms
+    css: css(Array) (2)Rerun [b21d870e]14 ms
+    css: css(String, Function) (3)Rerun [8ea592ae]6 ms
+    css: css(String, Function) with incoming value (3)Rerun [d52dd71f]6 ms
+    css: css(Object) where values are Functions (3)Rerun [90ac0dfe]4 ms
+    css: css(Object) where values are Functions with incoming values (3)Rerun [b8bbc3e4]4 ms
+    css: show() (18)Rerun [50a55477]11 ms
+    css: show/hide detached nodes (19)Rerun [f482cc88]12 ms
+    css: hide hidden elements (bug #7141) (3)Rerun [03e6c6eb]5 ms
+    css: show() after hide() should always set display to initial value (#14750) (1)Rerun [57252375]5 ms
+    css: show/hide 3.0, default display (36)Rerun [a7c2699f]8 ms
+    css: show/hide 3.0, default body display (2)Rerun [24d1dd87]19 ms
+    css: show/hide 3.0, cascade display (36)Rerun [fe4e7712]9 ms
+    css: show/hide 3.0, inline display (96)Rerun [a91016ff]12 ms
+    css: show/hide 3.0, cascade hidden (72)Rerun [edf8355a]11 ms
+    css: show/hide 3.0, inline hidden (84)Rerun [fbbc63cd]13 ms
+    css: toggle() (9)Rerun [886670ce]40 ms
+    css: detached toggle() (6)Rerun [658232ea]0 ms
+    css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (4)Rerun [b2ecf73b]15 ms
+    css: internal ref to elem.runtimeStyle (bug #7608) (1)Rerun [088cf83d]7 ms
+    css: computed margins (trac-3333; gh-2237) (2)Rerun [0d71fe58]7 ms
+    css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (2)Rerun [9d1b7146]15 ms
+    css: jQuery.cssProps behavior, (bug #8402) (2)Rerun [bf0079da]14 ms
     css: widows & orphans #8936 (2)Rerun [2d0ffbea]1 ms
     css: can't get css for disconnected in IE<9, see #10254 and #8388 (2)Rerun [ce12502e]0 ms
-    css: Ensure styles are retrieving from parsed html on document fragments (1)Rerun [40d316e9]1 ms
-    css: can't get background-position in IE<9, see #10796 (8)Rerun [a21fbb69]13 ms
-    css: percentage properties for left and top should be transformed to pixels, see #9505 (2)Rerun [9c39f1cc]88 ms
-    css: Do not append px (#9548, #12990, #2792) (3)Rerun [ef1ec892]11 ms
-    css: css('width') and css('height') should respect box-sizing, see #11004 (4)Rerun [e203a9fa]33 ms
-    css: css('width') should work correctly before document ready (#14084) (1)Rerun [50fba7e8]156 ms
-    css: css('width') should work correctly with browser zooming (1)Rerun [1502b009]138 ms
-    css: css('width') and css('height') should return fractional values for nodes in the document (2)Rerun [ae02f112]34 ms
+    css: Ensure styles are retrieving from parsed html on document fragments (1)Rerun [40d316e9]0 ms
+    css: can't get background-position in IE<9, see #10796 (8)Rerun [a21fbb69]7 ms
+    css: percentage properties for left and top should be transformed to pixels, see #9505 (2)Rerun [9c39f1cc]14 ms
+    css: Do not append px (#9548, #12990, #2792) (3)Rerun [ef1ec892]6 ms
+    css: css('width') and css('height') should respect box-sizing, see #11004 (4)Rerun [e203a9fa]16 ms
+    css: css('width') should work correctly before document ready (#14084) (1)Rerun [50fba7e8]73 ms
+    css: css('width') should work correctly with browser zooming (1)Rerun [1502b009]51 ms
+    css: css('width') and css('height') should return fractional values for nodes in the document (2)Rerun [ae02f112]17 ms
     css: css('width') and css('height') should return fractional values for disconnected nodes (2)Rerun [60a69090]1 ms
-    css: certain css values of 'normal' should be convertable to a number, see #8627 (3)Rerun [f92cd943]11 ms
-    css: cssHooks - expand (15)Rerun [0effefe7]2 ms
-    css: css opacity consistency across browsers (#12685) (3)Rerun [408cc779]13 ms
-    css: :visible/:hidden selectors (17)Rerun [9259039a]44 ms
-    css: Keep the last style if the new one isn't recognized by the browser (#14836) (1)Rerun [b7923ac5]1 ms
-    css: Keep the last style if the new one is a non-empty whitespace (gh-3204) (1)Rerun [57883443]1 ms
+    css: certain css values of 'normal' should be convertable to a number, see #8627 (3)Rerun [f92cd943]7 ms
+    css: cssHooks - expand (15)Rerun [0effefe7]1 ms
+    css: css opacity consistency across browsers (#12685) (3)Rerun [408cc779]6 ms
+    css: :visible/:hidden selectors (17)Rerun [9259039a]23 ms
+    css: Keep the last style if the new one isn't recognized by the browser (#14836) (1)Rerun [b7923ac5]0 ms
+    css: Keep the last style if the new one is a non-empty whitespace (gh-3204) (1)Rerun [57883443]0 ms
     css: Reset the style if set to an empty string (1)Rerun [963a3c6b]0 ms
     css: Clearing a Cloned Element's Style Shouldn't Clear the Original Element's Style (#8908) (24)Rerun [1170a758]1015 ms
     css: Don't append px to CSS "order" value (#14049) (1)Rerun [bd7562d2]1 ms
-    css: Do not throw on frame elements from css method (#15098) (1)Rerun [152c6b1d]37 ms
-    css: Don't default to a cached previously used wrong prefixed name (gh-2015) (3)Rerun [b862bce1]2 ms
+    css: Do not throw on frame elements from css method (#15098) (1)Rerun [152c6b1d]20 ms
+    css: Don't default to a cached previously used wrong prefixed name (gh-2015) (3)Rerun [b862bce1]0 ms
     css: Don't detect fake set properties on a node when caching the prefixed version (1)Rerun [8dd18c09]0 ms
-    css: css(--customProperty) (10)Rerun [b4597a25]15 ms
-    serialize: jQuery.param() (23)Rerun [9004571a]5 ms
-    serialize: jQuery.param() not affected by ajaxSettings (1)Rerun [503481d3]1 ms
+    css: css(--customProperty) (10)Rerun [b4597a25]8 ms
+    serialize: jQuery.param() (23)Rerun [9004571a]2 ms
+    serialize: jQuery.param() not affected by ajaxSettings (1)Rerun [503481d3]0 ms
     serialize: jQuery.param() Constructed prop values (4)Rerun [2ed25aef]0 ms
-    serialize: serialize() (6)Rerun [1a0f6125]16 ms
-    ajax: Unit Testing Environment (2)Rerun [7c492543]1 ms
-    ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE) (1)Rerun [e0d0b3c1]352 ms
-    ajax: jQuery.ajax() - success callbacks (8)Rerun [11a69f33]79 ms
-    ajax: jQuery.ajax() - success callbacks - (url, options) syntax (8)Rerun [473f095d]66 ms
-    ajax: jQuery.ajax() - execute js for crossOrigin when dataType option is provided (3)Rerun [49492c83]63 ms
-    ajax: jQuery.ajax() - do not execute js (crossOrigin) (2)Rerun [81be4b23]62 ms
-    ajax: jQuery.ajax() - success callbacks (late binding) (8)Rerun [df5387e3]69 ms
-    ajax: jQuery.ajax() - success callbacks (oncomplete binding) (8)Rerun [2a91caf1]64 ms
-    ajax: jQuery.ajax() - error callbacks (8)Rerun [ed8cd778]59 ms
-    ajax: jQuery.ajax() - textStatus and errorThrown values (4)Rerun [4af235be]59 ms
-    ajax: jQuery.ajax() - responseText on error (1)Rerun [7d19049b]71 ms
-    ajax: jQuery.ajax() - retry with jQuery.ajax( this ) (2)Rerun [fbd996cb]56 ms
-    ajax: jQuery.ajax() - headers (5)Rerun [809a3448]71 ms
-    ajax: jQuery.ajax() - Accept header (1)Rerun [41e037c7]62 ms
-    ajax: jQuery.ajax() - contentType (2)Rerun [25ace715]75 ms
-    ajax: jQuery.ajax() - protocol-less urls (1)Rerun [f9877014]55 ms
-    ajax: jQuery.ajax() - hash (4)Rerun [57d8038c]59 ms
-    ajax: jQuery.ajax() - traditional param encoding (4)Rerun [00f6ab1d]56 ms
-    ajax: jQuery.ajax() - cross-domain detection (8)Rerun [4d4f7314]62 ms
-    ajax: jQuery.ajax() - abort (9)Rerun [a2c63072]60 ms
+    serialize: serialize() (6)Rerun [1a0f6125]7 ms
+    ajax: Unit Testing Environment (2)Rerun [7c492543]0 ms
+    ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE) (1)Rerun [e0d0b3c1]279 ms
+    ajax: jQuery.ajax() - success callbacks (8)Rerun [11a69f33]9808 ms
+    ajax: jQuery.ajax() - success callbacks - (url, options) syntax (8)Rerun [473f095d]39 ms
+    ajax: jQuery.ajax() - execute js for crossOrigin when dataType option is provided (3)Rerun [49492c83]40 ms
+    ajax: jQuery.ajax() - do not execute js (crossOrigin) (2)Rerun [81be4b23]36 ms
+    ajax: jQuery.ajax() - success callbacks (late binding) (8)Rerun [df5387e3]28 ms
+    ajax: jQuery.ajax() - success callbacks (oncomplete binding) (8)Rerun [2a91caf1]37 ms
+    ajax: jQuery.ajax() - error callbacks (8)Rerun [ed8cd778]22 ms
+    ajax: jQuery.ajax() - textStatus and errorThrown values (4)Rerun [4af235be]36 ms
+    ajax: jQuery.ajax() - responseText on error (1)Rerun [7d19049b]38 ms
+    ajax: jQuery.ajax() - retry with jQuery.ajax( this ) (2)Rerun [fbd996cb]43 ms
+    ajax: jQuery.ajax() - headers (5)Rerun [809a3448]39 ms
+    ajax: jQuery.ajax() - Accept header (1)Rerun [41e037c7]39 ms
+    ajax: jQuery.ajax() - contentType (2)Rerun [25ace715]34 ms
+    ajax: jQuery.ajax() - protocol-less urls (1)Rerun [f9877014]20 ms
+    ajax: jQuery.ajax() - hash (4)Rerun [57d8038c]39 ms
+    ajax: jQuery.ajax() - traditional param encoding (4)Rerun [00f6ab1d]37 ms
+    ajax: jQuery.ajax() - cross-domain detection (8)Rerun [4d4f7314]40 ms
+    ajax: jQuery.ajax() - abort (9)Rerun [a2c63072]35 ms
     ajax: jQuery.ajax() - native abort (2)Rerun [9609be65]122 ms
-    ajax: jQuery.ajax() - native timeout (2)Rerun [3379ef56]62 ms
-    ajax: jQuery.ajax() - events with context (12)Rerun [6b614dbe]965 ms
-    ajax: jQuery.ajax() - events without context (3)Rerun [dc08b44e]63 ms
-    ajax: #15118 - jQuery.ajax() - function without jQuery.event (1)Rerun [eb310de2]67 ms
-    ajax: #15160 - jQuery.ajax() - request manually aborted in ajaxSend (3)Rerun [327be7ab]59 ms
-    ajax: jQuery.ajax() - context modification (1)Rerun [8a14e6eb]67 ms
-    ajax: jQuery.ajax() - context modification through ajaxSetup (3)Rerun [70060ead]69 ms
-    ajax: jQuery.ajax() - disabled globals (3)Rerun [2120810a]60 ms
-    ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (3)Rerun [294e634f]63 ms
-    ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP) (3)Rerun [6c0c8596]66 ms
-    ajax: jQuery.ajax() - HEAD requests (2)Rerun [c9f4c146]68 ms
-    ajax: jQuery.ajax() - beforeSend (1)Rerun [41e697a5]63 ms
-    ajax: jQuery.ajax() - beforeSend, cancel request manually (2)Rerun [be018331]57 ms
-    ajax: jQuery.ajax() - dataType html (5)Rerun [2f65b789]75 ms
-    ajax: jQuery.ajax() - synchronous request (1)Rerun [3354227a]62 ms
-    ajax: jQuery.ajax() - synchronous request with callbacks (2)Rerun [6ac8a05a]69 ms
-    ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object (8)Rerun [e0e98fe7]84 ms
-    ajax: jQuery.ajax() - cache (28)Rerun [a2e1bcc4]65 ms
-    ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain (5, 2, 7)Rerun [0af1ad6b]76 ms
+    ajax: jQuery.ajax() - native timeout (2)Rerun [3379ef56]35 ms
+    ajax: jQuery.ajax() - events with context (12)Rerun [6b614dbe]40 ms
+    ajax: jQuery.ajax() - events without context (3)Rerun [dc08b44e]38 ms
+    ajax: #15118 - jQuery.ajax() - function without jQuery.event (1)Rerun [eb310de2]37 ms
+    ajax: #15160 - jQuery.ajax() - request manually aborted in ajaxSend (3)Rerun [327be7ab]22 ms
+    ajax: jQuery.ajax() - context modification (1)Rerun [8a14e6eb]37 ms
+    ajax: jQuery.ajax() - context modification through ajaxSetup (3)Rerun [70060ead]43 ms
+    ajax: jQuery.ajax() - disabled globals (3)Rerun [2120810a]35 ms
+    ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (3)Rerun [294e634f]41 ms
+    ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP) (3)Rerun [6c0c8596]47 ms
+    ajax: jQuery.ajax() - HEAD requests (2)Rerun [c9f4c146]38 ms
+    ajax: jQuery.ajax() - beforeSend (1)Rerun [41e697a5]37 ms
+    ajax: jQuery.ajax() - beforeSend, cancel request manually (2)Rerun [be018331]20 ms
+    ajax: jQuery.ajax() - dataType html (5)Rerun [2f65b789]57 ms
+    ajax: jQuery.ajax() - synchronous request (1)Rerun [3354227a]35 ms
+    ajax: jQuery.ajax() - synchronous request with callbacks (2)Rerun [6ac8a05a]39 ms
+    ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object (8)Rerun [e0e98fe7]40 ms
+    ajax: jQuery.ajax() - cache (28)Rerun [a2e1bcc4]39 ms
+    ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain (5, 2, 7)Rerun [0af1ad6b]46 ms
 
-    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:909:11 each@http://localhost:22222/jquery/dist/jquery.js:354:19 @http://localhost:22222/jquery/test/unit/ajax.js:907:9 @http://localhost:22222/jquery/test/unit/ajax.js:2639:4
-    ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain (10)Rerun [89307bc0]78 ms
-    ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain (2)Rerun [21ec63be]75 ms
-    ajax: jQuery.ajax() - JSONP - POST - Same Domain (3)Rerun [4563ce54]80 ms
-    ajax: jQuery.ajax() - JSONP - Same Domain (3)Rerun [317c8a55]77 ms
-    ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain (2, 2, 4)Rerun [b40cd6d7]74 ms
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:909:11 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:907:9 @http://localhost:22222/jquery/test/unit/ajax.js:2639:4
+    ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain (10)Rerun [89307bc0]46 ms
+    ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain (2)Rerun [21ec63be]38 ms
+    ajax: jQuery.ajax() - JSONP - POST - Same Domain (3)Rerun [4563ce54]41 ms
+    ajax: jQuery.ajax() - JSONP - Same Domain (3)Rerun [317c8a55]43 ms
+    ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain (2, 2, 4)Rerun [b40cd6d7]40 ms
 
-    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:909:11 each@http://localhost:22222/jquery/dist/jquery.js:354:19 @http://localhost:22222/jquery/test/unit/ajax.js:907:9 @http://localhost:22222/jquery/test/unit/ajax.js:2639:4
-    ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain (10)Rerun [fda7d322]83 ms
-    ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain (2)Rerun [7c68eae4]71 ms
-    ajax: jQuery.ajax() - JSONP - POST - Cross Domain (3)Rerun [c7ded30e]73 ms
-    ajax: jQuery.ajax() - JSONP - Cross Domain (3)Rerun [5edd972d]81 ms
-    ajax: jQuery.ajax() - script, Remote (2)Rerun [bc1195a3]64 ms
-    ajax: jQuery.ajax() - script, Remote with POST (3)Rerun [4085a57d]70 ms
-    ajax: jQuery.ajax() - script, Remote with scheme-less URL (2)Rerun [40650873]64 ms
-    ajax: jQuery.ajax() - malformed JSON (2)Rerun [4743732b]63 ms
-    ajax: jQuery.ajax() - script by content-type (2)Rerun [37339ee0]71 ms
-    ajax: jQuery.ajax() - JSON by content-type (5)Rerun [e18e807d]63 ms
-    ajax: jQuery.ajax() - JSON by content-type disabled with options (6)Rerun [93d5d505]63 ms
-    ajax: jQuery.ajax() - simple get (1)Rerun [cd930fe6]63 ms
-    ajax: jQuery.ajax() - simple post (1)Rerun [e4d32a10]40 ms
-    ajax: jQuery.ajax() - data option - empty bodies for non-GET requests (1)Rerun [beecf48c]66 ms
-    ajax: jQuery.ajax() - data - x-www-form-urlencoded (gh-2658) (1)Rerun [0c695970]42 ms
-    ajax: jQuery.ajax() - data - text/plain (gh-2658) (1)Rerun [010ed4b1]56 ms
-    ajax: jQuery.ajax() - data - no processing POST (1)Rerun [36e1baf9]58 ms
-    ajax: jQuery.ajax() - data - no processing GET (1)Rerun [5459b9bd]58 ms
-    ajax: jQuery.ajax() - data - process string with GET (2)Rerun [4a0eb56f]57 ms
-    ajax: jQuery.ajax() - If-Modified-Since support (cache) (4)Rerun [a14493a6]78 ms
-    ajax: jQuery.ajax() - Etag support (cache) (4)Rerun [2e99b551]67 ms
-    ajax: jQuery.ajax() - If-Modified-Since support (no cache) (4)Rerun [17b51107]71 ms
-    ajax: jQuery.ajax() - Etag support (no cache) (4)Rerun [1d8e0b7c]77 ms
-    ajax: jQuery.ajax() - failing cross-domain (non-existing) (1)Rerun [8fe7268b]4557 ms
-    ajax: jQuery.ajax() - failing cross-domain (1)Rerun [cf74d80b]232 ms
-    ajax: jQuery.ajax() - atom+xml (1)Rerun [ed49f85b]71 ms
-    ajax: jQuery.ajax() - statusText (3)Rerun [31c72c3d]80 ms
-    ajax: jQuery.ajax() - statusCode (20)Rerun [31bf94fd]191 ms
-    ajax: jQuery.ajax() - transitive conversions (8)Rerun [970147a0]68 ms
-    ajax: jQuery.ajax() - overrideMimeType (2)Rerun [e90656f8]71 ms
-    ajax: jQuery.ajax() - empty json gets to error callback instead of success callback. (1)Rerun [b1aea05b]63 ms
-    ajax: #2688 - jQuery.ajax() - beforeSend, cancel request (2)Rerun [d97cf56e]58 ms
-    ajax: #2806 - jQuery.ajax() - data option - evaluate function values (1)Rerun [048476ed]62 ms
-    ajax: #7531 - jQuery.ajax() - Location object as url (1)Rerun [ba63b869]2 ms
-    ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain (1)Rerun [ee78960e]63 ms
-    ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain (1)Rerun [41630294]58 ms
-    ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5 (4)Rerun [93452e30]68 ms
-    ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain (4)Rerun [c61fc201]71 ms
-    ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain (4)Rerun [5ea15501]79 ms
-    ajax: #9887 - jQuery.ajax() - Context with circular references (#9887) (2)Rerun [f66111a0]3 ms
-    ajax: #10093 - jQuery.ajax() - falsy url as argument (4)Rerun [2ed44440]79 ms
-    ajax: #10093 - jQuery.ajax() - falsy url in settings object (4)Rerun [af4a1dec]76 ms
-    ajax: #11151 - jQuery.ajax() - parse error body (2)Rerun [d8837896]66 ms
-    ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE (1)Rerun [dc9cbb04]69 ms
-    ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception (2)Rerun [0fe4f9c9]64 ms
-    ajax: #11743 - jQuery.ajax() - script, throws exception (1)Rerun [fb3d7f01]63 ms
-    ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally (3)Rerun [11112fda]74 ms
-    ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally (3)Rerun [b6160961]69 ms
-    ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string (1)Rerun [4a5ae56b]44 ms
-    ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests (3)Rerun [ae3814fb]66 ms
-    ajax: #13388 - jQuery.ajax() - responseXML (3)Rerun [5fc9540b]63 ms
-    ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests (3)Rerun [5a6e2185]63 ms
-    ajax: #14379 - jQuery.ajax() on unload (1)Rerun [d38a90c9]150 ms
-    ajax: #14683 - jQuery.ajax() - Exceptions thrown synchronously by xhr.send should be caught (4)Rerun [3ef5bd03]77 ms
-    ajax: gh-2587 - when content-type not xml, but looks like one (1)Rerun [3e172a39]74 ms
-    ajax: gh-2587 - when content-type not xml, but looks like one (1)Rerun [84ce1d07]70 ms
-    ajax: gh-2587 - when content-type not json, but looks like one (1)Rerun [105d807e]63 ms
-    ajax: gh-2587 - when content-type not html, but looks like one (1)Rerun [3c4e9bc1]64 ms
-    ajax: gh-2587 - when content-type not javascript, but looks like one (1)Rerun [ff08cd03]70 ms
-    ajax: gh-2587 - when content-type not ecmascript, but looks like one (1)Rerun [d6eff993]64 ms
-    ajax: jQuery.ajaxPrefilter() - abort (1)Rerun [5ba592c5]58 ms
-    ajax: jQuery.ajaxSetup() (1)Rerun [1ac2258a]71 ms
-    ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout (2)Rerun [51cfebab]1018 ms
-    ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout (1)Rerun [7ad95c50]1020 ms
-    ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events (1)Rerun [cd193b73]54 ms
-    ajax: jQuery#load() - always use GET method even if it overrided through ajaxSetup (#11264) (1)Rerun [089a0d04]44 ms
-    ajax: jQuery#load() - should resolve with correct context (2)Rerun [61acec9d]69 ms
-    ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated (2)Rerun [0a4be813]68 ms
-    ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes (2)Rerun [c67463d9]62 ms
-    ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings (1)Rerun [4bab4865]42 ms
-    ajax: jQuery.getJSON( String, Hash, Function ) - JSON array (5)Rerun [fde69a0a]68 ms
-    ajax: jQuery.getJSON( String, Function ) - JSON object (2)Rerun [613829cc]62 ms
-    ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content (2)Rerun [94ce2e73]64 ms
-    ajax: jQuery.getScript( String, Function ) - with callback (2)Rerun [1c0a8777]71 ms
-    ajax: jQuery.getScript( String, Function ) - no callback (1)Rerun [4976fadc]61 ms
-    ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText (2)Rerun [5fce23e1]65 ms
-    ajax: jQuery.getScript( Object ) - with callback (2)Rerun [3b423039]77 ms
-    ajax: jQuery.getScript( Object ) - no callback (1)Rerun [78a5ec1e]63 ms
-    ajax: jQuery.fn.load( String ) (2)Rerun [7cfe4aca]67 ms
-    ajax: jQuery.fn.load() - 404 error callbacks (6)Rerun [e319cb54]69 ms
-    ajax: jQuery.fn.load( String, null ) (2)Rerun [56181445]68 ms
-    ajax: jQuery.fn.load( String, undefined ) (2)Rerun [24edc204]62 ms
-    ajax: jQuery.fn.load( URL_SELECTOR ) (1)Rerun [5876c7e8]66 ms
-    ajax: jQuery.fn.load( URL_SELECTOR with spaces ) (1)Rerun [e419ac4f]65 ms
-    ajax: jQuery.fn.load( URL_SELECTOR with non-HTML whitespace(#3003) ) (1)Rerun [ba22617e]65 ms
-    ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM (2)Rerun [70fae57b]65 ms
-    ajax: jQuery.fn.load( String, Function ) - check scripts (7)Rerun [8f543f13]680 ms
-    ajax: jQuery.fn.load( String, Function ) - check file with only a script tag (3)Rerun [fa8720ad]68 ms
-    ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings (2)Rerun [408924dd]67 ms
-    ajax: jQuery.fn.load( String, Object, Function ) (2)Rerun [d5228449]66 ms
-    ajax: jQuery.fn.load( String, String, Function ) (2)Rerun [9f38961b]43 ms
-    ajax: jQuery.fn.load() - callbacks get the correct parameters (8)Rerun [c9ec9545]48 ms
-    ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json (1)Rerun [6fc0ece6]65 ms
-    ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in (1)Rerun [d7f311d7]72 ms
-    ajax: jQuery.post() - data (3)Rerun [1eea9ba8]73 ms
-    ajax: jQuery.post( String, Hash, Function ) - simple with xml (4)Rerun [9f5e75ec]65 ms
-    ajax: jQuery[get|post]( options ) - simple with xml (2)Rerun [4293a0f1]72 ms
-    ajax: jQuery.active (1)Rerun [1868a7fa]1 ms
-    effects: sanity check (1)Rerun [efdae790]105 ms
-    effects: show() basic (1)Rerun [b34666a6]11 ms
-    effects: show() (27)Rerun [d8a15098]25 ms
-    effects: show(Number) - inline hidden (30)Rerun [00a2bb4d]131 ms
-    effects: show(Number) - cascade hidden (30)Rerun [85dccdda]785 ms
-    effects: Persist correct display value - inline hidden (3)Rerun [e5413915]16 ms
-    effects: Persist correct display value - cascade hidden (3)Rerun [350e0912]14 ms
-    effects: animate(Hash, Object, Function) (1)Rerun [cf19d4bb]11 ms
-    effects: animate relative values (12)Rerun [bc0d4d1d]70 ms
-    effects: animate negative height (1)Rerun [94637799]39 ms
-    effects: animate negative margin (1)Rerun [9cb76c20]12 ms
-    effects: animate negative margin with px (1)Rerun [aa03bfa2]11 ms
-    effects: animate negative padding (1)Rerun [982223df]10 ms
-    effects: animate block as inline width/height (3)Rerun [fa0a9ef5]23 ms
-    effects: animate native inline width/height (3)Rerun [563ce3a7]40 ms
-    effects: animate block width/height (3)Rerun [5c02ecbc]49 ms
-    effects: animate table width/height (1)Rerun [2014071b]40 ms
-    effects: animate table-row width/height (3)Rerun [b9cdf82e]20 ms
-    effects: animate table-cell width/height (3)Rerun [7ac0fc76]40 ms
-    effects: animate percentage(%) on width/height (2)Rerun [3ca3cfea]41 ms
-    effects: animate resets overflow-x and overflow-y when finished (2)Rerun [2ea5bb3f]40 ms
-    effects: animate option { queue: false } (2)Rerun [228dc8a0]12 ms
-    effects: animate option { queue: true } (2)Rerun [012e6a8b]12 ms
-    effects: animate option { queue: 'name' } (5)Rerun [3b587672]16 ms
-    effects: animate with no properties (2)Rerun [0c707191]54 ms
-    effects: animate duration 0 (11)Rerun [de89c01d]10 ms
-    effects: animate hyphenated properties (1)Rerun [e0741176]11 ms
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:909:11 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:907:9 @http://localhost:22222/jquery/test/unit/ajax.js:2639:4
+    ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain (10)Rerun [fda7d322]44 ms
+    ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain (2)Rerun [7c68eae4]40 ms
+    ajax: jQuery.ajax() - JSONP - POST - Cross Domain (3)Rerun [c7ded30e]44 ms
+    ajax: jQuery.ajax() - JSONP - Cross Domain (3)Rerun [5edd972d]45 ms
+    ajax: jQuery.ajax() - script, Remote (2)Rerun [bc1195a3]37 ms
+    ajax: jQuery.ajax() - script, Remote with POST (3)Rerun [4085a57d]40 ms
+    ajax: jQuery.ajax() - script, Remote with scheme-less URL (2)Rerun [40650873]38 ms
+    ajax: jQuery.ajax() - malformed JSON (2)Rerun [4743732b]28 ms
+    ajax: jQuery.ajax() - script by content-type (2)Rerun [37339ee0]39 ms
+    ajax: jQuery.ajax() - JSON by content-type (5)Rerun [e18e807d]35 ms
+    ajax: jQuery.ajax() - JSON by content-type disabled with options (6)Rerun [93d5d505]41 ms
+    ajax: jQuery.ajax() - simple get (1)Rerun [cd930fe6]39 ms
+    ajax: jQuery.ajax() - simple post (1)Rerun [e4d32a10]30 ms
+    ajax: jQuery.ajax() - data option - empty bodies for non-GET requests (1)Rerun [beecf48c]36 ms
+    ajax: jQuery.ajax() - data - x-www-form-urlencoded (gh-2658) (1)Rerun [0c695970]36 ms
+    ajax: jQuery.ajax() - data - text/plain (gh-2658) (1)Rerun [010ed4b1]36 ms
+    ajax: jQuery.ajax() - data - no processing POST (1)Rerun [36e1baf9]37 ms
+    ajax: jQuery.ajax() - data - no processing GET (1)Rerun [5459b9bd]36 ms
+    ajax: jQuery.ajax() - data - process string with GET (2)Rerun [4a0eb56f]36 ms
+    ajax: jQuery.ajax() - If-Modified-Since support (cache) (4)Rerun [a14493a6]45 ms
+    ajax: jQuery.ajax() - Etag support (cache) (4)Rerun [2e99b551]41 ms
+    ajax: jQuery.ajax() - If-Modified-Since support (no cache) (4)Rerun [17b51107]43 ms
+    ajax: jQuery.ajax() - Etag support (no cache) (4)Rerun [1d8e0b7c]42 ms
+    ajax: jQuery.ajax() - failing cross-domain (non-existing) (1)Rerun [8fe7268b]36 ms
+    ajax: jQuery.ajax() - failing cross-domain (1)Rerun [cf74d80b]257 ms
+    ajax: jQuery.ajax() - atom+xml (1)Rerun [ed49f85b]35 ms
+    ajax: jQuery.ajax() - statusText (3)Rerun [31c72c3d]46 ms
+    ajax: jQuery.ajax() - statusCode (20)Rerun [31bf94fd]154 ms
+    ajax: jQuery.ajax() - transitive conversions (8)Rerun [970147a0]37 ms
+    ajax: jQuery.ajax() - overrideMimeType (2)Rerun [e90656f8]40 ms
+    ajax: jQuery.ajax() - empty json gets to error callback instead of success callback. (1)Rerun [b1aea05b]37 ms
+    ajax: #2688 - jQuery.ajax() - beforeSend, cancel request (2)Rerun [d97cf56e]37 ms
+    ajax: #2806 - jQuery.ajax() - data option - evaluate function values (1)Rerun [048476ed]36 ms
+    ajax: #7531 - jQuery.ajax() - Location object as url (1)Rerun [ba63b869]0 ms
+    ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain (1)Rerun [ee78960e]38 ms
+    ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain (1)Rerun [41630294]37 ms
+    ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5 (4)Rerun [93452e30]40 ms
+    ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain (4)Rerun [c61fc201]41 ms
+    ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain (4)Rerun [5ea15501]37 ms
+    ajax: #9887 - jQuery.ajax() - Context with circular references (#9887) (2)Rerun [f66111a0]2 ms
+    ajax: #10093 - jQuery.ajax() - falsy url as argument (4)Rerun [2ed44440]40 ms
+    ajax: #10093 - jQuery.ajax() - falsy url in settings object (4)Rerun [af4a1dec]37 ms
+    ajax: #11151 - jQuery.ajax() - parse error body (2)Rerun [d8837896]38 ms
+    ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE (1)Rerun [dc9cbb04]31 ms
+    ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception (2)Rerun [0fe4f9c9]36 ms
+    ajax: #11743 - jQuery.ajax() - script, throws exception (1)Rerun [fb3d7f01]37 ms
+    ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally (3)Rerun [11112fda]42 ms
+    ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally (3)Rerun [b6160961]38 ms
+    ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string (1)Rerun [4a5ae56b]42 ms
+    ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests (3)Rerun [ae3814fb]40 ms
+    ajax: #13388 - jQuery.ajax() - responseXML (3)Rerun [5fc9540b]36 ms
+    ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests (3)Rerun [5a6e2185]40 ms
+    ajax: #14379 - jQuery.ajax() on unload (1)Rerun [d38a90c9]71 ms
+    ajax: #14683 - jQuery.ajax() - Exceptions thrown synchronously by xhr.send should be caught (4)Rerun [3ef5bd03]28 ms
+    ajax: gh-2587 - when content-type not xml, but looks like one (1)Rerun [3e172a39]37 ms
+    ajax: gh-2587 - when content-type not xml, but looks like one (1)Rerun [84ce1d07]37 ms
+    ajax: gh-2587 - when content-type not json, but looks like one (1)Rerun [105d807e]38 ms
+    ajax: gh-2587 - when content-type not html, but looks like one (1)Rerun [3c4e9bc1]43 ms
+    ajax: gh-2587 - when content-type not javascript, but looks like one (1)Rerun [ff08cd03]37 ms
+    ajax: gh-2587 - when content-type not ecmascript, but looks like one (1)Rerun [d6eff993]40 ms
+    ajax: jQuery.ajaxPrefilter() - abort (1)Rerun [5ba592c5]22 ms
+    ajax: jQuery.ajaxSetup() (1)Rerun [1ac2258a]38 ms
+    ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout (2)Rerun [51cfebab]1017 ms
+    ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout (1)Rerun [7ad95c50]1021 ms
+    ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events (1)Rerun [cd193b73]24 ms
+    ajax: jQuery#load() - always use GET method even if it overrided through ajaxSetup (#11264) (1)Rerun [089a0d04]30 ms
+    ajax: jQuery#load() - should resolve with correct context (2)Rerun [61acec9d]39 ms
+    ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated (2)Rerun [0a4be813]42 ms
+    ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes (2)Rerun [c67463d9]36 ms
+    ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings (1)Rerun [4bab4865]40 ms
+    ajax: jQuery.getJSON( String, Hash, Function ) - JSON array (5)Rerun [fde69a0a]38 ms
+    ajax: jQuery.getJSON( String, Function ) - JSON object (2)Rerun [613829cc]38 ms
+    ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content (2)Rerun [94ce2e73]36 ms
+    ajax: jQuery.getScript( String, Function ) - with callback (2)Rerun [1c0a8777]39 ms
+    ajax: jQuery.getScript( String, Function ) - no callback (1)Rerun [4976fadc]43 ms
+    ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText (2)Rerun [5fce23e1]36 ms
+    ajax: jQuery.getScript( Object ) - with callback (2)Rerun [3b423039]40 ms
+    ajax: jQuery.getScript( Object ) - no callback (1)Rerun [78a5ec1e]39 ms
+    ajax: jQuery.fn.load( String ) (2)Rerun [7cfe4aca]28 ms
+    ajax: jQuery.fn.load() - 404 error callbacks (6)Rerun [e319cb54]38 ms
+    ajax: jQuery.fn.load( String, null ) (2)Rerun [56181445]42 ms
+    ajax: jQuery.fn.load( String, undefined ) (2)Rerun [24edc204]38 ms
+    ajax: jQuery.fn.load( URL_SELECTOR ) (1)Rerun [5876c7e8]42 ms
+    ajax: jQuery.fn.load( URL_SELECTOR with spaces ) (1)Rerun [e419ac4f]36 ms
+    ajax: jQuery.fn.load( URL_SELECTOR with non-HTML whitespace(#3003) ) (1)Rerun [ba22617e]38 ms
+    ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM (2)Rerun [70fae57b]41 ms
+    ajax: jQuery.fn.load( String, Function ) - check scripts (7)Rerun [8f543f13]646 ms
+    ajax: jQuery.fn.load( String, Function ) - check file with only a script tag (3)Rerun [fa8720ad]44 ms
+    ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings (2)Rerun [408924dd]40 ms
+    ajax: jQuery.fn.load( String, Object, Function ) (2)Rerun [d5228449]33 ms
+    ajax: jQuery.fn.load( String, String, Function ) (2)Rerun [9f38961b]37 ms
+    ajax: jQuery.fn.load() - callbacks get the correct parameters (8)Rerun [c9ec9545]42 ms
+    ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json (1)Rerun [6fc0ece6]40 ms
+    ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in (1)Rerun [d7f311d7]41 ms
+    ajax: jQuery.post() - data (3)Rerun [1eea9ba8]39 ms
+    ajax: jQuery.post( String, Hash, Function ) - simple with xml (4)Rerun [9f5e75ec]43 ms
+    ajax: jQuery[get|post]( options ) - simple with xml (2)Rerun [4293a0f1]41 ms
+    ajax: jQuery.active (1)Rerun [1868a7fa]0 ms
+    effects: sanity check (1)Rerun [efdae790]54 ms
+    effects: show() basic (1)Rerun [b34666a6]6 ms
+    effects: show() (27)Rerun [d8a15098]15 ms
+    effects: show(Number) - inline hidden (30)Rerun [00a2bb4d]59 ms
+    effects: show(Number) - cascade hidden (30)Rerun [85dccdda]364 ms
+    effects: Persist correct display value - inline hidden (3)Rerun [e5413915]8 ms
+    effects: Persist correct display value - cascade hidden (3)Rerun [350e0912]8 ms
+    effects: animate(Hash, Object, Function) (1)Rerun [cf19d4bb]6 ms
+    effects: animate relative values (12)Rerun [bc0d4d1d]34 ms
+    effects: animate negative height (1)Rerun [94637799]18 ms
+    effects: animate negative margin (1)Rerun [9cb76c20]6 ms
+    effects: animate negative margin with px (1)Rerun [aa03bfa2]6 ms
+    effects: animate negative padding (1)Rerun [982223df]5 ms
+    effects: animate block as inline width/height (3)Rerun [fa0a9ef5]12 ms
+    effects: animate native inline width/height (3)Rerun [563ce3a7]19 ms
+    effects: animate block width/height (3)Rerun [5c02ecbc]22 ms
+    effects: animate table width/height (1)Rerun [2014071b]18 ms
+    effects: animate table-row width/height (3)Rerun [b9cdf82e]10 ms
+    effects: animate table-cell width/height (3)Rerun [7ac0fc76]20 ms
+    effects: animate percentage(%) on width/height (2)Rerun [3ca3cfea]20 ms
+    effects: animate resets overflow-x and overflow-y when finished (2)Rerun [2ea5bb3f]19 ms
+    effects: animate option { queue: false } (2)Rerun [228dc8a0]7 ms
+    effects: animate option { queue: true } (2)Rerun [012e6a8b]8 ms
+    effects: animate option { queue: 'name' } (5)Rerun [3b587672]8 ms
+    effects: animate with no properties (2)Rerun [0c707191]23 ms
+    effects: animate duration 0 (11)Rerun [de89c01d]4 ms
+    effects: animate hyphenated properties (1)Rerun [e0741176]7 ms
     effects: animate non-element (1)Rerun [8a2a7ba3]1 ms
-    effects: stop() (4)Rerun [d94a505d]44 ms
-    effects: stop() - several in queue (5)Rerun [900f6230]41 ms
-    effects: stop(clearQueue) (4)Rerun [99389d19]41 ms
-    effects: stop(clearQueue, gotoEnd) (1)Rerun [185a6135]43 ms
-    effects: stop( queue, ..., ... ) - Stop single queues (3)Rerun [91a9f589]46 ms
-    effects: toggle() (6)Rerun [0153e8af]42 ms
-    effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (7)Rerun [1185dbde]4 ms
-    effects: Overflow and Display (4)Rerun [fbe416b5]24 ms
-    effects: CSS Auto to 0 (6)Rerun [cd18cc65]47 ms
-    effects: CSS Auto to 50 (6)Rerun [d600c106]44 ms
-    effects: CSS Auto to 100 (6)Rerun [ea1750e6]45 ms
-    effects: CSS Auto to show (5)Rerun [58f1a6a8]46 ms
-    effects: CSS Auto to hide (4)Rerun [58eca8ed]47 ms
-    effects: JS Auto to 0 (6)Rerun [d95a1dbf]46 ms
-    effects: JS Auto to 50 (6)Rerun [51e99aec]44 ms
-    effects: JS Auto to 100 (6)Rerun [eb49b3c0]43 ms
-    effects: JS Auto to show (5)Rerun [7e0b9f0e]44 ms
-    effects: JS Auto to hide (4)Rerun [7e06a153]43 ms
-    effects: CSS 100 to 0 (6)Rerun [20d4da91]43 ms
-    effects: CSS 100 to 50 (6)Rerun [f9c6785a]43 ms
-    effects: CSS 100 to 100 (6)Rerun [3f088412]43 ms
-    effects: CSS 100 to show (5)Rerun [a226d8fc]42 ms
-    effects: CSS 100 to hide (4)Rerun [a221db41]40 ms
-    effects: JS 100 to 0 (6)Rerun [94d6f5f7]41 ms
-    effects: JS 100 to 50 (6)Rerun [0607c9b4]43 ms
-    effects: JS 100 to 100 (6)Rerun [baf15df8]41 ms
-    effects: JS 100 to show (5)Rerun [a3593bd6]42 ms
-    effects: JS 100 to hide (4)Rerun [a3543e1b]95 ms
-    effects: CSS 50 to 0 (6)Rerun [2ec35d59]43 ms
-    effects: CSS 50 to 50 (6)Rerun [a9a84e92]41 ms
-    effects: CSS 50 to 100 (6)Rerun [8b6174da]41 ms
-    effects: CSS 50 to show (5)Rerun [e0ec0134]43 ms
-    effects: CSS 50 to hide (4)Rerun [e0e70379]42 ms
-    effects: JS 50 to 0 (6)Rerun [21fd3d33]46 ms
-    effects: JS 50 to 50 (6)Rerun [1daa69f8]42 ms
-    effects: JS 50 to 100 (6)Rerun [97a2c634]43 ms
-    effects: JS 50 to show (5)Rerun [5cd4db1a]43 ms
-    effects: JS 50 to hide (4)Rerun [5ccfdd5f]42 ms
-    effects: CSS 0 to 0 (6)Rerun [cef43972]42 ms
-    effects: CSS 0 to 50 (6)Rerun [0f92f599]45 ms
-    effects: CSS 0 to 100 (6)Rerun [e2cbaeb3]43 ms
-    effects: CSS 0 to show (5)Rerun [76c9027b]42 ms
-    effects: CSS 0 to hide (4)Rerun [76c404c0]42 ms
-    effects: JS 0 to 0 (6)Rerun [6b71f658]42 ms
-    effects: JS 0 to 50 (6)Rerun [02ccd573]44 ms
-    effects: JS 0 to 100 (6)Rerun [56cdca19]44 ms
-    effects: JS 0 to show (5)Rerun [830a53d5]43 ms
-    effects: JS 0 to hide (4)Rerun [8305561a]40 ms
-    effects: Effects chaining (16)Rerun [30b31e59]212 ms
-    effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095) (4)Rerun [64f5d5da]52 ms
-    effects: interrupt toggle (24)Rerun [bfb8430b]202 ms
+    effects: stop() (4)Rerun [d94a505d]21 ms
+    effects: stop() - several in queue (5)Rerun [900f6230]19 ms
+    effects: stop(clearQueue) (4)Rerun [99389d19]20 ms
+    effects: stop(clearQueue, gotoEnd) (1)Rerun [185a6135]20 ms
+    effects: stop( queue, ..., ... ) - Stop single queues (3)Rerun [91a9f589]25 ms
+    effects: toggle() (6)Rerun [0153e8af]44 ms
+    effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (7)Rerun [1185dbde]7 ms
+    effects: Overflow and Display (4)Rerun [fbe416b5]9 ms
+    effects: CSS Auto to 0 (6)Rerun [cd18cc65]21 ms
+    effects: CSS Auto to 50 (6)Rerun [d600c106]20 ms
+    effects: CSS Auto to 100 (6)Rerun [ea1750e6]20 ms
+    effects: CSS Auto to show (5)Rerun [58f1a6a8]20 ms
+    effects: CSS Auto to hide (4)Rerun [58eca8ed]18 ms
+    effects: JS Auto to 0 (6)Rerun [d95a1dbf]22 ms
+    effects: JS Auto to 50 (6)Rerun [51e99aec]19 ms
+    effects: JS Auto to 100 (6)Rerun [eb49b3c0]20 ms
+    effects: JS Auto to show (5)Rerun [7e0b9f0e]20 ms
+    effects: JS Auto to hide (4)Rerun [7e06a153]19 ms
+    effects: CSS 100 to 0 (6)Rerun [20d4da91]20 ms
+    effects: CSS 100 to 50 (6)Rerun [f9c6785a]20 ms
+    effects: CSS 100 to 100 (6)Rerun [3f088412]20 ms
+    effects: CSS 100 to show (5)Rerun [a226d8fc]20 ms
+    effects: CSS 100 to hide (4)Rerun [a221db41]18 ms
+    effects: JS 100 to 0 (6)Rerun [94d6f5f7]20 ms
+    effects: JS 100 to 50 (6)Rerun [0607c9b4]20 ms
+    effects: JS 100 to 100 (6)Rerun [baf15df8]19 ms
+    effects: JS 100 to show (5)Rerun [a3593bd6]20 ms
+    effects: JS 100 to hide (4)Rerun [a3543e1b]19 ms
+    effects: CSS 50 to 0 (6)Rerun [2ec35d59]20 ms
+    effects: CSS 50 to 50 (6)Rerun [a9a84e92]18 ms
+    effects: CSS 50 to 100 (6)Rerun [8b6174da]20 ms
+    effects: CSS 50 to show (5)Rerun [e0ec0134]19 ms
+    effects: CSS 50 to hide (4)Rerun [e0e70379]20 ms
+    effects: JS 50 to 0 (6)Rerun [21fd3d33]20 ms
+    effects: JS 50 to 50 (6)Rerun [1daa69f8]19 ms
+    effects: JS 50 to 100 (6)Rerun [97a2c634]19 ms
+    effects: JS 50 to show (5)Rerun [5cd4db1a]20 ms
+    effects: JS 50 to hide (4)Rerun [5ccfdd5f]20 ms
+    effects: CSS 0 to 0 (6)Rerun [cef43972]20 ms
+    effects: CSS 0 to 50 (6)Rerun [0f92f599]20 ms
+    effects: CSS 0 to 100 (6)Rerun [e2cbaeb3]20 ms
+    effects: CSS 0 to show (5)Rerun [76c9027b]19 ms
+    effects: CSS 0 to hide (4)Rerun [76c404c0]19 ms
+    effects: JS 0 to 0 (6)Rerun [6b71f658]19 ms
+    effects: JS 0 to 50 (6)Rerun [02ccd573]21 ms
+    effects: JS 0 to 100 (6)Rerun [56cdca19]19 ms
+    effects: JS 0 to show (5)Rerun [830a53d5]20 ms
+    effects: JS 0 to hide (4)Rerun [8305561a]19 ms
+    effects: Effects chaining (16)Rerun [30b31e59]63 ms
+    effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095) (4)Rerun [64f5d5da]46 ms
+    effects: interrupt toggle (24)Rerun [bfb8430b]80 ms
     effects: animate with per-property easing (5)Rerun [31782e85]2 ms
-    effects: animate with CSS shorthand properties (11)Rerun [6cdfbda6]16 ms
-    effects: hide hidden elements, with animation (bug #7141) (4)Rerun [f7e757ea]42 ms
-    effects: animate unit-less properties (#4966) (2)Rerun [8ba15e93]14 ms
-    effects: animate properties missing px w/ opacity as last (#9074) (6)Rerun [4de2c7cb]45 ms
-    effects: callbacks should fire in correct order (#9100) (1)Rerun [ee12de1c]14 ms
-    effects: callbacks that throw exceptions will be removed (#5684) (2)Rerun [b234370d]41 ms
-    effects: animate will scale margin properties individually (2)Rerun [eb5df1cc]11 ms
-    effects: Do not append px to 'fill-opacity' #9548 (1)Rerun [de39926d]11 ms
-    effects: line-height animates correctly (#13855) (12)Rerun [2692e84b]62 ms
-    effects: jQuery.Animation( object, props, opts ) (4)Rerun [06a080f4]2 ms
-    effects: Animate Option: step: function( percent, tween ) (1)Rerun [d9eb74b1]12 ms
-    effects: Animate callbacks have correct context (2)Rerun [48f58a6c]40 ms
-    effects: User supplied callback called after show when fx off (#8892) (2)Rerun [fab3ee0c]44 ms
-    effects: animate should set display for disconnected nodes (20)Rerun [1cea88d3]38 ms
-    effects: Animation callback should not show animated element as :animated (#7157) (1)Rerun [4b540974]11 ms
-    effects: Initial step callback should show element as :animated (#14623) (1)Rerun [775bf4aa]10 ms
-    effects: hide called on element within hidden parent should set display to none (#10045) (3)Rerun [89eb04cf]49 ms
-    effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none (5)Rerun [eda025cc]38 ms
-    effects: hide should not leave hidden inline elements visible (#14848) (2)Rerun [7da02112]17 ms
-    effects: Handle queue:false promises (10)Rerun [4a1e01dc]15 ms
-    effects: multiple unqueued and promise (4)Rerun [7b25a5f4]18 ms
-    effects: animate does not change start value for non-px animation (#7109) (1)Rerun [aad22350]42 ms
-    effects: non-px animation handles non-numeric start (#11971) (2)Rerun [42f0f191]1 ms
-    effects: Animation callbacks (#11797) (15)Rerun [5f8a45b7]11 ms
-    effects: Animation callbacks in order (#2292) (9)Rerun [75750cf0]17 ms
-    effects: Animate properly sets overflow hidden when animating width/height (#12117) (8)Rerun [843718d3]4 ms
-    effects: Each tick of the timer loop uses a fresh time (#12837) (3)Rerun [c33eae3e]1 ms
-    effects: Animations with 0 duration don't ease (#12273) (1)Rerun [015c4700]41 ms
-    effects: toggle state tests: toggle (#8685) (4)Rerun [053bfcad]30 ms
-    effects: toggle state tests: slideToggle (#8685) (4)Rerun [10217f72]50 ms
-    effects: toggle state tests: fadeToggle (#8685) (4)Rerun [a103e349]15 ms
-    effects: jQuery.fx.start & jQuery.fx.stop hook points (3)Rerun [c6e72c4c]2 ms
-    effects: .finish() completes all queued animations (11)Rerun [792af4ff]5 ms
-    effects: .finish( false ) - unqueued animations (10)Rerun [ee304b1d]6 ms
-    effects: .finish( "custom" ) - custom queue animations (11)Rerun [cc2d89b1]5 ms
+    effects: animate with CSS shorthand properties (11)Rerun [6cdfbda6]8 ms
+    effects: hide hidden elements, with animation (bug #7141) (4)Rerun [f7e757ea]18 ms
+    effects: animate unit-less properties (#4966) (2)Rerun [8ba15e93]8 ms
+    effects: animate properties missing px w/ opacity as last (#9074) (6)Rerun [4de2c7cb]20 ms
+    effects: callbacks should fire in correct order (#9100) (1)Rerun [ee12de1c]7 ms
+    effects: callbacks that throw exceptions will be removed (#5684) (2)Rerun [b234370d]17 ms
+    effects: animate will scale margin properties individually (2)Rerun [eb5df1cc]6 ms
+    effects: Do not append px to 'fill-opacity' #9548 (1)Rerun [de39926d]7 ms
+    effects: line-height animates correctly (#13855) (12)Rerun [2692e84b]28 ms
+    effects: jQuery.Animation( object, props, opts ) (4)Rerun [06a080f4]0 ms
+    effects: Animate Option: step: function( percent, tween ) (1)Rerun [d9eb74b1]7 ms
+    effects: Animate callbacks have correct context (2)Rerun [48f58a6c]19 ms
+    effects: User supplied callback called after show when fx off (#8892) (2)Rerun [fab3ee0c]24 ms
+    effects: animate should set display for disconnected nodes (20)Rerun [1cea88d3]13 ms
+    effects: Animation callback should not show animated element as :animated (#7157) (1)Rerun [4b540974]7 ms
+    effects: Initial step callback should show element as :animated (#14623) (1)Rerun [775bf4aa]5 ms
+    effects: hide called on element within hidden parent should set display to none (#10045) (3)Rerun [89eb04cf]24 ms
+    effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none (5)Rerun [eda025cc]16 ms
+    effects: hide should not leave hidden inline elements visible (#14848) (2)Rerun [7da02112]10 ms
+    effects: Handle queue:false promises (10)Rerun [4a1e01dc]10 ms
+    effects: multiple unqueued and promise (4)Rerun [7b25a5f4]9 ms
+    effects: animate does not change start value for non-px animation (#7109) (1)Rerun [aad22350]21 ms
+    effects: non-px animation handles non-numeric start (#11971) (2)Rerun [42f0f191]7 ms
+    effects: Animation callbacks (#11797) (15)Rerun [5f8a45b7]7 ms
+    effects: Animation callbacks in order (#2292) (9)Rerun [75750cf0]8 ms
+    effects: Animate properly sets overflow hidden when animating width/height (#12117) (8)Rerun [843718d3]1 ms
+    effects: Each tick of the timer loop uses a fresh time (#12837) (3)Rerun [c33eae3e]0 ms
+    effects: Animations with 0 duration don't ease (#12273) (1)Rerun [015c4700]20 ms
+    effects: toggle state tests: toggle (#8685) (4)Rerun [053bfcad]14 ms
+    effects: toggle state tests: slideToggle (#8685) (4)Rerun [10217f72]24 ms
+    effects: toggle state tests: fadeToggle (#8685) (4)Rerun [a103e349]7 ms
+    effects: jQuery.fx.start & jQuery.fx.stop hook points (3)Rerun [c6e72c4c]0 ms
+    effects: .finish() completes all queued animations (11)Rerun [792af4ff]2 ms
+    effects: .finish( false ) - unqueued animations (10)Rerun [ee304b1d]2 ms
+    effects: .finish( "custom" ) - custom queue animations (11)Rerun [cc2d89b1]2 ms
     effects: .finish() calls finish of custom queue functions (6)Rerun [a098b6dc]1 ms
-    effects: .finish() is applied correctly when multiple elements were animated (#13937) (3)Rerun [7edca75c]5 ms
-    effects: slideDown() after stop() (#13483) (2)Rerun [a874816a]54 ms
-    effects: Respect display value on inline elements (#14824) (2)Rerun [647e4e8f]56 ms
-    effects: jQuery.easing._default (gh-2218) (2)Rerun [9b31e0cd]45 ms
-    effects: jQuery.easing._default in Animation (gh-2218 (3)Rerun [f3848a31]2 ms
-    effects: jQuery.easing._default in Tween (gh-2218) (3)Rerun [34e48d3f]1 ms
-    effects: Display value is correct for disconnected nodes (trac-13310) (3)Rerun [6cda80d6]16 ms
-    effects: Show/hide/toggle and display: inline (40)Rerun [fab77d41]132 ms
-    effects: jQuery.speed( speed, easing, complete ) (4)Rerun [548e7593]1 ms
+    effects: .finish() is applied correctly when multiple elements were animated (#13937) (3)Rerun [7edca75c]0 ms
+    effects: slideDown() after stop() (#13483) (2)Rerun [a874816a]26 ms
+    effects: Respect display value on inline elements (#14824) (2)Rerun [647e4e8f]23 ms
+    effects: jQuery.easing._default (gh-2218) (2)Rerun [9b31e0cd]22 ms
+    effects: jQuery.easing._default in Animation (gh-2218 (3)Rerun [f3848a31]1 ms
+    effects: jQuery.easing._default in Tween (gh-2218) (3)Rerun [34e48d3f]0 ms
+    effects: Display value is correct for disconnected nodes (trac-13310) (3)Rerun [6cda80d6]10 ms
+    effects: Show/hide/toggle and display: inline (40)Rerun [fab77d41]55 ms
+    effects: jQuery.speed( speed, easing, complete ) (4)Rerun [548e7593]0 ms
     effects: jQuery.speed( speed, easing, complete ) - with easing function (4)Rerun [da2d7313]0 ms
-    effects: jQuery.speed( options ) (4)Rerun [719b935e]2 ms
+    effects: jQuery.speed( options ) (4)Rerun [719b935e]0 ms
     effects: jQuery.speed( options ) - with easing function (4)Rerun [60ec00e8]0 ms
-    effects: jQuery.speed( options ) - queue values (5)Rerun [1879d526]2 ms
+    effects: jQuery.speed( options ) - queue values (5)Rerun [1879d526]1 ms
     effects: jQuery.speed() - durations (5)Rerun [cde8a3fe]0 ms
-    offset: empty set (2)Rerun [a2eac746]164 ms
-    offset: disconnected element (4)Rerun [4e7e1d80]14 ms
-    offset: hidden (display: none) element (4)Rerun [30c50140]15 ms
-    offset: 0 sized element (4)Rerun [08beeb66]16 ms
-    offset: hidden (visibility: hidden) element (4)Rerun [906bc1e8]15 ms
-    offset: normal element (4)Rerun [dda9c2ec]15 ms
-    offset: absolute (4)Rerun [7f824260]168 ms
-    offset: absolute (178)Rerun [70c609c0]275 ms
-    offset: relative (64)Rerun [f7752fb5]227 ms
-    offset: static (80)Rerun [b0b92997]217 ms
-    offset: fixed (38)Rerun [c2e7032b]157 ms
-    offset: table (4)Rerun [c3a85785]167 ms
-    offset: scroll (26)Rerun [afd141f6]176 ms
-    offset: body (4)Rerun [48584b0b]176 ms
-    offset: chaining (3)Rerun [6d9ef26a]42 ms
-    offset: nonzero box properties - html.static body.static (33)Rerun [483d26f4]195 ms
-    offset: nonzero box properties - html.static body.relative (33)Rerun [bdef49d2]216 ms
-    offset: nonzero box properties - html.static body.absolute (33)Rerun [45fc5c7d]215 ms
-    offset: nonzero box properties - html.static body.fixed (33)Rerun [5c6f662e]209 ms
-    offset: nonzero box properties - html.relative body.static (33)Rerun [700b0b52]204 ms
-    offset: nonzero box properties - html.relative body.relative (33)Rerun [29d58eb0]197 ms
-    offset: nonzero box properties - html.relative body.absolute (33)Rerun [b1e2a15b]157 ms
-    offset: nonzero box properties - html.relative body.fixed (33)Rerun [8f447e10]198 ms
-    offset: nonzero box properties - html.absolute body.static (33)Rerun [d492757d]203 ms
-    offset: nonzero box properties - html.absolute body.relative (33)Rerun [8a2b1a1b]210 ms
-    offset: nonzero box properties - html.absolute body.absolute (33)Rerun [12382cc6]198 ms
-    offset: nonzero box properties - html.absolute body.fixed (33)Rerun [0e61a285]223 ms
-    offset: nonzero box properties - html.fixed body.static (33)Rerun [a57a46a2]206 ms
-    offset: nonzero box properties - html.fixed body.relative (33)Rerun [c0633600]209 ms
-    offset: nonzero box properties - html.fixed body.absolute (33)Rerun [487048ab]198 ms
-    offset: nonzero box properties - html.fixed body.fixed (33)Rerun [fc5898c0]204 ms
-    offset: offsetParent (13)Rerun [f4faf786]54 ms
-    offset: fractions (see #7730 and #7885) (2)Rerun [373463ce]45 ms
-    offset: iframe scrollTop/Left (see gh-1945) (2)Rerun [8deeff6a]20 ms
-    dimensions: width() (9)Rerun [855ae478]53 ms
-    dimensions: width(Function) (9)Rerun [ae664c80]52 ms
-    dimensions: width(Function(args)) (2)Rerun [0db1c3fc]43 ms
-    dimensions: height() (9)Rerun [44094357]54 ms
-    dimensions: height(Function) (9)Rerun [27735c5f]52 ms
-    dimensions: height(Function(args)) (2)Rerun [5b05309b]43 ms
-    dimensions: innerWidth() (7)Rerun [3033c180]48 ms
-    dimensions: innerHeight() (7)Rerun [f44c074f]48 ms
-    dimensions: outerWidth() (12)Rerun [2a572bbb]50 ms
-    dimensions: outerHeight() (12)Rerun [3e95e474]50 ms
-    dimensions: child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #9441 #9300 (16)Rerun [f05103b6]54 ms
-    dimensions: getting dimensions shouldn't modify runtimeStyle see #9233 (1)Rerun [fd1a1aee]41 ms
-    dimensions: table dimensions (2)Rerun [5a628b4e]16 ms
-    dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 (16)Rerun [16694f32]54 ms
-    dimensions: passing undefined is a setter #5571 (4)Rerun [bdb02bc3]47 ms
-    dimensions: setters with and without box-sizing:border-box (120)Rerun [6d13f464]194 ms
-    dimensions: window vs. large document (2)Rerun [95e8fa70]170 ms
-    dimensions: allow modification of coordinates argument (gh-1848) (1)Rerun [70d69f87]43 ms
-    dimensions: outside view position (gh-2836) (1)Rerun [6719e036]31 ms
-    dimensions: width/height on element with transform (gh-3193) (2)Rerun [3eab4f83]45 ms
-    dimensions: width/height on an inline element with no explicitly-set dimensions (gh-3571) (8)Rerun [db2e1c03]49 ms
-    dimensions: width/height on an inline element with percentage dimensions (gh-3611) (4)Rerun [2744a6b3]42 ms
-    dimensions: width/height on a table row with phantom borders (gh-3698) (4, 0, 4)Rerun [0932dc94]25 ms
+    offset: empty set (2)Rerun [a2eac746]118 ms
+    offset: disconnected element (4)Rerun [4e7e1d80]9 ms
+    offset: hidden (display: none) element (4)Rerun [30c50140]9 ms
+    offset: 0 sized element (4)Rerun [08beeb66]10 ms
+    offset: hidden (visibility: hidden) element (4)Rerun [906bc1e8]10 ms
+    offset: normal element (4)Rerun [dda9c2ec]8 ms
+    offset: absolute (4)Rerun [7f824260]75 ms
+    offset: absolute (178)Rerun [70c609c0]157 ms
+    offset: relative (64)Rerun [f7752fb5]89 ms
+    offset: static (80)Rerun [b0b92997]113 ms
+    offset: fixed (38)Rerun [c2e7032b]78 ms
+    offset: table (4)Rerun [c3a85785]101 ms
+    offset: scroll (26)Rerun [afd141f6]67 ms
+    offset: body (4)Rerun [48584b0b]61 ms
+    offset: chaining (3)Rerun [6d9ef26a]21 ms
+    offset: nonzero box properties - html.static body.static (33)Rerun [483d26f4]100 ms
+    offset: nonzero box properties - html.static body.relative (33)Rerun [bdef49d2]97 ms
+    offset: nonzero box properties - html.static body.absolute (33)Rerun [45fc5c7d]94 ms
+    offset: nonzero box properties - html.static body.fixed (33)Rerun [5c6f662e]91 ms
+    offset: nonzero box properties - html.relative body.static (33)Rerun [700b0b52]95 ms
+    offset: nonzero box properties - html.relative body.relative (33)Rerun [29d58eb0]92 ms
+    offset: nonzero box properties - html.relative body.absolute (33)Rerun [b1e2a15b]92 ms
+    offset: nonzero box properties - html.relative body.fixed (33)Rerun [8f447e10]96 ms
+    offset: nonzero box properties - html.absolute body.static (33)Rerun [d492757d]92 ms
+    offset: nonzero box properties - html.absolute body.relative (33)Rerun [8a2b1a1b]121 ms
+    offset: nonzero box properties - html.absolute body.absolute (33)Rerun [12382cc6]93 ms
+    offset: nonzero box properties - html.absolute body.fixed (33)Rerun [0e61a285]113 ms
+    offset: nonzero box properties - html.fixed body.static (33)Rerun [a57a46a2]95 ms
+    offset: nonzero box properties - html.fixed body.relative (33)Rerun [c0633600]114 ms
+    offset: nonzero box properties - html.fixed body.absolute (33)Rerun [487048ab]94 ms
+    offset: nonzero box properties - html.fixed body.fixed (33)Rerun [fc5898c0]109 ms
+    offset: offsetParent (13)Rerun [f4faf786]27 ms
+    offset: fractions (see #7730 and #7885) (2)Rerun [373463ce]21 ms
+    offset: iframe scrollTop/Left (see gh-1945) (2)Rerun [8deeff6a]12 ms
+    dimensions: width() (9)Rerun [855ae478]25 ms
+    dimensions: width(Function) (9)Rerun [ae664c80]25 ms
+    dimensions: width(Function(args)) (2)Rerun [0db1c3fc]20 ms
+    dimensions: height() (9)Rerun [44094357]27 ms
+    dimensions: height(Function) (9)Rerun [27735c5f]26 ms
+    dimensions: height(Function(args)) (2)Rerun [5b05309b]19 ms
+    dimensions: innerWidth() (7)Rerun [3033c180]22 ms
+    dimensions: innerHeight() (7)Rerun [f44c074f]22 ms
+    dimensions: outerWidth() (12)Rerun [2a572bbb]25 ms
+    dimensions: outerHeight() (12)Rerun [3e95e474]24 ms
+    dimensions: child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #9441 #9300 (16)Rerun [f05103b6]28 ms
+    dimensions: getting dimensions shouldn't modify runtimeStyle see #9233 (1)Rerun [fd1a1aee]20 ms
+    dimensions: table dimensions (2)Rerun [5a628b4e]9 ms
+    dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 (16)Rerun [16694f32]30 ms
+    dimensions: passing undefined is a setter #5571 (4)Rerun [bdb02bc3]24 ms
+    dimensions: setters with and without box-sizing:border-box (120)Rerun [6d13f464]89 ms
+    dimensions: window vs. large document (2)Rerun [95e8fa70]74 ms
+    dimensions: allow modification of coordinates argument (gh-1848) (1)Rerun [70d69f87]23 ms
+    dimensions: outside view position (gh-2836) (1)Rerun [6719e036]22 ms
+    dimensions: width/height on element with transform (gh-3193) (2)Rerun [3eab4f83]23 ms
+    dimensions: width/height on an inline element with no explicitly-set dimensions (gh-3571) (8)Rerun [db2e1c03]22 ms
+    dimensions: width/height on an inline element with percentage dimensions (gh-3611) (4)Rerun [2744a6b3]20 ms
+    dimensions: width/height on a table row with phantom borders (gh-3698) (4, 0, 4)Rerun [0932dc94]12 ms
 
     Source: @http://localhost:22222/jquery/test/unit/dimensions.js:570:7 @http://localhost:22222/jquery/test/unit/dimensions.js:693:4
-    dimensions: interaction with scrollbars (gh-3589) (48)Rerun [1c06b88c]85 ms
-    animation: Animation( subject, props, opts ) - shape (20)Rerun [b1e3617f]5 ms
-    animation: Animation.prefilter( fn ) - calls prefilter after defaultPrefilter (1)Rerun [2a50ba1f]4 ms
-    animation: Animation.prefilter( fn, true ) - calls prefilter before defaultPrefilter (1)Rerun [c55d16bc]2 ms
-    animation: Animation.prefilter - prefilter return hooks (34)Rerun [2b51eabf]9 ms
-    animation: Animation.tweener( fn ) - unshifts a * tweener (2)Rerun [803364a1]1 ms
+    dimensions: interaction with scrollbars (gh-3589) (48)Rerun [1c06b88c]45 ms
+    animation: Animation( subject, props, opts ) - shape (20)Rerun [b1e3617f]3 ms
+    animation: Animation.prefilter( fn ) - calls prefilter after defaultPrefilter (1)Rerun [2a50ba1f]2 ms
+    animation: Animation.prefilter( fn, true ) - calls prefilter before defaultPrefilter (1)Rerun [c55d16bc]1 ms
+    animation: Animation.prefilter - prefilter return hooks (34)Rerun [2b51eabf]4 ms
+    animation: Animation.tweener( fn ) - unshifts a * tweener (2)Rerun [803364a1]0 ms
     animation: Animation.tweener( 'prop', fn ) - unshifts a 'prop' tweener (4)Rerun [12355747]1 ms
     animation: Animation.tweener( 'list of props', fn ) - unshifts a tweener to each prop (2)Rerun [590e4dc3]1 ms
-    tween: jQuery.Tween - Default propHooks on plain objects (8)Rerun [09121f56]2 ms
-    tween: jQuery.Tween - Default propHooks on elements (19)Rerun [03fab35f]5 ms
-    tween: jQuery.Tween - Plain Object (13)Rerun [064e21dc]2 ms
-    tween: jQuery.Tween - Element (15)Rerun [1a509f35]4 ms
+    tween: jQuery.Tween - Default propHooks on plain objects (8)Rerun [09121f56]0 ms
+    tween: jQuery.Tween - Default propHooks on elements (19)Rerun [03fab35f]2 ms
+    tween: jQuery.Tween - Plain Object (13)Rerun [064e21dc]1 ms
+    tween: jQuery.Tween - Element (15)Rerun [1a509f35]1 ms
     tween: jQuery.Tween - No duration (3)Rerun [05bfc4cc]2 ms
-    tween: jQuery.Tween - step function option (4)Rerun [5caad4b0]2 ms
-    tween: jQuery.Tween - custom propHooks (3)Rerun [8af203e5]2 ms
-    tween: jQuery.Tween - custom propHooks - advanced values (5)Rerun [701d4d72]2 ms
+    tween: jQuery.Tween - step function option (4)Rerun [5caad4b0]1 ms
+    tween: jQuery.Tween - custom propHooks (3)Rerun [8af203e5]0 ms
+    tween: jQuery.Tween - custom propHooks - advanced values (5)Rerun [701d4d72]1 ms
 

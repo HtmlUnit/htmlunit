@@ -3,9 +3,9 @@ jQuery Test Suite
 
 Hide passed testsCheck for GlobalsNo try-catchminnoqsaModule: < All Modules >corecallbacksdeferredsupportdataqueueattributeseventselector - jQuery onlytraversingmanipulationcssserializeajaxeffectsoffsetdimensionsdeprecatedexportsSizzle
 
-Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; rv:11.0) like Gecko
 
-Tests completed in 236933 milliseconds.
+Tests completed in 102358 milliseconds.
 6914 tests of 6915 passed, 1 failed.
 1.core: Unit Testing Environment (0, 2, 2)Rerun
 
@@ -7599,7 +7599,7 @@ Source:     at Anonymous function (http://localhost:22222/jquery/test/unit/manip
 
 See this blog entry for more information.
 
-Here are some [links] in a normal paragraph: Google, Google Groups (Link). This link has class="blog": diveintomark 
+Here are some [links] in a normal paragraph: Google, Google Groups (Link).This link has class="blog": diveintomark 
 
 
 Everything inside the red border is inside a div with id="foo".

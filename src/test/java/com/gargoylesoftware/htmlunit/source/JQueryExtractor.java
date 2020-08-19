@@ -83,7 +83,7 @@ public final class JQueryExtractor {
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        for (final String browser : new String[] {"CHROME", "FF", "FF68", "FF60", "IE"}) {
+        for (final String browser : new String[] {"CHROME", "EDGE", "FF", "FF68", "IE"}) {
             final File out = new File(baseDir, browser + ".out");
             final File results = new File(baseDir, "results." + browser + ".txt");
             extractExpectations(out, results);
