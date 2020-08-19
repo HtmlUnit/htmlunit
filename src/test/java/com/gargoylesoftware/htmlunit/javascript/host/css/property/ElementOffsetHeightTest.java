@@ -20,12 +20,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for ComputedHeight.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ElementOffsetHeightTest extends WebDriverTestCase {
@@ -55,5 +58,157 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
         final String expected = loadExpectation("ElementOffsetHeightTest.properties", ".txt");
         final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
         assertEquals(expected, actual);
+    }
+
+    /**
+     * Try to do a line break if width is fixed.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 288, 340, 407",
+            FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
+            FF68 = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
+            IE = "14, 28, 46, 55, 81, 110, 124, 161, 202, 221, 269, 290, 345, 405")
+    @HtmlUnitNYI(CHROME = "12, 27, 44, 75, 80, 108, 126, 161, 208, 216, 300, 320, 374, 407",
+            FF = "14, 30, 48, 75, 80, 108, 126, 161, 208, 224, 310, 363, 385, 418",
+            FF68 = "14, 30, 48, 75, 80, 108, 126, 161, 208, 224, 310, 363, 385, 418",
+            IE = "14, 27, 48, 56, 80, 108, 126, 161, 200, 224, 300, 320, 385, 407")
+    public void offsetHeightLineBreaks() throws Exception {
+        final String html
+            = "<html><head><body>\n"
+            + "  <div id='myDiv' style='width: 400px'>"
+            + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt "
+            + "ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo "
+            + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor "
+            + "sit amet.</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var array = [];\n"
+            + "  for (var i = 6; i <= 32; i+=2) {\n"
+            + "    div.style.fontSize = i + 'px';\n"
+            + "    array.push(div.offsetHeight);\n"
+            + "  }\n"
+            + "  document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Try to do a line break if width is fixed.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "60, 120",
+            IE = "55, 110")
+    @HtmlUnitNYI(CHROME = "75, 120",
+            FF = "75, 120",
+            FF68 = "75, 120",
+            IE = "56, 112")
+    public void offsetHeightManualLineBreaks() throws Exception {
+        final String html
+            = "<html><head><body>\n"
+
+            + "  <div id='myDiv' style='width: 400px;font-size: 12px;'>"
+            + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, "
+            + "sed diam nonumy eirmod tempor invidunt "
+            + "ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo "
+            + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor "
+            + "sit amet.</div>\n"
+
+            + "  <div id='myDivBr' style='width: 400px;font-size: 12px;'>"
+            + "Lorem<br>ipsum<br>dolor<br>sit<br>amet, consetetur sadipscing elitr, "
+            + "sed diam nonumy eirmod tempor invidunt "
+            + "ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo "
+            + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor "
+            + "sit amet.</div>\n"
+
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "  var array = [];\n"
+
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  array.push(div.offsetHeight);\n"
+
+            + "  var divBr = document.getElementById('myDivBr');\n"
+            + "  array.push(divBr.offsetHeight);\n"
+
+            + "  document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Test case for #124.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"549", "273"},
+            IE = {"552", "276"})
+    @HtmlUnitNYI(CHROME = {"552", "294"},
+            FF = {"552", "294"},
+            FF68 = {"552", "294"},
+            IE = {"552", "294"})
+    public void offsetHeightLineBreaksTest() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <style>\n"
+            + "      .title-box {width: 960px; font-size: 60px;}\n"
+            + "      .title-sizer {height: 300px;}\n"
+            + "    </style>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <div class='title-box'>\n"
+            + "      <span class='title-sizer'>\n"
+            + "        <span class='title'>\n"
+            + "          8oz steak from Good and Gather. 8oz steak from Good and Gather. 8oz"
+            + "          steak from Good and Gather. 8oz steak from Good and Gather. 8oz steak"
+            + "          from Good and Gather. 8oz steak from Good and Gather. 8oz steak from"
+            + "          Good and Gather. 8oz steak from Good and Gather."
+            + "        </span>\n"
+            + "      </span>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+
+            + "  <script>\n"
+            + "    function getAttributeValue(element, attribute) {\n"
+            + "      if (element) {\n"
+            + "        return window.getComputedStyle(element)[attribute].split('px')[0];\n"
+            + "      }\n"
+            + "      return 0;\n"
+            + "    }\n"
+
+            + "    var titleSizer = document.querySelector('.title-sizer');\n"
+            + "    var title = document.querySelector('.title');\n"
+            + "    var titleHeight = titleSizer.offsetHeight;\n"
+            + "    var titleFontSize = getAttributeValue(titleSizer, 'fontSize');\n"
+            + "    var titleHeightGoal = getAttributeValue(titleSizer, 'height');\n"
+
+            + "    alert(titleHeight);\r\n"
+
+            + "    while (titleHeight > titleHeightGoal) {\n"
+            + "      titleFontSize -= 1;\n"
+            + "      title.style.fontSize = titleFontSize + 'px';\n"
+            + "      titleHeight = titleSizer.offsetHeight;\n"
+            + "    }\n"
+
+            + "    alert(titleHeight);\n"
+            + "  </script>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

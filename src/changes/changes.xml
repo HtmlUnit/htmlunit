@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="update" dev="rbri" issue="#124">
+                Improved height calculation; for elements having a fixed width
+                we will do word wrapping to generate a better height values.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade salvation lib to salvation2 3.0.0.
             </action>
