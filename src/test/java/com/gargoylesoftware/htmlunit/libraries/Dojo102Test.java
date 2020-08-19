@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -123,7 +124,7 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void tests_basehtml() throws Exception {
         test("tests._base.html");
         // tests._base.html_rtl
@@ -272,6 +273,8 @@ public class Dojo102Test extends DojoTestBase {
     @Test
     @NotYetImplemented(IE)
     public void testsbehavior() throws Exception {
+        shutDownAll();
+
         test("tests.behavior");
     }
 
