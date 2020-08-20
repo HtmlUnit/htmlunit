@@ -1126,7 +1126,7 @@ public final class StyleAttributes {
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
         /** The style property {@code forcedColorAdjust}. */
-        RORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
+        FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
                 edge("auto")),
 
         /** The style property {@code gap}. */
