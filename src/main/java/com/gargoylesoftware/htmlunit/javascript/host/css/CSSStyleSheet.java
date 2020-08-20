@@ -1192,7 +1192,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param rule the rule
      * @return always return -1 as of MSDN documentation
      */
-    @JsxFunction({IE, CHROME, FF, FF68})
+    @JsxFunction
     public int addRule(final String selector, final String rule) {
         String completeRule = selector + " {" + rule + "}";
         try {
@@ -1222,7 +1222,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param position the position of the rule to be deleted
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
-    @JsxFunction({IE, CHROME, FF, FF68})
+    @JsxFunction
     public void removeRule(final int position) {
         try {
             initCssRules();

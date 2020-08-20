@@ -468,7 +468,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the current event.
      * @return the current event, or {@code null} if no event is currently available
      */
-    @JsxGetter({IE, CHROME, FF, FF68})
+    @JsxGetter
     public Object getEvent() {
         return currentEvent_;
     }

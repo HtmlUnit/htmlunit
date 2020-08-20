@@ -646,6 +646,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF68 = {"error2;error3;error4;load5;", "4"})
     // at the moment we do not check the image content
     @HtmlUnitNYI(CHROME = {"error2;error3;load4;load5;", "3"},
+            EDGE = {"error2;error3;load4;load5;", "3"},
             FF = {"error2;load3;load4;load5;", "4"},
             FF68 = {"error2;load3;load4;load5;", "4"},
             IE = {"error2;error3;load4;load5;", "3"})

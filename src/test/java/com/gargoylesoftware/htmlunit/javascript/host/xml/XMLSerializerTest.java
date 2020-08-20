@@ -110,6 +110,9 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
                     + "103232<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>"
                     + "103232</xsl:template>10</xsl:stylesheet>",
+            EDGE = "<xsl:stylesheet32version=\"1.0\"32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
+                    + "103232<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>"
+                    + "103232</xsl:template>10</xsl:stylesheet>",
             FF68 = "<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232<xsl:template32match=\"/\">103232<html>"
                     + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>",
@@ -189,7 +192,19 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "</body>"
                     + "</html>")
     // IE omits the body's ID attribute
-    @HtmlUnitNYI(FF68 = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+    @HtmlUnitNYI(CHROME = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                    + "<head><title>html</title></head>"
+                    + "<body32id=\"bodyId\">"
+                    + "<span32class=\"spanClass\">foo</span>"
+                    + "</body>"
+                    + "</html>",
+            EDGE = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                    + "<head><title>html</title></head>"
+                    + "<body32id=\"bodyId\">"
+                    + "<span32class=\"spanClass\">foo</span>"
+                    + "</body>"
+                    + "</html>",
+            FF68 = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body32id=\"bodyId\">"
                     + "<span32class=\"spanClass\">foo</span>"
@@ -201,12 +216,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>",
-            CHROME = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
-                    + "<head><title>html</title></head>"
-                    + "<body32id=\"bodyId\">"
-                    + "<span32class=\"spanClass\">foo</span>"
-                    + "</body>"
-                    + "</html>",
+
             IE = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body32id=\"bodyId\">"
@@ -302,6 +312,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\">HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</h2>",
             IE = "")
     @HtmlUnitNYI(CHROME = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
+            EDGE = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
             FF = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
             FF68 = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>")
     public void documentFragment() throws Exception {

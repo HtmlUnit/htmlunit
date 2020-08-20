@@ -1056,7 +1056,7 @@ public class Document extends Node {
         if (getBrowserVersion().isIE()) {
             return EXECUTE_CMDS_IE.contains(cmdLC);
         }
-        if (getBrowserVersion().isChrome()) {
+        if (getBrowserVersion().isChrome() || getBrowserVersion().isEdge()) {
             return EXECUTE_CMDS_CHROME.contains(cmdLC) || (includeBold && "bold".equalsIgnoreCase(cmd));
         }
         return EXECUTE_CMDS_FF.contains(cmdLC);

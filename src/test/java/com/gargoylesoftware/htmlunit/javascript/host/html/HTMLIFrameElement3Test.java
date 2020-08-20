@@ -403,6 +403,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             EDGE = {"complete", "complete"},
             IE = {"loading", "complete"})
     @HtmlUnitNYI(CHROME = {"loading", "complete"},
+            EDGE = {"loading", "complete"},
             FF = {"loading", "complete"},
             FF68 = {"loading", "complete"})
     public void readyState_IFrame() throws Exception {
@@ -912,6 +913,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = {"loaded", "2"})
     @HtmlUnitNYI(
             CHROME = {"loaded", "2"},
+            EDGE = {"loaded", "2"},
             FF = {"loaded", "2"},
             FF68 = {"loaded", "2"})
     public void recursiveContent() throws Exception {
@@ -954,6 +956,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @BuggyWebDriver(IE = "")
     // this kill the real ie
     @HtmlUnitNYI(CHROME = {"loaded", "21"},
+            EDGE = {"loaded", "21"},
             FF = {"loaded", "21"},
             FF68 = {"loaded", "21"},
             IE = {"loaded", "21"})

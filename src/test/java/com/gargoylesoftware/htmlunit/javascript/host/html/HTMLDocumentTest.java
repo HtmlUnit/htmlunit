@@ -415,7 +415,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"imported: [object HTMLScriptElement]", "replaced"},
             CHROME = {"imported: [object HTMLScriptElement]", "o", "replaced"},
             EDGE = {"imported: [object HTMLScriptElement]", "o", "replaced"})
-    @HtmlUnitNYI(CHROME = {"imported: [object HTMLScriptElement]", "replaced"})
+    @HtmlUnitNYI(CHROME = {"imported: [object HTMLScriptElement]", "replaced"},
+            EDGE = {"imported: [object HTMLScriptElement]", "replaced"})
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -448,7 +449,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"imported: [object HTMLDivElement]", "replaced"},
             CHROME = {"imported: [object HTMLDivElement]", "o", "replaced"},
             EDGE = {"imported: [object HTMLDivElement]", "o", "replaced"})
-    @HtmlUnitNYI(CHROME = {"imported: [object HTMLDivElement]", "replaced"})
+    @HtmlUnitNYI(CHROME = {"imported: [object HTMLDivElement]", "replaced"},
+            EDGE = {"imported: [object HTMLDivElement]", "replaced"})
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -2596,6 +2598,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
             FF = "false",
             FF68 = "false",
             IE = "false")
@@ -2623,6 +2626,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF68 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             IE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     @HtmlUnitNYI(CHROME = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
+            EDGE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF68 = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     public void readyState() throws Exception {

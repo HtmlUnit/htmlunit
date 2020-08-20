@@ -6278,7 +6278,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
             FF = "0, 1, 1",
             FF68 = "0, 1, 1",
             IE = "0, 1, 1")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
@@ -7923,7 +7923,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
             FF = "0, 2, 2",
             FF68 = "0, 2, 2",
             IE = "0, 2, 2")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }
