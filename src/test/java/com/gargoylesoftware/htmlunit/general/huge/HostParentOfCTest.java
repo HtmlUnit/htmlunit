@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 
 import java.util.Collection;
 
@@ -369,7 +370,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
     }

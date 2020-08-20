@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -221,7 +222,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void _Image_HTMLImageElement() throws Exception {
         // although Image != HTMLImageElement, they seem to be synonyms!!!
         test("Image", "HTMLImageElement");

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -268,7 +269,7 @@ public class HostParentOfWTest extends HostParentOf {
             CHROME = "true",
             EDGE = "true",
             FF = "true")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, EDGE, FF})
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
         test("WebKitCSSMatrix", "DOMMatrix");
     }
@@ -290,7 +291,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void _webkitMediaStream_MediaStream() throws Exception {
         test("webkitMediaStream", "MediaStream");
     }
@@ -335,7 +336,7 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "RTCPeerConnection");
     }

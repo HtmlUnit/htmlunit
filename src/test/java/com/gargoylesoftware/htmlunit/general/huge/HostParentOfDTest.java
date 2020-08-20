@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -345,7 +346,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void _DOMRectReadOnly_DOMRect() throws Exception {
         test("DOMRectReadOnly", "DOMRect");
     }
@@ -1931,7 +1932,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void _Error_DOMException() throws Exception {
         test("Error", "DOMException");
     }

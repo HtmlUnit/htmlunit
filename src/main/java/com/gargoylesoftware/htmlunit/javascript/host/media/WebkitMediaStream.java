@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = CHROME, className = "webkitMediaStream")
+@JsxClass(value = {CHROME, EDGE}, className = "webkitMediaStream")
 public class WebkitMediaStream extends EventTarget {
 
     /**

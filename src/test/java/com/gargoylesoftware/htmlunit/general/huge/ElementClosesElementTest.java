@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -42483,7 +42484,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void _noembed_command() throws Exception {
         test("noembed", "command");
     }
@@ -47461,7 +47462,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void _select_command() throws Exception {
         test("select", "command");
     }
@@ -51718,7 +51719,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @NotYetImplemented({CHROME, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void _table_template() throws Exception {
         test("table", "template");
     }
@@ -59856,7 +59857,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void _title_command() throws Exception {
         test("title", "command");
     }

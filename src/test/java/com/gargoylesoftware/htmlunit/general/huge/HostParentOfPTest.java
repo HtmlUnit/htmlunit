@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -682,7 +683,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, EDGE})
     public void _RTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "webkitRTCPeerConnection");
     }
