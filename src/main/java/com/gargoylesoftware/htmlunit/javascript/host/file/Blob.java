@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -305,7 +305,7 @@ public class Blob extends SimpleScriptable {
     public void fillRequest(final WebRequest webRequest) {
         webRequest.setRequestBody(new String(getBytes(), UTF_8));
 
-        if (getBrowserVersion().hasFeature(XHR_SEND_USE_BLOB_MIMETYPE_AS_CONTENTTYPE)) {
+        if (!getBrowserVersion().hasFeature(XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE)) {
             final String mimeType = getType();
             if (StringUtils.isNotBlank(mimeType)) {
                 webRequest.setAdditionalHeader(HttpHeader.CONTENT_TYPE, mimeType);

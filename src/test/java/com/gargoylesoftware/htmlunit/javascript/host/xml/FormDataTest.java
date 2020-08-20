@@ -990,6 +990,8 @@ public class FormDataTest extends WebDriverTestCase {
             IE = "no entries")
     @HtmlUnitNYI(CHROME = {"[object Iterator]", "value", "done",
                         "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            EDGE = {"[object Iterator]", "value", "done",
+                    "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF = {"[object FormData Iterator]", "value", "done",
                         "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF68 = {"[object FormData Iterator]", "value", "done",

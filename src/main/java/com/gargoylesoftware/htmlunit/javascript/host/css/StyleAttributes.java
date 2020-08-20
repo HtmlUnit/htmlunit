@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeNotIterable;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.edge;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff68;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff68AndUp;
@@ -1123,6 +1124,10 @@ public final class StyleAttributes {
 
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
+
+        /** The style property {@code forcedColorAdjust}. */
+        RORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
+                edge("auto")),
 
         /** The style property {@code gap}. */
         GAP("gap", "gap", chromeAndEdge("normal"), ff68AndUp("")),

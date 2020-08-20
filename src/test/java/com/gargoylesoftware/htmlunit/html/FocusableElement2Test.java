@@ -1169,6 +1169,10 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
                 "after", "active: body"},
+            EDGE = {"before", "active: body",
+                "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
+                "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
+                "after", "active: body"},
             FF = {"before", "active: body",
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
@@ -1368,6 +1372,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
             IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
                 "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
     @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            EDGE = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             FF = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1"})
     public void clickFromFocusableToFocusableDisabled() throws Exception {

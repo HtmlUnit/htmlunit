@@ -1144,7 +1144,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "TEMPORARY,test(),top,window",
             EDGE = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
-                + "console,crypto,devicePixelRatio,dispatchEvent(),document,external,find(),focus(),"
+                + "console,crypto,devicePixelRatio,dispatchEvent(),document,event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,"
                 + "localStorage,location,matchMedia(),moveBy(),moveTo(),name,navigator,offscreenBuffering,"
                 + "onabort,onanimationend,onanimationiteration,onanimationstart,onauxclick,onbeforeunload,"

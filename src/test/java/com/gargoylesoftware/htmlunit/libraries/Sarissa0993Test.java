@@ -40,6 +40,7 @@ public class Sarissa0993Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"++++++++++++++++++", "+", "+", "+", "+++", "++", "++++F+++"},
             CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
+            EDGE = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             FF = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"},
             IE = {"+++++++++++F++++++", "+", "+", "+", "FFF", "FF", "FFFFFFFF"})
     // TODO [IE]XML sarissa 0.9.9.3 is not compatible with IE's new XML stuff

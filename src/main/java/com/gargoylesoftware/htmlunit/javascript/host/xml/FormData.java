@@ -160,7 +160,7 @@ public class FormData extends SimpleScriptable {
      * Removes the entry (if exists).
      * @param name the name of the field to remove
      */
-    @JsxFunction(functionName = "delete", value = {FF, FF68, CHROME})
+    @JsxFunction(functionName = "delete", value = {CHROME, EDGE, FF, FF68})
     public void delete_js(final String name) {
         if (StringUtils.isEmpty(name)) {
             return;

@@ -195,6 +195,7 @@ public class Selection2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "1"},
             CHROME = {"0", "3"},
+            EDGE = {"0", "3"},
             IE = {"0", "exception", "1"})
     @NotYetImplemented({CHROME, EDGE})
     public void extend() throws Exception {
@@ -235,6 +236,7 @@ public class Selection2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "exception", "undefined"},
             CHROME = {"None", "None"},
+            EDGE = {"None", "None"},
             FF = {"None", "None"},
             FF68 = {"None", "None"})
     public void empty() throws Exception {

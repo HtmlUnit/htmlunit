@@ -67,7 +67,7 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
         expectedPairs.add(new NameValuePair("button.x", "100"));
         expectedPairs.add(new NameValuePair("button.y", "200"));
 
-        if ("Chrome".equals(getBrowserVersion().getNickname())) {
+        if (getBrowserVersion().isChrome() || getBrowserVersion().isEdge()) {
             expectedPairs.add(new NameValuePair("button", "foo"));
         }
 

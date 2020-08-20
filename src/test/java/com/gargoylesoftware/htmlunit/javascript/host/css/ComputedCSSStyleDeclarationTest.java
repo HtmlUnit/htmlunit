@@ -2007,7 +2007,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "0", "16"},
             CHROME = {"8px", "0", "16"},
             EDGE = {"8px", "0", "16"})
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
