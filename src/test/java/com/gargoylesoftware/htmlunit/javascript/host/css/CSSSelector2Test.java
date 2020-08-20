@@ -23,9 +23,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Additional tests for css pseudo selectors :placeholder-shown and :-ms-input-placeholder.
- * used https://caniuse.com/#search=placeholder-shown to get compatibility.
- * (however tested in IE 11.1016.18362.0 and number fields seem to be also supported)
+ * Tests for css pseudo selectors :placeholder-shown and :-ms-input-placeholder.
  *
  * @author Thorsten Wendelmuth
  *
