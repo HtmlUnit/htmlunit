@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -70,11 +71,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
             FF68 = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
             IE = "14, 28, 46, 55, 81, 110, 124, 161, 202, 221, 269, 290, 345, 405")
-    @HtmlUnitNYI(CHROME = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 320, 374, 407",
-            EDGE = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 320, 374, 407",
-            FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 330, 385, 418",
-            FF68 = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 330, 385, 418",
-            IE = "14, 27, 48, 56, 80, 108, 126, 161, 200, 224, 270, 320, 385, 407")
+    @NotYetImplemented // we will see other results on unix
     public void offsetHeightLineBreaks() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -101,6 +98,45 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 9, 10, 11",
+            IE = "2, 3, 3, 3, 5, 6, 5, 7, 8, 7, 8, 9, 9, 10")
+    @HtmlUnitNYI(CHROME = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
+            EDGE = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
+            FF = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
+            FF68 = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
+            IE = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11")
+    public void offsetHeightLineBreaks2() throws Exception {
+        final String html
+            = "<html><head><body>\n"
+            + "  <div id='myLine'>Lorem ipsum</div>\n"
+            + "  <div id='myDiv' style='width: 400px'>"
+            + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt "
+            + "ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo "
+            + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor "
+            + "sit amet.</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "  var lineDiv = document.getElementById('myLine');\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var array = [];\n"
+            + "  for (var i = 6; i <= 32; i+=2) {\n"
+            + "    lineDiv.style.fontSize = i + 'px';\n"
+            + "    div.style.fontSize = i + 'px';\n"
+            + "    array.push(Math.floor(div.offsetHeight / lineDiv.offsetHeight));\n"
+            + "  }\n"
+            + "  document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
      * Try to do a line break if width is fixed.
      *
      * @throws Exception if the test fails
@@ -108,7 +144,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "60, 120",
             IE = "55, 110")
-    @HtmlUnitNYI(IE = "56, 112")
+    @NotYetImplemented // we will see other results on unix
     public void offsetHeightManualLineBreaks() throws Exception {
         final String html
             = "<html><head><body>\n"
