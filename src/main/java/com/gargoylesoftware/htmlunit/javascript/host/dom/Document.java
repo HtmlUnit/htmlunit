@@ -1013,8 +1013,9 @@ public class Document extends Node {
             return null;
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
+            throw ScriptRuntime.constructError("SyntaxError",
+                    "An invalid or illegal selector was specified (selector: '"
+                            + selectors + "' error: " + e.getMessage() + ").");
         }
     }
 

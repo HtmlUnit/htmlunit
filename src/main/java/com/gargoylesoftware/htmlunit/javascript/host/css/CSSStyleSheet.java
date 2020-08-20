@@ -129,7 +129,6 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
@@ -180,7 +179,7 @@ public class CSSStyleSheet extends StyleSheet {
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required", "placeholder-shown", "-ms-input-placeholder"));
+            "optional", "required"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -786,18 +785,18 @@ public class CSSStyleSheet extends StyleSheet {
                 return element.isMouseOver();
 
             case "placeholder-shown":
-                if (!browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
-                    throw ScriptRuntime.constructError("SyntaxError", value + " is not a valid selector");
+                if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
+                    return element instanceof HtmlInput
+                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                            && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
-                return element instanceof HtmlInput && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
-                        && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
 
             case "-ms-input-placeholder":
-                if (!browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
-                    throw ScriptRuntime.constructError("SyntaxError", value + " is not a valid selector");
+                if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
+                    return element instanceof HtmlInput
+                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                            && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
-                return element instanceof HtmlInput && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
-                        && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
 
             default:
                 if (value.startsWith("nth-child(")) {
@@ -1622,6 +1621,15 @@ public class CSSStyleSheet extends StyleSheet {
                             || NTH_NUMERIC.matcher(arg).matches()
                             || NTH_COMPLEX.matcher(arg).matches();
                 }
+
+                if ("placeholder-shown".equals(value)) {
+                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN);
+                }
+
+                if ("-ms-input-placeholder".equals(value)) {
+                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
+                }
+
                 return CSS3_PSEUDO_CLASSES.contains(value);
             default:
                 if (LOG.isWarnEnabled()) {
