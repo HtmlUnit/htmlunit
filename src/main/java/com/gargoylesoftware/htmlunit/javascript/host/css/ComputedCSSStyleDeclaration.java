@@ -1264,7 +1264,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         else {
-            defaultHeight = getBrowserVersion().getFontHeight(getFontSize());
+            final String fontSize = getFontSize();
+            defaultHeight = getBrowserVersion().getFontHeight(fontSize);
 
             if (node instanceof HtmlDivision
                     || node instanceof HtmlSpan) {
@@ -1284,6 +1285,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         && StringUtils.isNotBlank(content)) {
                     final String[] lines = StringUtils.split(content, '\n');
                     int lineCount = 0;
+                    final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
+                    final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
                     for (int i = 0; i < lines.length; i++) {
                         final String line = lines[i];
                         if (StringUtils.isBlank(line)) {
@@ -1292,10 +1295,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         else {
                             // width is specified, we have to to some line breaking
                             final AttributedString attributedString = new AttributedString(line);
-                            final String fontSize = getFontSize();
-                            final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
                             attributedString.addAttribute(TextAttribute.SIZE, fontSizeInt / 1.1);
-                            final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, false);
                             final LineBreakMeasurer lineBreakMeasurer =
                                     new LineBreakMeasurer(attributedString.getIterator(), fontRenderCtx);
                             lineBreakMeasurer.nextLayout(pixelWidth);
