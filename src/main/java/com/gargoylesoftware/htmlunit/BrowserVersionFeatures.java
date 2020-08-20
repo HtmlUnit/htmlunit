@@ -153,6 +153,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     CSS_ZINDEX_TYPE_INTEGER,
 
+    /** Is the css pseudo selector placeholder-shown supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
+    CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN,
+
+    /** Is the css pseudo selector -ms-input-placeholder supported. */
+    @BrowserFeature(IE)
+    CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER,
+
     /** Add the 'Referer' header to a request triggered by window.showModalDialog. */
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     DIALOGWINDOW_REFERER,
