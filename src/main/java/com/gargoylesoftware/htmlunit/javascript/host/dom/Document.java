@@ -2004,7 +2004,7 @@ public class Document extends Node {
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction(CHROME)
+    @JsxFunction({CHROME, EDGE})
     public Selection getSelection() {
         return null;
     }
