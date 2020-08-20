@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
@@ -127,6 +129,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
@@ -177,7 +180,7 @@ public class CSSStyleSheet extends StyleSheet {
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required"));
+            "optional", "required", "placeholder-shown", "-ms-input-placeholder"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -781,6 +784,20 @@ public class CSSStyleSheet extends StyleSheet {
 
             case "hover":
                 return element.isMouseOver();
+
+            case "placeholder-shown":
+                if (!browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
+                    throw ScriptRuntime.constructError("SyntaxError", value + " is not a valid selector");
+                }
+                return element instanceof HtmlInput && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                        && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
+
+            case "-ms-input-placeholder":
+                if (!browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
+                    throw ScriptRuntime.constructError("SyntaxError", value + " is not a valid selector");
+                }
+                return element instanceof HtmlInput && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                        && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
 
             default:
                 if (value.startsWith("nth-child(")) {
