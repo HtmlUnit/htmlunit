@@ -101,13 +101,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 9, 10, 11",
-            IE = "2, 3, 3, 3, 5, 6, 5, 7, 8, 7, 8, 9, 9, 10")
-    @HtmlUnitNYI(CHROME = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
-            EDGE = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
-            FF = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
-            FF68 = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11",
-            IE = "2, 3, 4, 4, 5, 6, 6, 7, 8, 8, 9, 10, 11, 11")
+    @Alerts("true, true, true, true, true, true, true, true, true, true, true, true, true, true")
     public void offsetHeightLineBreaks2() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -119,13 +113,15 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "sit amet.</div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "<script>\n"
-            + "  var lineDiv = document.getElementById('myLine');\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var array = [];\n"
+            + "  var lastHeight = 0;\n"
+
             + "  for (var i = 6; i <= 32; i+=2) {\n"
-            + "    lineDiv.style.fontSize = i + 'px';\n"
             + "    div.style.fontSize = i + 'px';\n"
-            + "    array.push(Math.floor(div.offsetHeight / lineDiv.offsetHeight));\n"
+            + "    var height = div.offsetHeight;"
+            + "    array.push(height >= lastHeight);\n"
+            + "    lastHeight = height;\n"
             + "  }\n"
             + "  document.getElementById('myTextarea').value = array.join(', ');\n"
             + "</script>\n"
@@ -142,9 +138,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "60, 120",
-            IE = "55, 110")
-    @NotYetImplemented // we will see other results on unix
+    @Alerts("true")
     public void offsetHeightManualLineBreaks() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -165,15 +159,10 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
 
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "<script>\n"
-            + "  var array = [];\n"
-
             + "  var div = document.getElementById('myDiv');\n"
-            + "  array.push(div.offsetHeight);\n"
-
             + "  var divBr = document.getElementById('myDivBr');\n"
-            + "  array.push(divBr.offsetHeight);\n"
 
-            + "  document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "  document.getElementById('myTextarea').value = div.offsetHeight < divBr.offsetHeight;\n"
             + "</script>\n"
             + "</body></html>";
 
