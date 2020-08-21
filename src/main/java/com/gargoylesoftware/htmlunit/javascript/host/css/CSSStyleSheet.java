@@ -944,7 +944,6 @@ public class CSSStyleSheet extends StyleSheet {
             final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null);
-            System.out.println(errorHandler);
         }
         catch (final Throwable t) {
             if (LOG.isErrorEnabled()) {
