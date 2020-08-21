@@ -65,4 +65,8 @@
     <suppress checks="VisibilityModifier" files="WebDriverTestCase.java"/>
 
     <suppress checks="HideUtilityClassConstructor" files="ArchitectureTest.java"/>
+
+    <suppress checks="RegexpMultiline" files=".*[\\/]src[\\/](test)[\\/]" />
+    <suppress checks="RegexpMultiline" files="ScriptException.java" />
+    <suppress checks="RegexpMultiline" files="Version.java" />
 </suppressions>
