@@ -3498,10 +3498,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 5, 5",
-            EDGE = "0, 5, 5",
-            FF = "0, 5, 5",
-            FF68 = "0, 5, 5",
+    @Alerts(DEFAULT = "0, 5, 5",
             IE = "1, 4, 5")
     @NotYetImplemented(IE)
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
@@ -6125,10 +6122,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-            EDGE = "0, 2, 2",
-            FF = "0, 2, 2",
-            FF68 = "0, 2, 2",
+    @Alerts(DEFAULT = "0, 2, 2",
             IE = "0, 1, 1")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
@@ -6294,12 +6288,10 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
-            EDGE = "1, 1, 2",
-            FF = "0, 2, 2",
-            FF68 = "0, 2, 2",
-            IE = "0, 2, 2")
-    @NotYetImplemented({CHROME, EDGE})
+    @Alerts(DEFAULT = "0, 2, 2",
+            CHROME = "1, 1, 2",
+            EDGE = "1, 1, 2")
+    @NotYetImplemented({ CHROME, EDGE })
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }

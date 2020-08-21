@@ -114,7 +114,7 @@
 114.support: body background is not lost if set prior to loading jQuery (#9239) (0, 2, 2) [114]
 115.support: A background on the testElement does not cause IE8 to crash (#9823) (0, 1, 1) [115]
 116.support: box-sizing does not affect jQuery.support.shrinkWrapBlocks (0, 1, 1) [116]
-117.support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions (0, 2, 2) [117]
+117.support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions (1, 1, 2) [117]
 118.support: Verify that the support tests resolve as expected per browser (0, 34, 34) [118]
 119.data: expando (0, 1, 1) [119]
 120.data: jQuery.data(div) (0, 25, 25) [120]

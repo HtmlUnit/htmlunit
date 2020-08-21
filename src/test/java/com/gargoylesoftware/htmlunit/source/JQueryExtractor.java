@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.source;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.BufferedReader;
@@ -40,7 +37,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -241,90 +237,45 @@ public final class JQueryExtractor {
                 System.out.print("\"" + expectation + '"');
             }
             else {
-                boolean first = true;
-
-                // Hack a bit to avoid redundant alerts
                 final List<String> cleanedBrowserNames = new ArrayList<>(testExpectation.keySet());
                 Collections.sort(cleanedBrowserNames);
 
-                if (testExpectation.size() == 3) {
-                    if (StringUtils.equals(
-                            testExpectation.get(CHROME.name()),
-                            testExpectation.get(FF.name()))) {
-                        testExpectation.put("DEFAULT", testExpectation.get(CHROME.name()));
-                        testExpectation.remove(CHROME.name());
-                        testExpectation.remove(FF.name());
-                        cleanedBrowserNames.remove(CHROME.name());
-                        cleanedBrowserNames.remove(FF.name());
-                        cleanedBrowserNames.add(0, "DEFAULT");
+                if (testExpectation.size() == availableBrowserNames.size()) {
+                    // Hack a bit to avoid redundant alerts
+                    // find the best default
+                    int matches = 0;
+                    ArrayList<String> defaultBrowsers = null;
 
-                        if (StringUtils.equals(
-                                testExpectation.get(CHROME.name()),
-                                testExpectation.get("FF68"))) {
-                            testExpectation.remove("FF68");
-                            cleanedBrowserNames.remove("FF68");
+                    for (final String browser : cleanedBrowserNames) {
+                        final String expectation = testExpectation.get(browser);
+
+                        final ArrayList<String> matchBrowsers = new ArrayList<>();
+                        int matchCount = 0;
+                        for (final String otherBrowser : cleanedBrowserNames) {
+                            if (!browser.equals(otherBrowser)
+                                    && expectation.equals(testExpectation.get(otherBrowser))) {
+                                matchCount++;
+                                matchBrowsers.add(otherBrowser);
+                            }
                         }
-                        if (StringUtils.equals(
-                                testExpectation.get(CHROME.name()),
-                                testExpectation.get("FF60"))) {
-                            testExpectation.remove("FF60");
-                            cleanedBrowserNames.remove("FF60");
+                        if (matches < matchCount) {
+                            matches = matchCount;
+                            matchBrowsers.add(browser);
+                            defaultBrowsers = matchBrowsers;
                         }
                     }
-                    else if (StringUtils.equals(
-                            testExpectation.get(CHROME.name()),
-                            testExpectation.get(IE.name()))) {
-                        testExpectation.put("DEFAULT", testExpectation.get(CHROME.name()));
-                        testExpectation.remove(CHROME.name());
-                        testExpectation.remove(IE.name());
-                        cleanedBrowserNames.remove(CHROME.name());
-                        cleanedBrowserNames.remove(IE.name());
-                        cleanedBrowserNames.add(0, "DEFAULT");
 
-                        if (StringUtils.equals(
-                                testExpectation.get(CHROME.name()),
-                                testExpectation.get(FF.name()))) {
-                            testExpectation.remove(FF.name());
-                            cleanedBrowserNames.remove(FF.name());
-                        }
-                        if (StringUtils.equals(
-                                testExpectation.get(CHROME.name()),
-                                testExpectation.get("FF68"))) {
-                            testExpectation.remove("FF68");
-                            cleanedBrowserNames.remove("FF68");
-                        }
-                        if (StringUtils.equals(
-                                testExpectation.get(CHROME.name()),
-                                testExpectation.get("FF60"))) {
-                            testExpectation.remove("FF60");
-                            cleanedBrowserNames.remove("FF60");
-                        }
-                    }
-                    else if (StringUtils.equals(
-                            testExpectation.get(FF.name()),
-                            testExpectation.get(IE.name()))) {
-                        testExpectation.put("DEFAULT", testExpectation.get(FF.name()));
-                        testExpectation.remove(FF.name());
-                        testExpectation.remove(IE.name());
-                        cleanedBrowserNames.remove(FF.name());
-                        cleanedBrowserNames.remove(IE.name());
+                    if (matches > 1) {
+                        testExpectation.put("DEFAULT", testExpectation.get(defaultBrowsers.get(0)));
                         cleanedBrowserNames.add(0, "DEFAULT");
-
-                        if (StringUtils.equals(
-                                testExpectation.get(IE.name()),
-                                testExpectation.get("FF68"))) {
-                            testExpectation.remove("FF68");
-                            cleanedBrowserNames.remove("FF68");
-                        }
-                        if (StringUtils.equals(
-                                testExpectation.get(IE.name()),
-                                testExpectation.get("FF60"))) {
-                            testExpectation.remove("FF60");
-                            cleanedBrowserNames.remove("FF60");
+                        for (final String browser : defaultBrowsers) {
+                            testExpectation.remove(browser);
+                            cleanedBrowserNames.remove(browser);
                         }
                     }
                 }
 
+                boolean first = true;
                 if (cleanedBrowserNames.size() == 1 && "DEFAULT".equals(cleanedBrowserNames.get(0))) {
                     System.out.print("\"" + testExpectation.get("DEFAULT") + '"');
                 }

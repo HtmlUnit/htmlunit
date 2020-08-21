@@ -4,11 +4,11 @@ jQuery Test Suite
 
 Hide passed testsCheck for GlobalsNo try-catchBypass optimizationsLoad with AMDLoad unminifiedAlways check jQuery.dataModule: < All Modules >ajaxattributescallbackscorecssdatadeferreddimensionseffectseventmanipulationoffsetqueueselectorserializesupporttraversingwrap
 
-Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; rv:11.0) like Gecko
 
-Tests completed in 88658 milliseconds.
-6085 assertions of 6089 passed, 4 failed.
-1.event: jQuery.isReady (0, 2, 2)Rerun1 ms
+Tests completed in 50039 milliseconds.
+6084 assertions of 6089 passed, 5 failed.
+1.event: jQuery.isReady (0, 2, 2)Rerun0 ms
 
 
 2.event: jQuery ready (0, 10, 10)Rerun1 ms
@@ -22,10 +22,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-3.core: Unit Testing Environment (0, 2, 2)Rerun5 ms
+3.core: Unit Testing Environment (0, 2, 2)Rerun2 ms
 
 
-4.core: Basic requirements (0, 7, 7)Rerun6 ms
+4.core: Basic requirements (0, 7, 7)Rerun2 ms
 
 
 
@@ -33,7 +33,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-5.core: jQuery() (0, 28, 28)Rerun117 ms
+5.core: jQuery() (0, 28, 28)Rerun71 ms
 
 
 
@@ -62,11 +62,11 @@ Tests completed in 88658 milliseconds.
 
 
 
-6.core: jQuery(selector, context) (0, 3, 3)Rerun4 ms
+6.core: jQuery(selector, context) (0, 3, 3)Rerun6 ms
 
 
 
-7.core: selector state (0, 18, 18)Rerun5 ms
+7.core: selector state (0, 18, 18)Rerun3 ms
 
 
 
@@ -85,11 +85,11 @@ Tests completed in 88658 milliseconds.
 
 
 
-8.core: globalEval (0, 3, 3)Rerun8 ms
+8.core: globalEval (0, 3, 3)Rerun3 ms
 
 
 
-9.core: noConflict (0, 7, 7)Rerun8 ms
+9.core: noConflict (0, 7, 7)Rerun3 ms
 
 
 
@@ -97,7 +97,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-10.core: trim (0, 13, 13)Rerun14 ms
+10.core: trim (0, 13, 13)Rerun3 ms
 
 
 
@@ -111,7 +111,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-11.core: type (0, 28, 28)Rerun7 ms
+11.core: type (0, 28, 28)Rerun2 ms
 
 
 
@@ -140,7 +140,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-12.core: isPlainObject (0, 16, 16)Rerun48 ms
+12.core: isPlainObject (0, 16, 16)Rerun38 ms
 
 
 
@@ -157,7 +157,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-13.core: isFunction (0, 19, 19)Rerun11 ms
+13.core: isFunction (0, 19, 19)Rerun2 ms
 
 
 
@@ -177,7 +177,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-14.core: isNumeric (0, 38, 38)Rerun18 ms
+14.core: isNumeric (0, 38, 38)Rerun4 ms
 
 
 
@@ -216,18 +216,18 @@ Tests completed in 88658 milliseconds.
 
 
 
-15.core: isXMLDoc - HTML (0, 4, 4)Rerun9 ms
+15.core: isXMLDoc - HTML (0, 4, 4)Rerun6 ms
 
 
 
 
-16.core: XSS via location.hash (0, 1, 1)Rerun32 ms
+16.core: XSS via location.hash (0, 1, 1)Rerun31 ms
 
-17.core: isXMLDoc - XML (0, 3, 3)Rerun9 ms
+17.core: isXMLDoc - XML (0, 3, 3)Rerun6 ms
 
 
 
-18.core: isWindow (0, 14, 14)Rerun18 ms
+18.core: isWindow (0, 14, 14)Rerun4 ms
 
 
 
@@ -242,7 +242,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-19.core: jQuery('html') (0, 18, 18)Rerun20 ms
+19.core: jQuery('html') (0, 18, 18)Rerun8 ms
 
 
 
@@ -261,26 +261,26 @@ Tests completed in 88658 milliseconds.
 
 
 
-20.core: jQuery('massive html #7990') (0, 3, 3)Rerun398 ms
+20.core: jQuery('massive html #7990') (0, 3, 3)Rerun239 ms
 
 
 
-21.core: jQuery('html', context) (0, 1, 1)Rerun6 ms
+21.core: jQuery('html', context) (0, 1, 1)Rerun2 ms
 
-22.core: jQuery(selector, xml).text(str) - loaded via xml document (0, 2, 2)Rerun8 ms
+22.core: jQuery(selector, xml).text(str) - loaded via xml document (0, 2, 2)Rerun3 ms
 
 
-23.core: end() (0, 3, 3)Rerun51 ms
+23.core: end() (0, 3, 3)Rerun3 ms
 
 
 
-24.core: length (0, 1, 1)Rerun9 ms
+24.core: length (0, 1, 1)Rerun4 ms
 
-25.core: get() (0, 1, 1)Rerun6 ms
+25.core: get() (0, 1, 1)Rerun23 ms
 
-26.core: toArray() (0, 1, 1)Rerun6 ms
+26.core: toArray() (0, 1, 1)Rerun4 ms
 
-27.core: inArray() (0, 19, 19)Rerun7 ms
+27.core: inArray() (0, 19, 19)Rerun4 ms
 
 
 
@@ -300,15 +300,15 @@ Tests completed in 88658 milliseconds.
 
 
 
-28.core: get(Number) (0, 2, 2)Rerun16 ms
+28.core: get(Number) (0, 2, 2)Rerun3 ms
 
 
-29.core: get(-Number) (0, 2, 2)Rerun7 ms
+29.core: get(-Number) (0, 2, 2)Rerun4 ms
 
 
-30.core: each(Function) (0, 1, 1)Rerun6 ms
+30.core: each(Function) (0, 1, 1)Rerun3 ms
 
-31.core: slice() (0, 7, 7)Rerun9 ms
+31.core: slice() (0, 7, 7)Rerun4 ms
 
 
 
@@ -321,10 +321,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-33.core: map() (0, 2, 2)Rerun5 ms
+33.core: map() (0, 2, 2)Rerun3 ms
 
 
-34.core: jQuery.map (0, 25, 25)Rerun12 ms
+34.core: jQuery.map (0, 25, 25)Rerun3 ms
 
 
 
@@ -350,7 +350,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-35.core: jQuery.merge() (0, 10, 10)Rerun22 ms
+35.core: jQuery.merge() (0, 10, 10)Rerun12 ms
 
 
 
@@ -361,7 +361,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-36.core: jQuery.grep() (0, 8, 8)Rerun7 ms
+36.core: jQuery.grep() (0, 8, 8)Rerun4 ms
 
 
 
@@ -370,7 +370,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-37.core: jQuery.extend(Object, Object) (0, 28, 28)Rerun8 ms
+37.core: jQuery.extend(Object, Object) (0, 28, 28)Rerun4 ms
 
 
 
@@ -399,7 +399,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-38.core: jQuery.each(Object,Function) (0, 23, 23)Rerun7 ms
+38.core: jQuery.each(Object,Function) (0, 23, 23)Rerun4 ms
 
 
 
@@ -423,12 +423,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-39.core: JIT compilation does not interfere with length retrieval (gh-2145) (0, 4, 4)Rerun7 ms
+39.core: JIT compilation does not interfere with length retrieval (gh-2145) (0, 4, 4)Rerun5 ms
 
 
 
 
-40.core: jQuery.makeArray (0, 15, 15)Rerun18 ms
+40.core: jQuery.makeArray (0, 15, 15)Rerun6 ms
 
 
 
@@ -444,14 +444,14 @@ Tests completed in 88658 milliseconds.
 
 
 
-41.core: jQuery.inArray (0, 3, 3)Rerun11 ms
+41.core: jQuery.inArray (0, 3, 3)Rerun2 ms
 
 
 
-42.core: jQuery.isEmptyObject (0, 2, 2)Rerun6 ms
+42.core: jQuery.isEmptyObject (0, 2, 2)Rerun2 ms
 
 
-43.core: jQuery.proxy (0, 9, 9)Rerun6 ms
+43.core: jQuery.proxy (0, 9, 9)Rerun3 ms
 
 
 
@@ -461,7 +461,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-44.core: jQuery.parseHTML (0, 17, 17)Rerun193 ms
+44.core: jQuery.parseHTML (0, 17, 17)Rerun79 ms
 
 
 
@@ -479,7 +479,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-45.core: jQuery.parseJSON (0, 20, 20)Rerun19 ms
+45.core: jQuery.parseJSON (0, 20, 20)Rerun4 ms
 
 
 
@@ -500,7 +500,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-46.core: jQuery.parseXML (0, 8, 8)Rerun6 ms
+46.core: jQuery.parseXML (0, 8, 8)Rerun2 ms
 
 
 
@@ -509,7 +509,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-47.core: jQuery.camelCase() (0, 7, 7)Rerun5 ms
+47.core: jQuery.camelCase() (0, 7, 7)Rerun4 ms
 
 
 
@@ -517,17 +517,17 @@ Tests completed in 88658 milliseconds.
 
 
 
-48.core: Conditional compilation compatibility (#13274) (0, 3, 3)Rerun111 ms
+48.core: Conditional compilation compatibility (#13274) (0, 3, 3)Rerun69 ms
 
 
 
-49.core: document ready when jQuery loaded asynchronously (#13655) (0, 1, 1)Rerun170 ms
+49.core: document ready when jQuery loaded asynchronously (#13655) (0, 1, 1)Rerun93 ms
 
-50.core: Tolerating alias-masked DOM properties (#14074) (0, 1, 1)Rerun98 ms
+50.core: Tolerating alias-masked DOM properties (#14074) (0, 1, 1)Rerun64 ms
 
-51.core: Don't call window.onready (#14802) (0, 1, 1)Rerun122 ms
+51.core: Don't call window.onready (#14802) (0, 1, 1)Rerun60 ms
 
-52.callbacks: jQuery.Callbacks( '' ) - no filter (0, 21, 21)Rerun69 ms
+52.callbacks: jQuery.Callbacks( '' ) - no filter (0, 21, 21)Rerun19 ms
 
 
 
@@ -549,7 +549,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-53.callbacks: jQuery.Callbacks( { } ) - no filter (0, 21, 21)Rerun55 ms
+53.callbacks: jQuery.Callbacks( { } ) - no filter (0, 21, 21)Rerun34 ms
 
 
 
@@ -571,7 +571,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-54.callbacks: jQuery.Callbacks( '' ) - filter (0, 21, 21)Rerun71 ms
+54.callbacks: jQuery.Callbacks( '' ) - filter (0, 21, 21)Rerun26 ms
 
 
 
@@ -593,7 +593,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-55.callbacks: jQuery.Callbacks( { } ) - filter (0, 21, 21)Rerun65 ms
+55.callbacks: jQuery.Callbacks( { } ) - filter (0, 21, 21)Rerun21 ms
 
 
 
@@ -615,7 +615,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-56.callbacks: jQuery.Callbacks( 'once' ) - no filter (0, 21, 21)Rerun56 ms
+56.callbacks: jQuery.Callbacks( 'once' ) - no filter (0, 21, 21)Rerun32 ms
 
 
 
@@ -637,7 +637,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-57.callbacks: jQuery.Callbacks( { 'once': true } ) - no filter (0, 21, 21)Rerun44 ms
+57.callbacks: jQuery.Callbacks( { 'once': true } ) - no filter (0, 21, 21)Rerun23 ms
 
 
 
@@ -659,7 +659,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-58.callbacks: jQuery.Callbacks( 'once' ) - filter (0, 21, 21)Rerun77 ms
+58.callbacks: jQuery.Callbacks( 'once' ) - filter (0, 21, 21)Rerun32 ms
 
 
 
@@ -681,7 +681,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-59.callbacks: jQuery.Callbacks( { 'once': true } ) - filter (0, 21, 21)Rerun66 ms
+59.callbacks: jQuery.Callbacks( { 'once': true } ) - filter (0, 21, 21)Rerun22 ms
 
 
 
@@ -703,7 +703,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-60.callbacks: jQuery.Callbacks( 'memory' ) - no filter (0, 21, 21)Rerun68 ms
+60.callbacks: jQuery.Callbacks( 'memory' ) - no filter (0, 21, 21)Rerun31 ms
 
 
 
@@ -725,7 +725,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-61.callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter (0, 21, 21)Rerun74 ms
+61.callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter (0, 21, 21)Rerun21 ms
 
 
 
@@ -747,7 +747,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-62.callbacks: jQuery.Callbacks( 'memory' ) - filter (0, 21, 21)Rerun64 ms
+62.callbacks: jQuery.Callbacks( 'memory' ) - filter (0, 21, 21)Rerun30 ms
 
 
 
@@ -769,7 +769,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-63.callbacks: jQuery.Callbacks( { 'memory': true } ) - filter (0, 21, 21)Rerun58 ms
+63.callbacks: jQuery.Callbacks( { 'memory': true } ) - filter (0, 21, 21)Rerun21 ms
 
 
 
@@ -791,7 +791,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-64.callbacks: jQuery.Callbacks( 'unique' ) - no filter (0, 21, 21)Rerun44 ms
+64.callbacks: jQuery.Callbacks( 'unique' ) - no filter (0, 21, 21)Rerun48 ms
 
 
 
@@ -813,7 +813,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-65.callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter (0, 21, 21)Rerun55 ms
+65.callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter (0, 21, 21)Rerun20 ms
 
 
 
@@ -835,7 +835,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-66.callbacks: jQuery.Callbacks( 'unique' ) - filter (0, 21, 21)Rerun67 ms
+66.callbacks: jQuery.Callbacks( 'unique' ) - filter (0, 21, 21)Rerun33 ms
 
 
 
@@ -857,7 +857,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-67.callbacks: jQuery.Callbacks( { 'unique': true } ) - filter (0, 21, 21)Rerun74 ms
+67.callbacks: jQuery.Callbacks( { 'unique': true } ) - filter (0, 21, 21)Rerun19 ms
 
 
 
@@ -879,7 +879,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-68.callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter (0, 21, 21)Rerun68 ms
+68.callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter (0, 21, 21)Rerun50 ms
 
 
 
@@ -901,7 +901,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-69.callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun50 ms
+69.callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun21 ms
 
 
 
@@ -923,7 +923,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-70.callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter (0, 21, 21)Rerun55 ms
+70.callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter (0, 21, 21)Rerun33 ms
 
 
 
@@ -945,7 +945,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-71.callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun53 ms
+71.callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun20 ms
 
 
 
@@ -967,7 +967,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-72.callbacks: jQuery.Callbacks( 'once memory' ) - no filter (0, 21, 21)Rerun56 ms
+72.callbacks: jQuery.Callbacks( 'once memory' ) - no filter (0, 21, 21)Rerun35 ms
 
 
 
@@ -989,7 +989,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-73.callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter (0, 21, 21)Rerun40 ms
+73.callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter (0, 21, 21)Rerun19 ms
 
 
 
@@ -1011,7 +1011,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-74.callbacks: jQuery.Callbacks( 'once memory' ) - filter (0, 21, 21)Rerun55 ms
+74.callbacks: jQuery.Callbacks( 'once memory' ) - filter (0, 21, 21)Rerun36 ms
 
 
 
@@ -1033,7 +1033,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-75.callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter (0, 21, 21)Rerun57 ms
+75.callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter (0, 21, 21)Rerun20 ms
 
 
 
@@ -1055,7 +1055,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-76.callbacks: jQuery.Callbacks( 'once unique' ) - no filter (0, 21, 21)Rerun73 ms
+76.callbacks: jQuery.Callbacks( 'once unique' ) - no filter (0, 21, 21)Rerun51 ms
 
 
 
@@ -1077,7 +1077,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-77.callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter (0, 21, 21)Rerun66 ms
+77.callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter (0, 21, 21)Rerun21 ms
 
 
 
@@ -1099,7 +1099,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-78.callbacks: jQuery.Callbacks( 'once unique' ) - filter (0, 21, 21)Rerun78 ms
+78.callbacks: jQuery.Callbacks( 'once unique' ) - filter (0, 21, 21)Rerun34 ms
 
 
 
@@ -1121,7 +1121,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-79.callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter (0, 21, 21)Rerun59 ms
+79.callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter (0, 21, 21)Rerun20 ms
 
 
 
@@ -1143,7 +1143,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-80.callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - no filter (0, 21, 21)Rerun52 ms
+80.callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - no filter (0, 21, 21)Rerun35 ms
 
 
 
@@ -1165,7 +1165,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-81.callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun69 ms
+81.callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun18 ms
 
 
 
@@ -1187,7 +1187,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-82.callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter (0, 21, 21)Rerun64 ms
+82.callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter (0, 21, 21)Rerun50 ms
 
 
 
@@ -1209,7 +1209,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-83.callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun56 ms
+83.callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun18 ms
 
 
 
@@ -1231,7 +1231,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-84.callbacks: jQuery.Callbacks( 'memory unique' ) - no filter (0, 21, 21)Rerun54 ms
+84.callbacks: jQuery.Callbacks( 'memory unique' ) - no filter (0, 21, 21)Rerun35 ms
 
 
 
@@ -1253,7 +1253,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-85.callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - no filter (0, 21, 21)Rerun67 ms
+85.callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - no filter (0, 21, 21)Rerun44 ms
 
 
 
@@ -1275,7 +1275,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-86.callbacks: jQuery.Callbacks( 'memory unique' ) - filter (0, 21, 21)Rerun53 ms
+86.callbacks: jQuery.Callbacks( 'memory unique' ) - filter (0, 21, 21)Rerun23 ms
 
 
 
@@ -1297,7 +1297,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-87.callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter (0, 21, 21)Rerun65 ms
+87.callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter (0, 21, 21)Rerun30 ms
 
 
 
@@ -1319,7 +1319,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-88.callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - no filter (0, 21, 21)Rerun55 ms
+88.callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - no filter (0, 21, 21)Rerun44 ms
 
 
 
@@ -1341,7 +1341,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-89.callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun66 ms
+89.callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun20 ms
 
 
 
@@ -1363,7 +1363,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-90.callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - filter (0, 21, 21)Rerun67 ms
+90.callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - filter (0, 21, 21)Rerun34 ms
 
 
 
@@ -1385,7 +1385,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-91.callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun56 ms
+91.callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun41 ms
 
 
 
@@ -1407,7 +1407,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-92.callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter (0, 21, 21)Rerun72 ms
+92.callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter (0, 21, 21)Rerun24 ms
 
 
 
@@ -1429,7 +1429,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-93.callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun62 ms
+93.callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - no filter (0, 21, 21)Rerun32 ms
 
 
 
@@ -1451,7 +1451,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-94.callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter (0, 21, 21)Rerun84 ms
+94.callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter (0, 21, 21)Rerun20 ms
 
 
 
@@ -1473,7 +1473,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-95.callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun66 ms
+95.callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - filter (0, 21, 21)Rerun31 ms
 
 
 
@@ -1495,13 +1495,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-96.callbacks: jQuery.Callbacks( options ) - options are copied (0, 1, 1)Rerun7 ms
+96.callbacks: jQuery.Callbacks( options ) - options are copied (0, 1, 1)Rerun3 ms
 
-97.callbacks: jQuery.Callbacks.fireWith - arguments are copied (0, 1, 1)Rerun11 ms
+97.callbacks: jQuery.Callbacks.fireWith - arguments are copied (0, 1, 1)Rerun3 ms
 
-98.callbacks: jQuery.Callbacks.remove - should remove all instances (0, 1, 1)Rerun7 ms
+98.callbacks: jQuery.Callbacks.remove - should remove all instances (0, 1, 1)Rerun3 ms
 
-99.callbacks: jQuery.Callbacks.has (0, 13, 13)Rerun7 ms
+99.callbacks: jQuery.Callbacks.has (0, 13, 13)Rerun3 ms
 
 
 
@@ -1515,9 +1515,9 @@ Tests completed in 88658 milliseconds.
 
 
 
-100.callbacks: jQuery.Callbacks() - adding a string doesn't cause a stack overflow (0, 1, 1)Rerun7 ms
+100.callbacks: jQuery.Callbacks() - adding a string doesn't cause a stack overflow (0, 1, 1)Rerun8 ms
 
-101.deferred: jQuery.Deferred (0, 23, 23)Rerun22 ms
+101.deferred: jQuery.Deferred (0, 23, 23)Rerun4 ms
 
 
 
@@ -1541,7 +1541,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-102.deferred: jQuery.Deferred - new operator (0, 23, 23)Rerun11 ms
+102.deferred: jQuery.Deferred - new operator (0, 23, 23)Rerun5 ms
 
 
 
@@ -1565,7 +1565,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-103.deferred: jQuery.Deferred - chainability (0, 10, 10)Rerun9 ms
+103.deferred: jQuery.Deferred - chainability (0, 10, 10)Rerun3 ms
 
 
 
@@ -1576,33 +1576,33 @@ Tests completed in 88658 milliseconds.
 
 
 
-104.deferred: jQuery.Deferred.then - filtering (done) (0, 4, 4)Rerun19 ms
+104.deferred: jQuery.Deferred.then - filtering (done) (0, 4, 4)Rerun8 ms
 
 
 
 
-105.deferred: jQuery.Deferred.then - filtering (fail) (0, 4, 4)Rerun9 ms
+105.deferred: jQuery.Deferred.then - filtering (fail) (0, 4, 4)Rerun5 ms
 
 
 
 
-106.deferred: jQuery.Deferred.then - filtering (progress) (0, 3, 3)Rerun8 ms
+106.deferred: jQuery.Deferred.then - filtering (progress) (0, 3, 3)Rerun3 ms
 
 
 
-107.deferred: jQuery.Deferred.then - deferred (done) (0, 3, 3)Rerun7 ms
+107.deferred: jQuery.Deferred.then - deferred (done) (0, 3, 3)Rerun3 ms
 
 
 
-108.deferred: jQuery.Deferred.then - deferred (fail) (0, 3, 3)Rerun20 ms
+108.deferred: jQuery.Deferred.then - deferred (fail) (0, 3, 3)Rerun3 ms
 
 
 
-109.deferred: jQuery.Deferred.then - deferred (progress) (0, 3, 3)Rerun11 ms
+109.deferred: jQuery.Deferred.then - deferred (progress) (0, 3, 3)Rerun4 ms
 
 
 
-110.deferred: jQuery.Deferred.then - context (0, 7, 7)Rerun8 ms
+110.deferred: jQuery.Deferred.then - context (0, 7, 7)Rerun11 ms
 
 
 
@@ -1610,7 +1610,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-111.deferred: jQuery.when (0, 37, 37)Rerun21 ms
+111.deferred: jQuery.when (0, 37, 37)Rerun3 ms
 
 
 
@@ -1648,7 +1648,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-112.deferred: jQuery.when - joined (0, 119, 119)Rerun16 ms
+112.deferred: jQuery.when - joined (0, 119, 119)Rerun6 ms
 
 
 
@@ -1768,19 +1768,31 @@ Tests completed in 88658 milliseconds.
 
 
 
-113.support: zoom of doom (#13089) (0, 1, 1)Rerun13 ms
+113.support: zoom of doom (#13089) (0, 1, 1)Rerun4 ms
 
-114.support: body background is not lost if set prior to loading jQuery (#9239) (0, 2, 2)Rerun123 ms
+114.support: body background is not lost if set prior to loading jQuery (#9239) (0, 2, 2)Rerun75 ms
 
 
-115.support: A background on the testElement does not cause IE8 to crash (#9823) (0, 1, 1)Rerun84 ms
+115.support: A background on the testElement does not cause IE8 to crash (#9823) (0, 1, 1)Rerun60 ms
 
-116.support: box-sizing does not affect jQuery.support.shrinkWrapBlocks (0, 1, 1)Rerun90 ms
+116.support: box-sizing does not affect jQuery.support.shrinkWrapBlocks (0, 1, 1)Rerun62 ms
 
-117.support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions (0, 2, 2)Rerun134 ms
+117.support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions (1, 1, 2)Rerun77 ms1.No violations of CSP polices
+2.No log request should be sentExpected:  ""
+ 
+Result:  "error"
+ 
+Diff:  "" "error" 
+ 
+Source:     at Anonymous function (http://localhost:22222/jquery/test/unit/support.js:70:4)
+   at fire (http://localhost:22222/jquery/test/data/jquery-1.9.1.js:1037:5)
+   at self.fireWith (http://localhost:22222/jquery/test/data/jquery-1.9.1.js:1148:7)
+   at done (http://localhost:22222/jquery/test/data/jquery-1.9.1.js:8074:5)
+   at callback (http://localhost:22222/jquery/test/data/jquery-1.9.1.js:8598:8)
+ 
 
 
-118.support: Verify that the support tests resolve as expected per browser (0, 34, 34)Rerun14 ms
+118.support: Verify that the support tests resolve as expected per browser (0, 34, 34)Rerun4 ms
 
 
 
@@ -1815,9 +1827,9 @@ Tests completed in 88658 milliseconds.
 
 
 
-119.data: expando (0, 1, 1)Rerun17 ms
+119.data: expando (0, 1, 1)Rerun5 ms
 
-120.data: jQuery.data(div) (0, 25, 25)Rerun9 ms
+120.data: jQuery.data(div) (0, 25, 25)Rerun4 ms
 
 
 
@@ -1843,7 +1855,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-121.data: jQuery.data({}) (0, 25, 25)Rerun10 ms
+121.data: jQuery.data({}) (0, 25, 25)Rerun8 ms
 
 
 
@@ -1869,7 +1881,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-122.data: jQuery.data(window) (0, 25, 25)Rerun11 ms
+122.data: jQuery.data(window) (0, 25, 25)Rerun5 ms
 
 
 
@@ -1895,7 +1907,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-123.data: jQuery.data(document) (0, 25, 25)Rerun10 ms
+123.data: jQuery.data(document) (0, 25, 25)Rerun4 ms
 
 
 
@@ -1921,15 +1933,15 @@ Tests completed in 88658 milliseconds.
 
 
 
-124.data: Expando cleanup (0, 4, 4)Rerun9 ms
+124.data: Expando cleanup (0, 4, 4)Rerun3 ms
 
 
 
 
-125.data: Data is not being set on comment and text nodes (0, 2, 2)Rerun10 ms
+125.data: Data is not being set on comment and text nodes (0, 2, 2)Rerun4 ms
 
 
-126.data: jQuery.acceptData (0, 10, 10)Rerun9 ms
+126.data: jQuery.acceptData (0, 10, 10)Rerun4 ms
 
 
 
@@ -1940,16 +1952,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-127.data: jQuery().data() === undefined (#14101) (0, 2, 2)Rerun5 ms
+127.data: jQuery().data() === undefined (#14101) (0, 2, 2)Rerun8 ms
 
 
-128.data: .data() (0, 5, 5)Rerun23 ms
+128.data: .data() (0, 5, 5)Rerun4 ms
 
 
 
 
 
-129.data: jQuery(Element).data(String, Object).data(String) (0, 18, 18)Rerun8 ms
+129.data: jQuery(Element).data(String, Object).data(String) (0, 18, 18)Rerun4 ms
 
 
 
@@ -1968,7 +1980,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-130.data: jQuery(plain Object).data(String, Object).data(String) (0, 16, 16)Rerun9 ms
+130.data: jQuery(plain Object).data(String, Object).data(String) (0, 16, 16)Rerun5 ms
 
 
 
@@ -1985,7 +1997,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-131.data: data-* attributes (0, 43, 43)Rerun21 ms
+131.data: data-* attributes (0, 43, 43)Rerun5 ms
 
 
 
@@ -2029,12 +2041,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-132.data: .data(Object) (0, 4, 4)Rerun12 ms
+132.data: .data(Object) (0, 4, 4)Rerun3 ms
 
 
 
 
-133.data: jQuery.removeData (0, 10, 10)Rerun12 ms
+133.data: jQuery.removeData (0, 10, 10)Rerun10 ms
 
 
 
@@ -2045,16 +2057,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-134.data: .removeData() (0, 6, 6)Rerun11 ms
+134.data: .removeData() (0, 6, 6)Rerun5 ms
 
 
 
 
 
 
-135.data: JSON serialization (#8108) (0, 1, 1)Rerun9 ms
+135.data: JSON serialization (#8108) (0, 1, 1)Rerun3 ms
 
-136.data: jQuery.data should follow html5 specification regarding camel casing (0, 10, 10)Rerun7 ms
+136.data: jQuery.data should follow html5 specification regarding camel casing (0, 10, 10)Rerun4 ms
 
 
 
@@ -2065,10 +2077,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-137.data: jQuery.data should not miss data with preset hyphenated property names (0, 2, 2)Rerun7 ms
+137.data: jQuery.data should not miss data with preset hyphenated property names (0, 2, 2)Rerun4 ms
 
 
-138.data: jQuery.data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values (0, 24, 24)Rerun12 ms
+138.data: jQuery.data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values (0, 24, 24)Rerun4 ms
 
 
 
@@ -2093,7 +2105,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-139.data: jQuery.data supports interoperable removal of hyphenated/camelCase properties (0, 27, 27)Rerun18 ms
+139.data: jQuery.data supports interoperable removal of hyphenated/camelCase properties (0, 27, 27)Rerun10 ms
 
 
 
@@ -2121,21 +2133,21 @@ Tests completed in 88658 milliseconds.
 
 
 
-140.data: .removeData supports removal of hyphenated properties via array (#12786) (0, 4, 4)Rerun8 ms
+140.data: .removeData supports removal of hyphenated properties via array (#12786) (0, 4, 4)Rerun3 ms
 
 
 
 
-141.data: Triggering the removeData should not throw exceptions. (#10080) (0, 1, 1)Rerun75 ms
+141.data: Triggering the removeData should not throw exceptions. (#10080) (0, 1, 1)Rerun54 ms
 
-142.data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)Rerun10 ms
+142.data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)Rerun4 ms
 
 
-143.data: JSON data- attributes can have newlines (0, 1, 1)Rerun15 ms
+143.data: JSON data- attributes can have newlines (0, 1, 1)Rerun4 ms
 
-144.data: enumerate data attrs on body (#14894) (0, 1, 1)Rerun87 ms
+144.data: enumerate data attrs on body (#14894) (0, 1, 1)Rerun68 ms
 
-145.queue: queue() with other types (0, 14, 14)Rerun48 ms
+145.queue: queue() with other types (0, 14, 14)Rerun21 ms
 
 
 
@@ -2150,53 +2162,53 @@ Tests completed in 88658 milliseconds.
 
 
 
-146.queue: queue(name) passes in the next item in the queue as a parameter (0, 2, 2)Rerun20 ms
+146.queue: queue(name) passes in the next item in the queue as a parameter (0, 2, 2)Rerun4 ms
 
 
-147.queue: queue() passes in the next item in the queue as a parameter to fx queues (0, 3, 3)Rerun541 ms
+147.queue: queue() passes in the next item in the queue as a parameter to fx queues (0, 3, 3)Rerun528 ms
 
 
 
-148.queue: callbacks keep their place in the queue (0, 5, 5)Rerun454 ms
+148.queue: callbacks keep their place in the queue (0, 5, 5)Rerun459 ms
 
 
 
 
 
-149.queue: delay() (0, 2, 2)Rerun151 ms
+149.queue: delay() (0, 2, 2)Rerun130 ms
 
 
-150.queue: clearQueue(name) clears the queue (0, 2, 2)Rerun41 ms
+150.queue: clearQueue(name) clears the queue (0, 2, 2)Rerun28 ms
 
 
-151.queue: clearQueue() clears the fx queue (0, 1, 1)Rerun12 ms
+151.queue: clearQueue() clears the fx queue (0, 1, 1)Rerun3 ms
 
-152.queue: fn.promise() - called when fx queue is empty (0, 3, 3)Rerun69 ms
+152.queue: fn.promise() - called when fx queue is empty (0, 3, 3)Rerun38 ms
 
 
 
-153.queue: fn.promise( "queue" ) - called whenever last queue function is dequeued (0, 5, 5)Rerun88 ms
+153.queue: fn.promise( "queue" ) - called whenever last queue function is dequeued (0, 5, 5)Rerun46 ms
 
 
 
 
 
-154.queue: fn.promise( "queue" ) - waits for animation to complete before resolving (0, 2, 2)Rerun91 ms
+154.queue: fn.promise( "queue" ) - waits for animation to complete before resolving (0, 2, 2)Rerun61 ms
 
 
-155.queue: .promise(obj) (0, 2, 2)Rerun12 ms
+155.queue: .promise(obj) (0, 2, 2)Rerun4 ms
 
 
-156.queue: delay() can be stopped (0, 3, 3)Rerun1573 ms
+156.queue: delay() can be stopped (0, 3, 3)Rerun1540 ms
 
 
 
-157.queue: queue stop hooks (0, 2, 2)Rerun144 ms
+157.queue: queue stop hooks (0, 2, 2)Rerun24 ms
 
 
-158.attributes: jQuery.propFix integrity test (0, 1, 1)Rerun15 ms
+158.attributes: jQuery.propFix integrity test (0, 1, 1)Rerun3 ms
 
-159.attributes: attr(String) (0, 50, 50)Rerun62 ms
+159.attributes: attr(String) (0, 50, 50)Rerun13 ms
 
 
 
@@ -2247,23 +2259,23 @@ Tests completed in 88658 milliseconds.
 
 
 
-160.attributes: attr(String) on cloned elements, #9646 (0, 4, 4)Rerun24 ms
+160.attributes: attr(String) on cloned elements, #9646 (0, 4, 4)Rerun4 ms
 
 
 
 
-161.attributes: attr(String) in XML Files (0, 3, 3)Rerun18 ms
+161.attributes: attr(String) in XML Files (0, 3, 3)Rerun10 ms
 
 
 
-162.attributes: attr(String, Function) (0, 2, 2)Rerun30 ms
+162.attributes: attr(String, Function) (0, 2, 2)Rerun12 ms
 
 
-163.attributes: attr(Hash) (0, 3, 3)Rerun32 ms
+163.attributes: attr(Hash) (0, 3, 3)Rerun4 ms
 
 
 
-164.attributes: attr(String, Object) (0, 71, 71)Rerun62 ms
+164.attributes: attr(String, Object) (0, 71, 71)Rerun11 ms
 
 
 
@@ -2335,15 +2347,15 @@ Tests completed in 88658 milliseconds.
 
 
 
-165.attributes: attr - extending the boolean attrHandle (0, 1, 1)Rerun45 ms
+165.attributes: attr - extending the boolean attrHandle (0, 1, 1)Rerun10 ms
 
-166.attributes: attr(String, Object) - Loaded via XML document (0, 2, 2)Rerun36 ms
+166.attributes: attr(String, Object) - Loaded via XML document (0, 2, 2)Rerun4 ms
 
 
-167.attributes: attr(String, Object) - Loaded via XML fragment (0, 2, 2)Rerun15 ms
+167.attributes: attr(String, Object) - Loaded via XML fragment (0, 2, 2)Rerun3 ms
 
 
-168.attributes: attr('tabindex') (0, 8, 8)Rerun53 ms
+168.attributes: attr('tabindex') (0, 8, 8)Rerun7 ms
 
 
 
@@ -2352,7 +2364,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-169.attributes: attr('tabindex', value) (0, 9, 9)Rerun20 ms
+169.attributes: attr('tabindex', value) (0, 9, 9)Rerun9 ms
 
 
 
@@ -2362,7 +2374,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-170.attributes: removeAttr(String) (0, 12, 12)Rerun28 ms
+170.attributes: removeAttr(String) (0, 12, 12)Rerun8 ms
 
 
 
@@ -2375,7 +2387,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-171.attributes: removeAttr(String) in XML (0, 7, 7)Rerun16 ms
+171.attributes: removeAttr(String) in XML (0, 7, 7)Rerun5 ms
 
 
 
@@ -2383,7 +2395,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-172.attributes: removeAttr(Multi String, variable space width) (0, 8, 8)Rerun36 ms
+172.attributes: removeAttr(Multi String, variable space width) (0, 8, 8)Rerun6 ms
 
 
 
@@ -2392,7 +2404,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-173.attributes: prop(String, Object) (0, 17, 17)Rerun24 ms
+173.attributes: prop(String, Object) (0, 17, 17)Rerun9 ms
 
 
 
@@ -2410,7 +2422,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-174.attributes: prop(String, Object) on null/undefined (0, 14, 14)Rerun38 ms
+174.attributes: prop(String, Object) on null/undefined (0, 14, 14)Rerun6 ms
 
 
 
@@ -2425,7 +2437,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-175.attributes: prop('tabindex') (0, 11, 11)Rerun23 ms
+175.attributes: prop('tabindex') (0, 11, 11)Rerun3 ms
 
 
 
@@ -2437,7 +2449,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-176.attributes: prop('tabindex', value) (0, 10, 10)Rerun34 ms
+176.attributes: prop('tabindex', value) (0, 10, 10)Rerun3 ms
 
 
 
@@ -2448,16 +2460,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-177.attributes: removeProp(String) (0, 6, 6)Rerun15 ms
+177.attributes: removeProp(String) (0, 6, 6)Rerun3 ms
 
 
 
 
 
 
-178.attributes: val() after modification (0, 1, 1)Rerun14 ms
+178.attributes: val() after modification (0, 1, 1)Rerun9 ms
 
-179.attributes: val() (0, 26, 26)Rerun56 ms
+179.attributes: val() (0, 26, 26)Rerun13 ms
 
 
 
@@ -2484,11 +2496,11 @@ Tests completed in 88658 milliseconds.
 
 
 
-180.attributes: val() with non-matching values on dropdown list (0, 3, 3)Rerun21 ms
+180.attributes: val() with non-matching values on dropdown list (0, 3, 3)Rerun6 ms
 
 
 
-181.attributes: val(String/Number) (0, 9, 9)Rerun25 ms
+181.attributes: val(String/Number) (0, 9, 9)Rerun5 ms
 
 
 
@@ -2498,7 +2510,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-182.attributes: val(Function) (0, 9, 9)Rerun10 ms
+182.attributes: val(Function) (0, 9, 9)Rerun11 ms
 
 
 
@@ -2508,12 +2520,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-183.attributes: val(Array of Numbers) (Bug #7123) (0, 4, 4)Rerun18 ms
+183.attributes: val(Array of Numbers) (Bug #7123) (0, 4, 4)Rerun6 ms
 
 
 
 
-184.attributes: val(Function) with incoming value (0, 10, 10)Rerun20 ms
+184.attributes: val(Function) with incoming value (0, 10, 10)Rerun5 ms
 
 
 
@@ -2524,11 +2536,11 @@ Tests completed in 88658 milliseconds.
 
 
 
-185.attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)Rerun28 ms
+185.attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)Rerun5 ms
 
 
 
-186.attributes: addClass(String) (0, 9, 9)Rerun16 ms
+186.attributes: addClass(String) (0, 9, 9)Rerun9 ms
 
 
 
@@ -2538,7 +2550,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-187.attributes: addClass(Function) (0, 9, 9)Rerun142 ms
+187.attributes: addClass(Function) (0, 9, 9)Rerun6 ms
 
 
 
@@ -2548,7 +2560,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-188.attributes: addClass(Function) with incoming value (0, 52, 52)Rerun19 ms
+188.attributes: addClass(Function) with incoming value (0, 52, 52)Rerun4 ms
 
 
 
@@ -2601,7 +2613,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-189.attributes: removeClass(String) - simple (0, 8, 8)Rerun29 ms
+189.attributes: removeClass(String) - simple (0, 8, 8)Rerun13 ms
 
 
 
@@ -2610,7 +2622,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-190.attributes: removeClass(Function) - simple (0, 8, 8)Rerun46 ms
+190.attributes: removeClass(Function) - simple (0, 8, 8)Rerun6 ms
 
 
 
@@ -2619,7 +2631,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-191.attributes: removeClass(Function) with incoming value (0, 52, 52)Rerun29 ms
+191.attributes: removeClass(Function) with incoming value (0, 52, 52)Rerun5 ms
 
 
 
@@ -2672,11 +2684,11 @@ Tests completed in 88658 milliseconds.
 
 
 
-192.attributes: removeClass() removes duplicates (0, 1, 1)Rerun19 ms
+192.attributes: removeClass() removes duplicates (0, 1, 1)Rerun5 ms
 
-193.attributes: removeClass(undefined) is a no-op (0, 1, 1)Rerun38 ms
+193.attributes: removeClass(undefined) is a no-op (0, 1, 1)Rerun5 ms
 
-194.attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)Rerun18 ms
+194.attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)Rerun4 ms
 
 
 
@@ -2694,7 +2706,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-195.attributes: toggleClass(Function[, boolean]) (0, 17, 17)Rerun22 ms
+195.attributes: toggleClass(Function[, boolean]) (0, 17, 17)Rerun4 ms
 
 
 
@@ -2712,7 +2724,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-196.attributes: toggleClass(Function[, boolean]) with incoming value (0, 14, 14)Rerun16 ms
+196.attributes: toggleClass(Function[, boolean]) with incoming value (0, 14, 14)Rerun5 ms
 
 
 
@@ -2727,7 +2739,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-197.attributes: addClass, removeClass, hasClass (0, 17, 17)Rerun25 ms
+197.attributes: addClass, removeClass, hasClass (0, 17, 17)Rerun4 ms
 
 
 
@@ -2745,7 +2757,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-198.attributes: addClass, removeClass, hasClass on many elements (0, 19, 19)Rerun23 ms
+198.attributes: addClass, removeClass, hasClass on many elements (0, 19, 19)Rerun5 ms
 
 
 
@@ -2765,50 +2777,50 @@ Tests completed in 88658 milliseconds.
 
 
 
-199.attributes: contents().hasClass() returns correct values (0, 2, 2)Rerun21 ms
+199.attributes: contents().hasClass() returns correct values (0, 2, 2)Rerun11 ms
 
 
-200.attributes: hasClass correctly interprets non-space separators (#13835) (0, 4, 4)Rerun15 ms
+200.attributes: hasClass correctly interprets non-space separators (#13835) (0, 4, 4)Rerun5 ms
 
 
 
 
-201.attributes: coords returns correct values in IE6/IE7, see #10828 (0, 1, 1)Rerun21 ms
+201.attributes: coords returns correct values in IE6/IE7, see #10828 (0, 1, 1)Rerun4 ms
 
-202.attributes: should not throw at $(option).val() (#14686) (0, 1, 1)Rerun20 ms
+202.attributes: should not throw at $(option).val() (#14686) (0, 1, 1)Rerun4 ms
 
-203.attributes: Insignificant white space returned for $(option).val() (#14858) (0, 3, 3)Rerun13 ms
+203.attributes: Insignificant white space returned for $(option).val() (#14858) (0, 3, 3)Rerun4 ms
 
 
 
-204.event: null or undefined handler (0, 2, 2)Rerun43 ms
+204.event: null or undefined handler (0, 2, 2)Rerun8 ms
 
 
-205.event: on() with non-null,defined data (0, 2, 2)Rerun35 ms
+205.event: on() with non-null,defined data (0, 2, 2)Rerun19 ms
 
 
-206.event: Handler changes and .trigger() order (0, 1, 1)Rerun17 ms
+206.event: Handler changes and .trigger() order (0, 1, 1)Rerun7 ms
 
-207.event: on(), with data (0, 4, 4)Rerun61 ms
+207.event: on(), with data (0, 4, 4)Rerun34 ms
 
 
 
 
-208.event: click(), with data (0, 3, 3)Rerun51 ms
+208.event: click(), with data (0, 3, 3)Rerun23 ms
 
 
 
-209.event: on(), with data, trigger with data (0, 4, 4)Rerun80 ms
+209.event: on(), with data, trigger with data (0, 4, 4)Rerun15 ms
 
 
 
 
-210.event: on(), multiple events at once (0, 2, 2)Rerun44 ms
+210.event: on(), multiple events at once (0, 2, 2)Rerun18 ms
 
 
-211.event: on(), five events at once (0, 1, 1)Rerun60 ms
+211.event: on(), five events at once (0, 1, 1)Rerun24 ms
 
-212.event: on(), multiple events at once and namespaces (0, 7, 7)Rerun28 ms
+212.event: on(), multiple events at once and namespaces (0, 7, 7)Rerun7 ms
 
 
 
@@ -2816,7 +2828,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-213.event: on(), namespace with special add (0, 27, 27)Rerun29 ms
+213.event: on(), namespace with special add (0, 27, 27)Rerun13 ms
 
 
 
@@ -2844,38 +2856,38 @@ Tests completed in 88658 milliseconds.
 
 
 
-214.event: on(), no data (0, 1, 1)Rerun64 ms
+214.event: on(), no data (0, 1, 1)Rerun17 ms
 
-215.event: on/one/off(Object) (0, 6, 6)Rerun73 ms
+215.event: on/one/off(Object) (0, 6, 6)Rerun16 ms
 
 
 
 
 
 
-216.event: on/off(Object), on/off(Object, String) (0, 6, 6)Rerun27 ms
+216.event: on/off(Object), on/off(Object, String) (0, 6, 6)Rerun14 ms
 
 
 
 
 
 
-217.event: on immediate propagation (0, 2, 2)Rerun30 ms
+217.event: on immediate propagation (0, 2, 2)Rerun6 ms
 
 
-218.event: on bubbling, isDefaultPrevented, stopImmediatePropagation (0, 3, 3)Rerun46 ms
+218.event: on bubbling, isDefaultPrevented, stopImmediatePropagation (0, 3, 3)Rerun28 ms
 
 
 
-219.event: on(), iframes (0, 1, 1)Rerun50 ms
+219.event: on(), iframes (0, 1, 1)Rerun26 ms
 
-220.event: on(), trigger change on select (0, 5, 5)Rerun23 ms
+220.event: on(), trigger change on select (0, 5, 5)Rerun11 ms
 
 
 
 
 
-221.event: on(), namespaced events, cloned events (0, 18, 18)Rerun49 ms
+221.event: on(), namespaced events, cloned events (0, 18, 18)Rerun32 ms
 
 
 
@@ -2894,7 +2906,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-222.event: on(), multi-namespaced events (0, 6, 6)Rerun44 ms
+222.event: on(), multi-namespaced events (0, 6, 6)Rerun19 ms
 
 
 
@@ -2904,25 +2916,25 @@ Tests completed in 88658 milliseconds.
 223.event: namespace-only event binding is a no-op (0, 2, 2)Rerun13 ms
 
 
-224.event: on(), with same function (0, 2, 2)Rerun11 ms
+224.event: on(), with same function (0, 2, 2)Rerun7 ms
 
 
-225.event: on(), make sure order is maintained (0, 1, 1)Rerun38 ms
+225.event: on(), make sure order is maintained (0, 1, 1)Rerun23 ms
 
-226.event: on(), with different this object (0, 4, 4)Rerun28 ms
+226.event: on(), with different this object (0, 4, 4)Rerun17 ms
 
 
 
 
-227.event: on(name, false), off(name, false) (0, 3, 3)Rerun35 ms
+227.event: on(name, false), off(name, false) (0, 3, 3)Rerun19 ms
 
 
 
-228.event: on(name, selector, false), off(name, selector, false) (0, 3, 3)Rerun55 ms
+228.event: on(name, selector, false), off(name, selector, false) (0, 3, 3)Rerun28 ms
 
 
 
-229.event: on()/trigger()/off() on plain object (0, 7, 7)Rerun16 ms
+229.event: on()/trigger()/off() on plain object (0, 7, 7)Rerun6 ms
 
 
 
@@ -2930,32 +2942,32 @@ Tests completed in 88658 milliseconds.
 
 
 
-230.event: off(type) (0, 1, 1)Rerun18 ms
+230.event: off(type) (0, 1, 1)Rerun7 ms
 
-231.event: off(eventObject) (0, 4, 4)Rerun10 ms
+231.event: off(eventObject) (0, 4, 4)Rerun12 ms
 
 
 
 
-232.event: hover() mouseenter mouseleave (0, 1, 1)Rerun16 ms
+232.event: hover() mouseenter mouseleave (0, 1, 1)Rerun8 ms
 
-233.event: mouseover triggers mouseenter (0, 1, 1)Rerun15 ms
+233.event: mouseover triggers mouseenter (0, 1, 1)Rerun8 ms
 
-234.event: pointerover triggers pointerenter (0, 1, 1)Rerun26 ms
+234.event: pointerover triggers pointerenter (0, 1, 1)Rerun5 ms
 
-235.event: withinElement implemented with jQuery.contains() (0, 1, 1)Rerun13 ms
+235.event: withinElement implemented with jQuery.contains() (0, 1, 1)Rerun8 ms
 
-236.event: mouseenter, mouseleave don't catch exceptions (0, 2, 2)Rerun11 ms
+236.event: mouseenter, mouseleave don't catch exceptions (0, 2, 2)Rerun13 ms
 
 
-237.event: trigger() shortcuts (0, 6, 6)Rerun49 ms
+237.event: trigger() shortcuts (0, 6, 6)Rerun22 ms
 
 
 
 
 
 
-238.event: trigger() bubbling (0, 18, 18)Rerun46 ms
+238.event: trigger() bubbling (0, 18, 18)Rerun28 ms
 
 
 
@@ -2974,7 +2986,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-239.event: trigger(type, [data], [fn]) (0, 16, 16)Rerun24 ms
+239.event: trigger(type, [data], [fn]) (0, 16, 16)Rerun9 ms
 
 
 
@@ -2991,15 +3003,15 @@ Tests completed in 88658 milliseconds.
 
 
 
-240.event: submit event bubbles on copied forms (#11649) (0, 3, 3)Rerun73 ms
+240.event: submit event bubbles on copied forms (#11649) (0, 3, 3)Rerun39 ms
 
 
 
-241.event: change event bubbles on copied forms (#11796) (0, 3, 3)Rerun44 ms
+241.event: change event bubbles on copied forms (#11796) (0, 3, 3)Rerun20 ms
 
 
 
-242.event: trigger(eventObject, [data], [fn]) (0, 28, 28)Rerun25 ms
+242.event: trigger(eventObject, [data], [fn]) (0, 28, 28)Rerun8 ms
 
 
 
@@ -3028,28 +3040,28 @@ Tests completed in 88658 milliseconds.
 
 
 
-243.event: .trigger() bubbling on disconnected elements (#10489) (0, 2, 2)Rerun39 ms
+243.event: .trigger() bubbling on disconnected elements (#10489) (0, 2, 2)Rerun22 ms
 
 
-244.event: .trigger() doesn't bubble load event (#10717) (0, 1, 1)Rerun25 ms
+244.event: .trigger() doesn't bubble load event (#10717) (0, 1, 1)Rerun14 ms
 
-245.event: Delegated events in SVG (#10791; #13180) (0, 2, 2)Rerun26 ms
+245.event: Delegated events in SVG (#10791; #13180) (0, 2, 2)Rerun11 ms
 
 
-246.event: Delegated events in forms (#10844; #11145; #8165; #11382, #11764) (0, 5, 5)Rerun70 ms
+246.event: Delegated events in forms (#10844; #11145; #8165; #11382, #11764) (0, 5, 5)Rerun24 ms
 
 
 
 
 
-247.event: Submit event can be stopped (#11049) (0, 1, 1)Rerun46 ms
+247.event: Submit event can be stopped (#11049) (0, 1, 1)Rerun13 ms
 
-248.event: on(beforeunload) (0, 4, 4)Rerun65 ms
+248.event: on(beforeunload) (0, 4, 4)Rerun43 ms
 
 
 
 
-249.event: jQuery.Event( type, props ) (0, 5, 5)Rerun30 ms
+249.event: jQuery.Event( type, props ) (0, 5, 5)Rerun10 ms
 
 
 
@@ -3068,7 +3080,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-251.event: .on()/.off() (0, 65, 65)Rerun87 ms
+251.event: .on()/.off() (0, 65, 65)Rerun43 ms
 
 
 
@@ -3134,24 +3146,24 @@ Tests completed in 88658 milliseconds.
 
 
 
-252.event: jQuery.off using dispatched jQuery.Event (0, 1, 1)Rerun15 ms
+252.event: jQuery.off using dispatched jQuery.Event (0, 1, 1)Rerun7 ms
 
-253.event: delegated event with delegateTarget-relative selector (0, 3, 3)Rerun18 ms
+253.event: delegated event with delegateTarget-relative selector (0, 3, 3)Rerun10 ms
 
 
 
-254.event: delegated event with selector matching Object.prototype property (#13203) (0, 1, 1)Rerun29 ms
+254.event: delegated event with selector matching Object.prototype property (#13203) (0, 1, 1)Rerun6 ms
 
-255.event: delegated event with intermediate DOM manipulation (#13208) (0, 1, 1)Rerun22 ms
+255.event: delegated event with intermediate DOM manipulation (#13208) (0, 1, 1)Rerun12 ms
 
-256.event: stopPropagation() stops directly-bound events on delegated target (0, 1, 1)Rerun21 ms
+256.event: stopPropagation() stops directly-bound events on delegated target (0, 1, 1)Rerun6 ms
 
-257.event: off all bound delegated events (0, 2, 2)Rerun40 ms
+257.event: off all bound delegated events (0, 2, 2)Rerun20 ms
 
 
-258.event: on with multiple delegated events (0, 1, 1)Rerun36 ms
+258.event: on with multiple delegated events (0, 1, 1)Rerun19 ms
 
-259.event: delegated on with change (0, 8, 8)Rerun21 ms
+259.event: delegated on with change (0, 8, 8)Rerun7 ms
 
 
 
@@ -3160,25 +3172,25 @@ Tests completed in 88658 milliseconds.
 
 
 
-260.event: delegated on with submit (0, 2, 2)Rerun18 ms
+260.event: delegated on with submit (0, 2, 2)Rerun7 ms
 
 
-261.event: delegated off() with only namespaces (0, 2, 2)Rerun13 ms
+261.event: delegated off() with only namespaces (0, 2, 2)Rerun7 ms
 
 
-262.event: Non DOM element events (0, 1, 1)Rerun18 ms
+262.event: Non DOM element events (0, 1, 1)Rerun13 ms
 
-263.event: inline handler returning false stops default (0, 1, 1)Rerun11 ms
+263.event: inline handler returning false stops default (0, 1, 1)Rerun8 ms
 
-264.event: window resize (0, 2, 2)Rerun10 ms
+264.event: window resize (0, 2, 2)Rerun6 ms
 
 
-265.event: focusin bubbles (0, 2, 2)Rerun47 ms
+265.event: focusin bubbles (0, 2, 2)Rerun25 ms
 
 
-266.event: custom events with colons (#3533, #8272) (0, 1, 1)Rerun30 ms
+266.event: custom events with colons (#3533, #8272) (0, 1, 1)Rerun18 ms
 
-267.event: .on and .off (0, 9, 9)Rerun33 ms
+267.event: .on and .off (0, 9, 9)Rerun25 ms
 
 
 
@@ -3188,7 +3200,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-268.event: special on name mapping (0, 7, 7)Rerun40 ms
+268.event: special on name mapping (0, 7, 7)Rerun21 ms
 
 
 
@@ -3196,7 +3208,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-269.event: .on and .off, selective mixed removal (#10705) (0, 7, 7)Rerun35 ms
+269.event: .on and .off, selective mixed removal (#10705) (0, 7, 7)Rerun17 ms
 
 
 
@@ -3204,13 +3216,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-270.event: .on( event-map, null-selector, data ) #11130 (0, 1, 1)Rerun12 ms
+270.event: .on( event-map, null-selector, data ) #11130 (0, 1, 1)Rerun6 ms
 
-271.event: clone() delegated events (#11076) (0, 3, 3)Rerun43 ms
+271.event: clone() delegated events (#11076) (0, 3, 3)Rerun28 ms
 
 
 
-272.event: checkbox state (#3827) (0, 9, 9)Rerun29 ms
+272.event: checkbox state (#3827) (0, 9, 9)Rerun19 ms
 
 
 
@@ -3220,35 +3232,35 @@ Tests completed in 88658 milliseconds.
 
 
 
-273.event: hover event no longer special since 1.9 (0, 1, 1)Rerun16 ms
+273.event: hover event no longer special since 1.9 (0, 1, 1)Rerun6 ms
 
-274.event: fixHooks extensions (0, 2, 2)Rerun11 ms
+274.event: fixHooks extensions (0, 2, 2)Rerun6 ms
 
 
 275.event: focusin using non-element targets (0, 2, 2)Rerun12 ms
 
 
-276.event: focusin from an iframe (0, 1, 1)Rerun125 ms
+276.event: focusin from an iframe (0, 1, 1)Rerun86 ms
 
-277.event: jQuery.ready promise (0, 1, 1)Rerun98 ms
+277.event: jQuery.ready promise (0, 1, 1)Rerun67 ms
 
-278.event: Focusing iframe element (0, 1, 1)Rerun135 ms
+278.event: Focusing iframe element (0, 1, 1)Rerun68 ms
 
-279.event: triggerHandler(onbeforeunload) (0, 1, 1)Rerun93 ms
+279.event: triggerHandler(onbeforeunload) (0, 1, 1)Rerun75 ms
 
-280.event: jQuery.ready synchronous load with long loading subresources (0, 1, 1)Rerun1085 ms
+280.event: jQuery.ready synchronous load with long loading subresources (0, 1, 1)Rerun1046 ms
 
-281.event: change handler should be detached from element (0, 2, 2)Rerun20 ms
+281.event: change handler should be detached from element (0, 2, 2)Rerun10 ms
 
 
-282.event: trigger click on checkbox, fires change event (0, 1, 1)Rerun48 ms
+282.event: trigger click on checkbox, fires change event (0, 1, 1)Rerun36 ms
 
-283.event: Namespace preserved when passed an Event (#12739) (0, 4, 4)Rerun13 ms
+283.event: Namespace preserved when passed an Event (#12739) (0, 4, 4)Rerun8 ms
 
 
 
 
-284.event: make sure events cloned correctly (0, 18, 18)Rerun129 ms
+284.event: make sure events cloned correctly (0, 18, 18)Rerun38 ms
 
 
 
@@ -3267,20 +3279,20 @@ Tests completed in 88658 milliseconds.
 
 
 
-285.event: String.prototype.namespace does not cause trigger() to throw (#13360) (0, 1, 1)Rerun15 ms
+285.event: String.prototype.namespace does not cause trigger() to throw (#13360) (0, 1, 1)Rerun6 ms
 
-286.event: Inline event result is returned (#13993) (0, 1, 1)Rerun16 ms
+286.event: Inline event result is returned (#13993) (0, 1, 1)Rerun7 ms
 
-287.event: Check order of focusin/focusout events (0, 2, 2)Rerun52 ms
+287.event: Check order of focusin/focusout events (0, 2, 2)Rerun35 ms
 
 
-288.event: focus-blur order (#12868) (0, 5, 5)Rerun160 ms
+288.event: focus-blur order (#12868) (0, 5, 5)Rerun151 ms
 
 
 
 
 
-289.selector: element - jQuery only (0, 7, 7)Rerun22 ms
+289.selector: element - jQuery only (0, 7, 7)Rerun6 ms
 
 
 
@@ -3288,7 +3300,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-290.selector: id (0, 26, 26)Rerun78 ms
+290.selector: id (0, 26, 26)Rerun23 ms
 
 
 
@@ -3315,12 +3327,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-291.selector: class - jQuery only (0, 4, 4)Rerun17 ms
+291.selector: class - jQuery only (0, 4, 4)Rerun5 ms
 
 
 
 
-292.selector: name (0, 5, 5)Rerun33 ms
+292.selector: name (0, 5, 5)Rerun8 ms
 
 
 
@@ -3331,7 +3343,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-294.selector: child and adjacent (0, 27, 27)Rerun87 ms
+294.selector: child and adjacent (0, 27, 27)Rerun39 ms
 
 
 
@@ -3359,7 +3371,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-295.selector: attributes (0, 54, 54)Rerun125 ms
+295.selector: attributes (0, 54, 54)Rerun61 ms
 
 
 
@@ -3414,13 +3426,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-296.selector: disconnected nodes (0, 1, 1)Rerun18 ms
+296.selector: disconnected nodes (0, 1, 1)Rerun4 ms
 
-297.selector: disconnected nodes - jQuery only (0, 3, 3)Rerun9 ms
+297.selector: disconnected nodes - jQuery only (0, 3, 3)Rerun10 ms
 
 
 
-298.selector: attributes - jQuery.attr (0, 35, 35)Rerun193 ms
+298.selector: attributes - jQuery.attr (0, 35, 35)Rerun229 ms
 
 
 
@@ -3456,7 +3468,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-299.selector: jQuery.contains (0, 16, 16)Rerun20 ms
+299.selector: jQuery.contains (0, 16, 16)Rerun5 ms
 
 
 
@@ -3473,7 +3485,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-300.selector: jQuery.unique (0, 14, 14)Rerun20 ms
+300.selector: jQuery.unique (0, 14, 14)Rerun6 ms
 
 
 
@@ -3488,24 +3500,24 @@ Tests completed in 88658 milliseconds.
 
 
 
-301.selector: Sizzle cache collides with multiple Sizzles on a page (0, 4, 4)Rerun166 ms
+301.selector: Sizzle cache collides with multiple Sizzles on a page (0, 4, 4)Rerun120 ms
 
 
 
 
-302.selector: Iframe dispatch should not affect jQuery (#13936) (0, 1, 1)Rerun235 ms
+302.selector: Iframe dispatch should not affect jQuery (#13936) (0, 1, 1)Rerun133 ms
 
-303.traversing: find(String) (0, 1, 1)Rerun23 ms
+303.traversing: find(String) (0, 1, 1)Rerun5 ms
 
-304.traversing: find(String) under non-elements (0, 2, 2)Rerun10 ms
+304.traversing: find(String) under non-elements (0, 2, 2)Rerun11 ms
 
 
-305.traversing: find(leading combinator) (0, 4, 4)Rerun17 ms
+305.traversing: find(leading combinator) (0, 4, 4)Rerun8 ms
 
 
 
 
-306.traversing: find(node|jQuery object) (0, 13, 13)Rerun12 ms
+306.traversing: find(node|jQuery object) (0, 13, 13)Rerun4 ms
 
 
 
@@ -3519,7 +3531,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-307.traversing: is(String|undefined) (0, 23, 23)Rerun33 ms
+307.traversing: is(String|undefined) (0, 23, 23)Rerun5 ms
 
 
 
@@ -3543,7 +3555,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-308.traversing: is() against non-elements (#10178) (0, 14, 14)Rerun13 ms
+308.traversing: is() against non-elements (#10178) (0, 14, 14)Rerun5 ms
 
 
 
@@ -3558,7 +3570,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-309.traversing: is(jQuery) (0, 19, 19)Rerun47 ms
+309.traversing: is(jQuery) (0, 19, 19)Rerun14 ms
 
 
 
@@ -3578,14 +3590,14 @@ Tests completed in 88658 milliseconds.
 
 
 
-310.traversing: is() with :has() selectors (0, 6, 6)Rerun27 ms
+310.traversing: is() with :has() selectors (0, 6, 6)Rerun11 ms
 
 
 
 
 
 
-311.traversing: is() with positional selectors (0, 27, 27)Rerun68 ms
+311.traversing: is() with positional selectors (0, 27, 27)Rerun19 ms
 
 
 
@@ -3613,10 +3625,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-312.traversing: index() (0, 2, 2)Rerun9 ms
+312.traversing: index() (0, 2, 2)Rerun3 ms
 
 
-313.traversing: index(Object|String|undefined) (0, 16, 16)Rerun26 ms
+313.traversing: index(Object|String|undefined) (0, 16, 16)Rerun13 ms
 
 
 
@@ -3633,7 +3645,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-314.traversing: filter(Selector|undefined) (0, 9, 9)Rerun13 ms
+314.traversing: filter(Selector|undefined) (0, 9, 9)Rerun6 ms
 
 
 
@@ -3643,16 +3655,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-315.traversing: filter(Function) (0, 2, 2)Rerun9 ms
+315.traversing: filter(Function) (0, 2, 2)Rerun5 ms
 
 
-316.traversing: filter(Element) (0, 1, 1)Rerun12 ms
+316.traversing: filter(Element) (0, 1, 1)Rerun4 ms
 
-317.traversing: filter(Array) (0, 1, 1)Rerun19 ms
+317.traversing: filter(Array) (0, 1, 1)Rerun5 ms
 
-318.traversing: filter(jQuery) (0, 1, 1)Rerun14 ms
+318.traversing: filter(jQuery) (0, 1, 1)Rerun4 ms
 
-319.traversing: filter() with positional selectors (0, 19, 19)Rerun53 ms
+319.traversing: filter() with positional selectors (0, 19, 19)Rerun14 ms
 
 
 
@@ -3672,7 +3684,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-320.traversing: closest() (0, 13, 13)Rerun18 ms
+320.traversing: closest() (0, 13, 13)Rerun7 ms
 
 
 
@@ -3686,10 +3698,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-321.traversing: closest() with positional selectors (0, 2, 2)Rerun14 ms
+321.traversing: closest() with positional selectors (0, 2, 2)Rerun7 ms
 
 
-322.traversing: closest(jQuery) (0, 8, 8)Rerun8 ms
+322.traversing: closest(jQuery) (0, 8, 8)Rerun18 ms
 
 
 
@@ -3698,7 +3710,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-323.traversing: not(Selector|undefined) (0, 11, 11)Rerun29 ms
+323.traversing: not(Selector|undefined) (0, 11, 11)Rerun11 ms
 
 
 
@@ -3710,66 +3722,66 @@ Tests completed in 88658 milliseconds.
 
 
 
-324.traversing: not(Element) (0, 1, 1)Rerun9 ms
+324.traversing: not(Element) (0, 1, 1)Rerun6 ms
 
-325.traversing: not(Function) (0, 1, 1)Rerun8 ms
+325.traversing: not(Function) (0, 1, 1)Rerun5 ms
 
-326.traversing: not(Array) (0, 2, 2)Rerun8 ms
+326.traversing: not(Array) (0, 2, 2)Rerun5 ms
 
 
-327.traversing: not(jQuery) (0, 1, 1)Rerun9 ms
+327.traversing: not(jQuery) (0, 1, 1)Rerun8 ms
 
-328.traversing: has(Element) (0, 3, 3)Rerun9 ms
+328.traversing: has(Element) (0, 3, 3)Rerun6 ms
 
 
 
-329.traversing: has(Selector) (0, 5, 5)Rerun11 ms
+329.traversing: has(Selector) (0, 5, 5)Rerun6 ms
 
 
 
 
 
-330.traversing: has(Arrayish) (0, 4, 4)Rerun10 ms
+330.traversing: has(Arrayish) (0, 4, 4)Rerun14 ms
 
 
 
 
-331.traversing: addBack() (0, 5, 5)Rerun32 ms
+331.traversing: addBack() (0, 5, 5)Rerun6 ms
 
 
 
 
 
-332.traversing: siblings([String]) (0, 6, 6)Rerun9 ms
+332.traversing: siblings([String]) (0, 6, 6)Rerun5 ms
 
 
 
 
 
 
-333.traversing: siblings([String]) - jQuery only (0, 2, 2)Rerun8 ms
+333.traversing: siblings([String]) - jQuery only (0, 2, 2)Rerun4 ms
 
 
-334.traversing: children([String]) (0, 2, 2)Rerun9 ms
+334.traversing: children([String]) (0, 2, 2)Rerun5 ms
 
 
-335.traversing: children([String]) - jQuery only (0, 1, 1)Rerun7 ms
+335.traversing: children([String]) - jQuery only (0, 1, 1)Rerun4 ms
 
-336.traversing: parent([String]) (0, 6, 6)Rerun25 ms
+336.traversing: parent([String]) (0, 6, 6)Rerun5 ms
 
 
 
 
 
 
-337.traversing: parents([String]) (0, 6, 6)Rerun21 ms
+337.traversing: parents([String]) (0, 6, 6)Rerun13 ms
 
 
 
 
 
 
-338.traversing: parentsUntil([String]) (0, 10, 10)Rerun16 ms
+338.traversing: parentsUntil([String]) (0, 10, 10)Rerun6 ms
 
 
 
@@ -3780,32 +3792,32 @@ Tests completed in 88658 milliseconds.
 
 
 
-339.traversing: next([String]) (0, 6, 6)Rerun18 ms
+339.traversing: next([String]) (0, 6, 6)Rerun5 ms
 
 
 
 
 
 
-340.traversing: prev([String]) (0, 5, 5)Rerun21 ms
+340.traversing: prev([String]) (0, 5, 5)Rerun4 ms
 
 
 
 
 
-341.traversing: nextAll([String]) (0, 5, 5)Rerun36 ms
+341.traversing: nextAll([String]) (0, 5, 5)Rerun6 ms
 
 
 
 
 
-342.traversing: prevAll([String]) (0, 5, 5)Rerun42 ms
+342.traversing: prevAll([String]) (0, 5, 5)Rerun12 ms
 
 
 
 
 
-343.traversing: nextUntil([String]) (0, 12, 12)Rerun27 ms
+343.traversing: nextUntil([String]) (0, 12, 12)Rerun7 ms
 
 
 
@@ -3818,7 +3830,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-344.traversing: prevUntil([String]) (0, 11, 11)Rerun24 ms
+344.traversing: prevUntil([String]) (0, 11, 11)Rerun7 ms
 
 
 
@@ -3830,7 +3842,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-345.traversing: contents() (0, 12, 12)Rerun20 ms
+345.traversing: contents() (0, 12, 12)Rerun7 ms
 
 
 
@@ -3843,7 +3855,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-346.traversing: sort direction (0, 12, 12)Rerun43 ms
+346.traversing: sort direction (0, 12, 12)Rerun23 ms
 
 
 
@@ -3856,61 +3868,61 @@ Tests completed in 88658 milliseconds.
 
 
 
-347.traversing: add(String selector) (0, 2, 2)Rerun11 ms
+347.traversing: add(String selector) (0, 2, 2)Rerun4 ms
 
 
-348.traversing: add(String selector, String context) (0, 1, 1)Rerun25 ms
+348.traversing: add(String selector, String context) (0, 1, 1)Rerun5 ms
 
-349.traversing: add(String html) (0, 3, 3)Rerun18 ms
+349.traversing: add(String html) (0, 3, 3)Rerun4 ms
 
 
 
-350.traversing: add(jQuery) (0, 4, 4)Rerun29 ms
+350.traversing: add(jQuery) (0, 4, 4)Rerun6 ms
 
 
 
 
-351.traversing: add(Element) (0, 2, 2)Rerun18 ms
+351.traversing: add(Element) (0, 2, 2)Rerun11 ms
 
 
-352.traversing: add(Array elements) (0, 1, 1)Rerun14 ms
+352.traversing: add(Array elements) (0, 1, 1)Rerun5 ms
 
-353.traversing: add(Window) (0, 1, 1)Rerun21 ms
+353.traversing: add(Window) (0, 1, 1)Rerun6 ms
 
-354.traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement) (0, 4, 4)Rerun31 ms
+354.traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement) (0, 4, 4)Rerun5 ms
 
 
 
 
-355.traversing: add(String, Context) (0, 6, 6)Rerun19 ms
+355.traversing: add(String, Context) (0, 6, 6)Rerun4 ms
 
 
 
 
 
 
-356.traversing: eq('-1') #10616 (0, 3, 3)Rerun13 ms
+356.traversing: eq('-1') #10616 (0, 3, 3)Rerun6 ms
 
 
 
-357.traversing: index(no arg) #10977 (0, 2, 2)Rerun14 ms
+357.traversing: index(no arg) #10977 (0, 2, 2)Rerun5 ms
 
 
-358.traversing: traversing non-elements with attribute filters (#12523) (0, 5, 5)Rerun28 ms
+358.traversing: traversing non-elements with attribute filters (#12523) (0, 5, 5)Rerun4 ms
 
 
 
 
 
-359.manipulation: text() (0, 5, 5)Rerun26 ms
+359.manipulation: text() (0, 5, 5)Rerun8 ms
 
 
 
 
 
-360.manipulation: text(undefined) (0, 1, 1)Rerun14 ms
+360.manipulation: text(undefined) (0, 1, 1)Rerun17 ms
 
-361.manipulation: text(String) (0, 7, 7)Rerun13 ms
+361.manipulation: text(String) (0, 7, 7)Rerun6 ms
 
 
 
@@ -3918,7 +3930,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-362.manipulation: text(Function) (0, 7, 7)Rerun33 ms
+362.manipulation: text(Function) (0, 7, 7)Rerun6 ms
 
 
 
@@ -3926,10 +3938,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-363.manipulation: text(Function) with incoming value (0, 2, 2)Rerun22 ms
+363.manipulation: text(Function) with incoming value (0, 2, 2)Rerun3 ms
 
 
-364.manipulation: append(String|Element|Array<Element>|jQuery) (0, 78, 78)Rerun483 ms
+364.manipulation: append(String|Element|Array<Element>|jQuery) (0, 78, 78)Rerun58 ms
 
 
 
@@ -4008,7 +4020,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-365.manipulation: append(Function) (0, 78, 78)Rerun500 ms
+365.manipulation: append(Function) (0, 78, 78)Rerun74 ms
 
 
 
@@ -4087,62 +4099,62 @@ Tests completed in 88658 milliseconds.
 
 
 
-366.manipulation: append(param) to object, see #11280 (0, 5, 5)Rerun34 ms
+366.manipulation: append(param) to object, see #11280 (0, 5, 5)Rerun6 ms
 
 
 
 
 
-367.manipulation: append(Function) returns String (0, 4, 4)Rerun39 ms
+367.manipulation: append(Function) returns String (0, 4, 4)Rerun13 ms
 
 
 
 
-368.manipulation: append(Function) returns Element (0, 2, 2)Rerun21 ms
+368.manipulation: append(Function) returns Element (0, 2, 2)Rerun8 ms
 
 
-369.manipulation: append(Function) returns Array<Element> (0, 2, 2)Rerun25 ms
+369.manipulation: append(Function) returns Array<Element> (0, 2, 2)Rerun4 ms
 
 
-370.manipulation: append(Function) returns jQuery (0, 2, 2)Rerun23 ms
+370.manipulation: append(Function) returns jQuery (0, 2, 2)Rerun5 ms
 
 
-371.manipulation: append(Function) returns Number (0, 2, 2)Rerun21 ms
+371.manipulation: append(Function) returns Number (0, 2, 2)Rerun5 ms
 
 
-372.manipulation: XML DOM manipulation (#9960) (0, 5, 5)Rerun114 ms
+372.manipulation: XML DOM manipulation (#9960) (0, 5, 5)Rerun57 ms
 
 
 
 
 
-373.manipulation: append the same fragment with events (Bug #6997, 5566) (0, 2, 2)Rerun135 ms
+373.manipulation: append the same fragment with events (Bug #6997, 5566) (0, 2, 2)Rerun46 ms
 
 
-374.manipulation: append HTML5 sectioning elements (Bug #6485) (0, 2, 2)Rerun33 ms
+374.manipulation: append HTML5 sectioning elements (Bug #6485) (0, 2, 2)Rerun6 ms
 
 
-375.manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (0, 1, 1)Rerun25 ms
+375.manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (0, 1, 1)Rerun5 ms
 
-376.manipulation: html(String) with HTML5 (Bug #6485) (0, 2, 2)Rerun19 ms
+376.manipulation: html(String) with HTML5 (Bug #6485) (0, 2, 2)Rerun3 ms
 
 
-377.manipulation: IE8 serialization bug (0, 2, 2)Rerun40 ms
+377.manipulation: IE8 serialization bug (0, 2, 2)Rerun5 ms
 
 
-378.manipulation: html() object element #10324 (0, 1, 1)Rerun20 ms
+378.manipulation: html() object element #10324 (0, 1, 1)Rerun4 ms
 
-379.manipulation: append(xml) (0, 1, 1)Rerun19 ms
+379.manipulation: append(xml) (0, 1, 1)Rerun12 ms
 
-380.manipulation: appendTo(String) (0, 4, 4)Rerun25 ms
+380.manipulation: appendTo(String) (0, 4, 4)Rerun8 ms
 
 
 
 
-381.manipulation: appendTo(Element|Array<Element>) (0, 2, 2)Rerun31 ms
+381.manipulation: appendTo(Element|Array<Element>) (0, 2, 2)Rerun4 ms
 
 
-382.manipulation: appendTo(jQuery) (0, 10, 10)Rerun129 ms
+382.manipulation: appendTo(jQuery) (0, 10, 10)Rerun28 ms
 
 
 
@@ -4153,114 +4165,114 @@ Tests completed in 88658 milliseconds.
 
 
 
-383.manipulation: prepend(String) (0, 2, 2)Rerun22 ms
+383.manipulation: prepend(String) (0, 2, 2)Rerun6 ms
 
 
-384.manipulation: prepend(Element) (0, 1, 1)Rerun25 ms
+384.manipulation: prepend(Element) (0, 1, 1)Rerun5 ms
 
-385.manipulation: prepend(Array<Element>) (0, 1, 1)Rerun41 ms
+385.manipulation: prepend(Array<Element>) (0, 1, 1)Rerun5 ms
 
-386.manipulation: prepend(jQuery) (0, 1, 1)Rerun30 ms
+386.manipulation: prepend(jQuery) (0, 1, 1)Rerun15 ms
 
-387.manipulation: prepend(Array<jQuery>) (0, 1, 1)Rerun25 ms
+387.manipulation: prepend(Array<jQuery>) (0, 1, 1)Rerun9 ms
 
-388.manipulation: prepend(Function) with incoming value -- String (0, 4, 4)Rerun20 ms
+388.manipulation: prepend(Function) with incoming value -- String (0, 4, 4)Rerun5 ms
 
 
 
 
-389.manipulation: prepend(Function) with incoming value -- Element (0, 2, 2)Rerun20 ms
+389.manipulation: prepend(Function) with incoming value -- Element (0, 2, 2)Rerun4 ms
 
 
-390.manipulation: prepend(Function) with incoming value -- Array<Element> (0, 2, 2)Rerun47 ms
+390.manipulation: prepend(Function) with incoming value -- Array<Element> (0, 2, 2)Rerun4 ms
 
 
-391.manipulation: prepend(Function) with incoming value -- jQuery (0, 2, 2)Rerun22 ms
+391.manipulation: prepend(Function) with incoming value -- jQuery (0, 2, 2)Rerun4 ms
 
 
-392.manipulation: prependTo(String) (0, 2, 2)Rerun25 ms
+392.manipulation: prependTo(String) (0, 2, 2)Rerun6 ms
 
 
-393.manipulation: prependTo(Element) (0, 1, 1)Rerun26 ms
+393.manipulation: prependTo(Element) (0, 1, 1)Rerun6 ms
 
-394.manipulation: prependTo(Array<Element>) (0, 1, 1)Rerun35 ms
+394.manipulation: prependTo(Array<Element>) (0, 1, 1)Rerun4 ms
 
-395.manipulation: prependTo(jQuery) (0, 1, 1)Rerun28 ms
+395.manipulation: prependTo(jQuery) (0, 1, 1)Rerun5 ms
 
-396.manipulation: prependTo(Array<jQuery>) (0, 1, 1)Rerun25 ms
+396.manipulation: prependTo(Array<jQuery>) (0, 1, 1)Rerun6 ms
 
-397.manipulation: before(String) (0, 1, 1)Rerun33 ms
+397.manipulation: before(String) (0, 1, 1)Rerun7 ms
 
-398.manipulation: before(Element) (0, 1, 1)Rerun47 ms
+398.manipulation: before(Element) (0, 1, 1)Rerun4 ms
 
-399.manipulation: before(Array<Element>) (0, 1, 1)Rerun21 ms
+399.manipulation: before(Array<Element>) (0, 1, 1)Rerun5 ms
 
-400.manipulation: before(jQuery) (0, 1, 1)Rerun32 ms
+400.manipulation: before(jQuery) (0, 1, 1)Rerun5 ms
 
-401.manipulation: before(Array<jQuery>) (0, 1, 1)Rerun37 ms
+401.manipulation: before(Array<jQuery>) (0, 1, 1)Rerun6 ms
 
-402.manipulation: before(Function) -- Returns String (0, 1, 1)Rerun52 ms
+402.manipulation: before(Function) -- Returns String (0, 1, 1)Rerun4 ms
 
-403.manipulation: before(Function) -- Returns Element (0, 1, 1)Rerun39 ms
+403.manipulation: before(Function) -- Returns Element (0, 1, 1)Rerun5 ms
 
-404.manipulation: before(Function) -- Returns Array<Element> (0, 1, 1)Rerun58 ms
+404.manipulation: before(Function) -- Returns Array<Element> (0, 1, 1)Rerun8 ms
 
-405.manipulation: before(Function) -- Returns jQuery (0, 1, 1)Rerun39 ms
+405.manipulation: before(Function) -- Returns jQuery (0, 1, 1)Rerun6 ms
 
-406.manipulation: before(Function) -- Returns Array<jQuery> (0, 1, 1)Rerun58 ms
+406.manipulation: before(Function) -- Returns Array<jQuery> (0, 1, 1)Rerun6 ms
 
-407.manipulation: before(no-op) (0, 2, 2)Rerun22 ms
+407.manipulation: before(no-op) (0, 2, 2)Rerun15 ms
 
 
-408.manipulation: before and after w/ empty object (#10812) (0, 1, 1)Rerun20 ms
+408.manipulation: before and after w/ empty object (#10812) (0, 1, 1)Rerun4 ms
 
-409.manipulation: .before() and .after() disconnected node (0, 2, 2)Rerun17 ms
+409.manipulation: .before() and .after() disconnected node (0, 2, 2)Rerun5 ms
 
 
-410.manipulation: insert with .before() on disconnected node last (0, 1, 1)Rerun46 ms
+410.manipulation: insert with .before() on disconnected node last (0, 1, 1)Rerun5 ms
 
-411.manipulation: insert with .before() on disconnected node first (0, 1, 1)Rerun21 ms
+411.manipulation: insert with .before() on disconnected node first (0, 1, 1)Rerun5 ms
 
-412.manipulation: insert with .before() on disconnected node last (0, 1, 1)Rerun23 ms
+412.manipulation: insert with .before() on disconnected node last (0, 1, 1)Rerun5 ms
 
-413.manipulation: insert with .before() on disconnected node last (0, 1, 1)Rerun14 ms
+413.manipulation: insert with .before() on disconnected node last (0, 1, 1)Rerun5 ms
 
-414.manipulation: insertBefore(String) (0, 1, 1)Rerun42 ms
+414.manipulation: insertBefore(String) (0, 1, 1)Rerun4 ms
 
-415.manipulation: insertBefore(Element) (0, 1, 1)Rerun21 ms
+415.manipulation: insertBefore(Element) (0, 1, 1)Rerun4 ms
 
-416.manipulation: insertBefore(Array<Element>) (0, 1, 1)Rerun18 ms
+416.manipulation: insertBefore(Array<Element>) (0, 1, 1)Rerun5 ms
 
-417.manipulation: insertBefore(jQuery) (0, 1, 1)Rerun29 ms
+417.manipulation: insertBefore(jQuery) (0, 1, 1)Rerun14 ms
 
-418.manipulation: .after(String) (0, 1, 1)Rerun18 ms
+418.manipulation: .after(String) (0, 1, 1)Rerun5 ms
 
-419.manipulation: .after(Element) (0, 1, 1)Rerun40 ms
+419.manipulation: .after(Element) (0, 1, 1)Rerun4 ms
 
-420.manipulation: .after(Array<Element>) (0, 1, 1)Rerun22 ms
+420.manipulation: .after(Array<Element>) (0, 1, 1)Rerun4 ms
 
-421.manipulation: .after(jQuery) (0, 1, 1)Rerun33 ms
+421.manipulation: .after(jQuery) (0, 1, 1)Rerun5 ms
 
-422.manipulation: .after(Function) returns String (0, 1, 1)Rerun34 ms
+422.manipulation: .after(Function) returns String (0, 1, 1)Rerun4 ms
 
-423.manipulation: .after(Function) returns Element (0, 1, 1)Rerun47 ms
+423.manipulation: .after(Function) returns Element (0, 1, 1)Rerun5 ms
 
-424.manipulation: .after(Function) returns Array<Element> (0, 1, 1)Rerun18 ms
+424.manipulation: .after(Function) returns Array<Element> (0, 1, 1)Rerun5 ms
 
-425.manipulation: .after(Function) returns jQuery (0, 1, 1)Rerun40 ms
+425.manipulation: .after(Function) returns jQuery (0, 1, 1)Rerun6 ms
 
-426.manipulation: .after(disconnected node) (0, 2, 2)Rerun29 ms
+426.manipulation: .after(disconnected node) (0, 2, 2)Rerun6 ms
 
 
-427.manipulation: insertAfter(String) (0, 1, 1)Rerun53 ms
+427.manipulation: insertAfter(String) (0, 1, 1)Rerun5 ms
 
-428.manipulation: insertAfter(Element) (0, 1, 1)Rerun41 ms
+428.manipulation: insertAfter(Element) (0, 1, 1)Rerun15 ms
 
-429.manipulation: insertAfter(Array<Element>) (0, 1, 1)Rerun46 ms
+429.manipulation: insertAfter(Array<Element>) (0, 1, 1)Rerun7 ms
 
-430.manipulation: insertAfter(jQuery) (0, 1, 1)Rerun29 ms
+430.manipulation: insertAfter(jQuery) (0, 1, 1)Rerun6 ms
 
-431.manipulation: replaceWith(String|Element|Array<Element>|jQuery) (0, 29, 29)Rerun149 ms
+431.manipulation: replaceWith(String|Element|Array<Element>|jQuery) (0, 29, 29)Rerun35 ms
 
 
 
@@ -4290,7 +4302,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-432.manipulation: replaceWith(Function) (0, 30, 30)Rerun117 ms
+432.manipulation: replaceWith(Function) (0, 30, 30)Rerun33 ms
 
 
 
@@ -4321,11 +4333,11 @@ Tests completed in 88658 milliseconds.
 
 
 
-433.manipulation: replaceWith(string) for more than one element (0, 3, 3)Rerun34 ms
+433.manipulation: replaceWith(string) for more than one element (0, 3, 3)Rerun8 ms
 
 
 
-434.manipulation: Empty replaceWith (#13401; #13596) (0, 8, 8)Rerun28 ms
+434.manipulation: Empty replaceWith (#13401; #13596) (0, 8, 8)Rerun6 ms
 
 
 
@@ -4334,30 +4346,30 @@ Tests completed in 88658 milliseconds.
 
 
 
-435.manipulation: replaceAll(String) (0, 2, 2)Rerun25 ms
+435.manipulation: replaceAll(String) (0, 2, 2)Rerun5 ms
 
 
-436.manipulation: replaceAll(Element) (0, 2, 2)Rerun43 ms
+436.manipulation: replaceAll(Element) (0, 2, 2)Rerun10 ms
 
 
-437.manipulation: replaceAll(Array<Element>) (0, 3, 3)Rerun18 ms
+437.manipulation: replaceAll(Array<Element>) (0, 3, 3)Rerun7 ms
 
 
 
-438.manipulation: replaceAll(jQuery) (0, 3, 3)Rerun23 ms
+438.manipulation: replaceAll(jQuery) (0, 3, 3)Rerun5 ms
 
 
 
-439.manipulation: jQuery.clone() (#8017) (0, 2, 2)Rerun33 ms
+439.manipulation: jQuery.clone() (#8017) (0, 2, 2)Rerun7 ms
 
 
-440.manipulation: append to multiple elements (#8070) (0, 2, 2)Rerun40 ms
+440.manipulation: append to multiple elements (#8070) (0, 2, 2)Rerun6 ms
 
 
-441.manipulation: table manipulation (0, 2, 2)Rerun77 ms
+441.manipulation: table manipulation (0, 2, 2)Rerun19 ms
 
 
-442.manipulation: clone() (0, 45, 45)Rerun1083 ms
+442.manipulation: clone() (0, 45, 45)Rerun144 ms
 
 
 
@@ -4403,29 +4415,29 @@ Tests completed in 88658 milliseconds.
 
 
 
-443.manipulation: clone(script type=non-javascript) (#11359) (0, 3, 3)Rerun123 ms
+443.manipulation: clone(script type=non-javascript) (#11359) (0, 3, 3)Rerun6 ms
 
 
 
-444.manipulation: clone(form element) (Bug #3879, #6655) (0, 5, 5)Rerun15 ms
+444.manipulation: clone(form element) (Bug #3879, #6655) (0, 5, 5)Rerun34 ms
 
 
 
 
 
-445.manipulation: clone(multiple selected options) (Bug #8129) (0, 1, 1)Rerun13 ms
+445.manipulation: clone(multiple selected options) (Bug #8129) (0, 1, 1)Rerun6 ms
 
-446.manipulation: clone() on XML nodes (0, 2, 2)Rerun25 ms
+446.manipulation: clone() on XML nodes (0, 2, 2)Rerun10 ms
 
 
-447.manipulation: clone() on local XML nodes with html5 nodename (0, 2, 2)Rerun16 ms
+447.manipulation: clone() on local XML nodes with html5 nodename (0, 2, 2)Rerun6 ms
 
 
-448.manipulation: html(undefined) (0, 1, 1)Rerun14 ms
+448.manipulation: html(undefined) (0, 1, 1)Rerun4 ms
 
-449.manipulation: html() on empty set (0, 1, 1)Rerun11 ms
+449.manipulation: html() on empty set (0, 1, 1)Rerun4 ms
 
-450.manipulation: html(String|Number) (0, 39, 39)Rerun147 ms
+450.manipulation: html(String|Number) (0, 39, 39)Rerun47 ms
 
 
 
@@ -4465,7 +4477,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-451.manipulation: html(Function) (0, 39, 39)Rerun125 ms
+451.manipulation: html(Function) (0, 39, 39)Rerun33 ms
 
 
 
@@ -4505,16 +4517,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-452.manipulation: html( $.text() ) (0, 1, 1)Rerun38 ms
+452.manipulation: html( $.text() ) (0, 1, 1)Rerun4 ms
 
-453.manipulation: html( fn ) returns $.text() (0, 1, 1)Rerun28 ms
+453.manipulation: html( fn ) returns $.text() (0, 1, 1)Rerun7 ms
 
-454.manipulation: html(Function) with incoming value -- direct selection (0, 4, 4)Rerun30 ms
+454.manipulation: html(Function) with incoming value -- direct selection (0, 4, 4)Rerun8 ms
 
 
 
 
-455.manipulation: html(Function) with incoming value -- jQuery.contents() (0, 14, 14)Rerun26 ms
+455.manipulation: html(Function) with incoming value -- jQuery.contents() (0, 14, 14)Rerun13 ms
 
 
 
@@ -4529,14 +4541,14 @@ Tests completed in 88658 milliseconds.
 
 
 
-456.manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858) (0, 2, 2)Rerun16 ms
+456.manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858) (0, 2, 2)Rerun6 ms
 
 
-457.manipulation: remove() no filters (0, 3, 3)Rerun16 ms
+457.manipulation: remove() no filters (0, 3, 3)Rerun5 ms
 
 
 
-458.manipulation: remove() with filters (0, 8, 8)Rerun37 ms
+458.manipulation: remove() with filters (0, 8, 8)Rerun7 ms
 
 
 
@@ -4545,15 +4557,15 @@ Tests completed in 88658 milliseconds.
 
 
 
-459.manipulation: remove() event cleaning  (0, 1, 1)Rerun31 ms
+459.manipulation: remove() event cleaning  (0, 1, 1)Rerun5 ms
 
-460.manipulation: remove() in document order #13779 (0, 1, 1)Rerun68 ms
+460.manipulation: remove() in document order #13779 (0, 1, 1)Rerun12 ms
 
-461.manipulation: detach() no filters (0, 3, 3)Rerun20 ms
+461.manipulation: detach() no filters (0, 3, 3)Rerun4 ms
 
 
 
-462.manipulation: detach() with filters (0, 8, 8)Rerun34 ms
+462.manipulation: detach() with filters (0, 8, 8)Rerun6 ms
 
 
 
@@ -4562,16 +4574,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-463.manipulation: detach() event cleaning  (0, 1, 1)Rerun16 ms
+463.manipulation: detach() event cleaning  (0, 1, 1)Rerun8 ms
 
-464.manipulation: empty() (0, 6, 6)Rerun22 ms
+464.manipulation: empty() (0, 6, 6)Rerun5 ms
 
 
 
 
 
 
-465.manipulation: jQuery.cleanData (0, 14, 14)Rerun66 ms
+465.manipulation: jQuery.cleanData (0, 14, 14)Rerun44 ms
 
 
 
@@ -4586,17 +4598,17 @@ Tests completed in 88658 milliseconds.
 
 
 
-466.manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (0, 1, 1)Rerun18 ms
+466.manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (0, 1, 1)Rerun6 ms
 
-467.manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (0, 3, 3)Rerun22 ms
+467.manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (0, 3, 3)Rerun5 ms
 
 
 
-468.manipulation: jQuery.buildFragment - plain objects are not a document #8950 (0, 1, 1)Rerun17 ms
+468.manipulation: jQuery.buildFragment - plain objects are not a document #8950 (0, 1, 1)Rerun6 ms
 
-469.manipulation: jQuery.clone - no exceptions for object elements #9587 (0, 1, 1)Rerun16 ms
+469.manipulation: jQuery.clone - no exceptions for object elements #9587 (0, 1, 1)Rerun6 ms
 
-470.manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)Rerun84 ms
+470.manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)Rerun26 ms
 
 
 
@@ -4604,26 +4616,26 @@ Tests completed in 88658 milliseconds.
 
 
 
-471.manipulation: Guard against exceptions when clearing safeChildNodes (0, 1, 1)Rerun14 ms
+471.manipulation: Guard against exceptions when clearing safeChildNodes (0, 1, 1)Rerun5 ms
 
-472.manipulation: Ensure oldIE creates a new set on appendTo (#8894) (0, 5, 5)Rerun13 ms
+472.manipulation: Ensure oldIE creates a new set on appendTo (#8894) (0, 5, 5)Rerun5 ms
 
 
 
 
 
-473.manipulation: html() - script exceptions bubble (#11743) (0, 2, 2)Rerun39 ms
+473.manipulation: html() - script exceptions bubble (#11743) (0, 2, 2)Rerun17 ms
 
 
-474.manipulation: checked state is cloned with clone() (0, 2, 2)Rerun21 ms
+474.manipulation: checked state is cloned with clone() (0, 2, 2)Rerun5 ms
 
 
-475.manipulation: manipulate mixed jQuery and text (#12384, #12346) (0, 2, 2)Rerun22 ms
+475.manipulation: manipulate mixed jQuery and text (#12384, #12346) (0, 2, 2)Rerun6 ms
 
 
-476.manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266) (0, 1, 1)Rerun157 ms
+476.manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266) (0, 1, 1)Rerun83 ms
 
-477.manipulation: script evaluation (#11795) (0, 13, 13)Rerun43 ms
+477.manipulation: script evaluation (#11795) (0, 13, 13)Rerun13 ms
 
 
 
@@ -4637,13 +4649,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-478.manipulation: jQuery._evalUrl (#12838) (0, 5, 5)Rerun12 ms
+478.manipulation: jQuery._evalUrl (#12838) (0, 5, 5)Rerun7 ms
 
 
 
 
 
-479.manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087) (0, 10, 10)Rerun82 ms
+479.manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087) (0, 10, 10)Rerun20 ms
 
 
 
@@ -4654,12 +4666,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-480.manipulation: Index for function argument should be received (#13094) (0, 2, 2)Rerun18 ms
+480.manipulation: Index for function argument should be received (#13094) (0, 2, 2)Rerun5 ms
 
 
-481.manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment (0, 1, 1)Rerun20 ms
+481.manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment (0, 1, 1)Rerun10 ms
 
-482.wrap: wrap(String|Element) (0, 19, 19)Rerun62 ms
+482.wrap: wrap(String|Element) (0, 19, 19)Rerun33 ms
 
 
 
@@ -4679,7 +4691,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-483.wrap: wrap(Function) (0, 19, 19)Rerun75 ms
+483.wrap: wrap(Function) (0, 19, 19)Rerun24 ms
 
 
 
@@ -4699,14 +4711,14 @@ Tests completed in 88658 milliseconds.
 
 
 
-484.wrap: wrap(Function) with index (#10177) (0, 6, 6)Rerun29 ms
+484.wrap: wrap(Function) with index (#10177) (0, 6, 6)Rerun11 ms
 
 
 
 
 
 
-485.wrap: wrap(String) consecutive elements (#10177) (0, 12, 12)Rerun36 ms
+485.wrap: wrap(String) consecutive elements (#10177) (0, 12, 12)Rerun10 ms
 
 
 
@@ -4719,43 +4731,43 @@ Tests completed in 88658 milliseconds.
 
 
 
-486.wrap: wrapAll(String) (0, 5, 5)Rerun19 ms
+486.wrap: wrapAll(String) (0, 5, 5)Rerun7 ms
 
 
 
 
 
-487.wrap: wrapAll(Element) (0, 3, 3)Rerun17 ms
+487.wrap: wrapAll(Element) (0, 3, 3)Rerun9 ms
 
 
 
-488.wrap: wrapInner(String) (0, 6, 6)Rerun32 ms
+488.wrap: wrapInner(String) (0, 6, 6)Rerun8 ms
 
 
 
 
 
 
-489.wrap: wrapInner(Element) (0, 5, 5)Rerun15 ms
+489.wrap: wrapInner(Element) (0, 5, 5)Rerun5 ms
 
 
 
 
 
-490.wrap: wrapInner(Function) returns String (0, 6, 6)Rerun20 ms
+490.wrap: wrapInner(Function) returns String (0, 6, 6)Rerun6 ms
 
 
 
 
 
 
-491.wrap: wrapInner(Function) returns Element (0, 5, 5)Rerun30 ms
+491.wrap: wrapInner(Function) returns Element (0, 5, 5)Rerun5 ms
 
 
 
 
 
-492.wrap: unwrap() (0, 9, 9)Rerun81 ms
+492.wrap: unwrap() (0, 9, 9)Rerun27 ms
 
 
 
@@ -4765,13 +4777,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-493.wrap: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (0, 2, 2)Rerun15 ms
+493.wrap: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (0, 2, 2)Rerun6 ms
 
 
-494.wrap: wrapping scripts (#10470) (0, 2, 2)Rerun46 ms
+494.wrap: wrapping scripts (#10470) (0, 2, 2)Rerun11 ms
 
 
-495.css: css(String|Hash) (0, 43, 43)Rerun76 ms
+495.css: css(String|Hash) (0, 43, 43)Rerun26 ms
 
 
 
@@ -4815,7 +4827,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-496.css: css() explicit and relative values (0, 29, 29)Rerun39 ms
+496.css: css() explicit and relative values (0, 29, 29)Rerun25 ms
 
 
 
@@ -4845,7 +4857,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-497.css: css(String, Object) (0, 20, 20)Rerun76 ms
+497.css: css(String, Object) (0, 20, 20)Rerun18 ms
 
 
 
@@ -4866,31 +4878,31 @@ Tests completed in 88658 milliseconds.
 
 
 
-498.css: css(Array) (0, 2, 2)Rerun79 ms
+498.css: css(Array) (0, 2, 2)Rerun25 ms
 
 
-499.css: css(String, Function) (0, 3, 3)Rerun30 ms
+499.css: css(String, Function) (0, 3, 3)Rerun8 ms
 
 
 
-500.css: css(String, Function) with incoming value (0, 3, 3)Rerun34 ms
+500.css: css(String, Function) with incoming value (0, 3, 3)Rerun7 ms
 
 
 
-501.css: css(Object) where values are Functions (0, 3, 3)Rerun33 ms
+501.css: css(Object) where values are Functions (0, 3, 3)Rerun6 ms
 
 
 
-502.css: css(Object) where values are Functions with incoming values (0, 3, 3)Rerun23 ms
+502.css: css(Object) where values are Functions with incoming values (0, 3, 3)Rerun12 ms
 
 
 
-503.css: show(); hide() (0, 4, 4)Rerun23 ms
+503.css: show(); hide() (0, 4, 4)Rerun6 ms
 
 
 
 
-504.css: show(); (0, 18, 18)Rerun80 ms
+504.css: show(); (0, 18, 18)Rerun16 ms
 
 
 
@@ -4909,7 +4921,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-505.css: show() resolves correct default display #8099 (0, 7, 7)Rerun102 ms
+505.css: show() resolves correct default display #8099 (0, 7, 7)Rerun42 ms
 
 
 
@@ -4917,7 +4929,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-506.css: show() resolves correct default display for detached nodes (0, 13, 13)Rerun32 ms
+506.css: show() resolves correct default display for detached nodes (0, 13, 13)Rerun15 ms
 
 
 
@@ -4931,15 +4943,15 @@ Tests completed in 88658 milliseconds.
 
 
 
-507.css: show() resolves correct default display #10227 (0, 4, 4)Rerun210 ms
+507.css: show() resolves correct default display #10227 (0, 4, 4)Rerun52 ms
 
 
 
 
-508.css: show() resolves correct default display when iframe display:none #12904 (0, 2, 2)Rerun66 ms
+508.css: show() resolves correct default display when iframe display:none #12904 (0, 2, 2)Rerun23 ms
 
 
-509.css: toggle() (0, 9, 9)Rerun33 ms
+509.css: toggle() (0, 9, 9)Rerun30 ms
 
 
 
@@ -4949,32 +4961,32 @@ Tests completed in 88658 milliseconds.
 
 
 
-510.css: hide hidden elements (bug #7141) (0, 3, 3)Rerun20 ms
+510.css: hide hidden elements (bug #7141) (0, 3, 3)Rerun6 ms
 
 
 
-511.css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)Rerun74 ms
+511.css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)Rerun32 ms
 
 
 
 
-512.css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)Rerun48 ms
+512.css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)Rerun18 ms
 
-513.css: marginRight computed style (bug #3333) (0, 1, 1)Rerun81 ms
+513.css: marginRight computed style (bug #3333) (0, 1, 1)Rerun16 ms
 
-514.css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)Rerun69 ms
+514.css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)Rerun21 ms
 
 
-515.css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)Rerun69 ms
+515.css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)Rerun16 ms
 
 
-516.css: widows & orphans #8936 (0, 2, 2)Rerun18 ms
+516.css: widows & orphans #8936 (0, 2, 2)Rerun6 ms
 
 
-517.css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)Rerun41 ms
+517.css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)Rerun28 ms
 
 
-518.css: can't get background-position in IE<9, see #10796 (0, 8, 8)Rerun16 ms
+518.css: can't get background-position in IE<9, see #10796 (0, 8, 8)Rerun5 ms
 
 
 
@@ -4983,26 +4995,26 @@ Tests completed in 88658 milliseconds.
 
 
 
-519.css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pixels, see #11311 (0, 1, 1)Rerun23 ms
+519.css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pixels, see #11311 (0, 1, 1)Rerun5 ms
 
-520.css: percentage properties for left and top should be transformed to pixels, see #9505 (0, 2, 2)Rerun78 ms
+520.css: percentage properties for left and top should be transformed to pixels, see #9505 (0, 2, 2)Rerun17 ms
 
 
-521.css: Do not append px (#9548, #12990) (0, 2, 2)Rerun55 ms
+521.css: Do not append px (#9548, #12990) (0, 2, 2)Rerun22 ms
 
 
-522.css: css('width') and css('height') should respect box-sizing, see #11004 (0, 4, 4)Rerun55 ms
+522.css: css('width') and css('height') should respect box-sizing, see #11004 (0, 4, 4)Rerun18 ms
 
 
 
 
-523.css: css('width') should work correctly before document ready (#14084) (0, 1, 1)Rerun149 ms
+523.css: css('width') should work correctly before document ready (#14084) (0, 1, 1)Rerun93 ms
 
-524.css: certain css values of 'normal' should be convertable to a number, see #8627 (0, 3, 3)Rerun20 ms
+524.css: certain css values of 'normal' should be convertable to a number, see #8627 (0, 3, 3)Rerun5 ms
 
 
 
-525.css: cssHooks - expand (0, 15, 15)Rerun39 ms
+525.css: cssHooks - expand (0, 15, 15)Rerun6 ms
 
 
 
@@ -5018,12 +5030,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-526.css: css opacity consistency across browsers (#12685) (0, 4, 4)Rerun37 ms
+526.css: css opacity consistency across browsers (#12685) (0, 4, 4)Rerun15 ms
 
 
 
 
-527.css: :visible/:hidden selectors (0, 13, 13)Rerun131 ms
+527.css: :visible/:hidden selectors (0, 13, 13)Rerun32 ms
 
 
 
@@ -5037,12 +5049,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-528.css: Keep the last style if the new one isn't recognized by the browser (#14836) (0, 2, 2)Rerun33 ms
+528.css: Keep the last style if the new one isn't recognized by the browser (#14836) (0, 2, 2)Rerun4 ms
 
 
-529.css: Reset the style if set to an empty string (0, 1, 1)Rerun32 ms
+529.css: Reset the style if set to an empty string (0, 1, 1)Rerun5 ms
 
-530.css: Clearing a Cloned Element's Style Shouldn't Clear the Original Element's Style (#8908) (0, 24, 24)Rerun1087 ms
+530.css: Clearing a Cloned Element's Style Shouldn't Clear the Original Element's Style (#8908) (0, 24, 24)Rerun1043 ms
 
 
 
@@ -5067,18 +5079,18 @@ Tests completed in 88658 milliseconds.
 
 
 
-531.css: Make sure initialized display value for disconnected nodes is correct (#13310) (0, 4, 4)Rerun453 ms
+531.css: Make sure initialized display value for disconnected nodes is correct (#13310) (0, 4, 4)Rerun431 ms
 
 
 
 
-532.css: show() after hide() should always set display to initial value (#14750) (0, 1, 1)Rerun21 ms
+532.css: show() after hide() should always set display to initial value (#14750) (0, 1, 1)Rerun7 ms
 
-533.css: Don't append px to CSS "order" value (#14049) (0, 1, 1)Rerun18 ms
+533.css: Don't append px to CSS "order" value (#14049) (0, 1, 1)Rerun4 ms
 
-534.css: Do not throw on frame elements from css method (#15098) (0, 1, 1)Rerun42 ms
+534.css: Do not throw on frame elements from css method (#15098) (0, 1, 1)Rerun18 ms
 
-535.serialize: jQuery.param() (0, 22, 22)Rerun18 ms
+535.serialize: jQuery.param() (0, 22, 22)Rerun7 ms
 
 
 
@@ -5101,18 +5113,18 @@ Tests completed in 88658 milliseconds.
 
 
 
-536.serialize: jQuery.param() Constructed prop values (0, 4, 4)Rerun12 ms
+536.serialize: jQuery.param() Constructed prop values (0, 4, 4)Rerun8 ms
 
 
 
 
-537.serialize: serialize() (0, 5, 5)Rerun37 ms
+537.serialize: serialize() (0, 5, 5)Rerun17 ms
 
 
 
 
 
-538.ajax: jQuery.ajax() - success callbacks (0, 8, 8)Rerun91 ms
+538.ajax: jQuery.ajax() - success callbacks (0, 8, 8)Rerun34 ms
 
 
 
@@ -5121,7 +5133,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-539.ajax: jQuery.ajax() - success callbacks - (url, options) syntax (0, 8, 8)Rerun82 ms
+539.ajax: jQuery.ajax() - success callbacks - (url, options) syntax (0, 8, 8)Rerun32 ms
 
 
 
@@ -5130,7 +5142,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-540.ajax: jQuery.ajax() - success callbacks (late binding) (0, 8, 8)Rerun87 ms
+540.ajax: jQuery.ajax() - success callbacks (late binding) (0, 8, 8)Rerun25 ms
 
 
 
@@ -5139,7 +5151,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-541.ajax: jQuery.ajax() - success callbacks (oncomplete binding) (0, 8, 8)Rerun89 ms
+541.ajax: jQuery.ajax() - success callbacks (oncomplete binding) (0, 8, 8)Rerun32 ms
 
 
 
@@ -5148,7 +5160,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-542.ajax: jQuery.ajax() - error callbacks (0, 8, 8)Rerun59 ms
+542.ajax: jQuery.ajax() - error callbacks (0, 8, 8)Rerun36 ms
 
 
 
@@ -5157,34 +5169,34 @@ Tests completed in 88658 milliseconds.
 
 
 
-543.ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)Rerun69 ms
+543.ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)Rerun32 ms
 
 
 
 
-544.ajax: jQuery.ajax() - responseText on error (0, 1, 1)Rerun88 ms
+544.ajax: jQuery.ajax() - responseText on error (0, 1, 1)Rerun25 ms
 
-545.ajax: jQuery.ajax() - retry with jQuery.ajax( this ) (0, 2, 2)Rerun93 ms
+545.ajax: jQuery.ajax() - retry with jQuery.ajax( this ) (0, 2, 2)Rerun63 ms
 
 
-546.ajax: jQuery.ajax() - headers (0, 5, 5)Rerun77 ms
+546.ajax: jQuery.ajax() - headers (0, 5, 5)Rerun35 ms
 
 
 
 
 
-547.ajax: jQuery.ajax() - Accept header (0, 1, 1)Rerun119 ms
+547.ajax: jQuery.ajax() - Accept header (0, 1, 1)Rerun33 ms
 
-548.ajax: jQuery.ajax() - contentType (0, 2, 2)Rerun84 ms
+548.ajax: jQuery.ajax() - contentType (0, 2, 2)Rerun34 ms
 
 
-549.ajax: jQuery.ajax() - protocol-less urls (0, 1, 1)Rerun58 ms
+549.ajax: jQuery.ajax() - protocol-less urls (0, 1, 1)Rerun24 ms
 
-550.ajax: jQuery.ajax() - hash (0, 3, 3)Rerun45 ms
+550.ajax: jQuery.ajax() - hash (0, 3, 3)Rerun29 ms
 
 
 
-551.ajax: jQuery.ajax() - cross-domain detection (0, 7, 7)Rerun64 ms
+551.ajax: jQuery.ajax() - cross-domain detection (0, 7, 7)Rerun24 ms
 
 
 
@@ -5192,7 +5204,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-552.ajax: jQuery.ajax() - abort (0, 9, 9)Rerun63 ms
+552.ajax: jQuery.ajax() - abort (0, 9, 9)Rerun31 ms
 
 
 
@@ -5202,7 +5214,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-553.ajax: jQuery.ajax() - events with context (0, 12, 12)Rerun92 ms
+553.ajax: jQuery.ajax() - events with context (0, 12, 12)Rerun35 ms
 
 
 
@@ -5215,50 +5227,50 @@ Tests completed in 88658 milliseconds.
 
 
 
-554.ajax: jQuery.ajax() - events without context (0, 3, 3)Rerun84 ms
+554.ajax: jQuery.ajax() - events without context (0, 3, 3)Rerun45 ms
 
 
 
-555.ajax: #15118 - jQuery.ajax() - function without jQuery.event (0, 1, 1)Rerun92 ms
+555.ajax: #15118 - jQuery.ajax() - function without jQuery.event (0, 1, 1)Rerun31 ms
 
-556.ajax: jQuery.ajax() - context modification (0, 1, 1)Rerun109 ms
+556.ajax: jQuery.ajax() - context modification (0, 1, 1)Rerun27 ms
 
-557.ajax: jQuery.ajax() - context modification through ajaxSetup (0, 3, 3)Rerun85 ms
+557.ajax: jQuery.ajax() - context modification through ajaxSetup (0, 3, 3)Rerun32 ms
 
 
 
-558.ajax: jQuery.ajax() - disabled globals (0, 3, 3)Rerun73 ms
+558.ajax: jQuery.ajax() - disabled globals (0, 3, 3)Rerun27 ms
 
 
 
-559.ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (0, 3, 3)Rerun94 ms
+559.ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (0, 3, 3)Rerun43 ms
 
 
 
-560.ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP) (0, 3, 3)Rerun95 ms
+560.ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP) (0, 3, 3)Rerun33 ms
 
 
 
-561.ajax: jQuery.ajax() - HEAD requests (0, 2, 2)Rerun59 ms
+561.ajax: jQuery.ajax() - HEAD requests (0, 2, 2)Rerun26 ms
 
 
-562.ajax: jQuery.ajax() - beforeSend (0, 1, 1)Rerun74 ms
+562.ajax: jQuery.ajax() - beforeSend (0, 1, 1)Rerun32 ms
 
-563.ajax: jQuery.ajax() - beforeSend, cancel request manually (0, 2, 2)Rerun62 ms
+563.ajax: jQuery.ajax() - beforeSend, cancel request manually (0, 2, 2)Rerun25 ms
 
 
-564.ajax: jQuery.ajax() - dataType html (0, 5, 5)Rerun96 ms
+564.ajax: jQuery.ajax() - dataType html (0, 5, 5)Rerun65 ms
 
 
 
 
 
-565.ajax: jQuery.ajax() - synchronous request (0, 1, 1)Rerun59 ms
+565.ajax: jQuery.ajax() - synchronous request (0, 1, 1)Rerun33 ms
 
-566.ajax: jQuery.ajax() - synchronous request with callbacks (0, 2, 2)Rerun41 ms
+566.ajax: jQuery.ajax() - synchronous request with callbacks (0, 2, 2)Rerun25 ms
 
 
-567.ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object (0, 8, 8)Rerun73 ms
+567.ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object (0, 8, 8)Rerun38 ms
 
 
 
@@ -5267,7 +5279,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-568.ajax: jQuery.ajax() - cache (0, 12, 12)Rerun45 ms
+568.ajax: jQuery.ajax() - cache (0, 12, 12)Rerun24 ms
 
 
 
@@ -5280,7 +5292,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-569.ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain (2, 2, 4)Rerun76 ms1.JSON results returned (GET, url callback)
+569.ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain (2, 2, 4)Rerun41 ms1.JSON results returned (GET, url callback)
 2.JSON results returned (GET, url context-free callback)
 3.unexpected errorSource:     at Anonymous function (http://localhost:22222/jquery/test/data/testinit.js:173:10)
    at j (http://localhost:22222/jquery/dist/jquery.min.js:2:27301)
@@ -5297,7 +5309,7 @@ Tests completed in 88658 milliseconds.
  
 
 
-570.ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain (0, 9, 9)Rerun94 ms
+570.ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain (0, 9, 9)Rerun38 ms
 
 
 
@@ -5307,18 +5319,18 @@ Tests completed in 88658 milliseconds.
 
 
 
-571.ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain (0, 2, 2)Rerun67 ms
+571.ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain (0, 2, 2)Rerun36 ms
 
 
-572.ajax: jQuery.ajax() - JSONP - POST - Same Domain (0, 3, 3)Rerun44 ms
-
-
-
-573.ajax: jQuery.ajax() - JSONP - Same Domain (0, 3, 3)Rerun93 ms
+572.ajax: jQuery.ajax() - JSONP - POST - Same Domain (0, 3, 3)Rerun29 ms
 
 
 
-574.ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain (2, 2, 4)Rerun20055 ms1.JSON results returned (GET, url callback)
+573.ajax: jQuery.ajax() - JSONP - Same Domain (0, 3, 3)Rerun54 ms
+
+
+
+574.ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain (2, 2, 4)Rerun20034 ms1.JSON results returned (GET, url callback)
 2.JSON results returned (GET, url context-free callback)
 3.Test timed outSource:     at Anonymous function (http://localhost:22222/jquery/test/libs/qunit/qunit.js:201:5)
  
@@ -5332,7 +5344,7 @@ Tests completed in 88658 milliseconds.
  
 
 
-575.ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain (0, 9, 9)Rerun71 ms
+575.ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain (0, 9, 9)Rerun55 ms
 
 
 
@@ -5342,79 +5354,79 @@ Tests completed in 88658 milliseconds.
 
 
 
-576.ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain (0, 2, 2)Rerun63 ms
+576.ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain (0, 2, 2)Rerun31 ms
 
 
-577.ajax: jQuery.ajax() - JSONP - POST - Cross Domain (0, 3, 3)Rerun79 ms
+577.ajax: jQuery.ajax() - JSONP - POST - Cross Domain (0, 3, 3)Rerun35 ms
 
 
 
-578.ajax: jQuery.ajax() - JSONP - Cross Domain (0, 3, 3)Rerun94 ms
+578.ajax: jQuery.ajax() - JSONP - Cross Domain (0, 3, 3)Rerun57 ms
 
 
 
-579.ajax: jQuery.ajax() - script, Remote (0, 2, 2)Rerun72 ms
+579.ajax: jQuery.ajax() - script, Remote (0, 2, 2)Rerun34 ms
 
 
-580.ajax: jQuery.ajax() - script, Remote with POST (0, 3, 3)Rerun54 ms
+580.ajax: jQuery.ajax() - script, Remote with POST (0, 3, 3)Rerun27 ms
 
 
 
-581.ajax: jQuery.ajax() - script, Remote with scheme-less URL (0, 2, 2)Rerun82 ms
+581.ajax: jQuery.ajax() - script, Remote with scheme-less URL (0, 2, 2)Rerun45 ms
 
 
-582.ajax: jQuery.ajax() - malformed JSON (0, 2, 2)Rerun78 ms
+582.ajax: jQuery.ajax() - malformed JSON (0, 2, 2)Rerun26 ms
 
 
-583.ajax: jQuery.ajax() - script by content-type (0, 2, 2)Rerun61 ms
+583.ajax: jQuery.ajax() - script by content-type (0, 2, 2)Rerun35 ms
 
 
-584.ajax: jQuery.ajax() - JSON by content-type (0, 5, 5)Rerun66 ms
+584.ajax: jQuery.ajax() - JSON by content-type (0, 5, 5)Rerun27 ms
 
 
 
 
 
-585.ajax: jQuery.ajax() - JSON by content-type disabled with options (0, 6, 6)Rerun73 ms
+585.ajax: jQuery.ajax() - JSON by content-type disabled with options (0, 6, 6)Rerun32 ms
 
 
 
 
 
 
-586.ajax: jQuery.ajax() - simple get (0, 1, 1)Rerun75 ms
+586.ajax: jQuery.ajax() - simple get (0, 1, 1)Rerun26 ms
 
-587.ajax: jQuery.ajax() - simple post (0, 1, 1)Rerun82 ms
+587.ajax: jQuery.ajax() - simple post (0, 1, 1)Rerun56 ms
 
-588.ajax: jQuery.ajax() - data option - empty bodies for non-GET requests (0, 1, 1)Rerun71 ms
+588.ajax: jQuery.ajax() - data option - empty bodies for non-GET requests (0, 1, 1)Rerun31 ms
 
-589.ajax: jQuery.ajax() - If-Modified-Since support (cache) (0, 3, 3)Rerun76 ms
+589.ajax: jQuery.ajax() - If-Modified-Since support (cache) (0, 3, 3)Rerun45 ms
 
 
 
-590.ajax: jQuery.ajax() - Etag support (cache) (0, 3, 3)Rerun74 ms
+590.ajax: jQuery.ajax() - Etag support (cache) (0, 3, 3)Rerun45 ms
 
 
 
-591.ajax: jQuery.ajax() - If-Modified-Since support (no cache) (0, 3, 3)Rerun125 ms
+591.ajax: jQuery.ajax() - If-Modified-Since support (no cache) (0, 3, 3)Rerun61 ms
 
 
 
-592.ajax: jQuery.ajax() - Etag support (no cache) (0, 3, 3)Rerun91 ms
+592.ajax: jQuery.ajax() - Etag support (no cache) (0, 3, 3)Rerun65 ms
 
 
 
-593.ajax: jQuery.ajax() - failing cross-domain (non-existing) (0, 1, 1)Rerun4547 ms
+593.ajax: jQuery.ajax() - failing cross-domain (non-existing) (0, 1, 1)Rerun33 ms
 
-594.ajax: jQuery.ajax() - failing cross-domain (0, 1, 1)Rerun172 ms
+594.ajax: jQuery.ajax() - failing cross-domain (0, 1, 1)Rerun38 ms
 
-595.ajax: jQuery.ajax() - atom+xml (0, 1, 1)Rerun109 ms
+595.ajax: jQuery.ajax() - atom+xml (0, 1, 1)Rerun35 ms
 
-596.ajax: jQuery.ajax() - statusText (0, 3, 3)Rerun123 ms
+596.ajax: jQuery.ajax() - statusText (0, 3, 3)Rerun40 ms
 
 
 
-597.ajax: jQuery.ajax() - statusCode (0, 20, 20)Rerun331 ms
+597.ajax: jQuery.ajax() - statusCode (0, 20, 20)Rerun145 ms
 
 
 
@@ -5435,7 +5447,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-598.ajax: jQuery.ajax() - transitive conversions (0, 8, 8)Rerun81 ms
+598.ajax: jQuery.ajax() - transitive conversions (0, 8, 8)Rerun33 ms
 
 
 
@@ -5444,145 +5456,145 @@ Tests completed in 88658 milliseconds.
 
 
 
-599.ajax: jQuery.ajax() - overrideMimeType (0, 2, 2)Rerun72 ms
+599.ajax: jQuery.ajax() - overrideMimeType (0, 2, 2)Rerun55 ms
 
 
-600.ajax: jQuery.ajax() - empty json gets to error callback instead of success callback. (0, 1, 1)Rerun78 ms
+600.ajax: jQuery.ajax() - empty json gets to error callback instead of success callback. (0, 1, 1)Rerun33 ms
 
-601.ajax: #2688 - jQuery.ajax() - beforeSend, cancel request (0, 2, 2)Rerun65 ms
+601.ajax: #2688 - jQuery.ajax() - beforeSend, cancel request (0, 2, 2)Rerun26 ms
 
 
-602.ajax: #2806 - jQuery.ajax() - data option - evaluate function values (0, 1, 1)Rerun71 ms
+602.ajax: #2806 - jQuery.ajax() - data option - evaluate function values (0, 1, 1)Rerun35 ms
 
-603.ajax: #7531 - jQuery.ajax() - Location object as url (0, 1, 1)Rerun15 ms
+603.ajax: #7531 - jQuery.ajax() - Location object as url (0, 1, 1)Rerun7 ms
 
-604.ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain (0, 1, 1)Rerun52 ms
+604.ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain (0, 1, 1)Rerun45 ms
 
-605.ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain (0, 1, 1)Rerun63 ms
+605.ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain (0, 1, 1)Rerun26 ms
 
-606.ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5 (0, 4, 4)Rerun95 ms
+606.ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5 (0, 4, 4)Rerun37 ms
 
 
 
 
-607.ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain (0, 2, 2)Rerun88 ms
+607.ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain (0, 2, 2)Rerun27 ms
 
 
-608.ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain (0, 2, 2)Rerun86 ms
+608.ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain (0, 2, 2)Rerun33 ms
 
 
-609.ajax: #9887 - jQuery.ajax() - Context with circular references (#9887) (0, 2, 2)Rerun23 ms
+609.ajax: #9887 - jQuery.ajax() - Context with circular references (#9887) (0, 2, 2)Rerun5 ms
 
 
-610.ajax: #10093 - jQuery.ajax() - falsy url as argument (0, 4, 4)Rerun80 ms
+610.ajax: #10093 - jQuery.ajax() - falsy url as argument (0, 4, 4)Rerun34 ms
 
 
 
 
-611.ajax: #10093 - jQuery.ajax() - falsy url in settings object (0, 4, 4)Rerun96 ms
+611.ajax: #10093 - jQuery.ajax() - falsy url in settings object (0, 4, 4)Rerun36 ms
 
 
 
 
-612.ajax: #11151 - jQuery.ajax() - parse error body (0, 2, 2)Rerun73 ms
+612.ajax: #11151 - jQuery.ajax() - parse error body (0, 2, 2)Rerun26 ms
 
 
-613.ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE (0, 1, 1)Rerun80 ms
+613.ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE (0, 1, 1)Rerun34 ms
 
-614.ajax: #11743 - jQuery.ajax() - script, throws exception (0, 1, 1)Rerun28 ms
+614.ajax: #11743 - jQuery.ajax() - script, throws exception (0, 1, 1)Rerun8 ms
 
-615.ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally (0, 3, 3)Rerun64 ms
+615.ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally (0, 3, 3)Rerun35 ms
 
 
 
-616.ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally (0, 3, 3)Rerun103 ms
+616.ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally (0, 3, 3)Rerun64 ms
 
 
 
-617.ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string (0, 1, 1)Rerun82 ms
+617.ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string (0, 1, 1)Rerun36 ms
 
-618.ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests (0, 3, 3)Rerun78 ms
+618.ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests (0, 3, 3)Rerun27 ms
 
 
 
-619.ajax: #13388 - jQuery.ajax() - responseXML (0, 3, 3)Rerun71 ms
+619.ajax: #13388 - jQuery.ajax() - responseXML (0, 3, 3)Rerun32 ms
 
 
 
-620.ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests (0, 3, 3)Rerun84 ms
+620.ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests (0, 3, 3)Rerun25 ms
 
 
 
-621.ajax: #13240 - jQuery.ajax() - support non-RFC2616 methods (0, 1, 1)Rerun125 ms
+621.ajax: #13240 - jQuery.ajax() - support non-RFC2616 methods (0, 1, 1)Rerun38 ms
 
-622.ajax: #14379 - jQuery.ajax() on unload (0, 1, 1)Rerun188 ms
+622.ajax: #14379 - jQuery.ajax() on unload (0, 1, 1)Rerun115 ms
 
-623.ajax: jQuery.ajaxPrefilter() - abort (0, 1, 1)Rerun59 ms
+623.ajax: jQuery.ajaxPrefilter() - abort (0, 1, 1)Rerun32 ms
 
-624.ajax: jQuery.ajaxSetup() (0, 1, 1)Rerun83 ms
+624.ajax: jQuery.ajaxSetup() (0, 1, 1)Rerun26 ms
 
-625.ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout (0, 2, 2)Rerun1060 ms
+625.ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout (0, 2, 2)Rerun1040 ms
 
 
-626.ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout (0, 1, 1)Rerun1041 ms
+626.ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout (0, 1, 1)Rerun1027 ms
 
-627.ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events (0, 1, 1)Rerun26 ms
+627.ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events (0, 1, 1)Rerun11 ms
 
-628.ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated (0, 2, 2)Rerun59 ms
+628.ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated (0, 2, 2)Rerun38 ms
 
 
-629.ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes (0, 2, 2)Rerun64 ms
+629.ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes (0, 2, 2)Rerun34 ms
 
 
-630.ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings (0, 1, 1)Rerun84 ms
+630.ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings (0, 1, 1)Rerun32 ms
 
-631.ajax: jQuery.getJSON( String, Hash, Function ) - JSON array (0, 5, 5)Rerun103 ms
+631.ajax: jQuery.getJSON( String, Hash, Function ) - JSON array (0, 5, 5)Rerun26 ms
 
 
 
 
 
-632.ajax: jQuery.getJSON( String, Function ) - JSON object (0, 2, 2)Rerun89 ms
+632.ajax: jQuery.getJSON( String, Function ) - JSON object (0, 2, 2)Rerun34 ms
 
 
-633.ajax: jQuery.getJSON() - Using Native JSON (0, 2, 2)Rerun83 ms
+633.ajax: jQuery.getJSON() - Using Native JSON (0, 2, 2)Rerun28 ms
 
 
-634.ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content (0, 2, 2)Rerun76 ms
+634.ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content (0, 2, 2)Rerun39 ms
 
 
-635.ajax: jQuery.getScript( String, Function ) - with callback (0, 2, 2)Rerun83 ms
+635.ajax: jQuery.getScript( String, Function ) - with callback (0, 2, 2)Rerun28 ms
 
 
-636.ajax: jQuery.getScript( String, Function ) - no callback (0, 1, 1)Rerun94 ms
+636.ajax: jQuery.getScript( String, Function ) - no callback (0, 1, 1)Rerun36 ms
 
-637.ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText (0, 2, 2)Rerun87 ms
+637.ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText (0, 2, 2)Rerun28 ms
 
 
-638.ajax: jQuery.fn.load( String ) (0, 2, 2)Rerun110 ms
+638.ajax: jQuery.fn.load( String ) (0, 2, 2)Rerun50 ms
 
 
-639.ajax: jQuery.fn.load() - 404 error callbacks (0, 6, 6)Rerun83 ms
+639.ajax: jQuery.fn.load() - 404 error callbacks (0, 6, 6)Rerun31 ms
 
 
 
 
 
 
-640.ajax: jQuery.fn.load( String, null ) (0, 2, 2)Rerun65 ms
+640.ajax: jQuery.fn.load( String, null ) (0, 2, 2)Rerun36 ms
 
 
-641.ajax: jQuery.fn.load( String, undefined ) (0, 2, 2)Rerun51 ms
+641.ajax: jQuery.fn.load( String, undefined ) (0, 2, 2)Rerun35 ms
 
 
-642.ajax: jQuery.fn.load( URL_SELECTOR ) (0, 1, 1)Rerun90 ms
+642.ajax: jQuery.fn.load( URL_SELECTOR ) (0, 1, 1)Rerun27 ms
 
-643.ajax: jQuery.fn.load( URL_SELECTOR with spaces ) (0, 1, 1)Rerun65 ms
+643.ajax: jQuery.fn.load( URL_SELECTOR with spaces ) (0, 1, 1)Rerun32 ms
 
-644.ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM (0, 2, 2)Rerun70 ms
+644.ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM (0, 2, 2)Rerun27 ms
 
 
-645.ajax: jQuery.fn.load( String, Function ) - check scripts (0, 7, 7)Rerun729 ms
+645.ajax: jQuery.fn.load( String, Function ) - check scripts (0, 7, 7)Rerun659 ms
 
 
 
@@ -5590,20 +5602,20 @@ Tests completed in 88658 milliseconds.
 
 
 
-646.ajax: jQuery.fn.load( String, Function ) - check file with only a script tag (0, 3, 3)Rerun91 ms
+646.ajax: jQuery.fn.load( String, Function ) - check file with only a script tag (0, 3, 3)Rerun38 ms
 
 
 
-647.ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings (0, 2, 2)Rerun94 ms
+647.ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings (0, 2, 2)Rerun28 ms
 
 
-648.ajax: jQuery.fn.load( String, Object, Function ) (0, 2, 2)Rerun86 ms
+648.ajax: jQuery.fn.load( String, Object, Function ) (0, 2, 2)Rerun50 ms
 
 
-649.ajax: jQuery.fn.load( String, String, Function ) (0, 2, 2)Rerun87 ms
+649.ajax: jQuery.fn.load( String, String, Function ) (0, 2, 2)Rerun34 ms
 
 
-650.ajax: jQuery.fn.load() - callbacks get the correct parameters (0, 8, 8)Rerun99 ms
+650.ajax: jQuery.fn.load() - callbacks get the correct parameters (0, 8, 8)Rerun29 ms
 
 
 
@@ -5612,27 +5624,27 @@ Tests completed in 88658 milliseconds.
 
 
 
-651.ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json (0, 1, 1)Rerun69 ms
+651.ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json (0, 1, 1)Rerun40 ms
 
-652.ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in (0, 1, 1)Rerun82 ms
+652.ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in (0, 1, 1)Rerun46 ms
 
-653.ajax: jQuery.post() - data (0, 3, 3)Rerun106 ms
+653.ajax: jQuery.post() - data (0, 3, 3)Rerun63 ms
 
 
 
-654.ajax: jQuery.post( String, Hash, Function ) - simple with xml (0, 4, 4)Rerun110 ms
+654.ajax: jQuery.post( String, Hash, Function ) - simple with xml (0, 4, 4)Rerun35 ms
 
 
 
 
-655.ajax: jQuery.active (0, 1, 1)Rerun20 ms
+655.ajax: jQuery.active (0, 1, 1)Rerun6 ms
 
-656.effects: sanity check (0, 1, 1)Rerun1380 ms
+656.effects: sanity check (0, 1, 1)Rerun589 ms
 
-657.effects: show() basic (0, 2, 2)Rerun21 ms
+657.effects: show() basic (0, 2, 2)Rerun7 ms
 
 
-658.effects: show() (0, 27, 27)Rerun48 ms
+658.effects: show() (0, 27, 27)Rerun19 ms
 
 
 
@@ -5660,7 +5672,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-659.effects: show(Number) - other displays (0, 15, 15)Rerun106 ms
+659.effects: show(Number) - other displays (0, 15, 15)Rerun48 ms
 
 
 
@@ -5676,13 +5688,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-660.effects: Persist correct display value (0, 3, 3)Rerun37 ms
+660.effects: Persist correct display value (0, 3, 3)Rerun10 ms
 
 
 
 661.effects: animate(Hash, Object, Function) (0, 1, 1)Rerun11 ms
 
-662.effects: animate relative values (0, 12, 12)Rerun81 ms
+662.effects: animate relative values (0, 12, 12)Rerun35 ms
 
 
 
@@ -5695,58 +5707,58 @@ Tests completed in 88658 milliseconds.
 
 
 
-663.effects: animate negative height (0, 1, 1)Rerun59 ms
+663.effects: animate negative height (0, 1, 1)Rerun24 ms
 
-664.effects: animate negative margin (0, 1, 1)Rerun37 ms
+664.effects: animate negative margin (0, 1, 1)Rerun19 ms
 
-665.effects: animate negative margin with px (0, 1, 1)Rerun37 ms
+665.effects: animate negative margin with px (0, 1, 1)Rerun20 ms
 
-666.effects: animate negative padding (0, 1, 1)Rerun39 ms
+666.effects: animate negative padding (0, 1, 1)Rerun29 ms
 
-667.effects: animate block as inline width/height (0, 3, 3)Rerun69 ms
+667.effects: animate block as inline width/height (0, 3, 3)Rerun20 ms
 
 
 
-668.effects: animate native inline width/height (0, 3, 3)Rerun46 ms
+668.effects: animate native inline width/height (0, 3, 3)Rerun24 ms
 
 
 
-669.effects: animate block width/height (0, 3, 3)Rerun50 ms
+669.effects: animate block width/height (0, 3, 3)Rerun25 ms
 
 
 
-670.effects: animate table width/height (0, 1, 1)Rerun51 ms
+670.effects: animate table width/height (0, 1, 1)Rerun24 ms
 
-671.effects: animate table-row width/height (0, 3, 3)Rerun83 ms
+671.effects: animate table-row width/height (0, 3, 3)Rerun34 ms
 
 
 
-672.effects: animate table-cell width/height (0, 3, 3)Rerun64 ms
+672.effects: animate table-cell width/height (0, 3, 3)Rerun37 ms
 
 
 
-673.effects: animate percentage(%) on width/height (0, 2, 2)Rerun34 ms
+673.effects: animate percentage(%) on width/height (0, 2, 2)Rerun20 ms
 
 
-674.effects: animate resets overflow-x and overflow-y when finished (0, 2, 2)Rerun60 ms
+674.effects: animate resets overflow-x and overflow-y when finished (0, 2, 2)Rerun24 ms
 
 
-675.effects: animate option { queue: false } (0, 2, 2)Rerun14 ms
+675.effects: animate option { queue: false } (0, 2, 2)Rerun5 ms
 
 
-676.effects: animate option { queue: true } (0, 2, 2)Rerun17 ms
+676.effects: animate option { queue: true } (0, 2, 2)Rerun6 ms
 
 
-677.effects: animate option { queue: 'name' } (0, 5, 5)Rerun60 ms
+677.effects: animate option { queue: 'name' } (0, 5, 5)Rerun26 ms
 
 
 
 
 
-678.effects: animate with no properties (0, 2, 2)Rerun54 ms
+678.effects: animate with no properties (0, 2, 2)Rerun25 ms
 
 
-679.effects: animate duration 0 (0, 11, 11)Rerun53 ms
+679.effects: animate duration 0 (0, 11, 11)Rerun32 ms
 
 
 
@@ -5758,40 +5770,40 @@ Tests completed in 88658 milliseconds.
 
 
 
-680.effects: animate hyphenated properties (0, 1, 1)Rerun13 ms
+680.effects: animate hyphenated properties (0, 1, 1)Rerun6 ms
 
-681.effects: animate non-element (0, 1, 1)Rerun12 ms
+681.effects: animate non-element (0, 1, 1)Rerun6 ms
 
-682.effects: stop() (0, 4, 4)Rerun74 ms
+682.effects: stop() (0, 4, 4)Rerun22 ms
 
 
 
 
-683.effects: stop() - several in queue (0, 5, 5)Rerun49 ms
+683.effects: stop() - several in queue (0, 5, 5)Rerun27 ms
 
 
 
 
 
-684.effects: stop(clearQueue) (0, 4, 4)Rerun50 ms
+684.effects: stop(clearQueue) (0, 4, 4)Rerun21 ms
 
 
 
 
-685.effects: stop(clearQueue, gotoEnd) (0, 1, 1)Rerun43 ms
+685.effects: stop(clearQueue, gotoEnd) (0, 1, 1)Rerun22 ms
 
 686.effects: stop( queue, ..., ... ) - Stop single queues (0, 3, 3)Rerun38 ms
 
 
 
-687.effects: toggle() (0, 6, 6)Rerun60 ms
+687.effects: toggle() (0, 6, 6)Rerun19 ms
 
 
 
 
 
 
-688.effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (0, 7, 7)Rerun32 ms
+688.effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (0, 7, 7)Rerun19 ms
 
 
 
@@ -5799,268 +5811,268 @@ Tests completed in 88658 milliseconds.
 
 
 
-689.effects: Overflow and Display (0, 4, 4)Rerun18 ms
+689.effects: Overflow and Display (0, 4, 4)Rerun13 ms
 
 
 
 
-690.effects: CSS Auto to 0 (0, 6, 6)Rerun57 ms
+690.effects: CSS Auto to 0 (0, 6, 6)Rerun19 ms
 
 
 
 
 
 
-691.effects: CSS Auto to 50 (0, 6, 6)Rerun41 ms
+691.effects: CSS Auto to 50 (0, 6, 6)Rerun26 ms
 
 
 
 
 
 
-692.effects: CSS Auto to 100 (0, 6, 6)Rerun58 ms
+692.effects: CSS Auto to 100 (0, 6, 6)Rerun24 ms
 
 
 
 
 
 
-693.effects: CSS Auto to show (0, 5, 5)Rerun35 ms
+693.effects: CSS Auto to show (0, 5, 5)Rerun27 ms
 
 
 
 
 
-694.effects: CSS Auto to hide (0, 4, 4)Rerun72 ms
+694.effects: CSS Auto to hide (0, 4, 4)Rerun19 ms
 
 
 
 
-695.effects: JS Auto to 0 (0, 6, 6)Rerun50 ms
+695.effects: JS Auto to 0 (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-696.effects: JS Auto to 50 (0, 6, 6)Rerun59 ms
+696.effects: JS Auto to 50 (0, 6, 6)Rerun25 ms
 
 
 
 
 
 
-697.effects: JS Auto to 100 (0, 6, 6)Rerun41 ms
+697.effects: JS Auto to 100 (0, 6, 6)Rerun21 ms
 
 
 
 
 
 
-698.effects: JS Auto to show (0, 5, 5)Rerun47 ms
+698.effects: JS Auto to show (0, 5, 5)Rerun34 ms
 
 
 
 
 
-699.effects: JS Auto to hide (0, 4, 4)Rerun38 ms
+699.effects: JS Auto to hide (0, 4, 4)Rerun19 ms
 
 
 
 
-700.effects: CSS 100 to 0 (0, 6, 6)Rerun37 ms
+700.effects: CSS 100 to 0 (0, 6, 6)Rerun25 ms
 
 
 
 
 
 
-701.effects: CSS 100 to 50 (0, 6, 6)Rerun58 ms
+701.effects: CSS 100 to 50 (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-702.effects: CSS 100 to 100 (0, 6, 6)Rerun41 ms
+702.effects: CSS 100 to 100 (0, 6, 6)Rerun25 ms
 
 
 
 
 
 
-703.effects: CSS 100 to show (0, 5, 5)Rerun39 ms
+703.effects: CSS 100 to show (0, 5, 5)Rerun21 ms
 
 
 
 
 
-704.effects: CSS 100 to hide (0, 4, 4)Rerun36 ms
+704.effects: CSS 100 to hide (0, 4, 4)Rerun31 ms
 
 
 
 
-705.effects: JS 100 to 0 (0, 6, 6)Rerun35 ms
+705.effects: JS 100 to 0 (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-706.effects: JS 100 to 50 (0, 6, 6)Rerun62 ms
+706.effects: JS 100 to 50 (0, 6, 6)Rerun26 ms
 
 
 
 
 
 
-707.effects: JS 100 to 100 (0, 6, 6)Rerun52 ms
+707.effects: JS 100 to 100 (0, 6, 6)Rerun18 ms
 
 
 
 
 
 
-708.effects: JS 100 to show (0, 5, 5)Rerun39 ms
+708.effects: JS 100 to show (0, 5, 5)Rerun25 ms
 
 
 
 
 
-709.effects: JS 100 to hide (0, 4, 4)Rerun34 ms
+709.effects: JS 100 to hide (0, 4, 4)Rerun13 ms
 
 
 
 
-710.effects: CSS 50 to 0 (0, 6, 6)Rerun38 ms
+710.effects: CSS 50 to 0 (0, 6, 6)Rerun34 ms
 
 
 
 
 
 
-711.effects: CSS 50 to 50 (0, 6, 6)Rerun75 ms
+711.effects: CSS 50 to 50 (0, 6, 6)Rerun19 ms
 
 
 
 
 
 
-712.effects: CSS 50 to 100 (0, 6, 6)Rerun37 ms
+712.effects: CSS 50 to 100 (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-713.effects: CSS 50 to show (0, 5, 5)Rerun54 ms
+713.effects: CSS 50 to show (0, 5, 5)Rerun20 ms
 
 
 
 
 
-714.effects: CSS 50 to hide (0, 4, 4)Rerun53 ms
+714.effects: CSS 50 to hide (0, 4, 4)Rerun18 ms
 
 
 
 
-715.effects: JS 50 to 0 (0, 6, 6)Rerun65 ms
+715.effects: JS 50 to 0 (0, 6, 6)Rerun23 ms
 
 
 
 
 
 
-716.effects: JS 50 to 50 (0, 6, 6)Rerun48 ms
+716.effects: JS 50 to 50 (0, 6, 6)Rerun29 ms
 
 
 
 
 
 
-717.effects: JS 50 to 100 (0, 6, 6)Rerun40 ms
+717.effects: JS 50 to 100 (0, 6, 6)Rerun26 ms
 
 
 
 
 
 
-718.effects: JS 50 to show (0, 5, 5)Rerun38 ms
+718.effects: JS 50 to show (0, 5, 5)Rerun20 ms
 
 
 
 
 
-719.effects: JS 50 to hide (0, 4, 4)Rerun57 ms
+719.effects: JS 50 to hide (0, 4, 4)Rerun24 ms
 
 
 
 
-720.effects: CSS 0 to 0 (0, 6, 6)Rerun53 ms
+720.effects: CSS 0 to 0 (0, 6, 6)Rerun19 ms
 
 
 
 
 
 
-721.effects: CSS 0 to 50 (0, 6, 6)Rerun46 ms
+721.effects: CSS 0 to 50 (0, 6, 6)Rerun25 ms
 
 
 
 
 
 
-722.effects: CSS 0 to 100 (0, 6, 6)Rerun37 ms
+722.effects: CSS 0 to 100 (0, 6, 6)Rerun25 ms
 
 
 
 
 
 
-723.effects: CSS 0 to show (0, 5, 5)Rerun39 ms
+723.effects: CSS 0 to show (0, 5, 5)Rerun28 ms
 
 
 
 
 
-724.effects: CSS 0 to hide (0, 4, 4)Rerun37 ms
+724.effects: CSS 0 to hide (0, 4, 4)Rerun20 ms
 
 
 
 
-725.effects: JS 0 to 0 (0, 6, 6)Rerun106 ms
+725.effects: JS 0 to 0 (0, 6, 6)Rerun24 ms
 
 
 
 
 
 
-726.effects: JS 0 to 50 (0, 6, 6)Rerun61 ms
+726.effects: JS 0 to 50 (0, 6, 6)Rerun18 ms
 
 
 
 
 
 
-727.effects: JS 0 to 100 (0, 6, 6)Rerun53 ms
+727.effects: JS 0 to 100 (0, 6, 6)Rerun26 ms
 
 
 
 
 
 
-728.effects: JS 0 to show (0, 5, 5)Rerun78 ms
+728.effects: JS 0 to show (0, 5, 5)Rerun26 ms
 
 
 
 
 
-729.effects: JS 0 to hide (0, 4, 4)Rerun63 ms
+729.effects: JS 0 to hide (0, 4, 4)Rerun25 ms
 
 
 
 
-730.effects: Effects chaining (0, 16, 16)Rerun406 ms
+730.effects: Effects chaining (0, 16, 16)Rerun102 ms
 
 
 
@@ -6077,12 +6089,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-731.effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095) (0, 4, 4)Rerun64 ms
+731.effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095) (0, 4, 4)Rerun27 ms
 
 
 
 
-732.effects: interrupt toggle (0, 24, 24)Rerun277 ms
+732.effects: interrupt toggle (0, 24, 24)Rerun78 ms
 
 
 
@@ -6107,13 +6119,13 @@ Tests completed in 88658 milliseconds.
 
 
 
-733.effects: animate with per-property easing (0, 5, 5)Rerun22 ms
+733.effects: animate with per-property easing (0, 5, 5)Rerun7 ms
 
 
 
 
 
-734.effects: animate with CSS shorthand properties (0, 11, 11)Rerun66 ms
+734.effects: animate with CSS shorthand properties (0, 11, 11)Rerun35 ms
 
 
 
@@ -6125,31 +6137,31 @@ Tests completed in 88658 milliseconds.
 
 
 
-735.effects: hide hidden elements, with animation (bug #7141) (0, 3, 3)Rerun85 ms
+735.effects: hide hidden elements, with animation (bug #7141) (0, 3, 3)Rerun20 ms
 
 
 
-736.effects: animate unit-less properties (#4966) (0, 2, 2)Rerun34 ms
+736.effects: animate unit-less properties (#4966) (0, 2, 2)Rerun7 ms
 
 
-737.effects: animate properties missing px w/ opacity as last (#9074) (0, 6, 6)Rerun93 ms
+737.effects: animate properties missing px w/ opacity as last (#9074) (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-738.effects: callbacks should fire in correct order (#9100) (0, 1, 1)Rerun23 ms
+738.effects: callbacks should fire in correct order (#9100) (0, 1, 1)Rerun14 ms
 
-739.effects: callbacks that throw exceptions will be removed (#5684) (0, 2, 2)Rerun60 ms
+739.effects: callbacks that throw exceptions will be removed (#5684) (0, 2, 2)Rerun19 ms
 
 
-740.effects: animate will scale margin properties individually (0, 2, 2)Rerun45 ms
+740.effects: animate will scale margin properties individually (0, 2, 2)Rerun19 ms
 
 
-741.effects: Do not append px to 'fill-opacity' #9548 (0, 1, 1)Rerun24 ms
+741.effects: Do not append px to 'fill-opacity' #9548 (0, 1, 1)Rerun37 ms
 
-742.effects: line-height animates correctly (#13855) (0, 12, 12)Rerun100 ms
+742.effects: line-height animates correctly (#13855) (0, 12, 12)Rerun36 ms
 
 
 
@@ -6162,20 +6174,20 @@ Tests completed in 88658 milliseconds.
 
 
 
-743.effects: jQuery.Animation( object, props, opts ) (0, 4, 4)Rerun63 ms
+743.effects: jQuery.Animation( object, props, opts ) (0, 4, 4)Rerun6 ms
 
 
 
 
-744.effects: Animate Option: step: function( percent, tween ) (0, 1, 1)Rerun15 ms
+744.effects: Animate Option: step: function( percent, tween ) (0, 1, 1)Rerun5 ms
 
-745.effects: Animate callbacks have correct context (0, 2, 2)Rerun43 ms
+745.effects: Animate callbacks have correct context (0, 2, 2)Rerun25 ms
 
 
-746.effects: User supplied callback called after show when fx off (#8892) (0, 2, 2)Rerun48 ms
+746.effects: User supplied callback called after show when fx off (#8892) (0, 2, 2)Rerun20 ms
 
 
-747.effects: animate should set display for disconnected nodes (0, 18, 18)Rerun116 ms
+747.effects: animate should set display for disconnected nodes (0, 18, 18)Rerun39 ms
 
 
 
@@ -6194,24 +6206,24 @@ Tests completed in 88658 milliseconds.
 
 
 
-748.effects: Animation callback should not show animated element as :animated (#7157) (0, 1, 1)Rerun24 ms
+748.effects: Animation callback should not show animated element as :animated (#7157) (0, 1, 1)Rerun10 ms
 
-749.effects: Initial step callback should show element as :animated (#14623) (0, 1, 1)Rerun27 ms
+749.effects: Initial step callback should show element as :animated (#14623) (0, 1, 1)Rerun8 ms
 
-750.effects: hide called on element within hidden parent should set display to none (#10045) (0, 3, 3)Rerun72 ms
+750.effects: hide called on element within hidden parent should set display to none (#10045) (0, 3, 3)Rerun20 ms
 
 
 
-751.effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none (0, 5, 5)Rerun80 ms
+751.effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none (0, 5, 5)Rerun32 ms
 
 
 
 
 
-752.effects: hide should not leave hidden inline elements visible (#14848) (0, 2, 2)Rerun72 ms
+752.effects: hide should not leave hidden inline elements visible (#14848) (0, 2, 2)Rerun20 ms
 
 
-753.effects: Handle queue:false promises (0, 10, 10)Rerun76 ms
+753.effects: Handle queue:false promises (0, 10, 10)Rerun27 ms
 
 
 
@@ -6222,16 +6234,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-754.effects: multiple unqueued and promise (0, 4, 4)Rerun86 ms
+754.effects: multiple unqueued and promise (0, 4, 4)Rerun22 ms
 
 
 
 
-755.effects: animate does not change start value for non-px animation (#7109) (0, 1, 1)Rerun53 ms
+755.effects: animate does not change start value for non-px animation (#7109) (0, 1, 1)Rerun26 ms
 
-756.effects: non-px animation handles non-numeric start (#11971) (0, 1, 1)Rerun25 ms
+756.effects: non-px animation handles non-numeric start (#11971) (0, 1, 1)Rerun6 ms
 
-757.effects: Animation callbacks (#11797) (0, 15, 15)Rerun46 ms
+757.effects: Animation callbacks (#11797) (0, 15, 15)Rerun6 ms
 
 
 
@@ -6247,7 +6259,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-758.effects: Animate properly sets overflow hidden when animating width/height (#12117) (0, 8, 8)Rerun62 ms
+758.effects: Animate properly sets overflow hidden when animating width/height (#12117) (0, 8, 8)Rerun20 ms
 
 
 
@@ -6256,32 +6268,32 @@ Tests completed in 88658 milliseconds.
 
 
 
-759.effects: Each tick of the timer loop uses a fresh time (#12837) (0, 3, 3)Rerun25 ms
+759.effects: Each tick of the timer loop uses a fresh time (#12837) (0, 3, 3)Rerun12 ms
 
 
 
-760.effects: Animations with 0 duration don't ease (#12273) (0, 1, 1)Rerun91 ms
+760.effects: Animations with 0 duration don't ease (#12273) (0, 1, 1)Rerun18 ms
 
-761.effects: toggle state tests: toggle (#8685) (0, 4, 4)Rerun85 ms
+761.effects: toggle state tests: toggle (#8685) (0, 4, 4)Rerun29 ms
 
 
 
 
-762.effects: toggle state tests: slideToggle (#8685) (0, 4, 4)Rerun53 ms
+762.effects: toggle state tests: slideToggle (#8685) (0, 4, 4)Rerun24 ms
 
 
 
 
-763.effects: toggle state tests: fadeToggle (#8685) (0, 4, 4)Rerun18 ms
+763.effects: toggle state tests: fadeToggle (#8685) (0, 4, 4)Rerun8 ms
 
 
 
 
-764.effects: jQuery.fx.start & jQuery.fx.stop hook points (0, 3, 3)Rerun13 ms
+764.effects: jQuery.fx.start & jQuery.fx.stop hook points (0, 3, 3)Rerun5 ms
 
 
 
-765.effects: .finish() completes all queued animations (0, 11, 11)Rerun73 ms
+765.effects: .finish() completes all queued animations (0, 11, 11)Rerun25 ms
 
 
 
@@ -6293,7 +6305,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-766.effects: .finish( false ) - unqueued animations (0, 10, 10)Rerun75 ms
+766.effects: .finish( false ) - unqueued animations (0, 10, 10)Rerun20 ms
 
 
 
@@ -6304,7 +6316,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-767.effects: .finish( "custom" ) - custom queue animations (0, 11, 11)Rerun64 ms
+767.effects: .finish( "custom" ) - custom queue animations (0, 11, 11)Rerun25 ms
 
 
 
@@ -6316,38 +6328,38 @@ Tests completed in 88658 milliseconds.
 
 
 
-768.effects: .finish() calls finish of custom queue functions (0, 6, 6)Rerun32 ms
+768.effects: .finish() calls finish of custom queue functions (0, 6, 6)Rerun6 ms
 
 
 
 
 
 
-769.effects: .finish() is applied correctly when multiple elements were animated (#13937) (0, 3, 3)Rerun23 ms
+769.effects: .finish() is applied correctly when multiple elements were animated (#13937) (0, 3, 3)Rerun12 ms
 
 
 
-770.effects: slideDown() after stop() (#13483) (0, 2, 2)Rerun64 ms
+770.effects: slideDown() after stop() (#13483) (0, 2, 2)Rerun23 ms
 
 
-771.effects: Respect display value on inline elements (#14824) (0, 2, 2)Rerun112 ms
+771.effects: Respect display value on inline elements (#14824) (0, 2, 2)Rerun31 ms
 
 
-772.offset: empty set (0, 2, 2)Rerun87 ms
+772.offset: empty set (0, 2, 2)Rerun36 ms
 
 
-773.offset: object without getBoundingClientRect (0, 2, 2)Rerun60 ms
+773.offset: object without getBoundingClientRect (0, 2, 2)Rerun18 ms
 
 
-774.offset: disconnected node (0, 2, 2)Rerun80 ms
+774.offset: disconnected node (0, 2, 2)Rerun24 ms
 
 
-775.offset: absolute (0, 4, 4)Rerun287 ms
+775.offset: absolute (0, 4, 4)Rerun121 ms
 
 
 
 
-776.offset: absolute (0, 178, 178)Rerun280 ms
+776.offset: absolute (0, 178, 178)Rerun117 ms
 
 
 
@@ -6526,7 +6538,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-777.offset: relative (0, 60, 60)Rerun199 ms
+777.offset: relative (0, 60, 60)Rerun100 ms
 
 
 
@@ -6587,7 +6599,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-778.offset: static (0, 80, 80)Rerun245 ms
+778.offset: static (0, 80, 80)Rerun100 ms
 
 
 
@@ -6668,7 +6680,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-779.offset: fixed (0, 34, 34)Rerun161 ms
+779.offset: fixed (0, 34, 34)Rerun98 ms
 
 
 
@@ -6703,12 +6715,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-780.offset: table (0, 4, 4)Rerun188 ms
+780.offset: table (0, 4, 4)Rerun93 ms
 
 
 
 
-781.offset: scroll (0, 24, 24)Rerun173 ms
+781.offset: scroll (0, 24, 24)Rerun94 ms
 
 
 
@@ -6733,16 +6745,16 @@ Tests completed in 88658 milliseconds.
 
 
 
-782.offset: body (0, 4, 4)Rerun149 ms
+782.offset: body (0, 4, 4)Rerun115 ms
 
 
 
 
-783.offset: chaining (0, 3, 3)Rerun62 ms
+783.offset: chaining (0, 3, 3)Rerun24 ms
 
 
 
-784.offset: offsetParent (0, 13, 13)Rerun124 ms
+784.offset: offsetParent (0, 13, 13)Rerun31 ms
 
 
 
@@ -6756,10 +6768,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-785.offset: fractions (see #7730 and #7885) (0, 2, 2)Rerun107 ms
+785.offset: fractions (see #7730 and #7885) (0, 2, 2)Rerun32 ms
 
 
-786.dimensions: width() (0, 9, 9)Rerun90 ms
+786.dimensions: width() (0, 9, 9)Rerun26 ms
 
 
 
@@ -6769,7 +6781,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-787.dimensions: width(Function) (0, 9, 9)Rerun90 ms
+787.dimensions: width(Function) (0, 9, 9)Rerun25 ms
 
 
 
@@ -6779,10 +6791,10 @@ Tests completed in 88658 milliseconds.
 
 
 
-788.dimensions: width(Function(args)) (0, 2, 2)Rerun67 ms
+788.dimensions: width(Function(args)) (0, 2, 2)Rerun19 ms
 
 
-789.dimensions: height() (0, 9, 9)Rerun111 ms
+789.dimensions: height() (0, 9, 9)Rerun29 ms
 
 
 
@@ -6792,7 +6804,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-790.dimensions: height(Function) (0, 9, 9)Rerun114 ms
+790.dimensions: height(Function) (0, 9, 9)Rerun25 ms
 
 
 
@@ -6802,24 +6814,24 @@ Tests completed in 88658 milliseconds.
 
 
 
-791.dimensions: height(Function(args)) (0, 2, 2)Rerun52 ms
+791.dimensions: height(Function(args)) (0, 2, 2)Rerun18 ms
 
 
-792.dimensions: innerWidth() (0, 6, 6)Rerun89 ms
+792.dimensions: innerWidth() (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-793.dimensions: innerHeight() (0, 6, 6)Rerun76 ms
+793.dimensions: innerHeight() (0, 6, 6)Rerun20 ms
 
 
 
 
 
 
-794.dimensions: outerWidth() (0, 11, 11)Rerun126 ms
+794.dimensions: outerWidth() (0, 11, 11)Rerun34 ms
 
 
 
@@ -6831,7 +6843,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-795.dimensions: child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #9441 #9300 (0, 16, 16)Rerun70 ms
+795.dimensions: child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #9441 #9300 (0, 16, 16)Rerun25 ms
 
 
 
@@ -6848,12 +6860,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-796.dimensions: getting dimensions shouldn't modify runtimeStyle see #9233 (0, 1, 1)Rerun66 ms
+796.dimensions: getting dimensions shouldn't modify runtimeStyle see #9233 (0, 1, 1)Rerun20 ms
 
-797.dimensions: table dimensions (0, 2, 2)Rerun71 ms
+797.dimensions: table dimensions (0, 2, 2)Rerun19 ms
 
 
-798.dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 (0, 16, 16)Rerun87 ms
+798.dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 (0, 16, 16)Rerun19 ms
 
 
 
@@ -6870,7 +6882,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-799.dimensions: outerHeight() (0, 11, 11)Rerun68 ms
+799.dimensions: outerHeight() (0, 11, 11)Rerun21 ms
 
 
 
@@ -6882,12 +6894,12 @@ Tests completed in 88658 milliseconds.
 
 
 
-800.dimensions: passing undefined is a setter #5571 (0, 4, 4)Rerun74 ms
+800.dimensions: passing undefined is a setter #5571 (0, 4, 4)Rerun18 ms
 
 
 
 
-801.dimensions: getters on non elements should return null (0, 8, 8)Rerun31 ms
+801.dimensions: getters on non elements should return null (0, 8, 8)Rerun7 ms
 
 
 
@@ -6896,7 +6908,7 @@ Tests completed in 88658 milliseconds.
 
 
 
-802.dimensions: setters with and without box-sizing:border-box (0, 20, 20)Rerun110 ms
+802.dimensions: setters with and without box-sizing:border-box (0, 20, 20)Rerun50 ms
 
 
 
@@ -6917,9 +6929,9 @@ Tests completed in 88658 milliseconds.
 
 
 
-803.dimensions: window vs. small document (0, 1, 1)Rerun150 ms
+803.dimensions: window vs. small document (0, 1, 1)Rerun74 ms
 
-804.dimensions: window vs. large document (0, 2, 2)Rerun162 ms
+804.dimensions: window vs. large document (0, 2, 2)Rerun93 ms
 
 
   

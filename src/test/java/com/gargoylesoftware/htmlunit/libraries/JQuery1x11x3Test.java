@@ -1216,11 +1216,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
-            EDGE = "1, 1, 2",
-            FF = "1, 1, 2",
-            FF68 = "0, 2, 2",
-            IE = "0, 2, 2")
+    @Alerts("1, 1, 2")
     @NotYetImplemented({ FF68, IE })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
@@ -2936,8 +2932,9 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2",
-            EDGE = "0, 2, 2")
+    @Alerts(CHROME = "0, 2, 2",
+            EDGE = "0, 2, 2",
+            IE = "0, 2, 2")
     public void event__Check_order_of_focusin_focusout_events() throws Exception {
         runTest("event: Check order of focusin/focusout events");
     }
@@ -2947,8 +2944,9 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 5, 5",
-            EDGE = "0, 5, 5")
+    @Alerts(CHROME = "0, 5, 5",
+            EDGE = "0, 5, 5",
+            IE = "0, 5, 5")
     public void event__focus_blur_order___12868_() throws Exception {
         runTest("event: focus-blur order (#12868)");
     }
@@ -5209,11 +5207,9 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-            EDGE = "0, 2, 2",
+    @Alerts(DEFAULT = "0, 2, 2",
             FF = "0, 1, 1",
-            FF68 = "0, 1, 1",
-            IE = "0, 2, 2")
+            FF68 = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -6273,12 +6269,10 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 0, 1",
-            EDGE = "1, 0, 1",
-            FF = "0, 1, 1",
-            FF68 = "0, 1, 1",
-            IE = "0, 1, 1")
-    @NotYetImplemented({CHROME, EDGE})
+    @Alerts(DEFAULT = "0, 1, 1",
+            CHROME = "1, 0, 1",
+            EDGE = "1, 0, 1")
+    @NotYetImplemented({ CHROME, EDGE })
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
@@ -7628,10 +7622,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-            EDGE = "0, 2, 2",
-            FF = "0, 2, 2",
-            FF68 = "0, 2, 2",
+    @Alerts(DEFAULT = "0, 2, 2",
             IE = "0, 1, 1")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
@@ -7918,12 +7909,10 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 1, 2",
-            EDGE = "1, 1, 2",
-            FF = "0, 2, 2",
-            FF68 = "0, 2, 2",
-            IE = "0, 2, 2")
-    @NotYetImplemented({CHROME, EDGE})
+    @Alerts(DEFAULT = "0, 2, 2",
+            CHROME = "1, 1, 2",
+            EDGE = "1, 1, 2")
+    @NotYetImplemented({ CHROME, EDGE })
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }

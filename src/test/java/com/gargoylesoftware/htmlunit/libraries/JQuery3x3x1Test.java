@@ -389,10 +389,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            EDGE = "2",
-            FF = "2",
-            FF68 = "2",
+    @Alerts(DEFAULT = "2",
             IE = "0")
     public void core__isPlainObject_Symbol_() throws Exception {
         runTest("core: isPlainObject(Symbol)");
@@ -413,10 +410,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            EDGE = "1",
-            FF = "1",
-            FF68 = "1",
+    @Alerts(DEFAULT = "1",
             IE = "0")
     public void core__isPlainObject_Object_assign______() throws Exception {
         runTest("core: isPlainObject(Object.assign(...))");
@@ -1514,10 +1508,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            EDGE = "1",
-            FF = "1",
-            FF68 = "1",
+    @Alerts(DEFAULT = "1",
             IE = "0")
     public void deferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
@@ -1741,10 +1732,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            EDGE = "2",
-            FF = "2",
-            FF68 = "2",
+    @Alerts(DEFAULT = "2",
             IE = "0")
     public void deprecated__type_for__Symbol_() throws Exception {
         runTest("deprecated: type for `Symbol`");
@@ -1775,10 +1763,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            EDGE = "1",
-            FF = "1",
-            FF68 = "1",
+    @Alerts(DEFAULT = "1",
             IE = "0")
     @NotYetImplemented({ CHROME, FF })
     public void deprecated__isFunction_GeneratorFunction_() throws Exception {
@@ -1790,10 +1775,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            EDGE = "1",
-            FF = "1",
-            FF68 = "1",
+    @Alerts(DEFAULT = "1",
             IE = "0")
     @NotYetImplemented({ CHROME, FF })
     public void deprecated__isFunction_AsyncFunction_() throws Exception {
@@ -1805,10 +1787,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            EDGE = "2",
-            FF = "2",
-            FF68 = "2",
+    @Alerts(DEFAULT = "2",
             IE = "0")
     public void deprecated__isFunction_custom___toStringTag_() throws Exception {
         runTest("deprecated: isFunction(custom @@toStringTag)");
@@ -1869,10 +1848,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            EDGE = "2",
-            FF = "2",
-            FF68 = "2",
+    @Alerts(DEFAULT = "2",
             IE = "0")
     public void deprecated__isNumeric_Symbol_() throws Exception {
         runTest("deprecated: isNumeric(Symbol)");
@@ -1904,11 +1880,9 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "15",
-            EDGE = "15",
+    @Alerts(DEFAULT = "15",
             FF = "1, 14, 15",
-            FF68 = "1, 14, 15",
-            IE = "15")
+            FF68 = "1, 14, 15")
     @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
     public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that support tests resolve as expected per browser");
@@ -4644,10 +4618,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            EDGE = "2",
-            FF = "2",
-            FF68 = "2",
+    @Alerts(DEFAULT = "2",
             IE = "0")
     public void traversing__contents___for__template____remains_inert() throws Exception {
         runTest("traversing: contents() for <template /> remains inert");
@@ -5710,10 +5681,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "4",
-            EDGE = "4",
-            FF = "4",
-            FF68 = "4",
+    @Alerts(DEFAULT = "4",
             IE = "0")
     @NotYetImplemented(CHROME)
     public void manipulation__html_script_type_module_() throws Exception {
@@ -6786,10 +6754,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "3",
-            EDGE = "3",
-            FF = "3",
-            FF68 = "3",
+    @Alerts(DEFAULT = "3",
             IE = "2")
     @NotYetImplemented(CHROME)
     public void css__Don_t_default_to_a_cached_previously_used_wrong_prefixed_name__gh_2015_() throws Exception {
@@ -7844,11 +7809,9 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1, 0, 1",
-            EDGE = "1, 0, 1",
-            FF = "1",
-            FF68 = "1",
-            IE = "1")
+    @Alerts(DEFAULT = "1",
+            CHROME = "1, 0, 1",
+            EDGE = "1, 0, 1")
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
@@ -9333,10 +9296,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            EDGE = "2",
-            FF = "2",
-            FF68 = "2",
+    @Alerts(DEFAULT = "2",
             IE = "1")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
@@ -10195,11 +10155,8 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "4",
-            EDGE = "4",
-            FF = "4, 0, 4",
-            FF68 = "4",
-            IE = "4")
+    @Alerts(DEFAULT = "4",
+            FF = "4, 0, 4")
     @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
     public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
         runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");
