@@ -114,6 +114,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     CSS_PROGRESS_DISPLAY_INLINE,
 
+    /** Is the css pseudo selector -ms-input-placeholder supported. */
+    @BrowserFeature(IE)
+    CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER,
+
+    /** Is the css pseudo selector placeholder-shown supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
+    CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN,
+
     /** The default value of the display property for the 'rp' tag is 'none'. */
     @BrowserFeature({FF, FF68})
     CSS_RP_DISPLAY_NONE,
@@ -152,14 +160,6 @@ public enum BrowserVersionFeatures {
     /** zIndex is of type Integer. Other values are ignored (''). */
     @BrowserFeature(IE)
     CSS_ZINDEX_TYPE_INTEGER,
-
-    /** Is the css pseudo selector placeholder-shown supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF68})
-    CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN,
-
-    /** Is the css pseudo selector -ms-input-placeholder supported. */
-    @BrowserFeature(IE)
-    CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER,
 
     /** Add the 'Referer' header to a request triggered by window.showModalDialog. */
     @BrowserFeature({CHROME, EDGE, FF, FF68})
