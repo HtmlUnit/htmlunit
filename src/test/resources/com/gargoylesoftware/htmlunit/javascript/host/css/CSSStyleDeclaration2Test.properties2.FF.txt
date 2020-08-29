@@ -139,6 +139,7 @@ animationIterationCount
 animationName
 animationPlayState
 animationTimingFunction
+appearance
 backfaceVisibility
 background
 backgroundAttachment

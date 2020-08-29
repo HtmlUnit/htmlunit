@@ -278,6 +278,7 @@ animationIterationCount=:1
 animationName=:none
 animationPlayState=:running
 animationTimingFunction=:ease
+appearance=:none
 backface-visibility=:visible
 backfaceVisibility=:visible
 background-attachment=:scroll

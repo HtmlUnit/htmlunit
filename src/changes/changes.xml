@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.44.0" date="xxxx, 2020" description="Bugfixes">
+        <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, FF80">
             <action type="add" dev="rbri" issue=" #212" due-to="Thorsten Wendelmuth">
                 Support for placeholder-shown / -ms-input-placeholder added.
             </action>
