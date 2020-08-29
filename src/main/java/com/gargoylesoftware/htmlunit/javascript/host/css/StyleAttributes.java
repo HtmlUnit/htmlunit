@@ -179,7 +179,7 @@ public final class StyleAttributes {
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
 
         /** The style property {@code appearance}. */
-        APPEARANCE("appearance", "appearance", chromeAndEdge("none")),
+        APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ff("none")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
