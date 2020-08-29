@@ -538,7 +538,7 @@ public class WebClientOptions implements Serializable {
         }
 
         final KeyStore keyStore = KeyStore.getInstance(keystoreType);
-        final char[] passwordChars = keystorePassword != null ? keystorePassword.toCharArray() : null;
+        final char[] passwordChars = keystorePassword == null ? null : keystorePassword.toCharArray();
         keyStore.load(inputStream, passwordChars);
         return keyStore;
     }

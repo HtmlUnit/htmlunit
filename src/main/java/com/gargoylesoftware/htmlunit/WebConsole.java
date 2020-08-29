@@ -298,12 +298,12 @@ public class WebConsole implements Serializable {
                         default:
                             break;
                     }
-                    if (replacement != null) {
-                        msg.replace(startPos, startPos + 2, replacement);
-                        startPos = startPos + replacement.length();
+                    if (replacement == null) {
+                        startPos++;
                     }
                     else {
-                        startPos++;
+                        msg.replace(startPos, startPos + 2, replacement);
+                        startPos = startPos + replacement.length();
                     }
                 }
                 startPos = msg.indexOf("%", startPos);

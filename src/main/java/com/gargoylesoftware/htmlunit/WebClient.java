@@ -625,7 +625,10 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
             }
 
-            if (pageDenied != PageDenied.NONE) {
+            if (pageDenied == PageDenied.NONE) {
+                newPage = pageCreator_.createPage(webResponse, webWindow);
+            }
+            else {
                 try {
                     final WebResponse aboutBlank = loadWebResponse(WebRequest.newAboutBlankRequest());
                     newPage = pageCreator_.createPage(aboutBlank, webWindow);
@@ -636,9 +639,6 @@ public class WebClient implements Serializable, AutoCloseable {
                 catch (final IOException e) {
                     // ignore
                 }
-            }
-            else {
-                newPage = pageCreator_.createPage(webResponse, webWindow);
             }
 
             if (windows_.contains(webWindow)) {
@@ -1006,7 +1006,10 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
-        if (url != null) {
+        if (url == null) {
+            initializeEmptyWindow(window);
+        }
+        else {
             try {
                 final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
@@ -1024,9 +1027,6 @@ public class WebClient implements Serializable, AutoCloseable {
             catch (final IOException e) {
                 LOG.error("Error loading content into window", e);
             }
-        }
-        else {
-            initializeEmptyWindow(window);
         }
         return window;
     }
@@ -1532,16 +1532,16 @@ public class WebClient implements Serializable, AutoCloseable {
         // Retrieve the response, either from the cache or from the server.
         final WebResponse fromCache = getCache().getCachedResponse(webRequest);
         final WebResponse webResponse;
-        if (fromCache != null) {
-            webResponse = new WebResponseFromCache(fromCache, webRequest);
-        }
-        else {
+        if (fromCache == null) {
             try {
                 webResponse = getWebConnection().getResponse(webRequest);
             }
             catch (final NoHttpResponseException e) {
                 return new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
             }
+        }
+        else {
+            webResponse = new WebResponseFromCache(fromCache, webRequest);
         }
 
         // Continue according to the HTTP status code.
@@ -2301,10 +2301,12 @@ public class WebClient implements Serializable, AutoCloseable {
             if (target_ != null && !target_.isEmpty()) {
                 return false;
             }
-            else if (requestingWindow_.isClosed()) {
+
+            if (requestingWindow_.isClosed()) {
                 return true;
             }
-            else if (requestingWindow_.getEnclosedPage() != originalPage_.get()) {
+
+            if (requestingWindow_.getEnclosedPage() != originalPage_.get()) {
                 return true;
             }
 
@@ -2418,9 +2420,30 @@ public class WebClient implements Serializable, AutoCloseable {
             }
 
             final WebWindow window = resolveWindow(loadJob.requestingWindow_, loadJob.target_);
-            if (!updatedWindows.contains(window)) {
+            if (updatedWindows.contains(window)) {
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("No usage of download: " + loadJob);
+                }
+            }
+            else {
                 final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, "_self");
-                if (loadJob.urlWithOnlyHashChange_ != null) {
+                if (loadJob.urlWithOnlyHashChange_ == null) {
+                    final Page pageBeforeLoad = win.getEnclosedPage();
+                    loadWebResponseInto(loadJob.response_, win);
+
+                    // start execution here.
+                    if (scriptEngine_ != null) {
+                        scriptEngine_.registerWindowAndMaybeStartEventLoop(win);
+                    }
+
+                    if (pageBeforeLoad != win.getEnclosedPage()) {
+                        updatedWindows.add(win);
+                    }
+
+                    // check and report problems if needed
+                    throwFailingHttpStatusCodeExceptionIfNecessary(loadJob.response_);
+                }
+                else {
                     final Page page = loadJob.requestingWindow_.getEnclosedPage();
                     final String oldURL = page.getUrl().toExternalForm();
 
@@ -2437,27 +2460,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
                     // add to history
                     win.getHistory().addPage(page);
-                }
-                else {
-                    final Page pageBeforeLoad = win.getEnclosedPage();
-                    loadWebResponseInto(loadJob.response_, win);
-
-                    // start execution here.
-                    if (scriptEngine_ != null) {
-                        scriptEngine_.registerWindowAndMaybeStartEventLoop(win);
-                    }
-
-                    if (pageBeforeLoad != win.getEnclosedPage()) {
-                        updatedWindows.add(win);
-                    }
-
-                    // check and report problems if needed
-                    throwFailingHttpStatusCodeExceptionIfNecessary(loadJob.response_);
-                }
-            }
-            else {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("No usage of download: " + loadJob);
                 }
             }
         }

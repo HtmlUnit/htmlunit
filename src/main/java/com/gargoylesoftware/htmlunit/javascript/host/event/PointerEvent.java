@@ -97,7 +97,10 @@ public class PointerEvent extends MouseEvent {
 
     private static Object getValue(final ScriptableObject object, final String name, final Object defaulValue) {
         Object value = object.get(name);
-        if (value != null) {
+        if (value == null) {
+            value = defaulValue;
+        }
+        else {
             if (defaulValue instanceof String) {
                 value = String.valueOf(value);
             }
@@ -110,9 +113,6 @@ public class PointerEvent extends MouseEvent {
             else {
                 value = Context.toBoolean(value);
             }
-        }
-        else {
-            value = defaulValue;
         }
         return value;
     }

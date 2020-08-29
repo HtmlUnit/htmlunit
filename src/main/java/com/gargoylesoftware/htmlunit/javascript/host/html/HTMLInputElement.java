@@ -124,6 +124,7 @@ public class HTMLInputElement extends HTMLElement {
                 default:
             }
         }
+
         if (browserVersion.hasFeature(HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED)
                 && "color".equals(type)) {
             type = "text";

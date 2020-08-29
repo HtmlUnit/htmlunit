@@ -130,7 +130,13 @@ public class Geolocation extends SimpleScriptable {
         if (os.contains("win")) {
             wifiStringString = getWifiStringWindows();
         }
-        if (wifiStringString != null) {
+
+        if (wifiStringString == null) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Operating System not supported: " + os);
+            }
+        }
+        else {
             String url = PROVIDER_URL_;
             if (url.contains("?")) {
                 url += '&';
@@ -173,11 +179,6 @@ public class Geolocation extends SimpleScriptable {
             }
             catch (final Exception e) {
                 LOG.error("", e);
-            }
-        }
-        else {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Operating System not supported: " + os);
             }
         }
     }

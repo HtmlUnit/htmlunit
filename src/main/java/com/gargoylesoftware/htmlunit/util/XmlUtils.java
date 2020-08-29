@@ -284,11 +284,11 @@ public final class XmlUtils {
             final Attr attribute = (Attr) nodeAttributes.item(orderedIndex);
             final String attributeNamespaceURI = attribute.getNamespaceURI();
             final String attributeQualifiedName;
-            if (attribute.getPrefix() != null) {
-                attributeQualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
+            if (attribute.getPrefix() == null) {
+                attributeQualifiedName = attribute.getLocalName();
             }
             else {
-                attributeQualifiedName = attribute.getLocalName();
+                attributeQualifiedName = attribute.getPrefix() + ':' + attribute.getLocalName();
             }
             final String value = attribute.getNodeValue();
             final boolean specified = attribute.getSpecified();

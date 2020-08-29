@@ -895,10 +895,7 @@ public class KeyboardEvent extends UIEvent {
         }
 
         int keyCode = 0;
-        if (!getType().equals(Event.TYPE_KEY_PRESS)) {
-            keyCode = Integer.valueOf(charToKeyCode(character));
-        }
-        else {
+        if (getType().equals(Event.TYPE_KEY_PRESS)) {
             if (getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY)) {
                 if (character < 32 || character > 126) {
                     keyCode = Integer.valueOf(charToKeyCode(character));
@@ -908,12 +905,15 @@ public class KeyboardEvent extends UIEvent {
                 keyCode = Integer.valueOf(character);
             }
         }
+        else {
+            keyCode = Integer.valueOf(charToKeyCode(character));
+        }
         setKeyCode(keyCode);
         if (getType().equals(Event.TYPE_KEY_PRESS) && (character >= 32 && character <= 126
                     || !getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY))) {
             charCode_ = character;
         }
-        which_ = charCode_ != 0 ? Integer.valueOf(charCode_) : keyCode;
+        which_ = charCode_ == 0 ? keyCode : Integer.valueOf(charCode_);
     }
 
     /**
