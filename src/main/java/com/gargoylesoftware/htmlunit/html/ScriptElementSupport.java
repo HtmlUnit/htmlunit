@@ -58,6 +58,7 @@ import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 public final class ScriptElementSupport {
 
     private static final Log LOG = LogFactory.getLog(ScriptElementSupport.class);
+
     /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
     private static final String SLASH_SLASH_COLON = "//:";
 
@@ -169,6 +170,7 @@ public final class ScriptElementSupport {
                     if (charset == null) {
                         charset = page.getCharset();
                     }
+
                     JavaScriptLoadResult result = null;
                     final Window win = page.getEnclosingWindow().getScriptableObject();
                     final Document doc = win.getDocument();
@@ -213,13 +215,6 @@ public final class ScriptElementSupport {
             finally {
                 doc.setCurrentScript(null);
             }
-
-            if (element.hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
-                executeEvent(element, Event.TYPE_LOAD);
-            }
-
-            // <script>[code]</script>
-            executeInlineScriptIfNeeded(element);
 
             if (element.hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
                 executeEvent(element, Event.TYPE_LOAD);

@@ -18,9 +18,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -51,13 +48,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  */
 public class HtmlScript extends HtmlElement implements ScriptElement {
 
-    private static final Log LOG = LogFactory.getLog(HtmlScript.class);
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "script";
-
-    /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
-    private static final String SLASH_SLASH_COLON = "//:";
 
     private boolean executed_;
     private boolean createdByJavascript_;
