@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -310,6 +311,8 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("12,345")
+    @BuggyWebDriver(FF = "12.345",
+            FF68 = "12.345")
     public void toLocaleStringNoParam() throws Exception {
         final String html = "<html><head><script>\n"
             + "  try {\n"

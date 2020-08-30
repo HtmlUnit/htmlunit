@@ -113,7 +113,7 @@ public class ErrorOutputChecker implements TestRule {
         };
     }
 
-    private void verifyNoOutput() {
+    void verifyNoOutput() {
         if (baos_.size() != 0) {
             String output = baos_.toString();
 
@@ -140,7 +140,7 @@ public class ErrorOutputChecker implements TestRule {
         System.setErr(new NSAPrintStreamWrapper(originalErr_, baos_));
     }
 
-    private void restoreSystemErr() {
+    void restoreSystemErr() {
         System.setErr(originalErr_);
     }
 }

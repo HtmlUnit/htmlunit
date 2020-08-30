@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -152,6 +153,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2013",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2013")
+    @BuggyWebDriver(FF = "20.12.2013",
+            FF68 = "20.12.2013")
     public void format_default() throws Exception {
         test("new Intl.DateTimeFormat().format(date)");
     }
@@ -1513,6 +1516,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
+    @BuggyWebDriver(FF = "20.12.2013",
+            FF68 = "20.12.2013")
     public void format_no() throws Exception {
         test("new Intl.DateTimeFormat('no').format(date)");
     }
@@ -1523,6 +1528,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
+    @BuggyWebDriver(FF = "20.12.2013",
+            FF68 = "20.12.2013")
     public void format_no_no() throws Exception {
         test("new Intl.DateTimeFormat('no-NO').format(date)");
     }

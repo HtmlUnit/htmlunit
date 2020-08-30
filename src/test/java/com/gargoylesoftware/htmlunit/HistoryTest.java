@@ -123,7 +123,7 @@ public class HistoryTest extends WebDriverTestCase {
      * Servlet for '/post1'.
      */
     public static class Post1Servlet extends HttpServlet {
-        private static int Count_ = 0;
+        static int Count_ = 0;
 
         /**
          * {@inheritDoc}
