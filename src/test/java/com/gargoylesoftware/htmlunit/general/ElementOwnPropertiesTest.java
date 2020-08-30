@@ -444,7 +444,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scroll(),scrollBy(),scrollTo(),self,sessionStorage,setImmediate(),setInterval(),"
                 + "setTimeout(),showHelp(),showModalDialog(),showModelessDialog(),status,styleMedia,top,"
                 + "toStaticHTML(),toString(),window"})
-    @HtmlUnitNYI(CHROME = {"alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
+    @HtmlUnitNYI(CHROME = {"alert(),atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),console,constructor(),"
                 + "crypto,devicePixelRatio,document,event,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),"
@@ -465,8 +465,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
                 + "onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
                 + "PERSISTENT,postMessage(),print(),prompt(),releaseEvents(),requestAnimationFrame(),resizeBy(),"
-                + "resizeTo()",
-                "screen,scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
+                + "resizeTo(),screen",
+                "scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
                 + "setTimeout(),speechSynthesis,status,stop(),styleMedia,TEMPORARY,top,window"},
             EDGE = {"alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),console,constructor(),"
