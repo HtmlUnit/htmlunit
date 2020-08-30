@@ -1473,7 +1473,7 @@ public class HtmlPage extends SgmlPage {
                 if (e instanceof HtmlScript) {
                     final HtmlScript script = (HtmlScript) e;
                     if (script.isDeferred()) {
-                        script.executeScriptIfNeeded();
+                        ScriptElementSupport.executeScriptIfNeeded(script);
                     }
                 }
             }

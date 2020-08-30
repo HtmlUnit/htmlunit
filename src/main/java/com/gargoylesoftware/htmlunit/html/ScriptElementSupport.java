@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_HANDLE_204_AS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
@@ -28,10 +29,12 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -85,41 +88,51 @@ public final class ScriptElementSupport {
             return;
         }
 
-        final PostponedAction action = new PostponedAction(element.getPage(), "Execution of script " + element) {
-            @Override
-            public void execute() {
-                final HTMLDocument jsDoc = (HTMLDocument)
-                        ((Window) element.getPage().getEnclosingWindow().getScriptableObject()).getDocument();
-                jsDoc.setExecutingDynamicExternalPosponed(element.getStartLineNumber() == -1
-                        && ((ScriptElement) element).getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+        final WebWindow webWindow = element.getPage().getEnclosingWindow();
+        if (webWindow != null) {
+            final PostponedAction action = new PostponedAction(element.getPage(), "Execution of script " + element) {
+                @Override
+                public void execute() {
+                    // see HTMLDocument.setExecutingDynamicExternalPosponed(boolean)
+                    HTMLDocument jsDoc = null;
+                    final Window window = webWindow.getScriptableObject();
+                    if (window != null) {
+                        jsDoc = (HTMLDocument) window.getDocument();
+                        jsDoc.setExecutingDynamicExternalPosponed(element.getStartLineNumber() == -1
+                                && ((ScriptElement) element).getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                    }
+                    try {
+                        executeScriptIfNeeded(element);
+                    }
+                    finally {
+                        if (jsDoc != null) {
+                            jsDoc.setExecutingDynamicExternalPosponed(false);
+                        }
+                    }
+                }
+            };
 
+            final AbstractJavaScriptEngine<?> engine = element.getPage().getWebClient().getJavaScriptEngine();
+            if (engine != null
+                    && element.hasAttribute("async") && !engine.isScriptRunning()) {
+                final HtmlPage owningPage = element.getHtmlPageOrNull();
+                owningPage.addAfterLoadAction(action);
+            }
+            else if (engine != null
+                    && (element.hasAttribute("async")
+                            || postponed && StringUtils.isBlank(element.getTextContent()))) {
+                engine.addPostponedAction(action);
+            }
+            else {
                 try {
-                    executeScriptIfNeeded(element);
+                    action.execute();
                 }
-                finally {
-                    jsDoc.setExecutingDynamicExternalPosponed(false);
+                catch (final RuntimeException e) {
+                    throw e;
                 }
-            }
-        };
-
-        final AbstractJavaScriptEngine<?> engine = element.getPage().getWebClient().getJavaScriptEngine();
-        if (element.hasAttribute("async") && !engine.isScriptRunning()) {
-            final HtmlPage owningPage = element.getHtmlPageOrNull();
-            owningPage.addAfterLoadAction(action);
-        }
-        else if (element.hasAttribute("async")
-                || postponed && StringUtils.isBlank(element.getTextContent())) {
-            engine.addPostponedAction(action);
-        }
-        else {
-            try {
-                action.execute();
-            }
-            catch (final RuntimeException e) {
-                throw e;
-            }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -136,8 +149,9 @@ public final class ScriptElementSupport {
         }
 
         final HtmlPage page = (HtmlPage) element.getPage();
+        final ScriptElement scriptElement = (ScriptElement) element;
 
-        final String src = ((ScriptElement) element).getSrcAttribute();
+        final String src = scriptElement.getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
             executeEvent(element, Event.TYPE_ERROR);
             return;
@@ -150,18 +164,36 @@ public final class ScriptElementSupport {
                     LOG.debug("Loading external JavaScript: " + src);
                 }
                 try {
-                    final ScriptElement scriptElement = (ScriptElement) element;
                     scriptElement.setExecuted(true);
                     Charset charset = EncodingSniffer.toCharset(scriptElement.getCharsetAttribute());
                     if (charset == null) {
                         charset = page.getCharset();
                     }
-                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, charset);
-                    if (result == JavaScriptLoadResult.SUCCESS || result == JavaScriptLoadResult.NO_CONTENT) {
+                    JavaScriptLoadResult result = null;
+                    final Window win = page.getEnclosingWindow().getScriptableObject();
+                    final Document doc = win.getDocument();
+                    try {
+                        doc.setCurrentScript(element.getScriptableObject());
+                        result = page.loadExternalJavaScriptFile(src, charset);
+                    }
+                    finally {
+                        doc.setCurrentScript(null);
+                    }
+
+                    if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(element, Event.TYPE_LOAD);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
                         executeEvent(element, Event.TYPE_ERROR);
+                    }
+                    else if (result == JavaScriptLoadResult.NO_CONTENT) {
+                        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+                        if (browserVersion.hasFeature(JS_SCRIPT_HANDLE_204_AS_ERROR)) {
+                            executeEvent(element, Event.TYPE_ERROR);
+                        }
+                        else {
+                            executeEvent(element, Event.TYPE_LOAD);
+                        }
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
@@ -171,6 +203,21 @@ public final class ScriptElementSupport {
             }
         }
         else if (element.getFirstChild() != null) {
+            // <script>[code]</script>
+            final Window win = page.getEnclosingWindow().getScriptableObject();
+            final Document doc = win.getDocument();
+            try {
+                doc.setCurrentScript(element.getScriptableObject());
+                executeInlineScriptIfNeeded(element);
+            }
+            finally {
+                doc.setCurrentScript(null);
+            }
+
+            if (element.hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
+                executeEvent(element, Event.TYPE_LOAD);
+            }
+
             // <script>[code]</script>
             executeInlineScriptIfNeeded(element);
 
@@ -286,7 +333,8 @@ public final class ScriptElementSupport {
             return;
         }
 
-        final String src = ((ScriptElement) element).getSrcAttribute();
+        final ScriptElement scriptElement = (ScriptElement) element;
+        final String src = scriptElement.getSrcAttribute();
         if (src != ATTRIBUTE_NOT_DEFINED) {
             return;
         }
@@ -299,13 +347,14 @@ public final class ScriptElementSupport {
         }
 
         final String scriptCode = getScriptCode(element);
-        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
-            if (element.hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-                final Window window = element.getPage().getEnclosingWindow().getScriptableObject();
-                final BaseFunction function = new EventHandler(element, event, scriptCode);
-                window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
-                return;
-            }
+        if (event != ATTRIBUTE_NOT_DEFINED
+                && forr != ATTRIBUTE_NOT_DEFINED
+                && element.hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW)
+                && "window".equals(forr)) {
+            final Window window = element.getPage().getEnclosingWindow().getScriptableObject();
+            final BaseFunction function = new EventHandler(element, event, scriptCode);
+            window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
+            return;
         }
         if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
             final String url = element.getPage().getUrl().toExternalForm();
@@ -316,7 +365,7 @@ public final class ScriptElementSupport {
             final String desc = "script in " + url + " from (" + line1 + ", " + col1
                 + ") to (" + line2 + ", " + col2 + ")";
 
-            ((ScriptElement) element).setExecuted(true);
+            scriptElement.setExecuted(true);
             ((HtmlPage) element.getPage()).executeJavaScript(scriptCode, desc, line1);
         }
     }

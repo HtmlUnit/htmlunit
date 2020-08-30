@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -345,4 +346,49 @@ public class DOMParserTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    @Test
+    @Alerts("[object HTMLDocument]")
+    public void parseFromString_doNotExecuteScripts() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Org</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var html = '<script>document.title = \"parsed script executed\";</' + 'script>';\n"
+            + "      var parser = new DOMParser();\n"
+            + "      alert(parser.parseFromString(html, 'text/html'));\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "Org");
+    }
+
+    @Test
+    @Alerts("[object HTMLDocument]")
+    public void parseFromString_doNotExecuteSvgScripts() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>Org</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var html = '<svg viewBox=\"0 0 10 10\" xmlns=\"http://www.w3.org/2000/svg\">'\n"
+            + "                + '<script>document.title = \"parsed script executed\";</' + 'script>'\n"
+            + "                + '</svg>';\n"
+            + "      var parser = new DOMParser();\n"
+            + "      alert(parser.parseFromString(html, 'text/html'));\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "Org");
+    }
 }

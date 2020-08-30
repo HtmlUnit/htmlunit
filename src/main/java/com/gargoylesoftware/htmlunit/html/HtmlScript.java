@@ -14,36 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_HANDLE_204_AS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
-import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
-import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
-
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * Wrapper for the HTML element "script".<br>
@@ -199,7 +180,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             final PostponedAction action = new PostponedAction(getPage()) {
                 @Override
                 public void execute() {
-                    executeScriptIfNeeded();
+                    ScriptElementSupport.executeScriptIfNeeded(HtmlScript.this);
                 }
             };
             final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
@@ -209,101 +190,12 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     /**
      * Executes the <tt>onreadystatechange</tt> handler when simulating IE, as well as executing
-     * the script itself, if necessary. {@inheritDoc}
+     * the script itself, if necessary.
+     * {@inheritDoc}
      */
     @Override
     public void onAllChildrenAddedToPage(final boolean postponed) {
-        if (getOwnerDocument() instanceof XmlPage) {
-            return;
-        }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Script node added: " + asXml());
-        }
-
-        final PostponedAction action = new PostponedAction(getPage(), "Execution of script " + this) {
-            @Override
-            public void execute() {
-                Object jsDoc = null;
-                final Window window = getPage().getEnclosingWindow().getScriptableObject();
-                if (window != null) {
-                    jsDoc = window.getDocument();
-                    ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
-                            && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
-                }
-                try {
-                    executeScriptIfNeeded();
-                }
-                finally {
-                    if (jsDoc instanceof HTMLDocument) {
-                        ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(false);
-                    }
-                }
-            }
-        };
-
-        final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
-        if (engine != null
-                && hasAttribute("async") && !engine.isScriptRunning()) {
-            final HtmlPage owningPage = getHtmlPageOrNull();
-            owningPage.addAfterLoadAction(action);
-        }
-        else if (engine != null && (hasAttribute("async")
-                                    || postponed && StringUtils.isBlank(getTextContent()))) {
-            engine.addPostponedAction(action);
-        }
-        else {
-            try {
-                action.execute();
-            }
-            catch (final RuntimeException e) {
-                throw e;
-            }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    /**
-     * Executes this script node as inline script if necessary and/or possible.
-     */
-    private void executeInlineScriptIfNeeded() {
-        if (!isExecutionNeeded()) {
-            return;
-        }
-
-        final String src = getSrcAttribute();
-        if (src != ATTRIBUTE_NOT_DEFINED) {
-            return;
-        }
-
-        final String forr = getHtmlForAttribute();
-        String event = getEventAttribute();
-        // The event name can be like "onload" or "onload()".
-        if (event.endsWith("()")) {
-            event = event.substring(0, event.length() - 2);
-        }
-
-        final String scriptCode = getScriptCode();
-        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED
-                && hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-            final Window window = getPage().getEnclosingWindow().getScriptableObject();
-            final BaseFunction function = new EventHandler(this, event, scriptCode);
-            window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
-            return;
-        }
-        if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
-            final String url = getPage().getUrl().toExternalForm();
-            final int line1 = getStartLineNumber();
-            final int line2 = getEndLineNumber();
-            final int col1 = getStartColumnNumber();
-            final int col2 = getEndColumnNumber();
-            final String desc = "script in " + url + " from (" + line1 + ", " + col1
-                + ") to (" + line2 + ", " + col2 + ")";
-
-            executed_ = true;
-            ((HtmlPage) getPage()).executeJavaScript(scriptCode, desc, line1);
-        }
+        ScriptElementSupport.onAllChildrenAddedToPage(this, postponed);
     }
 
     /**
@@ -319,149 +211,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             }
         }
         return scriptCode.toString();
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Executes this script node if necessary and/or possible.
-     */
-    public void executeScriptIfNeeded() {
-        if (!isExecutionNeeded()) {
-            return;
-        }
-
-        final HtmlPage page = (HtmlPage) getPage();
-
-        final String src = getSrcAttribute();
-
-        if (src != ATTRIBUTE_NOT_DEFINED) {
-            if (src.equals(SLASH_SLASH_COLON)) {
-                executeEvent(Event.TYPE_ERROR);
-                return;
-            }
-
-            if (!src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                // <script src="[url]"></script>
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Loading external JavaScript: " + src);
-                }
-                try {
-                    executed_ = true;
-                    Charset charset = EncodingSniffer.toCharset(getCharsetAttribute());
-                    if (charset == null) {
-                        charset = page.getCharset();
-                    }
-
-                    JavaScriptLoadResult result = null;
-                    final Window win = page.getEnclosingWindow().getScriptableObject();
-                    final Document doc = win.getDocument();
-                    try {
-                        doc.setCurrentScript(getScriptableObject());
-                        result = page.loadExternalJavaScriptFile(src, charset);
-                    }
-                    finally {
-                        doc.setCurrentScript(null);
-                    }
-
-                    if (result == JavaScriptLoadResult.SUCCESS) {
-                        executeEvent(Event.TYPE_LOAD);
-                    }
-                    else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
-                        executeEvent(Event.TYPE_ERROR);
-                    }
-                    else if (result == JavaScriptLoadResult.NO_CONTENT) {
-                        final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-                        if (browserVersion.hasFeature(JS_SCRIPT_HANDLE_204_AS_ERROR)) {
-                            executeEvent(Event.TYPE_ERROR);
-                        }
-                        else {
-                            executeEvent(Event.TYPE_LOAD);
-                        }
-                    }
-                }
-                catch (final FailingHttpStatusCodeException e) {
-                    executeEvent(Event.TYPE_ERROR);
-                    throw e;
-                }
-            }
-        }
-        else if (getFirstChild() != null) {
-            // <script>[code]</script>
-            final Window win = page.getEnclosingWindow().getScriptableObject();
-            final Document doc = win.getDocument();
-            try {
-                doc.setCurrentScript(getScriptableObject());
-                executeInlineScriptIfNeeded();
-            }
-            finally {
-                doc.setCurrentScript(null);
-            }
-
-            if (hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
-                executeEvent(Event.TYPE_LOAD);
-            }
-        }
-    }
-
-    private void executeEvent(final String type) {
-        final Object scriptable = getScriptableObject();
-        final HTMLScriptElement script = (HTMLScriptElement) scriptable;
-        final Event event = new Event(this, type);
-        script.executeEventLocally(event);
-    }
-
-    /**
-     * Indicates if script execution is necessary and/or possible.
-     *
-     * @return {@code true} if the script should be executed
-     */
-    private boolean isExecutionNeeded() {
-        if (executed_) {
-            return false;
-        }
-
-        if (!isAttachedToPage()) {
-            return false;
-        }
-
-        // If JavaScript is disabled, we don't need to execute.
-        final SgmlPage page = getPage();
-        if (!page.getWebClient().isJavaScriptEnabled()) {
-            return false;
-        }
-
-        // If innerHTML or outerHTML is being parsed
-        final HtmlPage htmlPage = getHtmlPageOrNull();
-        if (htmlPage != null && htmlPage.isParsingHtmlSnippet()) {
-            return false;
-        }
-
-        // If the script node is nested in an iframe, a noframes, or a noscript node, we don't need to execute.
-        for (DomNode o = this; o != null; o = o.getParentNode()) {
-            if (o instanceof HtmlInlineFrame || o instanceof HtmlNoFrames) {
-                return false;
-            }
-        }
-
-        // If the underlying page no longer owns its window, the client has moved on (possibly
-        // because another script set window.location.href), and we don't need to execute.
-        if (page.getEnclosingWindow() != null && page.getEnclosingWindow().getEnclosedPage() != page) {
-            return false;
-        }
-
-        // If the script language is not JavaScript, we can't execute.
-        final String t = getTypeAttribute();
-        final String l = getLanguageAttribute();
-        if (!ScriptElementSupport.isJavaScript(this, t, l)) {
-            LOG.warn("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
-            return false;
-        }
-
-        // If the script's root ancestor node is not the page, then the script is not a part of the page.
-        // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
-
-        return getPage().isAncestorOf(this);
     }
 
     /**
