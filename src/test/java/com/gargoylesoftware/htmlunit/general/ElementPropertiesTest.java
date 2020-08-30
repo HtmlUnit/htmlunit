@@ -945,7 +945,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
+    @Alerts(CHROME = "addEventListener(),alert(),atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),"
                 + "cdc_adoQpoasnfa76pfcZLmcfl_Array(),cdc_adoQpoasnfa76pfcZLmcfl_Promise(),"
                 + "cdc_adoQpoasnfa76pfcZLmcfl_Symbol(),"
@@ -1117,7 +1117,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "sessionStorage,setImmediate(),setInterval(),setTimeout(),showHelp(),showModalDialog(),"
                 + "showModelessDialog(),sortFunction(),status,styleMedia,test(),top,toStaticHTML(),toString(),"
                 + "window")
-    @HtmlUnitNYI(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
+    @HtmlUnitNYI(CHROME = "addEventListener(),alert(),atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
                 + "console,crypto,devicePixelRatio,dispatchEvent(),document,event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,"

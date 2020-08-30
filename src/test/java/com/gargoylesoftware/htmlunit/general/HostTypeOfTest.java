@@ -126,9 +126,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF68 = "undefined",
+    @Alerts(DEFAULT = "undefined",
+            EDGE = "function",
             IE = "object")
     public void applicationCache() throws Exception {
         test("ApplicationCache");
@@ -139,7 +138,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
             EDGE = "function")
     public void applicationCacheErrorEvent() throws Exception {
         test("ApplicationCacheErrorEvent");

@@ -1547,7 +1547,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "", "10", "10", "rgb(0, 128, 0)"},
-            CHROME = {"", "", "", "auto", "auto", "rgb(0, 128, 0)"},
             EDGE = {"", "", "", "auto", "auto", "rgb(0, 128, 0)"})
     public void zIndexComputed() throws Exception {
         final String html = "<html><head>\n"

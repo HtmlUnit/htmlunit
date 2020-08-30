@@ -100,7 +100,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<?xml32version=\"1.0\"32encoding=\"UTF-8\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232<xsl:template32match=\"/\">103232<html>"
                     + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>",
-            CHROME = "<?xml32version=\"1.0\"32encoding=\"UTF-8\"?><xsl:stylesheet32xmlns:xsl="
+            CHROME = "<?xml32version=\"1.0\"32encoding=\"ISO-8859-1\"?><xsl:stylesheet32xmlns:xsl="
                     + "\"http://www.w3.org/1999/XSL/Transform\"32version=\"1.0\">103232<xsl:template32"
                     + "match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
                     + "</xsl:template>10</xsl:stylesheet>",
@@ -177,7 +177,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>",
-            CHROME = "<?xml32version=\"1.0\"32encoding=\"UTF-8\"?><html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+            CHROME = "<?xml32version=\"1.0\"32encoding=\"ISO-8859-1\"?><html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body32id=\"bodyId\">"
                     + "<span32class=\"spanClass\">foo</span>"

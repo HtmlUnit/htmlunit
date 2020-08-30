@@ -112,7 +112,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion EDGE = new BrowserVersion(84, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(84, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(85, "Chrome");
 
     /**
      * The best supported browser version at the moment.
@@ -210,9 +210,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.105 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4183.83 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4147.105 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4183.83 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -233,7 +233,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
         CHROME.acceptEncodingHeader_ = "gzip, deflate, br";
-        CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;"
+        CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/apng,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
         CHROME.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
