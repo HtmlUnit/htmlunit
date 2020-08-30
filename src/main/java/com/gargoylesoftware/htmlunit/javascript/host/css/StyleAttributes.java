@@ -2685,7 +2685,7 @@ public final class StyleAttributes {
         /** The style property {@code page-break-inside}. */
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff("auto")),
 
-        /** The style property {@code page-break-inside}. */
+        /** The style property {@code pageOrientation}. */
         PAGE_ORIENTATION("pageOrientation", "page-orientation", chromeAndEdge("")),
 
         /** The style property {@code paintOrder}. */
