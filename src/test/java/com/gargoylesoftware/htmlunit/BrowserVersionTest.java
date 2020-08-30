@@ -35,7 +35,7 @@ public class BrowserVersionTest extends WebTestCase {
         assertEquals(68, BrowserVersion.FIREFOX_68.getBrowserVersionNumeric());
         assertEquals(11, BrowserVersion.INTERNET_EXPLORER.getBrowserVersionNumeric());
         assertEquals(85, BrowserVersion.CHROME.getBrowserVersionNumeric());
-        assertEquals(84, BrowserVersion.EDGE.getBrowserVersionNumeric());
+        assertEquals(85, BrowserVersion.EDGE.getBrowserVersionNumeric());
     }
 
     /**
