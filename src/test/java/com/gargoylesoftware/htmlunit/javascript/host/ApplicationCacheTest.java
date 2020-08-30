@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ApplicationCacheTest extends WebDriverTestCase {
