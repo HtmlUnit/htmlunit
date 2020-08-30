@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.ScriptElementSupport;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -114,8 +115,7 @@ public class HTMLScriptElement extends HTMLElement {
         final DomNode textChild = new DomText(htmlElement.getPage(), text);
         htmlElement.appendChild(textChild);
 
-        final HtmlScript tmpScript = (HtmlScript) htmlElement;
-        tmpScript.executeScriptIfNeeded();
+        ScriptElementSupport.executeScriptIfNeeded(htmlElement);
     }
 
     /**
@@ -180,12 +180,12 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     public Object appendChild(final Object childObject) {
-        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        final HtmlElement tmpScript = getDomNodeOrDie();
         final boolean wasEmpty = tmpScript.getFirstChild() == null;
         final Object result = super.appendChild(childObject);
 
         if (wasEmpty) {
-            tmpScript.executeScriptIfNeeded();
+            ScriptElementSupport.executeScriptIfNeeded(tmpScript);
         }
         return result;
     }
