@@ -2664,7 +2664,7 @@ public final class StyleAttributes {
         /** The style property {@code padding-top}. */
         PADDING_TOP_("padding-top", "padding-top", ff("0px")),
 
-        /** The style property {@code pageBreakAfter}. */
+        /** The style property {@code page}. */
         PAGE("page", "page", chromeAndEdge("auto")),
 
         /** The style property {@code pageBreakAfter}. */

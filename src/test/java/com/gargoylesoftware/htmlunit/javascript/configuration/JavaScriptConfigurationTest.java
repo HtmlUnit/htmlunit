@@ -14,10 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_68;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -260,12 +257,10 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     @Test
     public void obsoleteJsxClasses() {
         final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX);
-        final BrowserVersion[] browsers = new BrowserVersion[]
-        {FIREFOX, FIREFOX_68, CHROME, INTERNET_EXPLORER};
 
         for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
             boolean found = false;
-            for (final BrowserVersion browser : browsers) {
+            for (final BrowserVersion browser : BrowserVersion.ALL_SUPPORTED_BROWSERS) {
                 if (AbstractJavaScriptConfiguration.getClassConfiguration(klass, browser) != null) {
                     found = true;
                     break;

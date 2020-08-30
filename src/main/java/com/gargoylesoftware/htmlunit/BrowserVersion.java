@@ -93,26 +93,25 @@ public final class BrowserVersion implements Serializable {
      */
     private static final String PLATFORM_WIN64 = "Win64";
 
-    /**
-     * Firefox.
-     * @since 2.38
-     */
+    /** Latest Firefox. */
     public static final BrowserVersion FIREFOX = new BrowserVersion(80, "FF");
 
-    /**
-     * Firefox 68 ESR.
-     * @since 2.37
-     */
+    /** Firefox 68 ESR. */
     public static final BrowserVersion FIREFOX_68 = new BrowserVersion(68, "FF68");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
-    /** Edge */
+    /** Latest Edge */
     public static final BrowserVersion EDGE = new BrowserVersion(84, "Edge");
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(85, "Chrome");
+
+    /**
+     * Array with all supported browsers
+     */
+    public static final BrowserVersion[] ALL_SUPPORTED_BROWSERS = new BrowserVersion[] {CHROME, EDGE, FIREFOX, FIREFOX_68, INTERNET_EXPLORER};
 
     /**
      * The best supported browser version at the moment.
