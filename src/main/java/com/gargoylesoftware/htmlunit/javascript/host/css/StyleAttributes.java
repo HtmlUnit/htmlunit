@@ -179,7 +179,7 @@ public final class StyleAttributes {
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
 
         /** The style property {@code appearance}. */
-        APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ff("none")),
+        APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ffLatest("none")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
@@ -857,6 +857,9 @@ public final class StyleAttributes {
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdge("normal"), ffLatest("normal"), ff68("none")),
 
+        /** The style property {@code contentVisibility}. */
+        CONTENT_VISISBILITY("contentVisibility", "content-visibility", chromeAndEdge("visible")),
+
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chromeAndEdge("none"), ff("none"), ie("none")),
 
@@ -870,7 +873,7 @@ public final class StyleAttributes {
         COUNTER_RESET_("counter-reset", "counter-reset", ff("none")),
 
         /** The style property {@code counterSet}. */
-        COUNTER_SET("counterSet", "counter-set", ff68AndUp("none")),
+        COUNTER_SET("counterSet", "counter-set", chromeAndEdge("none"), ff68AndUp("none")),
 
         /** The style property {@code counter-set}. */
         COUNTER_SET_("counter-set", "counter-set", ff68AndUp("none")),
@@ -1273,6 +1276,12 @@ public final class StyleAttributes {
 
         /** The style property {@code ime-mode}. */
         IME_MODE_("ime-mode", "ime-mode", ff("auto")),
+
+        /** The style property {@code inherits}. */
+        INHERITS("inherits", "inherits", chromeAndEdge("")),
+
+        /** The style property {@code initialValue}. */
+        INITIAL_VALUE("initialValue", "initial-value", chromeAndEdge("")),
 
         /** The style property {@code inlineSize}. */
         INLINE_SIZE("inlineSize", "inline-size", ff68AndUp("1244px"), chromeAndEdge("1240px")),
@@ -2656,6 +2665,9 @@ public final class StyleAttributes {
         PADDING_TOP_("padding-top", "padding-top", ff("0px")),
 
         /** The style property {@code pageBreakAfter}. */
+        PAGE("page", "page", chromeAndEdge("auto")),
+
+        /** The style property {@code pageBreakAfter}. */
         PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chromeAndEdge("auto"), ff("auto"), ie("auto")),
 
         /** The style property {@code page-break-after}. */
@@ -2672,6 +2684,9 @@ public final class StyleAttributes {
 
         /** The style property {@code page-break-inside}. */
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff("auto")),
+
+        /** The style property {@code page-break-inside}. */
+        PAGE_ORIENTATION("pageOrientation", "page-orientation", chromeAndEdge("")),
 
         /** The style property {@code paintOrder}. */
         PAINT_ORDER("paintOrder", "paint-order", ff("normal"), chromeAndEdge("normal")),
@@ -3122,6 +3137,9 @@ public final class StyleAttributes {
 
         /** The style property {@code styleFloat}. */
         STYLE_FLOAT("styleFloat", "style-float", ie("undefined")),
+
+        /** The style property {@code syntax}. */
+        SYNTAX("syntax", "syntax", chromeAndEdge("")),
 
         /** The style property {@code tabSize}. */
         TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8")),
