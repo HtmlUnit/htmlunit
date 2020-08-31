@@ -187,6 +187,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.WebKitMutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ApplicationCacheErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.AudioProcessingEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeInstallPromptEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -399,7 +400,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
-        ApplicationCache.class, Atomics.class,
+        ApplicationCache.class, ApplicationCacheErrorEvent.class,
+        Atomics.class,
         Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,

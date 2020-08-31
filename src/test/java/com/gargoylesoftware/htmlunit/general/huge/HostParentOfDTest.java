@@ -1968,6 +1968,17 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            EDGE = "true")
+    public void _Event_ApplicationCacheErrorEvent() throws Exception {
+        test("Event", "ApplicationCacheErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Event_AudioProcessingEvent() throws Exception {
@@ -2580,6 +2591,17 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_Animation() throws Exception {
         test("EventTarget", "Animation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            EDGE = "true")
+    public void _EventTarget_ApplicationCache() throws Exception {
+        test("EventTarget", "ApplicationCache");
     }
 
     /**
