@@ -2504,28 +2504,30 @@ public class HtmlPage extends SgmlPage {
 
         elementWithFocus_ = newElement;
 
-        if (elementWithFocus_ instanceof SelectableTextInput
+        // use newElement in the code below because element elementWithFocus_
+        // might be changed by another thread
+        if (newElement instanceof SelectableTextInput
                 && hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
-            final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
+            final SelectableTextInput sti = (SelectableTextInput) newElement;
             setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
         }
 
-        if (elementWithFocus_ != null) {
+        if (newElement != null) {
             if (getWebClient().isJavaScriptEnabled()) {
                 final Object o = getScriptableObject();
                 if (o instanceof HTMLDocument) {
-                    final Object e = elementWithFocus_.getScriptableObject();
+                    final Object e = newElement.getScriptableObject();
                     if (e instanceof HTMLElement) {
                         ((HTMLDocument) o).setActiveElement((HTMLElement) e);
                     }
                 }
             }
 
-            elementWithFocus_.focus();
-            elementWithFocus_.fireEvent(Event.TYPE_FOCUS);
+            newElement.focus();
+            newElement.fireEvent(Event.TYPE_FOCUS);
 
             if (hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
-                elementWithFocus_.fireEvent(Event.TYPE_FOCUS_IN);
+                newElement.fireEvent(Event.TYPE_FOCUS_IN);
             }
         }
 
