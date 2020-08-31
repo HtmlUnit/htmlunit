@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, FF80">
+            <action type="fix" dev="rbri" issue="#216">
+                DOMParser.parseFromString no longer tries to execute script tags
+                contained in the given input.
+            </action>
             <action type="add" dev="rbri" issue=" #212" due-to="Thorsten Wendelmuth">
                 Support for placeholder-shown / -ms-input-placeholder added.
             </action>
