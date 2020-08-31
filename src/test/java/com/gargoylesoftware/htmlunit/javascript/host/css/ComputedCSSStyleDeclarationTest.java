@@ -1546,8 +1546,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "", "10", "10", "rgb(0, 128, 0)"},
-            EDGE = {"", "", "", "auto", "auto", "rgb(0, 128, 0)"})
+    @Alerts({"", "", "", "10", "10", "rgb(0, 128, 0)"})
     public void zIndexComputed() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"

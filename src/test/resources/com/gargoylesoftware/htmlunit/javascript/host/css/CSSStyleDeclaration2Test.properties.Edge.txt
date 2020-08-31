@@ -111,8 +111,10 @@ columns
 contain
 containIntrinsicSize
 content
+contentVisibility
 counterIncrement
 counterReset
+counterSet
 cssFloat
 cssText
 cursor
@@ -177,6 +179,8 @@ height
 hyphens
 imageOrientation
 imageRendering
+inherits
+initialValue
 inlineSize
 isolation
 justifyContent
@@ -252,9 +256,11 @@ paddingInlineStart
 paddingLeft
 paddingRight
 paddingTop
+page
 pageBreakAfter
 pageBreakBefore
 pageBreakInside
+pageOrientation
 paintOrder
 perspective
 perspectiveOrigin
@@ -314,6 +320,7 @@ strokeLinejoin
 strokeMiterlimit
 strokeOpacity
 strokeWidth
+syntax
 tabSize
 tableLayout
 textAlign
