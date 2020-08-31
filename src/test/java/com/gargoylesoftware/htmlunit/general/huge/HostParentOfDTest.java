@@ -1969,7 +1969,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true",
             EDGE = "true")
     public void _Event_ApplicationCacheErrorEvent() throws Exception {
         test("Event", "ApplicationCacheErrorEvent");
@@ -2598,7 +2597,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true",
             EDGE = "true")
     public void _EventTarget_ApplicationCache() throws Exception {
         test("EventTarget", "ApplicationCache");
