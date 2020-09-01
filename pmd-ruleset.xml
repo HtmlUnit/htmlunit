@@ -24,7 +24,6 @@
         <exclude name="ShortVariable"/>
         <exclude name="TooManyStaticImports"/>
         <exclude name="UnnecessaryLocalBeforeReturn"/>
-        <exclude name="UseUnderscoresInNumericLiterals"/>
         <exclude name="UnnecessaryConstructor"/>
         <exclude name="UnnecessaryFullyQualifiedName"/>
         <exclude name="UselessParentheses"/>
