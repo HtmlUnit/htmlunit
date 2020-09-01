@@ -128,7 +128,14 @@ public class HtmlLabel extends HtmlElement {
      */
     public HtmlElement getLabeledElement() {
         final String elementId = getForAttribute();
-        if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
+        if (ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
+            for (final DomNode element : getChildren()) {
+                if (element instanceof LabelableElement) {
+                    return (HtmlElement) element;
+                }
+            }
+        }
+        else {
             try {
                 final HtmlElement element = ((HtmlPage) getPage()).getHtmlElementById(elementId);
                 if (element instanceof LabelableElement) {
@@ -137,13 +144,6 @@ public class HtmlLabel extends HtmlElement {
             }
             catch (final ElementNotFoundException e) {
                 return null;
-            }
-        }
-        else {
-            for (final DomNode element : getChildren()) {
-                if (element instanceof LabelableElement) {
-                    return (HtmlElement) element;
-                }
             }
         }
         return null;

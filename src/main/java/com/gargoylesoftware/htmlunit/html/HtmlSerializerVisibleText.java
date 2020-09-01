@@ -321,11 +321,11 @@ public class HtmlSerializerVisibleText {
             final HtmlTableRow htmlTableRow, final Mode mode) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (!first) {
-                builder.appendBlank();
+            if (first) {
+                first = false;
             }
             else {
-                first = false;
+                builder.appendBlank();
             }
             appendChildren(builder, cell, mode); // trim?
         }
@@ -374,14 +374,16 @@ public class HtmlSerializerVisibleText {
         final List<HtmlTableRow> tableRows = htmlTable.getRows();
         first = appendTableRows(builder, mode, tableRows, first, tableHeader, tableFooter);
 
-        if (tableFooter != null) {
-            first = appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
-        }
-        else if (tableRows.isEmpty()) {
-            final DomNode firstChild = htmlTable.getFirstChild();
-            if (firstChild != null) {
-                appendNode(builder, firstChild, mode);
+        if (tableFooter == null) {
+            if (tableRows.isEmpty()) {
+                final DomNode firstChild = htmlTable.getFirstChild();
+                if (firstChild != null) {
+                    appendNode(builder, firstChild, mode);
+                }
             }
+        }
+        else {
+            first = appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
         }
 
         builder.appendBlockSeparator();
@@ -617,11 +619,11 @@ public class HtmlSerializerVisibleText {
         // nothing to do
     }
 
-    private boolean isVisible(final DomNode node) {
+    private static boolean isVisible(final DomNode node) {
         return node.isDisplayed();
     }
 
-    private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();
