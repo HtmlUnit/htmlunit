@@ -132,13 +132,11 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         checkedState_ = isChecked;
         if (isChecked) {
             final HtmlForm form = getEnclosingForm();
-            if (form == null) {
-                if (page instanceof HtmlPage) {
-                    setCheckedForPage((HtmlPage) page);
-                }
-            }
-            else {
+            if (form != null) {
                 form.setCheckedRadioButton(this);
+            }
+            else if (page != null && page.isHtmlPage()) {
+                setCheckedForPage((HtmlPage) page);
             }
         }
 
@@ -161,19 +159,17 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         final HtmlForm form = getEnclosingForm();
+        final boolean changed = !isChecked();
 
         final Page page = getPage();
-        if (form == null) {
-            if (page instanceof HtmlPage) {
-                setCheckedForPage((HtmlPage) page);
-            }
-        }
-        else {
+        if (form != null) {
             form.setCheckedRadioButton(this);
         }
-
+        else if (page != null && page.isHtmlPage()) {
+            setCheckedForPage((HtmlPage) page);
+        }
         super.doClickStateUpdate(shiftKey, ctrlKey);
-        return !isChecked();
+        return changed;
     }
 
     /**

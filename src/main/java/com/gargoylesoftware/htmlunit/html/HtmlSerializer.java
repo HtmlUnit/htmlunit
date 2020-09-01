@@ -296,11 +296,11 @@ public class HtmlSerializer {
     protected void appendTableRow(final HtmlSerializerTextBuilder builder, final HtmlTableRow htmlTableRow) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (first) {
-                first = false;
+            if (!first) {
+                builder.appendTab();
             }
             else {
-                builder.appendTab();
+                first = false;
             }
             appendChildren(builder, cell); // trim?
         }
@@ -344,16 +344,14 @@ public class HtmlSerializer {
         final List<HtmlTableRow> tableRows = htmlTable.getRows();
         first = appendTableRows(builder, tableRows, first, tableHeader, tableFooter);
 
-        if (tableFooter == null) {
-            if (tableRows.isEmpty()) {
-                final DomNode firstChild = htmlTable.getFirstChild();
-                if (firstChild != null) {
-                    appendNode(builder, firstChild);
-                }
-            }
-        }
-        else {
+        if (tableFooter != null) {
             first = appendTableRows(builder, tableFooter.getRows(), first, null, null);
+        }
+        else if (tableRows.isEmpty()) {
+            final DomNode firstChild = htmlTable.getFirstChild();
+            if (firstChild != null) {
+                appendNode(builder, firstChild);
+            }
         }
 
         builder.appendBlockSeparator();

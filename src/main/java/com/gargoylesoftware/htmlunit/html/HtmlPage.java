@@ -725,11 +725,17 @@ public class HtmlPage extends SgmlPage {
      * @return the resolved target to use for the element
      */
     public String getResolvedTarget(final String elementTarget) {
-        if (base_ == null
-                || elementTarget == null || elementTarget.isEmpty()) {
-            return elementTarget;
+        final String resolvedTarget;
+        if (base_ == null) {
+            resolvedTarget = elementTarget;
         }
-        return base_.getTargetAttribute();
+        else if (elementTarget != null && !elementTarget.isEmpty()) {
+            resolvedTarget = elementTarget;
+        }
+        else {
+            resolvedTarget = base_.getTargetAttribute();
+        }
+        return resolvedTarget;
     }
 
     /**
@@ -1093,12 +1099,12 @@ public class HtmlPage extends SgmlPage {
         final Charset contentCharset = EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
         if (contentCharset == null) {
             // use info from script tag or fall back to utf-8
-            if (scriptCharset == null || ISO_8859_1 == scriptCharset) {
-                ignoreBom = ISO_8859_1 != scriptCharset;
-            }
-            else {
+            if (scriptCharset != null && ISO_8859_1 != scriptCharset) {
                 ignoreBom = true;
                 scriptEncoding = scriptCharset;
+            }
+            else {
+                ignoreBom = ISO_8859_1 != scriptCharset;
             }
         }
         else if (ISO_8859_1 == contentCharset) {
@@ -1159,11 +1165,11 @@ public class HtmlPage extends SgmlPage {
             }
             final Map<String, DomAttr> emptyMap = Collections.emptyMap();
             titleElement = new HtmlTitle(HtmlTitle.TAG_NAME, this, emptyMap);
-            if (head.getFirstChild() == null) {
-                head.appendChild(titleElement);
+            if (head.getFirstChild() != null) {
+                head.getFirstChild().insertBefore(titleElement);
             }
             else {
-                head.getFirstChild().insertBefore(titleElement);
+                head.appendChild(titleElement);
             }
         }
 

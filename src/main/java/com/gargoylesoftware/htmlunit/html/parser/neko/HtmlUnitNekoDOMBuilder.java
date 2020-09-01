@@ -313,18 +313,17 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             headParsed_ = lastTagWasSynthesized_ ? HeadParsed.SYNTHESIZED : HeadParsed.YES;
         }
 
-        if (namespaceURI == null) {
-            // add a head if none was there
-            if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-                final ElementFactory factory =
-                        htmlParser_.getElementFactory(page_, namespaceURI, "head", insideSvg_, false);
-                final DomElement newElement = factory.createElement(page_, "head", null);
-                currentNode_.appendChild(newElement);
-                headParsed_ = HeadParsed.SYNTHESIZED;
-            }
-        }
-        else {
+        if (namespaceURI != null) {
             namespaceURI = namespaceURI.trim();
+        }
+
+        // add a head if none was there
+        else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
+            final ElementFactory factory =
+                    htmlParser_.getElementFactory(page_, namespaceURI, "head", insideSvg_, false);
+            final DomElement newElement = factory.createElement(page_, "head", null);
+            currentNode_.appendChild(newElement);
+            headParsed_ = HeadParsed.SYNTHESIZED;
         }
 
         // If we're adding a body element, keep track of any temporary synthetic ones

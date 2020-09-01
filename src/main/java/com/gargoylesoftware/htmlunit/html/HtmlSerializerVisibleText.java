@@ -321,11 +321,11 @@ public class HtmlSerializerVisibleText {
             final HtmlTableRow htmlTableRow, final Mode mode) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (first) {
-                first = false;
+            if (!first) {
+                builder.appendBlank();
             }
             else {
-                builder.appendBlank();
+                first = false;
             }
             appendChildren(builder, cell, mode); // trim?
         }
@@ -374,16 +374,14 @@ public class HtmlSerializerVisibleText {
         final List<HtmlTableRow> tableRows = htmlTable.getRows();
         first = appendTableRows(builder, mode, tableRows, first, tableHeader, tableFooter);
 
-        if (tableFooter == null) {
-            if (tableRows.isEmpty()) {
-                final DomNode firstChild = htmlTable.getFirstChild();
-                if (firstChild != null) {
-                    appendNode(builder, firstChild, mode);
-                }
-            }
-        }
-        else {
+        if (tableFooter != null) {
             first = appendTableRows(builder, mode, tableFooter.getRows(), first, null, null);
+        }
+        else if (tableRows.isEmpty()) {
+            final DomNode firstChild = htmlTable.getFirstChild();
+            if (firstChild != null) {
+                appendNode(builder, firstChild, mode);
+            }
         }
 
         builder.appendBlockSeparator();
@@ -619,11 +617,11 @@ public class HtmlSerializerVisibleText {
         // nothing to do
     }
 
-    private static boolean isVisible(final DomNode node) {
+    private boolean isVisible(final DomNode node) {
         return node.isDisplayed();
     }
 
-    private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();

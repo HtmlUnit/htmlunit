@@ -377,18 +377,16 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         if (isMultipleSelectEnabled()) {
             selectedOption.setSelectedInternal(isSelected);
             if (isClick && !ctrlKey) {
-                if (shiftKey) {
-                    if (isSelected && lastSelectedIndex_ != -1) {
-                        final List<HtmlOption> options = getOptions();
-                        final int newIndex = options.indexOf(selectedOption);
-                        for (int i = 0; i < options.size(); i++) {
-                            options.get(i).setSelectedInternal(isBetween(i, lastSelectedIndex_, newIndex));
-                        }
-                    }
-                }
-                else {
+                if (!shiftKey) {
                     setOnlySelected(selectedOption, isSelected);
                     lastSelectedIndex_ = getOptions().indexOf(selectedOption);
+                }
+                else if (isSelected && lastSelectedIndex_ != -1) {
+                    final List<HtmlOption> options = getOptions();
+                    final int newIndex = options.indexOf(selectedOption);
+                    for (int i = 0; i < options.size(); i++) {
+                        options.get(i).setSelectedInternal(isBetween(i, lastSelectedIndex_, newIndex));
+                    }
                 }
             }
         }
