@@ -373,6 +373,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return false;
             case Context.FEATURE_LITTLE_ENDIAN:
                 return true;
+            case Context.FEATURE_LOCATION_INFORMATION_IN_ERROR:
+                return true;
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
                 return browserVersion_.hasFeature(JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION);
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
