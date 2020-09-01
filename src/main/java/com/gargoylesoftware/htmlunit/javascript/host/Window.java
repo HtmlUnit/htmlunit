@@ -2100,7 +2100,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction(value = IE, functionName = "ScriptEngineBuildVersion")
     public int scriptEngineBuildVersion() {
-        return 12345;
+        return 12_345;
     }
 
     /**

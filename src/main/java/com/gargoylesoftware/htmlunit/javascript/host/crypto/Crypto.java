@@ -69,7 +69,7 @@ public class Crypto extends SimpleScriptable {
         if (array == null) {
             throw ScriptRuntime.typeError("Argument 1 of Crypto.getRandomValues is not an object.");
         }
-        if (array.getByteLength() > 65536) {
+        if (array.getByteLength() > 65_536) {
             throw Context.reportRuntimeError("Error: Failed to execute 'getRandomValues' on 'Crypto': "
                     + "The ArrayBufferView's byte length "
                     + "(" + array.getByteLength() + ") exceeds the number of bytes "

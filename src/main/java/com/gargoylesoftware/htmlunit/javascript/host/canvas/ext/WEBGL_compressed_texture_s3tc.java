@@ -31,16 +31,16 @@ public class WEBGL_compressed_texture_s3tc extends SimpleScriptable {
 
     /** The constant {@code COMPRESSED_RGBA_S3TC_DXT1_EXT}. */
     @JsxConstant
-    public static final int COMPRESSED_RGBA_S3TC_DXT1_EXT = 33777;
+    public static final int COMPRESSED_RGBA_S3TC_DXT1_EXT = 33_777;
     /** The constant {@code COMPRESSED_RGBA_S3TC_DXT3_EXT}. */
     @JsxConstant
-    public static final int COMPRESSED_RGBA_S3TC_DXT3_EXT = 33778;
+    public static final int COMPRESSED_RGBA_S3TC_DXT3_EXT = 33_778;
     /** The constant {@code COMPRESSED_RGBA_S3TC_DXT5_EXT}. */
     @JsxConstant
-    public static final int COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779;
+    public static final int COMPRESSED_RGBA_S3TC_DXT5_EXT = 33_779;
     /** The constant {@code COMPRESSED_RGB_S3TC_DXT1_EXT}. */
     @JsxConstant
-    public static final int COMPRESSED_RGB_S3TC_DXT1_EXT = 33776;
+    public static final int COMPRESSED_RGB_S3TC_DXT1_EXT = 33_776;
 
     /**
      * Default constructor.

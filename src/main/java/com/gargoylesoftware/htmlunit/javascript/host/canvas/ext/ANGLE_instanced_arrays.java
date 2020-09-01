@@ -31,7 +31,7 @@ public class ANGLE_instanced_arrays extends SimpleScriptable {
 
     /** The constant {@code VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE}. */
     @JsxConstant
-    public static final int VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 35070;
+    public static final int VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 35_070;
 
     /**
      * Default constructor.

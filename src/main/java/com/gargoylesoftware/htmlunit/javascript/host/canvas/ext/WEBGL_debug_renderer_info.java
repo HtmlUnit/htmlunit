@@ -31,10 +31,10 @@ public class WEBGL_debug_renderer_info extends SimpleScriptable {
 
     /** The constant {@code UNMASKED_RENDERER_WEBGL}. */
     @JsxConstant
-    public static final int UNMASKED_RENDERER_WEBGL = 37446;
+    public static final int UNMASKED_RENDERER_WEBGL = 37_446;
     /** The constant {@code UNMASKED_VENDOR_WEBGL}. */
     @JsxConstant
-    public static final int UNMASKED_VENDOR_WEBGL = 37445;
+    public static final int UNMASKED_VENDOR_WEBGL = 37_445;
 
     /**
      * Default constructor.

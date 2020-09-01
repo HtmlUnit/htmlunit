@@ -31,7 +31,7 @@ public class OES_standard_derivatives extends SimpleScriptable {
 
     /** The constant {@code FRAGMENT_SHADER_DERIVATIVE_HINT_OES}. */
     @JsxConstant
-    public static final int FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 35723;
+    public static final int FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 35_723;
 
     /**
      * Default constructor.
