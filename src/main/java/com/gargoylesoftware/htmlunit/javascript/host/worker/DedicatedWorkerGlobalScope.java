@@ -225,10 +225,10 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     void executeEvent(final Context cx, final MessageEvent event) {
         final List<Scriptable> handlers = getEventListenersContainer().getListeners(Event.TYPE_MESSAGE, false);
         if (handlers != null) {
+            final Object[] args = {event};
             for (final Scriptable scriptable : handlers) {
                 if (scriptable instanceof Function) {
                     final Function handlerFunction = (Function) scriptable;
-                    final Object[] args = {event};
                     handlerFunction.call(cx, this, this, args);
                 }
             }
