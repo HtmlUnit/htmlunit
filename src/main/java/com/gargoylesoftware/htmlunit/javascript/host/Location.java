@@ -413,13 +413,13 @@ public class Location extends SimpleScriptable {
         final String hostname;
         final int port;
         final int index = host.indexOf(':');
-        if (index != -1) {
-            hostname = host.substring(0, index);
-            port = Integer.parseInt(host.substring(index + 1));
-        }
-        else {
+        if (index == -1) {
             hostname = host;
             port = -1;
+        }
+        else {
+            hostname = host.substring(0, index);
+            port = Integer.parseInt(host.substring(index + 1));
         }
         final URL url = UrlUtils.getUrlWithNewHostAndPort(getUrl(), hostname, port);
         setUrl(url);

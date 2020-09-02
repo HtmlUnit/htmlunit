@@ -792,7 +792,7 @@ public class WebGL2RenderingContext extends SimpleScriptable {
 
     /** The constant {@code INVALID_INDEX}. */
     @JsxConstant
-    public static final long INVALID_INDEX = 4294967_295L;
+    public static final long INVALID_INDEX = 4_294_967_295L;
 
     /** The constant {@code INVALID_OPERATION}. */
     @JsxConstant

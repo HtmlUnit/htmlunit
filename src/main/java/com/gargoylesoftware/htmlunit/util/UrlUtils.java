@@ -922,16 +922,17 @@ public final class UrlUtils {
         final String basePath = baseUrl.path_;
         String path = "";
 
-        if (basePath != null) {
+        if (basePath == null) {
+            path = "/";
+        }
+        else {
             final int lastSlashIndex = basePath.lastIndexOf('/');
 
             if (lastSlashIndex >= 0) {
                 path = basePath.substring(0, lastSlashIndex + 1);
             }
         }
-        else {
-            path = "/";
-        }
+
         path = path.concat(url.path_);
         //      a) All occurrences of "./", where "." is a complete path
         //         segment, are removed.
@@ -1100,8 +1101,8 @@ public final class UrlUtils {
         }
 
         // Compare the ports.
-        final int port1 = (u1.getPort() != -1) ? u1.getPort() : u1.getDefaultPort();
-        final int port2 = (u2.getPort() != -1) ? u2.getPort() : u2.getDefaultPort();
+        final int port1 = (u1.getPort() == -1) ? u1.getDefaultPort() : u1.getPort();
+        final int port2 = (u2.getPort() == -1) ? u2.getDefaultPort() : u2.getPort();
         if (port1 != port2) {
             return false;
         }
@@ -1148,7 +1149,7 @@ public final class UrlUtils {
                 .append("://")
                 .append(url.getHost())
                 .append(':')
-                .append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
+                .append((url.getPort() == -1) ? url.getDefaultPort() : url.getPort());
 
         // Compare the files.
         String f = url.getFile();
