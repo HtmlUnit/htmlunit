@@ -222,8 +222,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (state == DONE) {
             final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
+            Object[] paramsReadyState = { new Event(this, Event.TYPE_READY_STATE_CHANGE) };
+            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_READY_STATE_CHANGE, false),
+                    paramsReadyState);
+            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_READY_STATE_CHANGE, true),
+                    paramsReadyState);
+
             final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
-            final Object[] params = {event};
+            final Object[] paramOnLoad = { event };
             final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
             if (lengthComputable) {
                 event.setLengthComputable(true);
@@ -239,26 +245,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             final Function onLoad = getOnload();
             if (onLoad != null) {
-                jsEngine.callFunction(containingPage_, onLoad, onLoad.getParentScope(), this, params);
+                jsEngine.callFunction(containingPage_, onLoad, onLoad.getParentScope(), this, paramOnLoad);
             }
 
-            List<Scriptable> handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, false);
-            if (handlers != null) {
-                for (final Scriptable scriptable : handlers) {
-                    if (scriptable instanceof Function) {
-                        final Function function = (Function) scriptable;
-                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
-                    }
-                }
-            }
+            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, false), paramOnLoad);
+            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, false), paramOnLoad);
+        }
+    }
 
-            handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, true);
-            if (handlers != null) {
-                for (final Scriptable scriptable : handlers) {
-                    if (scriptable instanceof Function) {
-                        final Function function = (Function) scriptable;
-                        jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
-                    }
+    private void triggerJavascriptHandlers(List<Scriptable> handlers, Object[] params) {
+        if (handlers != null) {
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+            for (final Scriptable scriptable : handlers) {
+                if (scriptable instanceof Function) {
+                    final Function function = (Function) scriptable;
+                    jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
                 }
             }
         }

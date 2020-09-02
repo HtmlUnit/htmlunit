@@ -1082,4 +1082,39 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    @Test
+    @Alerts("4")
+    public void onreadystatechange_eventListener() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        xhr.addEventListener('readystatechange', onStateChange);\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+            + "      function onStateChange() {\n"
+            + "        alert(xhr.readyState);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPageWithAlerts2(html);
+    }
+
 }

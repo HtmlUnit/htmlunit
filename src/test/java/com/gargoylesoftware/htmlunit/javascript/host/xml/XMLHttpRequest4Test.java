@@ -37,7 +37,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void setLocation() throws Exception {
+    public void setLocation_onreadystatechange() throws Exception {
         final String content =
               "<html>\n"
             + "  <head>\n"
@@ -47,6 +47,37 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             + "      function testAsync() {\n"
             + "        request = new XMLHttpRequest();\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
+            + "        request.open('GET', 'foo.xml', true);\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onReadyStateChange() {\n"
+            + "        if (request.readyState == 4) {\n"
+            + "          window.location.href = 'about:blank';\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testAsync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebWindow window = loadPage(content).getEnclosingWindow();
+        assertEquals(0, window.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals("about:blank", window.getEnclosedPage().getUrl());
+    }
+
+    @Test
+    public void setLocation_addEventListener() throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>Page1</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function testAsync() {\n"
+            + "        request = new XMLHttpRequest();\n"
+            + "        request.addEventListener('readystatechange', onReadyStateChange);\n"
             + "        request.open('GET', 'foo.xml', true);\n"
             + "        request.send('');\n"
             + "      }\n"
