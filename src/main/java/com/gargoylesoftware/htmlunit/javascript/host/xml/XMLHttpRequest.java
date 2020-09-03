@@ -249,7 +249,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, false), paramOnLoad);
-            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, false), paramOnLoad);
+            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, true), paramOnLoad);
         }
     }
 
