@@ -31,11 +31,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpStatus;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -119,7 +122,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
+    @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void addEventListener_lifeCycle_sync() throws Exception {
         //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
         loadPageWithAlerts2(buildHtml(Mode.SYNC, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
@@ -135,7 +138,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
+    @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void addEventListener_lifeCycle_sync_Error500() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.ERROR_500, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
@@ -144,8 +147,16 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     @Test
     public void addEventListener_lifeCycle_sync_timeout() throws Exception {
         //that's invalid. You cannot set timeout for synced requests. Will throw an exception and not trigger any event.
-        loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.TIMEOUT, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
-                servlets_);
+        try {
+            loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.TIMEOUT, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
+                    servlets_);
+        }
+        catch (final WebDriverException e) {
+            if (useRealBrowser()) {
+                //we only expect the error to be thrown in htmlunit scenarios.
+                throw e;
+            }
+        }
     }
 
     /*
@@ -178,7 +189,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({ "readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true" })
+    @Alerts({"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true"})
     public void addEventListener_lifeCycle_async_readyStateChange() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.READY_STATE_CHANGE), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
@@ -194,7 +205,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("abort_false")
+    @Alerts("abort")
     public void addEventListener_lifeCycle_async_abortTriggered() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
@@ -246,6 +257,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("timeout_false")
+    @NotYetImplemented
     public void addEventListener_timeout_async_timeout() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
@@ -253,7 +265,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     //same tests as above, but this time we're triggering with the onkeyword.
     @Test
-    @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
+    @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void onKeyWord_lifeCycle_sync() throws Exception {
         //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
         loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
@@ -269,7 +281,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
+    @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void onKeyWord_lifeCycle_sync_Error500() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500, State.values()), URL_FIRST,
                 DEFAULT_WAIT_TIME, servlets_);
@@ -278,8 +290,16 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     @Test
     public void onKeyWord_lifeCycle_sync_timeout() throws Exception {
         //that's invalid. You cannot set timeout for synced requests. Will throw an exception and not trigger any event.
-        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        try {
+            loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()), URL_FIRST,
+                    DEFAULT_WAIT_TIME, servlets_);
+        }
+        catch (final WebDriverException e) {
+            if (useRealBrowser()) {
+                //we only expect the error to be thrown in htmlunit scenarios.
+                throw e;
+            }
+        }
     }
 
     @Test
@@ -308,7 +328,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({ "readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true" })
+    @Alerts({"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true"})
     public void onKeyWord_lifeCycle_async_readyStateChange() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.READY_STATE_CHANGE), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
@@ -325,7 +345,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("abort_false")
+    @Alerts("abort")
     public void onKeyWord_lifeCycle_async_abortTriggered() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT, State.ABORT), URL_FIRST,
                 DEFAULT_WAIT_TIME, servlets_);
@@ -377,9 +397,30 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("timeout_false")
+    @NotYetImplemented
     public void onKeyWord_timeout_async_timeout() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST,
                 DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts({"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
+            "progress_false", "readystatechange_true", "load_false", "loadend_false"})
+    @Ignore("The tests are highly faulty because of the collecting of the alerts. We're swallowing some the alerts."
+            + "The test is still useful to check that the order of the events is correct.")
+    public void addEventListener_async_all_success() throws Exception {
+        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts({"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
+            "progress_false", "readystatechange_true", "load_false", "loadend_false"})
+    @Ignore("The tests are highly faulty because of the collecting of the alerts. We're swallowing some the alerts."
+            + "The test is still useful to check that the order of the events is correct.")
+    public void onKeyWord_async_all_success() throws Exception {
+        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     private String buildHtml(final Mode mode, final State... statesParam) {
@@ -402,9 +443,8 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         htmlBuilder.append("  <head>\n");
         htmlBuilder.append("    <title>XMLHttpRequest Test</title>\n");
         htmlBuilder.append("    <script>\n");
-        htmlBuilder.append("      var xhr;\n");
         htmlBuilder.append("      function test() {\n");
-        htmlBuilder.append("        xhr = new XMLHttpRequest();\n");
+        htmlBuilder.append("        var xhr = new XMLHttpRequest();\n");
         states.forEach(state -> registerEventListener(htmlBuilder, mode, state));
 
         htmlBuilder.append("        xhr.open('GET', '");
@@ -434,8 +474,8 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         htmlBuilder.append("      function alertEventState(event) {\n");
         htmlBuilder.append("        alert(event.type + '_' + (event.loaded === undefined));\n");
         htmlBuilder.append("      }\n");
-        htmlBuilder.append("      function alertIEAbortEventState(event) {\n");
-        htmlBuilder.append("        alert(event.type + '_0');\n");
+        htmlBuilder.append("      function alertAbort(event) {\n");
+        htmlBuilder.append("        alert(event.type);\n");
         htmlBuilder.append("      }\n");
         htmlBuilder.append("    </script>\n");
         htmlBuilder.append("  </head>\n");
@@ -447,12 +487,17 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     private void registerEventListener(final StringBuffer buffer, final Mode mode, final State state) {
+        String function = "alertEventState";
+        if (State.ABORT.equals(state)) {
+            function = "alertAbort";
+        }
+
         if (mode.isUseOnKeyword()) {
-            buffer.append("        xhr.on").append(state.getEventName_()).append("=alertEventState;\n");
+            buffer.append("        xhr.on").append(state.getEventName_()).append("=").append(function).append(";\n");
         }
         else {
-            buffer.append("        xhr.addEventListener('").append(state.getEventName_())
-                    .append("', alertEventState);\n");
+            buffer.append("        xhr.addEventListener('").append(state.getEventName_()).append("', ").append(function)
+                    .append(");\n");
         }
     }
 

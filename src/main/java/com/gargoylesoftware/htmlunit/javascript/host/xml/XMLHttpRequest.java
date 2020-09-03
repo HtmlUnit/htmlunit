@@ -138,7 +138,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         "upgrade", HttpHeader.USER_AGENT_LC, "via");
 
     private int state_;
-    private Function stateChangeHandler_;
     private WebRequest webRequest_;
     private boolean async_;
     private int jobID_;
@@ -147,6 +146,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private HtmlPage containingPage_;
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
+    private int timeout_ = 0;
 
     /**
      * Creates a new instance.
@@ -166,100 +166,79 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Returns the event handler that fires on every state change.
-     * @return the event handler that fires on every state change
-     */
-    @JsxGetter
-    public Function getOnreadystatechange() {
-        return stateChangeHandler_;
-    }
-
-    /**
-     * Sets the event handler that fires on every state change.
-     * @param stateChangeHandler the event handler that fires on every state change
-     */
-    @JsxSetter
-    public void setOnreadystatechange(final Function stateChangeHandler) {
-        stateChangeHandler_ = stateChangeHandler;
-        if (state_ == OPENED) {
-            setState(state_, null);
-        }
-    }
-
-    /**
      * Sets the state as specified and invokes the state change handler if one has been set.
      * @param state the new state
      * @param context the context within which the state change handler is to be invoked;
      *                if {@code null}, the current thread's context is used.
      */
-    private void setState(final int state, Context context) {
+    private void setState(final int state, final Context context) {
         state_ = state;
 
-        final BrowserVersion browser = getBrowserVersion();
-        if (stateChangeHandler_ != null && (async_ || state == DONE)) {
-            final Scriptable scope = stateChangeHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Calling onreadystatechange handler for state " + state);
-
-                // do the decompilation an the debug output before the call, because the
-                // handler might deregister itself
-                if (context == null) {
-                    context = Context.getCurrentContext();
+        switch (state) {
+            case OPENED:
+                break;
+            case HEADERS_RECEIVED:
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                if (async_) {
+                    fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 }
-                LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
-            }
-
-            final Object[] params = {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
-            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
-
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
-            }
-        }
-
-        if (state == DONE) {
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-
-            Object[] paramsReadyState = { new Event(this, Event.TYPE_READY_STATE_CHANGE) };
-            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_READY_STATE_CHANGE, false),
-                    paramsReadyState);
-            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_READY_STATE_CHANGE, true),
-                    paramsReadyState);
-
-            final ProgressEvent event = new ProgressEvent(this, Event.TYPE_LOAD);
-            final Object[] paramOnLoad = { event };
-            final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
-            if (lengthComputable) {
-                event.setLengthComputable(true);
-            }
-
-            if (webResponse_ != null) {
-                final long contentLength = webResponse_.getContentLength();
-                event.setLoaded(contentLength);
-                if (lengthComputable) {
-                    event.setTotal(contentLength);
+                break;
+            case LOADING:
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                if (async_) {
+                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 }
-            }
-
-            final Function onLoad = getOnload();
-            if (onLoad != null) {
-                jsEngine.callFunction(containingPage_, onLoad, onLoad.getParentScope(), this, paramOnLoad);
-            }
-
-            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, false), paramOnLoad);
-            triggerJavascriptHandlers(getEventListenersContainer().getListeners(Event.TYPE_LOAD, true), paramOnLoad);
+                break;
+            case DONE:
+                fireJavascriptProgressEvent(Event.TYPE_LOAD);
+                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                break;
+            default:
+                LOG.error("Received an unknown state "
+                        + state
+                        + ", the state is not implemented, please check setState() implementation.");
+                break;
         }
     }
 
-    private void triggerJavascriptHandlers(List<Scriptable> handlers, Object[] params) {
+    private void fireJavascriptProgressEvent(final String eventName) {
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+        final BrowserVersion browser = getBrowserVersion();
+
+        final ProgressEvent progressEvent = new ProgressEvent(this, eventName);
+        final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
+        if (lengthComputable) {
+            progressEvent.setLengthComputable(true);
+        }
+
+        if (webResponse_ != null && !Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName)) {
+            final long contentLength = webResponse_.getContentLength();
+            progressEvent.setLoaded(contentLength);
+            if (lengthComputable) {
+                progressEvent.setTotal(contentLength);
+            }
+        }
+
+        final Function onFunction = getFunctionForEvent(eventName);
+        if (onFunction != null) {
+            jsEngine.callFunction(containingPage_, onFunction, onFunction.getParentScope(), this,
+                    new Object[]{progressEvent});
+        }
+
+        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, false), progressEvent);
+        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, true), progressEvent);
+    }
+
+    private void triggerJavascriptHandlers(final JavaScriptEngine jsEngine, final List<Scriptable> handlers,
+            final ProgressEvent event) {
         if (handlers != null) {
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+            final Object[] parameter = {event};
             for (final Scriptable scriptable : handlers) {
                 if (scriptable instanceof Function) {
                     final Function function = (Function) scriptable;
-                    jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, params);
+                    jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, parameter);
                 }
             }
         }
@@ -270,26 +249,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @param context the context within which the onerror handler is to be invoked;
      *                if {@code null}, the current thread's context is used.
      */
-    private void processError(Context context) {
-        final Function onError = getOnerror();
-        if (onError != null) {
-            final Scriptable scope = onError.getParentScope();
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-
-            final Object[] params = {new ProgressEvent(this, Event.TYPE_ERROR)};
-
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Calling onerror handler");
-            }
-            jsEngine.callFunction(containingPage_, onError, this, scope, params);
-            if (LOG.isDebugEnabled()) {
-                if (context == null) {
-                    context = Context.getCurrentContext();
-                }
-                LOG.debug("onerror handler: " + context.decompileFunction(onError, 4));
-                LOG.debug("Calling onerror handler done.");
-            }
-        }
+    private void processError(final Context context) {
+        fireJavascriptProgressEvent(Event.TYPE_ERROR);
     }
 
     /**
@@ -427,6 +388,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void abort() {
         getWindow().getWebWindow().getJobManager().stopJob(jobID_);
+        fireJavascriptProgressEvent(Event.TYPE_ABORT);
     }
 
     /**
@@ -709,6 +671,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
+        if (!async_ && timeout_ > 0) {
+            Context.throwAsScriptRuntimeEx(new RuntimeException("Can't use timeout in synchronous requests"));
+            return;
+        }
+
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
             if (originHeaderValue != null && isPreflight()) {
@@ -1021,6 +988,16 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         upload.setParentScope(getParentScope());
         upload.setPrototype(getPrototype(upload.getClass()));
         return upload;
+    }
+
+    @JsxGetter
+    public int getTimeout() {
+        return timeout_;
+    }
+
+    @JsxSetter
+    public void setTimeout(final int timeout) {
+        timeout_ = timeout;
     }
 
     private static final class NetworkErrorWebResponse extends WebResponse {

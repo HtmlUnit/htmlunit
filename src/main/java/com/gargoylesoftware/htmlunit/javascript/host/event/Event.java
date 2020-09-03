@@ -136,6 +136,21 @@ public class Event extends SimpleScriptable {
     /** The open event type, triggered by {@code onopen} event handlers. */
     public static final String TYPE_OPEN = "open";
 
+    /** The load start event type, triggered by {@code onloadstart} event handlers. */
+    public static final String TYPE_LOAD_START = "loadstart";
+
+    /** The load end event type, triggered by {@code onloadend} event handlers. */
+    public static final String TYPE_LOAD_END = "loadend";
+
+    /** The progress event type, triggered by {@code onprogress} event handlers. */
+    public static final String TYPE_PROGRESS = "progress";
+
+    /** The abort event type, triggered by {@code onabort} event handlers. */
+    public static final String TYPE_ABORT = "abort";
+
+    /** The timeout event type, triggered by {@code ontimeout} event handlers. */
+    public static final String TYPE_TIMEOUT = "timeout";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF68})
     public static final short NONE = 0;
