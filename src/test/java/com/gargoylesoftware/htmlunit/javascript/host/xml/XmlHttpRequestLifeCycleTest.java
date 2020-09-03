@@ -71,11 +71,40 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
 
     private enum State {
-        LOAD_START, LOAD, LOAD_END, PROGRESS, ERROR, ABORT, READY_STATE_CHANGE, TIMEOUT
+        LOAD_START("loadstart"), LOAD("load"), LOAD_END("loadend"), PROGRESS("progress"), ERROR("error"),
+        ABORT("abort"), READY_STATE_CHANGE("readystatechange"), TIMEOUT("timeout");
+
+        private final String eventName_;
+
+        State(final String eventName) {
+            eventName_ = eventName;
+        }
+
+        public String getEventName_() {
+            return eventName_;
+        }
+
     }
 
     private enum Mode {
-        ASYNC, SYNC
+        ASYNC(true, false), SYNC(false, false), ASYNC_ON_KEYWORD(true, true), SYNC_ON_KEYWORD(false, true);
+
+        private final boolean async_;
+        private final boolean useOnKeyword_;
+
+        Mode(final boolean async, final boolean useOnKeyword) {
+            async_ = async;
+            useOnKeyword_ = useOnKeyword;
+        }
+
+        public boolean isAsync() {
+            return async_;
+        }
+
+        public boolean isUseOnKeyword() {
+            return useOnKeyword_;
+        }
+
     }
 
     private enum Execution {
@@ -91,14 +120,14 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
-    public void stateChange_lifeCycle_sync() throws Exception {
+    public void addEventListener_lifeCycle_sync() throws Exception {
         //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
         loadPageWithAlerts2(buildHtml(Mode.SYNC, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts("readystatechange_true")
-    public void stateChange_lifeCycle_sync_networkError() throws Exception {
+    public void addEventListener_lifeCycle_sync_networkError() throws Exception {
         //will throw an exception and user is supposed to handle this.
         //That's why we only have one readystatechange callback.
         loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
@@ -107,13 +136,13 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
-    public void stateChange_lifeCycle_sync_Error500() throws Exception {
+    public void addEventListener_lifeCycle_sync_Error500() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.ERROR_500, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
     }
 
     @Test
-    public void stateChange_lifeCycle_sync_timeout() throws Exception {
+    public void addEventListener_lifeCycle_sync_timeout() throws Exception {
         //that's invalid. You cannot set timeout for synced requests. Will throw an exception and not trigger any event.
         loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.TIMEOUT, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
@@ -126,68 +155,68 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("loadstart_false")
-    public void stateChange_lifeCycle_async_loadStart() throws Exception {
+    public void addEventListener_lifeCycle_async_loadStart() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.LOAD_START), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts("load_false")
-    public void stateChange_lifeCycle_async_load() throws Exception {
+    public void addEventListener_lifeCycle_async_load() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.LOAD), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts("loadend_false")
-    public void stateChange_lifeCycle_async_loadEnd() throws Exception {
+    public void addEventListener_lifeCycle_async_loadEnd() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.LOAD_END), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts("progress_false")
-    public void stateChange_lifeCycle_async_progress() throws Exception {
+    public void addEventListener_lifeCycle_async_progress() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.PROGRESS), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts({ "readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true" })
-    public void stateChange_lifeCycle_async_readyStateChange() throws Exception {
+    public void addEventListener_lifeCycle_async_readyStateChange() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.READY_STATE_CHANGE), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
-    public void stateChange_lifeCycle_async_error() throws Exception {
+    public void addEventListener_lifeCycle_async_error() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
-    public void stateChange_lifeCycle_async_noAbort() throws Exception {
+    public void addEventListener_lifeCycle_async_noAbort() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts("abort_false")
-    public void stateChange_lifeCycle_async_abortTriggered() throws Exception {
+    public void addEventListener_lifeCycle_async_abortTriggered() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
     }
 
     @Test
     @Alerts("error_false")
-    public void stateChange_lifeCycle_async_networkErrorTriggered() throws Exception {
+    public void addEventListener_lifeCycle_async_networkErrorTriggered() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
     }
 
     @Test
     @Alerts("loadstart_false")
-    public void stateChange_lifeCycle_async_networkErrorTriggered_loadStart() throws Exception {
+    public void addEventListener_lifeCycle_async_networkErrorTriggered_loadStart() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_START), URL_FIRST,
                 DEFAULT_WAIT_TIME, servlets_);
     }
 
     @Test
     @Alerts("loadend_false")
-    public void stateChange_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
+    public void addEventListener_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_END), URL_FIRST,
                 DEFAULT_WAIT_TIME, servlets_);
     }
@@ -196,30 +225,161 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
      * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
      */
     @Test
-    public void stateChange_lifeCycle_async_Error500Triggered() throws Exception {
+    public void addEventListener_lifeCycle_async_Error500Triggered() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.ERROR_500, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
     }
 
     @Test
     @Alerts("loadstart_false")
-    public void stateChange_timeout_async_loadStart() throws Exception {
+    public void addEventListener_timeout_async_loadStart() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.LOAD_START), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
     }
 
     @Test
     @Alerts("loadend_false")
-    public void stateChange_timeout_async_loadEnd() throws Exception {
+    public void addEventListener_timeout_async_loadEnd() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.LOAD_END), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
     }
 
     @Test
     @Alerts("timeout_false")
-    public void stateChange_timeout_async_timeout() throws Exception {
+    public void addEventListener_timeout_async_timeout() throws Exception {
         loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST, DEFAULT_WAIT_TIME,
                 servlets_);
+    }
+
+    //same tests as above, but this time we're triggering with the onkeyword.
+    @Test
+    @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
+    public void onKeyWord_lifeCycle_sync() throws Exception {
+        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
+        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("readystatechange_true")
+    public void onKeyWord_lifeCycle_sync_networkError() throws Exception {
+        //will throw an exception and user is supposed to handle this.
+        //That's why we only have one readystatechange callback.
+        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.values()), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts({ "readystatechange_true", "readystatechange_true", "load_false", "loadend_false" })
+    public void onKeyWord_lifeCycle_sync_Error500() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500, State.values()), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    public void onKeyWord_lifeCycle_sync_timeout() throws Exception {
+        //that's invalid. You cannot set timeout for synced requests. Will throw an exception and not trigger any event.
+        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("loadstart_false")
+    public void onKeyWord_lifeCycle_async_loadStart() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD_START), URL_FIRST, DEFAULT_WAIT_TIME,
+                servlets_);
+    }
+
+    @Test
+    @Alerts("load_false")
+    public void onKeyWord_lifeCycle_async_load() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("loadend_false")
+    public void onKeyWord_lifeCycle_async_loadEnd() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD_END), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("progress_false")
+    public void onKeyWord_lifeCycle_async_progress() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.PROGRESS), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts({ "readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true" })
+    public void onKeyWord_lifeCycle_async_readyStateChange() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.READY_STATE_CHANGE), URL_FIRST, DEFAULT_WAIT_TIME,
+                servlets_);
+    }
+
+    @Test
+    public void onKeyWord_lifeCycle_async_error() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    public void onKeyWord_lifeCycle_async_noAbort() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("abort_false")
+    public void onKeyWord_lifeCycle_async_abortTriggered() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT, State.ABORT), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("error_false")
+    public void onKeyWord_lifeCycle_async_networkErrorTriggered() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.ERROR), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("loadstart_false")
+    public void onKeyWord_lifeCycle_async_networkErrorTriggered_loadStart() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_START), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("loadend_false")
+    public void onKeyWord_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_END), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    /**
+     * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+     */
+    @Test
+    public void onKeyWord_lifeCycle_async_Error500Triggered() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500, State.ERROR), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("loadstart_false")
+    public void onKeyWord_timeout_async_loadStart() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.LOAD_START), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("loadend_false")
+    public void onKeyWord_timeout_async_loadEnd() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.LOAD_END), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
+    }
+
+    @Test
+    @Alerts("timeout_false")
+    public void onKeyWord_timeout_async_timeout() throws Exception {
+        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST,
+                DEFAULT_WAIT_TIME, servlets_);
     }
 
     private String buildHtml(final Mode mode, final State... statesParam) {
@@ -245,30 +405,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         htmlBuilder.append("      var xhr;\n");
         htmlBuilder.append("      function test() {\n");
         htmlBuilder.append("        xhr = new XMLHttpRequest();\n");
-        if (states.contains(State.LOAD_START)) {
-            htmlBuilder.append("        xhr.addEventListener('loadstart', alertEventState);\n");
-        }
-        if (states.contains(State.LOAD)) {
-            htmlBuilder.append("        xhr.addEventListener('load', alertEventState);\n");
-        }
-        if (states.contains(State.LOAD_END)) {
-            htmlBuilder.append("        xhr.addEventListener('loadend', alertEventState);\n");
-        }
-        if (states.contains(State.PROGRESS)) {
-            htmlBuilder.append("        xhr.addEventListener('progress', alertEventState);\n");
-        }
-        if (states.contains(State.ERROR)) {
-            htmlBuilder.append("        xhr.addEventListener('error', alertEventState);\n");
-        }
-        if (states.contains(State.ABORT)) {
-            htmlBuilder.append("        xhr.addEventListener('abort', alertEventState);\n");
-        }
-        if (states.contains(State.READY_STATE_CHANGE)) {
-            htmlBuilder.append("        xhr.addEventListener('readystatechange', alertEventState);\n");
-        }
-        if (states.contains(State.TIMEOUT)) {
-            htmlBuilder.append("        xhr.addEventListener('timeout', alertEventState);\n");
-        }
+        states.forEach(state -> registerEventListener(htmlBuilder, mode, state));
 
         htmlBuilder.append("        xhr.open('GET', '");
         if (Execution.NETWORK_ERROR.equals(execution)) {
@@ -283,7 +420,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         else {
             htmlBuilder.append(SUCCESS_URL);
         }
-        htmlBuilder.append("', ").append(Mode.ASYNC.equals(mode)).append(");\n");
+        htmlBuilder.append("', ").append(mode.isAsync()).append(");\n");
 
         if (Execution.TIMEOUT.equals(execution)) {
             htmlBuilder.append("        xhr.timeout = 10;\n");
@@ -307,6 +444,16 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         htmlBuilder.append("</html>");
 
         return htmlBuilder.toString();
+    }
+
+    private void registerEventListener(final StringBuffer buffer, final Mode mode, final State state) {
+        if (mode.isUseOnKeyword()) {
+            buffer.append("        xhr.on").append(state.getEventName_()).append("=alertEventState;\n");
+        }
+        else {
+            buffer.append("        xhr.addEventListener('").append(state.getEventName_())
+                    .append("', alertEventState);\n");
+        }
     }
 
     public static class Xml200Servlet extends HttpServlet {
