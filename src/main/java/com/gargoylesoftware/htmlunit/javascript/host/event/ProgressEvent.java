@@ -64,7 +64,7 @@ public class ProgressEvent extends Event {
 
             final Object loaded = details.get("loaded");
             if (loaded instanceof Long) {
-                loaded_ = (Long) loaded;
+                loaded_ = loaded;
             }
             else if (loaded instanceof Double) {
                 loaded_ = ((Double) loaded).longValue();
