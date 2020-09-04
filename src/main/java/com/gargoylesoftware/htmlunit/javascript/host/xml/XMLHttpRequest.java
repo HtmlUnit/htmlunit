@@ -176,22 +176,22 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         switch (state) {
             case OPENED:
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 break;
             case HEADERS_RECEIVED:
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 if (async_) {
                     fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
                     fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 }
                 break;
             case LOADING:
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 if (async_) {
-                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
                     fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
                 }
                 break;
             case DONE:
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 fireJavascriptProgressEvent(Event.TYPE_LOAD);
                 fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
                 break;
@@ -207,32 +207,42 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
         final BrowserVersion browser = getBrowserVersion();
 
-        final ProgressEvent progressEvent = new ProgressEvent(this, eventName);
-        final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
-        if (lengthComputable) {
-            progressEvent.setLengthComputable(true);
-        }
+        final boolean isReadyStateChange = Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName);
+        final Event event;
 
-        if (webResponse_ != null && !Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName)) {
-            final long contentLength = webResponse_.getContentLength();
-            progressEvent.setLoaded(contentLength);
+        if (isReadyStateChange) {
+            event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
+        }
+        else {
+            final ProgressEvent progressEvent = new ProgressEvent(this, eventName);
+
+            final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
             if (lengthComputable) {
-                progressEvent.setTotal(contentLength);
+                progressEvent.setLengthComputable(true);
             }
+
+            if (webResponse_ != null) {
+                final long contentLength = webResponse_.getContentLength();
+                progressEvent.setLoaded(contentLength);
+                if (lengthComputable) {
+                    progressEvent.setTotal(contentLength);
+                }
+            }
+            event = progressEvent;
         }
 
         final Function onFunction = getFunctionForEvent(eventName);
         if (onFunction != null) {
             jsEngine.callFunction(containingPage_, onFunction, onFunction.getParentScope(), this,
-                    new Object[]{progressEvent});
+                    new Object[]{event});
         }
 
-        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, false), progressEvent);
-        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, true), progressEvent);
+        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, false), event);
+        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, true), event);
     }
 
     private void triggerJavascriptHandlers(final JavaScriptEngine jsEngine, final List<Scriptable> handlers,
-            final ProgressEvent event) {
+            final Event event) {
         if (handlers != null) {
             final Object[] parameter = {event};
             for (final Scriptable scriptable : handlers) {

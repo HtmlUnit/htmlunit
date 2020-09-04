@@ -31,9 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpStatus;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -124,38 +125,56 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     @Test
     @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void addEventListener_lifeCycle_sync() throws Exception {
-        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
-        loadPageWithAlerts2(buildHtml(Mode.SYNC, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        // we can register ourselves for every state here since it's in sync mode and
+        // most of them won't fire anyway.
+        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, State.values()), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("readystatechange_true")
     public void addEventListener_lifeCycle_sync_networkError() throws Exception {
-        //will throw an exception and user is supposed to handle this.
-        //That's why we only have one readystatechange callback.
-        loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
-                servlets_);
+        // will throw an exception and user is supposed to handle this.
+        // That's why we only have one readystatechange callback.
+        try {
+            loadPage2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR, State.values()), URL_FIRST, servlets_);
+        }
+        catch (final WebDriverException e) {
+            if (useRealBrowser()) {
+                // we only expect the error to be thrown in htmlunit scenarios.
+                throw e;
+            }
+        }
+        finally {
+            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+        }
+
     }
 
     @Test
     @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void addEventListener_lifeCycle_sync_Error500() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.ERROR_500, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500, State.values()), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
+    @Alerts("readystatechange_true")
     public void addEventListener_lifeCycle_sync_timeout() throws Exception {
-        //that's invalid. You cannot set timeout for synced requests. Will throw an exception and not trigger any event.
+        // that's invalid. You cannot set timeout for synced requests. Will throw an
+        // exception only triggers readystatechange
         try {
-            loadPageWithAlerts2(buildHtml(Mode.SYNC, Execution.TIMEOUT, State.values()), URL_FIRST, DEFAULT_WAIT_TIME,
-                    servlets_);
+            loadPage2(buildHtml(Mode.SYNC, Execution.TIMEOUT, State.values()), URL_FIRST, servlets_);
         }
         catch (final WebDriverException e) {
             if (useRealBrowser()) {
-                //we only expect the error to be thrown in htmlunit scenarios.
+                // we only expect the error to be thrown in htmlunit scenarios.
                 throw e;
             }
+        }
+        finally {
+            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
         }
     }
 
@@ -167,69 +186,80 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     @Test
     @Alerts("loadstart_false")
     public void addEventListener_lifeCycle_async_loadStart() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.LOAD_START), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.LOAD_START), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("load_false")
     public void addEventListener_lifeCycle_async_load() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.LOAD), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.LOAD), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadend_false")
     public void addEventListener_lifeCycle_async_loadEnd() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.LOAD_END), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.LOAD_END), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("progress_false")
     public void addEventListener_lifeCycle_async_progress() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.PROGRESS), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.PROGRESS), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts({"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true"})
     public void addEventListener_lifeCycle_async_readyStateChange() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.READY_STATE_CHANGE), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.READY_STATE_CHANGE), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     public void addEventListener_lifeCycle_async_error() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.ERROR), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     public void addEventListener_lifeCycle_async_noAbort() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.ABORT), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("abort")
     public void addEventListener_lifeCycle_async_abortTriggered() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT, State.ABORT), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("error_false")
     public void addEventListener_lifeCycle_async_networkErrorTriggered() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.ERROR), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadstart_false")
     public void addEventListener_lifeCycle_async_networkErrorTriggered_loadStart() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_START), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_START), URL_FIRST,
+                servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadend_false")
     public void addEventListener_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_END), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_END), URL_FIRST,
+                servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     /**
@@ -237,139 +267,172 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
      */
     @Test
     public void addEventListener_lifeCycle_async_Error500Triggered() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.ERROR_500, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500, State.ERROR), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadstart_false")
     public void addEventListener_timeout_async_loadStart() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.LOAD_START), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.LOAD_START), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadend_false")
     public void addEventListener_timeout_async_loadEnd() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.LOAD_END), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.LOAD_END), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("timeout_false")
     @NotYetImplemented
     public void addEventListener_timeout_async_timeout() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
-    //same tests as above, but this time we're triggering with the onkeyword.
+    // same tests as above, but this time we're triggering with the onkeyword.
     @Test
     @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void onKeyWord_lifeCycle_sync() throws Exception {
-        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
-        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        // we can register ourselves for every state here since it's in sync mode and
+        // most of them won't fire anyway.
+        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, State.values()), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("readystatechange_true")
     public void onKeyWord_lifeCycle_sync_networkError() throws Exception {
-        //will throw an exception and user is supposed to handle this.
-        //That's why we only have one readystatechange callback.
-        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.values()), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        // will throw an exception and user is supposed to handle this.
+        // That's why we only have one readystatechange callback.
+        try {
+            loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.values()), URL_FIRST, servlets_);
+
+        }
+        catch (final WebDriverException e) {
+            if (useRealBrowser()) {
+                // we only expect the error to be thrown in htmlunit scenarios.
+                throw e;
+            }
+        }
+        finally {
+            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+
+        }
     }
 
     @Test
     @Alerts({"readystatechange_true", "readystatechange_true", "load_false", "loadend_false"})
     public void onKeyWord_lifeCycle_sync_Error500() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500, State.values()), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500, State.values()),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
+    @Alerts("readystatechange_true")
     public void onKeyWord_lifeCycle_sync_timeout() throws Exception {
-        //that's invalid. You cannot set timeout for synced requests. Will throw an exception and not trigger any event.
+        // that's invalid. You cannot set timeout for synced requests. Will throw an
+        // exception and not trigger any event.
         try {
-            loadPageWithAlerts2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()), URL_FIRST,
-                    DEFAULT_WAIT_TIME, servlets_);
+            loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()), URL_FIRST, servlets_);
         }
         catch (final WebDriverException e) {
             if (useRealBrowser()) {
-                //we only expect the error to be thrown in htmlunit scenarios.
+                // we only expect the error to be thrown in htmlunit scenarios.
                 throw e;
             }
+        }
+        finally {
+            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
         }
     }
 
     @Test
     @Alerts("loadstart_false")
     public void onKeyWord_lifeCycle_async_loadStart() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD_START), URL_FIRST, DEFAULT_WAIT_TIME,
-                servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD_START), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("load_false")
     public void onKeyWord_lifeCycle_async_load() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadend_false")
     public void onKeyWord_lifeCycle_async_loadEnd() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD_END), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.LOAD_END), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("progress_false")
     public void onKeyWord_lifeCycle_async_progress() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.PROGRESS), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.PROGRESS), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts({"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true"})
     public void onKeyWord_lifeCycle_async_readyStateChange() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.READY_STATE_CHANGE), URL_FIRST, DEFAULT_WAIT_TIME,
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.READY_STATE_CHANGE), URL_FIRST,
                 servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     public void onKeyWord_lifeCycle_async_error() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.ERROR), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.ERROR), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     public void onKeyWord_lifeCycle_async_noAbort() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.ABORT), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.ABORT), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("abort")
     public void onKeyWord_lifeCycle_async_abortTriggered() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT, State.ABORT), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT, State.ABORT),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("error_false")
     public void onKeyWord_lifeCycle_async_networkErrorTriggered() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.ERROR), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.ERROR),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadstart_false")
     public void onKeyWord_lifeCycle_async_networkErrorTriggered_loadStart() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_START), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_START),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadend_false")
     public void onKeyWord_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_END), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_END),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     /**
@@ -377,54 +440,58 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
      */
     @Test
     public void onKeyWord_lifeCycle_async_Error500Triggered() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500, State.ERROR), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500, State.ERROR),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadstart_false")
     public void onKeyWord_timeout_async_loadStart() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.LOAD_START), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.LOAD_START),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("loadend_false")
     public void onKeyWord_timeout_async_loadEnd() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.LOAD_END), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.LOAD_END),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts("timeout_false")
     @NotYetImplemented
     public void onKeyWord_timeout_async_timeout() throws Exception {
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST,
-                DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.TIMEOUT),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts({"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
             "progress_false", "readystatechange_true", "load_false", "loadend_false"})
-    @Ignore("The tests are highly faulty because of the collecting of the alerts. We're swallowing some the alerts."
-            + "The test is still useful to check that the order of the events is correct.")
     public void addEventListener_async_all_success() throws Exception {
-        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.values()), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
     @Alerts({"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
             "progress_false", "readystatechange_true", "load_false", "loadend_false"})
-    @Ignore("The tests are highly faulty because of the collecting of the alerts. We're swallowing some the alerts."
-            + "The test is still useful to check that the order of the events is correct.")
     public void onKeyWord_async_all_success() throws Exception {
-        //we can register ourselves for every state here since it's in sync mode and most of them won't fire anyway.
-        loadPageWithAlerts2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.values()), URL_FIRST, DEFAULT_WAIT_TIME, servlets_);
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.values()), URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     private String buildHtml(final Mode mode, final State... statesParam) {
         return buildHtml(mode, Execution.ONLY_SEND, statesParam);
+    }
+
+    private String extractLog(final WebDriver driver) {
+        return driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
     }
 
     /**
@@ -444,6 +511,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         htmlBuilder.append("    <title>XMLHttpRequest Test</title>\n");
         htmlBuilder.append("    <script>\n");
         htmlBuilder.append("      function test() {\n");
+        htmlBuilder.append("        document.getElementById('log').value = '';");
         htmlBuilder.append("        var xhr = new XMLHttpRequest();\n");
         states.forEach(state -> registerEventListener(htmlBuilder, mode, state));
 
@@ -472,14 +540,16 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         }
         htmlBuilder.append("      }\n");
         htmlBuilder.append("      function alertEventState(event) {\n");
-        htmlBuilder.append("        alert(event.type + '_' + (event.loaded === undefined));\n");
+        htmlBuilder.append("        document.getElementById('log').value += ");
+        htmlBuilder.append("           (event.type + '_' + (event.loaded === undefined)  + '\\n');\n");
         htmlBuilder.append("      }\n");
         htmlBuilder.append("      function alertAbort(event) {\n");
-        htmlBuilder.append("        alert(event.type);\n");
+        htmlBuilder.append("        document.getElementById('log').value += event.type + '\\n';\n");
         htmlBuilder.append("      }\n");
         htmlBuilder.append("    </script>\n");
         htmlBuilder.append("  </head>\n");
         htmlBuilder.append("  <body onload='test()'>\n");
+        htmlBuilder.append("    <textarea id='log' cols='80' rows='40'></textarea>\n");
         htmlBuilder.append("  </body>\n");
         htmlBuilder.append("</html>");
 
@@ -547,7 +617,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
                 writer.write(RETURN_XML);
             }
             catch (final Exception e) {
-                //ignored.
+                // ignored.
             }
         }
     }
