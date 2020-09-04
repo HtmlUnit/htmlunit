@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class ProgressEvent extends Event {
 
     private boolean lengthComputable_;
-    private long loaded_;
+    private Object loaded_ = Undefined.instance;
     private long total_;
 
     /**
@@ -128,7 +128,7 @@ public class ProgressEvent extends Event {
      * @return the loaded property from the event.
      */
     @JsxGetter
-    public long getLoaded() {
+    public Object getLoaded() {
         return loaded_;
     }
 
@@ -137,7 +137,7 @@ public class ProgressEvent extends Event {
      *
      * @param loaded the loaded information for this event
      */
-    public void setLoaded(final long loaded) {
+    public void setLoaded(final Object loaded) {
         loaded_ = loaded;
     }
 
