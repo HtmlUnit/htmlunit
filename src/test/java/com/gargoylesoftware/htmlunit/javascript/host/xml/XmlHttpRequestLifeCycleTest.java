@@ -132,7 +132,10 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("readystatechange_true")
+    @Alerts(DEFAULT = {"readystatechange_true", "ExceptionThrown"},
+            FF = {"readystatechange_true", "readystatechange_true", "error_false", "loadend_false", "ExceptionThrown"},
+            FF68 = {"readystatechange_true", "readystatechange_true", "error_false", "loadend_false",
+                    "ExceptionThrown"})
     public void addEventListener_lifeCycle_sync_networkError() throws Exception {
         // will throw an exception and user is supposed to handle this.
         // That's why we only have one readystatechange callback.
@@ -160,7 +163,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("readystatechange_true")
+    @Alerts({"readystatechange_true", "ExceptionThrown"})
     public void addEventListener_lifeCycle_sync_timeout() throws Exception {
         // that's invalid. You cannot set timeout for synced requests. Will throw an
         // exception only triggers readystatechange
@@ -177,11 +180,6 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
             verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
         }
     }
-
-    /*
-     * Testing the whole lifecycle of an async request
-     * we're doing this one by one since we're getting too many alerts to reliably determine the test outcome.
-     */
 
     @Test
     @Alerts("loadstart_false")
@@ -212,7 +210,10 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true"})
+    @Alerts(DEFAULT = {"readystatechange_true", "readystatechange_true", "readystatechange_true",
+            "readystatechange_true"},
+            IE = {"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true",
+                    "readystatechange_true"})
     public void addEventListener_lifeCycle_async_readyStateChange() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.READY_STATE_CHANGE), URL_FIRST, servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
@@ -240,7 +241,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("error_false")
-    public void addEventListener_lifeCycle_async_networkErrorTriggered() throws Exception {
+    public void addEventListener_lifeCycle_async_networkErrorTriggered_error() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.ERROR), URL_FIRST,
                 servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
@@ -258,6 +259,17 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     @Alerts("loadend_false")
     public void addEventListener_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.LOAD_END), URL_FIRST,
+                servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"readystatechange_true", "loadstart_false", "readystatechange_true", "error_false",
+            "loadend_false"},
+            IE = {"readystatechange_true", "readystatechange_true", "loadstart_false", "readystatechange_true",
+                    "error_false", "loadend_false"})
+    public void addEventListener_lifeCycle_async_networkErrorTriggered() throws Exception {
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR, State.values()), URL_FIRST,
                 servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
@@ -308,7 +320,10 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("readystatechange_true")
+    @Alerts(DEFAULT = {"readystatechange_true", "ExceptionThrown"},
+            FF = {"readystatechange_true", "readystatechange_true", "error_false", "loadend_false", "ExceptionThrown"},
+            FF68 = {"readystatechange_true", "readystatechange_true", "error_false", "loadend_false",
+                    "ExceptionThrown"})
     public void onKeyWord_lifeCycle_sync_networkError() throws Exception {
         // will throw an exception and user is supposed to handle this.
         // That's why we only have one readystatechange callback.
@@ -324,7 +339,6 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         }
         finally {
             verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
-
         }
     }
 
@@ -337,22 +351,11 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("readystatechange_true")
+    @Alerts(DEFAULT = {"readystatechange_true", "ExceptionThrown"})
     public void onKeyWord_lifeCycle_sync_timeout() throws Exception {
-        // that's invalid. You cannot set timeout for synced requests. Will throw an
-        // exception and not trigger any event.
-        try {
-            loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()), URL_FIRST, servlets_);
-        }
-        catch (final WebDriverException e) {
-            if (useRealBrowser()) {
-                // we only expect the error to be thrown in htmlunit scenarios.
-                throw e;
-            }
-        }
-        finally {
-            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
-        }
+        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
@@ -384,7 +387,10 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true"})
+    @Alerts(DEFAULT = {"readystatechange_true", "readystatechange_true", "readystatechange_true",
+            "readystatechange_true"},
+            IE = {"readystatechange_true", "readystatechange_true", "readystatechange_true", "readystatechange_true",
+                    "readystatechange_true"})
     public void onKeyWord_lifeCycle_async_readyStateChange() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.READY_STATE_CHANGE), URL_FIRST,
                 servlets_);
@@ -413,7 +419,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("error_false")
-    public void onKeyWord_lifeCycle_async_networkErrorTriggered() throws Exception {
+    public void onKeyWord_lifeCycle_async_networkErrorTriggered_error() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.ERROR),
                 URL_FIRST, servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
@@ -431,6 +437,17 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     @Alerts("loadend_false")
     public void onKeyWord_lifeCycle_async_networkErrorTriggered_loadEnd() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.LOAD_END),
+                URL_FIRST, servlets_);
+        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"readystatechange_true", "loadstart_false", "readystatechange_true", "error_false",
+            "loadend_false"},
+            IE = {"readystatechange_true", "readystatechange_true", "loadstart_false", "readystatechange_true",
+                    "error_false", "loadend_false"})
+    public void onKeyWord_lifeCycle_async_networkErrorTriggered() throws Exception {
+        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR, State.values()),
                 URL_FIRST, servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
@@ -471,16 +488,20 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts({"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
-            "progress_false", "readystatechange_true", "load_false", "loadend_false"})
+    @Alerts(DEFAULT = {"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
+            "progress_false", "readystatechange_true", "load_false", "loadend_false"},
+            IE = {"readystatechange_true", "readystatechange_true", "loadstart_false", "readystatechange_true",
+                    "readystatechange_true", "progress_false", "readystatechange_true", "load_false", "loadend_false"})
     public void addEventListener_async_all_success() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, State.values()), URL_FIRST, servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
     }
 
     @Test
-    @Alerts({"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
-            "progress_false", "readystatechange_true", "load_false", "loadend_false"})
+    @Alerts(DEFAULT = {"readystatechange_true", "loadstart_false", "readystatechange_true", "readystatechange_true",
+            "progress_false", "readystatechange_true", "load_false", "loadend_false"},
+            IE = {"readystatechange_true", "readystatechange_true", "loadstart_false", "readystatechange_true",
+                    "readystatechange_true", "progress_false", "readystatechange_true", "load_false", "loadend_false"})
     public void onKeyWord_async_all_success() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, State.values()), URL_FIRST, servlets_);
         verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
@@ -530,21 +551,26 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         }
         htmlBuilder.append("', ").append(mode.isAsync()).append(");\n");
 
+        htmlBuilder.append("        try {\n");
+
         if (Execution.TIMEOUT.equals(execution)) {
             htmlBuilder.append("        xhr.timeout = 10;\n");
         }
 
-        htmlBuilder.append("        xhr.send();\n");
+        htmlBuilder.append("           xhr.send();\n");
         if (Execution.SEND_ABORT.equals(execution)) {
-            htmlBuilder.append("        xhr.abort();\n");
+            htmlBuilder.append("           xhr.abort();\n");
         }
+        htmlBuilder.append("        } catch (e) { logText('ExceptionThrown'); }\n");
         htmlBuilder.append("      }\n");
         htmlBuilder.append("      function alertEventState(event) {\n");
-        htmlBuilder.append("        document.getElementById('log').value += ");
-        htmlBuilder.append("           (event.type + '_' + (event.loaded === undefined)  + '\\n');\n");
+        htmlBuilder.append("        logText(event.type + '_' + (event.loaded === undefined));\n");
         htmlBuilder.append("      }\n");
         htmlBuilder.append("      function alertAbort(event) {\n");
-        htmlBuilder.append("        document.getElementById('log').value += event.type + '\\n';\n");
+        htmlBuilder.append("        logText(event.type);\n");
+        htmlBuilder.append("      }\n");
+        htmlBuilder.append("      function logText(txt) {\n");
+        htmlBuilder.append("        document.getElementById('log').value += txt + '\\n';\n");
         htmlBuilder.append("      }\n");
         htmlBuilder.append("    </script>\n");
         htmlBuilder.append("  </head>\n");

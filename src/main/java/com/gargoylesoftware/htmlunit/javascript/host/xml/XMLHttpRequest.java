@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
@@ -172,7 +173,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      *                if {@code null}, the current thread's context is used.
      */
     private void setState(final int state, final Context context) {
+        setState(state, false, context);
+    }
+
+    private void setState(final int state, final boolean inErrorState, final Context context) {
         state_ = state;
+        LOG.debug("Setting state to : " + state);
 
         switch (state) {
             case OPENED:
@@ -191,9 +197,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
                 break;
             case DONE:
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptProgressEvent(Event.TYPE_LOAD);
-                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                if (!inErrorState) {
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptProgressEvent(Event.TYPE_LOAD);
+                }
+                if (async_ || !inErrorState || getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                    fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                }
                 break;
             default:
                 LOG.error("Received an unknown state "
@@ -209,6 +219,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         final boolean isReadyStateChange = Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName);
         final Event event;
+
+        LOG.debug("Firing javascript XHR event: " + eventName);
 
         if (isReadyStateChange) {
             event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
@@ -682,9 +694,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         if (!async_ && timeout_ > 0) {
-            Context.throwAsScriptRuntimeEx(new RuntimeException("Can't use timeout in synchronous requests"));
+            Context.throwAsScriptRuntimeEx(new RuntimeException("Synchronous requests must not set a timeout."));
             return;
         }
+
+        boolean preflightAuthorizationError = false;
 
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
@@ -790,6 +804,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
                 }
+                preflightAuthorizationError = true;
                 throw new IOException("No permitted \"Access-Control-Allow-Origin\" header.");
             }
         }
@@ -797,13 +812,27 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("IOException: returning a network error response.", e);
             }
+
+            // IOException is very broad, if we got it because of our own pre-flight checks
+            // we're not going to treat it as error state.
+            // TODO collaborate and confirm that this is correct in most cases.
+            final boolean inErrorState = !preflightAuthorizationError;
+
             webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-            setState(HEADERS_RECEIVED, context);
-            setState(DONE, context);
+            setState(HEADERS_RECEIVED, true, context);
             if (async_) {
                 processError(context);
+                setState(DONE, inErrorState, context);
             }
             else {
+                if (getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    processError(context);
+                }
+
+                setState(DONE, inErrorState, context);
+
+                //TODO this should be NetworkError.
                 Context.throwAsScriptRuntimeEx(e);
             }
         }
