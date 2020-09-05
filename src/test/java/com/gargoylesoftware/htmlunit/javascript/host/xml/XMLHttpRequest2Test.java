@@ -232,8 +232,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1"})
-    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
+        shutDownRealIE();
+
         testResponseXML(MimeType.TEXT_XML);
         testResponseXML(null);
     }
@@ -244,8 +245,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_badContentType() throws Exception {
+        shutDownRealIE();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -699,8 +701,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"ok", "4", "§§URL§§"},
-            IE = {"ok", "4", "<null>"})
+    @Alerts({"ok", "4", "§§URL§§"})
     public void baseUrlAbsoluteRequestOtherUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
@@ -744,8 +745,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"ok", "4", "§§URL§§"},
-            IE = {"ok", "4", "<null>"})
+    @Alerts({"ok", "4", "§§URL§§"})
     public void baseUrlRelativeRequest() throws Exception {
         final String html = "<html><head>\n"
             + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
@@ -961,12 +961,13 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 + "server: Jetty(XXX)\n"
                 + "transfer-encoding: chunked\n"},
             IE = {"", "",
-                "Date XYZ GMT\n"
-                + "Content-Type: text/xml;charset=iso-8859-1\n"
+                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n\n"})
     @NotYetImplemented({CHROME, EDGE, FF, FF68})
     public void getAllResponseHeaders() throws Exception {
+        shutDownRealIE();
+
         final String html =
                 "<html>\n"
                         + "  <head>\n"

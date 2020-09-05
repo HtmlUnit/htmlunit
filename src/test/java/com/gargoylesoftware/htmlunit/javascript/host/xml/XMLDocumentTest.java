@@ -689,6 +689,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "0"})
     public void getElementsByTagName() throws Exception {
+        shutDownRealIE();
+
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
