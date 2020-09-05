@@ -87,7 +87,6 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         public String getEventName_() {
             return eventName_;
         }
-
     }
 
     private enum Mode {
@@ -108,7 +107,6 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         public boolean isUseOnKeyword() {
             return useOnKeyword_;
         }
-
     }
 
     private enum Execution {
@@ -151,7 +149,6 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         finally {
             verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
         }
-
     }
 
     @Test
@@ -351,7 +348,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"readystatechange_true", "ExceptionThrown"})
+    @Alerts({"readystatechange_true", "ExceptionThrown"})
     public void onKeyWord_lifeCycle_sync_timeout() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT, State.values()),
                 URL_FIRST, servlets_);

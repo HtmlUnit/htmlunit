@@ -178,7 +178,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private void setState(final int state, final boolean inErrorState, final Context context) {
         state_ = state;
-        LOG.debug("Setting state to : " + state);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Setting state to : " + state);
+        }
 
         switch (state) {
             case OPENED:
@@ -220,7 +222,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final boolean isReadyStateChange = Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName);
         final Event event;
 
-        LOG.debug("Firing javascript XHR event: " + eventName);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Firing javascript XHR event: " + eventName);
+        }
 
         if (isReadyStateChange) {
             event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
