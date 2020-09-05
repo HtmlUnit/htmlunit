@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.net.URL;
@@ -26,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -952,7 +952,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object XMLDocument]", "OK"},
             IE = {"[object Document]", "OK"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"[object XMLDocument]", "OK"})
     // Real IE seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -984,7 +984,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
             IE = "[object Document]")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "[object HTMLDocument]")
     public void html() throws Exception {
         final String svg
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
@@ -1044,7 +1044,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "about:blank",
             IE = "§§URL§§")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "about:blank")
     public void url() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -39,7 +39,7 @@ import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * executed together (Chrome did work in tests, FF & IE did not).
  *
  * @author Thorsten Wendelmuth
+ * @author Ronald Brill
  *
  */
 @RunWith(BrowserRunner.class)
@@ -299,7 +300,11 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("timeout_false")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "",
+            EDGE = "",
+            FF = "",
+            FF68 = "",
+            IE = "")
     public void addEventListener_timeout_async_timeout() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT, State.TIMEOUT), URL_FIRST,
                 servlets_);
@@ -477,7 +482,11 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
 
     @Test
     @Alerts("timeout_false")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "",
+            EDGE = "",
+            FF = "",
+            FF68 = "",
+            IE = "")
     public void onKeyWord_timeout_async_timeout() throws Exception {
         final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT, State.TIMEOUT),
                 URL_FIRST, servlets_);

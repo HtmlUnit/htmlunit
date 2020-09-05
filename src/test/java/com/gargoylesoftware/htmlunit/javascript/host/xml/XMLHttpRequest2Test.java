@@ -14,11 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
@@ -48,7 +43,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -199,7 +194,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"5", "pass", "pass", "pass", "pass"},
             IE = {"1", "exception", "exception", "pass", "pass"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"3", "exception", "exception", "pass", "pass"})
     // real IE invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
@@ -407,7 +402,11 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"in timeout", "hello"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"hello", "in timeout"},
+            EDGE = {"hello", "in timeout"},
+            FF = {"hello", "in timeout"},
+            FF68 = {"hello", "in timeout"},
+            IE = {"hello", "in timeout"})
     // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
         final String html = "<html><head><script>\n"
@@ -922,7 +921,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"},
             IE = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "null", "null"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"<xml><content>blah</content></xml>", "text/xml;charset=utf-8", "gzip", "45"})
     public void encodedXml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", EncodedXmlServlet.class);
@@ -964,7 +963,22 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n\n"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF68})
+    @HtmlUnitNYI(CHROME = {"", "",
+                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+                + "Transfer-Encoding: chunked\n"
+                + "Server: Jetty(XXX)\n"},
+        EDGE = {"", "",
+                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+                + "Transfer-Encoding: chunked\n"
+                + "Server: Jetty(XXX)\n"},
+        FF = {"", "",
+                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+                + "Transfer-Encoding: chunked\n"
+                + "Server: Jetty(XXX)\n"},
+        FF68 = {"", "",
+                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+                + "Transfer-Encoding: chunked\n"
+                + "Server: Jetty(XXX)\n"})
     public void getAllResponseHeaders() throws Exception {
         shutDownRealIE();
 
@@ -1071,7 +1085,11 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception for onerror")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "read onerror",
+        EDGE = "read onerror",
+        FF = "read onerror",
+        FF68 = "read onerror",
+        IE = "read onerror")
     public void readPropertyFromPrototypeShouldThrow() throws Exception {
         final String html = "<html><body><script>\n"
             + "var p = 'onerror';\n"

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
@@ -42,7 +40,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1369,7 +1366,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"39", "27035", "65533", "39"},
             IE = {"39", "27035", "63"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"39", "27035", "65533", "39"})
     public void overrideMimeType_charset_all() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -1529,7 +1526,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "null")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "undefined",
+            EDGE = "undefined",
+            FF = "undefined",
+            FF68 = "undefined",
+            IE = "undefined")
     public void addEventListenerCaller() throws Exception {
         final String html =
               "<html>\n"
@@ -1648,7 +1649,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function() { return !0 }",
                         "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                         "true", "true"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "",
+            EDGE = "",
+            FF = "",
+            FF68 = "",
+            IE = "")
     public void defineProperty() throws Exception {
         final String html =
               "<html>\n"
@@ -1657,15 +1662,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      var request;\n"
             + "      function test() {\n"
-            + "  try {\n"
             + "        Object.defineProperty(XMLHttpRequest.prototype, 'onreadystatechange', {\n"
             + "                                 enumerable: !0,\n"
             + "                                 configurable: !0,\n"
             + "                                 get: function() { return !0 }\n"
             + "                             });\n"
-            + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
-            + "  }\n"
             + "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
             + "        alert(desc);\n"
             + "        alert(desc.value);\n"
@@ -1693,7 +1694,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object XMLHttpRequest]",
             FF68 = "[object XMLHttpRequestPrototype]",
             IE = "[object XMLHttpRequestPrototype]")
-    @NotYetImplemented({FF68, IE})
+    @HtmlUnitNYI(FF68 = "[object XMLHttpRequest]",
+            IE = "[object XMLHttpRequest]")
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"
@@ -1721,7 +1723,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "application/json",
             IE = "null")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "application/json")
     public void enctypeBlob() throws Exception {
         final String html
             = "<html>\n"
@@ -1764,7 +1766,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "text/plain",
+            EDGE = "text/plain",
+            FF = "text/plain",
+            FF68 = "text/plain",
+            IE = "text/plain")
     public void enctypeBufferSource() throws Exception {
         final String html
             = "<html>\n"
@@ -1807,7 +1813,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"done", "application/x-www-form-urlencoded;charset=UTF-8",
                         "q=HtmlUnit", "u=\u043B\u0189"},
             IE = {"error: URLSearchParams", "text/plain;charset=UTF-8"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"done", "application/x-www-form-urlencoded;charset=UTF-8",
+            "q=HtmlUnit", "u=\u043B\u0189"})
     public void enctypeURLSearchParams() throws Exception {
         final String html
             = "<html>\n"

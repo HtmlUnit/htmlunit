@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
@@ -36,7 +35,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -66,7 +64,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"error [object ProgressEvent]", "error", "false", "0", "false"},
             IE =      {"error [object ProgressEvent]", "error", "false", "0", "true"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"error [object ProgressEvent]", "error", "true", "0", "false"})
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -131,7 +129,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "200", "null"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"4", "200", "[object XMLDocument]"},
+            EDGE = {"4", "200", "[object XMLDocument]"},
+            FF = {"4", "200", "[object XMLDocument]"},
+            FF68 = {"4", "200", "[object XMLDocument]"},
+            IE = {"4", "200", "[object XMLDocument]"})
     public void simpleHead() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 

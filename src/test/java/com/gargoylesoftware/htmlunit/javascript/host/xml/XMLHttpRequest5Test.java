@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.nio.charset.Charset;
 
 import org.junit.Assert;
@@ -24,7 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -41,7 +39,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"multipart/form-data; boundary=----formdata123456", "Html\r\nUnit\r\n"},
             IE = {"null", "Html\r\nUnit\r\n"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -49,7 +47,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
 
     @Test
     @Alerts({"null", "Html\r\nUnit\r\n"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob_emptyMimeType() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -58,7 +56,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"doesnt/exist", "Html\r\nUnit\r\n"},
             IE = {"null", "Html\r\nUnit\r\n"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob_badMimeType() throws Exception {
         sendBlobWithMimeTypeAndAssertContentType(getExpectedAlerts()[0],
                 "Html\\r\\nUnit\\r\\n", getExpectedAlerts()[1]);
@@ -105,6 +103,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
 
         Assert.assertEquals("Unexpected Content-Type header", desiredMimeType,
                 contentType == null ? "null" : contentType);
-        Assert.assertEquals(expectedBody, requestBody);
+        Assert.assertEquals(expectedBody, requestBody == null ? "null" : requestBody);
     }
 }
