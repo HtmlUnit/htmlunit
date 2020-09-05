@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -43,6 +41,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.HttpHeader;
@@ -1634,53 +1633,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onreadystatechange() { [native code] }",
-                        "function set onreadystatechange() { [native code] }",
-                        "true", "true"},
-            FF = {"[object Object]", "undefined", "undefined",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
-            FF68 = {"[object Object]", "undefined", "undefined",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                    "\nfunction onreadystatechange() {\n    [native code]\n}\n",
-                    "\nfunction onreadystatechange() {\n    [native code]\n}\n",
-                    "true", "true"})
-    @NotYetImplemented({CHROME, EDGE})
-    public void getOwnPropertyDescriptor() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
-            + "    <script>\n"
-            + "      var request;\n"
-            + "      function test() {\n"
-            + "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
-            + "        alert(desc);\n"
-            + "        alert(desc.value);\n"
-            + "        alert(desc.writable);\n"
-            + "        alert(desc.get);\n"
-            + "        alert(desc.set);\n"
-            + "        alert(desc.configurable);\n"
-            + "        alert(desc.enumerable);\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
                         "function set onreadystatechange() { [native code] }",
                         "true", "true"},
@@ -1705,11 +1657,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      var request;\n"
             + "      function test() {\n"
+            + "  try {\n"
             + "        Object.defineProperty(XMLHttpRequest.prototype, 'onreadystatechange', {\n"
             + "                                 enumerable: !0,\n"
             + "                                 configurable: !0,\n"
             + "                                 get: function() { return !0 }\n"
             + "                             });\n"
+            + "  } catch (e) {\n"
+            + "    alert('error: ' + e.message);\n"
+            + "  }\n"
             + "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
             + "        alert(desc);\n"
             + "        alert(desc.value);\n"
@@ -2043,6 +1999,158 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onabort() {\n    [native code]\n}\n",
+                        "\nfunction onabort() {\n    [native code]\n}\n",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onabort() throws Exception {
+        getOwnPropertyDescriptor("onabort");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onerror() {\n    [native code]\n}\n",
+                        "\nfunction onerror() {\n    [native code]\n}\n",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onerror() throws Exception {
+        getOwnPropertyDescriptor("onerror");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onload() {\n    [native code]\n}\n",
+                        "\nfunction onload() {\n    [native code]\n}\n",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onload() throws Exception {
+        getOwnPropertyDescriptor("onload");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onloadstart() {\n    [native code]\n}\n",
+                        "\nfunction onloadstart() {\n    [native code]\n}\n",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onloadstart() throws Exception {
+        getOwnPropertyDescriptor("onloadstart");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onloadend() {\n    [native code]\n}\n",
+                        "\nfunction onloadend() {\n    [native code]\n}\n",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onloadend() throws Exception {
+        getOwnPropertyDescriptor("onloadend");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onprogress() {\n    [native code]\n}\n",
+                        "\nfunction onprogress() {\n    [native code]\n}\n",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onprogress() throws Exception {
+        getOwnPropertyDescriptor("onprogress");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
+                        "function get onreadystatechange() { [native code] }",
+                        "function set onreadystatechange() { [native code] }",
+                        "true", "true"},
+            FF = {"[object Object]", "undefined", "undefined",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "true", "true"},
+            FF68 = {"[object Object]", "undefined", "undefined",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "true", "true"},
+            IE = {"[object Object]", "undefined", "undefined",
+                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                        "true", "true"})
+    @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
+                        "function onreadystatechange() { [native code] }",
+                        "function onreadystatechange() { [native code] }",
+                        "true", "true"},
+            EDGE = {"[object Object]", "undefined", "undefined",
+                        "function onreadystatechange() { [native code] }",
+                        "function onreadystatechange() { [native code] }",
+                        "true", "true"})
+    public void getOwnPropertyDescriptor_onreadystatechange() throws Exception {
+        getOwnPropertyDescriptor("onreadystatechange");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {"[object Object]", "undefined", "undefined",
+                    "\nfunction ontimeout() {\n    [native code]\n}\n",
+                    "\nfunction ontimeout() {\n    [native code]\n}\n",
+                    "true", "true"})
+    public void getOwnPropertyDescriptor_ontimeout() throws Exception {
+        getOwnPropertyDescriptor("ontimeout");
+    }
+
+    private void getOwnPropertyDescriptor(final String event) throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function test() {\n"
+            + "        var desc = Object.getOwnPropertyDescriptor("
+                                + "XMLHttpRequest.prototype, '" + event + "');\n"
+            + "        alert(desc);\n"
+            + "        if(!desc) { return; }\n"
+
+            + "        alert(desc.value);\n"
+            + "        alert(desc.writable);\n"
+            + "        alert(desc.get);\n"
+            + "        alert(desc.set);\n"
+            + "        alert(desc.configurable);\n"
+            + "        alert(desc.enumerable);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
             + "</html>";
 
         loadPageWithAlerts2(html);

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
@@ -560,13 +559,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     && "about".equals(newUrl.getProtocol()));
     }
 
-    private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
+    private static boolean isSameOrigin(final URL originUrl, final URL newUrl) {
         if (!originUrl.getHost().equals(newUrl.getHost())) {
             return false;
-        }
-
-        if (getBrowserVersion().hasFeature(XHR_IGNORE_PORT_FOR_SAME_ORIGIN)) {
-            return true;
         }
 
         int originPort = originUrl.getPort();
@@ -1033,6 +1028,24 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         return upload;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    @Override
+    public Function getOnreadystatechange() {
+        return super.getOnreadystatechange();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnreadystatechange(final Function readyStateChangeHandler) {
+        super.setOnreadystatechange(readyStateChangeHandler);
+    }
+
     @JsxGetter
     public int getTimeout() {
         return timeout_;
@@ -1041,6 +1054,132 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxSetter
     public void setTimeout(final int timeout) {
         timeout_ = timeout;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOntimeout() {
+        return super.getOntimeout();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOntimeout(final Function timeoutHandler) {
+        super.setOntimeout(timeoutHandler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOnprogress() {
+        return super.getOnprogress();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnprogress(final Function progressHandler) {
+        super.setOnprogress(progressHandler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOnload() {
+        return super.getOnload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnload(final Function loadHandler) {
+        super.setOnload(loadHandler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOnloadstart() {
+        return super.getOnloadstart();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnloadstart(final Function loadstartHandler) {
+        super.setOnloadstart(loadstartHandler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOnloadend() {
+        return super.getOnloadend();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnloadend(final Function loadendHandler) {
+        super.setOnloadend(loadendHandler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOnabort() {
+        return super.getOnabort();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnabort(final Function abortHandler) {
+        super.setOnabort(abortHandler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter(IE)
+    @Override
+    public Function getOnerror() {
+        return super.getOnerror();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setOnerror(final Function errorHandler) {
+        super.setOnerror(errorHandler);
     }
 
     private static final class NetworkErrorWebResponse extends WebResponse {

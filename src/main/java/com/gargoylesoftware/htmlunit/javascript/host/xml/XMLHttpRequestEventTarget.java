@@ -107,12 +107,12 @@ public class XMLHttpRequestEventTarget extends EventTarget {
     }
 
     /**
-     * Sets the event handler that fires on load.
-     * @param loadHandler the event handler that fires on load
+     * Sets the event handler that fires on load start.
+     * @param loadstartHandler the event handler that fires on load start
      */
     @JsxSetter
-    public void setOnloadstart(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_LOAD_START, loadHandler);
+    public void setOnloadstart(final Function loadstartHandler) {
+        eventMapping_.put(Event.TYPE_LOAD_START, loadstartHandler);
     }
 
     /**
@@ -126,11 +126,11 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on load end.
-     * @param loadHandler the event handler that fires on loadend
+     * @param loadendHandler the event handler that fires on load end
      */
     @JsxSetter
-    public void setOnloadend(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_LOAD_END, loadHandler);
+    public void setOnloadend(final Function loadendHandler) {
+        eventMapping_.put(Event.TYPE_LOAD_END, loadendHandler);
     }
 
     /**
@@ -144,11 +144,11 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on progress.
-     * @param loadHandler the event handler that fires on progress
+     * @param progressHandler the event handler that fires on progress
      */
     @JsxSetter
-    public void setOnprogress(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_PROGRESS, loadHandler);
+    public void setOnprogress(final Function progressHandler) {
+        eventMapping_.put(Event.TYPE_PROGRESS, progressHandler);
     }
 
     /**
@@ -162,29 +162,27 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on timeout.
-     * @param loadHandler the event handler that fires on timeout
+     * @param timeoutHandler the event handler that fires on timeout
      */
     @JsxSetter
-    public void setOntimeout(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_TIMEOUT, loadHandler);
+    public void setOntimeout(final Function timeoutHandler) {
+        eventMapping_.put(Event.TYPE_TIMEOUT, timeoutHandler);
     }
 
     /**
-     * Returns the event handler that fires on timeout.
-     * @return the event handler that fires on timeout
+     * Returns the event handler that fires on ready state change.
+     * @return the event handler that fires on ready state change
      */
-    @JsxGetter
     public Function getOnreadystatechange() {
         return getFunctionForEvent(Event.TYPE_READY_STATE_CHANGE);
     }
 
     /**
-     * Sets the event handler that fires on timeout.
-     * @param loadHandler the event handler that fires on timeout
+     * Sets the event handler that fires on ready state change.
+     * @param readyStateChangeHandler the event handler that fires on ready state change
      */
-    @JsxSetter
-    public void setOnreadystatechange(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_READY_STATE_CHANGE, loadHandler);
+    public void setOnreadystatechange(final Function readyStateChangeHandler) {
+        eventMapping_.put(Event.TYPE_READY_STATE_CHANGE, readyStateChangeHandler);
     }
 
     /**
@@ -198,10 +196,10 @@ public class XMLHttpRequestEventTarget extends EventTarget {
 
     /**
      * Sets the event handler that fires on abort.
-     * @param loadHandler the event handler that fires on abort
+     * @param abortHandler the event handler that fires on abort
      */
     @JsxSetter
-    public void setOnabort(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_ABORT, loadHandler);
+    public void setOnabort(final Function abortHandler) {
+        eventMapping_.put(Event.TYPE_ABORT, abortHandler);
     }
 }

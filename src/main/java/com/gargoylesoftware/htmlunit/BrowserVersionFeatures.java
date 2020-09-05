@@ -1613,15 +1613,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF68})
     XHR_HANDLE_SYNC_NETWORK_ERRORS,
 
-    /**
-     * Indicates if the port should be ignored during origin check.
-     * For IE: this is currently a bug, see
-     * http://connect.microsoft.com/IE/feedback/details/781303/
-     * origin-header-is-not-added-to-cors-requests-to-same-domain-but-different-port
-     */
-    @BrowserFeature(IE)
-    XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
-
     /** ProgressEvent.lengthComputable is true. */
     @BrowserFeature(IE)
     XHR_LENGTH_COMPUTABLE,

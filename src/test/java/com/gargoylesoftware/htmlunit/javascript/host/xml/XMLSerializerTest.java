@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -25,6 +27,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -399,6 +402,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
             IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
+    @NotYetImplemented(IE)
     public void mixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -485,6 +489,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />"})
+    @NotYetImplemented(IE)
     public void otherTags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
