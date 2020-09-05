@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class ProgressEvent extends Event {
 
     private boolean lengthComputable_;
-    private Object loaded_ = Undefined.instance;
+    private Object loaded_ = Long.valueOf(0L);
     private long total_;
 
     /**
