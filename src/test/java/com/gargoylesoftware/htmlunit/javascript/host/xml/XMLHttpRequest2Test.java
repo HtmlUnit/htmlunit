@@ -967,16 +967,13 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n"},
-        EDGE = {"", "",
-                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+            EDGE = {"", "", "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n"},
-        FF = {"", "",
-                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+            FF = {"", "", "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n"},
-        FF68 = {"", "",
-                "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
+            FF68 = {"", "", "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n"})
     public void getAllResponseHeaders() throws Exception {
@@ -1086,10 +1083,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception for onerror")
     @HtmlUnitNYI(CHROME = "read onerror",
-        EDGE = "read onerror",
-        FF = "read onerror",
-        FF68 = "read onerror",
-        IE = "read onerror")
+            EDGE = "read onerror",
+            FF = "read onerror",
+            FF68 = "read onerror",
+            IE = "read onerror")
     public void readPropertyFromPrototypeShouldThrow() throws Exception {
         final String html = "<html><body><script>\n"
             + "var p = 'onerror';\n"
