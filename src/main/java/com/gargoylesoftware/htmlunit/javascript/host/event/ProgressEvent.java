@@ -31,6 +31,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Thorsten Wendelmuth
  */
 @JsxClass
 public class ProgressEvent extends Event {

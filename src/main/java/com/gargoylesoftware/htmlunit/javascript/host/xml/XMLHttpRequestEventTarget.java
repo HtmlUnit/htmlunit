@@ -37,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Thorsten Wendelmuth
  */
 @JsxClass
 public class XMLHttpRequestEventTarget extends EventTarget {

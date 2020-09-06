@@ -57,6 +57,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Atsushi Nakagawa
+ * @author Thorsten Wendelmuth
  */
 @JsxClass
 public class Event extends SimpleScriptable {

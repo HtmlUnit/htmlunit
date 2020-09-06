@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ahmed Ashour
  * @author Stuart Begg
  * @author Sudhan Moghe
+ * @author Thorsten Wendelmuth
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest4Test extends SimpleWebTestCase {
