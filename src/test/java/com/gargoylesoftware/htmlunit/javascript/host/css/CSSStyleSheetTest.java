@@ -663,7 +663,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "  <div id='elt1'></div>\n"
                 + htmlSnippet
                 + "</body></html>";
-        loadPageWithAlerts2(html, 777777);
+        loadPageWithAlerts2(html);
     }
 
     /**

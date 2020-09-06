@@ -404,7 +404,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html, 777777);
+        loadPageWithAlerts2(html);
     }
 
     /**
