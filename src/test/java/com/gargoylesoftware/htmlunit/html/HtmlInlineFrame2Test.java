@@ -211,7 +211,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
             CHROME = "about://unsupported",
             EDGE = "about://unsupported",
             IE = "exception")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented({CHROME, EDGE, IE})
     public void aboutSrc() throws Exception {
         final String html
             = "<html><head>\n"

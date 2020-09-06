@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
@@ -271,15 +270,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param selector the selector determining that the style applies to this element
      */
     public void applyStyleFromSelector(final CSSStyleDeclarationImpl declaration, final Selector selector) {
-        final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = selector.getSelectorSpecificity();
         for (final Property prop : declaration.getProperties()) {
             final String name = prop.getName();
-            if (!browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX) || !"z-index".equals(name)) {
-                final String value = declaration.getPropertyValue(name);
-                final String priority = declaration.getPropertyPriority(name);
-                applyLocalStyleAttribute(name, value, priority, specificity);
-            }
+            final String value = declaration.getPropertyValue(name);
+            final String priority = declaration.getPropertyPriority(name);
+            applyLocalStyleAttribute(name, value, priority, specificity);
         }
     }
 

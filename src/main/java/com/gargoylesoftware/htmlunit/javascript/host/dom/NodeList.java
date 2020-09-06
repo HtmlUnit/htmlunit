@@ -135,7 +135,7 @@ public class NodeList extends AbstractList {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
 
-    @JsxSymbol({CHROME, FF, FF68})
+    @JsxSymbol({CHROME, EDGE, FF, FF68})
     public ES6Iterator iterator() {
         return values();
     }

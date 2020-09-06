@@ -70,6 +70,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = "",
             CHROME = "Your browser doesn't support applets",
+            EDGE = "Your browser doesn't support applets",
             FF = "Your browser doesn't support applets",
             FF68 = "Your browser doesn't support applets")
     public void asText_appletEnabled() throws Exception {

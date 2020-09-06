@@ -1193,6 +1193,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "Jane", "Smith", "sdg", "finished"},
             CHROME = "not available",
+            EDGE = "not available",
             FF = "not available",
             FF68 = "not available")
     public void showModalDialog() throws Exception {
@@ -1254,6 +1255,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "result", "finished"},
             CHROME = {"undefined", "not available"},
+            EDGE = {"undefined", "not available"},
             FF = {"undefined", "not available"},
             FF68 = {"undefined", "not available"})
     @NotYetImplemented(IE)
