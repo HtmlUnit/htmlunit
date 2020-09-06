@@ -92,7 +92,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -142,7 +142,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**

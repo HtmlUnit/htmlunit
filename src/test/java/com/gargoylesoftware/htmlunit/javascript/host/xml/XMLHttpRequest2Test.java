@@ -615,7 +615,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</xml>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html, 2000);
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
 
     /**

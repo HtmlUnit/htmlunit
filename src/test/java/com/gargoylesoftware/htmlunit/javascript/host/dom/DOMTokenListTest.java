@@ -821,7 +821,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  <div id='d1' class='hidden'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 700000);
+        loadPageWithAlerts2(html);
     }
 
     /**
