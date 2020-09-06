@@ -517,7 +517,7 @@ public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
         return buildHtml(mode, Execution.ONLY_SEND, statesParam);
     }
 
-    private String extractLog(final WebDriver driver) {
+    private static String extractLog(final WebDriver driver) {
         return driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
     }
 
