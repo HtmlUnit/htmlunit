@@ -1609,10 +1609,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF68})
     XHR_HANDLE_SYNC_NETWORK_ERRORS,
 
-    /** ProgressEvent.lengthComputable is true. */
-    @BrowserFeature(IE)
-    XHR_LENGTH_COMPUTABLE,
-
     /** A cross origin request to {@code about:blank} is not allowed. */
     @BrowserFeature(IE)
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
@@ -1628,10 +1624,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the content charset is used for response parsing. */
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     XHR_USE_CONTENT_CHARSET,
-
-    /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
-    @BrowserFeature(IE)
-    XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({CHROME, EDGE, IE})

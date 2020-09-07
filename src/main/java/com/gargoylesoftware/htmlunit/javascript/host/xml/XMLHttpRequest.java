@@ -18,11 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -50,7 +48,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -216,37 +213,26 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private void fireJavascriptProgressEvent(final String eventName) {
-        final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-        final BrowserVersion browser = getBrowserVersion();
-
-        final boolean isReadyStateChange = Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName);
-        final Event event;
-
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing javascript XHR event: " + eventName);
         }
 
+        final boolean isReadyStateChange = Event.TYPE_READY_STATE_CHANGE.equalsIgnoreCase(eventName);
+        final Event event;
         if (isReadyStateChange) {
             event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
         }
         else {
             final ProgressEvent progressEvent = new ProgressEvent(this, eventName);
 
-            final boolean lengthComputable = browser.hasFeature(XHR_LENGTH_COMPUTABLE);
-            if (lengthComputable) {
-                progressEvent.setLengthComputable(true);
-            }
-
             if (webResponse_ != null) {
                 final long contentLength = webResponse_.getContentLength();
                 progressEvent.setLoaded(contentLength);
-                if (lengthComputable) {
-                    progressEvent.setTotal(contentLength);
-                }
             }
             event = progressEvent;
         }
 
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
         final Function onFunction = getFunctionForEvent(eventName);
         if (onFunction != null) {
             jsEngine.callFunction(containingPage_, onFunction, onFunction.getParentScope(), this,
@@ -753,10 +739,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 String value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
                 if (isWithCredentials()) {
-                    allowOriginResponse = allowOriginResponse
-                            || (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL)
-                            && ALLOW_ORIGIN_ALL.equals(value));
-
                     // second step: check the allow-credentials header for true
                     value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
                     allowOriginResponse = allowOriginResponse && Boolean.parseBoolean(value);
