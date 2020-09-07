@@ -160,7 +160,8 @@ public class BlobTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", ""},
+    @Alerts(DEFAULT = {"0", "", ""},
+            FF68 = {"0", "", "TypeError true"},
             IE = {"0", "", "TypeError true"})
     public void ctorNoArgs() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -189,7 +190,9 @@ public class BlobTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", ""})
+    @Alerts(DEFAULT = {"0", "", ""},
+            FF68 = {"0", "", "TypeError true"},
+            IE = {"0", "", "TypeError true"})
     public void ctorEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
