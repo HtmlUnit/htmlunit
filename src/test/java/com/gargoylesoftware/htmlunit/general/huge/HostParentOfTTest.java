@@ -321,6 +321,16 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _UIEvent_MSGestureEvent() throws Exception {
+        test("UIEvent", "MSGestureEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
@@ -425,7 +435,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _URL_URL() throws Exception {
         test("URL", "URL");
     }
