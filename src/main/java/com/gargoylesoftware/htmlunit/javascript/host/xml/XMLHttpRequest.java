@@ -45,6 +45,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpStatus;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
@@ -109,15 +110,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /** The object has been created, but not initialized (the open() method has not been called). */
     @JsxConstant
     public static final int UNSENT = 0;
+
     /** The object has been created, but the send() method has not been called. */
     @JsxConstant
     public static final int OPENED = 1;
+
     /** The send() method has been called, but the status and headers are not yet available. */
     @JsxConstant
     public static final int HEADERS_RECEIVED = 2;
+
     /** Some data has been received. */
     @JsxConstant
     public static final int LOADING = 3;
+
     /** All the data has been received; the complete data is available in responseBody and responseText. */
     @JsxConstant
     public static final int DONE = 4;
@@ -166,50 +171,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /**
      * Sets the state as specified and invokes the state change handler if one has been set.
      * @param state the new state
-     * @param context the context within which the state change handler is to be invoked;
-     *                if {@code null}, the current thread's context is used.
      */
-    private void setState(final int state, final Context context) {
-        setState(state, false, context);
-    }
-
-    private void setState(final int state, final boolean inErrorState, final Context context) {
-        state_ = state;
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Setting state to : " + state);
+    private void setState(final int state) {
+        if (state == OPENED
+                || state == HEADERS_RECEIVED
+                || state == LOADING
+                || state == DONE) {
+            state_ = state;
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("State changed to : " + state);
+            }
+            return;
         }
 
-        switch (state) {
-            case OPENED:
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                break;
-            case HEADERS_RECEIVED:
-                if (async_) {
-                    fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                }
-                break;
-            case LOADING:
-                if (async_) {
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
-                }
-                break;
-            case DONE:
-                if (!inErrorState) {
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                    fireJavascriptProgressEvent(Event.TYPE_LOAD);
-                }
-                if (async_ || !inErrorState || getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
-                    fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
-                }
-                break;
-            default:
-                LOG.error("Received an unknown state "
-                        + state
+        LOG.error("Received an unknown state " + state
                         + ", the state is not implemented, please check setState() implementation.");
-                break;
-        }
     }
 
     private void fireJavascriptProgressEvent(final String eventName) {
@@ -254,15 +230,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
         }
-    }
-
-    /**
-     * Invokes the onerror handler if one has been set.
-     * @param context the context within which the onerror handler is to be invoked;
-     *                if {@code null}, the current thread's context is used.
-     */
-    private void processError(final Context context) {
-        fireJavascriptProgressEvent(Event.TYPE_ERROR);
     }
 
     /**
@@ -400,6 +367,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void abort() {
         getWindow().getWebWindow().getJobManager().stopJob(jobID_);
+
+        webResponse_ = null;
+        setState(DONE);
         fireJavascriptProgressEvent(Event.TYPE_ABORT);
     }
 
@@ -535,10 +505,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             return;
         }
+
         // Async stays a boolean.
         async_ = async;
+
         // Change the state!
-        setState(OPENED, null);
+        setState(OPENED);
+        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
     }
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
@@ -583,12 +556,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             doSend(Context.getCurrentContext());
         }
         else {
-            if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
-                // quite strange but IE seems to fire state loading twice
-                // in async mode (at least with HTML of the unit tests)
-                setState(OPENED, Context.getCurrentContext());
-            }
-
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = w;
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
@@ -716,9 +683,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
                 if (!isPreflightAuthorized(preflightResponse)) {
-                    setState(HEADERS_RECEIVED, context);
-                    setState(LOADING, context);
-                    setState(DONE, context);
+//                    setState(HEADERS_RECEIVED);
+//                    if (async_) {
+//                        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+//                    }
+//
+//                    setState(LOADING);
+//                    if (async_) {
+//                        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+//                        fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+//                    }
+//
+//                    setState(DONE);
+//                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+//                    fireJavascriptProgressEvent(Event.TYPE_LOAD);
+//
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
@@ -727,7 +706,37 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     return;
                 }
             }
+
+            if (async_) {
+                if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
+                    // quite strange but IE seems to fire state loading twice
+                    // in async mode (at least with HTML of the unit tests)
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                }
+                fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
+            }
+
             final WebResponse webResponse = wc.loadWebResponse(webRequest_);
+            // check and report problems if needed
+            final int statusCode = webResponse.getStatusCode();
+            final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
+                || statusCode == HttpStatus.SC_USE_PROXY
+                || statusCode == HttpStatus.SC_NOT_MODIFIED;
+            if (!successful) {
+                webResponse_ = webResponse;
+                setState(DONE);
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptProgressEvent(Event.TYPE_LOAD);
+                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                return;
+            }
+
+            webResponse_ = webResponse;
+            setState(HEADERS_RECEIVED);
+            if (async_) {
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+            }
+
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
@@ -748,10 +757,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
             if (allowOriginResponse) {
-                if (overriddenMimeType_ == null) {
-                    webResponse_ = webResponse;
-                }
-                else {
+                if (overriddenMimeType_ != null) {
                     final int index = overriddenMimeType_.toLowerCase(Locale.ROOT).indexOf("charset=");
                     String charsetName = "";
                     if (index != -1) {
@@ -778,9 +784,16 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
             if (allowOriginResponse) {
-                setState(HEADERS_RECEIVED, context);
-                setState(LOADING, context);
-                setState(DONE, context);
+                if (async_) {
+                    setState(LOADING);
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+                }
+
+                setState(DONE);
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptProgressEvent(Event.TYPE_LOAD);
+                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
             }
             else {
                 if (LOG.isDebugEnabled()) {
@@ -801,20 +814,20 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final boolean inErrorState = !preflightAuthorizationError;
 
             webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
-            setState(HEADERS_RECEIVED, true, context);
             if (async_) {
-                processError(context);
-                setState(DONE, inErrorState, context);
+                setState(DONE);
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
             }
             else {
+                setState(DONE);
                 if (getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                     fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                    processError(context);
+                    fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                    fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
                 }
 
-                setState(DONE, inErrorState, context);
-
-                //TODO this should be NetworkError.
                 Context.throwAsScriptRuntimeEx(e);
             }
         }
