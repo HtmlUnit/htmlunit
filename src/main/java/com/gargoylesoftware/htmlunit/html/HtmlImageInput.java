@@ -252,4 +252,11 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean propagateClickStateUpdateToParent() {
+        return true;
+    }
 }

@@ -200,8 +200,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "page2.html",
-            IE = "")
+    @Alerts("page2.html")
     public void clickNestedInputImageElement() throws Exception {
         final String html =
               "<html>\n"
