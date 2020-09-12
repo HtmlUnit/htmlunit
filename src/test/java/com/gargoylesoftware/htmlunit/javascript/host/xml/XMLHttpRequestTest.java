@@ -1450,8 +1450,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "false"},
-            IE = {"someLoad [object ProgressEvent]", "load", "true"})
+    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"},
+            IE = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"})
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
@@ -1461,6 +1461,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        alert('someLoad ' + event);\n"
             + "        alert(event.type);\n"
             + "        alert(event.lengthComputable);\n"
+            + "        alert(event.loaded);\n"
+            + "        alert(event.total);\n"
             + "      }\n"
             + "      function test() {\n"
             + "        try {\n"

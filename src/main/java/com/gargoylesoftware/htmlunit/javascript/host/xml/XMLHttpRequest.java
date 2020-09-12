@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_START_ASYNC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
@@ -203,9 +204,17 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         else {
             final ProgressEvent progressEvent = new ProgressEvent(this, eventName);
 
+            final boolean lengthComputable = getBrowserVersion().hasFeature(XHR_LENGTH_COMPUTABLE);
+            if (lengthComputable) {
+                progressEvent.setLengthComputable(true);
+            }
+
             if (webResponse_ != null) {
                 final long contentLength = webResponse_.getContentLength();
                 progressEvent.setLoaded(contentLength);
+                if (lengthComputable) {
+                    progressEvent.setTotal(contentLength);
+                }
             }
             event = progressEvent;
         }

@@ -1613,6 +1613,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     XHR_LOAD_START_ASYNC,
 
+    /** ProgressEvent.lengthComputable is true. */
+    @BrowserFeature(IE)
+    XHR_LENGTH_COMPUTABLE,
+
     /** A cross origin request to {@code about:blank} is not allowed. */
     @BrowserFeature(IE)
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
