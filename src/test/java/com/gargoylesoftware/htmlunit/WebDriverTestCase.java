@@ -504,6 +504,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     if (isWebClientCached()) {
                         webClient.getOptions().setHistorySizeLimit(0);
                     }
+
+                    final Integer timeout = getWebClientTimeout();
+                    if (timeout != null) {
+                        webClient.getOptions().setTimeout(timeout.intValue());
+                    }
                     return webClient;
                 }
             };
@@ -1381,6 +1386,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected boolean isWebClientCached() {
         return false;
+    }
+
+    /**
+     * Configure {@link WebClientOptions#getTimeout()}.
+     *
+     * @return null if unchanged otherwise the timeout as int
+     */
+    protected Integer getWebClientTimeout() {
+        return null;
     }
 
     /**

@@ -1609,6 +1609,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF68})
     XHR_HANDLE_SYNC_NETWORK_ERRORS,
 
+    /** XMLHttpRequest triggers the load start event async. */
+    @BrowserFeature(IE)
+    XHR_LOAD_START_ASYNC,
+
     /** A cross origin request to {@code about:blank} is not allowed. */
     @BrowserFeature(IE)
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_START_ASYNC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
@@ -31,6 +32,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayDeque;
@@ -370,7 +372,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         webResponse_ = null;
         setState(DONE);
+        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
         fireJavascriptProgressEvent(Event.TYPE_ABORT);
+        fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
     }
 
     /**
@@ -544,6 +548,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webRequest_ == null) {
             return;
         }
+        if (!async_ && timeout_ > 0) {
+            Context.throwAsScriptRuntimeEx(new RuntimeException("Synchronous requests must not set a timeout."));
+            return;
+        }
+
         prepareRequest(content);
 
         final Window w = getWindow();
@@ -592,6 +601,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }
             jobID_ = ww.getJobManager().addJob(job, page);
+
+            if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
+                // quite strange but IE seems to fire state loading twice
+                // in async mode (at least with HTML of the unit tests)
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+            }
+            if (!getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
+                fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
+            }
         }
     }
 
@@ -645,13 +663,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @param context the current context
      */
     void doSend(final Context context) {
-        final WebClient wc = getWindow().getWebWindow().getWebClient();
-        if (!async_ && timeout_ > 0) {
-            Context.throwAsScriptRuntimeEx(new RuntimeException("Synchronous requests must not set a timeout."));
-            return;
+        if (async_ && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
+            fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
         }
 
         boolean preflightAuthorizationError = false;
+        final WebClient wc = getWindow().getWebWindow().getWebClient();
 
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
@@ -707,15 +724,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
 
-            if (async_) {
-                if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
-                    // quite strange but IE seems to fire state loading twice
-                    // in async mode (at least with HTML of the unit tests)
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                }
-                fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
-            }
-
             final WebResponse webResponse = wc.loadWebResponse(webRequest_);
             // check and report problems if needed
             final int statusCode = webResponse.getStatusCode();
@@ -724,6 +732,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 || statusCode == HttpStatus.SC_NOT_MODIFIED;
             if (!successful) {
                 webResponse_ = webResponse;
+                if (async_) {
+                    setState(HEADERS_RECEIVED);
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+
+                    setState(LOADING);
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+                }
+
                 setState(DONE);
                 fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 fireJavascriptProgressEvent(Event.TYPE_LOAD);
@@ -813,18 +830,41 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             // TODO collaborate and confirm that this is correct in most cases.
             final boolean inErrorState = !preflightAuthorizationError;
 
+            // IE is really strange
+            if (async_ && e instanceof SocketTimeoutException
+                    && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
+                try {
+                    webResponse_ = wc.loadWebResponse(WebRequest.newAboutBlankRequest());
+                }
+                catch (final IOException eIgnored) {
+                    // ignore
+                }
+                setState(HEADERS_RECEIVED);
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+            }
+
             webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
             if (async_) {
                 setState(DONE);
                 fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                if (e instanceof SocketTimeoutException) {
+                    fireJavascriptProgressEvent(Event.TYPE_TIMEOUT);
+                }
+                else {
+                    fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                }
                 fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
             }
             else {
                 setState(DONE);
                 if (getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                     fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                    fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                    if (e instanceof SocketTimeoutException) {
+                        fireJavascriptProgressEvent(Event.TYPE_TIMEOUT);
+                    }
+                    else {
+                        fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                    }
                     fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
                 }
 
