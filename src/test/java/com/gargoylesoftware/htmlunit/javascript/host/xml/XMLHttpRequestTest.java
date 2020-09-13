@@ -1827,11 +1827,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"done", "application/x-www-form-urlencoded;charset=UTF-8",
+    @Alerts(DEFAULT = {"q=HtmlUnit&u=%D0%BB%C6%89", "done", "application/x-www-form-urlencoded;charset=UTF-8",
                         "q=HtmlUnit", "u=\u043B\u0189"},
-            IE = {"error: URLSearchParams", "text/plain;charset=UTF-8"})
-    @HtmlUnitNYI(IE = {"done", "application/x-www-form-urlencoded;charset=UTF-8",
-            "q=HtmlUnit", "u=\u043B\u0189"})
+            IE = {"error: URLSearchParams", "done", "text/plain;charset=UTF-8"})
     public void enctypeURLSearchParams() throws Exception {
         final String html
             = "<html>\n"
@@ -1843,6 +1841,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    searchParams = new URLSearchParams();\n"
             + "    searchParams.append('q', 'HtmlUnit');\n"
             + "    searchParams.append('u', '\u043B\u0189');\n"
+            + "    alert(searchParams);\n"
             + "  } catch (e) {\n"
             + "    alert('error: URLSearchParams');\n"
             + "  }\n"
@@ -1864,16 +1863,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
         headerContentType = headerContentType.replace("; ", ";"); // normalize
-        assertEquals(getExpectedAlerts()[1], headerContentType);
-        if (getExpectedAlerts().length > 2) {
-            assertEquals(getExpectedAlerts()[2], getMockWebConnection().getLastWebRequest()
-                                .getRequestParameters().get(0).toString());
+        assertEquals(getExpectedAlerts()[2], headerContentType);
+        if (getExpectedAlerts().length > 3) {
             assertEquals(getExpectedAlerts()[3], getMockWebConnection().getLastWebRequest()
+                                .getRequestParameters().get(0).toString());
+            assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest()
                     .getRequestParameters().get(1).toString());
             assertEquals(null, getMockWebConnection().getLastWebRequest().getRequestBody());
         }
