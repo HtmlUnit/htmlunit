@@ -300,10 +300,10 @@ public final class UrlUtils {
     }
 
     /**
-     * Encodes and escapes the specified URI anchor string.
+     * Encodes and escapes the specified URI hash string.
      *
      * @param hash the anchor string to encode and escape
-     * @return the encoded and escaped anchor string
+     * @return the encoded and escaped hash string
      */
     public static String encodeHash(final String hash) {
         if (hash == null) {
