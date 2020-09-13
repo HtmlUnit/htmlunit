@@ -1037,7 +1037,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of failure
      */
     protected void verifyAlerts(final Supplier<String> func, final String expected) throws Exception {
-        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+        verifyAlerts(func, expected, DEFAULT_WAIT_TIME);
+    }
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
+     * @throws Exception in case of failure
+     */
+    protected void verifyAlerts(final Supplier<String> func, final String expected,
+            final long maxWaitTime) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
 
         String actual = null;
         while (System.currentTimeMillis() < maxWait) {

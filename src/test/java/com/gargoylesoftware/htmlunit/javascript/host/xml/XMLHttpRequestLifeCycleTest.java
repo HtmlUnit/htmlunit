@@ -113,7 +113,8 @@ public final class XMLHttpRequestLifeCycleTest {
 
     private enum Execution {
         ONLY_SEND, SEND_ABORT, NETWORK_ERROR, ERROR_500, TIMEOUT,
-        ONLY_SEND_PREFLIGHT, ONLY_SEND_PREFLIGHT_FORBIDDEN
+        ONLY_SEND_PREFLIGHT, ONLY_SEND_PREFLIGHT_FORBIDDEN,
+        NETWORK_ERROR_PREFLIGHT
     }
 
     /**
@@ -256,6 +257,27 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void addEventListener_sync_networkError_preflight() throws Exception {
+            try {
+                loadPage2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR_PREFLIGHT), URL_FIRST, servlets_, servlets_);
+            }
+            catch (final WebDriverException e) {
+                if (useRealBrowser()) {
+                    // we only expect the error to be thrown in htmlunit scenarios.
+                    throw e;
+                }
+            }
+            finally {
+                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+            }
+        }
+
+        @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
                     "load_4_500_false", "loadend_4_500_false", "send-done"})
         public void addEventListener_sync_Error500() throws Exception {
@@ -352,6 +374,19 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR), URL_FIRST,
                     servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"})
+        public void addEventListener_async_networkErrorTriggered_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR_PREFLIGHT), URL_FIRST,
+                    servlets_, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
         /**
@@ -682,6 +717,10 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("        var url = 'https://' + window.location.hostname + ':"
                                 + WebTestCase.PORT + SUCCESS_URL + "';\n");
         }
+        else if (Execution.NETWORK_ERROR_PREFLIGHT.equals(execution)) {
+            htmlBuilder.append("        var url = 'https://' + window.location.hostname + ':"
+                                + WebTestCase.PORT2 + SUCCESS_URL + "';\n");
+        }
         else if (Execution.ERROR_500.equals(execution)) {
             htmlBuilder.append("        var url = '" + ERROR_URL + "';\n");
         }
@@ -702,7 +741,8 @@ public final class XMLHttpRequestLifeCycleTest {
 
         htmlBuilder.append("        try {\n");
 
-        if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)) {
+        if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)
+                || Execution.NETWORK_ERROR_PREFLIGHT.equals(execution)) {
             htmlBuilder.append("        xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n");
         }
         else if (Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN.equals(execution)) {
