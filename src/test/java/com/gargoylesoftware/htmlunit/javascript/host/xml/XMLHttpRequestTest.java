@@ -1740,7 +1740,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "application/json",
             IE = "null")
-    @HtmlUnitNYI(IE = "application/json")
+    @HtmlUnitNYI(IE = "application/x-www-form-urlencoded")
     public void enctypeBlob() throws Exception {
         final String html
             = "<html>\n"
