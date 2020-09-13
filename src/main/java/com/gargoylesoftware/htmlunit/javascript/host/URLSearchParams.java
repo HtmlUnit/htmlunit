@@ -20,16 +20,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -61,7 +60,7 @@ public class URLSearchParams extends SimpleScriptable {
     public static final class NativeParamsIterator extends ES6Iterator {
         private Type type_;
         private String className_;
-        private transient Iterator<Map.Entry<String, String>> iterator_ = Collections.emptyIterator();
+        private transient Iterator<NameValuePair> iterator_ = Collections.emptyIterator();
         enum Type { KEYS, VALUES, BOTH }
 
         public static void init(final ScriptableObject scope, final String className) {
@@ -75,7 +74,7 @@ public class URLSearchParams extends SimpleScriptable {
         }
 
         public NativeParamsIterator(final Scriptable scope, final String className, final Type type,
-                                        final Iterator<Map.Entry<String, String>> iterator) {
+                                        final Iterator<NameValuePair> iterator) {
             super(scope, URL_SEARCH_PARMS_TAG);
             iterator_ = iterator;
             type_ = type;
@@ -94,21 +93,21 @@ public class URLSearchParams extends SimpleScriptable {
 
         @Override
         protected Object nextValue(final Context cx, final Scriptable scope) {
-            final Map.Entry<String, String> e = iterator_.next();
+            final NameValuePair e = iterator_.next();
             switch (type_) {
                 case KEYS:
-                    return e.getKey();
+                    return e.getName();
                 case VALUES:
                     return e.getValue();
                 case BOTH:
-                    return cx.newArray(scope, new Object[] {e.getKey(), e.getValue()});
+                    return cx.newArray(scope, new Object[] {e.getName(), e.getValue()});
                 default:
                     throw new AssertionError();
             }
         }
     }
 
-    private final List<Entry<String, String>> params_ = new LinkedList<>();
+    private final List<NameValuePair> params_ = new LinkedList<>();
 
     /**
      * Constructs a new instance.
@@ -148,7 +147,7 @@ public class URLSearchParams extends SimpleScriptable {
         }
     }
 
-    private static Entry<String, String> splitQueryParameter(final String singleParam) {
+    private static NameValuePair splitQueryParameter(final String singleParam) {
         final int idx = singleParam.indexOf('=');
         if (idx > -1) {
             final String key = singleParam.substring(0, idx);
@@ -156,11 +155,11 @@ public class URLSearchParams extends SimpleScriptable {
             if (idx < singleParam.length()) {
                 value = singleParam.substring(idx + 1);
             }
-            return new AbstractMap.SimpleEntry<>(key, value);
+            return new NameValuePair(key, value);
         }
         final String key = singleParam;
         final String value = null;
-        return new AbstractMap.SimpleEntry<>(key, value);
+        return new NameValuePair(key, value);
     }
 
     /**
@@ -172,7 +171,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public void append(final String name, final String value) {
-        params_.add(new AbstractMap.SimpleEntry<>(name, value));
+        params_.add(new NameValuePair(name, value));
     }
 
     /**
@@ -184,10 +183,10 @@ public class URLSearchParams extends SimpleScriptable {
     @JsxFunction
     @Override
     public void delete(final String name) {
-        final Iterator<Entry<String, String>> iter = params_.iterator();
+        final Iterator<NameValuePair> iter = params_.iterator();
         while (iter.hasNext()) {
-            final Entry<String, String> entry = iter.next();
-            if (entry.getKey().equals(name)) {
+            final NameValuePair entry = iter.next();
+            if (entry.getName().equals(name)) {
                 iter.remove();
             }
         }
@@ -202,8 +201,8 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public String get(final String name) {
-        for (final Entry<String, String> param : params_) {
-            if (param.getKey().equals(name)) {
+        for (final NameValuePair param : params_) {
+            if (param.getName().equals(name)) {
                 return param.getValue();
             }
         }
@@ -220,8 +219,8 @@ public class URLSearchParams extends SimpleScriptable {
     @JsxFunction
     public Scriptable getAll(final String name) {
         final List<String> result = new LinkedList<>();
-        for (final Entry<String, String> param : params_) {
-            if (param.getKey().equals(name)) {
+        for (final NameValuePair param : params_) {
+            if (param.getName().equals(name)) {
                 result.add(param.getValue());
             }
         }
@@ -240,13 +239,13 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public void set(final String name, final String value) {
-        final Iterator<Entry<String, String>> iter = params_.iterator();
         boolean change = true;
+        final ListIterator<NameValuePair> iter = params_.listIterator();
         while (iter.hasNext()) {
-            final Entry<String, String> entry = iter.next();
-            if (entry.getKey().equals(name)) {
+            final NameValuePair entry = iter.next();
+            if (entry.getName().equals(name)) {
                 if (change) {
-                    entry.setValue(value);
+                    iter.set(new NameValuePair(name, value));
                     change = false;
                 }
                 else {
@@ -269,8 +268,8 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public boolean has(final String name) {
-        for (final Entry<String, String> param : params_) {
-            if (param.getKey().equals(name)) {
+        for (final NameValuePair param : params_) {
+            if (param.getName().equals(name)) {
                 return true;
             }
         }
@@ -337,20 +336,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        final StringBuilder paramStr = new StringBuilder();
-        String delim = "";
-        for (final Entry<String, String> param : params_) {
-            paramStr.append(delim);
-            delim = "&";
-            paramStr.append(param.getKey());
-            paramStr.append('=');
-            // TODO: need to encode value
-            final String value = param.getValue();
-            if (value != null) {
-                paramStr.append(param.getValue());
-            }
-        }
-        return paramStr.toString();
+        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
     }
 
     /**
@@ -363,8 +349,8 @@ public class URLSearchParams extends SimpleScriptable {
 
         if (params_.size() > 0) {
             final List<NameValuePair> params = new ArrayList<NameValuePair>();
-            for (final Entry<String, String> entry : params_) {
-                params.add(new NameValuePair(entry.getKey(), entry.getValue()));
+            for (final NameValuePair entry : params_) {
+                params.add(new NameValuePair(entry.getName(), entry.getValue()));
             }
             webRequest.setRequestParameters(params);
         }

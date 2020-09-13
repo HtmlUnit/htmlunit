@@ -58,6 +58,41 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"", "foo=1&bar=2", "q=Html+Unit&unml=%C3%A4%C3%9C", "q=HtmlUnit&u=%3F%3F"},
+            IE = {})
+    public void string() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        alert(new URLSearchParams());\n"
+            + "        alert(new URLSearchParams('?foo=1&bar=2'));\n"
+
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append('q', 'Html Unit');\n"
+            + "        searchParams.append('unml', '\u00E4\u00DC');\n"
+            + "        alert(searchParams);\n"
+
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append('q', 'HtmlUnit');\n"
+            + "        searchParams.append('u', '\u043B\u0189');\n"
+            + "        alert(searchParams);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
                         "key=value&empty-key=undefined&key=overwrite",
                         "key=value&empty-key=undefined&key=overwrite&key-null=null"},

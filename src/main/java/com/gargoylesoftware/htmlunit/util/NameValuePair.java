@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -25,6 +26,7 @@ import org.apache.http.util.LangUtils;
  *
  * @author Daniel Gredler
  * @author Nicolas Belisle
+ * @author Ronald Brill
  */
 public class NameValuePair implements Serializable {
 
@@ -111,13 +113,13 @@ public class NameValuePair implements Serializable {
      * @param pairs the name/value pairs to convert
      * @return the converted name/value pairs
      */
-    public static org.apache.http.NameValuePair[] toHttpClient(final List<NameValuePair> pairs) {
-        final org.apache.http.NameValuePair[] pairs2 = new org.apache.http.NameValuePair[pairs.size()];
+    public static List<org.apache.http.NameValuePair> toHttpClient(final List<NameValuePair> pairs) {
+        final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
         for (int i = 0; i < pairs.size(); i++) {
             final NameValuePair pair = pairs.get(i);
-            pairs2[i] = new BasicNameValuePair(pair.getName(), pair.getValue());
+            resultingPairs.add(new BasicNameValuePair(pair.getName(), pair.getValue()));
         }
-        return pairs2;
+        return resultingPairs;
     }
 
 }

@@ -30,7 +30,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -303,8 +302,7 @@ public class HttpWebConnection implements WebConnection {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                    final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
-                    final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
+                    final String query = URLEncodedUtils.format(NameValuePair.toHttpClient(pairs), charset);
 
                     final StringEntity urlEncodedEntity;
                     if (webRequest.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
@@ -373,8 +371,7 @@ public class HttpWebConnection implements WebConnection {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
             if (!webRequest.getRequestParameters().isEmpty()) {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
-                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
+                final String query = URLEncodedUtils.format(NameValuePair.toHttpClient(pairs), charset);
                 uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);
             }

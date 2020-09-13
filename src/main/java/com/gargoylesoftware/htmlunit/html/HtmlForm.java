@@ -288,8 +288,7 @@ public class HtmlForm extends HtmlElement {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
             }
-            queryFormFields =
-                URLEncodedUtils.format(Arrays.asList(NameValuePair.toHttpClient(parameters)), enc);
+            queryFormFields = URLEncodedUtils.format(NameValuePair.toHttpClient(parameters), enc);
 
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");

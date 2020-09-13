@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80">
+            <action type="fix" dev="rbri">
+                Parameter encoding for string representation of URLSearchParams fixed.
+            </action>
             <action type="fix" dev="rhino">
                 core-js: Make __proto__ more closely match the spec.
             </action>
