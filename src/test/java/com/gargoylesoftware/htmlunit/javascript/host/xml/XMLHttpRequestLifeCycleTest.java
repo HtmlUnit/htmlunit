@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *
  */
 @RunWith(BrowserRunner.class)
-public class XmlHttpRequestLifeCycleTest extends WebDriverTestCase {
+public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
     private static final String SUCCESS_URL = "/xmlhttprequest/success.html";
     private static final String ERROR_URL = "/xmlhttprequest/error.html";
     private static final String TIMEOUT_URL = "/xmlhttprequest/timeout.html";
