@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +40,10 @@ import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.MiniServer;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
@@ -60,8 +65,8 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * @author Ronald Brill
  *
  */
-@RunWith(BrowserRunner.class)
-public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
+@RunWith(Enclosed.class)
+public final class XMLHttpRequestLifeCycleTest {
     private static final String SUCCESS_URL = "/xmlhttprequest/success.html";
     private static final String ERROR_URL = "/xmlhttprequest/error.html";
     private static final String TIMEOUT_URL = "/xmlhttprequest/timeout.html";
@@ -70,8 +75,6 @@ public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
             + "<content>htmlunit</content>\n"
             + "<content>xmlhttpRequest</content>\n"
             + "</xml>";
-
-    private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
 
     private enum State {
         LOAD_START("loadstart"), LOAD("load"), LOAD_END("loadend"), PROGRESS("progress"), ERROR("error"),
@@ -113,287 +116,485 @@ public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
     }
 
     /**
-     * {@inheritDoc}
+     * Test using our JettyServer.
      */
-    @Override
-    protected Integer getWebClientTimeout() {
-        return 100;
-    }
+    @RunWith(BrowserRunner.class)
+    public static class JettyServerTest extends WebDriverTestCase {
+        public static class Xml200Servlet extends HttpServlet {
 
-    @Before
-    public void prepareTestingServlets() {
-        servlets_.put(SUCCESS_URL, Xml200Servlet.class);
-        servlets_.put(ERROR_URL, Xml500Servlet.class);
-        servlets_.put(TIMEOUT_URL, XmlTimeoutServlet.class);
-    }
+            @Override
+            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+                    throws ServletException, IOException {
+                resp.setContentType(MimeType.TEXT_XML);
+                resp.setContentLength(RETURN_XML.length());
+                resp.setStatus(HttpStatus.SC_OK);
+                final ServletOutputStream outputStream = resp.getOutputStream();
+                try (Writer writer = new OutputStreamWriter(outputStream)) {
+                    writer.write(RETURN_XML);
+                }
 
-    @Test
-    @Alerts({"readystatechange_1_0_true", "open-done",
-            "readystatechange_4_200_true", "load_4_200_false",
-            "loadend_4_200_false", "send-done"})
-    public void addEventListener_sync() throws Exception {
-        // we can register ourselves for every state here since it's in sync mode and
-        // most of them won't fire anyway.
-        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
-            FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                    "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-            FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                    "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
-    public void addEventListener_sync_networkError() throws Exception {
-        // will throw an exception and user is supposed to handle this.
-        // That's why we only have one readystatechange callback.
-        try {
-            loadPage2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR), URL_FIRST, servlets_);
-        }
-        catch (final WebDriverException e) {
-            if (useRealBrowser()) {
-                // we only expect the error to be thrown in htmlunit scenarios.
-                throw e;
             }
         }
-        finally {
-            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
-        }
-    }
 
-    @Test
-    @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
-                "load_4_500_false", "loadend_4_500_false", "send-done"})
-    public void addEventListener_sync_Error500() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
-                servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
+        public static class Xml500Servlet extends HttpServlet {
 
-    @Test
-    @Alerts({"readystatechange_1_0_true", "open-done", "ExceptionThrown"})
-    public void addEventListener_sync_timeout() throws Exception {
-        // that's invalid. You cannot set timeout for synced requests. Will throw an
-        // exception only triggers readystatechange
-        try {
-            loadPage2(buildHtml(Mode.SYNC, Execution.TIMEOUT), URL_FIRST, servlets_);
-        }
-        catch (final WebDriverException e) {
-            if (useRealBrowser()) {
-                // we only expect the error to be thrown in htmlunit scenarios.
-                throw e;
+            @Override
+            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+                    throws ServletException, IOException {
+                resp.setContentType(MimeType.TEXT_XML);
+                resp.setContentLength(RETURN_XML.length());
+                resp.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+                final ServletOutputStream outputStream = resp.getOutputStream();
+                try (Writer writer = new OutputStreamWriter(outputStream)) {
+                    writer.write(RETURN_XML);
+                }
             }
         }
-        finally {
-            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
-        }
-    }
 
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
-                    "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                    "loadend_4_200_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false",
-                    "readystatechange_2_200_true", "readystatechange_3_200_true",
-                    "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                    "loadend_4_200_false"})
-    public void addEventListener_async() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
+        public static class XmlTimeoutServlet extends HttpServlet {
 
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_4_0_true", "abort_4_0", "loadend_4_0_false",
-                    "abort-done"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "readystatechange_4_0_true", "abort_4_0",
-                    "loadend_4_0_false", "abort-done"})
-    public void addEventListener_async_abortTriggered() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT), URL_FIRST,
-                servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-            "send-done", "readystatechange_4_0_true", "error_4_0_false",
-            "loadend_4_0_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                    "error_4_0_false", "loadend_4_0_false"})
-    public void addEventListener_async_networkErrorTriggered() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR), URL_FIRST,
-                servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    /**
-     * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
-     */
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
-                    "progress_3_500_false", "readystatechange_4_500_true",
-                    "load_4_500_false", "loadend_4_500_false"},
-            IE = {"readystatechange_1_0_true", "open-done",
-                    "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                    "readystatechange_2_500_true", "readystatechange_3_500_true",
-                    "progress_3_500_false", "readystatechange_4_500_true",
-                    "load_4_500_false", "loadend_4_500_false"})
-    public void addEventListener_async_Error500Triggered() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500), URL_FIRST,
-                servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
-                    "loadend_4_0_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
-                    "readystatechange_4_0_true", "timeout_4_0_false",
-                    "loadend_4_0_false"})
-    public void addEventListener_async_timeout() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT), URL_FIRST,
-                servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    // same tests as above, but this time we're triggering with the onkeyword.
-    @Test
-    @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_200_true",
-                "load_4_200_false", "loadend_4_200_false", "send-done"})
-    public void onKeyWord_sync() throws Exception {
-        // we can register ourselves for every state here since it's in sync mode and
-        // most of them won't fire anyway.
-        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
-            FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                    "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-            FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                    "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
-    public void onKeyWord_sync_networkError() throws Exception {
-        // will throw an exception and user is supposed to handle this.
-        // That's why we only have one readystatechange callback.
-        try {
-            loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.NETWORK_ERROR), URL_FIRST, servlets_);
-
-        }
-        catch (final WebDriverException e) {
-            if (useRealBrowser()) {
-                // we only expect the error to be thrown in htmlunit scenarios.
-                throw e;
+            @Override
+            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+                    throws ServletException, IOException {
+                resp.setContentType(MimeType.TEXT_XML);
+                resp.setContentLength(RETURN_XML.length());
+                resp.setStatus(HttpStatus.SC_OK);
+                final ServletOutputStream outputStream = resp.getOutputStream();
+                try (Writer writer = new OutputStreamWriter(outputStream)) {
+                    writer.flush();
+                    Thread.sleep(500);
+                    writer.write(RETURN_XML);
+                }
+                catch (final Exception e) {
+                    // ignored.
+                }
             }
         }
-        finally {
-            verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+
+        private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected Integer getWebClientTimeout() {
+            return 100;
         }
-    }
 
-    @Test
-    @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
-            "load_4_500_false", "loadend_4_500_false", "send-done"})
-    public void onKeyWord_sync_Error500() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
+        @Before
+        public void prepareTestingServlets() {
+            servlets_.put(SUCCESS_URL, Xml200Servlet.class);
+            servlets_.put(ERROR_URL, Xml500Servlet.class);
+            servlets_.put(TIMEOUT_URL, XmlTimeoutServlet.class);
+        }
 
-    @Test
-    @Alerts({"readystatechange_1_0_true", "open-done", "ExceptionThrown"})
-    public void onKeyWord_sync_timeout() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done",
+                "readystatechange_4_200_true", "load_4_200_false",
+                "loadend_4_200_false", "send-done"})
+        public void addEventListener_sync() throws Exception {
+            // we can register ourselves for every state here since it's in sync mode and
+            // most of them won't fire anyway.
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
 
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
-                    "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                    "loadend_4_200_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false",
-                    "readystatechange_2_200_true", "readystatechange_3_200_true",
-                    "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                    "loadend_4_200_false"})
-    public void onKeyWord_async() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void addEventListener_sync_networkError() throws Exception {
+            // will throw an exception and user is supposed to handle this.
+            // That's why we only have one readystatechange callback.
+            try {
+                loadPage2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR), URL_FIRST, servlets_);
+            }
+            catch (final WebDriverException e) {
+                if (useRealBrowser()) {
+                    // we only expect the error to be thrown in htmlunit scenarios.
+                    throw e;
+                }
+            }
+            finally {
+                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+            }
+        }
 
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_4_0_true", "abort_4_0",
-                    "loadend_4_0_false", "abort-done"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "readystatechange_4_0_true", "abort_4_0",
-                    "loadend_4_0_false", "abort-done"})
-    public void onKeyWord_async_abortTriggered() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
+                    "load_4_500_false", "loadend_4_500_false", "send-done"})
+        public void addEventListener_sync_Error500() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
 
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done", "ExceptionThrown"})
+        public void addEventListener_sync_timeout() throws Exception {
+            // that's invalid. You cannot set timeout for synced requests. Will throw an
+            // exception only triggers readystatechange
+            try {
+                loadPage2(buildHtml(Mode.SYNC, Execution.TIMEOUT), URL_FIRST, servlets_);
+            }
+            catch (final WebDriverException e) {
+                if (useRealBrowser()) {
+                    // we only expect the error to be thrown in htmlunit scenarios.
+                    throw e;
+                }
+            }
+            finally {
+                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+            }
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                        "loadend_4_200_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                        "loadend_4_200_false"})
+        public void addEventListener_async() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "abort_4_0", "loadend_4_0_false",
+                        "abort-done"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "readystatechange_4_0_true", "abort_4_0",
+                        "loadend_4_0_false", "abort-done"})
+        public void addEventListener_async_abortTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                 "send-done", "readystatechange_4_0_true", "error_4_0_false",
                 "loadend_4_0_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                    "error_4_0_false", "loadend_4_0_false"})
-    public void onKeyWord_async_networkErrorTriggered() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"})
+        public void addEventListener_async_networkErrorTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                        "progress_3_500_false", "readystatechange_4_500_true",
+                        "load_4_500_false", "loadend_4_500_false"},
+                IE = {"readystatechange_1_0_true", "open-done",
+                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                        "readystatechange_2_500_true", "readystatechange_3_500_true",
+                        "progress_3_500_false", "readystatechange_4_500_true",
+                        "load_4_500_false", "loadend_4_500_false"})
+        public void addEventListener_async_Error500Triggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
+                        "readystatechange_4_0_true", "timeout_4_0_false",
+                        "loadend_4_0_false"})
+        public void addEventListener_async_timeout() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        // same tests as above, but this time we're triggering with the onkeyword.
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_200_true",
+                    "load_4_200_false", "loadend_4_200_false", "send-done"})
+        public void onKeyWord_sync() throws Exception {
+            // we can register ourselves for every state here since it's in sync mode and
+            // most of them won't fire anyway.
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void onKeyWord_sync_networkError() throws Exception {
+            // will throw an exception and user is supposed to handle this.
+            // That's why we only have one readystatechange callback.
+            try {
+                loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.NETWORK_ERROR), URL_FIRST, servlets_);
+
+            }
+            catch (final WebDriverException e) {
+                if (useRealBrowser()) {
+                    // we only expect the error to be thrown in htmlunit scenarios.
+                    throw e;
+                }
+            }
+            finally {
+                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+            }
+        }
+
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
+                "load_4_500_false", "loadend_4_500_false", "send-done"})
+        public void onKeyWord_sync_Error500() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done", "ExceptionThrown"})
+        public void onKeyWord_sync_timeout() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                        "loadend_4_200_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                        "loadend_4_200_false"})
+        public void onKeyWord_async() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "abort_4_0",
+                        "loadend_4_0_false", "abort-done"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "readystatechange_4_0_true", "abort_4_0",
+                        "loadend_4_0_false", "abort-done"})
+        public void onKeyWord_async_abortTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                    "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                    "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"})
+        public void onKeyWord_async_networkErrorTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                        "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
+                        "loadend_4_500_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_2_500_true", "readystatechange_3_500_true",
+                        "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
+                        "loadend_4_500_false"})
+        public void onKeyWord_async_Error500Triggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
+                        "readystatechange_4_0_true", "timeout_4_0_false",
+                        "loadend_4_0_false"})
+        public void onKeyWord_async_timeout() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
     }
 
     /**
-     * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+     * Test using our MiniServer to be able to simulate special error conditions.
      */
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
-                    "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
-                    "loadend_4_500_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false",
-                    "readystatechange_2_500_true", "readystatechange_3_500_true",
-                    "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
-                    "loadend_4_500_false"})
-    public void onKeyWord_async_Error500Triggered() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+    @RunWith(BrowserRunner.class)
+    public static class MiniServerTest extends WebDriverTestCase {
+
+        /**
+         * NoHttpResponseException.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void addEventListener_sync_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
+            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+
+            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
+            miniServer.start();
+            try {
+                final WebDriver driver = getWebDriver();
+                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            }
+            finally {
+                miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void onKeyWord_sync_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND));
+            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+
+            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
+            miniServer.start();
+            try {
+                final WebDriver driver = getWebDriver();
+                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            }
+            finally {
+                miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                FF = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"})
+        public void addEventListener_async_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
+            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+
+            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
+            miniServer.start();
+            try {
+                final WebDriver driver = getWebDriver();
+                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            }
+            finally {
+                miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                FF = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"})
+        public void onKeyWord_async_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND));
+            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+
+            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
+            miniServer.start();
+            try {
+                final WebDriver driver = getWebDriver();
+                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            }
+            finally {
+                miniServer.shutDown();
+            }
+        }
     }
 
-    @Test
-    @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
-                    "loadend_4_0_false"},
-            IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                    "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
-                    "readystatechange_4_0_true", "timeout_4_0_false",
-                    "loadend_4_0_false"})
-    public void onKeyWord_async_timeout() throws Exception {
-        final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT),
-                URL_FIRST, servlets_);
-        verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
-    }
-
-    private static String extractLog(final WebDriver driver) {
+    static String extractLog(final WebDriver driver) {
         return driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
     }
 
@@ -405,7 +606,7 @@ public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
      * @param statesParam
      * @return
      */
-    private String buildHtml(final Mode mode, final Execution execution) {
+    static String buildHtml(final Mode mode, final Execution execution) {
         final StringBuffer htmlBuilder = new StringBuffer();
         htmlBuilder.append("<html>\n");
         htmlBuilder.append("  <head>\n");
@@ -418,7 +619,7 @@ public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
 
         htmlBuilder.append("        xhr.open('GET', '");
         if (Execution.NETWORK_ERROR.equals(execution)) {
-            htmlBuilder.append((URL_FIRST + SUCCESS_URL).replace("http://", "https://"));
+            htmlBuilder.append((WebTestCase.URL_FIRST + SUCCESS_URL).replace("http://", "https://"));
         }
         else if (Execution.ERROR_500.equals(execution)) {
             htmlBuilder.append(ERROR_URL);
@@ -469,7 +670,7 @@ public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
         return htmlBuilder.toString();
     }
 
-    void registerEventListener(final StringBuffer buffer, final Mode mode, final State state) {
+    static void registerEventListener(final StringBuffer buffer, final Mode mode, final State state) {
         String function = "alertEventState";
         if (State.ABORT.equals(state)) {
             function = "alertAbort";
@@ -484,55 +685,6 @@ public class XMLHttpRequestLifeCycleTest extends WebDriverTestCase {
         }
     }
 
-    public static class Xml200Servlet extends HttpServlet {
-
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-                throws ServletException, IOException {
-            resp.setContentType(MimeType.TEXT_XML);
-            resp.setContentLength(RETURN_XML.length());
-            resp.setStatus(HttpStatus.SC_OK);
-            final ServletOutputStream outputStream = resp.getOutputStream();
-            try (Writer writer = new OutputStreamWriter(outputStream)) {
-                writer.write(RETURN_XML);
-            }
-
-        }
+    private XMLHttpRequestLifeCycleTest() {
     }
-
-    public static class Xml500Servlet extends HttpServlet {
-
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-                throws ServletException, IOException {
-            resp.setContentType(MimeType.TEXT_XML);
-            resp.setContentLength(RETURN_XML.length());
-            resp.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-            final ServletOutputStream outputStream = resp.getOutputStream();
-            try (Writer writer = new OutputStreamWriter(outputStream)) {
-                writer.write(RETURN_XML);
-            }
-        }
-    }
-
-    public static class XmlTimeoutServlet extends HttpServlet {
-
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-                throws ServletException, IOException {
-            resp.setContentType(MimeType.TEXT_XML);
-            resp.setContentLength(RETURN_XML.length());
-            resp.setStatus(HttpStatus.SC_OK);
-            final ServletOutputStream outputStream = resp.getOutputStream();
-            try (Writer writer = new OutputStreamWriter(outputStream)) {
-                writer.flush();
-                Thread.sleep(500);
-                writer.write(RETURN_XML);
-            }
-            catch (final Exception e) {
-                // ignored.
-            }
-        }
-    }
-
 }

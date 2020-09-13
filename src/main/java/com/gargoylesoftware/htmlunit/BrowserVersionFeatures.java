@@ -1625,6 +1625,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     XHR_OPEN_ALLOW_EMTPY_URL,
 
+    /** XMLHttpRequest triggers an additional progress event if a network error
+     * was thrown in async mode. */
+    @BrowserFeature({FF, FF68})
+    XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC,
+
     /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header. */
     @BrowserFeature(IE)
     XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE,

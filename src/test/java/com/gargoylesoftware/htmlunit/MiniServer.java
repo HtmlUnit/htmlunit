@@ -50,11 +50,11 @@ public class MiniServer extends Thread {
     private volatile ServerSocket serverSocket_;
     private static final String DROP_CONNECTION = "#drop connectoin#";
 
-    static void configureDropConnection(final MockWebConnection mockWebConnection, final URL url) {
+    public static void configureDropConnection(final MockWebConnection mockWebConnection, final URL url) {
         mockWebConnection.setResponse(url, DROP_CONNECTION);
     }
 
-    MiniServer(final int port, final MockWebConnection mockWebConnection) {
+    public MiniServer(final int port, final MockWebConnection mockWebConnection) {
         port_ = port;
         mockWebConnection_ = mockWebConnection;
         setDaemon(true);

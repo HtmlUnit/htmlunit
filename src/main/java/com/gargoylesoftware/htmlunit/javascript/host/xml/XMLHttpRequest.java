@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_CO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_START_ASYNC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -49,6 +50,7 @@ import java.util.TreeMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
+import org.apache.http.NoHttpResponseException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
@@ -840,16 +842,23 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final boolean inErrorState = !preflightAuthorizationError;
 
             // IE is really strange
-            if (async_ && e instanceof SocketTimeoutException
-                    && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
-                try {
-                    webResponse_ = wc.loadWebResponse(WebRequest.newAboutBlankRequest());
+            if (async_) {
+                if (e instanceof SocketTimeoutException
+                        && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
+                    try {
+                        webResponse_ = wc.loadWebResponse(WebRequest.newAboutBlankRequest());
+                    }
+                    catch (final IOException eIgnored) {
+                        // ignore
+                    }
+                    setState(HEADERS_RECEIVED);
+                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 }
-                catch (final IOException eIgnored) {
-                    // ignore
+
+                if (e instanceof NoHttpResponseException
+                        && getBrowserVersion().hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
+                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
                 }
-                setState(HEADERS_RECEIVED);
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
             }
 
             webResponse_ = new NetworkErrorWebResponse(webRequest_, e);

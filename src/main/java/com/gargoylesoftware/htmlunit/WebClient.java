@@ -62,7 +62,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
-import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
@@ -221,9 +220,6 @@ public class WebClient implements Serializable, AutoCloseable {
     private final boolean javaScriptEngineEnabled_;
     private WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
-
-    private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
-        0, "No HTTP Response", Collections.<NameValuePair>emptyList());
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -1533,12 +1529,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebResponse fromCache = getCache().getCachedResponse(webRequest);
         final WebResponse webResponse;
         if (fromCache == null) {
-            try {
-                webResponse = getWebConnection().getResponse(webRequest);
-            }
-            catch (final NoHttpResponseException e) {
-                return new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
-            }
+            webResponse = getWebConnection().getResponse(webRequest);
         }
         else {
             webResponse = new WebResponseFromCache(fromCache, webRequest);
