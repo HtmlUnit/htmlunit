@@ -711,21 +711,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
                 if (!isPreflightAuthorized(preflightResponse)) {
-//                    setState(HEADERS_RECEIVED);
-//                    if (async_) {
-//                        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-//                    }
-//
-//                    setState(LOADING);
-//                    if (async_) {
-//                        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-//                        fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
-//                    }
-//
-//                    setState(DONE);
-//                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-//                    fireJavascriptProgressEvent(Event.TYPE_LOAD);
-//
+                    setState(DONE);
+                    if (async_ || getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                        fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                        fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                    }
+
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }

@@ -912,7 +912,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPage2(final String html,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
-        return loadPage2(html, URL_FIRST, servlets);
+        return loadPage2(html, URL_FIRST, servlets, null);
     }
 
     /**
@@ -925,12 +925,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPage2(final String html, final URL url,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+        return loadPage2(html, url, servlets, null);
+    }
 
+    /**
+     * Same as {@link #loadPage2(String, URL)}, but with additional servlet configuration.
+     * @param html the HTML to use for the default page
+     * @param url the URL to use to load the page
+     * @param servlets the additional servlets to configure with their mapping
+     * @param servlets2 the additional servlets to configure with their mapping for a second server
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html, final URL url,
+            final Map<String, Class<? extends Servlet>> servlets,
+            final Map<String, Class<? extends Servlet>> servlets2) throws Exception {
         servlets.put("/*", MockWebConnectionServlet.class);
         getMockWebConnection().setResponse(url, html);
         MockWebConnectionServlet.MockConnection_ = getMockWebConnection();
 
         startWebServer("./", null, servlets);
+        if (servlets2 != null) {
+            startWebServer2("./", null, servlets2);
+        }
 
         WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {

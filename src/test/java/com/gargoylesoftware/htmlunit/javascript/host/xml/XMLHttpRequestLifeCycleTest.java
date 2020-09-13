@@ -112,7 +112,8 @@ public final class XMLHttpRequestLifeCycleTest {
     }
 
     private enum Execution {
-        ONLY_SEND, SEND_ABORT, NETWORK_ERROR, ERROR_500, TIMEOUT
+        ONLY_SEND, SEND_ABORT, NETWORK_ERROR, ERROR_500, TIMEOUT,
+        ONLY_SEND_PREFLIGHT, ONLY_SEND_PREFLIGHT_FORBIDDEN
     }
 
     /**
@@ -123,16 +124,26 @@ public final class XMLHttpRequestLifeCycleTest {
         public static class Xml200Servlet extends HttpServlet {
 
             @Override
-            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "*");
+                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+            }
+
+            @Override
+            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
                     throws ServletException, IOException {
-                resp.setContentType(MimeType.TEXT_XML);
-                resp.setContentLength(RETURN_XML.length());
-                resp.setStatus(HttpStatus.SC_OK);
-                final ServletOutputStream outputStream = resp.getOutputStream();
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "*");
+                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+                response.setContentType(MimeType.TEXT_XML);
+                response.setContentLength(RETURN_XML.length());
+                response.setStatus(HttpStatus.SC_OK);
+                final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
                 }
-
             }
         }
 
@@ -193,10 +204,33 @@ public final class XMLHttpRequestLifeCycleTest {
                 "readystatechange_4_200_true", "load_4_200_false",
                 "loadend_4_200_false", "send-done"})
         public void addEventListener_sync() throws Exception {
-            // we can register ourselves for every state here since it's in sync mode and
-            // most of them won't fire anyway.
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done",
+                "readystatechange_4_200_true", "load_4_200_false",
+                "loadend_4_200_false", "send-done"})
+        public void addEventListener_sync_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT),
+                    URL_FIRST, servlets_, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
+                        "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false", "ExceptionThrown"})
+        public void addEventListener_sync_preflight_forbidden() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN),
+                    URL_FIRST, servlets_, servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
@@ -207,8 +241,6 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_networkError() throws Exception {
-            // will throw an exception and user is supposed to handle this.
-            // That's why we only have one readystatechange callback.
             try {
                 loadPage2(buildHtml(Mode.SYNC, Execution.NETWORK_ERROR), URL_FIRST, servlets_);
             }
@@ -264,6 +296,35 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                        "loadend_4_200_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                        "loadend_4_200_false"})
+        public void addEventListener_async_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT),
+                    URL_FIRST, servlets_, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false"})
+        public void addEventListener_async_preflight_forbidden() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN),
+                    URL_FIRST, servlets_, servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
@@ -617,23 +678,36 @@ public final class XMLHttpRequestLifeCycleTest {
         htmlBuilder.append("        xhr = new XMLHttpRequest();\n");
         Arrays.asList(State.values()).forEach(state -> registerEventListener(htmlBuilder, mode, state));
 
-        htmlBuilder.append("        xhr.open('GET', '");
         if (Execution.NETWORK_ERROR.equals(execution)) {
-            htmlBuilder.append((WebTestCase.URL_FIRST + SUCCESS_URL).replace("http://", "https://"));
+            htmlBuilder.append("        var url = 'https://' + window.location.hostname + ':"
+                                + WebTestCase.PORT + SUCCESS_URL + "';\n");
         }
         else if (Execution.ERROR_500.equals(execution)) {
-            htmlBuilder.append(ERROR_URL);
+            htmlBuilder.append("        var url = '" + ERROR_URL + "';\n");
         }
         else if (Execution.TIMEOUT.equals(execution)) {
-            htmlBuilder.append(TIMEOUT_URL);
+            htmlBuilder.append("        var url = '" + TIMEOUT_URL + "';\n");
+        }
+        else if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)
+                || Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN.equals(execution)) {
+            htmlBuilder.append("        var url = 'http://' + window.location.hostname + ':"
+                    + WebTestCase.PORT2 + SUCCESS_URL + "';\n");
         }
         else {
-            htmlBuilder.append(SUCCESS_URL);
+            htmlBuilder.append("        var url = '" + SUCCESS_URL + "';\n");
         }
-        htmlBuilder.append("', ").append(mode.isAsync()).append(");\n");
+
+        htmlBuilder.append("        xhr.open('GET', url, ").append(mode.isAsync()).append(");\n");
         htmlBuilder.append("        logText('open-done');");
 
         htmlBuilder.append("        try {\n");
+
+        if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)) {
+            htmlBuilder.append("        xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n");
+        }
+        else if (Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN.equals(execution)) {
+            htmlBuilder.append("        xhr.setRequestHeader('X-FORBIDDEN', 'forbidden');\n");
+        }
 
         if (Execution.TIMEOUT.equals(execution)) {
             htmlBuilder.append("        xhr.timeout = 10;\n");
