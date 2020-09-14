@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -79,6 +80,106 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        searchParams.append('q', 'HtmlUnit');\n"
             + "        searchParams.append('u', '\u043B\u0189');\n"
             + "        alert(searchParams);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"=emptyKey", "null=nullKey", "undefined=undefinedKey"},
+            IE = {})
+    public void stringKeys() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append('', 'emptyKey');\n"
+            + "        alert(searchParams);\n"
+
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append(null, 'nullKey');\n"
+            + "        alert(searchParams);\n"
+
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append(undefined, 'undefinedKey');\n"
+            + "        alert(searchParams);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"emptyValue=", "nullValue=null", "undefinedValue=undefined"},
+            IE = {})
+    public void stringValues() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append('emptyValue', '');\n"
+            + "        alert(searchParams);\n"
+
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append('nullValue', null);\n"
+            + "        alert(searchParams);\n"
+
+            + "        searchParams = new URLSearchParams();\n"
+            + "        searchParams.append('undefinedValue', undefined);\n"
+            + "        alert(searchParams);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception param",
+            IE = {})
+    @HtmlUnitNYI(CHROME = "noValue=undefined",
+            EDGE = "noValue=undefined",
+            FF = "noValue=undefined",
+            FF68 = "noValue=undefined")
+    public void stringMissingParam() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        try {\n"
+            + "          searchParams = new URLSearchParams();\n"
+            + "          searchParams.append('noValue');\n"
+            + "          alert(searchParams);\n"
+            + "        } catch(e) { alert('exception param'); }\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
