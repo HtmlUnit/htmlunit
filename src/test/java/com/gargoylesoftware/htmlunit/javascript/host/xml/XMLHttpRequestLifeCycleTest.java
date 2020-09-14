@@ -117,7 +117,6 @@ public final class XMLHttpRequestLifeCycleTest {
         ONLY_SEND_PREFLIGHT, ONLY_SEND_PREFLIGHT_FORBIDDEN,
         NETWORK_ERROR_PREFLIGHT,
         ERROR_500_PREFLIGHT, ERROR_500_DURING_PREFLIGHT
-
     }
 
     /**
