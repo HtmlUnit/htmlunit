@@ -710,7 +710,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
-                if (!isPreflightAuthorized(preflightResponse)) {
+                final int statusCode = preflightResponse.getStatusCode();
+                final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES
+                    || statusCode == HttpStatus.SC_USE_PROXY
+                    || statusCode == HttpStatus.SC_NOT_MODIFIED;
+                if (!successful || !isPreflightAuthorized(preflightResponse)) {
                     setState(DONE);
                     if (async_ || getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                         fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);

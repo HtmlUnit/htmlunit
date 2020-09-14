@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 public final class XMLHttpRequestLifeCycleTest {
     private static final String SUCCESS_URL = "/xmlhttprequest/success.html";
     private static final String ERROR_URL = "/xmlhttprequest/error.html";
+    private static final String PREFLIGHT_ERROR_URL = "/xmlhttprequest/preflighterror.html";
     private static final String TIMEOUT_URL = "/xmlhttprequest/timeout.html";
 
     private static final String RETURN_XML = "<xml>\n"
@@ -114,7 +115,9 @@ public final class XMLHttpRequestLifeCycleTest {
     private enum Execution {
         ONLY_SEND, SEND_ABORT, NETWORK_ERROR, ERROR_500, TIMEOUT,
         ONLY_SEND_PREFLIGHT, ONLY_SEND_PREFLIGHT_FORBIDDEN,
-        NETWORK_ERROR_PREFLIGHT
+        NETWORK_ERROR_PREFLIGHT,
+        ERROR_500_PREFLIGHT, ERROR_500_DURING_PREFLIGHT
+
     }
 
     /**
@@ -151,15 +154,34 @@ public final class XMLHttpRequestLifeCycleTest {
         public static class Xml500Servlet extends HttpServlet {
 
             @Override
-            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "*");
+                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+            }
+
+            @Override
+            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
                     throws ServletException, IOException {
-                resp.setContentType(MimeType.TEXT_XML);
-                resp.setContentLength(RETURN_XML.length());
-                resp.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-                final ServletOutputStream outputStream = resp.getOutputStream();
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "*");
+                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+                response.setContentType(MimeType.TEXT_XML);
+                response.setContentLength(RETURN_XML.length());
+                response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+                final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
                 }
+            }
+        }
+
+        public static class Preflight500Servlet extends HttpServlet {
+
+            @Override
+            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+                response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             }
         }
 
@@ -197,6 +219,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void prepareTestingServlets() {
             servlets_.put(SUCCESS_URL, Xml200Servlet.class);
             servlets_.put(ERROR_URL, Xml500Servlet.class);
+            servlets_.put(PREFLIGHT_ERROR_URL, Preflight500Servlet.class);
             servlets_.put(TIMEOUT_URL, XmlTimeoutServlet.class);
         }
 
@@ -283,6 +306,29 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
+                    "load_4_500_false", "loadend_4_500_false", "send-done"})
+        public void addEventListener_sync_Error500_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500_PREFLIGHT), URL_FIRST,
+                    servlets_, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done",
+                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                        "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done",
+                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                        "ExceptionThrown"})
+        public void addEventListener_sync_Error500_during_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
+                    servlets_, servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
@@ -405,6 +451,41 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error500Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                        "progress_3_500_false", "readystatechange_4_500_true",
+                        "load_4_500_false", "loadend_4_500_false"},
+                IE = {"readystatechange_1_0_true", "open-done",
+                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                        "readystatechange_2_500_true", "readystatechange_3_500_true",
+                        "progress_3_500_false", "readystatechange_4_500_true",
+                        "load_4_500_false", "loadend_4_500_false"})
+        public void addEventListener_async_Error500Triggered_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500_PREFLIGHT), URL_FIRST,
+                    servlets_, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false"})
+        public void addEventListener_async_Error500Triggered_during_preflight() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
+                    servlets_, servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
@@ -724,6 +805,14 @@ public final class XMLHttpRequestLifeCycleTest {
         else if (Execution.ERROR_500.equals(execution)) {
             htmlBuilder.append("        var url = '" + ERROR_URL + "';\n");
         }
+        else if (Execution.ERROR_500_PREFLIGHT.equals(execution)) {
+            htmlBuilder.append("        var url = 'http://' + window.location.hostname + ':"
+                    + WebTestCase.PORT2 + ERROR_URL + "';\n");
+        }
+        else if (Execution.ERROR_500_DURING_PREFLIGHT.equals(execution)) {
+            htmlBuilder.append("        var url = 'http://' + window.location.hostname + ':"
+                    + WebTestCase.PORT2 + PREFLIGHT_ERROR_URL + "';\n");
+        }
         else if (Execution.TIMEOUT.equals(execution)) {
             htmlBuilder.append("        var url = '" + TIMEOUT_URL + "';\n");
         }
@@ -742,7 +831,9 @@ public final class XMLHttpRequestLifeCycleTest {
         htmlBuilder.append("        try {\n");
 
         if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)
-                || Execution.NETWORK_ERROR_PREFLIGHT.equals(execution)) {
+                || Execution.NETWORK_ERROR_PREFLIGHT.equals(execution)
+                || Execution.ERROR_500_PREFLIGHT.equals(execution)
+                || Execution.ERROR_500_DURING_PREFLIGHT.equals(execution)) {
             htmlBuilder.append("        xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n");
         }
         else if (Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN.equals(execution)) {
