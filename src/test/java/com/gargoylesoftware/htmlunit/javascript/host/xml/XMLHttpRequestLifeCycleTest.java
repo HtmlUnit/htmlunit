@@ -1078,7 +1078,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
-            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+            MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
             miniServer.start();
@@ -1094,7 +1094,7 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         /**
-         * NoHttpResponseException.
+         * NoHttpResponseException during preflight.
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1102,23 +1102,31 @@ public final class XMLHttpRequestLifeCycleTest {
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
-        public void onKeyWord_sync_NoHttpResponseException() throws Exception {
+        public void addEventListener_sync_preflight_NoHttpResponseException() throws Exception {
             stopWebServers();
 
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND));
-            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
 
-            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            miniServer.start();
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
             try {
-                final WebDriver driver = getWebDriver();
-                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
 
-                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
             }
             finally {
-                miniServer.shutDown();
+                miniServer1.shutDown();
             }
         }
 
@@ -1144,7 +1152,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
-            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+            MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
             miniServer.start();
@@ -1158,6 +1166,113 @@ public final class XMLHttpRequestLifeCycleTest {
                 miniServer.shutDown();
             }
         }
+
+        /**
+         * NoHttpResponseException during preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"})
+        public void addEventListener_async_preflight_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void onKeyWord_sync_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND));
+            MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+
+            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
+            miniServer.start();
+            try {
+                final WebDriver driver = getWebDriver();
+                driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            }
+            finally {
+                miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException during preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void onKeyWord_sync_preflight_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST,
+                    buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
+            }
+        }
+
 
         /**
          * NoHttpResponseException.
@@ -1181,7 +1296,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND));
-            MiniServer.configureDropConnection(mockWebConnection, new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
+            MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
             miniServer.start();
@@ -1193,6 +1308,46 @@ public final class XMLHttpRequestLifeCycleTest {
             }
             finally {
                 miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException during preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"})
+        public void onKeyWord_async_preflight_NoHttpResponseException() throws Exception {
+            stopWebServers();
+
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST,
+                    buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
             }
         }
     }
