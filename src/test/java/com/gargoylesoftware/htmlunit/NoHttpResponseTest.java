@@ -59,7 +59,7 @@ public class NoHttpResponseTest {
         public void callSubmitInButtonAndReturnTrue() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(URL_FIRST, html);
-            MiniServer.configureDropConnection(mockWebConnection, new URL(URL_FIRST, "page2?textfield="));
+            MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
 
@@ -91,7 +91,7 @@ public class NoHttpResponseTest {
         public void callSubmitInButtonAndReturnTrue() throws Throwable {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(URL_FIRST, html);
-            MiniServer.configureDropConnection(mockWebConnection, new URL(URL_FIRST, "page2?textfield="));
+            MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
             miniServer.start();
