@@ -25,6 +25,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
 import java.nio.CharBuffer;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
@@ -48,10 +50,16 @@ public class MiniServer extends Thread {
     private final AtomicBoolean started_ = new AtomicBoolean(false);
     private final MockWebConnection mockWebConnection_;
     private volatile ServerSocket serverSocket_;
-    private static final String DROP_CONNECTION = "#drop connectoin#";
 
-    public static void configureDropConnection(final MockWebConnection mockWebConnection, final URL url) {
-        mockWebConnection.setResponse(url, DROP_CONNECTION);
+    private static final Set<URL> DROP_REQUESTS = new HashSet<>();
+    private static final Set<URL> DROP_OPTION_REQUESTS = new HashSet<>();
+
+    public static void configureDropRequest(final URL url) {
+        DROP_REQUESTS.add(url);
+    }
+
+    public static void configureOptionDropRequest(final URL url) {
+        DROP_OPTION_REQUESTS.add(url);
     }
 
     public MiniServer(final int port, final MockWebConnection mockWebConnection) {
@@ -94,9 +102,21 @@ public class MiniServer extends Thread {
                         final String in = cb.toString();
                         cb.rewind();
 
-                        final RawResponseData responseData = getResponseData(in);
+                        RawResponseData responseData = null;
+                        final WebRequest request = parseRequest(in);
+                        if (request != null
+                                && (!DROP_REQUESTS.contains(request.getUrl())
+                                        && (request.getHttpMethod() != HttpMethod.OPTIONS
+                                                || !DROP_OPTION_REQUESTS.contains(request.getUrl())))) {
+                            try {
+                                responseData = mockWebConnection_.getRawResponse(request);
+                            }
+                            catch (final IllegalStateException e) {
+                                LOG.error(e);
+                            }
+                        }
 
-                        if (responseData == null || responseData.getStringContent() == DROP_CONNECTION) {
+                        if (responseData == null) {
                             LOG.info("Closing impolitely in & output streams");
                             s.getOutputStream().close();
                         }
@@ -127,21 +147,6 @@ public class MiniServer extends Thread {
         }
         finally {
             LOG.info("Finished listening on port " + port_);
-        }
-    }
-
-    private RawResponseData getResponseData(final String in) throws IOException {
-        final WebRequest request = parseRequest(in);
-        if (request == null) {
-            return null;
-        }
-
-        try {
-            return mockWebConnection_.getRawResponse(request);
-        }
-        catch (final IllegalStateException e) {
-            LOG.error(e);
-            return null;
         }
     }
 
