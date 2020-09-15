@@ -678,9 +678,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
         }
 
-        boolean preflightAuthorizationError = false;
         final WebClient wc = getWindow().getWebWindow().getWebClient();
-
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
             if (originHeaderValue != null && isPreflight()) {
@@ -731,49 +729,20 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
 
-            final WebResponse webResponse = wc.loadWebResponse(webRequest_);
-            // check and report problems if needed
-            final int statusCode = webResponse.getStatusCode();
-            final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
-                || statusCode == HttpStatus.SC_USE_PROXY
-                || statusCode == HttpStatus.SC_NOT_MODIFIED;
-            if (!successful) {
-                webResponse_ = webResponse;
-                if (async_) {
-                    setState(HEADERS_RECEIVED);
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-
-                    setState(LOADING);
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
-                }
-
-                setState(DONE);
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptProgressEvent(Event.TYPE_LOAD);
-                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
-                return;
-            }
-
-            webResponse_ = webResponse;
-            setState(HEADERS_RECEIVED);
-            if (async_) {
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-            }
-
+            webResponse_ = wc.loadWebResponse(webRequest_);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
             // this kind of web responses using UTF-8 as default encoding
-            webResponse.defaultCharsetUtf8();
+            webResponse_.defaultCharsetUtf8();
 
             boolean allowOriginResponse = true;
             if (originHeaderValue != null) {
-                String value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
+                String value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
                 if (isWithCredentials()) {
                     // second step: check the allow-credentials header for true
-                    value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
+                    value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
                     allowOriginResponse = allowOriginResponse && Boolean.parseBoolean(value);
                 }
                 else {
@@ -790,7 +759,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     final Charset charset = EncodingSniffer.toCharset(charsetName);
                     final String charsetNameFinal = charsetName;
                     final Charset charsetFinal = charset;
-                    webResponse_ = new WebResponseWrapper(webResponse) {
+                    webResponse_ = new WebResponseWrapper(webResponse_) {
                         @Override
                         public String getContentType() {
                             return overriddenMimeType_;
@@ -807,37 +776,34 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     };
                 }
             }
-            if (allowOriginResponse) {
-                if (async_) {
-                    setState(LOADING);
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
-                }
-
-                setState(DONE);
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptProgressEvent(Event.TYPE_LOAD);
-                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
-            }
-            else {
+            if (!allowOriginResponse) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
                 }
-                preflightAuthorizationError = true;
                 throw new IOException("No permitted \"Access-Control-Allow-Origin\" header.");
             }
+
+            setState(HEADERS_RECEIVED);
+            if (async_) {
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+            }
+
+            if (async_) {
+                setState(LOADING);
+                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+            }
+
+            setState(DONE);
+            fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+            fireJavascriptProgressEvent(Event.TYPE_LOAD);
+            fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
         }
         catch (final IOException e) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("IOException: returning a network error response.", e);
             }
 
-            // IOException is very broad, if we got it because of our own pre-flight checks
-            // we're not going to treat it as error state.
-            // TODO collaborate and confirm that this is correct in most cases.
-            final boolean inErrorState = !preflightAuthorizationError;
-
-            // IE is really strange
             if (async_) {
                 if (e instanceof SocketTimeoutException
                         && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
