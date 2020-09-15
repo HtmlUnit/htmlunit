@@ -1039,6 +1039,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected void verifyAlerts(final Supplier<String> func, final String expected) throws Exception {
         verifyAlerts(func, expected, DEFAULT_WAIT_TIME);
     }
+
     /**
      * Verifies the captured alerts.
      * @param func actual string producer
