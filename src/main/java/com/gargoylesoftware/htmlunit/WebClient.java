@@ -62,6 +62,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
+import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
@@ -156,6 +157,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /** Like the Firefox default value for {@code network.http.redirection-limit}. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
+    private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
+            0, "No HTTP Response", Collections.<NameValuePair>emptyList());
 
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
@@ -2367,7 +2370,13 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         else {
             try {
-                final WebResponse response = loadWebResponse(request);
+                WebResponse response;
+                try {
+                    response = loadWebResponse(request);
+                }
+                catch (final NoHttpResponseException e) {
+                    response = new WebResponse(responseDataNoHttpResponse_, request, 0);
+                }
                 loadJob = new LoadJob(request, requestingWindow, target, response);
             }
             catch (final IOException e) {
