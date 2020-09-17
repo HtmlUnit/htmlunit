@@ -105,9 +105,10 @@ public abstract class HostParentOf extends WebDriverTestCase {
             + "  /*\n"
             + "   * Returns true if o1 prototype is parent/grandparent of o2 prototype\n"
             + "   */\n"
-            + "  function isParentOf(o1, o2) {\n"
-            + "    o1.prototype.myCustomFunction = function() {};\n"
-            + "    return o2.prototype.myCustomFunction != undefined;\n"
+            + "  function isParentOf(o1, o2) {"
+            + "    detector = function() {};\n"
+            + "    o1.prototype.myCustomFunction = detector;\n"
+            + "    return o2.prototype.myCustomFunction === detector;\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
