@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -504,21 +505,26 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     static Page executeOnChangeHandlerIfAppropriate(final HtmlElement htmlElement) {
         final SgmlPage page = htmlElement.getPage();
+        final WebClient webClient = page.getWebClient();
 
-        final AbstractJavaScriptEngine<?> engine = htmlElement.getPage().getWebClient().getJavaScriptEngine();
+        if (!webClient.isJavaScriptEngineEnabled()) {
+            return page;
+        }
+
+        final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
         if (engine.isScriptRunning()) {
             return page;
         }
         final ScriptResult scriptResult = htmlElement.fireEvent(Event.TYPE_CHANGE);
 
-        if (page.getWebClient().containsWebWindow(page.getEnclosingWindow())) {
+        if (webClient.containsWebWindow(page.getEnclosingWindow())) {
             // may be itself or a newly loaded one
             return page.getEnclosingWindow().getEnclosedPage();
         }
 
         if (scriptResult != null) {
             // current window doesn't exist anymore
-            return page.getWebClient().getCurrentWindow().getEnclosedPage();
+            return webClient.getCurrentWindow().getEnclosedPage();
         }
 
         return page;

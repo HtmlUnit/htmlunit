@@ -21,8 +21,10 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
@@ -275,7 +277,7 @@ public class WebClient8Test extends SimpleWebTestCase {
                 + "  <title>foo</title>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "<object type='application/pdf' classid='cls12345'></object>\n"
+                + "  <object type='application/pdf' classid='cls12345'></object>\n"
                 + "</body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
@@ -319,13 +321,40 @@ public class WebClient8Test extends SimpleWebTestCase {
                 + "<head>"
                 + "  <title>foo</title>"
                 + "</head>"
-                + "<body>"
                 + "  <body onLoad='ready()'>"
-                + "</body>"
+                + "  </body>"
                 + "</html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             loadPage(webClient, html, null, URL_FIRST);
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void checkingWithNoJS() throws Exception {
+        final String html = "<html>"
+                + "<head>"
+                + "  <title>foo</title>"
+                + "</head>"
+                + "  <body>"
+                + "    <form id='form1'>\n"
+                + "      <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
+                + "      <input type='radio' name='radio' id='radio'>Check me</input>\n"
+                + "    </form>"
+                + "  </body>"
+                + "</html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+
+            final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
+            checkBox.setChecked(true);
+
+            final HtmlRadioButtonInput radioButton = page.getHtmlElementById("radio");
+            radioButton.setChecked(true);
         }
     }
 
@@ -359,9 +388,9 @@ public class WebClient8Test extends SimpleWebTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
-                + "<body>\n"
-                + "<img onerror='doSomething(this)' />\n"
-                + "</body>\n"
+                + "  <body>\n"
+                + "    <img onerror='doSomething(this)' />\n"
+                + "  </body>\n"
                 + "</html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
