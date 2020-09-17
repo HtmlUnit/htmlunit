@@ -202,9 +202,9 @@ public class MockWebConnection implements WebConnection {
             if (rawResponse == null) {
                 rawResponse = defaultResponse_;
                 if (rawResponse == null) {
-                    throw new IllegalStateException("No response specified that can handle URL ["
-                        + urlString
-                        + "]");
+                    throw new IllegalStateException("No response specified that can handle URL "
+                         + request.getHttpMethod()
+                         + " [" + urlString + "]");
                 }
             }
         }

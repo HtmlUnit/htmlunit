@@ -18,8 +18,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -30,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpStatus;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -40,11 +43,13 @@ import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MiniServer;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for the LifeCycle events for XMLHttpRequests.
@@ -1064,6 +1069,18 @@ public final class XMLHttpRequestLifeCycleTest {
     @RunWith(BrowserRunner.class)
     public static class MiniServerTest extends WebDriverTestCase {
 
+        @Before
+        public void before() throws Exception {
+            // Chrome seems to cache preflight results
+            shutDownAll();
+            MiniServer.resetDropRequests();
+        }
+
+        @After
+        public void after() throws Exception {
+            MiniServer.resetDropRequests();
+        }
+
         /**
          * NoHttpResponseException.
          */
@@ -1074,8 +1091,6 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
@@ -1087,6 +1102,12 @@ public final class XMLHttpRequestLifeCycleTest {
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                 verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                // no chance to to check the request count because of retries
+                assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
+                        mockWebConnection.getLastWebRequest().getUrl());
+                assertEquals(HttpMethod.GET,
+                        mockWebConnection.getLastWebRequest().getHttpMethod());
             }
             finally {
                 miniServer.shutDown();
@@ -1094,7 +1115,7 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         /**
-         * NoHttpResponseException during preflight.
+         * NoHttpResponseException after preflight.
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1103,11 +1124,16 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
-            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Access-Control-Allow-Origin", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Methods", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Headers", "X-PINGOTHER"));
+            getMockWebConnection().setResponse(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                    "",  200, "OK", MimeType.TEXT_HTML, headers);
+            MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
             final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
             miniServer1.start();
@@ -1120,6 +1146,53 @@ public final class XMLHttpRequestLifeCycleTest {
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                     verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.GET,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException during preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void addEventListener_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.OPTIONS,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
                 finally {
                     miniServer2.shutDown();
@@ -1148,8 +1221,6 @@ public final class XMLHttpRequestLifeCycleTest {
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false"})
         public void addEventListener_async_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
@@ -1161,9 +1232,65 @@ public final class XMLHttpRequestLifeCycleTest {
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                 verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                // no chance to to check the request count because of retries
+                assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
+                        mockWebConnection.getLastWebRequest().getUrl());
+                assertEquals(HttpMethod.GET,
+                        mockWebConnection.getLastWebRequest().getHttpMethod());
             }
             finally {
                 miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException after preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"})
+        public void addEventListener_async_preflight_NoHttpResponseException() throws Exception {
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
+
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Access-Control-Allow-Origin", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Methods", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Headers", "X-PINGOTHER"));
+            getMockWebConnection().setResponse(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                    "",  200, "OK", MimeType.TEXT_HTML, headers);
+            MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.GET,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
             }
         }
 
@@ -1178,12 +1305,10 @@ public final class XMLHttpRequestLifeCycleTest {
                         "send-done", "loadstart_1_0_false",
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false"})
-        public void addEventListener_async_preflight_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
+        public void addEventListener_async_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
-            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+            MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
             final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
             miniServer1.start();
@@ -1196,6 +1321,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                     verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.OPTIONS,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
                 finally {
                     miniServer2.shutDown();
@@ -1216,10 +1347,8 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND));
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
@@ -1229,6 +1358,12 @@ public final class XMLHttpRequestLifeCycleTest {
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                 verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                // no chance to to check the request count because of retries
+                assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
+                        mockWebConnection.getLastWebRequest().getUrl());
+                assertEquals(HttpMethod.GET,
+                        mockWebConnection.getLastWebRequest().getHttpMethod());
             }
             finally {
                 miniServer.shutDown();
@@ -1236,7 +1371,7 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         /**
-         * NoHttpResponseException during preflight.
+         * NoHttpResponseException after preflight.
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1245,12 +1380,16 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(WebTestCase.URL_FIRST,
-                    buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT));
-            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
+
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Access-Control-Allow-Origin", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Methods", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Headers", "X-PINGOTHER"));
+            getMockWebConnection().setResponse(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                    "",  200, "OK", MimeType.TEXT_HTML, headers);
+            MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
             final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
             miniServer1.start();
@@ -1263,6 +1402,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                     verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.GET,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
                 finally {
                     miniServer2.shutDown();
@@ -1273,6 +1418,46 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * NoHttpResponseException during preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                FF68 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
+                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
+        public void onKeyWord_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.OPTIONS,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
+            }
+        }
 
         /**
          * NoHttpResponseException.
@@ -1292,10 +1477,8 @@ public final class XMLHttpRequestLifeCycleTest {
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false"})
         public void onKeyWord_async_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND));
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
@@ -1305,9 +1488,65 @@ public final class XMLHttpRequestLifeCycleTest {
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                 verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                // no chance to to check the request count because of retries
+                assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
+                        mockWebConnection.getLastWebRequest().getUrl());
+                assertEquals(HttpMethod.GET,
+                        mockWebConnection.getLastWebRequest().getHttpMethod());
             }
             finally {
                 miniServer.shutDown();
+            }
+        }
+
+        /**
+         * NoHttpResponseException after preflight.
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
+                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
+                        "send-done", "loadstart_1_0_false",
+                        "readystatechange_4_0_true", "error_4_0_false",
+                        "loadend_4_0_false"})
+        public void onKeyWord_async_preflight_NoHttpResponseException() throws Exception {
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
+
+            final List<NameValuePair> headers = new ArrayList<>();
+            headers.add(new NameValuePair("Access-Control-Allow-Origin", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Methods", "*"));
+            headers.add(new NameValuePair("Access-Control-Allow-Headers", "X-PINGOTHER"));
+            getMockWebConnection().setResponse(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                    "",  200, "OK", MimeType.TEXT_HTML, headers);
+            MiniServer.configureDropGetRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
+
+            final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
+            miniServer1.start();
+            try {
+                final MiniServer miniServer2 = new MiniServer(PORT2, mockWebConnection);
+                miniServer2.start();
+
+                try {
+                    final WebDriver driver = getWebDriver();
+                    driver.get(WebTestCase.URL_FIRST.toExternalForm());
+
+                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.GET,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
+                }
+                finally {
+                    miniServer2.shutDown();
+                }
+            }
+            finally {
+                miniServer1.shutDown();
             }
         }
 
@@ -1322,13 +1561,10 @@ public final class XMLHttpRequestLifeCycleTest {
                         "send-done", "loadstart_1_0_false",
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false"})
-        public void onKeyWord_async_preflight_NoHttpResponseException() throws Exception {
-            stopWebServers();
-
+        public void onKeyWord_async_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
-            mockWebConnection.setResponse(WebTestCase.URL_FIRST,
-                    buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT));
-            MiniServer.configureOptionDropRequest(new URL("http://127.0.0.1:" + PORT2 + SUCCESS_URL));
+            mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
+            MiniServer.configureDropRequest(new URL("http://localhost:" + PORT2 + SUCCESS_URL));
 
             final MiniServer miniServer1 = new MiniServer(PORT, mockWebConnection);
             miniServer1.start();
@@ -1341,6 +1577,12 @@ public final class XMLHttpRequestLifeCycleTest {
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
                     verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+
+                    // no chance to to check the request count because of retries
+                    assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
+                            mockWebConnection.getLastWebRequest().getUrl());
+                    assertEquals(HttpMethod.OPTIONS,
+                            mockWebConnection.getLastWebRequest().getHttpMethod());
                 }
                 finally {
                     miniServer2.shutDown();

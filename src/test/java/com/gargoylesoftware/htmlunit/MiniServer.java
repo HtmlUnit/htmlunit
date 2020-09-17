@@ -52,14 +52,19 @@ public class MiniServer extends Thread {
     private volatile ServerSocket serverSocket_;
 
     private static final Set<URL> DROP_REQUESTS = new HashSet<>();
-    private static final Set<URL> DROP_OPTION_REQUESTS = new HashSet<>();
+    private static final Set<URL> DROP_GET_REQUESTS = new HashSet<>();
+
+    public static void resetDropRequests() {
+        DROP_REQUESTS.clear();
+        DROP_GET_REQUESTS.clear();
+    }
 
     public static void configureDropRequest(final URL url) {
         DROP_REQUESTS.add(url);
     }
 
-    public static void configureOptionDropRequest(final URL url) {
-        DROP_OPTION_REQUESTS.add(url);
+    public static void configureDropGetRequest(final URL url) {
+        DROP_GET_REQUESTS.add(url);
     }
 
     public MiniServer(final int port, final MockWebConnection mockWebConnection) {
@@ -104,16 +109,22 @@ public class MiniServer extends Thread {
 
                         RawResponseData responseData = null;
                         final WebRequest request = parseRequest(in);
-                        if (request != null
-                                && (!DROP_REQUESTS.contains(request.getUrl())
-                                        && (request.getHttpMethod() != HttpMethod.OPTIONS
-                                                || !DROP_OPTION_REQUESTS.contains(request.getUrl())))) {
-                            try {
+
+                        // try to get the data to count the request
+                        try {
+                            if (request != null) {
                                 responseData = mockWebConnection_.getRawResponse(request);
                             }
-                            catch (final IllegalStateException e) {
-                                LOG.error(e);
-                            }
+                        }
+                        catch (final IllegalStateException e) {
+                            LOG.error(e);
+                        }
+
+                        if (request == null
+                                || (DROP_REQUESTS.contains(request.getUrl())
+                                        || (request.getHttpMethod() == HttpMethod.GET
+                                                && DROP_GET_REQUESTS.contains(request.getUrl())))) {
+                            responseData = null;
                         }
 
                         if (responseData == null) {
@@ -154,6 +165,15 @@ public class MiniServer extends Thread {
         final int firstSpace = request.indexOf(' ');
         final int secondSpace = request.indexOf(' ', firstSpace + 1);
 
+        HttpMethod submitMethod = HttpMethod.GET;
+        final String methodText = request.substring(0, firstSpace);
+        if ("OPTIONS".equalsIgnoreCase(methodText)) {
+            submitMethod = HttpMethod.OPTIONS;
+        }
+        else if ("POST".equalsIgnoreCase(methodText)) {
+            submitMethod = HttpMethod.POST;
+        }
+
         final String requestedPath = request.substring(firstSpace + 1, secondSpace);
         if ("/favicon.ico".equals(requestedPath)) {
             if (LOG.isDebugEnabled()) {
@@ -163,7 +183,7 @@ public class MiniServer extends Thread {
         }
         try {
             final URL url = new URL("http://localhost:" + port_ + requestedPath);
-            return new WebRequest(url);
+            return new WebRequest(url, submitMethod);
         }
         catch (final MalformedURLException e) {
             LOG.error(e);

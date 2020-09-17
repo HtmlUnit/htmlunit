@@ -679,11 +679,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         final WebClient wc = getWindow().getWebWindow().getWebClient();
-        boolean inPreflight = false;
+        boolean preflighted = false;
         try {
             final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
             if (originHeaderValue != null && isPreflight()) {
-                inPreflight = true;
+                preflighted = true;
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
@@ -729,7 +729,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                             new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
                     return;
                 }
-                inPreflight = false;
             }
 
             webResponse_ = wc.loadWebResponse(webRequest_);
@@ -820,7 +819,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
                 }
 
-                if (!inPreflight
+                if (!preflighted
                         && e instanceof NoHttpResponseException
                         && getBrowserVersion().hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
                     fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
