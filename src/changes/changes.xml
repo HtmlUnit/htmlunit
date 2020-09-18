@@ -7,7 +7,11 @@
     </properties>
 
     <body>
-        <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80">
+        <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
+            <action type="add" dev="rbri" due-to="Thorsten Wendelmuth">
+                Event processing for XMLHttpRequest rewritten. Events defined using addEventListener
+                are now supported and the triggered events are more correct now.
+            </action>
             <action type="fix" dev="rbri" issue="#227">
                 Fix NPE during checkbox/radiobutton event handlers without JS engine.
             </action>
