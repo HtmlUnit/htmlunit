@@ -28,14 +28,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -49,6 +47,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HTMLInputElementTest extends WebDriverTestCase {
@@ -847,37 +846,56 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"radio", "hidden", "image"})
+    @Alerts(DEFAULT = {"text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, "
+                + "radio, hidden, password, image, reset, button, file, number, range, search, tel, url, text, text",
+                "text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, radio, "
+                + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text" },
+            FF = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
+                + "password, image, reset, button, file, number, range, search, tel, url, text, text",
+                "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
+                + "image, reset, button, file, number, range, search, tel, url, text, text"},
+            FF68 = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
+                + "password, image, reset, button, file, number, range, search, tel, url, text, text",
+                "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
+                + "image, reset, button, file, number, range, search, tel, url, text, text"},
+            IE = {"text, checkbox, error, error, error, error, error, error, email, text, submit, radio, hidden, "
+                + "password, image, reset, button, file, number, range, search, tel, url, error, text",
+                "text, checkbox, text, text, text, text, text, text, email, text, submit, radio, hidden, password, "
+                + "image, reset, button, file, number, range, search, tel, url, text, text" })
     public void changeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "  var input = document.myForm.myRadio;\n"
-            + "  alert(input.type);\n"
-
-            + "  try {\n"
-            + "    input.type = 'hidden';\n"
-            + "  } catch(e) { alert('error');}\n"
-            + "  alert(input.type);\n"
-
-            + "  try {\n"
-            + "    input.setAttribute('type', 'image');\n"
-            + "  } catch(e) { alert('error');}\n"
-            + "  alert(input.type);\n"
-            + "}\n</script></head>\n"
+            + "  var input = document.myForm.myInput;\n"
+            + "  var types = ['checkbox', 'date', 'datetime-local', 'month', 'time', 'week', 'color'"
+                            + ", 'email', 'text', 'submit', 'radio', 'hidden', 'password', 'image', 'reset'"
+                            + ", 'button', 'file', 'number', 'range', 'search', 'tel', 'url', 'unknown', 'text'];"
+            + "  var result = input.type;\n"
+            + "  for(i = 0; i < types.length; i++) {\n"
+            + "    try {\n"
+            + "      input.type = types[i];\n"
+            + "      result = result + ', ' + input.type;\n"
+            + "    } catch(e) { result = result + ', error';}\n"
+            + "  }\n"
+            + "  alert(result);\n"
+            + "  result = input.type;\n"
+            + "  for(i = 0; i < types.length; i++) {\n"
+            + "    try {\n"
+            + "      input.setAttribute('type', types[i]);\n"
+            + "      result = result + ', ' + input.type;\n"
+            + "    } catch(e) { result = result + ', error';}\n"
+            + "  }\n"
+            + "  alert(result);\n"
+            + "}\n"
+            + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "  <form name='myForm' action='foo'>\n"
-            + "    <input type='radio' name='myRadio'/>\n"
+            + "    <input type='text' name='myInput'/>\n"
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-
-        if (driver instanceof HtmlUnitDriver) {
-            final WebElement myRadio = driver.findElement(By.name("myRadio"));
-            assertTrue(toHtmlElement(myRadio) instanceof HtmlImageInput);
-        }
+        loadPageWithAlerts2(html);
     }
 
     /**
