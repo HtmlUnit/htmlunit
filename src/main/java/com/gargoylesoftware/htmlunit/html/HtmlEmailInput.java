@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -177,5 +178,13 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, La
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isPatternSupported() {
+        return true;
     }
 }

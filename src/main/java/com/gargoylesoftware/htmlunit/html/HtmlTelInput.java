@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlTelInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -162,5 +163,21 @@ public class HtmlTelInput extends HtmlInput implements SelectableTextInput, Labe
     public void reset() {
         super.reset();
         setSelectionEnd(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isPatternSupported() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isMinMaxLengthSupported() {
+        return true;
     }
 }

@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlWeekInput extends HtmlInput implements LabelableElement {
 
@@ -60,8 +61,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public void setValueAttribute(final String newValue) {
-        if (!hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
-                || hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)
+        if (!hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED)
                 || StringUtils.isEmpty(newValue)) {
             super.setValueAttribute(newValue);
             return;
@@ -74,5 +74,57 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
         catch (final DateTimeParseException e) {
             // ignore
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && isMaxValid() && isMinValid();
+    }
+
+    /**
+     * Returns if the input element has a valid min value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * for details.
+     *
+     * @return if the input element has a valid min value
+     */
+    private boolean isMinValid() {
+        if (hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED) && !getMin().isEmpty()) {
+            try {
+                final LocalDate dateValue = LocalDate.parse(getValueAttribute() + "-1",
+                        DateTimeFormatter.ISO_WEEK_DATE);
+                final LocalDate minDate = LocalDate.parse(getMin() + "-1", DateTimeFormatter.ISO_WEEK_DATE);
+                return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns if the input element has a valid max value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * for details.
+     *
+     * @return if the input element has a valid max value
+     */
+    private boolean isMaxValid() {
+        if (hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED) && !getMax().isEmpty()) {
+            try {
+                final LocalDate dateValue = LocalDate.parse(getValueAttribute() + "-1",
+                        DateTimeFormatter.ISO_WEEK_DATE);
+                final LocalDate maxDate = LocalDate.parse(getMax() + "-1", DateTimeFormatter.ISO_WEEK_DATE);
+                return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
     }
 }

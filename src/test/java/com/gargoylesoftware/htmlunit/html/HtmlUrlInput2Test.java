@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * Tests for {@link HtmlUrlInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUrlInput2Test extends SimpleWebTestCase {
@@ -119,5 +120,83 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void patternValidation() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='url' pattern='.*github.*' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlUrlInput input = (HtmlUrlInput) page.getElementById("foo");
+
+        // empty
+        assertFalse(input.isValid());
+        // invalid
+        input.setValueAttribute("https://sourceforge.net/projects/htmlunit/");
+        assertFalse(input.isValid());
+        // valid
+        input.setValueAttribute("https://github.com/HtmlUnit/htmlunit");
+        assertTrue(input.isValid());
+    }
+
+    /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    public void testMaxLengthValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='url' id='foo' maxLength='18'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertTrue(input.isValid());
+        input.type("https://github.com");
+        assertTrue(input.isValid());
+        input.type("/HtmlUnit/htmlunit");
+        assertTrue(input.isValid());
+        assertEquals("https://github.com", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    public void testMinLengthValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='url' id='foo' minLength='20'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertFalse(input.isValid());
+        input.type("https://github.com");
+        assertFalse(input.isValid());
+        input.type("/HtmlUnit/htmlunit");
+        assertTrue(input.isValid());
+        assertEquals("https://github.com/HtmlUnit/htmlunit", input.getValueAttribute());
     }
 }

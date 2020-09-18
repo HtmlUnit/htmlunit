@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlTextInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -207,5 +208,21 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput, Lab
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isPatternSupported() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isMinMaxLengthSupported() {
+        return true;
     }
 }

@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * Tests for {@link HtmlEmailInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlEmailInput2Test extends SimpleWebTestCase {
@@ -98,5 +99,33 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.type("xyz@email.com");
 
         assertEquals("xyz@email.com", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void patternValidation() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='email' pattern='.+@email.com' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlEmailInput input = (HtmlEmailInput) page.getElementById("foo");
+
+        // empty
+        assertFalse(input.isValid());
+        // invalid
+        input.setValueAttribute("abc@eemail.com");
+        assertFalse(input.isValid());
+        // valid
+        input.setValueAttribute("abc@email.com");
+        assertTrue(input.isValid());
     }
 }

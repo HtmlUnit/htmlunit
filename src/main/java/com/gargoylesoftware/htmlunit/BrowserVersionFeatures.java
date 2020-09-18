@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.intl.DateTimeFormat;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Anton Demydenko
  */
 public enum BrowserVersionFeatures {
 
@@ -451,6 +452,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
+    /** HTMLInputElement: minlength and maxlength attributes are supported. */
+    @BrowserFeature({CHROME, EDGE, FF, FF68})
+    HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED,
+
     /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
@@ -475,9 +480,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTMLINPUT_TYPE_DATETIME_SUPPORTED,
 
-    /** HTMLInputElement date and time types are not supported. */
-    @BrowserFeature({FF, FF68})
-    HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED,
+    /** HTMLInputElement datetime-local type is supported. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
+
+    /** HTMLInputElement month types type is supported. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLINPUT_TYPE_MONTH_SUPPORTED,
+
+    /** HTMLInputElement week type is supported. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLINPUT_TYPE_WEEK_SUPPORTED,
 
     /** Should the HTMLElement of {@code keygen} have no end tag. */
     @BrowserFeature(IE)

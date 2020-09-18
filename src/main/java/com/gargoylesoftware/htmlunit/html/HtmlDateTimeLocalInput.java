@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElement {
 
@@ -61,8 +62,7 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
-                    && !hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)
+            if (hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED)
                     && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
@@ -71,5 +71,57 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
         catch (final DateTimeParseException e) {
             // ignore
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && isMaxValid() && isMinValid();
+    }
+
+    /**
+     * Returns if the input element has a valid min value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * for details.
+     *
+     * @return if the input element has a valid min value
+     */
+    private boolean isMinValid() {
+        if (hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED)
+                && !getMin().isEmpty()) {
+            try {
+                final LocalDateTime dateValue = LocalDateTime.parse(getValueAttribute(), FORMATTER_);
+                final LocalDateTime minDate = LocalDateTime.parse(getMin(), FORMATTER_);
+                return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns if the input element has a valid max value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * for details.
+     *
+     * @return if the input element has a valid max value
+     */
+    private boolean isMaxValid() {
+        if (hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED)
+                && !getMax().isEmpty()) {
+            try {
+                final LocalDateTime dateValue = LocalDateTime.parse(getValueAttribute(), FORMATTER_);
+                final LocalDateTime maxDate = LocalDateTime.parse(getMax(), FORMATTER_);
+                return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
     }
 }
