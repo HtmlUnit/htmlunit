@@ -1604,7 +1604,7 @@ public enum BrowserVersionFeatures {
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
     /**
-     * Indicates that the Browser handles async & sync network errors the same way.
+     * Indicates that the Browser handles async and sync network errors the same way.
      */
     @BrowserFeature({FF, FF68})
     XHR_HANDLE_SYNC_NETWORK_ERRORS,
