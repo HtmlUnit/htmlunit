@@ -214,7 +214,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false-true", IE = "true-true")
+    @Alerts(DEFAULT = "false-true",
+            IE = "true-true")
     public void minValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -239,7 +240,8 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false-true", IE = "true-true")
+    @Alerts(DEFAULT = "false-true",
+            IE = "true-true")
     public void maxValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

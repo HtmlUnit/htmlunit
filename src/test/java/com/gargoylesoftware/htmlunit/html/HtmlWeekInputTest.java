@@ -208,7 +208,9 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(EDGE = "false-true", CHROME = "false-true", DEFAULT = "true-true")
+    @Alerts(DEFAULT = "true-true",
+            CHROME = "false-true",
+            EDGE = "false-true")
     public void maxValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -230,7 +232,9 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(EDGE = "false-true", CHROME = "false-true", DEFAULT = "true-true")
+    @Alerts(DEFAULT = "true-true",
+            CHROME = "false-true",
+            EDGE = "false-true")
     public void minValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
