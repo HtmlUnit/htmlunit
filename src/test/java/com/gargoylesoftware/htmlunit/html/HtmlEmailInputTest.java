@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlEmailInputTest extends WebDriverTestCase {
@@ -189,6 +190,28 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
             + "<form>\n"
             + "  <input type='email' id='tester'>\n"
             + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts("false-true")
+    public void patternValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    var bar = document.getElementById('bar');\n"
+            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='email' pattern='.+@email.com' id='foo' value='abc@eemail.com!'>\n"
+            + "  <input type='email' pattern='.+@email.com' id='bar' value='abc@email.com'>\n"
             + "</body>\n"
             + "</html>";
 

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlRangeInput extends HtmlInput implements LabelableElement {
 
@@ -183,5 +184,53 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     @Override
     protected boolean isRequiredSupported() {
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && isMaxValid() && isMinValid();
+    }
+
+    /**
+     * Returns if the input element has a valid min value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * documentation for details.
+     *
+     * @return if the input element has a valid min value
+     */
+    private boolean isMinValid() {
+        if (!getValueAttribute().isEmpty() && !getMin().isEmpty()) {
+            try {
+                final double value = Double.parseDouble(getValueAttribute());
+                return getMinNumeric() <= value;
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns if the input element has a valid max value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * documentation for details.
+     *
+     * @return if the input element has a valid max value
+     */
+    private boolean isMaxValid() {
+        if (!getValueAttribute().isEmpty() && !getMax().isEmpty()) {
+            try {
+                final int value = Integer.parseInt(getValueAttribute());
+                return getMaxNumeric() >= value;
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+        }
+        return true;
     }
 }

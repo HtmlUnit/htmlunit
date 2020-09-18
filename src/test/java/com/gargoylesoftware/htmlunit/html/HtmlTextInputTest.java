@@ -29,6 +29,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * Tests for {@link HtmlTextInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebDriverTestCase {
@@ -690,5 +692,103 @@ public class HtmlTextInputTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts("true-false")
+    public void patternValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    var bar = document.getElementById('bar');\n"
+            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='text' pattern='[a-z]{5}' id='foo' value='valid'>\n"
+            + "  <input type='text' pattern='[a-z]{5}' id='bar' value='invalid'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void minLengthValidation() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                    + "' method='" + HttpMethod.POST + "'>\n"
+            + "    <input type='text' minlength='5' id='foo'>\n"
+            + "    <button id='myButton' type='submit'>Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+
+        final WebElement foo = driver.findElement(By.id("foo"));
+        foo.sendKeys("test");
+        assertEquals("test", foo.getAttribute("value"));
+        //invalid data
+        driver.findElement(By.id("myButton")).click();
+        assertEquals(URL_FIRST.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        //valid data
+        foo.sendKeys("value");
+        assertEquals("testvalue", foo.getAttribute("value"));
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void maxLengthValidation() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                    + "' method='" + HttpMethod.POST + "'>\n"
+            + "    <input type='text' maxlength='5' id='foo'>\n"
+            + "    <input type='text' maxlength='5' id='bar'>\n"
+            + "    <button id='myButton' type='submit'>Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+
+        final WebElement foo = driver.findElement(By.id("foo"));
+        final WebElement bar = driver.findElement(By.id("bar"));
+        foo.sendKeys("test");
+        bar.sendKeys("testvalue");
+
+        assertEquals("test", foo.getAttribute("value"));
+        assertEquals("testv", bar.getAttribute("value"));
+
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
     }
 }

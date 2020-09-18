@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * Tests for {@link HtmlTelInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTelInput2Test extends SimpleWebTestCase {
@@ -98,5 +99,83 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void patternValidation() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTelInput input = (HtmlTelInput) page.getElementById("foo");
+
+        // empty
+        assertFalse(input.isValid());
+        // invalid
+        input.setValueAttribute("123-456-78901");
+        assertFalse(input.isValid());
+        // valid
+        input.setValueAttribute("123-456-7890");
+        assertTrue(input.isValid());
+    }
+
+    /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    public void testMaxLengthValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='tel' id='foo' maxLength='5'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertTrue(input.isValid());
+        input.type("12345");
+        assertTrue(input.isValid());
+        input.type("67890");
+        assertTrue(input.isValid());
+        assertEquals("12345", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    public void testMinLengthValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='text' id='foo' minLength='5'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertFalse(input.isValid());
+        input.type("1234");
+        assertFalse(input.isValid());
+        input.type("567890");
+        assertTrue(input.isValid());
+        assertEquals("1234567890", input.getValueAttribute());
     }
 }

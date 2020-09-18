@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Anton Demydenko
  */
 public class HtmlSearchInput extends HtmlTextInput {
 
@@ -38,4 +39,19 @@ public class HtmlSearchInput extends HtmlTextInput {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isPatternSupported() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isMinMaxLengthSupported() {
+        return true;
+    }
 }

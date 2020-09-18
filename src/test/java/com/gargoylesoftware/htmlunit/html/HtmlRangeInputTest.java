@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlRangeInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlRangeInputTest extends WebDriverTestCase {
@@ -352,6 +353,77 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "<form>\n"
             + "  <input type='range' id='tester'>\n"
             + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"true-true-true-true-true-true", "55-10-10-100-0-0"})
+    public void minValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('id1').checkValidity() + '-'\n"
+            + "         + document.getElementById('id2').checkValidity() + '-'\n"
+            + "         + document.getElementById('id3').checkValidity() + '-'\n"
+            + "         + document.getElementById('id4').checkValidity() + '-'\n"
+            + "         + document.getElementById('id5').checkValidity() + '-'\n"
+            + "         + document.getElementById('id6').checkValidity());\n"
+            + "    alert(document.getElementById('id1').value + '-'\n"
+            + "         + document.getElementById('id2').value + '-'\n"
+            + "         + document.getElementById('id3').value + '-'\n"
+            + "         + document.getElementById('id4').value + '-'\n"
+            + "         + document.getElementById('id5').value + '-'\n"
+            + "         + document.getElementById('id6').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='range' id='id1' min='10'>\n"
+            + "  <input type='range' id='id2' min='10' value='1'>\n"
+            + "  <input type='range' id='id3' min='10' value='10'>\n"
+            + "  <input type='range' id='id4' min='10' value='100'>\n"
+            + "  <input type='range' id='id5' value='0'>\n"
+            + "  <input type='range' id='id6' min='foo' value='0'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"true-true-true-true-true-true", "5-1-10-10-0-0"})
+    public void maxValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('id1').checkValidity() + '-'\n"
+            + "         + document.getElementById('id2').checkValidity() + '-'\n"
+            + "         + document.getElementById('id3').checkValidity() + '-'\n"
+            + "         + document.getElementById('id4').checkValidity() + '-'\n"
+            + "         + document.getElementById('id5').checkValidity() + '-'\n"
+            + "         + document.getElementById('id6').checkValidity());\n"
+            + "    alert(document.getElementById('id1').value + '-'\n"
+            + "         + document.getElementById('id2').value + '-'\n"
+            + "         + document.getElementById('id3').value + '-'\n"
+            + "         + document.getElementById('id4').value + '-'\n"
+            + "         + document.getElementById('id5').value + '-'\n"
+            + "         + document.getElementById('id6').value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='range' id='id1' max='10'>\n"
+            + "  <input type='range' id='id2' max='10' value='1'>\n"
+            + "  <input type='range' id='id3' max='10' value='10'>\n"
+            + "  <input type='range' id='id4' max='10' value='100'>\n"
+            + "  <input type='range' id='id5' value='0'>\n"
+            + "  <input type='range' id='id6' max='foo' value='0'>\n"
             + "</body>\n"
             + "</html>";
 

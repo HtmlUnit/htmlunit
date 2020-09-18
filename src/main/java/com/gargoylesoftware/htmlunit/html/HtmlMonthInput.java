@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlMonthInput extends HtmlInput implements LabelableElement {
 
@@ -61,9 +62,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
-                    && !hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)
-                    && StringUtils.isNotEmpty(newValue)) {
+            if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValueAttribute(newValue);
@@ -71,5 +70,55 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
         catch (final DateTimeParseException e) {
             // ignore
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && isMaxValid() && isMinValid();
+    }
+
+    /**
+     * Returns if the input element has a valid min value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * documentation for details.
+     *
+     * @return if the input element has a valid min value
+     */
+    private boolean isMinValid() {
+        if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && !getMin().isEmpty()) {
+            try {
+                final YearMonth dateValue = YearMonth.parse(getValueAttribute(), FORMATTER_);
+                final YearMonth minDate = YearMonth.parse(getMin(), FORMATTER_);
+                return minDate.equals(dateValue) || minDate.isBefore(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns if the input element has a valid max value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * documentation for details.
+     *
+     * @return if the input element has a valid max value
+     */
+    private boolean isMaxValid() {
+        if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && !getMax().isEmpty()) {
+            try {
+                final YearMonth dateValue = YearMonth.parse(getValueAttribute(), FORMATTER_);
+                final YearMonth maxDate = YearMonth.parse(getMax(), FORMATTER_);
+                return maxDate.equals(dateValue) || maxDate.isAfter(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
     }
 }

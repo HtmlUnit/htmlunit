@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * Tests for {@link HtmlNumberInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlNumberInput2Test extends SimpleWebTestCase {
@@ -119,5 +120,82 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testMinValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='number' id='first' min='10'>\n"
+                + "  <input type='number' id='second'>\n"
+                + "  <input type='number' id='third' min='foo'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlNumberInput first = (HtmlNumberInput) page.getElementById("first");
+        final HtmlNumberInput second = (HtmlNumberInput) page.getElementById("second");
+        final HtmlNumberInput third = (HtmlNumberInput) page.getElementById("third");
+
+        // empty
+        assertTrue(first.isValid());
+        // lesser
+        first.setValueAttribute("9");
+        assertFalse(first.isValid());
+        // equal
+        first.setValueAttribute("10");
+        assertTrue(first.isValid());
+        // bigger
+        first.setValueAttribute("11");
+        assertTrue(first.isValid());
+
+        second.setValueAttribute("10");
+        assertTrue(second.isValid());
+        third.setValueAttribute("10");
+        assertTrue(third.isValid());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testMaxValidation() throws Exception {
+        final String htmlContent = "<html>\n" + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='number' id='first' max='10'>\n"
+                + "  <input type='number' id='second'>\n"
+                + "  <input type='number' id='third' max='foo'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlNumberInput first = (HtmlNumberInput) page.getElementById("first");
+        final HtmlNumberInput second = (HtmlNumberInput) page.getElementById("second");
+        final HtmlNumberInput third = (HtmlNumberInput) page.getElementById("third");
+
+        // empty
+        assertTrue(first.isValid());
+        // lesser
+        first.setValueAttribute("8");
+        assertTrue(first.isValid());
+        // equal
+        first.setValueAttribute("10");
+        assertTrue(first.isValid());
+        // bigger
+        first.setValueAttribute("11");
+        assertFalse(first.isValid());
+
+        second.setValueAttribute("10");
+        assertTrue(second.isValid());
+        third.setValueAttribute("10");
+        assertTrue(third.isValid());
     }
 }

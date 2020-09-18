@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlTimeInput}.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTimeInputTest extends WebDriverTestCase {
@@ -197,6 +198,64 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
             + "<form>\n"
             + "  <input type='time' id='tester'>\n"
             + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = "true-false-true-true-true-true", IE = "true-true-true-true-true-true")
+    public void minValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('id1').checkValidity() + '-'\n"
+            + "         + document.getElementById('id2').checkValidity() + '-'\n"
+            + "         + document.getElementById('id3').checkValidity() + '-'\n"
+            + "         + document.getElementById('id4').checkValidity() + '-'\n"
+            + "         + document.getElementById('id5').checkValidity() + '-'\n"
+            + "         + document.getElementById('id6').checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='time' id='id1' min='09:00'>\n"
+            + "  <input type='time' id='id2' min='09:00' value='08:00'>\n"
+            + "  <input type='time' id='id3' min='09:00' value='09:00'>\n"
+            + "  <input type='time' id='id4' min='09:00' value='10:00'>\n"
+            + "  <input type='time' id='id5' value='09:00'>\n"
+            + "  <input type='time' id='id6' min='foo' value='09:00'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = "true-true-true-false-true-true", IE = "true-true-true-true-true-true")
+    public void maxValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('id1').checkValidity() + '-'\n"
+            + "         + document.getElementById('id2').checkValidity() + '-'\n"
+            + "         + document.getElementById('id3').checkValidity() + '-'\n"
+            + "         + document.getElementById('id4').checkValidity() + '-'\n"
+            + "         + document.getElementById('id5').checkValidity() + '-'\n"
+            + "         + document.getElementById('id6').checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='time' id='id1' max='09:00'>\n"
+            + "  <input type='time' id='id2' max='09:00' value='08:00'>\n"
+            + "  <input type='time' id='id3' max='09:00' value='09:00'>\n"
+            + "  <input type='time' id='id4' max='09:00' value='10:00'>\n"
+            + "  <input type='time' id='id5' value='09:00'>\n"
+            + "  <input type='time' id='id6' max='foo' value='09:00'>\n"
             + "</body>\n"
             + "</html>";
 

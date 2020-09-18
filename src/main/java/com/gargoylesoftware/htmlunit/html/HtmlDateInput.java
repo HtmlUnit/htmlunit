@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlDateInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -219,11 +221,71 @@ public class HtmlDateInput extends HtmlInput implements SelectableTextInput, Lab
      * {@inheritDoc}
      */
     @Override
+    protected boolean isPatternSupported() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlDateInput newnode = (HtmlDateInput) super.cloneNode(deep);
         newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && isMaxValid() && isMinValid();
+    }
+
+    /**
+     * Returns if the input element has a valid min value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * for details.
+     *
+     * @return if the input element has a valid min value
+     */
+    private boolean isMinValid() {
+        if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)
+                && !getMin().isEmpty()) {
+            try {
+                final LocalDate dateValue = LocalDate.parse(getValueAttribute(), FORMATTER_);
+                final LocalDate minDate = LocalDate.parse(getMin(), FORMATTER_);
+                return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns if the input element has a valid max value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * for details.
+     *
+     * @return if the input element has a valid max value
+     */
+    private boolean isMaxValid() {
+        if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)
+                && !getMax().isEmpty()) {
+            try {
+                final LocalDate dateValue = LocalDate.parse(getValueAttribute(), FORMATTER_);
+                final LocalDate maxDate = LocalDate.parse(getMax(), FORMATTER_);
+                return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
     }
 }

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
 
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlTimeInput extends HtmlInput implements LabelableElement {
 
@@ -69,5 +71,57 @@ public class HtmlTimeInput extends HtmlInput implements LabelableElement {
         catch (final DateTimeParseException e) {
             // ignore
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && isMaxValid() && isMinValid();
+    }
+
+    /**
+     * Returns if the input element has a valid min value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * documentation for details.
+     *
+     * @return if the input element has a valid min value
+     */
+    private boolean isMinValid() {
+        if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+                && !getMin().isEmpty()) {
+            try {
+                final LocalTime timeValue = LocalTime.parse(getValueAttribute(), FORMATTER_);
+                final LocalTime minTime = LocalTime.parse(getMin(), FORMATTER_);
+                return minTime.equals(timeValue) || minTime.isBefore(timeValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns if the input element has a valid max value. Refer to the
+     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * documentation for details.
+     *
+     * @return if the input element has a valid max value
+     */
+    private boolean isMaxValid() {
+        if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+                && !getMax().isEmpty()) {
+            try {
+                final LocalTime timeValue = LocalTime.parse(getValueAttribute(), FORMATTER_);
+                final LocalTime maxTime = LocalTime.parse(getMax(), FORMATTER_);
+                return maxTime.equals(timeValue) || maxTime.isAfter(timeValue);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
+        }
+        return true;
     }
 }
