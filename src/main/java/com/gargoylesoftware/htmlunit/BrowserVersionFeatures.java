@@ -1045,6 +1045,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_INPUT_SET_TYPE_LOWERCASE,
 
+    /** Setting of unsupported type value throw exception. */
+    @BrowserFeature(IE)
+    JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION,
+
     /** Setting the value of an Input Date will check for correct format. */
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     JS_INPUT_SET_VALUE_DATE_SUPPORTED,

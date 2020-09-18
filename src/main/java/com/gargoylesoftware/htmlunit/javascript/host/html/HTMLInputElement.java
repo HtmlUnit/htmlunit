@@ -18,13 +18,14 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -160,7 +161,17 @@ public class HTMLInputElement extends HTMLElement {
      * @param newType the new type to set
      */
     @JsxSetter
-    public void setType(String newType) {
+    public void setType(final String newType) {
+        setType(newType, false);
+    }
+
+    /**
+     * Sets the value of the attribute {@code type}.
+     * Note: this replace the DOM node with a new one.
+     * @param newType the new type to set
+     * @param setThroughAttribute set type value through setAttribute()
+     */
+    private void setType(String newType, final boolean setThroughAttribute) {
         HtmlInput input = getDomNodeOrDie();
 
         final String currentType = input.getAttributeDirect("type");
@@ -172,7 +183,13 @@ public class HTMLInputElement extends HTMLElement {
             }
 
             if (!isSupported(newType.toLowerCase(Locale.ROOT), browser)) {
-                throw Context.reportRuntimeError("Invalid argument '" + newType + "' for setting property type.");
+                if (setThroughAttribute) {
+                    newType = "text";
+                }
+                else if (browser.hasFeature(JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION)) {
+                    throw Context.reportRuntimeError("Invalid argument '" + newType
+                            + "' for setting property type.");
+                }
             }
 
             final AttributesImpl attributes = readAttributes(input);
@@ -296,7 +313,7 @@ public class HTMLInputElement extends HTMLElement {
     @Override
     public void setAttribute(final String name, final String value) {
         if ("type".equalsIgnoreCase(name)) {
-            setType(value);
+            setType(value, true);
             return;
         }
         if ("value".equalsIgnoreCase(name)) {

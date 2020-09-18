@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -512,6 +515,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
+    @NotYetImplemented(IE)
     public void testMinLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"

@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
@@ -238,6 +241,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
+    @NotYetImplemented(IE)
     public void testMinLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
