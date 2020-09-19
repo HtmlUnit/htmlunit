@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -34,7 +37,7 @@ public class HtmlDateTimeInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({TestedBrowser.IE, TestedBrowser.FF, TestedBrowser.FF68 })
+    @NotYetImplemented({FF, FF68, IE})
     public void testMinValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
@@ -74,7 +77,7 @@ public class HtmlDateTimeInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({TestedBrowser.IE, TestedBrowser.FF, TestedBrowser.FF68 })
+    @NotYetImplemented({FF, FF68, IE})
     public void testMaxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"
