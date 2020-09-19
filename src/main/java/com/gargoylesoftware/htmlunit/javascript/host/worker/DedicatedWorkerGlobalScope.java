@@ -285,7 +285,12 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             public Object run(final Context cx) {
                 final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
                         fullUrl.toExternalForm(), 1);
-                return javaScriptEngine.execute(page, thisScope, script);
+
+                // script might be null here e.g. if there is a syntax error)
+                if (script != null) {
+                    return javaScriptEngine.execute(page, thisScope, script);
+                }
+                return null;
             }
         };
 
@@ -296,7 +301,6 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         }
         else {
             final JavaScriptJob job = new WorkerJob(cf, action, "loadAndExecute " + url);
-
             owningWindow_.getWebWindow().getJobManager().addJob(job, page);
         }
     }
