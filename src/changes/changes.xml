@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
+            <action type="add" dev="rbri" due-to="Anton Demydenko">
+                Added validation based on minlength/maxlength for input types password, search, tel, text, url.
+            </action>
+            <action type="add" dev="rbri" due-to="Anton Demydenko">
+                Added validation based on min/max for input types date, datetime-local, month, number, range, time, week.
+            </action>
+            <action type="add" dev="rbri" due-to="Anton Demydenko">
+                Added validation based on pattern for input types date, email, password, search, tel, text, url.
+            </action>
             <action type="add" dev="rbri" due-to="Thorsten Wendelmuth">
                 Event processing for XMLHttpRequest is rewritten.
                 Events defined using addEventListener are now supported and the triggered events are more correct.
