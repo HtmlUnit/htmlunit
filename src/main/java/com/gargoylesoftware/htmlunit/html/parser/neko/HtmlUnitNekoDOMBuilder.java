@@ -28,6 +28,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -481,7 +482,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     private DomNode findElementOnStack(final String... searchedElementNames) {
         DomNode searchedNode = null;
-        for (final DomNode node : stack_) {
+        // search outwards
+        final Iterator<DomNode> itr = stack_.descendingIterator();
+        while (itr.hasNext()) {
+            final DomNode node = itr.next();
             if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
                 searchedNode = node;
                 break;
