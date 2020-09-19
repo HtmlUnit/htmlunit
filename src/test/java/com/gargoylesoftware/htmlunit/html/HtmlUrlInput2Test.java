@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -158,7 +155,8 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    public void testMaxLengthValidation() throws Exception {
+    @Alerts({"true", "true", "true", "https://github.com"})
+    public void maxLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
@@ -170,12 +168,12 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
-        assertTrue(input.isValid());
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
         input.type("https://github.com");
-        assertTrue(input.isValid());
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
         input.type("/HtmlUnit/htmlunit");
-        assertTrue(input.isValid());
-        assertEquals("https://github.com", input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
+        assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
     }
 
     /**
@@ -183,8 +181,9 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
-    public void testMinLengthValidation() throws Exception {
+    @Alerts(DEFAULT = {"false", "false", "true", "https://github.com/HtmlUnit/htmlunit"},
+            IE = {"true", "true", "true", "https://github.com/HtmlUnit/htmlunit"})
+    public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
@@ -196,11 +195,11 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
-        assertFalse(input.isValid());
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
         input.type("https://github.com");
-        assertFalse(input.isValid());
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
         input.type("/HtmlUnit/htmlunit");
-        assertTrue(input.isValid());
-        assertEquals("https://github.com/HtmlUnit/htmlunit", input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
+        assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
     }
 }

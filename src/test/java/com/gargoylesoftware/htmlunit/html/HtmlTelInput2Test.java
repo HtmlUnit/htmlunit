@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlTelInput}.
@@ -137,7 +135,8 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    public void testMaxLengthValidation() throws Exception {
+    @Alerts({"true", "true", "true", "12345"})
+    public void maxLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
@@ -149,12 +148,12 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
-        assertTrue(input.isValid());
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
         input.type("12345");
-        assertTrue(input.isValid());
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
         input.type("67890");
-        assertTrue(input.isValid());
-        assertEquals("12345", input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
+        assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
     }
 
     /**
@@ -162,8 +161,9 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
-    public void testMinLengthValidation() throws Exception {
+    @Alerts(DEFAULT = {"false", "false", "true", "1234567890"},
+            IE = {"true", "true", "true", "1234567890"})
+    public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
@@ -175,11 +175,11 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
-        assertFalse(input.isValid());
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
         input.type("1234");
-        assertFalse(input.isValid());
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
         input.type("567890");
-        assertTrue(input.isValid());
-        assertEquals("1234567890", input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
+        assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
     }
 }
