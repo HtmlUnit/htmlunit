@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import java.util.Collection;
 
 import org.junit.Test;
@@ -22,6 +24,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -437,6 +440,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(IE)
     public void _URL_URL() throws Exception {
         test("URL", "URL");
     }
