@@ -164,7 +164,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Browsers which run by default.
      */
     private static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
-        {BrowserVersion.CHROME, BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_68, BrowserVersion.INTERNET_EXPLORER};
+        {BrowserVersion.CHROME, BrowserVersion.EDGE,
+            BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_68,
+            BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
