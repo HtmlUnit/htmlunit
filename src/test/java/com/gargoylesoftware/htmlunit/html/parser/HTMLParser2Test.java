@@ -404,6 +404,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
     @Test
     @Alerts({"1", "TABLE"})
     public void scriptInsideTableData() throws Exception {
