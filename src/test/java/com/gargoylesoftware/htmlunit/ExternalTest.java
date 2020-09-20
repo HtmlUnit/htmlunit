@@ -154,7 +154,7 @@ public class ExternalTest {
             content = content.replace("\r\n", "");
 
             String version = "0.0.0.0";
-            final Pattern regex = Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*) \\|");
+            final Pattern regex = Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*) \\| Choose your OS: x86, x64");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
