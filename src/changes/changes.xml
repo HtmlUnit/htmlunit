@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
+            <action type="fix" dev="rbri">
+                Scripts nodes are not moved out of tables.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Fixes for tables inside tables and forms inside tables.
+            </action>
             <action type="add" dev="rbri" due-to="Anton Demydenko">
                 Added validation based on minlength/maxlength for input types password, search, tel, text, url.
             </action>

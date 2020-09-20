@@ -28,7 +28,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -437,12 +436,16 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         final String parentNodeName = parent.getNodeName();
 
-        if (("table".equals(parentNodeName) && !isTableChild(newNodeName))
-                || (isTableChild(parentNodeName) && !"caption".equals(parentNodeName)
-                        && !"colgroup".equals(parentNodeName) && !"tr".equals(newNodeName))
-                || ("colgroup".equals(parentNodeName) && !"col".equals(newNodeName))
-                || ("tr".equals(parentNodeName) && !isTableCell(newNodeName))) {
-            // If its a form or submittable just add it even though the resulting DOM is incorrect.
+        if (!"script".equals(newNodeName) // scripts are valid inside tables
+                && (
+                    ("table".equals(parentNodeName) && !isTableChild(newNodeName))
+                        || (!"tr".equals(newNodeName)
+                                && ("thead".equals(parentNodeName)
+                                        || "tbody".equals(parentNodeName)
+                                        || "tfoot".equals(parentNodeName)))
+                        || ("colgroup".equals(parentNodeName) && !"col".equals(newNodeName))
+                        || ("tr".equals(parentNodeName) && !isTableCell(newNodeName)))) {
+            // If its a form or submitable just add it even though the resulting DOM is incorrect.
             // Otherwise insert the element before the table.
             if ("form".equals(newNodeName)) {
                 formWaitingForLostChildren_ = (HtmlForm) newElement;
@@ -482,10 +485,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     private DomNode findElementOnStack(final String... searchedElementNames) {
         DomNode searchedNode = null;
-        // search outwards
-        final Iterator<DomNode> itr = stack_.descendingIterator();
-        while (itr.hasNext()) {
-            final DomNode node = itr.next();
+        for (final DomNode node : stack_) {
             if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
                 searchedNode = node;
                 break;
@@ -500,8 +500,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     private static boolean isTableChild(final String nodeName) {
-        return "thead".equals(nodeName) || "tbody".equals(nodeName)
-                || "tfoot".equals(nodeName) || "caption".equals(nodeName)
+        return "thead".equals(nodeName)
+                || "tbody".equals(nodeName)
+                || "tfoot".equals(nodeName)
+                || "caption".equals(nodeName)
                 || "colgroup".equals(nodeName);
     }
 

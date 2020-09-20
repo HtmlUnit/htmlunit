@@ -190,7 +190,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     @Test
-    // @Alerts({"H2", "TABLE", "H2", "TABLE", "H2", "TABLE", "H2", "TABLE", "SCRIPT"})
     @Alerts({"H2", "TABLE", "H2", "TABLE", "SCRIPT"})
     public void htmlTableMisplacedElementInside5() throws Exception {
         final String html = "<html><head>\n"
@@ -208,10 +207,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +           "<td>1st</td>"
                 +         "</tr>"
                 +       "</table>\n"
-//                + "<h2>Z</h2><table><td></td><tr><td></td></table>\n"
-//                + "</table>\n"
-//                + "<h2>Z2</h2><table><td></td><tr><td>1st</td></table>\n"
-//                + "</table>\n"
+                +   "</table>\n"
 
                 + "<script>\n"
                 + "   var tmp = document.body.firstChild;\n"
@@ -221,12 +217,224 @@ public class HTMLParser2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    @Test
+    @Alerts({"H2#x", "TABLE", "H2#y", "TABLE", "H2#z", "TABLE", "H2#a", "TABLE", "SCRIPT"})
+    public void htmlTableMisplacedElementInside6() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<h2 id='x'>X</h2>"
+                +       "<td>x</td>"
+                +     "</tr>\n"
+
+                +       "<table>"
+                +         "<tr>"
+                +           "<h2 id='y'>Y</h2>"
+                +           "<td>y</td>"
+                +         "</tr>"
+                +       "</table>\n"
+
+                +     "<h2 id='z'>Z</h2>"
+                +     "<table><tr><td>z</td></table>\n"
+                +   "</table>\n"
+
+                +   "<h2 id='a'>A</h2>"
+                +   "<table><tr><td>a</td></table>\n"
+                +   "</table>\n"
+
+                + "<script>\n"
+                + "   var tmp = document.body.firstChild;\n"
+                + "   while (tmp != null) {\n"
+                + "     if (tmp.tagName) {\n"
+                + "       alert(tmp.tagName + (tmp.id ? '#' + tmp.id : ''));\n"
+                + "     }\n"
+                + "     tmp = tmp.nextSibling;\n"
+                + "   }\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"4", "TABLE", "TABLE", "SPAN", "SCRIPT"})
+    public void tableInsideTable() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<td>x</td>"
+                +     "</tr>\n"
+
+                +       "<table>"
+                +         "<tr>"
+                +           "<td>y</td>"
+                +         "</tr>"
+                +       "</table>\n"
+
+                      // the second table has closed the first one
+                +     "<tr>"
+                +       "<td><span>z</span></td>"
+                +     "</tr>\n"
+                +   "</table>\n"
+
+                + "<script>\n"
+                + "  alert(document.body.children.length);\n"
+                + "  alert(document.body.children[0].tagName);\n"
+                + "  alert(document.body.children[1].tagName);\n"
+                + "  alert(document.body.children[2].tagName);\n"
+                + "  alert(document.body.children[3].tagName);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"4", "TABLE", "TABLE", "SPAN", "SCRIPT"})
+    public void tableInsideTableTr() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<td>x</td>"
+                +     "</tr>\n"
+
+                +     "<tr>"
+                +       "<table>"
+                +         "<tr>"
+                +           "<td>y</td>"
+                +         "</tr>"
+                +       "</table>\n"
+                +     "</tr>\n"
+
+                      // the second table has closed the first one
+                +     "<tr>"
+                +       "<td><span>z</span></td>"
+                +     "</tr>\n"
+                +   "</table>\n"
+
+                + "<script>\n"
+                + "  alert(document.body.children.length);\n"
+                + "  alert(document.body.children[0].tagName);\n"
+                + "  alert(document.body.children[1].tagName);\n"
+                + "  alert(document.body.children[2].tagName);\n"
+                + "  alert(document.body.children[3].tagName);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"2", "TABLE", "SCRIPT"})
+    public void tableInsideTableTd() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<td>x</td>"
+                +     "</tr>\n"
+
+                +     "<tr><td>"
+                +       "<table>"
+                +         "<tr>"
+                +           "<td>y</td>"
+                +         "</tr>"
+                +       "</table>\n"
+                +     "</td></tr>\n"
+
+                      // the second table has closed the first one
+                +     "<tr>"
+                +       "<td><span>z</span></td>"
+                +     "</tr>\n"
+                +   "</table>\n"
+
+                + "<script>\n"
+                + "  alert(document.body.children.length);\n"
+                + "  alert(document.body.children[0].tagName);\n"
+                + "  alert(document.body.children[1].tagName);\n"
+                + "  alert(document.body.children[2].tagName);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"1", "TABLE"})
+    public void scriptInsideTable() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<td>1st</td>"
+                +     "</tr>\n"
+
+                + "<script>\n"
+                + "  alert(document.body.childNodes.length);\n"
+                + "  var tmp = document.body.firstChild;\n"
+                + "  while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts({"1", "TABLE"})
+    public void scriptInsideTableRows() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<td>1st</td>"
+                +     "</tr>\n"
+                +     "<tr>"
+
+                + "<script>\n"
+                + "  alert(document.body.childNodes.length);\n"
+                + "  var tmp = document.body.firstChild;\n"
+                + "  while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "</script>\n"
+
+                +     "</tr>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+    @Test
+    @Alerts({"1", "TABLE"})
+    public void scriptInsideTableData() throws Exception {
+        final String html = "<html><head>\n"
+                + "</head>\n"
+                + "<body>"
+                +   "<table>"
+                +     "<tr>"
+                +       "<td>1st</td>"
+                +     "</tr>\n"
+                +     "<tr>"
+                +       "<td>"
+
+                + "<script>\n"
+                + "  alert(document.body.childNodes.length);\n"
+                + "  var tmp = document.body.firstChild;\n"
+                + "  while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "</script>\n"
+
+                +       "</td>"
+                +     "</tr>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception on test failure
      */
     @Test
     @Alerts({"TABLE", "TABLE"})
-    public void htmlTableClosesOnother() throws Exception {
+    public void htmlTableClosesAnother() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -261,7 +469,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TABLE", "TABLE"})
-    public void htmlTableClosesOnotherInsideTr() throws Exception {
+    public void htmlTableClosesAnotherInsideTr() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"

@@ -461,10 +461,10 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "TABLE", "2", "FORM", "TBODY"})
+    @Alerts({"2", "TABLE", "SCRIPT", "1", "TABLE", "2", "FORM", "TBODY", "0"})
     public void formInTable1() throws Exception {
         final String html = "<html>\n"
-                + "<body>\n"
+                + "<body id='bdy'>\n"
                 + "<table>\n"
                 + "  <tr>\n"
                 + "    <td>\n"
@@ -489,11 +489,17 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  </tr>\n"
                 + "</table>"
                 + "<script>\n"
+                + "  alert(document.getElementById('bdy').children.length);\n"
+                + "  alert(document.getElementById('bdy').children[0].tagName);\n"
+                + "  alert(document.getElementById('bdy').children[1].tagName);\n"
+
                 + "  alert(document.getElementById('td0').children.length);\n"
                 + "  alert(document.getElementById('td0').children[0].tagName);\n"
                 + "  alert(document.getElementById('td0').children[0].children.length);\n"
                 + "  alert(document.getElementById('td0').children[0].children[0].tagName);\n"
                 + "  alert(document.getElementById('td0').children[0].children[1].tagName);\n"
+
+                + "  alert(document.getElementById('td0').children[0].children[0].children.length);\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
