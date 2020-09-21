@@ -1003,7 +1003,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             assertEquals(4, e.getFailingLineNumber());
         }
 
-        assertEquals(getBrowserVersion().isFirefox() || getBrowserVersion().isChrome(), exceptionThrown);
+        assertEquals(getBrowserVersion().isFirefox()
+                || getBrowserVersion().isChrome()
+                || getBrowserVersion().isEdge(), exceptionThrown);
     }
 
     /**
