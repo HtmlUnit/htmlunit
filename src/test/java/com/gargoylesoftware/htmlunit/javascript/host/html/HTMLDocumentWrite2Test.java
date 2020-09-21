@@ -615,4 +615,33 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void openReplace() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var htmlDocument = '<html><head>"
+                    + "<script>document.title = \"parsed script executed\";</' + 'script>"
+                    + "</head><body>After</body</head>';\n"
+            + "  var newHTML = document.open('text/html', 'replace');\n"
+            + "  newHTML.write(htmlDocument);\n"
+            + "  newHTML.close();\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + " Before\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "parsed script executed");
+        assertEquals("After", driver.findElement(By.tagName("body")).getText());
+    }
 }
