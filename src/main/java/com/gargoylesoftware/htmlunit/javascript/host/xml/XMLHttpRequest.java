@@ -193,7 +193,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         + ", the state is not implemented, please check setState() implementation.");
     }
 
-    private void fireJavascriptProgressEvent(final String eventName) {
+    private void fireJavascriptEvent(final String eventName) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing javascript XHR event: " + eventName);
         }
@@ -383,9 +383,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         webResponse_ = null;
         setState(DONE);
-        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-        fireJavascriptProgressEvent(Event.TYPE_ABORT);
-        fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+        fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+        fireJavascriptEvent(Event.TYPE_ABORT);
+        fireJavascriptEvent(Event.TYPE_LOAD_END);
     }
 
     /**
@@ -526,7 +526,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         // Change the state!
         setState(OPENED);
-        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+        fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
     }
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
@@ -616,10 +616,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
                 // quite strange but IE seems to fire state loading twice
                 // in async mode (at least with HTML of the unit tests)
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
             }
             if (!getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
-                fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
+                fireJavascriptEvent(Event.TYPE_LOAD_START);
             }
         }
     }
@@ -675,7 +675,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     void doSend(final Context context) {
         if (async_ && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
-            fireJavascriptProgressEvent(Event.TYPE_LOAD_START);
+            fireJavascriptEvent(Event.TYPE_LOAD_START);
         }
 
         final WebClient wc = getWindow().getWebWindow().getWebClient();
@@ -717,9 +717,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 if (!successful || !isPreflightAuthorized(preflightResponse)) {
                     setState(DONE);
                     if (async_ || getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
-                        fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                        fireJavascriptProgressEvent(Event.TYPE_ERROR);
-                        fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                        fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+                        fireJavascriptEvent(Event.TYPE_ERROR);
+                        fireJavascriptEvent(Event.TYPE_LOAD_END);
                     }
 
                     if (LOG.isDebugEnabled()) {
@@ -787,19 +787,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             setState(HEADERS_RECEIVED);
             if (async_) {
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
             }
 
             if (async_) {
                 setState(LOADING);
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-                fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptEvent(Event.TYPE_PROGRESS);
             }
 
             setState(DONE);
-            fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
-            fireJavascriptProgressEvent(Event.TYPE_LOAD);
-            fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+            fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+            fireJavascriptEvent(Event.TYPE_LOAD);
+            fireJavascriptEvent(Event.TYPE_LOAD_END);
         }
         catch (final IOException e) {
             if (LOG.isDebugEnabled()) {
@@ -816,39 +816,39 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         // ignore
                     }
                     setState(HEADERS_RECEIVED);
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                 }
 
                 if (!preflighted
                         && e instanceof NoHttpResponseException
                         && getBrowserVersion().hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
-                    fireJavascriptProgressEvent(Event.TYPE_PROGRESS);
+                    fireJavascriptEvent(Event.TYPE_PROGRESS);
                 }
             }
 
             webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
             if (async_) {
                 setState(DONE);
-                fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                 if (e instanceof SocketTimeoutException) {
-                    fireJavascriptProgressEvent(Event.TYPE_TIMEOUT);
+                    fireJavascriptEvent(Event.TYPE_TIMEOUT);
                 }
                 else {
-                    fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                    fireJavascriptEvent(Event.TYPE_ERROR);
                 }
-                fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                fireJavascriptEvent(Event.TYPE_LOAD_END);
             }
             else {
                 setState(DONE);
                 if (getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
-                    fireJavascriptProgressEvent(Event.TYPE_READY_STATE_CHANGE);
+                    fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                     if (e instanceof SocketTimeoutException) {
-                        fireJavascriptProgressEvent(Event.TYPE_TIMEOUT);
+                        fireJavascriptEvent(Event.TYPE_TIMEOUT);
                     }
                     else {
-                        fireJavascriptProgressEvent(Event.TYPE_ERROR);
+                        fireJavascriptEvent(Event.TYPE_ERROR);
                     }
-                    fireJavascriptProgressEvent(Event.TYPE_LOAD_END);
+                    fireJavascriptEvent(Event.TYPE_LOAD_END);
                 }
 
                 Context.throwAsScriptRuntimeEx(e);
