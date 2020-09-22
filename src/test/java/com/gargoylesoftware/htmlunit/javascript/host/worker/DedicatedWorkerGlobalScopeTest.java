@@ -169,4 +169,26 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html, 20000);
     }
+
+    @Test
+    @Alerts(DEFAULT = "Received: func=function addEventListener() { [native code] }",
+            FF = "Received: func=function addEventListener() {\n    [native code]\n}",
+            FF68 = "Received: func=function addEventListener() {\n    [native code]\n}",
+            IE = "Received: func=\nfunction addEventListener() {\n    [native code]\n}\n")
+    public void functionDefaultValue() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    alert('Received: ' + e.data);\n"
+            + "  };\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "postMessage('func='+self.addEventListener);";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+
+        loadPageWithAlerts2(html, 7777777);
+    }
 }

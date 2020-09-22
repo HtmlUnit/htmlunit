@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NativeFunctionToStringFunction;
 import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
@@ -98,13 +99,15 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
                 (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
                 browserVersion);
-        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, null, browserVersion);
+        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this, browserVersion);
 
         config = AbstractJavaScriptConfiguration.getClassConfiguration(
                                 DedicatedWorkerGlobalScope.class, browserVersion);
-        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, null, browserVersion);
+        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
         prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
+
+        NativeFunctionToStringFunction.installFix(this, browserVersion);
 
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();

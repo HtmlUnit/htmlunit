@@ -34,14 +34,14 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-class NativeFunctionToStringFunction extends FunctionWrapper {
+public class NativeFunctionToStringFunction extends FunctionWrapper {
 
     /**
      * Install the wrapper in place of the native toString function on Function's prototype.
      * @param window the scope
      * @param browserVersion the simulated browser
      */
-    static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
+    public static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
         if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
             final ScriptableObject fnPrototype =
                     (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
