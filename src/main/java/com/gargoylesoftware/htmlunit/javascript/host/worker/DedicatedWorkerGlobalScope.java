@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.NativeFunctionToStringFunction;
 import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
@@ -88,14 +87,15 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
     /**
      * Constructor.
-     * @param browserVersion the simulated browser version
+     * @param webClient the WebClient
      * @param worker the started worker
      * @throws Exception in case of problem
      */
-    DedicatedWorkerGlobalScope(final Window owningWindow, final Context context, final BrowserVersion browserVersion,
+    DedicatedWorkerGlobalScope(final Window owningWindow, final Context context, final WebClient webClient,
             final Worker worker) throws Exception {
         context.initSafeStandardObjects(this);
 
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
         ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
                 (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
                 browserVersion);
@@ -107,7 +107,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
 
-        NativeFunctionToStringFunction.installFix(this, browserVersion);
+        // TODO we have to do more configuration here
+        JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();

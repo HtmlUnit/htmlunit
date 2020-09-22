@@ -53,7 +53,7 @@ public class Worker extends EventTarget {
         setPrototype(getPrototype(getClass()));
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        workerScope_ = new DedicatedWorkerGlobalScope(owningWindow, cx, webClient.getBrowserVersion(), this);
+        workerScope_ = new DedicatedWorkerGlobalScope(owningWindow, cx, webClient, this);
 
         workerScope_.loadAndExecute(webClient, url, null, false);
     }

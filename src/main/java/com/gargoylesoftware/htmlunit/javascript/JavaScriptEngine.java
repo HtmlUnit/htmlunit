@@ -447,12 +447,27 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         }
 
+        configureRhino(webClient, browserVersion, window);
+
+        window.setPrototypes(prototypes, prototypesPerJSName);
+        window.initialize(webWindow);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param webClient the WebClient
+     * @param browserVersion the BrowserVersion
+     * @param scriptable the window or the DedicatedWorkerGlobalScope
+     */
+    public static void configureRhino(final WebClient webClient,
+            final BrowserVersion browserVersion, final SimpleScriptable scriptable) {
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
-        final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
+        final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase");
 
-        final ScriptableObject numberPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Number");
-        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
+        final ScriptableObject numberPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "Number");
+        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "Date");
 
         if (!browserVersion.hasFeature(STRING_INCLUDES)) {
             deleteProperties(stringPrototype, "includes");
@@ -469,44 +484,41 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         // only FF has toSource
         if (!browserVersion.hasFeature(JS_FUNCTION_TOSOURCE)) {
-            deleteProperties(window, "uneval");
-            removePrototypeProperties(window, "Object", "toSource");
-            removePrototypeProperties(window, "Array", "toSource");
+            deleteProperties(scriptable, "uneval");
+            removePrototypeProperties(scriptable, "Object", "toSource");
+            removePrototypeProperties(scriptable, "Array", "toSource");
             deleteProperties(datePrototype, "toSource");
-            removePrototypeProperties(window, "Function", "toSource");
+            removePrototypeProperties(scriptable, "Function", "toSource");
             deleteProperties(numberPrototype, "toSource");
             deleteProperties(stringPrototype, "toSource");
         }
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
-            ((IdFunctionObject) ScriptableObject.getProperty(window, "Object")).delete("assign");
+            ((IdFunctionObject) ScriptableObject.getProperty(scriptable, "Object")).delete("assign");
 
             // TODO
-            deleteProperties(window, "WeakSet");
+            deleteProperties(scriptable, "WeakSet");
         }
-        deleteProperties(window, "isXMLName");
+        deleteProperties(scriptable, "isXMLName");
 
-        NativeFunctionToStringFunction.installFix(window, browserVersion);
+        NativeFunctionToStringFunction.installFix(scriptable, browserVersion);
 
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
 
         if (!browserVersion.hasFeature(JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS)) {
-            ((ScriptableObject) ScriptableObject.getProperty(window, "Object")).delete("getOwnPropertySymbols");
+            ((ScriptableObject) ScriptableObject.getProperty(scriptable, "Object")).delete("getOwnPropertySymbols");
         }
 
         if (!browserVersion.hasFeature(JS_ARRAY_FROM)) {
-            deleteProperties((ScriptableObject) ScriptableObject.getProperty(window, "Array"), "from", "of");
+            deleteProperties((ScriptableObject) ScriptableObject.getProperty(scriptable, "Array"), "from", "of");
         }
 
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
 
         if (!webClient.getOptions().isWebSocketEnabled()) {
-            deleteProperties(window, "WebSocket");
+            deleteProperties(scriptable, "WebSocket");
         }
-
-        window.setPrototypes(prototypes, prototypesPerJSName);
-        window.initialize(webWindow);
     }
 
     private static void defineConstructor(final Window window,
