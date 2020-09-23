@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
+            <action type="fix" dev="rbri" issue="#233">
+                Setup of the js engine for the DedicatedWorkerGlobalScope improved/fixes. Some strange js errors
+                for scripts running inside the workers are now hopefully gone.
+            </action>
             <action type="fix" dev="rbri">
                 Scripts nodes are not moved out of tables.
             </action>
