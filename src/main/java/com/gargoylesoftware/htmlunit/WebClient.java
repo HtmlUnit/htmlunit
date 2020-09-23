@@ -2375,6 +2375,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     response = loadWebResponse(request);
                 }
                 catch (final NoHttpResponseException e) {
+                    LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);
                     response = new WebResponse(responseDataNoHttpResponse_, request, 0);
                 }
                 loadJob = new LoadJob(request, requestingWindow, target, response);
