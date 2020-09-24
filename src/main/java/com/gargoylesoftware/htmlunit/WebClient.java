@@ -1593,13 +1593,22 @@ public class WebClient implements Serializable, AutoCloseable {
             }
             else if (status == HttpStatus.SC_TEMPORARY_REDIRECT
                         || status == 308) {
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308
+                // reuse method and body
                 final WebRequest wrs = new WebRequest(newUrl, webRequest.getHttpMethod());
                 wrs.setCharset(webRequest.getCharset());
+                if (HttpMethod.POST == webRequest.getHttpMethod()
+                        || HttpMethod.PUT == webRequest.getHttpMethod()
+                        || HttpMethod.PATCH == webRequest.getHttpMethod()) {
+                    wrs.setRequestBody(webRequest.getRequestBody());
+                }
 
                 wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
+
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
         }
