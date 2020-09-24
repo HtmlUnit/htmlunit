@@ -590,7 +590,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>-Xms512m -Xmx1536m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
