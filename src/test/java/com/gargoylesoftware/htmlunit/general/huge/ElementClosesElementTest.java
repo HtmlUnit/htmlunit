@@ -51589,7 +51589,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void _table_script() throws Exception {
         test("table", "script");
     }
