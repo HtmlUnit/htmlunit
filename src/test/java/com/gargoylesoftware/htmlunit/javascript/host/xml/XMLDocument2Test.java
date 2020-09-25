@@ -323,7 +323,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"xml", "foo"})
-    @HtmlUnitNYI(IE = "foo")
+    @HtmlUnitNYI(IE = {"foo", "foo"})
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
