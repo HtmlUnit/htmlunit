@@ -114,7 +114,6 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
     @Alerts({"text/plain", "HtmlUnit"})
     @HtmlUnitNYI(IE = {"application/x-www-form-urlencoded", "null"})
     public void sendBlob307() throws Exception {
-
         final URL redirectUrl = new URL(URL_FIRST, "/redirect.html");
         final URL responseUrl = new URL(URL_FIRST, "/response.html");
 
