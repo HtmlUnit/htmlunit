@@ -1598,13 +1598,17 @@ public class WebClient implements Serializable, AutoCloseable {
                 // reuse method and body
                 final WebRequest wrs = new WebRequest(newUrl, webRequest.getHttpMethod());
                 wrs.setCharset(webRequest.getCharset());
-                if (HttpMethod.POST == webRequest.getHttpMethod()
-                        || HttpMethod.PUT == webRequest.getHttpMethod()
-                        || HttpMethod.PATCH == webRequest.getHttpMethod()) {
-                    wrs.setRequestBody(webRequest.getRequestBody());
+                if (webRequest.getRequestBody() != null) {
+                    if (HttpMethod.POST == webRequest.getHttpMethod()
+                            || HttpMethod.PUT == webRequest.getHttpMethod()
+                            || HttpMethod.PATCH == webRequest.getHttpMethod()) {
+                        wrs.setRequestBody(webRequest.getRequestBody());
+                    }
+                }
+                else {
+                    wrs.setRequestParameters(parameters);
                 }
 
-                wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
