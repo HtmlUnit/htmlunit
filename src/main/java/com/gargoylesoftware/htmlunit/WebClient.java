@@ -1603,6 +1603,7 @@ public class WebClient implements Serializable, AutoCloseable {
                             || HttpMethod.PUT == webRequest.getHttpMethod()
                             || HttpMethod.PATCH == webRequest.getHttpMethod()) {
                         wrs.setRequestBody(webRequest.getRequestBody());
+                        wrs.setEncodingType(webRequest.getEncodingType());
                     }
                 }
                 else {
