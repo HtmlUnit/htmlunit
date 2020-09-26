@@ -149,6 +149,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Joerg Werner
+ * @author Anton Demydenko
  */
 public class WebClient implements Serializable, AutoCloseable {
 

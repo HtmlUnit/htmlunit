@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sebastian Cato
  * @author Frank Danek
  * @author Thorsten Wendelmuth
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
