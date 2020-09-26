@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
-            <action type="fix" dev="rbri">
+            <action type="fix" dev="rbri" due-to="Anton Demydenko">
                 Take care of the body if a post request is redirected based on a 307/308 response.
             </action>
             <action type="fix" dev="rbri" issue="#233">

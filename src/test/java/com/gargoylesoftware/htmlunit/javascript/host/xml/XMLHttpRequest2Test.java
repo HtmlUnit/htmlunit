@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
@@ -45,7 +44,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1141,9 +1139,13 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
     @Test
     @Alerts("3")
-    @NotYetImplemented(IE)
-    public void sendPostWithRedirect() throws Exception {
+    public void sendPostWithRedirect307() throws Exception {
         postRedirect(307, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    @Test
+    @Alerts("3")
+    public void sendPostWithRedirect308() throws Exception {
         postRedirect(308, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
     }
 
@@ -1179,5 +1181,4 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         assertFalse(getMockWebConnection().getLastWebRequest().getRequestBody().isEmpty());
         assertEquals(content, getMockWebConnection().getLastWebRequest().getRequestBody());
     }
-
 }

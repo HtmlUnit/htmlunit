@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECUR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_308;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_WITHOUT_HASH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
@@ -1545,11 +1545,11 @@ public class WebClient implements Serializable, AutoCloseable {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
         else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
-            && status <= (getBrowserVersion().hasFeature(HTTP_REDIRECT_308) ? 308 : HttpStatus.SC_TEMPORARY_REDIRECT)
+            && status <= 308
             && status != HttpStatus.SC_NOT_MODIFIED
             && getOptions().isRedirectEnabled()) {
 
-            final URL newUrl;
+            URL newUrl;
             String locationString = null;
             try {
                 locationString = webResponse.getResponseHeaderValue("Location");
@@ -1560,6 +1560,10 @@ public class WebClient implements Serializable, AutoCloseable {
                     locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
                 }
                 newUrl = expandUrl(url, locationString);
+
+                if (getBrowserVersion().hasFeature(HTTP_REDIRECT_WITHOUT_HASH)) {
+                    newUrl = UrlUtils.getUrlWithNewRef(newUrl, null);
+                }
             }
             catch (final MalformedURLException e) {
                 getIncorrectnessListener().notify("Got a redirect status code [" + status + " "

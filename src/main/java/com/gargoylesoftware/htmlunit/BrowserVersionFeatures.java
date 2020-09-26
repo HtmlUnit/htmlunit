@@ -589,9 +589,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF68})
     HTTP_HEADER_UPGRADE_INSECURE_REQUEST,
 
-    /** Supports redirect via 308 code. */
-    @BrowserFeature({CHROME, EDGE, FF, FF68})
-    HTTP_REDIRECT_308,
+    /** Redirection is done without the hash. */
+    @BrowserFeature(IE)
+    HTTP_REDIRECT_WITHOUT_HASH,
 
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({CHROME, EDGE, FF, FF68})
