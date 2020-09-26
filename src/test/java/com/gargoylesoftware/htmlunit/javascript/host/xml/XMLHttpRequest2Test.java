@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
@@ -44,9 +45,12 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -60,6 +64,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sebastian Cato
  * @author Frank Danek
  * @author Thorsten Wendelmuth
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
@@ -1132,6 +1137,47 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts("3")
+    @NotYetImplemented(IE)
+    public void sendPostWithRedirect() throws Exception {
+        postRedirect(307, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+        postRedirect(308, HttpMethod.POST, new URL(URL_FIRST, "/page2.html").toExternalForm(), "param=content");
+    }
+
+    private void postRedirect(final int code, final HttpMethod httpMethod,
+            final String redirectUrl, final String content) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    try {\n"
+            + "      xhr.open('POST', 'redirect.html', false);\n"
+            + "      xhr.send('" + content + "');\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final int reqCount = getMockWebConnection().getRequestCount();
+
+        final URL url = new URL(URL_FIRST, "page2.html");
+        getMockWebConnection().setResponse(url, html);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", redirectUrl));
+        getMockWebConnection().setDefaultResponse("", code, "* Redirect", null, headers);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPage2(html);
+
+        assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertNotNull(getMockWebConnection().getLastWebRequest().getRequestBody());
+        assertFalse(getMockWebConnection().getLastWebRequest().getRequestBody().isEmpty());
+        assertEquals(content, getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
 }

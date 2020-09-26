@@ -149,6 +149,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Joerg Werner
+ * @author Anton Demydenko
  */
 public class WebClient implements Serializable, AutoCloseable {
 
@@ -1603,6 +1604,7 @@ public class WebClient implements Serializable, AutoCloseable {
                             || HttpMethod.PUT == webRequest.getHttpMethod()
                             || HttpMethod.PATCH == webRequest.getHttpMethod()) {
                         wrs.setRequestBody(webRequest.getRequestBody());
+                        wrs.setEncodingType(webRequest.getEncodingType());
                     }
                 }
                 else {
