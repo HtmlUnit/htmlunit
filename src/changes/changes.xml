@@ -8,18 +8,30 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
+            <action type="fix" dev="rhino">
+                core-js: Add missing attribute escaping for String.prototype.big and similar calls.
+            </action>
+            <action type="fix" dev="rhino">
+                core-js: Make sure the this object is coercible for String.prototype.big and similar calls.
+            </action>
+            <action type="fix" dev="rhino">
+                core-js: Object() constructor fix for non extensible functions.
+            </action>
+            <action type="fix" dev="rhino">
+                core-js: TypedArray.prototype.subarray() should not throw an exception if called without parameters.
+            </action>
             <action type="update" dev="rbri">
                 CssParser: JavaCC 7.0.9.
             </action>
             <action type="update" dev="rbri">
                 CssParser: JDK 1.8 is now required.
             </action>
-	        <action type="update" dev="rbri" due-to="Christian Morgner">
-	            CssParser: var() support added.
-	        </action>
-	        <action type="update" dev="rbri" due-to="Christian Morgner">
-	            CssParser: calc() support added.
-	        </action>
+            <action type="update" dev="rbri" due-to="Christian Morgner">
+                CssParser: var() support added.
+            </action>
+            <action type="update" dev="rbri" due-to="Christian Morgner">
+                CssParser: calc() support added.
+            </action>
             <action type="fix" dev="rbri" due-to="Anton Demydenko">
                 Take care of the body if a post request is redirected based on a 307/308 response.
             </action>
