@@ -476,4 +476,17 @@ public class Promise extends SimpleScriptable {
     public Promise catch_js(final Object onRejected) {
         return then(null, onRejected);
     }
+
+    /**
+     * @return state and value details as string
+     */
+    public String getLogDetails() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("{ <state>: ")
+            .append(state_.toString().toLowerCase())
+            .append(", <value>: ")
+            .append(value_)
+            .append(" }");
+        return sb.toString();
+    }
 }

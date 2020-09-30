@@ -418,6 +418,13 @@ public class Console extends SimpleScriptable {
                     sb.append("({})");
                 }
             }
+            else if (val instanceof Promise) {
+                sb.append("Promise");
+                if (level == 0) {
+                    final Promise p = (Promise) val;
+                    sb.append(' ').append(p.getLogDetails());
+                }
+            }
             else if (val instanceof SimpleScriptable) {
                 if (level == 0) {
                     sb.append("[object ");
