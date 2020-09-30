@@ -476,4 +476,20 @@ public class Promise extends SimpleScriptable {
     public Promise catch_js(final Object onRejected) {
         return then(null, onRejected);
     }
+    
+    /**
+     * Get the value of the Promise.
+     * @return 
+     */
+    public Object getValue() {
+        return value_;
+    }
+    
+    /**
+     * Get the state of the Promise.
+     * @return The lowercase string representation of the current state: one of "pending", "fullfilled" or "rejected".
+     */
+    public String getState() {
+        return state_.toString().toLowerCase();
+    }
 }
