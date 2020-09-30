@@ -9,7 +9,7 @@
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
             <action type="update" dev="rbri" due-to="Rural Hunter">
-                 The console.log() output of Promise objects is now similar to Chrome.
+                The console.log() output of Promise objects is now similar to Chrome.
             </action>
             <action type="fix" dev="rhino">
                 core-js: Add missing attribute escaping for String.prototype.big and similar calls.
