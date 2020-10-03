@@ -25,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_REPEAT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_STARTS_ENDS_WITH;
@@ -225,10 +224,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "Continuation");
-        if (!browserVersion.hasFeature(JS_XML)) {
-            deleteProperties(window, "XML", "XMLList", "Namespace", "QName");
-        }
-
         deleteProperties(window, "Iterator", "StopIteration");
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
