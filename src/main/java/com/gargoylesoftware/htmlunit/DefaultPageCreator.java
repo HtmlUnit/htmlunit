@@ -189,7 +189,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @return the sniffed mime type
      * @exception IOException if an IO problem occurs
      */
-    private String determineContentType(final WebResponse webResponse)
+    private static String determineContentType(final WebResponse webResponse)
         throws IOException {
 
         final String contentType = webResponse.getContentType();

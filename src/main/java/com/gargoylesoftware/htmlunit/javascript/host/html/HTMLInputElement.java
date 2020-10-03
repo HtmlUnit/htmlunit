@@ -110,7 +110,7 @@ public class HTMLInputElement extends HTMLElement {
      * @param browserVersion
      * @return whether the specified type is supported or not
      */
-    private boolean isSupported(final String type, final BrowserVersion browserVersion) {
+    private static boolean isSupported(final String type, final BrowserVersion browserVersion) {
         boolean supported = false;
         switch (type) {
             case "date":

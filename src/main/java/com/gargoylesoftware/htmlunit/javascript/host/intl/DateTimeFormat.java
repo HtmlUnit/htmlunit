@@ -69,7 +69,6 @@ public class DateTimeFormat extends SimpleScriptable {
         final String mmSlash = "\u200EMM\u200E/\u200Edd\u200E/\u200EYYYY";
         final String yyyySlash = "\u200EYYYY\u200E/\u200EMM\u200E/\u200Edd";
         final String yyyyDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
-        final String yyyyDot = "\u200EYYYY\u200E.\u200EMM\u200E.\u200Edd";
         final String yyyyDotBlankDot = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd.";
         final String yyyyDotBlankDotIE = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd\u200E.";
         final String yyyyDotDot = "\u200EYYYY\u200E.\u200EMM\u200E.\u200Edd\u200E.";
