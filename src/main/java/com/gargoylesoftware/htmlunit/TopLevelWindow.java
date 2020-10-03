@@ -107,18 +107,31 @@ public class TopLevelWindow extends WebWindowImpl {
      * Closes this window.
      */
     public void close() {
-        setClosed();
+        close(false);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Closes this window.
+     * @param ignoreOnbeforeunloadAccepted if true the result of triggering the OnbeforeunloadAccepted event
+     * will be ignored
+     */
+    public void close(final boolean ignoreOnbeforeunloadAccepted) {
         final Page page = getEnclosedPage();
-        if (page != null) {
-            if (page.isHtmlPage()) {
-                final HtmlPage htmlPage = (HtmlPage) page;
-                if (!htmlPage.isOnbeforeunloadAccepted()) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
-                    }
-                    return;
+        if (page != null && page.isHtmlPage()) {
+            final HtmlPage htmlPage = (HtmlPage) page;
+            final boolean accepted = htmlPage.isOnbeforeunloadAccepted();
+            if (!ignoreOnbeforeunloadAccepted && !accepted) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
                 }
+                return;
             }
+        }
+
+        setClosed();
+        if (page != null) {
             page.cleanUp();
         }
 
@@ -126,5 +139,4 @@ public class TopLevelWindow extends WebWindowImpl {
         destroyChildren();
         getWebClient().deregisterWebWindow(this);
     }
-
 }

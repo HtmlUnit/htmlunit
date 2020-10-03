@@ -2092,7 +2092,7 @@ public class WebClient implements Serializable, AutoCloseable {
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
                 try {
-                    topWindow.close();
+                    topWindow.close(true);
                 }
                 catch (final Exception e) {
                     LOG.error("Exception while closing a topLevelWindow", e);

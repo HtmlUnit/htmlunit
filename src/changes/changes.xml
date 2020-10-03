@@ -8,19 +8,26 @@
 
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
+            <action type="fix" dev="rbri">
+                Improved page cleanup when closing the WebClient; there was a leak if the enclosed page has
+                an onbeforeunload handler in place that avoids page unloading).
+            </action>
+            <action type="fix" dev="rbri">
+                Fix some possible NPE when calling toString from js for Range or Location objects.
+            </action>
             <action type="update" dev="rbri" due-to="Rural Hunter">
                 The console.log() output of Promise objects is now similar to Chrome.
             </action>
-            <action type="fix" dev="rhino">
+            <action type="fix" dev="rbri">
                 core-js: Add missing attribute escaping for String.prototype.big and similar calls.
             </action>
-            <action type="fix" dev="rhino">
+            <action type="fix" dev="rbri">
                 core-js: Make sure the this object is coercible for String.prototype.big and similar calls.
             </action>
-            <action type="fix" dev="rhino">
+            <action type="fix" dev="rbri">
                 core-js: Object() constructor fix for non extensible functions.
             </action>
-            <action type="fix" dev="rhino">
+            <action type="fix" dev="rbri">
                 core-js: TypedArray.prototype.subarray() should not throw an exception if called without parameters.
             </action>
             <action type="update" dev="rbri">
