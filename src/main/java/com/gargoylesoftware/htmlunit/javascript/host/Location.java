@@ -109,7 +109,9 @@ public class Location extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        if (getPrototype() != null && (hint == null || String.class.equals(hint))) {
+        if (getPrototype() != null
+                && window_ != null
+                && (hint == null || String.class.equals(hint))) {
             return getHref();
         }
         return super.getDefaultValue(hint);
