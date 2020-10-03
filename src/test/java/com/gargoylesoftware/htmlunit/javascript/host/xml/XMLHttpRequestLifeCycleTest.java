@@ -63,8 +63,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * (only available in async requests, otherwise xhr.send will fail)
  *
  * The tests are split between sync (full-event cycle test) and async (each event is tested on it's own).
- * This is mainly done because we cannot reliably handle the amount & speed of the alerts if everything is
- * executed together (Chrome did work in tests, FF & IE did not).
+ * This is mainly done because we cannot reliably handle the amount &amp; speed of the alerts if everything is
+ * executed together (Chrome did work in tests, FF &amp; IE did not).
  *
  * @author Thorsten Wendelmuth
  * @author Ronald Brill
@@ -292,6 +292,9 @@ public final class XMLHttpRequestLifeCycleTest {
             servlets_.put(TIMEOUT_URL, XmlTimeoutServlet.class);
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done",
                 "readystatechange_4_200_true", "load_4_200_false",
@@ -302,6 +305,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_200_true", "load_4_200_false",
@@ -312,6 +318,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
                         "ExceptionThrown"},
@@ -327,6 +336,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -341,6 +353,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -355,6 +370,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
@@ -376,6 +394,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
@@ -397,6 +418,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
                     "load_4_403_false", "loadend_4_403_false", "send-done"})
@@ -406,6 +430,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
                     "load_4_403_false", "loadend_4_403_false", "send-done"})
@@ -415,6 +442,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -429,6 +459,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
                     "load_4_500_false", "loadend_4_500_false", "send-done"})
@@ -438,6 +471,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
                     "load_4_500_false", "loadend_4_500_false", "send-done"})
@@ -447,6 +483,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -461,6 +500,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "ExceptionThrown"})
         public void addEventListener_sync_timeout() throws Exception {
@@ -480,6 +522,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
@@ -496,6 +541,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
@@ -511,6 +559,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_4_0_true", "error_4_0_false",
@@ -524,7 +575,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
-
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
                         "loadstart_1_0_false", "send-done", "readystatechange_4_0_true",
@@ -538,6 +591,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
                         "loadstart_1_0_false", "send-done", "readystatechange_4_0_true",
@@ -551,6 +607,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_4_0_true", "abort_4_0", "loadend_4_0_false",
@@ -564,6 +623,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                 "send-done", "readystatechange_4_0_true", "error_4_0_false",
@@ -577,6 +639,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                 "send-done", "readystatechange_4_0_true", "error_4_0_false",
@@ -592,6 +657,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -630,6 +696,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -644,6 +711,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
@@ -659,6 +729,9 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         // same tests as above, but this time we're triggering with the onkeyword.
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_200_true",
                     "load_4_200_false", "loadend_4_200_false", "send-done"})
@@ -670,6 +743,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_200_true", "load_4_200_false",
@@ -680,6 +756,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
                         "ExceptionThrown"},
@@ -695,6 +774,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -709,6 +791,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -723,6 +808,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
@@ -747,6 +835,9 @@ public final class XMLHttpRequestLifeCycleTest {
             }
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
                     "load_4_403_false", "loadend_4_403_false", "send-done"})
@@ -756,6 +847,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
                     "load_4_403_false", "loadend_4_403_false", "send-done"})
@@ -766,6 +860,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -781,6 +878,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
                     "load_4_500_false", "loadend_4_500_false", "send-done"})
@@ -790,6 +890,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
                     "load_4_500_false", "loadend_4_500_false", "send-done"})
@@ -800,6 +903,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
@@ -815,6 +921,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "ExceptionThrown"})
         public void onKeyWord_sync_timeout() throws Exception {
@@ -823,6 +932,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
@@ -839,7 +951,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
-
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
@@ -855,6 +969,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_4_0_true", "abort_4_0",
@@ -868,6 +985,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                     "send-done", "readystatechange_4_0_true", "error_4_0_false",
@@ -884,6 +1004,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 403 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -903,6 +1024,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 403 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -923,6 +1045,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 403 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -940,6 +1063,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -959,6 +1083,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 403 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -978,6 +1103,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 403 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -997,6 +1123,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 403 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1013,6 +1140,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1033,6 +1161,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1048,6 +1177,9 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+        /**
+         * @throws Exception if the test fails
+         */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
@@ -1083,6 +1215,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1116,6 +1249,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException after preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1164,6 +1298,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException during preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1205,6 +1340,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1246,6 +1382,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException after preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1296,6 +1433,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException during preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1339,6 +1477,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1372,6 +1511,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException after preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1420,6 +1560,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException during preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
@@ -1461,6 +1602,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1502,6 +1644,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException after preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
@@ -1552,6 +1695,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * NoHttpResponseException during preflight.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
