@@ -9,6 +9,10 @@
     <body>
         <release version="2.44.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
             <action type="fix" dev="rbri">
+                Fix Rhino setup to avoid placing lazy load references to 'XML', 'XMLList',
+                'Namespace', and 'QName' in the window scope.
+            </action>
+            <action type="fix" dev="rbri">
                 Improved page cleanup when closing the WebClient; there was a leak if the enclosed page has
                 an onbeforeunload handler in place that avoids page unloading).
             </action>

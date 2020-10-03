@@ -2522,4 +2522,28 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false"})
+    public void xmlNotInWindow() throws Exception {
+        final String html
+            = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert('XML' in window);\n"
+            + "    alert('XMLList' in window);\n"
+            + "    alert('Namespace' in window);\n"
+            + "    alert('QName' in window);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <app:dIv xmlns='http://anotherURL'></app:dIv>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
