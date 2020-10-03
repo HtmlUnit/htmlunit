@@ -30,7 +30,7 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 
 [HtmlUnit Kanban Board][6]
 
-### Latest release Version 2.43.0 / August 8, 2020
+### Latest release Version 2.44.0 / October 3, 2020
 [Download from Sourceforge][1]
 
 For maven, you would add:
@@ -38,7 +38,7 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.43.0</version>
+        <version>2.44.0</version>
     </dependency>
 
 ### Latest CI build
@@ -52,7 +52,7 @@ If you use maven please add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.44.0-SNAPSHOT</version>
+        <version>2.45.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
@@ -70,7 +70,7 @@ You have to add the sonatype snapshot repository to your pom distributionManagem
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.43.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.44.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/job/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
