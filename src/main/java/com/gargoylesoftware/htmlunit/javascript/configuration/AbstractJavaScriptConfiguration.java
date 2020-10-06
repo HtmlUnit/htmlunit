@@ -111,7 +111,7 @@ public abstract class AbstractJavaScriptConfiguration {
             else if (browser.isIE()) {
                 expectedBrowser = IE;
             }
-            else if (browser.isFirefox68()) {
+            else if (browser.isFirefox78()) {
                 expectedBrowser = FF78;
             }
             else if (browser.isFirefox()) {

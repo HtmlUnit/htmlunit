@@ -80,8 +80,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"contains: undefined", "toSource: undefined", "trim: function"},
-            FF78 = {"contains: undefined", "toSource: function", "trim: function"})
+    @Alerts({"contains: undefined", "toSource: undefined", "trim: function"})
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);

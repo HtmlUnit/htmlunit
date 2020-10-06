@@ -325,7 +325,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"left", "right", "middle", "justify", "bottom", "middle",
                 "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF78 = {"left", "right", "middle", "justify", "bottom", "middle",
-                "top", "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"left", "right", "center", "", "bottom", "middle",
                 "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented({FF, FF78})
@@ -364,7 +364,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             FF78 = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                "bottom", "middle", "top", "bottom", "absmiddle", "baseline", "texttop"},
+                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             IE = {"center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
                 "absMiddle", "baseline", "textTop"})

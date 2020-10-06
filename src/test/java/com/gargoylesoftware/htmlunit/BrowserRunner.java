@@ -79,7 +79,7 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
                 }
-                if (browsers.contains("ff68")) {
+                if (browsers.contains("ff78")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_78, true));
                 }
                 if (browsers.contains("ff")) {
@@ -99,7 +99,7 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-ff")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
             }
-            if (browsers.contains("hu-ff68")) {
+            if (browsers.contains("hu-ff78")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_78, false));
             }
             if (browsers.contains("hu-ie")) {

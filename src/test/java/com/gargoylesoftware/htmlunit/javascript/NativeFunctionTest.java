@@ -51,8 +51,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "toSource: undefined",
-            FF78 = "toSource: function")
+    @Alerts("toSource: undefined")
     public void methods_toSource() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", "toSource");
         loadPageWithAlerts2(html);

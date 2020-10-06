@@ -192,7 +192,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "object",
-            FF78 = "undefined",
             IE = "undefined")
     public void atomics() throws Exception {
         test("Atomics");
@@ -346,6 +345,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             FF = "undefined",
+            FF78 = "undefined",
             IE = "undefined")
     public void batteryManager() throws Exception {
         test("BatteryManager");
@@ -1206,6 +1206,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             FF = "undefined",
+            FF78 = "undefined",
             IE = "object")
     public void domError() throws Exception {
         test("DOMError");
@@ -1769,7 +1770,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "object")
     public void geolocation() throws Exception {
         test("Geolocation");
@@ -4669,7 +4669,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void promiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent");
@@ -4691,7 +4690,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void pushManager() throws Exception {
         test("PushManager");
@@ -4702,7 +4700,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
@@ -4713,7 +4710,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
@@ -4950,7 +4946,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
@@ -4961,7 +4956,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
@@ -4981,7 +4975,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
@@ -7516,7 +7509,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF78 = "undefined",
             IE = "undefined")
     public void webkitURL() throws Exception {
         test("webkitURL");

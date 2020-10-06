@@ -1122,7 +1122,7 @@ public class ElementTest extends WebDriverTestCase {
             FF = {"function Element() {\n    [native code]\n}",
                     "[object Element]", "function Element() {\n    [native code]\n}"},
             FF78 = {"function Element() {\n    [native code]\n}",
-                    "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+                    "[object Element]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented({FF78, IE})
     public void prototypConstructor() throws Exception {
@@ -1158,7 +1158,7 @@ public class ElementTest extends WebDriverTestCase {
             FF = {"function Element() {\n    [native code]\n}",
                         "[object Element]", "function Element() {\n    [native code]\n}"},
             FF78 = {"function Element() {\n    [native code]\n}",
-                        "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
+                        "[object Element]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented({FF78, IE})
     public void prototypConstructorStandards() throws Exception {

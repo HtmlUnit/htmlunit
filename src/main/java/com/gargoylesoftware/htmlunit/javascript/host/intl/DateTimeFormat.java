@@ -279,7 +279,7 @@ public class DateTimeFormat extends SimpleScriptable {
         else if (browserVersion.isIE()) {
             formats = IE_FORMATS_;
         }
-        else if (browserVersion.isFirefox68()) {
+        else if (browserVersion.isFirefox78()) {
             formats = FF_78_FORMATS_;
         }
         else {

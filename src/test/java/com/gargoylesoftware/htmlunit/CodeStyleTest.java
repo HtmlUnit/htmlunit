@@ -583,12 +583,8 @@ public class CodeStyleTest {
                     addFailure(".isFirefox() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }
-                if (line.contains(".isFirefox60()")) {
-                    addFailure(".isFirefox60() should not be used, please use .hasFeature(): "
-                            + relativePath + ", line: " + index);
-                }
-                if (line.contains(".isFirefox68()")) {
-                    addFailure(".isFirefox68() should not be used, please use .hasFeature(): "
+                if (line.contains(".isFirefox78()")) {
+                    addFailure(".isFirefox78() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }
                 if (line.contains(".isChrome()")) {
@@ -902,7 +898,7 @@ public class CodeStyleTest {
                     || line.startsWith("        EDGE = ")
                     || line.startsWith("        IE = ")
                     || line.startsWith("        FF = ")
-                    || line.startsWith("        FF68 = ")) {
+                    || line.startsWith("        FF78 = ")) {
                 addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
             }
         }

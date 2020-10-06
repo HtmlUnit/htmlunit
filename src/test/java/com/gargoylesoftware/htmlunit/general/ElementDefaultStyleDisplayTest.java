@@ -420,7 +420,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF78 = {"", "inline"},
             IE = {"block", "block"})
     @AlertsStandards(DEFAULT = {"", "block"},
             IE = {"block", "block"})
@@ -1721,7 +1720,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF78 = {"", "inline"},
             IE = {"inline-block", "inline-block"})
     public void input() throws Exception {
         test("input");

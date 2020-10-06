@@ -79,7 +79,7 @@ public final class JQueryExtractor {
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        for (final String browser : new String[] {"CHROME", "EDGE", "FF", "FF68", "IE"}) {
+        for (final String browser : new String[] {"CHROME", "EDGE", "FF", "FF78", "IE"}) {
             final File out = new File(baseDir, browser + ".out");
             final File results = new File(baseDir, "results." + browser + ".txt");
             extractExpectations(out, results);
@@ -312,9 +312,9 @@ public final class JQueryExtractor {
                         // TODO dirty hack
                         if (browserNames.size() == 5
                                 && browserNames.contains("CHROME")
+                                && browserNames.contains("EDGE")
                                 && browserNames.contains("FF")
-                                && browserNames.contains("FF68")
-                                && browserNames.contains("FF60")
+                                && browserNames.contains("FF78")
                                 && browserNames.contains("IE")) {
                             System.out.println("    @NotYetImplemented");
                         }

@@ -233,7 +233,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AnimationTimeline() { [native code] }",
             EDGE = "function AnimationTimeline() { [native code] }",
-            FF = "function AnimationTimeline() {\n    [native code]\n}")
+            FF = "function AnimationTimeline() {\n    [native code]\n}",
+            FF78 = "function AnimationTimeline() {\n    [native code]\n}")
     @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception")
     public void animationTimeline() throws Exception {
         test("AnimationTimeline");
@@ -353,7 +354,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Atomics]",
-            FF78 = "exception",
             IE = "exception")
     public void atomics() throws Exception {
         test("Atomics");
@@ -548,8 +548,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function BatteryManager() { [native code] }",
-            EDGE = "function BatteryManager() { [native code] }",
-            FF78 = "function BatteryManager() {\n    [native code]\n}")
+            EDGE = "function BatteryManager() { [native code] }")
     public void batteryManager() throws Exception {
         test("BatteryManager");
     }
@@ -1953,7 +1952,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function DocumentTimeline() { [native code] }",
             EDGE = "function DocumentTimeline() { [native code] }",
-            FF = "function DocumentTimeline() {\n    [native code]\n}")
+            FF = "function DocumentTimeline() {\n    [native code]\n}",
+            FF78 = "function DocumentTimeline() {\n    [native code]\n}")
     @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception")
     public void documentTimeline() throws Exception {
         test("DocumentTimeline");
@@ -2035,7 +2035,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function DOMError() { [native code] }",
             FF = "exception",
-            FF78 = "function DOMError() {\n    [native code]\n}",
+            FF78 = "exception",
             IE = "[object DOMError]")
     public void domError() throws Exception {
         test("DOMError");
@@ -3059,10 +3059,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function Geolocation() { [native code] }",
+    @Alerts(CHROME = "function Geolocation() { [native code] }",
             EDGE = "function Geolocation() { [native code] }",
             FF = "function Geolocation() {\n    [native code]\n}",
+            FF78 = "function Geolocation() {\n    [native code]\n}",
             IE = "[object Geolocation]")
     public void geolocation() throws Exception {
         test("Geolocation");
@@ -7381,7 +7381,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PromiseRejectionEvent() { [native code] }",
             EDGE = "function PromiseRejectionEvent() { [native code] }",
-            FF = "function PromiseRejectionEvent() {\n    [native code]\n}")
+            FF = "function PromiseRejectionEvent() {\n    [native code]\n}",
+            FF78 = "function PromiseRejectionEvent() {\n    [native code]\n}")
     public void promiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent");
     }
@@ -7424,7 +7425,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PushManager() { [native code] }",
             EDGE = "function PushManager() { [native code] }",
-            FF = "function PushManager() {\n    [native code]\n}")
+            FF = "function PushManager() {\n    [native code]\n}",
+            FF78 = "function PushManager() {\n    [native code]\n}")
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -7454,7 +7456,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PushSubscription() { [native code] }",
             EDGE = "function PushSubscription() { [native code] }",
-            FF = "function PushSubscription() {\n    [native code]\n}")
+            FF = "function PushSubscription() {\n    [native code]\n}",
+            FF78 = "function PushSubscription() {\n    [native code]\n}")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -7466,7 +7469,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PushSubscriptionOptions() { [native code] }",
             EDGE = "function PushSubscriptionOptions() { [native code] }",
-            FF = "function PushSubscriptionOptions() {\n    [native code]\n}")
+            FF = "function PushSubscriptionOptions() {\n    [native code]\n}",
+            FF78 = "function PushSubscriptionOptions() {\n    [native code]\n}")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
     }
@@ -7876,7 +7880,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function ServiceWorker() { [native code] }",
             EDGE = "function ServiceWorker() { [native code] }",
-            FF = "function ServiceWorker() {\n    [native code]\n}")
+            FF = "function ServiceWorker() {\n    [native code]\n}",
+            FF78 = "function ServiceWorker() {\n    [native code]\n}")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -7888,7 +7893,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function ServiceWorkerContainer() { [native code] }",
             EDGE = "function ServiceWorkerContainer() { [native code] }",
-            FF = "function ServiceWorkerContainer() {\n    [native code]\n}")
+            FF = "function ServiceWorkerContainer() {\n    [native code]\n}",
+            FF78 = "function ServiceWorkerContainer() {\n    [native code]\n}")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
@@ -7918,7 +7924,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function ServiceWorkerRegistration() { [native code] }",
             EDGE = "function ServiceWorkerRegistration() { [native code] }",
-            FF = "function ServiceWorkerRegistration() {\n    [native code]\n}")
+            FF = "function ServiceWorkerRegistration() {\n    [native code]\n}",
+            FF78 = "function ServiceWorkerRegistration() {\n    [native code]\n}")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
     }
@@ -10731,8 +10738,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF78 = "function uneval() {\n    [native code]\n}")
+    @Alerts("exception")
     public void uneval() throws Exception {
         test("uneval");
     }
@@ -11377,7 +11383,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function DOMMatrix() { [native code] }",
             EDGE = "function DOMMatrix() { [native code] }",
             FF = "function DOMMatrix() {\n    [native code]\n}",
-            FF78 = "function WebKitCSSMatrix() {\n    [native code]\n}")
+            FF78 = "function DOMMatrix() {\n    [native code]\n}")
     @NotYetImplemented({CHROME, EDGE, FF})
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
@@ -11577,7 +11583,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function URL() { [native code] }",
             EDGE = "function URL() { [native code] }",
-            FF = "function URL() {\n    [native code]\n}")
+            FF = "function URL() {\n    [native code]\n}",
+            FF78 = "function URL() {\n    [native code]\n}")
     public void webkitURL() throws Exception {
         test("webkitURL");
     }

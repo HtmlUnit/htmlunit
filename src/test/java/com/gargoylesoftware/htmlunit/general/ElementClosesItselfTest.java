@@ -839,8 +839,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

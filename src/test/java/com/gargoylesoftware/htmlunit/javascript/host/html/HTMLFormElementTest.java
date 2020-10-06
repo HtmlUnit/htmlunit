@@ -2210,7 +2210,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Response", "param1=value1"},
-            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmit() throws Exception {
         final String html
@@ -2252,7 +2251,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Response", "param1=value1"},
-            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitWithSubmit() throws Exception {
         final String html
@@ -2296,7 +2294,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Response", "param1=value1&submit1="},
-            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitWithButton() throws Exception {
         final String html
@@ -2342,7 +2339,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"first", "requestSubmit failed"},
-            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitNotMember() throws Exception {
         final String html

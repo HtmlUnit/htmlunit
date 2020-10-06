@@ -174,7 +174,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "H25/12/20",
-            FF78 = "25/12/20",
             IE = "\u200e25\u200e/\u200e12\u200e/\u200e20")
     public void format_ja_jp_u_ca_japanese() throws Exception {
         test("new Intl.DateTimeFormat('ja-JP-u-ca-japanese').format(date)");
