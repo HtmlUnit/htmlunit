@@ -149,7 +149,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "page2.html",
-            FF68 = "page2.html")
+            FF78 = "page2.html")
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
@@ -270,7 +270,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§page2.html")
     @BuggyWebDriver(FF = "§§URL§§",
-                    FF68 = "§§URL§§")
+                    FF78 = "§§URL§§")
     public void clickNestedOptionElement() throws Exception {
         final String html =
               "<html>\n"
@@ -298,7 +298,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "page2.html",
-            FF68 = "page2.html")
+            FF78 = "page2.html")
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"
@@ -597,7 +597,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             IE = "click href click doubleClick ")
     @BuggyWebDriver(
             FF = "click doubleClick click href href ",
-            FF68 = "click doubleClick click href href ")
+            FF78 = "click doubleClick click href href ")
     @NotYetImplemented
     public void doubleClick() throws Exception {
         final String html =

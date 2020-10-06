@@ -23,7 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPT
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF68})
+@JsxClass({CHROME, EDGE, FF, FF78})
 @JsxClass(isJSObject = false, value = IE)
 public class HTMLOptionsCollection extends SimpleScriptable {
 
@@ -70,7 +70,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLOptionsCollection() {
     }
 

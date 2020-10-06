@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTRACK_END
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTrack;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -53,7 +53,7 @@ public class HTMLTrackElement extends HTMLElement {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLTrackElement() {
     }
 

@@ -38,7 +38,7 @@ public class SVGTextPathElementTest extends WebDriverTestCase {
     @Alerts(CHROME = "function SVGTextPathElement() { [native code] }",
             EDGE = "function SVGTextPathElement() { [native code] }",
             FF = "function SVGTextPathElement() {\n    [native code]\n}",
-            FF68 = "function SVGTextPathElement() {\n    [native code]\n}",
+            FF78 = "function SVGTextPathElement() {\n    [native code]\n}",
             IE = "[object SVGTextPathElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

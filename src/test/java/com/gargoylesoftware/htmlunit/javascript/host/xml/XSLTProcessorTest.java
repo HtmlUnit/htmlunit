@@ -40,8 +40,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF68 = {"134", "[object Element]"})
-    @HtmlUnitNYI(FF68 = {"97", "null"})
+            FF78 = {"134", "[object Element]"})
+    @HtmlUnitNYI(FF78 = {"97", "null"})
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -148,7 +148,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
                 "[object XSLTProcessor]"},
             FF = {"function", "function XSLTProcessor() {\n    [native code]\n}",
                 "[object XSLTProcessor]"},
-            FF68 = {"function", "function XSLTProcessor() {\n    [native code]\n}",
+            FF78 = {"function", "function XSLTProcessor() {\n    [native code]\n}",
                 "[object XSLTProcessor]"},
             IE = {"undefined", "exception"})
     public void type() throws Exception {
@@ -172,7 +172,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
             FF = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
-            FF68 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
+            FF78 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
             IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"

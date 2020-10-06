@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.LinkedList;
@@ -153,7 +153,7 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_TIMEOUT = "timeout";
 
     /** No event phase. */
-    @JsxConstant({CHROME, EDGE, FF, FF68})
+    @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
@@ -169,19 +169,19 @@ public class Event extends SimpleScriptable {
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
-    @JsxConstant({FF, FF68})
+    @JsxConstant({FF, FF78})
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
-    @JsxConstant({FF, FF68})
+    @JsxConstant({FF, FF78})
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
-    @JsxConstant({FF, FF68})
+    @JsxConstant({FF, FF78})
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
-    @JsxConstant({FF, FF68})
+    @JsxConstant({FF, FF78})
     public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
@@ -298,7 +298,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public void jsConstructor(final String type, final ScriptableObject details) {
         boolean bubbles = false;
         boolean cancelable = false;
@@ -686,7 +686,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return the return value property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Object getReturnValue() {
         return !preventDefault_;
     }
@@ -694,7 +694,7 @@ public class Event extends SimpleScriptable {
     /**
      * @param newValue the new return value
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setReturnValue(final Object newValue) {
         if (isCancelable()) {
             final boolean bool = !ScriptRuntime.toBoolean(newValue);

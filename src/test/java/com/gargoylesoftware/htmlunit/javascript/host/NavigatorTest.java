@@ -385,7 +385,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "20181001000000",
-            FF68 = "20181001000000")
+            FF78 = "20181001000000")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -406,7 +406,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Google Inc.", ""},
             FF = {"", ""},
-            FF68 = {"", ""},
+            FF78 = {"", ""},
             IE = {"", "undefined"})
     public void vendor() throws Exception {
         final String html
@@ -429,7 +429,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void oscpu() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

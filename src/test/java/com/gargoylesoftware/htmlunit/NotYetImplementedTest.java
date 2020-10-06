@@ -123,11 +123,11 @@ public class NotYetImplementedTest {
                         }
                         browser += "FF";
                     }
-                    if (nyiString.contains("FF68 = ")) {
+                    if (nyiString.contains("FF78 = ")) {
                         if (browser.length() > 0) {
                             browser += ", ";
                         }
-                        browser += "FF68";
+                        browser += "FF78";
                     }
                     if (nyiString.contains("IE = ")) {
                         if (browser.length() > 0) {
@@ -202,7 +202,7 @@ public class NotYetImplementedTest {
 
         int count = 0;
         int countIE = 0;
-        int countFF68 = 0;
+        int countFF78 = 0;
         int countFF = 0;
         int countChrome = 0;
         for (final String entry : entries_) {
@@ -255,9 +255,9 @@ public class NotYetImplementedTest {
                 countIE++;
             }
 
-            if (browser.contains("FF68")) {
-                browser = browser.replace("FF68", "");
-                countFF68++;
+            if (browser.contains("FF78")) {
+                browser = browser.replace("FF78", "");
+                countFF78++;
             }
             if (browser.contains("FF")) {
                 countFF++;
@@ -267,7 +267,7 @@ public class NotYetImplementedTest {
             }
             if (browser.contains("All")) {
                 countIE++;
-                countFF68++;
+                countFF78++;
                 countFF++;
                 countChrome++;
             }
@@ -287,8 +287,8 @@ public class NotYetImplementedTest {
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(countFF68).append("</td>\n");
-        overview.append("    <td>for FF68</td>\n");
+        overview.append("    <td class='numeric'>").append(countFF78).append("</td>\n");
+        overview.append("    <td>for FF78</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

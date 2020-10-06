@@ -411,7 +411,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF68 = "1")
+            FF78 = "1")
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -840,7 +840,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF68 = "2")
+            FF78 = "2")
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

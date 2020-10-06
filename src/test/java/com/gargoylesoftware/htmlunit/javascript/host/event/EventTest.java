@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -706,7 +706,7 @@ public class EventTest extends WebDriverTestCase {
                      "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                      "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
                      "e-33"},
-            FF68 = {"e-0", "1", "e-2", "e-3", "e-4", "e-5",
+            FF78 = {"e-0", "1", "e-2", "e-3", "e-4", "e-5",
                     "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                     "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
                     "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
@@ -792,10 +792,10 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "activeElement BODY",
             FF = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
-            FF68 = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
+            FF78 = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
-    @NotYetImplemented({IE, FF, FF68})
+    @NotYetImplemented({IE, FF, FF78})
     public void document_focus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

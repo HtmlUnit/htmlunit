@@ -81,7 +81,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"4", "0", "1", "2", "3", "length", "item"},
             FF = {"4", "0", "1", "2", "3", "item", "length"},
-            FF68 = {"4", "0", "1", "2", "3", "item", "length"})
+            FF78 = {"4", "0", "1", "2", "3", "item", "length"})
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

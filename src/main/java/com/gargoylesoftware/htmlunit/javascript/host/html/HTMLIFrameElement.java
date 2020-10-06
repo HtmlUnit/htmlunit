@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IFRAME_ALW
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -53,7 +53,7 @@ public class HTMLIFrameElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLIFrameElement() {
     }
 

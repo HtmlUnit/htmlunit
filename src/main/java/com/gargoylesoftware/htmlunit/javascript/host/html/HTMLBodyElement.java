@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGI
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.Locale;
@@ -50,7 +50,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLBodyElement() {
     }
 
@@ -279,7 +279,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onlanguagechange} event handler for this element.
      * @return the {@code onlanguagechange} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnlanguagechange() {
         return getEventHandler("languagechange");
     }
@@ -288,7 +288,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onlanguagechange} event handler for this element.
      * @param onlanguagechange the {@code onlanguagechange} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnlanguagechange(final Object onlanguagechange) {
         setEventHandler("languagechange", onlanguagechange);
     }
@@ -513,7 +513,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onmessageerror} event handler for this element.
      * @return the {@code onmessageerror} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmessageerror() {
         return getEventHandler("onmessageerror");
     }

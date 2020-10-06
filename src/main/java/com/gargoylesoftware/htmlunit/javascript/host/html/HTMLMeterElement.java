@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMeter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMeter.class, value = {CHROME, EDGE, FF, FF68})
+@JsxClass(domClass = HtmlMeter.class, value = {CHROME, EDGE, FF, FF78})
 public class HTMLMeterElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
@@ -41,7 +41,7 @@ public class HTMLMeterElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLMeterElement() {
     }
 
@@ -125,7 +125,7 @@ public class HTMLMeterElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());

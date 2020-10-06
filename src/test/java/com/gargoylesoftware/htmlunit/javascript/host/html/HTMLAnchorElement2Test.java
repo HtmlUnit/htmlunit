@@ -602,7 +602,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             CHROME = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
             EDGE = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
             FF = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"},
-            FF68 = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
+            FF78 = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
     public void typeof() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -709,7 +709,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                         "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
                     "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
-            FF68 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
+            FF78 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
                     "foo:||||||", "p:||||||", "p:||||||", "p:||||||"})
     public void propertiesNonStandardHref() throws Exception {
         final String html = "<html>\n"
@@ -1101,7 +1101,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "Tester", "https://Tester:password@developer.mozilla.org",
                 "Tester", "https://Tester@developer.mozilla.org",
                 "Tester", "https://Tester@developer.mozilla.org"},
-            FF68 = {"", "user", "user", "",
+            FF78 = {"", "user", "user", "",
                 "", "",
                 "Tester", "https://Tester:password@developer.mozilla.org",
                 "Tester", "https://Tester@developer.mozilla.org",
@@ -1170,7 +1170,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "Tester", "https://user:Tester@developer.mozilla.org",
                 "Tester", "https://:Tester@developer.mozilla.org",
                 "Tester", "https://:Tester@developer.mozilla.org"},
-            FF68 = {"", "password", "password", "",
+            FF78 = {"", "password", "password", "",
                 "", "",
                 "Tester", "https://user:Tester@developer.mozilla.org",
                 "Tester", "https://:Tester@developer.mozilla.org",

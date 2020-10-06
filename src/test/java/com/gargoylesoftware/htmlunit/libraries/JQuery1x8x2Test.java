@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -1598,7 +1598,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
     @Alerts(CHROME = "0, 4, 4",
             EDGE = "0, 4, 4",
             FF = "0, 4, 4",
-            FF68 = "0, 4, 4")
+            FF78 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -3953,7 +3953,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
     @Alerts(CHROME = "2, 2, 4",
             EDGE = "2, 2, 4",
             FF = "0, 1, 1",
-            FF68 = "0, 1, 1",
+            FF78 = "0, 1, 1",
             IE = "0, 4, 4")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
@@ -4135,7 +4135,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajax_____error_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - error callbacks");
     }
@@ -4746,7 +4746,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajaxSetup__timeout__Number_____with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout");
     }
@@ -5067,7 +5067,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
@@ -5118,7 +5118,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
@@ -5129,7 +5129,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
@@ -5350,7 +5350,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
@@ -5401,7 +5401,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
@@ -6112,7 +6112,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
@@ -6195,7 +6195,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 178, 178")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
     }
@@ -6206,7 +6206,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 60, 60")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__relative() throws Exception {
         runTest("offset: relative");
     }
@@ -6237,7 +6237,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__table() throws Exception {
         runTest("offset: table");
     }
@@ -6248,7 +6248,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__scroll() throws Exception {
         runTest("offset: scroll");
     }
@@ -6482,7 +6482,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
@@ -6523,7 +6523,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 10, 10")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void Sizzle__selector__XML_Document_Selectors() throws Exception {
         runTest("Sizzle: selector: XML Document Selectors");
     }

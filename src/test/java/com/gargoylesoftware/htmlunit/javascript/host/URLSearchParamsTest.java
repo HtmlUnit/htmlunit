@@ -167,7 +167,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "noValue=undefined",
             EDGE = "noValue=undefined",
             FF = "noValue=undefined",
-            FF68 = "noValue=undefined")
+            FF78 = "noValue=undefined")
     public void stringMissingParam() throws Exception {
         final String html =
             "<html>\n"
@@ -391,7 +391,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                     "key1", "key2", "key1", "", "true"},
             FF = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
-            FF68 = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
+            FF78 = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
             IE = {})
     public void keys() throws Exception {
@@ -435,7 +435,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                     "val1", "", "val3", "val4", "true"},
             FF = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
-            FF68 = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
+            FF78 = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
             IE = {})
     public void values() throws Exception {
@@ -507,7 +507,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            FF68 = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
+            FF78 = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
     public void entries() throws Exception {

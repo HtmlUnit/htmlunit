@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -108,7 +108,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("10")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ready__jQuery_ready() throws Exception {
         runTest("ready: jQuery ready");
     }
@@ -249,7 +249,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void basic__offset() throws Exception {
         runTest("basic: offset");
     }
@@ -753,7 +753,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void core__jQuery_parseHTML() throws Exception {
         runTest("core: jQuery.parseHTML");
     }
@@ -784,7 +784,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void core__document_ready_when_jQuery_loaded_asynchronously___13655_() throws Exception {
         runTest("core: document ready when jQuery loaded asynchronously (#13655)");
     }
@@ -1870,7 +1870,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1, 1, 2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
@@ -1882,8 +1882,8 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "15",
             FF = "1, 14, 15",
-            FF68 = "1, 14, 15")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+            FF78 = "1, 14, 15")
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that support tests resolve as expected per browser");
     }
@@ -2685,7 +2685,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("26")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void attributes__val__() throws Exception {
         runTest("attributes: val()");
     }
@@ -2708,7 +2708,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(CHROME = "4",
             EDGE = "4",
             FF = "4",
-            FF68 = "4")
+            FF78 = "4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -3409,7 +3409,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__submit_event_bubbles_on_copied_forms___11649_() throws Exception {
         runTest("event: submit event bubbles on copied forms (#11649)");
     }
@@ -3420,7 +3420,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__change_event_bubbles_on_copied_forms___11796_() throws Exception {
         runTest("event: change event bubbles on copied forms (#11796)");
     }
@@ -3501,7 +3501,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__on_beforeunload_() throws Exception {
         runTest("event: on(beforeunload)");
     }
@@ -3582,7 +3582,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__ignore_comment_nodes_in_event_delegation__gh_2055_() throws Exception {
         runTest("event: ignore comment nodes in event delegation (gh-2055)");
     }
@@ -3823,7 +3823,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__jQuery_ready_uses_interactive() throws Exception {
         runTest("event: jQuery.ready uses interactive");
     }
@@ -3854,7 +3854,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__jQuery_ready_synchronous_load_with_long_loading_subresources() throws Exception {
         runTest("event: jQuery.ready synchronous load with long loading subresources");
     }
@@ -4095,7 +4095,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void selector__disconnected_nodes() throws Exception {
         runTest("selector: disconnected nodes");
     }
@@ -4126,7 +4126,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("15")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void selector__jQuery_uniqueSort() throws Exception {
         runTest("selector: jQuery.uniqueSort");
     }
@@ -4487,7 +4487,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void traversing__siblings__String__() throws Exception {
         runTest("traversing: siblings([String])");
     }
@@ -4498,7 +4498,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void traversing__children__String__() throws Exception {
         runTest("traversing: children([String])");
     }
@@ -4940,7 +4940,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("240")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void manipulation__Tag_name_processing_respects_the_HTML_Standard__gh_2005_() throws Exception {
         runTest("manipulation: Tag name processing respects the HTML Standard (gh-2005)");
     }
@@ -5571,7 +5571,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void manipulation__table_manipulation() throws Exception {
         runTest("manipulation: table manipulation");
     }
@@ -5914,7 +5914,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void manipulation__html_____script_exceptions_bubble___11743_() throws Exception {
         runTest("manipulation: html() - script exceptions bubble (#11743)");
     }
@@ -5945,7 +5945,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("13")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void manipulation__script_evaluation___11795_() throws Exception {
         runTest("manipulation: script evaluation (#11795)");
     }
@@ -6066,7 +6066,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void manipulation__Make_sure_col_element_is_appended_correctly() throws Exception {
         runTest("manipulation: Make sure col element is appended correctly");
     }
@@ -6278,7 +6278,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("17")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css__css___non_px_relative_values__gh_1711_() throws Exception {
         runTest("css: css() non-px relative values (gh-1711)");
     }
@@ -6289,7 +6289,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css__css___mismatched_relative_values_with_bounded_styles__gh_2144_() throws Exception {
         runTest("css: css() mismatched relative values with bounded styles (gh-2144)");
     }
@@ -6511,7 +6511,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css__computed_margins__trac_3333__gh_2237_() throws Exception {
         runTest("css: computed margins (trac-3333; gh-2237)");
     }
@@ -6632,7 +6632,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css__css__width___and_css__height___should_return_fractional_values_for_nodes_in_the_document() throws Exception {
         runTest("css: css('width') and css('height') should return fractional values for nodes in the document");
     }
@@ -6643,7 +6643,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css__css__width___and_css__height___should_return_fractional_values_for_disconnected_nodes() throws Exception {
         runTest("css: css('width') and css('height') should return fractional values for disconnected nodes");
     }
@@ -6684,7 +6684,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("17")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css___visible__hidden_selectors() throws Exception {
         runTest("css: :visible/:hidden selectors");
     }
@@ -6779,9 +6779,9 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(CHROME = "8",
             EDGE = "8",
             FF = "10",
-            FF68 = "10",
+            FF78 = "10",
             IE = "0")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void css__css___customProperty_() throws Exception {
         runTest("css: css(--customProperty)");
     }
@@ -6842,7 +6842,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__XMLHttpRequest___Attempt_to_block_tests_because_of_dangling_XHR_requests__IE_() throws Exception {
         runTest("ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE)");
     }
@@ -7033,7 +7033,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajax_____native_abort() throws Exception {
         runTest("ajax: jQuery.ajax() - native abort");
     }
@@ -7044,7 +7044,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajax_____native_timeout() throws Exception {
         runTest("ajax: jQuery.ajax() - native timeout");
     }
@@ -7225,7 +7225,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("5, 2, 7")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain");
     }
@@ -7516,7 +7516,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajax_____failing_cross_domain__non_existing_() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain (non-existing)");
     }
@@ -7527,7 +7527,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajax_____failing_cross_domain() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain");
     }
@@ -7728,7 +7728,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__gh_2498___jQuery_ajax_____binary_data_shouldn_t_throw_an_exception() throws Exception {
         runTest("ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception");
     }
@@ -7739,7 +7739,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax___11743___jQuery_ajax_____script__throws_exception() throws Exception {
         runTest("ajax: #11743 - jQuery.ajax() - script, throws exception");
     }
@@ -7902,7 +7902,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
     }
@@ -7923,7 +7923,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax___11264___jQuery_domManip_____no_side_effect_because_of_ajaxSetup_or_global_events() throws Exception {
         runTest("ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events");
     }
@@ -8144,7 +8144,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("7")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
     }
@@ -8348,7 +8348,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("12")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_relative_values() throws Exception {
         runTest("effects: animate relative values");
     }
@@ -8389,7 +8389,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
@@ -8441,7 +8441,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
@@ -8452,7 +8452,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
@@ -8663,7 +8663,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
@@ -8714,7 +8714,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
@@ -9155,7 +9155,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("12")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__line_height_animates_correctly___13855_() throws Exception {
         runTest("effects: line-height animates correctly (#13855)");
     }
@@ -9286,7 +9286,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
@@ -9640,7 +9640,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("178")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
     }
@@ -9651,7 +9651,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("64")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__relative() throws Exception {
         runTest("offset: relative");
     }
@@ -9662,7 +9662,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("80")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__static() throws Exception {
         runTest("offset: static");
     }
@@ -9683,7 +9683,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__table() throws Exception {
         runTest("offset: table");
     }
@@ -9694,7 +9694,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("26")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__scroll() throws Exception {
         runTest("offset: scroll");
     }
@@ -9705,7 +9705,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__body() throws Exception {
         runTest("offset: body");
     }
@@ -9726,7 +9726,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_static_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.static body.static");
     }
@@ -9737,7 +9737,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_static_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.static body.relative");
     }
@@ -9748,7 +9748,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_static_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.static body.absolute");
     }
@@ -9759,7 +9759,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_static_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.static body.fixed");
     }
@@ -9770,7 +9770,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_relative_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.static");
     }
@@ -9781,7 +9781,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_relative_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.relative");
     }
@@ -9792,7 +9792,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_relative_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.absolute");
     }
@@ -9803,7 +9803,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_relative_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.fixed");
     }
@@ -9814,7 +9814,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_absolute_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.static");
     }
@@ -9825,7 +9825,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_absolute_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.relative");
     }
@@ -9836,7 +9836,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_absolute_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.absolute");
     }
@@ -9847,7 +9847,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_absolute_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.fixed");
     }
@@ -9858,7 +9858,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_fixed_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.static");
     }
@@ -9869,7 +9869,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_fixed_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.relative");
     }
@@ -9880,7 +9880,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_fixed_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.absolute");
     }
@@ -9891,7 +9891,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__nonzero_box_properties___html_fixed_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.fixed");
     }
@@ -9922,7 +9922,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__iframe_scrollTop_Left__see_gh_1945_() throws Exception {
         runTest("offset: iframe scrollTop/Left (see gh-1945)");
     }
@@ -10093,7 +10093,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
@@ -10114,7 +10114,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void dimensions__outside_view_position__gh_2836_() throws Exception {
         runTest("dimensions: outside view position (gh-2836)");
     }
@@ -10145,7 +10145,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void dimensions__width_height_on_an_inline_element_with_percentage_dimensions__gh_3611_() throws Exception {
         runTest("dimensions: width/height on an inline element with percentage dimensions (gh-3611)");
     }
@@ -10157,7 +10157,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "4",
             FF = "4, 0, 4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
         runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");
     }

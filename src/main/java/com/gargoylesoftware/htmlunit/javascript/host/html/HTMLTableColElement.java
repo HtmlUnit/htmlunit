@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup;
@@ -44,7 +44,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLTableColElement() {
     }
 

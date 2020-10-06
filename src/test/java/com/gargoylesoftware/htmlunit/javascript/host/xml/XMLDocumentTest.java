@@ -133,7 +133,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF68 = {"undefined", "true"})
+            FF78 = {"undefined", "true"})
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -151,7 +151,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF68 = {"true", "books", "books", "3", "#text", "0"})
+            FF78 = {"true", "books", "books", "3", "#text", "0"})
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -186,7 +186,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF68 = {"true", "books", "books", "3", "#text", "0"})
+            FF78 = {"true", "books", "books", "3", "#text", "0"})
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

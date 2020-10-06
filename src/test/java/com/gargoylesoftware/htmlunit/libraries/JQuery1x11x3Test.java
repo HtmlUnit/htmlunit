@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -536,7 +536,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void core__document_ready_when_jQuery_loaded_asynchronously___13655_() throws Exception {
         runTest("core: document ready when jQuery loaded asynchronously (#13655)");
     }
@@ -1860,7 +1860,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Alerts(CHROME = "0, 4, 4",
             EDGE = "0, 4, 4",
             FF = "0, 4, 4",
-            FF68 = "0, 4, 4")
+            FF78 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -2541,7 +2541,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void event__on_beforeunload_() throws Exception {
         runTest("event: on(beforeunload)");
     }
@@ -3066,7 +3066,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 14, 14")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void selector__jQuery_unique() throws Exception {
         runTest("selector: jQuery.unique");
     }
@@ -5208,7 +5208,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
             FF = "0, 1, 1",
-            FF68 = "0, 1, 1")
+            FF78 = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -6302,7 +6302,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
     }
@@ -6503,7 +6503,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 7, 7")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
     }
@@ -6674,7 +6674,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_relative_values() throws Exception {
         runTest("effects: animate relative values");
     }
@@ -6715,7 +6715,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
@@ -6766,7 +6766,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
@@ -6777,7 +6777,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
@@ -6988,7 +6988,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
@@ -7039,7 +7039,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
@@ -7480,7 +7480,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__line_height_animates_correctly___13855_() throws Exception {
         runTest("effects: line-height animates correctly (#13855)");
     }
@@ -7611,7 +7611,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
@@ -7814,7 +7814,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 178, 178")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
     }
@@ -7825,7 +7825,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 60, 60")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__relative() throws Exception {
         runTest("offset: relative");
     }
@@ -7856,7 +7856,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__table() throws Exception {
         runTest("offset: table");
     }
@@ -7867,7 +7867,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__scroll() throws Exception {
         runTest("offset: scroll");
     }
@@ -7878,7 +7878,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void offset__body() throws Exception {
         runTest("offset: body");
     }
@@ -8102,7 +8102,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF68, IE })
+    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }

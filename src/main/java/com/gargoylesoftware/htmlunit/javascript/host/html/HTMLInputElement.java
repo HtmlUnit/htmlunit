@@ -31,7 +31,7 @@ import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINE
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.File;
@@ -88,7 +88,7 @@ public class HTMLInputElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLInputElement() {
     }
 
@@ -368,7 +368,7 @@ public class HTMLInputElement extends HTMLElement {
      * Gets the value of {@code textLength} attribute.
      * @return the text length
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public int getTextLength() {
         return getValue().length();
     }
@@ -488,7 +488,7 @@ public class HTMLInputElement extends HTMLElement {
      * Gets the {@code minLength}.
      * @return the {@code minLength}
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public int getMinLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("minLength");
         return NumberUtils.toInt(attrValue, -1);
@@ -498,7 +498,7 @@ public class HTMLInputElement extends HTMLElement {
      * Sets the value of {@code minLength} attribute.
      * @param length the new value
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setMinLength(final int length) {
         getDomNodeOrDie().setMinLength(length);
     }
@@ -888,7 +888,7 @@ public class HTMLInputElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
@@ -936,7 +936,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public boolean isDisabled() {
         return super.isDisabled();
     }
@@ -945,7 +945,7 @@ public class HTMLInputElement extends HTMLElement {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
     }

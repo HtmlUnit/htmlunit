@@ -688,7 +688,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLElement]",
-            FF68 = "[object HTMLElement]",
+            FF78 = "[object HTMLElement]",
             IE = "[object HTMLImageElement]")
     public void image() throws Exception {
         test("image");
@@ -779,7 +779,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF68 = "[object HTMLSpanElement]",
+            FF78 = "[object HTMLSpanElement]",
             IE = "[object HTMLBlockElement]")
     public void keygen() throws Exception {
         test("keygen");
@@ -905,7 +905,7 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLMenuItemElement]",
-            FF68 = "[object HTMLMenuItemElement]")
+            FF78 = "[object HTMLMenuItemElement]")
     public void menuitem() throws Exception {
         test("menuitem");
     }

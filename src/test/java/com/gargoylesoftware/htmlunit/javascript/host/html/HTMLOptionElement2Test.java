@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.LinkedList;
@@ -158,7 +158,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @BuggyWebDriver(CHROME = "onchange-select; onclick-select;",
             EDGE = "onchange-select; onclick-select;",
             FF = "onchange-select; onclick-select;",
-            FF68 = "onchange-select; onclick-select;")
+            FF78 = "onchange-select; onclick-select;")
     public void clickOptionEventSequence1() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -202,7 +202,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @BuggyWebDriver(CHROME = "change-SELECT; click-SELECT;",
             EDGE = "change-SELECT; click-SELECT;",
             FF = "change-SELECT; click-SELECT;",
-            FF68 = "change-SELECT; click-SELECT;")
+            FF78 = "change-SELECT; click-SELECT;")
     public void clickOptionEventSequence2() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -261,7 +261,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @BuggyWebDriver(CHROME = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
             EDGE = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
             FF = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
-            FF68 = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+            FF78 = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
     public void clickOptionEventSequence3() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1241,9 +1241,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                         "false-selected", "false-null", "true-true"},
             FF = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"},
-            FF68 = {"false-null", "true-true", "true-null",
+            FF78 = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"})
-    @NotYetImplemented({FF, FF68})
+    @NotYetImplemented({FF, FF78})
     public void setSelectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1393,7 +1393,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "o-mouse over [option1]",
             FF = "o-mouse over [option1] s-mouse over [option1]",
-            FF68 = "o-mouse over [option1] s-mouse over [option1]",
+            FF78 = "o-mouse over [option1] s-mouse over [option1]",
             IE = "")
     public void mouseOverDisabledSelect() throws Exception {
         shutDownAll();
@@ -1449,7 +1449,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            FF68 = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
+            FF78 = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
     public void mouseOverDisabledOption() throws Exception {
         shutDownAll();
 

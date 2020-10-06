@@ -37,7 +37,7 @@ public class SVGPathElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathElement() { [native code] }",
             FF = "function SVGPathElement() {\n    [native code]\n}",
-            FF68 = "function SVGPathElement() {\n    [native code]\n}",
+            FF78 = "function SVGPathElement() {\n    [native code]\n}",
             IE = "[object SVGPathElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

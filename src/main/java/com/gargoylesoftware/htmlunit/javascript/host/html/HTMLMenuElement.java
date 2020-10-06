@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +47,7 @@ public class HTMLMenuElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLMenuElement() {
         label_ = "";
     }
@@ -57,7 +57,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @return the value of the {@code type} property
      */
     @Override
-    @JsxGetter({FF, FF68, IE})
+    @JsxGetter({FF, FF78, IE})
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             return "";
@@ -83,7 +83,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @param type the value of the {@code type} property
      */
     @Override
-    @JsxSetter({FF, FF68, IE})
+    @JsxSetter({FF, FF78, IE})
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             if (StringUtils.isEmpty(type)) {
@@ -113,7 +113,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code label} property.
      * @return the value of the {@code label} property
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public String getLabel() {
         return label_;
     }
@@ -122,7 +122,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code label} property.
      * @param label the value of the {@code label} property
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setLabel(final String label) {
         label_ = label;
     }

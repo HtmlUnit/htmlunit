@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.geo;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.BufferedReader;
@@ -55,7 +55,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF, IE})
-@JsxClass(isJSObject = false, value = FF68)
+@JsxClass(isJSObject = false, value = FF78)
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);

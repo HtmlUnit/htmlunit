@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class NodeList extends AbstractList {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public NodeList() {
     }
 
@@ -112,7 +112,7 @@ public class NodeList extends AbstractList {
      * Returns an Iterator allowing to go through all keys contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public ES6Iterator keys() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
     }
@@ -121,7 +121,7 @@ public class NodeList extends AbstractList {
      * Returns an Iterator allowing to go through all keys contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public ES6Iterator values() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }
@@ -130,12 +130,12 @@ public class NodeList extends AbstractList {
      * Returns an Iterator allowing to go through all key/value pairs contained in this object.
      * @return an {@link NativeArrayIterator}
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public ES6Iterator entries() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
 
-    @JsxSymbol({CHROME, EDGE, FF, FF68})
+    @JsxSymbol({CHROME, EDGE, FF, FF78})
     public ES6Iterator iterator() {
         return values();
     }
@@ -144,7 +144,7 @@ public class NodeList extends AbstractList {
      * Calls the {@code callback} given in parameter once for each value pair in the list, in insertion order.
      * @param callback function to execute for each element
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public void forEach(final Object callback) {
         final List<DomNode> nodes = getElements();
 

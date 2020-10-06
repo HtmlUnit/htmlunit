@@ -73,14 +73,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         leakyMap.clear();
         final int knownBrowsers = leakyMap.size();
 
-        BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
+        BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_78)
                                                 .setApplicationVersion("App")
                                                 .setApplicationVersion("Version")
                                                 .setUserAgent("User agent")
                                                 .build();
         JavaScriptConfiguration.getInstance(browserVersion);
 
-        browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
+        browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_78)
                             .setApplicationVersion("App2")
                             .setApplicationVersion("Version2")
                             .setUserAgent("User agent2")
@@ -101,7 +101,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
         long count = 0;
         while (count++ < 3000) {
-            final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
+            final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_78)
                                                     .setApplicationVersion("App" + generator.generate(20))
                                                     .setApplicationVersion("Version" + generator.generate(20))
                                                     .setUserAgent("User Agent" + generator.generate(20))

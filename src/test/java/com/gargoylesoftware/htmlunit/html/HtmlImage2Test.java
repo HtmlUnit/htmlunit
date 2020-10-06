@@ -73,7 +73,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF = "2",
-            FF68 = "2")
+            FF78 = "2")
     public void loadImageBlankSource() throws Exception {
         loadImage("src=' '");
         loadImageInnerHtml("src=' '");

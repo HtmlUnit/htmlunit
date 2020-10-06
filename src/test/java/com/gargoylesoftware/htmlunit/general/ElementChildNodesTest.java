@@ -349,7 +349,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "3"},
             FF = {"3", "2", "2", "3", "2", "2"},
-            FF68 = {"3", "2", "2", "3", "2", "2"})
+            FF78 = {"3", "2", "2", "3", "2", "2"})
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -417,9 +417,9 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
             FF = {"1", "0", "1", "1", "0", "1"},
-            FF68 = {"1", "0", "1", "1", "0", "1"})
+            FF78 = {"1", "0", "1", "1", "0", "1"})
     @HtmlUnitNYI(FF = {"3", "2", "2", "3", "2", "2"},
-            FF68 = {"3", "2", "2", "3", "2", "2"})
+            FF78 = {"3", "2", "2", "3", "2", "2"})
     public void dialog() throws Exception {
         loadPageWithAlerts2(test("dialog"));
     }

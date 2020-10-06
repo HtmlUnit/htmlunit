@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({FF, FF68, IE})
+    @NotYetImplemented({FF, FF78, IE})
     public void testMinValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
@@ -77,7 +77,7 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({FF, FF68, IE})
+    @NotYetImplemented({FF, FF78, IE})
     public void testMaxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"

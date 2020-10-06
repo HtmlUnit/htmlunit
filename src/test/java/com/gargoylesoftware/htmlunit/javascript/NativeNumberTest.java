@@ -247,7 +247,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
-            FF68 = "toSource: function")
+            FF78 = "toSource: function")
     public void methods_different() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", "toSource");
         loadPageWithAlerts2(html);
@@ -312,7 +312,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("12,345")
     @BuggyWebDriver(FF = "12.345",
-            FF68 = "12.345")
+            FF78 = "12.345")
     public void toLocaleStringNoParam() throws Exception {
         final String html = "<html><head><script>\n"
             + "  try {\n"

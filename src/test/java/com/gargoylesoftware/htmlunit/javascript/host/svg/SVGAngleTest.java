@@ -37,7 +37,7 @@ public class SVGAngleTest extends WebDriverTestCase {
     @Alerts(CHROME = {"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"},
             EDGE = {"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"},
             FF = {"function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4"},
-            FF68 = {"function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4"},
+            FF78 = {"function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4"},
             IE = {"[object SVGAngle]", "0", "1", "2", "3", "4"})
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

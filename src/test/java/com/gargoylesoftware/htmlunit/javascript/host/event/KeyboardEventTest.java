@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 
 import java.util.Arrays;
 
@@ -48,7 +48,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"DOM3: [object KeyboardEvent]", "vendor: exception"},
-            FF68 = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
+            FF78 = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -69,7 +69,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception", "0-0", "undefined-undefined"},
-            FF68 = {"0-0", "0-0", "undefined-undefined"})
+            FF78 = {"0-0", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -99,7 +99,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             FF = {"exception",
                 "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0"},
-            FF68 = {"keydown, true, true, true, true, true, true, 65, 0",
+            FF78 = {"keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0",
                 "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0"})
@@ -140,7 +140,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF68 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @BuggyWebDriver(FF78 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
     public void keyCodes_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -196,7 +196,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF68 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @BuggyWebDriver(FF78 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -309,7 +309,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"13", "13", "13"})
-    @NotYetImplemented({FF, FF68})
+    @NotYetImplemented({FF, FF78})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -366,7 +366,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13,Enter,undefined,Enter,false",
                     "keypress:13,0,13,Enter,undefined,Enter,false",
                     "keyup:13,0,13,Enter,undefined,Enter,false"},
-            FF68 = {  "keydown:16,0,16,Shift,undefined,ShiftLeft,true",
+            FF78 = {  "keydown:16,0,16,Shift,undefined,ShiftLeft,true",
                     "keydown:65,0,65,A,undefined,KeyA,true",
                     "keypress:0,65,65,A,undefined,KeyA,true",
                     "keyup:65,0,65,A,undefined,KeyA,true",
@@ -424,7 +424,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                             "keydown:13,0,13,Enter,undefined,Enter,false",
                             "keypress:13,13,13,Enter,undefined,Enter,false",
                             "keyup:13,0,13,Enter,undefined,Enter,false"},
-                    FF68 = {  "keydown:65,0,65,A,undefined,,false",
+                    FF78 = {  "keydown:65,0,65,A,undefined,,false",
                             "keypress:65,65,65,A,undefined,,false",
                             "keyup:65,0,65,A,undefined,,false",
                             "keydown:65,0,65,a,undefined,,false",

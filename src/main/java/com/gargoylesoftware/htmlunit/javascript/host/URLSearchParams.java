@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Ween Jiann
  */
-@JsxClass({CHROME, EDGE, FF, FF68})
+@JsxClass({CHROME, EDGE, FF, FF78})
 public class URLSearchParams extends SimpleScriptable {
 
     /** Constant used to register the prototype in the context. */

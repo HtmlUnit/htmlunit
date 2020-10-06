@@ -47,7 +47,7 @@ public class FileTest extends WebDriverTestCase {
                             "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             FF = {"1", "ScriptExceptionTest1.txt", "undefined",
                             "1437920507000", "", "14", MimeType.TEXT_PLAIN},
-            FF68 = {"1", "ScriptExceptionTest1.txt", "undefined",
+            FF78 = {"1", "ScriptExceptionTest1.txt", "undefined",
                     "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             IE = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
@@ -114,7 +114,7 @@ public class FileTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "function", "Hello HtmlUnit"},
-            FF68 = {"1", "undefined", "TypeError true"},
+            FF78 = {"1", "undefined", "TypeError true"},
             IE = {"1", "undefined", "TypeError true"})
     public void text() throws Exception {
         final String html
@@ -263,7 +263,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "0",
                 ""},
-            FF68 = {"[object File]", "htMluniT.txt", "", "true", "0",
+            FF78 = {"[object File]", "htMluniT.txt", "", "true", "0",
                 "TypeError true"},
             IE = "TypeError true")
     public void ctorEmpty() throws Exception {
@@ -299,7 +299,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "8",
                 "HtmlUnit"},
-            FF68 = {"[object File]", "htMluniT.txt", "", "true", "8",
+            FF78 = {"[object File]", "htMluniT.txt", "", "true", "8",
                 "TypeError true"},
             IE = "TypeError true")
     public void ctorString() throws Exception {
@@ -335,7 +335,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
                 "HtmlUnit"},
-            FF68 = {"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
+            FF78 = {"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
                 "TypeError true"},
             IE = "TypeError true")
     public void ctorStringWithOptions() throws Exception {
@@ -372,7 +372,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "16",
                 "HtmlUnitis great"},
-            FF68 = {"[object File]", "htMluniT.txt", "", "true", "16",
+            FF78 = {"[object File]", "htMluniT.txt", "", "true", "16",
                 "TypeError true"},
             IE = "TypeError true")
     public void ctorStrings() throws Exception {
@@ -408,7 +408,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "12",
                 "HtmlUnitMMMK"},
-            FF68 = {"[object File]", "htMluniT.txt", "", "true", "12",
+            FF78 = {"[object File]", "htMluniT.txt", "", "true", "12",
                 "TypeError true"},
             IE = "TypeError true")
     public void ctorMixed() throws Exception {

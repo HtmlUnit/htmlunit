@@ -328,7 +328,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLHeadingElement]-attributes",
-            FF68 = "[object HTMLInputElement]-attributes\n"
+            FF78 = "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"

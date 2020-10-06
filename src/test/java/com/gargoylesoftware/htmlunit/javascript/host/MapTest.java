@@ -67,7 +67,7 @@ public class MapTest extends WebDriverTestCase {
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             FF = {"function entries() {\n    [native code]\n}",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF68 = {"function entries() {\n    [native code]\n}",
+            FF78 = {"function entries() {\n    [native code]\n}",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             IE = {})
     public void iterator() throws Exception {
@@ -106,7 +106,7 @@ public class MapTest extends WebDriverTestCase {
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             FF = {"function entries() {\n    [native code]\n}",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF68 = {"function entries() {\n    [native code]\n}",
+            FF78 = {"function entries() {\n    [native code]\n}",
                 "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             IE = {})
     public void entries() throws Exception {
@@ -145,7 +145,7 @@ public class MapTest extends WebDriverTestCase {
                 "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
             FF = {"function values() {\n    [native code]\n}",
                 "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
-            FF68 = {"function values() {\n    [native code]\n}",
+            FF78 = {"function values() {\n    [native code]\n}",
                 "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
             IE = {})
     public void values() throws Exception {
@@ -184,7 +184,7 @@ public class MapTest extends WebDriverTestCase {
                 "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
             FF = {"function keys() {\n    [native code]\n}",
                 "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
-            FF68 = {"function keys() {\n    [native code]\n}",
+            FF78 = {"function keys() {\n    [native code]\n}",
                 "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
             IE = {})
     public void keys() throws Exception {

@@ -132,7 +132,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"4", "200", "[object XMLDocument]"},
             EDGE = {"4", "200", "[object XMLDocument]"},
             FF = {"4", "200", "[object XMLDocument]"},
-            FF68 = {"4", "200", "[object XMLDocument]"},
+            FF78 = {"4", "200", "[object XMLDocument]"},
             IE = {"4", "200", "[object XMLDocument]"})
     public void simpleHead() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));

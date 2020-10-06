@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,7 +73,7 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "\"Times New Roman\""},
             FF = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "serif"},
-            FF68 = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            FF78 = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "18px", "", "serif"},
             IE = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman"})
@@ -120,7 +120,7 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "oblique", "italic"},
             FF = {"15px arial, sans-serif", "", "normal", "normal",
                     "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
-            FF68 = {"15px arial, sans-serif", "", "normal", "normal",
+            FF78 = {"15px arial, sans-serif", "", "normal", "normal",
                     "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
             IE = {"15px/normal arial, sans-serif", "", "normal", "normal",
                     "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique"})
@@ -164,7 +164,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "16px \"Times New Roman\"", "", "\"Times New Roman\""},
             FF = {"", "", "", "serif"},
-            FF68 = {"", "", "", "serif"},
+            FF78 = {"", "", "", "serif"},
             IE = {"", "", "", "Times New Roman"})
     public void wrongFontFamily() throws Exception {
         font("xyz", "fontFamily", null);
@@ -177,7 +177,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px xyz", "1px xyz",
                 "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"},
             FF = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
-            FF68 = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
+            FF78 = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
@@ -190,7 +190,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "16px \"Times New Roman\"",
             "", "\"Times New Roman\"", "", "16px abc", "abc", "abc"},
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
-            FF68 = {"", "", "", "serif", "", "", "abc", "abc"},
+            FF78 = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
     @NotYetImplemented({CHROME, EDGE})
     public void minimalFontFamilyReversed() throws Exception {
@@ -204,9 +204,9 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px / 2px xyz", "1px / 2px xyz",
                 "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
-            FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
+            FF78 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void minimalLineHeight() throws Exception {
         font("1px/2px xyz", "lineHeight", "normal");
     }
@@ -218,9 +218,9 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px / 2px xyz", "1px / 2px xyz",
                 "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
-            FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
+            FF78 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void minimalLineHeightSpace() throws Exception {
         font("1px / 2px xyz", "lineHeight", "normal");
     }
@@ -232,9 +232,9 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px / 2px xyz", "1px / 2px xyz",
                 "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
-            FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
+            FF78 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void minimalLineHeightSpace2() throws Exception {
         font("1px/ 2px xyz", "lineHeight", "normal");
     }
@@ -246,7 +246,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px / 2px xyz", "1px / 2px xyz",
                 "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
-            FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
+            FF78 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
     @NotYetImplemented
     public void minimalLineHeightSpace3() throws Exception {
@@ -260,7 +260,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1px / 2px xyz", "1px / 2px xyz",
                 "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF = {"1px / 2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "normal"},
-            FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
+            FF78 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
     @NotYetImplemented
     public void minimalLineHeightSpace4() throws Exception {

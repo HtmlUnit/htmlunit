@@ -190,10 +190,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
                 + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0",
             FF = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0",
-            FF68 = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
+            FF78 = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0")
     //https://github.com/SeleniumHQ/selenium/issues/639
-    @BuggyWebDriver(FF68 = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
+    @BuggyWebDriver(FF78 = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
                 FF = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
                 IE = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0 down: 17,0 "
                         + "down: 18,0 down: 226,0 press: 124,124 up: 226,0 up: 17,0 up: 18,0")
@@ -409,7 +409,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("Hello-world")
     @BuggyWebDriver(FF = "-worldHello",
-            FF68 = "-worldHello")
+            FF78 = "-worldHello")
     public void typeAtEndOfEditableDiv() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -434,7 +434,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("Hello-world")
     @BuggyWebDriver(FF = "-worldHello",
-            FF68 = "-worldHello")
+            FF78 = "-worldHello")
     public void typeAtEndOfEditableDivWithParagraphInside() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

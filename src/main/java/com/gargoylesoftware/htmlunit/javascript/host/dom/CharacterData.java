@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOM_CDATA_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -47,7 +47,7 @@ public class CharacterData extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public CharacterData() {
     }
 
@@ -159,7 +159,7 @@ public class CharacterData extends Node {
      * Returns the next element sibling.
      * @return the next element sibling
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
@@ -172,7 +172,7 @@ public class CharacterData extends Node {
      * Returns the previous element sibling.
      * @return the previous element sibling
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
@@ -185,7 +185,7 @@ public class CharacterData extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public void remove() {
         super.remove();
     }
@@ -198,7 +198,7 @@ public class CharacterData extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.before(context, thisObj, args, function);
@@ -212,7 +212,7 @@ public class CharacterData extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public static void after(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.after(context, thisObj, args, function);
@@ -225,7 +225,7 @@ public class CharacterData extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.replaceWith(context, thisObj, args, function);

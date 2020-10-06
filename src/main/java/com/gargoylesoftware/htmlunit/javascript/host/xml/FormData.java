@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -160,7 +160,7 @@ public class FormData extends SimpleScriptable {
      * Removes the entry (if exists).
      * @param name the name of the field to remove
      */
-    @JsxFunction(functionName = "delete", value = {CHROME, EDGE, FF, FF68})
+    @JsxFunction(functionName = "delete", value = {CHROME, EDGE, FF, FF78})
     public void delete_js(final String name) {
         if (StringUtils.isEmpty(name)) {
             return;
@@ -179,7 +179,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public String get(final String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
@@ -199,7 +199,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the values found for the give name
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public Scriptable getAll(final String name) {
         if (StringUtils.isEmpty(name)) {
             return Context.getCurrentContext().newArray(this, 0);
@@ -222,7 +222,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return true if the name exists
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public boolean has(final String name) {
         if (StringUtils.isEmpty(name)) {
             return false;
@@ -245,7 +245,7 @@ public class FormData extends SimpleScriptable {
      * @param value the field's value
      * @param filename the filename reported to the server (optional)
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public void set(final String name, final Object value, final Object filename) {
         if (StringUtils.isEmpty(name)) {
             return;
@@ -287,7 +287,7 @@ public class FormData extends SimpleScriptable {
     /**
      * @return An Iterator that contains all the requestParameters name[0] and value[1]
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public Scriptable entries() {
         if (getBrowserVersion().hasFeature(JS_FORM_DATA_ITERATOR_SIMPLE_NAME)) {
             return new FormDataIterator(this, "Iterator", requestParameters_);

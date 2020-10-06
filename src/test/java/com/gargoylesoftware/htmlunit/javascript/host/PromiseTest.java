@@ -111,7 +111,7 @@ public class PromiseTest extends WebDriverTestCase {
                        "function () {\n    [native code]\n}",
                        "[object Window]",
                        "done", "resolved value"},
-            FF68 = { "function () {\n    [native code]\n}",
+            FF78 = { "function () {\n    [native code]\n}",
                         "function () {\n    [native code]\n}",
                         "[object Window]",
                         "done", "resolved value"},

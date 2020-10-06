@@ -470,7 +470,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
                 + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,spellcheck,style,tabIndex,title",
-            FF68 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,draggable,"
+            FF78 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,"
                 + "offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onauxclick,onblur,"
@@ -527,7 +527,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
                 + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
-            FF68 = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,isContentEditable,"
+            FF78 = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,isContentEditable,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onblur,oncanplay,"
                 + "oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"
@@ -637,7 +637,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),"
                 + "setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector()",
-            FF68 = "animate(),append(),attachShadow(),attributes,childElementCount,children,classList,className,"
+            FF78 = "animate(),append(),attachShadow(),attributes,childElementCount,children,classList,className,"
                 + "clientHeight,clientLeft,clientTop,clientWidth,closest(),firstElementChild,getAttribute(),"
                 + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
@@ -683,7 +683,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "querySelector(),querySelectorAll(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
-            FF68 = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
+            FF78 = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
@@ -789,7 +789,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollTo(),scrollTop,scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),shadowRoot,slot,tagName,"
                 + "toggleAttribute(),webkitMatchesSelector()",
-            FF68 = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,clientHeight,"
+            FF78 = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,clientHeight,"
                 + "clientLeft,clientTop,clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
@@ -835,7 +835,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "previousElementSibling,remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceWith(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
                 + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
-            FF68 = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
+            FF78 = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
                 + "getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),"
@@ -898,7 +898,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,"
                 + "type",
-            FF68 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
                 + "composedPath(),CONTROL_MASK,currentTarget,"
                 + "defaultPrevented,eventPhase,explicitOriginalTarget,initEvent(),isTrusted,"
                 + "META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
@@ -915,7 +915,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
                 + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF68 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type",
@@ -1052,7 +1052,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollMaxY,scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),setResizable(),setTimeout(),"
                 + "sidebar,sizeToContent(),sortFunction(),speechSynthesis,status,statusbar,stop(),test(),toolbar,"
                 + "top,u2f,updateCommands(),window"},
-            FF68 = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
+            FF78 = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),"
                 + "createImageBitmap(),crypto,customElements,devicePixelRatio,dispatchEvent(),document,dump(),"
                 + "event,external,fetch(),find(),focus(),frameElement,frames,fullScreen,getComputedStyle(),"
@@ -1165,7 +1165,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "screen,scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),sortFunction(),speechSynthesis,status,stop(),styleMedia,"
                 + "TEMPORARY,test(),top,window"},
-            FF68 = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
+            FF78 = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
@@ -1315,7 +1315,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target")
     @HtmlUnitNYI(CHROME = "alt,coords,rel,relList",
             EDGE = "alt,coords,rel,relList",
-            FF68 = "alt,coords,rel,relList",
+            FF78 = "alt,coords,rel,relList",
             FF = "alt,coords,rel,relList",
             IE = "alt,coords,rel")
     public void area() throws Exception {
@@ -1377,7 +1377,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "mozPreservesPitch,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,"
                 + "onencrypted,onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,readyState,seekable,"
                 + "seeking,seekToNextFrame(),setMediaKeys(),src,srcObject,textTracks,volume",
-            FF68 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+            FF78 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,mozAudioCaptured,"
                 + "mozCaptureStream(),mozCaptureStreamUntilEnded(),mozFragmentEnd,mozGetMetadata(),mozPreservesPitch,"
@@ -1397,7 +1397,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "HAVE_NOTHING,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
             EDGE = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
                 + "HAVE_NOTHING,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
-            FF68 = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+            FF78 = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
                 + "NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
             FF = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
                 + "NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
@@ -1522,7 +1522,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onlanguagechange,onmessage,onmessageerror,"
                 + "onoffline,ononline,onpagehide,onpageshow,onpopstate,onrejectionhandled,"
                 + "onstorage,onunhandledrejection,onunload,text,vLink",
-            FF68 = "aLink,background,bgColor,link,onafterprint,onbeforeprint,onbeforeunload,onhashchange,"
+            FF78 = "aLink,background,bgColor,link,onafterprint,onbeforeprint,onbeforeunload,onhashchange,"
                 + "onlanguagechange,onmessage,onmessageerror,"
                 + "onoffline,ononline,onpagehide,onpageshow,onpopstate,onstorage,onunload,text,"
                 + "vLink",
@@ -1575,7 +1575,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
                 + "formTarget,labels,name,reportValidity(),setCustomValidity(),type,validationMessage,validity,"
                 + "value,willValidate",
-            FF68 = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
+            FF78 = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
                 + "formTarget,labels,name,reportValidity(),setCustomValidity(),type,validationMessage,validity,"
                 + "value,willValidate",
             IE = "autofocus,checkValidity(),createTextRange(),form,formAction,formEnctype,formMethod,"
@@ -1583,7 +1583,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,labels,name,type,value",
             EDGE = "checkValidity(),disabled,form,labels,name,type,value",
-            FF68 = "checkValidity(),disabled,form,labels,name,type,value",
+            FF78 = "checkValidity(),disabled,form,labels,name,type,value",
             FF = "checkValidity(),disabled,form,labels,name,type,value",
             IE = "checkValidity(),createTextRange(),form,name,type,value")
     public void button() throws Exception {
@@ -1602,12 +1602,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     + "toDataURL(),transferControlToOffscreen(),width",
             FF = "captureStream(),getContext(),height,"
                     + "mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
-            FF68 = "captureStream(),getContext(),height,"
+            FF78 = "captureStream(),getContext(),height,"
                     + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             IE = "getContext(),height,msToBlob(),toDataURL(),width")
     @HtmlUnitNYI(CHROME = "getContext(),height,toDataURL(),width",
             EDGE = "getContext(),height,toDataURL(),width",
-            FF68 = "getContext(),height,toDataURL(),width",
+            FF78 = "getContext(),height,toDataURL(),width",
             FF = "getContext(),height,toDataURL(),width",
             IE = "getContext(),height,toDataURL(),width")
     public void canvas() throws Exception {
@@ -1805,7 +1805,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width")
     @HtmlUnitNYI(CHROME = "align,height,name,width",
             EDGE = "align,height,name,width",
-            FF68 = "align,height,name,width",
+            FF78 = "align,height,name,width",
             FF = "align,height,name,width",
             IE = "height,name,width")
     public void embed() throws Exception {
@@ -1835,7 +1835,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate")
     @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name",
             EDGE = "checkValidity(),disabled,form,name",
-            FF68 = "checkValidity(),disabled,form,name",
+            FF78 = "checkValidity(),disabled,form,name",
             FF = "checkValidity(),disabled,form,name",
             IE = "align,checkValidity(),form")
     public void fieldset() throws Exception {
@@ -1890,7 +1890,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reportValidity(),requestSubmit(),reset(),submit(),"
                 + "target",
-            FF68 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
+            FF78 = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reportValidity(),reset(),submit(),"
                 + "target",
             IE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
@@ -1900,7 +1900,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     + "requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
                     + "requestSubmit(),reset(),submit(),target",
-            FF68 = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
+            FF78 = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
             FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
                     + "requestSubmit(),reset(),submit(),target",
             IE = "action,checkValidity(),elements,encoding,enctype,item(),length,method,name,reset(),submit(),target")
@@ -1933,7 +1933,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width")
     @HtmlUnitNYI(CHROME = "contentDocument,contentWindow,name,src",
             EDGE = "contentDocument,contentWindow,name,src",
-            FF68 = "contentDocument,contentWindow,name,src",
+            FF78 = "contentDocument,contentWindow,name,src",
             FF = "contentDocument,contentWindow,name,src",
             IE = "border,contentDocument,contentWindow,name,src")
     public void frame() throws Exception {
@@ -1958,7 +1958,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmessageerror,onoffline,ononline,"
                 + "onpagehide,onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,"
                 + "onunload,rows",
-            FF68 = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
+            FF78 = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
                 + "onmessageerror,onoffline,ononline,"
                 + "onpagehide,onpageshow,onpopstate,onstorage,onunload,"
                 + "rows",
@@ -2076,7 +2076,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("align,color,noShade,size,width")
     @HtmlUnitNYI(CHROME = "align,color,width",
             EDGE = "align,color,width",
-            FF68 = "align,color,width",
+            FF78 = "align,color,width",
             FF = "align,color,width",
             IE = "align,color,width")
     public void hr() throws Exception {
@@ -2113,7 +2113,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "align,allow,allowFullscreen,allowPaymentRequest,contentDocument,contentWindow,frameBorder,"
                 + "getSVGDocument(),height,longDesc,marginHeight,marginWidth,name,referrerPolicy,"
                 + "sandbox,scrolling,src,srcdoc,width",
-            FF68 = "align,allowFullscreen,allowPaymentRequest,contentDocument,contentWindow,frameBorder,"
+            FF78 = "align,allowFullscreen,allowPaymentRequest,contentDocument,contentWindow,frameBorder,"
                 + "getSVGDocument(),height,longDesc,marginHeight,marginWidth,name,referrerPolicy,"
                 + "sandbox,scrolling,src,srcdoc,width",
             IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
@@ -2121,7 +2121,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width")
     @HtmlUnitNYI(CHROME = "align,contentDocument,contentWindow,height,name,src,width",
             EDGE = "align,contentDocument,contentWindow,height,name,src,width",
-            FF68 = "align,contentDocument,contentWindow,height,name,src,width",
+            FF78 = "align,contentDocument,contentWindow,height,name,src,width",
             FF = "align,contentDocument,contentWindow,height,name,src,width",
             IE = "align,border,contentDocument,contentWindow,height,name,src,width")
     public void iframe() throws Exception {
@@ -2157,7 +2157,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,loading,"
                 + "longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
                 + "useMap,vspace,width,x,y",
-            FF68 = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,"
+            FF78 = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,"
                 + "longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
                 + "useMap,vspace,width,x,y",
             IE = "align,alt,border,complete,crossOrigin,dynsrc,fileCreatedDate,fileModifiedDate,fileUpdatedDate,"
@@ -2167,7 +2167,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width")
     @HtmlUnitNYI(CHROME = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
             EDGE = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
-            FF68 = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
+            FF78 = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
             FF = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width",
             IE = "align,alt,border,complete,height,name,naturalHeight,naturalWidth,src,width")
     public void img() throws Exception {
@@ -2304,7 +2304,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("type,value")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "-")
     public void li() throws Exception {
@@ -2325,12 +2325,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             FF = "as,charset,crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
-            FF68 = "as,charset,crossOrigin,disabled,href,hreflang,integrity,"
+            FF78 = "as,charset,crossOrigin,disabled,href,hreflang,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             IE = "charset,href,hreflang,media,rel,rev,sheet,target,type")
     @HtmlUnitNYI(CHROME = "disabled,href,rel,relList,rev,type",
             EDGE = "disabled,href,rel,relList,rev,type",
-            FF68 = "disabled,href,rel,relList,rev,type",
+            FF78 = "disabled,href,rel,relList,rev,type",
             FF = "disabled,href,rel,relList,rev,type",
             IE = "href,rel,rev,type")
     public void link() throws Exception {
@@ -2382,13 +2382,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "vspace,width",
             FF = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
                 + "scrollDelay,start(),stop(),trueSpeed,vspace,width",
-            FF68 = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
+            FF78 = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
                 + "scrollDelay,start(),stop(),trueSpeed,vspace,width",
             IE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,width")
     @HtmlUnitNYI(CHROME = "bgColor,height,width",
             EDGE = "bgColor,height,width",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "bgColor,height,width")
     public void marquee() throws Exception {
@@ -2403,7 +2403,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "compact",
             FF = "compact,label,type",
-            FF68 = "compact,label,type",
+            FF78 = "compact,label,type",
             IE = "compact,type")
     public void menu() throws Exception {
         test("menu");
@@ -2417,8 +2417,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-",
             FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
-            FF68 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
-    @HtmlUnitNYI(FF68 = "-",
+            FF78 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
+    @HtmlUnitNYI(FF78 = "-",
             FF = "-")
     public void menuitem() throws Exception {
         test("menuitem");
@@ -2556,7 +2556,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate",
-            FF68 = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
+            FF78 = "align,archive,border,checkValidity(),code,codeBase,codeType,contentDocument,contentWindow,data,"
                 + "declare,form,getSVGDocument(),height,hspace,name,reportValidity(),setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate",
             IE = "align,alt,altHtml,archive,BaseHref,border,checkValidity(),classid,code,codeBase,codeType,"
@@ -2565,7 +2565,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
     @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,width",
             EDGE = "align,border,checkValidity(),form,height,name,width",
-            FF68 = "align,border,checkValidity(),form,height,name,width",
+            FF78 = "align,border,checkValidity(),form,height,name,width",
             FF = "align,border,checkValidity(),form,height,name,width",
             IE = "align,alt,border,checkValidity(),classid,form,height,name,width")
     public void object() throws Exception {
@@ -2582,7 +2582,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "compact,start,type")
     @HtmlUnitNYI(CHROME = "compact,type",
             EDGE = "compact,type",
-            FF68 = "compact,type",
+            FF78 = "compact,type",
             FF = "compact,type",
             IE = "compact,type")
     public void ol() throws Exception {
@@ -2626,7 +2626,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "-")
     @HtmlUnitNYI(CHROME = "checkValidity(),labels,name",
             EDGE = "checkValidity(),labels,name",
-            FF68 = "checkValidity(),labels,name",
+            FF78 = "checkValidity(),labels,name",
             FF = "checkValidity(),labels,name")
     public void output() throws Exception {
         test("output");
@@ -2689,7 +2689,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "form,max,position,value")
     @HtmlUnitNYI(CHROME = "labels,max,value",
             EDGE = "labels,max,value",
-            FF68 = "labels,max,value",
+            FF78 = "labels,max,value",
             FF = "labels,max,value",
             IE = "max,value")
     public void progress() throws Exception {
@@ -2771,12 +2771,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "integrity,noModule,referrerPolicy,src,text,type",
             FF = "async,charset,crossOrigin,defer,event,htmlFor,"
                 + "integrity,noModule,referrerPolicy,src,text,type",
-            FF68 = "async,charset,crossOrigin,defer,event,htmlFor,"
+            FF78 = "async,charset,crossOrigin,defer,event,htmlFor,"
                 + "integrity,noModule,referrerPolicy,src,text,type",
             IE = "async,charset,crossOrigin,defer,event,htmlFor,src,text,type")
     @HtmlUnitNYI(CHROME = "async,src,text,type",
             EDGE = "async,src,text,type",
-            FF68 = "async,src,text,type",
+            FF78 = "async,src,text,type",
             FF = "async,src,text,type",
             IE = "async,onreadystatechange,readyState,src,text,type")
     public void script() throws Exception {
@@ -2814,7 +2814,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "namedItem(),options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),"
                 + "size,type,validationMessage,validity,value,"
                 + "willValidate",
-            FF68 = "add(),autocomplete,autofocus,checkValidity(),disabled,form,item(),labels,length,multiple,name,"
+            FF78 = "add(),autocomplete,autofocus,checkValidity(),disabled,form,item(),labels,length,multiple,name,"
                 + "namedItem(),options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),"
                 + "size,type,validationMessage,validity,value,"
                 + "willValidate",
@@ -2825,7 +2825,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "required,selectedIndex,size,type,value",
             EDGE = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
                 + "required,selectedIndex,size,type,value",
-            FF68 = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
+            FF78 = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
                 + "required,selectedIndex,size,type,value",
             FF = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
                 + "required,selectedIndex,size,type,value",
@@ -2857,7 +2857,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "media,msKeySystem,src,type")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "-")
     public void source() throws Exception {
@@ -2978,7 +2978,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
                     + "createTFoot(),createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),"
                     + "rows,rules,summary,tBodies,tFoot,tHead,width",
-            FF68 = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
+            FF78 = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
                 + "createTFoot(),createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),"
                 + "rows,rules,summary,tBodies,tFoot,tHead,width",
             FF = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
@@ -3097,7 +3097,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "readOnly,reportValidity(),required,rows,select(),selectionDirection,selectionEnd,"
                 + "selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),"
                 + "textLength,type,validationMessage,validity,value,willValidate,wrap",
-            FF68 = "autocomplete,autofocus,checkValidity(),cols,defaultValue,disabled,form,"
+            FF78 = "autocomplete,autofocus,checkValidity(),cols,defaultValue,disabled,form,"
                 + "labels,maxLength,minLength,name,placeholder,"
                 + "readOnly,reportValidity(),required,rows,select(),selectionDirection,selectionEnd,"
                 + "selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),"
@@ -3112,7 +3112,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
                 + "textLength,type,value",
-            FF68 = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
+            FF78 = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
                 + "readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
                 + "textLength,type,value",
             FF = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
@@ -3192,7 +3192,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track")
     @HtmlUnitNYI(CHROME = "ERROR,LOADED,LOADING,NONE",
             EDGE = "ERROR,LOADED,LOADING,NONE",
-            FF68 = "ERROR,LOADED,LOADING,NONE",
+            FF78 = "ERROR,LOADED,LOADING,NONE",
             FF = "ERROR,LOADED,LOADING,NONE",
             IE = "ERROR,LOADED,LOADING,NONE")
     public void track() throws Exception {
@@ -3281,7 +3281,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_NO_SOURCE,networkState,onencrypted,onwaitingforkey,pause(),paused,play(),playbackRate,"
                 + "played,poster,preload,readyState,seekable,seeking,seekToNextFrame(),setMediaKeys(),src,"
                 + "srcObject,textTracks,videoHeight,videoWidth,volume,width",
-            FF68 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
+            FF78 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),getVideoPlaybackQuality(),"
                 + "HAVE_CURRENT_DATA,"
                 + "HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,"
@@ -3311,7 +3311,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
                 + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
                 + "play(),width",
-            FF68 = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
+            FF78 = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
                 + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
                 + "play(),width",
             FF = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
@@ -3376,7 +3376,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "selectionEnd,selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),size,"
                 + "src,step,stepDown(),stepUp(),textLength,type,useMap,validationMessage,validity,value,"
                 + "valueAsDate,valueAsNumber,webkitdirectory,webkitEntries,width,willValidate",
-            FF68 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+            FF78 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "indeterminate,labels,list,max,maxLength,min,minLength,mozIsTextField(),multiple,name,"
                 + "pattern,placeholder,readOnly,reportValidity(),required,"
@@ -3398,7 +3398,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,"
                 + "required,select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,type,value,"
                 + "width",
-            FF68 = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
+            FF78 = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
                 + "files,form,height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,required,"
                 + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,textLength,type,value,width",
             FF = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
@@ -3513,7 +3513,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,DOM_VK_Y,"
                 + "DOM_VK_Z,DOM_VK_ZOOM,getModifierState(),initKeyboardEvent(),initKeyEvent(),isComposing,"
                 + "key,keyCode,location,metaKey,repeat,shiftKey"},
-            FF68 = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
+            FF78 = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,"
                 + "DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,"
                 + "DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,"
@@ -3555,7 +3555,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
             EDGE = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
-            FF68 = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
+            FF78 = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
                 + "DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,"
                 + "DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,"
                 + "DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,"
@@ -3636,12 +3636,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "detail,initUIEvent(),sourceCapabilities,view,which",
             FF = "detail,initUIEvent(),layerX,layerY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
-            FF68 = "detail,initUIEvent(),layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
+            FF78 = "detail,initUIEvent(),layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
             IE = "detail,deviceSessionId,initUIEvent(),view")
     @HtmlUnitNYI(CHROME = "detail,initUIEvent(),view",
             EDGE = "detail,initUIEvent(),view",
-            FF68 = "detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+            FF78 = "detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
             FF = "detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
             IE = "detail,initUIEvent(),view")
     public void uiEvent() throws Exception {
@@ -3657,11 +3657,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "dataTransfer",
             EDGE = "dataTransfer",
             FF = "dataTransfer,initDragEvent()",
-            FF68 = "dataTransfer,initDragEvent()",
+            FF78 = "dataTransfer,initDragEvent()",
             IE = "dataTransfer,initDragEvent(),msConvertURL()")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "-")
     public void dragEvent() throws Exception {
@@ -3682,12 +3682,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             FF = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
-            FF68 = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+            FF78 = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "height,isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width",
             EDGE = "height,isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width",
-            FF68 = "height,isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width",
+            FF78 = "height,isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width",
             FF = "height,isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width")
     public void pointerEvent() throws Exception {
         testString("new PointerEvent('click'), document.createEvent('MouseEvent')");
@@ -3702,7 +3702,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF68 = "exception",
+            FF78 = "exception",
             IE = "height,hwTimestamp,initPointerEvent(),isPrimary,pointerId,"
                 + "pointerType,pressure,rotation,tiltX,tiltY,width")
     @HtmlUnitNYI(IE = "height,initPointerEvent(),isPrimary,pointerId,pointerType,pressure,tiltX,tiltY,width")
@@ -3721,7 +3721,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
                 + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
             FF = "exception",
-            FF68 = "exception",
+            FF78 = "exception",
             IE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,initWheelEvent()")
     @HtmlUnitNYI(CHROME = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL",
             EDGE = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL",
@@ -3747,7 +3747,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
                 + "mozInputSource,mozPressure,offsetX,offsetY,pageX,pageY,region,relatedTarget,"
                 + "screenX,screenY,shiftKey,x,y",
-            FF68 = "altKey,button,buttons,clientX,clientY,ctrlKey,getModifierState(),initMouseEvent(),"
+            FF78 = "altKey,button,buttons,clientX,clientY,ctrlKey,getModifierState(),initMouseEvent(),"
                 + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
                 + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
                 + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey,x,y",
@@ -3758,7 +3758,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "screenX,screenY,shiftKey,which",
             EDGE = "altKey,button,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,pageX,pageY,"
                 + "screenX,screenY,shiftKey,which",
-            FF68 = "altKey,button,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
+            FF78 = "altKey,button,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
                 + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
                 + "MOZ_SOURCE_UNKNOWN,pageX,pageY,screenX,screenY,shiftKey,which",
             FF = "altKey,button,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
@@ -3779,11 +3779,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "data,initCompositionEvent()",
             EDGE = "data,initCompositionEvent()",
             FF = "data,initCompositionEvent(),locale",
-            FF68 = "data,initCompositionEvent(),locale",
+            FF78 = "data,initCompositionEvent(),locale",
             IE = "data,initCompositionEvent(),locale")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "-")
     public void compositionEvent() throws Exception {
@@ -3799,11 +3799,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "relatedTarget",
             EDGE = "relatedTarget",
             FF = "relatedTarget",
-            FF68 = "relatedTarget",
+            FF78 = "relatedTarget",
             IE = "initFocusEvent(),relatedTarget")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "-")
     public void focusEvent() throws Exception {
@@ -3819,11 +3819,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "data,dataTransfer,getTargetRanges(),inputType,isComposing",
             EDGE = "data,dataTransfer,getTargetRanges(),inputType,isComposing",
             FF = "data,dataTransfer,inputType,isComposing",
-            FF68 = "data,dataTransfer,inputType,isComposing",
+            FF78 = "data,dataTransfer,inputType,isComposing",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-")
     public void inputEvent() throws Exception {
         testString("new InputEvent('input'), document.createEvent('UIEvent')");
@@ -3838,7 +3838,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF68 = "exception",
+            FF78 = "exception",
             IE = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),initMouseEvent(),"
                 + "initMouseWheelEvent(),layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,"
                 + "screenX,screenY,shiftKey,toElement,wheelDelta,which,x,y")
@@ -3867,14 +3867,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "data,initTextEvent()",
             EDGE = "data,initTextEvent()",
             FF = "data,initCompositionEvent(),locale",
-            FF68 = "data,initCompositionEvent(),locale",
+            FF78 = "data,initCompositionEvent(),locale",
             IE = "data,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
                 + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
                 + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,"
                 + "DOM_INPUT_METHOD_VOICE,initTextEvent(),inputMethod,locale")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-",
             IE = "DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
                 + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
@@ -3893,7 +3893,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "altKey,changedTouches,ctrlKey,metaKey,shiftKey,targetTouches,touches",
             EDGE = "altKey,changedTouches,ctrlKey,metaKey,shiftKey,targetTouches,touches",
             FF = "exception",
-            FF68 = "exception",
+            FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "-", EDGE = "-")
     public void touchEvent2() throws Exception {
@@ -3909,11 +3909,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "assignedElements(),assignedNodes(),name",
             EDGE = "assignedElements(),assignedNodes(),name",
             FF = "assignedElements(),assignedNodes(),name",
-            FF68 = "assignedElements(),assignedNodes(),name",
+            FF78 = "assignedElements(),assignedNodes(),name",
             IE = "-")
     @HtmlUnitNYI(CHROME = "-",
             EDGE = "-",
-            FF68 = "-",
+            FF78 = "-",
             FF = "-")
     public void slot() throws Exception {
         test("slot");
@@ -3926,14 +3926,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-",
-            FF68 = "alinkColor,all,bgColor,captureEvents(),clear(),close(),designMode,domain,execCommand(),fgColor,"
+            FF78 = "alinkColor,all,bgColor,captureEvents(),clear(),close(),designMode,domain,execCommand(),fgColor,"
                 + "linkColor,open(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),"
                 + "queryCommandSupported(),queryCommandValue(),releaseEvents(),vlinkColor,write(),writeln()")
     @HtmlUnitNYI(CHROME = "alinkColor,all,bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
             EDGE = "alinkColor,all,bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF68 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+            FF78 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
@@ -4069,7 +4069,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestStorageAccess(),"
                 + "rootElement,scripts,scrollingElement,selectedStyleSheetSet,styleSheets,styleSheetSets,"
                 + "timeline,title,URL,visibilityState,vlinkColor,write(),writeln()"},
-            FF68 = {"activeElement,adoptNode(),anchors,append(),applets,async,body,caretPositionFromPoint(),"
+            FF78 = {"activeElement,adoptNode(),anchors,append(),applets,async,body,caretPositionFromPoint(),"
                 + "characterSet,charset,childElementCount,children,compatMode,contentType,cookie,createAttribute(),"
                 + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createExpression(),createNodeIterator(),"
@@ -4178,7 +4178,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 "onwebkitfullscreenerror,onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF68 = "activeElement,adoptNode(),async,characterSet,charset,childElementCount,children,compatMode,"
+            FF78 = "activeElement,adoptNode(),async,characterSet,charset,childElementCount,children,compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
@@ -4292,7 +4292,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
                 + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,ownerSVGElement,style,tabIndex,viewportElement",
-            FF68 = "blur(),dataset,focus(),onabort,onanimationcancel,onanimationend,onanimationiteration,"
+            FF78 = "blur(),dataset,focus(),onabort,onanimationcancel,onanimationend,onanimationiteration,"
                 + "onanimationstart,onauxclick,onblur,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragexit,"
                 + "ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,"
@@ -4324,7 +4324,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
                 + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style",
-            FF68 = "onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,"
+            FF78 = "onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
                 + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
                 + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
@@ -4376,7 +4376,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,ownerElement,parentElement,parentNode,"
                 + "prefix,previousSibling,PROCESSING_INSTRUCTION_NODE,removeChild(),replaceChild(),specified,"
                 + "TEXT_NODE,textContent,value",
-            FF68 = "appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childNodes,cloneNode(),COMMENT_NODE,"
+            FF78 = "appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childNodes,cloneNode(),COMMENT_NODE,"
                 + "compareDocumentPosition(),contains(),DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,"
                 + "DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,DOCUMENT_POSITION_DISCONNECTED,"
                 + "DOCUMENT_POSITION_FOLLOWING,DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,"
@@ -4414,7 +4414,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "nodeValue,normalize(),NOTATION_NODE,ownerDocument,ownerElement,parentElement,parentNode,prefix,"
                 + "previousSibling,PROCESSING_INSTRUCTION_NODE,removeChild(),replaceChild(),specified,TEXT_NODE,"
                 + "textContent,value",
-            FF68 = "appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childNodes,cloneNode(),COMMENT_NODE,"
+            FF78 = "appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childNodes,cloneNode(),COMMENT_NODE,"
                 + "compareDocumentPosition(),contains(),DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,"
                 + "DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
                 + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
@@ -4463,7 +4463,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "extractContents(),getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),"
                 + "selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),"
                 + "setStartBefore(),START_TO_END,START_TO_START,startContainer,startOffset,surroundContents()",
-            FF68 = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+            FF78 = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
                 + "compareBoundaryPoints(),comparePoint(),createContextualFragment(),deleteContents(),detach(),"
                 + "END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),getBoundingClientRect(),"
                 + "getClientRects(),insertNode(),intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),"
@@ -4487,7 +4487,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "insertNode(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),"
                 + "setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,startContainer,startOffset,"
                 + "surroundContents()",
-            FF68 = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,compareBoundaryPoints(),"
+            FF78 = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,compareBoundaryPoints(),"
                 + "createContextualFragment(),deleteContents(),detach(),END_TO_END,END_TO_START,endContainer,"
                 + "endOffset,extractContents(),getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),"
                 + "selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),"
@@ -4538,7 +4538,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,parentElement,parentNode,prepend(),"
                 + "previousSibling,PROCESSING_INSTRUCTION_NODE,querySelector(),querySelectorAll(),removeChild(),"
                 + "replaceChild(),replaceChildren(),TEXT_NODE,textContent",
-            FF68 = "append(),appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childElementCount,childNodes,"
+            FF78 = "append(),appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childElementCount,childNodes,"
                 + "children,cloneNode(),COMMENT_NODE,compareDocumentPosition(),contains(),DOCUMENT_FRAGMENT_NODE,"
                 + "DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
                 + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
@@ -4579,7 +4579,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "lastElementChild,nextSibling,nodeName,nodeType,nodeValue,normalize(),NOTATION_NODE,ownerDocument,"
                 + "parentElement,parentNode,previousSibling,PROCESSING_INSTRUCTION_NODE,querySelector(),"
                 + "querySelectorAll(),removeChild(),replaceChild(),TEXT_NODE,textContent",
-            FF68 = "appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childElementCount,childNodes,"
+            FF78 = "appendChild(),ATTRIBUTE_NODE,baseURI,CDATA_SECTION_NODE,childElementCount,childNodes,"
                 + "children,cloneNode(),COMMENT_NODE,compareDocumentPosition(),contains(),DOCUMENT_FRAGMENT_NODE,"
                 + "DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
                 + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"

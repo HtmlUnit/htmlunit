@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -229,7 +229,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = {"text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined"},
             CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             EDGE = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF68, IE})
+    @NotYetImplemented({FF, FF78, IE})
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1808,7 +1808,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
             IE = {"Old = Old \ninnerText", "New = New cell value"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2161,7 +2161,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 "f1", "body", "h1", "i1", "td", "exception", "td", "body", "body"},
             FF = {"null", "body", "body", "body", "body", "body",
                     "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"},
-            FF68 = {"null", "body", "body", "body", "body", "body",
+            FF78 = {"null", "body", "body", "body", "body", "body",
                     "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"})
     public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
@@ -2754,7 +2754,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             FF = "page2 loaded",
-            FF68 = "page2 loaded")
+            FF78 = "page2 loaded")
     public void dispatchEvent_submitOnForm() throws Exception {
         final String html = "<html>\n"
             + "<head><title>page 1</title></head>\n"
@@ -4759,7 +4759,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     + "mouseup--body\nmouseup--undefined",
             FF = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
                     + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined",
-            FF68 = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+            FF78 = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
                     + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined")
     @NotYetImplemented
     public void clickAnElementThatDisappears() throws Exception {

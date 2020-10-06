@@ -95,8 +95,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.EDGE) {
                     expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
-                    expectedAlerts = firstDefined(alerts.FF68(), alerts.DEFAULT());
+                else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                    expectedAlerts = firstDefined(alerts.FF78(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX) {
                     expectedAlerts = firstDefined(alerts.FF(), alerts.DEFAULT());
@@ -122,9 +122,9 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.EDGE(), buggyWebDriver.DEFAULT());
                     }
-                    else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
+                    else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
-                                            buggyWebDriver.FF68(), buggyWebDriver.DEFAULT());
+                                            buggyWebDriver.FF78(), buggyWebDriver.DEFAULT());
                     }
                     else if (browserVersion_ == BrowserVersion.FIREFOX) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
@@ -146,8 +146,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.EDGE) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
-                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF68());
+                else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF78());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF());
@@ -175,8 +175,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.EDGE) {
                     expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
-                    expectedAlerts = firstDefined(alerts.FF68(), alerts.DEFAULT());
+                else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                    expectedAlerts = firstDefined(alerts.FF78(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX) {
                     expectedAlerts = firstDefined(alerts.FF(), alerts.DEFAULT());
@@ -335,8 +335,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     }
                     break;
 
-                case FF68:
-                    if (browserVersion_ == BrowserVersion.FIREFOX_68) {
+                case FF78:
+                    if (browserVersion_ == BrowserVersion.FIREFOX_78) {
                         return true;
                     }
                     break;

@@ -127,7 +127,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "none"},
-            FF68 = {"", "none"},
+            FF78 = {"", "none"},
             IE = {"inline", "inline"})
     public void area() throws Exception {
         test("area");
@@ -189,7 +189,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "none"},
-            FF68 = {"", "none"},
+            FF78 = {"", "none"},
             IE = {"inline", "inline"})
     public void base() throws Exception {
         test("base");
@@ -203,7 +203,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "none"},
-            FF68 = {"", "none"},
+            FF78 = {"", "none"},
             IE = {"inline", "inline"})
     public void basefont() throws Exception {
         test("basefont");
@@ -420,7 +420,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF68 = {"", "inline"},
+            FF78 = {"", "inline"},
             IE = {"block", "block"})
     @AlertsStandards(DEFAULT = {"", "block"},
             IE = {"block", "block"})
@@ -616,7 +616,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "block"},
             FF = {"", "inline"},
-            FF68 = {"", "inline"},
+            FF78 = {"", "inline"},
             IE = {"block", "block"})
     public void frame() throws Exception {
         test("frame");
@@ -880,7 +880,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "block"},
             FF = {"", "inline"},
-            FF68 = {"", "inline"},
+            FF78 = {"", "inline"},
             IE = {"inline", "inline"})
     public void layer() throws Exception {
         test("layer");
@@ -1038,7 +1038,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "block"},
-            FF68 = {"", "block"},
+            FF78 = {"", "block"},
             IE = {"inline", "inline"})
     public void multicol() throws Exception {
         test("multicol");
@@ -1088,7 +1088,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "none"},
-            FF68 = {"", "none"},
+            FF78 = {"", "none"},
             IE = {"none", "none"})
     public void noembed() throws Exception {
         test("noembed");
@@ -1272,7 +1272,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "ruby-text"},
-            FF68 = {"", "ruby-text"},
+            FF78 = {"", "ruby-text"},
             IE = {"ruby-text", "ruby-text"})
     public void rt() throws Exception {
         test("rt");
@@ -1286,7 +1286,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "ruby"},
-            FF68 = {"", "ruby"},
+            FF78 = {"", "ruby"},
             IE = {"ruby", "ruby"})
     public void ruby() throws Exception {
         test("ruby");
@@ -1564,7 +1564,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
             FF = {"", "inline"},
-            FF68 = {"", "inline"},
+            FF78 = {"", "inline"},
             IE = {"inline-block", "inline-block"})
     public void textarea() throws Exception {
         test("textarea");
@@ -1721,7 +1721,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF68 = {"", "inline"},
+            FF78 = {"", "inline"},
             IE = {"inline-block", "inline-block"})
     public void input() throws Exception {
         test("input");

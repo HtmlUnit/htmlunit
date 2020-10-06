@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -37,7 +37,7 @@ public class HTMLEmbedElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLEmbedElement() {
     }
 
@@ -45,7 +45,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Returns the value of the {@code align} property.
      * @return the value of the {@code align} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getAlign() {
         return getAlign(true);
     }
@@ -54,7 +54,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * Sets the value of the {@code align} property.
      * @param align the value of the {@code align} property
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setAlign(final String align) {
         setAlign(align, false);
     }

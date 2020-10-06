@@ -54,7 +54,7 @@ public class DateTimeFormat extends SimpleScriptable {
     private static ConcurrentHashMap<String, String> CHROME_FORMATS_ = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, String> FF_68_FORMATS_ = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, String> FF_78_FORMATS_ = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> IE_FORMATS_ = new ConcurrentHashMap<>();
 
     private transient DateTimeFormatHelper formatter_;
@@ -161,8 +161,8 @@ public class DateTimeFormat extends SimpleScriptable {
         FF_FORMATS_.put("da", ddDot);
         FF_FORMATS_.put("ja-JP-u-ca-japanese", "'H'yy/MM/dd");
 
-        FF_68_FORMATS_.putAll(commonFormats);
-        FF_68_FORMATS_.put("da", ddDot);
+        FF_78_FORMATS_.putAll(commonFormats);
+        FF_78_FORMATS_.put("da", ddDot);
 
         CHROME_FORMATS_.put("be", mmSlash);
         CHROME_FORMATS_.put("da", ddDot);
@@ -280,7 +280,7 @@ public class DateTimeFormat extends SimpleScriptable {
             formats = IE_FORMATS_;
         }
         else if (browserVersion.isFirefox68()) {
-            formats = FF_68_FORMATS_;
+            formats = FF_78_FORMATS_;
         }
         else {
             formats = FF_FORMATS_;

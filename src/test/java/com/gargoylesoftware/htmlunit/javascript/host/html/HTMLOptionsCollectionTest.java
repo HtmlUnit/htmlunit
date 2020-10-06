@@ -956,7 +956,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "1", "One", "3", "One", "Two", "Three"},
             FF = {"exception", "exception", "exception"},
-            FF68 = {"exception", "exception", "exception"},
+            FF78 = {"exception", "exception", "exception"},
             IE = {"exception", "exception", "exception"})
     public void setLengthMinusOne() throws Exception {
         setLength("-1");

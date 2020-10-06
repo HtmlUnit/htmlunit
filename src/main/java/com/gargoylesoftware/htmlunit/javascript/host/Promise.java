@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.KEY_STAR
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF68})
+@JsxClass({CHROME, EDGE, FF, FF78})
 public class Promise extends SimpleScriptable {
 
     private enum PromiseState { PENDING, FULFILLED, REJECTED }

@@ -24,7 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -306,7 +306,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
         throw ScriptRuntime.typeError("Illegal constructor");
@@ -459,7 +459,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({EDGE, FF, FF68, IE})
+    @JsxGetter({EDGE, FF, FF78, IE})
     public ApplicationCache getApplicationCache() {
         return applicationCache_;
     }
@@ -773,7 +773,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Prints messages to the {@code console}.
      * @param message the message to log
      */
-    @JsxFunction({FF, FF68})
+    @JsxFunction({FF, FF78})
     public void dump(final String message) {
         if (console_ instanceof Console) {
             Console.log(null, console_, new Object[] {message}, null);
@@ -1213,7 +1213,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Scrolls the window content down by the specified number of lines.
      * @param lines the number of lines to scroll down
      */
-    @JsxFunction({FF, FF68})
+    @JsxFunction({FF, FF78})
     public void scrollByLines(final int lines) {
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
@@ -1225,7 +1225,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Scrolls the window content down by the specified number of pages.
      * @param pages the number of pages to scroll down
      */
-    @JsxFunction({FF, FF68})
+    @JsxFunction({FF, FF78})
     public void scrollByPages(final int pages) {
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
@@ -1889,7 +1889,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
      * @return some object
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Object getControllers() {
         return controllers_;
     }
@@ -1898,7 +1898,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code controllers}.
      * @param value the new value
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setControllers(final Object value) {
         controllers_ = value;
     }
@@ -1907,7 +1907,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code mozInnerScreenX} property.
      * @return the value of {@code mozInnerScreenX} property
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public int getMozInnerScreenX() {
         return 10;
     }
@@ -1916,7 +1916,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code mozInnerScreenY} property.
      * @return the value of {@code mozInnerScreenY} property
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public int getMozInnerScreenY() {
         return 79;
     }
@@ -1925,7 +1925,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code mozPaintCount} property.
      * @return the value of {@code mozPaintCount} property
      */
-    @JsxGetter(FF68)
+    @JsxGetter(FF78)
     public int getMozPaintCount() {
         return 0;
     }
@@ -2128,7 +2128,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * (currently empty implementation)
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public void stop() {
         //empty
     }
@@ -2155,7 +2155,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code scrollX} property.
      * @return the value of {@code scrollX} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public int getScrollX() {
         return 0;
     }
@@ -2164,7 +2164,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code scrollY} property.
      * @return the value of {@code scrollY} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public int getScrollY() {
         return 0;
     }
@@ -2173,7 +2173,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the value of {@code netscape} property.
      * @return the value of {@code netscape} property
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Netscape getNetscape() {
         return new Netscape(this);
     }
@@ -2372,7 +2372,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param showDialog if true, specifies a show Dialog.
      * @return false
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public boolean find(final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
@@ -2407,7 +2407,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code crypto} property.
      * @return the {@code crypto} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Crypto getCrypto() {
         if (crypto_ == null) {
             crypto_ = new Crypto(this);
@@ -2489,7 +2489,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code oninvalid} event handler.
      * @return the {@code oninvalid} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOninvalid() {
         return getEventHandler("invalid");
     }
@@ -2498,7 +2498,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code oninvalid} event handler.
      * @param oninvalid the {@code oninvalid} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOninvalid(final Object oninvalid) {
         setHandlerForJavaScript("invalid", oninvalid);
     }
@@ -2777,7 +2777,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondeviceproximity} event handler.
      * @return the {@code ondeviceproximity} event handler
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Function getOndeviceproximity() {
         return getEventHandler("deviceproximity");
     }
@@ -2786,7 +2786,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondeviceproximity} event handler.
      * @param ondeviceproximity the {@code ondeviceproximity} event handler
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setOndeviceproximity(final Object ondeviceproximity) {
         setHandlerForJavaScript("deviceproximity", ondeviceproximity);
     }
@@ -2903,7 +2903,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondeviceorientation} event handler.
      * @return the {@code ondeviceorientation} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndeviceorientation() {
         return getEventHandler("deviceorientation");
     }
@@ -2912,7 +2912,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondeviceorientation} event handler.
      * @param ondeviceorientation the {@code ondeviceorientation} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndeviceorientation(final Object ondeviceorientation) {
         setHandlerForJavaScript("deviceorientation", ondeviceorientation);
     }
@@ -3083,7 +3083,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onuserproximity} event handler.
      * @return the {@code onuserproximity} event handler
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Function getOnuserproximity() {
         return getEventHandler("userproximity");
     }
@@ -3092,7 +3092,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onuserproximity} event handler.
      * @param onuserproximity the {@code onuserproximity} event handler
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setOnuserproximity(final Object onuserproximity) {
         setHandlerForJavaScript("userproximity", onuserproximity);
     }
@@ -3191,7 +3191,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onafterprint} event handler.
      * @return the {@code onafterprint} event handler
      */
-    @JsxGetter({FF, FF68, IE})
+    @JsxGetter({FF, FF78, IE})
     public Function getOnafterprint() {
         return getEventHandler("afterprint");
     }
@@ -3200,7 +3200,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onafterprint} event handler.
      * @param onafterprint the {@code onafterprint} event handler
      */
-    @JsxSetter({FF, FF68, IE})
+    @JsxSetter({FF, FF78, IE})
     public void setOnafterprint(final Object onafterprint) {
         setHandlerForJavaScript("afterprint", onafterprint);
     }
@@ -3209,7 +3209,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onmozfullscreenerror} event handler.
      * @return the {@code onmozfullscreenerror} event handler
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
         return getEventHandler("mozfullscreenerror");
     }
@@ -3218,7 +3218,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onmozfullscreenerror} event handler.
      * @param onmozfullscreenerror the {@code onmozfullscreenerror} event handler
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
         setHandlerForJavaScript("mozfullscreenerror", onmozfullscreenerror);
     }
@@ -3335,7 +3335,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onmozfullscreenchange} event handler.
      * @return the {@code onmozfullscreenchange} event handler
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
         return getEventHandler("mozfullscreenchange");
     }
@@ -3344,7 +3344,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onmozfullscreenchange} event handler.
      * @param onmozfullscreenchange the {@code onmozfullscreenchange} event handler
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
         setHandlerForJavaScript("mozfullscreenchange", onmozfullscreenchange);
     }
@@ -3533,7 +3533,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onlanguagechange} event handler.
      * @return the {@code onlanguagechange} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnlanguagechange() {
         return getEventHandler("languagechange");
     }
@@ -3542,7 +3542,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onlanguagechange} event handler.
      * @param onlanguagechange the {@code onlanguagechange} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnlanguagechange(final Object onlanguagechange) {
         setHandlerForJavaScript("languagechange", onlanguagechange);
     }
@@ -3713,7 +3713,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onwheel} event handler.
      * @return the {@code onwheel} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnwheel() {
         return getEventHandler("wheel");
     }
@@ -3722,7 +3722,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onwheel} event handler.
      * @param onwheel the {@code onwheel} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnwheel(final Object onwheel) {
         setHandlerForJavaScript("wheel", onwheel);
     }
@@ -3767,7 +3767,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onbeforeprint} event handler.
      * @return the {@code onbeforeprint} event handler
      */
-    @JsxGetter({FF, FF68, IE})
+    @JsxGetter({FF, FF78, IE})
     public Function getOnbeforeprint() {
         return getEventHandler("beforeprint");
     }
@@ -3776,7 +3776,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onbeforeprint} event handler.
      * @param onbeforeprint the {@code onbeforeprint} event handler
      */
-    @JsxSetter({FF, FF68, IE})
+    @JsxSetter({FF, FF78, IE})
     public void setOnbeforeprint(final Object onbeforeprint) {
         setHandlerForJavaScript("beforeprint", onbeforeprint);
     }
@@ -3803,7 +3803,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondevicelight} event handler.
      * @return the {@code ondevicelight} event handler
      */
-    @JsxGetter({FF, FF68})
+    @JsxGetter({FF, FF78})
     public Function getOndevicelight() {
         return getEventHandler("devicelight");
     }
@@ -3812,7 +3812,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondevicelight} event handler.
      * @param ondevicelight the {@code ondevicelight} event handler
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setOndevicelight(final Object ondevicelight) {
         setHandlerForJavaScript("devicelight", ondevicelight);
     }
@@ -4145,7 +4145,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code ondevicemotion} event handler.
      * @return the {@code ondevicemotion} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndevicemotion() {
         return getEventHandler("devicemotion");
     }
@@ -4154,7 +4154,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code ondevicemotion} event handler.
      * @param ondevicemotion the {@code ondevicemotion} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndevicemotion(final Object ondevicemotion) {
         setHandlerForJavaScript("devicemotion", ondevicemotion);
     }
@@ -4361,7 +4361,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onshow} event handler.
      * @return the {@code onshow} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF68})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -4370,7 +4370,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onshow} event handler.
      * @param onshow the {@code onshow} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF68})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnshow(final Object onshow) {
         setHandlerForJavaScript("show", onshow);
     }

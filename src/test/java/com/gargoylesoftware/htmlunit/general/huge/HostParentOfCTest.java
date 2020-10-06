@@ -77,7 +77,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _CanvasCaptureMediaStream_CanvasCaptureMediaStream() throws Exception {
         test("CanvasCaptureMediaStream", "CanvasCaptureMediaStream");
     }
@@ -126,7 +126,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _CaretPosition_CaretPosition() throws Exception {
         test("CaretPosition", "CaretPosition");
     }
@@ -381,7 +381,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _CSS2Properties_CSS2Properties() throws Exception {
         test("CSS2Properties", "CSS2Properties");
     }
@@ -422,7 +422,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule", "CSSCounterStyleRule");
     }
@@ -555,7 +555,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _CSSRule_CSSCounterStyleRule() throws Exception {
         test("CSSRule", "CSSCounterStyleRule");
     }
@@ -676,7 +676,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _CSSStyleDeclaration_CSS2Properties() throws Exception {
         test("CSSStyleDeclaration", "CSS2Properties");
     }

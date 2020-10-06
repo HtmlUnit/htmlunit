@@ -57,7 +57,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
             IE = {"body", "active: null", "onfocusin:body", "active: body", "onload", "active: body",
                 "onfocus:[object Window]", "active: body"})
     @HtmlUnitNYI(FF = {"body", "active: body", "onload", "active: body"},
-            FF68 = {"body", "active: body", "onload", "active: body"},
+            FF78 = {"body", "active: body", "onload", "active: body"},
             IE = {"body", "active: body", "onload", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodyLoad() throws Exception {
@@ -93,7 +93,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
             IE = {"onfocusin:focusId", "active: focusId", "onfocus:[object Window]", "active: focusId",
                 "before", "active: focusId", "after", "active: focusId"})
     @HtmlUnitNYI(FF = {"before", "active: focusId", "after", "active: focusId"},
-            FF68 = {"before", "active: focusId", "after", "active: focusId"},
+            FF78 = {"before", "active: focusId", "after", "active: focusId"},
             IE = {"before", "active: focusId", "onfocusout:focusId", "active: focusId", "after", "active: focusId"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void body() throws Exception {
@@ -131,7 +131,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
             IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
                 "before", "active: body", "after", "active: body"})
     @HtmlUnitNYI(FF = {"before", "active: body", "after", "active: body"},
-            FF68 = {"before", "active: body", "after", "active: body"},
+            FF78 = {"before", "active: body", "after", "active: body"},
             IE = {"before", "active: body", "after", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromBodyToNotFocusable() throws Exception {
@@ -192,7 +192,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onblurF:focusId", "active: body", "onfocusoutF:focusId",
                 "active: body", "onfocusout:focusId", "active: body",
                 "after", "active: body"},
-            FF68 = {"before", "active: body",
+            FF78 = {"before", "active: body",
                 "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
                 "active: focusId", "onfocusin:focusId", "active: focusId",
                 "onblurF:focusId", "active: body", "onfocusoutF:focusId",
@@ -240,7 +240,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "before", "active: body", "onfocusout:body", "active: focusId1",
                 "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"})
     @HtmlUnitNYI(FF = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
-            FF68 = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
+            FF78 = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
             IE = {"before", "active: body", "onfocusout:body", "active: body", "onfocusin:focusId1",
                 "active: body", "after", "active: focusId1"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
@@ -274,7 +274,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onfocusin:focusId1", "active: focusId1",
                 "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
                 "after", "active: focusId2"},
-            FF68 = {"before", "active: body",
+            FF78 = {"before", "active: body",
                 "onfocusin:focusId1", "active: focusId1",
                 "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
                 "after", "active: focusId2"},
@@ -325,7 +325,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"before", "active: body", "between", "active: body", "after", "active: body"},
-            FF68 = {"before", "active: body",
+            FF78 = {"before", "active: body",
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "between", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
@@ -540,7 +540,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "between", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId",
                 "active: body", "after", "active: body"},
-            FF68 = {"before", "active: body",
+            FF78 = {"before", "active: body",
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "between", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId",
@@ -1177,7 +1177,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
                 "after", "active: body"},
-            FF68 = {"before", "active: body",
+            FF78 = {"before", "active: body",
                 "onfocus:focusId", "active: focusId", "onfocusin:focusId", "active: focusId",
                 "onblur:focusId", "active: body", "onfocusout:focusId", "active: body",
                 "after", "active: body"},
@@ -1368,7 +1368,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1",
                 "onblur1:focusId1", "active: body", "onfocusout1:focusId1", "active: body"},
-            FF68 = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            FF78 = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             IE = {"onfocusin1:focusId1", "active: focusId1", "onfocus1:focusId1", "active: focusId1",
                 "onfocusout1:focusId1", "active: body", "onblur1:focusId1", "active: body"})
     @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},

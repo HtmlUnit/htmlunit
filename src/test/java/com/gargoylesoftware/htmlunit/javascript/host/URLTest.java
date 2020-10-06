@@ -45,7 +45,7 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function URL() { [native code] }",
             FF = "function URL() {\n    [native code]\n}",
-            FF68 = "function URL() {\n    [native code]\n}",
+            FF78 = "function URL() {\n    [native code]\n}",
             IE = "[object URL]")
     public void windowURL() throws Exception {
         final String html =

@@ -177,7 +177,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
-            FF68 = {"function Window() {\n    [native code]\n}",
+            FF78 = {"function Window() {\n    [native code]\n}",
                 "function Window() {\n    [native code]\n}", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function"},

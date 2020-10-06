@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -40,11 +40,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 public class UIEvent extends Event {
 
     /** Constant. */
-    @JsxConstant({FF, FF68})
+    @JsxConstant({FF, FF78})
     public static final int SCROLL_PAGE_DOWN = 0x8000;
 
     /** Constant. */
-    @JsxConstant({FF, FF68})
+    @JsxConstant({FF, FF78})
     public static final short SCROLL_PAGE_UP = 0xFFFF8000;
 
     /** Specifies some detail information about the event. */
@@ -53,7 +53,7 @@ public class UIEvent extends Event {
     /**
      * Creates a new UI event instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public UIEvent() {
     }
 
@@ -116,7 +116,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
-    @JsxFunction({CHROME, EDGE, FF, FF68, IE})
+    @JsxFunction({CHROME, EDGE, FF, FF78, IE})
     public void initUIEvent(
             final String type,
             final boolean bubbles,

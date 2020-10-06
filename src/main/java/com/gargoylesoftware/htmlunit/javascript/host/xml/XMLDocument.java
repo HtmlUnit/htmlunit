@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_EL
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.io.IOException;
 
@@ -76,7 +76,7 @@ public class XMLDocument extends Document {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public XMLDocument() {
         this(null);
     }
@@ -101,7 +101,7 @@ public class XMLDocument extends Document {
      * Sets the {@code async} attribute.
      * @param async Whether or not to send the request to the server asynchronously
      */
-    @JsxSetter({FF, FF68})
+    @JsxSetter({FF, FF78})
     public void setAsync(final boolean async) {
         async_ = async;
     }
@@ -110,7 +110,7 @@ public class XMLDocument extends Document {
      * Returns Whether or not to send the request to the server asynchronously.
      * @return the {@code async} attribute
      */
-    @JsxGetter(FF68)
+    @JsxGetter(FF78)
     public boolean isAsync() {
         return async_;
     }
@@ -121,7 +121,7 @@ public class XMLDocument extends Document {
      * @param xmlSource a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
-    @JsxFunction(FF68)
+    @JsxFunction(FF78)
     public boolean load(final String xmlSource) {
         if (async_) {
             if (LOG.isDebugEnabled()) {

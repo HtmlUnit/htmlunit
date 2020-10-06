@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Collection;
@@ -204,7 +204,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _SpeechSynthesis_SpeechSynthesis() throws Exception {
         test("SpeechSynthesis", "SpeechSynthesis");
     }
@@ -255,7 +255,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF68 = "true")
+            FF78 = "true")
     public void _SpeechSynthesisVoice_SpeechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice", "SpeechSynthesisVoice");
     }
@@ -2688,7 +2688,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented({FF, FF68, IE})
+    @NotYetImplemented({FF, FF78, IE})
     public void _SVGUnitTypes_SVGUnitTypes() throws Exception {
         test("SVGUnitTypes", "SVGUnitTypes");
     }

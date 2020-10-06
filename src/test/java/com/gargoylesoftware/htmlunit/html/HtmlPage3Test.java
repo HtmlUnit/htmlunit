@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -469,7 +469,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "error",
             CHROME = "Something",
             EDGE = "Something")
-    @NotYetImplemented({IE, FF, FF68})
+    @NotYetImplemented({IE, FF, FF78})
     public void shouldBeAbleToFindElementByXPathInXmlDocument() throws Exception {
         final String html = "<?xml version='1.0' encoding='UTF-8'?>\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml'\n"

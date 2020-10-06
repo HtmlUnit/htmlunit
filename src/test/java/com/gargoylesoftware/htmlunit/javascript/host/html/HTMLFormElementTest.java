@@ -2060,7 +2060,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "in listener",
             FF = {"in listener", "page2 loaded"},
-            FF68 = {"in listener", "page2 loaded"})
+            FF78 = {"in listener", "page2 loaded"})
     public void dispatchEventSubmitTriggersHandlers() throws Exception {
         // use an iframe to capture alerts among 2 pages
         final String container = "<html><body><iframe src='page1'></iframe></body></html>\n";
@@ -2210,7 +2210,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Response", "param1=value1"},
-            FF68 = "requestSubmit() not available",
+            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmit() throws Exception {
         final String html
@@ -2252,7 +2252,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Response", "param1=value1"},
-            FF68 = "requestSubmit() not available",
+            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitWithSubmit() throws Exception {
         final String html
@@ -2296,7 +2296,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Response", "param1=value1&submit1="},
-            FF68 = "requestSubmit() not available",
+            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitWithButton() throws Exception {
         final String html
@@ -2342,7 +2342,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"first", "requestSubmit failed"},
-            FF68 = "requestSubmit() not available",
+            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitNotMember() throws Exception {
         final String html
@@ -2390,7 +2390,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"first", "requestSubmit failed"},
-            FF68 = "requestSubmit() not available",
+            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitNotSubmit() throws Exception {
         final String html

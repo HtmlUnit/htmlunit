@@ -91,7 +91,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
-            FF68 = "toSource: function")
+            FF78 = "toSource: function")
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = createHTMLTestMethods("new Date()", methods);
@@ -138,7 +138,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1/1/2000",
             IE = "\u200E1\u200E/\u200E1\u200E/\u200E2000")
     @BuggyWebDriver(FF = "1.1.2000",
-            FF68 = "1.1.2000")
+            FF78 = "1.1.2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -240,7 +240,7 @@ public class NativeDateTest extends WebDriverTestCase {
             IE = {"\u200E12\u200E:\u200E00\u200E:\u200E00\u200E \u200EAM",
                     "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM"})
     @BuggyWebDriver(FF = "00:00:00, 07:08:09",
-            FF68 = "00:00:00, 07:08:09")
+            FF78 = "00:00:00, 07:08:09")
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

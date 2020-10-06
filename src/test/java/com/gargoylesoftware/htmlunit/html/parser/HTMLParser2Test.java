@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.html.parser;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -859,7 +859,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             IE = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
                         "1", "IFRAME", "null", "1",
                         "3", "#text", "</div></body></html>"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF68})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void selfClosingIframe() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

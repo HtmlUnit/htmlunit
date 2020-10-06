@@ -1531,7 +1531,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined",
             FF = "undefined",
-            FF68 = "undefined",
+            FF78 = "undefined",
             IE = "undefined")
     public void addEventListenerCaller() throws Exception {
         final String html =
@@ -1643,7 +1643,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function() { return !0 }",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
-            FF68 = {"[object Object]", "undefined", "undefined",
+            FF78 = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
@@ -1663,7 +1663,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function () {\n    return !0;\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
-            FF68 = {"[object Object]", "undefined", "undefined",
+            FF78 = {"[object Object]", "undefined", "undefined",
                         "function () {\n    return !0;\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
@@ -1709,9 +1709,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequest]",
-            FF68 = "[object XMLHttpRequestPrototype]",
+            FF78 = "[object XMLHttpRequestPrototype]",
             IE = "[object XMLHttpRequestPrototype]")
-    @HtmlUnitNYI(FF68 = "[object XMLHttpRequest]",
+    @HtmlUnitNYI(FF78 = "[object XMLHttpRequest]",
             IE = "[object XMLHttpRequest]")
     public void defineProperty2() throws Exception {
         final String html =
@@ -1786,7 +1786,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "text/plain",
             EDGE = "text/plain",
             FF = "text/plain",
-            FF68 = "text/plain",
+            FF78 = "text/plain",
             IE = "text/plain")
     public void enctypeBufferSource() throws Exception {
         final String html
@@ -2117,7 +2117,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function onreadystatechange() {\n    [native code]\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
-            FF68 = {"[object Object]", "undefined", "undefined",
+            FF78 = {"[object Object]", "undefined", "undefined",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},

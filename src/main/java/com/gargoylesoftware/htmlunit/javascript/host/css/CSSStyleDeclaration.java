@@ -28,7 +28,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRON
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND;
@@ -249,7 +249,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF68})
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public CSSStyleDeclaration() {
     }
 
@@ -2189,7 +2189,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code rubyAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({IE, FF, FF68})
+    @JsxGetter({IE, FF, FF78})
     public String getRubyAlign() {
         return getStyleAttribute(RUBY_ALIGN);
     }
@@ -2198,7 +2198,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code rubyAlign} style attribute.
      * @param rubyAlign the new attribute
      */
-    @JsxSetter({IE, FF, FF68})
+    @JsxSetter({IE, FF, FF78})
     public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(RUBY_ALIGN.getAttributeName(), rubyAlign);
     }
