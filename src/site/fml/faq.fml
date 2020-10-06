@@ -134,22 +134,50 @@
                 XHtml
             <source><![CDATA[
 
-        String htmlCode = "<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN".........</html>"
+        final String htmlCode = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\""
+                + "\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
+                + "  <head>"
+                + "    <title>Title</title>"
+                + "  </head>"
+                + "  <body>"
+                + "    content..."
+                + "  </body>"
+                + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            StringWebResponse response = new StringWebResponse(htmlCode, new URL("http://http://htmlunit.sourceforge.net//test.html"));
-            XHtmlPage page = htmlParser.parseXHtml(response, webClient.getCurrentWindow());
+            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+            final WebWindow webWindow = webClient.getCurrentWindow();
+
+            final StringWebResponse webResponse =
+                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
+            final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
+            webWindow.setEnclosedPage(page);
+
+            htmlParser.parse(webResponse, page, true);
             // work with the html page
         }
             ]]></source>
                 Html
             <source><![CDATA[
 
-        String htmlCode = "<html>.........</html>"
+        final String htmlCode = "<html>"
+                + "  <head>"
+                + "    <title>Title</title>"
+                + "  </head>"
+                + "  <body>"
+                + "    content..."
+                + "  </body>"
+                + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            StringWebResponse response = new StringWebResponse(htmlCode, new URL("http://http://htmlunit.sourceforge.net//test.html"));
-            HtmlPage page = htmlParser.parseHtml(response, webClient.getCurrentWindow());
+            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+            final WebWindow webWindow = webClient.getCurrentWindow();
+
+            final StringWebResponse webResponse =
+                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
+            final HtmlPage page = new HtmlPage(webResponse, webWindow);
+            webWindow.setEnclosedPage(page);
+
+            htmlParser.parse(webResponse, page, true);
             // work with the html page
         }
             ]]></source>
