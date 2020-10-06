@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -47,10 +50,10 @@ public class NoHttpResponseTest {
 
     /**
      * Test using WebDriver.
-     * @author Marc Guillemot
      */
     @RunWith(BrowserRunner.class)
     public static class WithWebDriverTest extends WebDriverTestCase {
+
         /**
          * @throws Exception if the test fails
          */
@@ -80,7 +83,6 @@ public class NoHttpResponseTest {
 
     /**
      * Test using WebClient with default configuration allowing to throw exception.
-     * @author Marc Guillemot
      */
     @RunWith(BrowserRunner.class)
     public static class WithWebClientTest extends SimpleWebTestCase {
@@ -98,6 +100,36 @@ public class NoHttpResponseTest {
             try {
                 final HtmlPage page = getWebClient().getPage(URL_FIRST);
                 page.getElementById("loginButton").click();
+            }
+            finally {
+                miniServer.shutDown();
+            }
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        public void htmlUnitDriverUsesGetPage() throws Exception {
+            final MockWebConnection mockWebConnection = getMockWebConnection();
+            MiniServer.configureDropRequest(URL_FIRST);
+
+            final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
+            miniServer.start();
+            try {
+                final WebRequest request = new WebRequest(new URL(URL_FIRST.toString()),
+                        getBrowserVersion().getHtmlAcceptHeader(), getBrowserVersion().getAcceptEncodingHeader());
+                request.setCharset(StandardCharsets.UTF_8);
+
+                try {
+                    getWebClient().getPage(getWebClient().getCurrentWindow().getTopWindow(), request);
+                    fail("FailingHttpStatusCodeException expected");
+                }
+                catch (final FailingHttpStatusCodeException e) {
+                    // expected
+                    assertEquals(0, e.getStatusCode());
+                    assertEquals("0 No HTTP Response for " + URL_FIRST.toString(), e.getMessage());
+                }
             }
             finally {
                 miniServer.shutDown();

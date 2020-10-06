@@ -434,7 +434,7 @@ public class WebClient implements Serializable, AutoCloseable {
             LOG.debug("Get page for window named '" + webWindow.getName() + "', using " + webRequest);
         }
 
-        final WebResponse webResponse;
+        WebResponse webResponse;
         final String protocol = webRequest.getUrl().getProtocol();
         if ("javascript".equals(protocol)) {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, webRequest.getUrl(), webRequest.getCharset());
@@ -444,7 +444,12 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         else {
-            webResponse = loadWebResponse(webRequest);
+            try {
+                webResponse = loadWebResponse(webRequest);
+            }
+            catch (final NoHttpResponseException e) {
+                webResponse = new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
+            }
         }
 
         printContentIfNecessary(webResponse);
