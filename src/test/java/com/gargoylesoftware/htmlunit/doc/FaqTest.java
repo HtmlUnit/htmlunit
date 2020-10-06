@@ -43,6 +43,7 @@ public class FaqTest extends SimpleWebTestCase {
      */
     @Test
     public void xhtmlPageFromString() throws Exception {
+        final String ls = System.lineSeparator();
         final BrowserVersion browserVersion = BrowserVersion.FIREFOX;
 
         final String htmlCode = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\""
@@ -67,7 +68,7 @@ public class FaqTest extends SimpleWebTestCase {
             htmlParser.parse(webResponse, page, true);
             // work with the html page
 
-            assertEquals("Title\r\ncontent...", page.asText());
+            assertEquals("Title" + ls + "content...", page.asText());
         }
     }
 
@@ -77,6 +78,7 @@ public class FaqTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlPageFromString() throws Exception {
+        final String ls = System.lineSeparator();
         final BrowserVersion browserVersion = BrowserVersion.FIREFOX;
 
         final String htmlCode = "<html>"
@@ -99,7 +101,7 @@ public class FaqTest extends SimpleWebTestCase {
             htmlParser.parse(webResponse, page, true);
             // work with the html page
 
-            assertEquals("Title\r\ncontent...", page.asText());
+            assertEquals("Title" + ls + "content...", page.asText());
         }
     }
 }
