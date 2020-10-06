@@ -677,6 +677,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
         /**
          * Error 500 on the server side still count as a valid requests for {@link XMLHttpRequest}.
+         * @throws Exception if the test fails
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
