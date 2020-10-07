@@ -952,10 +952,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS,
 
-    /** Indicates if the method toSource exists on the native objects. */
-    @BrowserFeature(FF78)
-    JS_FUNCTION_TOSOURCE,
-
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,

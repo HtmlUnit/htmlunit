@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
@@ -459,10 +458,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final BrowserVersion browserVersion, final SimpleScriptable scriptable) {
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "String");
-        deleteProperties(stringPrototype, "equals", "equalsIgnoreCase");
+        deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");
 
         final ScriptableObject numberPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "Number");
+        deleteProperties(numberPrototype, "toSource");
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "Date");
+        deleteProperties(datePrototype, "toSource");
 
         if (!browserVersion.hasFeature(STRING_INCLUDES)) {
             deleteProperties(stringPrototype, "includes");
@@ -477,16 +478,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             deleteProperties(stringPrototype, "trimLeft", "trimRight");
         }
 
-        // only FF has toSource
-        if (!browserVersion.hasFeature(JS_FUNCTION_TOSOURCE)) {
-            deleteProperties(scriptable, "uneval");
-            removePrototypeProperties(scriptable, "Object", "toSource");
-            removePrototypeProperties(scriptable, "Array", "toSource");
-            deleteProperties(datePrototype, "toSource");
-            removePrototypeProperties(scriptable, "Function", "toSource");
-            deleteProperties(numberPrototype, "toSource");
-            deleteProperties(stringPrototype, "toSource");
-        }
+        deleteProperties(scriptable, "uneval");
+        removePrototypeProperties(scriptable, "Object", "toSource");
+        removePrototypeProperties(scriptable, "Array", "toSource");
+        removePrototypeProperties(scriptable, "Function", "toSource");
+
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
             ((IdFunctionObject) ScriptableObject.getProperty(scriptable, "Object")).delete("assign");
 
