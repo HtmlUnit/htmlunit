@@ -1709,10 +1709,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequest]",
-            FF78 = "[object XMLHttpRequestPrototype]",
             IE = "[object XMLHttpRequestPrototype]")
-    @HtmlUnitNYI(FF78 = "[object XMLHttpRequest]",
-            IE = "[object XMLHttpRequest]")
+    @HtmlUnitNYI(IE = "[object XMLHttpRequest]")
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"

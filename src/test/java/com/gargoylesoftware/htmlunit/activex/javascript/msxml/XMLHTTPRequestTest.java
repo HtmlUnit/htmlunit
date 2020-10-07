@@ -1255,7 +1255,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
                         "null", "null", "no ActiveX"},
             FF = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                         "null", "null", "no ActiveX"},
-            FF78 = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            FF78 = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                         "null", "null", "no ActiveX"},
             IE = {"bar",
                    "application/javascript",

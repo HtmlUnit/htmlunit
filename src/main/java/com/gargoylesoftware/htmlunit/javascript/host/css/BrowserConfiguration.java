@@ -81,12 +81,12 @@ abstract class BrowserConfiguration {
         return new FFNotIterable(defaultValue);
     }
 
-    static BrowserConfiguration ff68(final String defaultValue) {
-        return new FF68(defaultValue);
+    static BrowserConfiguration ff78(final String defaultValue) {
+        return new FF78(defaultValue);
     }
 
-    static BrowserConfiguration ff68AndUp(final String defaultValue) {
-        return new FF68AndUp(defaultValue);
+    static BrowserConfiguration ff78AndUp(final String defaultValue) {
+        return new FF78AndUp(defaultValue);
     }
 
     static BrowserConfiguration ffLatest(final String defaultValue) {
@@ -179,8 +179,8 @@ abstract class BrowserConfiguration {
         }
     }
 
-    private static class FF68 extends BrowserConfiguration {
-        FF68(final String defaultValue) {
+    private static class FF78 extends BrowserConfiguration {
+        FF78(final String defaultValue) {
             super(defaultValue);
         }
 
@@ -190,8 +190,8 @@ abstract class BrowserConfiguration {
         }
     }
 
-    private static class FF68AndUp extends BrowserConfiguration {
-        FF68AndUp(final String defaultValue) {
+    private static class FF78AndUp extends BrowserConfiguration {
+        FF78AndUp(final String defaultValue) {
             super(defaultValue);
         }
 

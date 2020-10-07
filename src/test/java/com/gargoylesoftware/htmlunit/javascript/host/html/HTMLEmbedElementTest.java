@@ -44,7 +44,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             FF = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF78 = {"left", "right", "bottom", "middle", "top",
-                    "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+                    "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined"})
     @NotYetImplemented({FF, FF78})
@@ -81,7 +81,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop"},
             FF78 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
-                    "bottom", "absmiddle", "baseline", "texttop"})
+                    "absbottom", "absmiddle", "bottom", "texttop"})
     @NotYetImplemented({FF, FF78})
     public void setAlign() throws Exception {
         final String html

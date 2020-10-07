@@ -62,7 +62,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "Hello HtmlUnit"},
-            FF78 = {"undefined", "TypeError true"},
             IE = {"undefined", "TypeError true"})
     public void text() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -161,7 +160,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "", ""},
-            FF78 = {"0", "", "TypeError true"},
             IE = {"0", "", "TypeError true"})
     public void ctorNoArgs() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -191,7 +189,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "", ""},
-            FF78 = {"0", "", "TypeError true"},
             IE = {"0", "", "TypeError true"})
     public void ctorEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -221,7 +218,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"8", "", "HtmlUnit"},
-            FF78 = {"8", "", "TypeError true"},
             IE = {"8", "", "TypeError true"})
     public void ctorString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -251,7 +247,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"8", "application/octet-stream", "HtmlUnit"},
-            FF78 = {"8", "application/octet-stream", "TypeError true"},
             IE = {"8", "application/octet-stream", "TypeError true"})
     public void ctorStringWithOptions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -281,7 +276,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"16", "", "HtmlUnitis great"},
-            FF78 = {"16", "", "TypeError true"},
             IE = {"16", "", "TypeError true"})
     public void ctorStrings() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -311,7 +305,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "HtmlUnitMMMK"},
-            FF78 = {"12", "", "TypeError true"},
             IE = {"12", "", "TypeError true"})
     public void ctorMixed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -345,7 +338,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"34", "", "HtmlUnitHtmlUnitMMMKMKHtmlUnitMMMK"},
-            FF78 = {"34", "", "TypeError true"},
             IE = {"34", "", "TypeError true"})
     public void ctorMixedBlobs() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -380,7 +372,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "function", "3", "", "tml"},
-            FF78 = {"12", "", "function", "3", "", "TypeError true"},
             IE = {"12", "", "function", "3", "", "TypeError true"})
     public void slice() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -421,7 +412,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "12", "", "HtmlUnitMMMK"},
-            FF78 = {"12", "", "12", "", "TypeError true"},
             IE = {"12", "", "12", "", "TypeError true"})
     public void sliceWhole() throws Exception {
         slice("blob.slice();");
@@ -432,7 +422,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "9", "", "lUnitMMMK"},
-            FF78 = {"12", "", "9", "", "TypeError true"},
             IE = {"12", "", "9", "", "TypeError true"})
     public void sliceStartOnly() throws Exception {
         slice("blob.slice(3);");
@@ -443,7 +432,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "7", "", "nitMMMK"},
-            FF78 = {"12", "", "7", "", "TypeError true"},
             IE = {"12", "", "7", "", "TypeError true"})
     public void sliceStartOnlyNegative() throws Exception {
         slice("blob.slice(-7);");
@@ -454,7 +442,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "12", "", "HtmlUnitMMMK"},
-            FF78 = {"12", "", "12", "", "TypeError true"},
             IE = {"12", "", "12", "", "TypeError true"})
     public void sliceStartOnlyNegativeOutside() throws Exception {
         slice("blob.slice(-123);");
@@ -465,7 +452,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "3", "", "mlU"},
-            FF78 = {"12", "", "3", "", "TypeError true"},
             IE = {"12", "", "3", "", "TypeError true"})
     public void sliceEndNegative() throws Exception {
         slice("blob.slice(2, -7);");
@@ -476,7 +462,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "10", "", "mlUnitMMMK"},
-            FF78 = {"12", "", "10", "", "TypeError true"},
             IE = {"12", "", "10", "", "TypeError true"})
     public void sliceEndOutside() throws Exception {
         slice("blob.slice(2, 1234);");
@@ -487,7 +472,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "0", "", ""},
-            FF78 = {"12", "", "0", "", "TypeError true"},
             IE = {"12", "", "0", "", "TypeError true"})
     public void sliceBothOutside() throws Exception {
         slice("blob.slice(123, 1234);");
@@ -498,7 +482,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "0", "", ""},
-            FF78 = {"12", "", "0", "", "TypeError true"},
             IE = {"12", "", "0", "", "TypeError true"})
     public void sliceNoIntersection() throws Exception {
         slice("blob.slice(5, 4);");
@@ -509,7 +492,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "1", "", "U"},
-            FF78 = {"12", "", "1", "", "TypeError true"},
             IE = {"12", "", "1", "", "TypeError true"})
     public void sliceEmptyIntersection() throws Exception {
         slice("blob.slice(4, 5);");
@@ -520,7 +502,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "12", "", "HtmlUnitMMMK"},
-            FF78 = {"12", "", "12", "", "TypeError true"},
             IE = {"12", "", "12", "", "TypeError true"})
     public void sliceWrongStart() throws Exception {
         slice("blob.slice('four');");
@@ -531,7 +512,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "0", "", ""},
-            FF78 = {"12", "", "0", "", "TypeError true"},
             IE = {"12", "", "0", "", "TypeError true"})
     public void sliceWrongEnd() throws Exception {
         slice("blob.slice(1, 'four');");
@@ -542,7 +522,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "1", "type", "t"},
-            FF78 = {"12", "", "1", "type", "TypeError true"},
             IE = {"12", "", "1", "tyPE", "TypeError true"})
     @HtmlUnitNYI(IE = {"12", "", "1", "type", "TypeError true"})
     public void sliceContentType() throws Exception {
@@ -554,7 +533,6 @@ public class BlobTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"12", "", "1", "7", "t"},
-            FF78 = {"12", "", "1", "7", "TypeError true"},
             IE = {"12", "", "1", "7", "TypeError true"})
     public void sliceContentTypeNotString() throws Exception {
         slice("blob.slice(1, 2, 7);");

@@ -480,8 +480,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-56",
-            FF78 = "0")
+    @Alerts("-56")
     @NotYetImplemented({CHROME, EDGE, FF, IE})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
@@ -879,8 +878,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "110")
+    @Alerts("0")
     @NotYetImplemented(FF78)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
@@ -1343,7 +1341,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "22",
             FF = "27",
-            FF78 = "31",
+            FF78 = "27",
             IE = "23")
     @NotYetImplemented
     public void select() throws Exception {

@@ -47,8 +47,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"DOM3: [object KeyboardEvent]", "vendor: exception"},
-            FF78 = {"DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]"})
+    @Alerts({"DOM3: [object KeyboardEvent]", "vendor: exception"})
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -68,8 +67,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "0-0", "undefined-undefined"},
-            FF78 = {"0-0", "0-0", "undefined-undefined"})
+    @Alerts({"exception", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -99,8 +97,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             FF = {"exception",
                 "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0"},
-            FF78 = {"keydown, true, true, true, true, true, true, 65, 0",
-                "keyup, false, false, false, false, false, false, 32, 0",
+            FF78 = {"exception",
                 "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0"})
     public void initKeyEvent() throws Exception {
@@ -140,7 +137,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF78 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
     public void keyCodes_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -196,7 +192,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF78 = "0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

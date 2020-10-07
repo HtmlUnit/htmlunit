@@ -39,8 +39,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF78 = {"134", "[object Element]"})
+    @Alerts("exception")
     @HtmlUnitNYI(FF78 = {"97", "null"})
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

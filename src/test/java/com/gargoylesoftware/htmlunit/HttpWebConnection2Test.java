@@ -144,6 +144,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                     + "Content-Length: 48\n"
                     + "Content-Type: application/x-www-form-urlencoded\n"
                     + "Host: localhost:§§PORT§§\n"
+                    + "Origin: http://localhost:§§PORT§§\n"
                     + "Referer: http://localhost:§§PORT§§/\n"
                     + "Upgrade-Insecure-Requests: 1\n"
                     + "User-Agent: §§USER_AGENT§§\n",

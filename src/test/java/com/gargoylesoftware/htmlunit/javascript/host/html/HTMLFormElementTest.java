@@ -2386,7 +2386,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"first", "requestSubmit failed"},
-            FF78 = "requestSubmit() not available",
             IE = "requestSubmit() not available")
     public void requestSubmitNotSubmit() throws Exception {
         final String html
