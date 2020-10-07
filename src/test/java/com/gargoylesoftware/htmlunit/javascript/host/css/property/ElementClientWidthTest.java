@@ -879,7 +879,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented(FF78)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

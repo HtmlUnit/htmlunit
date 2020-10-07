@@ -647,10 +647,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
-    /** Indicates that the {@code Array} supports construction properties. */
-    @BrowserFeature(FF78)
-    JS_ARRAY_CONSTRUCTION_PROPERTIES,
-
     /** Indicates that Array.from() is supported. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_ARRAY_FROM,

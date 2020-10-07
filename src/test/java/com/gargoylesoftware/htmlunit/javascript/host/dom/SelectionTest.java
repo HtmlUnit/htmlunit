@@ -14,15 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -190,7 +187,6 @@ public class SelectionTest extends WebDriverTestCase {
             IE = {"1:null/0/null/0/true/undefined/0/",
                         "2:null/0/null/0/true/undefined/0/",
                         "3:s2/1/s3/1/false/undefined/1/foo[foo"})
-    @NotYetImplemented(TestedBrowser.FF78)
     public void addRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -216,7 +212,6 @@ public class SelectionTest extends WebDriverTestCase {
             IE = {"1:null/0/null/0/true/undefined/0/",
                     "2:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
                     "3:null/0/null/0/true/undefined/0/"})
-    @NotYetImplemented(FF78)
     public void removeAllRanges() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -241,7 +236,6 @@ public class SelectionTest extends WebDriverTestCase {
                         "2:null/0/null/0/true/None/0/"},
             IE = {"1:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
                         "2:null/0/null/0/true/undefined/0/"})
-    @NotYetImplemented(FF78)
     public void removeAllRanges2() throws Exception {
         final String jsSnippet = ""
             + "      var range = document.createRange();\n"

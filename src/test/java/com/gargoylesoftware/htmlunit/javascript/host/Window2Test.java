@@ -1251,7 +1251,6 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts({"string string 7 number string",
                 "string string 8 number object"})
-    @NotYetImplemented(FF78)
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"

@@ -580,7 +580,7 @@ public final class BrowserVersion implements Serializable {
      * @return whether or not this version version 60 of a Firefox browser
      */
     public boolean isFirefox78() {
-        return isFirefox() && getBrowserVersionNumeric() == 68;
+        return isFirefox() && getBrowserVersionNumeric() == 78;
     }
 
     /**

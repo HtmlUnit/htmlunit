@@ -1519,7 +1519,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "false"})
-    @NotYetImplemented(FF78)
     public void scrollbarHeight() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

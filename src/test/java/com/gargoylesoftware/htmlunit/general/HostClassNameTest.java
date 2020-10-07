@@ -235,7 +235,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function AnimationTimeline() { [native code] }",
             FF = "function AnimationTimeline() {\n    [native code]\n}",
             FF78 = "function AnimationTimeline() {\n    [native code]\n}")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception", FF78 = "exception")
     public void animationTimeline() throws Exception {
         test("AnimationTimeline");
     }
@@ -1954,7 +1954,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function DocumentTimeline() { [native code] }",
             FF = "function DocumentTimeline() {\n    [native code]\n}",
             FF78 = "function DocumentTimeline() {\n    [native code]\n}")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception", FF = "exception", FF78 = "exception")
     public void documentTimeline() throws Exception {
         test("DocumentTimeline");
     }
@@ -11384,7 +11384,10 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function DOMMatrix() { [native code] }",
             FF = "function DOMMatrix() {\n    [native code]\n}",
             FF78 = "function DOMMatrix() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, EDGE, FF})
+    @HtmlUnitNYI(CHROME = "function WebKitCSSMatrix() { [native code] }",
+            EDGE = "function WebKitCSSMatrix() { [native code] }",
+            FF = "function WebKitCSSMatrix() {\n    [native code]\n}",
+            FF78 = "function WebKitCSSMatrix() {\n    [native code]\n}")
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
     }
