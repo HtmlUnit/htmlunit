@@ -38,6 +38,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -620,6 +621,80 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * Async calls have to use the handler even if defined after send.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"sent", "onreadystatechange defined", "done"})
+    public void onreadystatechangeAsyncAfterSend() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var xhr;\n"
+
+            + "      function logText(txt) {\n"
+            + "        document.getElementById('log').value += txt + new Date().getTime() + '\\n';\n"
+            + "      }\n"
+
+            + "      function sleep(milliseconds) {\n"
+            + "        var start = new Date().getTime();\n"
+            + "        for (var i = 0; i < 1e7; i++) {\n"
+            + "          if ((new Date().getTime() - start) > milliseconds){\n"
+            + "            break;\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.send('');\n"
+            + "        logText('sent');\n"
+            + "        sleep(1000);"
+
+            + "        xhr.onloadstart = alertEventState;\n"
+            + "        logText('onloadstart defined');\n"
+
+            + "        xhr.onprogress = alertEventState;\n"
+            + "        logText('onprogress defined');\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        logText('onreadystatechange defined');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          logText('done');\n"
+            + "        }\n"
+            + "      }\n"
+
+            + "      function alertEventState(event) {\n"
+            + "        logText(event.type);\n"
+            + "      }\n"
+
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(2 * DEFAULT_WAIT_TIME);
+
+        final String log = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), log);
     }
 
     /**
