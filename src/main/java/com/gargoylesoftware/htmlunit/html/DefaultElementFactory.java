@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_BLOCK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_SELECT;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -166,9 +165,6 @@ public class DefaultElementFactory implements ElementFactory {
                 final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
                 if (browserVersion.hasFeature(KEYGEN_AS_BLOCK)) {
                     element = new HtmlBlockQuote(qualifiedName, page, attributeMap);
-                }
-                else if (browserVersion.hasFeature(KEYGEN_AS_SELECT)) {
-                    element = new HtmlSpan(qualifiedName, page, attributeMap);
                 }
                 else {
                     element = new HtmlUnknownElement(page, qualifiedName, attributeMap);

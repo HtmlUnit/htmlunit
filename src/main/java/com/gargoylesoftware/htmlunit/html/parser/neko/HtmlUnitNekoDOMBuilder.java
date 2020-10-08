@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ISINDEX_TAG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_MAIN_TAG;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 
 import java.io.IOException;
@@ -291,7 +290,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * {@inheritDoc}
      */
     @Override
-    public void startElement(String namespaceURI, final String localName, String qName, final Attributes atts)
+    public void startElement(String namespaceURI, final String localName, final String qName, final Attributes atts)
         throws SAXException {
 
         if (snippetStartNodeOverwritten_) {
@@ -300,7 +299,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
         handleCharacters();
 
-        String tagLower = localName.toLowerCase(Locale.ROOT);
+        final String tagLower = localName.toLowerCase(Locale.ROOT);
         if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
             return;
         }
@@ -342,12 +341,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // Add the new node.
         if (!(page_ instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI)) {
             namespaceURI = null;
-        }
-
-        final boolean keyGenAsSelect = "keygen".equals(tagLower) && page_.hasFeature(KEYGEN_AS_SELECT);
-        if (keyGenAsSelect) {
-            tagLower = "select";
-            qName = "select";
         }
 
         final ElementFactory factory =
@@ -393,15 +386,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                     }
                 }
             }
-        }
-        if (keyGenAsSelect) {
-            DomElement option = factory.createElementNS(page_, namespaceURI, "option", null, true);
-            option.appendChild(new DomText(page_, "High Grade"));
-            newElement.appendChild(option);
-
-            option = factory.createElementNS(page_, namespaceURI, "option", null, true);
-            option.appendChild(new DomText(page_, "Medium Grade"));
-            newElement.appendChild(option);
         }
         currentNode_ = newElement;
         stack_.push(currentNode_);

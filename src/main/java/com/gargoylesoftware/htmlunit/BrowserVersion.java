@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *                     .setUserAgent(userAgent)
  *                     .build();
  * </pre>
- * <p>But keep in mind this now one still behaves like a FF68, only the stuff reported to the
+ * <p>But keep in mind this now one still behaves like a FF78, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -96,7 +96,7 @@ public final class BrowserVersion implements Serializable {
     /** Latest Firefox. */
     public static final BrowserVersion FIREFOX = new BrowserVersion(80, "FF");
 
-    /** Firefox 68 ESR. */
+    /** Firefox 78 ESR. */
     public static final BrowserVersion FIREFOX_78 = new BrowserVersion(78, "FF78");
 
     /** Internet Explorer 11. */
@@ -462,7 +462,7 @@ public final class BrowserVersion implements Serializable {
      * Creates a new browser version instance.
      *
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickname the short name of the browser (like "FF68", "IE", ...) - has to be unique
+     * @param nickname the short name of the browser (like "FF78", "IE", ...) - has to be unique
      */
     BrowserVersion(final int browserVersionNumeric, final String nickname) {
         browserVersionNumeric_ = browserVersionNumeric;

@@ -82,15 +82,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     CSS_FONTFACERULE_CSSTEXT_IE_STYLE,
 
-    /** The default value of the display property for the 'input' tags is 'inline-block'. */
-    @BrowserFeature({CHROME, EDGE, FF, IE})
-    CSS_INPUT_DISPLAY_INLINE_BLOCK,
-
-    /** The default value of the display property for the 'input' tags of type
-     * radio or checkbox is 'inline-block'. */
-    @BrowserFeature({FF, FF78})
-    CSS_INPUT_DISPLAY_RADIO_CHECKBOX_INLINE_BLOCK,
-
     /** 'initial' is a valid length value. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_LENGTH_INITIAL,
@@ -1401,7 +1392,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME,
 
-    /** Support for accessing the frame of a window by id additionally to using the name ({FF, FF68}). */
+    /** Support for accessing the frame of a window by id additionally to using the name. */
     @BrowserFeature(IE)
     JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID,
 
@@ -1496,10 +1487,6 @@ public enum BrowserVersionFeatures {
     /** Handle {@code <keygen>} as {@code <block>}. */
     @BrowserFeature(IE)
     KEYGEN_AS_BLOCK,
-
-    /** Handle {@code <keygen>} as {@code <select>}. */
-    @BrowserFeature(FF78)
-    KEYGEN_AS_SELECT,
 
     /**
      * Indicates that the browser considers the meta X-UA-Compatible when determining
