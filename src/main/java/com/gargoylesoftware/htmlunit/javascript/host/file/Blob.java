@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_IGNO
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
@@ -284,7 +285,7 @@ public class Blob extends SimpleScriptable {
      * @return a Promise that resolves with a string containing the
      * contents of the blob, interpreted as UTF-8.
      */
-    @JsxFunction({CHROME, EDGE, FF})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public Promise text() {
         try {
             return Promise.resolve(null, this, new Object[] {getBackend().getText()}, null);
