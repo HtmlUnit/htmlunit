@@ -349,7 +349,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * an &lt;input&gt; or &lt;button&gt; element whose type attribute is submit.
      * If you omit the submitter parameter, the form element itself is used as the submitter.
      */
-    @JsxFunction({CHROME, EDGE, FF})
+    @JsxFunction({CHROME, EDGE, FF, FF78})
     public void requestSubmit(final Object submitter) {
         SubmittableElement submittable = null;
         if (Undefined.isUndefined(submitter)) {

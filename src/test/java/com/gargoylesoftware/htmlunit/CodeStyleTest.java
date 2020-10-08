@@ -378,7 +378,9 @@ public class CodeStyleTest {
      * Verifies that no direct instantiation of WebClient from a test that runs with BrowserRunner.
      */
     private void runWith(final List<String> lines, final String relativePath) {
-        if (relativePath.replace('\\', '/').contains("src/test/java") && !relativePath.contains("CodeStyleTest")) {
+        if (relativePath.replace('\\', '/').contains("src/test/java")
+                && !relativePath.contains("CodeStyleTest")
+                && !relativePath.contains("FaqTest")) {
             boolean runWith = false;
             boolean browserNone = true;
             int index = 1;
