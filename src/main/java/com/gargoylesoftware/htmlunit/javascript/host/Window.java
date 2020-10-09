@@ -1921,15 +1921,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         return 79;
     }
 
-    /**
-     * Returns the value of {@code mozPaintCount} property.
-     * @return the value of {@code mozPaintCount} property
-     */
-    @JsxGetter(FF78)
-    public int getMozPaintCount() {
-        return 0;
-    }
-
     private static final class Filter {
         private final boolean includeFormFields_;
 

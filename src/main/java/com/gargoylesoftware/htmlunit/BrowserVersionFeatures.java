@@ -201,10 +201,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
 
-    /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
-    @BrowserFeature({CHROME, EDGE, FF, IE})
-    EVENT_ONHASHCHANGE_BUBBLES_FALSE,
-
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(IE)
     EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
@@ -248,10 +244,6 @@ public enum BrowserVersionFeatures {
     /** Supports event type 'HashChangeEvent'. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     EVENT_TYPE_HASHCHANGEEVENT,
-
-    /** Supports vendor specific event type 'KeyEvents'. */
-    @BrowserFeature(FF78)
-    EVENT_TYPE_KEY_EVENTS,
 
     /** Supports vendor specific event type 'MouseWheelEvent'. */
     @BrowserFeature(IE)
@@ -1415,14 +1407,8 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 80.
      */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF78})
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_80,
-
-    /**
-     * Difference of window.outer/inner height is 81.
-     */
-    @BrowserFeature(FF78)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_81,
 
     /**
      * Difference of window.outer/inner height is 86.

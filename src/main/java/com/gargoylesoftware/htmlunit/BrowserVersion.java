@@ -136,10 +136,10 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.ACCEPT_ENCODING,
-            HttpHeader.REFERER,
             HttpHeader.CONNECTION,
+            HttpHeader.REFERER,
             HttpHeader.COOKIE};
-        FIREFOX_78.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_78.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
         FIREFOX_78.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX_78.imgAcceptHeader_ = "image/webp,*/*";
         FIREFOX_78.cssAcceptHeader_ = "text/css,*/*;q=0.1";
