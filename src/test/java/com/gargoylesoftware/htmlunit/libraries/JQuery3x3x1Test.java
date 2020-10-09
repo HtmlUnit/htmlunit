@@ -15,9 +15,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -93,7 +91,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {1=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -103,18 +101,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {2=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {2=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("10")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ready__jQuery_ready() throws Exception {
         runTest("ready: jQuery ready");
     }
 
     /**
-     * Test {3=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {3=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -124,7 +122,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {4=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {4=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -134,7 +132,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {5=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {5=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -144,7 +142,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {6=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {6=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -154,7 +152,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {7=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {7=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -164,7 +162,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {8=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {8=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -174,7 +172,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {9=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {9=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -184,7 +182,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {10=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {10=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -194,7 +192,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {11=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {11=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -204,7 +202,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {12=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {12=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -214,7 +212,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {13=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {13=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -224,7 +222,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {14=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {14=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -234,7 +232,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {15=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {15=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -244,18 +242,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {16=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {16=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void basic__offset() throws Exception {
         runTest("basic: offset");
     }
 
     /**
-     * Test {17=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {17=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -265,7 +263,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {18=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {18=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -275,7 +273,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {19=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {19=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -285,7 +283,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {20=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {20=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -295,7 +293,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {21=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {21=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -305,7 +303,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {22=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {22=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -315,7 +313,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {23=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {23=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -325,7 +323,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {24=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {24=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -335,7 +333,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {25=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {25=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -345,7 +343,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {26=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {26=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -355,7 +353,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {27=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {27=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -365,7 +363,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {28=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {28=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -375,7 +373,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {29=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {29=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -385,7 +383,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {30=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {30=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -396,7 +394,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {31=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {31=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -406,7 +404,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {32=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {32=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -417,7 +415,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {33=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {33=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -427,7 +425,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {34=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {34=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -437,7 +435,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {35=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {35=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -447,7 +445,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {36=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {36=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -457,7 +455,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {37=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {37=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -467,7 +465,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {38=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {38=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -477,7 +475,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {39=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {39=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -487,7 +485,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {40=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {40=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -497,7 +495,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {41=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {41=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -507,7 +505,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {42=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {42=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -517,7 +515,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {43=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {43=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -527,7 +525,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {44=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {44=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -537,7 +535,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {45=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {45=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -547,7 +545,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {46=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {46=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -557,7 +555,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {47=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {47=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -567,7 +565,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {48=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {48=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -577,7 +575,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {49=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {49=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -587,7 +585,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {50=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {50=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -597,7 +595,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {51=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {51=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -607,7 +605,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {52=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {52=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -617,7 +615,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {53=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {53=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -627,7 +625,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {54=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {54=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -637,7 +635,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {55=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {55=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -647,7 +645,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {56=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {56=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -657,7 +655,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {57=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {57=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -667,7 +665,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {58=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {58=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -677,7 +675,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {59=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {59=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -687,7 +685,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {60=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {60=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -697,7 +695,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {61=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {61=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -707,7 +705,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {62=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {62=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -718,7 +716,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {63=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {63=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -728,7 +726,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {64=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {64=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -738,7 +736,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {66=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {66=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -748,18 +746,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {67=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {67=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void core__jQuery_parseHTML() throws Exception {
         runTest("core: jQuery.parseHTML");
     }
 
     /**
-     * Test {68=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {68=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -769,7 +767,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {69=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {69=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -779,18 +777,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {70=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {70=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void core__document_ready_when_jQuery_loaded_asynchronously___13655_() throws Exception {
         runTest("core: document ready when jQuery loaded asynchronously (#13655)");
     }
 
     /**
-     * Test {71=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {71=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -800,7 +798,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {72=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {72=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -810,7 +808,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {73=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {73=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -820,7 +818,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {74=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {74=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -830,7 +828,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {75=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {75=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -840,7 +838,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {76=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {76=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -850,7 +848,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {77=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {77=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -860,7 +858,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {78=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {78=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -870,7 +868,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {79=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {79=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -880,7 +878,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {80=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {80=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -890,7 +888,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {81=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {81=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -900,7 +898,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {82=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {82=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -910,7 +908,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {83=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {83=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -920,7 +918,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {84=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {84=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -930,7 +928,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {85=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {85=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -940,7 +938,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {86=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {86=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -950,7 +948,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {87=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {87=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -960,7 +958,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {88=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {88=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -970,7 +968,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {89=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {89=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -980,7 +978,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {90=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {90=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -990,7 +988,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {91=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {91=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1000,7 +998,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {92=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {92=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1010,7 +1008,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {93=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {93=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1020,7 +1018,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {94=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {94=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1030,7 +1028,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {95=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {95=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1040,7 +1038,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {96=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {96=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1050,7 +1048,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {97=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {97=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1060,7 +1058,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {98=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {98=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1070,7 +1068,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {99=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {99=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1080,7 +1078,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {100=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {100=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1090,7 +1088,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {101=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {101=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1100,7 +1098,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {102=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {102=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1110,7 +1108,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {103=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {103=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1120,7 +1118,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {104=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {104=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1130,7 +1128,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {105=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {105=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1140,7 +1138,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {106=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {106=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1150,7 +1148,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {107=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {107=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1160,7 +1158,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {108=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {108=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1170,7 +1168,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {109=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {109=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1180,7 +1178,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {110=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {110=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1190,7 +1188,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {111=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {111=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1200,7 +1198,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {112=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {112=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1210,7 +1208,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {113=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {113=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1220,7 +1218,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {114=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {114=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1230,7 +1228,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {115=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {115=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1240,7 +1238,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {116=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {116=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1250,7 +1248,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {117=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {117=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1260,7 +1258,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {118=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {118=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1270,7 +1268,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {119=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {119=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1280,7 +1278,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {120=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {120=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1290,7 +1288,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {121=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {121=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1300,7 +1298,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {122=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {122=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1310,7 +1308,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {123=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {123=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1320,7 +1318,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {124=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {124=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1330,7 +1328,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {125=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {125=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1340,7 +1338,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {126=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {126=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1350,7 +1348,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {127=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {127=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1360,7 +1358,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {128=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {128=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1370,7 +1368,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {129=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {129=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1380,7 +1378,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {130=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {130=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1390,7 +1388,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {131=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {131=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1401,7 +1399,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {132=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {132=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1412,7 +1410,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {133=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {133=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1422,7 +1420,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {134=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {134=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1433,7 +1431,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {135=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {135=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1443,7 +1441,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {136=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {136=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1453,7 +1451,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {137=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {137=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1463,7 +1461,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {138=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {138=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1473,7 +1471,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {139=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {139=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1483,7 +1481,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {140=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {140=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1493,7 +1491,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {141=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {141=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1504,7 +1502,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {142=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {142=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1515,7 +1513,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {143=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {143=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1526,7 +1524,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {144=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {144=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1536,7 +1534,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {145=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {145=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1546,7 +1544,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {146=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {146=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1556,7 +1554,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {147=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {147=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1566,7 +1564,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {148=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {148=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1576,7 +1574,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {149=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {149=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1586,7 +1584,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {150=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {150=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1597,7 +1595,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {151=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {151=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1608,7 +1606,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {152=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {152=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1618,7 +1616,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {153=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {153=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1628,7 +1626,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {154=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {154=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1638,7 +1636,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {155=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {155=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1648,7 +1646,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {156=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {156=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1658,7 +1656,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {157=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {157=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1668,7 +1666,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {158=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {158=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1678,7 +1676,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {159=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {159=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1688,7 +1686,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {160=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {160=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1698,7 +1696,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {161=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {161=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1708,7 +1706,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {162=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {162=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1718,7 +1716,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {163=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {163=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1728,7 +1726,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {164=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {164=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1739,7 +1737,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {165=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {165=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1749,7 +1747,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {166=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {166=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1759,7 +1757,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {167=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {167=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1771,7 +1769,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {168=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {168=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1783,7 +1781,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {169=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {169=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1794,7 +1792,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {170=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {170=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1804,7 +1802,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {171=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {171=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1814,7 +1812,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {172=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {172=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1824,7 +1822,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {173=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {173=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1834,7 +1832,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {174=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {174=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1844,7 +1842,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {175=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {175=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1855,7 +1853,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {176=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {176=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1865,31 +1863,31 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {177=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {177=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1, 1, 2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
 
     /**
-     * Test {178=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {178=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "15",
             FF = "1, 14, 15",
             FF78 = "1, 14, 15")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that support tests resolve as expected per browser");
     }
 
     /**
-     * Test {179=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {179=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1899,7 +1897,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {180=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {180=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1909,7 +1907,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {181=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {181=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1919,7 +1917,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {182=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {182=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1929,7 +1927,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {183=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {183=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1939,7 +1937,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {184=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {184=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1949,7 +1947,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {185=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {185=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1959,7 +1957,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {186=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {186=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1969,7 +1967,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {187=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {187=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1979,7 +1977,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {188=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {188=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1989,7 +1987,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {189=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {189=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1999,7 +1997,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {190=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {190=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2009,7 +2007,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {191=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {191=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2019,7 +2017,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {192=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {192=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2029,7 +2027,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {193=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {193=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2039,7 +2037,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {194=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {194=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2049,7 +2047,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {195=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {195=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2059,7 +2057,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {196=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {196=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2069,7 +2067,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {197=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {197=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2079,7 +2077,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {198=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {198=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2089,7 +2087,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {199=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {199=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2099,7 +2097,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {200=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {200=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2109,7 +2107,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {201=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {201=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2119,7 +2117,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {202=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {202=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2129,7 +2127,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {203=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {203=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2139,7 +2137,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {204=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {204=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2149,7 +2147,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {205=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {205=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2159,7 +2157,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {206=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {206=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2169,7 +2167,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {207=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {207=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2179,7 +2177,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {208=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {208=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2189,7 +2187,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {209=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {209=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2199,7 +2197,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {210=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {210=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2209,7 +2207,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {211=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {211=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2219,7 +2217,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {212=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {212=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2229,7 +2227,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {213=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {213=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2239,7 +2237,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {214=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {214=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2249,7 +2247,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {215=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {215=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2259,7 +2257,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {216=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {216=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2269,7 +2267,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {217=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {217=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2279,7 +2277,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {218=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {218=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2289,7 +2287,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {219=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {219=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2299,7 +2297,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {220=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {220=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2309,7 +2307,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {221=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {221=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2319,7 +2317,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {222=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {222=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2329,7 +2327,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {223=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {223=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2339,7 +2337,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {224=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {224=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2349,7 +2347,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {225=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {225=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2359,7 +2357,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {226=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {226=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2369,7 +2367,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {227=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {227=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2379,7 +2377,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {228=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {228=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2389,7 +2387,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {229=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {229=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2400,7 +2398,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {230=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {230=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2410,7 +2408,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {231=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {231=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2420,7 +2418,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {232=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {232=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2430,7 +2428,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {233=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {233=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2440,7 +2438,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {234=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {234=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2450,7 +2448,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {235=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {235=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2460,7 +2458,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {236=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {236=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2470,7 +2468,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {237=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {237=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2480,7 +2478,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {238=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {238=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2490,7 +2488,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {239=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {239=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2500,7 +2498,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {240=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {240=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2510,7 +2508,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {241=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {241=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2520,7 +2518,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {242=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {242=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2530,7 +2528,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {243=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {243=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2540,7 +2538,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {244=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {244=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2550,7 +2548,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {245=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {245=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2560,7 +2558,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {246=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {246=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2570,7 +2568,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {247=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {247=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2580,7 +2578,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {248=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {248=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2590,7 +2588,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {249=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {249=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2600,7 +2598,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {250=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {250=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2610,7 +2608,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {251=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {251=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2620,7 +2618,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {252=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {252=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2630,7 +2628,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {253=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {253=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2640,7 +2638,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {254=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {254=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2650,7 +2648,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {255=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {255=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2660,7 +2658,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {256=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {256=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2670,7 +2668,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {257=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {257=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2680,18 +2678,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {258=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {258=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("26")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void attributes__val__() throws Exception {
         runTest("attributes: val()");
     }
 
     /**
-     * Test {259=[CHROME, EDGE, FF, FF68, IE]}.
+     * Test {259=[CHROME, EDGE, FF, FF78, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2701,7 +2699,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {260=[CHROME, EDGE, FF, FF68]}.
+     * Test {260=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2714,7 +2712,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {260=[IE], 261=[CHROME, EDGE, FF, FF68]}.
+     * Test {260=[IE], 261=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2724,7 +2722,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {261=[IE], 262=[CHROME, EDGE, FF, FF68]}.
+     * Test {261=[IE], 262=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2734,7 +2732,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {262=[IE], 263=[CHROME, EDGE, FF, FF68]}.
+     * Test {262=[IE], 263=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2744,7 +2742,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {263=[IE], 264=[CHROME, EDGE, FF, FF68]}.
+     * Test {263=[IE], 264=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2754,7 +2752,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {264=[IE], 265=[CHROME, EDGE, FF, FF68]}.
+     * Test {264=[IE], 265=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2764,7 +2762,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {265=[IE], 266=[CHROME, EDGE, FF, FF68]}.
+     * Test {265=[IE], 266=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2774,7 +2772,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {266=[IE], 267=[CHROME, EDGE, FF, FF68]}.
+     * Test {266=[IE], 267=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2784,7 +2782,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {267=[IE], 268=[CHROME, EDGE, FF, FF68]}.
+     * Test {267=[IE], 268=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2794,7 +2792,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {268=[IE], 269=[CHROME, EDGE, FF, FF68]}.
+     * Test {268=[IE], 269=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2804,7 +2802,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {269=[IE], 270=[CHROME, EDGE, FF, FF68]}.
+     * Test {269=[IE], 270=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2814,7 +2812,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {270=[IE], 271=[CHROME, EDGE, FF, FF68]}.
+     * Test {270=[IE], 271=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2824,7 +2822,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {271=[IE], 272=[CHROME, EDGE, FF, FF68]}.
+     * Test {271=[IE], 272=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2834,7 +2832,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {272=[IE], 273=[CHROME, EDGE, FF, FF68]}.
+     * Test {272=[IE], 273=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2844,7 +2842,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {273=[IE], 274=[CHROME, EDGE, FF, FF68]}.
+     * Test {273=[IE], 274=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2854,7 +2852,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {274=[IE], 275=[CHROME, EDGE, FF, FF68]}.
+     * Test {274=[IE], 275=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2864,7 +2862,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {275=[IE], 276=[CHROME, EDGE, FF, FF68]}.
+     * Test {275=[IE], 276=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2874,7 +2872,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {276=[IE], 277=[CHROME, EDGE, FF, FF68]}.
+     * Test {276=[IE], 277=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2884,7 +2882,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {277=[IE], 278=[CHROME, EDGE, FF, FF68]}.
+     * Test {277=[IE], 278=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2894,7 +2892,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {278=[IE], 279=[CHROME, EDGE, FF, FF68]}.
+     * Test {278=[IE], 279=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2904,7 +2902,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {279=[IE], 280=[CHROME, EDGE, FF, FF68]}.
+     * Test {279=[IE], 280=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2914,7 +2912,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {280=[IE], 281=[CHROME, EDGE, FF, FF68]}.
+     * Test {280=[IE], 281=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2924,7 +2922,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {281=[IE], 282=[CHROME, EDGE, FF, FF68]}.
+     * Test {281=[IE], 282=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2934,7 +2932,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {282=[IE], 283=[CHROME, EDGE, FF, FF68]}.
+     * Test {282=[IE], 283=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2944,7 +2942,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {283=[IE], 284=[CHROME, EDGE, FF, FF68]}.
+     * Test {283=[IE], 284=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2954,7 +2952,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {284=[IE], 285=[CHROME, EDGE, FF, FF68]}.
+     * Test {284=[IE], 285=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2964,7 +2962,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {285=[IE], 286=[CHROME, EDGE, FF, FF68]}.
+     * Test {285=[IE], 286=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2974,7 +2972,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {286=[IE], 287=[CHROME, EDGE, FF, FF68]}.
+     * Test {286=[IE], 287=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2984,7 +2982,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {287=[IE], 288=[CHROME, EDGE, FF, FF68]}.
+     * Test {287=[IE], 288=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2994,7 +2992,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {288=[IE], 289=[CHROME, EDGE, FF, FF68]}.
+     * Test {288=[IE], 289=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3004,7 +3002,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {289=[IE], 290=[CHROME, EDGE, FF, FF68]}.
+     * Test {289=[IE], 290=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3014,7 +3012,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {290=[IE], 291=[CHROME, EDGE, FF, FF68]}.
+     * Test {290=[IE], 291=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3024,7 +3022,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {291=[IE], 292=[CHROME, EDGE, FF, FF68]}.
+     * Test {291=[IE], 292=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3034,7 +3032,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {292=[IE], 293=[CHROME, EDGE, FF, FF68]}.
+     * Test {292=[IE], 293=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3044,7 +3042,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {293=[IE], 294=[CHROME, EDGE, FF, FF68]}.
+     * Test {293=[IE], 294=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3054,7 +3052,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {294=[IE], 295=[CHROME, EDGE, FF, FF68]}.
+     * Test {294=[IE], 295=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3064,7 +3062,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {295=[IE], 296=[CHROME, EDGE, FF, FF68]}.
+     * Test {295=[IE], 296=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3074,7 +3072,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {296=[IE], 297=[CHROME, EDGE, FF, FF68]}.
+     * Test {296=[IE], 297=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3084,7 +3082,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {297=[IE], 298=[CHROME, EDGE, FF, FF68]}.
+     * Test {297=[IE], 298=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3094,7 +3092,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {298=[IE], 299=[CHROME, EDGE, FF, FF68]}.
+     * Test {298=[IE], 299=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3104,7 +3102,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {299=[IE], 300=[CHROME, EDGE, FF, FF68]}.
+     * Test {299=[IE], 300=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3114,7 +3112,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {300=[IE], 301=[CHROME, EDGE, FF, FF68]}.
+     * Test {300=[IE], 301=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3124,7 +3122,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {301=[IE], 302=[CHROME, EDGE, FF, FF68]}.
+     * Test {301=[IE], 302=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3134,7 +3132,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {302=[IE], 303=[CHROME, EDGE, FF, FF68]}.
+     * Test {302=[IE], 303=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3144,7 +3142,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {303=[IE], 304=[CHROME, EDGE, FF, FF68]}.
+     * Test {303=[IE], 304=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3154,7 +3152,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {304=[IE], 305=[CHROME, EDGE, FF, FF68]}.
+     * Test {304=[IE], 305=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3164,7 +3162,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {305=[IE], 306=[CHROME, EDGE, FF, FF68]}.
+     * Test {305=[IE], 306=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3174,7 +3172,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {306=[IE], 307=[CHROME, EDGE, FF, FF68]}.
+     * Test {306=[IE], 307=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3184,7 +3182,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {307=[IE], 308=[CHROME, EDGE, FF, FF68]}.
+     * Test {307=[IE], 308=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3194,7 +3192,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {308=[IE], 309=[CHROME, EDGE, FF, FF68]}.
+     * Test {308=[IE], 309=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3204,7 +3202,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {309=[IE], 310=[CHROME, EDGE, FF, FF68]}.
+     * Test {309=[IE], 310=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3214,7 +3212,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {310=[IE], 311=[CHROME, EDGE, FF, FF68]}.
+     * Test {310=[IE], 311=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3224,7 +3222,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {311=[IE], 312=[CHROME, EDGE, FF, FF68]}.
+     * Test {311=[IE], 312=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3234,7 +3232,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {312=[IE], 313=[CHROME, EDGE, FF, FF68]}.
+     * Test {312=[IE], 313=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3244,7 +3242,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {313=[IE], 314=[CHROME, EDGE, FF, FF68]}.
+     * Test {313=[IE], 314=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3254,7 +3252,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {314=[IE], 315=[CHROME, EDGE, FF, FF68]}.
+     * Test {314=[IE], 315=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3264,7 +3262,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {315=[IE], 316=[CHROME, EDGE, FF, FF68]}.
+     * Test {315=[IE], 316=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3274,7 +3272,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {316=[IE], 317=[CHROME, EDGE, FF, FF68]}.
+     * Test {316=[IE], 317=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3284,7 +3282,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {317=[IE], 318=[CHROME, EDGE, FF, FF68]}.
+     * Test {317=[IE], 318=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3294,7 +3292,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {318=[IE], 319=[CHROME, EDGE, FF, FF68]}.
+     * Test {318=[IE], 319=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3304,7 +3302,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {319=[IE], 320=[CHROME, EDGE, FF, FF68]}.
+     * Test {319=[IE], 320=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3314,7 +3312,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {320=[IE], 321=[CHROME, EDGE, FF, FF68]}.
+     * Test {320=[IE], 321=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3324,7 +3322,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {321=[IE], 322=[CHROME, EDGE, FF, FF68]}.
+     * Test {321=[IE], 322=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3334,7 +3332,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {322=[IE], 323=[CHROME, EDGE, FF, FF68]}.
+     * Test {322=[IE], 323=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3344,7 +3342,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {323=[IE], 324=[CHROME, EDGE, FF, FF68]}.
+     * Test {323=[IE], 324=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3354,7 +3352,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {324=[IE], 325=[CHROME, EDGE, FF, FF68]}.
+     * Test {324=[IE], 325=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3364,7 +3362,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {325=[IE], 326=[CHROME, EDGE, FF, FF68]}.
+     * Test {325=[IE], 326=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3374,7 +3372,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {326=[IE], 327=[CHROME, EDGE, FF, FF68]}.
+     * Test {326=[IE], 327=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3384,7 +3382,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {327=[IE], 328=[CHROME, EDGE, FF, FF68]}.
+     * Test {327=[IE], 328=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3394,7 +3392,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {328=[IE], 329=[CHROME, EDGE, FF, FF68]}.
+     * Test {328=[IE], 329=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3404,29 +3402,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {329=[IE], 330=[CHROME, EDGE, FF, FF68]}.
+     * Test {329=[IE], 330=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void event__submit_event_bubbles_on_copied_forms___11649_() throws Exception {
         runTest("event: submit event bubbles on copied forms (#11649)");
     }
 
     /**
-     * Test {330=[IE], 331=[CHROME, EDGE, FF, FF68]}.
+     * Test {330=[IE], 331=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void event__change_event_bubbles_on_copied_forms___11796_() throws Exception {
         runTest("event: change event bubbles on copied forms (#11796)");
     }
 
     /**
-     * Test {331=[IE], 332=[CHROME, EDGE, FF, FF68]}.
+     * Test {331=[IE], 332=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3436,7 +3434,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {332=[IE], 333=[CHROME, EDGE, FF, FF68]}.
+     * Test {332=[IE], 333=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3446,7 +3444,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {333=[IE], 334=[CHROME, EDGE, FF, FF68]}.
+     * Test {333=[IE], 334=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3456,7 +3454,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {334=[IE], 335=[CHROME, EDGE, FF, FF68]}.
+     * Test {334=[IE], 335=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3466,7 +3464,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {335=[IE], 336=[CHROME, EDGE, FF, FF68]}.
+     * Test {335=[IE], 336=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3476,7 +3474,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {336=[IE], 337=[CHROME, EDGE, FF, FF68]}.
+     * Test {336=[IE], 337=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3486,7 +3484,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {337=[IE], 338=[CHROME, EDGE, FF, FF68]}.
+     * Test {337=[IE], 338=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3496,18 +3494,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {338=[IE], 339=[CHROME, EDGE, FF, FF68]}.
+     * Test {338=[IE], 339=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void event__on_beforeunload_() throws Exception {
         runTest("event: on(beforeunload)");
     }
 
     /**
-     * Test {339=[IE], 340=[CHROME, EDGE, FF, FF68]}.
+     * Test {339=[IE], 340=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3517,7 +3515,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {340=[IE], 341=[CHROME, EDGE, FF, FF68]}.
+     * Test {340=[IE], 341=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3527,7 +3525,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {341=[IE], 342=[CHROME, EDGE, FF, FF68]}.
+     * Test {341=[IE], 342=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3537,7 +3535,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {342=[IE], 343=[CHROME, EDGE, FF, FF68]}.
+     * Test {342=[IE], 343=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3547,7 +3545,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {343=[IE], 344=[CHROME, EDGE, FF, FF68]}.
+     * Test {343=[IE], 344=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3557,7 +3555,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {344=[IE], 345=[CHROME, EDGE, FF, FF68]}.
+     * Test {344=[IE], 345=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3567,7 +3565,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {345=[IE], 346=[CHROME, EDGE, FF, FF68]}.
+     * Test {345=[IE], 346=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3577,18 +3575,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {346=[IE], 347=[CHROME, EDGE, FF, FF68]}.
+     * Test {346=[IE], 347=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void event__ignore_comment_nodes_in_event_delegation__gh_2055_() throws Exception {
         runTest("event: ignore comment nodes in event delegation (gh-2055)");
     }
 
     /**
-     * Test {347=[IE], 348=[CHROME, EDGE, FF, FF68]}.
+     * Test {347=[IE], 348=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3598,7 +3596,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {348=[IE], 349=[CHROME, EDGE, FF, FF68]}.
+     * Test {348=[IE], 349=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3608,7 +3606,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {349=[IE], 350=[CHROME, EDGE, FF, FF68]}.
+     * Test {349=[IE], 350=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3618,7 +3616,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {350=[IE], 351=[CHROME, EDGE, FF, FF68]}.
+     * Test {350=[IE], 351=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3628,7 +3626,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {351=[IE], 352=[CHROME, EDGE, FF, FF68]}.
+     * Test {351=[IE], 352=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3638,7 +3636,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {352=[IE], 353=[CHROME, EDGE, FF, FF68]}.
+     * Test {352=[IE], 353=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3648,7 +3646,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {353=[IE], 354=[CHROME, EDGE, FF, FF68]}.
+     * Test {353=[IE], 354=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3658,7 +3656,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {354=[IE], 355=[CHROME, EDGE, FF, FF68]}.
+     * Test {354=[IE], 355=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3668,7 +3666,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {355=[IE], 356=[CHROME, EDGE, FF, FF68]}.
+     * Test {355=[IE], 356=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3678,7 +3676,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {356=[IE], 357=[CHROME, EDGE, FF, FF68]}.
+     * Test {356=[IE], 357=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3688,7 +3686,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {357=[IE], 358=[CHROME, EDGE, FF, FF68]}.
+     * Test {357=[IE], 358=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3698,7 +3696,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {358=[IE], 359=[CHROME, EDGE, FF, FF68]}.
+     * Test {358=[IE], 359=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3708,7 +3706,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {359=[IE], 360=[CHROME, EDGE, FF, FF68]}.
+     * Test {359=[IE], 360=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3718,7 +3716,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {360=[IE], 361=[CHROME, EDGE, FF, FF68]}.
+     * Test {360=[IE], 361=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3728,7 +3726,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {361=[IE], 362=[CHROME, EDGE, FF, FF68]}.
+     * Test {361=[IE], 362=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3738,7 +3736,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {362=[IE], 363=[CHROME, EDGE, FF, FF68]}.
+     * Test {362=[IE], 363=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3748,7 +3746,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {363=[IE], 364=[CHROME, EDGE, FF, FF68]}.
+     * Test {363=[IE], 364=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3758,7 +3756,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {364=[IE], 365=[CHROME, EDGE, FF, FF68]}.
+     * Test {364=[IE], 365=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3768,7 +3766,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {365=[IE], 366=[CHROME, EDGE, FF, FF68]}.
+     * Test {365=[IE], 366=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3778,7 +3776,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {366=[IE], 367=[CHROME, EDGE, FF, FF68]}.
+     * Test {366=[IE], 367=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3788,7 +3786,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {367=[IE], 368=[CHROME, EDGE, FF, FF68]}.
+     * Test {367=[IE], 368=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3798,7 +3796,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {368=[IE], 369=[CHROME, EDGE, FF, FF68]}.
+     * Test {368=[IE], 369=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3808,7 +3806,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {369=[IE], 370=[CHROME, EDGE, FF, FF68]}.
+     * Test {369=[IE], 370=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3818,18 +3816,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {370=[IE], 371=[CHROME, EDGE, FF, FF68]}.
+     * Test {370=[IE], 371=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void event__jQuery_ready_uses_interactive() throws Exception {
         runTest("event: jQuery.ready uses interactive");
     }
 
     /**
-     * Test {371=[IE], 372=[CHROME, EDGE, FF, FF68]}.
+     * Test {371=[IE], 372=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3839,7 +3837,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {372=[IE], 373=[CHROME, EDGE, FF, FF68]}.
+     * Test {372=[IE], 373=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3849,18 +3847,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {373=[IE], 374=[CHROME, EDGE, FF, FF68]}.
+     * Test {373=[IE], 374=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void event__jQuery_ready_synchronous_load_with_long_loading_subresources() throws Exception {
         runTest("event: jQuery.ready synchronous load with long loading subresources");
     }
 
     /**
-     * Test {374=[IE], 375=[CHROME, EDGE, FF, FF68]}.
+     * Test {374=[IE], 375=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3870,7 +3868,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {375=[IE], 376=[CHROME, EDGE, FF, FF68]}.
+     * Test {375=[IE], 376=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3880,7 +3878,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {376=[IE], 377=[CHROME, EDGE, FF, FF68]}.
+     * Test {376=[IE], 377=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3890,7 +3888,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {377=[IE], 378=[CHROME, EDGE, FF, FF68]}.
+     * Test {377=[IE], 378=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3900,7 +3898,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {378=[IE], 379=[CHROME, EDGE, FF, FF68]}.
+     * Test {378=[IE], 379=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3910,7 +3908,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {379=[IE], 380=[CHROME, EDGE, FF, FF68]}.
+     * Test {379=[IE], 380=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3920,7 +3918,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {380=[IE], 381=[CHROME, EDGE, FF, FF68]}.
+     * Test {380=[IE], 381=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3930,7 +3928,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {381=[IE], 382=[CHROME, EDGE, FF, FF68]}.
+     * Test {381=[IE], 382=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3940,7 +3938,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {382=[IE], 383=[CHROME, EDGE, FF, FF68]}.
+     * Test {382=[IE], 383=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3950,7 +3948,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {383=[IE], 384=[CHROME, EDGE, FF, FF68]}.
+     * Test {383=[IE], 384=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3960,7 +3958,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {384=[IE], 385=[CHROME, EDGE, FF, FF68]}.
+     * Test {384=[IE], 385=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3970,7 +3968,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {385=[IE], 386=[CHROME, EDGE, FF, FF68]}.
+     * Test {385=[IE], 386=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3980,7 +3978,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {386=[IE], 387=[CHROME, EDGE, FF, FF68]}.
+     * Test {386=[IE], 387=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3990,7 +3988,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {387=[IE], 388=[CHROME, EDGE, FF, FF68]}.
+     * Test {387=[IE], 388=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4000,7 +3998,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {388=[IE], 389=[CHROME, EDGE, FF, FF68]}.
+     * Test {388=[IE], 389=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4010,7 +4008,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {389=[IE], 390=[CHROME, EDGE, FF, FF68]}.
+     * Test {389=[IE], 390=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4020,7 +4018,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {390=[IE], 391=[CHROME, EDGE, FF, FF68]}.
+     * Test {390=[IE], 391=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4030,7 +4028,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {391=[IE], 392=[CHROME, EDGE, FF, FF68]}.
+     * Test {391=[IE], 392=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4040,7 +4038,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {392=[IE], 393=[CHROME, EDGE, FF, FF68]}.
+     * Test {392=[IE], 393=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4050,7 +4048,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {393=[IE], 394=[CHROME, EDGE, FF, FF68]}.
+     * Test {393=[IE], 394=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4060,7 +4058,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {394=[IE], 395=[CHROME, EDGE, FF, FF68]}.
+     * Test {394=[IE], 395=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4070,7 +4068,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {395=[IE], 396=[CHROME, EDGE, FF, FF68]}.
+     * Test {395=[IE], 396=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4080,7 +4078,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {396=[IE], 397=[CHROME, EDGE, FF, FF68]}.
+     * Test {396=[IE], 397=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4090,18 +4088,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {398=[IE], 399=[CHROME, EDGE, FF, FF68]}.
+     * Test {398=[IE], 399=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void selector__disconnected_nodes() throws Exception {
         runTest("selector: disconnected nodes");
     }
 
     /**
-     * Test {399=[IE], 400=[CHROME, EDGE, FF, FF68]}.
+     * Test {399=[IE], 400=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4111,7 +4109,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {400=[IE], 401=[CHROME, EDGE, FF, FF68]}.
+     * Test {400=[IE], 401=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4121,18 +4119,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {401=[IE], 402=[CHROME, EDGE, FF, FF68]}.
+     * Test {401=[IE], 402=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("15")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void selector__jQuery_uniqueSort() throws Exception {
         runTest("selector: jQuery.uniqueSort");
     }
 
     /**
-     * Test {402=[IE], 403=[CHROME, EDGE, FF, FF68]}.
+     * Test {402=[IE], 403=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4142,7 +4140,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {403=[IE], 404=[CHROME, EDGE, FF, FF68]}.
+     * Test {403=[IE], 404=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4152,7 +4150,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {404=[IE], 405=[CHROME, EDGE, FF, FF68]}.
+     * Test {404=[IE], 405=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4162,7 +4160,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {405=[IE], 406=[CHROME, EDGE, FF, FF68]}.
+     * Test {405=[IE], 406=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4172,7 +4170,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {406=[IE], 407=[CHROME, EDGE, FF, FF68]}.
+     * Test {406=[IE], 407=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4182,7 +4180,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {407=[IE], 408=[CHROME, EDGE, FF, FF68]}.
+     * Test {407=[IE], 408=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4192,7 +4190,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {408=[IE], 409=[CHROME, EDGE, FF, FF68]}.
+     * Test {408=[IE], 409=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4202,7 +4200,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {409=[IE], 410=[CHROME, EDGE, FF, FF68]}.
+     * Test {409=[IE], 410=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4212,7 +4210,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {410=[IE], 411=[CHROME, EDGE, FF, FF68]}.
+     * Test {410=[IE], 411=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4222,7 +4220,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {411=[IE], 412=[CHROME, EDGE, FF, FF68]}.
+     * Test {411=[IE], 412=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4232,7 +4230,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {412=[IE], 413=[CHROME, EDGE, FF, FF68]}.
+     * Test {412=[IE], 413=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4242,7 +4240,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {413=[IE], 414=[CHROME, EDGE, FF, FF68]}.
+     * Test {413=[IE], 414=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4252,7 +4250,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {414=[IE], 415=[CHROME, EDGE, FF, FF68]}.
+     * Test {414=[IE], 415=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4262,7 +4260,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {415=[IE], 416=[CHROME, EDGE, FF, FF68]}.
+     * Test {415=[IE], 416=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4272,7 +4270,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {416=[IE], 417=[CHROME, EDGE, FF, FF68]}.
+     * Test {416=[IE], 417=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4282,7 +4280,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {417=[IE], 418=[CHROME, EDGE, FF, FF68]}.
+     * Test {417=[IE], 418=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4292,7 +4290,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {418=[IE], 419=[CHROME, EDGE, FF, FF68]}.
+     * Test {418=[IE], 419=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4302,7 +4300,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {419=[IE], 420=[CHROME, EDGE, FF, FF68]}.
+     * Test {419=[IE], 420=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4312,7 +4310,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {420=[IE], 421=[CHROME, EDGE, FF, FF68]}.
+     * Test {420=[IE], 421=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4322,7 +4320,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {421=[IE], 422=[CHROME, EDGE, FF, FF68]}.
+     * Test {421=[IE], 422=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4332,7 +4330,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {422=[IE], 423=[CHROME, EDGE, FF, FF68]}.
+     * Test {422=[IE], 423=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4342,7 +4340,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {423=[IE], 424=[CHROME, EDGE, FF, FF68]}.
+     * Test {423=[IE], 424=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4352,7 +4350,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {424=[IE], 425=[CHROME, EDGE, FF, FF68]}.
+     * Test {424=[IE], 425=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4362,7 +4360,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {425=[IE], 426=[CHROME, EDGE, FF, FF68]}.
+     * Test {425=[IE], 426=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4372,7 +4370,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {426=[IE], 427=[CHROME, EDGE, FF, FF68]}.
+     * Test {426=[IE], 427=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4382,7 +4380,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {427=[IE], 428=[CHROME, EDGE, FF, FF68]}.
+     * Test {427=[IE], 428=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4392,7 +4390,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {428=[IE], 429=[CHROME, EDGE, FF, FF68]}.
+     * Test {428=[IE], 429=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4402,7 +4400,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {429=[IE], 430=[CHROME, EDGE, FF, FF68]}.
+     * Test {429=[IE], 430=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4412,7 +4410,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {430=[IE], 431=[CHROME, EDGE, FF, FF68]}.
+     * Test {430=[IE], 431=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4422,7 +4420,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {431=[IE], 432=[CHROME, EDGE, FF, FF68]}.
+     * Test {431=[IE], 432=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4432,7 +4430,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {432=[IE], 433=[CHROME, EDGE, FF, FF68]}.
+     * Test {432=[IE], 433=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4442,7 +4440,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {433=[IE], 434=[CHROME, EDGE, FF, FF68]}.
+     * Test {433=[IE], 434=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4452,7 +4450,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {434=[IE], 435=[CHROME, EDGE, FF, FF68]}.
+     * Test {434=[IE], 435=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4462,7 +4460,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {435=[IE], 436=[CHROME, EDGE, FF, FF68]}.
+     * Test {435=[IE], 436=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4472,7 +4470,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {436=[IE], 437=[CHROME, EDGE, FF, FF68]}.
+     * Test {436=[IE], 437=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4482,29 +4480,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {438=[IE], 439=[CHROME, EDGE, FF, FF68]}.
+     * Test {438=[IE], 439=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void traversing__siblings__String__() throws Exception {
         runTest("traversing: siblings([String])");
     }
 
     /**
-     * Test {440=[IE], 441=[CHROME, EDGE, FF, FF68]}.
+     * Test {440=[IE], 441=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void traversing__children__String__() throws Exception {
         runTest("traversing: children([String])");
     }
 
     /**
-     * Test {441=[IE], 442=[CHROME, EDGE, FF, FF68]}.
+     * Test {441=[IE], 442=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4514,7 +4512,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {442=[IE], 443=[CHROME, EDGE, FF, FF68]}.
+     * Test {442=[IE], 443=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4524,7 +4522,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {443=[IE], 444=[CHROME, EDGE, FF, FF68]}.
+     * Test {443=[IE], 444=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4534,7 +4532,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {444=[IE], 445=[CHROME, EDGE, FF, FF68]}.
+     * Test {444=[IE], 445=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4544,7 +4542,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {445=[IE], 446=[CHROME, EDGE, FF, FF68]}.
+     * Test {445=[IE], 446=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4554,7 +4552,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {446=[IE], 447=[CHROME, EDGE, FF, FF68]}.
+     * Test {446=[IE], 447=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4564,7 +4562,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {447=[IE], 448=[CHROME, EDGE, FF, FF68]}.
+     * Test {447=[IE], 448=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4574,7 +4572,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {448=[IE], 449=[CHROME, EDGE, FF, FF68]}.
+     * Test {448=[IE], 449=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4584,7 +4582,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {449=[IE], 450=[CHROME, EDGE, FF, FF68]}.
+     * Test {449=[IE], 450=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4594,7 +4592,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {450=[IE], 451=[CHROME, EDGE, FF, FF68]}.
+     * Test {450=[IE], 451=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4604,7 +4602,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {451=[IE], 452=[CHROME, EDGE, FF, FF68]}.
+     * Test {451=[IE], 452=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4614,7 +4612,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {452=[IE], 453=[CHROME, EDGE, FF, FF68]}.
+     * Test {452=[IE], 453=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4625,7 +4623,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {453=[IE], 454=[CHROME, EDGE, FF, FF68]}.
+     * Test {453=[IE], 454=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4635,7 +4633,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {454=[IE], 455=[CHROME, EDGE, FF, FF68]}.
+     * Test {454=[IE], 455=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4645,7 +4643,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {455=[IE], 456=[CHROME, EDGE, FF, FF68]}.
+     * Test {455=[IE], 456=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4655,7 +4653,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {456=[IE], 457=[CHROME, EDGE, FF, FF68]}.
+     * Test {456=[IE], 457=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4665,7 +4663,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {457=[IE], 458=[CHROME, EDGE, FF, FF68]}.
+     * Test {457=[IE], 458=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4675,7 +4673,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {458=[IE], 459=[CHROME, EDGE, FF, FF68]}.
+     * Test {458=[IE], 459=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4685,7 +4683,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {459=[IE], 460=[CHROME, EDGE, FF, FF68]}.
+     * Test {459=[IE], 460=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4695,7 +4693,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {460=[IE], 461=[CHROME, EDGE, FF, FF68]}.
+     * Test {460=[IE], 461=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4705,7 +4703,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {461=[IE], 462=[CHROME, EDGE, FF, FF68]}.
+     * Test {461=[IE], 462=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4715,7 +4713,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {462=[IE], 463=[CHROME, EDGE, FF, FF68]}.
+     * Test {462=[IE], 463=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4725,7 +4723,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {463=[IE], 464=[CHROME, EDGE, FF, FF68]}.
+     * Test {463=[IE], 464=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4735,7 +4733,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {464=[IE], 465=[CHROME, EDGE, FF, FF68]}.
+     * Test {464=[IE], 465=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4745,7 +4743,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {465=[IE], 466=[CHROME, EDGE, FF, FF68]}.
+     * Test {465=[IE], 466=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4755,7 +4753,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {466=[IE], 467=[CHROME, EDGE, FF, FF68]}.
+     * Test {466=[IE], 467=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4765,7 +4763,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {467=[IE], 468=[CHROME, EDGE, FF, FF68]}.
+     * Test {467=[IE], 468=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4775,7 +4773,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {468=[IE], 469=[CHROME, EDGE, FF, FF68]}.
+     * Test {468=[IE], 469=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4785,7 +4783,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {469=[IE], 470=[CHROME, EDGE, FF, FF68]}.
+     * Test {469=[IE], 470=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4795,7 +4793,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {470=[IE], 471=[CHROME, EDGE, FF, FF68]}.
+     * Test {470=[IE], 471=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4805,7 +4803,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {471=[IE], 472=[CHROME, EDGE, FF, FF68]}.
+     * Test {471=[IE], 472=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4815,7 +4813,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {472=[IE], 473=[CHROME, EDGE, FF, FF68]}.
+     * Test {472=[IE], 473=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4825,7 +4823,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {473=[IE], 474=[CHROME, EDGE, FF, FF68]}.
+     * Test {473=[IE], 474=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4835,7 +4833,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {474=[IE], 475=[CHROME, EDGE, FF, FF68]}.
+     * Test {474=[IE], 475=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4845,7 +4843,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {475=[IE], 476=[CHROME, EDGE, FF, FF68]}.
+     * Test {475=[IE], 476=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4855,7 +4853,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {476=[IE], 477=[CHROME, EDGE, FF, FF68]}.
+     * Test {476=[IE], 477=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4865,7 +4863,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {477=[IE], 478=[CHROME, EDGE, FF, FF68]}.
+     * Test {477=[IE], 478=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4875,7 +4873,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {478=[IE], 479=[CHROME, EDGE, FF, FF68]}.
+     * Test {478=[IE], 479=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4885,7 +4883,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {479=[IE], 480=[CHROME, EDGE, FF, FF68]}.
+     * Test {479=[IE], 480=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4895,7 +4893,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {480=[IE], 481=[CHROME, EDGE, FF, FF68]}.
+     * Test {480=[IE], 481=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4905,7 +4903,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {481=[IE], 482=[CHROME, EDGE, FF, FF68]}.
+     * Test {481=[IE], 482=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4915,7 +4913,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {482=[IE], 483=[CHROME, EDGE, FF, FF68]}.
+     * Test {482=[IE], 483=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4925,7 +4923,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {483=[IE], 484=[CHROME, EDGE, FF, FF68]}.
+     * Test {483=[IE], 484=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4935,18 +4933,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {484=[IE], 485=[CHROME, EDGE, FF, FF68]}.
+     * Test {484=[IE], 485=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("240")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void manipulation__Tag_name_processing_respects_the_HTML_Standard__gh_2005_() throws Exception {
         runTest("manipulation: Tag name processing respects the HTML Standard (gh-2005)");
     }
 
     /**
-     * Test {485=[IE], 486=[CHROME, EDGE, FF, FF68]}.
+     * Test {485=[IE], 486=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4956,7 +4954,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {486=[IE], 487=[CHROME, EDGE, FF, FF68]}.
+     * Test {486=[IE], 487=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4966,7 +4964,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {487=[IE], 488=[CHROME, EDGE, FF, FF68]}.
+     * Test {487=[IE], 488=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4976,7 +4974,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {488=[IE], 489=[CHROME, EDGE, FF, FF68]}.
+     * Test {488=[IE], 489=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4986,7 +4984,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {489=[IE], 490=[CHROME, EDGE, FF, FF68]}.
+     * Test {489=[IE], 490=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4996,7 +4994,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {490=[IE], 491=[CHROME, EDGE, FF, FF68]}.
+     * Test {490=[IE], 491=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5006,7 +5004,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {491=[IE], 492=[CHROME, EDGE, FF, FF68]}.
+     * Test {491=[IE], 492=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5016,7 +5014,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {492=[IE], 493=[CHROME, EDGE, FF, FF68]}.
+     * Test {492=[IE], 493=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5026,7 +5024,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {493=[IE], 494=[CHROME, EDGE, FF, FF68]}.
+     * Test {493=[IE], 494=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5036,7 +5034,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {494=[IE], 495=[CHROME, EDGE, FF, FF68]}.
+     * Test {494=[IE], 495=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5046,7 +5044,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {495=[IE], 496=[CHROME, EDGE, FF, FF68]}.
+     * Test {495=[IE], 496=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5056,7 +5054,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {496=[IE], 497=[CHROME, EDGE, FF, FF68]}.
+     * Test {496=[IE], 497=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5066,7 +5064,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {497=[IE], 498=[CHROME, EDGE, FF, FF68]}.
+     * Test {497=[IE], 498=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5076,7 +5074,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {498=[IE], 499=[CHROME, EDGE, FF, FF68]}.
+     * Test {498=[IE], 499=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5086,7 +5084,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {499=[IE], 500=[CHROME, EDGE, FF, FF68]}.
+     * Test {499=[IE], 500=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5096,7 +5094,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {500=[IE], 501=[CHROME, EDGE, FF, FF68]}.
+     * Test {500=[IE], 501=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5106,7 +5104,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {501=[IE], 502=[CHROME, EDGE, FF, FF68]}.
+     * Test {501=[IE], 502=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5116,7 +5114,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {502=[IE], 503=[CHROME, EDGE, FF, FF68]}.
+     * Test {502=[IE], 503=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5126,7 +5124,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {503=[IE], 504=[CHROME, EDGE, FF, FF68]}.
+     * Test {503=[IE], 504=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5136,7 +5134,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {504=[IE], 505=[CHROME, EDGE, FF, FF68]}.
+     * Test {504=[IE], 505=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5146,7 +5144,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {505=[IE], 506=[CHROME, EDGE, FF, FF68]}.
+     * Test {505=[IE], 506=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5156,7 +5154,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {506=[IE], 507=[CHROME, EDGE, FF, FF68]}.
+     * Test {506=[IE], 507=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5166,7 +5164,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {507=[IE], 508=[CHROME, EDGE, FF, FF68]}.
+     * Test {507=[IE], 508=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5176,7 +5174,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {508=[IE], 509=[CHROME, EDGE, FF, FF68]}.
+     * Test {508=[IE], 509=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5186,7 +5184,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {509=[IE], 510=[CHROME, EDGE, FF, FF68]}.
+     * Test {509=[IE], 510=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5196,7 +5194,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {510=[IE], 511=[CHROME, EDGE, FF, FF68]}.
+     * Test {510=[IE], 511=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5206,7 +5204,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {511=[IE], 512=[CHROME, EDGE, FF, FF68]}.
+     * Test {511=[IE], 512=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5216,7 +5214,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {512=[IE], 513=[CHROME, EDGE, FF, FF68]}.
+     * Test {512=[IE], 513=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5226,7 +5224,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {513=[IE], 514=[CHROME, EDGE, FF, FF68]}.
+     * Test {513=[IE], 514=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5236,7 +5234,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {514=[IE], 515=[CHROME, EDGE, FF, FF68]}.
+     * Test {514=[IE], 515=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5246,7 +5244,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {515=[IE], 516=[CHROME, EDGE, FF, FF68]}.
+     * Test {515=[IE], 516=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5256,7 +5254,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {516=[IE], 517=[CHROME, EDGE, FF, FF68]}.
+     * Test {516=[IE], 517=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5266,7 +5264,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {517=[IE], 518=[CHROME, EDGE, FF, FF68]}.
+     * Test {517=[IE], 518=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5276,7 +5274,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {519=[IE], 520=[CHROME, EDGE, FF, FF68]}.
+     * Test {519=[IE], 520=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5286,7 +5284,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {521=[IE], 522=[CHROME, EDGE, FF, FF68]}.
+     * Test {521=[IE], 522=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5296,7 +5294,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {522=[IE], 523=[CHROME, EDGE, FF, FF68]}.
+     * Test {522=[IE], 523=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5306,7 +5304,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {523=[IE], 524=[CHROME, EDGE, FF, FF68]}.
+     * Test {523=[IE], 524=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5316,7 +5314,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {524=[IE], 525=[CHROME, EDGE, FF, FF68]}.
+     * Test {524=[IE], 525=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5326,7 +5324,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {525=[IE], 526=[CHROME, EDGE, FF, FF68]}.
+     * Test {525=[IE], 526=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5336,7 +5334,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {526=[IE], 527=[CHROME, EDGE, FF, FF68]}.
+     * Test {526=[IE], 527=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5346,7 +5344,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {527=[IE], 528=[CHROME, EDGE, FF, FF68]}.
+     * Test {527=[IE], 528=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5356,7 +5354,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {528=[IE], 529=[CHROME, EDGE, FF, FF68]}.
+     * Test {528=[IE], 529=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5366,7 +5364,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {529=[IE], 530=[CHROME, EDGE, FF, FF68]}.
+     * Test {529=[IE], 530=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5376,7 +5374,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {530=[IE], 531=[CHROME, EDGE, FF, FF68]}.
+     * Test {530=[IE], 531=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5386,7 +5384,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {531=[IE], 532=[CHROME, EDGE, FF, FF68]}.
+     * Test {531=[IE], 532=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5396,7 +5394,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {532=[IE], 533=[CHROME, EDGE, FF, FF68]}.
+     * Test {532=[IE], 533=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5406,7 +5404,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {533=[IE], 534=[CHROME, EDGE, FF, FF68]}.
+     * Test {533=[IE], 534=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5416,7 +5414,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {534=[IE], 535=[CHROME, EDGE, FF, FF68]}.
+     * Test {534=[IE], 535=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5426,7 +5424,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {535=[IE], 536=[CHROME, EDGE, FF, FF68]}.
+     * Test {535=[IE], 536=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5436,7 +5434,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {536=[IE], 537=[CHROME, EDGE, FF, FF68]}.
+     * Test {536=[IE], 537=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5446,7 +5444,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {537=[IE], 538=[CHROME, EDGE, FF, FF68]}.
+     * Test {537=[IE], 538=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5456,7 +5454,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {538=[IE], 539=[CHROME, EDGE, FF, FF68]}.
+     * Test {538=[IE], 539=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5466,7 +5464,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {539=[IE], 540=[CHROME, EDGE, FF, FF68]}.
+     * Test {539=[IE], 540=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5476,7 +5474,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {540=[IE], 541=[CHROME, EDGE, FF, FF68]}.
+     * Test {540=[IE], 541=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5486,7 +5484,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {541=[IE], 542=[CHROME, EDGE, FF, FF68]}.
+     * Test {541=[IE], 542=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5496,7 +5494,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {542=[IE], 543=[CHROME, EDGE, FF, FF68]}.
+     * Test {542=[IE], 543=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5506,7 +5504,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {543=[IE], 544=[CHROME, EDGE, FF, FF68]}.
+     * Test {543=[IE], 544=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5516,7 +5514,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {544=[IE], 545=[CHROME, EDGE, FF, FF68]}.
+     * Test {544=[IE], 545=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5526,7 +5524,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {545=[IE], 546=[CHROME, EDGE, FF, FF68]}.
+     * Test {545=[IE], 546=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5536,7 +5534,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {546=[IE], 547=[CHROME, EDGE, FF, FF68]}.
+     * Test {546=[IE], 547=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5546,7 +5544,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {547=[IE], 548=[CHROME, EDGE, FF, FF68]}.
+     * Test {547=[IE], 548=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5556,7 +5554,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {548=[IE], 549=[CHROME, EDGE, FF, FF68]}.
+     * Test {548=[IE], 549=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5566,18 +5564,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {549=[IE], 550=[CHROME, EDGE, FF, FF68]}.
+     * Test {549=[IE], 550=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void manipulation__table_manipulation() throws Exception {
         runTest("manipulation: table manipulation");
     }
 
     /**
-     * Test {550=[IE], 551=[CHROME, EDGE, FF, FF68]}.
+     * Test {550=[IE], 551=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5587,7 +5585,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {551=[IE], 552=[CHROME, EDGE, FF, FF68]}.
+     * Test {551=[IE], 552=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5597,7 +5595,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {552=[IE], 553=[CHROME, EDGE, FF, FF68]}.
+     * Test {552=[IE], 553=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5607,7 +5605,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {553=[IE], 554=[CHROME, EDGE, FF, FF68]}.
+     * Test {553=[IE], 554=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5617,7 +5615,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {554=[IE], 555=[CHROME, EDGE, FF, FF68]}.
+     * Test {554=[IE], 555=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5627,7 +5625,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {555=[IE], 556=[CHROME, EDGE, FF, FF68]}.
+     * Test {555=[IE], 556=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5637,7 +5635,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {556=[IE], 557=[CHROME, EDGE, FF, FF68]}.
+     * Test {556=[IE], 557=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5647,7 +5645,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {557=[IE], 558=[CHROME, EDGE, FF, FF68]}.
+     * Test {557=[IE], 558=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5657,7 +5655,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {558=[IE], 559=[CHROME, EDGE, FF, FF68]}.
+     * Test {558=[IE], 559=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5667,7 +5665,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {559=[IE], 560=[CHROME, EDGE, FF, FF68]}.
+     * Test {559=[IE], 560=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5677,7 +5675,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {560=[IE], 561=[CHROME, EDGE, FF, FF68]}.
+     * Test {560=[IE], 561=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5689,7 +5687,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {561=[IE], 562=[CHROME, EDGE, FF, FF68]}.
+     * Test {561=[IE], 562=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5699,7 +5697,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {562=[IE], 563=[CHROME, EDGE, FF, FF68]}.
+     * Test {562=[IE], 563=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5709,7 +5707,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {563=[IE], 564=[CHROME, EDGE, FF, FF68]}.
+     * Test {563=[IE], 564=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5719,7 +5717,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {564=[IE], 565=[CHROME, EDGE, FF, FF68]}.
+     * Test {564=[IE], 565=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5729,7 +5727,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {565=[IE], 566=[CHROME, EDGE, FF, FF68]}.
+     * Test {565=[IE], 566=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5739,7 +5737,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {566=[IE], 567=[CHROME, EDGE, FF, FF68]}.
+     * Test {566=[IE], 567=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5749,7 +5747,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {567=[IE], 568=[CHROME, EDGE, FF, FF68]}.
+     * Test {567=[IE], 568=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5759,7 +5757,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {568=[IE], 569=[CHROME, EDGE, FF, FF68]}.
+     * Test {568=[IE], 569=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5769,7 +5767,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {569=[IE], 570=[CHROME, EDGE, FF, FF68]}.
+     * Test {569=[IE], 570=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5779,7 +5777,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {570=[IE], 571=[CHROME, EDGE, FF, FF68]}.
+     * Test {570=[IE], 571=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5789,7 +5787,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {571=[IE], 572=[CHROME, EDGE, FF, FF68]}.
+     * Test {571=[IE], 572=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5799,7 +5797,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {572=[IE], 573=[CHROME, EDGE, FF, FF68]}.
+     * Test {572=[IE], 573=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5809,7 +5807,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {573=[IE], 574=[CHROME, EDGE, FF, FF68]}.
+     * Test {573=[IE], 574=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5819,7 +5817,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {574=[IE], 575=[CHROME, EDGE, FF, FF68]}.
+     * Test {574=[IE], 575=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5829,7 +5827,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {575=[IE], 576=[CHROME, EDGE, FF, FF68]}.
+     * Test {575=[IE], 576=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5839,7 +5837,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {576=[IE], 577=[CHROME, EDGE, FF, FF68]}.
+     * Test {576=[IE], 577=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5849,7 +5847,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {577=[IE], 578=[CHROME, EDGE, FF, FF68]}.
+     * Test {577=[IE], 578=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5859,7 +5857,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {578=[IE], 579=[CHROME, EDGE, FF, FF68]}.
+     * Test {578=[IE], 579=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5869,7 +5867,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {579=[IE], 580=[CHROME, EDGE, FF, FF68]}.
+     * Test {579=[IE], 580=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5879,7 +5877,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {580=[IE], 581=[CHROME, EDGE, FF, FF68]}.
+     * Test {580=[IE], 581=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5889,7 +5887,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {581=[IE], 582=[CHROME, EDGE, FF, FF68]}.
+     * Test {581=[IE], 582=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5899,7 +5897,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {582=[IE], 583=[CHROME, EDGE, FF, FF68]}.
+     * Test {582=[IE], 583=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5909,18 +5907,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {583=[IE], 584=[CHROME, EDGE, FF, FF68]}.
+     * Test {583=[IE], 584=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void manipulation__html_____script_exceptions_bubble___11743_() throws Exception {
         runTest("manipulation: html() - script exceptions bubble (#11743)");
     }
 
     /**
-     * Test {584=[IE], 585=[CHROME, EDGE, FF, FF68]}.
+     * Test {584=[IE], 585=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5930,7 +5928,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {585=[IE], 586=[CHROME, EDGE, FF, FF68]}.
+     * Test {585=[IE], 586=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5940,18 +5938,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {586=[IE], 587=[CHROME, EDGE, FF, FF68]}.
+     * Test {586=[IE], 587=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("13")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void manipulation__script_evaluation___11795_() throws Exception {
         runTest("manipulation: script evaluation (#11795)");
     }
 
     /**
-     * Test {587=[IE], 588=[CHROME, EDGE, FF, FF68]}.
+     * Test {587=[IE], 588=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5961,7 +5959,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {588=[IE], 589=[CHROME, EDGE, FF, FF68]}.
+     * Test {588=[IE], 589=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5971,7 +5969,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {589=[IE], 590=[CHROME, EDGE, FF, FF68]}.
+     * Test {589=[IE], 590=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5981,7 +5979,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {590=[IE], 591=[CHROME, EDGE, FF, FF68]}.
+     * Test {590=[IE], 591=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5991,7 +5989,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {591=[IE], 592=[CHROME, EDGE, FF, FF68]}.
+     * Test {591=[IE], 592=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6001,7 +5999,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {592=[IE], 593=[CHROME, EDGE, FF, FF68]}.
+     * Test {592=[IE], 593=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6011,7 +6009,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {593=[IE], 594=[CHROME, EDGE, FF, FF68]}.
+     * Test {593=[IE], 594=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6021,7 +6019,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {594=[IE], 595=[CHROME, EDGE, FF, FF68]}.
+     * Test {594=[IE], 595=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6031,7 +6029,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {595=[IE], 596=[CHROME, EDGE, FF, FF68]}.
+     * Test {595=[IE], 596=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6041,7 +6039,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {596=[IE], 597=[CHROME, EDGE, FF, FF68]}.
+     * Test {596=[IE], 597=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6051,7 +6049,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {597=[IE], 598=[CHROME, EDGE, FF, FF68]}.
+     * Test {597=[IE], 598=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6061,18 +6059,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {598=[IE], 599=[CHROME, EDGE, FF, FF68]}.
+     * Test {598=[IE], 599=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void manipulation__Make_sure_col_element_is_appended_correctly() throws Exception {
         runTest("manipulation: Make sure col element is appended correctly");
     }
 
     /**
-     * Test {599=[IE], 600=[CHROME, EDGE, FF, FF68]}.
+     * Test {599=[IE], 600=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6082,7 +6080,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {600=[IE], 601=[CHROME, EDGE, FF, FF68]}.
+     * Test {600=[IE], 601=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6092,7 +6090,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {601=[IE], 602=[CHROME, EDGE, FF, FF68]}.
+     * Test {601=[IE], 602=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6102,7 +6100,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {602=[IE], 603=[CHROME, EDGE, FF, FF68]}.
+     * Test {602=[IE], 603=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6112,7 +6110,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {603=[IE], 604=[CHROME, EDGE, FF, FF68]}.
+     * Test {603=[IE], 604=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6122,7 +6120,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {604=[IE], 605=[CHROME, EDGE, FF, FF68]}.
+     * Test {604=[IE], 605=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6132,7 +6130,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {605=[IE], 606=[CHROME, EDGE, FF, FF68]}.
+     * Test {605=[IE], 606=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6142,7 +6140,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {606=[IE], 607=[CHROME, EDGE, FF, FF68]}.
+     * Test {606=[IE], 607=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6152,7 +6150,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {607=[IE], 608=[CHROME, EDGE, FF, FF68]}.
+     * Test {607=[IE], 608=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6162,7 +6160,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {608=[IE], 609=[CHROME, EDGE, FF, FF68]}.
+     * Test {608=[IE], 609=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6172,7 +6170,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {609=[IE], 610=[CHROME, EDGE, FF, FF68]}.
+     * Test {609=[IE], 610=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6182,7 +6180,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {610=[IE], 611=[CHROME, EDGE, FF, FF68]}.
+     * Test {610=[IE], 611=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6192,7 +6190,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {611=[IE], 612=[CHROME, EDGE, FF, FF68]}.
+     * Test {611=[IE], 612=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6202,7 +6200,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {612=[IE], 613=[CHROME, EDGE, FF, FF68]}.
+     * Test {612=[IE], 613=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6212,7 +6210,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {613=[IE], 614=[CHROME, EDGE, FF, FF68]}.
+     * Test {613=[IE], 614=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6222,7 +6220,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {614=[IE], 615=[CHROME, EDGE, FF, FF68]}.
+     * Test {614=[IE], 615=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6232,7 +6230,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {615=[IE], 616=[CHROME, EDGE, FF, FF68]}.
+     * Test {615=[IE], 616=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6242,7 +6240,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {616=[IE], 617=[CHROME, EDGE, FF, FF68]}.
+     * Test {616=[IE], 617=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6252,7 +6250,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {617=[IE], 618=[CHROME, EDGE, FF, FF68]}.
+     * Test {617=[IE], 618=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6263,7 +6261,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {618=[IE], 619=[CHROME, EDGE, FF, FF68]}.
+     * Test {618=[IE], 619=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6273,29 +6271,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {619=[IE], 620=[CHROME, EDGE, FF, FF68]}.
+     * Test {619=[IE], 620=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("17")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css__css___non_px_relative_values__gh_1711_() throws Exception {
         runTest("css: css() non-px relative values (gh-1711)");
     }
 
     /**
-     * Test {620=[IE], 621=[CHROME, EDGE, FF, FF68]}.
+     * Test {620=[IE], 621=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css__css___mismatched_relative_values_with_bounded_styles__gh_2144_() throws Exception {
         runTest("css: css() mismatched relative values with bounded styles (gh-2144)");
     }
 
     /**
-     * Test {621=[IE], 622=[CHROME, EDGE, FF, FF68]}.
+     * Test {621=[IE], 622=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6306,7 +6304,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {622=[IE], 623=[CHROME, EDGE, FF, FF68]}.
+     * Test {622=[IE], 623=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6316,7 +6314,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {623=[IE], 624=[CHROME, EDGE, FF, FF68]}.
+     * Test {623=[IE], 624=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6326,7 +6324,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {624=[IE], 625=[CHROME, EDGE, FF, FF68]}.
+     * Test {624=[IE], 625=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6336,7 +6334,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {625=[IE], 626=[CHROME, EDGE, FF, FF68]}.
+     * Test {625=[IE], 626=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6346,7 +6344,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {626=[IE], 627=[CHROME, EDGE, FF, FF68]}.
+     * Test {626=[IE], 627=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6356,7 +6354,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {627=[IE], 628=[CHROME, EDGE, FF, FF68]}.
+     * Test {627=[IE], 628=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6366,7 +6364,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {628=[IE], 629=[CHROME, EDGE, FF, FF68]}.
+     * Test {628=[IE], 629=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6376,7 +6374,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {629=[IE], 630=[CHROME, EDGE, FF, FF68]}.
+     * Test {629=[IE], 630=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6386,7 +6384,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {630=[IE], 631=[CHROME, EDGE, FF, FF68]}.
+     * Test {630=[IE], 631=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6396,7 +6394,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {631=[IE], 632=[CHROME, EDGE, FF, FF68]}.
+     * Test {631=[IE], 632=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6406,7 +6404,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {632=[IE], 633=[CHROME, EDGE, FF, FF68]}.
+     * Test {632=[IE], 633=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6416,7 +6414,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {633=[IE], 634=[CHROME, EDGE, FF, FF68]}.
+     * Test {633=[IE], 634=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6426,7 +6424,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {634=[IE], 635=[CHROME, EDGE, FF, FF68]}.
+     * Test {634=[IE], 635=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6436,7 +6434,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {635=[IE], 636=[CHROME, EDGE, FF, FF68]}.
+     * Test {635=[IE], 636=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6446,7 +6444,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {636=[IE], 637=[CHROME, EDGE, FF, FF68]}.
+     * Test {636=[IE], 637=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6456,7 +6454,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {637=[IE], 638=[CHROME, EDGE, FF, FF68]}.
+     * Test {637=[IE], 638=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6466,7 +6464,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {638=[IE], 639=[CHROME, EDGE, FF, FF68]}.
+     * Test {638=[IE], 639=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6476,7 +6474,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {639=[IE], 640=[CHROME, EDGE, FF, FF68]}.
+     * Test {639=[IE], 640=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6486,7 +6484,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {640=[IE], 641=[CHROME, EDGE, FF, FF68]}.
+     * Test {640=[IE], 641=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6496,7 +6494,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {641=[IE], 642=[CHROME, EDGE, FF, FF68]}.
+     * Test {641=[IE], 642=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6506,18 +6504,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {642=[IE], 643=[CHROME, EDGE, FF, FF68]}.
+     * Test {642=[IE], 643=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css__computed_margins__trac_3333__gh_2237_() throws Exception {
         runTest("css: computed margins (trac-3333; gh-2237)");
     }
 
     /**
-     * Test {643=[IE], 644=[CHROME, EDGE, FF, FF68]}.
+     * Test {643=[IE], 644=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6527,7 +6525,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {644=[IE], 645=[CHROME, EDGE, FF, FF68]}.
+     * Test {644=[IE], 645=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6537,7 +6535,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {645=[IE], 646=[CHROME, EDGE, FF, FF68]}.
+     * Test {645=[IE], 646=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6547,7 +6545,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {646=[IE], 647=[CHROME, EDGE, FF, FF68]}.
+     * Test {646=[IE], 647=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6557,7 +6555,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {647=[IE], 648=[CHROME, EDGE, FF, FF68]}.
+     * Test {647=[IE], 648=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6567,7 +6565,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {648=[IE], 649=[CHROME, EDGE, FF, FF68]}.
+     * Test {648=[IE], 649=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6577,7 +6575,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {649=[IE], 650=[CHROME, EDGE, FF, FF68]}.
+     * Test {649=[IE], 650=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6587,7 +6585,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {650=[IE], 651=[CHROME, EDGE, FF, FF68]}.
+     * Test {650=[IE], 651=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6597,7 +6595,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {651=[IE], 652=[CHROME, EDGE, FF, FF68]}.
+     * Test {651=[IE], 652=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6607,7 +6605,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {652=[IE], 653=[CHROME, EDGE, FF, FF68]}.
+     * Test {652=[IE], 653=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6617,7 +6615,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {653=[IE], 654=[CHROME, EDGE, FF, FF68]}.
+     * Test {653=[IE], 654=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6627,29 +6625,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {654=[IE], 655=[CHROME, EDGE, FF, FF68]}.
+     * Test {654=[IE], 655=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css__css__width___and_css__height___should_return_fractional_values_for_nodes_in_the_document() throws Exception {
         runTest("css: css('width') and css('height') should return fractional values for nodes in the document");
     }
 
     /**
-     * Test {655=[IE], 656=[CHROME, EDGE, FF, FF68]}.
+     * Test {655=[IE], 656=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css__css__width___and_css__height___should_return_fractional_values_for_disconnected_nodes() throws Exception {
         runTest("css: css('width') and css('height') should return fractional values for disconnected nodes");
     }
 
     /**
-     * Test {656=[IE], 657=[CHROME, EDGE, FF, FF68]}.
+     * Test {656=[IE], 657=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6659,7 +6657,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {657=[IE], 658=[CHROME, EDGE, FF, FF68]}.
+     * Test {657=[IE], 658=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6669,7 +6667,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {658=[IE], 659=[CHROME, EDGE, FF, FF68]}.
+     * Test {658=[IE], 659=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6679,18 +6677,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {659=[IE], 660=[CHROME, EDGE, FF, FF68]}.
+     * Test {659=[IE], 660=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("17")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css___visible__hidden_selectors() throws Exception {
         runTest("css: :visible/:hidden selectors");
     }
 
     /**
-     * Test {660=[IE], 661=[CHROME, EDGE, FF, FF68]}.
+     * Test {660=[IE], 661=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6700,7 +6698,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {661=[IE], 662=[CHROME, EDGE, FF, FF68]}.
+     * Test {661=[IE], 662=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6710,7 +6708,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {662=[IE], 663=[CHROME, EDGE, FF, FF68]}.
+     * Test {662=[IE], 663=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6720,7 +6718,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {663=[IE], 664=[CHROME, EDGE, FF, FF68]}.
+     * Test {663=[IE], 664=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6730,7 +6728,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {664=[IE], 665=[CHROME, EDGE, FF, FF68]}.
+     * Test {664=[IE], 665=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6740,7 +6738,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {665=[IE], 666=[CHROME, EDGE, FF, FF68]}.
+     * Test {665=[IE], 666=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6750,7 +6748,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {666=[IE], 667=[CHROME, EDGE, FF, FF68]}.
+     * Test {666=[IE], 667=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6762,7 +6760,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {667=[IE], 668=[CHROME, EDGE, FF, FF68]}.
+     * Test {667=[IE], 668=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6772,7 +6770,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {668=[IE], 669=[CHROME, EDGE, FF, FF68]}.
+     * Test {668=[IE], 669=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6781,13 +6779,13 @@ public class JQuery3x3x1Test extends JQueryTestBase {
             FF = "10",
             FF78 = "10",
             IE = "0")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void css__css___customProperty_() throws Exception {
         runTest("css: css(--customProperty)");
     }
 
     /**
-     * Test {669=[IE], 670=[CHROME, EDGE, FF, FF68]}.
+     * Test {669=[IE], 670=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6797,7 +6795,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {670=[IE], 671=[CHROME, EDGE, FF, FF68]}.
+     * Test {670=[IE], 671=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6807,7 +6805,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {671=[IE], 672=[CHROME, EDGE, FF, FF68]}.
+     * Test {671=[IE], 672=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6817,7 +6815,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {672=[IE], 673=[CHROME, EDGE, FF, FF68]}.
+     * Test {672=[IE], 673=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6827,7 +6825,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {673=[IE], 674=[CHROME, EDGE, FF, FF68]}.
+     * Test {673=[IE], 674=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6837,18 +6835,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {674=[IE], 675=[CHROME, EDGE, FF, FF68]}.
+     * Test {674=[IE], 675=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__XMLHttpRequest___Attempt_to_block_tests_because_of_dangling_XHR_requests__IE_() throws Exception {
         runTest("ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE)");
     }
 
     /**
-     * Test {675=[IE], 676=[CHROME, EDGE, FF, FF68]}.
+     * Test {675=[IE], 676=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6858,7 +6856,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {676=[IE], 677=[CHROME, EDGE, FF, FF68]}.
+     * Test {676=[IE], 677=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6868,7 +6866,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {677=[IE], 678=[CHROME, EDGE, FF, FF68]}.
+     * Test {677=[IE], 678=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6878,7 +6876,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {678=[IE], 679=[CHROME, EDGE, FF, FF68]}.
+     * Test {678=[IE], 679=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6888,7 +6886,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {679=[IE], 680=[CHROME, EDGE, FF, FF68]}.
+     * Test {679=[IE], 680=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6898,7 +6896,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {680=[IE], 681=[CHROME, EDGE, FF, FF68]}.
+     * Test {680=[IE], 681=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6908,7 +6906,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {681=[IE], 682=[CHROME, EDGE, FF, FF68]}.
+     * Test {681=[IE], 682=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6918,7 +6916,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {682=[IE], 683=[CHROME, EDGE, FF, FF68]}.
+     * Test {682=[IE], 683=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6928,7 +6926,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {683=[IE], 684=[CHROME, EDGE, FF, FF68]}.
+     * Test {683=[IE], 684=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6938,7 +6936,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {684=[IE], 685=[CHROME, EDGE, FF, FF68]}.
+     * Test {684=[IE], 685=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6948,7 +6946,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {685=[IE], 686=[CHROME, EDGE, FF, FF68]}.
+     * Test {685=[IE], 686=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6958,7 +6956,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {686=[IE], 687=[CHROME, EDGE, FF, FF68]}.
+     * Test {686=[IE], 687=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6968,7 +6966,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {687=[IE], 688=[CHROME, EDGE, FF, FF68]}.
+     * Test {687=[IE], 688=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6978,7 +6976,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {688=[IE], 689=[CHROME, EDGE, FF, FF68]}.
+     * Test {688=[IE], 689=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6988,7 +6986,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {689=[IE], 690=[CHROME, EDGE, FF, FF68]}.
+     * Test {689=[IE], 690=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6998,7 +6996,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {690=[IE], 691=[CHROME, EDGE, FF, FF68]}.
+     * Test {690=[IE], 691=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7008,7 +7006,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {691=[IE], 692=[CHROME, EDGE, FF, FF68]}.
+     * Test {691=[IE], 692=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7018,7 +7016,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {692=[IE], 693=[CHROME, EDGE, FF, FF68]}.
+     * Test {692=[IE], 693=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7028,29 +7026,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {693=[IE], 694=[CHROME, EDGE, FF, FF68]}.
+     * Test {693=[IE], 694=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____native_abort() throws Exception {
         runTest("ajax: jQuery.ajax() - native abort");
     }
 
     /**
-     * Test {694=[IE], 695=[CHROME, EDGE, FF, FF68]}.
+     * Test {694=[IE], 695=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____native_timeout() throws Exception {
         runTest("ajax: jQuery.ajax() - native timeout");
     }
 
     /**
-     * Test {695=[IE], 696=[CHROME, EDGE, FF, FF68]}.
+     * Test {695=[IE], 696=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7060,7 +7058,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {696=[IE], 697=[CHROME, EDGE, FF, FF68]}.
+     * Test {696=[IE], 697=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7070,7 +7068,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {697=[IE], 698=[CHROME, EDGE, FF, FF68]}.
+     * Test {697=[IE], 698=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7080,7 +7078,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {698=[IE], 699=[CHROME, EDGE, FF, FF68]}.
+     * Test {698=[IE], 699=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7090,7 +7088,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {699=[IE], 700=[CHROME, EDGE, FF, FF68]}.
+     * Test {699=[IE], 700=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7100,7 +7098,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {700=[IE], 701=[CHROME, EDGE, FF, FF68]}.
+     * Test {700=[IE], 701=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7110,7 +7108,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {701=[IE], 702=[CHROME, EDGE, FF, FF68]}.
+     * Test {701=[IE], 702=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7120,7 +7118,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {702=[IE], 703=[CHROME, EDGE, FF, FF68]}.
+     * Test {702=[IE], 703=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7130,7 +7128,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {703=[IE], 704=[CHROME, EDGE, FF, FF68]}.
+     * Test {703=[IE], 704=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7140,7 +7138,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {704=[IE], 705=[CHROME, EDGE, FF, FF68]}.
+     * Test {704=[IE], 705=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7150,7 +7148,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {705=[IE], 706=[CHROME, EDGE, FF, FF68]}.
+     * Test {705=[IE], 706=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7160,7 +7158,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {706=[IE], 707=[CHROME, EDGE, FF, FF68]}.
+     * Test {706=[IE], 707=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7170,7 +7168,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {707=[IE], 708=[CHROME, EDGE, FF, FF68]}.
+     * Test {707=[IE], 708=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7180,7 +7178,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {708=[IE], 709=[CHROME, EDGE, FF, FF68]}.
+     * Test {708=[IE], 709=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7190,7 +7188,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {709=[IE], 710=[CHROME, EDGE, FF, FF68]}.
+     * Test {709=[IE], 710=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7200,7 +7198,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {710=[IE], 711=[CHROME, EDGE, FF, FF68]}.
+     * Test {710=[IE], 711=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7210,7 +7208,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {711=[IE], 712=[CHROME, EDGE, FF, FF68]}.
+     * Test {711=[IE], 712=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7220,18 +7218,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {712=[IE], 713=[CHROME, EDGE, FF, FF68]}.
+     * Test {712=[IE], 713=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("5, 2, 7")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain");
     }
 
     /**
-     * Test {713=[IE], 714=[CHROME, EDGE, FF, FF68]}.
+     * Test {713=[IE], 714=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7241,7 +7239,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {714=[IE], 715=[CHROME, EDGE, FF, FF68]}.
+     * Test {714=[IE], 715=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7251,7 +7249,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {715=[IE], 716=[CHROME, EDGE, FF, FF68]}.
+     * Test {715=[IE], 716=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7261,7 +7259,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {716=[IE], 717=[CHROME, EDGE, FF, FF68]}.
+     * Test {716=[IE], 717=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7271,7 +7269,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {717=[IE], 718=[CHROME, EDGE, FF, FF68]}.
+     * Test {717=[IE], 718=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7281,7 +7279,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {718=[IE], 719=[CHROME, EDGE, FF, FF68]}.
+     * Test {718=[IE], 719=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7291,7 +7289,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {719=[IE], 720=[CHROME, EDGE, FF, FF68]}.
+     * Test {719=[IE], 720=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7301,7 +7299,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {720=[IE], 721=[CHROME, EDGE, FF, FF68]}.
+     * Test {720=[IE], 721=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7311,7 +7309,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {721=[IE], 722=[CHROME, EDGE, FF, FF68]}.
+     * Test {721=[IE], 722=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7321,7 +7319,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {722=[IE], 723=[CHROME, EDGE, FF, FF68]}.
+     * Test {722=[IE], 723=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7331,7 +7329,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {723=[IE], 724=[CHROME, EDGE, FF, FF68]}.
+     * Test {723=[IE], 724=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7341,7 +7339,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {724=[IE], 725=[CHROME, EDGE, FF, FF68]}.
+     * Test {724=[IE], 725=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7351,7 +7349,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {725=[IE], 726=[CHROME, EDGE, FF, FF68]}.
+     * Test {725=[IE], 726=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7361,7 +7359,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {726=[IE], 727=[CHROME, EDGE, FF, FF68]}.
+     * Test {726=[IE], 727=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7371,7 +7369,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {727=[IE], 728=[CHROME, EDGE, FF, FF68]}.
+     * Test {727=[IE], 728=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7381,7 +7379,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {728=[IE], 729=[CHROME, EDGE, FF, FF68]}.
+     * Test {728=[IE], 729=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7391,7 +7389,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {729=[IE], 730=[CHROME, EDGE, FF, FF68]}.
+     * Test {729=[IE], 730=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7401,7 +7399,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {730=[IE], 731=[CHROME, EDGE, FF, FF68]}.
+     * Test {730=[IE], 731=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7411,7 +7409,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {731=[IE], 732=[CHROME, EDGE, FF, FF68]}.
+     * Test {731=[IE], 732=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7421,7 +7419,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {732=[IE], 733=[CHROME, EDGE, FF, FF68]}.
+     * Test {732=[IE], 733=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7431,7 +7429,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {733=[IE], 734=[CHROME, EDGE, FF, FF68]}.
+     * Test {733=[IE], 734=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7441,7 +7439,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {734=[IE], 735=[CHROME, EDGE, FF, FF68]}.
+     * Test {734=[IE], 735=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7451,7 +7449,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {735=[IE], 736=[CHROME, EDGE, FF, FF68]}.
+     * Test {735=[IE], 736=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7461,7 +7459,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {736=[IE], 737=[CHROME, EDGE, FF, FF68]}.
+     * Test {736=[IE], 737=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7471,7 +7469,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {737=[IE], 738=[CHROME, EDGE, FF, FF68]}.
+     * Test {737=[IE], 738=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7481,7 +7479,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {738=[IE], 739=[CHROME, EDGE, FF, FF68]}.
+     * Test {738=[IE], 739=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7491,7 +7489,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {739=[IE], 740=[CHROME, EDGE, FF, FF68]}.
+     * Test {739=[IE], 740=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7501,7 +7499,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {740=[IE], 741=[CHROME, EDGE, FF, FF68]}.
+     * Test {740=[IE], 741=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7511,29 +7509,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {741=[IE], 742=[CHROME, EDGE, FF, FF68]}.
+     * Test {741=[IE], 742=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____failing_cross_domain__non_existing_() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain (non-existing)");
     }
 
     /**
-     * Test {742=[IE], 743=[CHROME, EDGE, FF, FF68]}.
+     * Test {742=[IE], 743=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____failing_cross_domain() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain");
     }
 
     /**
-     * Test {743=[IE], 744=[CHROME, EDGE, FF, FF68]}.
+     * Test {743=[IE], 744=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7543,7 +7541,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {744=[IE], 745=[CHROME, EDGE, FF, FF68]}.
+     * Test {744=[IE], 745=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7553,7 +7551,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {745=[IE], 746=[CHROME, EDGE, FF, FF68]}.
+     * Test {745=[IE], 746=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7563,7 +7561,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {746=[IE], 747=[CHROME, EDGE, FF, FF68]}.
+     * Test {746=[IE], 747=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7573,7 +7571,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {747=[IE], 748=[CHROME, EDGE, FF, FF68]}.
+     * Test {747=[IE], 748=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7583,7 +7581,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {748=[IE], 749=[CHROME, EDGE, FF, FF68]}.
+     * Test {748=[IE], 749=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7593,7 +7591,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {749=[IE], 750=[CHROME, EDGE, FF, FF68]}.
+     * Test {749=[IE], 750=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7603,7 +7601,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {750=[IE], 751=[CHROME, EDGE, FF, FF68]}.
+     * Test {750=[IE], 751=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7613,7 +7611,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {751=[IE], 752=[CHROME, EDGE, FF, FF68]}.
+     * Test {751=[IE], 752=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7623,7 +7621,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {752=[IE], 753=[CHROME, EDGE, FF, FF68]}.
+     * Test {752=[IE], 753=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7633,7 +7631,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {753=[IE], 754=[CHROME, EDGE, FF, FF68]}.
+     * Test {753=[IE], 754=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7643,7 +7641,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {754=[IE], 755=[CHROME, EDGE, FF, FF68]}.
+     * Test {754=[IE], 755=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7653,7 +7651,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {755=[IE], 756=[CHROME, EDGE, FF, FF68]}.
+     * Test {755=[IE], 756=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7663,7 +7661,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {756=[IE], 757=[CHROME, EDGE, FF, FF68]}.
+     * Test {756=[IE], 757=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7673,7 +7671,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {757=[IE], 758=[CHROME, EDGE, FF, FF68]}.
+     * Test {757=[IE], 758=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7683,7 +7681,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {758=[IE], 759=[CHROME, EDGE, FF, FF68]}.
+     * Test {758=[IE], 759=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7693,7 +7691,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {759=[IE], 760=[CHROME, EDGE, FF, FF68]}.
+     * Test {759=[IE], 760=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7703,7 +7701,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {760=[IE], 761=[CHROME, EDGE, FF, FF68]}.
+     * Test {760=[IE], 761=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7713,7 +7711,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {761=[IE], 762=[CHROME, EDGE, FF, FF68]}.
+     * Test {761=[IE], 762=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7723,29 +7721,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {762=[IE], 763=[CHROME, EDGE, FF, FF68]}.
+     * Test {762=[IE], 763=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__gh_2498___jQuery_ajax_____binary_data_shouldn_t_throw_an_exception() throws Exception {
         runTest("ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception");
     }
 
     /**
-     * Test {763=[IE], 764=[CHROME, EDGE, FF, FF68]}.
+     * Test {763=[IE], 764=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax___11743___jQuery_ajax_____script__throws_exception() throws Exception {
         runTest("ajax: #11743 - jQuery.ajax() - script, throws exception");
     }
 
     /**
-     * Test {764=[IE], 765=[CHROME, EDGE, FF, FF68]}.
+     * Test {764=[IE], 765=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7755,7 +7753,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {765=[IE], 766=[CHROME, EDGE, FF, FF68]}.
+     * Test {765=[IE], 766=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7765,7 +7763,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {766=[IE], 767=[CHROME, EDGE, FF, FF68]}.
+     * Test {766=[IE], 767=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7775,7 +7773,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {767=[IE], 768=[CHROME, EDGE, FF, FF68]}.
+     * Test {767=[IE], 768=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7785,7 +7783,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {768=[IE], 769=[CHROME, EDGE, FF, FF68]}.
+     * Test {768=[IE], 769=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7795,7 +7793,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {769=[IE], 770=[CHROME, EDGE, FF, FF68]}.
+     * Test {769=[IE], 770=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7805,7 +7803,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {770=[IE], 771=[CHROME, EDGE, FF, FF68]}.
+     * Test {770=[IE], 771=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7817,7 +7815,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {771=[IE], 772=[CHROME, EDGE, FF, FF68]}.
+     * Test {771=[IE], 772=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7827,7 +7825,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {773=[IE], 774=[CHROME, EDGE, FF, FF68]}.
+     * Test {773=[IE], 774=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7837,7 +7835,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {774=[IE], 775=[CHROME, EDGE, FF, FF68]}.
+     * Test {774=[IE], 775=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7847,7 +7845,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {775=[IE], 776=[CHROME, EDGE, FF, FF68]}.
+     * Test {775=[IE], 776=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7857,7 +7855,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {776=[IE], 777=[CHROME, EDGE, FF, FF68]}.
+     * Test {776=[IE], 777=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7867,7 +7865,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {777=[IE], 778=[CHROME, EDGE, FF, FF68]}.
+     * Test {777=[IE], 778=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7877,7 +7875,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {778=[IE], 779=[CHROME, EDGE, FF, FF68]}.
+     * Test {778=[IE], 779=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7887,7 +7885,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {779=[IE], 780=[CHROME, EDGE, FF, FF68]}.
+     * Test {779=[IE], 780=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7897,18 +7895,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {780=[IE], 781=[CHROME, EDGE, FF, FF68]}.
+     * Test {780=[IE], 781=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
     }
 
     /**
-     * Test {781=[IE], 782=[CHROME, EDGE, FF, FF68]}.
+     * Test {781=[IE], 782=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7918,18 +7916,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {782=[IE], 783=[CHROME, EDGE, FF, FF68]}.
+     * Test {782=[IE], 783=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax___11264___jQuery_domManip_____no_side_effect_because_of_ajaxSetup_or_global_events() throws Exception {
         runTest("ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events");
     }
 
     /**
-     * Test {783=[IE], 784=[CHROME, EDGE, FF, FF68]}.
+     * Test {783=[IE], 784=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7939,7 +7937,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {784=[IE], 785=[CHROME, EDGE, FF, FF68]}.
+     * Test {784=[IE], 785=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7949,7 +7947,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {785=[IE], 786=[CHROME, EDGE, FF, FF68]}.
+     * Test {785=[IE], 786=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7959,7 +7957,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {786=[IE], 787=[CHROME, EDGE, FF, FF68]}.
+     * Test {786=[IE], 787=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7969,7 +7967,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {787=[IE], 788=[CHROME, EDGE, FF, FF68]}.
+     * Test {787=[IE], 788=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7979,7 +7977,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {788=[IE], 789=[CHROME, EDGE, FF, FF68]}.
+     * Test {788=[IE], 789=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7989,7 +7987,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {789=[IE], 790=[CHROME, EDGE, FF, FF68]}.
+     * Test {789=[IE], 790=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7999,7 +7997,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {790=[IE], 791=[CHROME, EDGE, FF, FF68]}.
+     * Test {790=[IE], 791=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8009,7 +8007,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {791=[IE], 792=[CHROME, EDGE, FF, FF68]}.
+     * Test {791=[IE], 792=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8019,7 +8017,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {792=[IE], 793=[CHROME, EDGE, FF, FF68]}.
+     * Test {792=[IE], 793=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8029,7 +8027,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {793=[IE], 794=[CHROME, EDGE, FF, FF68]}.
+     * Test {793=[IE], 794=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8039,7 +8037,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {794=[IE], 795=[CHROME, EDGE, FF, FF68]}.
+     * Test {794=[IE], 795=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8049,7 +8047,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {795=[IE], 796=[CHROME, EDGE, FF, FF68]}.
+     * Test {795=[IE], 796=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8059,7 +8057,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {796=[IE], 797=[CHROME, EDGE, FF, FF68]}.
+     * Test {796=[IE], 797=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8069,7 +8067,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {797=[IE], 798=[CHROME, EDGE, FF, FF68]}.
+     * Test {797=[IE], 798=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8079,7 +8077,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {798=[IE], 799=[CHROME, EDGE, FF, FF68]}.
+     * Test {798=[IE], 799=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8089,7 +8087,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {799=[IE], 800=[CHROME, EDGE, FF, FF68]}.
+     * Test {799=[IE], 800=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8099,7 +8097,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {800=[IE], 801=[CHROME, EDGE, FF, FF68]}.
+     * Test {800=[IE], 801=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8109,7 +8107,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {801=[IE], 802=[CHROME, EDGE, FF, FF68]}.
+     * Test {801=[IE], 802=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8119,7 +8117,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {802=[IE], 803=[CHROME, EDGE, FF, FF68]}.
+     * Test {802=[IE], 803=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8129,7 +8127,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {803=[IE], 804=[CHROME, EDGE, FF, FF68]}.
+     * Test {803=[IE], 804=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8139,18 +8137,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {804=[IE], 805=[CHROME, EDGE, FF, FF68]}.
+     * Test {804=[IE], 805=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("7")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
     }
 
     /**
-     * Test {805=[IE], 806=[CHROME, EDGE, FF, FF68]}.
+     * Test {805=[IE], 806=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8160,7 +8158,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {806=[IE], 807=[CHROME, EDGE, FF, FF68]}.
+     * Test {806=[IE], 807=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8170,7 +8168,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {807=[IE], 808=[CHROME, EDGE, FF, FF68]}.
+     * Test {807=[IE], 808=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8180,7 +8178,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {808=[IE], 809=[CHROME, EDGE, FF, FF68]}.
+     * Test {808=[IE], 809=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8190,7 +8188,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {809=[IE], 810=[CHROME, EDGE, FF, FF68]}.
+     * Test {809=[IE], 810=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8200,7 +8198,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {810=[IE], 811=[CHROME, EDGE, FF, FF68]}.
+     * Test {810=[IE], 811=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8210,7 +8208,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {811=[IE], 812=[CHROME, EDGE, FF, FF68]}.
+     * Test {811=[IE], 812=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8220,7 +8218,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {812=[IE], 813=[CHROME, EDGE, FF, FF68]}.
+     * Test {812=[IE], 813=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8230,7 +8228,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {813=[IE], 814=[CHROME, EDGE, FF, FF68]}.
+     * Test {813=[IE], 814=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8240,7 +8238,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {814=[IE], 815=[CHROME, EDGE, FF, FF68]}.
+     * Test {814=[IE], 815=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8250,7 +8248,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {815=[IE], 816=[CHROME, EDGE, FF, FF68]}.
+     * Test {815=[IE], 816=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8260,7 +8258,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {816=[IE], 817=[CHROME, EDGE, FF, FF68]}.
+     * Test {816=[IE], 817=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8270,7 +8268,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {817=[IE], 818=[CHROME, EDGE, FF, FF68]}.
+     * Test {817=[IE], 818=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8280,7 +8278,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {818=[IE], 819=[CHROME, EDGE, FF, FF68]}.
+     * Test {818=[IE], 819=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8291,7 +8289,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {819=[IE], 820=[CHROME, EDGE, FF, FF68]}.
+     * Test {819=[IE], 820=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8302,7 +8300,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {820=[IE], 821=[CHROME, EDGE, FF, FF68]}.
+     * Test {820=[IE], 821=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8313,7 +8311,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {821=[IE], 822=[CHROME, EDGE, FF, FF68]}.
+     * Test {821=[IE], 822=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8323,7 +8321,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {822=[IE], 823=[CHROME, EDGE, FF, FF68]}.
+     * Test {822=[IE], 823=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8333,7 +8331,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {823=[IE], 824=[CHROME, EDGE, FF, FF68]}.
+     * Test {823=[IE], 824=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8343,18 +8341,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {824=[IE], 825=[CHROME, EDGE, FF, FF68]}.
+     * Test {824=[IE], 825=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("12")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__animate_relative_values() throws Exception {
         runTest("effects: animate relative values");
     }
 
     /**
-     * Test {825=[IE], 826=[CHROME, EDGE, FF, FF68]}.
+     * Test {825=[IE], 826=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8364,7 +8362,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {826=[IE], 827=[CHROME, EDGE, FF, FF68]}.
+     * Test {826=[IE], 827=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8374,7 +8372,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {827=[IE], 828=[CHROME, EDGE, FF, FF68]}.
+     * Test {827=[IE], 828=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8384,18 +8382,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {828=[IE], 829=[CHROME, EDGE, FF, FF68]}.
+     * Test {828=[IE], 829=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
 
     /**
-     * Test {829=[IE], 830=[CHROME, EDGE, FF, FF68]}.
+     * Test {829=[IE], 830=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8405,7 +8403,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {830=[IE], 831=[CHROME, EDGE, FF, FF68]}.
+     * Test {830=[IE], 831=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8416,7 +8414,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {831=[IE], 832=[CHROME, EDGE, FF, FF68]}.
+     * Test {831=[IE], 832=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8426,7 +8424,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {832=[IE], 833=[CHROME, EDGE, FF, FF68]}.
+     * Test {832=[IE], 833=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8436,29 +8434,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {833=[IE], 834=[CHROME, EDGE, FF, FF68]}.
+     * Test {833=[IE], 834=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
 
     /**
-     * Test {834=[IE], 835=[CHROME, EDGE, FF, FF68]}.
+     * Test {834=[IE], 835=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
 
     /**
-     * Test {835=[IE], 836=[CHROME, EDGE, FF, FF68]}.
+     * Test {835=[IE], 836=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8468,7 +8466,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {836=[IE], 837=[CHROME, EDGE, FF, FF68]}.
+     * Test {836=[IE], 837=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8478,7 +8476,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {837=[IE], 838=[CHROME, EDGE, FF, FF68]}.
+     * Test {837=[IE], 838=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8488,7 +8486,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {838=[IE], 839=[CHROME, EDGE, FF, FF68]}.
+     * Test {838=[IE], 839=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8498,7 +8496,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {839=[IE], 840=[CHROME, EDGE, FF, FF68]}.
+     * Test {839=[IE], 840=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8508,7 +8506,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {840=[IE], 841=[CHROME, EDGE, FF, FF68]}.
+     * Test {840=[IE], 841=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8518,7 +8516,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {841=[IE], 842=[CHROME, EDGE, FF, FF68]}.
+     * Test {841=[IE], 842=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8528,7 +8526,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {842=[IE], 843=[CHROME, EDGE, FF, FF68]}.
+     * Test {842=[IE], 843=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8538,7 +8536,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {843=[IE], 844=[CHROME, EDGE, FF, FF68]}.
+     * Test {843=[IE], 844=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8548,7 +8546,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {844=[IE], 845=[CHROME, EDGE, FF, FF68]}.
+     * Test {844=[IE], 845=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8558,7 +8556,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {845=[IE], 846=[CHROME, EDGE, FF, FF68]}.
+     * Test {845=[IE], 846=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8568,7 +8566,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {846=[IE], 847=[CHROME, EDGE, FF, FF68]}.
+     * Test {846=[IE], 847=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8578,7 +8576,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {847=[IE], 848=[CHROME, EDGE, FF, FF68]}.
+     * Test {847=[IE], 848=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8588,7 +8586,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {848=[IE], 849=[CHROME, EDGE, FF, FF68]}.
+     * Test {848=[IE], 849=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8598,7 +8596,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {849=[IE], 850=[CHROME, EDGE, FF, FF68]}.
+     * Test {849=[IE], 850=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8608,7 +8606,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {850=[IE], 851=[CHROME, EDGE, FF, FF68]}.
+     * Test {850=[IE], 851=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8618,7 +8616,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {851=[IE], 852=[CHROME, EDGE, FF, FF68]}.
+     * Test {851=[IE], 852=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8628,7 +8626,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {852=[IE], 853=[CHROME, EDGE, FF, FF68]}.
+     * Test {852=[IE], 853=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8638,7 +8636,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {853=[IE], 854=[CHROME, EDGE, FF, FF68]}.
+     * Test {853=[IE], 854=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8648,7 +8646,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {854=[IE], 855=[CHROME, EDGE, FF, FF68]}.
+     * Test {854=[IE], 855=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8658,18 +8656,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {855=[IE], 856=[CHROME, EDGE, FF, FF68]}.
+     * Test {855=[IE], 856=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
 
     /**
-     * Test {856=[IE], 857=[CHROME, EDGE, FF, FF68]}.
+     * Test {856=[IE], 857=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8679,7 +8677,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {857=[IE], 858=[CHROME, EDGE, FF, FF68]}.
+     * Test {857=[IE], 858=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8689,7 +8687,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {858=[IE], 859=[CHROME, EDGE, FF, FF68]}.
+     * Test {858=[IE], 859=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8699,7 +8697,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {859=[IE], 860=[CHROME, EDGE, FF, FF68]}.
+     * Test {859=[IE], 860=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8709,18 +8707,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {860=[IE], 861=[CHROME, EDGE, FF, FF68]}.
+     * Test {860=[IE], 861=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("5")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
 
     /**
-     * Test {861=[IE], 862=[CHROME, EDGE, FF, FF68]}.
+     * Test {861=[IE], 862=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8730,7 +8728,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {862=[IE], 863=[CHROME, EDGE, FF, FF68]}.
+     * Test {862=[IE], 863=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8740,7 +8738,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {863=[IE], 864=[CHROME, EDGE, FF, FF68]}.
+     * Test {863=[IE], 864=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8750,7 +8748,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {864=[IE], 865=[CHROME, EDGE, FF, FF68]}.
+     * Test {864=[IE], 865=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8760,7 +8758,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {865=[IE], 866=[CHROME, EDGE, FF, FF68]}.
+     * Test {865=[IE], 866=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8770,7 +8768,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {866=[IE], 867=[CHROME, EDGE, FF, FF68]}.
+     * Test {866=[IE], 867=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8780,7 +8778,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {867=[IE], 868=[CHROME, EDGE, FF, FF68]}.
+     * Test {867=[IE], 868=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8790,7 +8788,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {868=[IE], 869=[CHROME, EDGE, FF, FF68]}.
+     * Test {868=[IE], 869=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8800,7 +8798,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {869=[IE], 870=[CHROME, EDGE, FF, FF68]}.
+     * Test {869=[IE], 870=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8810,7 +8808,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {870=[IE], 871=[CHROME, EDGE, FF, FF68]}.
+     * Test {870=[IE], 871=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8820,7 +8818,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {871=[IE], 872=[CHROME, EDGE, FF, FF68]}.
+     * Test {871=[IE], 872=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8830,7 +8828,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {872=[IE], 873=[CHROME, EDGE, FF, FF68]}.
+     * Test {872=[IE], 873=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8840,7 +8838,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {873=[IE], 874=[CHROME, EDGE, FF, FF68]}.
+     * Test {873=[IE], 874=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8850,7 +8848,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {874=[IE], 875=[CHROME, EDGE, FF, FF68]}.
+     * Test {874=[IE], 875=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8860,7 +8858,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {875=[IE], 876=[CHROME, EDGE, FF, FF68]}.
+     * Test {875=[IE], 876=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8870,7 +8868,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {876=[IE], 877=[CHROME, EDGE, FF, FF68]}.
+     * Test {876=[IE], 877=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8880,7 +8878,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {877=[IE], 878=[CHROME, EDGE, FF, FF68]}.
+     * Test {877=[IE], 878=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8890,7 +8888,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {878=[IE], 879=[CHROME, EDGE, FF, FF68]}.
+     * Test {878=[IE], 879=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8900,7 +8898,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {879=[IE], 880=[CHROME, EDGE, FF, FF68]}.
+     * Test {879=[IE], 880=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8910,7 +8908,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {880=[IE], 881=[CHROME, EDGE, FF, FF68]}.
+     * Test {880=[IE], 881=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8920,7 +8918,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {881=[IE], 882=[CHROME, EDGE, FF, FF68]}.
+     * Test {881=[IE], 882=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8930,7 +8928,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {882=[IE], 883=[CHROME, EDGE, FF, FF68]}.
+     * Test {882=[IE], 883=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8940,7 +8938,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {883=[IE], 884=[CHROME, EDGE, FF, FF68]}.
+     * Test {883=[IE], 884=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8950,7 +8948,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {884=[IE], 885=[CHROME, EDGE, FF, FF68]}.
+     * Test {884=[IE], 885=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8960,7 +8958,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {885=[IE], 886=[CHROME, EDGE, FF, FF68]}.
+     * Test {885=[IE], 886=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8970,7 +8968,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {886=[IE], 887=[CHROME, EDGE, FF, FF68]}.
+     * Test {886=[IE], 887=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8980,7 +8978,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {887=[IE], 888=[CHROME, EDGE, FF, FF68]}.
+     * Test {887=[IE], 888=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8990,7 +8988,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {888=[IE], 889=[CHROME, EDGE, FF, FF68]}.
+     * Test {888=[IE], 889=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9000,7 +8998,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {889=[IE], 890=[CHROME, EDGE, FF, FF68]}.
+     * Test {889=[IE], 890=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9010,7 +9008,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {890=[IE], 891=[CHROME, EDGE, FF, FF68]}.
+     * Test {890=[IE], 891=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9020,7 +9018,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {891=[IE], 892=[CHROME, EDGE, FF, FF68]}.
+     * Test {891=[IE], 892=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9030,7 +9028,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {892=[IE], 893=[CHROME, EDGE, FF, FF68]}.
+     * Test {892=[IE], 893=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9040,7 +9038,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {893=[IE], 894=[CHROME, EDGE, FF, FF68]}.
+     * Test {893=[IE], 894=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9050,7 +9048,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {894=[IE], 895=[CHROME, EDGE, FF, FF68]}.
+     * Test {894=[IE], 895=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9060,7 +9058,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {895=[IE], 896=[CHROME, EDGE, FF, FF68]}.
+     * Test {895=[IE], 896=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9070,7 +9068,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {896=[IE], 897=[CHROME, EDGE, FF, FF68]}.
+     * Test {896=[IE], 897=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9080,7 +9078,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {897=[IE], 898=[CHROME, EDGE, FF, FF68]}.
+     * Test {897=[IE], 898=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9090,7 +9088,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {898=[IE], 899=[CHROME, EDGE, FF, FF68]}.
+     * Test {898=[IE], 899=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9100,7 +9098,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {899=[IE], 900=[CHROME, EDGE, FF, FF68]}.
+     * Test {899=[IE], 900=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9110,7 +9108,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {900=[IE], 901=[CHROME, EDGE, FF, FF68]}.
+     * Test {900=[IE], 901=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9120,7 +9118,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {901=[IE], 902=[CHROME, EDGE, FF, FF68]}.
+     * Test {901=[IE], 902=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9130,7 +9128,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {902=[IE], 903=[CHROME, EDGE, FF, FF68]}.
+     * Test {902=[IE], 903=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9140,7 +9138,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {903=[IE], 904=[CHROME, EDGE, FF, FF68]}.
+     * Test {903=[IE], 904=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9150,18 +9148,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {904=[IE], 905=[CHROME, EDGE, FF, FF68]}.
+     * Test {904=[IE], 905=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("12")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__line_height_animates_correctly___13855_() throws Exception {
         runTest("effects: line-height animates correctly (#13855)");
     }
 
     /**
-     * Test {905=[IE], 906=[CHROME, EDGE, FF, FF68]}.
+     * Test {905=[IE], 906=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9171,7 +9169,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {906=[IE], 907=[CHROME, EDGE, FF, FF68]}.
+     * Test {906=[IE], 907=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9181,7 +9179,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {907=[IE], 908=[CHROME, EDGE, FF, FF68]}.
+     * Test {907=[IE], 908=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9191,7 +9189,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {908=[IE], 909=[CHROME, EDGE, FF, FF68]}.
+     * Test {908=[IE], 909=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9201,7 +9199,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {909=[IE], 910=[CHROME, EDGE, FF, FF68]}.
+     * Test {909=[IE], 910=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9211,7 +9209,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {910=[IE], 911=[CHROME, EDGE, FF, FF68]}.
+     * Test {910=[IE], 911=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9221,7 +9219,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {911=[IE], 912=[CHROME, EDGE, FF, FF68]}.
+     * Test {911=[IE], 912=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9231,7 +9229,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {912=[IE], 913=[CHROME, EDGE, FF, FF68]}.
+     * Test {912=[IE], 913=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9241,7 +9239,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {913=[IE], 914=[CHROME, EDGE, FF, FF68]}.
+     * Test {913=[IE], 914=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9251,7 +9249,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {914=[IE], 915=[CHROME, EDGE, FF, FF68]}.
+     * Test {914=[IE], 915=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9261,7 +9259,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {915=[IE], 916=[CHROME, EDGE, FF, FF68]}.
+     * Test {915=[IE], 916=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9271,7 +9269,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {916=[IE], 917=[CHROME, EDGE, FF, FF68]}.
+     * Test {916=[IE], 917=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9281,18 +9279,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {917=[IE], 918=[CHROME, EDGE, FF, FF68]}.
+     * Test {917=[IE], 918=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
 
     /**
-     * Test {918=[IE], 919=[CHROME, EDGE, FF, FF68]}.
+     * Test {918=[IE], 919=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9304,7 +9302,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {919=[IE], 920=[CHROME, EDGE, FF, FF68]}.
+     * Test {919=[IE], 920=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9314,7 +9312,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {920=[IE], 921=[CHROME, EDGE, FF, FF68]}.
+     * Test {920=[IE], 921=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9324,7 +9322,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {921=[IE], 922=[CHROME, EDGE, FF, FF68]}.
+     * Test {921=[IE], 922=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9334,7 +9332,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {922=[IE], 923=[CHROME, EDGE, FF, FF68]}.
+     * Test {922=[IE], 923=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9344,7 +9342,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {923=[IE], 924=[CHROME, EDGE, FF, FF68]}.
+     * Test {923=[IE], 924=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9354,7 +9352,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {924=[IE], 925=[CHROME, EDGE, FF, FF68]}.
+     * Test {924=[IE], 925=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9364,7 +9362,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {925=[IE], 926=[CHROME, EDGE, FF, FF68]}.
+     * Test {925=[IE], 926=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9374,7 +9372,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {926=[IE], 927=[CHROME, EDGE, FF, FF68]}.
+     * Test {926=[IE], 927=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9384,7 +9382,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {927=[IE], 928=[CHROME, EDGE, FF, FF68]}.
+     * Test {927=[IE], 928=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9394,7 +9392,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {928=[IE], 929=[CHROME, EDGE, FF, FF68]}.
+     * Test {928=[IE], 929=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9404,7 +9402,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {929=[IE], 930=[CHROME, EDGE, FF, FF68]}.
+     * Test {929=[IE], 930=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9414,7 +9412,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {930=[IE], 931=[CHROME, EDGE, FF, FF68]}.
+     * Test {930=[IE], 931=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9424,7 +9422,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {931=[IE], 932=[CHROME, EDGE, FF, FF68]}.
+     * Test {931=[IE], 932=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9434,7 +9432,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {932=[IE], 933=[CHROME, EDGE, FF, FF68]}.
+     * Test {932=[IE], 933=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9444,7 +9442,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {933=[IE], 934=[CHROME, EDGE, FF, FF68]}.
+     * Test {933=[IE], 934=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9454,7 +9452,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {934=[IE], 935=[CHROME, EDGE, FF, FF68]}.
+     * Test {934=[IE], 935=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9464,7 +9462,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {935=[IE], 936=[CHROME, EDGE, FF, FF68]}.
+     * Test {935=[IE], 936=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9474,7 +9472,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {936=[IE], 937=[CHROME, EDGE, FF, FF68]}.
+     * Test {936=[IE], 937=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9484,7 +9482,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {937=[IE], 938=[CHROME, EDGE, FF, FF68]}.
+     * Test {937=[IE], 938=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9494,7 +9492,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {938=[IE], 939=[CHROME, EDGE, FF, FF68]}.
+     * Test {938=[IE], 939=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9504,7 +9502,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {939=[IE], 940=[CHROME, EDGE, FF, FF68]}.
+     * Test {939=[IE], 940=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9515,7 +9513,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {940=[IE], 941=[CHROME, EDGE, FF, FF68]}.
+     * Test {940=[IE], 941=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9525,7 +9523,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {941=[IE], 942=[CHROME, EDGE, FF, FF68]}.
+     * Test {941=[IE], 942=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9535,7 +9533,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {942=[IE], 943=[CHROME, EDGE, FF, FF68]}.
+     * Test {942=[IE], 943=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9545,7 +9543,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {943=[IE], 944=[CHROME, EDGE, FF, FF68]}.
+     * Test {943=[IE], 944=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9555,7 +9553,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {944=[IE], 945=[CHROME, EDGE, FF, FF68]}.
+     * Test {944=[IE], 945=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9565,7 +9563,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {945=[IE], 946=[CHROME, EDGE, FF, FF68]}.
+     * Test {945=[IE], 946=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9575,7 +9573,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {946=[IE], 947=[CHROME, EDGE, FF, FF68]}.
+     * Test {946=[IE], 947=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9585,7 +9583,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {947=[IE], 948=[CHROME, EDGE, FF, FF68]}.
+     * Test {947=[IE], 948=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9595,7 +9593,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {948=[IE], 949=[CHROME, EDGE, FF, FF68]}.
+     * Test {948=[IE], 949=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9605,7 +9603,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {949=[IE], 950=[CHROME, EDGE, FF, FF68]}.
+     * Test {949=[IE], 950=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9615,7 +9613,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {950=[IE], 951=[CHROME, EDGE, FF, FF68]}.
+     * Test {950=[IE], 951=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9625,7 +9623,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {951=[IE], 952=[CHROME, EDGE, FF, FF68]}.
+     * Test {951=[IE], 952=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9635,40 +9633,40 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {953=[IE], 954=[CHROME, EDGE, FF, FF68]}.
+     * Test {953=[IE], 954=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("178")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
     }
 
     /**
-     * Test {954=[IE], 955=[CHROME, EDGE, FF, FF68]}.
+     * Test {954=[IE], 955=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("64")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__relative() throws Exception {
         runTest("offset: relative");
     }
 
     /**
-     * Test {955=[IE], 956=[CHROME, EDGE, FF, FF68]}.
+     * Test {955=[IE], 956=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("80")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__static() throws Exception {
         runTest("offset: static");
     }
 
     /**
-     * Test {956=[IE], 957=[CHROME, EDGE, FF, FF68]}.
+     * Test {956=[IE], 957=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9678,40 +9676,40 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {957=[IE], 958=[CHROME, EDGE, FF, FF68]}.
+     * Test {957=[IE], 958=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__table() throws Exception {
         runTest("offset: table");
     }
 
     /**
-     * Test {958=[IE], 959=[CHROME, EDGE, FF, FF68]}.
+     * Test {958=[IE], 959=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("26")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__scroll() throws Exception {
         runTest("offset: scroll");
     }
 
     /**
-     * Test {959=[IE], 960=[CHROME, EDGE, FF, FF68]}.
+     * Test {959=[IE], 960=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__body() throws Exception {
         runTest("offset: body");
     }
 
     /**
-     * Test {960=[IE], 961=[CHROME, EDGE, FF, FF68]}.
+     * Test {960=[IE], 961=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9721,183 +9719,183 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {961=[IE], 962=[CHROME, EDGE, FF, FF68]}.
+     * Test {961=[IE], 962=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_static_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.static body.static");
     }
 
     /**
-     * Test {962=[IE], 963=[CHROME, EDGE, FF, FF68]}.
+     * Test {962=[IE], 963=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_static_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.static body.relative");
     }
 
     /**
-     * Test {963=[IE], 964=[CHROME, EDGE, FF, FF68]}.
+     * Test {963=[IE], 964=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_static_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.static body.absolute");
     }
 
     /**
-     * Test {964=[IE], 965=[CHROME, EDGE, FF, FF68]}.
+     * Test {964=[IE], 965=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_static_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.static body.fixed");
     }
 
     /**
-     * Test {965=[IE], 966=[CHROME, EDGE, FF, FF68]}.
+     * Test {965=[IE], 966=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_relative_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.static");
     }
 
     /**
-     * Test {966=[IE], 967=[CHROME, EDGE, FF, FF68]}.
+     * Test {966=[IE], 967=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_relative_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.relative");
     }
 
     /**
-     * Test {967=[IE], 968=[CHROME, EDGE, FF, FF68]}.
+     * Test {967=[IE], 968=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_relative_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.absolute");
     }
 
     /**
-     * Test {968=[IE], 969=[CHROME, EDGE, FF, FF68]}.
+     * Test {968=[IE], 969=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_relative_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.relative body.fixed");
     }
 
     /**
-     * Test {969=[IE], 970=[CHROME, EDGE, FF, FF68]}.
+     * Test {969=[IE], 970=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_absolute_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.static");
     }
 
     /**
-     * Test {970=[IE], 971=[CHROME, EDGE, FF, FF68]}.
+     * Test {970=[IE], 971=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_absolute_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.relative");
     }
 
     /**
-     * Test {971=[IE], 972=[CHROME, EDGE, FF, FF68]}.
+     * Test {971=[IE], 972=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_absolute_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.absolute");
     }
 
     /**
-     * Test {972=[IE], 973=[CHROME, EDGE, FF, FF68]}.
+     * Test {972=[IE], 973=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_absolute_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.absolute body.fixed");
     }
 
     /**
-     * Test {973=[IE], 974=[CHROME, EDGE, FF, FF68]}.
+     * Test {973=[IE], 974=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_fixed_body_static() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.static");
     }
 
     /**
-     * Test {974=[IE], 975=[CHROME, EDGE, FF, FF68]}.
+     * Test {974=[IE], 975=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_fixed_body_relative() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.relative");
     }
 
     /**
-     * Test {975=[IE], 976=[CHROME, EDGE, FF, FF68]}.
+     * Test {975=[IE], 976=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_fixed_body_absolute() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.absolute");
     }
 
     /**
-     * Test {976=[IE], 977=[CHROME, EDGE, FF, FF68]}.
+     * Test {976=[IE], 977=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("33")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__nonzero_box_properties___html_fixed_body_fixed() throws Exception {
         runTest("offset: nonzero box properties - html.fixed body.fixed");
     }
 
     /**
-     * Test {977=[IE], 978=[CHROME, EDGE, FF, FF68]}.
+     * Test {977=[IE], 978=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9907,7 +9905,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {978=[IE], 979=[CHROME, EDGE, FF, FF68]}.
+     * Test {978=[IE], 979=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9917,18 +9915,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {979=[IE], 980=[CHROME, EDGE, FF, FF68]}.
+     * Test {979=[IE], 980=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void offset__iframe_scrollTop_Left__see_gh_1945_() throws Exception {
         runTest("offset: iframe scrollTop/Left (see gh-1945)");
     }
 
     /**
-     * Test {980=[IE], 981=[CHROME, EDGE, FF, FF68]}.
+     * Test {980=[IE], 981=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9938,7 +9936,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {981=[IE], 982=[CHROME, EDGE, FF, FF68]}.
+     * Test {981=[IE], 982=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9948,7 +9946,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {982=[IE], 983=[CHROME, EDGE, FF, FF68]}.
+     * Test {982=[IE], 983=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9958,7 +9956,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {983=[IE], 984=[CHROME, EDGE, FF, FF68]}.
+     * Test {983=[IE], 984=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9968,7 +9966,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {984=[IE], 985=[CHROME, EDGE, FF, FF68]}.
+     * Test {984=[IE], 985=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9978,7 +9976,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {985=[IE], 986=[CHROME, EDGE, FF, FF68]}.
+     * Test {985=[IE], 986=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9988,7 +9986,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {986=[IE], 987=[CHROME, EDGE, FF, FF68]}.
+     * Test {986=[IE], 987=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9998,7 +9996,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {987=[IE], 988=[CHROME, EDGE, FF, FF68]}.
+     * Test {987=[IE], 988=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10008,7 +10006,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {988=[IE], 989=[CHROME, EDGE, FF, FF68]}.
+     * Test {988=[IE], 989=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10018,7 +10016,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {989=[IE], 990=[CHROME, EDGE, FF, FF68]}.
+     * Test {989=[IE], 990=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10028,7 +10026,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {990=[IE], 991=[CHROME, EDGE, FF, FF68]}.
+     * Test {990=[IE], 991=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10038,7 +10036,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {991=[IE], 992=[CHROME, EDGE, FF, FF68]}.
+     * Test {991=[IE], 992=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10048,7 +10046,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {992=[IE], 993=[CHROME, EDGE, FF, FF68]}.
+     * Test {992=[IE], 993=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10058,7 +10056,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {993=[IE], 994=[CHROME, EDGE, FF, FF68]}.
+     * Test {993=[IE], 994=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10068,7 +10066,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {994=[IE], 995=[CHROME, EDGE, FF, FF68]}.
+     * Test {994=[IE], 995=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10078,7 +10076,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {995=[IE], 996=[CHROME, EDGE, FF, FF68]}.
+     * Test {995=[IE], 996=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10088,18 +10086,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {996=[IE], 997=[CHROME, EDGE, FF, FF68]}.
+     * Test {996=[IE], 997=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
 
     /**
-     * Test {997=[IE], 998=[CHROME, EDGE, FF, FF68]}.
+     * Test {997=[IE], 998=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10109,18 +10107,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {998=[IE], 999=[CHROME, EDGE, FF, FF68]}.
+     * Test {998=[IE], 999=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void dimensions__outside_view_position__gh_2836_() throws Exception {
         runTest("dimensions: outside view position (gh-2836)");
     }
 
     /**
-     * Test {999=[IE], 1000=[CHROME, EDGE, FF, FF68]}.
+     * Test {999=[IE], 1000=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10130,7 +10128,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1000=[IE], 1001=[CHROME, EDGE, FF, FF68]}.
+     * Test {1000=[IE], 1001=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10140,30 +10138,31 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1001=[IE], 1002=[CHROME, EDGE, FF, FF68]}.
+     * Test {1001=[IE], 1002=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+    @NotYetImplemented
     public void dimensions__width_height_on_an_inline_element_with_percentage_dimensions__gh_3611_() throws Exception {
         runTest("dimensions: width/height on an inline element with percentage dimensions (gh-3611)");
     }
 
     /**
-     * Test {1002=[IE], 1003=[CHROME, EDGE, FF, FF68]}.
+     * Test {1002=[IE], 1003=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "4",
-            FF = "4, 0, 4")
-    @NotYetImplemented({ CHROME, EDGE, FF, FF78, IE })
+            FF = "4, 0, 4",
+            FF78 = "4, 0, 4")
+    @NotYetImplemented
     public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
         runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");
     }
 
     /**
-     * Test {1003=[IE], 1004=[CHROME, EDGE, FF, FF68]}.
+     * Test {1003=[IE], 1004=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10173,7 +10172,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1004=[IE], 1005=[CHROME, EDGE, FF, FF68]}.
+     * Test {1004=[IE], 1005=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10183,7 +10182,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1005=[IE], 1006=[CHROME, EDGE, FF, FF68]}.
+     * Test {1005=[IE], 1006=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10193,7 +10192,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1006=[IE], 1007=[CHROME, EDGE, FF, FF68]}.
+     * Test {1006=[IE], 1007=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10203,7 +10202,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1007=[IE], 1008=[CHROME, EDGE, FF, FF68]}.
+     * Test {1007=[IE], 1008=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10213,7 +10212,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1008=[IE], 1009=[CHROME, EDGE, FF, FF68]}.
+     * Test {1008=[IE], 1009=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10223,7 +10222,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1009=[IE], 1010=[CHROME, EDGE, FF, FF68]}.
+     * Test {1009=[IE], 1010=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10233,7 +10232,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1010=[IE], 1011=[CHROME, EDGE, FF, FF68]}.
+     * Test {1010=[IE], 1011=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10243,7 +10242,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1011=[IE], 1012=[CHROME, EDGE, FF, FF68]}.
+     * Test {1011=[IE], 1012=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10253,7 +10252,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1012=[IE], 1013=[CHROME, EDGE, FF, FF68]}.
+     * Test {1012=[IE], 1013=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10263,7 +10262,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1013=[IE], 1014=[CHROME, EDGE, FF, FF68]}.
+     * Test {1013=[IE], 1014=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10273,7 +10272,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1014=[IE], 1015=[CHROME, EDGE, FF, FF68]}.
+     * Test {1014=[IE], 1015=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10283,7 +10282,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1015=[IE], 1016=[CHROME, EDGE, FF, FF68]}.
+     * Test {1015=[IE], 1016=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10293,7 +10292,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1016=[IE], 1017=[CHROME, EDGE, FF, FF68]}.
+     * Test {1016=[IE], 1017=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10303,7 +10302,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1017=[IE], 1018=[CHROME, EDGE, FF, FF68]}.
+     * Test {1017=[IE], 1018=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10313,7 +10312,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1018=[IE], 1019=[CHROME, EDGE, FF, FF68]}.
+     * Test {1018=[IE], 1019=[CHROME, EDGE, FF, FF78]}.
      * @throws Exception if an error occurs
      */
     @Test
