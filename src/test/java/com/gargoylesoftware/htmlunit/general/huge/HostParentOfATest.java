@@ -137,7 +137,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({CHROME, EDGE, FF})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void _Atomics_Atomics() throws Exception {
         test("Atomics", "Atomics");
     }

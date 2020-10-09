@@ -263,8 +263,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF78 = "false")
+    @Alerts(DEFAULT = "true")
     public void _Geolocation_Geolocation() throws Exception {
         test("Geolocation", "Geolocation");
     }

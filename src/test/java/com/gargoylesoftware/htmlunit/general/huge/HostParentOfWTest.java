@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Collection;
@@ -268,8 +269,9 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true",
-            FF = "true")
-    @NotYetImplemented({CHROME, EDGE, FF})
+            FF = "true",
+            FF78 = "true")
+    @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
         test("WebKitCSSMatrix", "DOMMatrix");
     }
@@ -414,7 +416,8 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true",
-            FF = "true")
+            FF = "true",
+            FF78 = "true")
     public void _webkitURL_URL() throws Exception {
         test("webkitURL", "URL");
     }
@@ -426,7 +429,8 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true",
-            FF = "true")
+            FF = "true",
+            FF78 = "true")
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
     }
