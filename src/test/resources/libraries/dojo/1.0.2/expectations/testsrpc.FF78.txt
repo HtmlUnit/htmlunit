@@ -1,0 +1,15 @@
+4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.rpc" has 4 tests to run
+ PASSED test: JsonRPC-EchoTest
+ PASSED test: JsonRPC-EmptyParamTest
+ PASSED test: JsonRPC_SMD_Loading_test
+ TypeError:...     ERROR IN:  function...
+ FAILED test: JsonP_test
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      4 tests in 1 groups
+      1 errors
+      0 failures

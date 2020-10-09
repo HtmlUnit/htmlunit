@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Sarissa0993Test extends WebDriverTestCase {
@@ -38,10 +39,10 @@ public class Sarissa0993Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"++++++++++++++++++", "+", "+", "+", "+++", "++", "++++F+++"},
-            CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
+    @Alerts(CHROME = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             EDGE = {"+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++"},
             FF = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"},
+            FF78 = {"+++++++++++F++++++", "+", "+", "+", "F++", "++", "++++F+++"},
             IE = {"+++++++++++F++++++", "+", "+", "+", "FFF", "FF", "FFFFFFFF"})
     // TODO [IE]XML sarissa 0.9.9.3 is not compatible with IE's new XML stuff
     public void sarissa() throws Exception {
