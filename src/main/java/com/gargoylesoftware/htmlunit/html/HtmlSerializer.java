@@ -156,7 +156,7 @@ public class HtmlSerializer {
                 final Object scriptableObject = domNode.getScriptableObject();
                 if (scriptableObject instanceof Element) {
                     final Element element = (Element) scriptableObject;
-                    final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+                    final String display = element.getWindow().getComputedStyle(element, null).getDisplay();
                     block = "block".equals(display);
                 }
             }

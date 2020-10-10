@@ -39,7 +39,6 @@ public class Intl extends SimpleScriptable {
      * @param browserVersion the browser version
      */
     public void defineProperties(final BrowserVersion browserVersion) {
-        setClassName("Object");
         define(Collator.class, browserVersion);
         define(DateTimeFormat.class, browserVersion);
         define(NumberFormat.class, browserVersion);

@@ -19,8 +19,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
@@ -256,13 +258,19 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Intl intl = new Intl();
         intl.setParentScope(window);
         window.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
+        if (browserVersion.hasFeature(JS_INTL_NAMED_OBJECT)) {
+            intl.setClassName("Object");
+        }
         intl.defineProperties(browserVersion);
 
         if (browserVersion.hasFeature(JS_REFLECT)) {
             final Reflect reflect = new Reflect();
             reflect.setParentScope(window);
             window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
-            reflect.defineProperties();
+
+            if (browserVersion.hasFeature(JS_REFLECT_NAMED_OBJECT)) {
+                reflect.setClassName("Object");
+            }
         }
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();

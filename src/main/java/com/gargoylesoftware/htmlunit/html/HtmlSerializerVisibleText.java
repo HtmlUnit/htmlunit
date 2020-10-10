@@ -167,7 +167,7 @@ public class HtmlSerializerVisibleText {
         }
         else if (scriptableObject instanceof Element) {
             final Element element = (Element) scriptableObject;
-            final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+            final String display = element.getWindow().getComputedStyle(element, null).getDisplay();
             block = "block".equals(display);
         }
         else {

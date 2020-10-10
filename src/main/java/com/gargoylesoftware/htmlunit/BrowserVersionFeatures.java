@@ -358,10 +358,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLCOLLECTION_SUPPORTS_PARANTHESES,
 
-    /** Is the default display style {@code inline} for quirks mode. */
-    @BrowserFeature(FF78)
-    HTMLDEFINITION_INLINE_IN_QUIRKS,
-
     /** Is {@code document.charset} lower-case. */
     @BrowserFeature(IE)
     HTMLDOCUMENT_CHARSET_LOWERCASE,
@@ -1036,6 +1032,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_INPUT_SET_VALUE_URL_TRIMMED,
 
+    /** Intl is named Object. */
+    @BrowserFeature({FF, FF78, IE})
+    JS_INTL_NAMED_OBJECT,
+
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
@@ -1165,6 +1165,10 @@ public enum BrowserVersionFeatures {
     /** Support {@code Reflect}. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_REFLECT,
+
+    /** {@code Reflect} is named Object. */
+    @BrowserFeature({FF, FF78})
+    JS_REFLECT_NAMED_OBJECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
     @BrowserFeature(IE)

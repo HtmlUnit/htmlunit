@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -335,6 +336,8 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             CHROME = {"function", "true", "function get length() { [native code] }", "0", "0"},
             EDGE = {"undefined", "false", "undefined", "exception"},
             IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
+    @HtmlUnitNYI(CHROME = {"function", "true", "function length() { [native code] }", "0", "0"},
+            EDGE = {"function", "true", "function length() { [native code] }", "0", "0"})
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

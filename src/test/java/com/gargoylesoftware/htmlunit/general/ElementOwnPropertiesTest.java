@@ -283,8 +283,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,"
                 + "onsearch,onselectstart,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
-                + "replaceWith(),scrollHeight,scrollIntoView(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,webkitMatchesSelector()",
             EDGE = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,"
@@ -298,8 +297,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,"
                 + "onsearch,onselectstart,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
-                + "replaceWith(),scrollHeight,scrollIntoView(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,webkitMatchesSelector()",
             FF = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,clientLeft,"
@@ -9089,9 +9087,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF78 = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "constructor(),height,isPrimary,pointerId,pointerType,"
+    @HtmlUnitNYI(CHROME = "altitudeAngle,azimuthAngle,constructor(),height,isPrimary,pointerId,pointerType,"
                 + "pressure,tiltX,tiltY,width",
-            EDGE = "constructor(),height,isPrimary,pointerId,pointerType,"
+            EDGE = "altitudeAngle,azimuthAngle,constructor(),height,isPrimary,pointerId,pointerType,"
                 + "pressure,tiltX,tiltY,width",
             FF78 = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width",

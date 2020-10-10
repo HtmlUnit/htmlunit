@@ -38,13 +38,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class Reflect extends SimpleScriptable {
 
     /**
-     * Define needed properties.
-     */
-    public void defineProperties() {
-        setClassName("Object");
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

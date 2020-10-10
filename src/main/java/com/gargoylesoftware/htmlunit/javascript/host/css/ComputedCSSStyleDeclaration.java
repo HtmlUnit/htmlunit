@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
@@ -113,7 +112,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
-import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
@@ -555,54 +553,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
-        return getDisplay(false);
-    }
-
-    /**
-     * Returns the {@code display} attribute.
-     * @param ignoreBlockIfNotAttached flag
-     * @return the {@code display} attribute
-     */
-    public String getDisplay(final boolean ignoreBlockIfNotAttached) {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final DomElement domElem = getElement().getDomNodeOrDie();
-        boolean changeValueIfEmpty = false;
         if (!domElem.isAttachedToPage()) {
             final BrowserVersion browserVersion = getBrowserVersion();
             if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
                 return "";
             }
-            if (!ignoreBlockIfNotAttached
-                    && (domElem instanceof HtmlDefinitionDescription
-                         && browserVersion.hasFeature(HTMLDEFINITION_INLINE_IN_QUIRKS))) {
-                changeValueIfEmpty = true;
-            }
         }
         final String value = super.getStyleAttribute(DISPLAY, false);
         if (StringUtils.isEmpty(value)) {
             if (domElem instanceof HtmlElement) {
-                final String defaultValue = ((HtmlElement) domElem).getDefaultStyleDisplay().value();
-                if (changeValueIfEmpty) {
-                    switch (defaultValue) {
-                        case "inline":
-                        case "inline-block":
-                        case "table-caption":
-                        case "table-cell":
-                        case "table-column":
-                        case "table-column-group":
-                        case "table-footer-group":
-                        case "table-header-group":
-                        case "table-row":
-                        case "table-row-group":
-                        case "list-item":
-                        case "ruby":
-                            return BLOCK;
-
-                        default:
-                    }
-                }
-                return defaultValue;
+                return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
             }
             return "";
         }

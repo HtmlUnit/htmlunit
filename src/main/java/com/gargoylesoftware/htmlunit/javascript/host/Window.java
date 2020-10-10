@@ -459,7 +459,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({EDGE, FF, FF78, IE})
+    @JsxGetter({FF, FF78, IE})
     public ApplicationCache getApplicationCache() {
         return applicationCache_;
     }

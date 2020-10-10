@@ -481,7 +481,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-56")
-    @NotYetImplemented({CHROME, EDGE, FF, IE})
+    @NotYetImplemented({CHROME, EDGE, FF, FF78, IE})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
