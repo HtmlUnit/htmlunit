@@ -273,4 +273,20 @@ public class PointerEvent extends MouseEvent {
     public boolean isPrimary() {
         return isPrimary_;
     }
+
+    /**
+     * @return the pointerType
+     */
+    @JsxGetter({CHROME, EDGE})
+    public double getAltitudeAngle() {
+        return 1.5707963267948966;
+    }
+
+    /**
+     * @return the pointerType
+     */
+    @JsxGetter({CHROME, EDGE})
+    public double getAzimuthAngle() {
+        return 0d;
+    }
 }

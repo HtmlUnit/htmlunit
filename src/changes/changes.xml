@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.45.0" date="xxx, 2020" description="Bugfixes, switch from FF68 to FF78 ESR; Chrome/Edge 86">
+            <action type="add" dev="rbri">
+                PointerEvent supports altitudeAngle and azimuthAngle property for Chrome/Edge.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpComponents to 4.5.13.
             </action>
