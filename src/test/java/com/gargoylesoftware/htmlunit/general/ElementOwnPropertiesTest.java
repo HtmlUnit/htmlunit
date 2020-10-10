@@ -196,7 +196,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onfullscreenerror,"
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,part,prefix,prepend(),"
                 + "previousElementSibling,querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
-                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceWith(),requestFullscreen(),"
+                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),requestFullscreen(),"
                 + "requestPointerLock(),scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),"
                 + "scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,"
@@ -219,7 +220,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onfullscreenerror,onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,part,"
                 + "prefix,prepend(),previousElementSibling,querySelector(),querySelectorAll(),"
                 + "releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
-                + "replaceWith(),requestFullscreen(),requestPointerLock(),scroll(),scrollBy(),scrollHeight,"
+                + "replaceChildren(),replaceWith(),requestFullscreen(),"
+                + "requestPointerLock(),scroll(),scrollBy(),scrollHeight,"
                 + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTo(),scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),"
                 + "shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector(),"
@@ -281,7 +283,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,"
                 + "onsearch,onselectstart,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,webkitMatchesSelector()",
             EDGE = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,"
@@ -295,7 +298,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,"
                 + "onsearch,onselectstart,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,webkitMatchesSelector()",
             FF = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,clientLeft,"
@@ -9073,10 +9077,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),getCoalescedEvents(),getPredictedEvents(),height,"
+    @Alerts(CHROME = "altitudeAngle,azimuthAngle,constructor(),getCoalescedEvents(),getPredictedEvents(),height,"
                 + "isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
-            EDGE = "constructor(),getCoalescedEvents(),getPredictedEvents(),height,isPrimary,pointerId,pointerType,"
+            EDGE = "altitudeAngle,azimuthAngle,constructor(),getCoalescedEvents(),"
+                + "getPredictedEvents(),height,isPrimary,pointerId,pointerType,"
                 + "pressure,tangentialPressure,tiltX,tiltY,twist,"
                 + "width",
             FF = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
@@ -9316,8 +9321,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "assignedElements(),assignedNodes(),constructor(),name",
-            EDGE = "assignedElements(),assignedNodes(),constructor(),name",
+    @Alerts(CHROME = "assign(),assignedElements(),assignedNodes(),constructor(),name",
+            EDGE = "assign(),assignedElements(),assignedNodes(),constructor(),name",
             FF = "assignedElements(),assignedNodes(),constructor(),name",
             FF78 = "assignedElements(),assignedNodes(),constructor(),name",
             IE = "constructor,namedRecordset(),recordset")
@@ -9595,11 +9600,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "append(),childElementCount,children,constructor(),firstElementChild,getElementById(),"
-                + "lastElementChild,prepend(),querySelector(),"
-                + "querySelectorAll()",
+                + "lastElementChild,prepend(),querySelector(),querySelectorAll(),replaceChildren()",
             EDGE = "append(),childElementCount,children,constructor(),firstElementChild,getElementById(),"
-                + "lastElementChild,prepend(),querySelector(),"
-                + "querySelectorAll()",
+                + "lastElementChild,prepend(),querySelector(),querySelectorAll(),replaceChildren()",
             FF = "append(),childElementCount,children,constructor(),firstElementChild,getElementById(),"
                 + "lastElementChild,prepend(),querySelector(),"
                 + "querySelectorAll(),replaceChildren()",

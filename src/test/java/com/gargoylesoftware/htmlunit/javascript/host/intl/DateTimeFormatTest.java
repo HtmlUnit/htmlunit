@@ -44,7 +44,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]",
+            CHROME = "[object Intl]",
+            EDGE = "[object Intl]")
     public void intl() throws Exception {
         test("Intl");
     }
