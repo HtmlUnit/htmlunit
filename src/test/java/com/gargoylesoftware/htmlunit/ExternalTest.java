@@ -52,7 +52,7 @@ public class ExternalTest {
 
     /** Chrome driver. */
     static String CHROME_DRIVER_ = "86.0.4240.22";
-    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_85";
+    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_86";
 
     static String EDGE_DRIVER_ = "86.0.622.38";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";

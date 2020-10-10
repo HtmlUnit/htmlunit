@@ -1179,7 +1179,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
-                + "mozPaintCount,name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
+                + "name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,"
                 + "ondevicelight,ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"
@@ -1192,8 +1192,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,postMessage(),print(),process(),prompt(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,scroll(),"
-                + "scrollBy(),scrollByLines(),scrollByPages()",
-                "scrollTo(),scrollX,scrollY,self,sessionStorage,"
+                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo()",
+                "scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window"},
             FF = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,controllers,"
@@ -1909,7 +1909,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     + "requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
                     + "requestSubmit(),reset(),submit(),target",
-            FF78 = "action,checkValidity(),elements,encoding,enctype,length,method,name,reset(),submit(),target",
+            FF78 = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
+                    + "requestSubmit(),reset(),submit(),target",
             FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
                     + "requestSubmit(),reset(),submit(),target",
             IE = "action,checkValidity(),elements,encoding,enctype,item(),length,method,name,reset(),submit(),target")
@@ -4196,14 +4197,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 "onwebkitfullscreenerror,onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF78 = "activeElement,adoptNode(),async,characterSet,charset,childElementCount,children,compatMode,"
+            FF78 = "activeElement,adoptNode(),characterSet,charset,childElementCount,children,compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,doctype,documentElement,documentURI,elementFromPoint(),"
                 + "evaluate(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
-                + "importNode(),inputEncoding,lastElementChild,lastModified,load(),location,onabort,"
+                + "importNode(),inputEncoding,lastElementChild,lastModified,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
                 + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,oninput,"

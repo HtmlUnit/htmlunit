@@ -405,7 +405,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onrejectionhandled} event handler for this element.
      * @return the {@code onrejectionhandled} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnrejectionhandled() {
         return getEventHandler("rejectionhandled");
     }
@@ -414,7 +414,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onrejectionhandled} event handler for this element.
      * @param onrejectionhandled the {@code onrejectionhandled} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnrejectionhandled(final Object onrejectionhandled) {
         setEventHandler("rejectionhandled", onrejectionhandled);
     }
@@ -441,7 +441,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onunhandledrejection} event handler for this element.
      * @return the {@code onunhandledrejection} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnunhandledrejection() {
         return getEventHandler("unhandledrejection");
     }
@@ -450,7 +450,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onunhandledrejection} event handler for this element.
      * @param onunhandledrejection the {@code onunhandledrejection} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnunhandledrejection(final Object onunhandledrejection) {
         setEventHandler("unhandledrejection", onunhandledrejection);
     }

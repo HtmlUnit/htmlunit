@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_FORM_ATTRIBUTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
 import java.io.IOException;
@@ -417,18 +416,9 @@ public abstract class HtmlElement extends DomElement {
      * @return this element's tab index
      */
     public Short getTabIndex() {
-        String index = getAttributeDirect("tabindex");
-        if (index == null) {
+        final String index = getAttributeDirect("tabindex");
+        if (index == null || index.isEmpty()) {
             return null;
-        }
-        if (index.isEmpty()) {
-            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-            if (index != ATTRIBUTE_NOT_DEFINED && browserVersion.hasFeature(HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE)) {
-                index = "-1";
-            }
-            else {
-                return null;
-            }
         }
         try {
             final long l = Long.parseLong(index);

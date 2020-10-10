@@ -1368,6 +1368,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             EDGE = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             FF = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
+            FF78 = {"onfocus1:focusId1", "active: focusId1", "onfocusin1:focusId1", "active: focusId1"},
             IE = {"onfocusin1:focusId1", "active: body", "onfocus1:focusId1", "active: focusId1"})
     public void clickFromFocusableToFocusableDisabled() throws Exception {
         testSwitchWithClick("<input type='text' id='focusId1'>\n"

@@ -299,7 +299,7 @@ public enum BrowserVersionFeatures {
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
 
     /** Form submit includes the origin header. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     FORM_SUBMISSION_HEADER_ORIGIN,
 
     /** Form submit is done without the hash part of the action url. */
@@ -406,10 +406,6 @@ public enum BrowserVersionFeatures {
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature({CHROME, EDGE})
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
-
-    /** An empty (but given) tabindex attribute is treated as -1. */
-    @BrowserFeature(FF78)
-    HTMLELEMENT_TABINDEX_EMPTY_IS_MINUS_ONE,
 
     /** Handle blank source like empty. */
     @BrowserFeature({CHROME, EDGE, IE})
