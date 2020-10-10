@@ -256,7 +256,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            EDGE = "function ApplicationCache() { [native code] }",
             IE = "[object ApplicationCache]")
     public void applicationCache() throws Exception {
         test("ApplicationCache");
@@ -266,8 +265,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            EDGE = "function ApplicationCacheErrorEvent() { [native code] }")
+    @Alerts("exception")
     public void applicationCacheErrorEvent() throws Exception {
         test("ApplicationCacheErrorEvent");
     }
