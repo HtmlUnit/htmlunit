@@ -158,7 +158,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /** Like the Firefox default value for {@code network.http.redirection-limit}. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
-    private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
+    private static final WebResponseData RESPONSE_DATA_NO_HTTP_RESPONSE = new WebResponseData(
             0, "No HTTP Response", Collections.<NameValuePair>emptyList());
 
     private transient WebConnection webConnection_;
@@ -448,7 +448,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 webResponse = loadWebResponse(webRequest);
             }
             catch (final NoHttpResponseException e) {
-                webResponse = new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
+                webResponse = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, webRequest, 0);
             }
         }
 
@@ -2400,7 +2400,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
                 catch (final NoHttpResponseException e) {
                     LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);
-                    response = new WebResponse(responseDataNoHttpResponse_, request, 0);
+                    response = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, request, 0);
                 }
                 loadJob = new LoadJob(request, requestingWindow, target, response);
             }
