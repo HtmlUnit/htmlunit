@@ -1969,8 +1969,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            EDGE = "true")
+    @Alerts("false")
     public void _Event_ApplicationCacheErrorEvent() throws Exception {
         test("Event", "ApplicationCacheErrorEvent");
     }
@@ -2598,8 +2597,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            EDGE = "true")
+    @Alerts("false")
     public void _EventTarget_ApplicationCache() throws Exception {
         test("EventTarget", "ApplicationCache");
     }

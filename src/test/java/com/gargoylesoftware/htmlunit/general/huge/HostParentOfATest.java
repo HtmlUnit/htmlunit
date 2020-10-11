@@ -107,7 +107,6 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            EDGE = "true",
             IE = "true")
     public void _ApplicationCache_ApplicationCache() throws Exception {
         test("ApplicationCache", "ApplicationCache");
@@ -117,8 +116,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            EDGE = "true")
+    @Alerts("false")
     public void _ApplicationCacheErrorEvent_ApplicationCacheErrorEvent() throws Exception {
         test("ApplicationCacheErrorEvent", "ApplicationCacheErrorEvent");
     }
