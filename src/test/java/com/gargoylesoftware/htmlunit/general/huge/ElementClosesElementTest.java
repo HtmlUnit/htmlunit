@@ -35495,8 +35495,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_a() throws Exception {
         test("keygen", "a");
     }
@@ -35505,8 +35504,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_abbr() throws Exception {
         test("keygen", "abbr");
     }
@@ -35515,8 +35513,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_acronym() throws Exception {
         test("keygen", "acronym");
     }
@@ -35525,8 +35522,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_address() throws Exception {
         test("keygen", "address");
     }
@@ -35535,8 +35531,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_applet() throws Exception {
         test("keygen", "applet");
     }
@@ -35545,8 +35540,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_area() throws Exception {
         test("keygen", "area");
     }
@@ -35555,8 +35549,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_article() throws Exception {
         test("keygen", "article");
     }
@@ -35565,8 +35558,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_aside() throws Exception {
         test("keygen", "aside");
     }
@@ -35575,8 +35567,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_audio() throws Exception {
         test("keygen", "audio");
     }
@@ -35585,8 +35576,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_b() throws Exception {
         test("keygen", "b");
     }
@@ -35595,8 +35585,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_base() throws Exception {
         test("keygen", "base");
     }
@@ -35605,8 +35594,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_basefont() throws Exception {
         test("keygen", "basefont");
     }
@@ -35615,8 +35603,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_bdi() throws Exception {
         test("keygen", "bdi");
     }
@@ -35625,8 +35612,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_bdo() throws Exception {
         test("keygen", "bdo");
     }
@@ -35635,8 +35621,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_bgsound() throws Exception {
         test("keygen", "bgsound");
     }
@@ -35645,8 +35630,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_big() throws Exception {
         test("keygen", "big");
     }
@@ -35655,8 +35639,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_blink() throws Exception {
         test("keygen", "blink");
     }
@@ -35665,8 +35648,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_blockquote() throws Exception {
         test("keygen", "blockquote");
     }
@@ -35675,8 +35657,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_body() throws Exception {
         test("keygen", "body");
     }
@@ -35685,8 +35666,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_br() throws Exception {
         test("keygen", "br");
     }
@@ -35695,8 +35675,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_button() throws Exception {
         test("keygen", "button");
     }
@@ -35705,8 +35684,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_canvas() throws Exception {
         test("keygen", "canvas");
     }
@@ -35715,8 +35693,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_caption() throws Exception {
         test("keygen", "caption");
     }
@@ -35725,8 +35702,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_center() throws Exception {
         test("keygen", "center");
     }
@@ -35735,8 +35711,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_cite() throws Exception {
         test("keygen", "cite");
     }
@@ -35745,8 +35720,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_code() throws Exception {
         test("keygen", "code");
     }
@@ -35755,8 +35729,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_col() throws Exception {
         test("keygen", "col");
     }
@@ -35765,8 +35738,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_colgroup() throws Exception {
         test("keygen", "colgroup");
     }
@@ -35775,8 +35747,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_command() throws Exception {
         test("keygen", "command");
     }
@@ -35785,8 +35756,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_content() throws Exception {
         test("keygen", "content");
     }
@@ -35795,8 +35765,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_data() throws Exception {
         test("keygen", "data");
     }
@@ -35805,8 +35774,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_datalist() throws Exception {
         test("keygen", "datalist");
     }
@@ -35815,8 +35783,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_dd() throws Exception {
         test("keygen", "dd");
     }
@@ -35825,8 +35792,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_del() throws Exception {
         test("keygen", "del");
     }
@@ -35835,8 +35801,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_details() throws Exception {
         test("keygen", "details");
     }
@@ -35845,8 +35810,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_dfn() throws Exception {
         test("keygen", "dfn");
     }
@@ -35855,8 +35819,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_dialog() throws Exception {
         test("keygen", "dialog");
     }
@@ -35865,8 +35828,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_dir() throws Exception {
         test("keygen", "dir");
     }
@@ -35875,8 +35837,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_div() throws Exception {
         test("keygen", "div");
     }
@@ -35885,8 +35846,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_dl() throws Exception {
         test("keygen", "dl");
     }
@@ -35895,8 +35855,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_dt() throws Exception {
         test("keygen", "dt");
     }
@@ -35905,8 +35864,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_em() throws Exception {
         test("keygen", "em");
     }
@@ -35915,8 +35873,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_embed() throws Exception {
         test("keygen", "embed");
     }
@@ -35925,8 +35882,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_fieldset() throws Exception {
         test("keygen", "fieldset");
     }
@@ -35935,8 +35891,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_figcaption() throws Exception {
         test("keygen", "figcaption");
     }
@@ -35945,8 +35900,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_figure() throws Exception {
         test("keygen", "figure");
     }
@@ -35955,8 +35909,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_font() throws Exception {
         test("keygen", "font");
     }
@@ -35965,8 +35918,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_footer() throws Exception {
         test("keygen", "footer");
     }
@@ -35975,8 +35927,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_form() throws Exception {
         test("keygen", "form");
     }
@@ -35985,8 +35936,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_frame() throws Exception {
         test("keygen", "frame");
     }
@@ -35995,8 +35945,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_frameset() throws Exception {
         test("keygen", "frameset");
     }
@@ -36005,8 +35954,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_h1() throws Exception {
         test("keygen", "h1");
     }
@@ -36015,8 +35963,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_h2() throws Exception {
         test("keygen", "h2");
     }
@@ -36025,8 +35972,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_h3() throws Exception {
         test("keygen", "h3");
     }
@@ -36035,8 +35981,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_h4() throws Exception {
         test("keygen", "h4");
     }
@@ -36045,8 +35990,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_h5() throws Exception {
         test("keygen", "h5");
     }
@@ -36055,8 +35999,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_h6() throws Exception {
         test("keygen", "h6");
     }
@@ -36065,8 +36008,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_head() throws Exception {
         test("keygen", "head");
     }
@@ -36075,8 +36017,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_header() throws Exception {
         test("keygen", "header");
     }
@@ -36085,8 +36026,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_hr() throws Exception {
         test("keygen", "hr");
     }
@@ -36095,8 +36035,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_html() throws Exception {
         test("keygen", "html");
     }
@@ -36105,8 +36044,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_i() throws Exception {
         test("keygen", "i");
     }
@@ -36115,8 +36053,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_iframe() throws Exception {
         test("keygen", "iframe");
     }
@@ -36125,8 +36062,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_image() throws Exception {
         test("keygen", "image");
     }
@@ -36135,8 +36071,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_img() throws Exception {
         test("keygen", "img");
     }
@@ -36145,8 +36080,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_input() throws Exception {
         test("keygen", "input");
     }
@@ -36155,8 +36089,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_ins() throws Exception {
         test("keygen", "ins");
     }
@@ -36165,8 +36098,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_isindex() throws Exception {
         test("keygen", "isindex");
     }
@@ -36175,8 +36107,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_kbd() throws Exception {
         test("keygen", "kbd");
     }
@@ -36185,8 +36116,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_keygen() throws Exception {
         test("keygen", "keygen");
     }
@@ -36195,8 +36125,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_label() throws Exception {
         test("keygen", "label");
     }
@@ -36205,8 +36134,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_layer() throws Exception {
         test("keygen", "layer");
     }
@@ -36215,8 +36143,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_legend() throws Exception {
         test("keygen", "legend");
     }
@@ -36225,8 +36152,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_li() throws Exception {
         test("keygen", "li");
     }
@@ -36235,8 +36161,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_link() throws Exception {
         test("keygen", "link");
     }
@@ -36245,8 +36170,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_listing() throws Exception {
         test("keygen", "listing");
     }
@@ -36255,8 +36179,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_main() throws Exception {
         test("keygen", "main");
     }
@@ -36265,8 +36188,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_map() throws Exception {
         test("keygen", "map");
     }
@@ -36275,8 +36197,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_mark() throws Exception {
         test("keygen", "mark");
     }
@@ -36285,8 +36206,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_marquee() throws Exception {
         test("keygen", "marquee");
     }
@@ -36295,8 +36215,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_menu() throws Exception {
         test("keygen", "menu");
     }
@@ -36305,8 +36224,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_menuitem() throws Exception {
         test("keygen", "menuitem");
     }
@@ -36315,8 +36233,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_meta() throws Exception {
         test("keygen", "meta");
     }
@@ -36325,8 +36242,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_meter() throws Exception {
         test("keygen", "meter");
     }
@@ -36335,8 +36251,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_multicol() throws Exception {
         test("keygen", "multicol");
     }
@@ -36345,8 +36260,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_nav() throws Exception {
         test("keygen", "nav");
     }
@@ -36355,8 +36269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_nextid() throws Exception {
         test("keygen", "nextid");
     }
@@ -36365,8 +36278,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_nobr() throws Exception {
         test("keygen", "nobr");
     }
@@ -36375,8 +36287,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_noembed() throws Exception {
         test("keygen", "noembed");
     }
@@ -36385,8 +36296,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_noframes() throws Exception {
         test("keygen", "noframes");
     }
@@ -36395,8 +36305,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_nolayer() throws Exception {
         test("keygen", "nolayer");
     }
@@ -36405,8 +36314,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_noscript() throws Exception {
         test("keygen", "noscript");
     }
@@ -36415,8 +36323,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_object() throws Exception {
         test("keygen", "object");
     }
@@ -36425,8 +36332,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_ol() throws Exception {
         test("keygen", "ol");
     }
@@ -36435,8 +36341,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_optgroup() throws Exception {
         test("keygen", "optgroup");
     }
@@ -36445,8 +36350,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_option() throws Exception {
         test("keygen", "option");
     }
@@ -36455,8 +36359,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_output() throws Exception {
         test("keygen", "output");
     }
@@ -36465,8 +36368,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_p() throws Exception {
         test("keygen", "p");
     }
@@ -36475,8 +36377,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_param() throws Exception {
         test("keygen", "param");
     }
@@ -36485,8 +36386,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_picture() throws Exception {
         test("keygen", "picture");
     }
@@ -36495,8 +36395,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_plaintext() throws Exception {
         test("keygen", "plaintext");
     }
@@ -36505,8 +36404,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_pre() throws Exception {
         test("keygen", "pre");
     }
@@ -36515,8 +36413,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_progress() throws Exception {
         test("keygen", "progress");
     }
@@ -36525,8 +36422,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_q() throws Exception {
         test("keygen", "q");
     }
@@ -36535,8 +36431,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_rp() throws Exception {
         test("keygen", "rp");
     }
@@ -36545,8 +36440,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_rt() throws Exception {
         test("keygen", "rt");
     }
@@ -36555,8 +36449,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_ruby() throws Exception {
         test("keygen", "ruby");
     }
@@ -36565,8 +36458,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_s() throws Exception {
         test("keygen", "s");
     }
@@ -36575,8 +36467,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_samp() throws Exception {
         test("keygen", "samp");
     }
@@ -36585,8 +36476,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_script() throws Exception {
         test("keygen", "script");
     }
@@ -36595,8 +36485,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_section() throws Exception {
         test("keygen", "section");
     }
@@ -36605,8 +36494,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_select() throws Exception {
         test("keygen", "select");
     }
@@ -36615,8 +36503,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_slot() throws Exception {
         test("keygen", "slot");
     }
@@ -36625,8 +36512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_small() throws Exception {
         test("keygen", "small");
     }
@@ -36635,8 +36521,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_source() throws Exception {
         test("keygen", "source");
     }
@@ -36645,8 +36530,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_span() throws Exception {
         test("keygen", "span");
     }
@@ -36655,8 +36539,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_strike() throws Exception {
         test("keygen", "strike");
     }
@@ -36665,8 +36548,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_strong() throws Exception {
         test("keygen", "strong");
     }
@@ -36675,8 +36557,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_style() throws Exception {
         test("keygen", "style");
     }
@@ -36685,8 +36566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_sub() throws Exception {
         test("keygen", "sub");
     }
@@ -36695,8 +36575,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_summary() throws Exception {
         test("keygen", "summary");
     }
@@ -36705,8 +36584,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_sup() throws Exception {
         test("keygen", "sup");
     }
@@ -36715,8 +36593,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_svg() throws Exception {
         test("keygen", "svg");
     }
@@ -36725,8 +36602,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_table() throws Exception {
         test("keygen", "table");
     }
@@ -36735,8 +36611,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_tbody() throws Exception {
         test("keygen", "tbody");
     }
@@ -36745,8 +36620,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_td() throws Exception {
         test("keygen", "td");
     }
@@ -36755,8 +36629,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_template() throws Exception {
         test("keygen", "template");
     }
@@ -36765,8 +36638,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_textarea() throws Exception {
         test("keygen", "textarea");
     }
@@ -36775,8 +36647,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_tfoot() throws Exception {
         test("keygen", "tfoot");
     }
@@ -36785,8 +36656,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_th() throws Exception {
         test("keygen", "th");
     }
@@ -36795,8 +36665,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_thead() throws Exception {
         test("keygen", "thead");
     }
@@ -36805,8 +36674,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_time() throws Exception {
         test("keygen", "time");
     }
@@ -36815,8 +36683,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_title() throws Exception {
         test("keygen", "title");
     }
@@ -36825,8 +36692,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_tr() throws Exception {
         test("keygen", "tr");
     }
@@ -36835,8 +36701,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_track() throws Exception {
         test("keygen", "track");
     }
@@ -36845,8 +36710,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_tt() throws Exception {
         test("keygen", "tt");
     }
@@ -36855,8 +36719,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_u() throws Exception {
         test("keygen", "u");
     }
@@ -36865,8 +36728,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_ul() throws Exception {
         test("keygen", "ul");
     }
@@ -36875,8 +36737,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_var() throws Exception {
         test("keygen", "var");
     }
@@ -36885,8 +36746,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_video() throws Exception {
         test("keygen", "video");
     }
@@ -36895,8 +36755,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_wbr() throws Exception {
         test("keygen", "wbr");
     }
@@ -36905,8 +36764,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF78 = "2")
+    @Alerts("0")
     public void _keygen_xmp() throws Exception {
         test("keygen", "xmp");
     }
@@ -47522,7 +47380,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF = "1",
+            FF78 = "1")
     @NotYetImplemented
     public void _select_keygen() throws Exception {
         test("select", "keygen");
