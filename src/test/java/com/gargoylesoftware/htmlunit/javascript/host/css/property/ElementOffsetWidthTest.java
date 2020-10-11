@@ -480,7 +480,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-56")
-    @NotYetImplemented({CHROME, EDGE, FF, IE})
+    @NotYetImplemented
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }
