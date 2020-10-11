@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -59,14 +60,10 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "        script.type = 'text/javascript';\n"
             + "        script.onreadystatechange = null;\n"
             + "        script.onreadystatechange = function() {\n"
-            + "          document.getElementById('myTextarea').value += script.id + '=' + script.readyState + ' ';\n"
-            + "          if (this.readyState == 'loaded') {\n"
-            + "            alert(document.getElementById('myTextarea').value);\n"
-            + "          }\n"
+            + "          document.getElementById('myTextarea').value += 'onreadystatechange ' + script.readyState + ' ';\n"
             + "        }\n"
             + "        script.onload = function() {\n"
             + "          document.getElementById('myTextarea').value += 'onload ';\n"
-            + "          alert(document.getElementById('myTextarea').value);\n"
             + "        }\n"
             + "        document.getElementById('myTextarea').value += '1 ';\n"
             + "        script.src = 'script.js';\n"
@@ -83,7 +80,11 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String js = "document.getElementById('myTextarea').value += '4 ';";
 
         getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textArea = driver.findElement(By.id("myTextarea"));
+        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
+
     }
 
     /**
