@@ -84,7 +84,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement textArea = driver.findElement(By.id("myTextarea"));
         assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
-
     }
 
     /**
