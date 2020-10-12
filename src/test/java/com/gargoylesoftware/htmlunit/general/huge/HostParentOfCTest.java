@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -25,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -370,7 +366,6 @@ public class HostParentOfCTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented({CHROME, EDGE})
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
     }
