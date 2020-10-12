@@ -678,13 +678,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_CONSOLE_HANDLE_WINDOW,
 
-    /** CSS.toString returns [object Object] instead of [object CSS]. */
-    @BrowserFeature({FF, FF78})
-    JS_CSS_OBJECT,
-
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature({FF, FF78})
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
+
+    /** CSS.toString returns [object Object] instead of [object CSS]. */
+    @BrowserFeature({FF, FF78})
+    JS_CSS_OBJECT,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
