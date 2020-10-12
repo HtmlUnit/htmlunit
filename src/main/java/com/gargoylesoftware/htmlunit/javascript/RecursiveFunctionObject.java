@@ -37,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * A FunctionObject that returns IDs of this object and all its parent classes.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class RecursiveFunctionObject extends FunctionObject {
 
@@ -152,7 +153,6 @@ public class RecursiveFunctionObject extends FunctionObject {
         final String superFunctionName = super.getFunctionName();
         if ("prototype".equals(name)) {
             switch (superFunctionName) {
-                case "CSS":
                 case "Proxy":
                     return NOT_FOUND;
 

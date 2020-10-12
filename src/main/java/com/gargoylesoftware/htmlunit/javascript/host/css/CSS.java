@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSS_OBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -57,7 +58,8 @@ public class CSS extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        if (String.class.equals(hint) || hint == null) {
+        if (getBrowserVersion().hasFeature(JS_CSS_OBJECT)
+                && (String.class.equals(hint) || hint == null)) {
             return "[object Object]";
         }
         return super.getDefaultValue(hint);
