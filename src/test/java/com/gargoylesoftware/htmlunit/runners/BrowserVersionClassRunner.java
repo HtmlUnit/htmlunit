@@ -19,18 +19,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
 import org.junit.rules.RunRules;
 import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runner.manipulation.Filter;
-import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -232,31 +227,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return object;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void filter(final Filter filter) throws NoTestsRemainException {
-        final List<FrameworkMethod> testMethods = computeTestMethods();
-
-        for (final ListIterator<FrameworkMethod> iter = testMethods.listIterator(); iter.hasNext();) {
-            final FrameworkMethod method = iter.next();
-            // compute 2 descriptions to verify if it is the intended test:
-            // - one "normal", this is what Eclipse's filter awaits when typing Ctrl+X T
-            //   when cursor is located on a test method
-            // - one with browser nickname, this is what is needed when re-running a test from
-            //   the JUnit view
-            // as the list of methods is cached, this is what will be returned when computeTestMethods() is called
-            final Description description = Description.createTestDescription(getTestClass().getJavaClass(),
-                method.getName());
-            final Description description2 = Description.createTestDescription(getTestClass().getJavaClass(),
-                testName(method));
-            if (!filter.shouldRun(description) && !filter.shouldRun(description2)) {
-                iter.remove();
-            }
-        }
-    }
-
     @Override
     protected String getName() {
         String browserString = browserVersion_.getNickname();
@@ -283,19 +253,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         String className = method.getMethod().getDeclaringClass().getName();
         className = className.substring(className.lastIndexOf('.') + 1);
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
-    }
-
-    // caching this methods is required by eclipse
-    // without this it is not possible to run a single test
-    private List<FrameworkMethod> testMethods_;
-
-    @Override
-    protected List<FrameworkMethod> computeTestMethods() {
-        if (testMethods_ == null) {
-            testMethods_ = new ArrayList<>(super.computeTestMethods());
-        }
-
-        return testMethods_;
     }
 
     /**
@@ -383,6 +340,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         statement = withBefores(method, test, statement);
         statement = withAfters(method, test, statement);
         statement = withRules(method, test, statement);
+        statement = withInterruptIsolation(statement);
 
         //  End of copy & paste from super.methodBlock()  //
 

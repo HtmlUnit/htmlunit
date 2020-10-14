@@ -25,7 +25,7 @@
 
         <htmlunitdriver.version>2.45.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.6.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.44.0</htmlunitneko.version>
+        <htmlunitneko.version>2.45.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitcorejs.version>2.44.0</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
@@ -1179,7 +1179,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
