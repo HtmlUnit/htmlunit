@@ -588,7 +588,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final Page oldPage = webWindow.getEnclosedPage();
         if (oldPage != null) {
-            // Remove the old windows before create new ones.
+            // Remove the old page before create new one.
             oldPage.cleanUp();
         }
 
@@ -1214,21 +1214,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (isJavaScriptEngineEnabled()) {
             scriptEngine_.initialize(webWindow);
-        }
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Initializes a new page for JavaScript.
-     * @param newPage the new page
-     */
-    public void initialize(final Page newPage) {
-        WebAssert.notNull("newPage", newPage);
-
-        if (isJavaScriptEngineEnabled()) {
-            final Window window = newPage.getEnclosingWindow().getScriptableObject();
-            window.initialize(newPage);
         }
     }
 

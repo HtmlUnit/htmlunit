@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -133,12 +134,19 @@ public abstract class WebWindowImpl implements WebWindow {
             return;
         }
         destroyChildren();
-        enclosedPage_ = page;
-        history_.addPage(page);
+
         if (isJavaScriptInitializationNeeded()) {
             webClient_.initialize(this);
         }
-        webClient_.initialize(page);
+        if (webClient_.isJavaScriptEngineEnabled()) {
+            final Window window = getScriptableObject();
+            window.initialize(page);
+        }
+
+        // has to be done after page initialization to make sure
+        // the enclosedPage has a scriptable object
+        enclosedPage_ = page;
+        history_.addPage(page);
     }
 
     /**
