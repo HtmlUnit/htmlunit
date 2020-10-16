@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -30,7 +24,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
@@ -4987,7 +4980,9 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function InternalError() {\n    [native code]\n}",
             FF78 = "function InternalError() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @HtmlUnitNYI(CHROME = "function InternalError() { [native code] }",
+            EDGE = "function InternalError() { [native code] }",
+            IE = "function InternalError() {\n    [native code]\n}\n")
     public void internalError() throws Exception {
         test("InternalError");
     }
@@ -6273,7 +6268,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object MSCurrentStyleCSSProperties]")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "exception")
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }
@@ -6296,7 +6291,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object MSStyleCSSProperties]")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "exception")
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
     }
@@ -6721,7 +6716,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function OffscreenCanvas() { [native code] }",
             EDGE = "function OffscreenCanvas() { [native code] }")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }
@@ -7297,7 +7293,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PresentationConnectionList() { [native code] }",
             EDGE = "function PresentationConnectionList() { [native code] }")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception")
     public void presentationConnectionList() throws Exception {
         test("PresentationConnectionList");
     }
@@ -7309,7 +7306,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PresentationReceiver() { [native code] }",
             EDGE = "function PresentationReceiver() { [native code] }")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception")
     public void presentationReceiver() throws Exception {
         test("PresentationReceiver");
     }
@@ -7404,7 +7402,10 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Proxy() {\n    [native code]\n}",
             IE = "exception",
             FF78 = "function Proxy() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF78 = "exception")
     public void proxy() throws Exception {
         test("Proxy");
     }
@@ -7669,7 +7670,10 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function RTCDataChannel() { [native code] }",
             FF = "function RTCDataChannel() {\n    [native code]\n}",
             FF78 = "function RTCDataChannel() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF78 = "exception")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
@@ -7769,7 +7773,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSctpTransport() { [native code] }",
             EDGE = "function RTCSctpTransport() { [native code] }")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception")
     public void rtcSctpTransport() throws Exception {
         test("RTCSctpTransport");
     }
@@ -10869,7 +10874,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function VRDisplay() {\n    [native code]\n}",
             FF78 = "function VRDisplay() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "exception",
+            FF78 = "exception")
     public void vrDisplay() throws Exception {
         test("VRDisplay");
     }
@@ -10881,7 +10887,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function VRDisplayCapabilities() {\n    [native code]\n}",
             FF78 = "function VRDisplayCapabilities() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "exception",
+            FF78 = "exception")
     public void vrDisplayCapabilities() throws Exception {
         test("VRDisplayCapabilities");
     }
@@ -10893,7 +10900,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function VREyeParameters() {\n    [native code]\n}",
             FF78 = "function VREyeParameters() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "exception",
+            FF78 = "exception")
     public void vrEyeParameters() throws Exception {
         test("VREyeParameters");
     }
@@ -10905,7 +10913,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function VRFieldOfView() {\n    [native code]\n}",
             FF78 = "function VRFieldOfView() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "exception",
+            FF78 = "exception")
     public void vrFieldOfView() throws Exception {
         test("VRFieldOfView");
     }
@@ -10935,7 +10944,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function VRPose() {\n    [native code]\n}",
             FF78 = "function VRPose() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "exception",
+            FF78 = "exception")
     public void vrPose() throws Exception {
         test("VRPose");
     }
@@ -10956,7 +10966,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function VRStageParameters() {\n    [native code]\n}",
             FF78 = "function VRStageParameters() {\n    [native code]\n}")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "exception",
+            FF78 = "exception")
     public void vrStageParameters() throws Exception {
         test("VRStageParameters");
     }
