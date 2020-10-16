@@ -54,7 +54,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_ = "86.0.4240.22";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_86";
 
-    static String EDGE_DRIVER_ = "86.0.622.38";
+    static String EDGE_DRIVER_ = "86.0.622.43";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -296,11 +296,6 @@ public class ExternalTest {
 
     private static boolean isIgnored(@SuppressWarnings("unused") final String groupId,
             @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
-        if ("junit".equals(groupId)
-                && "junit".equals(artifactId)
-                && !"4.12".equals(version)) {
-            return true;
-        }
         return false;
     }
 
