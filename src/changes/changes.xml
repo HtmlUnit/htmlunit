@@ -8,6 +8,14 @@
 
     <body>
         <release version="2.45.0" date="xxx, 2020" description="Bugfixes, switch from FF68 to FF78 ESR; Chrome/Edge 86">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
+                the method requires now the page as second parameter.
+            </action>
+            <action type="fix" dev="rbri" issue="#68">
+                Make sure the js initialization of the new page is finished before the page is
+                visible as enclosed page to the outside.
+            </action>
             <action type="add" dev="rbri">
                 PointerEvent supports altitudeAngle and azimuthAngle property for Chrome/Edge.
             </action>
