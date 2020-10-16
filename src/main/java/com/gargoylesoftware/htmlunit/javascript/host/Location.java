@@ -93,14 +93,15 @@ public class Location extends SimpleScriptable {
     }
 
     /**
-     * Initializes the object.
+     * Initializes this Location.
      *
      * @param window the window that this location belongs to
+     * @param page the page that will become the enclosing page
      */
-    public void initialize(final Window window) {
+    public void initialize(final Window window, final Page page) {
         window_ = window;
-        if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            setHash(window_.getWebWindow().getEnclosedPage().getUrl().getRef());
+        if (window_ != null && page != null) {
+            setHash(null, page.getUrl().getRef());
         }
     }
 
@@ -343,13 +344,12 @@ public class Location extends SimpleScriptable {
         }
         final boolean hasChanged = hash != null && !hash.equals(hash_);
         hash_ = hash;
-        final String newURL = getHref();
 
         if (hasChanged) {
             final Window w = getWindow();
             final Event event;
             if (getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)) {
-                event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, newURL);
+                event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, getHref());
             }
             else {
                 event = new Event(w, Event.TYPE_HASH_CHANGE);

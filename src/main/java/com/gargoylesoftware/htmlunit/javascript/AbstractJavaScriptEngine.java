@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -77,10 +78,11 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
     void registerWindowAndMaybeStartEventLoop(WebWindow webWindow);
 
     /**
-     * Performs initialization for the given webWindow.
+     * Performs initialization for the given webWindow and page.
      * @param webWindow the web window to initialize for
+     * @param page the page that will become the enclosing page
      */
-    void initialize(WebWindow webWindow);
+    void initialize(WebWindow webWindow, Page page);
 
     /**
      * Sets the number of milliseconds that a script is allowed to execute before being terminated.

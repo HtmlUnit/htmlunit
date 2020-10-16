@@ -41,7 +41,7 @@ public class DialogWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isJavaScriptInitializationNeeded() {
+    protected boolean isJavaScriptInitializationNeeded(final Page page) {
         return getScriptableObject() == null;
     }
 

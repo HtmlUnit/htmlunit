@@ -135,8 +135,8 @@ public abstract class WebWindowImpl implements WebWindow {
         }
         destroyChildren();
 
-        if (isJavaScriptInitializationNeeded()) {
-            webClient_.initialize(this);
+        if (isJavaScriptInitializationNeeded(page)) {
+            webClient_.initialize(this, page);
         }
         if (webClient_.isJavaScriptEngineEnabled()) {
             final Window window = getScriptableObject();
@@ -151,9 +151,10 @@ public abstract class WebWindowImpl implements WebWindow {
 
     /**
      * Returns {@code true} if this window needs JavaScript initialization to occur when the enclosed page is set.
+     * @param page the page that will become the enclosing page
      * @return {@code true} if this window needs JavaScript initialization to occur when the enclosed page is set
      */
-    protected abstract boolean isJavaScriptInitializationNeeded();
+    protected abstract boolean isJavaScriptInitializationNeeded(Page page);
 
     /**
      * {@inheritDoc}

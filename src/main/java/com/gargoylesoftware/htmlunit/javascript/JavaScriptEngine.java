@@ -48,6 +48,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -174,12 +175,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param webWindow the web window to initialize for
      */
     @Override
-    public void initialize(final WebWindow webWindow) {
+    public void initialize(final WebWindow webWindow, final Page page) {
         WebAssert.notNull("webWindow", webWindow);
 
         getContextFactory().call(cx -> {
             try {
-                init(webWindow, cx);
+                init(webWindow, page, cx);
             }
             catch (final Exception e) {
                 LOG.error("Exception while initializing JavaScript for the page", e);
@@ -204,7 +205,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param context the current context
      * @throws Exception if something goes wrong
      */
-    private void init(final WebWindow webWindow, final Context context) throws Exception {
+    private void init(final WebWindow webWindow, final Page page, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
@@ -452,7 +453,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         configureRhino(webClient, browserVersion, window);
 
         window.setPrototypes(prototypes, prototypesPerJSName);
-        window.initialize(webWindow);
+        window.initialize(webWindow, page);
     }
 
     /**

@@ -1012,7 +1012,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
         if (url == null) {
-            initializeEmptyWindow(window);
+            initializeEmptyWindow(window, window.getEnclosedPage());
         }
         else {
             try {
@@ -1208,12 +1208,13 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * Initializes a new web window for JavaScript.
      * @param webWindow the new WebWindow
+     * @param page the page that will become the enclosing page
      */
-    public void initialize(final WebWindow webWindow) {
+    public void initialize(final WebWindow webWindow, final Page page) {
         WebAssert.notNull("webWindow", webWindow);
 
         if (isJavaScriptEngineEnabled()) {
-            scriptEngine_.initialize(webWindow);
+            scriptEngine_.initialize(webWindow, page);
         }
     }
 
@@ -1223,12 +1224,13 @@ public class WebClient implements Serializable, AutoCloseable {
      * Initializes a new empty window for JavaScript.
      *
      * @param webWindow the new WebWindow
+     * @param page the page that will become the enclosing page
      */
-    public void initializeEmptyWindow(final WebWindow webWindow) {
+    public void initializeEmptyWindow(final WebWindow webWindow, final Page page) {
         WebAssert.notNull("webWindow", webWindow);
 
         if (isJavaScriptEngineEnabled()) {
-            initialize(webWindow);
+            initialize(webWindow, page);
             ((Window) webWindow.getScriptableObject()).initialize();
         }
     }

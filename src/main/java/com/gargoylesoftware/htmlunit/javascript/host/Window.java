@@ -870,15 +870,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     /**
      * Initializes this window.
      * @param webWindow the web window corresponding to this window
+     * @param pageToEnclose the page that will become the enclosing page
      */
-    public void initialize(final WebWindow webWindow) {
+    public void initialize(final WebWindow webWindow, final Page pageToEnclose) {
         webWindow_ = webWindow;
         webWindow_.setScriptableObject(this);
 
         windowProxy_ = new WindowProxy(webWindow_);
 
-        final Page enclosedPage = webWindow.getEnclosedPage();
-        if (enclosedPage instanceof XmlPage) {
+        if (pageToEnclose instanceof XmlPage) {
             document_ = new XMLDocument();
         }
         else {
@@ -888,8 +888,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         document_.setPrototype(getPrototype(document_.getClass()));
         document_.setWindow(this);
 
-        if (enclosedPage instanceof SgmlPage) {
-            final SgmlPage page = (SgmlPage) enclosedPage;
+        if (pageToEnclose instanceof SgmlPage) {
+            final SgmlPage page = (SgmlPage) pageToEnclose;
             document_.setDomNode(page);
 
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
@@ -918,7 +918,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         location_ = new Location();
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(location_.getClass()));
-        location_.initialize(this);
+        location_.initialize(this, pageToEnclose);
 
         console_ = new Console();
         ((Console) console_).setWebWindow(webWindow_);

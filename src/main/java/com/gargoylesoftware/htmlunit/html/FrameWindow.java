@@ -85,9 +85,9 @@ public class FrameWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isJavaScriptInitializationNeeded() {
+    protected boolean isJavaScriptInitializationNeeded(final Page page) {
         return getScriptableObject() == null
-            || !(getEnclosedPage().getWebResponse() instanceof StringWebResponse);
+            || !(page.getWebResponse() instanceof StringWebResponse);
         // TODO: find a better way to distinguish content written by document.open(),...
     }
 

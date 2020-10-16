@@ -70,11 +70,10 @@ public class TopLevelWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isJavaScriptInitializationNeeded() {
-        final Page enclosedPage = getEnclosedPage();
+    protected boolean isJavaScriptInitializationNeeded(final Page page) {
         return getScriptableObject() == null
-            || enclosedPage.getUrl() == WebClient.URL_ABOUT_BLANK
-            || !(enclosedPage.getWebResponse() instanceof StringWebResponse);
+            || page.getUrl() == WebClient.URL_ABOUT_BLANK
+            || !(page.getWebResponse() instanceof StringWebResponse);
         // TODO: find a better way to distinguish content written by document.open(),...
     }
 
