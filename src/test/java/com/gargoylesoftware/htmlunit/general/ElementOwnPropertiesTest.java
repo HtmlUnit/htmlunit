@@ -462,13 +462,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousewheel,onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onpopstate,onprogress,onratechange,onrejectionhandled,onreset,onresize,onscroll,"
-                + "onsearch,onseeked,onseeking,onselect,onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,"
+                + "onsearch,onseeked,onseeking,onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitionend,onunhandledrejection,onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
                 + "onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
                 + "PERSISTENT,postMessage(),print(),prompt(),releaseEvents(),requestAnimationFrame(),resizeBy(),"
-                + "resizeTo(),screen",
-                "scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
+                + "resizeTo(),screen,scroll()",
+                "scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
                 + "setTimeout(),speechSynthesis,status,stop(),styleMedia,TEMPORARY,top,window"},
             EDGE = {"alert(),atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),console,constructor(),"
@@ -486,13 +486,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousewheel,onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onpopstate,onprogress,onratechange,onrejectionhandled,onreset,onresize,onscroll,"
-                + "onsearch,onseeked,onseeking,onselect,onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,"
+                + "onsearch,onseeked,onseeking,onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitionend,onunhandledrejection,onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
                 + "onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
                 + "PERSISTENT,postMessage(),print(),prompt(),releaseEvents(),requestAnimationFrame(),resizeBy(),"
-                + "resizeTo(),screen",
-                "scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
+                + "resizeTo(),screen,scroll()",
+                "scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
                 + "setTimeout(),speechSynthesis,status,stop(),styleMedia,TEMPORARY,top,window"},
             FF = "alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),close(),closed,confirm(),console,constructor(),controllers,"
@@ -715,7 +715,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -727,7 +727,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -837,7 +837,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -849,7 +849,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -998,7 +998,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
                 + "onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
-                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,"
+                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,"
                 + "tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -1011,7 +1011,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
                 + "onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
-                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,"
+                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,"
                 + "tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -1185,7 +1185,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
-                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,"
+                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -1197,7 +1197,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
-                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,"
+                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -1340,7 +1340,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,"
@@ -1352,7 +1352,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1546,7 +1546,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1558,7 +1558,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1667,7 +1667,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1679,7 +1679,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1789,7 +1789,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1801,7 +1801,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1911,7 +1911,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1923,7 +1923,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2107,7 +2107,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2119,7 +2119,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2312,7 +2312,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2324,7 +2324,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2434,7 +2434,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2446,7 +2446,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2556,7 +2556,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2568,7 +2568,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2709,7 +2709,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2721,7 +2721,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2831,7 +2831,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2843,7 +2843,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3053,7 +3053,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3065,7 +3065,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3196,7 +3196,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3208,7 +3208,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3365,7 +3365,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3377,7 +3377,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3519,7 +3519,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3531,7 +3531,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3722,7 +3722,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
-                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,"
+                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -3734,7 +3734,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onlostpointercapture,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
-                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,"
+                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -3962,7 +3962,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3974,7 +3974,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4385,7 +4385,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4397,7 +4397,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4507,7 +4507,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4519,7 +4519,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4624,7 +4624,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,"
-                + "onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4638,7 +4638,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,"
-                + "onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             IE = "constructor")
     public void layer() throws Exception {
@@ -4803,7 +4803,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4815,7 +4815,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4958,7 +4958,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4970,7 +4970,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5222,7 +5222,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5234,7 +5234,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
+                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,"
                 + "onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),"
@@ -5372,7 +5372,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5384,7 +5384,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5514,7 +5514,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
-                + "onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5526,7 +5526,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
-                + "onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5668,7 +5668,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5680,7 +5680,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5772,7 +5772,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5784,7 +5784,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             IE = "constructor")
     public void nolayer() throws Exception {
@@ -5892,7 +5892,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5904,7 +5904,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6165,7 +6165,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6177,7 +6177,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6319,7 +6319,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6331,7 +6331,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "constructor()",
             FF = "constructor()",
@@ -6423,7 +6423,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6435,7 +6435,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "constructor()",
             FF = "constructor()",
@@ -6527,7 +6527,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6539,7 +6539,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "constructor()",
             FF = "constructor()",
@@ -6631,7 +6631,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6643,7 +6643,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6753,7 +6753,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6765,7 +6765,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6919,7 +6919,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -6932,7 +6932,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
                 + "style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -7098,7 +7098,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7110,7 +7110,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7252,7 +7252,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7264,7 +7264,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7374,7 +7374,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7386,7 +7386,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7512,7 +7512,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7524,7 +7524,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7634,7 +7634,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7646,7 +7646,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7756,7 +7756,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7768,7 +7768,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8172,7 +8172,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8184,7 +8184,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8342,7 +8342,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8354,7 +8354,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8484,7 +8484,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8496,7 +8496,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8660,7 +8660,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8672,7 +8672,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),classList,click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hasAttribute(),hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -9468,7 +9468,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style",
             EDGE = "constructor(),onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
@@ -9478,7 +9478,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style",
             FF78 = "constructor(),onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,"
                 + "oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"

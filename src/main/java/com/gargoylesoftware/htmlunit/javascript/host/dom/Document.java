@@ -3310,7 +3310,7 @@ public class Document extends Node {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({FF, FF78})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -3319,7 +3319,7 @@ public class Document extends Node {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({FF, FF78})
     public void setOnshow(final Object onshow) {
         setEventHandler("show", onshow);
     }

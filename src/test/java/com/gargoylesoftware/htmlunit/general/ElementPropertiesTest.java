@@ -20,6 +20,8 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +48,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
 
 /**
  * Tests all properties of an object.
@@ -56,11 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 @RunWith(BrowserRunner.class)
 public class ElementPropertiesTest extends WebDriverTestCase {
 
-    private static DefaultCategoryDataset DATASET_;
-    private static StringBuilder HTML_ = new StringBuilder();
     private static BrowserVersion BROWSER_VERSION_;
-    private static int IMPLEMENTED_COUNT_;
-    private static int TOTAL_COUNT_;
 
     private void test(final String tagName) throws Exception {
         testString("document.createElement('" + tagName + "'), unknown");
@@ -134,40 +133,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         }
 
         loadPageWithAlerts2(html);
-
-//        final List<String> realProperties = stringAsArray(String.join(",", getExpectedAlerts()));
-//        final List<String> simulatedProperties = stringAsArray(actual);
-//
-//        final List<String> erroredProperties = new ArrayList<>(simulatedProperties);
-//        erroredProperties.removeAll(realProperties);
-//
-//        final List<String> implementedProperties = new ArrayList<>(simulatedProperties);
-//        implementedProperties.retainAll(realProperties);
-//
-//        IMPLEMENTED_COUNT_ += implementedProperties.size();
-//        TOTAL_COUNT_ += realProperties.size();
-//
-//        String methodName = null;
-//        for (final StackTraceElement e : new Exception().getStackTrace()) {
-//            if (e.getClassName().equals(getClass().getName())) {
-//                methodName = e.getMethodName();
-//            }
-//            else {
-//                break;
-//            }
-//        }
-//
-//        htmlDetails(methodName, HTML_, realProperties, implementedProperties, erroredProperties);
-//
-//        DATASET_.addValue(implementedProperties.size(), "Implemented", methodName);
-//        DATASET_.addValue(realProperties.size(),
-//            getBrowserVersion().getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "),
-//            methodName);
-//        DATASET_.addValue(erroredProperties.size(), "Should not be implemented", methodName);
-//
-//        if (failure != null) {
-//            throw failure;
-//        }
     }
 
     private static List<String> stringAsArray(final String string) {
@@ -182,11 +147,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @BeforeClass
     public static void beforeClass() {
-        DATASET_ = new DefaultCategoryDataset();
-        HTML_.setLength(0);
         BROWSER_VERSION_ = null;
-        IMPLEMENTED_COUNT_ = 0;
-        TOTAL_COUNT_ = 0;
     }
 
     /**
@@ -196,22 +157,98 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @AfterClass
     public static void saveAll() throws IOException {
-        saveChart();
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        final int[] counts = {0, 0};
+        final StringBuilder html = new StringBuilder();
+        html.setLength(0);
+
+        collectStatistics(BROWSER_VERSION_, dataset, html, counts);
+        saveChart(dataset);
 
         FileUtils.writeStringToFile(new File(getTargetDirectory()
                 + "/properties-" + BROWSER_VERSION_.getNickname() + ".html"),
                 htmlHeader()
-                    .append(overview())
+                    .append(overview(counts))
                     .append(htmlDetailsHeader())
-                    .append(HTML_)
+                    .append(html)
                     .append(htmlDetailsFooter())
                     .append(htmlFooter()).toString(), ISO_8859_1);
     }
 
-    private static void saveChart() throws IOException {
+    private static void collectStatistics(final BrowserVersion browserVersion, final DefaultCategoryDataset dataset,
+            final StringBuilder html, final int[] counts) {
+        for (final Method method :ElementPropertiesTest.class.getMethods()) {
+            if (method.isAnnotationPresent(Test.class)) {
+
+                final Alerts alerts = method.getAnnotation(Alerts.class);
+                String[] expectedAlerts = {};
+                expectedAlerts = BrowserVersionClassRunner.NO_ALERTS_DEFINED;
+                if (BrowserVersionClassRunner.isDefined(alerts.value())) {
+                    expectedAlerts = alerts.value();
+                }
+                if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.IE(), alerts.DEFAULT());
+                }
+                else if (browserVersion == BrowserVersion.EDGE) {
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.EDGE(), alerts.DEFAULT());
+                }
+                else if (browserVersion == BrowserVersion.FIREFOX_78) {
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.FF78(), alerts.DEFAULT());
+                }
+                else if (browserVersion == BrowserVersion.FIREFOX) {
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.FF(), alerts.DEFAULT());
+                }
+                else if (browserVersion == BrowserVersion.CHROME) {
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.CHROME(), alerts.DEFAULT());
+                }
+
+                final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
+                String[] nyiAlerts = {};
+                if (htmlUnitNYI != null) {
+                    if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
+                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.IE());
+                    }
+                    else if (browserVersion == BrowserVersion.EDGE) {
+                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
+                    }
+                    else if (browserVersion == BrowserVersion.FIREFOX_78) {
+                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF78());
+                    }
+                    else if (browserVersion == BrowserVersion.FIREFOX) {
+                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF());
+                    }
+                    else if (browserVersion == BrowserVersion.CHROME) {
+                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.CHROME());
+                    }
+                }
+
+                final List<String> realProperties = stringAsArray(String.join(",", expectedAlerts));
+                final List<String> simulatedProperties = stringAsArray(String.join(",", nyiAlerts));
+
+                final List<String> erroredProperties = new ArrayList<>(simulatedProperties);
+                erroredProperties.removeAll(realProperties);
+
+                final List<String> implementedProperties = new ArrayList<>(simulatedProperties);
+                implementedProperties.retainAll(realProperties);
+
+                counts[1] += implementedProperties.size();
+                counts[0] += realProperties.size();
+
+                htmlDetails(method.getName(), html, realProperties, implementedProperties, erroredProperties);
+
+                dataset.addValue(implementedProperties.size(), "Implemented", method.getName());
+                dataset.addValue(realProperties.size(),
+                        browserVersion.getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "),
+                       method.getName());
+                dataset.addValue(erroredProperties.size(), "Should not be implemented", method.getName());
+            }
+        }
+    }
+
+    private static void saveChart(final DefaultCategoryDataset dataset) throws IOException {
         final JFreeChart chart = ChartFactory.createBarChart(
             "HtmlUnit implemented properties and methods for " + BROWSER_VERSION_.getNickname(), "Objects",
-            "Count", DATASET_, PlotOrientation.HORIZONTAL, true, true, false);
+            "Count", dataset, PlotOrientation.HORIZONTAL, true, true, false);
         final CategoryPlot plot = (CategoryPlot) chart.getPlot();
         final NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -257,14 +294,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         return html;
     }
 
-    private static StringBuilder overview() {
+    private static StringBuilder overview(final int[] counts) {
         final StringBuilder html = new StringBuilder();
         html.append("<table class='bottomBorder'>");
         html.append("<tr>\n");
 
         html.append("<th>Total Implemented:</th>\n");
-        html.append("<td>" + IMPLEMENTED_COUNT_)
-            .append(" / " + TOTAL_COUNT_).append("</td>\n");
+        html.append("<td>" + counts[1])
+            .append(" / " + counts[0]).append("</td>\n");
 
         html.append("</tr>\n");
         html.append("</table>\n");
@@ -514,7 +551,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             EDGE = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,"
                 + "isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
@@ -525,7 +562,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style,tabIndex,title",
             FF78 = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,isContentEditable,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onblur,oncanplay,"
@@ -1140,12 +1177,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpageshow,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onpopstate,onprogress,"
                 + "onratechange,onrejectionhandled,onreset,onresize,onscroll,onsearch,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "ontransitionend,onunhandledrejection,onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
-                + "pageYOffset",
-                "parent,performance,PERSISTENT,postMessage(),print(),process(),prompt(),"
+                + "pageYOffset,parent",
+                "performance,PERSISTENT,postMessage(),print(),process(),prompt(),"
                 + "releaseEvents(),removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),"
                 + "screen,scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),sortFunction(),speechSynthesis,status,stop(),styleMedia,"
@@ -1166,11 +1203,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpageshow,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onpopstate,onprogress,"
                 + "onratechange,onrejectionhandled,onreset,onresize,onscroll,onsearch,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "ontransitionend,onunhandledrejection,onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset",
-                "parent,performance,PERSISTENT,postMessage(),print(),process(),prompt(),"
+                + "onwebkittransitionend,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,"
+                + "parent",
+                "performance,PERSISTENT,postMessage(),print(),process(),prompt(),"
                 + "releaseEvents(),removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),"
                 + "screen,scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),sortFunction(),speechSynthesis,status,stop(),styleMedia,"
@@ -4177,9 +4215,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
-                + "onseeking,onselect,onselectionchange,onselectstart,onshow,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange",
-                "onwebkitfullscreenerror,onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange,onwebkitfullscreenerror",
+                "onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
             EDGE = {"activeElement,adoptNode(),anchors,applets,body,characterSet,charset,childElementCount,"
@@ -4201,9 +4239,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
-                + "onseeking,onselect,onselectionchange,onselectstart,onshow,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange",
-                "onwebkitfullscreenerror,onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange,onwebkitfullscreenerror",
+                "onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
             FF78 = "activeElement,adoptNode(),characterSet,charset,childElementCount,children,compatMode,"
@@ -4342,7 +4380,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style",
             EDGE = "onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
@@ -4351,7 +4389,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onlostpointercapture,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,"
                 + "onmouseup,onmousewheel,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onshow,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style",
             FF78 = "onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -4640,5 +4678,4 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void documentFragment() throws Exception {
         testString("document.createDocumentFragment(), window.performance");
     }
-
 }

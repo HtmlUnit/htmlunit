@@ -4352,7 +4352,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onshow} event handler.
      * @return the {@code onshow} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({FF, FF78})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -4361,7 +4361,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onshow} event handler.
      * @param onshow the {@code onshow} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({FF, FF78})
     public void setOnshow(final Object onshow) {
         setHandlerForJavaScript("show", onshow);
     }

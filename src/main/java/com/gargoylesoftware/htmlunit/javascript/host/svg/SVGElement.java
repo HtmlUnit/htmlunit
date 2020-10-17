@@ -1251,7 +1251,7 @@ public class SVGElement extends Element {
      * Returns the {@code onshow} event handler.
      * @return the {@code onshow} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({FF, FF78})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -1260,7 +1260,7 @@ public class SVGElement extends Element {
      * Sets the {@code onshow} event handler.
      * @param show the {@code onshow} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({FF, FF78})
     public void setOnshow(final Object show) {
         setEventHandler("show", show);
     }

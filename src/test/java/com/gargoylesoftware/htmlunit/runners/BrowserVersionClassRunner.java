@@ -187,7 +187,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    private static String[] firstDefined(final String[]... variants) {
+    public static String[] firstDefined(final String[]... variants) {
         for (final String[] var : variants) {
             if (isDefined(var)) {
                 return var;
@@ -196,7 +196,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return NO_ALERTS_DEFINED;
     }
 
-    private static String[] firstDefinedOrGiven(final String[] given, final String[]... variants) {
+    public static String[] firstDefinedOrGiven(final String[] given, final String[]... variants) {
         for (final String[] var : variants) {
             if (isDefined(var)) {
                 try {
@@ -270,7 +270,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return false;
     }
 
-    static boolean isDefined(final String[] alerts) {
+    public static boolean isDefined(final String[] alerts) {
         return alerts.length != 1 || !alerts[0].equals(BrowserRunner.EMPTY_DEFAULT);
     }
 

@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="fix" dev="rbri">
+                Property onshow is not available in Chrome/Edge.
+            </action>
             <action type="fix" dev="rbri" issue="#68">
                 Make sure the js initialization of the new page is finished before the page is
                 visible as enclosed page to the outside.
