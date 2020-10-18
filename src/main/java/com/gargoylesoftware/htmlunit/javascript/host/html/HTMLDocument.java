@@ -1082,24 +1082,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, EDGE, FF, FF78})
-    public void captureEvents(final String type) {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction({CHROME, EDGE, FF, FF78})
-    public void releaseEvents(final String type) {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object elementFromPoint(final int x, final int y) {
         final HtmlElement element = getPage().getElementFromPoint(x, y);
         return element == null ? null : element.getScriptableObject();
