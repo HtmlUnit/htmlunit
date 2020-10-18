@@ -2836,7 +2836,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "async,src,text,type",
             FF78 = "async,src,text,type",
             FF = "async,src,text,type",
-            IE = "async,onreadystatechange,readyState,src,text,type")
+            IE = "async,readyState,src,text,type")
     public void script() throws Exception {
         test("script");
     }
