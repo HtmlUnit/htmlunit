@@ -1793,7 +1793,7 @@ public class Document extends Node {
      * Returns the value of the {@code forms} property.
      * @return the value of the {@code forms} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getForms() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1816,7 +1816,7 @@ public class Document extends Node {
      * Returns the value of the {@code embeds} property.
      * @return the value of the {@code embeds} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getEmbeds() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1919,7 +1919,7 @@ public class Document extends Node {
      * Returns the value of the {@code plugins} property.
      * @return the value of the {@code plugins} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getPlugins() {
         return getEmbeds();
     }
@@ -1929,7 +1929,7 @@ public class Document extends Node {
      * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
      * @return the value of this property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getLinks() {
         return new HTMLCollection(getDomNodeOrDie(), true) {
             @Override
