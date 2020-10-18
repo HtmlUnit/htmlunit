@@ -9344,18 +9344,18 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
-                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+    @HtmlUnitNYI(CHROME = "captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
+                + "documentElement,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            EDGE = "bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
-                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+            EDGE = "captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
+                + "documentElement,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
-                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+            FF78 = "anchors,applets,body,captureEvents(),clear(),close(),constructor(),cookie,"
+                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
-            FF = "anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
-                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+            FF = "anchors,applets,body,captureEvents(),clear(),close(),constructor(),cookie,"
+                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             IE = "clear(),constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"

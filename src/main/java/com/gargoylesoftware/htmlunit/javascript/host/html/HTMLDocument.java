@@ -863,7 +863,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getBgColor() {
         String color = getPage().getBody().getAttribute("bgColor");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -879,7 +878,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setBgColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setBgColor(color);
@@ -965,7 +963,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getFgColor() {
         String color = getPage().getBody().getAttributeDirect("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -981,7 +978,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setFgColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setText(color);

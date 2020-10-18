@@ -2151,7 +2151,7 @@ public class Document extends Node {
      * @return the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getBgColor() {
         return "#ffffff";
     }
@@ -2161,7 +2161,7 @@ public class Document extends Node {
      * @param color the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setBgColor(final String color) {
     }
 
@@ -2169,7 +2169,7 @@ public class Document extends Node {
      * Returns the value of the {@code fgColor} property.
      * @return the value of the {@code fgColor} property
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getFgColor() {
         return "#000000";
     }
@@ -2178,7 +2178,7 @@ public class Document extends Node {
      * Sets the value of the {@code fgColor} property.
      * @param color the value of the {@code fgColor} property
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setFgColor(final String color) {
     }
 
