@@ -310,7 +310,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
         html.append("<th>Total Implemented:</th>\n");
         html.append("<td>" + counts[1])
-            .append(" / " + counts[0]).append("</td>\n");
+            .append(" / " + counts[0])
+            .append(" (" + Math.round(((double) counts[1]) / counts[0] * 100))
+            .append("%)</td>\n");
 
         html.append("</tr>\n");
         html.append("</table>\n");
@@ -2836,7 +2838,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "async,src,text,type",
             FF78 = "async,src,text,type",
             FF = "async,src,text,type",
-            IE = "async,readyState,src,text,type")
+            IE = "async,src,text,type")
     public void script() throws Exception {
         test("script");
     }
