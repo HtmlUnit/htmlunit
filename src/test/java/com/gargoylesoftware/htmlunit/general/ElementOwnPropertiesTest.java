@@ -9353,11 +9353,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF78 = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,embeds,fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
-                + "releaseEvents(),scripts,vlinkColor,write(),writeln()",
+                + "releaseEvents(),vlinkColor,write(),writeln()",
             FF = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,embeds,fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
-                + "releaseEvents(),scripts,vlinkColor,write(),writeln()",
+                + "releaseEvents(),vlinkColor,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {

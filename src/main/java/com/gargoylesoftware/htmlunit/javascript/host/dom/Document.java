@@ -1862,7 +1862,7 @@ public class Document extends Node {
      * Returns the value of the {@code scripts} property.
      * @return the value of the {@code scripts} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getScripts() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override

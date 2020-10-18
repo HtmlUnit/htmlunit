@@ -3990,12 +3990,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "vlinkColor,write(),writeln()",
             FF78 = "alinkColor,bgColor,body,captureEvents(),close(),cookie,designMode,"
                 + "embeds,fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
-                + "links,open(),plugins,releaseEvents(),scripts,"
-                + "vlinkColor,write(),writeln()",
+                + "links,open(),plugins,releaseEvents(),vlinkColor,write(),writeln()",
             FF = "alinkColor,bgColor,body,captureEvents(),close(),cookie,designMode,"
                 + "embeds,fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
-                + "links,open(),plugins,releaseEvents(),scripts,"
-                + "vlinkColor,write(),writeln()",
+                + "links,open(),plugins,releaseEvents(),vlinkColor,write(),writeln()",
             IE = "getSelection(),open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document, xmlDocument");
@@ -4270,7 +4268,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
-                + "styleSheets,title,URL",
+                + "scripts,styleSheets,title,URL",
             FF = "activeElement,adoptNode(),all,anchors,applets,"
                 + "characterSet,charset,childElementCount,children,clear(),compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
@@ -4290,7 +4288,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
-                + "styleSheets,title,URL",
+                + "scripts,styleSheets,title,URL",
             IE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),characterSet,"
                 + "charset,clear(),close(),compatMode,cookie,createAttribute(),createCDATASection(),createComment(),"
                 + "createDocumentFragment(),createElement(),createElementNS(),createEvent(),createNodeIterator(),"

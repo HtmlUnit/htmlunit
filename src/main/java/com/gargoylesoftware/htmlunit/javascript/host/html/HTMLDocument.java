@@ -939,15 +939,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({FF, FF78})
-    public Object getScripts() {
-        return super.getScripts();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public HTMLElement getActiveElement() {
         if (activeElement_ == null) {
             final HtmlElement body = getPage().getBody();
