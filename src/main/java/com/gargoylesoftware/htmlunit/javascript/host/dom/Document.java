@@ -131,6 +131,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TextEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -4107,6 +4108,25 @@ public class Document extends Node {
             fonts_ = fonts;
         }
         return fonts_;
+    }
+
+    /**
+     * Returns the value of the {@code all} property.
+     * @return the value of the {@code all} property
+     */
+    @JsxGetter
+    public HTMLCollection getAll() {
+        return new HTMLAllCollection(getDomNodeOrDie()) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return true;
+            }
+
+            @Override
+            public boolean avoidObjectDetection() {
+                return true;
+            }
+        };
     }
 
     @Override

@@ -9344,21 +9344,21 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "alinkColor,all,bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
+    @HtmlUnitNYI(CHROME = "alinkColor,bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
                 + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            EDGE = "alinkColor,all,bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
+            EDGE = "alinkColor,bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
                 + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
+            FF78 = "alinkColor,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
-            FF = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
+            FF = "alinkColor,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
-            IE = "all,clear(),constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
+            IE = "clear(),constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),parentWindow,write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document");

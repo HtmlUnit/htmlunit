@@ -525,25 +525,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the {@code all} property.
-     * @return the value of the {@code all} property
-     */
-    @JsxGetter
-    public HTMLCollection getAll() {
-        return new HTMLAllCollection(getDomNodeOrDie()) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return true;
-            }
-
-            @Override
-            public boolean avoidObjectDetection() {
-                return true;
-            }
-        };
-    }
-
-    /**
      * JavaScript function "open".
      *
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
