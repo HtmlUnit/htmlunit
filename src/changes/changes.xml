@@ -19,7 +19,7 @@
                 Property all moved from HtmlDocument to Document.
             </action>
             <action type="fix" dev="rbri">
-                Properties domain, scripts, anchors and applets moved
+                Properties domain, forms, embeds, links, plugins, scripts, anchors and applets moved
                 from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
