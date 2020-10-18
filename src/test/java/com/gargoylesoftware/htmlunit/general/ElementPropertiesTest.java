@@ -3989,10 +3989,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "alinkColor,bgColor,fgColor,linkColor,open(),"
                 + "vlinkColor,write(),writeln()",
             FF78 = "alinkColor,bgColor,close(),cookie,"
-                + "fgColor,getElementsByName(),getSelection(),head,images,linkColor,"
+                + "fgColor,getElementsByName(),getSelection(),head,linkColor,"
                 + "open(),vlinkColor,write(),writeln()",
             FF = "alinkColor,bgColor,close(),cookie,"
-                + "fgColor,getElementsByName(),getSelection(),head,images,linkColor,"
+                + "fgColor,getElementsByName(),getSelection(),head,linkColor,"
                 + "open(),vlinkColor,write(),writeln()",
             IE = "getSelection(),open(),write(),writeln()")
     public void htmlDocument() throws Exception {
@@ -4259,7 +4259,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,domain,elementFromPoint(),"
                 + "embeds,evaluate(),execCommand(),firstElementChild,fonts,forms,"
                 + "getElementById(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,images,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,links,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
@@ -4280,7 +4280,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,domain,elementFromPoint(),"
                 + "embeds,evaluate(),execCommand(),firstElementChild,fonts,forms,"
                 + "getElementById(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,images,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,links,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"

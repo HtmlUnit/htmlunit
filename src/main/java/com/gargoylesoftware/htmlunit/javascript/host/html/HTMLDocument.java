@@ -462,15 +462,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({FF, FF78})
-    public Object getImages() {
-        return super.getImages();
-    }
-
-    /**
      * JavaScript function "open".
      *
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for

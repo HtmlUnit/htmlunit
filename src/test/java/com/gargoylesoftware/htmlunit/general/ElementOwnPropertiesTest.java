@@ -9351,10 +9351,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),"
                 + "vlinkColor,write(),writeln()",
             FF78 = "alinkColor,bgColor,close(),constructor(),cookie,dispatchEvent(),documentElement,fgColor,"
-                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,open(),"
+                + "getElementById(),getElementsByName(),getSelection(),head,linkColor,open(),"
                 + "vlinkColor,write(),writeln()",
             FF = "alinkColor,bgColor,close(),constructor(),cookie,dispatchEvent(),documentElement,fgColor,"
-                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,open(),"
+                + "getElementById(),getElementsByName(),getSelection(),head,linkColor,open(),"
                 + "vlinkColor,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")

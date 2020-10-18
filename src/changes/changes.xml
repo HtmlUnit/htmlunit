@@ -22,7 +22,7 @@
                 Functions captureEvents() and releaseEvents() moved from HtmlDocument to Document for Chrome/Edge/FF/FF78.
             </action>
             <action type="fix" dev="rbri">
-                Properties body, designMode, domain, forms, embeds, links, plugins, scripts, anchors and applets moved
+                Properties body, designMode, domain, forms, embeds, links, images, plugins, scripts, anchors and applets moved
                 from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">

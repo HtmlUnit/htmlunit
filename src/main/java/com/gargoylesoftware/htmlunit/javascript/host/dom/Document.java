@@ -1839,7 +1839,7 @@ public class Document extends Node {
      * Returns the value of the {@code embeds} property.
      * @return the value of the {@code embeds} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getImages() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
