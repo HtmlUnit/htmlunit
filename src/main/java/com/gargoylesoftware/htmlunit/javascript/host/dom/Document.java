@@ -4180,4 +4180,13 @@ public class Document extends Node {
         final CDATASection node = getPage().createCDATASection(data);
         return getScriptableFor(node);
     }
+
+    /**
+     * Does... nothing.
+     * @see <a href="https://developer.mozilla.org/en/DOM/document.clear">Mozilla doc</a>
+     */
+    @JsxFunction
+    public void clear() {
+        // nothing
+    }
 }

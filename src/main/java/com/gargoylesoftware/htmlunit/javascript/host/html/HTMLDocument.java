@@ -1082,15 +1082,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Does... nothing.
-     * @see <a href="https://developer.mozilla.org/en/DOM/document.clear">Mozilla doc</a>
-     */
-    @JsxFunction
-    public void clear() {
-        // nothing
-    }
-
-    /**
      * Sets the head.
      * @param head the head
      */

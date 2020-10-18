@@ -13,6 +13,9 @@
                 the method requires now the page as second parameter.
             </action>
             <action type="fix" dev="rbri">
+                Function clear() moved from HtmlDocument to Document.
+            </action>
+            <action type="fix" dev="rbri">
                 Property all moved from HtmlDocument to Document.
             </action>
             <action type="update" dev="rbri">

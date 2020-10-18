@@ -3984,19 +3984,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-")
-    @HtmlUnitNYI(CHROME = "alinkColor,bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
+    @HtmlUnitNYI(CHROME = "alinkColor,bgColor,captureEvents(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            EDGE = "alinkColor,bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
+            EDGE = "alinkColor,bgColor,captureEvents(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "alinkColor,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+            FF78 = "alinkColor,anchors,applets,bgColor,body,captureEvents(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
-            FF = "alinkColor,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+            FF = "alinkColor,anchors,applets,bgColor,body,captureEvents(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
-            IE = "clear(),getSelection(),open(),parentWindow,write(),writeln()")
+            IE = "getSelection(),open(),parentWindow,write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document, xmlDocument");
     }
@@ -4203,7 +4203,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "updateSettings(),URL,URLUnencoded,visibilityState,vlinkColor,write(),writeln(),xmlEncoding,"
                 + "xmlStandalone,xmlVersion"})
     @HtmlUnitNYI(CHROME = {"activeElement,adoptNode(),all,anchors,applets,body,characterSet,charset,childElementCount,"
-                + "children,close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
+                + "children,clear(),close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
                 + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
                 + "createNodeIterator(),createNSResolver(),createProcessingInstruction(),createRange(),"
                 + "createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,doctype,"
@@ -4221,12 +4221,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
                 + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange",
-                "onwebkitfullscreenerror,onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting",
+                "onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
+                + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
             EDGE = {"activeElement,adoptNode(),all,anchors,applets,body,characterSet,charset,childElementCount,"
-                + "children,close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
+                + "children,clear(),close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
                 + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
                 + "createNodeIterator(),createNSResolver(),createProcessingInstruction(),createRange(),"
                 + "createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,doctype,"
@@ -4245,11 +4246,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
                 + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange",
-                "onwebkitfullscreenerror,onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting",
+                "onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
+                + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF78 = "activeElement,adoptNode(),all,characterSet,charset,childElementCount,children,compatMode,"
+            FF78 = "activeElement,adoptNode(),all,characterSet,charset,childElementCount,children,clear(),compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
@@ -4267,7 +4269,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
-            FF = "activeElement,adoptNode(),all,characterSet,charset,childElementCount,children,compatMode,"
+            FF = "activeElement,adoptNode(),all,characterSet,charset,childElementCount,children,clear(),compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
@@ -4286,7 +4288,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
             IE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),characterSet,"
-                + "charset,close(),compatMode,cookie,createAttribute(),createCDATASection(),createComment(),"
+                + "charset,clear(),close(),compatMode,cookie,createAttribute(),createCDATASection(),createComment(),"
                 + "createDocumentFragment(),createElement(),createElementNS(),createEvent(),createNodeIterator(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),defaultCharset,"
                 + "defaultView,designMode,doctype,documentElement,documentMode,domain,elementFromPoint(),embeds,"
@@ -4304,9 +4306,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmspointerout,onmspointerover,onmspointerup,onmssitemodejumplistitemremoved,onmsthumbnailclick,"
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,"
-                + "onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
-                + "onstop",
-                "onstoragecommit,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,plugins,"
+                + "onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled",
+                "onstop,onstoragecommit,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),querySelector(),querySelectorAll(),readyState,"
                 + "referrer,releaseCapture(),releaseEvents(),rootElement,scripts,styleSheets,title,uniqueID,URL,"
                 + "URLUnencoded,vlinkColor,xmlEncoding,xmlStandalone,xmlVersion"})
