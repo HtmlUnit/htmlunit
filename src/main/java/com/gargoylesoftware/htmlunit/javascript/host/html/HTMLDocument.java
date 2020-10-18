@@ -525,25 +525,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the {@code all} property.
-     * @return the value of the {@code all} property
-     */
-    @JsxGetter
-    public HTMLCollection getAll() {
-        return new HTMLAllCollection(getDomNodeOrDie()) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return true;
-            }
-
-            @Override
-            public boolean avoidObjectDetection() {
-                return true;
-            }
-        };
-    }
-
-    /**
      * JavaScript function "open".
      *
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
@@ -908,7 +889,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getAlinkColor() {
         String color = getPage().getBody().getAttribute("aLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -924,7 +904,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setAlinkColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setALink(color);

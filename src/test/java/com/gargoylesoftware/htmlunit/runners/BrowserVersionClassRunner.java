@@ -187,7 +187,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    public static String[] firstDefined(final String[]... variants) {
+    private static String[] firstDefined(final String[]... variants) {
         for (final String[] var : variants) {
             if (isDefined(var)) {
                 return var;
