@@ -24,6 +24,9 @@
             <action type="fix" dev="rbri">
                 Property parentWindow moved from HtmlDocument to Document for IE.
             </action>
+            <action type="fix" dev="rbri">
+                Property onreadystatechange and readyState removed from HtmlScript for IE.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.7.2.
             </action>

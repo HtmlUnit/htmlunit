@@ -2832,7 +2832,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "async,src,text,type",
             FF78 = "async,src,text,type",
             FF = "async,src,text,type",
-            IE = "async,onreadystatechange,readyState,src,text,type")
+            IE = "async,src,text,type")
     public void script() throws Exception {
         test("script");
     }
@@ -4270,7 +4270,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
-            FF = "activeElement,adoptNode(),all,anchors,applets,characterSet,charset,childElementCount,children,clear(),compatMode,"
+            FF = "activeElement,adoptNode(),all,anchors,applets,"
+                + "characterSet,charset,childElementCount,children,clear(),compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"

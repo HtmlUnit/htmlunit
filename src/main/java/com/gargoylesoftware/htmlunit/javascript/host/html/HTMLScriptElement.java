@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,9 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object that represents an {@code HTMLScriptElement}.
@@ -134,42 +130,6 @@ public class HTMLScriptElement extends HTMLElement {
     @JsxSetter
     public void setType(final String type) {
         getDomNodeOrDie().setAttribute("type", type);
-    }
-
-    /**
-     * Returns the event handler that fires on every state change.
-     * @return the event handler that fires on every state change
-     */
-    @JsxGetter(IE)
-    public Object getOnreadystatechange() {
-        return getEventHandler(Event.TYPE_READY_STATE_CHANGE);
-    }
-
-    /**
-     * Sets the event handler that fires on every state change.
-     * @param handler the event handler that fires on every state change
-     */
-    @JsxSetter(IE)
-    public void setOnreadystatechange(final Object handler) {
-        setEventHandler(Event.TYPE_READY_STATE_CHANGE, handler);
-    }
-
-    /**
-     * Returns the ready state of the script. This is an IE-only property.
-     * @return the ready state of the script
-     * @see DomNode#READY_STATE_UNINITIALIZED
-     * @see DomNode#READY_STATE_LOADING
-     * @see DomNode#READY_STATE_LOADED
-     * @see DomNode#READY_STATE_INTERACTIVE
-     * @see DomNode#READY_STATE_COMPLETE
-     */
-    @JsxGetter(IE)
-    public Object getReadyState() {
-        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
-        if (tmpScript.wasCreatedByJavascript()) {
-            return Undefined.instance;
-        }
-        return tmpScript.getReadyState();
     }
 
     /**
