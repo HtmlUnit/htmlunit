@@ -180,6 +180,24 @@ public class HTMLDocument extends Document {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getAnchors() {
+        return super.getAnchors();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getApplets() {
+        return super.getApplets();
+    }
+
+    /**
      * JavaScript function "write" may accept a variable number of arguments.
      * @param context the JavaScript context
      * @param thisObj the scriptable
