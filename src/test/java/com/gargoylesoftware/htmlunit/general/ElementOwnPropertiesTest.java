@@ -9350,11 +9350,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "alinkColor,bgColor,captureEvents(),constructor(),cookie,dispatchEvent(),"
                 + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "alinkColor,anchors,applets,bgColor,body,captureEvents(),close(),constructor(),cookie,"
+            FF78 = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
-            FF = "alinkColor,anchors,applets,bgColor,body,captureEvents(),close(),constructor(),cookie,"
+            FF = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
