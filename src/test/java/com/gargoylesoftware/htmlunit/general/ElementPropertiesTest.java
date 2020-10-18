@@ -3992,11 +3992,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "write(),writeln()",
             EDGE = "captureEvents(),open(),releaseEvents(),"
                 + "write(),writeln()",
-            FF78 = "captureEvents(),close(),cookie,"
+            FF78 = "body,captureEvents(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),forms,getElementsByName(),getSelection(),head,images,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "write(),writeln()",
-            FF = "captureEvents(),close(),cookie,"
+            FF = "body,captureEvents(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),forms,getElementsByName(),getSelection(),head,images,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "write(),writeln()",
@@ -4257,12 +4257,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,vlinkColor,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF78 = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,characterSet,"
+            FF78 = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,characterSet,"
                 + "charset,childElementCount,children,clear(),compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
-                + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,elementFromPoint(),"
+                + "currentScript,defaultView,doctype,documentElement,documentURI,elementFromPoint(),"
                 + "evaluate(),fgColor,firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,linkColor,location,onabort,"
@@ -4276,12 +4276,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL,vlinkColor",
-            FF = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,"
+            FF = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,"
                 + "characterSet,charset,childElementCount,children,clear(),compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
-                + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,elementFromPoint(),"
+                + "currentScript,defaultView,doctype,documentElement,documentURI,elementFromPoint(),"
                 + "evaluate(),fgColor,firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,linkColor,location,onabort,"

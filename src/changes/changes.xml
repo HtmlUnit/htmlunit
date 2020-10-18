@@ -16,7 +16,7 @@
                 Upgrade Apache commons-net to 3.7.2.
             </action>
             <action type="fix" dev="rbri">
-                Properties anchors, applets, body and designMode moved from HtmlDocument to Document for FF/FF78.
+                Properties anchors and applets moved from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
                 Function clear() moved from HtmlDocument to Document.
