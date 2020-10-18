@@ -911,7 +911,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getLinkColor() {
         String color = getPage().getBody().getAttributeDirect("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -927,7 +926,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setLinkColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setLink(color);
@@ -937,7 +935,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getVlinkColor() {
         String color = getPage().getBody().getAttribute("vLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -953,7 +950,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setVlinkColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setVLink(color);
