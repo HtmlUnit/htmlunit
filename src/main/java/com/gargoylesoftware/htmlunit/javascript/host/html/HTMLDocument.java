@@ -144,6 +144,42 @@ public class HTMLDocument extends Document {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getForms() {
+        return super.getForms();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getEmbeds() {
+        return super.getEmbeds();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getPlugins() {
+        return super.getPlugins();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getLinks() {
+        return super.getLinks();
+    }
+
+    /**
      * JavaScript function "write" may accept a variable number of arguments.
      * @param context the JavaScript context
      * @param thisObj the scriptable

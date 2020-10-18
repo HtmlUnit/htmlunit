@@ -9351,12 +9351,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "documentElement,getElementById(),getSelection(),head,open(),"
                 + "write(),writeln()",
             FF78 = "close(),constructor(),cookie,"
-                + "dispatchEvent(),documentElement,domain,execCommand(),"
-                + "getElementById(),getElementsByName(),getSelection(),head,images,open(),"
+                + "dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),scripts,write(),writeln()",
             FF = "close(),constructor(),cookie,"
-                + "dispatchEvent(),documentElement,domain,execCommand(),"
-                + "getElementById(),getElementsByName(),getSelection(),head,images,open(),"
+                + "dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),scripts,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")
