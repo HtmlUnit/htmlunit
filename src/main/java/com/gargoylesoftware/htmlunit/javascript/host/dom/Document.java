@@ -2094,7 +2094,7 @@ public class Document extends Node {
      * @param type the type of events to capture
      * @see Window#captureEvents(String)
      */
-    @JsxFunction(IE)
+    @JsxFunction
     public void captureEvents(final String type) {
         // Empty.
     }
@@ -2105,7 +2105,7 @@ public class Document extends Node {
      * @param type the type of events to capture
      * @see Window#releaseEvents(String)
      */
-    @JsxFunction(IE)
+    @JsxFunction
     public void releaseEvents(final String type) {
         // Empty.
     }

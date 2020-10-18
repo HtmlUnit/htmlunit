@@ -9344,20 +9344,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "alinkColor,bgColor,captureEvents(),constructor(),cookie,dispatchEvent(),"
-                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+    @HtmlUnitNYI(CHROME = "alinkColor,bgColor,constructor(),cookie,dispatchEvent(),"
+                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),"
                 + "vlinkColor,write(),writeln()",
-            EDGE = "alinkColor,bgColor,captureEvents(),constructor(),cookie,dispatchEvent(),"
-                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+            EDGE = "alinkColor,bgColor,constructor(),cookie,dispatchEvent(),"
+                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
+            FF78 = "alinkColor,bgColor,body,close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,fgColor,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,open(),"
-                + "releaseEvents(),vlinkColor,write(),writeln()",
-            FF = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
+                + "vlinkColor,write(),writeln()",
+            FF = "alinkColor,bgColor,body,close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,fgColor,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,open(),"
-                + "releaseEvents(),vlinkColor,write(),writeln()",
+                + "vlinkColor,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {

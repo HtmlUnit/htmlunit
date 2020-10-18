@@ -1011,24 +1011,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, EDGE, FF, FF78})
-    public void captureEvents(final String type) {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction({CHROME, EDGE, FF, FF78})
-    public void releaseEvents(final String type) {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     @JsxGetter({FF, FF78})
     public String getDesignMode() {
         return super.getDesignMode();
