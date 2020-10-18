@@ -131,7 +131,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TextEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -1859,25 +1858,6 @@ public class Document extends Node {
     }
 
     /**
-     * Returns the value of the {@code all} property.
-     * @return the value of the {@code all} property
-     */
-    @JsxGetter
-    public HTMLCollection getAll() {
-        return new HTMLAllCollection(getDomNodeOrDie()) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return true;
-            }
-
-            @Override
-            public boolean avoidObjectDetection() {
-                return true;
-            }
-        };
-    }
-
-    /**
      * Returns the value of the {@code scripts} property.
      * @return the value of the {@code scripts} property
      */
@@ -2133,7 +2113,7 @@ public class Document extends Node {
      * Returns the value of the {@code alinkColor} property.
      * @return the value of the {@code alinkColor} property
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public String getAlinkColor() {
         return "#0000ff";
     }
@@ -2142,7 +2122,7 @@ public class Document extends Node {
      * Sets the value of the {@code alinkColor} property.
      * @param color the value of the {@code alinkColor} property
      */
-    @JsxSetter
+    @JsxSetter(IE)
     public void setAlinkColor(final String color) {
     }
 

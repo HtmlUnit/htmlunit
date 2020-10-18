@@ -182,28 +182,24 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
                 final Alerts alerts = method.getAnnotation(Alerts.class);
                 String[] expectedAlerts = {};
+                expectedAlerts = BrowserVersionClassRunner.NO_ALERTS_DEFINED;
                 if (BrowserVersionClassRunner.isDefined(alerts.value())) {
                     expectedAlerts = alerts.value();
                 }
                 if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.IE(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.EDGE) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.EDGE(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.EDGE(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.FIREFOX_78) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.FF78(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.FF78(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.FIREFOX) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.CHROME) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.CHROME(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.CHROME(), alerts.DEFAULT());
                 }
 
                 final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
@@ -3983,19 +3979,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-")
-    @HtmlUnitNYI(CHROME = "bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
+    @HtmlUnitNYI(CHROME = "alinkColor,all,bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            EDGE = "bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
+            EDGE = "alinkColor,all,bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+            FF78 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
-            FF = "anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+            FF = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
                 + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
-            IE = "clear(),getSelection(),open(),parentWindow,write(),writeln()")
+            IE = "all,clear(),getSelection(),open(),parentWindow,write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document, xmlDocument");
     }
@@ -4201,8 +4197,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "releaseCapture(),releaseEvents(),rootElement,scripts,security,styleSheets,title,uniqueID,"
                 + "updateSettings(),URL,URLUnencoded,visibilityState,vlinkColor,write(),writeln(),xmlEncoding,"
                 + "xmlStandalone,xmlVersion"})
-    @HtmlUnitNYI(CHROME = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
-                + "body,characterSet,charset,childElementCount,"
+    @HtmlUnitNYI(CHROME = {"activeElement,adoptNode(),anchors,applets,body,characterSet,charset,childElementCount,"
                 + "children,close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
                 + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
                 + "createNodeIterator(),createNSResolver(),createProcessingInstruction(),createRange(),"
@@ -4221,13 +4216,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
                 + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle,onvolumechange,onwaiting",
-                "onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
-                + "plugins,queryCommandEnabled(),queryCommandSupported(),"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange,onwebkitfullscreenerror",
+                "onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            EDGE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
-                + "body,characterSet,charset,childElementCount,"
+            EDGE = {"activeElement,adoptNode(),anchors,applets,body,characterSet,charset,childElementCount,"
                 + "children,close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
                 + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
                 + "createNodeIterator(),createNSResolver(),createProcessingInstruction(),createRange(),"
@@ -4247,13 +4240,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
                 + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle,onvolumechange,onwaiting",
-                "onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
-                + "plugins,queryCommandEnabled(),queryCommandSupported(),"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange,onwebkitfullscreenerror",
+                "onwheel,plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF78 = "activeElement,adoptNode(),alinkColor,all,characterSet,"
-                + "charset,childElementCount,children,compatMode,"
+            FF78 = "activeElement,adoptNode(),characterSet,charset,childElementCount,children,compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
@@ -4271,8 +4262,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
-            FF = "activeElement,adoptNode(),alinkColor,all,"
-                + "characterSet,charset,childElementCount,children,compatMode,"
+            FF = "activeElement,adoptNode(),characterSet,charset,childElementCount,children,compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
@@ -4290,8 +4280,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
-            IE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
-                + "bgColor,body,captureEvents(),characterSet,"
+            IE = {"activeElement,adoptNode(),alinkColor,anchors,applets,bgColor,body,captureEvents(),characterSet,"
                 + "charset,close(),compatMode,cookie,createAttribute(),createCDATASection(),createComment(),"
                 + "createDocumentFragment(),createElement(),createElementNS(),createEvent(),createNodeIterator(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),defaultCharset,"
@@ -4311,8 +4300,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,"
                 + "onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
-                + "onstop",
-                "onstoragecommit,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,plugins,"
+                + "onstop,onstoragecommit",
+                "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),querySelector(),querySelectorAll(),readyState,"
                 + "referrer,releaseCapture(),releaseEvents(),rootElement,scripts,styleSheets,title,uniqueID,URL,"
                 + "URLUnencoded,vlinkColor,xmlEncoding,xmlStandalone,xmlVersion"})
