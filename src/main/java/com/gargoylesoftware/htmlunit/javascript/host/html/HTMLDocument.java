@@ -748,15 +748,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({FF, FF78})
-    public HTMLElement getBody() {
-        return super.getBody();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getTitle() {
         return getPage().getTitleText();
     }
@@ -1005,24 +996,6 @@ public class HTMLDocument extends Document {
     @Override
     public String getBaseURI() {
         return getPage().getBaseURL().toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({FF, FF78})
-    public String getDesignMode() {
-        return super.getDesignMode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({FF, FF78})
-    public void setDesignMode(final String mode) {
-        super.setDesignMode(mode);
     }
 
     /**

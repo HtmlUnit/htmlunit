@@ -418,7 +418,7 @@ public class Document extends Node {
      * Returns a value which indicates whether or not the document can be edited.
      * @return a value which indicates whether or not the document can be edited
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public String getDesignMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
@@ -435,7 +435,7 @@ public class Document extends Node {
      * Sets a value which indicates whether or not the document can be edited.
      * @param mode a value which indicates whether or not the document can be edited
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter
     public void setDesignMode(final String mode) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
@@ -903,7 +903,7 @@ public class Document extends Node {
      * Returns this document's {@code body} element.
      * @return this document's {@code body} element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public HTMLElement getBody() {
         final Page page = getPage();
         if (page instanceof HtmlPage) {
