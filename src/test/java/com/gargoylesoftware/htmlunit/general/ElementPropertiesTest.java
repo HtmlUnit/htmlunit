@@ -3983,16 +3983,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-")
-    @HtmlUnitNYI(CHROME = "captureEvents(),clear(),linkColor,open(),releaseEvents(),"
+    @HtmlUnitNYI(CHROME = "bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            EDGE = "captureEvents(),clear(),linkColor,open(),releaseEvents(),"
+            EDGE = "bgColor,captureEvents(),clear(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
-            FF78 = "anchors,applets,body,captureEvents(),clear(),close(),cookie,designMode,"
-                + "domain,embeds,execCommand(),forms,getElementsByName(),getSelection(),head,images,linkColor,"
+            FF78 = "anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+                + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
-            FF = "anchors,applets,body,captureEvents(),clear(),close(),cookie,designMode,"
-                + "domain,embeds,execCommand(),forms,getElementsByName(),getSelection(),head,images,linkColor,"
+            FF = "anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
+                + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
             IE = "clear(),getSelection(),open(),parentWindow,write(),writeln()")
@@ -4201,14 +4201,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "releaseCapture(),releaseEvents(),rootElement,scripts,security,styleSheets,title,uniqueID,"
                 + "updateSettings(),URL,URLUnencoded,visibilityState,vlinkColor,write(),writeln(),xmlEncoding,"
                 + "xmlStandalone,xmlVersion"})
-    @HtmlUnitNYI(CHROME = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,"
+    @HtmlUnitNYI(CHROME = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
                 + "body,characterSet,charset,childElementCount,"
                 + "children,close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
                 + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
                 + "createNodeIterator(),createNSResolver(),createProcessingInstruction(),createRange(),"
                 + "createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,doctype,"
                 + "documentElement,documentURI,domain,elementFromPoint(),embeds,evaluate(),execCommand(),"
-                + "fgColor,firstElementChild,fonts,forms,getElementById(),getElementsByClassName(),getElementsByName(),"
+                + "firstElementChild,fonts,forms,getElementById(),getElementsByClassName(),getElementsByName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),hasFocus(),head,hidden,images,"
                 + "implementation,importNode(),inputEncoding,lastElementChild,lastModified,links,location,"
                 + "onabort,onauxclick,onbeforecopy,onbeforecut,onbeforepaste,onblur,oncancel,oncanplay,"
@@ -4221,19 +4221,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
                 + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle",
-                "onvolumechange,onwaiting,onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting",
+                "onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
                 + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            EDGE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,"
+            EDGE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
                 + "body,characterSet,charset,childElementCount,"
                 + "children,close(),compatMode,contentType,cookie,createAttribute(),createCDATASection(),"
                 + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
                 + "createNodeIterator(),createNSResolver(),createProcessingInstruction(),createRange(),"
                 + "createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,doctype,"
                 + "documentElement,documentURI,domain,elementFromPoint(),embeds,evaluate(),execCommand(),"
-                + "fgColor,firstElementChild,fonts,forms,getElementById(),getElementsByClassName(),getElementsByName(),"
+                + "firstElementChild,fonts,forms,getElementById(),getElementsByClassName(),getElementsByName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),hasFocus(),"
                 + "head,hidden,images,"
                 + "implementation,importNode(),inputEncoding,lastElementChild,lastModified,links,location,"
@@ -4247,18 +4247,18 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerlockchange,onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onscroll,onsearch,onseeked,"
                 + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
-                + "ontimeupdate,ontoggle",
-                "onvolumechange,onwaiting,onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
+                + "ontimeupdate,ontoggle,onvolumechange,onwaiting",
+                "onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,"
                 + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,rootElement,scripts,styleSheets,"
                 + "title,URL,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF78 = "activeElement,adoptNode(),alinkColor,all,bgColor,characterSet,"
+            FF78 = "activeElement,adoptNode(),alinkColor,all,characterSet,"
                 + "charset,childElementCount,children,compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,doctype,documentElement,documentURI,elementFromPoint(),"
-                + "evaluate(),fgColor,firstElementChild,fonts,getElementById(),getElementsByClassName(),"
+                + "evaluate(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
@@ -4271,13 +4271,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
-            FF = "activeElement,adoptNode(),alinkColor,all,bgColor,"
+            FF = "activeElement,adoptNode(),alinkColor,all,"
                 + "characterSet,charset,childElementCount,children,compatMode,"
                 + "contentType,createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,doctype,documentElement,documentURI,elementFromPoint(),"
-                + "evaluate(),fgColor,firstElementChild,fonts,getElementById(),getElementsByClassName(),"
+                + "evaluate(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
