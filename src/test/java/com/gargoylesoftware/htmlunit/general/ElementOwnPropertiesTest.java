@@ -9344,20 +9344,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "constructor(),cookie,dispatchEvent(),"
-                + "documentElement,getElementById(),getSelection(),head,open(),"
+    @HtmlUnitNYI(CHROME = "captureEvents(),constructor(),cookie,dispatchEvent(),"
+                + "documentElement,getElementById(),getSelection(),head,open(),releaseEvents(),"
                 + "write(),writeln()",
-            EDGE = "constructor(),cookie,dispatchEvent(),"
-                + "documentElement,getElementById(),getSelection(),head,open(),"
+            EDGE = "captureEvents(),constructor(),cookie,dispatchEvent(),"
+                + "documentElement,getElementById(),getSelection(),head,open(),releaseEvents(),"
                 + "write(),writeln()",
-            FF78 = "close(),constructor(),cookie,"
+            FF78 = "captureEvents(),close(),constructor(),cookie,"
                 + "dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
-                + "queryCommandEnabled(),queryCommandSupported(),scripts,write(),writeln()",
-            FF = "close(),constructor(),cookie,"
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,write(),writeln()",
+            FF = "captureEvents(),close(),constructor(),cookie,"
                 + "dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
-                + "queryCommandEnabled(),queryCommandSupported(),scripts,write(),writeln()",
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {

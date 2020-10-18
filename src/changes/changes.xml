@@ -16,9 +16,6 @@
                 Upgrade Apache commons-net to 3.7.2.
             </action>
             <action type="fix" dev="rbri">
-                Functions captureEvents() and releaseEvents() moved from HtmlDocument to Document for Chrome/Edge/FF/FF78.
-            </action>
-            <action type="fix" dev="rbri">
                 Properties anchors, applets, body and designMode moved from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
