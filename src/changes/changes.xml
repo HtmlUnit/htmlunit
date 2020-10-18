@@ -16,9 +16,6 @@
                 Upgrade Apache commons-net to 3.7.2.
             </action>
             <action type="fix" dev="rbri">
-                Property onreadystatechange and readyState removed from HtmlScript for IE.
-            </action>
-            <action type="fix" dev="rbri">
                 Function dispatchEvent() removed from HtmlDocument.
             </action>
             <action type="fix" dev="rbri">

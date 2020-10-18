@@ -6813,7 +6813,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "async,constructor(),src,text,type",
             FF78 = "async,constructor(),src,text,type",
             FF = "async,constructor(),src,text,type",
-            IE = "async,constructor,src,text,type")
+            IE = "async,constructor,onreadystatechange,readyState,src,text,type")
     public void script() throws Exception {
         test("script");
     }
