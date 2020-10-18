@@ -16,13 +16,10 @@
                 Upgrade Apache commons-net to 3.7.2.
             </action>
             <action type="fix" dev="rbri">
-                Function clear() moved from HtmlDocument to Document.
-            </action>
-            <action type="fix" dev="rbri">
                 Properties bgColor and fgColor moved from HtmlDocument to Document for Chrome/Edge/FF/FF78.
             </action>
             <action type="fix" dev="rbri">
-                Properties aLinkColor,linkColor,vLinkColor and all moved from HtmlDocument to Document for Chrome/Edge/FF/FF78.
+                Properties aLinkColor,linkColor,vLinkcolor and all moved from HtmlDocument to Document for Chrome/Edge/FF/FF78.
             </action>
             <action type="fix" dev="rbri">
                 Property onshow is not available in Chrome/Edge.

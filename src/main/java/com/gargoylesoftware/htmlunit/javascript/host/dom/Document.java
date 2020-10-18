@@ -4138,15 +4138,6 @@ public class Document extends Node {
     }
 
     /**
-     * Does... nothing.
-     * @see <a href="https://developer.mozilla.org/en/DOM/document.clear">Mozilla doc</a>
-     */
-    @JsxFunction
-    public void clear() {
-        // nothing
-    }
-
-    /**
      * Returns the element with the specified ID, as long as it is an HTML element; {@code null} otherwise.
      * @param id the ID to search for
      * @return the element with the specified ID, as long as it is an HTML element; {@code null} otherwise
