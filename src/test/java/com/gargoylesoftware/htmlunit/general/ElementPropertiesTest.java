@@ -3990,8 +3990,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("-")
     @HtmlUnitNYI(CHROME = "open(),write(),writeln()",
             EDGE = "open(),write(),writeln()",
-            FF78 = "open(),write(),writeln()",
-            FF = "open(),write(),writeln()",
+            FF78 = "close(),domain,open(),write(),writeln()",
+            FF = "close(),domain,open(),write(),writeln()",
             IE = "open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document, xmlDocument");
@@ -4251,14 +4251,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseEvents(),rootElement,"
                 + "scripts,styleSheets,"
                 + "title,URL,vlinkColor,xmlEncoding,xmlStandalone,xmlVersion"},
-            FF78 = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
-                + "bgColor,body,captureEvents(),characterSet,"
-                + "charset,childElementCount,children,clear(),close(),compatMode,contentType,cookie,"
+            FF78 = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),characterSet,"
+                + "charset,childElementCount,children,clear(),compatMode,contentType,cookie,"
                 + "createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
-                + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,domain,"
-                + "elementFromPoint(),embeds,evaluate(),execCommand(),"
+                + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,elementFromPoint(),"
+                + "embeds,evaluate(),execCommand(),"
                 + "fgColor,firstElementChild,fonts,forms,getElementById(),getElementsByClassName(),getElementsByName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),"
                 + "hasFocus(),head,hidden,images,implementation,"
@@ -4273,15 +4272,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),querySelector(),querySelectorAll(),"
                 + "readyState,referrer,releaseCapture(),releaseEvents(),rootElement,scripts,"
-                + "styleSheets,title",
-                "URL,vlinkColor"},
-            FF = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),"
-                + "characterSet,charset,childElementCount,children,clear(),close(),compatMode,contentType,cookie,"
+                + "styleSheets,title,URL,vlinkColor",
+            FF = "activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),"
+                + "characterSet,charset,childElementCount,children,clear(),compatMode,contentType,cookie,"
                 + "createAttribute(),createCDATASection(),createComment(),createDocumentFragment(),"
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
-                + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,domain,"
-                + "elementFromPoint(),embeds,evaluate(),execCommand(),"
+                + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,elementFromPoint(),"
+                + "embeds,evaluate(),execCommand(),"
                 + "fgColor,firstElementChild,fonts,forms,getElementById(),getElementsByClassName(),getElementsByName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),"
                 + "hasFocus(),head,hidden,images,implementation,"
@@ -4296,8 +4294,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),querySelector(),querySelectorAll(),"
                 + "readyState,referrer,releaseCapture(),releaseEvents(),rootElement,scripts,"
-                + "styleSheets,title",
-                "URL,vlinkColor"},
+                + "styleSheets,title,URL,vlinkColor",
             IE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,"
                 + "bgColor,body,captureEvents(),characterSet,"
                 + "charset,clear(),close(),compatMode,cookie,createAttribute(),createCDATASection(),createComment(),"

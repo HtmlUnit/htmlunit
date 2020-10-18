@@ -19,11 +19,11 @@
                 Function dispatchEvent() removed from HtmlDocument.
             </action>
             <action type="fix" dev="rbri">
-                Properties cookie, domain, head, scripts and images moved from HtmlDocument to Document for FF/FF78.
+                Properties cookie, head, scripts and images moved from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
-                Functions close(), getElementsByName(), execCommand(), queryCommandEnabled() and
-                queryCommandSupported() moved from HtmlDocument to Document for FF/FF78.
+                Functions getElementsByName(), execCommand(), queryCommandEnabled() and queryCommandSupported() moved 
+                from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
                 Function getSelection() moved from HtmlDocument to Document for FF/FF78/IE.

@@ -923,7 +923,7 @@ public class Document extends Node {
      *
      * @throws IOException if an IO problem occurs
      */
-    @JsxFunction
+    @JsxFunction({CHROME, EDGE, IE})
     public void close() throws IOException {
     }
 
@@ -1361,7 +1361,7 @@ public class Document extends Node {
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
      * W3C documentation</a>
      */
-    @JsxGetter
+    @JsxGetter({CHROME, EDGE, IE})
     public String getDomain() {
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
@@ -1408,7 +1408,7 @@ public class Document extends Node {
      * trimming to co.uk should not be possible.
      * @param newDomain the new domain to set
      */
-    @JsxSetter
+    @JsxSetter({CHROME, EDGE, IE})
     public void setDomain(String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
