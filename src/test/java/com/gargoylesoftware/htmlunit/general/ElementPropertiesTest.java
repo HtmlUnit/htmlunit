@@ -301,7 +301,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
         html.append("<th>Total Implemented:</th>\n");
         html.append("<td>" + counts[1])
-            .append(" / " + counts[0]).append("</td>\n");
+            .append(" (" + Math.round(((double) counts[1]) / counts[0] * 100))
+            .append("%)</td>\n");
 
         html.append("</tr>\n");
         html.append("</table>\n");
