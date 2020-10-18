@@ -811,15 +811,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({FF, FF78})
-    public HTMLElement getBody() {
-        return super.getBody();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getTitle() {
         return getPage().getTitleText();
     }
@@ -1103,24 +1094,6 @@ public class HTMLDocument extends Document {
     @JsxFunction({CHROME, EDGE, FF, FF78})
     public void releaseEvents(final String type) {
         // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({FF, FF78})
-    public String getDesignMode() {
-        return super.getDesignMode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({FF, FF78})
-    public void setDesignMode(final String mode) {
-        super.setDesignMode(mode);
     }
 
     /**
