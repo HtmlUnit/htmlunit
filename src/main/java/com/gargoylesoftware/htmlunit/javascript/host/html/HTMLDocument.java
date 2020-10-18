@@ -967,24 +967,6 @@ public class HTMLDocument extends Document {
      */
     @Override
     @JsxGetter({FF, FF78})
-    public String getDomain() {
-        return super.getDomain();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({FF, FF78})
-    public void setDomain(final String newDomain) {
-        super.setDomain(newDomain);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({FF, FF78})
     public Object getScripts() {
         return super.getScripts();
     }

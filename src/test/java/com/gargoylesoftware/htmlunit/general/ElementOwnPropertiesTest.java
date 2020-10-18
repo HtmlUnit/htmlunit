@@ -9351,11 +9351,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
             FF78 = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
-                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+                + "designMode,dispatchEvent(),documentElement,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             FF = "alinkColor,bgColor,body,captureEvents(),close(),constructor(),cookie,"
-                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+                + "designMode,dispatchEvent(),documentElement,embeds,execCommand(),fgColor,forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
