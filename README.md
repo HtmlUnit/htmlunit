@@ -71,7 +71,7 @@ This project is licensed under the Apache 2.0 License
 
 
 [1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.44.0/ "HtmlUnit on sourceforge"
-[2]: https://jenkins.wetator.org/job/HtmlUnit/ "HtmlUnit CI"
+[2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20Headless/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
 [5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
