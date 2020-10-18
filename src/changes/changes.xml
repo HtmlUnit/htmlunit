@@ -16,19 +16,6 @@
                 Upgrade Apache commons-net to 3.7.2.
             </action>
             <action type="fix" dev="rbri">
-                Function dispatchEvent() removed from HtmlDocument.
-            </action>
-            <action type="fix" dev="rbri">
-                Properties cookie, head, scripts and images moved from HtmlDocument to Document for FF/FF78.
-            </action>
-            <action type="fix" dev="rbri">
-                Functions getElementsByName(), execCommand(), queryCommandEnabled() and queryCommandSupported() moved 
-                from HtmlDocument to Document for FF/FF78.
-            </action>
-            <action type="fix" dev="rbri">
-                Function getSelection() moved from HtmlDocument to Document for FF/FF78/IE.
-            </action>
-            <action type="fix" dev="rbri">
                 Properties forms, plugins, links and embeds moved from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">

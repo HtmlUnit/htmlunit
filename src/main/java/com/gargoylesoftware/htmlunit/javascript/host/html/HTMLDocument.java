@@ -26,6 +26,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.net.URL;
@@ -422,6 +423,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
+    @JsxGetter
     public String getCookie() {
         final HtmlPage page = getPage();
 
@@ -444,6 +446,28 @@ public class HTMLDocument extends Document {
         }
 
         return builder.toString();
+    }
+
+    /**
+     * Adds a cookie, as long as cookies are enabled.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
+     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
+     */
+    @JsxSetter
+    public void setCookie(final String newCookie) {
+        final HtmlPage page = getPage();
+        final WebClient client = page.getWebClient();
+
+        client.addCookie(newCookie, getPage().getUrl(), this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({FF, FF78})
+    public Object getImages() {
+        return super.getImages();
     }
 
     /**
@@ -519,10 +543,38 @@ public class HTMLDocument extends Document {
     /**
      * {@inheritDoc}
      */
+    @JsxGetter
     @Override
     public Element getDocumentElement() {
         implicitCloseIfNecessary();
         return super.getDocumentElement();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction({FF, FF78})
+    public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
+        return super.execCommand(cmd, userInterface, value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction({FF, FF78})
+    public boolean queryCommandEnabled(final String cmd) {
+        return super.queryCommandEnabled(cmd);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction({FF, FF78})
+    public boolean queryCommandSupported(final String cmd) {
+        return super.queryCommandSupported(cmd);
     }
 
     /**
@@ -592,6 +644,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
+    @JsxFunction({FF, FF78})
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         if ("null".equals(elementName)
@@ -709,6 +762,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
+    @JsxGetter
     public HTMLElement getHead() {
         final HtmlElement head = getPage().getHead();
         if (head == null) {
@@ -875,6 +929,15 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
+    @JsxGetter({FF, FF78})
+    public Object getScripts() {
+        return super.getScripts();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public HTMLElement getActiveElement() {
         if (activeElement_ == null) {
             final HtmlElement body = getPage().getBody();
@@ -929,6 +992,7 @@ public class HTMLDocument extends Document {
      *         called <tt>preventDefault</tt>; {@code true} otherwise
      */
     @Override
+    @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -936,9 +1000,19 @@ public class HTMLDocument extends Document {
     }
 
     /**
+     * Sets the head.
+     * @param head the head
+     */
+    @JsxSetter({FF, FF78, IE})
+    public void setHead(final ScriptableObject head) {
+        //ignore
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
+    @JsxFunction
     public Selection getSelection() {
         return getWindow().getSelectionImpl();
     }

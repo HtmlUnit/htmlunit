@@ -9344,13 +9344,22 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "constructor(),getElementById(),open(),write(),writeln()",
-            EDGE = "constructor(),getElementById(),open(),write(),writeln()",
-            FF78 = "close(),constructor(),domain,"
-                + "getElementById(),open(),write(),writeln()",
-            FF = "close(),constructor(),domain,"
-                + "getElementById(),open(),write(),writeln()",
-            IE = "constructor,getElementById(),open(),write(),writeln()")
+    @HtmlUnitNYI(CHROME = "constructor(),cookie,dispatchEvent(),"
+                + "documentElement,getElementById(),getSelection(),head,open(),"
+                + "write(),writeln()",
+            EDGE = "constructor(),cookie,dispatchEvent(),"
+                + "documentElement,getElementById(),getSelection(),head,open(),"
+                + "write(),writeln()",
+            FF78 = "close(),constructor(),cookie,"
+                + "dispatchEvent(),documentElement,domain,execCommand(),"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,open(),"
+                + "queryCommandEnabled(),queryCommandSupported(),scripts,write(),writeln()",
+            FF = "close(),constructor(),cookie,"
+                + "dispatchEvent(),documentElement,domain,execCommand(),"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,open(),"
+                + "queryCommandEnabled(),queryCommandSupported(),scripts,write(),writeln()",
+            IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
+                + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document");
     }
