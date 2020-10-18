@@ -60,8 +60,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
@@ -489,7 +487,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({FF, FF78})
     public void close() throws IOException {
         if (writeInCurrentDocument_) {
             LOG.warn("close() called when document is not open.");
@@ -552,7 +549,6 @@ public class HTMLDocument extends Document {
      * @param id the ID to search for
      * @return the element, or {@code null} if it could not be found
      */
-    @JsxFunction
     @Override
     public Object getElementById(final String id) {
         implicitCloseIfNecessary();
@@ -851,24 +847,6 @@ public class HTMLDocument extends Document {
     public void setFgColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setText(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({FF, FF78})
-    public String getDomain() {
-        return super.getDomain();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({FF, FF78})
-    public void setDomain(final String newDomain) {
-        super.setDomain(newDomain);
     }
 
     /**

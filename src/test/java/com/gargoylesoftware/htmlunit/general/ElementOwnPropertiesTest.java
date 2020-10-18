@@ -9344,13 +9344,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "constructor(),getElementById(),open(),write(),writeln()",
-            EDGE = "constructor(),getElementById(),open(),write(),writeln()",
-            FF78 = "close(),constructor(),domain,"
-                + "getElementById(),open(),write(),writeln()",
-            FF = "close(),constructor(),domain,"
-                + "getElementById(),open(),write(),writeln()",
-            IE = "constructor,getElementById(),open(),write(),writeln()")
+    @HtmlUnitNYI(CHROME = "constructor(),open(),write(),writeln()",
+            EDGE = "constructor(),open(),write(),writeln()",
+            FF78 = "constructor(),open(),write(),writeln()",
+            FF = "constructor(),open(),write(),writeln()",
+            IE = "constructor,open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document");
     }
