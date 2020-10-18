@@ -1043,7 +1043,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command is supported
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1069,7 +1069,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command can be successfully executed
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1082,7 +1082,7 @@ public class Document extends Node {
      * @param value the string, number, or other value to assign (possible values depend on the command)
      * @return {@code true} if the command was successful, {@code false} otherwise
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
         if (!hasCommand(cmd, false)) {
             return false;
@@ -1168,9 +1168,20 @@ public class Document extends Node {
      * Returns the {@code cookie} property.
      * @return the {@code cookie} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public String getCookie() {
         return "";
+    }
+
+    /**
+     * Adds a cookie, as long as cookies are enabled.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
+     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
+     */
+    @JsxSetter
+    public void setCookie(final String newCookie) {
+        final SgmlPage page = getPage();
+        page.getWebClient().addCookie(newCookie, page.getUrl(), this);
     }
 
     /**
@@ -1839,7 +1850,7 @@ public class Document extends Node {
      * Returns the value of the {@code embeds} property.
      * @return the value of the {@code embeds} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getImages() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1881,7 +1892,7 @@ public class Document extends Node {
      * Returns the value of the {@code scripts} property.
      * @return the value of the {@code scripts} property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getScripts() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -1969,7 +1980,7 @@ public class Document extends Node {
      * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a {@code name} attribute with the specified value
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public HTMLCollection getElementsByName(final String elementName) {
         return null;
     }
@@ -2023,7 +2034,7 @@ public class Document extends Node {
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({CHROME, EDGE})
+    @JsxFunction
     public Selection getSelection() {
         return null;
     }
@@ -2032,7 +2043,7 @@ public class Document extends Node {
      * Returns this document's {@code head} element.
      * @return this document's {@code head} element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getHead() {
         return null;
     }
