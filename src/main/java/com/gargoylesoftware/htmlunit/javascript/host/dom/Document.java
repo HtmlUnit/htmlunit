@@ -856,7 +856,7 @@ public class Document extends Node {
      * Gecko DOM reference</a>
      * @return the value of this property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getAnchors() {
         return new HTMLCollection(getDomNodeOrDie(), true) {
             @Override
@@ -889,7 +889,7 @@ public class Document extends Node {
      * Gecko DOM reference</a>
      * @return the value of this property
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getApplets() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override

@@ -9350,11 +9350,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "captureEvents(),constructor(),cookie,dispatchEvent(),"
                 + "documentElement,getElementById(),getSelection(),head,open(),releaseEvents(),"
                 + "write(),writeln()",
-            FF78 = "anchors,applets,body,captureEvents(),close(),constructor(),cookie,"
+            FF78 = "body,captureEvents(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,write(),writeln()",
-            FF = "anchors,applets,body,captureEvents(),close(),constructor(),cookie,"
+            FF = "body,captureEvents(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
                 + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,write(),writeln()",
