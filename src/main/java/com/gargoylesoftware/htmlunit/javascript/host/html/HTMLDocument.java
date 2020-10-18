@@ -587,33 +587,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction({FF, FF78})
-    public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
-        return super.execCommand(cmd, userInterface, value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction({FF, FF78})
-    public boolean queryCommandEnabled(final String cmd) {
-        return super.queryCommandEnabled(cmd);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxFunction({FF, FF78})
-    public boolean queryCommandSupported(final String cmd) {
-        return super.queryCommandSupported(cmd);
-    }
-
-    /**
      * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
      */
     private void implicitCloseIfNecessary() {

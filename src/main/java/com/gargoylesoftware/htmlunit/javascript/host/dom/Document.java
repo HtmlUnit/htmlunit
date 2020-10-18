@@ -1043,7 +1043,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command is supported
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1069,7 +1069,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command can be successfully executed
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1082,7 +1082,7 @@ public class Document extends Node {
      * @param value the string, number, or other value to assign (possible values depend on the command)
      * @return {@code true} if the command was successful, {@code false} otherwise
      */
-    @JsxFunction({CHROME, EDGE, IE})
+    @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
         if (!hasCommand(cmd, false)) {
             return false;

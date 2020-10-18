@@ -3989,12 +3989,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "alinkColor,bgColor,captureEvents(),fgColor,linkColor,open(),releaseEvents(),"
                 + "vlinkColor,write(),writeln()",
             FF78 = "alinkColor,bgColor,body,captureEvents(),close(),cookie,designMode,"
-                + "embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
-                + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
+                + "embeds,fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
+                + "links,open(),plugins,releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
             FF = "alinkColor,bgColor,body,captureEvents(),close(),cookie,designMode,"
-                + "embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
-                + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
+                + "embeds,fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
+                + "links,open(),plugins,releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
             IE = "getSelection(),open(),write(),writeln()")
     public void htmlDocument() throws Exception {
@@ -4257,7 +4257,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,doctype,documentElement,documentURI,domain,elementFromPoint(),"
-                + "evaluate(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
+                + "evaluate(),execCommand(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
@@ -4268,6 +4268,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,"
                 + "onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
+                + "queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
             FF = "activeElement,adoptNode(),all,anchors,applets,"
@@ -4276,7 +4277,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createElement(),createElementNS(),createEvent(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,doctype,documentElement,documentURI,domain,elementFromPoint(),"
-                + "evaluate(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
+                + "evaluate(),execCommand(),firstElementChild,fonts,getElementById(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
@@ -4287,6 +4288,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,"
                 + "onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
+                + "queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),rootElement,"
                 + "styleSheets,title,URL",
             IE = {"activeElement,adoptNode(),alinkColor,all,anchors,applets,bgColor,body,captureEvents(),characterSet,"
