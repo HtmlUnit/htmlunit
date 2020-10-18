@@ -646,6 +646,15 @@ public class HTMLDocument extends Document {
     }
 
     /**
+     * Gets the window in which this document is contained.
+     * @return the window
+     */
+    @JsxGetter(IE)
+    public Object getParentWindow() {
+        return getWindow();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

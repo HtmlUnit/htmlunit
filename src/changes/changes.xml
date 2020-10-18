@@ -19,9 +19,6 @@
                 Function clear() moved from HtmlDocument to Document.
             </action>
             <action type="fix" dev="rbri">
-                Property parentWindow moved from HtmlDocument to Document for IE.
-            </action>
-            <action type="fix" dev="rbri">
                 Properties bgColor and fgColor moved from HtmlDocument to Document for Chrome/Edge/FF/FF78.
             </action>
             <action type="fix" dev="rbri">
