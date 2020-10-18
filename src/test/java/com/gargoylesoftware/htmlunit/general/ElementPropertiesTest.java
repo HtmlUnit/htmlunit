@@ -182,24 +182,28 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
                 final Alerts alerts = method.getAnnotation(Alerts.class);
                 String[] expectedAlerts = {};
-                expectedAlerts = BrowserVersionClassRunner.NO_ALERTS_DEFINED;
                 if (BrowserVersionClassRunner.isDefined(alerts.value())) {
                     expectedAlerts = alerts.value();
                 }
                 if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
-                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.IE(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner
+                            .firstDefinedOrGiven(expectedAlerts, alerts.IE(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.EDGE) {
-                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.EDGE(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner
+                            .firstDefinedOrGiven(expectedAlerts, alerts.EDGE(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.FIREFOX_78) {
-                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.FF78(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner
+                            .firstDefinedOrGiven(expectedAlerts, alerts.FF78(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.FIREFOX) {
-                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner
+                            .firstDefinedOrGiven(expectedAlerts, alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.CHROME) {
-                    expectedAlerts = BrowserVersionClassRunner.firstDefined(alerts.CHROME(), alerts.DEFAULT());
+                    expectedAlerts = BrowserVersionClassRunner
+                            .firstDefinedOrGiven(expectedAlerts, alerts.CHROME(), alerts.DEFAULT());
                 }
 
                 final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
