@@ -2186,7 +2186,7 @@ public class Document extends Node {
      * Returns the value of the {@code linkColor} property.
      * @return the value of the {@code linkColor} property
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public String getLinkColor() {
         return "#0000ff";
     }
@@ -2195,7 +2195,7 @@ public class Document extends Node {
      * Sets the value of the {@code linkColor} property.
      * @param color the value of the {@code linkColor} property
      */
-    @JsxSetter
+    @JsxSetter(IE)
     public void setLinkColor(final String color) {
     }
 
@@ -2203,7 +2203,7 @@ public class Document extends Node {
      * Returns the value of the {@code vlinkColor} property.
      * @return the value of the {@code vlinkColor} property
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public String getVlinkColor() {
         return "#800080";
     }
@@ -2212,7 +2212,7 @@ public class Document extends Node {
      * Sets the value of the {@code vlinkColor} property.
      * @param color the value of the {@code vlinkColor} property
      */
-    @JsxSetter
+    @JsxSetter(IE)
     public void setVlinkColor(final String color) {
     }
 

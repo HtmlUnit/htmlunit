@@ -9345,19 +9345,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF78 = "constructor()",
             IE = "constructor")
     @HtmlUnitNYI(CHROME = "captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
-                + "documentElement,getElementById(),getSelection(),head,open(),releaseEvents(),"
-                + "write(),writeln()",
+                + "documentElement,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+                + "vlinkColor,write(),writeln()",
             EDGE = "captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
-                + "documentElement,getElementById(),getSelection(),head,open(),releaseEvents(),"
-                + "write(),writeln()",
+                + "documentElement,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+                + "vlinkColor,write(),writeln()",
             FF78 = "anchors,applets,body,captureEvents(),clear(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
-                + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
-                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,write(),writeln()",
+                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             FF = "anchors,applets,body,captureEvents(),clear(),close(),constructor(),cookie,"
                 + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),forms,"
-                + "getElementById(),getElementsByName(),getSelection(),head,images,links,open(),plugins,"
-                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,write(),writeln()",
+                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             IE = "clear(),constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),parentWindow,write(),writeln()")
     public void htmlDocument() throws Exception {
