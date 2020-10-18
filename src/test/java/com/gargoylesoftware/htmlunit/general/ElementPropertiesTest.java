@@ -3996,7 +3996,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "domain,embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,linkColor,"
                 + "links,open(),plugins,queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,"
                 + "vlinkColor,write(),writeln()",
-            IE = "getSelection(),open(),parentWindow,write(),writeln()")
+            IE = "getSelection(),open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document, xmlDocument");
     }
@@ -4307,7 +4307,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,"
                 + "onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled",
-                "onstop,onstoragecommit,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,plugins,"
+                "onstop,onstoragecommit,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,parentWindow,plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),querySelector(),querySelectorAll(),readyState,"
                 + "referrer,releaseCapture(),releaseEvents(),rootElement,scripts,styleSheets,title,uniqueID,URL,"
                 + "URLUnencoded,vlinkColor,xmlEncoding,xmlStandalone,xmlVersion"})

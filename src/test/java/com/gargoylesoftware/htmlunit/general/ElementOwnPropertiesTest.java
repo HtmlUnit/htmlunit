@@ -9359,7 +9359,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
-                + "head,open(),parentWindow,write(),writeln()")
+                + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document");
     }

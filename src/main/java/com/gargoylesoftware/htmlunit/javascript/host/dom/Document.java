@@ -4129,6 +4129,15 @@ public class Document extends Node {
         };
     }
 
+    /**
+     * Gets the window in which this document is contained.
+     * @return the window
+     */
+    @JsxGetter(IE)
+    public Object getParentWindow() {
+        return getWindow();
+    }
+
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
         if ("body".equals(name)) {
