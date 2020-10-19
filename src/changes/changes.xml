@@ -26,7 +26,7 @@
                 from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
-                Functions execCommand(), queryCommandEnabled() and queryCommandSupported() moved 
+                Functions execCommand(), queryCommandEnabled() and queryCommandSupported() moved
                 from HtmlDocument to Document for FF/FF78.
             </action>
             <action type="fix" dev="rbri">
