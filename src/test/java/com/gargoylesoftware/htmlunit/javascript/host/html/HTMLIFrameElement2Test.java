@@ -890,7 +890,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
               + "  <body onload='test()'>\n"
               + "  </body>\n"
               + "</html>";
-        loadPageWithAlerts2(html, 7777777);
+        loadPageWithAlerts2(html);
     }
 
 }
