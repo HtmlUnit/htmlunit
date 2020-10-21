@@ -76,6 +76,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code HTMLDocument}.
@@ -494,7 +495,8 @@ public class HTMLDocument extends Document {
         writeInCurrentDocument_ = false;
         final WebWindow ww = getWindow().getWebWindow();
         if (ww instanceof FrameWindow
-                && getBrowserVersion().hasFeature(JS_DOCUMENT_OPEN_OVERWRITES_ABOUT_BLANK_LOCATION)
+                && (!Undefined.isUndefined(url)
+                        || getBrowserVersion().hasFeature(JS_DOCUMENT_OPEN_OVERWRITES_ABOUT_BLANK_LOCATION))
                 && WebClient.ABOUT_BLANK.equals(getPage().getUrl().toExternalForm())) {
             final URL enclosingUrl = ((FrameWindow) ww).getEnclosingPage().getUrl();
             getPage().getWebResponse().getWebRequest().setUrl(enclosingUrl);
