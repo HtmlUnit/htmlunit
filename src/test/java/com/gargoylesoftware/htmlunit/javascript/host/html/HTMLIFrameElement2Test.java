@@ -867,7 +867,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"about:blank", "§§URL§§"})
+    @Alerts(DEFAULT = {"about:blank", "§§URL§§", "§§URL§§"},
+            FF = {"about:blank", "about:blank", "about:blank"},
+            FF78 = {"about:blank", "about:blank", "about:blank"})
     public void location() throws Exception {
         final String html =
                 "<html>\n"
@@ -882,12 +884,13 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
               + "    alert(win.location);\n"
               + "    doc.write('');\n"
               + "    doc.close();\n"
+              + "    alert(win.location);\n"
               + "  }\n"
               + "</script></head>\n"
               + "  <body onload='test()'>\n"
               + "  </body>\n"
               + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 7777777);
     }
 
 }

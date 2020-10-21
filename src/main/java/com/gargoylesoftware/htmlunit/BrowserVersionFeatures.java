@@ -718,6 +718,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
+    /** Document open() rewrites url of about:blank documents. */
+    @BrowserFeature({CHROME, EDGE, IE})
+    JS_DOCUMENT_OPEN_OVERWRITES_ABOUT_BLANK_LOCATION,
+
     /** The browser has selection {@code rangeCount}. */
     @BrowserFeature({FF, FF78, IE})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,

@@ -13,6 +13,9 @@
                 the method requires now the page as second parameter.
             </action>
             <action type="fix" dev="rbri">
+                Document.open() does not change the location of about:blank pages in FF.
+            </action>
+            <action type="fix" dev="rbri">
                 Function clear() moved from HtmlDocument to Document.
             </action>
             <action type="fix" dev="rbri">
