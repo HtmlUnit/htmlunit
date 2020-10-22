@@ -29,6 +29,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * A very simple implementation of a Web Server.
  * This covers some cases which are not possible with Jetty.
@@ -108,6 +110,19 @@ public class PrimitiveWebServer implements Closeable {
 
                             if (i == '\n' && requestString.endsWith("\r\n\r\n")) {
                                 break;
+                            }
+                        }
+
+                        final int contentLenghtPos = StringUtils.indexOfIgnoreCase(requestString, "Content-Length:");
+                        if (contentLenghtPos > -1) {
+                            final int endPos = requestString.indexOf('\n', contentLenghtPos + 16);
+                            final String toParse = requestString.substring(contentLenghtPos + 16, endPos);
+                            final int contentLenght = Integer.parseInt(toParse.trim());
+
+                            if (contentLenght > 0) {
+                                final byte[] charArray = new byte[contentLenght];
+                                in.read(charArray, 0, contentLenght);
+                                requestString += new String(charArray);
                             }
                         }
 
