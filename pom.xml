@@ -29,7 +29,7 @@
         <htmlunitcorejs.version>2.44.0</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
-        <jetty.version>9.4.32.v20200930</jetty.version>
+        <jetty.version>9.4.33.v20201020</jetty.version>
         <log4j.version>2.13.3</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
@@ -71,7 +71,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.1.3</version>
+                <version>4.1.4</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>

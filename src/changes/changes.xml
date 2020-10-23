@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.33.v20201020.
+            </action>
             <action type="fix" dev="rbri">
                 Document.open() does not change the location of about:blank pages in FF.
             </action>
