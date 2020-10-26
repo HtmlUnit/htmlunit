@@ -279,5 +279,26 @@ INFO: Redirect requested but followRedirects is disabled</source>
             </answer>
         </faq>
 
+        <faq id="CodeCoverage">
+            <question>
+                When I run the unit tests with HtmlUnit and code coverage enabled I get a MethodTooLargeException.
+            </question>
+            <answer>
+                <p>
+                    Background:
+                    The CSS parser used by HtmlUnit is implemented based on the JavaCC parser generator.
+                    Because of the way JavaCC works, the (generated) parser consists of really huge class
+                    file (containing huge methods) nearly at the limits of the JVM class byte code.
+                    On the other hand Jacoco instruments the byte code (adds more operations) to keep track of the called methods.
+                    This is done with a more or less poor approach - without taking the limits of the JVM into account.
+                    As a result the instrumented bytecode exceeds the JVM limits and is no longer loadable.
+                </p>
+                <p>
+                    For your tests try to exclude the CssParser (and maybe HtmlUnit itself also) from Jacoco instrumentation.
+                    Usually you like to check the code coverage of your classes and not for HtmlUnit oder the CssParser.
+                </p>
+            </answer>
+        </faq>
+
     </part>
 </faqs>
