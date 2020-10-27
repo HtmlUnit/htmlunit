@@ -93,6 +93,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.BrowserType;
@@ -461,7 +462,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 if (IE_BIN_ != null) {
                     System.setProperty(InternetExplorerDriverService.IE_DRIVER_EXE_PROPERTY, IE_BIN_);
                 }
-                return new InternetExplorerDriver();
+
+                final InternetExplorerOptions options = new InternetExplorerOptions();
+                options.ignoreZoomSettings();
+                return new InternetExplorerDriver(options);
             }
 
             if (BrowserVersion.EDGE == getBrowserVersion()) {
