@@ -49,7 +49,7 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
         final HtmlSearchInput input = (HtmlSearchInput) page.getElementById("foo");
 
         // empty
-        assertFalse(input.isValid());
+        assertTrue(input.isValid());
         // invalid
         input.setValueAttribute("qwerty");
         assertFalse(input.isValid());

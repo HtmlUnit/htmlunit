@@ -141,7 +141,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         final HtmlUrlInput input = (HtmlUrlInput) page.getElementById("foo");
 
         // empty
-        assertFalse(input.isValid());
+        assertTrue(input.isValid());
         // invalid
         input.setValueAttribute("https://sourceforge.net/projects/htmlunit/");
         assertFalse(input.isValid());

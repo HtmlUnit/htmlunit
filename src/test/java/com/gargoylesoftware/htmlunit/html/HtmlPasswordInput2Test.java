@@ -199,7 +199,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         final HtmlPasswordInput input = (HtmlPasswordInput) page.getElementById("foo");
 
         // empty
-        assertFalse(input.isValid());
+        assertTrue(input.isValid());
         // invalid
         input.setValueAttribute("0987654321!");
         assertFalse(input.isValid());

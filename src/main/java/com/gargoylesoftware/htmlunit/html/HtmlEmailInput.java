@@ -187,4 +187,12 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, La
     protected boolean isPatternSupported() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isBlankPatternValidated() {
+        return false;
+    }
 }

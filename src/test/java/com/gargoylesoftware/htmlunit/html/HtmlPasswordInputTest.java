@@ -678,6 +678,30 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    @Test
+    @Alerts("true-false-false")
+    public void patternValidationEmpty() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    var bar = document.getElementById('bar');\n"
+            + "    var bar2 = document.getElementById('bar2');\n"
+            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() + '-' + bar2.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='password' pattern='[0-9a-zA-Z]{10,40}' id='foo' value=''>\n"
+            + "  <input type='password' pattern='[0-9a-zA-Z]{10,40}' id='bar' value=' '>\n"
+            + "  <input type='password' pattern='[0-9a-zA-Z]{10,40}' id='bar2' value='  \t'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception if an error occurs
      */

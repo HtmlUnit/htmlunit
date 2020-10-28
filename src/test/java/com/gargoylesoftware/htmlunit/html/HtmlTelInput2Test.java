@@ -121,7 +121,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         final HtmlTelInput input = (HtmlTelInput) page.getElementById("foo");
 
         // empty
-        assertFalse(input.isValid());
+        assertTrue(input.isValid());
         // invalid
         input.setValueAttribute("123-456-78901");
         assertFalse(input.isValid());

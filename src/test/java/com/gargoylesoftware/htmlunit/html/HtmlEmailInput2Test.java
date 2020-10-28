@@ -120,7 +120,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         final HtmlEmailInput input = (HtmlEmailInput) page.getElementById("foo");
 
         // empty
-        assertFalse(input.isValid());
+        assertTrue(input.isValid());
         // invalid
         input.setValueAttribute("abc@eemail.com");
         assertFalse(input.isValid());

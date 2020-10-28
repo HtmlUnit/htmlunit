@@ -192,6 +192,14 @@ public class HtmlUrlInput extends HtmlInput implements SelectableTextInput, Labe
      * {@inheritDoc}
      */
     @Override
+    protected boolean isBlankPatternValidated() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected boolean isMinMaxLengthSupported() {
         return true;
     }

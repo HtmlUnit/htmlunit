@@ -473,7 +473,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
         final HtmlTextInput input = (HtmlTextInput) page.getElementById("foo");
 
         // empty
-        assertFalse(input.isValid());
+        assertTrue(input.isValid());
         // invalid
         input.setValueAttribute("foo");
         assertFalse(input.isValid());

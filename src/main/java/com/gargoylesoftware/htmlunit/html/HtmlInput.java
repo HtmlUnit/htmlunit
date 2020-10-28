@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -851,6 +853,13 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * @return if the element executes pattern validation on blank strings
+     */
+    protected boolean isBlankPatternValidated() {
+        return true;
+    }
+
+    /**
      * Returns if the input element supports maxlength minlength validation. Refer to the
      * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
      * for details.
@@ -917,15 +926,30 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return if the input element has a valid value pattern
      */
     private boolean isPatternValid() {
-        if (isPatternSupported() && !getPattern().isEmpty()) {
-            final RegExpJsToJavaConverter converter = new RegExpJsToJavaConverter();
-            final String javaPattern = converter.convert(getPattern());
-            try {
-                return Pattern.matches(javaPattern, getValueAttribute());
-            }
-            catch (final Exception e) {
-                // ignore if regex invalid
-            }
+        if (!isPatternSupported()) {
+            return true;
+        }
+
+        final String pattern = getPattern();
+        if (StringUtils.isEmpty(pattern)) {
+            return true;
+        }
+
+        final String value = getValueAttribute();
+        if (StringUtils.isEmpty(value)) {
+            return true;
+        }
+        if (!isBlankPatternValidated() && StringUtils.isBlank(value)) {
+            return true;
+        }
+
+        final RegExpJsToJavaConverter converter = new RegExpJsToJavaConverter();
+        final String javaPattern = converter.convert(pattern);
+        try {
+            return Pattern.matches(javaPattern, value);
+        }
+        catch (final Exception e) {
+            // ignore if regex invalid
         }
         return true;
     }

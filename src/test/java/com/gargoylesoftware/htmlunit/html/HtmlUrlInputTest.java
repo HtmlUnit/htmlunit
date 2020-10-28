@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +25,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -121,6 +124,32 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <input type='url' pattern='.*test.*' id='foo' value='http://test.com'>\n"
             + "  <input type='url' pattern='.*test.*' id='bar' value='http://example.com'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = "true-true-true",
+            IE = "true-false-false")
+    @NotYetImplemented(IE)
+    public void patternValidationEmpty() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    var bar = document.getElementById('bar');\n"
+            + "    var bar2 = document.getElementById('bar2');\n"
+            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() + '-' + bar2.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='url' pattern='.*test.*' id='foo' value=''>\n"
+            + "  <input type='url' pattern='.*test.*' id='bar' value=' '>\n"
+            + "  <input type='url' pattern='.*test.*' id='bar2' value='  \t'>\n"
             + "</body>\n"
             + "</html>";
 
