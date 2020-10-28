@@ -196,7 +196,7 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         final BrowserVersion frBrowser =
                 new BrowserVersion.BrowserVersionBuilder(getBrowserVersion())
-                        .setBrowserLanguage("fr")
+                        .setAcceptLanguageHeader("fr")
                         .build();
 
         setBrowserVersion(frBrowser);

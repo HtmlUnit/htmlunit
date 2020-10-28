@@ -332,7 +332,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 "Host: localhost:§§PORT§§",
                 "User-Agent: §§USER_AGENT§§",
                 "Accept: §§ACCEPT§§",
-                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Language: en-US,en;q=0.5",
                 "Accept-Encoding: gzip, deflate",
                 "Connection: keep-alive",
                 "Referer: http://localhost:§§PORT§§/",
@@ -341,7 +341,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 "Host: localhost:§§PORT§§",
                 "User-Agent: §§USER_AGENT§§",
                 "Accept: §§ACCEPT§§",
-                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Language: en-US,en;q=0.5",
                 "Accept-Encoding: gzip, deflate",
                 "Connection: keep-alive",
                 "Referer: http://localhost:§§PORT§§/",
@@ -384,7 +384,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 "Host: localhost:§§PORT§§",
                 "User-Agent: §§USER_AGENT§§",
                 "Accept: §§ACCEPT§§",
-                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Language: en-US,en;q=0.5",
                 "Accept-Encoding: gzip, deflate",
                 "Connection: Keep-Alive",
                 "Referer: http://localhost:§§PORT§§/",
@@ -393,7 +393,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 "Host: localhost:§§PORT§§",
                 "User-Agent: §§USER_AGENT§§",
                 "Accept: §§ACCEPT§§",
-                "Accept-Language: en-US,en;q=0.9",
+                "Accept-Language: en-US,en;q=0.5",
                 "Accept-Encoding: gzip, deflate",
                 "Connection: Keep-Alive",
                 "Referer: http://localhost:§§PORT§§/",
@@ -602,6 +602,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final WebDriver driver = getWebDriver();
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
+            Thread.sleep(4_000);
             driver.findElement(By.id("submit")).click();
 
             final String[] expectedHeaders = getExpectedAlerts();

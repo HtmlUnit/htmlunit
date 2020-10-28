@@ -1635,7 +1635,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // Add standard HtmlUnit headers to the web request if still not present there yet.
         if (!wrs.isAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE)) {
-            wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getBrowserLanguage());
+            wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getAcceptLanguageHeader());
         }
 
         if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
