@@ -189,6 +189,6 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
-        loadPageWithAlerts2(html, 7777777);
+        loadPageWithAlerts2(html);
     }
 }
