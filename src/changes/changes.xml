@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="add" dev="rbri">
+                New configuration option AcceptLanguageHeader for the BrowserVersion.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.33.v20201020.
             </action>

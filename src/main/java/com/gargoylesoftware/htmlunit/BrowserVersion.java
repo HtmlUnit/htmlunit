@@ -140,10 +140,10 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.REFERER,
             HttpHeader.COOKIE};
         FIREFOX_78.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        FIREFOX_78.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX_78.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX_78.imgAcceptHeader_ = "image/webp,*/*";
         FIREFOX_78.cssAcceptHeader_ = "text/css,*/*;q=0.1";
-        FIREFOX_78.browserLanguage_ = LANGUAGE_ENGLISH_US + ",en;q=0.5";
         FIREFOX_78.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
             31, 32, 33, 34, 35, 37, 38, 38, 39, 41, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 56, 58, 59, 59,
@@ -170,10 +170,10 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.REFERER,
             HttpHeader.COOKIE};
         FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX.imgAcceptHeader_ = "image/webp,*/*";
         FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
-        FIREFOX.browserLanguage_ = LANGUAGE_ENGLISH_US + ",en;q=0.5";
         FIREFOX.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
             31, 32, 33, 34, 35, 37, 38, 38, 39, 41, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 56, 58, 59, 59,
@@ -198,6 +198,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.CONNECTION,
             HttpHeader.COOKIE};
         INTERNET_EXPLORER.htmlAcceptHeader_ = "text/html, application/xhtml+xml, image/jxr, */*";
+        INTERNET_EXPLORER.acceptLanguageHeader_ = "en-US,en;q=0.5";
         INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5";
         INTERNET_EXPLORER.cssAcceptHeader_ = "text/css, */*";
         INTERNET_EXPLORER.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
@@ -234,6 +235,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
         CHROME.acceptEncodingHeader_ = "gzip, deflate, br";
+        CHROME.acceptLanguageHeader_ = "en-US,en;q=0.9";
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
@@ -276,6 +278,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
         EDGE.acceptEncodingHeader_ = "gzip, deflate, br";
+        EDGE.acceptLanguageHeader_ = "en-US,en;q=0.9";
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
@@ -440,7 +443,7 @@ public final class BrowserVersion implements Serializable {
     private String buildId_;
     private String productSub_;
     private String vendor_ = "";
-    private String browserLanguage_ = LANGUAGE_ENGLISH_US + ",en;q=0.9";
+    private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
@@ -451,6 +454,7 @@ public final class BrowserVersion implements Serializable {
     private final Set<PluginConfiguration> plugins_;
     private final Set<BrowserVersionFeatures> features_;
     private String acceptEncodingHeader_;
+    private String acceptLanguageHeader_;
     private String htmlAcceptHeader_;
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
@@ -732,6 +736,14 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the value used by the browser for the {@code Accept_Language} header.
+     * @return the accept language header string
+     */
+    public String getAcceptLanguageHeader() {
+        return acceptLanguageHeader_;
+    }
+
+    /**
      * Returns the value used by the browser for the {@code Accept} header if requesting a page.
      * @return the accept header string
      */
@@ -906,6 +918,7 @@ public final class BrowserVersion implements Serializable {
                 .setBuildId(version.getBuildId())
                 .setProductSub(version.getProductSub())
                 .setAcceptEncodingHeader(version.getAcceptEncodingHeader())
+                .setAcceptLanguageHeader(version.getAcceptLanguageHeader())
                 .setHtmlAcceptHeader(version.getHtmlAcceptHeader())
                 .setImgAcceptHeader(version.getImgAcceptHeader())
                 .setCssAcceptHeader(version.getCssAcceptHeader())
@@ -1052,6 +1065,15 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setAcceptEncodingHeader(final String acceptEncodingHeader) {
             workPiece_.acceptEncodingHeader_ = acceptEncodingHeader;
+            return this;
+        }
+
+        /**
+         * @param acceptLanguageHeader the {@code Accept-Language} header
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setAcceptLanguageHeader(final String acceptLanguageHeader) {
+            workPiece_.acceptLanguageHeader_ = acceptLanguageHeader;
             return this;
         }
 

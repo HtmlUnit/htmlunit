@@ -27,6 +27,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -175,13 +176,14 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "en-US,en;q=0.9",
+            FF = "en-US,en;q=0.5",
+            FF78 = "en-US,en;q=0.5")
     public void acceptLanguage() throws Exception {
         final String html = "<html><body></body></html>";
-        loadPageWithAlerts(html);
-        // browsers are using different casing, but this is not relevant for this test
-        assertEquals("en-us",
-                getMockWebConnection().getLastAdditionalHeaders()
-                    .get(HttpHeader.ACCEPT_LANGUAGE).toLowerCase(Locale.ROOT));
+        loadPage(html);
+        assertEquals(getExpectedAlerts()[0],
+                getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
     }
 
     /**
