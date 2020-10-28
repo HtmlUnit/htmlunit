@@ -198,7 +198,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.CONNECTION,
             HttpHeader.COOKIE};
         INTERNET_EXPLORER.htmlAcceptHeader_ = "text/html, application/xhtml+xml, image/jxr, */*";
-        INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
+        INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5";
         INTERNET_EXPLORER.cssAcceptHeader_ = "text/css, */*";
         INTERNET_EXPLORER.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
         INTERNET_EXPLORER.fontHeights_ = new int[] {
