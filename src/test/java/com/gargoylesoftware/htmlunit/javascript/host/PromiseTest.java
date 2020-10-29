@@ -462,7 +462,7 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "fulfilled!", "TypeError: Throwing 1", "Resolving"},
+    @Alerts(DEFAULT = {"true", "fulfilled!", "TypeError: Throwing 1", "Resolving", "fulfilled!"},
             IE = "")
     public void resolveThenables() throws Exception {
         final String html = "<html>\n"
@@ -509,6 +509,14 @@ public class PromiseTest extends WebDriverTestCase {
             + "          log(v);\n"
             + "        }, function(e) {\n"
             + "          log('failure');\n"
+            + "        });\n"
+            + "\n"
+            + "        var p4 = Promise.resolve(1);\n"
+            + "        p4=p4.then(function(v) {\n"
+            + "          return {then: function(onFulfill, onReject) { onFulfill('fulfilled!'); }};\n"
+            + "        });\n"
+            + "        p4.then(function(v) {\n"
+            + "          log(v);\n"
             + "        });\n"
             + "      }\n"
             + "    }\n"
