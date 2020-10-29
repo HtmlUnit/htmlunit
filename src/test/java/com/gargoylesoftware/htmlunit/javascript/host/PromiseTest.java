@@ -462,14 +462,15 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "fulfilled!", "TypeError: Throwing 1", "Resolving"},
+    @Alerts(DEFAULT = {"true", "fulfilled!"},
             IE = "")
-    public void resolveThenables() throws Exception {
+    public void resolveThenable() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
+
             + "        var p1 = Promise.resolve({\n"
             + "          then: function(onFulfill, onReject) {\n"
             + "            onFulfill('fulfilled!');\n"
@@ -482,7 +483,38 @@ public class PromiseTest extends WebDriverTestCase {
             + "        }, function(e) {\n"
             + "            log('failure');\n"
             + "        });\n"
-            + "\n"
+
+            + "      }\n"
+            + "    }\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyAlerts(() -> driver.findElement(By.id("log"))
+                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError: Throwing 1",
+            IE = "")
+    public void resolveThenableThrows() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+
             + "        var thenable = {\n"
             + "          then: function(resolve) {\n"
             + "            throw new TypeError('Throwing 1');\n"
@@ -496,7 +528,38 @@ public class PromiseTest extends WebDriverTestCase {
             + "        }, function(e) {\n"
             + "          log(e);\n"
             + "        });\n"
-            + "\n"
+
+            + "      }\n"
+            + "    }\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyAlerts(() -> driver.findElement(By.id("log"))
+                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Resolving",
+            IE = "")
+    public void resolveThenableThrowsAfterCallback() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+
             + "        var thenable = {\n"
             + "          then: function(resolve) {\n"
             + "            resolve('Resolving');\n"
