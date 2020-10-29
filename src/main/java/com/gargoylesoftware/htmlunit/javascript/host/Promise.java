@@ -102,12 +102,16 @@ public class Promise extends SimpleScriptable {
         this.setPrototype(window.getPrototype(this.getClass()));
         final Promise thisPromise = this;
 
+        callThenableFunction(fun, window, thisPromise);
+    }
+
+    private static void callThenableFunction(final Function fun, final Window window, final Promise promise) {
         final Function resolve = new BaseFunction(window, ScriptableObject.getFunctionPrototype(window)) {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
                                         final Object[] args) {
-                thisPromise.settle(true, args.length == 0 ? Undefined.instance : args[0], window);
-                return thisPromise;
+                promise.settle(true, args.length == 0 ? Undefined.instance : args[0], window);
+                return promise;
             }
         };
 
@@ -115,8 +119,8 @@ public class Promise extends SimpleScriptable {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
                                         final Object[] args) {
-                thisPromise.settle(false, args.length == 0 ? Undefined.instance : args[0], window);
-                return thisPromise;
+                promise.settle(false, args.length == 0 ? Undefined.instance : args[0], window);
+                return promise;
             }
         };
 
@@ -140,7 +144,7 @@ public class Promise extends SimpleScriptable {
             window.getWebWindow().getWebClient().getJavaScriptEngine().processPostponedActions();
         }
         catch (final JavaScriptException e) {
-            thisPromise.settle(false, e.getValue(), window);
+            promise.settle(false, e.getValue(), window);
         }
     }
 
@@ -431,6 +435,15 @@ public class Promise extends SimpleScriptable {
                                         resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
                                     }
                                     resultPromise.dependentPromises_.add(returnPromise);
+                                }
+                            }
+                            else if (callbackResult instanceof NativeObject) {
+                                final NativeObject nativeObject = (NativeObject) callbackResult;
+                                final Object thenFunction = nativeObject.get("then", nativeObject);
+                                if (thenFunction instanceof Function) {
+                                    toExecute = (Function) thenFunction;
+
+                                    callThenableFunction(toExecute, window, returnPromise);
                                 }
                             }
                             else {

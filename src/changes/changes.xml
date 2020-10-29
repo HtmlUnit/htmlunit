@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="fix" dev="rbri" issue="260">
+                Promise.then() now supports also Thenables.
+            </action>
             <action type="fix" dev="rbri" issue="261">
                 Validation pattern has to be ignored for empty values.
             </action>
