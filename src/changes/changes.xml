@@ -12,6 +12,21 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="add" dev="rbri">
+                AudioBufferSourceNode.start(), AudioNode.connect().
+            </action>
+            <action type="add" dev="rbri">
+                AudioContext.createBufferSource() moved up to BaseAudioContext.
+            </action>
+            <action type="add" dev="rbri">
+                BaseAudioContext.createBuffer() added.
+            </action>
+            <action type="add" dev="rbri">
+                GainNode gain property added.
+            </action>
+            <action type="add" dev="rbri">
+                AudioParam value, defaultValue, maxValue and minValued added.
+            </action>
             <action type="fix" dev="rbri" issue="260">
                 Promise.then() now supports also Thenables.
             </action>
