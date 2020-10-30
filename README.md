@@ -4,15 +4,18 @@ Version 2.44.0 / October 3, 2020
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit)
 
-**Homepage:**
+**Homepage**
+
 [htmlunit.sourceforge.io][4]
 
 **News**
+
 [HtmlUnit@Twitter][3]
 
 [HtmlUnit Kanban Board][6]
 
 **Download**
+
 [Download from Sourceforge][1]
 
 For maven, you would add:
