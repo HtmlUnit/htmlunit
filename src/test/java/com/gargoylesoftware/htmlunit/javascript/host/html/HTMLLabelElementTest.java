@@ -645,7 +645,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
     }
 
-    private String generateControlPage(final String snippet) {
+    private static String generateControlPage(final String snippet) {
         return "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -844,7 +844,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
         assertTitle(driver, String.join(";", getExpectedAlerts()) + ";");
     }
 
-    private String generateFormPage(final String snippet) {
+    private static String generateFormPage(final String snippet) {
         return "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
