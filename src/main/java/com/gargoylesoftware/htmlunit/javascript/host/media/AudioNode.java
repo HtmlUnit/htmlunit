@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -37,5 +38,15 @@ public class AudioNode extends EventTarget {
      */
     @JsxConstructor
     public AudioNode() {
+    }
+
+    /**
+     * Lets you connect one of the node's outputs to a target, which may be either another
+     * AudioNode (thereby directing the sound data to the specified node) or an AudioParam,
+     * so that the node's output data is automatically used to change the value
+     * of that parameter over time.
+     */
+    @JsxFunction
+    public void connect() {
     }
 }

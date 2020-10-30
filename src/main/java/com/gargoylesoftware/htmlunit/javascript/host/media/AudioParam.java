@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 /**
  * A JavaScript object for {@code AudioParam}.
@@ -32,10 +32,51 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class AudioParam extends SimpleScriptable {
 
+    private double value_;
+
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public AudioParam() {
+        value_ = getDefaultValue();
+    }
+
+    /**
+     * @return the value
+     */
+    @JsxGetter
+    public double getValue() {
+        return value_;
+    }
+
+    /**
+     * @param value the value
+     */
+    public void setValue(final double value) {
+        value_ = value;
+    }
+
+    /**
+     * @return the defaultValue
+     */
+    @JsxGetter
+    public double getDefaultValue() {
+        return 1;
+    }
+
+    /**
+     * @return the maxValue
+     */
+    @JsxGetter
+    public double getMaxValue() {
+        return 3.4028234663852886e+38;
+    }
+
+    /**
+     * @return the minValue
+     */
+    @JsxGetter
+    public double getMinValue() {
+        return -3.4028234663852886e+38;
     }
 }

@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
 
 /**
@@ -37,5 +38,13 @@ public class AudioBufferSourceNode extends AudioScheduledSourceNode {
      */
     @JsxConstructor
     public AudioBufferSourceNode() {
+    }
+
+    /**
+     * Schedules playback of the audio data contained in the buffer,
+     * or to begin playback immediately..
+     */
+    @JsxFunction
+    public void start() {
     }
 }

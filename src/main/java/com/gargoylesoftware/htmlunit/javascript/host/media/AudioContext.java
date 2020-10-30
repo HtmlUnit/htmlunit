@@ -49,18 +49,6 @@ public class AudioContext extends BaseAudioContext {
     }
 
     /**
-     * @return a new AudioBufferSourceNode, which can be used to
-     * play audio data contained within an AudioBuffer object.
-     */
-    @JsxFunction
-    public AudioBufferSourceNode createBufferSource() {
-        final AudioBufferSourceNode node = new AudioBufferSourceNode();
-        node.setParentScope(getParentScope());
-        node.setPrototype(getPrototype(node.getClass()));
-        return node;
-    }
-
-    /**
      * The decodeAudioData() method of the BaseAudioContext Interface is used to asynchronously
      * decode audio file data contained in an ArrayBuffer. In this case the ArrayBuffer is
      * loaded from XMLHttpRequest and FileReader.
@@ -95,5 +83,17 @@ public class AudioContext extends BaseAudioContext {
 
         final Promise promise = Promise.reject(Context.getCurrentContext(), AudioContext.this, new Object[] {}, null);
         return promise;
+    }
+
+    /**
+     * @return a GainNode, which can be used to control the overall gain (or volume) of the audio graph.
+     */
+    @JsxFunction
+    public GainNode createGain() {
+        final GainNode node = new GainNode();
+        node.setParentScope(getParentScope());
+        node.setPrototype(getPrototype(node.getClass()));
+        node.jsConstructor(this);
+        return node;
     }
 }

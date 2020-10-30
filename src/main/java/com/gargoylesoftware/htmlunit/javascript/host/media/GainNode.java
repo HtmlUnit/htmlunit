@@ -21,6 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * A JavaScript object for {@code GainNode}.
@@ -31,10 +34,36 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class GainNode extends AudioNode {
 
+    private BaseAudioContext baseAudioContext_;
+    private AudioParam gain_;
+
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public GainNode() {
     }
+
+    @JsxConstructor
+    public void jsConstructor(final Object baCtx) {
+        if (!(baCtx instanceof BaseAudioContext)) {
+            throw ScriptRuntime.typeError(
+                    "Failed to construct 'GainNode': first parameter is not of type 'BaseAudioContext'.");
+        }
+
+        baseAudioContext_ = (BaseAudioContext) baCtx;
+
+        final AudioParam node = new AudioParam();
+        node.setParentScope(getParentScope());
+        node.setPrototype(getPrototype(node.getClass()));
+        gain_ = node;
+    }
+
+    /**
+     * @return an a-rate AudioParam representing the amount of gain to apply.
+     */
+    @JsxGetter
+    public AudioParam getGain() {
+        return gain_;
+    }
+
 }

@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -33,9 +33,26 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 public class BaseAudioContext extends EventTarget {
 
     /**
-     * Creates an instance.
+     * @return a new AudioBufferSourceNode, which can be used to
+     * play audio data contained within an AudioBuffer object.
      */
-    @JsxConstructor
-    public BaseAudioContext() {
+    @JsxFunction
+    public AudioBufferSourceNode createBufferSource() {
+        final AudioBufferSourceNode node = new AudioBufferSourceNode();
+        node.setParentScope(getParentScope());
+        node.setPrototype(getPrototype(node.getClass()));
+        return node;
+    }
+
+    /**
+     * @return new, empty AudioBuffer object, which can then be
+     * populated by data, and played via an AudioBufferSourceNode.
+     */
+    @JsxFunction
+    public AudioBuffer createBuffer() {
+        final AudioBuffer node = new AudioBuffer();
+        node.setParentScope(getParentScope());
+        node.setPrototype(getPrototype(node.getClass()));
+        return node;
     }
 }

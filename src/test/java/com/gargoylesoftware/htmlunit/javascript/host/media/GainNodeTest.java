@@ -25,12 +25,12 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link AudioContext}.
+ * Tests for {@link GainNode}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class AudioContextTest extends WebDriverTestCase {
+public class GainNodeTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -44,7 +44,7 @@ public class AudioContextTest extends WebDriverTestCase {
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      alert('AudioContext' in window);\n"
+            + "      alert('GainNode' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -53,122 +53,6 @@ public class AudioContextTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "[object AudioBufferSourceNode]",
-            IE = "AudioContext not available")
-    public void createBufferSource() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      if (!('AudioContext' in window)) {\n"
-            + "        alert('AudioContext not available');\n"
-            + "        return;\n"
-            + "      }\n"
-
-            + "      var audioCtx = new AudioContext();\n"
-            + "      var source = audioCtx.createBufferSource();\n"
-            + "      alert(source);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
-            IE = "AudioContext not available; ")
-    public void decodeAudioData() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function log(msg) {\n"
-            + "      var ta = document.getElementById('myTextArea');\n"
-            + "      ta.value += msg + '; ';\n"
-            + "    }\n"
-
-            + "    function test() {\n"
-            + "      if (!('AudioContext' in window)) {\n"
-            + "        log('AudioContext not available');\n"
-            + "        return;\n"
-            + "      }\n"
-
-            + "      var audioCtx = new AudioContext();\n"
-            + "      var audioData = new ArrayBuffer(0);\n"
-            + "      audioCtx.decodeAudioData(audioData,\n"
-            + "             function(buffer) { log('Decoding audio data done'); },\n"
-            + "             function(e) { log('Error with decoding audio data'); }\n"
-            + "           );\n"
-            + "      log('AudioContext prep done');\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
-            IE = "AudioContext not available; ")
-    public void decodeAudioData2() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function log(msg) {\n"
-            + "      var ta = document.getElementById('myTextArea');\n"
-            + "      ta.value += msg + '; ';\n"
-            + "    }\n"
-
-            + "    function test() {\n"
-            + "      if (!('AudioContext' in window)) {\n"
-            + "        log('AudioContext not available');\n"
-            + "        return;\n"
-            + "      }\n"
-
-            + "      var audioCtx = new AudioContext();\n"
-            + "      var audioData = new ArrayBuffer(0);\n"
-            + "      audioCtx.decodeAudioData(audioData).then(\n"
-            + "             function(buffer) { log('Decoding audio data done'); },\n"
-            + "             function(e) { log('Error with decoding audio data'); }\n"
-            + "           );\n"
-            + "      log('AudioContext prep done');\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
     }
 
     /**
@@ -177,7 +61,7 @@ public class AudioContextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1; -3.4028234663852886e+38; 3.4028234663852886e+38; 1; 0.5; ",
             IE = "AudioContext not available; ")
-    public void createGain() throws Exception {
+    public void ctor() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
@@ -194,7 +78,8 @@ public class AudioContextTest extends WebDriverTestCase {
             + "      }\n"
 
             + "      var audioCtx = new AudioContext();\n"
-            + "      var gainNode = audioCtx.createGain();\n"
+            + "      var gainNode = new GainNode(audioCtx);\n"
+
             + "      log(gainNode.gain.defaultValue);\n"
             + "      log(gainNode.gain.minValue);\n"
             + "      log(gainNode.gain.maxValue);\n"
@@ -202,6 +87,59 @@ public class AudioContextTest extends WebDriverTestCase {
 
             + "      gainNode.gain.value = 0.5;\n"
             + "      log(gainNode.gain.value);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Error 1; Error 2; Error 3; Error 4; ",
+            IE = "AudioContext not available; ")
+    public void ctorAudiocontextMissing() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function log(msg) {\n"
+            + "      var ta = document.getElementById('myTextArea');\n"
+            + "      ta.value += msg + '; ';\n"
+            + "    }\n"
+
+            + "    function test() {\n"
+            + "      if (!('AudioContext' in window)) {\n"
+            + "        log('AudioContext not available');\n"
+            + "        return;\n"
+            + "      }\n"
+
+            + "      var audioCtx = new AudioContext();\n"
+            + "      try {\n"
+            + "        gainNode = new GainNode();\n"
+            + "      } catch(e) { log('Error 1'); }\n"
+
+            + "      try {\n"
+            + "        gainNode = new GainNode(undefined);\n"
+            + "      } catch(e) { log('Error 2'); }\n"
+
+            + "      try {\n"
+            + "        gainNode = new GainNode(null);\n"
+            + "      } catch(e) { log('Error 3'); }\n"
+
+            + "      try {\n"
+            + "        gainNode = new GainNode('wrong');\n"
+            + "      } catch(e) { log('Error 4'); }\n"
+
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
