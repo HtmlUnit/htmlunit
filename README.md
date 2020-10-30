@@ -1,12 +1,38 @@
 # HtmlUnit
 
+Version 2.44.0 / October 3, 2020
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit)
+
+**Homepage:**
+[htmlunit.sourceforge.io][4]
+
+**News**
+[HtmlUnit@Twitter][3]
+
+[HtmlUnit Kanban Board][6]
+
+**Download**
+[Download from Sourceforge][1]
+
+For maven, you would add:
+
+    <dependency>
+        <groupId>net.sourceforge.htmlunit</groupId>
+        <artifactId>htmlunit</artifactId>
+        <version>2.44.0</version>
+    </dependency>
+
+Overview
+--------
 HtmlUnit is a "GUI-Less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
 
 It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
 
 HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
 
-#### Features
+Features
+--------
 * Support for the HTTP and HTTPS protocols
 * Support for cookies
 * Ability to specify whether failing responses from the server should throw exceptions or should be returned as pages of the appropriate type (based on content type)
@@ -22,26 +48,8 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 * Excellent JavaScript support
 
 
-### Project Homepage
-[htmlunit.sourceforge.io][4]
-
-### Project News
-[HtmlUnit@Twitter][3]
-
-[HtmlUnit Kanban Board][6]
-
-### Latest release Version 2.44.0 / October 3, 2020
-[Download from Sourceforge][1]
-
-For maven, you would add:
-
-    <dependency>
-        <groupId>net.sourceforge.htmlunit</groupId>
-        <artifactId>htmlunit</artifactId>
-        <version>2.44.0</version>
-    </dependency>
-
-### Latest CI build
+Latest CI build
+--------
 The latest builds are available from our
 [Jenkins CI build server][2]
 
@@ -62,10 +70,12 @@ You have to add the sonatype snapshot repository to your pom distributionManagem
         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
 
-### Some insights
+Some insights
+--------
 [HtmlUnit at openhub][5]
 
-## License
+License
+--------
 
 This project is licensed under the Apache 2.0 License
 
