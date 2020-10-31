@@ -1474,6 +1474,21 @@ public class CSSStyleSheet extends StyleSheet {
                 case EX:
                     // hard coded default for the moment 16px = 100%
                     return 0.16f * cssValue.getDoubleValue();
+                case CH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VW:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VMIN:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VMAX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
                 case REM:
                     // hard coded default for the moment 16px = 100%
                     return 0.16f * cssValue.getDoubleValue();
