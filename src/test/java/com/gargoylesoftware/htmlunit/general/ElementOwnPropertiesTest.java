@@ -32,10 +32,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class ElementOwnPropertiesTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {
-        testString("document.createElement('" + tagName + "')");
+        testString("", "document.createElement('" + tagName + "')");
     }
 
-    private void testString(final String string) throws Exception {
+    private void testString(final String preparation, final String string) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head><script>\n"
                 + "  function test(event) {\n"
@@ -45,6 +45,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "    var div = document.createElement('div');\n"
                 + "    var svg = document.getElementById('mySvg');\n"
                 + "    try{\n"
+                + "      " + preparation + "\n"
                 + "      process(" + string + ");\n"
                 + "    } catch (e) {\n"
                 + "      alert('exception');\n"
@@ -111,7 +112,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),splitText(),wholeText",
             IE = "constructor,splitText(),text,wholeText")
     public void text() throws Exception {
-        testString("document.createTextNode('some text')");
+        testString("", "document.createTextNode('some text')");
     }
 
     /**
@@ -126,7 +127,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "constructor,expando,localName,name,namespaceURI,ownerElement,prefix,"
                 + "specified,value")
     public void attr() throws Exception {
-        testString("document.createAttribute('some_attrib')");
+        testString("", "document.createAttribute('some_attrib')");
     }
 
     /**
@@ -140,7 +141,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,text")
     @HtmlUnitNYI(IE = "constructor,getAttribute(),getAttributeNode(),text")
     public void comment() throws Exception {
-        testString("document.createComment('come_comment')");
+        testString("", "document.createComment('come_comment')");
     }
 
     /**
@@ -154,7 +155,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(IE = "constructor")
     public void unknown() throws Exception {
-        testString("unknown");
+        testString("", "unknown");
     }
 
     /**
@@ -168,7 +169,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(IE = "constructor")
     public void htmlElement() throws Exception {
-        testString("unknown");
+        testString("", "unknown");
     }
 
     /**
@@ -334,7 +335,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),tagName")
     public void element() throws Exception {
-        testString("element");
+        testString("", "element");
     }
 
     /**
@@ -359,7 +360,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             + "textDecorationBlink,textDecorationLineThrough,textDecorationNone,textDecorationOverline,"
             + "textDecorationUnderline,textIndent,top,verticalAlign,widows,width,wordSpacing,zIndex")
     public void currentStyle() throws Exception {
-        testString("document.body.currentStyle");
+        testString("", "document.body.currentStyle");
     }
 
     /**
@@ -406,7 +407,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "defaultPrevented,eventPhase,initEvent(),preventDefault(),srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type")
     public void event() throws Exception {
-        testString("event ? event : window.event");
+        testString("", "event ? event : window.event");
     }
 
     /**
@@ -629,7 +630,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "WebGLTexture,WebGLUniformLocation,WebSocket(),WheelEvent,Window,window,With(),Worker(),"
                 + "XMLDocument,XMLHttpRequest(),XMLHttpRequestEventTarget,XMLSerializer()"})
     public void window() throws Exception {
-        testString("window");
+        testString("", "window");
     }
 
     /**
@@ -9022,7 +9023,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
                 + "DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which")
     public void keyboardEvent() throws Exception {
-        testString("document.createEvent('KeyboardEvent')");
+        testString("", "document.createEvent('KeyboardEvent')");
     }
 
     /**
@@ -9046,7 +9047,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
             IE = "constructor,detail,initUIEvent(),view")
     public void uiEvent() throws Exception {
-        testString("document.createEvent('UIEvent')");
+        testString("", "document.createEvent('UIEvent')");
     }
 
     /**
@@ -9066,7 +9067,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             IE = "constructor")
     public void dragEvent() throws Exception {
-        testString("document.createEvent('DragEvent')");
+        testString("", "document.createEvent('DragEvent')");
     }
 
     /**
@@ -9096,7 +9097,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width")
     public void pointerEvent() throws Exception {
-        testString("new PointerEvent('click')");
+        testString("", "new PointerEvent('click')");
     }
 
     /**
@@ -9115,7 +9116,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "constructor,height,initPointerEvent(),isPrimary,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width")
     public void pointerEvent2() throws Exception {
-        testString(" document.createEvent('PointerEvent')");
+        testString("", " document.createEvent('PointerEvent')");
     }
 
     /**
@@ -9138,7 +9139,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL",
             IE = "constructor,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL")
     public void wheelEvent() throws Exception {
-        testString("document.createEvent('WheelEvent')");
+        testString("", "document.createEvent('WheelEvent')");
     }
 
     /**
@@ -9181,7 +9182,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "altKey,button,clientX,clientY,constructor,ctrlKey,initMouseEvent(),metaKey,pageX,pageY,"
                 + "screenX,screenY,shiftKey,which")
     public void mouseEvent() throws Exception {
-        testString("document.createEvent('MouseEvent')");
+        testString("", "document.createEvent('MouseEvent')");
     }
 
     /**
@@ -9201,7 +9202,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             IE = "constructor")
     public void compositionEvent() throws Exception {
-        testString("document.createEvent('CompositionEvent')");
+        testString("", "document.createEvent('CompositionEvent')");
     }
 
     /**
@@ -9221,7 +9222,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             IE = "constructor")
     public void focusEvent() throws Exception {
-        testString("document.createEvent('FocusEvent')");
+        testString("", "document.createEvent('FocusEvent')");
     }
 
     /**
@@ -9240,7 +9241,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF78 = "constructor()",
             FF = "constructor()")
     public void inputEvent() throws Exception {
-        testString("new InputEvent('input')");
+        testString("", "new InputEvent('input')");
     }
 
     /**
@@ -9256,7 +9257,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,initMouseWheelEvent(),wheelDelta")
     @HtmlUnitNYI(IE = "constructor")
     public void mouseWheelEvent() throws Exception {
-        testString("document.createEvent('MouseWheelEvent')");
+        testString("", "document.createEvent('MouseWheelEvent')");
     }
 
     /**
@@ -9267,7 +9268,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void svgZoomEvent() throws Exception {
-        testString("document.createEvent('SVGZoomEvent')");
+        testString("", "document.createEvent('SVGZoomEvent')");
     }
 
     /**
@@ -9293,7 +9294,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
                 + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE")
     public void textEvent() throws Exception {
-        testString("document.createEvent('TextEvent')");
+        testString("", "document.createEvent('TextEvent')");
     }
 
     /**
@@ -9310,7 +9311,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()")
     public void touchEvent2() throws Exception {
-        testString("new TouchEvent('touch')");
+        testString("", "new TouchEvent('touch')");
     }
 
     /**
@@ -9359,7 +9360,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {
-        testString("document");
+        testString("", "document");
     }
 
     /**
@@ -9379,7 +9380,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),getElementsByTagName()",
             IE = "constructor,getElementsByTagName()")
     public void document() throws Exception {
-        testString("xmlDocument");
+        testString("", "xmlDocument");
     }
 
     /**
@@ -9505,7 +9506,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),tagName")
     public void svgElement() throws Exception {
-        testString("svg");
+        testString("", "svg");
     }
 
     /**
@@ -9519,7 +9520,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,expando,name,ownerElement,specified,value")
     @HtmlUnitNYI(IE = "constructor,expando,localName,name,namespaceURI,ownerElement,prefix,specified,value")
     public void nodeAndAttr() throws Exception {
-        testString("document.createAttribute('some_attrib')");
+        testString("", "document.createAttribute('some_attrib')");
     }
 
     /**
@@ -9588,7 +9589,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
                 + "START_TO_END,START_TO_START,startContainer,startOffset,surroundContents(),toString()")
     public void range() throws Exception {
-        testString("document.createRange()");
+        testString("", "document.createRange()");
     }
 
     /**
@@ -9616,6 +9617,67 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + ",lastElementChild,querySelector(),querySelectorAll()",
             IE = "constructor,querySelector(),querySelectorAll()")
     public void documentFragment() throws Exception {
-        testString("document.createDocumentFragment()");
+        testString("", "document.createDocumentFragment()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "baseLatency,close(),constructor(),createMediaElementSource(),createMediaStreamDestination(),"
+                + "createMediaStreamSource(),getOutputTimestamp(),resume(),suspend()",
+            EDGE = "baseLatency,close(),constructor(),createMediaElementSource(),createMediaStreamDestination(),"
+                + "createMediaStreamSource(),getOutputTimestamp(),resume(),suspend()",
+            FF = "baseLatency,close(),constructor(),createMediaElementSource(),createMediaStreamDestination(),"
+                + "createMediaStreamSource(),createMediaStreamTrackSource(),getOutputTimestamp(),"
+                + "outputLatency,suspend()",
+            FF78 = "baseLatency,close(),constructor(),createMediaElementSource(),createMediaStreamDestination(),"
+                + "createMediaStreamSource(),createMediaStreamTrackSource(),getOutputTimestamp(),"
+                + "outputLatency,suspend()",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor(),createGain(),decodeAudioData()",
+            EDGE = "constructor(),createGain(),decodeAudioData()",
+            FF78 = "constructor(),createGain(),decodeAudioData()",
+            FF = "constructor(),createGain(),decodeAudioData()")
+    public void audioContext() throws Exception {
+        testString("", "new AudioContext()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "automationRate,cancelAndHoldAtTime(),cancelScheduledValues(),constructor(),"
+                + "defaultValue,exponentialRampToValueAtTime(),linearRampToValueAtTime(),maxValue,minValue,"
+                + "setTargetAtTime(),setValueAtTime(),setValueCurveAtTime(),value",
+            EDGE = "automationRate,cancelAndHoldAtTime(),cancelScheduledValues(),constructor(),"
+                + "defaultValue,exponentialRampToValueAtTime(),linearRampToValueAtTime(),maxValue,minValue,"
+                + "setTargetAtTime(),setValueAtTime(),setValueCurveAtTime(),value",
+            FF = "cancelScheduledValues(),constructor(),defaultValue,exponentialRampToValueAtTime(),"
+                + "linearRampToValueAtTime(),maxValue,minValue,setTargetAtTime(),setValueAtTime(),"
+                + "setValueCurveAtTime(),value",
+            FF78 = "cancelScheduledValues(),constructor(),defaultValue,exponentialRampToValueAtTime(),"
+                + "linearRampToValueAtTime(),maxValue,minValue,setTargetAtTime(),setValueAtTime(),"
+                + "setValueCurveAtTime(),value",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor(),defaultValue,maxValue,minValue,value",
+            EDGE = "constructor(),defaultValue,maxValue,minValue,value",
+            FF78 = "constructor(),defaultValue,maxValue,minValue,value",
+            FF = "constructor(),defaultValue,maxValue,minValue,value")
+    public void audioParam() throws Exception {
+        testString("var audioCtx = new AudioContext(); var gainNode = new GainNode(audioCtx);", "gainNode.gain");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),gain",
+            EDGE = "constructor(),gain",
+            FF = "constructor(),gain",
+            FF78 = "constructor(),gain",
+            IE = "exception")
+    public void gainNode() throws Exception {
+        testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
     }
 }
