@@ -445,6 +445,9 @@ public class Promise extends SimpleScriptable {
 
                                     callThenableFunction(toExecute, window, returnPromise);
                                 }
+                                else {
+                                    returnPromise.settle(true, callbackResult, window);
+                                }
                             }
                             else {
                                 returnPromise.settle(true, callbackResult, window);
