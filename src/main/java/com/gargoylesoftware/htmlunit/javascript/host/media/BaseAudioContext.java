@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -31,6 +32,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class BaseAudioContext extends EventTarget {
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public BaseAudioContext() {
+    }
 
     /**
      * @return a new AudioBufferSourceNode, which can be used to

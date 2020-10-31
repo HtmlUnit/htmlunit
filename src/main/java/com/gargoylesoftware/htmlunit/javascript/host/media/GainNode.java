@@ -55,6 +55,7 @@ public class GainNode extends AudioNode {
         final AudioParam node = new AudioParam();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
+        node.jsConstructor();
         gain_ = node;
     }
 

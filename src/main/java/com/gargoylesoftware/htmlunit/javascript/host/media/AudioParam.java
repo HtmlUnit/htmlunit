@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 /**
@@ -38,6 +39,13 @@ public class AudioParam extends SimpleScriptable {
      * Creates a new instance.
      */
     public AudioParam() {
+    }
+
+    /**
+     * Creates a new instance.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
         value_ = getDefaultValue();
     }
 
