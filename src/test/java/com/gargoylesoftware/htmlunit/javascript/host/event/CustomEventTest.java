@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link CustomEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CustomEventTest extends WebDriverTestCase {
@@ -47,4 +48,31 @@ public class CustomEventTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "I was here"})
+    public void dispatchEvent() throws Exception {
+        final String html =
+            "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var listener = function(x) {\n"
+            + "    alert(x == myEvent);\n"
+            + "    x.foo = 'I was here';\n"
+            + "  }\n"
+            + "  document.addEventListener('HTMLImportsLoaded', listener);\n"
+
+            + "  var myEvent = document.createEvent('CustomEvent');\n"
+            + "  myEvent.initCustomEvent('HTMLImportsLoaded', true, true, 'detail');\n"
+            + "  document.dispatchEvent(myEvent);\n"
+            + "  alert(myEvent.foo);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
