@@ -52,7 +52,7 @@ public class CustomEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "I was here"})
+    @Alerts({"true", "details", "I was here"})
     public void dispatchEvent() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -60,12 +60,13 @@ public class CustomEventTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var listener = function(x) {\n"
             + "    alert(x == myEvent);\n"
+            + "    alert(x.detail);\n"
             + "    x.foo = 'I was here';\n"
             + "  }\n"
             + "  document.addEventListener('HTMLImportsLoaded', listener);\n"
 
             + "  var myEvent = document.createEvent('CustomEvent');\n"
-            + "  myEvent.initCustomEvent('HTMLImportsLoaded', true, true, 'detail');\n"
+            + "  myEvent.initCustomEvent('HTMLImportsLoaded', true, true, 'details');\n"
             + "  document.dispatchEvent(myEvent);\n"
             + "  alert(myEvent.foo);\n"
             + "}\n"
