@@ -430,4 +430,23 @@ public class HtmlLink2Test extends WebDriverTestCase {
             assertEquals(bigContent, respCss.getContentAsString());
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void polymerImportCheck() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert('import' in document.createElement('link'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
