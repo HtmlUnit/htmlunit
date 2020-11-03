@@ -102,6 +102,126 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+            IE = "exception")
+    public void create_ctorWithDetailsBoolAsString() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event', {\n"
+            + "        'bubbles': 'true'\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+            IE = "exception")
+    public void create_ctorWithDetailsBoolAsNumber() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event', {\n"
+            + "        'bubbles': 1\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+            IE = "exception")
+    public void create_ctorWithDetailsBoolAsObject() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event', {\n"
+            + "        'bubbles': {}\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false"},
+            IE = "exception")
+    public void create_ctorWithDetailsBoolAsUndefined() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event', {\n"
+            + "        'bubbles': undefined\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false"},
+            IE = "exception")
+    public void create_ctorWithDetailsBoolAsNull() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event', {\n"
+            + "        'bubbles': null\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"[object Event]", "", "false", "false"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -304,15 +304,8 @@ public class Event extends SimpleScriptable {
         boolean cancelable = false;
 
         if (details != null && !Undefined.isUndefined(details)) {
-            final Boolean detailBubbles = (Boolean) details.get("bubbles");
-            if (detailBubbles != null) {
-                bubbles = detailBubbles.booleanValue();
-            }
-
-            final Boolean detailCancelable = (Boolean) details.get("cancelable");
-            if (detailCancelable != null) {
-                cancelable = detailCancelable.booleanValue();
-            }
+            bubbles = ScriptRuntime.toBoolean(details.get("bubbles"));
+            cancelable  = ScriptRuntime.toBoolean(details.get("cancelable"));
         }
         initEvent(type, bubbles, cancelable);
     }

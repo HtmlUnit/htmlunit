@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * JavaScript object representing a Mouse Event.
@@ -120,11 +122,22 @@ public class MouseEvent extends UIEvent {
     /**
      * Used to build the prototype.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public MouseEvent() {
         screenX_ = Integer.valueOf(0);
         screenY_ = Integer.valueOf(0);
         setDetail(1);
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @Override
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(ScriptRuntime.toString(type), details);
     }
 
     /**
