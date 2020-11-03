@@ -27,12 +27,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing a Mouse Event.
@@ -113,6 +113,9 @@ public class MouseEvent extends UIEvent {
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
 
+    /** The buttons being depressed (if any) when the mouse event was fired. */
+    private int buttons_;
+
     /** Switch to disable label handling if we already processing the event triggered from label processing */
     private boolean processLabelAfterBubbling_ = true;
 
@@ -138,6 +141,42 @@ public class MouseEvent extends UIEvent {
     @Override
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(ScriptRuntime.toString(type), details);
+        if (details != null && !Undefined.isUndefined(details)) {
+            final Object screenX = details.get("screenX", details);
+            if (NOT_FOUND != screenX) {
+                screenX_ = ScriptRuntime.toInt32(screenX);
+            }
+
+            final Object screenY = details.get("screenY", details);
+            if (NOT_FOUND != screenX) {
+                screenY_ = ScriptRuntime.toInt32(screenY);
+            }
+
+            final Object clientX = details.get("clientX", details);
+            if (NOT_FOUND != clientX) {
+                clientX_ = ScriptRuntime.toInt32(clientX);
+            }
+
+            final Object clientY = details.get("clientY", details);
+            if (NOT_FOUND != clientX) {
+                clientY_ = ScriptRuntime.toInt32(clientY);
+            }
+
+            final Object button = details.get("button", details);
+            if (NOT_FOUND != button) {
+                button_ = ScriptRuntime.toInt32(button);
+            }
+
+            final Object buttons = details.get("buttons", details);
+            if (NOT_FOUND != buttons) {
+                buttons_ = ScriptRuntime.toInt32(buttons);
+            }
+
+            setAltKey(ScriptRuntime.toBoolean(details.get("altKey")));
+            setCtrlKey(ScriptRuntime.toBoolean(details.get("ctrlKey")));
+            setMetaKey(ScriptRuntime.toBoolean(details.get("metaKey")));
+            setShiftKey(ScriptRuntime.toBoolean(details.get("shiftKey")));
+        }
     }
 
     /**
@@ -186,7 +225,6 @@ public class MouseEvent extends UIEvent {
      * Sets the clientX value.
      * @param value the clientX value
      */
-    @JsxSetter
     public void setClientX(final int value) {
         clientX_ = value;
     }
@@ -233,7 +271,6 @@ public class MouseEvent extends UIEvent {
      * Sets the clientY value.
      * @param value the clientY value
      */
-    @JsxSetter
     public void setClientY(final int value) {
         clientY_ = value;
     }
@@ -277,9 +314,25 @@ public class MouseEvent extends UIEvent {
      * Sets the button code.
      * @param value the button code
      */
-    @JsxSetter
     public void setButton(final int value) {
         button_ = value;
+    }
+
+    /**
+     * Gets the button code.
+     * @return the button code
+     */
+    @JsxGetter
+    public int getButtons() {
+        return buttons_;
+    }
+
+    /**
+     * Sets the button code.
+     * @param value the button code
+     */
+    public void setButtons(final int value) {
+        buttons_ = value;
     }
 
     /**

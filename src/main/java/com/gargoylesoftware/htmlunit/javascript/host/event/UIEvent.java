@@ -26,6 +26,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * JavaScript object representing a UI event. For general information on which properties and functions should be
@@ -50,11 +56,37 @@ public class UIEvent extends Event {
     /** Specifies some detail information about the event. */
     private long detail_;
 
+    /** Specifies some view information about the event. */
+    private Object view_;
+    private static final Object NO_VIEW = new Object();
+
     /**
      * Creates a new UI event instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public UIEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @Override
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
+
+        view_ = NO_VIEW;
+        if (details != null && !Undefined.isUndefined(details)) {
+            final Object view = details.get("view", details);
+            if (view instanceof Window) {
+                view_ = view;
+            }
+            else if (view != Scriptable.NOT_FOUND) {
+                throw ScriptRuntime.typeError("View must be a window.");
+            }
+        }
     }
 
     /**
@@ -104,6 +136,12 @@ public class UIEvent extends Event {
      */
     @JsxGetter
     public Object getView() {
+        if (view_ == NO_VIEW) {
+            return null;
+        }
+        if (view_ != null) {
+            return view_;
+        }
         return getWindow();
     }
 

@@ -51,6 +51,8 @@ public class MouseEventTest extends WebDriverTestCase {
             + "    alert(event.altKey);\n"
             + "    alert(event.shiftKey);\n"
             + "    alert(event.metaKey);\n"
+            + "    alert(event.button);\n"
+            + "    alert(event.buttons);\n"
             + "  }\n";
 
     /**
@@ -58,16 +60,8 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "click", "false", "false", "false",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "click", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                EDGE = {"[object MouseEvent]", "click", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF = {"[object MouseEvent]", "click", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF78 = {"[object MouseEvent]", "click", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -89,14 +83,14 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "undefined", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                EDGE = {"[object MouseEvent]", "undefined", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF = {"[object MouseEvent]", "undefined", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF78 = {"[object MouseEvent]", "undefined", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"})
+    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "undefined", "false", "false", "false",
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
+                EDGE = {"[object MouseEvent]", "undefined", "false", "false", "false",
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
+                FF = {"[object MouseEvent]", "undefined", "false", "false", "false",
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
+                FF78 = {"[object MouseEvent]", "undefined", "false", "false", "false",
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -118,16 +112,8 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "42", "false", "false", "false",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "42", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                EDGE = {"[object MouseEvent]", "42", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF = {"[object MouseEvent]", "42", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF78 = {"[object MouseEvent]", "42", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -149,15 +135,15 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "null", "false", "false", "false",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "null", "false", "false", "true",
+    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "null", "false", "false", "false",
                         "0", "0", "0", "0", "false", "false", "false", "false"},
-                EDGE = {"[object MouseEvent]", "null", "false", "false", "true",
+                EDGE = {"[object MouseEvent]", "null", "false", "false", "false",
                         "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF = {"[object MouseEvent]", "null", "false", "false", "true",
+                FF = {"[object MouseEvent]", "null", "false", "false", "false",
                         "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF78 = {"[object MouseEvent]", "null", "false", "false", "true",
+                FF78 = {"[object MouseEvent]", "null", "false", "false", "false",
                         "0", "0", "0", "0", "false", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -201,22 +187,50 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "false",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
+                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                EDGE = {"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF = {"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"},
-                FF78 = {"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "true",
-                        "0", "0", "0", "0", "false", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent('HtmlUnitEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object MouseEvent]", "click", "false", "false", "false",
+                        "7", "0", "13", "-15", "true", "true", "true", "true", "2", "4"},
+            IE = "exception")
+    public void create_ctorAllDetails() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new MouseEvent('click', {\n"
+            + "        'screenX': 7,\n"
+            + "        'screenY': 0.4,\n"
+            + "        'clientX': 13.007,\n"
+            + "        'clientY': -15,\n"
+
+            + "        'ctrlKey': true,\n"
+            + "        'shiftKey': 'true',\n"
+            + "        'altKey': 1,\n"
+            + "        'metaKey': {},\n"
+
+            + "        'button': 2,\n"
+            + "        'buttons': 4\n"
+            + "      });\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"

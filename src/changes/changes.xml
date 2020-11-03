@@ -13,6 +13,18 @@
                 the method requires now the page as second parameter.
             </action>
             <action type="add" dev="rbri">
+                MouseEvent.buttons property added.
+            </action>
+            <action type="update" dev="rbri">
+                UIEvent handling of view property improved.
+            </action>
+            <action type="fix" dev="rbri">
+                Event, UIEvent and MouseEvent construction via new now handles the details dictionary more correct.
+            </action>
+            <action type="fix" dev="rbri">
+                MouseEvent properties clientX. clientY and button are readonly.
+            </action>
+            <action type="add" dev="rbri">
                 AudioBufferSourceNode.start(), AudioNode.connect().
             </action>
             <action type="add" dev="rbri">
