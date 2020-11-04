@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -71,29 +72,11 @@ public class CloseEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        int code = 0;
-        String reason = "";
-        boolean wasClean = false;
-
         if (details != null && !Undefined.isUndefined(details)) {
-            final Double detailCode = (Double) details.get("code");
-            if (detailCode != null) {
-                code = detailCode.intValue();
-            }
-
-            final String detailReason = (String) details.get("reason");
-            if (detailReason != null) {
-                reason = detailReason;
-            }
-
-            final Boolean detailWasClean = (Boolean) details.get("wasClean");
-            if (detailWasClean != null) {
-                wasClean = detailWasClean.booleanValue();
-            }
+            code_ = ScriptRuntime.toInt32(details.get("code"));
+            reason_ = ScriptRuntime.toString(details.get("reason"));
+            wasClean_ = ScriptRuntime.toBoolean(details.get("wasClean"));
         }
-        code_ = code;
-        reason_ = reason;
-        wasClean_ = wasClean;
     }
 
     /**
