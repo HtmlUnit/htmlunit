@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Madis Pärn
  * @author Ronald Brill
+ * @author Rural Hunter
  */
 @RunWith(BrowserRunner.class)
 public class PromiseTest extends WebDriverTestCase {
@@ -514,11 +515,11 @@ public class PromiseTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      if (window.Promise) {\n"
-            + "        function MyThenable() {\n" 
-            + "          this.value='aaa';\n" 
+            + "        function MyThenable() {\n"
+            + "          this.value = 'aaa';\n"
             + "        };"
-            + "        MyThenable.prototype={then: function(onFulfill, onReject) { onFulfill(this.value); }};\n"
-            + "        var thenable=new MyThenable();\n"
+            + "        MyThenable.prototype = { then: function(onFulfill, onReject) { onFulfill(this.value); }};\n"
+            + "        var thenable = new MyThenable();\n"
             + "        var p1 = Promise.resolve(1);\n"
             + "        log(p1 instanceof Promise);\n"
             + "\n"

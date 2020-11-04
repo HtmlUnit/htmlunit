@@ -55,6 +55,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Rural Hunter
  */
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class Promise extends SimpleScriptable {
@@ -105,7 +106,8 @@ public class Promise extends SimpleScriptable {
         callThenableFunction(fun, window, thisPromise, window);
     }
 
-    private static void callThenableFunction(final Function fun, final Window window, final Promise promise, Scriptable thisObj) {
+    private static void callThenableFunction(final Function fun, final Window window,
+                            final Promise promise, final Scriptable thisObj) {
         final Function resolve = new BaseFunction(window, ScriptableObject.getFunctionPrototype(window)) {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,

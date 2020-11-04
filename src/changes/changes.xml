@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="add" dev="rbri" due-to="Rural Hunter">
+                Thenable prototypes support added.
+            </action>
             <action type="add" dev="rbri">
                 MouseEvent.buttons property added.
             </action>
