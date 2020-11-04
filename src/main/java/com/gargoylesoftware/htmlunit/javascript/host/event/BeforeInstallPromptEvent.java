@@ -18,12 +18,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code BeforeInstallPromptEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class BeforeInstallPromptEvent extends Event {
@@ -31,7 +31,6 @@ public class BeforeInstallPromptEvent extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public BeforeInstallPromptEvent() {
     }
 }

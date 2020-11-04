@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code AudioProcessingEvent}.
@@ -34,7 +33,6 @@ public class AudioProcessingEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public AudioProcessingEvent() {
     }
 }

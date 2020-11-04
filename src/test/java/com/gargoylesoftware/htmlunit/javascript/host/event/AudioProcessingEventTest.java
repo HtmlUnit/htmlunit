@@ -28,9 +28,33 @@ import com.gargoylesoftware.htmlunit.javascript.host.animations.AnimationEvent;
  *
  * @author Ahmed Ashour
  * @author Madis Pärn
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class AnimationEventTest extends WebDriverTestCase {
+public class AudioProcessingEventTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void inWindow() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert('AudioProcessingEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * Test for feature-request #229.
