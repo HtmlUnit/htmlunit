@@ -57,7 +57,7 @@ public class BeforeUnloadEvent extends Event {
      * The JavaScript constructor. It seems it is not possible to do it from JavaScript code.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF78})
-    public void jConstructor() {
+    public void jsConstructor() {
         Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
     }
 

@@ -16,15 +16,17 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.animations.AnimationEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link AnimationEvent}.
+ * Tests for {@link AudioProcessingEvent}.
  *
  * @author Ahmed Ashour
  * @author Madis Pärn
@@ -32,6 +34,112 @@ import com.gargoylesoftware.htmlunit.javascript.host.animations.AnimationEvent;
  */
 @RunWith(BrowserRunner.class)
 public class AudioProcessingEventTest extends WebDriverTestCase {
+
+    private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
+            + "    alert(event);\n"
+            + "    alert(event.type);\n"
+            + "    alert(event.bubbles);\n"
+            + "    alert(event.cancelable);\n"
+            + "  }\n";
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void create_ctor() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent('audioprocessing');\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object AudioProcessingEvent]", "audioprocessing", "false", "false"},
+            FF = "exception",
+            FF78 = "exception",
+            IE = "exception")
+    // audioCtx.createBuffer is missing
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception")
+    public void create_ctorTwoArgs() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var audioCtx = new AudioContext();\n"
+            + "      var inputBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);\n"
+            + "      var outputBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);\n"
+            + "      var event = new AudioProcessingEvent('audioprocessing', {"
+            + "        'inputBuffer': inputBuffer,\n"
+            + "        'outputBuffer': outputBuffer,\n"
+            + "        'playbackTime': 4,\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + DUMP_EVENT_FUNCTION
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void create_ctorTwoArgsMissingDetails() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var audioCtx = new AudioContext();\n"
+            + "      var inputBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);\n"
+            + "      var outputBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);\n"
+            + "      var event = new AudioProcessingEvent('audioprocessing');\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + DUMP_EVENT_FUNCTION
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void create_createEvent() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('AudioProcessingEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { document.title += 'exception' }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+    }
 
     /**
      * @throws Exception if the test fails

@@ -630,6 +630,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
+    /** AudioProcessingEvent ctor is callable. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_AUDIO_PROCESSING_EVENT_CTOR,
+
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
     @BrowserFeature({FF, FF78})
     JS_BGSOUND_AS_UNKNOWN,
