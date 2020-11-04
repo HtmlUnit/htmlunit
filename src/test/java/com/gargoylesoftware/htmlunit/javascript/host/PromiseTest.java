@@ -506,6 +506,56 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"true", "aaa"},
+            IE = "")
+    public void resolveThenablePrototype() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        function MyThenable() {\n" 
+            + "          this.value='aaa';\n" 
+            + "        };"
+            + "        MyThenable.prototype={then: function(onFulfill, onReject) { onFulfill(this.value); }};\n"
+            + "        var thenable=new MyThenable();\n"
+            + "        var p1 = Promise.resolve(1);\n"
+            + "        log(p1 instanceof Promise);\n"
+            + "\n"
+            + "        p1=p1.then(function(v) {\n"
+            + "            return thenable;\n"
+            + "        }, function(e) {\n"
+            + "            log('failure');\n"
+            + "        });\n"
+            + "\n"
+            + "        p1=p1.then(function(v) {\n"
+            + "            log(v);\n"
+            + "        }, function(e) {\n"
+            + "            log('failure');\n"
+            + "        });\n"
+
+            + "      }\n"
+            + "    }\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyAlerts(() -> driver.findElement(By.id("log"))
+                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = "TypeError: Throwing 1",
             IE = "")
     public void resolveThenableThrows() throws Exception {

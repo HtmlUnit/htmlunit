@@ -102,10 +102,10 @@ public class Promise extends SimpleScriptable {
         this.setPrototype(window.getPrototype(this.getClass()));
         final Promise thisPromise = this;
 
-        callThenableFunction(fun, window, thisPromise);
+        callThenableFunction(fun, window, thisPromise, window);
     }
 
-    private static void callThenableFunction(final Function fun, final Window window, final Promise promise) {
+    private static void callThenableFunction(final Function fun, final Window window, final Promise promise, Scriptable thisObj) {
         final Function resolve = new BaseFunction(window, ScriptableObject.getFunctionPrototype(window)) {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
@@ -135,7 +135,7 @@ public class Promise extends SimpleScriptable {
             }
             stack.push(window);
             try {
-                fun.call(cx, window, window, new Object[] {resolve, reject});
+                fun.call(cx, window, thisObj, new Object[] {resolve, reject});
             }
             finally {
                 stack.pop();
@@ -439,11 +439,11 @@ public class Promise extends SimpleScriptable {
                             }
                             else if (callbackResult instanceof NativeObject) {
                                 final NativeObject nativeObject = (NativeObject) callbackResult;
-                                final Object thenFunction = nativeObject.get("then", nativeObject);
+                                final Object thenFunction = ScriptableObject.getProperty(nativeObject, "then");
                                 if (thenFunction instanceof Function) {
                                     toExecute = (Function) thenFunction;
 
-                                    callThenableFunction(toExecute, window, returnPromise);
+                                    callThenableFunction(toExecute, window, returnPromise, nativeObject);
                                 }
                                 else {
                                     returnPromise.settle(true, callbackResult, window);
