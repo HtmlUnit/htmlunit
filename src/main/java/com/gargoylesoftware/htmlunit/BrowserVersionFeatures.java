@@ -197,10 +197,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** <code>CloseEvent</code> initCloseEvent is available but throws an exception when called. */
-    @BrowserFeature({FF, FF78})
-    EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS,
-
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(IE)
     EVENT_ONLOAD_INTERNAL_JAVASCRIPT,

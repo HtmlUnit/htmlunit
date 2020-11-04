@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -26,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -88,12 +86,9 @@ public class CloseEvent extends Event {
      * @param reasonCode the reason code
      * @param reason the reason
      */
-    @JsxFunction({FF, FF78, IE})
+    @JsxFunction(IE)
     public void initCloseEvent(final String type, final boolean bubbles, final boolean cancelable,
             final boolean wasClean, final int reasonCode, final String reason) {
-        if (getBrowserVersion().hasFeature(EVENT_ONCLOSE_INIT_CLOSE_EVENT_THROWS)) {
-            Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal call to initCloseEvent()"));
-        }
         super.initEvent(type, bubbles, cancelable);
         wasClean_ = wasClean;
         code_ = reasonCode;

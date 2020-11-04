@@ -9687,6 +9687,32 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "constructor(),returnValue",
+            EDGE = "constructor(),returnValue",
+            FF = "constructor(),returnValue",
+            FF78 = "constructor(),returnValue",
+            IE = "exception")
+    public void beforeUnloadEvent() throws Exception {
+        testString("", "document.createEvent('BeforeUnloadEvent')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "code,constructor(),reason,wasClean",
+            EDGE = "code,constructor(),reason,wasClean",
+            FF = "code,constructor(),reason,wasClean",
+            FF78 = "code,constructor(),reason,wasClean",
+            IE = "exception")
+    public void closeEvent() throws Exception {
+        testString("", "new CloseEvent('type-close')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(CHROME = "constructor(),data,timecode",
             EDGE = "constructor(),data,timecode",
             FF = "constructor(),data",

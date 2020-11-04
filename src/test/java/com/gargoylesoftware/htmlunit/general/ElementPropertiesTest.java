@@ -4792,6 +4792,95 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "initEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "initEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type")
+    public void beforeUnloadEvent() throws Exception {
+        testString("", "document.createEvent('BeforeUnloadEvent')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),reason,returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,wasClean",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),reason,returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,wasClean",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "reason,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,wasClean",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "reason,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,wasClean",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "NONE,preventDefault(),reason,returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,wasClean",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "NONE,preventDefault(),reason,returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,wasClean",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "initEvent(),META_MASK,NONE,preventDefault(),"
+                + "reason,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,wasClean",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,code,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "initEvent(),META_MASK,NONE,preventDefault(),"
+                + "reason,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,wasClean")
+    public void closeEvent() throws Exception {
+        testString("", "new CloseEvent('type-close')");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,composedPath(),currentTarget,data,defaultPrevented,eventPhase,initEvent(),"
                 + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timecode,timeStamp,type",
