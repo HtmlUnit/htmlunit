@@ -55,6 +55,28 @@ public class HtmlStyleTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_getTextContent_insideDiv() throws Exception {
+        final String html
+            =   "<html>\n"
+            + "<head></head>\n"
+            + "<body>"
+            + "<div id='tester'>"
+                + "<style>h6.add-class {color: green;}</style>"
+                + "Text content"
+            + "</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final DomNode node = page.getHtmlElementById("tester");
+
+        assertEquals("Text content", node.asText());
+        assertEquals("h6.add-class {color: green;}Text content", node.getTextContent());
+    }
+
+    /**
      * See <a href="http://sourceforge.net/support/tracker.php?aid=2802096">Bug 2802096</a>.
      * @throws Exception if the test fails
      */
