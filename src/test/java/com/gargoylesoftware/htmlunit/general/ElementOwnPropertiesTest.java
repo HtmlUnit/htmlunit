@@ -9682,4 +9682,21 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void gainNode() throws Exception {
         testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data,timecode",
+            EDGE = "constructor(),data,timecode",
+            FF = "constructor(),data",
+            FF78 = "constructor(),data",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor(),data",
+            EDGE = "constructor(),data")
+    public void blobEvent() throws Exception {
+        testString("var debug = {hello: 'world'};"
+                    + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
+                    "new BlobEvent('blob', { 'data': blob })");
+    }
 }

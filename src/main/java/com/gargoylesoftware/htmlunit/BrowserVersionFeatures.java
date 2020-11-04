@@ -642,6 +642,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE,
 
+    /** BlobEvent ctor requires a data value. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_BLOB_EVENT_REQUIRES_DATA,
+
     /** Body {@code margin} is 8px. */
     @BrowserFeature(IE)
     JS_BODY_MARGINS_8,

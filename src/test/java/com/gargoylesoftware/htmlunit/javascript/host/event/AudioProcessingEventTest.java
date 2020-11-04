@@ -72,7 +72,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     // audioCtx.createBuffer is missing
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception")
-    public void create_ctorTwoArgs() throws Exception {
+    public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -100,14 +100,11 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void create_ctorTwoArgsMissingDetails() throws Exception {
+    public void create_ctorMissingDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var audioCtx = new AudioContext();\n"
-            + "      var inputBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);\n"
-            + "      var outputBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"

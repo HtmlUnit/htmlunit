@@ -4786,4 +4786,51 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void gainNode() throws Exception {
         testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timecode,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timecode,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,data,defaultPrevented,eventPhase,initEvent(),"
+                + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,data,defaultPrevented,eventPhase,initEvent(),"
+                + "NONE,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "CONTROL_MASK,currentTarget,data,defaultPrevented,eventPhase,"
+                + "initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "CONTROL_MASK,currentTarget,data,defaultPrevented,eventPhase,"
+                + "initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type")
+    public void blobEvent() throws Exception {
+        testString("var debug = {hello: 'world'};"
+                    + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
+                    "new BlobEvent('blob', { 'data': blob })");
+    }
 }
