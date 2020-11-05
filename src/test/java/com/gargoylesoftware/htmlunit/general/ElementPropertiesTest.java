@@ -3524,163 +3524,197 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                + "DOM_KEY_LOCATION_RIGHT,"
-                + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),isComposing,"
-                + "key,keyCode,location,metaKey,repeat,"
-                + "shiftKey",
-            EDGE = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                + "DOM_KEY_LOCATION_RIGHT,"
-                + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),isComposing,"
-                + "key,keyCode,location,metaKey,repeat,"
-                + "shiftKey",
-            FF = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,"
-                + "DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,"
-                + "DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,"
-                + "DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,DOM_VK_BACK_SPACE,DOM_VK_C,DOM_VK_CANCEL,"
-                + "DOM_VK_CAPS_LOCK,DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,DOM_VK_CLOSE_BRACKET,"
-                + "DOM_VK_CLOSE_CURLY_BRACKET,DOM_VK_CLOSE_PAREN,DOM_VK_COLON,DOM_VK_COMMA,DOM_VK_CONTEXT_MENU,"
-                + "DOM_VK_CONTROL,DOM_VK_CONVERT,DOM_VK_CRSEL,DOM_VK_D,DOM_VK_DECIMAL,DOM_VK_DELETE,"
-                + "DOM_VK_DIVIDE,DOM_VK_DOLLAR,DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,DOM_VK_EISU,DOM_VK_END,"
-                + "DOM_VK_EQUALS,DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,DOM_VK_EXSEL,"
-                + "DOM_VK_F,DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,"
-                + "DOM_VK_F16,DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,"
-                + "DOM_VK_F23,DOM_VK_F24,DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,"
-                + "DOM_VK_FINAL,DOM_VK_G,DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,"
-                + "DOM_VK_HELP,DOM_VK_HOME,DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,"
-                + "DOM_VK_K,DOM_VK_KANA,DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,"
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,charCode,code,"
+                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,"
+                + "DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,eventPhase,"
+                + "getModifierState(),"
+                + "initEvent(),initKeyboardEvent(),initUIEvent(),isComposing,isTrusted,key,keyCode,location,metaKey,"
+                + "NONE,path,preventDefault(),repeat,returnValue,shiftKey,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,charCode,code,"
+                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,"
+                + "DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,eventPhase,"
+                + "getModifierState(),"
+                + "initEvent(),initKeyboardEvent(),initUIEvent(),isComposing,isTrusted,key,keyCode,location,metaKey,"
+                + "NONE,path,preventDefault(),repeat,returnValue,shiftKey,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF = {"ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "charCode,code,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
+                + "DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,"
+                + "DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,"
+                + "DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,DOM_VK_BACK_SPACE,DOM_VK_C,"
+                + "DOM_VK_CANCEL,DOM_VK_CAPS_LOCK,"
+                + "DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,DOM_VK_CLOSE_PAREN,"
+                + "DOM_VK_COLON,DOM_VK_COMMA,DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,DOM_VK_CRSEL,DOM_VK_D,"
+                + "DOM_VK_DECIMAL,DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,"
+                + "DOM_VK_EISU,DOM_VK_END,DOM_VK_EQUALS,DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,"
+                + "DOM_VK_EXSEL,DOM_VK_F,DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,"
+                + "DOM_VK_F16,DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,DOM_VK_F23,"
+                + "DOM_VK_F24,DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,DOM_VK_FINAL,"
+                + "DOM_VK_G,DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,DOM_VK_HELP,"
+                + "DOM_VK_HOME,DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,DOM_VK_K,"
+                + "DOM_VK_KANA,DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,"
+                + "DOM_VK_MODECHANGE,DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,DOM_VK_NUMPAD0,"
+                + "DOM_VK_NUMPAD1,DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,DOM_VK_NUMPAD6,"
+                + "DOM_VK_NUMPAD7,DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,DOM_VK_OPEN_CURLY_BRACKET,"
+                + "DOM_VK_OPEN_PAREN",
+                "DOM_VK_P,DOM_VK_PA1,DOM_VK_PAGE_DOWN,DOM_VK_PAGE_UP,DOM_VK_PAUSE,DOM_VK_PERCENT,"
+                + "DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,DOM_VK_PROCESSKEY,"
+                + "DOM_VK_Q,DOM_VK_QUESTION_MARK,DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,DOM_VK_S,"
+                + "DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,DOM_VK_SEMICOLON,DOM_VK_SEPARATOR,DOM_VK_SHIFT,DOM_VK_SLASH,"
+                + "DOM_VK_SLEEP,DOM_VK_SPACE,DOM_VK_SUBTRACT,DOM_VK_T,DOM_VK_TAB,DOM_VK_TILDE,DOM_VK_U,"
+                + "DOM_VK_UNDERSCORE,DOM_VK_UP,DOM_VK_V,DOM_VK_VOLUME_DOWN,DOM_VK_VOLUME_MUTE,DOM_VK_VOLUME_UP,"
+                + "DOM_VK_W,DOM_VK_WIN,DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,DOM_VK_WIN_ICO_HELP,DOM_VK_WIN_OEM_ATTN,"
+                + "DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,DOM_VK_WIN_OEM_CLEAR,DOM_VK_WIN_OEM_COPY,"
+                + "DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,DOM_VK_WIN_OEM_FINISH,DOM_VK_WIN_OEM_FJ_JISHO,"
+                + "DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,DOM_VK_WIN_OEM_FJ_ROYA,DOM_VK_WIN_OEM_FJ_TOUROKU,"
+                + "DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,"
+                + "DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,eventPhase,explicitOriginalTarget,"
+                + "getModifierState(),initEvent(),initKeyboardEvent(),initKeyEvent(),initUIEvent(),isComposing,"
+                + "isTrusted,key,keyCode,layerX,layerY,location,META_MASK,metaKey,NONE,originalTarget,"
+                + "preventDefault(),rangeOffset,rangeParent,repeat,returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,"
+                + "SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
+                + "type,view,which"},
+            FF78 = {"ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "charCode,code,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
+                + "DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,"
+                + "DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,"
+                + "DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,DOM_VK_BACK_SPACE,DOM_VK_C,"
+                + "DOM_VK_CANCEL,DOM_VK_CAPS_LOCK,"
+                + "DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,DOM_VK_CLOSE_PAREN,"
+                + "DOM_VK_COLON,DOM_VK_COMMA,DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,DOM_VK_CRSEL,DOM_VK_D,"
+                + "DOM_VK_DECIMAL,DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,"
+                + "DOM_VK_EISU,DOM_VK_END,DOM_VK_EQUALS,DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,"
+                + "DOM_VK_EXSEL,DOM_VK_F,DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,"
+                + "DOM_VK_F16,DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,DOM_VK_F23,"
+                + "DOM_VK_F24,DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,DOM_VK_FINAL,"
+                + "DOM_VK_G,DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,DOM_VK_HELP,"
+                + "DOM_VK_HOME,DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,DOM_VK_K,"
+                + "DOM_VK_KANA,DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,"
+                + "DOM_VK_MODECHANGE,DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,DOM_VK_NUMPAD0,"
+                + "DOM_VK_NUMPAD1,DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,DOM_VK_NUMPAD6,"
+                + "DOM_VK_NUMPAD7,DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,DOM_VK_OPEN_CURLY_BRACKET,"
+                + "DOM_VK_OPEN_PAREN",
+                "DOM_VK_P,DOM_VK_PA1,DOM_VK_PAGE_DOWN,DOM_VK_PAGE_UP,DOM_VK_PAUSE,DOM_VK_PERCENT,"
+                + "DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,DOM_VK_PROCESSKEY,"
+                + "DOM_VK_Q,DOM_VK_QUESTION_MARK,DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,DOM_VK_S,"
+                + "DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,DOM_VK_SEMICOLON,DOM_VK_SEPARATOR,DOM_VK_SHIFT,DOM_VK_SLASH,"
+                + "DOM_VK_SLEEP,DOM_VK_SPACE,DOM_VK_SUBTRACT,DOM_VK_T,DOM_VK_TAB,DOM_VK_TILDE,DOM_VK_U,"
+                + "DOM_VK_UNDERSCORE,DOM_VK_UP,DOM_VK_V,DOM_VK_VOLUME_DOWN,DOM_VK_VOLUME_MUTE,DOM_VK_VOLUME_UP,"
+                + "DOM_VK_W,DOM_VK_WIN,DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,DOM_VK_WIN_ICO_HELP,DOM_VK_WIN_OEM_ATTN,"
+                + "DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,DOM_VK_WIN_OEM_CLEAR,DOM_VK_WIN_OEM_COPY,"
+                + "DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,DOM_VK_WIN_OEM_FINISH,DOM_VK_WIN_OEM_FJ_JISHO,"
+                + "DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,DOM_VK_WIN_OEM_FJ_ROYA,DOM_VK_WIN_OEM_FJ_TOUROKU,"
+                + "DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,"
+                + "DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,eventPhase,explicitOriginalTarget,"
+                + "getModifierState(),initEvent(),initKeyboardEvent(),initKeyEvent(),initUIEvent(),isComposing,"
+                + "isTrusted,key,keyCode,layerX,layerY,location,META_MASK,metaKey,NONE,originalTarget,"
+                + "preventDefault(),rangeOffset,rangeParent,repeat,returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,"
+                + "SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
+                + "type,view,which"},
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,char,charCode,"
+                + "ctrlKey,currentTarget,defaultPrevented,detail,deviceSessionId,DOM_KEY_LOCATION_JOYSTICK,"
+                + "DOM_KEY_LOCATION_LEFT,"
+                + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
+                + "eventPhase,getModifierState(),initEvent(),initKeyboardEvent(),initUIEvent(),isTrusted,key,keyCode,"
+                + "locale,location,metaKey,preventDefault(),repeat,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which")
+    @HtmlUnitNYI(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "charCode,"
+                + "code,ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
+                + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,eventPhase,initEvent(),initUIEvent(),key,keyCode,"
+                + "metaKey,NONE,preventDefault(),returnValue,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,charCode,"
+                + "code,ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
+                + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,eventPhase,initEvent(),initUIEvent(),key,keyCode,"
+                + "metaKey,NONE,preventDefault(),returnValue,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            FF78 = {"ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,charCode,"
+                + "code,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,"
+                + "DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,"
+                + "DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,"
+                + "DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,"
+                + "DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,DOM_VK_BACK_SPACE,DOM_VK_C,DOM_VK_CANCEL,"
+                + "DOM_VK_CAPS_LOCK,DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,"
+                + "DOM_VK_CLOSE_PAREN,DOM_VK_COLON,DOM_VK_COMMA,DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,"
+                + "DOM_VK_CRSEL,DOM_VK_D,DOM_VK_DECIMAL,DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,"
+                + "DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,DOM_VK_EISU,DOM_VK_END,DOM_VK_EQUALS,"
+                + "DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,DOM_VK_EXSEL,DOM_VK_F,"
+                + "DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,DOM_VK_F16,"
+                + "DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,DOM_VK_F23,"
+                + "DOM_VK_F24,DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,DOM_VK_FINAL,"
+                + "DOM_VK_G,DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,DOM_VK_HELP,"
+                + "DOM_VK_HOME,DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,DOM_VK_K,"
+                + "DOM_VK_KANA,DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,"
                 + "DOM_VK_MODECHANGE,DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,DOM_VK_NUMPAD0,"
                 + "DOM_VK_NUMPAD1,DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,DOM_VK_NUMPAD6,"
                 + "DOM_VK_NUMPAD7,DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,"
-                + "DOM_VK_OPEN_CURLY_BRACKET,DOM_VK_OPEN_PAREN,DOM_VK_P,DOM_VK_PA1,DOM_VK_PAGE_DOWN,"
+                + "DOM_VK_OPEN_CURLY_BRACKET,DOM_VK_OPEN_PAREN,DOM_VK_P,DOM_VK_PA1",
+                "DOM_VK_PAGE_DOWN,"
                 + "DOM_VK_PAGE_UP,DOM_VK_PAUSE,DOM_VK_PERCENT,DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,"
-                + "DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,DOM_VK_PROCESSKEY",
-                "DOM_VK_Q,DOM_VK_QUESTION_MARK,"
+                + "DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,DOM_VK_PROCESSKEY,DOM_VK_Q,DOM_VK_QUESTION_MARK,"
                 + "DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,DOM_VK_S,DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,"
-                + "DOM_VK_SEMICOLON,"
-                + "DOM_VK_SEPARATOR,DOM_VK_SHIFT,DOM_VK_SLASH,DOM_VK_SLEEP,DOM_VK_SPACE,"
+                + "DOM_VK_SEMICOLON,DOM_VK_SEPARATOR,DOM_VK_SHIFT,DOM_VK_SLASH,DOM_VK_SLEEP,DOM_VK_SPACE,"
                 + "DOM_VK_SUBTRACT,DOM_VK_T,DOM_VK_TAB,DOM_VK_TILDE,DOM_VK_U,DOM_VK_UNDERSCORE,DOM_VK_UP,"
                 + "DOM_VK_V,DOM_VK_VOLUME_DOWN,DOM_VK_VOLUME_MUTE,DOM_VK_VOLUME_UP,DOM_VK_W,DOM_VK_WIN,"
                 + "DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,DOM_VK_WIN_ICO_HELP,DOM_VK_WIN_OEM_ATTN,"
                 + "DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,DOM_VK_WIN_OEM_CLEAR,DOM_VK_WIN_OEM_COPY,"
                 + "DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,DOM_VK_WIN_OEM_FINISH,DOM_VK_WIN_OEM_FJ_JISHO,"
                 + "DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,DOM_VK_WIN_OEM_FJ_ROYA,"
-                + "DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,DOM_VK_WIN_OEM_PA2,"
-                + "DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,DOM_VK_Y,"
-                + "DOM_VK_Z,DOM_VK_ZOOM,getModifierState(),initKeyboardEvent(),initKeyEvent(),isComposing,"
-                + "key,keyCode,location,metaKey,repeat,shiftKey"},
-            FF78 = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,"
-                + "DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,"
-                + "DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,"
-                + "DOM_VK_BACK_SLASH,DOM_VK_BACK_SPACE,DOM_VK_C,DOM_VK_CANCEL,DOM_VK_CAPS_LOCK,DOM_VK_CIRCUMFLEX,"
-                + "DOM_VK_CLEAR,DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,DOM_VK_CLOSE_PAREN,DOM_VK_COLON,"
-                + "DOM_VK_COMMA,DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,DOM_VK_CRSEL,DOM_VK_D,"
-                + "DOM_VK_DECIMAL,DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,"
-                + "DOM_VK_E,DOM_VK_EISU,DOM_VK_END,DOM_VK_EQUALS,DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,"
-                + "DOM_VK_EXECUTE,DOM_VK_EXSEL,DOM_VK_F,DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,"
-                + "DOM_VK_F14,DOM_VK_F15,DOM_VK_F16,DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,"
-                + "DOM_VK_F22,DOM_VK_F23,DOM_VK_F24,DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,"
-                + "DOM_VK_F9,DOM_VK_FINAL,DOM_VK_G,DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,"
-                + "DOM_VK_HASH,DOM_VK_HELP,DOM_VK_HOME,DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,"
-                + "DOM_VK_JUNJA,DOM_VK_K,DOM_VK_KANA,DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,"
-                + "DOM_VK_META,DOM_VK_MODECHANGE,DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,"
-                + "DOM_VK_NUMPAD0,DOM_VK_NUMPAD1,DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,"
-                + "DOM_VK_NUMPAD6,DOM_VK_NUMPAD7,DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,"
-                + "DOM_VK_OPEN_CURLY_BRACKET,DOM_VK_OPEN_PAREN,DOM_VK_P,DOM_VK_PA1,DOM_VK_PAGE_DOWN,DOM_VK_PAGE_UP,"
-                + "DOM_VK_PAUSE,DOM_VK_PERCENT,DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,DOM_VK_PLUS,DOM_VK_PRINT,"
-                + "DOM_VK_PRINTSCREEN,DOM_VK_PROCESSKEY",
-                "DOM_VK_Q,DOM_VK_QUESTION_MARK,DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,DOM_VK_S,"
-                + "DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,DOM_VK_SEMICOLON,"
-                + "DOM_VK_SEPARATOR,DOM_VK_SHIFT,DOM_VK_SLASH,DOM_VK_SLEEP,DOM_VK_SPACE,DOM_VK_SUBTRACT,DOM_VK_T,"
-                + "DOM_VK_TAB,DOM_VK_TILDE,DOM_VK_U,DOM_VK_UNDERSCORE,DOM_VK_UP,DOM_VK_V,DOM_VK_VOLUME_DOWN,"
-                + "DOM_VK_VOLUME_MUTE,DOM_VK_VOLUME_UP,DOM_VK_W,DOM_VK_WIN,DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,"
-                + "DOM_VK_WIN_ICO_HELP,DOM_VK_WIN_OEM_ATTN,DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,"
-                + "DOM_VK_WIN_OEM_CLEAR,DOM_VK_WIN_OEM_COPY,DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,"
-                + "DOM_VK_WIN_OEM_FINISH,DOM_VK_WIN_OEM_FJ_JISHO,DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,"
-                + "DOM_VK_WIN_OEM_FJ_ROYA,DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
-                + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,"
-                + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,"
-                + "getModifierState(),initKeyboardEvent(),initKeyEvent(),isComposing,"
-                + "key,keyCode,location,metaKey,repeat,shiftKey"},
-            IE = "altKey,char,charCode,ctrlKey,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,"
+                + "DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
+                + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,"
+                + "DOM_VK_X,DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,eventPhase,initEvent(),initKeyEvent(),initUIEvent(),"
+                + "key,keyCode,META_MASK,metaKey,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which"},
+            FF = {"ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,charCode,"
+                + "code,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,"
+                + "DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,"
+                + "DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,"
+                + "DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,"
+                + "DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,DOM_VK_BACK_SPACE,DOM_VK_C,DOM_VK_CANCEL,"
+                + "DOM_VK_CAPS_LOCK,DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,"
+                + "DOM_VK_CLOSE_PAREN,DOM_VK_COLON,DOM_VK_COMMA,DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,"
+                + "DOM_VK_CRSEL,DOM_VK_D,DOM_VK_DECIMAL,DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,"
+                + "DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,DOM_VK_EISU,DOM_VK_END,DOM_VK_EQUALS,"
+                + "DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,DOM_VK_EXSEL,DOM_VK_F,"
+                + "DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,DOM_VK_F16,"
+                + "DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,DOM_VK_F23,"
+                + "DOM_VK_F24,DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,DOM_VK_FINAL,"
+                + "DOM_VK_G,DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,DOM_VK_HELP,"
+                + "DOM_VK_HOME,DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,DOM_VK_K,"
+                + "DOM_VK_KANA,DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,"
+                + "DOM_VK_MODECHANGE,DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,DOM_VK_NUMPAD0,"
+                + "DOM_VK_NUMPAD1,DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,DOM_VK_NUMPAD6,"
+                + "DOM_VK_NUMPAD7,DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,"
+                + "DOM_VK_OPEN_CURLY_BRACKET,DOM_VK_OPEN_PAREN,DOM_VK_P,DOM_VK_PA1",
+                "DOM_VK_PAGE_DOWN,"
+                + "DOM_VK_PAGE_UP,DOM_VK_PAUSE,DOM_VK_PERCENT,DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,"
+                + "DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,DOM_VK_PROCESSKEY,DOM_VK_Q,DOM_VK_QUESTION_MARK,"
+                + "DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,DOM_VK_S,DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,"
+                + "DOM_VK_SEMICOLON,DOM_VK_SEPARATOR,DOM_VK_SHIFT,DOM_VK_SLASH,DOM_VK_SLEEP,DOM_VK_SPACE,"
+                + "DOM_VK_SUBTRACT,DOM_VK_T,DOM_VK_TAB,DOM_VK_TILDE,DOM_VK_U,DOM_VK_UNDERSCORE,DOM_VK_UP,"
+                + "DOM_VK_V,DOM_VK_VOLUME_DOWN,DOM_VK_VOLUME_MUTE,DOM_VK_VOLUME_UP,DOM_VK_W,DOM_VK_WIN,"
+                + "DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,DOM_VK_WIN_ICO_HELP,DOM_VK_WIN_OEM_ATTN,"
+                + "DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,DOM_VK_WIN_OEM_CLEAR,DOM_VK_WIN_OEM_COPY,"
+                + "DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,DOM_VK_WIN_OEM_FINISH,DOM_VK_WIN_OEM_FJ_JISHO,"
+                + "DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,DOM_VK_WIN_OEM_FJ_ROYA,"
+                + "DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
+                + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,"
+                + "DOM_VK_X,DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,eventPhase,initEvent(),initKeyEvent(),initUIEvent(),"
+                + "key,keyCode,META_MASK,metaKey,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which"},
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,char,charCode,"
+                + "ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,"
                 + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
-                + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,"
-                + "which")
-    @HtmlUnitNYI(CHROME = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
-            EDGE = "altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
-            FF78 = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
-                + "DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,"
-                + "DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,"
-                + "DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,"
-                + "DOM_VK_BACK_SPACE,DOM_VK_C,DOM_VK_CANCEL,DOM_VK_CAPS_LOCK,DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,"
-                + "DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,DOM_VK_CLOSE_PAREN,DOM_VK_COLON,DOM_VK_COMMA,"
-                + "DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,DOM_VK_CRSEL,DOM_VK_D,DOM_VK_DECIMAL,"
-                + "DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,DOM_VK_EISU,"
-                + "DOM_VK_END,DOM_VK_EQUALS,DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,DOM_VK_EXSEL,"
-                + "DOM_VK_F,DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,DOM_VK_F16,"
-                + "DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,DOM_VK_F23,DOM_VK_F24,"
-                + "DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,DOM_VK_FINAL,DOM_VK_G,"
-                + "DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,DOM_VK_HELP,DOM_VK_HOME,"
-                + "DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,DOM_VK_K,DOM_VK_KANA,"
-                + "DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,DOM_VK_MODECHANGE,"
-                + "DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,DOM_VK_NUMPAD0,DOM_VK_NUMPAD1,"
-                + "DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,DOM_VK_NUMPAD6,DOM_VK_NUMPAD7,"
-                + "DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,DOM_VK_OPEN_CURLY_BRACKET,"
-                + "DOM_VK_OPEN_PAREN,DOM_VK_P,DOM_VK_PA1,DOM_VK_PAGE_DOWN,DOM_VK_PAGE_UP,DOM_VK_PAUSE,"
-                + "DOM_VK_PERCENT,DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,"
-                + "DOM_VK_PROCESSKEY",
-                "DOM_VK_Q,DOM_VK_QUESTION_MARK,DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,"
-                + "DOM_VK_S,DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,DOM_VK_SEMICOLON,DOM_VK_SEPARATOR,DOM_VK_SHIFT,"
-                + "DOM_VK_SLASH,DOM_VK_SLEEP,DOM_VK_SPACE,DOM_VK_SUBTRACT,DOM_VK_T,DOM_VK_TAB,DOM_VK_TILDE,"
-                + "DOM_VK_U,DOM_VK_UNDERSCORE,DOM_VK_UP,DOM_VK_V,DOM_VK_VOLUME_DOWN,DOM_VK_VOLUME_MUTE,"
-                + "DOM_VK_VOLUME_UP,DOM_VK_W,DOM_VK_WIN,DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,DOM_VK_WIN_ICO_HELP,"
-                + "DOM_VK_WIN_OEM_ATTN,DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,DOM_VK_WIN_OEM_CLEAR,"
-                + "DOM_VK_WIN_OEM_COPY,DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,DOM_VK_WIN_OEM_FINISH,"
-                + "DOM_VK_WIN_OEM_FJ_JISHO,DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,DOM_VK_WIN_OEM_FJ_ROYA,"
-                + "DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,DOM_VK_WIN_OEM_PA2,"
-                + "DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,DOM_VK_Y,DOM_VK_Z,"
-                + "DOM_VK_ZOOM,initKeyEvent(),key,keyCode,metaKey,shiftKey,which"},
-            FF = {"altKey,charCode,code,ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
-                + "DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,"
-                + "DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,DOM_VK_ALTGR,DOM_VK_AMPERSAND,"
-                + "DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,DOM_VK_BACK_SLASH,"
-                + "DOM_VK_BACK_SPACE,DOM_VK_C,DOM_VK_CANCEL,DOM_VK_CAPS_LOCK,DOM_VK_CIRCUMFLEX,DOM_VK_CLEAR,"
-                + "DOM_VK_CLOSE_BRACKET,DOM_VK_CLOSE_CURLY_BRACKET,DOM_VK_CLOSE_PAREN,DOM_VK_COLON,DOM_VK_COMMA,"
-                + "DOM_VK_CONTEXT_MENU,DOM_VK_CONTROL,DOM_VK_CONVERT,DOM_VK_CRSEL,DOM_VK_D,DOM_VK_DECIMAL,"
-                + "DOM_VK_DELETE,DOM_VK_DIVIDE,DOM_VK_DOLLAR,DOM_VK_DOUBLE_QUOTE,DOM_VK_DOWN,DOM_VK_E,DOM_VK_EISU,"
-                + "DOM_VK_END,DOM_VK_EQUALS,DOM_VK_EREOF,DOM_VK_ESCAPE,DOM_VK_EXCLAMATION,DOM_VK_EXECUTE,DOM_VK_EXSEL,"
-                + "DOM_VK_F,DOM_VK_F1,DOM_VK_F10,DOM_VK_F11,DOM_VK_F12,DOM_VK_F13,DOM_VK_F14,DOM_VK_F15,DOM_VK_F16,"
-                + "DOM_VK_F17,DOM_VK_F18,DOM_VK_F19,DOM_VK_F2,DOM_VK_F20,DOM_VK_F21,DOM_VK_F22,DOM_VK_F23,DOM_VK_F24,"
-                + "DOM_VK_F3,DOM_VK_F4,DOM_VK_F5,DOM_VK_F6,DOM_VK_F7,DOM_VK_F8,DOM_VK_F9,DOM_VK_FINAL,DOM_VK_G,"
-                + "DOM_VK_GREATER_THAN,DOM_VK_H,DOM_VK_HANGUL,DOM_VK_HANJA,DOM_VK_HASH,DOM_VK_HELP,DOM_VK_HOME,"
-                + "DOM_VK_HYPHEN_MINUS,DOM_VK_I,DOM_VK_INSERT,DOM_VK_J,DOM_VK_JUNJA,DOM_VK_K,DOM_VK_KANA,"
-                + "DOM_VK_KANJI,DOM_VK_L,DOM_VK_LEFT,DOM_VK_LESS_THAN,DOM_VK_M,DOM_VK_META,DOM_VK_MODECHANGE,"
-                + "DOM_VK_MULTIPLY,DOM_VK_N,DOM_VK_NONCONVERT,DOM_VK_NUM_LOCK,DOM_VK_NUMPAD0,DOM_VK_NUMPAD1,"
-                + "DOM_VK_NUMPAD2,DOM_VK_NUMPAD3,DOM_VK_NUMPAD4,DOM_VK_NUMPAD5,DOM_VK_NUMPAD6,DOM_VK_NUMPAD7,"
-                + "DOM_VK_NUMPAD8,DOM_VK_NUMPAD9,DOM_VK_O,DOM_VK_OPEN_BRACKET,DOM_VK_OPEN_CURLY_BRACKET,"
-                + "DOM_VK_OPEN_PAREN,DOM_VK_P,DOM_VK_PA1,DOM_VK_PAGE_DOWN,DOM_VK_PAGE_UP,DOM_VK_PAUSE,"
-                + "DOM_VK_PERCENT,DOM_VK_PERIOD,DOM_VK_PIPE,DOM_VK_PLAY,DOM_VK_PLUS,DOM_VK_PRINT,DOM_VK_PRINTSCREEN,"
-                + "DOM_VK_PROCESSKEY",
-                "DOM_VK_Q,DOM_VK_QUESTION_MARK,DOM_VK_QUOTE,DOM_VK_R,DOM_VK_RETURN,DOM_VK_RIGHT,"
-                + "DOM_VK_S,DOM_VK_SCROLL_LOCK,DOM_VK_SELECT,DOM_VK_SEMICOLON,DOM_VK_SEPARATOR,DOM_VK_SHIFT,"
-                + "DOM_VK_SLASH,DOM_VK_SLEEP,DOM_VK_SPACE,DOM_VK_SUBTRACT,DOM_VK_T,DOM_VK_TAB,DOM_VK_TILDE,"
-                + "DOM_VK_U,DOM_VK_UNDERSCORE,DOM_VK_UP,DOM_VK_V,DOM_VK_VOLUME_DOWN,DOM_VK_VOLUME_MUTE,"
-                + "DOM_VK_VOLUME_UP,DOM_VK_W,DOM_VK_WIN,DOM_VK_WIN_ICO_00,DOM_VK_WIN_ICO_CLEAR,DOM_VK_WIN_ICO_HELP,"
-                + "DOM_VK_WIN_OEM_ATTN,DOM_VK_WIN_OEM_AUTO,DOM_VK_WIN_OEM_BACKTAB,DOM_VK_WIN_OEM_CLEAR,"
-                + "DOM_VK_WIN_OEM_COPY,DOM_VK_WIN_OEM_CUSEL,DOM_VK_WIN_OEM_ENLW,DOM_VK_WIN_OEM_FINISH,"
-                + "DOM_VK_WIN_OEM_FJ_JISHO,DOM_VK_WIN_OEM_FJ_LOYA,DOM_VK_WIN_OEM_FJ_MASSHOU,DOM_VK_WIN_OEM_FJ_ROYA,"
-                + "DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,DOM_VK_WIN_OEM_PA2,"
-                + "DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,DOM_VK_Y,DOM_VK_Z,"
-                + "DOM_VK_ZOOM,initKeyEvent(),key,keyCode,metaKey,shiftKey,which"},
-            IE = "altKey,char,charCode,ctrlKey,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_MOBILE,"
-                + "DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,"
-                + "shiftKey,which")
+                + "eventPhase,initEvent(),initUIEvent(),key,keyCode,metaKey,preventDefault(),shiftKey,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
     public void keyboardEvent() throws Exception {
-        testString("", "document.createEvent('KeyboardEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('KeyboardEvent')");
     }
 
     /**
@@ -3689,20 +3723,96 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "detail,initUIEvent(),sourceCapabilities,view,which",
-            EDGE = "detail,initUIEvent(),sourceCapabilities,view,which",
-            FF = "detail,initUIEvent(),layerX,layerY,rangeOffset,rangeParent,"
-                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
-            FF78 = "detail,initUIEvent(),layerX,layerY,rangeOffset,rangeParent,"
-                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
-            IE = "detail,deviceSessionId,initUIEvent(),view")
-    @HtmlUnitNYI(CHROME = "detail,initUIEvent(),view",
-            EDGE = "detail,initUIEvent(),view",
-            FF78 = "detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
-            FF = "detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
-            IE = "detail,initUIEvent(),view")
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),preventDefault(),srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    public void event2() throws Exception {
+        testString("", "document.createEvent('Event')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,deviceSessionId,eventPhase,initEvent(),initUIEvent(),isTrusted,"
+                + "preventDefault(),srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
     public void uiEvent() throws Exception {
-        testString("", "document.createEvent('UIEvent'), document.createEvent('Event')");
+        testString("", "document.createEvent('UIEvent')");
     }
 
     /**
@@ -3794,39 +3904,74 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),"
-                + "initMouseEvent(),layerX,layerY,metaKey,movementX,movementY,offsetX,offsetY,"
-                + "pageX,pageY,relatedTarget,screenX,screenY,shiftKey,toElement,x,y",
-            EDGE = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),"
-                + "initMouseEvent(),layerX,layerY,metaKey,movementX,movementY,offsetX,offsetY,"
-                + "pageX,pageY,relatedTarget,screenX,screenY,shiftKey,toElement,x,y",
-            FF = "altKey,button,buttons,clientX,clientY,ctrlKey,getModifierState(),initMouseEvent(),"
-                + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
-                + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
-                + "mozInputSource,mozPressure,offsetX,offsetY,pageX,pageY,region,relatedTarget,"
-                + "screenX,screenY,shiftKey,x,y",
-            FF78 = "altKey,button,buttons,clientX,clientY,ctrlKey,getModifierState(),initMouseEvent(),"
-                + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
-                + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
-                + "mozInputSource,mozPressure,offsetX,offsetY,pageX,pageY,region,relatedTarget,"
-                + "screenX,screenY,shiftKey,x,y",
-            IE = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),initMouseEvent(),"
-                + "layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,screenX,screenY,shiftKey,"
-                + "toElement,which,x,y")
-    @HtmlUnitNYI(CHROME = "altKey,button,buttons,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,pageX,pageY,"
-                + "screenX,screenY,shiftKey,which",
-            EDGE = "altKey,button,buttons,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,pageX,pageY,"
-                + "screenX,screenY,shiftKey,which",
-            FF78 = "altKey,button,buttons,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
-                + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
-                + "MOZ_SOURCE_UNKNOWN,pageX,pageY,screenX,screenY,shiftKey,which",
-            FF = "altKey,button,buttons,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,MOZ_SOURCE_CURSOR,"
-                + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
-                + "MOZ_SOURCE_UNKNOWN,pageX,pageY,screenX,screenY,shiftKey,which",
-            IE = "altKey,button,buttons,clientX,clientY,ctrlKey,initMouseEvent(),metaKey,pageX,pageY,"
-                + "screenX,screenY,shiftKey,which")
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,fromElement,getModifierState(),initEvent(),initMouseEvent(),"
+                + "initUIEvent(),isTrusted,layerX,layerY,metaKey,movementX,movementY,NONE,offsetX,offsetY,"
+                + "pageX,pageY,path,preventDefault(),relatedTarget,returnValue,screenX,screenY,shiftKey,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,toElement,type,view,which,x,y",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,fromElement,getModifierState(),initEvent(),initMouseEvent(),"
+                + "initUIEvent(),isTrusted,layerX,layerY,metaKey,movementX,movementY,NONE,offsetX,offsetY,"
+                + "pageX,pageY,path,preventDefault(),relatedTarget,returnValue,screenX,screenY,shiftKey,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,toElement,type,view,which,x,y",
+            FF = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,explicitOriginalTarget,getModifierState(),initEvent(),"
+                + "initMouseEvent(),initNSMouseEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,metaKey,"
+                + "movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,mozInputSource,mozPressure,NONE,offsetX,"
+                + "offsetY,originalTarget,pageX,pageY,preventDefault(),rangeOffset,rangeParent,region,"
+                + "relatedTarget,returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which,x,y",
+            FF78 = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,explicitOriginalTarget,getModifierState(),initEvent(),"
+                + "initMouseEvent(),initNSMouseEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,metaKey,"
+                + "movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,mozInputSource,mozPressure,NONE,offsetX,"
+                + "offsetY,originalTarget,pageX,pageY,preventDefault(),rangeOffset,rangeParent,region,"
+                + "relatedTarget,returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which,x,y",
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,deviceSessionId,eventPhase,"
+                + "fromElement,getModifierState(),initEvent(),initMouseEvent(),initUIEvent(),isTrusted,layerX,"
+                + "layerY,metaKey,offsetX,offsetY,pageX,pageY,preventDefault(),relatedTarget,screenX,screenY,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,toElement,"
+                + "type,view,which,x,y")
+    @HtmlUnitNYI(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "initEvent(),initMouseEvent(),initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),"
+                + "returnValue,screenX,screenY,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "initEvent(),initMouseEvent(),initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),"
+                + "returnValue,screenX,screenY,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,"
+                + "detail,eventPhase,initEvent(),initMouseEvent(),initUIEvent(),META_MASK,metaKey,"
+                + "MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,"
+                + "MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,preventDefault(),returnValue,screenX,"
+                + "screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,"
+                + "detail,eventPhase,initEvent(),initMouseEvent(),initUIEvent(),META_MASK,metaKey,"
+                + "MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,"
+                + "MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,preventDefault(),returnValue,screenX,"
+                + "screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initMouseEvent(),initUIEvent(),metaKey,pageX,pageY,preventDefault(),screenX,screenY,shiftKey,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
     public void mouseEvent() throws Exception {
-        testString("", "document.createEvent('MouseEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('MouseEvent')");
     }
 
     /**
@@ -3835,18 +3980,51 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data,initCompositionEvent()",
-            EDGE = "data,initCompositionEvent()",
-            FF = "data,initCompositionEvent(),locale",
-            FF78 = "data,initCompositionEvent(),locale",
-            IE = "data,initCompositionEvent(),locale")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF78 = "-",
-            FF = "-",
-            IE = "-")
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,NONE,path,preventDefault(),"
+                + "returnValue,sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,NONE,path,preventDefault(),"
+                + "returnValue,sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,"
+                + "layerX,layerY,locale,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,"
+                + "returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,"
+                + "layerX,layerY,locale,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,"
+                + "returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,data,"
+                + "defaultPrevented,detail,deviceSessionId,eventPhase,initCompositionEvent(),initEvent(),"
+                + "initUIEvent(),isTrusted,locale,preventDefault(),srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,data,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
     public void compositionEvent() throws Exception {
-        testString("", "document.createEvent('CompositionEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('CompositionEvent')");
     }
 
     /**
@@ -3855,18 +4033,53 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "relatedTarget",
-            EDGE = "relatedTarget",
-            FF = "relatedTarget",
-            FF78 = "relatedTarget",
-            IE = "initFocusEvent(),relatedTarget")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF78 = "-",
-            FF = "-",
-            IE = "-")
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),isTrusted,NONE,path,preventDefault(),relatedTarget,returnValue,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),isTrusted,NONE,path,preventDefault(),relatedTarget,returnValue,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),rangeOffset,rangeParent,relatedTarget,returnValue,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),rangeOffset,rangeParent,relatedTarget,returnValue,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,detail,deviceSessionId,eventPhase,initEvent(),"
+                + "initFocusEvent(),initUIEvent(),isTrusted,preventDefault(),relatedTarget,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
     public void focusEvent() throws Exception {
-        testString("", "document.createEvent('FocusEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('FocusEvent')");
     }
 
     /**
@@ -3875,17 +4088,49 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data,dataTransfer,getTargetRanges(),inputType,isComposing",
-            EDGE = "data,dataTransfer,getTargetRanges(),inputType,isComposing",
-            FF = "data,dataTransfer,inputType,isComposing",
-            FF78 = "data,dataTransfer,inputType,isComposing",
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,dataTransfer,defaultPrevented,detail,"
+                + "eventPhase,getTargetRanges(),initEvent(),initUIEvent(),inputType,isComposing,"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,dataTransfer,defaultPrevented,detail,"
+                + "eventPhase,getTargetRanges(),initEvent(),initUIEvent(),inputType,isComposing,"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,dataTransfer,defaultPrevented,"
+                + "detail,eventPhase,explicitOriginalTarget,initEvent(),initUIEvent(),inputType,isComposing,"
+                + "isTrusted,layerX,layerY,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,"
+                + "rangeParent,returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,dataTransfer,defaultPrevented,"
+                + "detail,eventPhase,explicitOriginalTarget,initEvent(),initUIEvent(),inputType,isComposing,"
+                + "isTrusted,layerX,layerY,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,"
+                + "rangeParent,returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF78 = "-",
-            FF = "-")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view")
     public void inputEvent() throws Exception {
-        testString("", "new InputEvent('input'), document.createEvent('UIEvent')");
+        testString("", "new InputEvent('input')");
     }
 
     /**
@@ -3898,12 +4143,18 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "exception",
             FF = "exception",
             FF78 = "exception",
-            IE = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),initMouseEvent(),"
-                + "initMouseWheelEvent(),layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,"
-                + "screenX,screenY,shiftKey,toElement,wheelDelta,which,x,y")
-    @HtmlUnitNYI(IE = "-")
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "deviceSessionId,eventPhase,fromElement,getModifierState(),initEvent(),initMouseEvent(),"
+                + "initMouseWheelEvent(),initUIEvent(),isTrusted,layerX,layerY,metaKey,offsetX,offsetY,"
+                + "pageX,pageY,preventDefault(),relatedTarget,screenX,screenY,shiftKey,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,toElement,type,"
+                + "view,wheelDelta,which,x,y")
+    @HtmlUnitNYI(IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
     public void mouseWheelEvent() throws Exception {
-        testString("", "document.createEvent('MouseWheelEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('MouseWheelEvent')");
     }
 
     /**
@@ -3914,7 +4165,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void svgZoomEvent() throws Exception {
-        testString("", "document.createEvent('SVGZoomEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('SVGZoomEvent')");
     }
 
     /**
@@ -3923,24 +4174,57 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data,initTextEvent()",
-            EDGE = "data,initTextEvent()",
-            FF = "data,initCompositionEvent(),locale",
-            FF78 = "data,initCompositionEvent(),locale",
-            IE = "data,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initTextEvent(),initUIEvent(),isTrusted,NONE,path,preventDefault(),returnValue,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initTextEvent(),initUIEvent(),isTrusted,NONE,path,preventDefault(),returnValue,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,layerX,layerY,"
+                + "locale,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initCompositionEvent(),initEvent(),initUIEvent(),isTrusted,layerX,layerY,"
+                + "locale,META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,data,"
+                + "defaultPrevented,detail,deviceSessionId,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,"
+                + "DOM_INPUT_METHOD_IME,DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
+                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE,"
+                + "eventPhase,initEvent(),initTextEvent(),initUIEvent(),inputMethod,isTrusted,locale,preventDefault(),"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,"
+                + "detail,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
                 + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
                 + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,"
-                + "DOM_INPUT_METHOD_VOICE,initTextEvent(),inputMethod,locale")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF78 = "-",
-            FF = "-",
-            IE = "DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
-                + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
-                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,"
-                + "DOM_INPUT_METHOD_VOICE")
+                + "DOM_INPUT_METHOD_VOICE,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
     public void textEvent() throws Exception {
-        testString("", "document.createEvent('TextEvent'), document.createEvent('UIEvent')");
+        testString("", "document.createEvent('TextEvent')");
     }
 
     /**
@@ -3949,14 +4233,27 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "altKey,changedTouches,ctrlKey,metaKey,shiftKey,targetTouches,touches",
-            EDGE = "altKey,changedTouches,ctrlKey,metaKey,shiftKey,targetTouches,touches",
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "changedTouches,composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "initEvent(),initUIEvent(),isTrusted,metaKey,NONE,path,preventDefault(),returnValue,shiftKey,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,"
+                + "timeStamp,touches,type,view,which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "changedTouches,composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "initEvent(),initUIEvent(),isTrusted,metaKey,NONE,path,preventDefault(),returnValue,shiftKey,"
+                + "sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,"
+                + "timeStamp,touches,type,view,which",
             FF = "exception",
             FF78 = "exception",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "-", EDGE = "-")
-    public void touchEvent2() throws Exception {
-        testString("", "new TouchEvent('touch'), document.createEvent('UIEvent')");
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+    public void touchEvent() throws Exception {
+        testString("", "new TouchEvent('touch')");
     }
 
     /**
@@ -4876,6 +5173,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void closeEvent() throws Exception {
         testString("", "new CloseEvent('type-close')");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -4921,5 +5219,46 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         testString("var debug = {hello: 'world'};"
                     + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
                     "new BlobEvent('blob', { 'data': blob })");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "acceleration,accelerationIncludingGravity,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,composed,composedPath(),currentTarget,defaultPrevented,"
+                + "eventPhase,initEvent(),interval,isTrusted,NONE,path,preventDefault(),returnValue,"
+                + "rotationRate,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "acceleration,accelerationIncludingGravity,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,composed,composedPath(),currentTarget,defaultPrevented,"
+                + "eventPhase,initEvent(),interval,isTrusted,NONE,path,preventDefault(),returnValue,"
+                + "rotationRate,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "acceleration,accelerationIncludingGravity,ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,"
+                + "cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),CONTROL_MASK,currentTarget,"
+                + "defaultPrevented,eventPhase,explicitOriginalTarget,initDeviceMotionEvent(),initEvent(),"
+                + "interval,isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,rotationRate,"
+                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF78 = "acceleration,accelerationIncludingGravity,ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,"
+                + "cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),CONTROL_MASK,currentTarget,"
+                + "defaultPrevented,eventPhase,explicitOriginalTarget,initDeviceMotionEvent(),initEvent(),"
+                + "interval,isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,rotationRate,"
+                + "SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type")
+    public void deviceMotionEvent() throws Exception {
+        testString("", "new DeviceMotionEvent('motion')");
     }
 }

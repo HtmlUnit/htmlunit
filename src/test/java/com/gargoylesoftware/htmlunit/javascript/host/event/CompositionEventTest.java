@@ -24,18 +24,21 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link BlobEvent}.
+ * Tests for {@link CompositionEvent}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class BlobEventTest extends WebDriverTestCase {
+public class CompositionEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
             + "    alert(event);\n"
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+
+            + "    alert(event.view == window);\n"
+
             + "    alert(event.data);\n"
             + "  }\n";
 
@@ -43,15 +46,14 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "blob", "false", "false", "null"},
-            FF78 = {"[object BlobEvent]", "blob", "false", "false", "null"})
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", ""},
+            IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('blob');\n"
+            + "      var event = new CompositionEvent('composition');\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -67,14 +69,16 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(FF = {"[object BlobEvent]", "undefined", "false", "false", "null"},
-                FF78 = {"[object BlobEvent]", "undefined", "false", "false", "null"})
+    @HtmlUnitNYI(CHROME = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""},
+            EDGE = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""},
+            FF = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""},
+                FF78 = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent();\n"
+            + "      var event = new CompositionEvent();\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -89,15 +93,14 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "42", "false", "false", "null"},
-            FF78 = {"[object BlobEvent]", "42", "false", "false", "null"})
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "42", "false", "false", "false", ""},
+            IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent(42);\n"
+            + "      var event = new CompositionEvent(42);\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -112,15 +115,14 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "null", "false", "false", "null"},
-            FF78 = {"[object BlobEvent]", "null", "false", "false", "null"})
+    @Alerts(DEFAULT =  {"[object CompositionEvent]", "null", "false", "false", "false", ""},
+            IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent(null);\n"
+            + "      var event = new CompositionEvent(null);\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -141,7 +143,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent(unknown);\n"
+            + "      var event = new CompositionEvent(unknown);\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -156,15 +158,14 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "HtmlUnitEvent", "false", "false", "null"},
-            FF78 = {"[object BlobEvent]", "HtmlUnitEvent", "false", "false", "null"})
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "HtmlUnitEvent", "false", "false", "false", ""},
+            IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('HtmlUnitEvent');\n"
+            + "      var event = new CompositionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
@@ -179,17 +180,15 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object BlobEvent]", "blob", "false", "false", "[object Blob]"},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "mozart"},
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var debug = {hello: 'world'};\n"
-            + "      var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});\n"
-            + "      var event = new BlobEvent('blob', {\n"
-            + "        'data': blob\n"
+            + "      var event = new CompositionEvent('composition', {\n"
+            + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
@@ -205,15 +204,14 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "blob", "false", "false", "null"},
-            FF78 = {"[object BlobEvent]", "blob", "false", "false", "null"})
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", ""},
+            IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('blob', {\n"
+            + "      var event = new CompositionEvent('composition', {\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
@@ -229,14 +227,15 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "Html,Unit"},
+            IE = "exception")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('blob', {\n"
-            + "        'data': 'blob'\n"
+            + "      var event = new CompositionEvent('composition', {\n"
+            + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch (e) { alert('exception') }\n"
@@ -252,15 +251,14 @@ public class BlobEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      alert('BlobEvent' in window);\n"
+            + "      alert('CompositionEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

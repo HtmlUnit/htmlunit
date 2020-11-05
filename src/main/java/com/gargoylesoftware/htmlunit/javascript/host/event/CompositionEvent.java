@@ -21,6 +21,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code CompositionEvent}.
@@ -31,10 +36,46 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 @JsxClass
 public class CompositionEvent extends UIEvent {
 
+    private String data_;
+
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public CompositionEvent() {
+        data_ = "";
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
+
+        if (details != null && !Undefined.isUndefined(details)) {
+            final Object dataObj = details.get("data", details);
+            if (NOT_FOUND != dataObj) {
+                data_ = ScriptRuntime.toString(dataObj);
+            }
+        }
+    }
+
+    /**
+     * @return the data
+     */
+    @JsxGetter
+    public String getData() {
+        return data_;
+    }
+
+    /**
+     * @param data the data
+     */
+    public void setData(final String data) {
+        data_ = data;
     }
 }

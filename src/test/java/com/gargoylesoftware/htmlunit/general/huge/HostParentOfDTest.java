@@ -114,8 +114,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DeviceMotionEvent_DeviceMotionEvent() throws Exception {
         test("DeviceMotionEvent", "DeviceMotionEvent");
     }
@@ -2064,8 +2063,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_DeviceMotionEvent() throws Exception {
         test("Event", "DeviceMotionEvent");
     }

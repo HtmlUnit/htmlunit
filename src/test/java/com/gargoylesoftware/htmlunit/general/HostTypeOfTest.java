@@ -1106,7 +1106,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "undefined")
+            IE = "object")
     public void deviceMotionEvent() throws Exception {
         test("DeviceMotionEvent");
     }

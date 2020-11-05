@@ -1808,7 +1808,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function DeviceMotionEvent() { [native code] }",
-            IE = "exception",
+            IE = "[object DeviceMotionEvent]",
             FF = "function DeviceMotionEvent() {\n    [native code]\n}",
             FF78 = "function DeviceMotionEvent() {\n    [native code]\n}")
     public void deviceMotionEvent() throws Exception {

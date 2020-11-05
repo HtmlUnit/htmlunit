@@ -13,6 +13,9 @@
                 the method requires now the page as second parameter.
             </action>
             <action type="update" dev="rbri">
+                DeviceMotionEvent is available in IE also.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.34.v20201102.
             </action>
             <action type="add" dev="rbri" due-to="Rural Hunter">

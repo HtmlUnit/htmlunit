@@ -9198,11 +9198,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),data,initCompositionEvent(),locale",
             FF78 = "constructor(),data,initCompositionEvent(),locale",
             IE = "constructor,data,initCompositionEvent(),locale")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF78 = "constructor()",
-            FF = "constructor()",
-            IE = "constructor")
+    @HtmlUnitNYI(CHROME = "constructor(),data",
+            EDGE = "constructor(),data",
+            FF78 = "constructor(),data",
+            FF = "constructor(),data",
+            IE = "constructor,data")
     public void compositionEvent() throws Exception {
         testString("", "document.createEvent('CompositionEvent')");
     }
@@ -9724,5 +9724,41 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
         testString("var debug = {hello: 'world'};"
                     + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
                     "new BlobEvent('blob', { 'data': blob })");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.TouchEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey,changedTouches,constructor(),ctrlKey,metaKey,shiftKey,targetTouches,touches",
+            EDGE = "altKey,changedTouches,constructor(),ctrlKey,metaKey,shiftKey,targetTouches,touches",
+            FF = "exception",
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void touchEvent() throws Exception {
+        testString("", "new TouchEvent('touch')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "acceleration,accelerationIncludingGravity,constructor(),interval,rotationRate",
+            EDGE = "acceleration,accelerationIncludingGravity,constructor(),interval,rotationRate",
+            FF = "acceleration,accelerationIncludingGravity,constructor(),"
+                + "initDeviceMotionEvent(),interval,rotationRate",
+            FF78 = "acceleration,accelerationIncludingGravity,constructor(),"
+                + "initDeviceMotionEvent(),interval,rotationRate",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF78 = "constructor()")
+    public void deviceMotionEvent() throws Exception {
+        testString("", "new DeviceMotionEvent('motion')");
     }
 }
