@@ -7566,10 +7566,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Object]",
-            CHROME = "[object Reflect]",
+    @Alerts(CHROME = "[object Reflect]",
             EDGE = "[object Reflect]",
             FF = "[object Reflect]",
+            FF78 = "[object Object]",
             IE = "exception")
     public void reflect() throws Exception {
         test("Reflect");

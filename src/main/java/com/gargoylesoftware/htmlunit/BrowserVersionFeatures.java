@@ -1179,7 +1179,7 @@ public enum BrowserVersionFeatures {
     JS_REFLECT,
 
     /** {@code Reflect} is named Object. */
-    @BrowserFeature({FF, FF78})
+    @BrowserFeature(FF78)
     JS_REFLECT_NAMED_OBJECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
