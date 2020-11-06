@@ -540,7 +540,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor,Coordinates,Crypto,CSSFontFaceRule,CSSImportRule,CSSKeyframeRule,"
                 + "CSSKeyframesRule,CSSMediaRule,CSSNamespaceRule,CSSPageRule,CSSRule,CSSRuleList,"
                 + "CSSStyleDeclaration,CSSStyleRule,CSSStyleSheet,CustomEvent,DataTransfer,DataView(),"
-                + "Date(),decodeURI(),decodeURIComponent(),devicePixelRatio,Document,document,DocumentFragment,"
+                + "Date(),decodeURI(),decodeURIComponent(),DeviceMotionEvent,"
+                + "devicePixelRatio,Document,document,DocumentFragment,"
                 + "DocumentType,DOMError,DOMException,DOMImplementation,DOMParser(),DOMSettableTokenList,"
                 + "DOMStringList,DOMStringMap,DOMTokenList,doNotTrack,DragEvent,Element,encodeURI(),"
                 + "encodeURIComponent(),Enumerator(),Error(),ErrorEvent,escape(),eval(),EvalError(),Event,"
@@ -555,8 +556,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "HTMLHeadElement,HTMLHeadingElement,HTMLHRElement,HTMLHtmlElement,HTMLIFrameElement,"
                 + "HTMLImageElement,HTMLInputElement,HTMLIsIndexElement,HTMLLabelElement,HTMLLegendElement,"
                 + "HTMLLIElement,HTMLLinkElement,HTMLMapElement,HTMLMarqueeElement,HTMLMediaElement,"
-                + "HTMLMenuElement,HTMLMetaElement",
-                "HTMLModElement,HTMLNextIdElement,HTMLObjectElement,"
+                + "HTMLMenuElement",
+                "HTMLMetaElement,HTMLModElement,HTMLNextIdElement,HTMLObjectElement,"
                 + "HTMLOListElement,HTMLOptGroupElement,HTMLOptionElement,HTMLParagraphElement,HTMLParamElement,"
                 + "HTMLPhraseElement,HTMLPreElement,HTMLProgressElement,HTMLQuoteElement,HTMLScriptElement,"
                 + "HTMLSelectElement,HTMLSourceElement,HTMLSpanElement,HTMLStyleElement,HTMLTableCaptionElement,"

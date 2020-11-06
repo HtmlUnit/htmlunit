@@ -22,19 +22,32 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code DeviceOrientationEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF78})
+@JsxClass
 public class DeviceOrientationEvent extends Event {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public DeviceOrientationEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }
