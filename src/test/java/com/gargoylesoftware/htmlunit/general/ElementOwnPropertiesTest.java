@@ -9800,4 +9800,29 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void gamepadEvent() throws Exception {
         testString("", "new GamepadEvent('gamepad')");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ADDITION,attrChange,attrName,constructor(),initMutationEvent(),MODIFICATION,"
+                + "newValue,prevValue,relatedNode,REMOVAL",
+            EDGE = "ADDITION,attrChange,attrName,constructor(),initMutationEvent(),MODIFICATION,"
+                + "newValue,prevValue,relatedNode,REMOVAL",
+            FF = "ADDITION,attrChange,attrName,constructor(),initMutationEvent(),MODIFICATION,"
+                + "newValue,prevValue,relatedNode,REMOVAL",
+            FF78 = "ADDITION,attrChange,attrName,constructor(),initMutationEvent(),MODIFICATION,"
+                + "newValue,prevValue,relatedNode,REMOVAL",
+            IE = "ADDITION,attrChange,attrName,constructor,initMutationEvent(),MODIFICATION,"
+                + "newValue,prevValue,relatedNode,REMOVAL")
+    @HtmlUnitNYI(CHROME = "ADDITION,constructor,MODIFICATION,REMOVAL",
+            EDGE = "ADDITION,constructor,MODIFICATION,REMOVAL",
+            FF78 = "ADDITION,constructor,MODIFICATION,REMOVAL",
+            FF = "ADDITION,constructor,MODIFICATION,REMOVAL",
+            IE = "ADDITION,constructor,MODIFICATION,REMOVAL")
+    public void mutationEvent() throws Exception {
+        testString("", "document.createEvent('MutationEvent')");
+    }
 }
