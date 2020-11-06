@@ -9825,4 +9825,15 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void mutationEvent() throws Exception {
         testString("", "document.createEvent('MutationEvent')");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void offlineAudioCompletionEvent() throws Exception {
+        testString("", "document.createEvent('OfflineAudioCompletionEvent')");
+    }
 }

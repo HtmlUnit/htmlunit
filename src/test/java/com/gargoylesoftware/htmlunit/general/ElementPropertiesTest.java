@@ -5449,4 +5449,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void mutationEvent() throws Exception {
         testString("", "document.createEvent('MutationEvent')");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void offlineAudioCompletionEvent() throws Exception {
+        testString("", "document.createEvent('OfflineAudioCompletionEvent')");
+    }
 }
