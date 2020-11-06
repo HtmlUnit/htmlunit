@@ -29,13 +29,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE, FF, FF78})
+@JsxClass
 public class SourceBufferList extends EventTarget {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public SourceBufferList() {
     }
 }

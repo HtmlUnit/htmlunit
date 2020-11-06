@@ -1789,7 +1789,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object DeviceAcceleration]")
+    @HtmlUnitNYI(IE = "exception")
     public void deviceAcceleration() throws Exception {
         test("DeviceAcceleration");
     }
@@ -1820,7 +1822,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function DeviceOrientationEvent() { [native code] }",
-            IE = "exception",
+            IE = "[object DeviceOrientationEvent]",
             FF = "function DeviceOrientationEvent() {\n    [native code]\n}",
             FF78 = "function DeviceOrientationEvent() {\n    [native code]\n}")
     public void deviceOrientationEvent() throws Exception {
@@ -1840,7 +1842,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object DeviceRotationRate]")
+    @HtmlUnitNYI(IE = "exception")
     public void deviceRotationRate() throws Exception {
         test("DeviceRotationRate");
     }
@@ -5537,7 +5541,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function MediaSource() { [native code] }",
-            IE = "exception",
+            IE = "function MediaSource() {\n    [native code]\n}\n",
             FF = "function MediaSource() {\n    [native code]\n}",
             FF78 = "function MediaSource() {\n    [native code]\n}")
     public void mediaSource() throws Exception {
@@ -7565,6 +7569,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object Object]",
             CHROME = "[object Reflect]",
             EDGE = "[object Reflect]",
+            FF = "[object Reflect]",
             IE = "exception")
     public void reflect() throws Exception {
         test("Reflect");
@@ -8221,7 +8226,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(IE = "[object SourceBuffer]",
             CHROME = "function SourceBuffer() { [native code] }",
             EDGE = "function SourceBuffer() { [native code] }",
             FF = "function SourceBuffer() {\n    [native code]\n}",
@@ -8234,7 +8239,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(IE = "[object SourceBufferList]",
             CHROME = "function SourceBufferList() { [native code] }",
             EDGE = "function SourceBufferList() { [native code] }",
             FF = "function SourceBufferList() {\n    [native code]\n}",
