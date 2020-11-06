@@ -9762,4 +9762,23 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void deviceMotionEvent() throws Exception {
         testString("", "new DeviceMotionEvent('motion')");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "colno,constructor(),error,filename,lineno,message",
+            EDGE = "colno,constructor(),error,filename,lineno,message",
+            FF = "colno,constructor(),error,filename,lineno,message",
+            FF78 = "colno,constructor(),error,filename,lineno,message",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF78 = "constructor()",
+            FF = "constructor()")
+    public void errorEvent() throws Exception {
+        testString("", "new ErrorEvent('error')");
+    }
 }

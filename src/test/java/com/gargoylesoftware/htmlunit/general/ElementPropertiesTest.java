@@ -3821,18 +3821,75 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "dataTransfer",
-            EDGE = "dataTransfer",
-            FF = "dataTransfer,initDragEvent()",
-            FF78 = "dataTransfer,initDragEvent()",
-            IE = "dataTransfer,initDragEvent(),msConvertURL()")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF78 = "-",
-            FF = "-",
-            IE = "-")
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,dataTransfer,defaultPrevented,detail,"
+                + "eventPhase,fromElement,getModifierState(),initEvent(),initMouseEvent(),initUIEvent(),isTrusted,"
+                + "layerX,layerY,metaKey,movementX,movementY,NONE,offsetX,offsetY,pageX,pageY,path,preventDefault(),"
+                + "relatedTarget,returnValue,screenX,screenY,shiftKey,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,toElement,type,view,which,x,y",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,dataTransfer,defaultPrevented,detail,"
+                + "eventPhase,fromElement,getModifierState(),initEvent(),initMouseEvent(),initUIEvent(),isTrusted,"
+                + "layerX,layerY,metaKey,movementX,movementY,NONE,offsetX,offsetY,pageX,pageY,path,preventDefault(),"
+                + "relatedTarget,returnValue,screenX,screenY,shiftKey,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,toElement,type,view,which,x,y",
+            FF = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,"
+                + "dataTransfer,defaultPrevented,detail,eventPhase,explicitOriginalTarget,getModifierState(),"
+                + "initDragEvent(),initEvent(),initMouseEvent(),initNSMouseEvent(),initUIEvent(),isTrusted,"
+                + "layerX,layerY,META_MASK,metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
+                + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
+                + "mozInputSource,mozPressure,NONE,offsetX,offsetY,originalTarget,pageX,pageY,preventDefault(),"
+                + "rangeOffset,rangeParent,region,relatedTarget,returnValue,screenX,screenY,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which,x,y",
+            FF78 = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,"
+                + "dataTransfer,defaultPrevented,detail,eventPhase,explicitOriginalTarget,getModifierState(),"
+                + "initDragEvent(),initEvent(),initMouseEvent(),initNSMouseEvent(),initUIEvent(),isTrusted,"
+                + "layerX,layerY,META_MASK,metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
+                + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
+                + "mozInputSource,mozPressure,NONE,offsetX,offsetY,originalTarget,pageX,pageY,preventDefault(),"
+                + "rangeOffset,rangeParent,region,relatedTarget,returnValue,screenX,screenY,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which,x,y",
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,ctrlKey,currentTarget,dataTransfer,defaultPrevented,detail,deviceSessionId,"
+                + "eventPhase,fromElement,getModifierState(),initDragEvent(),initEvent(),initMouseEvent(),"
+                + "initUIEvent(),isTrusted,layerX,layerY,metaKey,msConvertURL(),offsetX,offsetY,pageX,pageY,"
+                + "preventDefault(),relatedTarget,screenX,screenY,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,toElement,type,view,which,x,y")
+    @HtmlUnitNYI(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "initEvent(),initMouseEvent(),initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),"
+                + "returnValue,screenX,screenY,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "initEvent(),initMouseEvent(),initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),"
+                + "returnValue,screenX,screenY,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            FF78 = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "eventPhase,initEvent(),initMouseEvent(),initUIEvent(),META_MASK,metaKey,MOZ_SOURCE_CURSOR,"
+                + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
+                + "MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,preventDefault(),returnValue,screenX,screenY,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "eventPhase,initEvent(),initMouseEvent(),initUIEvent(),META_MASK,metaKey,MOZ_SOURCE_CURSOR,"
+                + "MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,"
+                + "MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,preventDefault(),returnValue,screenX,screenY,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,which",
+            IE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initMouseEvent(),initUIEvent(),metaKey,pageX,pageY,preventDefault(),screenX,screenY,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
+                + "type,view,which")
     public void dragEvent() throws Exception {
-        testString("", "document.createEvent('DragEvent'), document.createEvent('MouseEvent')");
+        testString("", "document.createEvent('DragEvent')");
     }
 
     /**
@@ -5260,5 +5317,45 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "target,timeStamp,type")
     public void deviceMotionEvent() throws Exception {
         testString("", "new DeviceMotionEvent('motion')");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,error,eventPhase,filename,initEvent(),"
+                + "isTrusted,lineno,message,NONE,path,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,error,eventPhase,filename,initEvent(),"
+                + "isTrusted,lineno,message,NONE,path,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,error,eventPhase,"
+                + "explicitOriginalTarget,filename,initEvent(),isTrusted,lineno,message,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,colno,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,error,eventPhase,"
+                + "explicitOriginalTarget,filename,initEvent(),isTrusted,lineno,message,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),returnValue,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type")
+    public void errorEvent() throws Exception {
+        testString("", "new ErrorEvent('error')");
     }
 }

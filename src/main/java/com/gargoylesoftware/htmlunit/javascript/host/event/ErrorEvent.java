@@ -22,6 +22,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code ErrorEvent}.
  *
@@ -34,7 +36,18 @@ public class ErrorEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
     public ErrorEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }
