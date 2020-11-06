@@ -9781,4 +9781,23 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void errorEvent() throws Exception {
         testString("", "new ErrorEvent('error')");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),gamepad",
+            EDGE = "constructor(),gamepad",
+            FF = "constructor(),gamepad",
+            FF78 = "constructor(),gamepad",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF78 = "constructor()",
+            FF = "constructor()")
+    public void gamepadEvent() throws Exception {
+        testString("", "new GamepadEvent('gamepad')");
+    }
 }
