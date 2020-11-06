@@ -20,6 +20,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code OfflineAudioCompletionEvent}.
@@ -34,5 +38,17 @@ public class OfflineAudioCompletionEvent extends Event {
      * Creates an instance.
      */
     public OfflineAudioCompletionEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @Override
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw ScriptRuntime.typeError("Illegal constructor call for OfflineAudioCompletionEvent");
     }
 }

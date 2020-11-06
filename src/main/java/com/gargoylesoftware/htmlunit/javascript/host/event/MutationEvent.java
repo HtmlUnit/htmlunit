@@ -14,8 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * JavaScript object representing a Mutation Event.
@@ -46,4 +55,15 @@ public class MutationEvent extends Event {
     public MutationEvent() {
     }
 
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @Override
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw ScriptRuntime.typeError("Illegal constructor call for MutationEvent");
+    }
 }

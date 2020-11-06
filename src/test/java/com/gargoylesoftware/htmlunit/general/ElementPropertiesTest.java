@@ -5458,4 +5458,45 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,gamepad,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),currentTarget,defaultPrevented,eventPhase,gamepad,initEvent(),"
+                + "isTrusted,NONE,path,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,gamepad,initEvent(),isTrusted,META_MASK,NONE,originalTarget,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,"
+                + "explicitOriginalTarget,gamepad,initEvent(),isTrusted,META_MASK,NONE,originalTarget,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type",
+            FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type")
+    public void pageTransitionEvent() throws Exception {
+        testString("", "new PageTransitionEvent('transition')");
+    }
 }
