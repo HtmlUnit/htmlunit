@@ -5499,4 +5499,23 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void pageTransitionEvent() throws Exception {
         testString("", "new PageTransitionEvent('transition')");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.SourceBufferList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
+                + "onremovesourcebuffer,removeEventListener()",
+            EDGE = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
+                + "onremovesourcebuffer,removeEventListener()",
+            FF = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
+                + "onremovesourcebuffer,removeEventListener()",
+            FF78 = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
+                + "onremovesourcebuffer,removeEventListener()",
+            IE = "addEventListener(),dispatchEvent(),item(),length,removeEventListener()")
+    public void sourceBufferList() throws Exception {
+        testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
+    }
 }

@@ -1096,6 +1096,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @HtmlUnitNYI(IE = "undefined")
+    public void deviceAcceleration() throws Exception {
+        test("DeviceAcceleration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("undefined")
     public void deviceLightEvent() throws Exception {
         test("DeviceLightEvent");
@@ -1116,7 +1127,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "undefined")
+            IE = "object")
     public void deviceOrientationEvent() throws Exception {
         test("DeviceOrientationEvent");
     }
@@ -1128,6 +1139,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void deviceProximityEvent() throws Exception {
         test("DeviceProximityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @HtmlUnitNYI(IE = "undefined")
+    public void deviceRotationRate() throws Exception {
+        test("DeviceRotationRate");
     }
 
     /**
@@ -3552,8 +3574,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
+    @Alerts("function")
     public void mediaSource() throws Exception {
         test("MediaSource");
     }
@@ -5056,8 +5077,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
+    @Alerts("function")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }
@@ -5066,8 +5086,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
+    @Alerts("function")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }

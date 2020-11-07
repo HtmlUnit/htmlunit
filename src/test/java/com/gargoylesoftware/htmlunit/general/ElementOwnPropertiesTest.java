@@ -540,7 +540,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor,Coordinates,Crypto,CSSFontFaceRule,CSSImportRule,CSSKeyframeRule,"
                 + "CSSKeyframesRule,CSSMediaRule,CSSNamespaceRule,CSSPageRule,CSSRule,CSSRuleList,"
                 + "CSSStyleDeclaration,CSSStyleRule,CSSStyleSheet,CustomEvent,DataTransfer,DataView(),"
-                + "Date(),decodeURI(),decodeURIComponent(),DeviceMotionEvent,"
+                + "Date(),decodeURI(),decodeURIComponent(),DeviceMotionEvent,DeviceOrientationEvent,"
                 + "devicePixelRatio,Document,document,DocumentFragment,"
                 + "DocumentType,DOMError,DOMException,DOMImplementation,DOMParser(),DOMSettableTokenList,"
                 + "DOMStringList,DOMStringMap,DOMTokenList,doNotTrack,DragEvent,Element,encodeURI(),"
@@ -555,9 +555,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "HTMLFieldSetElement,HTMLFontElement,HTMLFormElement,HTMLFrameElement,HTMLFrameSetElement,"
                 + "HTMLHeadElement,HTMLHeadingElement,HTMLHRElement,HTMLHtmlElement,HTMLIFrameElement,"
                 + "HTMLImageElement,HTMLInputElement,HTMLIsIndexElement,HTMLLabelElement,HTMLLegendElement,"
-                + "HTMLLIElement,HTMLLinkElement,HTMLMapElement,HTMLMarqueeElement,HTMLMediaElement,"
-                + "HTMLMenuElement",
-                "HTMLMetaElement,HTMLModElement,HTMLNextIdElement,HTMLObjectElement,"
+                + "HTMLLIElement,HTMLLinkElement,HTMLMapElement,HTMLMarqueeElement,HTMLMediaElement",
+                "HTMLMenuElement,HTMLMetaElement,HTMLModElement,HTMLNextIdElement,HTMLObjectElement,"
                 + "HTMLOListElement,HTMLOptGroupElement,HTMLOptionElement,HTMLParagraphElement,HTMLParamElement,"
                 + "HTMLPhraseElement,HTMLPreElement,HTMLProgressElement,HTMLQuoteElement,HTMLScriptElement,"
                 + "HTMLSelectElement,HTMLSourceElement,HTMLSpanElement,HTMLStyleElement,HTMLTableCaptionElement,"
@@ -568,7 +567,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "IDBOpenDBRequest,IDBRequest,IDBTransaction,IDBVersionChangeEvent,Image(),ImageData,Infinity,"
                 + "innerHeight,innerWidth,Int16Array(),Int32Array(),Int8Array(),InternalError(),Intl,isFinite(),"
                 + "isNaN(),JavaException(),JSON,KeyboardEvent,length,localStorage,Location,location,Map(),"
-                + "matchMedia(),Math,MediaError,MediaList,MediaQueryList,MessageChannel(),MessageEvent,MessagePort,"
+                + "matchMedia(),Math,MediaError,MediaList,MediaQueryList,MediaSource(),"
+                + "MessageChannel(),MessageEvent,MessagePort,"
                 + "MimeType,MimeTypeArray,MouseEvent,MouseWheelEvent,moveBy(),moveTo(),MSGestureEvent,MutationEvent,"
                 + "MutationObserver(),MutationRecord,name,NamedNodeMap,NaN,navigate(),Navigator,navigator,Node,"
                 + "NodeFilter,NodeIterator,NodeList,Number(),Object(),OES_element_index_uint,OES_standard_derivatives,"
@@ -594,7 +594,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "RegExp(),releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),Screen,screen,Script(),"
                 + "ScriptEngine(),ScriptEngineBuildVersion(),ScriptEngineMajorVersion(),ScriptEngineMinorVersion(),"
                 + "scroll(),scrollBy(),scrollTo(),Selection,self,sessionStorage,Set(),setInterval(),setTimeout(),"
-                + "showModalDialog(),showModelessDialog(),sortFunction(),status,Storage,StorageEvent,String(),"
+                + "showModalDialog(),showModelessDialog(),sortFunction(),SourceBuffer,SourceBufferList,"
+                + "status,Storage,StorageEvent,String(),"
                 + "StyleMedia,styleMedia,StyleSheet,StyleSheetList,SubtleCrypto,SVGAElement,SVGAngle,SVGAnimatedAngle,"
                 + "SVGAnimatedBoolean,SVGAnimatedEnumeration,SVGAnimatedInteger,SVGAnimatedLength,"
                 + "SVGAnimatedLengthList,"
@@ -9745,6 +9746,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DeviceMotionEvent}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -9764,7 +9767,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.ErrorEvent}.
      *
      * @throws Exception if the test fails
      */
@@ -9783,7 +9786,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent}.
      *
      * @throws Exception if the test fails
      */
@@ -9802,7 +9805,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent}.
      *
      * @throws Exception if the test fails
      */
@@ -9817,17 +9820,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "newValue,prevValue,relatedNode,REMOVAL",
             IE = "ADDITION,attrChange,attrName,constructor,initMutationEvent(),MODIFICATION,"
                 + "newValue,prevValue,relatedNode,REMOVAL")
-    @HtmlUnitNYI(CHROME = "ADDITION,constructor,MODIFICATION,REMOVAL",
-            EDGE = "ADDITION,constructor,MODIFICATION,REMOVAL",
-            FF78 = "ADDITION,constructor,MODIFICATION,REMOVAL",
-            FF = "ADDITION,constructor,MODIFICATION,REMOVAL",
+    @HtmlUnitNYI(CHROME = "ADDITION,constructor(),MODIFICATION,REMOVAL",
+            EDGE = "ADDITION,constructor(),MODIFICATION,REMOVAL",
+            FF78 = "ADDITION,constructor(),MODIFICATION,REMOVAL",
+            FF = "ADDITION,constructor(),MODIFICATION,REMOVAL",
             IE = "ADDITION,constructor,MODIFICATION,REMOVAL")
     public void mutationEvent() throws Exception {
         testString("", "document.createEvent('MutationEvent')");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.OfflineAudioCompletionEvent}.
      *
      * @throws Exception if the test fails
      */
@@ -9835,5 +9838,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts("exception")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.SourceBufferList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),length,onaddsourcebuffer,onremovesourcebuffer",
+            EDGE = "constructor(),length,onaddsourcebuffer,onremovesourcebuffer",
+            FF = "constructor(),length,onaddsourcebuffer,onremovesourcebuffer",
+            FF78 = "constructor(),length,onaddsourcebuffer,onremovesourcebuffer",
+            IE = "addEventListener(),constructor,dispatchEvent(),item(),length,removeEventListener()")
+    public void sourceBufferList() throws Exception {
+        testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
     }
 }
