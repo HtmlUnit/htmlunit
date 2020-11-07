@@ -26,7 +26,7 @@
         <htmlunitdriver.version>2.45.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.7.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitneko.version>2.45.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitcorejs.version>2.44.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>2.45.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.34.v20201102</jetty.version>
