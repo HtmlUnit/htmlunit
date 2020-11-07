@@ -12,6 +12,15 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="fix" dev="rbri">
+                CssParser: Generate correct type for rem dimensions.
+            </action>
+            <action type="add" dev="rbri">
+                CssParser: Support for the dimensions 'ch', 'vw', 'vh', 'vmin' and 'vmax' added.
+            </action>
+            <action type="update" dev="rbri">
+                CssParser: Back to JavaCC 7.0.4.
+            </action>
             <action type="update" dev="rbri">
                 DeviceMotionEvent is available in IE also.
             </action>
