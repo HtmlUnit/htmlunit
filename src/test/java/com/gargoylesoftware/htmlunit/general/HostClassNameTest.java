@@ -8226,11 +8226,12 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object SourceBuffer]",
-            CHROME = "function SourceBuffer() { [native code] }",
+    @Alerts(CHROME = "function SourceBuffer() { [native code] }",
             EDGE = "function SourceBuffer() { [native code] }",
             FF = "function SourceBuffer() {\n    [native code]\n}",
-            FF78 = "function SourceBuffer() {\n    [native code]\n}")
+            FF78 = "function SourceBuffer() {\n    [native code]\n}",
+            IE = "[object SourceBuffer]")
+    @HtmlUnitNYI(IE = "function SourceBuffer() {\n    [native code]\n}\n")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }
@@ -8239,11 +8240,12 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object SourceBufferList]",
-            CHROME = "function SourceBufferList() { [native code] }",
+    @Alerts(CHROME = "function SourceBufferList() { [native code] }",
             EDGE = "function SourceBufferList() { [native code] }",
             FF = "function SourceBufferList() {\n    [native code]\n}",
-            FF78 = "function SourceBufferList() {\n    [native code]\n}")
+            FF78 = "function SourceBufferList() {\n    [native code]\n}",
+            IE = "[object SourceBufferList]")
+    @HtmlUnitNYI(IE = "function SourceBufferList() {\n    [native code]\n}\n")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }

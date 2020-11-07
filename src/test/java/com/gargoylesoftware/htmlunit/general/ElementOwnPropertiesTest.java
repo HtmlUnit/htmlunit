@@ -594,7 +594,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "RegExp(),releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),Screen,screen,Script(),"
                 + "ScriptEngine(),ScriptEngineBuildVersion(),ScriptEngineMajorVersion(),ScriptEngineMinorVersion(),"
                 + "scroll(),scrollBy(),scrollTo(),Selection,self,sessionStorage,Set(),setInterval(),setTimeout(),"
-                + "showModalDialog(),showModelessDialog(),sortFunction(),SourceBuffer,SourceBufferList,"
+                + "showModalDialog(),showModelessDialog(),sortFunction(),SourceBuffer(),SourceBufferList(),"
                 + "status,Storage,StorageEvent,String(),"
                 + "StyleMedia,styleMedia,StyleSheet,StyleSheetList,SubtleCrypto,SVGAElement,SVGAngle,SVGAnimatedAngle,"
                 + "SVGAnimatedBoolean,SVGAnimatedEnumeration,SVGAnimatedInteger,SVGAnimatedLength,"
@@ -9851,6 +9851,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),length,onaddsourcebuffer,onremovesourcebuffer",
             FF78 = "constructor(),length,onaddsourcebuffer,onremovesourcebuffer",
             IE = "addEventListener(),constructor,dispatchEvent(),item(),length,removeEventListener()")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF78 = "exception",
+            IE = "exception")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
     }

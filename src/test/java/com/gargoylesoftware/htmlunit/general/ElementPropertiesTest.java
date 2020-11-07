@@ -5515,6 +5515,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF78 = "addEventListener(),dispatchEvent(),length,onaddsourcebuffer,"
                 + "onremovesourcebuffer,removeEventListener()",
             IE = "addEventListener(),dispatchEvent(),item(),length,removeEventListener()")
+    @HtmlUnitNYI(CHROME = "-",
+            EDGE = "-",
+            FF = "-",
+            FF78 = "-",
+            IE = "-")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
     }
