@@ -13,6 +13,9 @@
                 the method requires now the page as second parameter.
             </action>
             <action type="fix" dev="rbri">
+                Properties linkColor, aLinkColor, vLinkColor, bgColor, and fgColor moved from HtmlDocument to Document.
+            </action>
+            <action type="fix" dev="rbri">
                 CssParser: Generate correct type for rem dimensions.
             </action>
             <action type="add" dev="rbri">

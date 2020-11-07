@@ -14,13 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_OPEN_OVERWRITES_ABOUT_BLANK_LOCATION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -753,136 +751,6 @@ public class HTMLDocument extends Document {
     @Override
     public void setTitle(final String title) {
         getPage().setTitleText(title);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
-    public String getBgColor() {
-        String color = getPage().getBody().getAttribute("bgColor");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            color = "#ffffff";
-        }
-        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-            color = "#000000";
-        }
-        return color;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
-    public void setBgColor(final String color) {
-        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
-        body.setBgColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
-    public String getAlinkColor() {
-        String color = getPage().getBody().getAttribute("aLink");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            color = "#0000ff";
-        }
-        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-            color = "#000000";
-        }
-        return color;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
-    public void setAlinkColor(final String color) {
-        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
-        body.setALink(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
-    public String getLinkColor() {
-        String color = getPage().getBody().getAttributeDirect("link");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            color = "#0000ff";
-        }
-        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-            color = "#000000";
-        }
-        return color;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
-    public void setLinkColor(final String color) {
-        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
-        body.setLink(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
-    public String getVlinkColor() {
-        String color = getPage().getBody().getAttribute("vLink");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            color = "#800080";
-        }
-        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-            color = "#000000";
-        }
-        return color;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
-    public void setVlinkColor(final String color) {
-        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
-        body.setVLink(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
-    public String getFgColor() {
-        String color = getPage().getBody().getAttributeDirect("text");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
-            color = "#000000";
-        }
-        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
-            color = "#000000";
-        }
-        return color;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, FF, FF78})
-    public void setFgColor(final String color) {
-        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
-        body.setText(color);
     }
 
     /**

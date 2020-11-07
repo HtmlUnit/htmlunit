@@ -23,6 +23,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
@@ -133,6 +135,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -2114,17 +2117,36 @@ public class Document extends Node {
      * Returns the value of the {@code alinkColor} property.
      * @return the value of the {@code alinkColor} property
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getAlinkColor() {
-        return "#0000ff";
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            String color = ((HTMLBodyElement) body).getALink();
+            if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+                color = "#0000ff";
+            }
+            else if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+                color = "#000000";
+            }
+            return color;
+        }
+
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+            return "#0000ff";
+        }
+        return null;
     }
 
     /**
      * Sets the value of the {@code alinkColor} property.
      * @param color the value of the {@code alinkColor} property
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setAlinkColor(final String color) {
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            ((HTMLBodyElement) body).setALink(color);
+        }
     }
 
     /**
@@ -2132,9 +2154,24 @@ public class Document extends Node {
      * @return the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getBgColor() {
-        return "#ffffff";
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            String color = ((HTMLBodyElement) body).getBgColor();
+            if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+                color = "#ffffff";
+            }
+            else if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+                color = "#000000";
+            }
+            return color;
+        }
+
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+            return "#ffffff";
+        }
+        return null;
     }
 
     /**
@@ -2142,59 +2179,120 @@ public class Document extends Node {
      * @param color the value of the {@code bgColor} property
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setBgColor(final String color) {
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            ((HTMLBodyElement) body).setBgColor(color);
+        }
     }
 
     /**
      * Returns the value of the {@code fgColor} property.
      * @return the value of the {@code fgColor} property
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getFgColor() {
-        return "#000000";
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            String color = ((HTMLBodyElement) body).getText();
+            if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+                color = "#000000";
+            }
+            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+                color = "#000000";
+            }
+            return color;
+        }
+
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+            return "#000000";
+        }
+        return null;
     }
 
     /**
      * Sets the value of the {@code fgColor} property.
      * @param color the value of the {@code fgColor} property
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setFgColor(final String color) {
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            ((HTMLBodyElement) body).setText(color);
+        }
     }
 
     /**
      * Returns the value of the {@code linkColor} property.
      * @return the value of the {@code linkColor} property
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getLinkColor() {
-        return "#0000ff";
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            String color = ((HTMLBodyElement) body).getLink();
+            if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+                color = "#0000ff";
+            }
+            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+                color = "#000000";
+            }
+            return color;
+        }
+
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+            return "#0000ff";
+        }
+        return null;
     }
 
     /**
      * Sets the value of the {@code linkColor} property.
      * @param color the value of the {@code linkColor} property
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setLinkColor(final String color) {
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            ((HTMLBodyElement) body).setLink(color);
+        }
     }
 
     /**
      * Returns the value of the {@code vlinkColor} property.
      * @return the value of the {@code vlinkColor} property
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public String getVlinkColor() {
-        return "#800080";
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            String color = ((HTMLBodyElement) body).getVLink();
+            if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+                color = "#800080";
+            }
+            if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+                color = "#000000";
+            }
+            return color;
+        }
+
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+            return "#800080";
+        }
+        return null;
     }
 
     /**
      * Sets the value of the {@code vlinkColor} property.
      * @param color the value of the {@code vlinkColor} property
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setVlinkColor(final String color) {
+        final HTMLElement body = getBody();
+        if (body instanceof HTMLBodyElement) {
+            ((HTMLBodyElement) body).setVLink(color);
+        }
     }
 
     /**
