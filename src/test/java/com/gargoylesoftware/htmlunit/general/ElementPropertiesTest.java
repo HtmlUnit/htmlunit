@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -178,7 +179,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
     private static void collectStatistics(final BrowserVersion browserVersion, final DefaultCategoryDataset dataset,
             final StringBuilder html, final int[] counts) {
-        for (final Method method :ElementPropertiesTest.class.getMethods()) {
+        final Method[] methods = ElementPropertiesTest.class.getMethods();
+        Arrays.sort(methods, Comparator.comparing(Method::getName));
+        for (final Method method : methods) {
             if (method.isAnnotationPresent(Test.class)) {
 
                 final Alerts alerts = method.getAnnotation(Alerts.class);
