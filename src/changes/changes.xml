@@ -115,6 +115,9 @@
                 Method getPage(WebWindow, WebRequest, boolean) has to handle NoHttpResponseException
                 because this internal call is used by the WebDriver (regression from 2.44.0).
             </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.14.0.
+            </action>
         </release>
         <release version="2.44.0" date="October 3, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
             <action type="update" dev="rbri">
