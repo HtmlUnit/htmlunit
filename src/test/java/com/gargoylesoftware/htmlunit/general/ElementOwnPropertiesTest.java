@@ -9349,18 +9349,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF78 = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "alinkColor,bgColor,constructor(),cookie,dispatchEvent(),"
-                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),"
-                + "vlinkColor,write(),writeln()",
-            EDGE = "alinkColor,bgColor,constructor(),cookie,dispatchEvent(),"
-                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),"
-                + "vlinkColor,write(),writeln()",
-            FF78 = "alinkColor,bgColor,close(),constructor(),cookie,dispatchEvent(),documentElement,fgColor,"
-                + "getElementById(),getElementsByName(),getSelection(),head,linkColor,open(),"
-                + "vlinkColor,write(),writeln()",
-            FF = "alinkColor,bgColor,close(),constructor(),cookie,dispatchEvent(),documentElement,fgColor,"
-                + "getElementById(),getElementsByName(),getSelection(),head,linkColor,open(),"
-                + "vlinkColor,write(),writeln()",
+    @HtmlUnitNYI(CHROME = "constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
+                + "getSelection(),head,open(),write(),writeln()",
+            EDGE = "constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
+                + "getSelection(),head,open(),write(),writeln()",
+            FF78 = "close(),constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
+                + "getElementsByName(),getSelection(),head,open(),write(),writeln()",
+            FF = "close(),constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
+                + "getElementsByName(),getSelection(),head,open(),write(),writeln()",
             IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
                 + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {

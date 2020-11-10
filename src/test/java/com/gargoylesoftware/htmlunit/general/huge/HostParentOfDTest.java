@@ -123,8 +123,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _DeviceOrientationEvent_DeviceOrientationEvent() throws Exception {
         test("DeviceOrientationEvent", "DeviceOrientationEvent");
     }
@@ -2072,8 +2071,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _Event_DeviceOrientationEvent() throws Exception {
         test("Event", "DeviceOrientationEvent");
     }
