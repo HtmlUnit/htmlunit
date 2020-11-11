@@ -36,6 +36,7 @@ public class ErrorEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
 
             // TODO all properties
             + "  }\n";
@@ -44,7 +45,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false"},
+    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -67,7 +68,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(CHROME = {"[object ErrorEvent]", "undefined", "false", "false"},
+    @HtmlUnitNYI(CHROME = {"[object ErrorEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object ErrorEvent]", "undefined", "false", "false"},
             FF = {"[object ErrorEvent]", "undefined", "false", "false"},
                 FF78 = {"[object ErrorEvent]", "undefined", "false", "false"})
@@ -91,7 +92,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ErrorEvent]", "42", "false", "false"},
+    @Alerts(DEFAULT = {"[object ErrorEvent]", "42", "false", "false", "false"},
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -113,7 +114,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"[object ErrorEvent]", "null", "false", "false"},
+    @Alerts(DEFAULT =  {"[object ErrorEvent]", "null", "false", "false", "false"},
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -156,7 +157,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ErrorEvent]", "HtmlUnitEvent", "false", "false"},
+    @Alerts(DEFAULT = {"[object ErrorEvent]", "HtmlUnitEvent", "false", "false", "false"},
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -178,7 +179,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false"},
+    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -202,7 +203,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false"},
+    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

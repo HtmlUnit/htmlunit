@@ -40,6 +40,8 @@ public class UIEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
+
             + "    alert(event.view == window);\n"
             + "  }\n";
 
@@ -47,7 +49,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object UIEvent]", "event", "false", "false", "false"},
+    @Alerts(DEFAULT = {"[object UIEvent]", "event", "false", "false", "false", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -69,7 +71,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object UIEvent]", "event", "true", "false", "true"},
+    @Alerts(DEFAULT = {"[object UIEvent]", "event", "true", "false", "false", "true"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

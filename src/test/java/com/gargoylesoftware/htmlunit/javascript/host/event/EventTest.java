@@ -50,13 +50,14 @@ public class EventTest extends WebDriverTestCase {
         + "    alert(event.type);\n"
         + "    alert(event.bubbles);\n"
         + "    alert(event.cancelable);\n"
+        + "    alert(event.composed);\n"
         + "  }\n";
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -78,7 +79,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false", "false"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -102,7 +103,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false", "false"},
             IE = "exception")
     public void create_ctorWithDetailsBoolAsString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -126,7 +127,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false", "false"},
             IE = "exception")
     public void create_ctorWithDetailsBoolAsNumber() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -150,7 +151,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false", "false"},
             IE = "exception")
     public void create_ctorWithDetailsBoolAsObject() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -174,7 +175,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false", "false"},
             IE = "exception")
     public void create_ctorWithDetailsBoolAsUndefined() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -198,7 +199,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false"},
+    @Alerts(DEFAULT = {"[object Event]", "event", "false", "false", "false"},
             IE = "exception")
     public void create_ctorWithDetailsBoolAsNull() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -222,7 +223,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Event]", "", "false", "false"})
+    @Alerts(DEFAULT = {"[object Event]", "", "false", "false", "false"},
+            IE = {"[object Event]", "", "false", "false", "undefined"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -267,7 +269,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Event]", "event", "true", "false"})
+    @Alerts(DEFAULT = {"[object Event]", "event", "true", "false", "false"},
+            IE = {"[object Event]", "event", "true", "false", "undefined"})
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -686,7 +689,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"[object Event]", "load", "false", "false"})
+    @Alerts(DEFAULT = {"[object Event]", "load", "false", "false", "false"},
+            IE = {"[object Event]", "load", "false", "false", "undefined"})
     public void onload() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"

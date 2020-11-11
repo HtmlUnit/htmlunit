@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
                 the method requires now the page as second parameter.
             </action>
+            <action type="add" dev="rbri">
+                Property composed added to Event.
+            </action>
             <action type="fix" dev="rbri">
                 Properties linkColor, aLinkColor, vLinkColor, bgColor, and fgColor moved from HtmlDocument to Document.
             </action>

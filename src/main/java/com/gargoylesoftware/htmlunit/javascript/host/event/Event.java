@@ -696,4 +696,12 @@ public class Event extends SimpleScriptable {
             }
         }
     }
+
+    /**
+     * @return the return composed property
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF78})
+    public Object getComposed() {
+        return false;
+    }
 }

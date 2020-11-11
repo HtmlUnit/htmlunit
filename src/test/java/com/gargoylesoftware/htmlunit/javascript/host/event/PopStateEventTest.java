@@ -43,6 +43,8 @@ public class PopStateEventTest extends WebDriverTestCase {
         + "      alert(event.type);\n"
         + "      alert(event.bubbles);\n"
         + "      alert(event.cancelable);\n"
+        + "      alert(event.composed);\n"
+
         + "      alert(event.state);\n"
         + "    } else {\n"
         + "      alert('no event');\n"
@@ -53,7 +55,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "popstate", "false", "false", "null"},
+    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "popstate", "false", "false", "false", "null"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -75,7 +77,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "popstate", "true", "false", "2"},
+    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "popstate", "true", "false", "false", "2"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -100,9 +102,10 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
+    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "false", "null"},
             FF = "exception",
-            FF78 = "exception")
+            FF78 = "exception",
+            IE = {"[object PopStateEvent]", "null", "", "false", "false", "undefined", "null"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -123,9 +126,10 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
+    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "false", "null"},
             FF = "exception",
-            FF78 = "exception")
+            FF78 = "exception",
+            IE = {"[object PopStateEvent]", "null", "", "false", "false", "undefined", "null"})
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -212,7 +216,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no initPopStateEvent",
             FF = "exception ctor",
             FF78 = "exception ctor",
-            IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "html"})
+            IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "undefined", "html"})
     public void initPopStateEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

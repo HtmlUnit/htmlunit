@@ -36,6 +36,7 @@ public class CompositionEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
 
             + "    alert(event.view == window);\n"
 
@@ -46,7 +47,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", ""},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "false", ""},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -69,10 +70,10 @@ public class CompositionEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(CHROME = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""},
-            EDGE = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""},
-            FF = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""},
-                FF78 = {"[object CompositionEvent]", "undefined", "false", "false", "false", ""})
+    @HtmlUnitNYI(CHROME = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""},
+            EDGE = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""},
+            FF = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""},
+                FF78 = {"[object CompositionEvent]", "undefined", "false", "false", "false", "false", ""})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -93,7 +94,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CompositionEvent]", "42", "false", "false", "false", ""},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "42", "false", "false", "false", "false", ""},
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -115,7 +116,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"[object CompositionEvent]", "null", "false", "false", "false", ""},
+    @Alerts(DEFAULT =  {"[object CompositionEvent]", "null", "false", "false", "false", "false", ""},
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -158,7 +159,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CompositionEvent]", "HtmlUnitEvent", "false", "false", "false", ""},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "HtmlUnitEvent", "false", "false", "false", "false", ""},
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -180,7 +181,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "mozart"},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "false", "mozart"},
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -204,7 +205,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", ""},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "false", ""},
             IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -227,7 +228,7 @@ public class CompositionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "Html,Unit"},
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "composition", "false", "false", "false", "false", "Html,Unit"},
             IE = "exception")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

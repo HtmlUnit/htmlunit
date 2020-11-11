@@ -37,6 +37,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
 
             // TODO all properties
             + "  }\n";

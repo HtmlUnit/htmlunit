@@ -36,6 +36,8 @@ public class ProgressEventTest extends WebDriverTestCase {
         + "      alert(event.type);\n"
         + "      alert(event.bubbles);\n"
         + "      alert(event.cancelable);\n"
+        + "      alert(event.composed);\n"
+
         + "      alert(event.lengthComputable);\n"
         + "      alert(event.loaded);\n"
         + "      alert(event.total);\n"
@@ -48,7 +50,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ProgressEvent]", "progress", "false", "false", "false", "0", "0"},
+    @Alerts(DEFAULT = {"[object ProgressEvent]", "progress", "false", "false", "false", "false", "0", "0"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -70,7 +72,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ProgressEvent]", "test", "true", "false", "true", "234", "666"},
+    @Alerts(DEFAULT = {"[object ProgressEvent]", "test", "true", "false", "false", "true", "234", "666"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -98,7 +100,7 @@ public class ProgressEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = {"[object ProgressEvent]", "", "false", "false", "false", "0", "0"})
+            IE = {"[object ProgressEvent]", "", "false", "false", "undefined", "false", "0", "0"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

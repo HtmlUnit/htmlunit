@@ -40,6 +40,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
             + "  }\n";
 
     /**
@@ -65,7 +66,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object AudioProcessingEvent]", "audioprocessing", "false", "false"},
+    @Alerts(DEFAULT = {"[object AudioProcessingEvent]", "audioprocessing", "false", "false", "false"},
             FF = "exception",
             FF78 = "exception",
             IE = "exception")

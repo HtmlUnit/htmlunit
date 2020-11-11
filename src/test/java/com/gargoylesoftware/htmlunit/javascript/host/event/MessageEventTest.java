@@ -42,6 +42,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "      document.title += ' -' + event.type;\n"
             + "      document.title += ' -' + event.bubbles;\n"
             + "      document.title += ' -' + event.cancelable;\n"
+            + "      document.title += ' -' + event.composed;\n"
             + "      document.title += ' -' + event.data;\n"
             + "      document.title += ' -' + event.origin;\n"
             + "      document.title += ' -' + event.lastEventId;\n"
@@ -55,7 +56,8 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-null", "-", "-", "-null"},
+    @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-false",
+                            "-null", "-", "-", "-null"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -78,7 +80,7 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false",
+    @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-false",
                             "-test-data", "-test-origin", "-42", "-[object Window]"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
@@ -128,13 +130,13 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
     @NotYetImplemented(IE)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
-            expectedAlerts[5] += PORT;
+            expectedAlerts[6] += PORT;
             setExpectedAlerts(expectedAlerts);
         }
 
@@ -160,14 +162,14 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+    @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-false", "-hello",
                         "-http://localhost:", "-2", "-[object Window]"},
-            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
     public void initMessageEventPortsUndefined() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
-            expectedAlerts[5] += PORT;
+            expectedAlerts[6] += PORT;
             setExpectedAlerts(expectedAlerts);
         }
 
@@ -193,13 +195,13 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+    @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-false", "-hello",
                             "-http://localhost:", "-2", "-[object Window]"},
-            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
-        expectedAlerts[5] += PORT;
+        expectedAlerts[6] += PORT;
         setExpectedAlerts(expectedAlerts);
 
         final String origin = "http://localhost:" + PORT;

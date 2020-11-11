@@ -37,6 +37,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
         + "      document.title += ' -' + event.type;\n"
         + "      document.title += ' -' + event.bubbles;\n"
         + "      document.title += ' -' + event.cancelable;\n"
+        + "      document.title += ' -' + event.composed;\n"
         + "      document.title += ' -' + event.returnValue;\n"
         + "    } else {\n"
         + "      document.title += ' ' + 'no event';\n"
@@ -66,7 +67,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-", "-false", "-false", "-"},
+    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-", "-false", "-false", "-false", "-"},
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -89,7 +90,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-"},
+    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-false", "-"},
             IE = "exception")
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -113,7 +114,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-"},
+    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-false", "-"},
             IE = "exception")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -138,8 +139,8 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"},
-            IE = {"-[object Event]", "-beforeunload", "-true", "-false", "-undefined"})
+    @Alerts(DEFAULT = {"-[object Event]", "-beforeunload", "-true", "-false", "-false", "-true"},
+            IE = {"-[object Event]", "-beforeunload", "-true", "-false", "-undefined", "-undefined"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

@@ -36,6 +36,7 @@ public class GamepadEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
 
             // TODO all properties
             + "  }\n";
@@ -44,7 +45,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false"},
+    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -67,7 +68,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(CHROME = {"[object GamepadEvent]", "undefined", "false", "false"},
+    @HtmlUnitNYI(CHROME = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object GamepadEvent]", "undefined", "false", "false"},
             FF = {"[object GamepadEvent]", "undefined", "false", "false"},
                 FF78 = {"[object GamepadEvent]", "undefined", "false", "false"})
@@ -91,7 +92,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "42", "false", "false"},
+    @Alerts(DEFAULT = {"[object GamepadEvent]", "42", "false", "false", "false"},
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -113,7 +114,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"[object GamepadEvent]", "null", "false", "false"},
+    @Alerts(DEFAULT =  {"[object GamepadEvent]", "null", "false", "false", "false"},
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -156,7 +157,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "HtmlUnitEvent", "false", "false"},
+    @Alerts(DEFAULT = {"[object GamepadEvent]", "HtmlUnitEvent", "false", "false", "false"},
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -178,7 +179,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false"},
+    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -202,7 +203,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false"},
+    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -225,7 +226,7 @@ public class GamepadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false"},
+    @Alerts(DEFAULT = {"[object GamepadEvent]", "gamepad", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

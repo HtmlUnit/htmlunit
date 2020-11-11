@@ -36,6 +36,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
             + "    alert(event.type);\n"
             + "    alert(event.bubbles);\n"
             + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
 
             // + "    alert(event.acceleration);\n"
             // + "    alert(event.accelerationIncludingGravity);\n"
@@ -47,7 +48,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false"},
+    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false", "false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -70,10 +71,10 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(CHROME = {"[object DeviceMotionEvent]", "undefined", "false", "false"},
-            EDGE = {"[object DeviceMotionEvent]", "undefined", "false", "false"},
-            FF = {"[object DeviceMotionEvent]", "undefined", "false", "false"},
-                FF78 = {"[object DeviceMotionEvent]", "undefined", "false", "false"})
+    @HtmlUnitNYI(CHROME = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
+            EDGE = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
+            FF78 = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -94,7 +95,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "42", "false", "false"},
+    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "42", "false", "false", "false"},
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -116,7 +117,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT =  {"[object DeviceMotionEvent]", "null", "false", "false"},
+    @Alerts(DEFAULT =  {"[object DeviceMotionEvent]", "null", "false", "false", "false"},
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -159,7 +160,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "HtmlUnitEvent", "false", "false"},
+    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "HtmlUnitEvent", "false", "false", "false"},
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -181,7 +182,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false"},
+    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -205,7 +206,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false"},
+    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -228,7 +229,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false"},
+    @Alerts(DEFAULT = {"[object DeviceMotionEvent]", "motion", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
