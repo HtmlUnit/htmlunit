@@ -16,14 +16,19 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code TouchEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class TouchEvent extends UIEvent {
@@ -31,7 +36,18 @@ public class TouchEvent extends UIEvent {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public TouchEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }

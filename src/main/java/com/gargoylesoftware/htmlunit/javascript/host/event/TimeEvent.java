@@ -20,6 +20,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code TimeEvent}.
  *
@@ -32,7 +35,18 @@ public class TimeEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public TimeEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw ScriptRuntime.typeError("TimeEvent ctor is not available");
     }
 }
