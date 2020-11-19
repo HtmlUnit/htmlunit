@@ -2560,35 +2560,40 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param origin the requester
      */
     public void addCookie(final String cookieString, final URL pageUrl, final Object origin) {
-        final BrowserVersion browserVersion = getBrowserVersion();
         final CookieManager cookieManager = getCookieManager();
-        if (cookieManager.isCookiesEnabled()) {
-            final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
-            buffer.append("Set-Cookie: ");
-            buffer.append(cookieString);
+        if (!cookieManager.isCookiesEnabled()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Skipped adding cookie: '" + cookieString
+                        + "' because cookies are not enabled for the CookieManager.");
+            }
+            return;
+        }
 
-            final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
+        final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
+        buffer.append("Set-Cookie: ");
+        buffer.append(cookieString);
 
-            try {
-                final List<org.apache.http.cookie.Cookie> cookies =
-                        cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
+        final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
 
-                for (final org.apache.http.cookie.Cookie cookie : cookies) {
-                    final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
-                    cookieManager.addCookie(htmlUnitCookie);
+        try {
+            final List<org.apache.http.cookie.Cookie> cookies =
+                    cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
 
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Added cookie: '" + cookieString + "'");
-                    }
+            for (final org.apache.http.cookie.Cookie cookie : cookies) {
+                final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
+                cookieManager.addCookie(htmlUnitCookie);
+
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Added cookie: '" + cookieString + "'");
                 }
             }
-            catch (final MalformedCookieException e) {
-                getIncorrectnessListener().notify("set-cookie http-equiv meta tag: invalid cookie '"
-                        + cookieString + "'; reason: '" + e.getMessage() + "'.", origin);
-            }
         }
-        else if (LOG.isDebugEnabled()) {
-            LOG.debug("Skipped adding cookie: '" + cookieString + "'");
+        catch (final MalformedCookieException e) {
+            if (LOG.isDebugEnabled()) {
+                LOG.warn("Adding cookie '" + cookieString + "' failed; reason: '" + e.getMessage() + "'.");
+            }
+            getIncorrectnessListener().notify("Adding cookie '" + cookieString
+                        + "' failed; reason: '" + e.getMessage() + "'.", origin);
         }
     }
 
