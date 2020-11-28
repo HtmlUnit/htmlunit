@@ -179,6 +179,9 @@ public final class StyleAttributes {
         /** The style property {@code appearance}. */
         APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ffLatest("none")),
 
+        /** The style property {@code ascentOverride}. */
+        ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
+
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
 
@@ -295,13 +298,13 @@ public final class StyleAttributes {
         BORDER("border", "border", chromeAndEdge("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code borderBlock}. */
-        BORDER_BLOCK("borderBlock", "border-block", ff("")),
+        BORDER_BLOCK("borderBlock", "border-block", chromeAndEdge("0px none rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-block}. */
         BORDER_BLOCK_("border-block", "border-block", ff("")),
 
         /** The style property {@code borderBlockColor}. */
-        BORDER_BLOCK_COLOR("borderBlockColor", "border-block-color", ff("")),
+        BORDER_BLOCK_COLOR("borderBlockColor", "border-block-color", chromeAndEdge("rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-block-color}. */
         BORDER_BLOCK_COLOR_("border-block-color", "border-block-color", ff("")),
@@ -365,13 +368,13 @@ public final class StyleAttributes {
                 ff("0px")),
 
         /** The style property {@code borderBlockStyle}. */
-        BORDER_BLOCK_STYLE("borderBlockStyle", "border-block-style", ff("")),
+        BORDER_BLOCK_STYLE("borderBlockStyle", "border-block-style", chromeAndEdge("none"), ff("")),
 
         /** The style property {@code border-block-style}. */
         BORDER_BLOCK_STYLE_("border-block-style", "border-block-style", ff("")),
 
         /** The style property {@code borderBlockWidth}. */
-        BORDER_BLOCK_WIDTH("borderBlockWidth", "border-block-width", ff("")),
+        BORDER_BLOCK_WIDTH("borderBlockWidth", "border-block-width", chromeAndEdge("0px"), ff("")),
 
         /** The style property {@code border-block-width}. */
         BORDER_BLOCK_WIDTH_("border-block-width", "border-block-width", ff("")),
@@ -482,13 +485,13 @@ public final class StyleAttributes {
         BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff("1")),
 
         /** The style property {@code borderInline}. */
-        BORDER_INLINE("borderInline", "border-inline", ff("")),
+        BORDER_INLINE("borderInline", "border-inline", chromeAndEdge("0px none rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-inline}. */
         BORDER_INLINE_("border-inline", "border-inline", ff("")),
 
         /** The style property {@code borderInlineColor}. */
-        BORDER_INLINE_COLOR("borderInlineColor", "border-inline-color", ff("")),
+        BORDER_INLINE_COLOR("borderInlineColor", "border-inline-color", chromeAndEdge("rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-inline-color}. */
         BORDER_INLINE_COLOR_("border-inline-color", "border-inline-color", ff("")),
@@ -554,13 +557,13 @@ public final class StyleAttributes {
                 ff("0px")),
 
         /** The style property {@code borderInlineStyle}. */
-        BORDER_INLINE_STYLE("borderInlineStyle", "border-inline-style", ff("")),
+        BORDER_INLINE_STYLE("borderInlineStyle", "border-inline-style", chromeAndEdge("none"), ff("")),
 
         /** The style property {@code border-inline-style}. */
         BORDER_INLINE_STYLE_("border-inline-style", "border-inline-style", ff("")),
 
         /** The style property {@code borderInlineWidth}. */
-        BORDER_INLINE_WIDTH("borderInlineWidth", "border-inline-color", ff("")),
+        BORDER_INLINE_WIDTH("borderInlineWidth", "border-inline-color", chromeAndEdge("0px"), ff("")),
 
         /** The style property {@code border-inline-width}. */
         BORDER_INLINE_WIDTH_("border-inline-width", "border-inline-color", ff("")),
@@ -903,6 +906,9 @@ public final class StyleAttributes {
 
         /** The style property {@code d}. */
         D("d", "d", chromeAndEdge("none")),
+
+        /** The style property {@code descentOverride}. */
+        DESCENT_OVERRIDE("descentOverride", "descent-dverride", chromeAndEdge("")),
 
         /** The style property {@code direction}. */
         DIRECTION("direction", "direction", chromeAndEdge("ltr"), ff("ltr"), ie("ltr")),
@@ -1288,40 +1294,40 @@ public final class StyleAttributes {
         INLINE_SIZE_("inline-size", "inline-size", ff("1244px")),
 
         /** The style property {@code inset}. */
-        INSET("inset", "inset", ff("")),
+        INSET("inset", "inset", chromeAndEdge("auto"), ff("")),
 
         /** The style property {@code insetBlock}. */
-        INSET_BLOCK("insetBlock", "inset-block", ff("")),
+        INSET_BLOCK("insetBlock", "inset-block", chromeAndEdge("auto"), ff("")),
 
         /** The style property {@code inset-block}. */
         INSET_BLOCK_("inset-block", "inset-block", ff("")),
 
         /** The style property {@code insetBlockEnd}. */
-        INSET_BLOCK_END("insetBlockEnd", "inset-block-end", ff("auto")),
+        INSET_BLOCK_END("insetBlockEnd", "inset-block-end", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code inset-block-end}. */
         INSET_BLOCK_END_("inset-block-end", "inset-block-end", ff("auto")),
 
         /** The style property {@code insetBlockStart}. */
-        INSET_BLOCK_START("insetBlockStart", "inset-block-start", ff("auto")),
+        INSET_BLOCK_START("insetBlockStart", "inset-block-start", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code inset-block-start}. */
         INSET_BLOCK_START_("inset-block-start", "inset-block-start", ff("auto")),
 
         /** The style property {@code insetInline}. */
-        INSET_INLINE("insetInline", "inset-inline", ff("")),
+        INSET_INLINE("insetInline", "inset-inline", chromeAndEdge("auto"), ff("")),
 
         /** The style property {@code inset-inline}. */
         INSET_INLINE_("inset-inline", "inset-inline", ff("")),
 
         /** The style property {@code insetInlineEnd}. */
-        INSET_INLINE_END("insetInlineEnd", "inset-inline-end", ff("auto")),
+        INSET_INLINE_END("insetInlineEnd", "inset-inline-end", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code inset-inline-end}. */
         INSET_INLINE_END_("inset-inline-end", "inset-inline-end", ff("auto")),
 
         /** The style property {@code insetInlineStart}. */
-        INSET_INLINE_START("insetInlineStart", "inset-inline-start", ff("auto")),
+        INSET_INLINE_START("insetInlineStart", "inset-inline-start", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code inset-inline-start}. */
         INSET_INLINE_START_("inset-inline-start", "inset-inline-start", ff("auto")),
@@ -1392,6 +1398,9 @@ public final class StyleAttributes {
         /** The style property {@code line-break}. */
         LINE_BREAK_("line-break", "line-break", ff("auto")),
 
+        /** The style property {@code lineGapOverride}. */
+        LINE_GAP_OVERRIDE("lineGapOverride", "line-gap-oOverride", chromeAndEdge("")),
+
         /** The style property {@code lineHeight}. */
         LINE_HEIGHT("lineHeight", "line-height", ff("normal"),
                 ie("normal"), chromeAndEdge("normal")),
@@ -1428,7 +1437,7 @@ public final class StyleAttributes {
         MARGIN("margin", "margin", chromeAndEdge("0px"), ff(""), ie("")),
 
         /** The style property {@code marginBlock}. */
-        MARGIN_BLOCK("marginBlock", "margin-block", ff("")),
+        MARGIN_BLOCK("marginBlock", "margin-block", chromeAndEdge("0px"), ff("")),
 
         /** The style property {@code margin-block}. */
         MARGIN_BLOCK_("margin-block", "margin-block", ff("")),
@@ -1452,7 +1461,7 @@ public final class StyleAttributes {
         MARGIN_BOTTOM_("margin-bottom", "margin-bottom", ff("0px")),
 
         /** The style property {@code marginInline}. */
-        MARGIN_INLINE("marginInline", "margin-inline", ff("")),
+        MARGIN_INLINE("marginInline", "margin-inline", chromeAndEdge("0px"), ff("")),
 
         /** The style property {@code margin-inline}. */
         MARGIN_INLINE_("margin-inline", "margin-inline", ff("")),
@@ -2540,7 +2549,7 @@ public final class StyleAttributes {
         PADDING("padding", "padding", chromeAndEdge("0px"), ff(""), ie("")),
 
         /** The style property {@code paddingBlock}. */
-        PADDING_BLOCK("paddingBlock", "padding-block", ff("")),
+        PADDING_BLOCK("paddingBlock", "padding-block", chromeAndEdge("0px"), ff("")),
 
         /** The style property {@code padding-block}. */
         PADDING_BLOCK_("padding-block", "padding-block", ff("")),
@@ -2565,7 +2574,7 @@ public final class StyleAttributes {
         PADDING_BOTTOM_("padding-bottom", "padding-bottom", ff("0px")),
 
         /** The style property {@code paddingInline}. */
-        PADDING_INLINE("paddingInline", "padding-inline", ff("")),
+        PADDING_INLINE("paddingInline", "padding-inline", chromeAndEdge("0px"), ff("")),
 
         /** The style property {@code padding-inline}. */
         PADDING_INLINE_("padding-inline", "padding-inline", ff("")),
@@ -2720,7 +2729,7 @@ public final class StyleAttributes {
         POSITION("position", "position", chromeAndEdge("static"), ff("static"), ie("static")),
 
         /** The style property {@code quotes}. */
-        QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdge("")),
+        QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdge("auto")),
 
         /** The style property {@code r}. */
         R("r", "r", chromeAndEdge("0px"), ff("0px")),
@@ -3160,7 +3169,8 @@ public final class StyleAttributes {
         TEXT_DECORATION_STYLE_("text-decoration-style", "text-decoration-style", ff("solid")),
 
         /** The style property {@code textDecorationThickness}. */
-        TEXT_DECORATION_THICKNESS("textDecorationThickness", "text-decoration-thickness", ff("auto")),
+        TEXT_DECORATION_THICKNESS("textDecorationThickness", "text-decoration-thickness",
+                chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code text-decoration-thickness}. */
         TEXT_DECORATION_THICKNESS_("text-decoration-thickness", "text-decoration-thickness", ff("auto")),
@@ -3248,7 +3258,7 @@ public final class StyleAttributes {
         TEXT_TRANSFORM_("text-transform", "text-transform", ff("none")),
 
         /** The style property {@code textUnderlineOffset}. */
-        TEXT_UNDERLINE_OFFSET("textUnderlineOffset", "text-underline-offset", ff("auto")),
+        TEXT_UNDERLINE_OFFSET("textUnderlineOffset", "text-underline-offset", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code text-underline-offset}. */
         TEXT_UNDERLINE_OFFSET_("text-underline-offset", "text-underline-offset", ff("auto")),
@@ -3860,9 +3870,6 @@ public final class StyleAttributes {
         /** The style property {@code webkitFontFeatureSettings}. */
         WEBKIT_FONT_FEATURE_SETTINGS("webkitFontFeatureSettings", "webkit-font-feature-settings",
                 chromeAndEdge("normal")),
-
-        /** The style property {@code webkitFontSizeDelta}. */
-        WEBKIT_FONT_SIZE_DELTA("webkitFontSizeDelta", "webkit-font-size-delta", chromeAndEdge("")),
 
         /** The style property {@code webkitFontSmoothing}. */
         WEBKIT_FONT_SMOOTHING("webkitFontSmoothing", "webkit-font-smoothing", chromeAndEdge("auto")),

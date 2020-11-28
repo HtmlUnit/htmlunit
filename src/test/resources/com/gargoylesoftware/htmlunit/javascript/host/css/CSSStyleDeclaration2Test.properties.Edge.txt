@@ -13,6 +13,7 @@ animationName
 animationPlayState
 animationTimingFunction
 appearance
+ascentOverride
 backdropFilter
 backfaceVisibility
 background
@@ -32,6 +33,8 @@ backgroundSize
 baselineShift
 blockSize
 border
+borderBlock
+borderBlockColor
 borderBlockEnd
 borderBlockEndColor
 borderBlockEndStyle
@@ -40,6 +43,8 @@ borderBlockStart
 borderBlockStartColor
 borderBlockStartStyle
 borderBlockStartWidth
+borderBlockStyle
+borderBlockWidth
 borderBottom
 borderBottomColor
 borderBottomLeftRadius
@@ -54,6 +59,8 @@ borderImageRepeat
 borderImageSlice
 borderImageSource
 borderImageWidth
+borderInline
+borderInlineColor
 borderInlineEnd
 borderInlineEndColor
 borderInlineEndStyle
@@ -62,6 +69,8 @@ borderInlineStart
 borderInlineStartColor
 borderInlineStartStyle
 borderInlineStartWidth
+borderInlineStyle
+borderInlineWidth
 borderLeft
 borderLeftColor
 borderLeftStyle
@@ -121,6 +130,7 @@ cursor
 cx
 cy
 d
+descentOverride
 direction
 display
 dominantBaseline
@@ -182,6 +192,13 @@ imageRendering
 inherits
 initialValue
 inlineSize
+inset
+insetBlock
+insetBlockEnd
+insetBlockStart
+insetInline
+insetInlineEnd
+insetInlineStart
 isolation
 justifyContent
 justifyItems
@@ -191,15 +208,18 @@ length
 letterSpacing
 lightingColor
 lineBreak
+lineGapOverride
 lineHeight
 listStyle
 listStyleImage
 listStylePosition
 listStyleType
 margin
+marginBlock
 marginBlockEnd
 marginBlockStart
 marginBottom
+marginInline
 marginInlineEnd
 marginInlineStart
 marginLeft
@@ -248,9 +268,11 @@ overscrollBehaviorInline
 overscrollBehaviorX
 overscrollBehaviorY
 padding
+paddingBlock
 paddingBlockEnd
 paddingBlockStart
 paddingBottom
+paddingInline
 paddingInlineEnd
 paddingInlineStart
 paddingLeft
@@ -332,6 +354,7 @@ textDecorationColor
 textDecorationLine
 textDecorationSkipInk
 textDecorationStyle
+textDecorationThickness
 textIndent
 textOrientation
 textOverflow
@@ -339,6 +362,7 @@ textRendering
 textShadow
 textSizeAdjust
 textTransform
+textUnderlineOffset
 textUnderlinePosition
 top
 touchAction
@@ -432,7 +456,6 @@ webkitFlexGrow
 webkitFlexShrink
 webkitFlexWrap
 webkitFontFeatureSettings
-webkitFontSizeDelta
 webkitFontSmoothing
 webkitHighlight
 webkitHyphenateCharacter
