@@ -83,7 +83,6 @@ public class UIEventTest extends WebDriverTestCase {
             + "        'view': window\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "      alert(event.view);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
