@@ -334,7 +334,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
             CHROME = {"function", "true", "function get length() { [native code] }", "0", "0"},
-            EDGE = {"undefined", "false", "undefined", "exception"},
+            EDGE = {"function", "true", "function get length() { [native code] }", "0", "0"},
             IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
     @HtmlUnitNYI(CHROME = {"function", "true", "function length() { [native code] }", "0", "0"},
             EDGE = {"function", "true", "function length() { [native code] }", "0", "0"})
