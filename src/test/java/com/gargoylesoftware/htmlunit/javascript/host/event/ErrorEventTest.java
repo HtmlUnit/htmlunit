@@ -69,9 +69,9 @@ public class ErrorEventTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     @HtmlUnitNYI(CHROME = {"[object ErrorEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object ErrorEvent]", "undefined", "false", "false"},
-            FF = {"[object ErrorEvent]", "undefined", "false", "false"},
-                FF78 = {"[object ErrorEvent]", "undefined", "false", "false"})
+            EDGE = {"[object ErrorEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object ErrorEvent]", "undefined", "false", "false", "false"},
+            FF78 = {"[object ErrorEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
