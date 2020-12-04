@@ -313,7 +313,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 5_500);\n"
+                + "    window.setTimeout(alertCookies, 5500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
@@ -597,7 +597,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 5_500);\n"
+                + "    window.setTimeout(alertCookies, 5500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
@@ -697,5 +697,49 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * Test for issue #270.
+     * @throws Exception in case of error
+     *
+     * This requires an entry in your hosts file
+     * 127.0.0.1       www.htmlunit-local.com
+     */
+    @Test
+    @Alerts("JDSessionID=1234567890")
+    public void issue270() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
+
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body><script>\n"
+
+            + "function setCookie(name, value, expires, path, domain, secure) {\n"
+            + "  var curCookie = name + '=' + escape(value) +\n"
+            + "    ((expires) ? '; expires=' + expires.toGMTString() : '') +\n"
+            + "    ((path) ? '; path=' + path : '') +\n"
+            + "    ((domain) ? '; domain=' + domain : '') +\n"
+            + "    ((secure) ? '; secure' : '');\n"
+
+            + "  document.cookie = curCookie;\n"
+            + "}\n"
+
+            + "var now = new Date();\n"
+            + "now.setTime(now.getTime() + 60 * 60 * 1000);\n"
+            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit-local.com');\n"
+
+//             + "alert('cookies: ' + document.cookie);\n"
+
+            + "</script></body>\n"
+            + "</html>";
+
+        final URL firstUrl = new URL("http://www.htmlunit-local.com:" + PORT + "/");
+        getMockWebConnection().setResponse(firstUrl, html);
+        loadPage2(html, firstUrl);
+
+        loadPageWithAlerts2(HTML_ALERT_COOKIE, firstUrl);
+
     }
 }
