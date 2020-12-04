@@ -31,6 +31,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -298,6 +299,34 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Test for document.cookie for cookies expired after the page was loaded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"cookies: first=1", "cookies: "})
+    public void setCookieTimeout() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>foo</title><script>\n"
+                + "  function alertCookies() {\n"
+                + "    alert('cookies: ' + document.cookie);\n"
+                + "  }\n"
+
+                + "  function test() {\n"
+                + "    alertCookies();\n"
+                + "    window.setTimeout(alertCookies, 5_500);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        final List<NameValuePair> responseHeader1 = new ArrayList<>();
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 5_000));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + ";"));
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader1);
+
+        loadPageWithAlerts2(URL_FIRST, 10_000);
+    }
+
+    /**
      * Regression test for bug 3081652: it seems that expiration date should be ignored if format is incorrect.
      * @throws Exception if the test fails
      */
@@ -556,8 +585,10 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"cookies: first=1", "cookies: "})
-    public void setCookieTimeout() throws Exception {
+    @Alerts(DEFAULT = {"cookies: first=1", "cookies: "},
+            IE = {})
+    @HtmlUnitNYI(IE = {"cookies: first=1", "cookies: "})
+    public void setCookieDuring302() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head><title>foo</title><script>\n"
                 + "  function alertCookies() {\n"
@@ -566,7 +597,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 3600);\n"
+                + "    window.setTimeout(alertCookies, 5_500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
@@ -575,12 +606,12 @@ public class CookieManagerTest extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_FIRST, "/foo/test.html");
 
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 3500));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 5_000));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
         responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl, 25_000);
+        loadPageWithAlerts2(firstUrl, 10_000);
     }
 
     /**

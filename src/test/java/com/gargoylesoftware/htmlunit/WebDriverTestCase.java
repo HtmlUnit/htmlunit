@@ -465,7 +465,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                 final InternetExplorerOptions options = new InternetExplorerOptions();
                 options.ignoreZoomSettings();
-                return new InternetExplorerDriver(options);
+
+                // clear the cookies - seems to be not done by the driver
+                final InternetExplorerDriver ieDriver = new InternetExplorerDriver(options);
+                ieDriver.manage().deleteAllCookies();
+                return ieDriver;
             }
 
             if (BrowserVersion.EDGE == getBrowserVersion()) {
