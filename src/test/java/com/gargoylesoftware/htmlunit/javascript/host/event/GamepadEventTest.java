@@ -69,9 +69,9 @@ public class GamepadEventTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     @HtmlUnitNYI(CHROME = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object GamepadEvent]", "undefined", "false", "false"},
-            FF = {"[object GamepadEvent]", "undefined", "false", "false"},
-                FF78 = {"[object GamepadEvent]", "undefined", "false", "false"})
+            EDGE = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object GamepadEvent]", "undefined", "false", "false", "false"},
+                FF78 = {"[object GamepadEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

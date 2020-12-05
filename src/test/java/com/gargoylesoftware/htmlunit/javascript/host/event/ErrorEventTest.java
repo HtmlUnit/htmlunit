@@ -226,7 +226,7 @@ public class ErrorEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false"},
+    @Alerts(DEFAULT = {"[object ErrorEvent]", "error", "false", "false", "false"},
             IE = "exception")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

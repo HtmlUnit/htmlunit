@@ -740,6 +740,5 @@ public class CookieManagerTest extends WebDriverTestCase {
         loadPage2(html, firstUrl);
 
         loadPageWithAlerts2(HTML_ALERT_COOKIE, firstUrl);
-
     }
 }
