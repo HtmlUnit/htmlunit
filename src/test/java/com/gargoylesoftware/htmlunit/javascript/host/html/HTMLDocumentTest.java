@@ -22,16 +22,17 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.http.client.utils.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -629,25 +630,67 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    @Alerts(DEFAULT = {"string", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            IE = {"string", "Fri, 16 Oct 2009 12:59:47 GMT"})
+    @HtmlUnitNYI(IE = {"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
     public void lastModified() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<>();
-        // TODO When ran with the IEDriver the IE is in a mysterious state after this test and cannot be restored
-        // to normal in an automatic way.
-        // All following tests will break until you restart your PC.
-        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE".equals(getBrowserVersion().getNickname()))) {
-            responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
-            testLastModified(responseHeaders);
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders);
 
-            // Last-Modified header has priority compared to Date header
-            responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
-            testLastModified(responseHeaders);
-        }
+        // for some strange reasons, the selenium driven browser is in an invalid
+        // state after this test
+        releaseResources();
+        shutDownAll();
+    }
 
-        // but Date is taken, if no Last-Modified header is present (if not IE)
+    /**
+     * Property lastModified returns the last modification date of the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"string", "Fri, 16 Oct 2009 13:59:47 GMT"},
+            IE = {"string", "Fri, 16 Oct 2009 12:59:47 GMT"})
+    @HtmlUnitNYI(IE = {"string", "Fri, 16 Oct 2009 13:59:47 GMT"})
+    public void lastModifiedAndDate() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders);
+
+        // Last-Modified header has priority compared to Date header
+        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+        testLastModified(responseHeaders);
+
+        // for some strange reasons, the selenium driven browser is in an invalid
+        // state after this test
+        releaseResources();
+        shutDownAll();
+    }
+
+    /**
+     * Property lastModified returns the last modification date of the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "§§URL§§"})
+    public void lastModifiedOnlyDate() throws Exception {
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.clear();
         responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
-        testLastModified(responseHeaders);
+
+        expandExpectedAlertsVariables(DateUtils.formatDate(new Date()).substring(0, 17));
+        final String html = "<html><head><title>foo</title><script>\n"
+                + "function doTest() {\n"
+                + "  alert(typeof document.lastModified);\n"
+                + "  var d = new Date(document.lastModified);\n"
+                + "  alert(d.toGMTString().substr(0, 17));\n" // to have results not depending on the user's time zone
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
+        loadPageWithAlerts2(URL_FIRST);
 
         // for some strange reasons, the selenium driven browser is in an invalid
         // state after this test
