@@ -827,7 +827,8 @@ public class HttpWebConnection implements WebConnection {
                     list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
                 }
                 else if (HttpHeader.USER_AGENT.equals(header)) {
-                    list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    list.add(new UserAgentHeaderHttpRequestInterceptor(headerValue!=null?headerValue:userAgent));
                 }
                 else if (HttpHeader.ACCEPT.equals(header)) {
                     final String headerValue = webRequest.getAdditionalHeader(header);
