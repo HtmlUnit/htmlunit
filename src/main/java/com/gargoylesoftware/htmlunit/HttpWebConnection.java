@@ -814,85 +814,80 @@ public class HttpWebConnection implements WebConnection {
         }
 
         // make sure the headers are added in the right order
-        final String userAgent = webClient_.getBrowserVersion().getUserAgent();
         final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
-        if (headerNames == null) {
-            list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
-            list.add(new RequestAddCookies());
-            list.add(new RequestClientConnControl());
-        }
-        else {
-            for (final String header : headerNames) {
-                if (HttpHeader.HOST.equals(header)) {
-                    list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
+        for (final String header : headerNames) {
+            if (HttpHeader.HOST.equals(header)) {
+                list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
+            }
+            else if (HttpHeader.USER_AGENT.equals(header)) {
+                String headerValue = webRequest.getAdditionalHeader(HttpHeader.USER_AGENT);
+                if (headerValue == null) {
+                    headerValue = webClient_.getBrowserVersion().getUserAgent();
                 }
-                else if (HttpHeader.USER_AGENT.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    list.add(new UserAgentHeaderHttpRequestInterceptor(headerValue!=null?headerValue:userAgent));
+                list.add(new UserAgentHeaderHttpRequestInterceptor(headerValue));
+            }
+            else if (HttpHeader.ACCEPT.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT);
+                if (headerValue != null) {
+                    list.add(new AcceptHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.ACCEPT.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new AcceptHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.ACCEPT_LANGUAGE.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE);
+                if (headerValue != null) {
+                    list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.ACCEPT_LANGUAGE.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.ACCEPT_ENCODING.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.ACCEPT_ENCODING);
+                if (headerValue != null) {
+                    list.add(new AcceptEncodingHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.ACCEPT_ENCODING.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new AcceptEncodingHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.SEC_FETCH_DEST.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_DEST);
+                if (headerValue != null) {
+                    list.add(new SecFetchDestHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.SEC_FETCH_DEST.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new SecFetchDestHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.SEC_FETCH_MODE.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_MODE);
+                if (headerValue != null) {
+                    list.add(new SecFetchModeHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.SEC_FETCH_MODE.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new SecFetchModeHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.SEC_FETCH_SITE.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_SITE);
+                if (headerValue != null) {
+                    list.add(new SecFetchSiteHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.SEC_FETCH_SITE.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new SecFetchSiteHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.SEC_FETCH_USER.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_FETCH_USER);
+                if (headerValue != null) {
+                    list.add(new SecFetchUserHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.SEC_FETCH_USER.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new SecFetchUserHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS);
+                if (headerValue != null) {
+                    list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(headerValue));
-                    }
+            }
+            else if (HttpHeader.REFERER.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.REFERER);
+                if (headerValue != null) {
+                    list.add(new RefererHeaderHttpRequestInterceptor(headerValue));
                 }
-                else if (HttpHeader.REFERER.equals(header)) {
-                    final String headerValue = webRequest.getAdditionalHeader(header);
-                    if (headerValue != null) {
-                        list.add(new RefererHeaderHttpRequestInterceptor(headerValue));
-                    }
-                }
-                else if (HttpHeader.CONNECTION.equals(header)) {
-                    list.add(new RequestClientConnControl());
-                }
-                else if (HttpHeader.COOKIE.equals(header)) {
-                    list.add(new RequestAddCookies());
-                }
-                else if (HttpHeader.DNT.equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
-                    list.add(new DntHeaderHttpRequestInterceptor("1"));
-                }
+            }
+            else if (HttpHeader.CONNECTION.equals(header)) {
+                list.add(new RequestClientConnControl());
+            }
+            else if (HttpHeader.COOKIE.equals(header)) {
+                list.add(new RequestAddCookies());
+            }
+            else if (HttpHeader.DNT.equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
+                list.add(new DntHeaderHttpRequestInterceptor("1"));
             }
         }
 
