@@ -297,6 +297,10 @@ public class ExternalTest {
 
     private static boolean isIgnored(@SuppressWarnings("unused") final String groupId,
             @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
+        if (groupId.startsWith("org.eclipse.jetty")
+                && (version.startsWith("11.") || version.startsWith("10."))) {
+            return true;
+        }
         return false;
     }
 
