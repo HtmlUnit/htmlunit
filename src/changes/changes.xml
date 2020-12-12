@@ -8,6 +8,21 @@
 
     <body>
         <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87">
+            <action type="fix" dev="rbri">
+                core-js: Fix parameter handling for Object.assign.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix the (confusing) exception msg if Object.prototype.setPrototypeOf is called with less than two parameters.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix JSON.stringify on a RegExp object; RegExp object is no longer callable.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Math.max/min - each element coerced.
+            </action>
+            <action type="add" dev="rbri" due-to="Dargonfly">
+                Support setting the USER_AGENT header per WebRequset.
+            </action>
             <action type="add" dev="rbri">
                 Constructor improved for StorageEvent, TimeEvent, TouchEvent, TrackEvent, TransitionEvent and WheelEvent.
             </action>
