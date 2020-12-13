@@ -1,0 +1,27 @@
+ 17 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.router" has 17 tests to run
+ PASSED test: Router API x ms
+ PASSED test: Registering a route by string x ms
+ PASSED test: Ensuring routes don't fire before startup x ms
+ PASSED test: Ensuring routes do fire after startup x ms
+ PASSED test: Ensuring that hash changes fire routes x ms
+ PASSED test: Ensuring that router.go fires changes x ms
+ PASSED test: Ensuring route doesn't fire after removal x ms
+ PASSED test: Registering a route by regexp x ms
+ PASSED test: Checking event object x ms
+ PASSED test: Checking extra arguments - string route x ms
+ PASSED test: Checking extra arguments - regex route x ms
+ PASSED test: Registering long routes with placeholders x ms
+ PASSED test: Using capture groups in a regex route x ms
+ PASSED test: Testing registerBefore x ms
+ PASSED test: Stopping propagation x ms
+ PASSED test: Preventing default (change) x ms
+ PASSED test: Default router path x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      17 tests in 1 groups
+      0 errors
+      0 failures

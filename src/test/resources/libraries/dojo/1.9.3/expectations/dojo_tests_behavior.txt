@@ -1,0 +1,18 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.behavior" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/behavior.html::t::add x ms
+ PASSED test: ../../dojo/tests/behavior.html::t::apply x ms
+ PASSED test: ../../dojo/tests/behavior.html::t::reapply x ms
+ PASSED test: ../../dojo/tests/behavior.html::t::topics x ms
+ PASSED test: ../../dojo/tests/behavior.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 1 groups
+      0 errors
+      0 failures

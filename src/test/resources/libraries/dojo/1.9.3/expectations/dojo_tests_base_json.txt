@@ -1,0 +1,15 @@
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.json" has 5 tests to run
+ PASSED test: toAndFromJson x ms
+ PASSED test: dojoExtendedJson x ms
+ PASSED test: prettyPrintJson x ms
+ PASSED test: evalJson x ms
+ PASSED test: toJsonStringObject x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 1 groups
+      0 errors
+      0 failures

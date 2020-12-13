@@ -1,0 +1,31 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.fx" has 1 test to run
+ 17 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 17 tests to run
+ PASSED test: ../../dojo/tests/_base/fx.html::t::fadeOut x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::fadeIn x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateColor x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateColorBack x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateHeight x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateHeight_defaults_syntax x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::inlineWidth x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim_defaults x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-fn-property x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-fn-property-return-fn x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-fn-prop-end x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-fn-prop-start x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-onend-node x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-beforebegin-node x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-onend-scope x ms
+ PASSED test: ../../dojo/tests/_base/fx.html::t::anim-onend-scope-natural x ms
+ PASSED test: ../../dojo/tests/_base/fx.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      18 tests in 1 groups
+      0 errors
+      0 failures

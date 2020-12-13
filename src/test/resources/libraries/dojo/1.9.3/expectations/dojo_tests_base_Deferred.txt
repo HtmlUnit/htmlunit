@@ -1,0 +1,32 @@
+ 21 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.Deferred" has 21 tests to run
+ debug from dojo.Deferred callback
+ PASSED test: callback x ms
+ PASSED test: callback_extra_args x ms
+ PASSED test: errback x ms
+ PASSED test: callbackTwice x ms
+ PASSED test: addBoth x ms
+ PASSED test: callbackNested x ms
+ PASSED test: simpleThen x ms
+ PASSED test: thenChaining x ms
+ PASSED test: simpleWhen x ms
+ PASSED test: progress x ms
+ PASSED test: cancelThenDerivative x ms
+ PASSED test: cancelPromiseValue x ms
+ PASSED test: errorResult x ms
+ PASSED test: globalLeak x ms
+ PASSED test: backAndForthProcess x ms
+ PASSED test: backAndForthProcessThen x ms
+ PASSED test: returnErrorObject x ms
+ PASSED test: returnErrorObjectThen x ms
+ PASSED test: errbackWithPromise x ms
+ PASSED test: testDojoPromiseProgressBasic x ms
+ PASSED test: testDojoPromiseProgressChain x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      21 tests in 1 groups
+      0 errors
+      0 failures

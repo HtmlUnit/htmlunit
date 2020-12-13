@@ -1,0 +1,17 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.window" has 1 test to run
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "_base/window" has 3 tests to run
+ PASSED test: ../../dojo/tests/_base/window.html::_base/window::withDoc x ms
+ PASSED test: ../../dojo/tests/_base/window.html::_base/window::withGlobal x ms
+ PASSED test: ../../dojo/tests/_base/window.html::_base/window::hasQuirks x ms
+ PASSED test: ../../dojo/tests/_base/window.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      4 tests in 1 groups
+      0 errors
+      0 failures

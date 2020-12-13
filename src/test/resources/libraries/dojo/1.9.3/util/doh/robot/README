@@ -1,0 +1,53 @@
+How to permanently accept DOHRobot.jar:
+Starting with Java 7u40, you can no longer accept a JAR file signed by an untrusted source.
+This will cause the robot to ask for permission to run on every test.
+To resolve this issue, in your Java Control Panel:
+1. Go to Security->Manage Certificates
+2. In the Certificate Type drop down at the top of the dialog, select Signer CA.
+3. Click Import and find root-ca.crt under util/doh/robot (you may need to change the filter to display All Files). You should now have The Dojo Foundation as a CA.
+4. Run a doh test.
+5. When the security dialog pops up, check Allow to run as usual. At the bottom of the dialog you will notice some new small blue text labeled something like "Show options." Expand that and check the box to permanently accept the applet.
+
+Notes on self-signing the JAR file (easy, but always asks for permission to run):
+
+PC
+--
+1. Download JDK 1.4.
+2. create key file called "key" (using keytool and jarsigner?)
+3. compilerobot.bat
+
+MAC
+---
+I used the version of java preinstalled and the mac and it seemed to work.
+
+1. create key file:
+
+  $ keytool -genkey -alias dojo
+
+2. Run compilerobot.sh (creates DOHRobot.jar):
+
+  $ sh compilerobot.sh
+
+  
+Notes on properly signing the JAR:
+The best way is to ask around for the magically signed dohrobot keystore.
+
+If you need to regenerate the signature because it expired or whatever, it is actually a big pain... you will need to set up openssl to have the same "Dojo Toolkit"ish names as the keytool command below
+The following REM stuff is the first time init to get the root-ca.key (better to just ask around for it):
+REM cd openssl
+REM cat "unique_subject = no" > index.txt.attr
+REM cat "01" > serial.txt
+REM openssl genrsa -des3 -out root-ca.key 1024
+REM openssl req -new -x509 -days 3650 -key root-ca.key -out root-ca.crt -config openssl.cnf
+REM cd ../
+REM keytool -genkey -dname "CN=, OU=Dojo Toolkit, O=The Dojo Foundation, ST=California, C=US" -validity 365 -alias dojo -keystore dohrobot < key
+del openssl\dohrobot_csr.pem
+keytool -certreq -alias dojo -file openssl\dohrobot_csr.pem -keystore dohrobot
+cd openssl
+openssl ca -verbose -config openssl.cnf -days 365 -in dohrobot_csr.pem -out dohrobot.pem -keyfile root-ca.key -cert root-ca.crt
+openssl x509 -in dohrobot.pem -out dohrobot.pem -outform PEM
+del dohrobot.chain
+copy dohrobot.pem + root-ca.crt dohrobot.chain
+REM FIXME: remove bad character from end of dohrobot.chain at this point, otherwise you will get an error about the cert being too big
+cd ../
+keytool -import -alias dojo -file openssl/dohrobot.chain -keystore dohrobot < key

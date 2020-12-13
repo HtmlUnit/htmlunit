@@ -1,0 +1,41 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.html" has 1 test to run
+ 19 tests to run in 5 groups
+ ------------------------------------------------------------
+ GROUP "basicChecks" has 12 tests to run
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::set x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::setContentWithOnEnd x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::setContent_with_parsing x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::emptyElement x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::changeContentTRHead x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::changeContentTHead x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::changeContentTRBody x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::changeContentTBody x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::changeContentTable x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::setNodeList x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::setMixedContent x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::basicChecks::extractContent x ms
+ ------------------------------------------------------------
+ GROUP "nodelistExtension" has 2 tests to run
+ PASSED test: ../../dojo/tests/html/test_set.html::nodelistExtension::nodelistHtml x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::nodelistExtension::nodeListSimple x ms
+ ------------------------------------------------------------
+ GROUP "fromMarkup" has 2 tests to run
+ PASSED test: ../../dojo/tests/html/test_set.html::fromMarkup::contentOpFromMarkup x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::fromMarkup::extendedContentOpFromMarkup x ms
+ ------------------------------------------------------------
+ GROUP "reuse" has 1 test to run
+ PASSED test: ../../dojo/tests/html/test_set.html::reuse::ContentSetterReUse x ms
+ ------------------------------------------------------------
+ GROUP "inherited" has 2 tests to run
+ PASSED test: ../../dojo/tests/html/test_set.html::inherited::unspecified x ms
+ PASSED test: ../../dojo/tests/html/test_set.html::inherited::specified x ms
+ PASSED test: ../../dojo/tests/html/test_set.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      20 tests in 1 groups
+      0 errors
+      0 failures

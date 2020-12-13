@@ -1,0 +1,23 @@
+ 13 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.connect" has 13 tests to run
+ PASSED test: smokeTest 0 ms
+ PASSED test: basicTest 0 ms
+ PASSED test: hubConnectDisconnect1000 12 ms
+ PASSED test: args4Test 0 ms
+ PASSED test: args3Test 0 ms
+ PASSED test: args2Test 0 ms
+ PASSED test: scopeTest1 0 ms
+ PASSED test: scopeTest2 0 ms
+ PASSED test: pubsub 0 ms
+ PASSED test: connectPublisher 0 ms
+ PASSED test: publishSubscribe1000 12 ms
+ PASSED test: performanceAdd 2 ms
+ PASSED test: performanceFire 8 ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      13 tests in 1 groups
+      0 errors
+      0 failures

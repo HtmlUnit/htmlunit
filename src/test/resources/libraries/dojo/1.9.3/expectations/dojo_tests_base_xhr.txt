@@ -1,0 +1,46 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.xhr" has 1 test to run
+ 32 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 32 tests to run
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::inputNodeValueFromId x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formNodeValueFromNode x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formNodeToObject x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formIdToObject x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToObjectRadioGroup x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToObjectWithMultiSelect x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::objectToQuery x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::objectToQueryArr x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToQuery x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToQueryArr x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToJson x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToJsonArr x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::queryToObject x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::textContentHandler x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsonContentHandler x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsonCFContentHandler x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsContentHandler x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xmlContentHandler x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGet x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGet404 x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetContent x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetForm x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetFormWithContent x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPost x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostWithContent x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostForm x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::rawXhrPost x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPut x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrDelete x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrCancel x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrXMLQueryable x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::ioPublish x ms
+ PASSED test: ../../dojo/tests/_base/xhr.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      33 tests in 1 groups
+      0 errors
+      0 failures
