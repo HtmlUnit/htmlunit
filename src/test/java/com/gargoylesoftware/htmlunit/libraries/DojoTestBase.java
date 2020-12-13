@@ -55,12 +55,13 @@ public abstract class DojoTestBase extends WebDriverTestCase {
      */
     abstract String getVersion();
 
+    abstract String getUrl(String module);
+
     void test(final String module) throws Exception {
         try {
 
             final WebDriver webdriver = getWebDriver();
-            final String url = URL_FIRST + "util/doh/runner.html?testModule=" + module;
-            webdriver.get(url);
+            webdriver.get(getUrl(module));
 
             final long runTime = 60 * DEFAULT_WAIT_TIME;
             final long endTime = System.currentTimeMillis() + runTime;
@@ -93,6 +94,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
 
             String expFileName = StringUtils.replace(module, ".", "");
             expFileName = StringUtils.replace(expFileName, "_", "");
+            expFileName = StringUtils.replace(expFileName, "/", "_");
             String expected = loadExpectation(expFileName);
             expected = StringUtils.replace(expected, "\r\n", "\n");
 
@@ -156,7 +158,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
                 normalized.append(ch);
             }
         }
-        return normalized.toString();
+        return normalized.toString().replaceAll("\\d+ ms", "x ms");
     }
 
     private String loadExpectation(final String expFileName) throws Exception {

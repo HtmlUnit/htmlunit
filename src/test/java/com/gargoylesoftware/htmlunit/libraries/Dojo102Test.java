@@ -40,6 +40,11 @@ public class Dojo102Test extends DojoTestBase {
         return "1.0.2";
     }
 
+    @Override
+    String getUrl(final String module) {
+        return URL_FIRST + "util/doh/runner.html?testModule=" + module;
+    }
+
     /**
      * @throws Exception if an error occurs
      */
