@@ -36,7 +36,7 @@
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.38</checkstyle.version>
         <spotbugs.version>4.2.0</spotbugs.version>
-        <pmd.version>6.29.0</pmd.version>
+        <pmd.version>6.30.0</pmd.version>
     </properties>
 
     <build>
@@ -291,7 +291,7 @@
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.10.0</version>
+                <version>1.10.1</version>
                 <executions>
                     <execution>
                         <goals>
