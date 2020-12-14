@@ -1,0 +1,247 @@
+225 tests to run in 5 groups
+ ------------------------------------------------------------
+ GROUP "tests.data.ObjectStore" has 8 tests to run
+     Error: test timeout in testFetchByIdentity
+     ERROR IN:  function...
+ FAILED test: testFetchByIdentity x ms
+     Error: test timeout in testQuery
+     ERROR IN:  function...
+ FAILED test: testQuery x ms
+ PASSED test: testNewItem x ms
+ PASSED test: testMemoryQuery x ms
+ PASSED test: testMemoryQueryEmpty x ms
+ PASSED test: testMemoryQueryWithWildcard x ms
+ PASSED test: testMemoryQueryWithEscapedWildcard x ms
+ PASSED test: testMemoryQueryWithWildcardCaseInsensitive x ms
+ ------------------------------------------------------------
+ GROUP "tests.data.utils" has 18 tests to run
+ PASSED test: testWildcardFilter_1 x ms
+ PASSED test: testWildcardFilter_2 x ms
+ PASSED test: testWildcardFilter_3 x ms
+ PASSED test: testWildcardFilter_4 x ms
+ PASSED test: testWildcardFilter_5 x ms
+ PASSED test: testWildcardFilter_caseInsensitive x ms
+ PASSED test: testSingleChar_1 x ms
+ PASSED test: testSingleChar_2 x ms
+ PASSED test: testBracketChar x ms
+ PASSED test: testBraceChar x ms
+ PASSED test: testParenChar x ms
+ PASSED test: testPlusChar x ms
+ PASSED test: testPeriodChar x ms
+ PASSED test: testBarChar x ms
+ PASSED test: testDollarSignChar x ms
+ PASSED test: testCarrotChar x ms
+ PASSED test: testEscapeChar x ms
+ PASSED test: testAbsoluteMatch x ms
+ ------------------------------------------------------------
+ GROUP "IFSCommonTests: dojo.data.ItemFileReadStore" has 80 tests to run
+ PASSED test: Identity API: fetchItemByIdentity() x ms
+ PASSED test: Identity API: fetchItemByIdentity() preventCache x ms
+ PASSED test: Identity API: fetchItemByIdentity() notFound x ms
+ PASSED test: Identity API: getIdentityAttributes() x ms
+ PASSED test: Identity API: fetchItemByIdentity() commentFilteredJson x ms
+ PASSED test: Identity API: fetchItemByIdentity() nullValue x ms
+ PASSED test: Identity API: fetchItemByIdentity() booleanValue x ms
+ PASSED test: Identity API: fetchItemByIdentity() withoutSpecifiedIdInData x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype item identifier x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype item identifier 2 x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype identity x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype identity 2 x ms
+ PASSED test: Identity API: getIdentity() x ms
+ PASSED test: Identity API: getIdentity() withoutSpecifiedId x ms
+ PASSED test: Read API: fetch() all x ms
+ PASSED test: Read API: fetch() all failOk x ms
+ PASSED test: Read API: fetch() abort x ms
+ PASSED test: Read API: fetch() all (count === Infinity) x ms
+ PASSED test: Read API: fetch() all PreventCache x ms
+ PASSED test: Read API: fetch() one x ms
+ PASSED test: Read API: fetch() shallow x ms
+ PASSED test: Read API: fetch() Multiple x ms
+ PASSED test: Read API: fetch() MultipleMixedFetch x ms
+ PASSED test: Read API: fetch() deep x ms
+ PASSED test: Read API: fetch() hierarchy off x ms
+ PASSED test: Read API: fetch() hierarchy off refs still parse x ms
+ PASSED test: Read API: fetch() one_commentFilteredJson x ms
+ PASSED test: Read API: fetch() withNull x ms
+ PASSED test: Read API: fetch() all_streaming x ms
+ PASSED test: Read API: fetch() paging x ms
+ PASSED test: Read API: fetch() with MultiType Match x ms
+ PASSED test: Read API: fetch() with RegExp Match x ms
+ PASSED test: Read API: fetch() with RegExp Match Inline x ms
+ PASSED test: Read API: fetch() with MultiType, MultiValue Match x ms
+ PASSED test: Read API: getLabel() x ms
+ PASSED test: Read API: getLabelAttributes() x ms
+ PASSED test: Read API: getValue() x ms
+ PASSED test: Read API: getValues() x ms
+ PASSED test: Read API: isItem() x ms
+ PASSED test: Read API: isItem() multistore x ms
+ PASSED test: Read API: hasAttribute() x ms
+ PASSED test: Read API: containsValue() x ms
+ PASSED test: Read API: getAttributes() x ms
+ PASSED test: Read API: getFeatures() x ms
+ PASSED test: Read API: fetch() patternMatch0 x ms
+ PASSED test: Read API: fetch() patternMatch1 x ms
+ PASSED test: Read API: fetch() patternMatch2 x ms
+ PASSED test: Read API: fetch() patternMatch_caseSensitive x ms
+ PASSED test: Read API: fetch() patternMatch_caseInsensitive x ms
+ PASSED test: Read API: fetch() sortNumeric x ms
+ PASSED test: Read API: fetch() sortNumericDescending x ms
+ PASSED test: Read API: fetch() sortNumericWithCount x ms
+ PASSED test: Read API: fetch() sortAlphabetic x ms
+ PASSED test: Read API: fetch() sortAlphabeticDescending x ms
+ PASSED test: Read API: fetch() sortDate x ms
+ PASSED test: Read API: fetch() sortDateDescending x ms
+ PASSED test: Read API: fetch() sortMultiple x ms
+ PASSED test: Read API: fetch() sortMultipleSpecialComparator x ms
+ PASSED test: Read API: fetch() sortAlphabeticWithUndefined x ms
+ PASSED test: Read API: errorCondition_idCollision_inMemory x ms
+ PASSED test: Read API: errorCondition_idCollision_xhr x ms
+ PASSED test: Read API: Date_datatype x ms
+ PASSED test: Read API: custom_datatype_Color_SimpleMapping x ms
+ PASSED test: Read API: custom_datatype_Color_GeneralMapping x ms
+ PASSED test: Read API: custom_datatype_CustomObject 0 (False) value x ms
+ PASSED test: Read API: custom_datatype_CustomObject Boolean False values x ms
+ PASSED test: Read API: custom_datatype_CustomObject Empty String values x ms
+ PASSED test: Read API: custom_datatype_CustomObject explicit null values x ms
+ PASSED test: Read API: custom_datatype_CustomObject explicit undefined value x ms
+ PASSED test: Read API: hierarchical_data x ms
+ PASSED test: Read API: close (clearOnClose: true) x ms
+ PASSED test: Read API: close (clearOnClose: true, reset url.) x ms
+ PASSED test: Read API: fetch, close (clearOnClose: true, reset url.) x ms
+ PASSED test: Read API: close (clearOnClose: true, reset _jsonFileUrl.) x ms
+ PASSED test: Read API: close (clearOnClose: false) x ms
+ PASSED test: Read API: close (clearOnClose: true, reset data.) x ms
+ PASSED test: Identity API: no_identifier_specified x ms
+ PASSED test: Identity API: hierarchical_data x ms
+ PASSED test: Read API: functionConformance x ms
+ PASSED test: Identity API: functionConformance x ms
+ ------------------------------------------------------------
+ GROUP "IFSCommonTests: dojo.data.ItemFileWriteStore" has 80 tests to run
+ PASSED test: Identity API: fetchItemByIdentity() x ms
+ PASSED test: Identity API: fetchItemByIdentity() preventCache x ms
+ PASSED test: Identity API: fetchItemByIdentity() notFound x ms
+ PASSED test: Identity API: getIdentityAttributes() x ms
+ PASSED test: Identity API: fetchItemByIdentity() commentFilteredJson x ms
+ PASSED test: Identity API: fetchItemByIdentity() nullValue x ms
+ PASSED test: Identity API: fetchItemByIdentity() booleanValue x ms
+ PASSED test: Identity API: fetchItemByIdentity() withoutSpecifiedIdInData x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype item identifier x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype item identifier 2 x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype identity x ms
+ PASSED test: Identity API: fetchItemByIdentity() Object.prototype identity 2 x ms
+ PASSED test: Identity API: getIdentity() x ms
+ PASSED test: Identity API: getIdentity() withoutSpecifiedId x ms
+ PASSED test: Read API: fetch() all x ms
+ PASSED test: Read API: fetch() all failOk x ms
+ PASSED test: Read API: fetch() abort x ms
+ PASSED test: Read API: fetch() all (count === Infinity) x ms
+ PASSED test: Read API: fetch() all PreventCache x ms
+ PASSED test: Read API: fetch() one x ms
+ PASSED test: Read API: fetch() shallow x ms
+ PASSED test: Read API: fetch() Multiple x ms
+ PASSED test: Read API: fetch() MultipleMixedFetch x ms
+ PASSED test: Read API: fetch() deep x ms
+ PASSED test: Read API: fetch() hierarchy off x ms
+ PASSED test: Read API: fetch() hierarchy off refs still parse x ms
+ PASSED test: Read API: fetch() one_commentFilteredJson x ms
+ PASSED test: Read API: fetch() withNull x ms
+ PASSED test: Read API: fetch() all_streaming x ms
+ PASSED test: Read API: fetch() paging x ms
+ PASSED test: Read API: fetch() with MultiType Match x ms
+ PASSED test: Read API: fetch() with RegExp Match x ms
+ PASSED test: Read API: fetch() with RegExp Match Inline x ms
+ PASSED test: Read API: fetch() with MultiType, MultiValue Match x ms
+ PASSED test: Read API: getLabel() x ms
+ PASSED test: Read API: getLabelAttributes() x ms
+ PASSED test: Read API: getValue() x ms
+ PASSED test: Read API: getValues() x ms
+ PASSED test: Read API: isItem() x ms
+ PASSED test: Read API: isItem() multistore x ms
+ PASSED test: Read API: hasAttribute() x ms
+ PASSED test: Read API: containsValue() x ms
+ PASSED test: Read API: getAttributes() x ms
+ PASSED test: Read API: getFeatures() x ms
+ PASSED test: Read API: fetch() patternMatch0 x ms
+ PASSED test: Read API: fetch() patternMatch1 x ms
+ PASSED test: Read API: fetch() patternMatch2 x ms
+ PASSED test: Read API: fetch() patternMatch_caseSensitive x ms
+ PASSED test: Read API: fetch() patternMatch_caseInsensitive x ms
+ PASSED test: Read API: fetch() sortNumeric x ms
+ PASSED test: Read API: fetch() sortNumericDescending x ms
+ PASSED test: Read API: fetch() sortNumericWithCount x ms
+ PASSED test: Read API: fetch() sortAlphabetic x ms
+ PASSED test: Read API: fetch() sortAlphabeticDescending x ms
+ PASSED test: Read API: fetch() sortDate x ms
+ PASSED test: Read API: fetch() sortDateDescending x ms
+ PASSED test: Read API: fetch() sortMultiple x ms
+ PASSED test: Read API: fetch() sortMultipleSpecialComparator x ms
+ PASSED test: Read API: fetch() sortAlphabeticWithUndefined x ms
+ PASSED test: Read API: errorCondition_idCollision_inMemory x ms
+ PASSED test: Read API: errorCondition_idCollision_xhr x ms
+ PASSED test: Read API: Date_datatype x ms
+ PASSED test: Read API: custom_datatype_Color_SimpleMapping x ms
+ PASSED test: Read API: custom_datatype_Color_GeneralMapping x ms
+ PASSED test: Read API: custom_datatype_CustomObject 0 (False) value x ms
+ PASSED test: Read API: custom_datatype_CustomObject Boolean False values x ms
+ PASSED test: Read API: custom_datatype_CustomObject Empty String values x ms
+ PASSED test: Read API: custom_datatype_CustomObject explicit null values x ms
+ PASSED test: Read API: custom_datatype_CustomObject explicit undefined value x ms
+ PASSED test: Read API: hierarchical_data x ms
+ PASSED test: Read API: close (clearOnClose: true) x ms
+ PASSED test: Read API: close (clearOnClose: true, reset url.) x ms
+ PASSED test: Read API: fetch, close (clearOnClose: true, reset url.) x ms
+ PASSED test: Read API: close (clearOnClose: true, reset _jsonFileUrl.) x ms
+ PASSED test: Read API: close (clearOnClose: false) x ms
+ PASSED test: Read API: close (clearOnClose: true, reset data.) x ms
+ PASSED test: Identity API: no_identifier_specified x ms
+ PASSED test: Identity API: hierarchical_data x ms
+ PASSED test: Read API: functionConformance x ms
+ PASSED test: Identity API: functionConformance x ms
+ ------------------------------------------------------------
+ GROUP "tests.data.ItemFileWriteStore" has 39 tests to run
+ PASSED test: test_getFeatures x ms
+ PASSED test: testWriteAPI_setValue x ms
+ PASSED test: testWriteAPI_setValues x ms
+ PASSED test: testWriteAPI_unsetAttribute x ms
+ PASSED test: testWriteAPI_newItem x ms
+ PASSED test: testWriteAPI_newItem_withParent x ms
+ PASSED test: testWriteAPI_newItem_multiple_withParent x ms
+ PASSED test: testWriteAPI_deleteItem x ms
+ PASSED test: testWriteAPI_isDirty x ms
+ PASSED test: testWriteAPI_revert x ms
+ PASSED test: testWriteAPI_save x ms
+ PASSED test: testWriteAPI_saveVerifyState x ms
+ PASSED test: testWriteAPI_saveEverything x ms
+ PASSED test: testWriteAPI_saveEverything_HierarchyOff x ms
+ PASSED test: testWriteAPI_saveEverything_withDateType x ms
+ PASSED test: testWriteAPI_saveEverything_withCustomColorTypeSimple x ms
+ PASSED test: testWriteAPI_saveEverything_withCustomColorTypeGeneral x ms
+ PASSED test: testWriteAPI_newItem_revert x ms
+ PASSED test: testWriteAPI_new_modify_revert x ms
+ PASSED test: testWriteAPI_new_modify_delete_revert x ms
+ PASSED test: testNotificationAPI_onSet x ms
+ PASSED test: testNotificationAPI_onNew x ms
+ PASSED test: testNotificationAPI_onDelete x ms
+ PASSED test: testReadAPI_functionConformanceToo x ms
+ PASSED test: testWriteAPI_functionConformance x ms
+ PASSED test: testNotificationAPI_functionConformance x ms
+ PASSED test: testIdentityAPI_noIdentifierSpecified x ms
+ PASSED test: testIdentityAPI_noIdentifierSpecified_revert x ms
+ PASSED test: testReferenceIntegrity_checkReferences x ms
+ PASSED test: testReferenceIntegrity_deleteReferencedItem x ms
+ PASSED test: testReferenceIntegrity_deleteReferencedItemThenRevert x ms
+ PASSED test: testReferenceIntegrity_deleteMultipleItemsWithReferencesAndRevert x ms
+ PASSED test: testReferenceIntegrity_removeReferenceFromAttribute x ms
+ PASSED test: testReferenceIntegrity_deleteReferencedItemNonParent x ms
+ PASSED test: testReferenceIntegrity_addReferenceToAttribute x ms
+ PASSED test: testReferenceIntegrity_newItemWithParentReference x ms
+ PASSED test: testReferenceIntegrity_newItemWithReferenceToExistingItem x ms
+ PASSED test: testReferenceIntegrity_disableReferenceIntegrity x ms
+ PASSED test: testReadAPI_close_dirty_failure x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      225 tests in 5 groups
+      2 errors
+      0 failures

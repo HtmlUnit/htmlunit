@@ -1,0 +1,120 @@
+ 5 tests to run in 5 groups
+ ------------------------------------------------------------
+ GROUP "parser" has 1 test to run
+ 55 tests to run in 12 groups
+ ------------------------------------------------------------
+ GROUP "basic tests" has 30 tests to run
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::parse x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testDataDojoId x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testJsId x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testStrProp x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testIntProp x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testArrProp x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testBoolProp x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testDateProp x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testUnwantedParams x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testDisabledFlag x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testCheckedFlag x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testFunctionProp x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::t.is(4, obj.preambleTestProp); x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::t.is(deepTestProp, obj.deepProp); x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testConnect x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testFunctionAssignment x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testSubNodeParse x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testMarkupFactory x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testMarkupFactoryClass x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testnostart x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::rootTest x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::cacheRefresh x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::recurse x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::simpleHTML5 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::html5inherited x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::html5withMethod x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testOnWatch x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testOn2 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testAspect x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::basic tests::testMID x ms
+ ------------------------------------------------------------
+ GROUP "BIDI" has 4 tests to run
+ PASSED test: ../../dojo/tests/parser/parser.html::BIDI::dirAttr x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::BIDI::langAttr x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::BIDI::textdirAttr x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::BIDI::inheritance from HTML x ms
+ ------------------------------------------------------------
+ GROUP "IE attribute detection" has 11 tests to run
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::input1 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::input2 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::input3 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::textarea x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::button1 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::button2 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::button3 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::button4 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::form1 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::form2 x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::IE attribute detection::li x ms
+ ------------------------------------------------------------
+ GROUP "mixed attribute specification" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::mixed attribute specification::mixed x ms
+ ------------------------------------------------------------
+ GROUP "functions" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::functions::onclick x ms
+ ------------------------------------------------------------
+ GROUP "parser.instantiate()" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::parser.instantiate()::instantiate1 x ms
+ ------------------------------------------------------------
+ GROUP "parser.construct()" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::parser.construct()::construct1 x ms
+ ------------------------------------------------------------
+ GROUP "data-dojo-mixins support" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::data-dojo-mixins support::mixins x ms
+ ------------------------------------------------------------
+ GROUP "behavioral" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::behavioral::doubleConnect x ms
+ ------------------------------------------------------------
+ GROUP "script type=dojo/require support" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::script type=dojo/require support::declarativeRequire x ms
+ ------------------------------------------------------------
+ GROUP "context require support" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parser.html::context require support::contextRequire x ms
+ ------------------------------------------------------------
+ GROUP "promise error handling support" has 2 tests to run
+ PASSED test: ../../dojo/tests/parser/parser.html::promise error handling support::asyncError x ms
+ PASSED test: ../../dojo/tests/parser/parser.html::promise error handling support::missingCtor x ms
+ PASSED test: ../../dojo/tests/parser/parser.html x ms
+ ------------------------------------------------------------
+ GROUP "parseOnLoad-auto-require" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "parseOnLoad auto-require" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parseOnLoadAutoRequire.html::parseOnLoad auto-require::parseOnLoad x ms
+ PASSED test: ../../dojo/tests/parser/parseOnLoadAutoRequire.html x ms
+ ------------------------------------------------------------
+ GROUP "parseOnLoad-declarative-require" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "parseOnLoad declarative-require" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parseOnLoadDeclarativeRequire.html::parseOnLoad declarative-require::parseOnLoad x ms
+ PASSED test: ../../dojo/tests/parser/parseOnLoadDeclarativeRequire.html x ms
+ ------------------------------------------------------------
+ GROUP "parser-args" has 1 test to run
+ 2 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "args scope test" has 2 tests to run
+ PASSED test: ../../dojo/tests/parser/parser-args.html::args scope test::noArgs x ms
+ PASSED test: ../../dojo/tests/parser/parser-args.html::args scope test::optionsOnly x ms
+ PASSED test: ../../dojo/tests/parser/parser-args.html x ms
+ ------------------------------------------------------------
+ GROUP "parser-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "async tests" has 1 test to run
+ PASSED test: ../../dojo/tests/parser/parserAsync.html::async tests::parse x ms
+ PASSED test: ../../dojo/tests/parser/parserAsync.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      65 tests in 5 groups
+      0 errors
+      0 failures

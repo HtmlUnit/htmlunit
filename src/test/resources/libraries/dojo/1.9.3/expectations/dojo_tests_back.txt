@@ -1,16 +1,13 @@
-4 tests to run in 1 groups
+1 tests to run in 1 groups
  ------------------------------------------------------------
- GROUP "tests.store.JsonRest" has 4 tests to run
- PASSED test: testGet x ms
- PASSED test: testQuery x ms
- PASSED test: testQueryIterative x ms
-     Error: test timeout in testHeaders
+ GROUP "tests.back" has 1 test to run
+     Error: test timeout in ../../dojo/tests/back.html
      ERROR IN:  function...
- FAILED test: testHeaders x ms
+ FAILED test: ../../dojo/tests/back.html x ms
  WOOHOO!!
  ------------------------------------------------------------
  | TEST SUMMARY:
  ------------------------------------------------------------
-      4 tests in 1 groups
+      1 tests in 1 groups
       1 errors
       0 failures

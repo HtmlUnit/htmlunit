@@ -1,0 +1,40 @@
+ 30 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.number" has 30 tests to run
+ PASSED test: number x ms
+ PASSED test: invalid x ms
+ PASSED test: round x ms
+ PASSED test: round_multiple x ms
+ PASSED test: round_speleotrove x ms
+ PASSED test: format x ms
+ PASSED test: parse x ms
+ PASSED test: format_icu4j3_6 x ms
+ PASSED test: format_patterns x ms
+ PASSED test: exponential x ms
+ PASSED test: format_quotes x ms
+ PASSED test: format_rounding x ms
+ PASSED test: format_scientific x ms
+ PASSED test: format_perMill x ms
+ PASSED test: format_grouping x ms
+ PASSED test: format_pad x ms
+ PASSED test: parse_icu4j3_6 x ms
+ PASSED test: parse_whitespace x ms
+ PASSED test: number_regression_1 x ms
+ PASSED test: number_regression_2 x ms
+ PASSED test: number_regression_3 x ms
+ PASSED test: number_regression_4 x ms
+ PASSED test: number_regression_5 x ms
+ PASSED test: number_regression_6 x ms
+ PASSED test: number_regression_7 x ms
+ PASSED test: number_regression_8 x ms
+ PASSED test: number_regression_9 x ms
+ PASSED test: number_regression_10 x ms
+ PASSED test: number_regression_11 x ms
+ PASSED test: number_regression_12 x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      30 tests in 1 groups
+      0 errors
+      0 failures

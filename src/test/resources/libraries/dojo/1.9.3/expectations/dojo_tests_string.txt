@@ -1,0 +1,16 @@
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.string" has 6 tests to run
+ PASSED test: test_string_pad x ms
+ PASSED test: test_string_substitute x ms
+ PASSED test: test_string_substitute_transform x ms
+ PASSED test: test_string_substitute_formatter x ms
+ PASSED test: test_string_trim x ms
+ PASSED test: test_string_rep x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      6 tests in 1 groups
+      0 errors
+      0 failures

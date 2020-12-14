@@ -1,0 +1,34 @@
+ 24 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.hash" has 24 tests to run
+ PASSED test: Getting an empty hash x ms
+ PASSED test: Setting an empty hash x ms
+ PASSED test: Getting the hash of 'test' x ms
+ PASSED test: Setting the hash to 'test' x ms
+ PASSED test: Getting the hash of 'test%20with%20spaces' x ms
+ PASSED test: Setting the hash of 'test%20with%20spaces' x ms
+ PASSED test: Getting the hash of 'test%23with%23encoded%23hashes' x ms
+ PASSED test: Setting the hash of 'test%23with%23encoded%23hashes' x ms
+ PASSED test: Getting the hash of 'test+with+pluses' x ms
+ PASSED test: Setting the hash to 'test+with+pluses' x ms
+ PASSED test: Getting the hash of '%20leadingSpace' x ms
+ PASSED test: Setting the hash to '%20leadingSpace' x ms
+ PASSED test: Getting the hash of 'trailingSpace%20' x ms
+ PASSED test: Setting the hash to 'trailingSpace%20' x ms
+ PASSED test: Getting the hash of 'under_score' x ms
+ PASSED test: Setting the hash to 'under_score' x ms
+ PASSED test: Getting the hash of 'extra&instring' x ms
+ PASSED test: Setting the hash to 'extra&instring' x ms
+ PASSED test: Getting the hash of 'extra?instring' x ms
+ PASSED test: Setting the hash of 'extra?instring' x ms
+ PASSED test: Getting the hash resembling a query parameter ('?testa=3&testb=test') x ms
+ PASSED test: Setting the hash resembling a query parameter ('?testa=3&testb=test') x ms
+ PASSED test: Setting the hash to '#leadingHash' should result in the hash being 'leadingHash' x ms
+ PASSED test: Hash change publishes to '/dojo/hashchange' x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      24 tests in 1 groups
+      0 errors
+      0 failures

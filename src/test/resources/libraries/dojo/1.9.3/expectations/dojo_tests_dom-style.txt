@@ -1,0 +1,15 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.dom-style" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "ungrouped" has 1 test to run
+ PASSED test: ../../dojo/tests/dom-style.html::ungrouped::getComputedStyle x ms
+ PASSED test: ../../dojo/tests/dom-style.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      2 tests in 1 groups
+      0 errors
+      0 failures

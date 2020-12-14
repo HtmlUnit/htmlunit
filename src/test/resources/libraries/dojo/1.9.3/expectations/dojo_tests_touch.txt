@@ -1,0 +1,19 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.touch" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "mouse events" has 5 tests to run
+ PASSED test: ../../dojo/tests/test_touch.html::mouse events::press x ms
+ PASSED test: ../../dojo/tests/test_touch.html::mouse events::move x ms
+ PASSED test: ../../dojo/tests/test_touch.html::mouse events::release x ms
+ PASSED test: ../../dojo/tests/test_touch.html::mouse events::cancel x ms
+ PASSED test: ../../dojo/tests/test_touch.html::mouse events::movePreventDefault x ms
+ PASSED test: ../../dojo/tests/test_touch.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      6 tests in 1 groups
+      0 errors
+      0 failures

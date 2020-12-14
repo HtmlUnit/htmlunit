@@ -1,0 +1,17 @@
+ 7 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.aspect" has 7 tests to run
+ PASSED test: before x ms
+ PASSED test: after x ms
+ PASSED test: afterMultiple x ms
+ PASSED test: around x ms
+ PASSED test: around2 x ms
+ PASSED test: multipleRemove x ms
+ PASSED test: delegation x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      7 tests in 1 groups
+      0 errors
+      0 failures

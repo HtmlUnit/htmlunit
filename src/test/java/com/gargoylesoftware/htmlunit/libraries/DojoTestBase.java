@@ -58,12 +58,16 @@ public abstract class DojoTestBase extends WebDriverTestCase {
     abstract String getUrl(String module);
 
     void test(final String module) throws Exception {
+        test(module, 60);
+    }
+
+    void test(final String module, final long waitTime) throws Exception {
         try {
 
             final WebDriver webdriver = getWebDriver();
             webdriver.get(getUrl(module));
 
-            final long runTime = 60 * DEFAULT_WAIT_TIME;
+            final long runTime = waitTime * DEFAULT_WAIT_TIME;
             final long endTime = System.currentTimeMillis() + runTime;
 
             // wait a bit to let the tests start

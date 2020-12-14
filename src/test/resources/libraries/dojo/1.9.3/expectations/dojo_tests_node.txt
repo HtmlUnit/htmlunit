@@ -1,0 +1,26 @@
+6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.node" has 6 tests to run
+     Error: node plugin failed to load because environment is not Node.js
+     ERROR IN:  function...
+ FAILED test: testRequireBuiltIn x ms
+ PASSED test: testRequireMissing x ms
+     Error: test timeout in testRequireSimpleModule
+     ERROR IN:  function...
+ FAILED test: testRequireSimpleModule x ms
+     Error: test timeout in testRequireRequire
+     ERROR IN:  function...
+ FAILED test: testRequireRequire x ms
+     Error: test timeout in testRequirePackageJson
+     ERROR IN:  function...
+ FAILED test: testRequirePackageJson x ms
+     Error: test timeout in testRequireCommonJSAMD
+     ERROR IN:  function...
+ FAILED test: testRequireCommonJSAMD x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      6 tests in 1 groups
+      5 errors
+      0 failures

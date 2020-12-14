@@ -1,0 +1,22 @@
+ 12 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.Color" has 12 tests to run
+ PASSED test: testColor1 x ms
+ PASSED test: testColor2 x ms
+ PASSED test: testColor3 x ms
+ PASSED test: testColor4 x ms
+ PASSED test: testColor5 x ms
+ PASSED test: testColor6 x ms
+ PASSED test: testColor7 x ms
+ PASSED test: testColor8 x ms
+ PASSED test: testColor9 x ms
+ PASSED test: testColor10 x ms
+ PASSED test: testColor11 x ms
+ PASSED test: testColor12 x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      12 tests in 1 groups
+      0 errors
+      0 failures

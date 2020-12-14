@@ -1,0 +1,68 @@
+ 58 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.Deferred" has 58 tests to run
+ PASSED test: deferred receives result after resolving x ms
+ PASSED test: promise receives result after resolving x ms
+ PASSED test: resolve() returns promise x ms
+ PASSED test: isResolved() returns true after resolving x ms
+ PASSED test: isFulfilled() returns true after resolving x ms
+ PASSED test: resolve() is ignored after having been fulfilled x ms
+ PASSED test: resolve() throws error after having been fulfilled and strict x ms
+ PASSED test: resolve() results are cached x ms
+ PASSED test: resolve() is already bound to the deferred x ms
+ PASSED test: deferred receives result after rejecting x ms
+ PASSED test: promise receives result after rejecting x ms
+ PASSED test: reject() returns promise x ms
+ PASSED test: isRejected() returns true after rejecting x ms
+ PASSED test: isFulfilled() returns true after rejecting x ms
+ PASSED test: reject() is ignored after having been fulfilled x ms
+ PASSED test: reject() throws error after having been fulfilled and strict x ms
+ PASSED test: reject() results are cached x ms
+ PASSED test: reject() is already bound to the deferred x ms
+ PASSED test: deferred receives result after progress x ms
+ PASSED test: promise receives result after progres x ms
+ PASSED test: progress() returns promise x ms
+ PASSED test: isResolved() returns false after progress x ms
+ PASSED test: isRejected() returns false after progress x ms
+ PASSED test: isFulfilled() returns false after progress x ms
+ PASSED test: progress() is ignored after having been fulfilled x ms
+ PASSED test: progress() throws error after having been fulfilled and strict x ms
+ PASSED test: progress() results are not cached x ms
+ PASSED test: progress() with chaining x ms
+ PASSED test: after progress(), the progback return value is emitted on the returned promise x ms
+ PASSED test: progress() is already bound to the deferred x ms
+ PASSED test: cancel() invokes a canceler x ms
+ PASSED test: isCanceled() returns true after canceling x ms
+ PASSED test: isResolved() returns false after canceling x ms
+ PASSED test: isRejected() returns true after canceling x ms
+ PASSED test: isFulfilled() returns true after canceling x ms
+ PASSED test: cancel() is ignored after having been fulfilled x ms
+ PASSED test: cancel() throws error after having been fulfilled and strict x ms
+ PASSED test: cancel() without reason results in CancelError x ms
+ PASSED test: cancel() returns default reason x ms
+ PASSED test: reason is passed to canceler x ms
+ PASSED test: cancels with reason returned from canceler x ms
+ PASSED test: cancel() returns reason from canceler x ms
+ PASSED test: cancel() returns reason from canceler, if canceler rejects with reason x ms
+ PASSED test: with canceler not returning anything, returns default CancelError x ms
+ PASSED test: with canceler not returning anything, still returns passed reason x ms
+ PASSED test: cancel() doesn't reject promise if canceler resolves deferred x ms
+ PASSED test: cancel() doesn't reject promise if canceler resolves a chain of promises x ms
+ PASSED test: cancel() returns undefined if canceler resolves deferred x ms
+ PASSED test: cancel() doesn't change rejection value if canceler rejects deferred x ms
+ PASSED test: cancel() doesn't change rejection value if canceler rejects a chain of promises x ms
+ PASSED test: cancel() returns undefined if canceler rejects deferred x ms
+ PASSED test: cancel() a promise chain x ms
+ PASSED test: cancel() a returned promise x ms
+ PASSED test: cancel() is already bound to the deferred x ms
+ PASSED test: chained then() x ms
+ PASSED test: asynchronously chained then() x ms
+ PASSED test: then() is already bound to the deferred x ms
+ PASSED test: then() with progback: returned promise is not fulfilled when progress is emitted x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      58 tests in 1 groups
+      0 errors
+      0 failures

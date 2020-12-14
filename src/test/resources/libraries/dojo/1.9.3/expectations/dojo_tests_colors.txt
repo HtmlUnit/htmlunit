@@ -1,0 +1,36 @@
+ 26 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.colors" has 26 tests to run
+ PASSED test: testColorEx01 x ms
+ PASSED test: testColorEx02 x ms
+ PASSED test: testColorEx03 x ms
+ PASSED test: testColorEx04 x ms
+ PASSED test: testColorEx05 x ms
+ PASSED test: testColorEx06 x ms
+ PASSED test: testColorEx07 x ms
+ PASSED test: testColorEx08 x ms
+ PASSED test: testColorEx09 x ms
+ PASSED test: testColorEx10 x ms
+ PASSED test: testColorEx11 x ms
+ PASSED test: testColorEx12 x ms
+ PASSED test: testColorEx13 x ms
+ PASSED test: testColorEx14 x ms
+ PASSED test: testColorEx15 x ms
+ PASSED test: testColorEx16 x ms
+ PASSED test: testColorEx17 x ms
+ PASSED test: testColorEx18 x ms
+ PASSED test: testColorEx19 x ms
+ PASSED test: testColorEx20 x ms
+ PASSED test: testColorEx21 x ms
+ PASSED test: testColorEx22 x ms
+ PASSED test: testColorEx23 x ms
+ PASSED test: testColorEx24 x ms
+ PASSED test: testColorEx25 x ms
+ PASSED test: testColorEx26 x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      26 tests in 1 groups
+      0 errors
+      0 failures

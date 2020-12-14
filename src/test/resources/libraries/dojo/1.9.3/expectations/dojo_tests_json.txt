@@ -1,0 +1,53 @@
+ 39 tests to run in 3 groups
+ ------------------------------------------------------------
+ GROUP "tests.json" has 32 tests to run
+ PASSED test: simpleString x ms
+ PASSED test: simpleTrue x ms
+ PASSED test: simpleFalse x ms
+ PASSED test: simpleNull x ms
+ PASSED test: simpleNumber x ms
+ PASSED test: strictString x ms
+ PASSED test: strictEmptyString x ms
+ PASSED test: strictStringEsc x ms
+ PASSED test: strictTrue x ms
+ PASSED test: strictFalse x ms
+ PASSED test: strictNull x ms
+ PASSED test: strictNumber x ms
+ PASSED test: strictNumberNeg x ms
+ PASSED test: exponentNegative x ms
+ PASSED test: exponent x ms
+ PASSED test: array x ms
+ PASSED test: badCall x ms
+ PASSED test: badMath x ms
+ PASSED test: badIndex x ms
+ PASSED test: badKey x ms
+ PASSED test: badUnbalanced x ms
+ PASSED test: badUnbalanced2 x ms
+ PASSED test: badType x ms
+ PASSED test: badUnbalanced2 x ms
+ PASSED test: serializeString x ms
+ PASSED test: serializeNull x ms
+ PASSED test: serializeFunction x ms
+ PASSED test: serializeNaN x ms
+ PASSED test: serializeInfinity x ms
+ PASSED test: serializeDate x ms
+ PASSED test: serializeInherited x ms
+ PASSED test: serializeToJSON x ms
+ ------------------------------------------------------------
+ GROUP "tests.json.circular" has 1 test to run
+ PASSED test: serializeCircular x ms
+ ------------------------------------------------------------
+ GROUP "tests.json.performance" has 6 tests to run
+ PASSED test: small x ms
+ PASSED test: strictSmall x ms
+ PASSED test: medium x ms
+ PASSED test: strictMedium x ms
+ PASSED test: large x ms
+ PASSED test: strictLarge x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      39 tests in 3 groups
+      0 errors
+      0 failures

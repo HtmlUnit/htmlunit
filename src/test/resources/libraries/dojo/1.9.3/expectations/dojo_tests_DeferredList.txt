@@ -1,0 +1,24 @@
+ 8 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.DeferredList" has 8 tests to run
+ debug from dojo.DeferredList callback
+ PASSED test: callback x ms
+ debug from dojo.DeferredList callback
+ PASSED test: errback x ms
+ debug from dojo.DeferredList callback
+ PASSED test: mixed x ms
+ PASSED test: gather x ms
+ debug from dojo.DeferredList callback
+ PASSED test: callback x ms
+ debug from dojo.DeferredList callback
+ PASSED test: errback x ms
+ debug from dojo.DeferredList callback
+ PASSED test: mixed x ms
+ PASSED test: gather x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      8 tests in 1 groups
+      0 errors
+      0 failures

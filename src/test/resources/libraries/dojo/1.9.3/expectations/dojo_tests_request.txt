@@ -1,0 +1,85 @@
+ 9 tests to run in 6 groups
+ ------------------------------------------------------------
+ GROUP "tests.request.handlers" has 4 tests to run
+ PASSED test: textContentHandler x ms
+ PASSED test: jsonContentHandler x ms
+ PASSED test: jsContentHandler x ms
+ PASSED test: xmlContentHandler x ms
+ ------------------------------------------------------------
+ GROUP "tests.request.xhr" has 1 test to run
+ 16 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojo/request/xhr" has 16 tests to run
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrGet x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrGet404 x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrGetQuery x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrPost x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrPostWithQuery x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::rawXhrPost x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrPut x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrDelete x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrTimeout x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrCancel x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrSync x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrXDomainFail x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrHeaders x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrCustomContentType x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrXMLQueryable x ms
+ PASSED test: ../../dojo/tests/request/xhr.html::dojo/request/xhr::xhrFormData x ms
+ PASSED test: ../../dojo/tests/request/xhr.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.request.script" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojo/request/script" has 5 tests to run
+ PASSED test: ../../dojo/tests/request/script.html::dojo/request/script::load x ms
+ PASSED test: ../../dojo/tests/request/script.html::dojo/request/script::checkString x ms
+ PASSED test: ../../dojo/tests/request/script.html::dojo/request/script::jsonp x ms
+ PASSED test: ../../dojo/tests/request/script.html::dojo/request/script::jsonpTimeout x ms
+ PASSED test: ../../dojo/tests/request/script.html::dojo/request/script::jsonpCancel x ms
+ PASSED test: ../../dojo/tests/request/script.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.request.iframe" has 1 test to run
+ 10 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojo/request/iframe" has 10 tests to run
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetText x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostJson x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostWithoutForm x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJson x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetWithForm x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJavascript x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetHtml x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetXml x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeDataArray x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::iframeQueue x ms
+ PASSED test: ../../dojo/tests/request/iframe.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.request.registry" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojo/request/registry" has 5 tests to run
+ PASSED test: ../../dojo/tests/request/registry.html::dojo/request/registry::requestEqualsRegistry x ms
+ PASSED test: ../../dojo/tests/request/registry.html::dojo/request/registry::RegExp registration works x ms
+ PASSED test: ../../dojo/tests/request/registry.html::dojo/request/registry::Function registration works x ms
+ PASSED test: ../../dojo/tests/request/registry.html::dojo/request/registry::String registration works x ms
+ PASSED test: ../../dojo/tests/request/registry.html::dojo/request/registry::Fallback works x ms
+ PASSED test: ../../dojo/tests/request/registry.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.request.notify" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojo/request/notify" has 5 tests to run
+ PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::start/send x ms
+ PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::load x ms
+ PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::error x ms
+ PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::done/stop x ms
+ PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::cancel x ms
+ PASSED test: ../../dojo/tests/request/notify.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      50 tests in 6 groups
+      0 errors
+      0 failures

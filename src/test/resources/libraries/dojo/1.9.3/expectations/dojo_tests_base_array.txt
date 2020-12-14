@@ -1,0 +1,24 @@
+ 14 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.array" has 14 tests to run
+ PASSED test: testIndexOf x ms
+ PASSED test: testIndexOfFromIndex x ms
+ PASSED test: testLastIndexOf x ms
+ PASSED test: testLastIndexOfFromIndex x ms
+ PASSED test: testForEach x ms
+ PASSED test: testForEach_str x ms
+ PASSED test: testForEach_string_callback x ms
+ PASSED test: testEvery x ms
+ PASSED test: testEvery_str x ms
+ PASSED test: testSome x ms
+ PASSED test: testSome_str x ms
+ PASSED test: testFilter x ms
+ PASSED test: testFilter_str x ms
+ PASSED test: testMap x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      14 tests in 1 groups
+      0 errors
+      0 failures

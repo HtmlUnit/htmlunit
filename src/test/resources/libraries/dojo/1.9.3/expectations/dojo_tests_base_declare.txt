@@ -1,0 +1,31 @@
+ 21 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.declare" has 21 tests to run
+ PASSED test: smokeTest x ms
+ PASSED test: smokeTest2 x ms
+ PASSED test: smokeTestWithCtor x ms
+ PASSED test: smokeTestCompactArgs x ms
+ PASSED test: subclass x ms
+ PASSED test: subclassWithCtor x ms
+ PASSED test: mixinSubclass x ms
+ PASSED test: superclassRef x ms
+ PASSED test: inheritedCall x ms
+ PASSED test: inheritedExplicitCall x ms
+ PASSED test: inheritedMixinCalls x ms
+ PASSED test: mixinPreamble x ms
+ PASSED test: basicMixin x ms
+ PASSED test: mutatedMethods x ms
+ PASSED test: modifiedInstance x ms
+ PASSED test: duplicatedBase x ms
+ PASSED test: indirectlyDuplicatedBase x ms
+ PASSED test: wrongMultipleInheritance x ms
+ PASSED test: impossibleBases x ms
+ PASSED test: noNew x ms
+ PASSED test: createSubclass x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      21 tests in 1 groups
+      0 errors
+      0 failures

@@ -42,6 +42,46 @@ public class Dojo193Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void dojo_tests__base_loader() throws Exception {
+        test("dojo/tests/_base/loader");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests__base_array() throws Exception {
+        test("dojo/tests/_base/array");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests__base_color() throws Exception {
+        test("dojo/tests/_base/Color");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests__base_lang() throws Exception {
+        test("dojo/tests/_base/lang");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests__base_declare() throws Exception {
+        test("dojo/tests/_base/declare");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void dojo_tests__base_connect() throws Exception {
         test("dojo/tests/_base/connect");
     }
@@ -66,8 +106,25 @@ public class Dojo193Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void dojo_tests__base_object() throws Exception {
+        test("dojo/tests/_base/object");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void dojo_tests__base_html() throws Exception {
         test("dojo/tests/_base/html");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests__base_domstyle() throws Exception {
+        // TODO - how to call this
+        // test("dojo/tests/_base/dom-style");
     }
 
     /**
@@ -106,32 +163,16 @@ public class Dojo193Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void dojo_tests_store_jsonrest() throws Exception {
-        test("dojo/tests/store/JsonRest");
+    public void dojo_tests_aspect() throws Exception {
+        test("dojo/tests/aspect");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void dojo_tests_data_objectstore() throws Exception {
-        test("dojo/tests/data/ObjectStore");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void dojo_tests_router() throws Exception {
-        test("dojo/tests/router");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void dojo_tests_request_handlers() throws Exception {
-        test("dojo/tests/request/handlers");
+    public void dojo_tests_back() throws Exception {
+        test("dojo/tests/back");
     }
 
     /**
@@ -146,530 +187,256 @@ public class Dojo193Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void dojo_parser() throws Exception {
+    public void dojo_tests_cache() throws Exception {
+        test("dojo/tests/cache");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_cldr() throws Exception {
+        test("dojo/tests/cldr");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_colors() throws Exception {
+        test("dojo/tests/colors");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_cookie() throws Exception {
+        test("dojo/tests/cookie");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_currency() throws Exception {
+        test("dojo/tests/currency");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_data() throws Exception {
+        test("dojo/tests/data");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_date() throws Exception {
+        test("dojo/tests/date");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_Deferred() throws Exception {
+        test("dojo/tests/Deferred");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_DeferredList() throws Exception {
+        test("dojo/tests/DeferredList");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_domStyle() throws Exception {
+        test("dojo/tests/dom-style");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_errors() throws Exception {
+        test("dojo/tests/errors");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_fx() throws Exception {
+        test("dojo/tests/fx");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_hash() throws Exception {
+        test("dojo/tests/hash");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_html() throws Exception {
         test("dojo/tests/html");
     }
-/*
-tests.html
 
-    778ms
-►
-tests.fx
-
-    20.1s
-►
-tests.NodeList-fx
-
-    5.4s
-►
-tests.io.script
-
-    2s
-►
-tests.io.iframe
-
-    3.3s
-►
-tests.back.hash
-
-    1ms
-►
-tests.hash
-
-    5ms
-►
-tests.rpc
-
-    10s
-►
-tests.cookie
-
-    329ms
-►
-tests.NodeList-traverse
-
-    597ms
-►
-tests.NodeList-manipulate
-
-    781ms
-►
-tests.NodeList-data
-
-    524ms
-►
-tests.uacss.sniffQuirks
-
-    187ms
-►
-tests.uacss.sniffStandards
-
-    145ms
-►
-tests.window.viewport
-
-    180ms
-►
-tests.window.viewportQuirks
-
-    10s
-►
-tests.window.test_scroll
-
-    1.1m
-►
-tests.touch
-
-    488ms
-►
-tests._base._loader.bootstrap
-
-    50ms
-►
-tests._base.loader.asyncWithDojoRequire
-
-    10s
-►
-tests._base.loader.config?dojoConfig-djConfig-require
-
-    141ms
-►
-tests._base.loader.config?dojoConfig-require
-
-    121ms
-►
-tests._base.loader.config?dojoConfig-djConfig
-
-    125ms
-►
-tests._base.loader.config?dojoConfig
-
-    122ms
-►
-tests._base.loader.config?djConfig-require
-
-    119ms
-►
-tests._base.loader.config?djConfig
-
-    112ms
-►
-tests._base.loader.config?require
-
-    122ms
-►
-tests._base.loader.config?configApi.html
-
-    142ms
-►
-tests._base.loader.config?config-sniff.html
-
-    125ms
-►
-tests._base.loader.config?config-sniff-djConfig.html
-
-    142ms
-►
-tests._base.loader.config?config-has.html
-
-    234ms
-►
-tests._base.loader.loader-declareStepsOnProvide
-
-    172ms
-►
-tests._base.loader.publish-require-result
-
-    155ms
-►
-tests._base.loader.no-publish-require-result
-
-    158ms
-►
-tests._base.loader.top-level-module-by-paths
-
-    203ms
-►
-tests._base.loader.xdomin-sync-1
-
-    200ms
-►
-tests._base.loader.xdomin-sync-2
-
-    197ms
-►
-tests._base.loader.xdomin-async-1
-
-    205ms
-►
-tests._base.loader.xdomin-async-2
-
-    202ms
-►
-tests._base.loader.requirejs-simple-sync
-
-    220ms
-►
-tests._base.loader.requirejs-simple-async
-
-    170ms
-►
-tests._base.loader.requirejs-config-sync
-
-    153ms
-►
-tests._base.loader.requirejs-config-async
-
-    107ms
-►
-tests._base.loader.requirejs-simple-nohead-sync
-
-    174ms
-►
-tests._base.loader.requirejs-simple-nohead-async
-
-    109ms
-►
-tests._base.loader.requirejs-simple-badbase-async
-
-    10s
-►
-tests._base.loader.requirejs-circular-async
-
-    110ms
-►
-tests._base.loader.requirejs-urlfetch-sync
-
-    173ms
-►
-tests._base.loader.requirejs-urlfetch-async
-
-    106ms
-►
-tests._base.loader.requirejs-uniques-sync
-
-    171ms
-►
-tests._base.loader.requirejs-uniques-async
-
-    109ms
-►
-tests._base.loader.requirejs-i18nlocaleunknown-sync
-
-    171ms
-►
-tests._base.loader.requirejs-i18nlocaleunknown-async
-
-    127ms
-►
-tests._base.loader.requirejs-i18n-sync
-
-    266ms
-►
-tests._base.loader.requirejs-i18n-async
-
-    127ms
-►
-tests._base.loader.requirejs-i18nlocale-sync
-
-    188ms
-►
-tests._base.loader.requirejs-i18nlocale-async
-
-    109ms
-►
-tests._base.loader.requirejs-i18nbundle-sync
-
-    173ms
-►
-tests._base.loader.requirejs-i18nbundle-async
-
-    112ms
-►
-tests._base.loader.requirejs-i18ncommon-sync
-
-    172ms
-►
-tests._base.loader.requirejs-i18ncommon-async
-
-    122ms
-►
-tests._base.loader.requirejs-i18ncommonlocale-sync
-
-    169ms
-►
-tests._base.loader.requirejs-i18ncommonlocale-async
-
-    123ms
-►
-tests._base.loader.requirejs-paths-sync
-
-    170ms
-►
-tests._base.loader.requirejs-paths-async
-
-    125ms
-►
-tests._base.loader.requirejs-relative-sync
-
-    314ms
-►
-tests._base.loader.requirejs-relative-async
-
-    123ms
-►
-tests._base.loader.requirejs-text-sync
-
-    397ms
-►
-tests._base.loader.requirejs-text-async
-
-    239ms
-►
-tests._base.loader.requirejs-textOnly-sync
-
-    154ms
-►
-tests._base.loader.requirejs-textOnly-async
-
-    109ms
-►
-tests._base.loader.requirejs-exports-sync
-
-    169ms
-►
-tests._base.loader.requirejs-exports-async
-
-    109ms
-►
-tests._base.loader.require-config
-
-    63ms
-►
-tests._base.loader.mapping
-
-    50ms
-►
-tests._base.array
-
-    1ms
-►
-tests._base.Color
-
-    0ms
-►
-tests._base.lang
-
-    4ms
-►
-tests._base.declare
-
-    9ms
-►
-tests._base.object
-
-    0ms
-►
-tests.Deferred
-
-    75ms
-►
-tests.promise.Promise
-
-    2ms
-►
-tests.when
-
-    1ms
-►
-tests.promise.all
-
-    3ms
-►
-tests.promise.first
-
-    4ms
-►
-tests.promise.tracer
-
-    280ms
-►
-tests.cache
-
-    69ms
-►
-tests.i18n
-
-    251ms
-►
-tests.i18n.extra.sync
-
-    452ms
-►
-tests.i18n.extra.async
-
-    175ms
-►
-tests.cldr
-
-    1ms
-►
-dojo.tests.store.Memory
-
-    1ms
-►
-dojo.tests.store.DataStore
-
-    4ms
-►
-dojo.tests.store.Observable
-
-    3ms
-►
-dojo.tests.store.Cache
-
-    2ms
-►
-tests.data.utils
-
-    3ms
-►
-IFSCommonTests: dojo.data.ItemFileReadStore
-
-    1.3s
-►
-IFSCommonTests: dojo.data.ItemFileWriteStore
-
-    1.2s
-►
-tests.data.ItemFileWriteStore
-
-    1.1s
-►
-tests.date.util
-
-    1ms
-►
-tests.date.math
-
-    1ms
-►
-tests.date.locale
-
-    142ms
-►
-tests.date.stamp
-
-    1ms
-►
-tests.on
-
-    6ms
-►
-tests.on.event-focusin
-
-    82ms
-►
-tests.json
-
-    3ms
-►
-tests.json.circular
-
-    0ms
-►
-tests.json.performance
-
-    245ms
-►
-tests.aspect
-
-    0ms
-►
-tests.number
-
-    70ms
-►
-tests.currency
-
-    3ms
-►
-tests.AdapterRegistry
-
-    0ms
-►
-tests.query-lite
-
-    3.1s
-►
-tests.query-css2
-
-    3.2s
-►
-tests.query-css2.1
-
-    3.3s
-►
-tests.query-css3
-
-    4.6s
-►
-tests.query-acme
-
-    5.1s
-►
-tests.query-unspecified
-
-    5.1s
-►
-tests.query-lite-quirks
-
-    2.9s
-►
-tests.query-css2-quirks
-
-    2.9s
-►
-tests.query-css2.1-quirks
-
-    3.3s
-►
-tests.query-css3-quirks
-
-    4.9s
-►
-tests.query-acme-quirks
-
-    5.3s
-►
-tests.query-unspecified-quirks
-
-    5.2s
-►
-tests.query-xml
-
-    145ms
-►
-tests.regexp
-
-    0ms
-►
-tests.string
-
-    0ms
-►
-tests.colors
-
-    1ms
-►
-tests.DeferredList
-
-    0ms
-►
-tests.Stateful
-
-    62ms
-►
-tests.errors
-  */
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_i18n() throws Exception {
+        test("dojo/tests/i18n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_json() throws Exception {
+        test("dojo/tests/json");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_mouse() throws Exception {
+        test("dojo/tests/mouse");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_node() throws Exception {
+        test("dojo/tests/node");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_number() throws Exception {
+        test("dojo/tests/number");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_on() throws Exception {
+        test("dojo/tests/on");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_parser() throws Exception {
+        test("dojo/tests/parser");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_query() throws Exception {
+        test("dojo/tests/query");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_regexp() throws Exception {
+        test("dojo/tests/regexp");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_request() throws Exception {
+        test("dojo/tests/request");
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_router() throws Exception {
+        test("dojo/tests/router");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_stateful() throws Exception {
+        test("dojo/tests/Stateful");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_string() throws Exception {
+        test("dojo/tests/string");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_store() throws Exception {
+        test("dojo/tests/store");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_touch() throws Exception {
+        test("dojo/tests/touch");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_uacss() throws Exception {
+        test("dojo/tests/uacss");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_when() throws Exception {
+        test("dojo/tests/when");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dojo_tests_window() throws Exception {
+        test("dojo/tests/window", 300);
+    }
 }

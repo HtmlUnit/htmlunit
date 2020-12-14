@@ -1,0 +1,16 @@
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.object" has 6 tests to run
+ PASSED test: getBasic x ms
+ PASSED test: setObject2 x ms
+ PASSED test: setWithContext x ms
+ PASSED test: getUndefined x ms
+ PASSED test: setDeep x ms
+ PASSED test: getDeep x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      6 tests in 1 groups
+      0 errors
+      0 failures

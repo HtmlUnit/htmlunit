@@ -1,0 +1,20 @@
+ 10 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.Stateful" has 10 tests to run
+ PASSED test: getSetWatch x ms
+ PASSED test: removeWatchHandle x ms
+ PASSED test: removeWatchHandleTwice x ms
+ PASSED test: setHash x ms
+ PASSED test: wildcard x ms
+ PASSED test: accessors x ms
+ PASSED test: paramHandling x ms
+ PASSED test: deferredSetting x ms
+ PASSED test: changeAttrValue x ms
+ PASSED test: serialize x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      10 tests in 1 groups
+      0 errors
+      0 failures

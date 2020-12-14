@@ -1,0 +1,22 @@
+ 2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "tests.uacss.sniffQuirks" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.window.sniffQuirks" has 1 test to run
+ PASSED test: ../../dojo/tests/uacss/sniffQuirks.html::tests.window.sniffQuirks::test_boxModel x ms
+ PASSED test: ../../dojo/tests/uacss/sniffQuirks.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.uacss.sniffStandards" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.window.sniffStandards" has 1 test to run
+ PASSED test: ../../dojo/tests/uacss/sniffStandards.html::tests.window.sniffStandards::test_boxModel x ms
+ PASSED test: ../../dojo/tests/uacss/sniffStandards.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      4 tests in 2 groups
+      0 errors
+      0 failures

@@ -1,0 +1,59 @@
+39 tests to run in 5 groups
+ ------------------------------------------------------------
+ GROUP "tests.store.JsonRest" has 4 tests to run
+ PASSED test: testGet x ms
+ PASSED test: testQuery x ms
+ PASSED test: testQueryIterative x ms
+     Error: test timeout in testHeaders
+     ERROR IN:  function...
+ FAILED test: testHeaders x ms
+ ------------------------------------------------------------
+ GROUP "dojo.tests.store.Memory" has 16 tests to run
+ PASSED test: testGet x ms
+ PASSED test: testQuery x ms
+ PASSED test: testQueryWithString x ms
+ PASSED test: testQueryWithRegExp x ms
+ PASSED test: testQueryWithTestFunction x ms
+ PASSED test: testQueryWithSort x ms
+ PASSED test: testQueryWithPaging x ms
+ PASSED test: testPutUpdate x ms
+ PASSED test: testPutNew x ms
+ PASSED test: testAddDuplicate x ms
+ PASSED test: testAddNew x ms
+ PASSED test: testRemove x ms
+ PASSED test: testRemoveMissing x ms
+ PASSED test: testQueryAfterChanges x ms
+ PASSED test: testIFRSStyleData x ms
+ PASSED test: testAddNewIdAssignment x ms
+ ------------------------------------------------------------
+ GROUP "dojo.tests.store.DataStore" has 6 tests to run
+ PASSED test: testGet x ms
+ PASSED test: testQuery1 x ms
+ PASSED test: testQuery2 x ms
+ PASSED test: testPutUpdate x ms
+ PASSED test: testPutNew x ms
+ PASSED test: testNoWriteFeature x ms
+ ------------------------------------------------------------
+ GROUP "dojo.tests.store.Observable" has 5 tests to run
+ PASSED test: testGet x ms
+ PASSED test: testQuery x ms
+ PASSED test: testQueryWithZeroId x ms
+ PASSED test: testPaging x ms
+ PASSED test: testType x ms
+ ------------------------------------------------------------
+ GROUP "dojo.tests.store.Cache" has 8 tests to run
+ PASSED test: testGet x ms
+ PASSED test: testQuery x ms
+ PASSED test: testQueryWithSort x ms
+ PASSED test: testPutUpdate x ms
+ PASSED test: testPutNew x ms
+ PASSED test: testAddDuplicate x ms
+ PASSED test: testAddNew x ms
+ PASSED test: testResultsFromMaster x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      39 tests in 5 groups
+      1 errors
+      0 failures

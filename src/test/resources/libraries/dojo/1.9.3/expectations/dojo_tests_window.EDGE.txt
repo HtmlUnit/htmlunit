@@ -1,0 +1,1428 @@
+3 tests to run in 3 groups
+ ------------------------------------------------------------
+ GROUP "tests.window.viewport" has 1 test to run
+ 2 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojo.window.viewport" has 2 tests to run
+ PASSED test: ../../dojo/tests/window/viewport.html::dojo.window.viewport::initial x ms
+ PASSED test: ../../dojo/tests/window/viewport.html::dojo.window.viewport::expand x ms
+ PASSED test: ../../dojo/tests/window/viewport.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.window.viewportQuirks" has 1 test to run
+     Error: test timeout in ../../dojo/tests/window/viewportQuirks.html
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/viewportQuirks.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.window.test_scroll" has 1 test to run
+ 470 tests to run in 53 groups
+ ------------------------------------------------------------
+ GROUP "dojo.window.scroll" has 2 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::dojo.window.scroll::create iframes and wait for them to load x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::dojo.window.scroll::checkAttrs x ms
+ ------------------------------------------------------------
+ GROUP "8249_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  min: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8249_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  min: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8249_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  min: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8249_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  min: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8249_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8284_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8284_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_strict::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  min: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8284_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_strict::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  max: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8284_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_strict::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8284_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8284_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8284_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8284_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8284_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "absContent_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  min: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  max: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::absContent_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "absContent_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "absContent_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "absContent_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::absContent_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedNode_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedNode_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedNode_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedNode_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedNode_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedScrollable_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedScrollable_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedScrollable_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "fixedScrollable_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::fixedScrollable_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "7036_8665_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  27
+ but got
+  28
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "7036_8665_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  27
+ but got
+  28
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "7036_8665_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "7036_8665_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::7036_8665_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerNoScrollBars_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  0
+
+ with hint: 
+  min: start: shift left width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  18
+
+ with hint: 
+  min: end: shift left partial width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  3
+
+ with hint: 
+  max: end: shift right width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerNoScrollBars_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  0
+
+ with hint: 
+  min: start: shift left width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  18
+
+ with hint: 
+  min: end: shift left partial width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  3
+
+ with hint: 
+  max: end: shift right width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerNoScrollBars_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  0
+
+ with hint: 
+  min: start: shift left width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  18
+
+ with hint: 
+  min: end: shift left partial width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  3
+
+ with hint: 
+  max: end: shift right width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerNoScrollBars_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  0
+
+ with hint: 
+  min: start: shift left width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  18
+
+ with hint: 
+  min: end: shift left partial width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  3
+
+ with hint: 
+  max: end: shift right width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerNoScrollBars_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "noScrollBars_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "noScrollBars_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "noScrollBars_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "noScrollBars_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::noScrollBars_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "table_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  25
+ but got
+  40
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_strict::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  25
+ but got
+  40
+
+ with hint: 
+  min: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_strict::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_strict::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  26
+ but got
+  40
+
+ with hint: 
+  max: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_strict::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_strict::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  26
+ but got
+  40
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "table_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "table_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  39
+ but got
+  41
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  41
+ but got
+  39
+
+ with hint: 
+  max: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  39
+ but got
+  40
+
+ with hint: 
+  max: start: shift down height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  41
+ but got
+  39
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  39
+ but got
+  40
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "table_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  39
+ but got
+  41
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  41
+ but got
+  39
+
+ with hint: 
+  max: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  39
+ but got
+  40
+
+ with hint: 
+  max: start: shift down height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  41
+ but got
+  39
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  39
+ but got
+  40
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::table_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerScrollbars_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  2
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  min: end: shift left partial width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  min: end: shift up full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  50
+ but got
+  49
+
+ with hint: 
+  max: start: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  50
+ but got
+  49
+
+ with hint: 
+  max: end: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerScrollbars_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  2
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  min: end: shift left partial width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  min: end: shift up full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  50
+ but got
+  49
+
+ with hint: 
+  max: start: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  50
+ but got
+  49
+
+ with hint: 
+  max: end: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerScrollbars_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  2
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  max: start: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  max: end: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "innerScrollbars_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  2
+
+ with hint: 
+  min: start: shift up height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  max: start: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  49
+ but got
+  50
+
+ with hint: 
+  max: end: shift right full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::innerScrollbars_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8542_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_strict::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  0
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  19
+
+ with hint: 
+  min: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  min: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  max: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  20
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8542_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  19
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8542_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "8542_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::8542_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "tooBig_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  83
+
+ with hint: 
+  max: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  83
+
+ with hint: 
+  max: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  83
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  83
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::tooBig_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "tooBig_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  2
+ but got
+  3
+
+ with hint: 
+  max: end: shift right width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "tooBig_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "tooBig_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::max end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::tooBig_quirks_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "htmlPadding_strict" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::compare to native x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  20
+ but got
+  0
+
+ with hint: 
+  min: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::min start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  min: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::min start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  min: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::min end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  min: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::min end vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  max: start: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::max start horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  max: start: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::max start vertical x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  max: end: no shift full width
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  0
+ but got
+  20
+
+ with hint: 
+  max: end: no shift full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_strict::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "htmlPadding_quirks" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  19
+ but got
+  20
+
+ with hint: 
+  max: end: shift down full height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "htmlPadding_loose_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  2
+
+ with hint: 
+  max: end: shift down height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_loose_rtl::max end vertical x ms
+ ------------------------------------------------------------
+ GROUP "htmlPadding_quirks_rtl" has 9 tests to run
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::compare to native x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::min start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::min start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::min end horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::min end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::max start horizontal x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::max start vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::max end horizontal x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  2
+
+ with hint: 
+  max: end: shift down height
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/window/test_scroll.html::htmlPadding_quirks_rtl::max end vertical x ms
+ PASSED test: ../../dojo/tests/window/test_scroll.html x ms
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      475 tests in 3 groups
+      1 errors
+      92 failures

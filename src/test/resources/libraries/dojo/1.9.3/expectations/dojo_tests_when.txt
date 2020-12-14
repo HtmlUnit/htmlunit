@@ -1,0 +1,19 @@
+ 9 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.when" has 9 tests to run
+ PASSED test: when() returns the same promise without callbacks x ms
+ PASSED test: when() doesn't convert to promise if errback is passed but no callback x ms
+ PASSED test: when() with a result value x ms
+ PASSED test: when() with a result value, returns result of callback x ms
+ PASSED test: when() with a promise that gets resolved x ms
+ PASSED test: when() with a promise that gets rejected x ms
+ PASSED test: when() with a promise that gets progress x ms
+ PASSED test: when() with chaining of the result x ms
+ PASSED test: when() converts foreign promises x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      9 tests in 1 groups
+      0 errors
+      0 failures

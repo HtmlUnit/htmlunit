@@ -1,0 +1,12 @@
+ 2 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.errors" has 2 tests to run
+ PASSED test: TestError x ms
+ PASSED test: OtherError x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      2 tests in 1 groups
+      0 errors
+      0 failures

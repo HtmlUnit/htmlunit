@@ -1,0 +1,11 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.cache" has 1 test to run
+ PASSED test: dojo.cache x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      1 tests in 1 groups
+      0 errors
+      0 failures

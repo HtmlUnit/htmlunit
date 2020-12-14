@@ -1,0 +1,27 @@
+ 15 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "tests.date.util" has 3 tests to run
+ PASSED test: test_date_getDaysInMonth x ms
+ PASSED test: test_date_isLeapYear x ms
+ PASSED test: test_date_getTimezoneName x ms
+ ------------------------------------------------------------
+ GROUP "tests.date.math" has 12 tests to run
+ PASSED test: test_date_compare x ms
+ PASSED test: test_date_add x ms
+ PASSED test: test_date_diff x ms
+ PASSED test: test_date_add_diff_year x ms
+ PASSED test: test_date_add_diff_quarter x ms
+ PASSED test: test_date_add_diff_month x ms
+ PASSED test: test_date_add_diff_week x ms
+ PASSED test: test_date_add_diff_day x ms
+ PASSED test: test_date_add_diff_weekday x ms
+ PASSED test: test_date_add_diff_hour x ms
+ PASSED test: test_date_add_diff_minute x ms
+ PASSED test: test_date_add_diff_second x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      15 tests in 2 groups
+      0 errors
+      0 failures

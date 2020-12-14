@@ -1,0 +1,1405 @@
+ 13 tests to run in 13 groups
+ ------------------------------------------------------------
+ GROUP "tests.query-lite" has 1 test to run
+ 78 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 78 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::dotBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::poundBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::comma1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::comma2 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite::css2::sort x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=lite x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-css2" has 1 test to run
+ 78 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 78 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::dotBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::poundBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::comma1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::comma2 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2::css2::sort x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2 x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-css2.1" has 1 test to run
+ 84 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 78 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::dotBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::poundBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::comma1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::comma2 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css2.1 x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-css3" has 1 test to run
+ 126 tests to run in 3 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 78 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::dotBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::poundBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::comma1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::comma2 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ ------------------------------------------------------------
+ GROUP "css3" has 42 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#t span.foo:not(:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(4, (query('.foo~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(4, (query('.foo~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(4, (query('.foo ~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(4, (query('.foo ~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, (query('#foo~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, (query('#foo ~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(2, query('#t > h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(3, query('#t h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(3, query('#t h3:nth-child(2n+1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#t h3:nth-child(even)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#t h3:nth-child(2n)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#t h3:nth-child(2n+3)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(2, query('#t h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#t > h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(3, query('#t :nth-child(3)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(0, query('#t > div:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(7, query('#t span').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(3, query('#t > *:nth-child(n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#t > *:nth-child(n+12)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(10, query('#t > *:nth-child(-n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(5, query('#t > *:nth-child(-2n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(6, query('#t > *:nth-child(2n+2)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(5, query('#t> *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(6, query('#t > *:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(6, query('#t>*:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(query('style')[0], query(':nth-child(2)')[0]); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(2, query('#t2 > :checked').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::undefined x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::undefined x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#radio1:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(0, query('#radio1:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(0, query('#radio2:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('#radio2:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(4, query('#t > span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(6, query('#t span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(0, query('h3 span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3::css3::doh.is(1, query('h3 :not(:empty)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=css3 x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-acme" has 1 test to run
+ 139 tests to run in 4 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 78 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::dotBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::poundBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::comma1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::comma2 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ ------------------------------------------------------------
+ GROUP "css3" has 42 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#t span.foo:not(:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(4, (query('.foo~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(4, (query('.foo~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(4, (query('.foo ~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(4, (query('.foo ~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, (query('#foo~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, (query('#foo ~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(2, query('#t > h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(3, query('#t h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(3, query('#t h3:nth-child(2n+1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#t h3:nth-child(even)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#t h3:nth-child(2n)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#t h3:nth-child(2n+3)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(2, query('#t h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#t > h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(3, query('#t :nth-child(3)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(0, query('#t > div:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(7, query('#t span').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(3, query('#t > *:nth-child(n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#t > *:nth-child(n+12)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(10, query('#t > *:nth-child(-n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(5, query('#t > *:nth-child(-2n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(6, query('#t > *:nth-child(2n+2)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(5, query('#t> *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(6, query('#t > *:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(6, query('#t>*:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(query('style')[0], query(':nth-child(2)')[0]); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(2, query('#t2 > :checked').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::undefined x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::undefined x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#radio1:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(0, query('#radio1:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(0, query('#radio2:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('#radio2:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(4, query('#t > span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(6, query('#t span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(0, query('h3 span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::css3::doh.is(1, query('h3 :not(:empty)').length); x ms
+ ------------------------------------------------------------
+ GROUP "acme" has 13 tests to run
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(1, query('#t span.foo:not(span:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::attrSpecialCharsNoEscape x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(12, (query('#t >')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(3, (query('.foo >')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(3, query('>', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(0, query('> .not-there').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(1, (query('#foo ~')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(1, (query('#foo~')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(1, query('+', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::doh.is(3, query('~', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::domOrder x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme::acme::xml_nthchild x ms
+ PASSED test: ../../dojo/tests/query/query.html?selector=acme x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-unspecified" has 1 test to run
+ 139 tests to run in 4 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 78 tests to run
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::dotBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::poundBogus x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::comma1 x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::comma2 x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/query.html::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ ------------------------------------------------------------
+ GROUP "css3" has 42 tests to run
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#t span.foo:not(:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(4, (query('.foo~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(4, (query('.foo~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(4, (query('.foo ~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(4, (query('.foo ~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, (query('#foo~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, (query('#foo ~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(2, query('#t > h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(3, query('#t h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(3, query('#t h3:nth-child(2n+1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#t h3:nth-child(even)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#t h3:nth-child(2n)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#t h3:nth-child(2n+3)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(2, query('#t h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#t > h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(3, query('#t :nth-child(3)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(0, query('#t > div:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(7, query('#t span').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(3, query('#t > *:nth-child(n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#t > *:nth-child(n+12)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(10, query('#t > *:nth-child(-n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(5, query('#t > *:nth-child(-2n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(6, query('#t > *:nth-child(2n+2)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(5, query('#t> *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(6, query('#t > *:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(6, query('#t>*:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(query('style')[0], query(':nth-child(2)')[0]); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(2, query('#t2 > :checked').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::undefined x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::undefined x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#radio1:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(0, query('#radio1:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(0, query('#radio2:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('#radio2:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(4, query('#t > span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(6, query('#t span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(0, query('h3 span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::css3::doh.is(1, query('h3 :not(:empty)').length); x ms
+ ------------------------------------------------------------
+ GROUP "acme" has 13 tests to run
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(1, query('#t span.foo:not(span:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::attrSpecialCharsNoEscape x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(12, (query('#t >')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(3, (query('.foo >')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(3, query('>', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(0, query('> .not-there').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(1, (query('#foo ~')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(1, (query('#foo~')).length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(1, query('+', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::doh.is(3, query('~', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::domOrder x ms
+ PASSED test: ../../dojo/tests/query/query.html::acme::xml_nthchild x ms
+ PASSED test: ../../dojo/tests/query/query.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-lite-quirks" has 1 test to run
+ 77 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 77 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('.bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('#bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('#baz,#foo,#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::NodeList_identity x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite::css2::sort x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=lite x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-css2-quirks" has 1 test to run
+ 77 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 77 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('.bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('#bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('#baz,#foo,#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::NodeList_identity x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2::css2::sort x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2 x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-css2.1-quirks" has 1 test to run
+ 83 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 77 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('.bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('#bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('#baz,#foo,#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::NodeList_identity x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css2.1 x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-css3-quirks" has 1 test to run
+ 125 tests to run in 3 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 77 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('.bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('#bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('#baz,#foo,#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::NodeList_identity x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ ------------------------------------------------------------
+ GROUP "css3" has 42 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#t span.foo:not(:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(4, (query('.foo~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(4, (query('.foo~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(4, (query('.foo ~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(4, (query('.foo ~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, (query('#foo~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, (query('#foo ~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(2, query('#t > h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(3, query('#t h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(3, query('#t h3:nth-child(2n+1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#t h3:nth-child(even)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#t h3:nth-child(2n)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#t h3:nth-child(2n+3)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(2, query('#t h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#t > h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(3, query('#t :nth-child(3)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(0, query('#t > div:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(7, query('#t span').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(3, query('#t > *:nth-child(n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#t > *:nth-child(n+12)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(10, query('#t > *:nth-child(-n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(5, query('#t > *:nth-child(-2n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(6, query('#t > *:nth-child(2n+2)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(5, query('#t> *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(6, query('#t > *:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(6, query('#t>*:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(query('style')[0], query(':nth-child(2)')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(2, query('#t2 > :checked').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(dojo.byId('checkbox2'), query('#t2 > input[type=checkbox]:checked')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(dojo.byId('radio2'), query('#t2 > input[type=radio]:checked')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#radio1:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(0, query('#radio1:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(0, query('#radio2:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('#radio2:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(4, query('#t > span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(6, query('#t span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(0, query('h3 span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3::css3::doh.is(1, query('h3 :not(:empty)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=css3 x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-acme-quirks" has 1 test to run
+ 138 tests to run in 4 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 77 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('.bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('#bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('#baz,#foo,#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::NodeList_identity x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ ------------------------------------------------------------
+ GROUP "css3" has 42 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#t span.foo:not(:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(4, (query('.foo~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(4, (query('.foo~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(4, (query('.foo ~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(4, (query('.foo ~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, (query('#foo~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, (query('#foo ~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(2, query('#t > h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(3, query('#t h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(3, query('#t h3:nth-child(2n+1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#t h3:nth-child(even)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#t h3:nth-child(2n)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#t h3:nth-child(2n+3)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(2, query('#t h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#t > h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(3, query('#t :nth-child(3)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(0, query('#t > div:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(7, query('#t span').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(3, query('#t > *:nth-child(n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#t > *:nth-child(n+12)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(10, query('#t > *:nth-child(-n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(5, query('#t > *:nth-child(-2n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(6, query('#t > *:nth-child(2n+2)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(5, query('#t> *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(6, query('#t > *:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(6, query('#t>*:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(query('style')[0], query(':nth-child(2)')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(2, query('#t2 > :checked').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(dojo.byId('checkbox2'), query('#t2 > input[type=checkbox]:checked')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(dojo.byId('radio2'), query('#t2 > input[type=radio]:checked')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#radio1:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(0, query('#radio1:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(0, query('#radio2:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('#radio2:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(4, query('#t > span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(6, query('#t span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(0, query('h3 span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::css3::doh.is(1, query('h3 :not(:empty)').length); x ms
+ ------------------------------------------------------------
+ GROUP "acme" has 13 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(1, query('#t span.foo:not(span:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::attrSpecialCharsNoEscape x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(12, (query('#t >')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(3, (query('.foo >')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(3, query('>', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(0, query('> .not-there').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(1, (query('#foo ~')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(1, (query('#foo~')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(1, query('+', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::doh.is(3, query('~', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::domOrder x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme::acme::xml_nthchild x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html?selector=acme x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-unspecified-quirks" has 1 test to run
+ 138 tests to run in 4 groups
+ ------------------------------------------------------------
+ GROUP "css2" has 77 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(4, (query('h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('#bug')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(4, (query('#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('div#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(4, (query('div#t h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('span#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('.bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('.bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('#bogus')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('#bogus', dojo.byId('container'))).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('#t div > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, (query('#t > h3')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('#baz,#foo,#t')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query(null)).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(12, (query('#t > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, (query('.foo > *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, (query('> *', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, (query('> *, > h3', 'container')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, (query('> h3', 't')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.foo, .bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.foo,.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('.foo.bar')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.foo')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('span.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('sPaN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('SPAN.baz')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, (query('[foo]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('[foo$="thud"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('[foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('[foo$="thudish"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('#t [foo$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('#t [title$=thud]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('#t span[title$=thud ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('[id$=\'55555\']')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('[foo~="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('[ foo ~= "bar" ]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('[foo|="bar"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, (query('[foo|="bar-baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('[foo|="baz"]')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, query('> [qux]', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is('child1', query('> [qux]', 'container')[0].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is('child3', query('> [qux]', 'container')[1].id); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, query('> *', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(3, query('>*', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is('passed', query('#bug')[0].value); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('div p', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('div p a', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.subDiv .subP', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(2, (query('.subDiv .subP .subA', 't4')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('*', 'thinger')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(0, (query('div#foo').length)); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('option[value="a+b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('option[value="a~b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('option[value="a^b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('option[value="a,b"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query("a[href*='foo=bar']", 'attrSpecialChars').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('input[name="data[foo][bar]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('input[name="foo[0].bar"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query('input[name="test[0]"]', "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query("input[name=data\\[foo\\]\\[bar\\]]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::doh.is(1, query("input[name=foo\\[0\\]\\.bar]", "attrSpecialChars").length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::crossDocumentQuery x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::silly_IDs1 x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::NodeList_identity x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::xml x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::xml_attrs x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2::sort x ms
+ ------------------------------------------------------------
+ GROUP "css2.1" has 6 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2.1::doh.is(1, (query('h1:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2.1::doh.is(2, (query('h3:first-child')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2.1::doh.is(1, (query('.foo+ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2.1::doh.is(1, (query('.foo+span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2.1::doh.is(1, (query('.foo +span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css2.1::doh.is(1, (query('.foo + span')).length); x ms
+ ------------------------------------------------------------
+ GROUP "css3" has 42 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#t span.foo:not(:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(4, (query('.foo~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(4, (query('.foo~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(4, (query('.foo ~span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(4, (query('.foo ~ span')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, (query('#foo~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, (query('#foo ~*')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, (query('#foo ~ *')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(2, query('#t > h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(3, query('#t h3:nth-child(odd)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(3, query('#t h3:nth-child(2n+1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#t h3:nth-child(even)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#t h3:nth-child(2n)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#t h3:nth-child(2n+3)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(2, query('#t h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#t > h3:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(3, query('#t :nth-child(3)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(0, query('#t > div:nth-child(1)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(7, query('#t span').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(3, query('#t > *:nth-child(n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#t > *:nth-child(n+12)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(10, query('#t > *:nth-child(-n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(5, query('#t > *:nth-child(-2n+10)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(6, query('#t > *:nth-child(2n+2)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(5, query('#t > *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(5, query('#t> *:nth-child(2n+4)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(6, query('#t > *:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(6, query('#t>*:nth-child(2n-5)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(query('style')[0], query(':nth-child(2)')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(2, query('#t2 > :checked').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(dojo.byId('checkbox2'), query('#t2 > input[type=checkbox]:checked')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(dojo.byId('radio2'), query('#t2 > input[type=radio]:checked')[0]); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#radio1:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(0, query('#radio1:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(0, query('#radio2:disabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('#radio2:enabled').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(4, query('#t > span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(6, query('#t span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(0, query('h3 span:empty').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::css3::doh.is(1, query('h3 :not(:empty)').length); x ms
+ ------------------------------------------------------------
+ GROUP "acme" has 13 tests to run
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(1, query('.fooBar').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(1, query('#t span.foo:not(span:first-child)').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::attrSpecialCharsNoEscape x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(12, (query('#t >')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(3, (query('.foo >')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(3, query('>', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(0, query('> .not-there').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(1, (query('#foo ~')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(1, (query('#foo~')).length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(1, query('+', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::doh.is(3, query('~', 'container').length); x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::domOrder x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html::acme::xml_nthchild x ms
+ PASSED test: ../../dojo/tests/query/queryQuirks.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.query-xml" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "ungrouped" has 1 test to run
+ PASSED test: ../../dojo/tests/query/xml.xhtml::ungrouped::undefined x ms
+ PASSED test: ../../dojo/tests/query/xml.xhtml x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      1296 tests in 13 groups
+      0 errors
+      0 failures

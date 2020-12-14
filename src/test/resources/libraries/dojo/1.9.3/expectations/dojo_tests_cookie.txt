@@ -1,0 +1,18 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.cookie" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "ungrouped" has 4 tests to run
+ PASSED test: ../../dojo/tests/cookie.html::ungrouped::basicSet x ms
+ PASSED test: ../../dojo/tests/cookie.html::ungrouped::basicGet x ms
+ PASSED test: ../../dojo/tests/cookie.html::ungrouped::daysAsNumber x ms
+ PASSED test: ../../dojo/tests/cookie.html::ungrouped::nameSuffix x ms
+ PASSED test: ../../dojo/tests/cookie.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 1 groups
+      0 errors
+      0 failures

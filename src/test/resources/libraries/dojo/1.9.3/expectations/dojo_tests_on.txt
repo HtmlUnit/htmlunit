@@ -1,0 +1,26 @@
+ 10 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "tests.on" has 9 tests to run
+ PASSED test: object x ms
+ PASSED test: once x ms
+ PASSED test: dom x ms
+ PASSED test: extensionEvent x ms
+ PASSED test: testEvented x ms
+ PASSED test: pubsub x ms
+ PASSED test: touch x ms
+ PASSED test: stopImmediatePropagation x ms
+ PASSED test: eventAugmentation x ms
+ ------------------------------------------------------------
+ GROUP "tests.on.event-focusin" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "ungrouped" has 1 test to run
+ PASSED test: ../../dojo/tests/on/event-focusin.html::ungrouped::focusInTest x ms
+ PASSED test: ../../dojo/tests/on/event-focusin.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      11 tests in 2 groups
+      0 errors
+      0 failures

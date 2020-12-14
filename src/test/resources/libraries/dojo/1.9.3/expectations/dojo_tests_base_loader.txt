@@ -1,0 +1,450 @@
+72 tests to run in 60 groups
+ ------------------------------------------------------------
+ GROUP "dojo.tests._base._loader.internals" has 1 test to run
+ PASSED test: compactPath x ms
+ ------------------------------------------------------------
+ GROUP "dojo.tests._base._loader.modules" has 1 test to run
+ PASSED test: testAMD x ms
+ ------------------------------------------------------------
+ GROUP "dojo.tests._base._loader.modulesIds" has 6 tests to run
+ PASSED test: compactPath x ms
+ PASSED test: testModuleIds x ms
+ PASSED test: baseUrl x ms
+ PASSED test: moduleUrl x ms
+ PASSED test: modulePaths x ms
+ PASSED test: moduleUrls x ms
+ ------------------------------------------------------------
+ GROUP "tests._base._loader.bootstrap" has 6 tests to run
+ PASSED test: hasConsole x ms
+ PASSED test: getText x ms
+ PASSED test: getObject x ms
+ PASSED test: exists x ms
+ PASSED test: evalWorks x ms
+ PASSED test: _mixin x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.asyncWithDojoRequire" has 1 test to run
+     Error: test timeout in ../../dojo/tests/_base/loader/asyncWithDojoRequire.html
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/loader/asyncWithDojoRequire.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?dojoConfig-djConfig-require" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig-djConfig-require::dojoConfig-test::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig-djConfig-require x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?dojoConfig-require" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig-require::dojoConfig-test::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig-require x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?dojoConfig-djConfig" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig-djConfig::dojoConfig-test::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig-djConfig x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?dojoConfig" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig::dojoConfig-test::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?dojoConfig x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?djConfig-require" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?djConfig-require::dojoConfig-test::expectDjConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?djConfig-require x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?djConfig" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?djConfig::dojoConfig-test::expectDjConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?djConfig x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?require" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config.html?require::dojoConfig-test::expectRequireConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config.html?require x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?configApi.html" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "config-event" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/configApi.html::config-event::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/configApi.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?config-sniff.html" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-sniff-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config-sniff.html::dojoConfig-sniff-test::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config-sniff.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?config-sniff-djConfig.html" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dojoConfig-sniff-test" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config-sniff-djConfig.html::dojoConfig-sniff-test::expectDojoConfig x ms
+ PASSED test: ../../dojo/tests/_base/loader/config-sniff-djConfig.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.config?config-has.html" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "config-has" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config-has.html::config-has::check1 x ms
+ PASSED test: ../../dojo/tests/_base/loader/config-has.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.loader-declareStepsOnProvide" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "loader.declareStepsOnProvide" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/declareStepsOnProvide.html::loader.declareStepsOnProvide::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/declareStepsOnProvide.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.publish-require-result" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "config-publish-require-result" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/publishRequireResult.html::config-publish-require-result::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/publishRequireResult.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.no-publish-require-result" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "config-publish-require-result" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/publishRequireResult.html?do-not-publish::config-publish-require-result::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/publishRequireResult.html?do-not-publish x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.top-level-module-by-paths" has 1 test to run
+ 2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "aliases" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/paths.html::aliases::undefined x ms
+ ------------------------------------------------------------
+ GROUP "top-level-module-via-paths" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/paths.html::top-level-module-via-paths::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/paths.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.xdomin-sync-1" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "xdomain" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html::xdomain::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.xdomin-sync-2" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "xdomain" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html::xdomain::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.xdomin-async-1" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "xdomain" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html::xdomain::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.xdomin-async-2" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "xdomain" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html::xdomain::undefined x ms
+ PASSED test: ../../dojo/tests/_base/loader/xdomain/xdomain.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-simple-sync" has 1 test to run
+ 2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "simple" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple.html::simple::colors x ms
+ ------------------------------------------------------------
+ GROUP "fooBar" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple.html::fooBar::fooBar x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-simple-async" has 1 test to run
+ 2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "simple" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple.html::simple::colors x ms
+ ------------------------------------------------------------
+ GROUP "fooBar" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple.html::fooBar::fooBar x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-config-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "config" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/config.html::config::config x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/config.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-config-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "config" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/config.html::config::config x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/config.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-simple-nohead-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "dataMain" has 1 test to run
+ ------------------------------------------------------------
+ GROUP "simple-nohead" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-nohead.html::dataMain::dataMain x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-nohead.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-simple-nohead-async" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-nohead.html::simple-nohead::colors x ms
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "simple-nohead" has 1 test to run
+ ------------------------------------------------------------
+ GROUP "dataMain" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-nohead.html::simple-nohead::colors x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-nohead.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-simple-badbase-async" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-nohead.html::dataMain::dataMain x ms
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "simple" has 1 test to run
+ ------------------------------------------------------------
+ GROUP "fooBar" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-badbase.html::simple::colors x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-badbase.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-circular-async" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/simple-badbase.html::fooBar::fooBar x ms
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "circular" has 1 test to run
+ ------------------------------------------------------------
+ GROUP "circularFunc" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/circular.html::circular::circular x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/circular.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-urlfetch-sync" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/circular.html::circularFunc::circularFunc x ms
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "urlfetch" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/urlfetch/urlfetch.html::urlfetch::urlfetch x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/urlfetch/urlfetch.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-urlfetch-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "urlfetch" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/urlfetch/urlfetch.html::urlfetch::urlfetch x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/urlfetch/urlfetch.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-uniques-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "uniques" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/uniques/uniques.html::uniques::uniques x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/uniques/uniques.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-uniques-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "uniques" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/uniques/uniques.html::uniques::uniques x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/uniques/uniques.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18nlocaleunknown-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/fr-fr/colors::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/fr-fr/colors x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18nlocaleunknown-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/fr-fr/colors::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/fr-fr/colors x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18n-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18n-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18nlocale-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?locale=en-us-surfer::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?locale=en-us-surfer x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18nlocale-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?locale=en-us-surfer::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?locale=en-us-surfer x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18nbundle-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/en-us-surfer/colors::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/en-us-surfer/colors x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18nbundle-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "i18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/en-us-surfer/colors::i18n::i18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/i18n.html?bundle=i18n!nls/en-us-surfer/colors x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18ncommon-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "commoni18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html::commoni18n::commoni18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18ncommon-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "commoni18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html::commoni18n::commoni18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18ncommonlocale-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "commoni18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html?locale=en-us-surfer::commoni18n::commoni18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html?locale=en-us-surfer x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-i18ncommonlocale-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "commoni18n" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html?locale=en-us-surfer::commoni18n::commoni18n x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/i18n/common.html?locale=en-us-surfer x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-paths-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "paths" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/paths/paths.html::paths::paths x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/paths/paths.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-paths-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "paths" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/paths/paths.html::paths::paths x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/paths/paths.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-relative-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "relative" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/relative/relative.html::relative::relative x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/relative/relative.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-relative-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "relative" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/relative/relative.html::relative::relative x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/relative/relative.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-text-sync" has 2 tests to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "text" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html::text::text x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html x ms
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "text" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html::text::text x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-text-async" has 2 tests to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "text" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html::text::text x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html x ms
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "text" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html::text::text x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/text.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-textOnly-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "textOnly" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/textOnly.html::textOnly::textOnly x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/textOnly.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-textOnly-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "textOnly" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/textOnly.html::textOnly::textOnly x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/text/textOnly.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-exports-sync" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "exports" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/exports/exports.html::exports::exports x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/exports/exports.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.requirejs-exports-async" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "exports" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/exports/exports.html::exports::exports x ms
+ PASSED test: ../../dojo/tests/_base/loader/requirejs/exports/exports.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.require-config" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "require.config" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/config/test.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.loader.mapping" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "star-mapping" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/loader/mapping.html::star-mapping::mapping after build x ms
+ PASSED test: ../../dojo/tests/_base/loader/mapping.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      136 tests in 60 groups
+      1 errors
+      0 failures
