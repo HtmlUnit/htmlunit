@@ -40,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.css.parser.CSSException;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -218,13 +219,30 @@ public class Element extends Node {
      */
     @JsxFunction
     public HTMLCollection getElementsByTagName(final String tagName) {
-        final String tagNameLC = tagName.toLowerCase(Locale.ROOT);
-
         if (elementsByTagName_ == null) {
             elementsByTagName_ = new HashMap<>();
         }
 
-        HTMLCollection collection = elementsByTagName_.get(tagNameLC);
+        final String searchTagName;
+        final boolean caseSensitive;
+        final DomNode dom = getDomNodeOrNull();
+        if (dom == null) {
+            searchTagName = tagName.toLowerCase(Locale.ROOT);
+            caseSensitive = false;
+        }
+        else {
+            final SgmlPage page = dom.getPage();
+            if (page != null && page.hasCaseSensitiveTagNames()) {
+                searchTagName = tagName;
+                caseSensitive = true;
+            }
+            else {
+                searchTagName = tagName.toLowerCase(Locale.ROOT);
+                caseSensitive = false;
+            }
+        }
+
+        HTMLCollection collection = elementsByTagName_.get(searchTagName);
         if (collection != null) {
             return collection;
         }
@@ -242,7 +260,10 @@ public class Element extends Node {
             collection = new HTMLCollection(node, false) {
                 @Override
                 protected boolean isMatching(final DomNode nodeToMatch) {
-                    return tagNameLC.equalsIgnoreCase(nodeToMatch.getNodeName());
+                    if (caseSensitive) {
+                        return searchTagName.equals(nodeToMatch.getNodeName());
+                    }
+                    return searchTagName.equalsIgnoreCase(nodeToMatch.getNodeName());
                 }
             };
         }

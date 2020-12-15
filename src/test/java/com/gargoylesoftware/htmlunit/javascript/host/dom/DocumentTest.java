@@ -1231,6 +1231,59 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
+                "1", "Two", "0", "0"},
+            IE = {"2", "undefined", "undefined",
+                    "1", "undefined", "0", "0"})
+    public void getElementsByTagNameXml() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "</head><body>\n"
+            + "<script>\n"
+
+            + "  var xmlString = [\n"
+            + "                 '<ResultSet>',\n"
+            + "                 '<Result>One</Result>',\n"
+            + "                 '<RESULT>Two</RESULT>',\n"
+            + "                 '<result><nested>Three</nested></result>',\n"
+            + "                 '<result>Four</result>',\n"
+            + "                 '</ResultSet>'\n"
+            + "                ].join('');\n"
+            + "  if (window.DOMParser) {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    xml = parser.parseFromString(xmlString, 'text/xml');\n"
+            + "  } else { // IE\n"
+            + "    var parser = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    parser.async = 'false';\n"
+            + "    parser.loadXML(xmlString);\n"
+            + "  }\n"
+            + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
+            + "  try {\n"
+
+            + "    var res = xmlDoc.getElementsByTagName('result');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+            + "    alert(res[1].innerHTML);\n"
+
+            + "    res = xmlDoc.getElementsByTagName('RESULT');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+
+            + "    res = xmlDoc.getElementsByTagName('resulT');\n"
+            + "    alert(res.length);\n"
+
+            + "    res = xmlDoc.getElementsByTagName('rEsulT');\n"
+            + "    alert(res.length);\n"
+            + "  } catch(e) {alert('exception ' + e)}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -9,6 +9,9 @@
     <body>
         <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87">
             <action type="fix" dev="rbri">
+                Element.getElementsByTagName is case sensitive for xml nodes.
+            </action>
+            <action type="fix" dev="rbri">
                 CSS tag name selector is case sensitive for xml nodes.
             </action>
             <action type="fix" dev="rbri">
