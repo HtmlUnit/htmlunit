@@ -9,6 +9,9 @@
     <body>
         <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87">
             <action type="fix" dev="rbri">
+                core-js: Make type checking and casting a bit more generic to provide better error messages.
+            </action>
+            <action type="fix" dev="rbri">
                 Various fixes for handling of xml nodes by css selectors.
             </action>
             <action type="fix" dev="rbri">
