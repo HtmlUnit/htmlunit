@@ -436,8 +436,19 @@ public class CSSStyleSheet extends StyleSheet {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
-                final String name = es.getLocalNameLowerCase();
-                if (name == null || name.equals(element.getLowercaseName())) {
+
+                final String name;
+                final String elementName;
+                if (element.getPage().hasCaseSensitiveTagNames()) {
+                    name = es.getLocalName();
+                    elementName = element.getLocalName();
+                }
+                else {
+                    name = es.getLocalNameLowerCase();
+                    elementName = element.getLowercaseName();
+                }
+
+                if (name == null || name.equals(elementName)) {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
                         for (final Condition condition : conditions) {
@@ -448,6 +459,7 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                     return true;
                 }
+
                 return false;
 
             case CHILD_SELECTOR:

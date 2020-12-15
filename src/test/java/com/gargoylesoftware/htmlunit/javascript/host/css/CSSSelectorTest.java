@@ -1474,6 +1474,30 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"silly:id::with:colons", "silly:id::with:colons", "silly~id", "silly~id"})
+    public void escapedId() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "</head><body>\n"
+            + "  <input id='silly:id::with:colons'>\n"
+            + "  <input id='silly~id'>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(document.querySelectorAll('#silly\\\\:id\\\\:\\\\:with\\\\:colons')[0].id);\n"
+            + "  alert(document.querySelectorAll(\"#silly\\\\:id\\\\:\\\\:with\\\\:colons\")[0].id);\n"
+
+            + "  alert(document.querySelectorAll('#silly\\\\~id')[0].id);\n"
+            + "  alert(document.querySelectorAll(\"#silly\\\\~id\")[0].id);\n"
+            + "} catch(e) {alert('exception ' + e)}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("exception")
     public void invalidSelectors() throws Exception {
         final String html
@@ -1740,6 +1764,60 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'></myDiv>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
+                "1", "Two", "0", "0"},
+            IE = {"2", "undefined", "undefined",
+                    "1", "undefined", "0", "0"})
+    public void xmlTagName() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "</head><body>\n"
+            + "<script>\n"
+
+            + "  var xmlString = [\n"
+            + "                 '<ResultSet>',\n"
+            + "                 '<Result>One</Result>',\n"
+            + "                 '<RESULT>Two</RESULT>',\n"
+            + "                 '<result><nested>Three</nested></result>',\n"
+            + "                 '<result>Four</result>',\n"
+            + "                 '</ResultSet>'\n"
+            + "                ].join('');\n"
+            + "  if (window.DOMParser) {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    xml = parser.parseFromString(xmlString, 'text/xml');\n"
+            + "  } else { // IE\n"
+            + "    var parser = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    parser.async = 'false';\n"
+            + "    parser.loadXML(xmlString);\n"
+            + "  }\n"
+            + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
+            + "  var de = xmlDoc.documentElement;\n"
+            + "  try {\n"
+
+            + "    var res = de.querySelectorAll('result');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+            + "    alert(res[1].innerHTML);\n"
+
+            + "    res = de.querySelectorAll('RESULT');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+
+            + "    res = de.querySelectorAll('resulT');\n"
+            + "    alert(res.length);\n"
+
+            + "    res = de.querySelectorAll('rEsulT');\n"
+            + "    alert(res.length);\n"
+            + "  } catch(e) {alert('exception ' + e)}\n"
+            + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }
