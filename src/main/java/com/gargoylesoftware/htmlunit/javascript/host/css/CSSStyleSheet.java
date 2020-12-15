@@ -344,6 +344,12 @@ public class CSSStyleSheet extends StyleSheet {
             if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
 
                 final InputStream in = response.getContentAsStreamWithBomIfApplicable();
+                if (in == null) {
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("Loading stylesheet for url '" + uri + "' returns empty responseData");
+                    }
+                    return new CSSStyleSheet(element, "", uri);
+                }
                 try {
                     Charset cssEncoding = Charset.forName("windows-1252");
                     final Charset contentCharset =
