@@ -576,12 +576,12 @@ public class CSSStyleSheet extends StyleSheet {
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
                 final String v = condition.getValue();
                 final String a = element.getAttribute(condition.getLocalName());
-                return selects(v, a, '-');
+                return selectsHyphenSeparated(v, a);
 
             case ONE_OF_ATTRIBUTE_CONDITION:
                 final String v2 = condition.getValue();
                 final String a2 = element.getAttribute(condition.getLocalName());
-                return selects(v2, a2, ' ');
+                return selectsOneOf(v2, a2);
 
             case LANG_CONDITION:
                 final String lcLang = condition.getValue();
@@ -607,7 +607,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
     }
 
-    private static boolean selects(final String condition, final String attribute, final char separator) {
+    private static boolean selectsOneOf(final String condition, final String attribute) {
         // attribute.equals(condition)
         // || attribute.startsWith(condition + " ") || attriubte.endsWith(" " + condition)
         // || attribute.contains(" " + condition + " ");
@@ -622,18 +622,42 @@ public class CSSStyleSheet extends StyleSheet {
             return false;
         }
         if (attribLength > conditionLength) {
-            if (separator == attribute.charAt(conditionLength)
+            if (' ' == attribute.charAt(conditionLength)
                     && attribute.startsWith(condition)) {
                 return true;
             }
-            if (separator == attribute.charAt(attribLength - conditionLength - 1)
+            if (' ' == attribute.charAt(attribLength - conditionLength - 1)
                     && attribute.endsWith(condition)) {
                 return true;
             }
             if (attribLength + 1 > conditionLength) {
                 final StringBuilder tmp = new StringBuilder(conditionLength + 2);
-                tmp.append(separator).append(condition).append(separator);
+                tmp.append(' ').append(condition).append(' ');
                 return attribute.contains(tmp);
+            }
+            return false;
+        }
+        return attribute.equals(condition);
+    }
+
+    private static boolean selectsHyphenSeparated(final String condition, final String attribute) {
+        final int conditionLength = condition.length();
+        if (conditionLength < 1) {
+            if (attribute != ATTRIBUTE_NOT_DEFINED) {
+                final int attribLength = attribute.length();
+                return attribLength == 0 || '-' == attribute.charAt(0);
+            }
+            return false;
+        }
+
+        final int attribLength = attribute.length();
+        if (attribLength < conditionLength) {
+            return false;
+        }
+        if (attribLength > conditionLength) {
+            if ('-' == attribute.charAt(conditionLength)
+                    && attribute.startsWith(condition)) {
+                return true;
             }
             return false;
         }

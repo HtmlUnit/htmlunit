@@ -520,6 +520,100 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"5", "id1", "id2", "id5", "id6", "id7"})
+    public void hyphenSeparatedAttributeValue() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[title|=\"abc\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='abc'></ul>\n"
+            + "  <p id='id2' title='abc-def'></p>\n"
+            + "  <p id='id3' title='x-abc-def'></p>\n"
+            + "  <p id='id4' title='abc -def'></p>\n"
+            + "  <p id='id5' title='abc- def'></p>\n"
+            + "  <p id='id6' title='abc-def gh'></p>\n"
+            + "  <p id='id7' title='abc-def-gh'></p>\n"
+            + "  <p id='id8' title='xabc'></p>\n"
+            + "  <ul id='id9' title='abcd'></ul>\n"
+            + "  <p id='id10' title='abc def'></p>\n"
+            + "  <p id='id11' title=' abc-def gh'></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "id1", "id4"})
+    public void hyphenSeparatedAttributeValueHyphenInSelector() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[title|=\"ab-c\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='ab-c'></ul>\n"
+            + "  <p id='id2' title='ab-cd'></p>\n"
+            + "  <ul id='id3' title='ab-c d'></ul>\n"
+            + "  <p id='id4' title='ab-c-d'></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "id2", "id6"})
+    public void hyphenSeparatedAttributeValueEmpty() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[title|=\"\"]');\n"
+            + "  alert(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='abc'></ul>\n"
+            + "  <p id='id2' title=''></p>\n"
+            + "  <ul id='id3' title=' '></ul>\n"
+            + "  <p id='id4' title=' -abc'></p>\n"
+            + "  <p id='id5' title=' -abc'></p>\n"
+            + "  <p id='id6' title='-abc'></p>\n"
+            + "  <p id='id7' title='\\t'></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"1", "id3"})
     public void emptyAttributeValue() throws Exception {
         final String html = "<html><head><title>First</title>\n"
