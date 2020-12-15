@@ -1821,4 +1821,69 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "ONE", "<CHILD>Two</CHILD>",
+                    "0",
+                    "2", "ONE", "<CHILD>Two</CHILD>",
+                    "1", "ONE",
+                    "1", "Two"},
+            IE = {"2", "undefined", "undefined",
+                    "0",
+                    "2", "undefined", "undefined",
+                    "1", "undefined",
+                    "1", "undefined"})
+    public void xmlAttribute() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "</head><body>\n"
+            + "<script>\n"
+
+            + "  var xmlString = [\n"
+            + "                 '<ResultSet>',\n"
+            + "                 '<RESULT thinger=\"blah\">ONE</RESULT>',\n"
+            + "                 '<RESULT thinger=\"gadzooks\"><CHILD>Two</CHILD></RESULT>',\n"
+            + "                 '</ResultSet>'\n"
+            + "                ].join('');\n"
+            + "  if (window.DOMParser) {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    xml = parser.parseFromString(xmlString, 'text/xml');\n"
+            + "  } else { // IE\n"
+            + "    var parser = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    parser.async = 'false';\n"
+            + "    parser.loadXML(xmlString);\n"
+            + "  }\n"
+            + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
+            + "  var de = xmlDoc.documentElement;\n"
+            + "  try {\n"
+
+            + "    var res = de.querySelectorAll('RESULT');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+            + "    alert(res[1].innerHTML);\n"
+
+            + "    res = de.querySelectorAll('RESULT[THINGER]');\n"
+            + "    alert(res.length);\n"
+
+            + "    res = de.querySelectorAll('RESULT[thinger]');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+            + "    alert(res[1].innerHTML);\n"
+
+            + "    res = de.querySelectorAll('RESULT[thinger=blah]');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+
+            + "    res = de.querySelectorAll('RESULT > CHILD');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].innerHTML);\n"
+
+            + "  } catch(e) {alert('exception ' + e)}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

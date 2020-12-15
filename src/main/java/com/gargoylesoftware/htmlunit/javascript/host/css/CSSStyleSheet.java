@@ -467,12 +467,12 @@ public class CSSStyleSheet extends StyleSheet {
                 if (parentNode == element.getPage()) {
                     return false;
                 }
-                if (!(parentNode instanceof HtmlElement)) {
+                if (!(parentNode instanceof DomElement)) {
                     return false; // for instance parent is a DocumentFragment
                 }
                 final ChildSelector cs = (ChildSelector) selector;
                 return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
-                    && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode,
+                    && selects(browserVersion, cs.getAncestorSelector(), (DomElement) parentNode,
                             pseudoElement, fromQuerySelectorAll);
 
             case DESCENDANT_SELECTOR:
@@ -484,8 +484,8 @@ public class CSSStyleSheet extends StyleSheet {
                         ancestor = ancestor.getParentNode();
                     }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
-                    while (ancestor instanceof HtmlElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor, pseudoElement,
+                    while (ancestor instanceof DomElement) {
+                        if (selects(browserVersion, dsAncestorSelector, (DomElement) ancestor, pseudoElement,
                                 fromQuerySelectorAll)) {
                             return true;
                         }
@@ -498,12 +498,12 @@ public class CSSStyleSheet extends StyleSheet {
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
                 if (selects(browserVersion, das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
                     DomNode prev = element.getPreviousSibling();
-                    while (prev != null && !(prev instanceof HtmlElement)) {
+                    while (prev != null && !(prev instanceof DomElement)) {
                         prev = prev.getPreviousSibling();
                     }
                     return prev != null
                             && selects(browserVersion, das.getSelector(),
-                                    (HtmlElement) prev, pseudoElement, fromQuerySelectorAll);
+                                    (DomElement) prev, pseudoElement, fromQuerySelectorAll);
                 }
                 return false;
 
@@ -512,8 +512,8 @@ public class CSSStyleSheet extends StyleSheet {
                 if (selects(browserVersion, gas.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
                     for (DomNode prev1 = element.getPreviousSibling(); prev1 != null;
                                                         prev1 = prev1.getPreviousSibling()) {
-                        if (prev1 instanceof HtmlElement
-                            && selects(browserVersion, gas.getSelector(), (HtmlElement) prev1,
+                        if (prev1 instanceof DomElement
+                            && selects(browserVersion, gas.getSelector(), (DomElement) prev1,
                                     pseudoElement, fromQuerySelectorAll)) {
                             return true;
                         }
