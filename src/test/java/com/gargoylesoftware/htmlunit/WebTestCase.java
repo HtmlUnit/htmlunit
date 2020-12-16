@@ -736,14 +736,30 @@ public abstract class WebTestCase {
 
     private static URL getExpectationsResource(final Class<?> referenceClass, final BrowserVersion browserVersion,
             final String resourcePrefix, final String resourceSuffix) {
-        final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
 
-        final URL url = referenceClass.getResource(browserSpecificResource);
+        // first try nyi
+        final String browserSpecificNyiResource
+                = resourcePrefix + "." + browserVersion.getNickname() + "_NYI" + resourceSuffix;
+        URL url = referenceClass.getResource(browserSpecificNyiResource);
         if (url != null) {
             return url;
         }
 
-        // fall back: expectations for all browsers
+        // next nyi without browser
+        final String nyiResource = resourcePrefix + "_NYI" + resourceSuffix;
+        url = referenceClass.getResource(nyiResource);
+        if (url != null) {
+            return url;
+        }
+
+        // implemented - browser specific
+        final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
+        url = referenceClass.getResource(browserSpecificResource);
+        if (url != null) {
+            return url;
+        }
+
+        // implemented - all browsers
         final String resource = resourcePrefix + resourceSuffix;
         return referenceClass.getResource(resource);
     }
