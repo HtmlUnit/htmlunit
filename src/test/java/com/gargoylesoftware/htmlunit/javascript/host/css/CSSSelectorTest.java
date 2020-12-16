@@ -809,6 +809,64 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"1", "checkbox2", "1", "checkbox2"})
+    public void pseudoCheckboxChecked() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('input[type=checkbox]:checked');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
+
+            + "  var list = document.querySelectorAll('#t2 > input[type=checkbox]:checked');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='t2'>\n"
+            + "    <input type='checkbox' name='checkbox1' id='checkbox1' value='foo'>\n"
+            + "    <input type='checkbox' name='checkbox2' id='checkbox2' value='bar' checked>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "radio2", "1", "radio2"})
+    public void pseudoRadioChecked() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('input[type=radio]:checked');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
+
+            + "  var list = document.querySelectorAll('#t2 > input[type=radio]:checked');\n"
+            + "  alert(list.length);\n"
+            + "  alert(list[0].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='t2'>\n"
+            + "    <input type='radio' name='radio1' id='radio1' value='foo'>\n"
+            + "    <input type='radio' name='radio2' id='radio2' value='bar' checked>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("li1")
     public void first_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
