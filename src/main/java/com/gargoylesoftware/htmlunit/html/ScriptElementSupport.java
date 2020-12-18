@@ -77,7 +77,8 @@ public final class ScriptElementSupport {
             LOG.debug("Script node added: " + element.asXml());
         }
 
-        final PostponedAction action = new PostponedAction(element.getPage(), "Execution of script " + element) {
+        final String description = "Execution of " + element.getClass().getSimpleName();
+        final PostponedAction action = new PostponedAction(element.getPage(), description) {
             @Override
             public void execute() {
                 final HTMLDocument jsDoc = (HTMLDocument)
