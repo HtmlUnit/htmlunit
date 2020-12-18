@@ -91,7 +91,8 @@ public final class ScriptElementSupport {
 
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         if (webWindow != null) {
-            final PostponedAction action = new PostponedAction(element.getPage(), "Execution of script " + element) {
+            final String description = "Execution of " + element.getClass().getSimpleName();
+            final PostponedAction action = new PostponedAction(element.getPage(), description) {
                 @Override
                 public void execute() {
                     // see HTMLDocument.setExecutingDynamicExternalPosponed(boolean)
