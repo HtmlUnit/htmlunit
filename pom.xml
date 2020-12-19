@@ -1090,6 +1090,9 @@
         <contributor>
             <name>Thorsten Wendelmuth</name>
         </contributor>
+        <contributor>
+            <name>Markus Heiden</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
