@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87">
+            <action type="update" dev="Markus Heiden">
+                Improved performance due to avoiding Script conversion into String only for naming the action.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix comment parsing in try and catch statements.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Make type checking and casting a bit more generic to provide better error messages.
             </action>

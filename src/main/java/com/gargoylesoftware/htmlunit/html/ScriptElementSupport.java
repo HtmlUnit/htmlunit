@@ -91,8 +91,15 @@ public final class ScriptElementSupport {
 
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         if (webWindow != null) {
-            final String description = "Execution of " + element.getClass().getSimpleName();
-            final PostponedAction action = new PostponedAction(element.getPage(), description) {
+            final String srcAttrib = ((ScriptElement) element).getSrcAttribute();
+            final StringBuilder description = new StringBuilder()
+                    .append("Execution of ")
+                    .append(srcAttrib == ATTRIBUTE_NOT_DEFINED ? "inline " : "external ")
+                    .append(element.getClass().getSimpleName());
+            if (srcAttrib != ATTRIBUTE_NOT_DEFINED) {
+                description.append(" (").append(srcAttrib).append(")");
+            }
+            final PostponedAction action = new PostponedAction(element.getPage(), description.toString()) {
                 @Override
                 public void execute() {
                     // see HTMLDocument.setExecutingDynamicExternalPosponed(boolean)
@@ -101,7 +108,7 @@ public final class ScriptElementSupport {
                     if (window != null) {
                         jsDoc = (HTMLDocument) window.getDocument();
                         jsDoc.setExecutingDynamicExternalPosponed(element.getStartLineNumber() == -1
-                                && ((ScriptElement) element).getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                                && srcAttrib != ATTRIBUTE_NOT_DEFINED);
                     }
                     try {
                         executeScriptIfNeeded(element);
