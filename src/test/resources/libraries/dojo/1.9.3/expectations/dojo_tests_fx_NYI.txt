@@ -1,0 +1,52 @@
+2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "tests.fx" has 1 test to run
+ 23 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 23 tests to run
+ PASSED test: ../../dojo/tests/fx.html::t::slideTo x ms
+ PASSED test: ../../dojo/tests/fx.html::t::wipeOut x ms
+     Error: test timeout in ../../dojo/tests/fx.html::t::wipeIn
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/fx.html::t::wipeIn x ms
+ PASSED test: ../../dojo/tests/fx.html::t::chain x ms
+ PASSED test: ../../dojo/tests/fx.html::t::combine x ms
+ PASSED test: ../../dojo/tests/fx.html::t::combineBeforeBegin x ms
+ PASSED test: ../../dojo/tests/fx.html::t::delayTest x ms
+ PASSED test: ../../dojo/tests/fx.html::t::delayTestChain x ms
+ PASSED test: ../../dojo/tests/fx.html::t::combineOnEnd x ms
+ PASSED test: ../../dojo/tests/fx.html::t::combineOnPlay x ms
+ PASSED test: ../../dojo/tests/fx.html::t::chainOnEnd x ms
+ PASSED test: ../../dojo/tests/fx.html::t::chainOnPlay x ms
+ PASSED test: ../../dojo/tests/fx.html::t::stopDelay x ms
+ PASSED test: ../../dojo/tests/fx.html::t::stopDelayPassed x ms
+ PASSED test: ../../dojo/tests/fx.html::t::testToggler x ms
+ PASSED test: ../../dojo/tests/fx.html::t::combineChain x ms
+ PASSED test: ../../dojo/tests/fx.html::t::chainCombine x ms
+ PASSED test: ../../dojo/tests/fx.html::t::easingNames x ms
+ PASSED test: ../../dojo/tests/fx.html::t::easingReturns x ms
+ PASSED test: ../../dojo/tests/fx.html::t::onendStatus-chain x ms
+ PASSED test: ../../dojo/tests/fx.html::t::onendStatus-combine x ms
+ PASSED test: ../../dojo/tests/fx.html::t::wipeOut onStop x ms
+ PASSED test: ../../dojo/tests/fx.html::t::wipeIn onStop x ms
+ PASSED test: ../../dojo/tests/fx.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.NodeList-fx" has 1 test to run
+ 7 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "NodeList-fx" has 7 tests to run
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::fadeOut x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::fadeIn x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::wipeOut x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::wipeIn x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::slideTo x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::anim x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html::NodeList-fx::auto x ms
+ PASSED test: ../../dojo/tests/NodeList-fx.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      32 tests in 2 groups
+      1 errors
+      0 failures
