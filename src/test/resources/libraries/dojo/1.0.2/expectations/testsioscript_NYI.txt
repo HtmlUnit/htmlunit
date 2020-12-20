@@ -1,0 +1,19 @@
+1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.io.script" has 1 test to run
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 3 tests to run
+ PASSED test: ../../dojo/tests/io/script.html::t::ioScriptSimple
+ PASSED test: ../../dojo/tests/io/script.html::t::ioScriptJsonp
+ Error: false
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/io/script.html::t::ioScriptJsonpTimeout
+ PASSED test: ../../dojo/tests/io/script.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      4 tests in 2 groups
+      1 errors
+      0 failures

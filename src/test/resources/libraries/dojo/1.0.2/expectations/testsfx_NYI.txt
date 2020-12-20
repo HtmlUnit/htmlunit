@@ -1,0 +1,20 @@
+1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.fx" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/fx.html::t::slideTo
+ PASSED test: ../../dojo/tests/fx.html::t::wipeOut
+ Error: test timeout in ../../dojo/tests/fx.html::t::wipeIn
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/fx.html::t::wipeIn
+ PASSED test: ../../dojo/tests/fx.html::t::Toggler
+ PASSED test: ../../dojo/tests/fx.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 2 groups
+      1 errors
+      0 failures

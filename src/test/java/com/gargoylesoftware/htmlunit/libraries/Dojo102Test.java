@@ -14,15 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with version 1.0.2 of the <a href="http://dojotoolkit.org/">Dojo
@@ -129,7 +124,6 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({CHROME, EDGE})
     public void tests_basehtml() throws Exception {
         test("tests._base.html");
         // tests._base.html_rtl
@@ -243,7 +237,6 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void testsioscript() throws Exception {
         test("tests.io.script");
     }
@@ -276,7 +269,6 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE)
     public void testsbehavior() throws Exception {
         shutDownAll();
 
@@ -303,7 +295,6 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void testsfx() throws Exception {
         test("tests.fx");
     }
