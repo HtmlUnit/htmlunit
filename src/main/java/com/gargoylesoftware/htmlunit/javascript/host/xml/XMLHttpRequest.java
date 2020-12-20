@@ -564,7 +564,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return;
         }
 
-        prepareRequest(content);
+        prepareRequestContent(content);
+        if (timeout_ > 0) {
+            webRequest_.setTimeout(timeout_);
+        }
 
         final Window w = getWindow();
         final WebWindow ww = w.getWebWindow();
@@ -573,7 +576,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final HtmlPage page = (HtmlPage) ww.getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, webRequest_, async_);
         if (synchron) {
-            doSend(Context.getCurrentContext());
+            doSend();
         }
         else {
             // Create and start a thread in which to execute the request.
@@ -593,7 +596,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     stack.push(startingScope);
 
                     try {
-                        doSend(cx);
+                        doSend();
                     }
                     finally {
                         stack.pop();
@@ -628,7 +631,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * Prepares the WebRequest that will be sent.
      * @param content the content to send
      */
-    private void prepareRequest(final Object content) {
+    private void prepareRequestContent(final Object content) {
         if (content != null
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
@@ -673,7 +676,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * The real send job.
      * @param context the current context
      */
-    void doSend(final Context context) {
+    void doSend() {
         if (async_ && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
             fireJavascriptEvent(Event.TYPE_LOAD_START);
         }
@@ -707,6 +710,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     }
                 }
                 preflightRequest.setAdditionalHeader(HttpHeader.ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
+                if (timeout_ > 0) {
+                    preflightRequest.setTimeout(timeout_);
+                }
 
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);

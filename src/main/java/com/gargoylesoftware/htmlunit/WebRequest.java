@@ -69,6 +69,7 @@ public class WebRequest implements Serializable {
     private Map<String, String> additionalHeaders_ = new HashMap<>();
     private Credentials urlCredentials_;
     private Credentials credentials_;
+    private int timeout_;
     private transient Charset charset_ = ISO_8859_1;
     private transient Set<HttpHint> httpHints_;
 
@@ -90,6 +91,7 @@ public class WebRequest implements Serializable {
         if (acceptEncodingHeader != null) {
             setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, acceptEncodingHeader);
         }
+        timeout_ = -1;
     }
 
     /**
@@ -258,6 +260,21 @@ public class WebRequest implements Serializable {
      */
     public void setSocksProxy(final boolean isSocksProxy) {
         isSocksProxy_ = isSocksProxy;
+    }
+
+    /**
+     * @return the timeout to use
+     */
+    public int getTimeout() {
+        return timeout_;
+    }
+
+    /**
+     * Sets the timeout to use.
+     * @param timeout the timeout to use
+     */
+    public void setTimeout(final int timeout) {
+        timeout_ = timeout;
     }
 
     /**

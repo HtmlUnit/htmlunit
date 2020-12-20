@@ -273,14 +273,6 @@ public final class XMLHttpRequestLifeCycleTest {
 
         private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected Integer getWebClientTimeout() {
-            return 100;
-        }
-
         @Before
         public void prepareTestingServlets() {
             servlets_.put(SUCCESS_URL, Xml200Servlet.class);

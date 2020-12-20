@@ -168,20 +168,20 @@ public class HttpWebConnection implements WebConnection {
      * {@inheritDoc}
      */
     @Override
-    public WebResponse getResponse(final WebRequest request) throws IOException {
-        final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());
+    public WebResponse getResponse(final WebRequest webRequest) throws IOException {
+        final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder(), webRequest);
 
         HttpUriRequest httpMethod = null;
         try {
             try {
-                httpMethod = makeHttpMethod(request, builder);
+                httpMethod = makeHttpMethod(webRequest, builder);
             }
             catch (final URISyntaxException e) {
-                throw new IOException("Unable to create URI from URL: " + request.getUrl().toExternalForm()
+                throw new IOException("Unable to create URI from URL: " + webRequest.getUrl().toExternalForm()
                         + " (reason: " + e.getMessage() + ")", e);
             }
 
-            final URL url = request.getUrl();
+            final URL url = webRequest.getUrl();
             final HttpHost httpHost = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
             final long startTime = System.currentTimeMillis();
 
@@ -215,7 +215,7 @@ public class HttpWebConnection implements WebConnection {
 
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
-            return makeWebResponse(httpResponse, request, downloadedBody, endTime - startTime);
+            return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
         }
         finally {
             if (httpMethod != null) {
@@ -250,7 +250,7 @@ public class HttpWebConnection implements WebConnection {
 
     private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
         final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
-        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout(), localAddress);
+        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout(webRequest), localAddress);
 
         if (webRequest.getProxyHost() == null) {
             requestBuilder.setProxy(null);
@@ -559,10 +559,15 @@ public class HttpWebConnection implements WebConnection {
      * Returns the timeout to use for socket and connection timeouts for HttpConnectionManager.
      * Is overridden to 0 by StreamingWebConnection which keeps reading after a timeout and
      * must have long running connections explicitly terminated.
+     * @param webRequest the request might have his own timeout
      * @return the WebClient's timeout
      */
-    protected int getTimeout() {
-        return webClient_.getOptions().getTimeout();
+    protected int getTimeout(final WebRequest webRequest) {
+        if (webRequest == null || webRequest.getTimeout() < 0) {
+            return webClient_.getOptions().getTimeout();
+        }
+
+        return webRequest.getTimeout();
     }
 
     /**
@@ -576,7 +581,7 @@ public class HttpWebConnection implements WebConnection {
     protected HttpClientBuilder createHttpClientBuilder() {
         final HttpClientBuilder builder = HttpClientBuilder.create();
         builder.setRedirectStrategy(new HtmlUnitRedirectStrategie());
-        configureTimeout(builder, getTimeout());
+        configureTimeout(builder, getTimeout(null));
         configureHttpsScheme(builder);
         builder.setMaxConnPerRoute(6);
 
@@ -619,7 +624,8 @@ public class HttpWebConnection implements WebConnection {
      * React on changes that may have occurred on the WebClient settings.
      * Registering as a listener would be probably better.
      */
-    private HttpClientBuilder reconfigureHttpClientIfNeeded(final HttpClientBuilder httpClientBuilder) {
+    private HttpClientBuilder reconfigureHttpClientIfNeeded(final HttpClientBuilder httpClientBuilder,
+            final WebRequest webRequest) {
         final WebClientOptions options = webClient_.getOptions();
 
         // register new SSL factory only if settings have changed
@@ -637,7 +643,7 @@ public class HttpWebConnection implements WebConnection {
             }
         }
 
-        final int timeout = getTimeout();
+        final int timeout = getTimeout(webRequest);
         if (timeout != usedOptions_.getTimeout()) {
             configureTimeout(httpClientBuilder, timeout);
         }
@@ -710,7 +716,7 @@ public class HttpWebConnection implements WebConnection {
      * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final HttpResponse httpResponse,
-            final WebRequest request, final DownloadedContent responseBody, final long loadTime) {
+            final WebRequest webRequest, final DownloadedContent responseBody, final long loadTime) {
 
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
         if (statusMessage == null) {
@@ -722,7 +728,7 @@ public class HttpWebConnection implements WebConnection {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
         final WebResponseData responseData = new WebResponseData(responseBody, statusCode, statusMessage, headers);
-        return newWebResponseInstance(responseData, loadTime, request);
+        return newWebResponseInstance(responseData, loadTime, webRequest);
     }
 
     /**
@@ -790,15 +796,15 @@ public class HttpWebConnection implements WebConnection {
      * Constructs an appropriate WebResponse.
      * May be overridden by subclasses to return a specialized WebResponse.
      * @param responseData Data that was send back
-     * @param request the request used to get this response
+     * @param webRequest the request used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse
      */
     protected WebResponse newWebResponseInstance(
             final WebResponseData responseData,
             final long loadTime,
-            final WebRequest request) {
-        return new WebResponse(responseData, request, loadTime);
+            final WebRequest webRequest) {
+        return new WebResponse(responseData, webRequest, loadTime);
     }
 
     private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) {
