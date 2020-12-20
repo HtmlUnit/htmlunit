@@ -1,0 +1,40 @@
+ 11 tests to run in 3 groups
+ ------------------------------------------------------------
+ GROUP "tests.i18n" has 9 tests to run
+ PASSED test: salutations-de x ms
+ PASSED test: salutations-en x ms
+ PASSED test: salutations-en-au x ms
+ PASSED test: salutations-en-us x ms
+ PASSED test: salutations-en-us-texas x ms
+ PASSED test: salutations-en-us-new_york x ms
+ PASSED test: salutations-en-us-new_york-brooklyn x ms
+ PASSED test: salutations-xx x ms
+ PASSED test: salutations-zh-cn x ms
+ ------------------------------------------------------------
+ GROUP "tests.i18n.extra.sync" has 1 test to run
+ 3 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "ungrouped" has 2 tests to run
+ PASSED test: ../../dojo/tests/i18n.html::ungrouped::oldAndNewBundleStyles x ms
+ PASSED test: ../../dojo/tests/i18n.html::ungrouped::extraLocalesSync x ms
+ ------------------------------------------------------------
+ GROUP "tests.i18n.unit" has 1 test to run
+ PASSED test: ../../dojo/tests/i18n.html::tests.i18n.unit:: x ms
+ PASSED test: ../../dojo/tests/i18n.html x ms
+ ------------------------------------------------------------
+ GROUP "tests.i18n.extra.async" has 1 test to run
+ 2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "ungrouped" has 1 test to run
+ PASSED test: ../../dojo/tests/i18n.html::ungrouped::extraLocalesAsync x ms
+ ------------------------------------------------------------
+ GROUP "tests.i18n.unit" has 1 test to run
+ PASSED test: ../../dojo/tests/i18n.html::tests.i18n.unit:: x ms
+ PASSED test: ../../dojo/tests/i18n.html x ms
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      16 tests in 3 groups
+      0 errors
+      0 failures
