@@ -25,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -36,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * </p>
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MochiKitTest extends WebDriverTestCase {
@@ -134,7 +134,6 @@ public class MochiKitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void style() throws Exception {
         doTest("Style");
     }
