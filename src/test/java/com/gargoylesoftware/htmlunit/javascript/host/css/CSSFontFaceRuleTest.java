@@ -36,8 +36,6 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSFontFaceRule]", "5",
                 "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"},
-            FF = {"[object CSSFontFaceRule]", "5",
-                "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
             FF78 = {"[object CSSFontFaceRule]", "5",
                 "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
             IE = {"[object CSSFontFaceRule]", "5",
@@ -68,7 +66,6 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@font-face { font-family: Delicious; src: url(\"//:\"); }",
-            FF = "@font-face {\n  font-family: Delicious;\n  src: url(\"//:\");\n}",
             FF78 = "@font-face {\n  font-family: Delicious;\n  src: url(\"//:\");\n}",
             IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(//:);\n}\n")
     public void urlSlashSlashColon() throws Exception {
@@ -96,7 +93,6 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@font-face { font-family: Delicious; src: url(\"/:\"); }",
             FF78 = "@font-face {\n  font-family: Delicious;\n  src: url(\"/:\");\n}",
-            FF = "@font-face {\n  font-family: Delicious;\n  src: url(\"/:\");\n}",
             IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(/:);\n}\n")
     public void urlSlashColon() throws Exception {
         final String html
@@ -122,7 +118,6 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "@font-face { font-family: Delicious; src: url(\"//\"); }",
-            FF = "@font-face {\n  font-family: Delicious;\n  src: url(\"//\");\n}",
             FF78 = "@font-face {\n  font-family: Delicious;\n  src: url(\"//\");\n}",
             IE = "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(//);\n}\n")
     public void urlSlashSlash() throws Exception {

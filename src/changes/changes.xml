@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87">
+        <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87, Firefox 84">
             <action type="add" dev="rbri">
                 Support individual timeout settings for XMLHttpRequest.
             </action>
@@ -425,7 +425,7 @@
                 core-js: Support for ES6 generators was added to Rhino.
             </action>
         </release>
-        <release version="2.41.0" date="June 6, 2020" description="Bugfixes, Chrome 83, Firefox77">
+        <release version="2.41.0" date="June 6, 2020" description="Bugfixes, Chrome 83, Firefox 77">
             <action type="fix" dev="rbri">
                 core-js:  It should be not possible to change the prototype of a non-extensible object.
             </action>
@@ -504,7 +504,7 @@
                 Fix NPE getting event handlers without JS engine.
             </action>
         </release>
-        <release version="2.40.0" date="May 2, 2020" description="Bugfixes, Chrome 81, Firefox75">
+        <release version="2.40.0" date="May 2, 2020" description="Bugfixes, Chrome 81, Firefox 75">
             <action type="add" dev="rbri" issue="161">
                 New WebClientConfiguration option ConnectionTimeToLive added.
             </action>
@@ -564,7 +564,7 @@
                 opening a new WebClinet window.
             </action>
         </release>
-        <release version="2.39.0" date="April 5, 2020" description="Bugfixes, Firefox74">
+        <release version="2.39.0" date="April 5, 2020" description="Bugfixes, Firefox 74">
             <action type="fix" dev="rbri">
                 Neko: fix encoding of blanks in file uri's.
             </action>

@@ -4160,7 +4160,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "featurePolicy,frameBorder,getSVGDocument(),height,loading,longDesc,marginHeight,marginWidth,name,"
                 + "referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
-            FF = "align,allow,allowFullscreen,allowPaymentRequest,constructor(),contentDocument,contentWindow,"
+            FF = "align,allow,allowFullscreen,constructor(),contentDocument,contentWindow,"
                 + "frameBorder,getSVGDocument(),height,longDesc,marginHeight,marginWidth,name,referrerPolicy,"
                 + "sandbox,scrolling,src,srcdoc,"
                 + "width",

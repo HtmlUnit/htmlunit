@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link Intl}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class IntlTest extends WebDriverTestCase {
@@ -34,9 +35,9 @@ public class IntlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Object]",
-            CHROME = "[object Intl]",
-            EDGE = "[object Intl]")
+    @Alerts(DEFAULT = "[object Intl]",
+            FF78 = "[object Object]",
+            IE = "[object Object]")
     public void intl() throws Exception {
         test("Intl");
     }

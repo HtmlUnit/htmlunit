@@ -45,7 +45,6 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "blob", "false", "false", "false", "null"},
             FF78 = {"[object BlobEvent]", "blob", "false", "false", "false", "null"})
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -91,7 +90,6 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "42", "false", "false", "false", "null"},
             FF78 = {"[object BlobEvent]", "42", "false", "false", "false", "null"})
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -114,7 +112,6 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "null", "false", "false", "false", "null"},
             FF78 = {"[object BlobEvent]", "null", "false", "false", "false", "null"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -158,7 +155,6 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "HtmlUnitEvent", "false", "false", "false", "null"},
             FF78 = {"[object BlobEvent]", "HtmlUnitEvent", "false", "false", "false", "null"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -207,7 +203,6 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"[object BlobEvent]", "blob", "false", "false", "false", "null"},
             FF78 = {"[object BlobEvent]", "blob", "false", "false", "false", "null"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
