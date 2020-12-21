@@ -944,14 +944,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF = {"2", "link_2", "link_3"})
     public void invalid_not() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll('p a:not(a:first-of-type)')[0].id);\n"
+            + "    var found = document.querySelectorAll('p a:not(a:first-of-type)');\n"
+            + "    alert(found.length);\n"
+            + "    alert(found[0].id);\n"
+            + "    alert(found[1].id);\n"
             + "  } catch(e) {alert('exception')}\n"
             + "}\n"
             + "</script></head>\n"
@@ -960,6 +964,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <strong id='strong'>This</strong> is a short blurb\n"
             + "  <a id='link_1' href='#'>with a link</a> or\n"
             + "  <a id='link_2' href='#'>two</a>.\n"
+            + "  <a id='link_3' href='#'>three</a>.\n"
             + "  Or <cite id='with_title' title='hello world!'>a citation</cite>.\n"
             + "</p>\n"
             + "</body></html>";
