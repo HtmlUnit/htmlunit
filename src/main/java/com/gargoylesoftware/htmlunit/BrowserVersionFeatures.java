@@ -75,7 +75,7 @@ public enum BrowserVersionFeatures {
     CSS_DISPLAY_BLOCK2,
 
     /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE,
 
     /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
@@ -639,7 +639,7 @@ public enum BrowserVersionFeatures {
     JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE,
 
     /** BlobEvent ctor requires a data value. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_BLOB_EVENT_REQUIRES_DATA,
 
     /** Body {@code margin} is 8px. */
@@ -1045,7 +1045,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_VALUE_URL_TRIMMED,
 
     /** Intl is named Object. */
-    @BrowserFeature({FF, FF78, IE})
+    @BrowserFeature({FF78, IE})
     JS_INTL_NAMED_OBJECT,
 
     /** Indicates that Intl.v8BreakIterator is supported. */

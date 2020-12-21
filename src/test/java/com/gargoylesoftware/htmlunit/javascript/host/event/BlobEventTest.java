@@ -67,8 +67,7 @@ public class BlobEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(FF = {"[object BlobEvent]", "undefined", "false", "false", "false", "null"},
-                FF78 = {"[object BlobEvent]", "undefined", "false", "false", "false", "null"})
+    @HtmlUnitNYI(FF78 = {"[object BlobEvent]", "undefined", "false", "false", "false", "null"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
