@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87, Firefox 84">
+            <action type="fix" dev="rbri">
+                core-js: Fix handling of MemberBox functions in getOwnPropertyDescriptor.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix Error.captureStackTrace(myError).
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix __lookupGetter__/__lookupSetter__ implementation.
+            </action>
             <action type="add" dev="rbri">
                 Support individual timeout settings for XMLHttpRequest.
             </action>
