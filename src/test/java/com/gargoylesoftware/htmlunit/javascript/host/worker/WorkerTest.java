@@ -65,7 +65,7 @@ public class WorkerTest extends WebDriverTestCase {
 
         final String workerJs = "postMessage('worker loaded');\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
@@ -88,7 +88,7 @@ public class WorkerTest extends WebDriverTestCase {
 
         final String workerJs = "postMessage('worker loaded');\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
@@ -114,7 +114,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "  postMessage(workerResult);\n"
                 + "}\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
@@ -203,7 +203,7 @@ public class WorkerTest extends WebDriverTestCase {
 
         final String scriptToImportJs1 = "postMessage(' in imported script1');\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1,
                 contentType);
 
@@ -231,7 +231,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "postMessage(' ' + self);\n"
                 + "postMessage(' ' + (this == self));\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
@@ -403,7 +403,31 @@ public class WorkerTest extends WebDriverTestCase {
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
+
+        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Received:worker loaded",
+            FF = {})
+    public void workerCodeWithWrongMimeType() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script async>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    alert('Received:' + e.data);\n"
+            + "  };\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "postMessage('worker loaded');\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }

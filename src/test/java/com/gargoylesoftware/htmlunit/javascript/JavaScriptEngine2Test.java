@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -943,7 +944,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "} catch (e) { pi = pi + ' - ' + 'exception'; }\n"
                 + "postMessage(pi);\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2000);
     }

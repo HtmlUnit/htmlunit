@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -64,7 +65,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
                 + "  postMessage(workerResult);\n"
                 + "}\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2000);
     }
@@ -90,7 +91,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
                 + "  postMessage(workerResult);\n"
                 + "}\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
@@ -116,7 +117,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
                 + "  postMessage(workerResult);\n"
                 + "});\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2000);
     }
@@ -140,7 +141,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
                 + "  postMessage('timeout');\n"
                 + "}, 10);\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
     }
@@ -165,7 +166,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
                 + "  clearInterval(id);\n"
                 + "}, 10);\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html, 20000);
     }
@@ -187,8 +188,36 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         final String workerJs = "postMessage('func='+self.addEventListener);";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Received: Result = 15",
+            FF = {})
+    public void workerCodeWithWrongMimeType() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    alert('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  var workerResult = 'Result = ' + (e.data[0] * e.data[1]);\n"
+                + "  postMessage(workerResult);\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_HTML);
+
+        loadPageWithAlerts2(html, 2000);
     }
 }
