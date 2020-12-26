@@ -64,7 +64,7 @@
  PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled x ms
      _AssertFailure: assertTrue('false') failed with hint: 
-   strict iframe element x == 0 (x,y,w,h=16.666667938232422,0,105.75,22)
+   strict iframe element x == 0 (x,y,w,h=17,0,105.75,22)
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html.html::t::coordsIframe x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(1, dojo.style('sq100nopos', 'opacity')); x ms
@@ -166,7 +166,7 @@
   expected
   100
  but got
-  116.66667175292969
+  117
 
  with hint: 
   x pos should be 100 after horizontal scroll
@@ -176,7 +176,7 @@
   expected
   10
  but got
-  26.666671752929688
+  27
 
  with hint: 
   pageX
@@ -186,7 +186,7 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=845 control.offsetLeft=811
+  abs1.offsetLeft=620 control.offsetLeft=586
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
  ------------------------------------------------------------
@@ -360,20 +360,8 @@
  ------------------------------------------------------------
  GROUP "t" has 4 tests to run
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testNonScrolled x ms
-     _AssertFailure: assertEqual() failed:
-  expected
-  1
- but got
-  0.6666666865348816
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
-     _AssertFailure: assertEqual() failed:
-  expected
-  1
- but got
-  0.6666666865348816
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
+ PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
+ PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html x ms
  ------------------------------------------------------------
@@ -381,4 +369,4 @@
  ------------------------------------------------------------
       213 tests in 9 groups
       0 errors
-      12 failures
+      10 failures

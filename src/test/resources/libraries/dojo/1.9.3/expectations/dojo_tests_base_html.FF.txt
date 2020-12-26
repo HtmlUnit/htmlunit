@@ -1,4 +1,4 @@
-9 tests to run in 9 groups
+ 9 tests to run in 9 groups
  ------------------------------------------------------------
  GROUP "tests._base.html" has 1 test to run
  103 tests to run in 7 groups
@@ -161,13 +161,7 @@
  GROUP "rtl" has 3 tests to run
  PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::coordsWithScrolling x ms
  PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::eventClientXY_IE x ms
-     _AssertFailure: http://localhost:22222/dojo/dojo.js line 315 > Function line 3 > eval:47 assertEqual() failed:
-  expected
-  EQUAL
- but got
-  100% width element start/size=-0.6666717529296875/2000 frame client left/width=0/881
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeNoneSmall" has 1 test to run
  PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneSmall::test_scrollingQuirksIframeNoneSmall x ms
@@ -303,25 +297,14 @@
  ------------------------------------------------------------
  GROUP "t" has 4 tests to run
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testNonScrolled x ms
-     _AssertFailure: http://localhost:22222/dojo/dojo.js line 315 > Function line 3 > eval:47 assertEqual() failed:
-  expected
-  1
- but got
-  1.3333333730697632
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
-     _AssertFailure: http://localhost:22222/dojo/dojo.js line 315 > Function line 3 > eval:47 assertEqual() failed:
-  expected
-  1
- but got
-  1.3333333730697632
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
+ PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
+ PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html x ms
+ WOOHOO!!
  ------------------------------------------------------------
  | TEST SUMMARY:
  ------------------------------------------------------------
       213 tests in 9 groups
       0 errors
-      3 failures
+      0 failures

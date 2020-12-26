@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -714,54 +713,6 @@ public abstract class WebTestCase {
     @After
     public void releaseResources() {
         mockWebConnection_ = null;
-    }
-
-    /**
-     * Loads an expectation file for the specified browser search first for a browser specific resource
-     * and falling back in a general resource.
-     * @param resourcePrefix the start of the resource name
-     * @param resourceSuffix the end of the resource name
-     * @return the content of the file
-     * @throws Exception in case of error
-     */
-    protected String loadExpectation(final String resourcePrefix, final String resourceSuffix) throws Exception {
-        final URL url = getExpectationsResource(getClass(), getBrowserVersion(), resourcePrefix, resourceSuffix);
-        assertNotNull(url);
-        final File file = new File(url.toURI());
-
-        String content = FileUtils.readFileToString(file, UTF_8);
-        content = StringUtils.replace(content, "\r\n", "\n");
-        return content;
-    }
-
-    private static URL getExpectationsResource(final Class<?> referenceClass, final BrowserVersion browserVersion,
-            final String resourcePrefix, final String resourceSuffix) {
-
-        // first try nyi
-        final String browserSpecificNyiResource
-                = resourcePrefix + "." + browserVersion.getNickname() + "_NYI" + resourceSuffix;
-        URL url = referenceClass.getResource(browserSpecificNyiResource);
-        if (url != null) {
-            return url;
-        }
-
-        // next nyi without browser
-        final String nyiResource = resourcePrefix + "_NYI" + resourceSuffix;
-        url = referenceClass.getResource(nyiResource);
-        if (url != null) {
-            return url;
-        }
-
-        // implemented - browser specific
-        final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
-        url = referenceClass.getResource(browserSpecificResource);
-        if (url != null) {
-            return url;
-        }
-
-        // implemented - all browsers
-        final String resource = resourcePrefix + resourceSuffix;
-        return referenceClass.getResource(resource);
     }
 
     /**

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -53,6 +54,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
@@ -157,6 +159,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     private static List<BrowserVersion> ALL_BROWSERS_ = Collections.unmodifiableList(
             Arrays.asList(BrowserVersion.CHROME,
+                    BrowserVersion.EDGE,
                     BrowserVersion.FIREFOX,
                     BrowserVersion.FIREFOX_78,
                     BrowserVersion.INTERNET_EXPLORER));
@@ -1254,6 +1257,57 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
         field.setAccessible(true);
         return (HtmlElement) field.get(webElement);
+    }
+
+    /**
+     * Loads an expectation file for the specified browser search first for a browser specific resource
+     * and falling back in a general resource.
+     * @param resourcePrefix the start of the resource name
+     * @param resourceSuffix the end of the resource name
+     * @return the content of the file
+     * @throws Exception in case of error
+     */
+    protected String loadExpectation(final String resourcePrefix, final String resourceSuffix) throws Exception {
+        final URL url = getExpectationsResource(getClass(), getBrowserVersion(), resourcePrefix, resourceSuffix);
+        assertNotNull(url);
+        final File file = new File(url.toURI());
+
+        String content = FileUtils.readFileToString(file, UTF_8);
+        content = StringUtils.replace(content, "\r\n", "\n");
+        return content;
+    }
+
+    private URL getExpectationsResource(final Class<?> referenceClass, final BrowserVersion browserVersion,
+            final String resourcePrefix, final String resourceSuffix) {
+
+        URL url;
+        if (!useRealBrowser()) {
+            // first try nyi
+            final String browserSpecificNyiResource
+                    = resourcePrefix + "." + browserVersion.getNickname() + "_NYI" + resourceSuffix;
+            url = referenceClass.getResource(browserSpecificNyiResource);
+            if (url != null) {
+                return url;
+            }
+
+            // next nyi without browser
+            final String nyiResource = resourcePrefix + "_NYI" + resourceSuffix;
+            url = referenceClass.getResource(nyiResource);
+            if (url != null) {
+                return url;
+            }
+        }
+
+        // implemented - browser specific
+        final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
+        url = referenceClass.getResource(browserSpecificResource);
+        if (url != null) {
+            return url;
+        }
+
+        // implemented - all browsers
+        final String resource = resourcePrefix + resourceSuffix;
+        return referenceClass.getResource(resource);
     }
 
     /**

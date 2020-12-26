@@ -1,4 +1,4 @@
-9 tests to run in 9 groups
+ 9 tests to run in 9 groups
  ------------------------------------------------------------
  GROUP "tests._base.html" has 1 test to run
  103 tests to run in 7 groups
@@ -160,16 +160,7 @@
  ------------------------------------------------------------
  GROUP "rtl" has 3 tests to run
  PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::coordsWithScrolling x ms
-     _AssertFailure: assertEqual() failed:
-  expected
-  723
- but got
-  722.659912109375
-
- with hint: 
-  pageX
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::eventClientXY_IE x ms
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::eventClientXY_IE x ms
  PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeNoneSmall" has 1 test to run
@@ -310,9 +301,10 @@
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html x ms
+ WOOHOO!!
  ------------------------------------------------------------
  | TEST SUMMARY:
  ------------------------------------------------------------
       213 tests in 9 groups
       0 errors
-      1 failures
+      0 failures
