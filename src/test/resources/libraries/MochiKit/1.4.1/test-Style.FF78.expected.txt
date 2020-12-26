@@ -1,8 +1,9 @@
-Passed: 53
-Failed: 12
+Passed: 59
+Failed: 6
 ok - initial x position
 ok - initial y position
 ok - x position with offsetParent border
+ok - y position with offsetParent border
 ok - updated x position
 ok - updated y position
 ok - updated x position (using relativeTo parameter)
@@ -31,10 +32,15 @@ ok - setStyle of CSS float
 ok - setStyle of CSS cssFloat
 ok - setStyle of CSS styleFloat
 ok - getElementDimensions w ok
+ok - getElementDimensions h ok
 ok - getElementDimensions content w ok
+ok - getElementDimensions content h ok
 ok - setElementDimensions w ok
+ok - setElementDimensions h ok
 ok - setElementDimensions only w ok
+ok - setElementDimensions h not updated ok
 ok - getElementDimensions w ok when display none
+ok - getElementDimensions h ok when display none
 ok - getElementDimensions w ok when CSS display none
 ok - getElementDimensions h ok when CSS display none
 ok - getElementDimensions modified element display
