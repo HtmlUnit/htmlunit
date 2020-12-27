@@ -19,12 +19,14 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link StyleAttributes}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class StyleAttributesIterable2Test extends WebDriverTestCase {
@@ -36,8 +38,9 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            IE = "in style")
+    @Alerts(DEFAULT = "done",
+            IE = {"in style", "done"})
+    @HtmlUnitNYI(IE = {"in style", "in computed style", "done"})
     public void notInComputed() throws Exception {
         styleVsComputed("pixelBottom");
     }
@@ -46,7 +49,7 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"in style", "in computed style"})
+    @Alerts({"in style", "in computed style", "done"})
     public void inComputed() throws Exception {
         styleVsComputed("wordBreak");
     }
@@ -66,6 +69,7 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
             + "        alert('in computed style');\n"
             + "      }\n"
             + "    }\n"
+            + "    alert('done');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
