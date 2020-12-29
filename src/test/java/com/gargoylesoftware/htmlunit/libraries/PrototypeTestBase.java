@@ -18,8 +18,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -34,7 +32,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -97,7 +94,10 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
             }
         }
 
-        String expected = getExpectations(getBrowserVersion(), filename);
+        final String expFileName = StringUtils.substringBeforeLast(filename, ".");
+        final String resourcePrefix = "/libraries/prototype/" + getVersion() + "/expected." + expFileName;
+        String expected = loadExpectation(resourcePrefix, ".txt");
+
         WebElement testlog = driver.findElement(By.id("testlog"));
         String actual = testlog.getText();
 
@@ -126,36 +126,6 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         }
 
         assertEquals(expected, actual);
-    }
-
-    private String getExpectations(final BrowserVersion browserVersion, final String filename)
-        throws IOException {
-        final String fileNameBase = StringUtils.substringBeforeLast(filename, ".");
-        final String baseName = "src/test/resources/libraries/prototype/" + getVersion() + "/expected." + fileNameBase;
-
-        File expectationsFile = null;
-        // version specific to this browser (or browser group)?
-        String browserSuffix = "." + browserVersion.getNickname();
-        while (!browserSuffix.isEmpty()) {
-            final File file = new File(baseName + browserSuffix + ".txt");
-            if (file.exists()) {
-                expectationsFile = file;
-                break;
-            }
-            browserSuffix = browserSuffix.substring(0, browserSuffix.length() - 1);
-        }
-
-        // generic version
-        if (expectationsFile == null) {
-            expectationsFile = new File(baseName + ".txt");
-            if (!expectationsFile.exists()) {
-                throw new FileNotFoundException("Can't find expectations file ("
-                        + expectationsFile.getName() + ") for test " + filename
-                        + "(" + browserVersion.getNickname() + ")");
-            }
-        }
-
-        return FileUtils.readFileToString(expectationsFile, UTF_8);
     }
 
     /**

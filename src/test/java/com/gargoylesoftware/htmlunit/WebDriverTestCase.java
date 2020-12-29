@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -1268,46 +1269,91 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of error
      */
     protected String loadExpectation(final String resourcePrefix, final String resourceSuffix) throws Exception {
-        final URL url = getExpectationsResource(getClass(), getBrowserVersion(), resourcePrefix, resourceSuffix);
-        assertNotNull(url);
-        final File file = new File(url.toURI());
+        final Class<?> referenceClass = getClass();
+        final BrowserVersion browserVersion = getBrowserVersion();
 
-        String content = FileUtils.readFileToString(file, UTF_8);
-        content = StringUtils.replace(content, "\r\n", "\n");
-        return content;
-    }
-
-    private URL getExpectationsResource(final Class<?> referenceClass, final BrowserVersion browserVersion,
-            final String resourcePrefix, final String resourceSuffix) {
-
-        URL url;
+        String realBrowserNyiExpectation = null;
+        String realNyiExpectation = null;
+        final String browserExpectation;
+        final String expectation;
         if (!useRealBrowser()) {
             // first try nyi
             final String browserSpecificNyiResource
                     = resourcePrefix + "." + browserVersion.getNickname() + "_NYI" + resourceSuffix;
-            url = referenceClass.getResource(browserSpecificNyiResource);
-            if (url != null) {
-                return url;
-            }
+            realBrowserNyiExpectation = loadContent(referenceClass.getResource(browserSpecificNyiResource));
 
             // next nyi without browser
             final String nyiResource = resourcePrefix + "_NYI" + resourceSuffix;
-            url = referenceClass.getResource(nyiResource);
-            if (url != null) {
-                return url;
-            }
+            realNyiExpectation = loadContent(referenceClass.getResource(nyiResource));
         }
 
         // implemented - browser specific
         final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
-        url = referenceClass.getResource(browserSpecificResource);
-        if (url != null) {
-            return url;
-        }
+        browserExpectation = loadContent(referenceClass.getResource(browserSpecificResource));
 
         // implemented - all browsers
         final String resource = resourcePrefix + resourceSuffix;
-        return referenceClass.getResource(resource);
+        expectation = loadContent(referenceClass.getResource(resource));
+
+        // check for duplicates
+        if (realBrowserNyiExpectation != null) {
+            if (realNyiExpectation != null) {
+                Assert.assertNotEquals("Duplicate NYI Expectation for Browser " + browserVersion.getNickname(),
+                        realBrowserNyiExpectation, realNyiExpectation);
+            }
+
+            if (browserExpectation == null) {
+                if (expectation != null) {
+                    Assert.assertNotEquals("NYI Expectation matches the expected "
+                            + "result for Browser " + browserVersion.getNickname(),
+                            realBrowserNyiExpectation, expectation);
+                }
+            }
+            else {
+                Assert.assertNotEquals("NYI Expectation matches the expected "
+                        + "browser specific result for Browser " + browserVersion.getNickname(),
+                        realBrowserNyiExpectation, browserExpectation);
+            }
+
+            return realBrowserNyiExpectation;
+        }
+
+        if (realNyiExpectation != null) {
+            if (browserExpectation == null) {
+                if (expectation != null) {
+                    Assert.assertNotEquals("NYI Expectation matches the expected "
+                            + "result for Browser " + browserVersion.getNickname(),
+                            realNyiExpectation, expectation);
+                }
+            }
+            else {
+                Assert.assertNotEquals("NYI Expectation matches the expected "
+                        + "browser specific result for Browser " + browserVersion.getNickname(),
+                        realNyiExpectation, browserExpectation);
+            }
+            return realNyiExpectation;
+        }
+
+        if (browserExpectation != null) {
+            if (expectation != null) {
+                Assert.assertNotEquals("Browser specific NYI Expectation matches the expected "
+                        + "result for Browser " + browserVersion.getNickname(),
+                        browserExpectation, expectation);
+            }
+            return browserExpectation;
+        }
+        return expectation;
+    }
+
+    private static String loadContent(final URL url) throws URISyntaxException, IOException {
+        if (url == null) {
+            return null;
+        }
+
+        final File file = new File(url.toURI());
+        String content = FileUtils.readFileToString(file, UTF_8);
+        content = StringUtils.replace(content, "\r\n", "\n");
+        return content;
     }
 
     /**
