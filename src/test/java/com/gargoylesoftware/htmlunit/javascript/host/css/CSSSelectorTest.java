@@ -1101,6 +1101,150 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "id2")
+    @HtmlUnitNYI(FF = "exception")
+    public void notWithFirstOfType() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll('div:not(div:first-of-type)')[0].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='id1'>1</div>\n"
+            + "  <div id='id2'>2</div>\n"
+            + "  <div id='id3'>3</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
+                    "3", "id1", "id2", "id3"})
+    @HtmlUnitNYI(FF = "exception")
+    public void notWithNthOfType() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = document.querySelectorAll('div:not(div:nth-of-type(1))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+
+            + "    res = document.querySelectorAll('div:not(div:nth-of-type(2))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+
+            + "    res = document.querySelectorAll('div:not(div:nth-of-type(3))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+
+            + "    res = document.querySelectorAll('div:not(div:nth-of-type(4))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+            + "    alert(res[2].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='id1'>1</div>\n"
+            + "  <div id='id2'>2</div>\n"
+            + "  <div id='id3'>3</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "id2")
+    @HtmlUnitNYI(FF = "exception")
+    public void notWithLastOfType() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll('div:not(div:last-of-type)')[1].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='id1'>1</div>\n"
+            + "  <div id='id2'>2</div>\n"
+            + "  <div id='id3'>3</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
+                    "3", "id1", "id2", "id3"})
+    @HtmlUnitNYI(FF = "exception")
+    public void notWithNthLastOfType() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = document.querySelectorAll('div:not(div:nth-last-of-type(1))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+
+            + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(2))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+
+            + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(3))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+
+            + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(4))');\n"
+            + "    alert(res.length);\n"
+            + "    alert(res[0].id);\n"
+            + "    alert(res[1].id);\n"
+            + "    alert(res[2].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='id1'>1</div>\n"
+            + "  <div id='id2'>2</div>\n"
+            + "  <div id='id3'>3</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"2", "item_2", "item_3"})
     public void childNot() throws Exception {
         final String html = "<html><head><title>First</title>\n"
