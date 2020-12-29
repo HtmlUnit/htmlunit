@@ -1283,7 +1283,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             realBrowserNyiExpectation = loadContent(referenceClass.getResource(browserSpecificNyiResource));
 
             // next nyi without browser
-            final String nyiResource = resourcePrefix + "_NYI" + resourceSuffix;
+            final String nyiResource = resourcePrefix + ".NYI" + resourceSuffix;
             realNyiExpectation = loadContent(referenceClass.getResource(nyiResource));
         }
 

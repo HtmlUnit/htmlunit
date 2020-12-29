@@ -64,7 +64,7 @@
  PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled x ms
      _AssertFailure: assertTrue('false') failed with hint: 
-   strict iframe element x == 0 (x,y,w,h=17,0,105.75,22)
+   quirks iframe element x == 0 (x,y,w,h=2,2,224,22)
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html.html::t::coordsIframe x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(1, dojo.style('sq100nopos', 'opacity')); x ms
@@ -90,7 +90,14 @@
  PASSED test: ../../dojo/tests/_base/html.html::t::setReadonlyInput x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::attr_map x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::attr_reconnect x ms
- PASSED test: ../../dojo/tests/_base/html.html::t::attrSpecials x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::t::attrSpecials x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::testLabelForAttr x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::attrInnerHtmlDiv x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::attrInnerHtmlTable x ms
@@ -106,22 +113,64 @@
  PASSED test: ../../dojo/tests/_base/html.html::t::destroyDivNotInDOM x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeNone" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeNone::test_scrollingQuirksIframeNone x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeNone::test_scrollingQuirksIframeNone x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeNone" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeNone::test_scrollingStrictIframeNone x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeNone::test_scrollingStrictIframeNone x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeVert" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeVert::test_scrollingQuirksIframeVert x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeVert::test_scrollingQuirksIframeVert x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeVert" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeVert::test_scrollingStrictIframeVert x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeVert::test_scrollingStrictIframeVert x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeBoth" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeBoth::test_scrollingQuirksIframeBoth x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeBoth::test_scrollingQuirksIframeBoth x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeBoth" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeBoth::test_scrollingStrictIframeBoth x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeBoth::test_scrollingStrictIframeBoth x ms
  PASSED test: ../../dojo/tests/_base/html.html x ms
  ------------------------------------------------------------
  GROUP "tests._base.html_id" has 1 test to run
@@ -162,70 +211,124 @@
  19 tests to run in 17 groups
  ------------------------------------------------------------
  GROUP "rtl" has 3 tests to run
-     _AssertFailure: assertEqual() failed:
-  expected
-  100
- but got
-  117
-
- with hint: 
-  x pos should be 100 after horizontal scroll
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::coordsWithScrolling x ms
-     _AssertFailure: assertEqual() failed:
-  expected
-  10
- but got
-  27
-
- with hint: 
-  pageX
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::eventClientXY_IE x ms
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::coordsWithScrolling x ms
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::eventClientXY_IE x ms
      _AssertFailure: assertEqual() failed:
   expected
   EQUAL
  but got
-  abs1.offsetLeft=620 control.offsetLeft=586
+  abs1.offsetTop=1218 control.offsetTop=1236
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeNoneSmall" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneSmall::test_scrollingQuirksIframeNoneSmall x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneSmall::test_scrollingQuirksIframeNoneSmall x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeNoneLarge" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneLarge::test_scrollingQuirksIframeNoneLarge x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneLarge::test_scrollingQuirksIframeNoneLarge x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeNoneSmall" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeNoneSmall::test_scrollingStrictIframeNoneSmall x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeNoneSmall::test_scrollingStrictIframeNoneSmall x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeNoneLarge" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeNoneLarge::test_scrollingStrictIframeNoneLarge x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeNoneLarge::test_scrollingStrictIframeNoneLarge x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeHorzSmall" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeHorzSmall::test_scrollingQuirksIframeHorzSmall x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeHorzSmall::test_scrollingQuirksIframeHorzSmall x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeHorzLarge" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeHorzLarge::test_scrollingQuirksIframeHorzLarge x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeHorzLarge::test_scrollingQuirksIframeHorzLarge x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeHorzSmall" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeHorzSmall::test_scrollingStrictIframeHorzSmall x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeHorzSmall::test_scrollingStrictIframeHorzSmall x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeHorzLarge" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeHorzLarge::test_scrollingStrictIframeHorzLarge x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeHorzLarge::test_scrollingStrictIframeHorzLarge x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeVertSmall" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeVertSmall::test_scrollingQuirksIframeVertSmall x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeVertSmall::test_scrollingQuirksIframeVertSmall x ms
  ------------------------------------------------------------
  GROUP "scrollingQuirksIframeVertLarge" has 1 test to run
- PASSED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeVertLarge::test_scrollingQuirksIframeVertLarge x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeVertLarge::test_scrollingQuirksIframeVertLarge x ms
  ------------------------------------------------------------
  GROUP "scrollingStrictIframeVertSmall" has 1 test to run
      _AssertFailure: assertEqual() failed:
   expected
   EQUAL
  but got
-  abs1.offsetLeft=269 control.offsetLeft=235
+  abs1.offsetTop=36 control.offsetTop=54
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeVertSmall::test_scrollingStrictIframeVertSmall x ms
  ------------------------------------------------------------
@@ -234,7 +337,8 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=269 control.offsetLeft=235
+  abs1.offsetTop=36 control.offsetTop=54
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeVertLarge::test_scrollingStrictIframeVertLarge x ms
  ------------------------------------------------------------
@@ -243,7 +347,8 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=269 control.offsetLeft=235
+  abs1.offsetTop=36 control.offsetTop=54
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeBothSmall::test_scrollingQuirksIframeBothSmall x ms
  ------------------------------------------------------------
@@ -252,7 +357,8 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=269 control.offsetLeft=235
+  abs1.offsetTop=36 control.offsetTop=54
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeBothLarge::test_scrollingQuirksIframeBothLarge x ms
  ------------------------------------------------------------
@@ -261,7 +367,8 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=269 control.offsetLeft=235
+  abs1.offsetTop=36 control.offsetTop=54
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeBothSmall::test_scrollingStrictIframeBothSmall x ms
  ------------------------------------------------------------
@@ -270,7 +377,8 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=269 control.offsetLeft=235
+  abs1.offsetTop=36 control.offsetTop=54
+
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeBothLarge::test_scrollingStrictIframeBothLarge x ms
  PASSED test: ../../dojo/tests/_base/html_rtl.html x ms
@@ -360,13 +468,34 @@
  ------------------------------------------------------------
  GROUP "t" has 4 tests to run
  PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testNonScrolled x ms
- PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
- PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
- PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksScrolled x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksScrolled x ms
  PASSED test: ../../dojo/tests/_base/html_docScroll.html x ms
  ------------------------------------------------------------
  | TEST SUMMARY:
  ------------------------------------------------------------
       213 tests in 9 groups
       0 errors
-      10 failures
+      28 failures
