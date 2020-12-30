@@ -51,6 +51,11 @@ Features
 * Excellent JavaScript support
 
 
+Contributing
+--------
+Pull Requests and and all other Community Contributions are essential for open source software.
+Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
+
 Latest CI build
 --------
 The latest builds are available from our
