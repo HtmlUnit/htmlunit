@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
@@ -458,6 +459,10 @@ public class HTMLDocument extends Document {
         final HtmlPage page = getPage();
         final WebClient client = page.getWebClient();
 
+        if (StringUtils.isBlank(newCookie)
+                && client.getBrowserVersion().hasFeature(HTMLDOCUMENT_COOKIES_IGNORE_BLANK)) {
+            return;
+        }
         client.addCookie(newCookie, getPage().getUrl(), this);
     }
 

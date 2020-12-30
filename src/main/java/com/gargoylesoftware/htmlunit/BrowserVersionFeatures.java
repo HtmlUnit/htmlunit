@@ -362,6 +362,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLDOCUMENT_COLOR,
 
+    /** Calling cookies setter with blank string does not reset the cookies. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLDOCUMENT_COOKIES_IGNORE_BLANK,
+
     /**
     /** {@code document.getElementsByName} returns an empty list if called with the empty string.
      */

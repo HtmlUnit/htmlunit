@@ -1638,7 +1638,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "a", "", "b", ""})
+    @Alerts(DEFAULT = {"", "a", "", "b", ""},
+            CHROME = {"", "a", "a", "b", "b"},
+            EDGE = {"", "a", "a", "b", "b"})
     public void cookie_write2() throws Exception {
         final String html =
               "<html>\n"
@@ -1651,7 +1653,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      alert(document.cookie);\n"
             + "      document.cookie = 'b';\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie = '';\n"
+            + "      document.cookie = ' ';\n"
             + "      alert(document.cookie);\n"
             + "    </script>\n"
             + "  </head>\n"
