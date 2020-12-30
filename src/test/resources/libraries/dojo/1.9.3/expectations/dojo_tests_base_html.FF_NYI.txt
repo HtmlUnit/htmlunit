@@ -1,0 +1,501 @@
+9 tests to run in 9 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.html" has 1 test to run
+ 103 tests to run in 7 groups
+ ------------------------------------------------------------
+ GROUP "t" has 97 tests to run
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(null, dojo.byId('nonExistantId')); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(null, dojo.byId(null)); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(null, dojo.byId('')); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(undefined, dojo.byId(undefined)); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.marginBox('sq100').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.marginBox('sq100').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo._getMarginSize('sq100').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo._getMarginSize('sq100').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(140, dojo.marginBox('sq100margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(140, dojo.marginBox('sq100margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(140, dojo._getMarginSize('sq100margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(140, dojo._getMarginSize('sq100margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(110, dojo.marginBox('sq100ltpad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(110, dojo.marginBox('sq100ltpad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100ltpad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100ltpad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100ltpad10rbmargin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100ltpad10rbmargin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100border10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(120, dojo.marginBox('sq100border10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100border10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100border10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(140, dojo.marginBox('sq100border10margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(140, dojo.marginBox('sq100border10margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100border10margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100border10margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(160, dojo.marginBox('sq100border10margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(160, dojo.marginBox('sq100border10margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100border10margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.contentBox('sq100border10margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(100, dojo.marginBox('sq100nopos').h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).l); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).t); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getPadExtents(dojo.byId('sq100ltpad10rbmargin10')).h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(0, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).l); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(0, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).t); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getMarginExtents(dojo.byId('sq100ltpad10rbmargin10')).h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).l); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(10, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).t); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(20, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(20, dojo._getBorderExtents(dojo.byId('sq100border10margin10pad10')).h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(20, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).l); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(20, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).t); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).w); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(40, dojo._getPadBorderExtents(dojo.byId('sq100border10margin10pad10')).h); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::scrollUp x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsBasic x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsMargin x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsBorder x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled x ms
+     _AssertFailure: assertTrue('false') failed with hint: 
+   quirks iframe element x == 0 (x,y,w,h=2,2,224,22)
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::t::coordsIframe x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(1, dojo.style('sq100nopos', 'opacity')); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is((0.1).toFixed(4), Number(dojo.style('sq100nopos', 'opacity', 0.1)).toFixed(4)); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is((0.8).toFixed(4), Number(dojo.style('sq100nopos', 'opacity', 0.8)).toFixed(4)); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::styleObject x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::doh.is('static', dojo.style('sq100nopos', 'position')); x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::getBgcolor x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::isDescendant x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::isDescendantIframe x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::testClassFunctions x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::testAddRemoveClassMultiple x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::getTypeInput x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::getWithString x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::attrId x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::getTabindexDiv x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::getTabindexInput x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::setTabindexDiv x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::setTabindexInput x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::removeTabindexFromDiv x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::removeDisabledFromInput x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::removeTabindexFromInput x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::setReadonlyInput x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::attr_map x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::attr_reconnect x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::t::attrSpecials x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::testLabelForAttr x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::attrInnerHtmlDiv x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::attrInnerHtmlTable x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::attrInputTextValue x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::testInputDisabled x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::testIframeDestroy10095 x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::testGCSsvg x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::emptySvg x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::destroySvg x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::emptyObject x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::destroyObject x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::destroyIframe x ms
+ PASSED test: ../../dojo/tests/_base/html.html::t::destroyDivNotInDOM x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeNone" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeNone::test_scrollingQuirksIframeNone x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeNone" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeNone::test_scrollingStrictIframeNone x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeVert" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeVert::test_scrollingQuirksIframeVert x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeVert" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeVert::test_scrollingStrictIframeVert x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeBoth" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingQuirksIframeBoth::test_scrollingQuirksIframeBoth x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeBoth" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html.html::scrollingStrictIframeBoth::test_scrollingStrictIframeBoth x ms
+ PASSED test: ../../dojo/tests/_base/html.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_id" has 1 test to run
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 1 test to run
+ PASSED test: ../../dojo/tests/_base/html_id.html::t::byId x ms
+ PASSED test: ../../dojo/tests/_base/html_id.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_element" has 1 test to run
+ 21 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 21 tests to run
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::createBasic x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::createAttrs x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::createPlace x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::createHtml x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::createPlaceRef x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::destroyList x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::createList x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::destroyAll x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::recreateOneV1 x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::recreateOneV2 x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::emptyDiv x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::emptyTable x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::toDomSpans x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::toDomTr x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::toDomText x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::toDomOption x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::placeDivs x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::placeTable x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::placeReplace x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::placeOnly x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html::t::placeNumber x ms
+ PASSED test: ../../dojo/tests/_base/html_element.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_rtl" has 1 test to run
+ 19 tests to run in 17 groups
+ ------------------------------------------------------------
+ GROUP "rtl" has 3 tests to run
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::coordsWithScrolling x ms
+ PASSED test: ../../dojo/tests/_base/html_rtl.html::rtl::eventClientXY_IE x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=1221 control.offsetTop=1239
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeNoneSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneSmall::test_scrollingQuirksIframeNoneSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeNoneLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeNoneLarge::test_scrollingQuirksIframeNoneLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeNoneSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeNoneSmall::test_scrollingStrictIframeNoneSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeNoneLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeNoneLarge::test_scrollingStrictIframeNoneLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeHorzSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeHorzSmall::test_scrollingQuirksIframeHorzSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeHorzLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeHorzLarge::test_scrollingQuirksIframeHorzLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeHorzSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeHorzSmall::test_scrollingStrictIframeHorzSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeHorzLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeHorzLarge::test_scrollingStrictIframeHorzLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeVertSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeVertSmall::test_scrollingQuirksIframeVertSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeVertLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeVertLarge::test_scrollingQuirksIframeVertLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeVertSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeVertSmall::test_scrollingStrictIframeVertSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeVertLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeVertLarge::test_scrollingStrictIframeVertLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeBothSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeBothSmall::test_scrollingQuirksIframeBothSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingQuirksIframeBothLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingQuirksIframeBothLarge::test_scrollingQuirksIframeBothLarge x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeBothSmall" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeBothSmall::test_scrollingStrictIframeBothSmall x ms
+ ------------------------------------------------------------
+ GROUP "scrollingStrictIframeBothLarge" has 1 test to run
+     _AssertFailure: assertEqual() failed:
+  expected
+  EQUAL
+ but got
+  abs1.offsetTop=36 control.offsetTop=54
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_rtl.html::scrollingStrictIframeBothLarge::test_scrollingStrictIframeBothLarge x ms
+ PASSED test: ../../dojo/tests/_base/html_rtl.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_quirks" has 1 test to run
+ 39 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 39 tests to run
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.marginBox('sq100nopos').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsBasic x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsMargin x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::coordsBorder x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::sq100nopos x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(110, dojo.marginBox('sq100ltpad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(110, dojo.marginBox('sq100ltpad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100ltpad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100ltpad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100ltpad10rbmargin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100border10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(120, dojo.marginBox('sq100border10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100border10margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(140, dojo.marginBox('sq100border10margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(160, dojo.marginBox('sq100border10margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').w); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::t.is(100, dojo.contentBox('sq100border10margin10pad10').h); x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::emptySvg x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::destroySvg x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::emptyObject x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::destroyObject x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::destroyIframe x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html::t::destroyDivNotInDOM x ms
+ PASSED test: ../../dojo/tests/_base/html_quirks.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_box" has 1 test to run
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 6 tests to run
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTests x ms
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTests x ms
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTestsOverflow x ms
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::fitTestsFloat x ms
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTestsInline x ms
+ PASSED test: ../../dojo/tests/_base/html_box.html::t::reciprocalTestsButtonChild x ms
+ PASSED test: ../../dojo/tests/_base/html_box.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_box_quirks" has 1 test to run
+ 6 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 6 tests to run
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTests x ms
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTests x ms
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTestsOverflow x ms
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::fitTestsFloat x ms
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTestsInline x ms
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html::t::reciprocalTestsButtonChild x ms
+ PASSED test: ../../dojo/tests/_base/html_box_quirks.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_isBodyLtr" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 5 tests to run
+ PASSED test: ../../dojo/tests/_base/html_isBodyLtr.html::t::testRtl x ms
+ PASSED test: ../../dojo/tests/_base/html_isBodyLtr.html::t::testCache x ms
+ PASSED test: ../../dojo/tests/_base/html_isBodyLtr.html::t::testHtmlValue x ms
+ PASSED test: ../../dojo/tests/_base/html_isBodyLtr.html::t::testDefaultValue x ms
+ PASSED test: ../../dojo/tests/_base/html_isBodyLtr.html::t::testHiddenIframe x ms
+ PASSED test: ../../dojo/tests/_base/html_isBodyLtr.html x ms
+ ------------------------------------------------------------
+ GROUP "tests._base.html_docScroll" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/_base/html_docScroll.html::t::testNonScrolled x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testScrolled x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  1
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksNonScrolled x ms
+     _AssertFailure: assertEqual() failed:
+  expected
+  10
+ but got
+  0
+
+     ERROR IN:  function...
+ FAILED test: ../../dojo/tests/_base/html_docScroll.html::t::testQuirksScrolled x ms
+ PASSED test: ../../dojo/tests/_base/html_docScroll.html x ms
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      213 tests in 9 groups
+      0 errors
+      28 failures
