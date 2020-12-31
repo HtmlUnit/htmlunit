@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87, Firefox 84">
+            <action type="add" dev="rbri">
+                OWASP dependency-check added to the build process.
+            </action>
             <action type="fix" dev="rbri">
                 Document.cookies setter called with with blank does not reset the cookies in CHROME/EDGE.
             </action>

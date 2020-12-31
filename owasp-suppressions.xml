@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes><![CDATA[
+        file name: htmlunit-cssparser-1.7.0.jar
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/net\.sourceforge\.htmlunit/htmlunit\-cssparser@.*$</packageUrl>
+        <cpe>cpe:/a:htmlunit_project:htmlunit</cpe>
+    </suppress>
+</suppressions>
