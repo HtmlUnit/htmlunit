@@ -164,8 +164,9 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             return;
         }
 
-        final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        // namespaceURI is always null here - we can call getAttribute directly
+        final String oldValue = getAttribute(qualifiedName);
+        super.setAttributeNS(null, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
 
         if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {

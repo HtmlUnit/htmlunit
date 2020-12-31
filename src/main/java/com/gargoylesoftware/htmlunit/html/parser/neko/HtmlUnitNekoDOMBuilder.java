@@ -318,8 +318,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // add a head if none was there
         else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-            final ElementFactory factory =
-                    htmlParser_.getElementFactory(page_, namespaceURI, "head", insideSvg_, false);
+            final ElementFactory factory = htmlParser_.getElementFactory(page_, null, "head", insideSvg_, false);
             final DomElement newElement = factory.createElement(page_, "head", null);
             currentNode_.appendChild(newElement);
             headParsed_ = HeadParsed.SYNTHESIZED;
