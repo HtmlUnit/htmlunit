@@ -15,6 +15,7 @@
         A headless browser intended for use in testing web-based applications.
     </description>
     <url>http://htmlunit.sourceforge.net</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
@@ -41,6 +42,23 @@
 
     <build>
         <plugins>
+            <!--
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.0.3</version>
+                <configuration>
+                    <failBuildOnCVSS>0</failBuildOnCVSS>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -213,6 +231,12 @@
                     <execution>
                         <configuration>
                             <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>1.8.0</version>
+                                </requireJavaVersion>
                                 <dependencyConvergence />
                             </rules>
                         </configuration>
