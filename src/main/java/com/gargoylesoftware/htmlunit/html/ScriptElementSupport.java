@@ -303,17 +303,7 @@ public final class ScriptElementSupport {
         }
 
         if (StringUtils.isNotEmpty(typeAttribute)) {
-            if ("text/javascript".equalsIgnoreCase(typeAttribute)
-                    || "text/ecmascript".equalsIgnoreCase(typeAttribute)) {
-                return true;
-            }
-
-            if (MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(typeAttribute)
-                            || "application/ecmascript".equalsIgnoreCase(typeAttribute)
-                            || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
-                return true;
-            }
-            return false;
+            return MimeType.isJavascriptMimeType(typeAttribute);
         }
 
         if (StringUtils.isNotEmpty(languageAttribute)) {
