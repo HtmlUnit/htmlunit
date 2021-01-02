@@ -1347,7 +1347,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * jQuery disables script execution this way.
+     * JQuery disables script execution this way.
      * @throws Exception if an error occurs
      */
     @Test
