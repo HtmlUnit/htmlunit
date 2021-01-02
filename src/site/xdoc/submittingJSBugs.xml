@@ -22,7 +22,7 @@
                 compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
                 and you will mostly be able to provide a tiny failing test case which contains
                 few lines of JavaScript (independent of the whole JavaScript library),
-                please have a look at <a href="https://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>
+                please have a look at <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>
                 Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
             </p>
             <p>
