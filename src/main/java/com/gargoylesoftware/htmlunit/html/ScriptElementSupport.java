@@ -274,13 +274,17 @@ public final class ScriptElementSupport {
         final String t = element.getAttributeDirect("type");
         final String l = element.getAttributeDirect("language");
         if (!isJavaScript(element, t, l)) {
-            LOG.warn("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
+            // Was at warn level before 2.46 but other types or tricky implementations with unsupported types
+            // are common out there and too many peoples out there thinking the is the root of problems.
+            // Browsers are also not warning about this.
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
+            }
             return false;
         }
 
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
-
         return element.getPage().isAncestorOf(element);
     }
 
