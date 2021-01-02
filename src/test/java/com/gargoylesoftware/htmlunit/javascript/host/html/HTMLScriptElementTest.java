@@ -1373,4 +1373,131 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null-", "testType-testType", "-"})
+    public void modifyType() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script id='testScript'></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+
+            + "  <script >\n"
+            + "    var script = document.getElementById('testScript');\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "    script.type = 'testType';\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "    script.type = '';\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "  </script>\n"
+
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"typeAttr-typeAttr", "null-", "newType-newType", "null-null"})
+    public void modifyTypeAttribute() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script id='testScript' type='typeAttr'></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+
+            + "  <script >\n"
+            + "    var script = document.getElementById('testScript');\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "    script.removeAttribute('type');\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "    script.setAttribute('type', 'newType');\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "    script.setAttribute('type', null);\n"
+            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+
+            + "  </script>\n"
+
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"typeAttr", "text/javascript"})
+    public void modifyTypeToJs() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script id='testScript' type='typeAttr'>alert('exec');</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+
+            + "  <script >\n"
+            + "    var script = document.getElementById('testScript');\n"
+            + "    alert(script.getAttribute('type'));\n"
+
+            + "    script.type = 'text/javascript';\n"
+            + "    alert(script.getAttribute('type'));\n"
+            + "  </script>\n"
+
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * <a href="https://github.com/HtmlUnit/htmlunit/issues/11">issue #11</a>.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"change type", "inside script.js"})
+    public void loadScriptDynamicallyAdded1() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var script = document.createElement('script');\n"
+            + "        script.type = 'true/text/javascript';\n"
+            + "        script.async = true;\n"
+            + "        script.src = 'script.js';\n"
+
+            + "        var s = document.getElementsByTagName('script')[0];\n"
+            + "        s.parentNode.insertBefore(script, s);\n"
+
+            + "        alert('change type');\n"
+            + "        s.type = 'text/javascript';\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='myTextarea' cols='40'></textarea>\n"
+            + "  </body></html>";
+
+        final String js = "alert('inside script.js');";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
+
+        loadPageWithAlerts2(html);
+    }
 }
