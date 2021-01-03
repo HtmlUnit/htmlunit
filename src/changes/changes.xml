@@ -7,7 +7,27 @@
     </properties>
 
     <body>
-        <release version="2.46.0" date="xxxx, 2020" description="Bugfixes, Chrome/Edge 87, Firefox 84">
+        <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="remove" dev="rbri">
+                Deprecated method HtmlLabel.getReferencedElement() removed.
+            </action>
+        </release>
+        <release version="2.46.0" date="January 2, 2021" description="Bugfixes, Chrome/Edge 87, Firefox 84">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix bug with node position in labeled loops.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: JSON.stringify with no arguments should return undefined.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: JSON.stringify with more than 3 arguments should respect the first 3 arguments.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix detection of supported javascript types.
+            </action>
+            <action type="add" dev="rbri">
+                OWASP dependency-check added to the build process.
+            </action>
             <action type="fix" dev="rbri">
                 Document.cookies setter called with with blank does not reset the cookies in CHROME/EDGE.
             </action>

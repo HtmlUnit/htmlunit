@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020 Gargoyle Software Inc.
+ * Copyright (c) 2002-2021 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -274,13 +274,17 @@ public final class ScriptElementSupport {
         final String t = element.getAttributeDirect("type");
         final String l = element.getAttributeDirect("language");
         if (!isJavaScript(element, t, l)) {
-            LOG.warn("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
+            // Was at warn level before 2.46 but other types or tricky implementations with unsupported types
+            // are common out there and too many peoples out there thinking the is the root of problems.
+            // Browsers are also not warning about this.
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
+            }
             return false;
         }
 
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
-
         return element.getPage().isAncestorOf(element);
     }
 
@@ -303,17 +307,7 @@ public final class ScriptElementSupport {
         }
 
         if (StringUtils.isNotEmpty(typeAttribute)) {
-            if ("text/javascript".equalsIgnoreCase(typeAttribute)
-                    || "text/ecmascript".equalsIgnoreCase(typeAttribute)) {
-                return true;
-            }
-
-            if (MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(typeAttribute)
-                            || "application/ecmascript".equalsIgnoreCase(typeAttribute)
-                            || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
-                return true;
-            }
-            return false;
+            return MimeType.isJavascriptMimeType(typeAttribute);
         }
 
         if (StringUtils.isNotEmpty(languageAttribute)) {

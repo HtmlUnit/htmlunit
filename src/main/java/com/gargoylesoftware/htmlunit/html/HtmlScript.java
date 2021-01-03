@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020 Gargoyle Software Inc.
+ * Copyright (c) 2002-2021 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -164,8 +164,9 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             return;
         }
 
-        final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        // namespaceURI is always null here - we can call getAttribute directly
+        final String oldValue = getAttribute(qualifiedName);
+        super.setAttributeNS(null, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
 
         if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {

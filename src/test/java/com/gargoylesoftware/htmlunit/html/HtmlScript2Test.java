@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020 Gargoyle Software Inc.
+ * Copyright (c) 2002-2021 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,6 +122,36 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  <script type='text/JavaScript'>\n"
             + "    alert('Hello');\n"
             + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#JavaScript_types.
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"})
+    public void typeValues() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script type='application/javascript'>alert('1');</script>\n"
+            + "  <script type='application/ecmascript'>alert('2');</script>\n"
+            + "  <script type='application/x-ecmascript'>alert('3');</script>\n"
+            + "  <script type='application/x-javascript'>alert('4');</script>\n"
+            + "  <script type='text/javascript'>alert('5');</script>\n"
+            + "  <script type='text/ecmascript'>alert('6');</script>\n"
+            + "  <script type='text/javascript1.0'>alert('7');</script>\n"
+            + "  <script type='text/javascript1.1'>alert('8');</script>\n"
+            + "  <script type='text/javascript1.2'>alert('9');</script>\n"
+            + "  <script type='text/javascript1.3'>alert('A');</script>\n"
+            + "  <script type='text/javascript1.4'>alert('B');</script>\n"
+            + "  <script type='text/javascript1.5'>alert('C');</script>\n"
+            + "  <script type='text/jscript'>alert('D');</script>\n"
+            + "  <script type='text/livescript'>alert('E');</script>\n"
+            + "  <script type='text/x-ecmascript'>alert('F');</script>\n"
+            + "  <script type='text/x-javascript'>alert('G');</script>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

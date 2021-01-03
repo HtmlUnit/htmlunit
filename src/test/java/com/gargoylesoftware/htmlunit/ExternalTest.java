@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020 Gargoyle Software Inc.
+ * Copyright (c) 2002-2021 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -277,14 +277,8 @@ public class ExternalTest {
             if (i == values2.length) {
                 return true;
             }
-            int i1 = Integer.parseInt(values1[i]);
-            int i2 = Integer.parseInt(values2[i]);
-            if (i1 > 2000 && i2 < 2000) {
-                i1 = 0;
-            }
-            if (i2 > 2000 && i1 < 2000) {
-                i2 = 0;
-            }
+            final int i1 = Integer.parseInt(values1[i]);
+            final int i2 = Integer.parseInt(values2[i]);
             if (i1 < i2) {
                 return false;
             }
@@ -301,6 +295,15 @@ public class ExternalTest {
                 && (version.startsWith("11.") || version.startsWith("10."))) {
             return true;
         }
+
+        // really old common versions
+        if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
+            return true;
+        }
+        if ("commons-net".equals(artifactId) && (version.startsWith("2003"))) {
+            return true;
+        }
+
         return false;
     }
 
