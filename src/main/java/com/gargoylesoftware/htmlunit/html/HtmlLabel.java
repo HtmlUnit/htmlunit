@@ -110,17 +110,6 @@ public class HtmlLabel extends HtmlElement {
     }
 
     /**
-     * Gets the element referenced by this label. That is the element in the page which id is
-     * equal to the value of the for attribute of this label.
-     * @return the element, {@code null} if not found
-     * @deprecated as of version 2.40; use {@link #getLabeledElement()} instead
-     */
-    @Deprecated
-    public HtmlElement getReferencedElement() {
-        return getLabeledElement();
-    }
-
-    /**
      * Gets the element labeled by this label. That is the labelable element in the page
      * which id is equal to the value of the for attribute of this label or, if no for
      * attribute is defined, the first nested labelable element.

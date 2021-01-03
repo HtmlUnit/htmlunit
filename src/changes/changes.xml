@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="remove" dev="rbri">
+                Deprecated method HtmlLabel.getReferencedElement() removed.
+            </action>
+        </release>
         <release version="2.46.0" date="January 2, 2021" description="Bugfixes, Chrome/Edge 87, Firefox 84">
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix bug with node position in labeled loops.
