@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Setting onload attribute on body forwards to window.
+            </action>
             <action type="remove" dev="rbri">
                 Deprecated method HtmlLabel.getReferencedElement() removed.
             </action>

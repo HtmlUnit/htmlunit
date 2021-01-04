@@ -110,7 +110,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DataTransfer;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -1253,17 +1252,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Object getOnload() {
-        final Object onload = getEventHandler(Event.TYPE_LOAD);
-        if (onload == null) {
-            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
-            final HtmlElement body = page.getBody();
-            if (body != null) {
-                final HTMLBodyElement b = body.getScriptableObject();
-                return b.getEventHandler("onload");
-            }
-            return null;
-        }
-        return onload;
+        return getEventHandler(Event.TYPE_LOAD);
     }
 
     /**

@@ -2924,7 +2924,7 @@ public class HTMLElement extends Element {
      * @return the {@code onload} event handler for this element
      */
     @JsxGetter
-    public Function getOnload() {
+    public Object getOnload() {
         return getEventHandler(Event.TYPE_LOAD);
     }
 

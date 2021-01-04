@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -237,6 +238,36 @@ public class HTMLBodyElement extends HTMLElement {
     @JsxFunction(IE)
     public TextRange createTextRange() {
         return super.createTextRange();
+    }
+
+    /**
+     * Returns the {@code onload} event handler for this element.
+     * @return the {@code onload} event handler for this element
+     */
+    @JsxGetter
+    @Override
+    public Object getOnload() {
+        final Window win = getWindow();
+        if (win == null) {
+            return null;
+        }
+
+        return win.getOnload();
+    }
+
+    /**
+     * Sets the {@code onload} event handler for this element.
+     * @param onload the {@code onload} event handler for this element
+     */
+    @JsxSetter
+    @Override
+    public void setOnload(final Object onload) {
+        final Window win = getWindow();
+        if (win == null) {
+            return;
+        }
+
+        win.setEventHandler(Event.TYPE_LOAD, onload);
     }
 
     /**
