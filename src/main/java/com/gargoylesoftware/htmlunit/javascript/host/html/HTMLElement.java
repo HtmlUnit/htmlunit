@@ -1979,18 +1979,9 @@ public class HTMLElement extends Element {
      * @return the token list of class attribute
      */
     @Override
-    @JsxGetter
+    @JsxGetter(IE)
     public DOMTokenList getClassList() {
-        return new DOMTokenList(this, "class");
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxFunction
-    public boolean hasAttribute(final String name) {
-        return super.hasAttribute(name);
+        return super.getClassList();
     }
 
     /**
@@ -3544,8 +3535,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncopy} event handler for this element.
      * @return the {@code oncopy} event handler for this element
      */
-    @Override
-    @JsxGetter({FF, FF78, IE})
+    @JsxGetter
     public Function getOncopy() {
         return getEventHandler("copy");
     }
@@ -3554,8 +3544,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncopy} event handler for this element.
      * @param oncopy the {@code oncopy} event handler for this element
      */
-    @Override
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter
     public void setOncopy(final Object oncopy) {
         setEventHandler("copy", oncopy);
     }
@@ -3564,8 +3553,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncut} event handler for this element.
      * @return the {@code oncut} event handler for this element
      */
-    @Override
-    @JsxGetter({FF, FF78, IE})
+    @JsxGetter
     public Function getOncut() {
         return getEventHandler("cut");
     }
@@ -3574,8 +3562,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncut} event handler for this element.
      * @param oncut the {@code oncut} event handler for this element
      */
-    @Override
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter
     public void setOncut(final Object oncut) {
         setEventHandler("cut", oncut);
     }
@@ -3584,8 +3571,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpaste} event handler for this element.
      * @return the {@code onpaste} event handler for this element
      */
-    @Override
-    @JsxGetter({FF, FF78, IE})
+    @JsxGetter
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
@@ -3594,8 +3580,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpaste} event handler for this element.
      * @param onpaste the {@code onpaste} event handler for this element
      */
-    @Override
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter
     public void setOnpaste(final Object onpaste) {
         setEventHandler("paste", onpaste);
     }

@@ -780,19 +780,19 @@ public class SVGElement extends Element {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code oncut} event handler.
+     * @return the {@code oncut} event handler
      */
-    @Override
-    @JsxGetter({FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncut() {
         return getEventHandler("cut");
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code oncut} event handler.
+     * @param cut the {@code oncut} event handler
      */
-    @Override
-    @JsxSetter({FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncut(final Object cut) {
         setEventHandler("cut", cut);
     }
@@ -1260,42 +1260,42 @@ public class SVGElement extends Element {
      * Sets the {@code onshow} event handler.
      * @param show the {@code onshow} event handler
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnshow(final Object show) {
         setEventHandler("show", show);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code oncopy} event handler.
+     * @return the {@code oncopy} event handler
      */
-    @Override
-    @JsxGetter({FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncopy() {
         return getEventHandler("copy");
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code oncopy} event handler.
+     * @param copy the {@code oncopy} event handler
      */
-    @Override
-    @JsxSetter({FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncopy(final Object copy) {
         setEventHandler("copy", copy);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code onpaste} event handler.
+     * @return the {@code onpaste} event handler
      */
-    @Override
-    @JsxGetter({FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code onpaste} event handler.
+     * @param paste the {@code onpaste} event handler
      */
-    @Override
     @JsxSetter({FF, FF78})
     public void setOnpaste(final Object paste) {
         setEventHandler("paste", paste);

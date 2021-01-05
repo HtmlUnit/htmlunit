@@ -9,6 +9,9 @@
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Element properties oncopy, oncut, onpaste, classList and hasAttribute fixed for many elements.
+            </action>
+            <action type="fix" dev="rbri">
                 Various fixes for body element properties.
             </action>
             <action type="fix" dev="rbri">

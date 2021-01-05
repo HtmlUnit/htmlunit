@@ -1357,60 +1357,6 @@ public class Element extends Node {
     }
 
     /**
-     * Returns the {@code oncopy} event handler for this element.
-     * @return the {@code oncopy} event handler for this element
-     */
-    @JsxGetter({CHROME, EDGE})
-    public Function getOncopy() {
-        return getEventHandler("copy");
-    }
-
-    /**
-     * Sets the {@code oncopy} event handler for this element.
-     * @param oncopy the {@code oncopy} event handler for this element
-     */
-    @JsxSetter({CHROME, EDGE})
-    public void setOncopy(final Object oncopy) {
-        setEventHandler("copy", oncopy);
-    }
-
-    /**
-     * Returns the {@code oncut} event handler for this element.
-     * @return the {@code oncut} event handler for this element
-     */
-    @JsxGetter({CHROME, EDGE})
-    public Function getOncut() {
-        return getEventHandler("cut");
-    }
-
-    /**
-     * Sets the {@code oncut} event handler for this element.
-     * @param oncut the {@code oncut} event handler for this element
-     */
-    @JsxSetter({CHROME, EDGE})
-    public void setOncut(final Object oncut) {
-        setEventHandler("cut", oncut);
-    }
-
-    /**
-     * Returns the {@code onpaste} event handler for this element.
-     * @return the {@code onpaste} event handler for this element
-     */
-    @JsxGetter({CHROME, EDGE})
-    public Function getOnpaste() {
-        return getEventHandler("paste");
-    }
-
-    /**
-     * Sets the {@code onpaste} event handler for this element.
-     * @param onpaste the {@code onpaste} event handler for this element
-     */
-    @JsxSetter({CHROME, EDGE})
-    public void setOnpaste(final Object onpaste) {
-        setEventHandler("paste", onpaste);
-    }
-
-    /**
      * Returns the {@code onsearch} event handler for this element.
      * @return the {@code onsearch} event handler for this element
      */
