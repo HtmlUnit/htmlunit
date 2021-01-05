@@ -241,26 +241,19 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onload} event handler for this element.
-     * @return the {@code onload} event handler for this element
+     * {@inheritDoc}
      */
-    @JsxGetter
     @Override
+    @JsxGetter({CHROME, EDGE})
     public Object getOnload() {
-        final Window win = getWindow();
-        if (win == null) {
-            return null;
-        }
-
-        return win.getOnload();
+        return super.getOnload();
     }
 
     /**
-     * Sets the {@code onload} event handler for this element.
-     * @param onload the {@code onload} event handler for this element
+     * {@inheritDoc}
      */
-    @JsxSetter
     @Override
+    @JsxSetter({CHROME, EDGE})
     public void setOnload(final Object onload) {
         final Window win = getWindow();
         if (win == null) {
@@ -268,6 +261,60 @@ public class HTMLBodyElement extends HTMLElement {
         }
 
         win.setEventHandler(Event.TYPE_LOAD, onload);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnblur(final Object handler) {
+        super.setOnblur(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnblur() {
+        return super.getOnblur();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnfocus(final Object handler) {
+        super.setOnfocus(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnfocus() {
+        return super.getOnfocus();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnerror(final Object handler) {
+        super.setOnerror(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnerror() {
+        return super.getOnerror();
     }
 
     /**
@@ -562,7 +609,7 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(IE)
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnresize() {
         return super.getOnresize();
     }
@@ -571,9 +618,26 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(IE)
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnresize(final Object onresize) {
         super.setOnresize(onresize);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Function getOnscroll() {
+        return super.getOnscroll();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnscroll(final Object onresize) {
+        super.setOnscroll(onresize);
+    }
 }

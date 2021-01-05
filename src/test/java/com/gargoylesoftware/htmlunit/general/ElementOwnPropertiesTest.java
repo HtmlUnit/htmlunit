@@ -2026,13 +2026,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmessage,onoffline,ononline,onpagehide,onpageshow,onpopstate,onresize,onstorage,onunload,"
                 + "rightMargin,scroll,text,topMargin,"
                 + "vLink")
-    @HtmlUnitNYI(CHROME = "aLink,background,bgColor,constructor(),link,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onhashchange,onlanguagechange,onmessage,onmessageerror,onoffline,ononline,onpagehide,"
-                + "onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,text,vLink",
-            EDGE = "aLink,background,bgColor,constructor(),link,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onhashchange,onlanguagechange,onmessage,onmessageerror,onoffline,ononline,onpagehide,"
-                + "onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,text,vLink",
-            IE = "aLink,background,bgColor,constructor,createTextRange(),link,onafterprint,onbeforeprint,"
+    @HtmlUnitNYI(IE = "aLink,background,bgColor,constructor,createTextRange(),link,onafterprint,onbeforeprint,"
                 + "onbeforeunload,onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onpopstate,"
                 + "onresize,onstorage,onunload,text,vLink")
     public void body() throws Exception {

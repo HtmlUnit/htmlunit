@@ -2925,6 +2925,10 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnload() {
+        if (this instanceof HTMLBodyElement) {
+            return getWindow().getEventHandler(Event.TYPE_LOAD);
+        }
+
         return getEventHandler(Event.TYPE_LOAD);
     }
 
@@ -2934,6 +2938,11 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnload(final Object onload) {
+        if (this instanceof HTMLBodyElement) {
+            getWindow().setEventHandler(Event.TYPE_LOAD, onload);
+            return;
+        }
+
         setEventHandler(Event.TYPE_LOAD, onload);
     }
 
