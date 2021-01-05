@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -255,12 +254,7 @@ public class HTMLBodyElement extends HTMLElement {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnload(final Object onload) {
-        final Window win = getWindow();
-        if (win == null) {
-            return;
-        }
-
-        win.setEventHandler(Event.TYPE_LOAD, onload);
+        super.setOnload(onload);
     }
 
     /**
