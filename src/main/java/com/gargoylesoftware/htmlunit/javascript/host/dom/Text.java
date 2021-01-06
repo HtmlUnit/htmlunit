@@ -69,17 +69,4 @@ public class Text extends CharacterData {
     public String getWholeText() {
         return ((DomText) getDomNodeOrDie()).getWholeText();
     }
-
-    /**
-     * Returns the value of the node.
-     * @return the value of the node
-     */
-    @JsxGetter(IE)
-    public Object getText() {
-        final DomNode node = getDomNodeOrDie();
-        if (node.getPage() instanceof XmlPage) {
-            return ((DomText) node).getWholeText();
-        }
-        return Undefined.instance;
-    }
 }

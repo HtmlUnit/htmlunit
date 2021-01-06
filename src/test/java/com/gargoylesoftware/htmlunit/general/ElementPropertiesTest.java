@@ -420,7 +420,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "substringData(),"
                 + "wholeText")
     @HtmlUnitNYI(IE = "appendData(),data,deleteData(),insertData(),length,replaceData(),splitText(),"
-                + "substringData(),text,wholeText")
+                + "substringData(),wholeText")
     public void text() throws Exception {
         testString("", "document.createTextNode('some text'), unknown");
     }

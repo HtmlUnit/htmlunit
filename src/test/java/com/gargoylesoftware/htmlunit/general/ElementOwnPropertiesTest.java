@@ -409,7 +409,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),splitText(),wholeText",
             FF78 = "constructor(),splitText(),wholeText",
             FF = "constructor(),splitText(),wholeText",
-            IE = "constructor,splitText(),text,wholeText")
+            IE = "constructor,splitText(),wholeText")
     public void text() throws Exception {
         testString("", "document.createTextNode('some text')");
     }
