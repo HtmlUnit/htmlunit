@@ -71,6 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement.ProxyDomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTemplateElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -907,15 +908,17 @@ public class Element extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getInnerHTML() {
-        final DomNode domNode;
         try {
-            domNode = getDomNodeOrDie();
+            DomNode domNode = getDomNodeOrDie();
+            if (this instanceof HTMLTemplateElement) {
+                domNode = ((HtmlTemplate) getDomNodeOrDie()).getContent();
+            }
+            return getInnerHTML(domNode);
         }
         catch (final IllegalStateException e) {
             Context.throwAsScriptRuntimeEx(e);
             return "";
         }
-        return getInnerHTML(domNode);
     }
 
     /**

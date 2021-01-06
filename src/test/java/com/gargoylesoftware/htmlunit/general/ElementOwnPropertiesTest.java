@@ -9344,12 +9344,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "constructor(),content",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(
-            CHROME = "constructor(),content,innerHTML",
-            EDGE = "constructor(),content,innerHTML",
-            FF78 = "constructor(),content,innerHTML",
-            FF = "constructor(),content,innerHTML",
-            IE = "constructor")
+    @HtmlUnitNYI(IE = "constructor")
     public void template() throws Exception {
         test("template");
     }

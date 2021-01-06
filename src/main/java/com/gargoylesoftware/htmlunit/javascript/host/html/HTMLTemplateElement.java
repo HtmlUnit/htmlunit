@@ -19,14 +19,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.HtmlTemplate;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLTemplateElement}.
@@ -55,22 +52,5 @@ public class HTMLTemplateElement extends HTMLElement {
         result.setDomNode(((HtmlTemplate) getDomNodeOrDie()).getContent());
 
         return result;
-    }
-
-    /**
-     * Gets the innerHTML attribute.
-     * @return the contents of this node as HTML
-     */
-    @JsxGetter
-    @Override
-    public String getInnerHTML() {
-        try {
-            final DomDocumentFragment fragment = ((HtmlTemplate) getDomNodeOrDie()).getContent();
-            return getInnerHTML(fragment);
-        }
-        catch (final IllegalStateException e) {
-            Context.throwAsScriptRuntimeEx(e);
-            return "";
-        }
     }
 }
