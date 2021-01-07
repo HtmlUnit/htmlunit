@@ -221,28 +221,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             event = progressEvent;
         }
 
-        final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-        final Function onFunction = getFunctionForEvent(eventName);
-        if (onFunction != null) {
-            jsEngine.callFunction(containingPage_, onFunction, onFunction.getParentScope(), this,
-                    new Object[]{event});
-        }
-
-        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, false), event);
-        triggerJavascriptHandlers(jsEngine, getEventListenersContainer().getListeners(eventName, true), event);
-    }
-
-    private void triggerJavascriptHandlers(final JavaScriptEngine jsEngine, final List<Scriptable> handlers,
-            final Event event) {
-        if (handlers != null) {
-            final Object[] parameter = {event};
-            for (final Scriptable scriptable : handlers) {
-                if (scriptable instanceof Function) {
-                    final Function function = (Function) scriptable;
-                    jsEngine.callFunction(containingPage_, function, function.getParentScope(), this, parameter);
-                }
-            }
-        }
+        executeEventLocally(event);
     }
 
     /**

@@ -19,9 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -42,8 +39,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 @JsxClass
 public class XMLHttpRequestEventTarget extends EventTarget {
 
-    private final Map<String, Function> eventMapping_ = new HashMap<>();
-
     /**
      * Creates an instance.
      */
@@ -58,8 +53,9 @@ public class XMLHttpRequestEventTarget extends EventTarget {
         throw ScriptRuntime.typeError("Illegal constructor.");
     }
 
+    @Deprecated
     public Function getFunctionForEvent(final String event) {
-        return eventMapping_.get(event);
+        return getEventHandler(event);
     }
 
     /**
@@ -68,7 +64,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOnload() {
-        return getFunctionForEvent(Event.TYPE_LOAD);
+        return getEventHandler(Event.TYPE_LOAD);
     }
 
     /**
@@ -77,7 +73,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOnload(final Function loadHandler) {
-        eventMapping_.put(Event.TYPE_LOAD, loadHandler);
+        setEventHandler(Event.TYPE_LOAD, loadHandler);
     }
 
     /**
@@ -86,7 +82,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOnerror() {
-        return getFunctionForEvent(Event.TYPE_ERROR);
+        return getEventHandler(Event.TYPE_ERROR);
     }
 
     /**
@@ -95,7 +91,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOnerror(final Function errorHandler) {
-        eventMapping_.put(Event.TYPE_ERROR, errorHandler);
+        setEventHandler(Event.TYPE_ERROR, errorHandler);
     }
 
     /**
@@ -104,7 +100,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOnloadstart() {
-        return getFunctionForEvent(Event.TYPE_LOAD_START);
+        return getEventHandler(Event.TYPE_LOAD_START);
     }
 
     /**
@@ -113,7 +109,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOnloadstart(final Function loadstartHandler) {
-        eventMapping_.put(Event.TYPE_LOAD_START, loadstartHandler);
+        setEventHandler(Event.TYPE_LOAD_START, loadstartHandler);
     }
 
     /**
@@ -122,7 +118,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOnloadend() {
-        return getFunctionForEvent(Event.TYPE_LOAD_END);
+        return getEventHandler(Event.TYPE_LOAD_END);
     }
 
     /**
@@ -131,7 +127,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOnloadend(final Function loadendHandler) {
-        eventMapping_.put(Event.TYPE_LOAD_END, loadendHandler);
+        setEventHandler(Event.TYPE_LOAD_END, loadendHandler);
     }
 
     /**
@@ -140,7 +136,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOnprogress() {
-        return getFunctionForEvent(Event.TYPE_PROGRESS);
+        return getEventHandler(Event.TYPE_PROGRESS);
     }
 
     /**
@@ -149,7 +145,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOnprogress(final Function progressHandler) {
-        eventMapping_.put(Event.TYPE_PROGRESS, progressHandler);
+        setEventHandler(Event.TYPE_PROGRESS, progressHandler);
     }
 
     /**
@@ -158,7 +154,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOntimeout() {
-        return getFunctionForEvent(Event.TYPE_TIMEOUT);
+        return getEventHandler(Event.TYPE_TIMEOUT);
     }
 
     /**
@@ -167,7 +163,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOntimeout(final Function timeoutHandler) {
-        eventMapping_.put(Event.TYPE_TIMEOUT, timeoutHandler);
+        setEventHandler(Event.TYPE_TIMEOUT, timeoutHandler);
     }
 
     /**
@@ -175,7 +171,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      * @return the event handler that fires on ready state change
      */
     public Function getOnreadystatechange() {
-        return getFunctionForEvent(Event.TYPE_READY_STATE_CHANGE);
+        return getEventHandler(Event.TYPE_READY_STATE_CHANGE);
     }
 
     /**
@@ -183,7 +179,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      * @param readyStateChangeHandler the event handler that fires on ready state change
      */
     public void setOnreadystatechange(final Function readyStateChangeHandler) {
-        eventMapping_.put(Event.TYPE_READY_STATE_CHANGE, readyStateChangeHandler);
+        setEventHandler(Event.TYPE_READY_STATE_CHANGE, readyStateChangeHandler);
     }
 
     /**
@@ -192,7 +188,7 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxGetter
     public Function getOnabort() {
-        return getFunctionForEvent(Event.TYPE_ABORT);
+        return getEventHandler(Event.TYPE_ABORT);
     }
 
     /**
@@ -201,6 +197,6 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      */
     @JsxSetter
     public void setOnabort(final Function abortHandler) {
-        eventMapping_.put(Event.TYPE_ABORT, abortHandler);
+        setEventHandler(Event.TYPE_ABORT, abortHandler);
     }
 }
