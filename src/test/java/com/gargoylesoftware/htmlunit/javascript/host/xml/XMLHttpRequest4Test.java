@@ -102,7 +102,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
     }
 
     /**
-     * Testing event invocation order
+     * Testing event invocation order.
      */
     @Test
     @Alerts(DEFAULT = {
@@ -125,7 +125,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             "onreadystatechange_2: readyState=4",
             "onreadystatechange_p: readyState=4",
             "onreadystatechange_3: readyState=4",
-            "onreadystatechange_4: readyState=4",
+            "onreadystatechange_4: readyState=4"
         }, IE = {
             "onreadystatechange_1: readyState=1",
             "onreadystatechange_2: readyState=1",
@@ -151,7 +151,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             "onreadystatechange_2: readyState=4",
             "onreadystatechange_p: readyState=4",
             "onreadystatechange_3: readyState=4",
-            "onreadystatechange_4: readyState=4",
+            "onreadystatechange_4: readyState=4"
     })
     public void eventInvocationOrder() throws Exception {
         final String html = ""
