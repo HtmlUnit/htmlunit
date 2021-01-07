@@ -125,8 +125,8 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             "onreadystatechange_2: readyState=4",
             "onreadystatechange_p: readyState=4",
             "onreadystatechange_3: readyState=4",
-            "onreadystatechange_4: readyState=4"
-        }, IE = {
+            "onreadystatechange_4: readyState=4"},
+            IE = {
             "onreadystatechange_1: readyState=1",
             "onreadystatechange_2: readyState=1",
             "onreadystatechange_p: readyState=1",
@@ -152,41 +152,41 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             "onreadystatechange_p: readyState=4",
             "onreadystatechange_3: readyState=4",
             "onreadystatechange_4: readyState=4"
-    })
+        })
     public void eventInvocationOrder() throws Exception {
         final String html = ""
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "    var xhr = new XMLHttpRequest();\n"
+            + "  var xhr = new XMLHttpRequest();\n"
             + "\n"
-            + "    var onreadystatechange_1 = function (e) {\n"
-            + "        alert('onreadystatechange_1: readyState=' + xhr.readyState);\n"
-            + "    }\n"
-            + "    var onreadystatechange_2 = function (e) {\n"
-            + "        alert('onreadystatechange_2: readyState=' + xhr.readyState);\n"
-            + "        e.stopPropagation();\n"
-            + "    }\n"
-            + "    var onreadystatechange_3 = function (e) {\n"
-            + "        alert('onreadystatechange_3: readyState=' + xhr.readyState);\n"
-            + "        e.stopPropagation();\n"
-            + "    }\n"
-            + "    var onreadystatechange_4 = function (e) {\n"
-            + "        alert('onreadystatechange_4: readyState=' + xhr.readyState);\n"
-            + "    }\n"
+            + "  var onreadystatechange_1 = function (e) {\n"
+            + "    alert('onreadystatechange_1: readyState=' + xhr.readyState);\n"
+            + "  }\n"
+            + "  var onreadystatechange_2 = function (e) {\n"
+            + "    alert('onreadystatechange_2: readyState=' + xhr.readyState);\n"
+            + "    e.stopPropagation();\n"
+            + "  }\n"
+            + "  var onreadystatechange_3 = function (e) {\n"
+            + "    alert('onreadystatechange_3: readyState=' + xhr.readyState);\n"
+            + "    e.stopPropagation();\n"
+            + "  }\n"
+            + "  var onreadystatechange_4 = function (e) {\n"
+            + "    alert('onreadystatechange_4: readyState=' + xhr.readyState);\n"
+            + "  }\n"
             + "\n"
-            + "    var onreadystatechange_p = function (e) {\n"
-            + "        alert('onreadystatechange_p: readyState=' + xhr.readyState);\n"
-            + "    }\n"
+            + "  var onreadystatechange_p = function (e) {\n"
+            + "    alert('onreadystatechange_p: readyState=' + xhr.readyState);\n"
+            + "  }\n"
             + "\n"
-            + "    xhr.addEventListener('readystatechange', onreadystatechange_1, false);\n"
-            + "    xhr.addEventListener('readystatechange', onreadystatechange_2, true);\n"
-            + "    xhr.onreadystatechange = onreadystatechange_p;\n"
-            + "    xhr.addEventListener('readystatechange', onreadystatechange_3, false);\n"
-            + "    xhr.addEventListener('readystatechange', onreadystatechange_4, true);\n"
-            + "    xhr.open('GET', 'foo.xml');\n"
-            + "    xhr.send();\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_1, false);\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_2, true);\n"
+            + "  xhr.onreadystatechange = onreadystatechange_p;\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_3, false);\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_4, true);\n"
+            + "  xhr.open('GET', 'foo.xml');\n"
+            + "  xhr.send();\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
