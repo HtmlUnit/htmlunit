@@ -2734,7 +2734,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOndragenter() {
-        return getEventHandler("dragenter");
+        return getEventHandler(Event.TYPE_DRAGENTER);
     }
 
     /**
@@ -2743,7 +2743,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOndragenter(final Object ondragenter) {
-        setEventHandler("dragenter", ondragenter);
+        setEventHandler(Event.TYPE_DRAGENTER, ondragenter);
     }
 
     /**
@@ -2998,7 +2998,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
-        return getEventHandler("lostpointercapture");
+        return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
     }
 
     /**
@@ -3008,7 +3008,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object onlostpointercapture) {
-        setEventHandler("lostpointercapture", onlostpointercapture);
+        setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, onlostpointercapture);
     }
 
     /**
@@ -3206,7 +3206,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
-        return getEventHandler("pointermove");
+        return getEventHandler(Event.TYPE_POINTERMOVE);
     }
 
     /**
@@ -3216,7 +3216,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object onpointermove) {
-        setEventHandler("pointermove", onpointermove);
+        setEventHandler(Event.TYPE_POINTERMOVE, onpointermove);
     }
 
     /**
@@ -3246,7 +3246,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
-        return getEventHandler("pointerover");
+        return getEventHandler(Event.TYPE_POINTEROVER);
     }
 
     /**
@@ -3256,7 +3256,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object onpointerover) {
-        setEventHandler("pointerover", onpointerover);
+        setEventHandler(Event.TYPE_POINTEROVER, onpointerover);
     }
 
     /**

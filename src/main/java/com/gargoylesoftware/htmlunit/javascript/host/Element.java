@@ -1472,7 +1472,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnlostpointercapture() {
-        return getEventHandler("lostpointercapture");
+        return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
     }
 
     /**
@@ -1481,7 +1481,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnlostpointercapture(final Object onlostpointercapture) {
-        setEventHandler("lostpointercapture", onlostpointercapture);
+        setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, onlostpointercapture);
     }
 
     /**
@@ -1724,7 +1724,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointermove() {
-        return getEventHandler("mspointermove");
+        return getEventHandler(Event.TYPE_MSPOINTERMOVE);
     }
 
     /**
@@ -1733,7 +1733,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointermove(final Object onmspointermove) {
-        setEventHandler("mspointermove", onmspointermove);
+        setEventHandler(Event.TYPE_MSPOINTERMOVE, onmspointermove);
     }
 
     /**
@@ -1868,7 +1868,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointermove() {
-        return getEventHandler("pointermove");
+        return getEventHandler(Event.TYPE_POINTERMOVE);
     }
 
     /**
@@ -1877,7 +1877,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointermove(final Object onpointermove) {
-        setEventHandler("pointermove", onpointermove);
+        setEventHandler(Event.TYPE_POINTERMOVE, onpointermove);
     }
 
     /**
@@ -1904,7 +1904,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointerover() {
-        return getEventHandler("pointerover");
+        return getEventHandler(Event.TYPE_POINTEROVER);
     }
 
     /**
@@ -1913,7 +1913,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointerover(final Object onpointerover) {
-        setEventHandler("pointerover", onpointerover);
+        setEventHandler(Event.TYPE_POINTEROVER, onpointerover);
     }
 
     /**

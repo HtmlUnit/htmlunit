@@ -391,7 +391,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnafterprint() {
-        return getEventHandler("afterprint");
+        return getEventHandler(Event.TYPE_AFTERPRINT);
     }
 
     /**
@@ -400,7 +400,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnafterprint(final Object afterprint) {
-        setEventHandler("afterprint", afterprint);
+        setEventHandler(Event.TYPE_AFTERPRINT, afterprint);
     }
 
     /**

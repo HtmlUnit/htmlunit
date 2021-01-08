@@ -551,7 +551,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnafterprint() {
-        return getEventHandler("afterprint");
+        return getEventHandler(Event.TYPE_AFTERPRINT);
     }
 
     /**
@@ -560,7 +560,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnafterprint(final Object onafterprint) {
-        setEventHandler("afterprint", onafterprint);
+        setEventHandler(Event.TYPE_AFTERPRINT, onafterprint);
     }
 
     /**

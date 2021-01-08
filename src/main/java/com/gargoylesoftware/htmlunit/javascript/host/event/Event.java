@@ -233,6 +233,30 @@ public class Event extends SimpleScriptable {
     /** The msinertiastart event type, triggered by {@code msinertiastart} event handlers. */
     public static final String TYPE_MSINERTIASTART = "msinertiastart";
 
+    /** The pointermove event type, triggered by {@code pointermove} event handlers. */
+    public static final String TYPE_POINTERMOVE = "pointermove";
+
+    /** The mspointermove event type, triggered by {@code mspointermove} event handlers. */
+    public static final String TYPE_MSPOINTERMOVE = "mspointermove";
+
+    /** The userproximity event type, triggered by {@code userproximity} event handlers. */
+    public static final String TYPE_USERPROXIMITY = "userproximity";
+
+    /** The lostpointercapture event type, triggered by {@code lostpointercapture} event handlers. */
+    public static final String TYPE_LOSTPOINTERCAPTURE = "lostpointercapture";
+
+    /** The pointerover event type, triggered by {@code pointerover} event handlers. */
+    public static final String TYPE_POINTEROVER = "pointerover";
+
+    /** The animationend event type, triggered by {@code animationend} event handlers. */
+    public static final String TYPE_ANIMATIONEND = "animationend";
+
+    /** The dragenter event type, triggered by {@code dragenter} event handlers. */
+    public static final String TYPE_DRAGENTER = "dragenter";
+
+    /** The afterprint event type, triggered by {@code afterprint} event handlers. */
+    public static final String TYPE_AFTERPRINT = "afterprint";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

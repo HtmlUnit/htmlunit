@@ -767,7 +767,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
-        return getEventHandler("pointermove");
+        return getEventHandler(Event.TYPE_POINTERMOVE);
     }
 
     /**
@@ -776,7 +776,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object pointermove) {
-        setEventHandler("pointermove", pointermove);
+        setEventHandler(Event.TYPE_POINTERMOVE, pointermove);
     }
 
     /**
@@ -839,7 +839,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
-        return getEventHandler("lostpointercapture");
+        return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
     }
 
     /**
@@ -848,7 +848,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object lostpointercapture) {
-        setEventHandler("lostpointercapture", lostpointercapture);
+        setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, lostpointercapture);
     }
 
     /**
@@ -875,7 +875,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
-        return getEventHandler("pointerover");
+        return getEventHandler(Event.TYPE_POINTEROVER);
     }
 
     /**
@@ -884,7 +884,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object pointerover) {
-        setEventHandler("pointerover", pointerover);
+        setEventHandler(Event.TYPE_POINTEROVER, pointerover);
     }
 
     /**
@@ -911,7 +911,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndragenter() {
-        return getEventHandler("dragenter");
+        return getEventHandler(Event.TYPE_DRAGENTER);
     }
 
     /**
@@ -920,7 +920,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndragenter(final Object dragenter) {
-        setEventHandler("dragenter", dragenter);
+        setEventHandler(Event.TYPE_DRAGENTER, dragenter);
     }
 
     /**
