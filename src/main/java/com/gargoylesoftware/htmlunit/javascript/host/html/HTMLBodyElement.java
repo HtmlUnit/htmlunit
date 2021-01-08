@@ -389,7 +389,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnoffline() {
-        return getEventHandler("offline");
+        return getEventHandler(Event.TYPE_OFFLINE);
     }
 
     /**
@@ -398,7 +398,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnoffline(final Object onoffline) {
-        setEventHandler("offline", onoffline);
+        setEventHandler(Event.TYPE_OFFLINE, onoffline);
     }
 
     /**

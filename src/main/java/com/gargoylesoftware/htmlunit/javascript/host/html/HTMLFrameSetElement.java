@@ -229,7 +229,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnoffline() {
-        return getEventHandler("offline");
+        return getEventHandler(Event.TYPE_OFFLINE);
     }
 
     /**
@@ -238,7 +238,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnoffline(final Object offline) {
-        setEventHandler("offline", offline);
+        setEventHandler(Event.TYPE_OFFLINE, offline);
     }
 
     /**

@@ -152,6 +152,87 @@ public class Event extends SimpleScriptable {
     /** The timeout event type, triggered by {@code ontimeout} event handlers. */
     public static final String TYPE_TIMEOUT = "timeout";
 
+    /** The scroll event type, triggered by {@code onscroll} event handlers. */
+    public static final String TYPE_SCROLL = "scroll";
+
+    /** The search event type, triggered by {@code onsearch} event handlers. */
+    public static final String TYPE_SEARCH = "search";
+
+    /** The dragend event type, triggered by {@code dragend} event handlers. */
+    public static final String TYPE_DRAGEND = "dragend";
+
+    /** The invalid event type, triggered by {@code invalid} event handlers. */
+    public static final String TYPE_INVALID = "invalid";
+
+    /** The pointerout event type, triggered by {@code pointerout} event handlers. */
+    public static final String TYPE_POINTEROUT = "pointerout";
+
+    /** The help event type, triggered by {@code help} event handlers. */
+    public static final String TYPE_HELP = "help";
+
+    /** The ratechange event type, triggered by {@code ratechange} event handlers. */
+    public static final String TYPE_RATECHANGE = "ratechange";
+
+    /** The animationiteration event type, triggered by {@code animationiteration} event handlers. */
+    public static final String TYPE_ANIMATIONITERATION = "animationiteration";
+
+    /** The canplaythrough event type, triggered by {@code canplaythrough} event handlers. */
+    public static final String TYPE_CANPLAYTHROUGH = "canplaythrough";
+
+    /** The cancel event type, triggered by {@code cancel} event handlers. */
+    public static final String TYPE_CANCEL = "cancel";
+
+    /** The pointerenter event type, triggered by {@code pointerenter} event handlers. */
+    public static final String TYPE_POINTERENTER = "pointerenter";
+
+    /** The select event type, triggered by {@code select} event handlers. */
+    public static final String TYPE_SELECT = "select";
+
+    /** The auxclick event type, triggered by {@code auxclick} event handlers. */
+    public static final String TYPE_AUXCLICK = "auxclick";
+
+    /** The mspointerleave event type, triggered by {@code mspointerleave} event handlers. */
+    public static final String TYPE_MSPOINTERLEAVE = "mspointerleave";
+
+    /** The webkitanimationstart event type, triggered by {@code webkitanimationstart} event handlers. */
+    public static final String TYPE_WEBANIMATIONSTART = "webkitanimationstart";
+
+    /** The msgesturestart event type, triggered by {@code msgesturestart} event handlers. */
+    public static final String TYPE_MSGESTURESTART = "msgesturestart";
+
+    /** The deviceproximity event type, triggered by {@code deviceproximity} event handlers. */
+    public static final String TYPE_DEVICEPROXIMITY = "deviceproximity";
+
+    /** The drag event type, triggered by {@code drag} event handlers. */
+    public static final String TYPE_DRAG = "drag";
+
+    /** The seeked event type, triggered by {@code seeked} event handlers. */
+    public static final String TYPE_SEEKED = "seeked";
+
+    /** The offline event type, triggered by {@code offline} event handlers. */
+    public static final String TYPE_OFFLINE = "offline";
+
+    /** The deviceorientation event type, triggered by {@code deviceorientation} event handlers. */
+    public static final String TYPE_DEVICEORIENTATION = "deviceorientation";
+
+    /** The toggle event type, triggered by {@code toggle} event handlers. */
+    public static final String TYPE_TOGGLE = "toggle";
+
+    /** The play event type, triggered by {@code play} event handlers. */
+    public static final String TYPE_PLAY = "play";
+
+    /** The mspointerover event type, triggered by {@code mspointerover} event handlers. */
+    public static final String TYPE_MSPOINTEROVER = "mspointerover";
+
+    /** The mspointerup event type, triggered by {@code mspointerup} event handlers. */
+    public static final String TYPE_MSPOINTERUP = "mspointerup";
+
+    /** The loadedmetadata event type, triggered by {@code loadedmetadata} event handlers. */
+    public static final String TYPE_LOADEDMETADATA = "loadedmetadata";
+
+    /** The msinertiastart event type, triggered by {@code msinertiastart} event handlers. */
+    public static final String TYPE_MSINERTIASTART = "msinertiastart";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

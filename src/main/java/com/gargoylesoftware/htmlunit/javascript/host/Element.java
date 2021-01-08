@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -1365,7 +1366,7 @@ public class Element extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnsearch() {
-        return getEventHandler("search");
+        return getEventHandler(Event.TYPE_SEARCH);
     }
 
     /**
@@ -1374,7 +1375,7 @@ public class Element extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnsearch(final Object onsearch) {
-        setEventHandler("search", onsearch);
+        setEventHandler(Event.TYPE_SEARCH, onsearch);
     }
 
     /**
@@ -1561,7 +1562,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturestart() {
-        return getEventHandler("msgesturestart");
+        return getEventHandler(Event.TYPE_MSGESTURESTART);
     }
 
     /**
@@ -1570,7 +1571,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgesturestart(final Object onmsgesturestart) {
-        setEventHandler("msgesturestart", onmsgesturestart);
+        setEventHandler(Event.TYPE_MSGESTURESTART, onmsgesturestart);
     }
 
     /**
@@ -1615,7 +1616,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsinertiastart() {
-        return getEventHandler("msinertiastart");
+        return getEventHandler(Event.TYPE_MSINERTIASTART);
     }
 
     /**
@@ -1624,7 +1625,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsinertiastart(final Object onmsinertiastart) {
-        setEventHandler("msinertiastart", onmsinertiastart);
+        setEventHandler(Event.TYPE_MSINERTIASTART, onmsinertiastart);
     }
 
     /**
@@ -1705,7 +1706,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerleave() {
-        return getEventHandler("mspointerleave");
+        return getEventHandler(Event.TYPE_MSPOINTERLEAVE);
     }
 
     /**
@@ -1714,7 +1715,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerleave(final Object onmspointerleave) {
-        setEventHandler("mspointerleave", onmspointerleave);
+        setEventHandler(Event.TYPE_MSPOINTERLEAVE, onmspointerleave);
     }
 
     /**
@@ -1759,7 +1760,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerover() {
-        return getEventHandler("mspointerover");
+        return getEventHandler(Event.TYPE_MSPOINTEROVER);
     }
 
     /**
@@ -1768,7 +1769,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerover(final Object onmspointerover) {
-        setEventHandler("mspointerover", onmspointerover);
+        setEventHandler(Event.TYPE_MSPOINTEROVER, onmspointerover);
     }
 
     /**
@@ -1777,7 +1778,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerup() {
-        return getEventHandler("mspointerup");
+        return getEventHandler(Event.TYPE_MSPOINTERUP);
     }
 
     /**
@@ -1786,7 +1787,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerup(final Object onmspointerup) {
-        setEventHandler("mspointerup", onmspointerup);
+        setEventHandler(Event.TYPE_MSPOINTERUP, onmspointerup);
     }
 
     /**
@@ -1831,7 +1832,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointerenter() {
-        return getEventHandler("pointerenter");
+        return getEventHandler(Event.TYPE_POINTERENTER);
     }
 
     /**
@@ -1840,7 +1841,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointerenter(final Object onpointerenter) {
-        setEventHandler("pointerenter", onpointerenter);
+        setEventHandler(Event.TYPE_POINTERENTER, onpointerenter);
     }
 
     /**
@@ -1885,7 +1886,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointerout() {
-        return getEventHandler("pointerout");
+        return getEventHandler(Event.TYPE_POINTEROUT);
     }
 
     /**
@@ -1894,7 +1895,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointerout(final Object onpointerout) {
-        setEventHandler("pointerout", onpointerout);
+        setEventHandler(Event.TYPE_POINTEROUT, onpointerout);
     }
 
     /**
