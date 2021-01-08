@@ -3515,7 +3515,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnlanguagechange() {
-        return getEventHandler("languagechange");
+        return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
 
     /**
@@ -3524,7 +3524,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnlanguagechange(final Object onlanguagechange) {
-        setHandlerForJavaScript("languagechange", onlanguagechange);
+        setHandlerForJavaScript(Event.TYPE_LANGUAGECHANGE, onlanguagechange);
     }
 
     /**
@@ -3533,7 +3533,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnemptied() {
-        return getEventHandler("emptied");
+        return getEventHandler(Event.TYPE_EMPTIED);
     }
 
     /**
@@ -3542,7 +3542,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnemptied(final Object onemptied) {
-        setHandlerForJavaScript("emptied", onemptied);
+        setHandlerForJavaScript(Event.TYPE_EMPTIED, onemptied);
     }
 
     /**
@@ -3551,7 +3551,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnrejectionhandled() {
-        return getEventHandler("rejectionhandled");
+        return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
 
     /**
@@ -3560,7 +3560,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnrejectionhandled(final Object onrejectionhandled) {
-        setHandlerForJavaScript("rejectionhandled", onrejectionhandled);
+        setHandlerForJavaScript(Event.TYPE_REJECTIONHANDLED, onrejectionhandled);
     }
 
     /**
@@ -3569,7 +3569,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointercancel() {
-        return getEventHandler("pointercancel");
+        return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
 
     /**
@@ -3578,7 +3578,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointercancel(final Object onpointercancel) {
-        setHandlerForJavaScript("pointercancel", onpointercancel);
+        setHandlerForJavaScript(Event.TYPE_POINTERCANCEL, onpointercancel);
     }
 
     /**
@@ -3587,7 +3587,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter(IE)
     public Function getOnmsgestureend() {
-        return getEventHandler("msgestureend");
+        return getEventHandler(Event.TYPE_MSGESTUREEND);
     }
 
     /**
@@ -3596,7 +3596,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter(IE)
     public void setOnmsgestureend(final Object onmsgestureend) {
-        setHandlerForJavaScript("msgestureend", onmsgestureend);
+        setHandlerForJavaScript(Event.TYPE_MSGESTUREEND, onmsgestureend);
     }
 
     /**
@@ -3605,7 +3605,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnresize() {
-        return getEventHandler("resize");
+        return getEventHandler(Event.TYPE_RESIZE);
     }
 
     /**
@@ -3614,7 +3614,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnresize(final Object onresize) {
-        setHandlerForJavaScript("resize", onresize);
+        setHandlerForJavaScript(Event.TYPE_RESIZE, onresize);
     }
 
     /**
@@ -3623,7 +3623,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnpause() {
-        return getEventHandler("pause");
+        return getEventHandler(Event.TYPE_PAUSE);
     }
 
     /**
@@ -3632,7 +3632,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnpause(final Object onpause) {
-        setHandlerForJavaScript("pause", onpause);
+        setHandlerForJavaScript(Event.TYPE_PAUSE, onpause);
     }
 
     /**
@@ -3641,7 +3641,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnloadstart() {
-        return getEventHandler("loadstart");
+        return getEventHandler(Event.TYPE_LOAD_START);
     }
 
     /**
@@ -3650,7 +3650,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnloadstart(final Object onloadstart) {
-        setHandlerForJavaScript("loadstart", onloadstart);
+        setHandlerForJavaScript(Event.TYPE_LOAD_START, onloadstart);
     }
 
     /**
@@ -3659,7 +3659,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnprogress() {
-        return getEventHandler("progress");
+        return getEventHandler(Event.TYPE_PROGRESS);
     }
 
     /**
@@ -3668,7 +3668,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnprogress(final Object onprogress) {
-        setHandlerForJavaScript("progress", onprogress);
+        setHandlerForJavaScript(Event.TYPE_PROGRESS, onprogress);
     }
 
     /**
@@ -3677,7 +3677,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerup() {
-        return getEventHandler("pointerup");
+        return getEventHandler(Event.TYPE_POINTERUP);
     }
 
     /**
@@ -3686,7 +3686,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerup(final Object onpointerup) {
-        setHandlerForJavaScript("pointerup", onpointerup);
+        setHandlerForJavaScript(Event.TYPE_POINTERUP, onpointerup);
     }
 
     /**
@@ -3695,7 +3695,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnwheel() {
-        return getEventHandler("wheel");
+        return getEventHandler(Event.TYPE_WHEEL);
     }
 
     /**
@@ -3704,7 +3704,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnwheel(final Object onwheel) {
-        setHandlerForJavaScript("wheel", onwheel);
+        setHandlerForJavaScript(Event.TYPE_WHEEL, onwheel);
     }
 
     /**
@@ -3713,7 +3713,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter(IE)
     public Function getOnmspointerdown() {
-        return getEventHandler("mspointerdown");
+        return getEventHandler(Event.TYPE_MSPOINTERDOWN);
     }
 
     /**
@@ -3722,7 +3722,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter(IE)
     public void setOnmspointerdown(final Object onmspointerdown) {
-        setHandlerForJavaScript("mspointerdown", onmspointerdown);
+        setHandlerForJavaScript(Event.TYPE_MSPOINTERDOWN, onmspointerdown);
     }
 
     /**
@@ -3731,7 +3731,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerleave() {
-        return getEventHandler("pointerleave");
+        return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
 
     /**
@@ -3740,7 +3740,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerleave(final Object onpointerleave) {
-        setHandlerForJavaScript("pointerleave", onpointerleave);
+        setHandlerForJavaScript(Event.TYPE_POINTERLEAVE, onpointerleave);
     }
 
     /**
@@ -3749,7 +3749,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF78, IE})
     public Function getOnbeforeprint() {
-        return getEventHandler("beforeprint");
+        return getEventHandler(Event.TYPE_BEFOREPRINT);
     }
 
     /**
@@ -3758,7 +3758,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({FF, FF78, IE})
     public void setOnbeforeprint(final Object onbeforeprint) {
-        setHandlerForJavaScript("beforeprint", onbeforeprint);
+        setHandlerForJavaScript(Event.TYPE_BEFOREPRINT, onbeforeprint);
     }
 
     /**
@@ -3767,7 +3767,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnstorage() {
-        return getEventHandler("storage");
+        return getEventHandler(Event.TYPE_STORAGE);
     }
 
     /**
@@ -3776,7 +3776,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
-        setHandlerForJavaScript("storage", onstorage);
+        setHandlerForJavaScript(Event.TYPE_STORAGE, onstorage);
     }
 
     /**
@@ -3785,7 +3785,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF78})
     public Function getOndevicelight() {
-        return getEventHandler("devicelight");
+        return getEventHandler(Event.TYPE_DEVICELIGHT);
     }
 
     /**
@@ -3794,7 +3794,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({FF, FF78})
     public void setOndevicelight(final Object ondevicelight) {
-        setHandlerForJavaScript("devicelight", ondevicelight);
+        setHandlerForJavaScript(Event.TYPE_DEVICELIGHT, ondevicelight);
     }
 
     /**
@@ -3803,7 +3803,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnanimationstart() {
-        return getEventHandler("animationstart");
+        return getEventHandler(Event.TYPE_ANIMATIONSTART);
     }
 
     /**
@@ -3812,7 +3812,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnanimationstart(final Object onanimationstart) {
-        setHandlerForJavaScript("animationstart", onanimationstart);
+        setHandlerForJavaScript(Event.TYPE_ANIMATIONSTART, onanimationstart);
     }
 
     /**
@@ -3821,7 +3821,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter(IE)
     public Function getOnmspointercancel() {
-        return getEventHandler("mspointercancel");
+        return getEventHandler(Event.TYPE_MSPOINTERCANCEL);
     }
 
     /**
@@ -3830,7 +3830,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter(IE)
     public void setOnmspointercancel(final Object onmspointercancel) {
-        setHandlerForJavaScript("mspointercancel", onmspointercancel);
+        setHandlerForJavaScript(Event.TYPE_MSPOINTERCANCEL, onmspointercancel);
     }
 
     /**
@@ -3839,7 +3839,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOntimeupdate() {
-        return getEventHandler("timeupdate");
+        return getEventHandler(Event.TYPE_TIMEUPDATE);
     }
 
     /**
@@ -3848,7 +3848,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOntimeupdate(final Object ontimeupdate) {
-        setHandlerForJavaScript("timeupdate", ontimeupdate);
+        setHandlerForJavaScript(Event.TYPE_TIMEUPDATE, ontimeupdate);
     }
 
     /**

@@ -1437,7 +1437,7 @@ public class Element extends Node {
      * @return the {@code onwheel} event handler for this element
      */
     public Function getOnwheel() {
-        return getEventHandler("wheel");
+        return getEventHandler(Event.TYPE_WHEEL);
     }
 
     /**
@@ -1445,7 +1445,7 @@ public class Element extends Node {
      * @param onwheel the {@code onwheel} event handler for this element
      */
     public void setOnwheel(final Object onwheel) {
-        setEventHandler("wheel", onwheel);
+        setEventHandler(Event.TYPE_WHEEL, onwheel);
     }
 
     /**
@@ -1526,7 +1526,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgestureend() {
-        return getEventHandler("msgestureend");
+        return getEventHandler(Event.TYPE_MSGESTUREEND);
     }
 
     /**
@@ -1535,7 +1535,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgestureend(final Object onmsgestureend) {
-        setEventHandler("msgestureend", onmsgestureend);
+        setEventHandler(Event.TYPE_MSGESTUREEND, onmsgestureend);
     }
 
     /**
@@ -1652,7 +1652,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointercancel() {
-        return getEventHandler("mspointercancel");
+        return getEventHandler(Event.TYPE_MSPOINTERCANCEL);
     }
 
     /**
@@ -1661,7 +1661,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointercancel(final Object onmspointercancel) {
-        setEventHandler("mspointercancel", onmspointercancel);
+        setEventHandler(Event.TYPE_MSPOINTERCANCEL, onmspointercancel);
     }
 
     /**
@@ -1670,7 +1670,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerdown() {
-        return getEventHandler("mspointerdown");
+        return getEventHandler(Event.TYPE_MSPOINTERDOWN);
     }
 
     /**
@@ -1679,7 +1679,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerdown(final Object onmspointerdown) {
-        setEventHandler("mspointerdown", onmspointerdown);
+        setEventHandler(Event.TYPE_MSPOINTERDOWN, onmspointerdown);
     }
 
     /**
@@ -1796,7 +1796,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointercancel() {
-        return getEventHandler("pointercancel");
+        return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
 
     /**
@@ -1805,7 +1805,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointercancel(final Object onpointercancel) {
-        setEventHandler("pointercancel", onpointercancel);
+        setEventHandler(Event.TYPE_POINTERCANCEL, onpointercancel);
     }
 
     /**
@@ -1850,7 +1850,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointerleave() {
-        return getEventHandler("pointerleave");
+        return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
 
     /**
@@ -1859,7 +1859,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointerleave(final Object onpointerleave) {
-        setEventHandler("pointerleave", onpointerleave);
+        setEventHandler(Event.TYPE_POINTERLEAVE, onpointerleave);
     }
 
     /**
@@ -1922,7 +1922,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnpointerup() {
-        return getEventHandler("pointerup");
+        return getEventHandler(Event.TYPE_POINTERUP);
     }
 
     /**
@@ -1931,7 +1931,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnpointerup(final Object onpointerup) {
-        setEventHandler("pointerup", onpointerup);
+        setEventHandler(Event.TYPE_POINTERUP, onpointerup);
     }
 
     /**

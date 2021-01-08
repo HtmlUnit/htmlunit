@@ -305,6 +305,57 @@ public class Event extends SimpleScriptable {
     /** The canplay event type, triggered by {@code canplay} event handlers. */
     public static final String TYPE_CANPLAY = "canplay";
 
+    /** The languagechange event type, triggered by {@code languagechange} event handlers. */
+    public static final String TYPE_LANGUAGECHANGE = "languagechange";
+
+    /** The emptied event type, triggered by {@code emptied} event handlers. */
+    public static final String TYPE_EMPTIED = "emptied";
+
+    /** The rejectionhandled event type, triggered by {@code rejectionhandled} event handlers. */
+    public static final String TYPE_REJECTIONHANDLED = "rejectionhandled";
+
+    /** The pointercancel event type, triggered by {@code pointercancel} event handlers. */
+    public static final String TYPE_POINTERCANCEL = "pointercancel";
+
+    /** The msgestureend event type, triggered by {@code msgestureend} event handlers. */
+    public static final String TYPE_MSGESTUREEND = "msgestureend";
+
+    /** The resize event type, triggered by {@code resize} event handlers. */
+    public static final String TYPE_RESIZE = "resize";
+
+    /** The pause event type, triggered by {@code pause} event handlers. */
+    public static final String TYPE_PAUSE = "pause";
+
+    /** The pointerup event type, triggered by {@code pointerup} event handlers. */
+    public static final String TYPE_POINTERUP = "pointerup";
+
+    /** The wheel event type, triggered by {@code wheel} event handlers. */
+    public static final String TYPE_WHEEL = "wheel";
+
+    /** The mspointerdown event type, triggered by {@code mspointerdown} event handlers. */
+    public static final String TYPE_MSPOINTERDOWN = "mspointerdown";
+
+    /** The pointerleave event type, triggered by {@code pointerleave} event handlers. */
+    public static final String TYPE_POINTERLEAVE = "pointerleave";
+
+    /** The beforeprint event type, triggered by {@code beforeprint} event handlers. */
+    public static final String TYPE_BEFOREPRINT = "beforeprint";
+
+    /** The storage event type, triggered by {@code storage} event handlers. */
+    public static final String TYPE_STORAGE = "storage";
+
+    /** The devicelight event type, triggered by {@code devicelight} event handlers. */
+    public static final String TYPE_DEVICELIGHT = "devicelight";
+
+    /** The animationstart event type, triggered by {@code animationstart} event handlers. */
+    public static final String TYPE_ANIMATIONSTART = "animationstart";
+
+    /** The mspointercancel event type, triggered by {@code mspointercancel} event handlers. */
+    public static final String TYPE_MSPOINTERCANCEL = "mspointercancel";
+
+    /** The timeupdate event type, triggered by {@code timeupdate} event handlers. */
+    public static final String TYPE_TIMEUPDATE = "timeupdate";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

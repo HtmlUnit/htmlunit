@@ -353,7 +353,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnlanguagechange() {
-        return getEventHandler("languagechange");
+        return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
 
     /**
@@ -362,7 +362,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnlanguagechange(final Object onlanguagechange) {
-        setEventHandler("languagechange", onlanguagechange);
+        setEventHandler(Event.TYPE_LANGUAGECHANGE, onlanguagechange);
     }
 
     /**
@@ -479,7 +479,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnrejectionhandled() {
-        return getEventHandler("rejectionhandled");
+        return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
 
     /**
@@ -488,7 +488,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnrejectionhandled(final Object onrejectionhandled) {
-        setEventHandler("rejectionhandled", onrejectionhandled);
+        setEventHandler(Event.TYPE_REJECTIONHANDLED, onrejectionhandled);
     }
 
     /**
@@ -497,7 +497,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnstorage() {
-        return getEventHandler("storage");
+        return getEventHandler(Event.TYPE_STORAGE);
     }
 
     /**
@@ -506,7 +506,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
-        setEventHandler("storage", onstorage);
+        setEventHandler(Event.TYPE_STORAGE, onstorage);
     }
 
     /**
@@ -569,7 +569,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnbeforeprint() {
-        return getEventHandler("beforeprint");
+        return getEventHandler(Event.TYPE_BEFOREPRINT);
     }
 
     /**
@@ -578,7 +578,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnbeforeprint(final Object onbeforeprint) {
-        setEventHandler("beforeprint", onbeforeprint);
+        setEventHandler(Event.TYPE_BEFOREPRINT, onbeforeprint);
     }
 
     /**

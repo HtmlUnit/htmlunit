@@ -2468,7 +2468,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnresize(final Object handler) {
-        setEventHandler("resize", handler);
+        setEventHandler(Event.TYPE_RESIZE, handler);
     }
 
     /**
@@ -2477,7 +2477,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnresize() {
-        return getEventHandler("resize");
+        return getEventHandler(Event.TYPE_RESIZE);
     }
 
     /**
@@ -2842,7 +2842,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnemptied() {
-        return getEventHandler("emptied");
+        return getEventHandler(Event.TYPE_EMPTIED);
     }
 
     /**
@@ -2851,7 +2851,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnemptied(final Object onemptied) {
-        setEventHandler("emptied", onemptied);
+        setEventHandler(Event.TYPE_EMPTIED, onemptied);
     }
 
     /**
@@ -2979,7 +2979,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnloadstart() {
-        return getEventHandler("loadstart");
+        return getEventHandler(Event.TYPE_LOAD_START);
     }
 
     /**
@@ -2988,7 +2988,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnloadstart(final Object onloadstart) {
-        setEventHandler("loadstart", onloadstart);
+        setEventHandler(Event.TYPE_LOAD_START, onloadstart);
     }
 
     /**
@@ -3071,7 +3071,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnpause() {
-        return getEventHandler("pause");
+        return getEventHandler(Event.TYPE_PAUSE);
     }
 
     /**
@@ -3080,7 +3080,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnpause(final Object onpause) {
-        setEventHandler("pause", onpause);
+        setEventHandler(Event.TYPE_PAUSE, onpause);
     }
 
     /**
@@ -3126,7 +3126,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointercancel() {
-        return getEventHandler("pointercancel");
+        return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
 
     /**
@@ -3136,7 +3136,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointercancel(final Object onpointercancel) {
-        setEventHandler("pointercancel", onpointercancel);
+        setEventHandler(Event.TYPE_POINTERCANCEL, onpointercancel);
     }
 
     /**
@@ -3186,7 +3186,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerleave() {
-        return getEventHandler("pointerleave");
+        return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
 
     /**
@@ -3196,7 +3196,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerleave(final Object onpointerleave) {
-        setEventHandler("pointerleave", onpointerleave);
+        setEventHandler(Event.TYPE_POINTERLEAVE, onpointerleave);
     }
 
     /**
@@ -3266,7 +3266,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerup() {
-        return getEventHandler("pointerup");
+        return getEventHandler(Event.TYPE_POINTERUP);
     }
 
     /**
@@ -3276,7 +3276,7 @@ public class HTMLElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerup(final Object onpointerup) {
-        setEventHandler("pointerup", onpointerup);
+        setEventHandler(Event.TYPE_POINTERUP, onpointerup);
     }
 
     /**
@@ -3285,7 +3285,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnprogress() {
-        return getEventHandler("progress");
+        return getEventHandler(Event.TYPE_PROGRESS);
     }
 
     /**
@@ -3294,7 +3294,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnprogress(final Object onprogress) {
-        setEventHandler("progress", onprogress);
+        setEventHandler(Event.TYPE_PROGRESS, onprogress);
     }
 
     /**
@@ -3465,7 +3465,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOntimeupdate() {
-        return getEventHandler("timeupdate");
+        return getEventHandler(Event.TYPE_TIMEUPDATE);
     }
 
     /**
@@ -3474,7 +3474,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOntimeupdate(final Object ontimeupdate) {
-        setEventHandler("timeupdate", ontimeupdate);
+        setEventHandler(Event.TYPE_TIMEUPDATE, ontimeupdate);
     }
 
     /**
