@@ -443,7 +443,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("pageshow");
+        return getEventHandler(Event.TYPE_PAGESHOW);
     }
 
     /**
@@ -452,7 +452,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
-        setEventHandler("pageshow", onpageshow);
+        setEventHandler(Event.TYPE_PAGESHOW, onpageshow);
     }
 
     /**

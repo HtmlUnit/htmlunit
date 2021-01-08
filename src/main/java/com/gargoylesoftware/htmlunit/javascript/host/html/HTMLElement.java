@@ -2680,7 +2680,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOncuechange() {
-        return getEventHandler("cuechange");
+        return getEventHandler(Event.TYPE_CUECHANGE);
     }
 
     /**
@@ -2689,7 +2689,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOncuechange(final Object oncuechange) {
-        setEventHandler("cuechange", oncuechange);
+        setEventHandler(Event.TYPE_CUECHANGE, oncuechange);
     }
 
     /**
@@ -3035,7 +3035,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnmouseleave() {
-        return getEventHandler("mouseleave");
+        return getEventHandler(Event.TYPE_MOUSELEAVE);
     }
 
     /**
@@ -3044,7 +3044,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnmouseleave(final Object onmouseleave) {
-        setEventHandler("mouseleave", onmouseleave);
+        setEventHandler(Event.TYPE_MOUSELEAVE, onmouseleave);
     }
 
     /**
@@ -3062,7 +3062,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
-        setEventHandler("mousewheel", onmousewheel);
+        setEventHandler(Event.TYPE_MOUSEWHEEL, onmousewheel);
     }
 
     /**
@@ -3375,7 +3375,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnseeking() {
-        return getEventHandler("seeking");
+        return getEventHandler(Event.TYPE_SEEKING);
     }
 
     /**
@@ -3384,7 +3384,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnseeking(final Object onseeking) {
-        setEventHandler("seeking", onseeking);
+        setEventHandler(Event.TYPE_SEEKING, onseeking);
     }
 
     /**
@@ -3591,7 +3591,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("mozfullscreenchange");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENCHANGE);
     }
 
     /**
@@ -3600,7 +3600,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
-        setEventHandler("mozfullscreenchange", onmozfullscreenchange);
+        setEventHandler(Event.TYPE_MOZFULLSCREENCHANGE, onmozfullscreenchange);
     }
 
     /**
@@ -3609,7 +3609,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("mozfullscreenerror");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENERROR);
     }
 
     /**
@@ -3618,7 +3618,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
-        setEventHandler("mozfullscreenerror", onmozfullscreenerror);
+        setEventHandler(Event.TYPE_MOZFULLSCREENERROR, onmozfullscreenerror);
     }
 
     /**

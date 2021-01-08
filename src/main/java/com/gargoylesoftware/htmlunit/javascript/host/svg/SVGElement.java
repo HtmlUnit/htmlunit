@@ -929,7 +929,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("mozfullscreenerror");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENERROR);
     }
 
     /**
@@ -938,7 +938,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object mozfullscreenerror) {
-        setEventHandler("mozfullscreenerror", mozfullscreenerror);
+        setEventHandler(Event.TYPE_MOZFULLSCREENERROR, mozfullscreenerror);
     }
 
     /**
@@ -965,7 +965,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmouseleave() {
-        return getEventHandler("mouseleave");
+        return getEventHandler(Event.TYPE_MOUSELEAVE);
     }
 
     /**
@@ -974,7 +974,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnmouseleave(final Object mouseleave) {
-        setEventHandler("mouseleave", mouseleave);
+        setEventHandler(Event.TYPE_MOUSELEAVE, mouseleave);
     }
 
     /**
@@ -1019,7 +1019,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnmousewheel() {
-        return getEventHandler("mousewheel");
+        return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
 
     /**
@@ -1028,7 +1028,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnmousewheel(final Object mousewheel) {
-        setEventHandler("mousewheel", mousewheel);
+        setEventHandler(Event.TYPE_MOUSEWHEEL, mousewheel);
     }
 
     /**
@@ -1055,7 +1055,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnseeking() {
-        return getEventHandler("seeking");
+        return getEventHandler(Event.TYPE_SEEKING);
     }
 
     /**
@@ -1064,7 +1064,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnseeking(final Object seeking) {
-        setEventHandler("seeking", seeking);
+        setEventHandler(Event.TYPE_SEEKING, seeking);
     }
 
     /**
@@ -1091,7 +1091,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
-        return getEventHandler("cuechange");
+        return getEventHandler(Event.TYPE_CUECHANGE);
     }
 
     /**
@@ -1100,7 +1100,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object cuechange) {
-        setEventHandler("cuechange", cuechange);
+        setEventHandler(Event.TYPE_CUECHANGE, cuechange);
     }
 
     /**
@@ -1145,7 +1145,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("mozfullscreenchange");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENCHANGE);
     }
 
     /**
@@ -1154,7 +1154,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object mozfullscreenchange) {
-        setEventHandler("mozfullscreenchange", mozfullscreenchange);
+        setEventHandler(Event.TYPE_MOZFULLSCREENCHANGE, mozfullscreenchange);
     }
 
     /**

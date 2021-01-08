@@ -283,7 +283,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("pageshow");
+        return getEventHandler(Event.TYPE_PAGESHOW);
     }
 
     /**
@@ -292,7 +292,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpageshow(final Object pageshow) {
-        setEventHandler("pageshow", pageshow);
+        setEventHandler(Event.TYPE_PAGESHOW, pageshow);
     }
 
     /**

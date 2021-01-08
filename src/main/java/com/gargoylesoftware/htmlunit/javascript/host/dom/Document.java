@@ -2565,7 +2565,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
-        return getEventHandler("cuechange");
+        return getEventHandler(Event.TYPE_CUECHANGE);
     }
 
     /**
@@ -2574,7 +2574,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object oncuechange) {
-        setEventHandler("cuechange", oncuechange);
+        setEventHandler(Event.TYPE_CUECHANGE, oncuechange);
     }
 
     /**
@@ -2925,7 +2925,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmouseleave() {
-        return getEventHandler("mouseleave");
+        return getEventHandler(Event.TYPE_MOUSELEAVE);
     }
 
     /**
@@ -2934,7 +2934,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnmouseleave(final Object onmouseleave) {
-        setEventHandler("mouseleave", onmouseleave);
+        setEventHandler(Event.TYPE_MOUSELEAVE, onmouseleave);
     }
 
     /**
@@ -2943,7 +2943,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnmousewheel() {
-        return getEventHandler("mousewheel");
+        return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
 
     /**
@@ -2952,7 +2952,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
-        setEventHandler("mousewheel", onmousewheel);
+        setEventHandler(Event.TYPE_MOUSEWHEEL, onmousewheel);
     }
 
     /**
@@ -3339,7 +3339,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnseeking() {
-        return getEventHandler("seeking");
+        return getEventHandler(Event.TYPE_SEEKING);
     }
 
     /**
@@ -3348,7 +3348,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnseeking(final Object onseeking) {
-        setEventHandler("seeking", onseeking);
+        setEventHandler(Event.TYPE_SEEKING, onseeking);
     }
 
     /**
@@ -3645,7 +3645,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("mozfullscreenchange");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENCHANGE);
     }
 
     /**
@@ -3654,7 +3654,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
-        setEventHandler("mozfullscreenchange", onmozfullscreenchange);
+        setEventHandler(Event.TYPE_MOZFULLSCREENCHANGE, onmozfullscreenchange);
     }
 
     /**
@@ -3663,7 +3663,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("mozfullscreenerror");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENERROR);
     }
 
     /**
@@ -3672,7 +3672,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
-        setEventHandler("mozfullscreenerror", onmozfullscreenerror);
+        setEventHandler(Event.TYPE_MOZFULLSCREENERROR, onmozfullscreenerror);
     }
 
     /**
@@ -3933,7 +3933,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerenter() {
-        return getEventHandler("mspointerenter");
+        return getEventHandler(Event.TYPE_MSPOINTENTER);
     }
 
     /**
@@ -3942,7 +3942,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerenter(final Object onmspointerenter) {
-        setEventHandler("mspointerenter", onmspointerenter);
+        setEventHandler(Event.TYPE_MSPOINTENTER, onmspointerenter);
     }
 
     /**

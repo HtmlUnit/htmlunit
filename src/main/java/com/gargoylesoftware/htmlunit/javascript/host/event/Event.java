@@ -257,6 +257,30 @@ public class Event extends SimpleScriptable {
     /** The afterprint event type, triggered by {@code afterprint} event handlers. */
     public static final String TYPE_AFTERPRINT = "afterprint";
 
+    /** The mozfullscreenerror event type, triggered by {@code mozfullscreenerror} event handlers. */
+    public static final String TYPE_MOZFULLSCREENERROR = "mozfullscreenerror";
+
+    /** The mouseleave event type, triggered by {@code mouseleave} event handlers. */
+    public static final String TYPE_MOUSELEAVE = "mouseleave";
+
+    /** The mousewheel event type, triggered by {@code mousewheel} event handlers. */
+    public static final String TYPE_MOUSEWHEEL = "mousewheel";
+
+    /** The seeking event type, triggered by {@code seeking} event handlers. */
+    public static final String TYPE_SEEKING = "seeking";
+
+    /** The cuechange event type, triggered by {@code cuechange} event handlers. */
+    public static final String TYPE_CUECHANGE = "cuechange";
+
+    /** The pageshow event type, triggered by {@code pageshow} event handlers. */
+    public static final String TYPE_PAGESHOW = "pageshow";
+
+    /** The mspointerenter event type, triggered by {@code mspointerenter} event handlers. */
+    public static final String TYPE_MSPOINTENTER = "mspointerenter";
+
+    /** The mozfullscreenchange event type, triggered by {@code mozfullscreenchange} event handlers. */
+    public static final String TYPE_MOZFULLSCREENCHANGE = "mozfullscreenchange";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

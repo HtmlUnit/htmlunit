@@ -1688,7 +1688,7 @@ public class Element extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerenter() {
-        return getEventHandler("mspointerenter");
+        return getEventHandler(Event.TYPE_MSPOINTENTER);
     }
 
     /**
@@ -1697,7 +1697,7 @@ public class Element extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerenter(final Object onmspointerenter) {
-        setEventHandler("mspointerenter", onmspointerenter);
+        setEventHandler(Event.TYPE_MSPOINTENTER, onmspointerenter);
     }
 
     /**

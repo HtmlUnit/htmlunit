@@ -3191,7 +3191,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("mozfullscreenerror");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENERROR);
     }
 
     /**
@@ -3200,7 +3200,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
-        setHandlerForJavaScript("mozfullscreenerror", onmozfullscreenerror);
+        setHandlerForJavaScript(Event.TYPE_MOZFULLSCREENERROR, onmozfullscreenerror);
     }
 
     /**
@@ -3209,7 +3209,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnmouseleave() {
-        return getEventHandler("mouseleave");
+        return getEventHandler(Event.TYPE_MOUSELEAVE);
     }
 
     /**
@@ -3218,7 +3218,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnmouseleave(final Object onmouseleave) {
-        setHandlerForJavaScript("mouseleave", onmouseleave);
+        setHandlerForJavaScript(Event.TYPE_MOUSELEAVE, onmouseleave);
     }
 
     /**
@@ -3227,7 +3227,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnmousewheel() {
-        return getEventHandler("mousewheel");
+        return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
 
     /**
@@ -3236,7 +3236,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
-        setHandlerForJavaScript("mousewheel", onmousewheel);
+        setHandlerForJavaScript(Event.TYPE_MOUSEWHEEL, onmousewheel);
     }
 
     /**
@@ -3245,7 +3245,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnseeking() {
-        return getEventHandler("seeking");
+        return getEventHandler(Event.TYPE_SEEKING);
     }
 
     /**
@@ -3254,7 +3254,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnseeking(final Object onseeking) {
-        setHandlerForJavaScript("seeking", onseeking);
+        setHandlerForJavaScript(Event.TYPE_SEEKING, onseeking);
     }
 
     /**
@@ -3263,7 +3263,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
-        return getEventHandler("cuechange");
+        return getEventHandler(Event.TYPE_CUECHANGE);
     }
 
     /**
@@ -3272,7 +3272,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object oncuechange) {
-        setHandlerForJavaScript("cuechange", oncuechange);
+        setHandlerForJavaScript(Event.TYPE_CUECHANGE, oncuechange);
     }
 
     /**
@@ -3281,7 +3281,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("pageshow");
+        return getEventHandler(Event.TYPE_PAGESHOW);
     }
 
     /**
@@ -3290,7 +3290,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
-        setHandlerForJavaScript("pageshow", onpageshow);
+        setHandlerForJavaScript(Event.TYPE_PAGESHOW, onpageshow);
     }
 
     /**
@@ -3299,7 +3299,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter(IE)
     public Function getOnmspointerenter() {
-        return getEventHandler("mspointerenter");
+        return getEventHandler(Event.TYPE_MSPOINTENTER);
     }
 
     /**
@@ -3308,7 +3308,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter(IE)
     public void setOnmspointerenter(final Object onmspointerenter) {
-        setHandlerForJavaScript("mspointerenter", onmspointerenter);
+        setHandlerForJavaScript(Event.TYPE_MSPOINTENTER, onmspointerenter);
     }
 
     /**
@@ -3317,7 +3317,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("mozfullscreenchange");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENCHANGE);
     }
 
     /**
@@ -3326,7 +3326,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
-        setHandlerForJavaScript("mozfullscreenchange", onmozfullscreenchange);
+        setHandlerForJavaScript(Event.TYPE_MOZFULLSCREENCHANGE, onmozfullscreenchange);
     }
 
     /**
