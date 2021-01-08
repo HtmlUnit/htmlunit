@@ -281,6 +281,30 @@ public class Event extends SimpleScriptable {
     /** The mozfullscreenchange event type, triggered by {@code mozfullscreenchange} event handlers. */
     public static final String TYPE_MOZFULLSCREENCHANGE = "mozfullscreenchange";
 
+    /** The durationchange event type, triggered by {@code durationchange} event handlers. */
+    public static final String TYPE_DURATIONCHANGE = "durationchange";
+
+    /** The playing event type, triggered by {@code playing} event handlers. */
+    public static final String TYPE_PLAYNG = "playing";
+
+    /** The ended event type, triggered by {@code ended} event handlers. */
+    public static final String TYPE_ENDED = "ended";
+
+    /** The loadeddata event type, triggered by {@code loadeddata} event handlers. */
+    public static final String TYPE_LOADEDDATA = "loadeddata";
+
+    /** The unhandledrejection event type, triggered by {@code unhandledrejection} event handlers. */
+    public static final String TYPE_UNHANDLEDREJECTION = "unhandledrejection";
+
+    /** The suspend event type, triggered by {@code suspend} event handlers. */
+    public static final String TYPE_SUSPEND = "suspend";
+
+    /** The waiting event type, triggered by {@code waiting} event handlers. */
+    public static final String TYPE_WAITING = "waiting";
+
+    /** The canplay event type, triggered by {@code canplay} event handlers. */
+    public static final String TYPE_CANPLAY = "canplay";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

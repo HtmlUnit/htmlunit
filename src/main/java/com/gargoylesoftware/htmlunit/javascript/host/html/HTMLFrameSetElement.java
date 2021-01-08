@@ -355,7 +355,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnunhandledrejection() {
-        return getEventHandler("unhandledrejection");
+        return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
 
     /**
@@ -364,7 +364,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnunhandledrejection(final Object unhandledrejection) {
-        setEventHandler("unhandledrejection", unhandledrejection);
+        setEventHandler(Event.TYPE_UNHANDLEDREJECTION, unhandledrejection);
     }
 
     /**

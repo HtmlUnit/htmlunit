@@ -2626,7 +2626,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOncanplay() {
-        return getEventHandler("canplay");
+        return getEventHandler(Event.TYPE_CANPLAY);
     }
 
     /**
@@ -2635,7 +2635,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOncanplay(final Object oncanplay) {
-        setEventHandler("canplay", oncanplay);
+        setEventHandler(Event.TYPE_CANPLAY, oncanplay);
     }
 
     /**
@@ -2824,7 +2824,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOndurationchange() {
-        return getEventHandler("durationchange");
+        return getEventHandler(Event.TYPE_DURATIONCHANGE);
     }
 
     /**
@@ -2833,7 +2833,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOndurationchange(final Object ondurationchange) {
-        setEventHandler("durationchange", ondurationchange);
+        setEventHandler(Event.TYPE_DURATIONCHANGE, ondurationchange);
     }
 
     /**
@@ -2860,7 +2860,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnended() {
-        return getEventHandler("ended");
+        return getEventHandler(Event.TYPE_ENDED);
     }
 
     /**
@@ -2869,7 +2869,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnended(final Object onended) {
-        setEventHandler("ended", onended);
+        setEventHandler(Event.TYPE_ENDED, onended);
     }
 
     /**
@@ -2943,7 +2943,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnloadeddata() {
-        return getEventHandler("loadeddata");
+        return getEventHandler(Event.TYPE_LOADEDDATA);
     }
 
     /**
@@ -2952,7 +2952,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnloadeddata(final Object onloadeddata) {
-        setEventHandler("loadeddata", onloadeddata);
+        setEventHandler(Event.TYPE_LOADEDDATA, onloadeddata);
     }
 
     /**
@@ -3107,7 +3107,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler("playing");
+        return getEventHandler(Event.TYPE_PLAYNG);
     }
 
     /**
@@ -3116,7 +3116,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setEventHandler("playing", onplaying);
+        setEventHandler(Event.TYPE_PLAYNG, onplaying);
     }
 
     /**
@@ -3447,7 +3447,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnsuspend() {
-        return getEventHandler("suspend");
+        return getEventHandler(Event.TYPE_SUSPEND);
     }
 
     /**
@@ -3456,7 +3456,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnsuspend(final Object onsuspend) {
-        setEventHandler("suspend", onsuspend);
+        setEventHandler(Event.TYPE_SUSPEND, onsuspend);
     }
 
     /**

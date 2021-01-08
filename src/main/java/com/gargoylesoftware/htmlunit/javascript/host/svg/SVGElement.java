@@ -1163,7 +1163,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndurationchange() {
-        return getEventHandler("durationchange");
+        return getEventHandler(Event.TYPE_DURATIONCHANGE);
     }
 
     /**
@@ -1172,7 +1172,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndurationchange(final Object durationchange) {
-        setEventHandler("durationchange", durationchange);
+        setEventHandler(Event.TYPE_DURATIONCHANGE, durationchange);
     }
 
     /**
@@ -1181,7 +1181,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnplaying() {
-        return getEventHandler("playing");
+        return getEventHandler(Event.TYPE_PLAYNG);
     }
 
     /**
@@ -1190,7 +1190,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnplaying(final Object playing) {
-        setEventHandler("playing", playing);
+        setEventHandler(Event.TYPE_PLAYNG, playing);
     }
 
     /**
@@ -1217,7 +1217,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnended() {
-        return getEventHandler("ended");
+        return getEventHandler(Event.TYPE_ENDED);
     }
 
     /**
@@ -1226,7 +1226,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnended(final Object ended) {
-        setEventHandler("ended", ended);
+        setEventHandler(Event.TYPE_ENDED, ended);
     }
 
     /**
@@ -1235,7 +1235,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnloadeddata() {
-        return getEventHandler("loadeddata");
+        return getEventHandler(Event.TYPE_LOADEDDATA);
     }
 
     /**
@@ -1244,7 +1244,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnloadeddata(final Object loadeddata) {
-        setEventHandler("loadeddata", loadeddata);
+        setEventHandler(Event.TYPE_LOADEDDATA, loadeddata);
     }
 
     /**
@@ -1325,7 +1325,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnsuspend() {
-        return getEventHandler("suspend");
+        return getEventHandler(Event.TYPE_SUSPEND);
     }
 
     /**
@@ -1334,7 +1334,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnsuspend(final Object suspend) {
-        setEventHandler("suspend", suspend);
+        setEventHandler(Event.TYPE_SUSPEND, suspend);
     }
 
     /**
@@ -1361,7 +1361,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnwaiting() {
-        return getEventHandler("waiting");
+        return getEventHandler(Event.TYPE_WAITING);
     }
 
     /**
@@ -1370,7 +1370,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnwaiting(final Object waiting) {
-        setEventHandler("waiting", waiting);
+        setEventHandler(Event.TYPE_WAITING, waiting);
     }
 
     /**
@@ -1379,7 +1379,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncanplay() {
-        return getEventHandler("canplay");
+        return getEventHandler(Event.TYPE_CANPLAY);
     }
 
     /**
@@ -1388,7 +1388,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncanplay(final Object canplay) {
-        setEventHandler("canplay", canplay);
+        setEventHandler(Event.TYPE_CANPLAY, canplay);
     }
 
     /**

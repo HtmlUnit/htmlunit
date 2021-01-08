@@ -515,7 +515,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnunhandledrejection() {
-        return getEventHandler("unhandledrejection");
+        return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
 
     /**
@@ -524,7 +524,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnunhandledrejection(final Object onunhandledrejection) {
-        setEventHandler("unhandledrejection", onunhandledrejection);
+        setEventHandler(Event.TYPE_UNHANDLEDREJECTION, onunhandledrejection);
     }
 
     /**

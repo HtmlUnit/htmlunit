@@ -2475,7 +2475,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOncanplay() {
-        return getEventHandler("canplay");
+        return getEventHandler(Event.TYPE_CANPLAY);
     }
 
     /**
@@ -2484,7 +2484,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOncanplay(final Object oncanplay) {
-        setEventHandler("canplay", oncanplay);
+        setEventHandler(Event.TYPE_CANPLAY, oncanplay);
     }
 
     /**
@@ -2727,7 +2727,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndurationchange() {
-        return getEventHandler("durationchange");
+        return getEventHandler(Event.TYPE_DURATIONCHANGE);
     }
 
     /**
@@ -2736,7 +2736,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndurationchange(final Object ondurationchange) {
-        setEventHandler("durationchange", ondurationchange);
+        setEventHandler(Event.TYPE_DURATIONCHANGE, ondurationchange);
     }
 
     /**
@@ -2763,7 +2763,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnended() {
-        return getEventHandler("ended");
+        return getEventHandler(Event.TYPE_ENDED);
     }
 
     /**
@@ -2772,7 +2772,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnended(final Object onended) {
-        setEventHandler("ended", onended);
+        setEventHandler(Event.TYPE_ENDED, onended);
     }
 
     /**
@@ -2835,7 +2835,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnloadeddata() {
-        return getEventHandler("loadeddata");
+        return getEventHandler(Event.TYPE_LOADEDDATA);
     }
 
     /**
@@ -2844,7 +2844,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnloadeddata(final Object onloadeddata) {
-        setEventHandler("loadeddata", onloadeddata);
+        setEventHandler(Event.TYPE_LOADEDDATA, onloadeddata);
     }
 
     /**
@@ -3015,7 +3015,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler("playing");
+        return getEventHandler(Event.TYPE_PLAYNG);
     }
 
     /**
@@ -3024,7 +3024,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setEventHandler("playing", onplaying);
+        setEventHandler(Event.TYPE_PLAYNG, onplaying);
     }
 
     /**
@@ -3465,7 +3465,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnsuspend() {
-        return getEventHandler("suspend");
+        return getEventHandler(Event.TYPE_SUSPEND);
     }
 
     /**
@@ -3474,7 +3474,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnsuspend(final Object onsuspend) {
-        setEventHandler("suspend", onsuspend);
+        setEventHandler(Event.TYPE_SUSPEND, onsuspend);
     }
 
     /**
@@ -3537,7 +3537,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnwaiting() {
-        return getEventHandler("waiting");
+        return getEventHandler(Event.TYPE_WAITING);
     }
 
     /**
@@ -3546,7 +3546,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnwaiting(final Object onwaiting) {
-        setEventHandler("waiting", onwaiting);
+        setEventHandler(Event.TYPE_WAITING, onwaiting);
     }
 
     /**
