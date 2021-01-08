@@ -1379,24 +1379,6 @@ public class Element extends Node {
     }
 
     /**
-     * Returns the {@code onselectstart} event handler for this element.
-     * @return the {@code onselectstart} event handler for this element
-     */
-    @JsxGetter({CHROME, EDGE})
-    public Function getOnselectstart() {
-        return getEventHandler(Event.TYPE_SELECTSTART);
-    }
-
-    /**
-     * Sets the {@code onselectstart} event handler for this element.
-     * @param onselectstart the {@code onselectstart} event handler for this element
-     */
-    @JsxSetter({CHROME, EDGE})
-    public void setOnselectstart(final Object onselectstart) {
-        setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
-    }
-
-    /**
      * Returns the {@code onwebkitfullscreenchange} event handler for this element.
      * @return the {@code onwebkitfullscreenchange} event handler for this element
      */

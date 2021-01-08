@@ -3519,7 +3519,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnwaiting() {
-        return getEventHandler("waiting");
+        return getEventHandler(Event.TYPE_WAITING);
     }
 
     /**
@@ -3528,7 +3528,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnwaiting(final Object onwaiting) {
-        setEventHandler("waiting", onwaiting);
+        setEventHandler(Event.TYPE_WAITING, onwaiting);
     }
 
     /**
@@ -3703,7 +3703,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public Function getOnbeforedeactivate() {
-        return getEventHandler("beforedeactivate");
+        return getEventHandler(Event.TYPE_BEFOREDEACTIVATE);
     }
 
     /**
@@ -3712,7 +3712,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter(IE)
     public void setOnbeforedeactivate(final Object onbeforedeactivate) {
-        setEventHandler("beforedeactivate", onbeforedeactivate);
+        setEventHandler(Event.TYPE_BEFOREDEACTIVATE, onbeforedeactivate);
     }
 
     /**
@@ -3811,8 +3811,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
-    @Override
-    @JsxGetter(IE)
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnselectstart() {
         return getEventHandler(Event.TYPE_SELECTSTART);
     }
@@ -3821,8 +3820,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
-    @Override
-    @JsxSetter(IE)
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
     }
@@ -3861,5 +3859,77 @@ public class HTMLElement extends Element {
      */
     public void setValue(final Object newValue) {
         getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
+    }
+
+    /**
+     * Returns the {@code onanimationend} event handler.
+     * @return the {@code onanimationend} event handler
+     */
+    @JsxGetter({CHROME, EDGE})
+    public Function getOnanimationend() {
+        return getEventHandler(Event.TYPE_ANIMATIONEND);
+    }
+
+    /**
+     * Sets the {@code onanimationend} event handler.
+     * @param onanimationend the {@code onanimationend} event handler
+     */
+    @JsxSetter({CHROME, EDGE})
+    public void setOnanimationend(final Object onanimationend) {
+        setEventHandler(Event.TYPE_ANIMATIONEND, onanimationend);
+    }
+
+    /**
+     * Returns the {@code onanimationiteration} event handler.
+     * @return the {@code onanimationiteration} event handler
+     */
+    @JsxGetter({CHROME, EDGE})
+    public Function getOnanimationiteration() {
+        return getEventHandler(Event.TYPE_ANIMATIONITERATION);
+    }
+
+    /**
+     * Sets the {@code onanimationiteration} event handler.
+     * @param onanimationiteration the {@code onanimationiteration} event handler
+     */
+    @JsxSetter({CHROME, EDGE})
+    public void setOnanimationiteration(final Object onanimationiteration) {
+        setEventHandler(Event.TYPE_ANIMATIONITERATION, onanimationiteration);
+    }
+
+    /**
+     * Returns the {@code onanimationstart} event handler.
+     * @return the {@code onanimationstart} event handler
+     */
+    @JsxGetter({CHROME, EDGE})
+    public Function getOnanimationstart() {
+        return getEventHandler(Event.TYPE_ANIMATIONSTART);
+    }
+
+    /**
+     * Sets the {@code onanimationstart} event handler.
+     * @param onanimationstart the {@code onanimationstart} event handler
+     */
+    @JsxSetter({CHROME, EDGE})
+    public void setOnanimationstart(final Object onanimationstart) {
+        setEventHandler(Event.TYPE_ANIMATIONSTART, onanimationstart);
+    }
+
+    /**
+     * Returns the {@code onselectionchange} event handler for this element.
+     * @return the {@code onselectionchange} event handler for this element
+     */
+    @JsxGetter({CHROME, EDGE, IE})
+    public Function getOnselectionchange() {
+        return getEventHandler(Event.TYPE_SELECTIONCHANGE);
+    }
+
+    /**
+     * Sets the {@code onselectionchange} event handler for this element.
+     * @param onselectionchange the {@code onselectionchange} event handler for this element
+     */
+    @JsxSetter({CHROME, EDGE, IE})
+    public void setOnselectionchange(final Object onselectionchange) {
+        setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
     }
 }

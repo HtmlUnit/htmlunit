@@ -478,6 +478,42 @@ public class Event extends SimpleScriptable {
     /** The beforeactivate event type, triggered by {@code beforeactivate} event handlers. */
     public static final String TYPE_BEFOREACTIVATE = "beforeactivate";
 
+    /** The pointerlockchange event type, triggered by {@code pointerlockchange} event handlers. */
+    public static final String TYPE_POINTERLOCKCHANGE = "pointerlockchange";
+
+    /** The pointerlockerror event type, triggered by {@code pointerlockerror} event handlers. */
+    public static final String TYPE_POINTERLOCKERROR = "pointerlockerror";
+
+    /** The selectionchange event type, triggered by {@code selectionchange} event handlers. */
+    public static final String TYPE_SELECTIONCHANGE = "selectionchange";
+
+    /** The afterscriptexecute event type, triggered by {@code afterscriptexecute} event handlers. */
+    public static final String TYPE_AFTERSCRIPTEXECUTE = "afterscriptexecute";
+
+    /** The beforescriptexecute event type, triggered by {@code beforescriptexecute} event handlers. */
+    public static final String TYPE_BEFORESCRIPTEXECUTE = "beforescriptexecute";
+
+    /** The msfullscreenchange event type, triggered by {@code msfullscreenchange} event handlers. */
+    public static final String TYPE_MSFULLSCREENCHANGE = "msfullscreenchange";
+
+    /** The msfullscreenerror event type, triggered by {@code msfullscreenerror} event handlers. */
+    public static final String TYPE_MSFULLSCREENERROR = "msfullscreenerror";
+
+    /** The beforedeactivate event type, triggered by {@code beforedeactivate} event handlers. */
+    public static final String TYPE_BEFOREDEACTIVATE = "beforedeactivate";
+
+    /** The msthumbnailclick event type, triggered by {@code msthumbnailclick} event handlers. */
+    public static final String TYPE_MSTHUMBNAILCLICK = "msthumbnailclick";
+
+    /** The storagecommit event type, triggered by {@code storagecommit} event handlers. */
+    public static final String TYPE_STORAGECOMMIT = "storagecommit";
+
+    /**
+     * The mssitemodejumplistitemremoved event type, triggered
+     * by {@code mssitemodejumplistitemremoved} event handlers.
+     */
+    public static final String TYPE_MSSITEMODEJUMPLISTITEMREMOVED = "mssitemodejumplistitemremoved";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

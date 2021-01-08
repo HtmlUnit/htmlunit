@@ -3105,7 +3105,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerlockchange() {
-        return getEventHandler("pointerlockchange");
+        return getEventHandler(Event.TYPE_POINTERLOCKCHANGE);
     }
 
     /**
@@ -3114,7 +3114,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerlockchange(final Object onpointerlockchange) {
-        setEventHandler("pointerlockchange", onpointerlockchange);
+        setEventHandler(Event.TYPE_POINTERLOCKCHANGE, onpointerlockchange);
     }
 
     /**
@@ -3123,7 +3123,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerlockerror() {
-        return getEventHandler("pointerlockerror");
+        return getEventHandler(Event.TYPE_POINTERLOCKERROR);
     }
 
     /**
@@ -3132,7 +3132,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerlockerror(final Object onpointerlockerror) {
-        setEventHandler("pointerlockerror", onpointerlockerror);
+        setEventHandler(Event.TYPE_POINTERLOCKERROR, onpointerlockerror);
     }
 
     /**
@@ -3375,7 +3375,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnselectionchange() {
-        return getEventHandler("selectionchange");
+        return getEventHandler(Event.TYPE_SELECTIONCHANGE);
     }
 
     /**
@@ -3384,7 +3384,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnselectionchange(final Object onselectionchange) {
-        setEventHandler("selectionchange", onselectionchange);
+        setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
     }
 
     /**
@@ -3609,7 +3609,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnafterscriptexecute() {
-        return getEventHandler("afterscriptexecute");
+        return getEventHandler(Event.TYPE_AFTERSCRIPTEXECUTE);
     }
 
     /**
@@ -3618,7 +3618,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnafterscriptexecute(final Object onafterscriptexecute) {
-        setEventHandler("afterscriptexecute", onafterscriptexecute);
+        setEventHandler(Event.TYPE_AFTERSCRIPTEXECUTE, onafterscriptexecute);
     }
 
     /**
@@ -3627,7 +3627,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnbeforescriptexecute() {
-        return getEventHandler("beforescriptexecute");
+        return getEventHandler(Event.TYPE_BEFORESCRIPTEXECUTE);
     }
 
     /**
@@ -3636,7 +3636,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnbeforescriptexecute(final Object onbeforescriptexecute) {
-        setEventHandler("beforescriptexecute", onbeforescriptexecute);
+        setEventHandler(Event.TYPE_BEFORESCRIPTEXECUTE, onbeforescriptexecute);
     }
 
     /**
@@ -3717,7 +3717,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsfullscreenchange() {
-        return getEventHandler("msfullscreenchange");
+        return getEventHandler(Event.TYPE_MSFULLSCREENCHANGE);
     }
 
     /**
@@ -3726,7 +3726,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsfullscreenchange(final Object onmsfullscreenchange) {
-        setEventHandler("msfullscreenchange", onmsfullscreenchange);
+        setEventHandler(Event.TYPE_MSFULLSCREENCHANGE, onmsfullscreenchange);
     }
 
     /**
@@ -3735,7 +3735,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsfullscreenerror() {
-        return getEventHandler("msfullscreenerror");
+        return getEventHandler(Event.TYPE_MSFULLSCREENERROR);
     }
 
     /**
@@ -3744,7 +3744,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsfullscreenerror(final Object onmsfullscreenerror) {
-        setEventHandler("msfullscreenerror", onmsfullscreenerror);
+        setEventHandler(Event.TYPE_MSFULLSCREENERROR, onmsfullscreenerror);
     }
 
     /**
@@ -4041,7 +4041,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmssitemodejumplistitemremoved() {
-        return getEventHandler("mssitemodejumplistitemremoved");
+        return getEventHandler(Event.TYPE_MSSITEMODEJUMPLISTITEMREMOVED);
     }
 
     /**
@@ -4050,7 +4050,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmssitemodejumplistitemremoved(final Object onmssitemodejumplistitemremoved) {
-        setEventHandler("mssitemodejumplistitemremoved", onmssitemodejumplistitemremoved);
+        setEventHandler(Event.TYPE_MSSITEMODEJUMPLISTITEMREMOVED, onmssitemodejumplistitemremoved);
     }
 
     /**
@@ -4059,7 +4059,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsthumbnailclick() {
-        return getEventHandler("msthumbnailclick");
+        return getEventHandler(Event.TYPE_MSTHUMBNAILCLICK);
     }
 
     /**
@@ -4068,7 +4068,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsthumbnailclick(final Object onmsthumbnailclick) {
-        setEventHandler("msthumbnailclick", onmsthumbnailclick);
+        setEventHandler(Event.TYPE_MSTHUMBNAILCLICK, onmsthumbnailclick);
     }
 
     /**
@@ -4095,7 +4095,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnstoragecommit() {
-        return getEventHandler("storagecommit");
+        return getEventHandler(Event.TYPE_STORAGECOMMIT);
     }
 
     /**
@@ -4104,7 +4104,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnstoragecommit(final Object onstoragecommit) {
-        setEventHandler("storagecommit", onstoragecommit);
+        setEventHandler(Event.TYPE_STORAGECOMMIT, onstoragecommit);
     }
 
     /**
@@ -4149,7 +4149,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnbeforedeactivate() {
-        return getEventHandler("beforedeactivate");
+        return getEventHandler(Event.TYPE_BEFOREDEACTIVATE);
     }
 
     /**
@@ -4158,7 +4158,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnbeforedeactivate(final Object onbeforedeactivate) {
-        setEventHandler("beforedeactivate", onbeforedeactivate);
+        setEventHandler(Event.TYPE_BEFOREDEACTIVATE, onbeforedeactivate);
     }
 
     /**
