@@ -356,6 +356,128 @@ public class Event extends SimpleScriptable {
     /** The timeupdate event type, triggered by {@code timeupdate} event handlers. */
     public static final String TYPE_TIMEUPDATE = "timeupdate";
 
+    /** The pagehide event type, triggered by {@code pagehide} event handlers. */
+    public static final String TYPE_PAGEHIDE = "pagehide";
+
+    /** The webkitanimationiteration event type, triggered by {@code webkitanimationiteration} event handlers. */
+    public static final String TYPE_WEBKITANIMATIONITERATION = "webkitanimationiteration";
+
+    /** The msgesturetap event type, triggered by {@code msgesturetap} event handlers. */
+    public static final String TYPE_MSGESTURETAP = "msgesturetap";
+
+    /** The dragover event type, triggered by {@code dragover} event handlers. */
+    public static final String TYPE_DRAGOVER = "dragover";
+
+    /** The online event type, triggered by {@code online} event handlers. */
+    public static final String TYPE_ONLINE = "online";
+
+    /** The msgesturedoubletap event type, triggered by {@code msgesturedoubletap} event handlers. */
+    public static final String TYPE_MSGESTUREDOUBLETAP = "msgesturedoubletap";
+
+    /** The show event type, triggered by {@code show} event handlers. */
+    public static final String TYPE_SHOW = "show";
+
+    /** The volumechange event type, triggered by {@code volumechange} event handlers. */
+    public static final String TYPE_VOLUMECHANGE = "volumechange";
+
+    /** The msgesturechange event type, triggered by {@code msgesturechange} event handlers. */
+    public static final String TYPE_MSGESTURECHANGE = "msgesturechange";
+
+    /** The gotpointercapture event type, triggered by {@code gotpointercapture} event handlers. */
+    public static final String TYPE_GOTPOINTERCAPTURE = "gotpointercapture";
+
+    /** The webkittransitionend event type, triggered by {@code webkittransitionend} event handlers. */
+    public static final String TYPE_WEBKITTRANSITIONEND = "webkittransitionend";
+
+    /** The webkitanimationend event type, triggered by {@code webkitanimationend} event handlers. */
+    public static final String TYPE_WEBKITANIMATIONEND = "webkitanimationend";
+
+    /** The mspointerout event type, triggered by {@code mspointerout} event handlers. */
+    public static final String TYPE_MSPOINTEROUT = "mspointerout";
+
+    /** The devicemotion event type, triggered by {@code devicemotion} event handlers. */
+    public static final String TYPE_DEVICEMOTION = "devicemotion";
+
+    /** The stalled event type, triggered by {@code stalled} event handlers. */
+    public static final String TYPE_STALLED = "stalled";
+
+    /** The mouseenter event type, triggered by {@code mouseenter} event handlers. */
+    public static final String TYPE_MOUDEENTER = "mouseenter";
+
+    /** The dragleave event type, triggered by {@code dragleave} event handlers. */
+    public static final String TYPE_DRAGLEAVE = "dragleave";
+
+    /** The pointerdown event type, triggered by {@code pointerdown} event handlers. */
+    public static final String TYPE_POINTERDOWN = "pointerdown";
+
+    /** The drop event type, triggered by {@code drop} event handlers. */
+    public static final String TYPE_DROP = "drop";
+
+    /** The dragstart event type, triggered by {@code dragstart} event handlers. */
+    public static final String TYPE_DRAGSTART = "dragstart";
+
+    /** The transitionend event type, triggered by {@code transitionend} event handlers. */
+    public static final String TYPE_TRANSITIONEND = "transitionend";
+
+    /** The msgesturehold event type, triggered by {@code msgesturehold} event handlers. */
+    public static final String TYPE_MSGESTUREHOLD = "msgesturehold";
+
+    /** The deviceorientationabsolute event type, triggered by {@code deviceorientationabsolute} event handlers. */
+    public static final String TYPE_DEVICEORIENTATIONABSOLUTE = "deviceorientationabsolute";
+
+    /** The beforecopy event type, triggered by {@code beforecopy} event handlers. */
+    public static final String TYPE_BEFORECOPY = "beforecopy";
+
+    /** The beforecut event type, triggered by {@code beforecut} event handlers. */
+    public static final String TYPE_BEFORECUT = "beforecut";
+
+    /** The beforepaste event type, triggered by {@code beforepaste} event handlers. */
+    public static final String TYPE_BEFOREPASTE = "beforepaste";
+
+    /** The selectstart event type, triggered by {@code selectstart} event handlers. */
+    public static final String TYPE_SELECTSTART = "selectstart";
+
+    /** The webkitfullscreenchange event type, triggered by {@code webkitfullscreenchange} event handlers. */
+    public static final String TYPE_WEBKITFULLSCREENCHANGE = "webkitfullscreenchange";
+
+    /** The webkitfullscreenerror event type, triggered by {@code webkitfullscreenerror} event handlers. */
+    public static final String TYPE_WEBKITFULLSCREENERROR = "webkitfullscreenerror";
+    /** The copy event type, triggered by {@code copy} event handlers. */
+    public static final String TYPE_COPY = "copy";
+
+    /** The cut event type, triggered by {@code cut} event handlers. */
+    public static final String TYPE_CUT = "cut";
+
+    /** The paste event type, triggered by {@code paste} event handlers. */
+    public static final String TYPE_PASTE = "paste";
+
+    /** The onmessageerror event type, triggered by {@code onmessageerror} event handlers. */
+    public static final String TYPE_ONMESSAGEERROR = "onmessageerror";
+
+    /** The stop event type, triggered by {@code stop} event handlers. */
+    public static final String TYPE_STOP = "stop";
+
+    /** The msgotpointercapture event type, triggered by {@code msgotpointercapture} event handlers. */
+    public static final String TYPE_MSGOTPOINTERCAPTURE = "msgotpointercapture";
+
+    /** The mslostpointercapture event type, triggered by {@code mslostpointercapture} event handlers. */
+    public static final String TYPE_MSLOSTPOINTERCAPTURE = "mslostpointercapture";
+
+    /** The activate event type, triggered by {@code activate} event handlers. */
+    public static final String TYPE_ACTIVATE = "activate";
+
+    /** The deactivate event type, triggered by {@code deactivate} event handlers. */
+    public static final String TYPE_DEACTIVATE = "deactivate";
+
+    /** The mscontentzoom event type, triggered by {@code mscontentzoom} event handlers. */
+    public static final String TYPE_MSCONTENTZOOM = "mscontentzoom";
+
+    /** The msmanipulationstatechanged event type, triggered by {@code msmanipulationstatechanged} event handlers. */
+    public static final String TYPE_MSMANIPULATIONSTATECHANGED = "msmanipulationstatechanged";
+
+    /** The beforeactivate event type, triggered by {@code beforeactivate} event handlers. */
+    public static final String TYPE_BEFOREACTIVATE = "beforeactivate";
+
     /** No event phase. */
     @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short NONE = 0;

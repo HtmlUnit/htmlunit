@@ -211,7 +211,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmessageerror() {
-        return getEventHandler("onmessageerror");
+        return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
 
     /**
@@ -220,7 +220,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnmessageerror(final Object onmessageerror) {
-        setEventHandler("onmessageerror", onmessageerror);
+        setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }
 
     /**
@@ -247,7 +247,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnonline() {
-        return getEventHandler("online");
+        return getEventHandler(Event.TYPE_ONLINE);
     }
 
     /**
@@ -256,7 +256,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnonline(final Object online) {
-        setEventHandler("online", online);
+        setEventHandler(Event.TYPE_ONLINE, online);
     }
 
     /**
@@ -265,7 +265,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpagehide() {
-        return getEventHandler("pagehide");
+        return getEventHandler(Event.TYPE_PAGEHIDE);
     }
 
     /**
@@ -274,7 +274,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpagehide(final Object pagehide) {
-        setEventHandler("pagehide", pagehide);
+        setEventHandler(Event.TYPE_PAGEHIDE, pagehide);
     }
 
     /**

@@ -407,7 +407,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnonline() {
-        return getEventHandler("online");
+        return getEventHandler(Event.TYPE_ONLINE);
     }
 
     /**
@@ -416,7 +416,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnonline(final Object ononline) {
-        setEventHandler("online", ononline);
+        setEventHandler(Event.TYPE_ONLINE, ononline);
     }
 
     /**
@@ -425,7 +425,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpagehide() {
-        return getEventHandler("pagehide");
+        return getEventHandler(Event.TYPE_PAGEHIDE);
     }
 
     /**
@@ -434,7 +434,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpagehide(final Object onpagehide) {
-        setEventHandler("pagehide", onpagehide);
+        setEventHandler(Event.TYPE_PAGEHIDE, onpagehide);
     }
 
     /**
@@ -587,7 +587,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmessageerror() {
-        return getEventHandler("onmessageerror");
+        return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
 
     /**
@@ -596,7 +596,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnmessageerror(final Object onmessageerror) {
-        setEventHandler("onmessageerror", onmessageerror);
+        setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }
 
     /**
