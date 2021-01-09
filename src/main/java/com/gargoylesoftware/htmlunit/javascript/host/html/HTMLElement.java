@@ -2678,7 +2678,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncuechange} event handler for this element.
      * @return the {@code oncuechange} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Function getOncuechange() {
         return getEventHandler(Event.TYPE_CUECHANGE);
     }
@@ -2687,7 +2687,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncuechange} event handler for this element.
      * @param oncuechange the {@code oncuechange} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter
     public void setOncuechange(final Object oncuechange) {
         setEventHandler(Event.TYPE_CUECHANGE, oncuechange);
     }
