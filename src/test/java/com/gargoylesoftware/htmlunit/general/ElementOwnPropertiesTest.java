@@ -1567,8 +1567,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,"
                 + "onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
-                + "onscroll,onseeked,onseeking,onselect,onselectionchange,"
-                + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onscroll,onseeked,onseeking,onselect,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,"
                 + "scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
     public void article() throws Exception {
@@ -1731,7 +1730,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,"
                 + "onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,"
                 + "onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,"
-                + "onselect,onselectionchange,onselectstart,"
+                + "onselect,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,scrollIntoView(),setActive(),"
                 + "setCapture(),style,tabIndex,title,uniqueID")
@@ -3852,7 +3851,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
                 + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectionchange,onselectstart,"
+                + "onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
                 + "parentElement,releaseCapture(),removeNode(),runtimeStyle,scrollIntoView(),setActive(),"
                 + "setCapture(),style,tabIndex,title,uniqueID")
@@ -4015,7 +4014,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,"
                 + "onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
-                + "onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onscroll,onseeked,onseeking,onselect,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,"
                 + "scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -4230,7 +4229,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,"
                 + "onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
-                + "onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onscroll,onseeked,onseeking,onselect,onselectstart,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,"
                 + "scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -4478,7 +4477,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,"
                 + "onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,"
-                + "onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,"
+                + "onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
                 + "onselectstart,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),"
                 + "removeNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -5512,7 +5511,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onfocusout,onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,"
                 + "onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,"
-                + "onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,"
+                + "onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
                 + "onselectstart,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),"
                 + "removeNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -5786,7 +5785,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
                 + "onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,"
-                + "onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectstart,"
                 + "onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),"
                 + "removeNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -6094,7 +6093,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
                 + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,"
-                + "onselect,onselectionchange,onselectstart,"
+                + "onselect,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,"
                 + "outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,scrollIntoView(),"
                 + "setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -6257,7 +6256,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,"
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onmscontentzoom,"
                 + "onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,onratechange,onreset,"
-                + "onscroll,onseeked,onseeking,onselect,onselectionchange,"
+                + "onscroll,onseeked,onseeking,onselect,"
                 + "onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),removeNode(),runtimeStyle,"
                 + "scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
@@ -6499,7 +6498,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,"
                 + "onmouseover,onmouseup,onmousewheel,onmscontentzoom,onmsmanipulationstatechanged,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,"
-                + "onselectionchange,onselectstart,"
+                + "onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,"
                 + "parentElement,releaseCapture(),removeNode(),runtimeStyle,scrollIntoView(),setActive(),"
                 + "setCapture(),style,tabIndex,title,uniqueID")
@@ -7588,7 +7587,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
                 + "onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,"
-                + "onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectstart,"
                 + "onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),"
                 + "removeNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,"
@@ -9403,7 +9402,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onhelp,oninput,onkeydown,onkeypress,onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,"
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
                 + "onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,onprogress,"
-                + "onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectstart,"
                 + "onstalled,onsubmit,"
                 + "onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,parentElement,releaseCapture(),"
                 + "removeNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),style,tabIndex,title,uniqueID")
