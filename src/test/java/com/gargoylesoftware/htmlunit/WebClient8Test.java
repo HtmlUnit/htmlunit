@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import java.net.URL;
 
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -259,11 +261,16 @@ public class WebClient8Test extends SimpleWebTestCase {
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final MockWebConnection webConnection = getMockWebConnection();
             webConnection.setResponse(URL_FIRST, html);
-            webConnection.setResponse(new URL(URL_FIRST, "simple.css"), "");
+            URL cssUrl = new URL(URL_FIRST, "simple.css");
+            webConnection.setResponse(cssUrl, "");
 
             webClient.setWebConnection(webConnection);
 
-            webClient.getPage(URL_FIRST);
+            HtmlPage page = webClient.getPage(URL_FIRST);
+            //css must be loaded even if javascript is disabled
+            List<CssStyleSheet> styleSheets = page.getStyleSheets();
+            assertEquals(styleSheets.size(), 1);
+            assertEquals(styleSheets.iterator().next().getUri(), cssUrl);
         }
     }
 

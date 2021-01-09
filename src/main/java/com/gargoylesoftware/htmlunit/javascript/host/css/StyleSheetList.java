@@ -14,31 +14,30 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.Collections;
+import java.util.List;
 
-import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
+import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
+import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
-import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -62,53 +61,55 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class StyleSheetList extends SimpleScriptable {
 
-    /**
-     * We back the stylesheet list with an {@link HTMLCollection} of styles/links because this list must be "live".
-     */
-    private HTMLCollection nodes_;
+    private List<CssStyleSheet> styleSheets;
 
-    /**
-     * Verifies if the provided node is a link node pointing to a stylesheet.
-     *
-     * @param domNode the mode to check
-     * @return true if the provided node is a stylesheet link
-     */
-    public static boolean isStyleSheetLink(final DomNode domNode) {
-        if (domNode instanceof HtmlLink) {
-            final HtmlLink link = (HtmlLink) domNode;
-            String rel = link.getRelAttribute();
-            if (rel != null) {
-                rel = rel.trim();
-            }
-            return "stylesheet".equalsIgnoreCase(rel);
+    private static final class ChangeListener
+        implements DomChangeListener, HtmlAttributeChangeListener {
+
+        private Runnable clearCacheFct;
+
+        private ChangeListener(Runnable clearCacheFct) {
+            this.clearCacheFct = clearCacheFct;
         }
-        return false;
-    }
 
-    /**
-     * Verifies if the provided node is a link node pointing to an active stylesheet.
-     *
-     * @param domNode the mode to check
-     * @return true if the provided node is a stylesheet link
-     */
-    public boolean isActiveStyleSheetLink(final DomNode domNode) {
-        if (domNode instanceof HtmlLink) {
-            final HtmlLink link = (HtmlLink) domNode;
-            String rel = link.getRelAttribute();
-            if (rel != null) {
-                rel = rel.trim();
-            }
-            if ("stylesheet".equalsIgnoreCase(rel)) {
-                final String media = link.getMediaAttribute();
-                if (StringUtils.isBlank(media)) {
-                    return true;
-                }
-                final WebClient webClient = getWindow().getWebWindow().getWebClient();
-                final MediaListImpl mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
-                return CSSStyleSheet.isActive(this, mediaList);
+        @Override
+        public void attributeAdded(HtmlAttributeChangeEvent event) {
+            if (shouldClearCache(event)) {
+                clearCacheFct.run();
             }
         }
-        return false;
+
+        @Override
+        public void attributeRemoved(HtmlAttributeChangeEvent event) {
+            if (shouldClearCache(event)) {
+                clearCacheFct.run();
+            }
+        }
+
+        @Override
+        public void attributeReplaced(HtmlAttributeChangeEvent event) {
+            if (shouldClearCache(event)) {
+                clearCacheFct.run();
+            }
+        }
+
+        protected boolean shouldClearCache(final HtmlAttributeChangeEvent event) {
+            final HtmlElement node = event.getHtmlElement();
+            if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void nodeAdded(DomChangeEvent event) {
+            clearCacheFct.run();
+        }
+
+        @Override
+        public void nodeDeleted(DomChangeEvent event) {
+            clearCacheFct.run();
+        }
     }
 
     /**
@@ -120,74 +121,52 @@ public class StyleSheetList extends SimpleScriptable {
 
     /**
      * Creates a new style sheet list owned by the specified document.
-     *
      * @param document the owning document
      */
     public StyleSheetList(final Document document) {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
 
-        final WebClient webClient = getWindow().getWebWindow().getWebClient();
+        SgmlPage page = document.getPage();
+        final WebClient webClient = page.getWebClient();
 
         if (webClient.getOptions().isCssEnabled()) {
-            final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
-            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    if (node instanceof HtmlStyle) {
-                        return true;
-                    }
-                    if (onlyActive) {
-                        return isActiveStyleSheetLink(node);
-                    }
-                    return isStyleSheetLink(node);
-                }
+            styleSheets = page.getStyleSheets();
+            ChangeListener changeListener = new ChangeListener(() -> {
+                page.resetCachedStyleSheets();
+                styleSheets = page.getStyleSheets();
+            });
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    final HtmlElement node = event.getHtmlElement();
-                    if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
-                        return EffectOnCache.RESET;
-                    }
-                    return EffectOnCache.NONE;
-                }
-            };
-        }
-        else {
-            nodes_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
+            page.addDomChangeListener(changeListener);
+            if(page instanceof HtmlPage){
+                ((HtmlPage) page).addHtmlAttributeChangeListener(changeListener);
+            }
+        } else {
+            styleSheets = Collections.emptyList();
         }
     }
 
     /**
      * Returns the list's length.
-     *
      * @return the list's length
      */
     @JsxGetter
     public int getLength() {
-        return nodes_.getLength();
+        return styleSheets.size();
     }
 
     /**
      * Returns the style sheet at the specified index.
-     *
      * @param index the index of the style sheet to return
      * @return the style sheet at the specified index
      */
     @JsxFunction
     public Object item(final int index) {
-        if (nodes_ == null || index < 0 || index >= nodes_.getLength()) {
+        if (styleSheets == null || index < 0 || index >= styleSheets.size()) {
             return Undefined.instance;
         }
-
-        final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));
-
-        // <style type="text/css"> ... </style>
-        if (element instanceof HTMLStyleElement) {
-            return ((HTMLStyleElement) element).getSheet();
-        }
-        // <link rel="stylesheet" type="text/css" href="..." />
-        return ((HTMLLinkElement) element).getSheet();
+        CssStyleSheet cssStyleSheet = styleSheets.get(index);
+        return new CSSStyleSheet(cssStyleSheet);
     }
 
     /**

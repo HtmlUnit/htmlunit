@@ -410,11 +410,12 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (addToHistory) {
                     webWindow.getHistory().addPage(page);
                 }
-
+                if (page instanceof SgmlPage) {
+                    ((SgmlPage) page).clearComputedStyles();
+                }
                 final Window window = webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
-                    window.clearComputedStyles();
                 }
                 return (P) page;
             }

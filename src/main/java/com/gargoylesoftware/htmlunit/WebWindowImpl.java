@@ -52,6 +52,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
 
     private WebClient webClient_;
+    private Screen screen;
     private Page enclosedPage_;
     private transient Object scriptObject_;
     private JavaScriptJobManager jobManager_;
@@ -97,6 +98,7 @@ public abstract class WebWindowImpl implements WebWindow {
             outerHeight_ = innerHeight_ + 115;
             outerWidth_ = innerWidth_ + 14;
         }
+        screen = new Screen(webClient);
     }
 
     /**
@@ -147,6 +149,11 @@ public abstract class WebWindowImpl implements WebWindow {
         // the enclosedPage has a scriptable object
         enclosedPage_ = page;
         history_.addPage(page);
+    }
+
+    @Override
+    public Screen getScreen() {
+        return screen;
     }
 
     /**

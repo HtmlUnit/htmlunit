@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -70,8 +71,8 @@ public class MediaQueryList extends EventTarget {
     @JsxGetter
     public boolean isMatches() {
         final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-        final MediaListImpl mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
-        return CSSStyleSheet.isActive(this, mediaList);
+        final MediaListImpl mediaList = CssStyleSheet.parseMedia(errorHandler, media_);
+        return CssStyleSheet.isActive(getWindow().getWebWindow(), mediaList);
     }
 
     /**

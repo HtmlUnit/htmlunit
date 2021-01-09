@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.css;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 

@@ -35,10 +35,11 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 
 /**
  * Tests for {@link CSSStyleDeclaration}.

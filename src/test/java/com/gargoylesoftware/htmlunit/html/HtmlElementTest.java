@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,11 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Unit tests for {@link HtmlElement}.
@@ -1199,5 +1205,32 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         assertTrue(page.getElementById("d1").isDisplayed());
         assertEquals(Boolean.parseBoolean(getExpectedAlerts()[0]), page.getElementById("d2").isDisplayed());
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void testStyleJsDisabled() throws IOException {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <div id='id'>foo</div>\n"
+            + "  <link rel='stylesheet' href='simple.css'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            URL cssUrl = new URL(URL_FIRST, "simple.css");
+            webConnection.setResponse(cssUrl, "div{color:red}", MimeType.TEXT_CSS);
+
+            webClient.setWebConnection(webConnection);
+
+            HtmlPage page = webClient.getPage(URL_FIRST);
+            CssStyleDeclaration style = page.getElementById("id").getStyle();
+            assertEquals(style.getStyleAttribute("color"), "red");
+        }
     }
 }

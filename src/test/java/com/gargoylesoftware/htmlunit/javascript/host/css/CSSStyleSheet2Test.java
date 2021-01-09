@@ -18,10 +18,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
+import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.DefaultCssErrorHandler;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -32,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 
 /**
- * Unit tests for {@link CSSStyleSheet}.
+ * Unit tests for {@link CssStyleSheet}.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -66,25 +73,51 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
-        final CSSStyleSheet sheet = host.getSheet();
 
-        Selector selector = parseSelector(sheet, "*.yui-log input");
+        Selector selector = parseSelector("*.yui-log input");
 
-        assertFalse(CSSStyleSheet.selects(browserVersion, selector, body, null, false));
-        assertFalse(CSSStyleSheet.selects(browserVersion, selector, form, null, false));
-        assertTrue(CSSStyleSheet.selects(browserVersion, selector, input1, null, false));
-        assertTrue(CSSStyleSheet.selects(browserVersion, selector, input2, null, false));
-        assertFalse(CSSStyleSheet.selects(browserVersion, selector, button1, null, false));
-        assertFalse(CSSStyleSheet.selects(browserVersion, selector, button2, null, false));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, body, null, false));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, form, null, false));
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, input1, null, false));
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, input2, null, false));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, button1, null, false));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, button2, null, false));
 
-        selector = parseSelector(sheet, "#m1");
-        assertTrue(CSSStyleSheet.selects(browserVersion, selector, input1, null, false));
-        assertFalse(CSSStyleSheet.selects(browserVersion, selector, input2, null, false));
+        selector = parseSelector("#m1");
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, input1, null, false));
+        assertFalse(CssStyleSheet.selects(browserVersion, selector, input2, null, false));
     }
 
-    private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
-        return sheet.parseSelectors(rule).get(0);
+    private static Selector parseSelector(final String rule) {
+        return parseSelectors(rule).get(0);
+    }
+
+    /**
+     * Parses the selectors at the specified input source. If anything at all goes wrong, this
+     * method returns an empty selector list.
+     *
+     * @param source the source from which to retrieve the selectors to be parsed
+     * @return the selectors parsed from the specified input source
+     */
+    private static SelectorList parseSelectors(final String source) {
+        SelectorList selectors;
+        try {
+            final CSSErrorHandler errorHandler = new DefaultCssErrorHandler();
+            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+            parser.setErrorHandler(errorHandler);
+            selectors = parser.parseSelectors(source);
+            // in case of error parseSelectors returns null
+            if (null == selectors) {
+                selectors = new SelectorListImpl();
+            }
+        }
+        catch (final Throwable t) {
+//            if (LOG.isErrorEnabled()) {
+//                LOG.error("Error parsing CSS selectors from '" + source + "': " + t.getMessage(), t);
+//            }
+            selectors = new SelectorListImpl();
+        }
+        return selectors;
     }
 
     /**
@@ -151,13 +184,12 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final BrowserVersion browserVersion = getBrowserVersion();
-        final CSSStyleSheet sheet = host.getSheet();
 
-        Selector selector = sheet.parseSelectors("#d\\:e").get(0);
-        assertTrue(CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d:e"), null, false));
+        Selector selector = parseSelectors("#d\\:e").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d:e"), null, false));
 
-        selector = sheet.parseSelectors("#d-e").get(0);
-        assertTrue(CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d-e"), null, false));
+        selector = parseSelectors("#d-e").get(0);
+        assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d-e"), null, false));
     }
 
     /**
@@ -211,14 +243,13 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
-        final CSSStyleSheet sheet = host.getSheet();
-        final Selector selector = sheet.parseSelectors(css).get(0);
+        final Selector selector = parseSelectors(css).get(0);
         assertEquals(selectBody,
-                CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("b"), null, false));
+                CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("b"), null, false));
         assertEquals(selectDivD,
-                CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d"), null, false));
+                CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d"), null, false));
         assertEquals(selectSpanS,
-                CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("s"), null, false));
+                CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("s"), null, false));
     }
 
     /**

@@ -14,12 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.WeakHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
@@ -31,6 +46,10 @@ import org.w3c.dom.Text;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 
+import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclarationBuilder;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.AbstractDomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
@@ -42,6 +61,8 @@ import com.gargoylesoftware.htmlunit.html.DomNodeIterator;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
+import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 
 /**
  * A basic class of Standard Generalized Markup Language (SGML), e.g. HTML and XML.
@@ -55,6 +76,92 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
+    private transient List<CssStyleSheet> styleSheetList_;
+    private final CSSPropertiesCache cssPropertiesCache_;
+
+    /**
+     * Cache computed styles when possible, because their calculation is very expensive.
+     * We use a weak hash map because we don't want this cache to be the only reason
+     * nodes are kept around in the JVM, if all other references to them are gone.
+     */
+    private static final class CSSPropertiesCache implements Serializable {
+        private transient WeakHashMap<DomElement, Map<String, CssStyleDeclaration>> computedStyles_ = new WeakHashMap<>();
+
+        CSSPropertiesCache() {
+        }
+
+        public synchronized CssStyleDeclaration get(final DomElement element, final String normalizedPseudo) {
+            final Map<String, CssStyleDeclaration> elementMap = computedStyles_.get(element);
+            if (elementMap != null) {
+                return elementMap.get(normalizedPseudo);
+            }
+            return null;
+        }
+
+        public synchronized void put(final DomElement element, final String normalizedPseudo, final CssStyleDeclaration style) {
+            Map<String, CssStyleDeclaration> elementMap = computedStyles_.get(element);
+            if (elementMap == null) {
+                elementMap = new WeakHashMap<>();
+                computedStyles_.put(element, elementMap);
+            }
+            elementMap.put(normalizedPseudo, style);
+        }
+
+        public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
+            final Iterator<Entry<DomElement, Map<String, CssStyleDeclaration>>> i = computedStyles_.entrySet().iterator();
+            while (i.hasNext()) {
+                final Map.Entry<DomElement, Map<String, CssStyleDeclaration>> entry = i.next();
+                final DomNode node = entry.getKey();
+                if (changed == node
+                    || changed.getParentNode() == node.getParentNode()
+                    || changed.isAncestorOf(node)
+                    || clearParents && node.isAncestorOf(changed)) {
+                    i.remove();
+                }
+            }
+
+            // maybe this is a better solution but i have to think a bit more about this
+            //
+            //            if (computedStyles_.isEmpty()) {
+            //                return;
+            //            }
+            //
+            //            // remove all siblings
+            //            DomNode parent = changed.getParentNode();
+            //            if (parent != null) {
+            //                for (DomNode sibling : parent.getChildNodes()) {
+            //                    computedStyles_.remove(sibling.getScriptableObject());
+            //                }
+            //
+            //                if (clearParents) {
+            //                    // remove all parents
+            //                    while (parent != null) {
+            //                        computedStyles_.remove(parent.getScriptableObject());
+            //                        parent = parent.getParentNode();
+            //                    }
+            //                }
+            //            }
+            //
+            //            // remove changed itself and all descendants
+            //            computedStyles_.remove(changed.getScriptableObject());
+            //            for (DomNode descendant : changed.getDescendants()) {
+            //                computedStyles_.remove(descendant.getScriptableObject());
+            //            }
+        }
+
+        public synchronized void clear() {
+            computedStyles_.clear();
+        }
+
+        public synchronized Map<String, CssStyleDeclaration> remove(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+            return computedStyles_.remove(element.getDomNodeOrNull());
+        }
+
+        private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+            in.defaultReadObject();
+            computedStyles_ = new WeakHashMap<>();
+        }
+    }
 
     /**
      * Creates an instance of SgmlPage.
@@ -67,6 +174,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
         webResponse_ = webResponse;
         enclosingWindow_ = webWindow;
         webClient_ = webWindow.getWebClient();
+        cssPropertiesCache_ = new CSSPropertiesCache();
     }
 
     /**
@@ -380,4 +488,123 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * @return the content type of this page
      */
     public abstract String getContentType();
+
+    /**
+     * Verifies if the provided node is a link node pointing to an active stylesheet.
+     * @param link the html link
+     * @return true if the provided node is a stylesheet link
+     */
+    private boolean isActiveStyleSheetLink(final HtmlLink link) {
+        String rel = link.getRelAttribute();
+        if (rel != null) {
+            rel = rel.trim();
+        }
+        if ("stylesheet".equalsIgnoreCase(rel)) {
+            final String media = link.getMediaAttribute();
+            if (StringUtils.isBlank(media)) {
+                return true;
+            }
+
+            final MediaListImpl mediaList = CssStyleSheet.parseMedia(getWebClient().getCssErrorHandler(), media);
+            return CssStyleSheet.isActive(getEnclosingWindow(), mediaList);
+        }
+        return false;
+    }
+
+    /**
+     * Retrieves a collection of stylesheet objects representing the style sheets that correspond
+     * to each instance of a Link or
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration} object in the document.
+     *
+     * @return styleSheet collection
+     */
+    public List<CssStyleSheet> getStyleSheets() {
+        if (styleSheetList_ == null) {
+            final boolean onlyActive = getWebClient().getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
+            styleSheetList_ = StreamSupport.stream(getDescendants().spliterator(), false)
+                .map(node -> {
+                    // <style type="text/css"> ... </style>
+                    if (node instanceof HtmlStyle) {
+                        return ((HtmlStyle) node).getSheet();
+                    }
+                    // <link rel="stylesheet" type="text/css" href="..." />
+                    if (node instanceof HtmlLink) {
+                        boolean valid;
+                        HtmlLink link = (HtmlLink) node;
+                        if (onlyActive) {
+                            valid = isActiveStyleSheetLink(link);
+                        } else {
+                            valid = link.isStyleSheetLink();
+                        }
+                        if (valid)
+                            return link.getSheet();
+                    }
+                    return null;
+                }).filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        }
+        return styleSheetList_;
+    }
+
+    public void resetCachedStyleSheets() {
+        styleSheetList_ = null;
+    }
+
+    public CssStyleDeclaration getComputedStyle(final DomElement domNode, final String pseudoElement) {
+        String normalizedPseudo = pseudoElement;
+        if (normalizedPseudo != null) {
+            if (normalizedPseudo.startsWith("::")) {
+                normalizedPseudo = normalizedPseudo.substring(1);
+            }
+            else if (getWebClient().getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
+                && normalizedPseudo.length() > 0 && normalizedPseudo.charAt(0) != ':') {
+                normalizedPseudo = ":" + normalizedPseudo;
+            }
+        }
+
+        final CssStyleDeclaration styleFromCache = cssPropertiesCache_.get(domNode, normalizedPseudo);
+        if (styleFromCache != null) {
+            return styleFromCache;
+        }
+
+        final Collection<CssStyleSheet> sheets =  domNode.getPage().getStyleSheets();
+        final CssStyleDeclaration style = CssStyleDeclarationBuilder.build(sheets, domNode, normalizedPseudo);
+
+        cssPropertiesCache_.put(domNode, normalizedPseudo, style);
+        return style;
+    }
+
+    /**
+     * Clears the computed styles.
+     */
+    public void clearComputedStyles() {
+        cssPropertiesCache_.clear();
+    }
+
+    /**
+     * Clears the computed styles for a specific {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStyles(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+        cssPropertiesCache_.remove(element);
+    }
+
+    /**
+     * Clears the computed styles for a specific {@link com.gargoylesoftware.htmlunit.javascript.host.Element}
+     * and all parent elements.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStylesUpToRoot(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+        cssPropertiesCache_.remove(element);
+
+        com.gargoylesoftware.htmlunit.javascript.host.Element parent = element.getParentElement();
+        while (parent != null) {
+            cssPropertiesCache_.remove(parent);
+            parent = parent.getParentElement();
+        }
+    }
+
+    public void nodeChanged(DomNode changed, boolean clearParents) {
+        cssPropertiesCache_.nodeChanged(changed, clearParents);
+    }
 }

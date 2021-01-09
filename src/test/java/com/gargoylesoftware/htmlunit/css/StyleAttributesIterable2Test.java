@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.css;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +21,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * Tests for {@link StyleAttributes}.

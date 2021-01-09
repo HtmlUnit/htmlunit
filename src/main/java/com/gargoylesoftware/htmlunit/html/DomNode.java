@@ -58,8 +58,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -1857,7 +1857,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
                     for (final Selector selector : selectorList) {
-                        if (CSSStyleSheet.selects(browserVersion, selector, child, null, true)) {
+                        if (CssStyleSheet.selects(browserVersion, selector, child, null, true)) {
                             elements.add(child);
                             break;
                         }
@@ -1898,7 +1898,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     documentMode = ((HTMLDocument) sobj).getDocumentMode();
                 }
             }
-            CSSStyleSheet.validateSelectors(selectorList, documentMode, this);
+            CssStyleSheet.validateSelectors(selectorList, documentMode, this);
 
         }
         return selectorList;

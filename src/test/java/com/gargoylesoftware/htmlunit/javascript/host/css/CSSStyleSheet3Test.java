@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -39,10 +40,11 @@ import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
- * Tests encoding handling for {@link CSSStyleSheet}.
+ * Tests encoding handling for {@link CssStyleSheet}.
  *
  * @author Ronald Brill
  */

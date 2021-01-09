@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -57,7 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -1417,7 +1418,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             mouseOver_ = mouseOver;
 
             final SimpleScriptable scriptable = getScriptableObject();
-            scriptable.getWindow().clearComputedStyles();
+            scriptable.getDomNodeOrDie().getPage().clearComputedStyles();
         }
 
         return currentPage;
@@ -1557,7 +1558,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             if (selectorList != null) {
                 for (final Selector selector : selectorList) {
-                    if (CSSStyleSheet.selects(browserVersion, selector, this, null, true)) {
+                    if (CssStyleSheet.selects(browserVersion, selector, this, null, true)) {
                         return true;
                     }
                 }
@@ -1575,6 +1576,17 @@ public class DomElement extends DomNamespaceNode implements Element {
     @Override
     public void setNodeValue(final String value) {
         // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * Returns the current (calculated) style object for this element.
+     * @return the current (calculated) style object for this element
+     */
+    public CssStyleDeclaration getStyle() {
+        if (!isAttachedToPage()) {
+            return null;
+        }
+        return getPage().getComputedStyle(this, null);
     }
 }
 

@@ -28,6 +28,13 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 public interface WebWindow extends Serializable {
 
     /**
+     * Returns the screen.
+     *
+     * @return the screen
+     */
+    Screen getScreen();
+
+    /**
      * Returns the name of this window.
      *
      * @return the name of this window

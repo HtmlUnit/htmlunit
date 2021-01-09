@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;

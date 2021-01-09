@@ -16,7 +16,11 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 
 /**
  * Wrapper for the HTML element "style".
@@ -28,6 +32,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Frank Danek
  */
 public class HtmlStyle extends HtmlElement {
+
+    private CssStyleSheet sheet_;
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "style";
@@ -119,5 +125,28 @@ public class HtmlStyle extends HtmlElement {
     @Override
     public boolean mayBeDisplayed() {
         return false;
+    }
+
+    public CssStyleSheet getSheet() {
+        if (sheet_ != null) {
+            return sheet_;
+        }
+
+        final String css = this.getTextContent();
+
+        final Cache cache = getPage().getWebClient().getCache();
+        final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(css);
+        final String uri = getPage().getWebResponse().getWebRequest()
+            .getUrl().toExternalForm();
+        if (cached != null) {
+            sheet_ = new CssStyleSheet(this, cached, uri);
+        }
+        else {
+            CSSErrorHandler cssErrorHandler = getPage().getWebClient().getCssErrorHandler();
+            sheet_ = new CssStyleSheet(this, cssErrorHandler, css, uri);
+            cache.cache(css, sheet_.getWrappedSheet());
+        }
+
+        return sheet_;
     }
 }

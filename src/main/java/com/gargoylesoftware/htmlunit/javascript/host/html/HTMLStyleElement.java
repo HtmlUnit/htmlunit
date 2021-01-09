@@ -19,8 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -55,25 +53,9 @@ public class HTMLStyleElement extends HTMLElement {
      */
     @JsxGetter
     public CSSStyleSheet getSheet() {
-        if (sheet_ != null) {
-            return sheet_;
+        if (sheet_ == null) {
+            sheet_ =  new CSSStyleSheet(this, ((HtmlStyle) getDomNodeOrDie()).getSheet());
         }
-
-        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        final String css = style.getTextContent();
-
-        final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
-        final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(css);
-        final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
-                .getUrl().toExternalForm();
-        if (cached != null) {
-            sheet_ = new CSSStyleSheet(this, cached, uri);
-        }
-        else {
-            sheet_ = new CSSStyleSheet(this, css, uri);
-            cache.cache(css, sheet_.getWrappedSheet());
-        }
-
         return sheet_;
     }
 
@@ -148,7 +130,7 @@ public class HTMLStyleElement extends HTMLElement {
         final boolean modified = disabled == sheet.isEnabled();
         sheet.setEnabled(!disabled);
         if (modified) {
-            getWindow().clearComputedStyles();
+            getDomNodeOrDie().getPage().clearComputedStyles();
         }
     }
 }

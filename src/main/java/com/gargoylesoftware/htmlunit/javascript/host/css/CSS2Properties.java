@@ -17,8 +17,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
  * A JavaScript object for {@code CSS2Properties}.
@@ -39,10 +41,11 @@ public class CSS2Properties extends ComputedCSSStyleDeclaration {
     /**
      * Creates an instance.
      *
-     * @param style the original Style
+     * @param element the element to which this style is bound
+     * @param style the base style impl
      */
-    public CSS2Properties(final CSSStyleDeclaration style) {
-        super(style);
+    public CSS2Properties(final Element element, final CssStyleDeclaration style) {
+        super(element, style);
     }
 
 }

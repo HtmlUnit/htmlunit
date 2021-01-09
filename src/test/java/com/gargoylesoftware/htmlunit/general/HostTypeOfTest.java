@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -971,7 +972,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet}.
+     * Test {@link CssStyleSheet}.
      *
      * @throws Exception if an error occurs
      */

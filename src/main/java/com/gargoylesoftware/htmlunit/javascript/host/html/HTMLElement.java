@@ -122,7 +122,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;

@@ -938,7 +938,7 @@ public class Element extends Node {
         }
 
         domNode.removeAllChildren();
-        getWindow().clearComputedStylesUpToRoot(this);
+        domNode.getPage().clearComputedStylesUpToRoot(this);
 
         final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
         if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {

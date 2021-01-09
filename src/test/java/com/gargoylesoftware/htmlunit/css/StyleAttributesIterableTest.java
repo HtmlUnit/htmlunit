@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.css;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 
 /**
  * Tests for iterability of CSS style attributes defined in {@link StyleAttributes}.
