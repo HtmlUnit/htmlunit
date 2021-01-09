@@ -508,6 +508,18 @@ public class Event extends SimpleScriptable {
     /** The storagecommit event type, triggered by {@code storagecommit} event handlers. */
     public static final String TYPE_STORAGECOMMIT = "storagecommit";
 
+    /** The ontransitioncancel event type, triggered by {@code ontransitioncancel} event handlers. */
+    public static final String TYPE_ONTRANSITIONCANCEL = "ontransitioncancel";
+
+    /** The ontransitionend event type, triggered by {@code ontransitionend} event handlers. */
+    public static final String TYPE_ONTRANSITIONEND = "ontransitionend";
+
+    /** The ontransitionrun event type, triggered by {@code ontransitionrun} event handlers. */
+    public static final String TYPE_ONTRANSITIONRUN = "ontransitionrun";
+
+    /** The ontransitionstart event type, triggered by {@code ontransitionstart} event handlers. */
+    public static final String TYPE_ONTRANSITIONSTART = "ontransitionstart";
+
     /**
      * The mssitemodejumplistitemremoved event type, triggered
      * by {@code mssitemodejumplistitemremoved} event handlers.
