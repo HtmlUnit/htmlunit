@@ -130,9 +130,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
      */
     @Test
     @Alerts(DEFAULT = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-            "HtmlUnitxy", "y", "1234", "z"},
+                 "HtmlUnitxy", "y", "1234", "z"},
             IE = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-            "HtmlUnitxy", "", "1234", "z"})
+                "HtmlUnitxy", "", "1234", "z"})
     public void regExpMatchTooManyGroupsIgnoreCase() throws Exception {
         testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }

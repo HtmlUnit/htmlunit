@@ -847,21 +847,22 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, "
-                + "radio, hidden, password, image, reset, button, file, number, range, search, tel, url, text, text",
+                    + "radio, hidden, password, image, reset, button, file, number,"
+                    + " range, search, tel, url, text, text",
                 "text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, radio, "
-                + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text" },
+                    + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text" },
             FF = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
-                + "password, image, reset, button, file, number, range, search, tel, url, text, text",
+                    + "password, image, reset, button, file, number, range, search, tel, url, text, text",
                 "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
-                + "image, reset, button, file, number, range, search, tel, url, text, text"},
+                    + "image, reset, button, file, number, range, search, tel, url, text, text"},
             FF78 = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
-                + "password, image, reset, button, file, number, range, search, tel, url, text, text",
+                    + "password, image, reset, button, file, number, range, search, tel, url, text, text",
                 "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
-                + "image, reset, button, file, number, range, search, tel, url, text, text"},
+                    + "image, reset, button, file, number, range, search, tel, url, text, text"},
             IE = {"text, checkbox, error, error, error, error, error, error, email, text, submit, radio, hidden, "
-                + "password, image, reset, button, file, number, range, search, tel, url, error, text",
+                    + "password, image, reset, button, file, number, range, search, tel, url, error, text",
                 "text, checkbox, text, text, text, text, text, text, email, text, submit, radio, hidden, password, "
-                + "image, reset, button, file, number, range, search, tel, url, text, text" })
+                    + "image, reset, button, file, number, range, search, tel, url, text, text" })
     public void changeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -519,8 +519,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV"
-                })
+                "[object HTMLUnknownElement],ANOTHER:DIV"})
     public void namespace_nodeName() throws Exception {
         namespace("nodeName");
     }
@@ -535,8 +534,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV"
-                })
+                "[object HTMLUnknownElement],ANOTHER:DIV"})
     public void namespace_tagName() throws Exception {
         namespace("tagName");
     }
@@ -551,8 +549,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],app",
                 "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
-                "[object HTMLUnknownElement],null"
-                })
+                "[object HTMLUnknownElement],null"})
     public void namespace_prefix() throws Exception {
         namespace("prefix");
     }
@@ -567,8 +564,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],dIv",
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
-                "[object HTMLUnknownElement],another:div"
-                })
+                "[object HTMLUnknownElement],another:div"})
     public void namespace_localName() throws Exception {
         namespace("localName");
     }
@@ -583,8 +579,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
-                })
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"})
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
     }
@@ -623,8 +618,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"[object Element]", "dIv",
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
-                "[object HTMLUnknownElement]", "dIv"
-                })
+                "[object HTMLUnknownElement]", "dIv"})
     public void xml_nodeName() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -639,8 +633,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"[object Element]", "dIv",
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
-                "[object HTMLUnknownElement]", "dIv"
-                })
+                "[object HTMLUnknownElement]", "dIv"})
     public void xml_tagName() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -655,8 +648,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"[object Element]", "null",
                 "[object HTMLHtmlElement]", "null",
                 "[object HTMLDivElement]", "null",
-                "[object HTMLUnknownElement]", "null"
-                })
+                "[object HTMLUnknownElement]", "null"})
     public void xml_prefix() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -671,8 +663,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"[object Element]", "dIv",
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
-                "[object HTMLUnknownElement]", "dIv"
-                })
+                "[object HTMLUnknownElement]", "dIv"})
     public void xml_localName() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -687,8 +678,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"[object Element]", "undefined",
                 "[object HTMLHtmlElement]", "undefined",
                 "[object HTMLDivElement]", "undefined",
-                "[object HTMLUnknownElement]", "undefined"
-                })
+                "[object HTMLUnknownElement]", "undefined"})
     public void xml_baseName() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -703,8 +693,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"[object Element]", "null",
                 "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
-                })
+                "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"})
     public void xml_namespaceURI() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();

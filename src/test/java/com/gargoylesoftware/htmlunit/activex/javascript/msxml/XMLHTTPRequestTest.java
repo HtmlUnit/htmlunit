@@ -645,8 +645,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = {"exception-created",
                    "exception-opened",
                    "Date XYZ GMT\\r\\n"
-                   + "Content-Type: text/xml;charset=iso-8859-1\\r\\n"
-                   + "Transfer-Encoding: chunked\\r\\nServer: Jetty(XXX)\\r\\n\\r\\n"})
+                       + "Content-Type: text/xml;charset=iso-8859-1\\r\\n"
+                       + "Transfer-Encoding: chunked\\r\\nServer: Jetty(XXX)\\r\\n\\r\\n"})
     public void getAllResponseHeaders() throws Exception {
         final String test = ""
             // create

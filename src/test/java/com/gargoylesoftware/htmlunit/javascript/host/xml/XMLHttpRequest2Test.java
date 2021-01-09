@@ -965,12 +965,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 + "transfer-encoding: chunked\n"},
             IE = {"", "",
                 "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
-                + "Transfer-Encoding: chunked\n"
-                + "Server: Jetty(XXX)\n\n"})
+                    + "Transfer-Encoding: chunked\n"
+                    + "Server: Jetty(XXX)\n\n"})
     @HtmlUnitNYI(CHROME = {"", "",
                 "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
-                + "Transfer-Encoding: chunked\n"
-                + "Server: Jetty(XXX)\n"},
+                    + "Transfer-Encoding: chunked\n"
+                    + "Server: Jetty(XXX)\n"},
             EDGE = {"", "", "Date XYZ GMT\nContent-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n"},
