@@ -24,7 +24,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>2.45.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.46.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.7.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.46.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.46.0</htmlunitcorejs.version>
@@ -72,7 +72,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.1.4</version>
+                <version>4.2.0</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
@@ -209,7 +209,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>6.0.4</version>
+                <version>6.0.5</version>
                 <configuration>
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
@@ -314,7 +314,7 @@
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.10.1</version>
+                <version>1.11.0</version>
                 <executions>
                     <execution>
                         <goals>

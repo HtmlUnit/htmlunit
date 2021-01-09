@@ -240,6 +240,78 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnload() {
+        return super.getOnload();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnload(final Object onload) {
+        super.setOnload(onload);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnblur(final Object handler) {
+        super.setOnblur(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnblur() {
+        return super.getOnblur();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnfocus(final Object handler) {
+        super.setOnfocus(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnfocus() {
+        return super.getOnfocus();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnerror(final Object handler) {
+        super.setOnerror(handler);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Object getOnerror() {
+        return super.getOnerror();
+    }
+
+    /**
      * Returns the {@code onbeforeunload} event handler for this element.
      * @return the {@code onbeforeunload} event handler for this element
      */
@@ -281,7 +353,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnlanguagechange() {
-        return getEventHandler("languagechange");
+        return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
 
     /**
@@ -290,7 +362,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnlanguagechange(final Object onlanguagechange) {
-        setEventHandler("languagechange", onlanguagechange);
+        setEventHandler(Event.TYPE_LANGUAGECHANGE, onlanguagechange);
     }
 
     /**
@@ -317,7 +389,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnoffline() {
-        return getEventHandler("offline");
+        return getEventHandler(Event.TYPE_OFFLINE);
     }
 
     /**
@@ -326,7 +398,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnoffline(final Object onoffline) {
-        setEventHandler("offline", onoffline);
+        setEventHandler(Event.TYPE_OFFLINE, onoffline);
     }
 
     /**
@@ -335,7 +407,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnonline() {
-        return getEventHandler("online");
+        return getEventHandler(Event.TYPE_ONLINE);
     }
 
     /**
@@ -344,7 +416,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnonline(final Object ononline) {
-        setEventHandler("online", ononline);
+        setEventHandler(Event.TYPE_ONLINE, ononline);
     }
 
     /**
@@ -353,7 +425,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpagehide() {
-        return getEventHandler("pagehide");
+        return getEventHandler(Event.TYPE_PAGEHIDE);
     }
 
     /**
@@ -362,7 +434,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpagehide(final Object onpagehide) {
-        setEventHandler("pagehide", onpagehide);
+        setEventHandler(Event.TYPE_PAGEHIDE, onpagehide);
     }
 
     /**
@@ -371,7 +443,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("pageshow");
+        return getEventHandler(Event.TYPE_PAGESHOW);
     }
 
     /**
@@ -380,7 +452,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
-        setEventHandler("pageshow", onpageshow);
+        setEventHandler(Event.TYPE_PAGESHOW, onpageshow);
     }
 
     /**
@@ -407,7 +479,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnrejectionhandled() {
-        return getEventHandler("rejectionhandled");
+        return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
 
     /**
@@ -416,7 +488,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnrejectionhandled(final Object onrejectionhandled) {
-        setEventHandler("rejectionhandled", onrejectionhandled);
+        setEventHandler(Event.TYPE_REJECTIONHANDLED, onrejectionhandled);
     }
 
     /**
@@ -425,7 +497,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnstorage() {
-        return getEventHandler("storage");
+        return getEventHandler(Event.TYPE_STORAGE);
     }
 
     /**
@@ -434,7 +506,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
-        setEventHandler("storage", onstorage);
+        setEventHandler(Event.TYPE_STORAGE, onstorage);
     }
 
     /**
@@ -443,7 +515,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnunhandledrejection() {
-        return getEventHandler("unhandledrejection");
+        return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
 
     /**
@@ -452,7 +524,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnunhandledrejection(final Object onunhandledrejection) {
-        setEventHandler("unhandledrejection", onunhandledrejection);
+        setEventHandler(Event.TYPE_UNHANDLEDREJECTION, onunhandledrejection);
     }
 
     /**
@@ -479,7 +551,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnafterprint() {
-        return getEventHandler("afterprint");
+        return getEventHandler(Event.TYPE_AFTERPRINT);
     }
 
     /**
@@ -488,7 +560,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnafterprint(final Object onafterprint) {
-        setEventHandler("afterprint", onafterprint);
+        setEventHandler(Event.TYPE_AFTERPRINT, onafterprint);
     }
 
     /**
@@ -497,7 +569,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnbeforeprint() {
-        return getEventHandler("beforeprint");
+        return getEventHandler(Event.TYPE_BEFOREPRINT);
     }
 
     /**
@@ -506,7 +578,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnbeforeprint(final Object onbeforeprint) {
-        setEventHandler("beforeprint", onbeforeprint);
+        setEventHandler(Event.TYPE_BEFOREPRINT, onbeforeprint);
     }
 
     /**
@@ -515,7 +587,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmessageerror() {
-        return getEventHandler("onmessageerror");
+        return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
 
     /**
@@ -524,14 +596,14 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnmessageerror(final Object onmessageerror) {
-        setEventHandler("onmessageerror", onmessageerror);
+        setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(IE)
+    @JsxGetter({CHROME, EDGE, IE})
     public Function getOnresize() {
         return super.getOnresize();
     }
@@ -540,9 +612,26 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(IE)
+    @JsxSetter({CHROME, EDGE, IE})
     public void setOnresize(final Object onresize) {
         super.setOnresize(onresize);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, EDGE})
+    public Function getOnscroll() {
+        return super.getOnscroll();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter({CHROME, EDGE})
+    public void setOnscroll(final Object onresize) {
+        super.setOnscroll(onresize);
+    }
 }

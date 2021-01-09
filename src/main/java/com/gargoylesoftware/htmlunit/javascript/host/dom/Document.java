@@ -1709,7 +1709,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnresize(final Object handler) {
-        setEventHandler("resize", handler);
+        setEventHandler(Event.TYPE_RESIZE, handler);
     }
 
     /**
@@ -1718,7 +1718,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Object getOnresize() {
-        return getEventHandler("resize");
+        return getEventHandler(Event.TYPE_RESIZE);
     }
 
     /**
@@ -2367,7 +2367,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnabort() {
-        return getEventHandler("abort");
+        return getEventHandler(Event.TYPE_ABORT);
     }
 
     /**
@@ -2376,7 +2376,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnabort(final Object onabort) {
-        setEventHandler("abort", onabort);
+        setEventHandler(Event.TYPE_ABORT, onabort);
     }
 
     /**
@@ -2385,7 +2385,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnauxclick() {
-        return getEventHandler("auxclick");
+        return getEventHandler(Event.TYPE_AUXCLICK);
     }
 
     /**
@@ -2394,7 +2394,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnauxclick(final Object onauxclick) {
-        setEventHandler("auxclick", onauxclick);
+        setEventHandler(Event.TYPE_AUXCLICK, onauxclick);
     }
 
     /**
@@ -2403,7 +2403,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnbeforecopy() {
-        return getEventHandler("beforecopy");
+        return getEventHandler(Event.TYPE_BEFORECOPY);
     }
 
     /**
@@ -2412,7 +2412,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnbeforecopy(final Object onbeforecopy) {
-        setEventHandler("beforecopy", onbeforecopy);
+        setEventHandler(Event.TYPE_BEFORECOPY, onbeforecopy);
     }
 
     /**
@@ -2421,7 +2421,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnbeforecut() {
-        return getEventHandler("beforecut");
+        return getEventHandler(Event.TYPE_BEFORECUT);
     }
 
     /**
@@ -2430,7 +2430,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnbeforecut(final Object onbeforecut) {
-        setEventHandler("beforecut", onbeforecut);
+        setEventHandler(Event.TYPE_BEFORECUT, onbeforecut);
     }
 
     /**
@@ -2439,7 +2439,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnbeforepaste() {
-        return getEventHandler("beforepaste");
+        return getEventHandler(Event.TYPE_BEFOREPASTE);
     }
 
     /**
@@ -2448,7 +2448,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnbeforepaste(final Object onbeforepaste) {
-        setEventHandler("beforepaste", onbeforepaste);
+        setEventHandler(Event.TYPE_BEFOREPASTE, onbeforepaste);
     }
 
     /**
@@ -2457,7 +2457,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncancel() {
-        return getEventHandler("cancel");
+        return getEventHandler(Event.TYPE_CANCEL);
     }
 
     /**
@@ -2466,7 +2466,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncancel(final Object oncancel) {
-        setEventHandler("cancel", oncancel);
+        setEventHandler(Event.TYPE_CANCEL, oncancel);
     }
 
     /**
@@ -2475,7 +2475,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOncanplay() {
-        return getEventHandler("canplay");
+        return getEventHandler(Event.TYPE_CANPLAY);
     }
 
     /**
@@ -2484,7 +2484,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOncanplay(final Object oncanplay) {
-        setEventHandler("canplay", oncanplay);
+        setEventHandler(Event.TYPE_CANPLAY, oncanplay);
     }
 
     /**
@@ -2493,7 +2493,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOncanplaythrough() {
-        return getEventHandler("canplaythrough");
+        return getEventHandler(Event.TYPE_CANPLAYTHROUGH);
     }
 
     /**
@@ -2502,7 +2502,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOncanplaythrough(final Object oncanplaythrough) {
-        setEventHandler("canplaythrough", oncanplaythrough);
+        setEventHandler(Event.TYPE_CANPLAYTHROUGH, oncanplaythrough);
     }
 
     /**
@@ -2547,7 +2547,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncopy() {
-        return getEventHandler("copy");
+        return getEventHandler(Event.TYPE_COPY);
     }
 
     /**
@@ -2556,7 +2556,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncopy(final Object oncopy) {
-        setEventHandler("copy", oncopy);
+        setEventHandler(Event.TYPE_COPY, oncopy);
     }
 
     /**
@@ -2565,7 +2565,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
-        return getEventHandler("cuechange");
+        return getEventHandler(Event.TYPE_CUECHANGE);
     }
 
     /**
@@ -2574,7 +2574,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object oncuechange) {
-        setEventHandler("cuechange", oncuechange);
+        setEventHandler(Event.TYPE_CUECHANGE, oncuechange);
     }
 
     /**
@@ -2583,7 +2583,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncut() {
-        return getEventHandler("cut");
+        return getEventHandler(Event.TYPE_CUT);
     }
 
     /**
@@ -2592,7 +2592,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncut(final Object oncut) {
-        setEventHandler("cut", oncut);
+        setEventHandler(Event.TYPE_CUT, oncut);
     }
 
     /**
@@ -2601,7 +2601,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndrag() {
-        return getEventHandler("drag");
+        return getEventHandler(Event.TYPE_DRAG);
     }
 
     /**
@@ -2610,7 +2610,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndrag(final Object ondrag) {
-        setEventHandler("drag", ondrag);
+        setEventHandler(Event.TYPE_DRAG, ondrag);
     }
 
     /**
@@ -2619,7 +2619,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndragend() {
-        return getEventHandler("dragend");
+        return getEventHandler(Event.TYPE_DRAGEND);
     }
 
     /**
@@ -2628,7 +2628,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndragend(final Object ondragend) {
-        setEventHandler("dragend", ondragend);
+        setEventHandler(Event.TYPE_DRAGEND, ondragend);
     }
 
     /**
@@ -2637,7 +2637,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndragenter() {
-        return getEventHandler("dragenter");
+        return getEventHandler(Event.TYPE_DRAGENTER);
     }
 
     /**
@@ -2646,7 +2646,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndragenter(final Object ondragenter) {
-        setEventHandler("dragenter", ondragenter);
+        setEventHandler(Event.TYPE_DRAGENTER, ondragenter);
     }
 
     /**
@@ -2655,7 +2655,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndragleave() {
-        return getEventHandler("dragleave");
+        return getEventHandler(Event.TYPE_DRAGLEAVE);
     }
 
     /**
@@ -2664,7 +2664,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndragleave(final Object ondragleave) {
-        setEventHandler("dragleave", ondragleave);
+        setEventHandler(Event.TYPE_DRAGLEAVE, ondragleave);
     }
 
     /**
@@ -2673,7 +2673,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndragover() {
-        return getEventHandler("dragover");
+        return getEventHandler(Event.TYPE_DRAGOVER);
     }
 
     /**
@@ -2682,7 +2682,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndragover(final Object ondragover) {
-        setEventHandler("dragover", ondragover);
+        setEventHandler(Event.TYPE_DRAGOVER, ondragover);
     }
 
     /**
@@ -2691,7 +2691,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndragstart() {
-        return getEventHandler("dragstart");
+        return getEventHandler(Event.TYPE_DRAGSTART);
     }
 
     /**
@@ -2700,7 +2700,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndragstart(final Object ondragstart) {
-        setEventHandler("dragstart", ondragstart);
+        setEventHandler(Event.TYPE_DRAGSTART, ondragstart);
     }
 
     /**
@@ -2709,7 +2709,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndrop() {
-        return getEventHandler("drop");
+        return getEventHandler(Event.TYPE_DROP);
     }
 
     /**
@@ -2718,7 +2718,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndrop(final Object ondrop) {
-        setEventHandler("drop", ondrop);
+        setEventHandler(Event.TYPE_DROP, ondrop);
     }
 
     /**
@@ -2727,7 +2727,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOndurationchange() {
-        return getEventHandler("durationchange");
+        return getEventHandler(Event.TYPE_DURATIONCHANGE);
     }
 
     /**
@@ -2736,7 +2736,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOndurationchange(final Object ondurationchange) {
-        setEventHandler("durationchange", ondurationchange);
+        setEventHandler(Event.TYPE_DURATIONCHANGE, ondurationchange);
     }
 
     /**
@@ -2745,7 +2745,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnemptied() {
-        return getEventHandler("emptied");
+        return getEventHandler(Event.TYPE_EMPTIED);
     }
 
     /**
@@ -2754,7 +2754,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnemptied(final Object onemptied) {
-        setEventHandler("emptied", onemptied);
+        setEventHandler(Event.TYPE_EMPTIED, onemptied);
     }
 
     /**
@@ -2763,7 +2763,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnended() {
-        return getEventHandler("ended");
+        return getEventHandler(Event.TYPE_ENDED);
     }
 
     /**
@@ -2772,7 +2772,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnended(final Object onended) {
-        setEventHandler("ended", onended);
+        setEventHandler(Event.TYPE_ENDED, onended);
     }
 
     /**
@@ -2781,7 +2781,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
-        return getEventHandler("gotpointercapture");
+        return getEventHandler(Event.TYPE_GOTPOINTERCAPTURE);
     }
 
     /**
@@ -2790,7 +2790,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object ongotpointercapture) {
-        setEventHandler("gotpointercapture", ongotpointercapture);
+        setEventHandler(Event.TYPE_GOTPOINTERCAPTURE, ongotpointercapture);
     }
 
     /**
@@ -2799,7 +2799,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOninvalid() {
-        return getEventHandler("invalid");
+        return getEventHandler(Event.TYPE_INVALID);
     }
 
     /**
@@ -2808,7 +2808,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOninvalid(final Object oninvalid) {
-        setEventHandler("invalid", oninvalid);
+        setEventHandler(Event.TYPE_INVALID, oninvalid);
     }
 
     /**
@@ -2835,7 +2835,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnloadeddata() {
-        return getEventHandler("loadeddata");
+        return getEventHandler(Event.TYPE_LOADEDDATA);
     }
 
     /**
@@ -2844,7 +2844,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnloadeddata(final Object onloadeddata) {
-        setEventHandler("loadeddata", onloadeddata);
+        setEventHandler(Event.TYPE_LOADEDDATA, onloadeddata);
     }
 
     /**
@@ -2853,7 +2853,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnloadedmetadata() {
-        return getEventHandler("loadedmetadata");
+        return getEventHandler(Event.TYPE_LOADEDMETADATA);
     }
 
     /**
@@ -2862,7 +2862,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnloadedmetadata(final Object onloadedmetadata) {
-        setEventHandler("loadedmetadata", onloadedmetadata);
+        setEventHandler(Event.TYPE_LOADEDMETADATA, onloadedmetadata);
     }
 
     /**
@@ -2871,7 +2871,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnloadstart() {
-        return getEventHandler("loadstart");
+        return getEventHandler(Event.TYPE_LOAD_START);
     }
 
     /**
@@ -2880,7 +2880,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnloadstart(final Object onloadstart) {
-        setEventHandler("loadstart", onloadstart);
+        setEventHandler(Event.TYPE_LOAD_START, onloadstart);
     }
 
     /**
@@ -2889,7 +2889,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
-        return getEventHandler("lostpointercapture");
+        return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
     }
 
     /**
@@ -2898,7 +2898,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object onlostpointercapture) {
-        setEventHandler("lostpointercapture", onlostpointercapture);
+        setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, onlostpointercapture);
     }
 
     /**
@@ -2907,7 +2907,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmouseenter() {
-        return getEventHandler("mouseenter");
+        return getEventHandler(Event.TYPE_MOUDEENTER);
     }
 
     /**
@@ -2916,7 +2916,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnmouseenter(final Object onmouseenter) {
-        setEventHandler("mouseenter", onmouseenter);
+        setEventHandler(Event.TYPE_MOUDEENTER, onmouseenter);
     }
 
     /**
@@ -2925,7 +2925,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmouseleave() {
-        return getEventHandler("mouseleave");
+        return getEventHandler(Event.TYPE_MOUSELEAVE);
     }
 
     /**
@@ -2934,7 +2934,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnmouseleave(final Object onmouseleave) {
-        setEventHandler("mouseleave", onmouseleave);
+        setEventHandler(Event.TYPE_MOUSELEAVE, onmouseleave);
     }
 
     /**
@@ -2943,7 +2943,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnmousewheel() {
-        return getEventHandler("mousewheel");
+        return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
 
     /**
@@ -2952,7 +2952,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnmousewheel(final Object onmousewheel) {
-        setEventHandler("mousewheel", onmousewheel);
+        setEventHandler(Event.TYPE_MOUSEWHEEL, onmousewheel);
     }
 
     /**
@@ -2961,7 +2961,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnpaste() {
-        return getEventHandler("paste");
+        return getEventHandler(Event.TYPE_PASTE);
     }
 
     /**
@@ -2970,7 +2970,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnpaste(final Object onpaste) {
-        setEventHandler("paste", onpaste);
+        setEventHandler(Event.TYPE_PASTE, onpaste);
     }
 
     /**
@@ -2979,7 +2979,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnpause() {
-        return getEventHandler("pause");
+        return getEventHandler(Event.TYPE_PAUSE);
     }
 
     /**
@@ -2988,7 +2988,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnpause(final Object onpause) {
-        setEventHandler("pause", onpause);
+        setEventHandler(Event.TYPE_PAUSE, onpause);
     }
 
     /**
@@ -2997,7 +2997,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnplay() {
-        return getEventHandler("play");
+        return getEventHandler(Event.TYPE_PLAY);
     }
 
     /**
@@ -3006,7 +3006,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnplay(final Object onplay) {
-        setEventHandler("play", onplay);
+        setEventHandler(Event.TYPE_PLAY, onplay);
     }
 
     /**
@@ -3015,7 +3015,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler("playing");
+        return getEventHandler(Event.TYPE_PLAYNG);
     }
 
     /**
@@ -3024,7 +3024,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setEventHandler("playing", onplaying);
+        setEventHandler(Event.TYPE_PLAYNG, onplaying);
     }
 
     /**
@@ -3033,7 +3033,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointercancel() {
-        return getEventHandler("pointercancel");
+        return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
 
     /**
@@ -3042,7 +3042,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointercancel(final Object onpointercancel) {
-        setEventHandler("pointercancel", onpointercancel);
+        setEventHandler(Event.TYPE_POINTERCANCEL, onpointercancel);
     }
 
     /**
@@ -3051,7 +3051,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerdown() {
-        return getEventHandler("pointerdown");
+        return getEventHandler(Event.TYPE_POINTERDOWN);
     }
 
     /**
@@ -3060,7 +3060,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerdown(final Object onpointerdown) {
-        setEventHandler("pointerdown", onpointerdown);
+        setEventHandler(Event.TYPE_POINTERDOWN, onpointerdown);
     }
 
     /**
@@ -3069,7 +3069,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerenter() {
-        return getEventHandler("pointerenter");
+        return getEventHandler(Event.TYPE_POINTERENTER);
     }
 
     /**
@@ -3078,7 +3078,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerenter(final Object onpointerenter) {
-        setEventHandler("pointerenter", onpointerenter);
+        setEventHandler(Event.TYPE_POINTERENTER, onpointerenter);
     }
 
     /**
@@ -3087,7 +3087,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerleave() {
-        return getEventHandler("pointerleave");
+        return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
 
     /**
@@ -3096,7 +3096,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerleave(final Object onpointerleave) {
-        setEventHandler("pointerleave", onpointerleave);
+        setEventHandler(Event.TYPE_POINTERLEAVE, onpointerleave);
     }
 
     /**
@@ -3105,7 +3105,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerlockchange() {
-        return getEventHandler("pointerlockchange");
+        return getEventHandler(Event.TYPE_POINTERLOCKCHANGE);
     }
 
     /**
@@ -3114,7 +3114,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerlockchange(final Object onpointerlockchange) {
-        setEventHandler("pointerlockchange", onpointerlockchange);
+        setEventHandler(Event.TYPE_POINTERLOCKCHANGE, onpointerlockchange);
     }
 
     /**
@@ -3123,7 +3123,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerlockerror() {
-        return getEventHandler("pointerlockerror");
+        return getEventHandler(Event.TYPE_POINTERLOCKERROR);
     }
 
     /**
@@ -3132,7 +3132,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerlockerror(final Object onpointerlockerror) {
-        setEventHandler("pointerlockerror", onpointerlockerror);
+        setEventHandler(Event.TYPE_POINTERLOCKERROR, onpointerlockerror);
     }
 
     /**
@@ -3141,7 +3141,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointermove() {
-        return getEventHandler("pointermove");
+        return getEventHandler(Event.TYPE_POINTERMOVE);
     }
 
     /**
@@ -3150,7 +3150,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointermove(final Object onpointermove) {
-        setEventHandler("pointermove", onpointermove);
+        setEventHandler(Event.TYPE_POINTERMOVE, onpointermove);
     }
 
     /**
@@ -3159,7 +3159,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerout() {
-        return getEventHandler("pointerout");
+        return getEventHandler(Event.TYPE_POINTEROUT);
     }
 
     /**
@@ -3168,7 +3168,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerout(final Object onpointerout) {
-        setEventHandler("pointerout", onpointerout);
+        setEventHandler(Event.TYPE_POINTEROUT, onpointerout);
     }
 
     /**
@@ -3177,7 +3177,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerover() {
-        return getEventHandler("pointerover");
+        return getEventHandler(Event.TYPE_POINTEROVER);
     }
 
     /**
@@ -3186,7 +3186,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerover(final Object onpointerover) {
-        setEventHandler("pointerover", onpointerover);
+        setEventHandler(Event.TYPE_POINTEROVER, onpointerover);
     }
 
     /**
@@ -3195,7 +3195,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnpointerup() {
-        return getEventHandler("pointerup");
+        return getEventHandler(Event.TYPE_POINTERUP);
     }
 
     /**
@@ -3204,7 +3204,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnpointerup(final Object onpointerup) {
-        setEventHandler("pointerup", onpointerup);
+        setEventHandler(Event.TYPE_POINTERUP, onpointerup);
     }
 
     /**
@@ -3213,7 +3213,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnprogress() {
-        return getEventHandler("progress");
+        return getEventHandler(Event.TYPE_PROGRESS);
     }
 
     /**
@@ -3222,7 +3222,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnprogress(final Object onprogress) {
-        setEventHandler("progress", onprogress);
+        setEventHandler(Event.TYPE_PROGRESS, onprogress);
     }
 
     /**
@@ -3231,7 +3231,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnratechange() {
-        return getEventHandler("ratechange");
+        return getEventHandler(Event.TYPE_RATECHANGE);
     }
 
     /**
@@ -3240,7 +3240,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnratechange(final Object onratechange) {
-        setEventHandler("ratechange", onratechange);
+        setEventHandler(Event.TYPE_RATECHANGE, onratechange);
     }
 
     /**
@@ -3285,7 +3285,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnscroll() {
-        return getEventHandler("scroll");
+        return getEventHandler(Event.TYPE_SCROLL);
     }
 
     /**
@@ -3294,7 +3294,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnscroll(final Object onscroll) {
-        setEventHandler("scroll", onscroll);
+        setEventHandler(Event.TYPE_SCROLL, onscroll);
     }
 
     /**
@@ -3303,7 +3303,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnsearch() {
-        return getEventHandler("search");
+        return getEventHandler(Event.TYPE_SEARCH);
     }
 
     /**
@@ -3312,7 +3312,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnsearch(final Object onsearch) {
-        setEventHandler("search", onsearch);
+        setEventHandler(Event.TYPE_SEARCH, onsearch);
     }
 
     /**
@@ -3321,7 +3321,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnseeked() {
-        return getEventHandler("seeked");
+        return getEventHandler(Event.TYPE_SEEKED);
     }
 
     /**
@@ -3330,7 +3330,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnseeked(final Object onseeked) {
-        setEventHandler("seeked", onseeked);
+        setEventHandler(Event.TYPE_SEEKED, onseeked);
     }
 
     /**
@@ -3339,7 +3339,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnseeking() {
-        return getEventHandler("seeking");
+        return getEventHandler(Event.TYPE_SEEKING);
     }
 
     /**
@@ -3348,7 +3348,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnseeking(final Object onseeking) {
-        setEventHandler("seeking", onseeking);
+        setEventHandler(Event.TYPE_SEEKING, onseeking);
     }
 
     /**
@@ -3357,7 +3357,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnselect() {
-        return getEventHandler("select");
+        return getEventHandler(Event.TYPE_SELECT);
     }
 
     /**
@@ -3366,7 +3366,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnselect(final Object onselect) {
-        setEventHandler("select", onselect);
+        setEventHandler(Event.TYPE_SELECT, onselect);
     }
 
     /**
@@ -3375,7 +3375,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnselectionchange() {
-        return getEventHandler("selectionchange");
+        return getEventHandler(Event.TYPE_SELECTIONCHANGE);
     }
 
     /**
@@ -3384,7 +3384,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnselectionchange(final Object onselectionchange) {
-        setEventHandler("selectionchange", onselectionchange);
+        setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
     }
 
     /**
@@ -3393,7 +3393,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, IE})
     public Function getOnselectstart() {
-        return getEventHandler("selectstart");
+        return getEventHandler(Event.TYPE_SELECTSTART);
     }
 
     /**
@@ -3402,7 +3402,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, IE})
     public void setOnselectstart(final Object onselectstart) {
-        setEventHandler("selectstart", onselectstart);
+        setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
     }
 
     /**
@@ -3411,7 +3411,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnshow() {
-        return getEventHandler("show");
+        return getEventHandler(Event.TYPE_SHOW);
     }
 
     /**
@@ -3420,7 +3420,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnshow(final Object onshow) {
-        setEventHandler("show", onshow);
+        setEventHandler(Event.TYPE_SHOW, onshow);
     }
 
     /**
@@ -3429,7 +3429,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnstalled() {
-        return getEventHandler("stalled");
+        return getEventHandler(Event.TYPE_STALLED);
     }
 
     /**
@@ -3438,7 +3438,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnstalled(final Object onstalled) {
-        setEventHandler("stalled", onstalled);
+        setEventHandler(Event.TYPE_STALLED, onstalled);
     }
 
     /**
@@ -3465,7 +3465,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnsuspend() {
-        return getEventHandler("suspend");
+        return getEventHandler(Event.TYPE_SUSPEND);
     }
 
     /**
@@ -3474,7 +3474,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnsuspend(final Object onsuspend) {
-        setEventHandler("suspend", onsuspend);
+        setEventHandler(Event.TYPE_SUSPEND, onsuspend);
     }
 
     /**
@@ -3483,7 +3483,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOntimeupdate() {
-        return getEventHandler("timeupdate");
+        return getEventHandler(Event.TYPE_TIMEUPDATE);
     }
 
     /**
@@ -3492,7 +3492,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOntimeupdate(final Object ontimeupdate) {
-        setEventHandler("timeupdate", ontimeupdate);
+        setEventHandler(Event.TYPE_TIMEUPDATE, ontimeupdate);
     }
 
     /**
@@ -3501,7 +3501,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOntoggle() {
-        return getEventHandler("toggle");
+        return getEventHandler(Event.TYPE_TOGGLE);
     }
 
     /**
@@ -3510,7 +3510,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOntoggle(final Object ontoggle) {
-        setEventHandler("toggle", ontoggle);
+        setEventHandler(Event.TYPE_TOGGLE, ontoggle);
     }
 
     /**
@@ -3519,7 +3519,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnvolumechange() {
-        return getEventHandler("volumechange");
+        return getEventHandler(Event.TYPE_VOLUMECHANGE);
     }
 
     /**
@@ -3528,7 +3528,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnvolumechange(final Object onvolumechange) {
-        setEventHandler("volumechange", onvolumechange);
+        setEventHandler(Event.TYPE_VOLUMECHANGE, onvolumechange);
     }
 
     /**
@@ -3537,7 +3537,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Function getOnwaiting() {
-        return getEventHandler("waiting");
+        return getEventHandler(Event.TYPE_WAITING);
     }
 
     /**
@@ -3546,7 +3546,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnwaiting(final Object onwaiting) {
-        setEventHandler("waiting", onwaiting);
+        setEventHandler(Event.TYPE_WAITING, onwaiting);
     }
 
     /**
@@ -3555,7 +3555,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitfullscreenchange() {
-        return getEventHandler("webkitfullscreenchange");
+        return getEventHandler(Event.TYPE_WEBKITFULLSCREENCHANGE);
     }
 
     /**
@@ -3564,7 +3564,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnwebkitfullscreenchange(final Object onwebkitfullscreenchange) {
-        setEventHandler("webkitfullscreenchange", onwebkitfullscreenchange);
+        setEventHandler(Event.TYPE_WEBKITFULLSCREENCHANGE, onwebkitfullscreenchange);
     }
 
     /**
@@ -3573,7 +3573,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnwebkitfullscreenerror() {
-        return getEventHandler("webkitfullscreenerror");
+        return getEventHandler(Event.TYPE_WEBKITFULLSCREENERROR);
     }
 
     /**
@@ -3582,7 +3582,7 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setOnwebkitfullscreenerror(final Object onwebkitfullscreenerror) {
-        setEventHandler("webkitfullscreenerror", onwebkitfullscreenerror);
+        setEventHandler(Event.TYPE_WEBKITFULLSCREENERROR, onwebkitfullscreenerror);
     }
 
     /**
@@ -3591,7 +3591,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnwheel() {
-        return getEventHandler("wheel");
+        return getEventHandler(Event.TYPE_WHEEL);
     }
 
     /**
@@ -3600,7 +3600,7 @@ public class Document extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnwheel(final Object onwheel) {
-        setEventHandler("wheel", onwheel);
+        setEventHandler(Event.TYPE_WHEEL, onwheel);
     }
 
     /**
@@ -3609,7 +3609,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnafterscriptexecute() {
-        return getEventHandler("afterscriptexecute");
+        return getEventHandler(Event.TYPE_AFTERSCRIPTEXECUTE);
     }
 
     /**
@@ -3618,7 +3618,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnafterscriptexecute(final Object onafterscriptexecute) {
-        setEventHandler("afterscriptexecute", onafterscriptexecute);
+        setEventHandler(Event.TYPE_AFTERSCRIPTEXECUTE, onafterscriptexecute);
     }
 
     /**
@@ -3627,7 +3627,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnbeforescriptexecute() {
-        return getEventHandler("beforescriptexecute");
+        return getEventHandler(Event.TYPE_BEFORESCRIPTEXECUTE);
     }
 
     /**
@@ -3636,7 +3636,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnbeforescriptexecute(final Object onbeforescriptexecute) {
-        setEventHandler("beforescriptexecute", onbeforescriptexecute);
+        setEventHandler(Event.TYPE_BEFORESCRIPTEXECUTE, onbeforescriptexecute);
     }
 
     /**
@@ -3645,7 +3645,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("mozfullscreenchange");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENCHANGE);
     }
 
     /**
@@ -3654,7 +3654,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
-        setEventHandler("mozfullscreenchange", onmozfullscreenchange);
+        setEventHandler(Event.TYPE_MOZFULLSCREENCHANGE, onmozfullscreenchange);
     }
 
     /**
@@ -3663,7 +3663,7 @@ public class Document extends Node {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("mozfullscreenerror");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENERROR);
     }
 
     /**
@@ -3672,7 +3672,7 @@ public class Document extends Node {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
-        setEventHandler("mozfullscreenerror", onmozfullscreenerror);
+        setEventHandler(Event.TYPE_MOZFULLSCREENERROR, onmozfullscreenerror);
     }
 
     /**
@@ -3681,7 +3681,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnhelp() {
-        return getEventHandler("help");
+        return getEventHandler(Event.TYPE_HELP);
     }
 
     /**
@@ -3690,7 +3690,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnhelp(final Object onhelp) {
-        setEventHandler("help", onhelp);
+        setEventHandler(Event.TYPE_HELP, onhelp);
     }
 
     /**
@@ -3699,7 +3699,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmscontentzoom() {
-        return getEventHandler("mscontentzoom");
+        return getEventHandler(Event.TYPE_MSCONTENTZOOM);
     }
 
     /**
@@ -3708,7 +3708,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmscontentzoom(final Object onmscontentzoom) {
-        setEventHandler("mscontentzoom", onmscontentzoom);
+        setEventHandler(Event.TYPE_MSCONTENTZOOM, onmscontentzoom);
     }
 
     /**
@@ -3717,7 +3717,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsfullscreenchange() {
-        return getEventHandler("msfullscreenchange");
+        return getEventHandler(Event.TYPE_MSFULLSCREENCHANGE);
     }
 
     /**
@@ -3726,7 +3726,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsfullscreenchange(final Object onmsfullscreenchange) {
-        setEventHandler("msfullscreenchange", onmsfullscreenchange);
+        setEventHandler(Event.TYPE_MSFULLSCREENCHANGE, onmsfullscreenchange);
     }
 
     /**
@@ -3735,7 +3735,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsfullscreenerror() {
-        return getEventHandler("msfullscreenerror");
+        return getEventHandler(Event.TYPE_MSFULLSCREENERROR);
     }
 
     /**
@@ -3744,7 +3744,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsfullscreenerror(final Object onmsfullscreenerror) {
-        setEventHandler("msfullscreenerror", onmsfullscreenerror);
+        setEventHandler(Event.TYPE_MSFULLSCREENERROR, onmsfullscreenerror);
     }
 
     /**
@@ -3753,7 +3753,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturechange() {
-        return getEventHandler("msgesturechange");
+        return getEventHandler(Event.TYPE_MSGESTURECHANGE);
     }
 
     /**
@@ -3762,7 +3762,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgesturechange(final Object onmsgesturechange) {
-        setEventHandler("msgesturechange", onmsgesturechange);
+        setEventHandler(Event.TYPE_MSGESTURECHANGE, onmsgesturechange);
     }
 
     /**
@@ -3771,7 +3771,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturedoubletap() {
-        return getEventHandler("msgesturedoubletap");
+        return getEventHandler(Event.TYPE_MSGESTUREDOUBLETAP);
     }
 
     /**
@@ -3780,7 +3780,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgesturedoubletap(final Object onmsgesturedoubletap) {
-        setEventHandler("msgesturedoubletap", onmsgesturedoubletap);
+        setEventHandler(Event.TYPE_MSGESTUREDOUBLETAP, onmsgesturedoubletap);
     }
 
     /**
@@ -3789,7 +3789,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgestureend() {
-        return getEventHandler("msgestureend");
+        return getEventHandler(Event.TYPE_MSGESTUREEND);
     }
 
     /**
@@ -3798,7 +3798,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgestureend(final Object onmsgestureend) {
-        setEventHandler("msgestureend", onmsgestureend);
+        setEventHandler(Event.TYPE_MSGESTUREEND, onmsgestureend);
     }
 
     /**
@@ -3807,7 +3807,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturehold() {
-        return getEventHandler("msgesturehold");
+        return getEventHandler(Event.TYPE_MSGESTUREHOLD);
     }
 
     /**
@@ -3816,7 +3816,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgesturehold(final Object onmsgesturehold) {
-        setEventHandler("msgesturehold", onmsgesturehold);
+        setEventHandler(Event.TYPE_MSGESTUREHOLD, onmsgesturehold);
     }
 
     /**
@@ -3825,7 +3825,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturestart() {
-        return getEventHandler("msgesturestart");
+        return getEventHandler(Event.TYPE_MSGESTURESTART);
     }
 
     /**
@@ -3834,7 +3834,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgesturestart(final Object onmsgesturestart) {
-        setEventHandler("msgesturestart", onmsgesturestart);
+        setEventHandler(Event.TYPE_MSGESTURESTART, onmsgesturestart);
     }
 
     /**
@@ -3843,7 +3843,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturetap() {
-        return getEventHandler("msgesturetap");
+        return getEventHandler(Event.TYPE_MSGESTURETAP);
     }
 
     /**
@@ -3852,7 +3852,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsgesturetap(final Object onmsgesturetap) {
-        setEventHandler("msgesturetap", onmsgesturetap);
+        setEventHandler(Event.TYPE_MSGESTURETAP, onmsgesturetap);
     }
 
     /**
@@ -3861,7 +3861,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsinertiastart() {
-        return getEventHandler("msinertiastart");
+        return getEventHandler(Event.TYPE_MSINERTIASTART);
     }
 
     /**
@@ -3870,7 +3870,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsinertiastart(final Object onmsinertiastart) {
-        setEventHandler("msinertiastart", onmsinertiastart);
+        setEventHandler(Event.TYPE_MSINERTIASTART, onmsinertiastart);
     }
 
     /**
@@ -3879,7 +3879,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsmanipulationstatechanged() {
-        return getEventHandler("msmanipulationstatechanged");
+        return getEventHandler(Event.TYPE_MSMANIPULATIONSTATECHANGED);
     }
 
     /**
@@ -3888,7 +3888,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsmanipulationstatechanged(final Object onmsmanipulationstatechanged) {
-        setEventHandler("msmanipulationstatechanged", onmsmanipulationstatechanged);
+        setEventHandler(Event.TYPE_MSMANIPULATIONSTATECHANGED, onmsmanipulationstatechanged);
     }
 
     /**
@@ -3897,7 +3897,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointercancel() {
-        return getEventHandler("mspointercancel");
+        return getEventHandler(Event.TYPE_MSPOINTERCANCEL);
     }
 
     /**
@@ -3906,7 +3906,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointercancel(final Object onmspointercancel) {
-        setEventHandler("mspointercancel", onmspointercancel);
+        setEventHandler(Event.TYPE_MSPOINTERCANCEL, onmspointercancel);
     }
 
     /**
@@ -3915,7 +3915,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerdown() {
-        return getEventHandler("mspointerdown");
+        return getEventHandler(Event.TYPE_MSPOINTERDOWN);
     }
 
     /**
@@ -3924,7 +3924,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerdown(final Object onmspointerdown) {
-        setEventHandler("mspointerdown", onmspointerdown);
+        setEventHandler(Event.TYPE_MSPOINTERDOWN, onmspointerdown);
     }
 
     /**
@@ -3933,7 +3933,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerenter() {
-        return getEventHandler("mspointerenter");
+        return getEventHandler(Event.TYPE_MSPOINTENTER);
     }
 
     /**
@@ -3942,7 +3942,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerenter(final Object onmspointerenter) {
-        setEventHandler("mspointerenter", onmspointerenter);
+        setEventHandler(Event.TYPE_MSPOINTENTER, onmspointerenter);
     }
 
     /**
@@ -3951,7 +3951,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerleave() {
-        return getEventHandler("mspointerleave");
+        return getEventHandler(Event.TYPE_MSPOINTERLEAVE);
     }
 
     /**
@@ -3960,7 +3960,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerleave(final Object onmspointerleave) {
-        setEventHandler("mspointerleave", onmspointerleave);
+        setEventHandler(Event.TYPE_MSPOINTERLEAVE, onmspointerleave);
     }
 
     /**
@@ -3969,7 +3969,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointermove() {
-        return getEventHandler("mspointermove");
+        return getEventHandler(Event.TYPE_MSPOINTERMOVE);
     }
 
     /**
@@ -3978,7 +3978,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointermove(final Object onmspointermove) {
-        setEventHandler("mspointermove", onmspointermove);
+        setEventHandler(Event.TYPE_MSPOINTERMOVE, onmspointermove);
     }
 
     /**
@@ -3987,7 +3987,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerout() {
-        return getEventHandler("mspointerout");
+        return getEventHandler(Event.TYPE_MSPOINTEROUT);
     }
 
     /**
@@ -3996,7 +3996,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerout(final Object onmspointerout) {
-        setEventHandler("mspointerout", onmspointerout);
+        setEventHandler(Event.TYPE_MSPOINTEROUT, onmspointerout);
     }
 
     /**
@@ -4005,7 +4005,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerover() {
-        return getEventHandler("mspointerover");
+        return getEventHandler(Event.TYPE_MSPOINTEROVER);
     }
 
     /**
@@ -4014,7 +4014,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerover(final Object onmspointerover) {
-        setEventHandler("mspointerover", onmspointerover);
+        setEventHandler(Event.TYPE_MSPOINTEROVER, onmspointerover);
     }
 
     /**
@@ -4023,7 +4023,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmspointerup() {
-        return getEventHandler("mspointerup");
+        return getEventHandler(Event.TYPE_MSPOINTERUP);
     }
 
     /**
@@ -4032,7 +4032,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmspointerup(final Object onmspointerup) {
-        setEventHandler("mspointerup", onmspointerup);
+        setEventHandler(Event.TYPE_MSPOINTERUP, onmspointerup);
     }
 
     /**
@@ -4041,7 +4041,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmssitemodejumplistitemremoved() {
-        return getEventHandler("mssitemodejumplistitemremoved");
+        return getEventHandler(Event.TYPE_MSSITEMODEJUMPLISTITEMREMOVED);
     }
 
     /**
@@ -4050,7 +4050,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmssitemodejumplistitemremoved(final Object onmssitemodejumplistitemremoved) {
-        setEventHandler("mssitemodejumplistitemremoved", onmssitemodejumplistitemremoved);
+        setEventHandler(Event.TYPE_MSSITEMODEJUMPLISTITEMREMOVED, onmssitemodejumplistitemremoved);
     }
 
     /**
@@ -4059,7 +4059,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnmsthumbnailclick() {
-        return getEventHandler("msthumbnailclick");
+        return getEventHandler(Event.TYPE_MSTHUMBNAILCLICK);
     }
 
     /**
@@ -4068,7 +4068,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnmsthumbnailclick(final Object onmsthumbnailclick) {
-        setEventHandler("msthumbnailclick", onmsthumbnailclick);
+        setEventHandler(Event.TYPE_MSTHUMBNAILCLICK, onmsthumbnailclick);
     }
 
     /**
@@ -4077,7 +4077,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnstop() {
-        return getEventHandler("stop");
+        return getEventHandler(Event.TYPE_STOP);
     }
 
     /**
@@ -4086,7 +4086,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnstop(final Object onstop) {
-        setEventHandler("stop", onstop);
+        setEventHandler(Event.TYPE_STOP, onstop);
     }
 
     /**
@@ -4095,7 +4095,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnstoragecommit() {
-        return getEventHandler("storagecommit");
+        return getEventHandler(Event.TYPE_STORAGECOMMIT);
     }
 
     /**
@@ -4104,7 +4104,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnstoragecommit(final Object onstoragecommit) {
-        setEventHandler("storagecommit", onstoragecommit);
+        setEventHandler(Event.TYPE_STORAGECOMMIT, onstoragecommit);
     }
 
     /**
@@ -4113,7 +4113,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnactivate() {
-        return getEventHandler("activate");
+        return getEventHandler(Event.TYPE_ACTIVATE);
     }
 
     /**
@@ -4122,7 +4122,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnactivate(final Object onactivate) {
-        setEventHandler("activate", onactivate);
+        setEventHandler(Event.TYPE_ACTIVATE, onactivate);
     }
 
     /**
@@ -4131,7 +4131,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnbeforeactivate() {
-        return getEventHandler("beforeactivate");
+        return getEventHandler(Event.TYPE_BEFOREACTIVATE);
     }
 
     /**
@@ -4140,7 +4140,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnbeforeactivate(final Object onbeforeactivate) {
-        setEventHandler("beforeactivate", onbeforeactivate);
+        setEventHandler(Event.TYPE_BEFOREACTIVATE, onbeforeactivate);
     }
 
     /**
@@ -4149,7 +4149,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOnbeforedeactivate() {
-        return getEventHandler("beforedeactivate");
+        return getEventHandler(Event.TYPE_BEFOREDEACTIVATE);
     }
 
     /**
@@ -4158,7 +4158,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOnbeforedeactivate(final Object onbeforedeactivate) {
-        setEventHandler("beforedeactivate", onbeforedeactivate);
+        setEventHandler(Event.TYPE_BEFOREDEACTIVATE, onbeforedeactivate);
     }
 
     /**
@@ -4167,7 +4167,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Function getOndeactivate() {
-        return getEventHandler("deactivate");
+        return getEventHandler(Event.TYPE_DEACTIVATE);
     }
 
     /**
@@ -4176,7 +4176,7 @@ public class Document extends Node {
      */
     @JsxSetter(IE)
     public void setOndeactivate(final Object ondeactivate) {
-        setEventHandler("deactivate", ondeactivate);
+        setEventHandler(Event.TYPE_DEACTIVATE, ondeactivate);
     }
 
     /**

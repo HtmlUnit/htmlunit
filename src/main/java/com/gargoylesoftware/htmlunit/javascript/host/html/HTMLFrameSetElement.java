@@ -175,7 +175,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnlanguagechange() {
-        return getEventHandler("languagechange");
+        return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
 
     /**
@@ -184,7 +184,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnlanguagechange(final Object languagechange) {
-        setEventHandler("languagechange", languagechange);
+        setEventHandler(Event.TYPE_LANGUAGECHANGE, languagechange);
     }
 
     /**
@@ -211,7 +211,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmessageerror() {
-        return getEventHandler("onmessageerror");
+        return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
 
     /**
@@ -220,7 +220,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnmessageerror(final Object onmessageerror) {
-        setEventHandler("onmessageerror", onmessageerror);
+        setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }
 
     /**
@@ -229,7 +229,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnoffline() {
-        return getEventHandler("offline");
+        return getEventHandler(Event.TYPE_OFFLINE);
     }
 
     /**
@@ -238,7 +238,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnoffline(final Object offline) {
-        setEventHandler("offline", offline);
+        setEventHandler(Event.TYPE_OFFLINE, offline);
     }
 
     /**
@@ -247,7 +247,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnonline() {
-        return getEventHandler("online");
+        return getEventHandler(Event.TYPE_ONLINE);
     }
 
     /**
@@ -256,7 +256,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnonline(final Object online) {
-        setEventHandler("online", online);
+        setEventHandler(Event.TYPE_ONLINE, online);
     }
 
     /**
@@ -265,7 +265,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpagehide() {
-        return getEventHandler("pagehide");
+        return getEventHandler(Event.TYPE_PAGEHIDE);
     }
 
     /**
@@ -274,7 +274,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpagehide(final Object pagehide) {
-        setEventHandler("pagehide", pagehide);
+        setEventHandler(Event.TYPE_PAGEHIDE, pagehide);
     }
 
     /**
@@ -283,7 +283,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("pageshow");
+        return getEventHandler(Event.TYPE_PAGESHOW);
     }
 
     /**
@@ -292,7 +292,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpageshow(final Object pageshow) {
-        setEventHandler("pageshow", pageshow);
+        setEventHandler(Event.TYPE_PAGESHOW, pageshow);
     }
 
     /**
@@ -319,7 +319,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnrejectionhandled() {
-        return getEventHandler("rejectionhandled");
+        return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
 
     /**
@@ -328,7 +328,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnrejectionhandled(final Object rejectionhandled) {
-        setEventHandler("rejectionhandled", rejectionhandled);
+        setEventHandler(Event.TYPE_REJECTIONHANDLED, rejectionhandled);
     }
 
     /**
@@ -337,7 +337,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnstorage() {
-        return getEventHandler("storage");
+        return getEventHandler(Event.TYPE_STORAGE);
     }
 
     /**
@@ -346,7 +346,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnstorage(final Object storage) {
-        setEventHandler("storage", storage);
+        setEventHandler(Event.TYPE_STORAGE, storage);
     }
 
     /**
@@ -355,7 +355,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnunhandledrejection() {
-        return getEventHandler("unhandledrejection");
+        return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
 
     /**
@@ -364,7 +364,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnunhandledrejection(final Object unhandledrejection) {
-        setEventHandler("unhandledrejection", unhandledrejection);
+        setEventHandler(Event.TYPE_UNHANDLEDREJECTION, unhandledrejection);
     }
 
     /**
@@ -391,7 +391,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnafterprint() {
-        return getEventHandler("afterprint");
+        return getEventHandler(Event.TYPE_AFTERPRINT);
     }
 
     /**
@@ -400,7 +400,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnafterprint(final Object afterprint) {
-        setEventHandler("afterprint", afterprint);
+        setEventHandler(Event.TYPE_AFTERPRINT, afterprint);
     }
 
     /**
@@ -409,7 +409,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnbeforeprint() {
-        return getEventHandler("beforeprint");
+        return getEventHandler(Event.TYPE_BEFOREPRINT);
     }
 
     /**
@@ -418,7 +418,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnbeforeprint(final Object beforeprint) {
-        setEventHandler("beforeprint", beforeprint);
+        setEventHandler(Event.TYPE_BEFOREPRINT, beforeprint);
     }
 
     /**

@@ -83,7 +83,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
 
         getMockWebConnection().setResponse(cssUrl, css, MimeType.TEXT_CSS);
-        loadPageWithAlerts2(html, pageUrl, 1000000);
+        loadPageWithAlerts2(html, pageUrl);
     }
 
     /**

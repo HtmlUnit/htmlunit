@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Stuart Begg
  * @author Sudhan Moghe
  * @author Thorsten Wendelmuth
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest4Test extends SimpleWebTestCase {
@@ -97,6 +99,103 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         final WebWindow window = loadPage(content).getEnclosingWindow();
         assertEquals(0, window.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
         assertEquals("about:blank", window.getEnclosedPage().getUrl());
+    }
+
+    /**
+     * Testing event invocation order.
+     */
+    @Test
+    @Alerts(DEFAULT = {
+            "onreadystatechange_1: readyState=1",
+            "onreadystatechange_2: readyState=1",
+            "onreadystatechange_p: readyState=1",
+            "onreadystatechange_3: readyState=1",
+            "onreadystatechange_4: readyState=1",
+            "onreadystatechange_1: readyState=2",
+            "onreadystatechange_2: readyState=2",
+            "onreadystatechange_p: readyState=2",
+            "onreadystatechange_3: readyState=2",
+            "onreadystatechange_4: readyState=2",
+            "onreadystatechange_1: readyState=3",
+            "onreadystatechange_2: readyState=3",
+            "onreadystatechange_p: readyState=3",
+            "onreadystatechange_3: readyState=3",
+            "onreadystatechange_4: readyState=3",
+            "onreadystatechange_1: readyState=4",
+            "onreadystatechange_2: readyState=4",
+            "onreadystatechange_p: readyState=4",
+            "onreadystatechange_3: readyState=4",
+            "onreadystatechange_4: readyState=4"},
+            IE = {
+            "onreadystatechange_1: readyState=1",
+            "onreadystatechange_2: readyState=1",
+            "onreadystatechange_p: readyState=1",
+            "onreadystatechange_3: readyState=1",
+            "onreadystatechange_4: readyState=1",
+            "onreadystatechange_1: readyState=1",
+            "onreadystatechange_2: readyState=1",
+            "onreadystatechange_p: readyState=1",
+            "onreadystatechange_3: readyState=1",
+            "onreadystatechange_4: readyState=1",
+            "onreadystatechange_1: readyState=2",
+            "onreadystatechange_2: readyState=2",
+            "onreadystatechange_p: readyState=2",
+            "onreadystatechange_3: readyState=2",
+            "onreadystatechange_4: readyState=2",
+            "onreadystatechange_1: readyState=3",
+            "onreadystatechange_2: readyState=3",
+            "onreadystatechange_p: readyState=3",
+            "onreadystatechange_3: readyState=3",
+            "onreadystatechange_4: readyState=3",
+            "onreadystatechange_1: readyState=4",
+            "onreadystatechange_2: readyState=4",
+            "onreadystatechange_p: readyState=4",
+            "onreadystatechange_3: readyState=4",
+            "onreadystatechange_4: readyState=4"
+        })
+    public void eventInvocationOrder() throws Exception {
+        final String html = ""
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "\n"
+            + "  var onreadystatechange_1 = function (e) {\n"
+            + "    alert('onreadystatechange_1: readyState=' + xhr.readyState);\n"
+            + "  }\n"
+            + "  var onreadystatechange_2 = function (e) {\n"
+            + "    alert('onreadystatechange_2: readyState=' + xhr.readyState);\n"
+            + "    e.stopPropagation();\n"
+            + "  }\n"
+            + "  var onreadystatechange_3 = function (e) {\n"
+            + "    alert('onreadystatechange_3: readyState=' + xhr.readyState);\n"
+            + "    e.stopPropagation();\n"
+            + "  }\n"
+            + "  var onreadystatechange_4 = function (e) {\n"
+            + "    alert('onreadystatechange_4: readyState=' + xhr.readyState);\n"
+            + "  }\n"
+            + "\n"
+            + "  var onreadystatechange_p = function (e) {\n"
+            + "    alert('onreadystatechange_p: readyState=' + xhr.readyState);\n"
+            + "  }\n"
+            + "\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_1, false);\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_2, true);\n"
+            + "  xhr.onreadystatechange = onreadystatechange_p;\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_3, false);\n"
+            + "  xhr.addEventListener('readystatechange', onreadystatechange_4, true);\n"
+            + "  xhr.open('GET', 'foo.xml');\n"
+            + "  xhr.send();\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPageWithAlerts(html, URL_FIRST, 1000);
     }
 
 }

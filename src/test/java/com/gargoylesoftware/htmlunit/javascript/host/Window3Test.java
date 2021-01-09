@@ -2022,6 +2022,131 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function () { log(\"onload from body\") }",
+                "function () { log(\"onload from body\") }",
+                "function () { log(\"onload from window\") }",
+                "function () { log(\"onload from window\") }",
+                "null",
+                "null",
+                "function () { log(\"onload from body\") }",
+                "function () { log(\"onload from body\") }",
+                "onload from body"})
+    public void onloadFromBody() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    window.parent.document.title += ('' + msg).replace(';', '') + ';';\n"
+            + "  }\n"
+
+            + "  document.body.onload = function () { log(\"onload from body\") };\n"
+            + "  log(document.body.onload);\n"
+            + "  log(window.onload);\n"
+
+            + "  window.onload = function () { log(\"onload from window\") };\n"
+            + "  log(document.body.onload);\n"
+            + "  log(window.onload);\n"
+
+            + "  window.onload = undefined;\n"
+            + "  log(document.body.onload);\n"
+            + "  log(window.onload);\n"
+
+            + "  document.body.onload = function () { log(\"onload from body\") };\n"
+            + "  log(document.body.onload);\n"
+            + "  log(window.onload);\n"
+
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({})
+    public void onloadListenerFromBody() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    window.parent.document.title += msg + ';';\n"
+            + "  }\n"
+
+            + "  document.body.addEventListener(\"load\", function () { log(\"onload from body\") });\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("onload from window")
+    public void onloadListenerFromBodyAndWindow() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    window.parent.document.title += msg + ';';\n"
+            + "  }\n"
+
+            + "  document.body.addEventListener(\"load\", function () { log(\"onload from body\") });\n"
+            + "  window.addEventListener(\"load\", function () { log(\"onload from window\") });\n"
+
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({})
+    public void onloadListenerFromBodyAndWindowRemoved() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    window.parent.document.title += msg + ';';\n"
+            + "  }\n"
+
+            + "  document.body.addEventListener(\"load\", function () { log(\"onload from body\") });\n"
+            + "  function evt() { log(\"onload from window\") }"
+            + "  window.addEventListener(\"load\", evt);\n"
+            + "  window.removeEventListener(\"load\", evt);\n"
+
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
      * Tests propagation of a more or less basic event (click event) with regards to
      * handling of the capturing / bubbling / at target phases.
      * Tests listener and property handler ordering.

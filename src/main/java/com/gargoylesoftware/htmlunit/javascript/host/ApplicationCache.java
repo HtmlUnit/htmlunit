@@ -153,7 +153,7 @@ public class ApplicationCache extends EventTarget {
      */
     @JsxGetter
     public Object getOnprogress() {
-        return getHandlerForJavaScript("progress");
+        return getHandlerForJavaScript(Event.TYPE_PROGRESS);
     }
 
     /**
@@ -162,7 +162,7 @@ public class ApplicationCache extends EventTarget {
      */
     @JsxSetter
     public void setOnprogress(final Object o) {
-        setHandlerForJavaScript("progress", o);
+        setHandlerForJavaScript(Event.TYPE_PROGRESS, o);
     }
 
     /**

@@ -1289,7 +1289,7 @@ public class HtmlPage extends SgmlPage {
                 }
                 if (window.getScriptableObject() instanceof Window) {
                     final Event event;
-                    if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
+                    if (Event.TYPE_BEFORE_UNLOAD.equals(eventType)) {
                         event = new BeforeUnloadEvent(frame, eventType);
                     }
                     else {

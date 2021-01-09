@@ -859,7 +859,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         final String[] expectedAlerts = getExpectedAlerts();
         setExpectedAlerts(Arrays.copyOf(expectedAlerts, expectedAlerts.length - 1));
-        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_FIRST, "path"), DEFAULT_WAIT_TIME);
+        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_FIRST, "path"));
 
         driver.findElement(By.id("clickme")).click();
         verifyAlerts(driver, expectedAlerts[expectedAlerts.length - 1]);

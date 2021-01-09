@@ -580,7 +580,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -605,7 +605,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -660,7 +660,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -685,7 +685,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -732,7 +732,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -757,7 +757,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -800,7 +800,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -823,7 +823,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -870,7 +870,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -895,7 +895,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -942,7 +942,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -967,7 +967,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1010,7 +1010,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1033,7 +1033,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1080,7 +1080,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1105,7 +1105,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1152,7 +1152,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1177,7 +1177,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1220,7 +1220,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1243,7 +1243,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1286,7 +1286,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1309,7 +1309,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1352,7 +1352,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1375,7 +1375,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1420,7 +1420,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1444,7 +1444,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1489,7 +1489,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1513,7 +1513,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1558,7 +1558,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1582,7 +1582,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1627,7 +1627,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1651,7 +1651,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1696,7 +1696,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1720,7 +1720,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1765,7 +1765,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1789,7 +1789,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1834,7 +1834,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1858,7 +1858,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1903,7 +1903,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1927,7 +1927,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1972,7 +1972,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**
@@ -1996,7 +1996,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, URL_FIRST);
     }
 
     /**

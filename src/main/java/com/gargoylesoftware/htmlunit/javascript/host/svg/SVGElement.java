@@ -119,7 +119,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndragend() {
-        return getEventHandler("dragend");
+        return getEventHandler(Event.TYPE_DRAGEND);
     }
 
     /**
@@ -128,7 +128,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndragend(final Object dragend) {
-        setEventHandler("dragend", dragend);
+        setEventHandler(Event.TYPE_DRAGEND, dragend);
     }
 
     /**
@@ -137,7 +137,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOninvalid() {
-        return getEventHandler("invalid");
+        return getEventHandler(Event.TYPE_INVALID);
     }
 
     /**
@@ -146,7 +146,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOninvalid(final Object invalid) {
-        setEventHandler("invalid", invalid);
+        setEventHandler(Event.TYPE_INVALID, invalid);
     }
 
     /**
@@ -155,7 +155,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointercancel() {
-        return getEventHandler("pointercancel");
+        return getEventHandler(Event.TYPE_POINTERCANCEL);
     }
 
     /**
@@ -164,7 +164,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointercancel(final Object pointercancel) {
-        setEventHandler("pointercancel", pointercancel);
+        setEventHandler(Event.TYPE_POINTERCANCEL, pointercancel);
     }
 
     /**
@@ -173,7 +173,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerout() {
-        return getEventHandler("pointerout");
+        return getEventHandler(Event.TYPE_POINTEROUT);
     }
 
     /**
@@ -182,7 +182,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerout(final Object pointerout) {
-        setEventHandler("pointerout", pointerout);
+        setEventHandler(Event.TYPE_POINTEROUT, pointerout);
     }
 
     /**
@@ -191,7 +191,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnratechange() {
-        return getEventHandler("ratechange");
+        return getEventHandler(Event.TYPE_RATECHANGE);
     }
 
     /**
@@ -200,7 +200,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnratechange(final Object ratechange) {
-        setEventHandler("ratechange", ratechange);
+        setEventHandler(Event.TYPE_RATECHANGE, ratechange);
     }
 
     /**
@@ -209,7 +209,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnresize() {
-        return getEventHandler("resize");
+        return getEventHandler(Event.TYPE_RESIZE);
     }
 
     /**
@@ -218,7 +218,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnresize(final Object resize) {
-        setEventHandler("resize", resize);
+        setEventHandler(Event.TYPE_RESIZE, resize);
     }
 
     /**
@@ -227,7 +227,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncanplaythrough() {
-        return getEventHandler("canplaythrough");
+        return getEventHandler(Event.TYPE_CANPLAYTHROUGH);
     }
 
     /**
@@ -236,7 +236,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncanplaythrough(final Object canplaythrough) {
-        setEventHandler("canplaythrough", canplaythrough);
+        setEventHandler(Event.TYPE_CANPLAYTHROUGH, canplaythrough);
     }
 
     /**
@@ -245,7 +245,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncancel() {
-        return getEventHandler("cancel");
+        return getEventHandler(Event.TYPE_CANCEL);
     }
 
     /**
@@ -254,7 +254,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncancel(final Object cancel) {
-        setEventHandler("cancel", cancel);
+        setEventHandler(Event.TYPE_CANCEL, cancel);
     }
 
     /**
@@ -263,7 +263,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerenter() {
-        return getEventHandler("pointerenter");
+        return getEventHandler(Event.TYPE_POINTERENTER);
     }
 
     /**
@@ -272,7 +272,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerenter(final Object pointerenter) {
-        setEventHandler("pointerenter", pointerenter);
+        setEventHandler(Event.TYPE_POINTERENTER, pointerenter);
     }
 
     /**
@@ -281,7 +281,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnselect() {
-        return getEventHandler("select");
+        return getEventHandler(Event.TYPE_SELECT);
     }
 
     /**
@@ -290,7 +290,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnselect(final Object select) {
-        setEventHandler("select", select);
+        setEventHandler(Event.TYPE_SELECT, select);
     }
 
     /**
@@ -299,7 +299,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnauxclick() {
-        return getEventHandler("auxclick");
+        return getEventHandler(Event.TYPE_AUXCLICK);
     }
 
     /**
@@ -308,7 +308,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnauxclick(final Object auxclick) {
-        setEventHandler("auxclick", auxclick);
+        setEventHandler(Event.TYPE_AUXCLICK, auxclick);
     }
 
     /**
@@ -317,7 +317,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnpause() {
-        return getEventHandler("pause");
+        return getEventHandler(Event.TYPE_PAUSE);
     }
 
     /**
@@ -326,7 +326,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnpause(final Object pause) {
-        setEventHandler("pause", pause);
+        setEventHandler(Event.TYPE_PAUSE, pause);
     }
 
     /**
@@ -335,7 +335,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnloadstart() {
-        return getEventHandler("loadstart");
+        return getEventHandler(Event.TYPE_LOAD_START);
     }
 
     /**
@@ -344,7 +344,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnloadstart(final Object loadstart) {
-        setEventHandler("loadstart", loadstart);
+        setEventHandler(Event.TYPE_LOAD_START, loadstart);
     }
 
     /**
@@ -353,7 +353,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnprogress() {
-        return getEventHandler("progress");
+        return getEventHandler(Event.TYPE_PROGRESS);
     }
 
     /**
@@ -362,7 +362,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnprogress(final Object progress) {
-        setEventHandler("progress", progress);
+        setEventHandler(Event.TYPE_PROGRESS, progress);
     }
 
     /**
@@ -371,7 +371,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerup() {
-        return getEventHandler("pointerup");
+        return getEventHandler(Event.TYPE_POINTERUP);
     }
 
     /**
@@ -380,7 +380,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerup(final Object pointerup) {
-        setEventHandler("pointerup", pointerup);
+        setEventHandler(Event.TYPE_POINTERUP, pointerup);
     }
 
     /**
@@ -389,7 +389,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnscroll() {
-        return getEventHandler("scroll");
+        return getEventHandler(Event.TYPE_SCROLL);
     }
 
     /**
@@ -398,7 +398,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnscroll(final Object scroll) {
-        setEventHandler("scroll", scroll);
+        setEventHandler(Event.TYPE_SCROLL, scroll);
     }
 
     /**
@@ -425,7 +425,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerleave() {
-        return getEventHandler("pointerleave");
+        return getEventHandler(Event.TYPE_POINTERLEAVE);
     }
 
     /**
@@ -434,7 +434,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerleave(final Object pointerleave) {
-        setEventHandler("pointerleave", pointerleave);
+        setEventHandler(Event.TYPE_POINTERLEAVE, pointerleave);
     }
 
     /**
@@ -533,7 +533,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOntimeupdate() {
-        return getEventHandler("timeupdate");
+        return getEventHandler(Event.TYPE_TIMEUPDATE);
     }
 
     /**
@@ -542,7 +542,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOntimeupdate(final Object timeupdate) {
-        setEventHandler("timeupdate", timeupdate);
+        setEventHandler(Event.TYPE_TIMEUPDATE, timeupdate);
     }
 
     /**
@@ -569,7 +569,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndrag() {
-        return getEventHandler("drag");
+        return getEventHandler(Event.TYPE_DRAG);
     }
 
     /**
@@ -578,7 +578,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndrag(final Object drag) {
-        setEventHandler("drag", drag);
+        setEventHandler(Event.TYPE_DRAG, drag);
     }
 
     /**
@@ -587,7 +587,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnseeked() {
-        return getEventHandler("seeked");
+        return getEventHandler(Event.TYPE_SEEKED);
     }
 
     /**
@@ -596,7 +596,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnseeked(final Object seeked) {
-        setEventHandler("seeked", seeked);
+        setEventHandler(Event.TYPE_SEEKED, seeked);
     }
 
     /**
@@ -605,7 +605,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnabort() {
-        return getEventHandler("abort");
+        return getEventHandler(Event.TYPE_ABORT);
     }
 
     /**
@@ -614,7 +614,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnabort(final Object abort) {
-        setEventHandler("abort", abort);
+        setEventHandler(Event.TYPE_ABORT, abort);
     }
 
     /**
@@ -623,7 +623,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnloadedmetadata() {
-        return getEventHandler("loadedmetadata");
+        return getEventHandler(Event.TYPE_LOADEDMETADATA);
     }
 
     /**
@@ -632,7 +632,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnloadedmetadata(final Object loadedmetadata) {
-        setEventHandler("loadedmetadata", loadedmetadata);
+        setEventHandler(Event.TYPE_LOADEDMETADATA, loadedmetadata);
     }
 
     /**
@@ -641,7 +641,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOntoggle() {
-        return getEventHandler("toggle");
+        return getEventHandler(Event.TYPE_TOGGLE);
     }
 
     /**
@@ -650,7 +650,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOntoggle(final Object toggle) {
-        setEventHandler("toggle", toggle);
+        setEventHandler(Event.TYPE_TOGGLE, toggle);
     }
 
     /**
@@ -659,7 +659,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnplay() {
-        return getEventHandler("play");
+        return getEventHandler(Event.TYPE_PLAY);
     }
 
     /**
@@ -668,7 +668,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnplay(final Object play) {
-        setEventHandler("play", play);
+        setEventHandler(Event.TYPE_PLAY, play);
     }
 
     /**
@@ -749,7 +749,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndragover() {
-        return getEventHandler("dragover");
+        return getEventHandler(Event.TYPE_DRAGOVER);
     }
 
     /**
@@ -758,7 +758,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndragover(final Object dragover) {
-        setEventHandler("dragover", dragover);
+        setEventHandler(Event.TYPE_DRAGOVER, dragover);
     }
 
     /**
@@ -767,7 +767,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointermove() {
-        return getEventHandler("pointermove");
+        return getEventHandler(Event.TYPE_POINTERMOVE);
     }
 
     /**
@@ -776,25 +776,25 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointermove(final Object pointermove) {
-        setEventHandler("pointermove", pointermove);
+        setEventHandler(Event.TYPE_POINTERMOVE, pointermove);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code oncut} event handler.
+     * @return the {@code oncut} event handler
      */
-    @Override
-    @JsxGetter({FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncut() {
-        return getEventHandler("cut");
+        return getEventHandler(Event.TYPE_CUT);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code oncut} event handler.
+     * @param cut the {@code oncut} event handler
      */
-    @Override
-    @JsxSetter({FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncut(final Object cut) {
-        setEventHandler("cut", cut);
+        setEventHandler(Event.TYPE_CUT, cut);
     }
 
     /**
@@ -839,7 +839,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnlostpointercapture() {
-        return getEventHandler("lostpointercapture");
+        return getEventHandler(Event.TYPE_LOSTPOINTERCAPTURE);
     }
 
     /**
@@ -848,7 +848,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnlostpointercapture(final Object lostpointercapture) {
-        setEventHandler("lostpointercapture", lostpointercapture);
+        setEventHandler(Event.TYPE_LOSTPOINTERCAPTURE, lostpointercapture);
     }
 
     /**
@@ -857,7 +857,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnstalled() {
-        return getEventHandler("stalled");
+        return getEventHandler(Event.TYPE_STALLED);
     }
 
     /**
@@ -866,7 +866,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnstalled(final Object stalled) {
-        setEventHandler("stalled", stalled);
+        setEventHandler(Event.TYPE_STALLED, stalled);
     }
 
     /**
@@ -875,7 +875,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerover() {
-        return getEventHandler("pointerover");
+        return getEventHandler(Event.TYPE_POINTEROVER);
     }
 
     /**
@@ -884,7 +884,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerover(final Object pointerover) {
-        setEventHandler("pointerover", pointerover);
+        setEventHandler(Event.TYPE_POINTEROVER, pointerover);
     }
 
     /**
@@ -911,7 +911,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndragenter() {
-        return getEventHandler("dragenter");
+        return getEventHandler(Event.TYPE_DRAGENTER);
     }
 
     /**
@@ -920,7 +920,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndragenter(final Object dragenter) {
-        setEventHandler("dragenter", dragenter);
+        setEventHandler(Event.TYPE_DRAGENTER, dragenter);
     }
 
     /**
@@ -929,7 +929,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("mozfullscreenerror");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENERROR);
     }
 
     /**
@@ -938,7 +938,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenerror(final Object mozfullscreenerror) {
-        setEventHandler("mozfullscreenerror", mozfullscreenerror);
+        setEventHandler(Event.TYPE_MOZFULLSCREENERROR, mozfullscreenerror);
     }
 
     /**
@@ -965,7 +965,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmouseleave() {
-        return getEventHandler("mouseleave");
+        return getEventHandler(Event.TYPE_MOUSELEAVE);
     }
 
     /**
@@ -974,7 +974,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnmouseleave(final Object mouseleave) {
-        setEventHandler("mouseleave", mouseleave);
+        setEventHandler(Event.TYPE_MOUSELEAVE, mouseleave);
     }
 
     /**
@@ -983,7 +983,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnmouseenter() {
-        return getEventHandler("mouseenter");
+        return getEventHandler(Event.TYPE_MOUDEENTER);
     }
 
     /**
@@ -992,7 +992,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnmouseenter(final Object mouseenter) {
-        setEventHandler("mouseenter", mouseenter);
+        setEventHandler(Event.TYPE_MOUDEENTER, mouseenter);
     }
 
     /**
@@ -1001,7 +1001,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndragleave() {
-        return getEventHandler("dragleave");
+        return getEventHandler(Event.TYPE_DRAGLEAVE);
     }
 
     /**
@@ -1010,7 +1010,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndragleave(final Object dragleave) {
-        setEventHandler("dragleave", dragleave);
+        setEventHandler(Event.TYPE_DRAGLEAVE, dragleave);
     }
 
     /**
@@ -1019,7 +1019,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOnmousewheel() {
-        return getEventHandler("mousewheel");
+        return getEventHandler(Event.TYPE_MOUSEWHEEL);
     }
 
     /**
@@ -1028,7 +1028,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOnmousewheel(final Object mousewheel) {
-        setEventHandler("mousewheel", mousewheel);
+        setEventHandler(Event.TYPE_MOUSEWHEEL, mousewheel);
     }
 
     /**
@@ -1037,7 +1037,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOnpointerdown() {
-        return getEventHandler("pointerdown");
+        return getEventHandler(Event.TYPE_POINTERDOWN);
     }
 
     /**
@@ -1046,7 +1046,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOnpointerdown(final Object pointerdown) {
-        setEventHandler("pointerdown", pointerdown);
+        setEventHandler(Event.TYPE_POINTERDOWN, pointerdown);
     }
 
     /**
@@ -1055,7 +1055,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnseeking() {
-        return getEventHandler("seeking");
+        return getEventHandler(Event.TYPE_SEEKING);
     }
 
     /**
@@ -1064,7 +1064,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnseeking(final Object seeking) {
-        setEventHandler("seeking", seeking);
+        setEventHandler(Event.TYPE_SEEKING, seeking);
     }
 
     /**
@@ -1091,7 +1091,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE})
     public Function getOncuechange() {
-        return getEventHandler("cuechange");
+        return getEventHandler(Event.TYPE_CUECHANGE);
     }
 
     /**
@@ -1100,7 +1100,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE})
     public void setOncuechange(final Object cuechange) {
-        setEventHandler("cuechange", cuechange);
+        setEventHandler(Event.TYPE_CUECHANGE, cuechange);
     }
 
     /**
@@ -1109,7 +1109,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndrop() {
-        return getEventHandler("drop");
+        return getEventHandler(Event.TYPE_DROP);
     }
 
     /**
@@ -1118,7 +1118,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndrop(final Object drop) {
-        setEventHandler("drop", drop);
+        setEventHandler(Event.TYPE_DROP, drop);
     }
 
     /**
@@ -1127,7 +1127,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndragstart() {
-        return getEventHandler("dragstart");
+        return getEventHandler(Event.TYPE_DRAGSTART);
     }
 
     /**
@@ -1136,7 +1136,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndragstart(final Object dragstart) {
-        setEventHandler("dragstart", dragstart);
+        setEventHandler(Event.TYPE_DRAGSTART, dragstart);
     }
 
     /**
@@ -1145,7 +1145,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("mozfullscreenchange");
+        return getEventHandler(Event.TYPE_MOZFULLSCREENCHANGE);
     }
 
     /**
@@ -1154,7 +1154,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({FF, FF78})
     public void setOnmozfullscreenchange(final Object mozfullscreenchange) {
-        setEventHandler("mozfullscreenchange", mozfullscreenchange);
+        setEventHandler(Event.TYPE_MOZFULLSCREENCHANGE, mozfullscreenchange);
     }
 
     /**
@@ -1163,7 +1163,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOndurationchange() {
-        return getEventHandler("durationchange");
+        return getEventHandler(Event.TYPE_DURATIONCHANGE);
     }
 
     /**
@@ -1172,7 +1172,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOndurationchange(final Object durationchange) {
-        setEventHandler("durationchange", durationchange);
+        setEventHandler(Event.TYPE_DURATIONCHANGE, durationchange);
     }
 
     /**
@@ -1181,7 +1181,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnplaying() {
-        return getEventHandler("playing");
+        return getEventHandler(Event.TYPE_PLAYNG);
     }
 
     /**
@@ -1190,7 +1190,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnplaying(final Object playing) {
-        setEventHandler("playing", playing);
+        setEventHandler(Event.TYPE_PLAYNG, playing);
     }
 
     /**
@@ -1217,7 +1217,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnended() {
-        return getEventHandler("ended");
+        return getEventHandler(Event.TYPE_ENDED);
     }
 
     /**
@@ -1226,7 +1226,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnended(final Object ended) {
-        setEventHandler("ended", ended);
+        setEventHandler(Event.TYPE_ENDED, ended);
     }
 
     /**
@@ -1235,7 +1235,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnloadeddata() {
-        return getEventHandler("loadeddata");
+        return getEventHandler(Event.TYPE_LOADEDDATA);
     }
 
     /**
@@ -1244,7 +1244,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnloadeddata(final Object loadeddata) {
-        setEventHandler("loadeddata", loadeddata);
+        setEventHandler(Event.TYPE_LOADEDDATA, loadeddata);
     }
 
     /**
@@ -1253,52 +1253,52 @@ public class SVGElement extends Element {
      */
     @JsxGetter({FF, FF78})
     public Function getOnshow() {
-        return getEventHandler("show");
+        return getEventHandler(Event.TYPE_SHOW);
     }
 
     /**
      * Sets the {@code onshow} event handler.
      * @param show the {@code onshow} event handler
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnshow(final Object show) {
-        setEventHandler("show", show);
+        setEventHandler(Event.TYPE_SHOW, show);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code oncopy} event handler.
+     * @return the {@code oncopy} event handler
      */
-    @Override
-    @JsxGetter({FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncopy() {
-        return getEventHandler("copy");
+        return getEventHandler(Event.TYPE_COPY);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code oncopy} event handler.
+     * @param copy the {@code oncopy} event handler
      */
-    @Override
-    @JsxSetter({FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncopy(final Object copy) {
-        setEventHandler("copy", copy);
+        setEventHandler(Event.TYPE_COPY, copy);
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the {@code onpaste} event handler.
+     * @return the {@code onpaste} event handler
      */
-    @Override
-    @JsxGetter({FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnpaste() {
-        return getEventHandler("paste");
+        return getEventHandler(Event.TYPE_PASTE);
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the {@code onpaste} event handler.
+     * @param paste the {@code onpaste} event handler
      */
-    @Override
     @JsxSetter({FF, FF78})
     public void setOnpaste(final Object paste) {
-        setEventHandler("paste", paste);
+        setEventHandler(Event.TYPE_PASTE, paste);
     }
 
     /**
@@ -1325,7 +1325,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnsuspend() {
-        return getEventHandler("suspend");
+        return getEventHandler(Event.TYPE_SUSPEND);
     }
 
     /**
@@ -1334,7 +1334,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnsuspend(final Object suspend) {
-        setEventHandler("suspend", suspend);
+        setEventHandler(Event.TYPE_SUSPEND, suspend);
     }
 
     /**
@@ -1343,7 +1343,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnvolumechange() {
-        return getEventHandler("volumechange");
+        return getEventHandler(Event.TYPE_VOLUMECHANGE);
     }
 
     /**
@@ -1352,7 +1352,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnvolumechange(final Object volumechange) {
-        setEventHandler("volumechange", volumechange);
+        setEventHandler(Event.TYPE_VOLUMECHANGE, volumechange);
     }
 
     /**
@@ -1361,7 +1361,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnwaiting() {
-        return getEventHandler("waiting");
+        return getEventHandler(Event.TYPE_WAITING);
     }
 
     /**
@@ -1370,7 +1370,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnwaiting(final Object waiting) {
-        setEventHandler("waiting", waiting);
+        setEventHandler(Event.TYPE_WAITING, waiting);
     }
 
     /**
@@ -1379,7 +1379,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOncanplay() {
-        return getEventHandler("canplay");
+        return getEventHandler(Event.TYPE_CANPLAY);
     }
 
     /**
@@ -1388,7 +1388,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOncanplay(final Object canplay) {
-        setEventHandler("canplay", canplay);
+        setEventHandler(Event.TYPE_CANPLAY, canplay);
     }
 
     /**
@@ -1415,7 +1415,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Function getOnemptied() {
-        return getEventHandler("emptied");
+        return getEventHandler(Event.TYPE_EMPTIED);
     }
 
     /**
@@ -1424,7 +1424,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, EDGE, FF, FF78})
     public void setOnemptied(final Object emptied) {
-        setEventHandler("emptied", emptied);
+        setEventHandler(Event.TYPE_EMPTIED, emptied);
     }
 
     /**
@@ -1433,7 +1433,7 @@ public class SVGElement extends Element {
     @Override
     @JsxGetter({CHROME, EDGE})
     public Function getOngotpointercapture() {
-        return getEventHandler("gotpointercapture");
+        return getEventHandler(Event.TYPE_GOTPOINTERCAPTURE);
     }
 
     /**
@@ -1442,7 +1442,7 @@ public class SVGElement extends Element {
     @Override
     @JsxSetter({CHROME, EDGE})
     public void setOngotpointercapture(final Object gotpointercapture) {
-        setEventHandler("gotpointercapture", gotpointercapture);
+        setEventHandler(Event.TYPE_GOTPOINTERCAPTURE, gotpointercapture);
     }
 
     /**
@@ -1452,7 +1452,7 @@ public class SVGElement extends Element {
     @JsxGetter({CHROME, EDGE})
     @Override
     public Function getOnwheel() {
-        return getEventHandler("wheel");
+        return getEventHandler(Event.TYPE_WHEEL);
     }
 
     /**
@@ -1462,6 +1462,6 @@ public class SVGElement extends Element {
     @JsxSetter({CHROME, EDGE})
     @Override
     public void setOnwheel(final Object onwheel) {
-        setEventHandler("wheel", onwheel);
+        setEventHandler(Event.TYPE_WHEEL, onwheel);
     }
 }
