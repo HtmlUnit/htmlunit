@@ -248,6 +248,9 @@ public class Event extends SimpleScriptable {
     /** The pointerover event type, triggered by {@code pointerover} event handlers. */
     public static final String TYPE_POINTEROVER = "pointerover";
 
+    /** The animationcancel event type, triggered by {@code animationcancel} event handlers. */
+    public static final String TYPE_ANIMATIONCANCEL = "animationcancel";
+
     /** The animationend event type, triggered by {@code animationend} event handlers. */
     public static final String TYPE_ANIMATIONEND = "animationend";
 
