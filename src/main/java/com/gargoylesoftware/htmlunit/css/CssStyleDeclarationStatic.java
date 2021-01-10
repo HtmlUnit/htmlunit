@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 
 class CssStyleDeclarationStatic implements CssStyleDeclaration {
@@ -24,7 +25,8 @@ class CssStyleDeclarationStatic implements CssStyleDeclaration {
     }
 
     @Override
-    public void setDefaultLocalStyleAttribute(String name, String newValue) {
+    public BrowserVersion getBrowserVersion() {
+        return null;
     }
 
     @Override
@@ -48,16 +50,16 @@ class CssStyleDeclarationStatic implements CssStyleDeclaration {
     }
 
     @Override
-    public String getPropertyPriority(String name) {
+    public String getStylePriority(String name) {
         return "";
     }
 
     @Override
-    public void setProperty(String name, String newValue, String important) {
+    public void setStyleAttribute(String name, String newValue, String important) {
     }
 
     @Override
-    public String removeProperty(String name) {
+    public String removeStyleAttribute(String name) {
         return "";
     }
 

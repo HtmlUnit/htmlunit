@@ -15,7 +15,11 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
+import java.util.Optional;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 
@@ -25,6 +29,8 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
  */
 public interface CssStyleDeclaration extends Serializable {
 
+    StyleElement EMPTY_FINAl = new StyleElement("", "", "", SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
+
     /**
      * Returns an unmodifiable empty instance
      */
@@ -33,31 +39,36 @@ public interface CssStyleDeclaration extends Serializable {
     }
 
     /**
-     * Creates an instance and sets its parent scope to the one of the provided element.
-     * @param parentScope the element to which this style is bound
+     * Creates an instance for element styles.
+     * @param element the element to which this style is bound
      */
-    static CssStyleDeclaration build(DomElement parentScope) {
-        return new CssStyleDeclarationImpl(parentScope);
+    static ElementCssStyleDeclaration build(DomElement element) {
+        return new ElementCssStyleDeclaration(element);
+    }
+
+    /**
+     * Creates an instance for computed element styles.
+     * @param element the element to which this style is bound
+     */
+    static ComputedCssStyleDeclaration buildComputed(DomElement element) {
+        return new ComputedCssStyleDeclaration(build(element));
     }
 
     /**
      * Creates an instance which wraps the specified style declaration.
-     * @param element the element to which this style is bound
      * @param styleDeclaration the style declaration to wrap
+     * @param browserVersion the browser version
      */
-    static CssStyleDeclaration build(DomElement element, com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl styleDeclaration) {
-        return new CssStyleDeclarationImpl(element, styleDeclaration);
+    static CssStyleDeclarationWrapper wrapStylesheet(CSSStyleDeclarationImpl styleDeclaration, BrowserVersion browserVersion) {
+        return new CssStyleDeclarationWrapper(styleDeclaration, browserVersion);
     }
 
+
     /**
-     * Makes a local, "computed", modification to this CSS style that won't override other
-     * style attributes of the same name. This method should be used to set default values
-     * for style attributes.
-     *
-     * @param name the name of the style attribute to set
-     * @param newValue the value of the style attribute to set
+     * Get the browser version
+     * @return the browser version
      */
-    void setDefaultLocalStyleAttribute(String name, String newValue);
+    BrowserVersion getBrowserVersion();
 
     /**
      * Determines the StyleElement for the given name.
@@ -69,17 +80,23 @@ public interface CssStyleDeclaration extends Serializable {
 
     /**
      * Get the value for the style attribute.
-     * @param definition the definition
-     * @return the value
-     */
-    String getStyleAttribute(Definition definition);
-
-    /**
-     * Get the value for the style attribute.
      * @param name the name of the style
      * @return the value
      */
-    String getStyleAttribute(String name);
+    default String getStyleAttribute(String name){
+        return Optional.ofNullable(getStyleElement(name))
+            .map(StyleElement::getValue)
+            .orElse("");
+    }
+
+    /**
+     * Get the value for the style attribute or default value.
+     * @param style the definition
+     * @return the value or default value
+     */
+    default String getStyleAttribute(Definition style){
+        return getStyleAttribute(style, true);
+    }
 
     /**
      * Get the value for the style attribute.
@@ -87,7 +104,18 @@ public interface CssStyleDeclaration extends Serializable {
      * @param getDefaultValueIfEmpty whether to get the default value if empty or not
      * @return the value
      */
-    String getStyleAttribute(Definition style, boolean getDefaultValueIfEmpty);
+    default String getStyleAttribute(Definition style, boolean getDefaultValueIfEmpty){
+        StyleElement styleElement = getStyleElement(style.getAttributeName());
+        if(styleElement == EMPTY_FINAl)
+            return ""; //prevent getting default value
+        String value = Optional.ofNullable(styleElement)
+                .map(StyleElement::getValue)
+                .orElse("");
+        if (value.isEmpty() && getDefaultValueIfEmpty) {
+            value = style.getDefaultComputedValue(getBrowserVersion());
+        }
+        return value;
+    }
 
     /**
      * Returns the priority of the named style attribute, or an empty string if it is not found.
@@ -95,7 +123,13 @@ public interface CssStyleDeclaration extends Serializable {
      * @param name the name of the style attribute whose value is to be retrieved
      * @return the named style attribute value, or an empty string if it is not found
      */
-    String getPropertyPriority(String name);
+    default String getStylePriority(String name){
+        final StyleElement element = getStyleElement(name);
+        if (element != null && element.getValue() != null) {
+            return element.getPriority();
+        }
+        return "";
+    }
 
     /**
      * Sets the value of the specified property.
@@ -104,14 +138,14 @@ public interface CssStyleDeclaration extends Serializable {
      * @param newValue the value to assign to the attribute
      * @param important may be null
      */
-    void setProperty(String name, String newValue, String important);
+    void setStyleAttribute(String name, String newValue, String important);
 
     /**
      * Removes the named property.
      * @param name the name of the property to remove
      * @return the value deleted
      */
-    String removeProperty(String name);
+    String removeStyleAttribute(String name);
 
     /**
      * Returns the actual text of the style.

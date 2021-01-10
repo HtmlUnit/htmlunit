@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
+
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
@@ -25,11 +27,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TY
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
@@ -96,10 +93,12 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDOW
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.Z_INDEX_;
-import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
-import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import java.awt.Color;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -123,6 +122,11 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclarationWrapper;
+import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -132,7 +136,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
@@ -148,7 +151,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
- * @author Chris Erskine
+ * @author Chris Erskineeva_spyce
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Sudhan Moghe
@@ -260,9 +263,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param element the element to which this style is bound
      */
     public CSSStyleDeclaration(final Element element) {
-        setParentScope(element.getParentScope());
-        setPrototype(getPrototype(getClass()));
-        styleDeclaration_ = CssStyleDeclaration.build(element.getDomNodeOrDie());
+        this(element, CssStyleDeclaration.build(element.getDomNodeOrDie()));
         initialize(element);
     }
 
@@ -271,11 +272,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param element the element to which this style is bound
      * @param styleDeclaration the style declaration to wrap
      */
-    public CSSStyleDeclaration(final Element element, final CssStyleDeclaration styleDeclaration) {
+    protected CSSStyleDeclaration(final Element element, final ElementCssStyleDeclaration styleDeclaration) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         styleDeclaration_ = styleDeclaration;
-        initialize(element);
     }
 
     /**
@@ -283,7 +283,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param parentScope the parent scope to use
      * @param styleDeclaration the style declaration to wrap
      */
-    CSSStyleDeclaration(final Scriptable parentScope, final CssStyleDeclaration styleDeclaration) {
+    CSSStyleDeclaration(final Scriptable parentScope, final CssStyleDeclarationWrapper styleDeclaration) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
         styleDeclaration_ = styleDeclaration;
@@ -293,7 +293,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Initializes the object.
      * @param element the element that this style describes
      */
-    private void initialize(final Element element) {
+    protected void initialize(final Element element) {
         // Initialize.
         WebAssert.notNull("htmlElement", element);
         jsElement_ = element;
@@ -355,7 +355,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the named style attribute value, or an empty string if it is not found
      */
     protected String getStylePriority(final String name) {
-        return styleDeclaration_.getPropertyPriority(name);
+        return styleDeclaration_.getStylePriority(name);
     }
 
     /**
@@ -476,28 +476,13 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
-     * Makes a local, "computed", modification to this CSS style that won't override other
-     * style attributes of the same name. This method should be used to set default values
-     * for style attributes.
-     *
-     * @param name the name of the style attribute to set
-     * @param newValue the value of the style attribute to set
-     */
-    public void setDefaultLocalStyleAttribute(final String name, final String newValue) {
-        styleDeclaration_.setDefaultLocalStyleAttribute(name, newValue);
-    }
-
-    /**
      * Sets the specified style attribute.
      * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
      * @param important important value
      */
     protected void setStyleAttribute(final String name, String newValue, final String important) {
-        if (null == newValue || "null".equals(newValue)) {
-            newValue = "";
-        }
-        styleDeclaration_.setProperty(name, newValue, important);
+        styleDeclaration_.setStyleAttribute(name, newValue, important);
     }
 
     /**
@@ -505,7 +490,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private String removeStyleAttribute(final String name) {
-        return styleDeclaration_.removeProperty(name);
+        return styleDeclaration_.removeStyleAttribute(name);
     }
 
     /**
@@ -1652,7 +1637,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the value
      */
     public String getStyleAttribute(final Definition definition) {
-        return getStyleAttribute(definition,                                                                                                                                                                                false);
+        return getStyleAttribute(definition, false);
     }
 
     /**

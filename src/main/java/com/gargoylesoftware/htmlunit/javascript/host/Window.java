@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
@@ -1665,7 +1666,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             throw ScriptRuntime.typeError("parameter 1 is not of type 'Element'");
         }
         Element jsElement = (Element) element;
-        CssStyleDeclaration computedStyle = jsElement.getDomNodeOrDie().getPage()
+        ComputedCssStyleDeclaration computedStyle = jsElement.getDomNodeOrDie().getPage()
             .getComputedStyle(jsElement.getDomNodeOrDie(), pseudoElement);
         return new CSS2Properties(jsElement, computedStyle);
     }

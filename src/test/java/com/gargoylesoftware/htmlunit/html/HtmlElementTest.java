@@ -1229,7 +1229,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             webClient.setWebConnection(webConnection);
 
             HtmlPage page = webClient.getPage(URL_FIRST);
-            CssStyleDeclaration style = page.getElementById("id").getStyle();
+            CssStyleDeclaration style = page.getElementById("id").getComputedStyle();
             assertEquals(style.getStyleAttribute("color"), "red");
         }
     }

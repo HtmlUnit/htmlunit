@@ -47,6 +47,7 @@ import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.CssStyleDeclarationBuilder;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
@@ -85,21 +86,21 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
     private static final class CSSPropertiesCache implements Serializable {
-        private transient WeakHashMap<DomElement, Map<String, CssStyleDeclaration>> computedStyles_ = new WeakHashMap<>();
+        private transient WeakHashMap<DomElement, Map<String, ComputedCssStyleDeclaration>> computedStyles_ = new WeakHashMap<>();
 
         CSSPropertiesCache() {
         }
 
-        public synchronized CssStyleDeclaration get(final DomElement element, final String normalizedPseudo) {
-            final Map<String, CssStyleDeclaration> elementMap = computedStyles_.get(element);
+        public synchronized ComputedCssStyleDeclaration get(final DomElement element, final String normalizedPseudo) {
+            final Map<String, ComputedCssStyleDeclaration> elementMap = computedStyles_.get(element);
             if (elementMap != null) {
                 return elementMap.get(normalizedPseudo);
             }
             return null;
         }
 
-        public synchronized void put(final DomElement element, final String normalizedPseudo, final CssStyleDeclaration style) {
-            Map<String, CssStyleDeclaration> elementMap = computedStyles_.get(element);
+        public synchronized void put(final DomElement element, final String normalizedPseudo, final ComputedCssStyleDeclaration style) {
+            Map<String, ComputedCssStyleDeclaration> elementMap = computedStyles_.get(element);
             if (elementMap == null) {
                 elementMap = new WeakHashMap<>();
                 computedStyles_.put(element, elementMap);
@@ -108,9 +109,9 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
         }
 
         public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
-            final Iterator<Entry<DomElement, Map<String, CssStyleDeclaration>>> i = computedStyles_.entrySet().iterator();
+            final Iterator<Entry<DomElement, Map<String, ComputedCssStyleDeclaration>>> i = computedStyles_.entrySet().iterator();
             while (i.hasNext()) {
-                final Map.Entry<DomElement, Map<String, CssStyleDeclaration>> entry = i.next();
+                final Map.Entry<DomElement, Map<String, ComputedCssStyleDeclaration>> entry = i.next();
                 final DomNode node = entry.getKey();
                 if (changed == node
                     || changed.getParentNode() == node.getParentNode()
@@ -153,7 +154,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
             computedStyles_.clear();
         }
 
-        public synchronized Map<String, CssStyleDeclaration> remove(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+        public synchronized Map<String, ComputedCssStyleDeclaration> remove(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
             return computedStyles_.remove(element.getDomNodeOrNull());
         }
 
@@ -550,7 +551,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
         styleSheetList_ = null;
     }
 
-    public CssStyleDeclaration getComputedStyle(final DomElement domNode, final String pseudoElement) {
+    public ComputedCssStyleDeclaration getComputedStyle(final DomElement domNode, final String pseudoElement) {
         String normalizedPseudo = pseudoElement;
         if (normalizedPseudo != null) {
             if (normalizedPseudo.startsWith("::")) {
@@ -562,13 +563,13 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
             }
         }
 
-        final CssStyleDeclaration styleFromCache = cssPropertiesCache_.get(domNode, normalizedPseudo);
+        final ComputedCssStyleDeclaration styleFromCache = cssPropertiesCache_.get(domNode, normalizedPseudo);
         if (styleFromCache != null) {
             return styleFromCache;
         }
 
         final Collection<CssStyleSheet> sheets =  domNode.getPage().getStyleSheets();
-        final CssStyleDeclaration style = CssStyleDeclarationBuilder.build(sheets, domNode, normalizedPseudo);
+        final ComputedCssStyleDeclaration style = CssStyleDeclarationBuilder.build(sheets, domNode, normalizedPseudo);
 
         cssPropertiesCache_.put(domNode, normalizedPseudo, style);
         return style;

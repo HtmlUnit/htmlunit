@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
@@ -59,10 +60,18 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     public StyleElement(final String name, final String value, final String priority,
             final SelectorSpecificity specificity, final long index) {
         name_ = name;
-        value_ = value;
+        value_ = fixValueCase(value);
+        assert priority.equals(priority.toLowerCase());
         priority_ = priority;
         specificity_ = specificity;
         index_ = index;
+    }
+
+    private static String fixValueCase(String value){
+        if (!value.contains("url")) {
+            return value.toLowerCase(Locale.ROOT);
+        }
+        return value;
     }
 
     /**
@@ -86,16 +95,16 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     }
 
     /**
-     * Returns the style element's value.
-     * @return the style element's value
+     * Returns the style element's value (lowercase if case insensitive).
+     * @return the style element's value (lowercase if case insensitive)
      */
     public String getValue() {
         return value_;
     }
 
     /**
-     * Returns the style element's priority.
-     * @return the style element's priority
+     * Returns the style element's priority (lowercase).
+     * @return the style element's priority (lowercase)
      */
     public String getPriority() {
         return priority_;

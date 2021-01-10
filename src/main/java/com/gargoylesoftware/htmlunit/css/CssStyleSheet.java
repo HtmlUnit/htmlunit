@@ -230,27 +230,6 @@ public class CssStyleSheet implements Serializable {
     }
 
     /**
-     * Modifies the specified style object by adding any style rules which apply to the specified
-     * element.
-     *
-     * @param style the style to modify
-     * @param element the element to which style rules must apply in order for them to be added to
-     *        the specified style
-     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
-     */
-    public void modifyIfNecessary(final CssStyleDeclarationImpl style, final DomElement element,
-            final String pseudoElement) {
-
-        final BrowserVersion browser = getBrowserVersion();
-        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
-                selects(getRuleIndex(), browser, element, pseudoElement, false);
-        for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
-            final com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
-            style.applyStyleFromSelector(dec, entry.getSelector());
-        }
-    }
-
-    /**
      * Loads the stylesheet at the specified href.
      * @param owner the parent DOM element (stylesheet owner)
      * @param url the stylesheet's url
@@ -1533,10 +1512,18 @@ public class CssStyleSheet implements Serializable {
         }
     }
 
+    List<CSSStyleSheetImpl.SelectorEntry> selects(
+                final DomElement element,
+                final String pseudoElement,
+                final boolean fromQuerySelectorAll) {
+        return selects(getRuleIndex(), element, pseudoElement, fromQuerySelectorAll);
+    }
+
     private List<CSSStyleSheetImpl.SelectorEntry> selects(
-                            final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
-                            final BrowserVersion browserVersion, final DomElement element,
-                            final String pseudoElement, final boolean fromQuerySelectorAll) {
+                final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
+                final DomElement element,
+                final String pseudoElement,
+                final boolean fromQuerySelectorAll) {
 
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
         if (CssStyleSheet.isActive(element, index.getMediaList())) {
@@ -1547,7 +1534,7 @@ public class CssStyleSheet implements Serializable {
 
             CSSStyleSheetImpl.SelectorEntry entry = iter.next();
             while (null != entry) {
-                if (CssStyleSheet.selects(browserVersion, entry.getSelector(),
+                if (CssStyleSheet.selects(getBrowserVersion(), entry.getSelector(),
                                             element, pseudoElement, fromQuerySelectorAll)) {
                     matchingRules.add(entry);
                 }
@@ -1555,8 +1542,7 @@ public class CssStyleSheet implements Serializable {
             }
 
             for (final CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
-                matchingRules.addAll(selects(child, browserVersion,
-                                                    element, pseudoElement, fromQuerySelectorAll));
+                matchingRules.addAll(selects(child, element, pseudoElement, fromQuerySelectorAll));
             }
         }
 

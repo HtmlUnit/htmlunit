@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
+
+import java.util.HashMap;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
@@ -150,6 +154,26 @@ public class HtmlBody extends HtmlElement {
      */
     public final boolean isTemporary() {
         return temporary_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String,String> getDefaultStyles() {
+        Map<String,String> defaults = new HashMap<>();
+        BrowserVersion browserVersion = getPage().getEnclosingWindow().getWebClient().getBrowserVersion();
+        if (browserVersion.hasFeature(JS_BODY_MARGINS_8)) {
+            defaults.put("margin", "8px");
+            defaults.put("padding", "0px");
+        }
+        else {
+            defaults.put("margin-left", "8px");
+            defaults.put("margin-right", "8px");
+            defaults.put("margin-top", "8px");
+            defaults.put("margin-bottom", "8px");
+        }
+        return defaults;
     }
 
     /**

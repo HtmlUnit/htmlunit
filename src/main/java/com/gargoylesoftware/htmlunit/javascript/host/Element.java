@@ -436,17 +436,6 @@ public class Element extends Node {
     }
 
     /**
-     * Callback method which allows different HTML element types to perform custom
-     * initialization of computed styles. For example, body elements in most browsers
-     * have default values for their margins.
-     *
-     * @param style the style to initialize
-     */
-    public void setDefaults(final ComputedCSSStyleDeclaration style) {
-        // Empty by default; override as necessary.
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

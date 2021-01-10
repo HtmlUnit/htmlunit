@@ -17,12 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
-import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -53,12 +53,14 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -705,6 +707,18 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public final void setId(final String newId) {
         setAttribute("id", newId);
+    }
+
+    /**
+     * Callback method which allows different HTML element types to perform custom
+     * initialization of computed styles. For example, body elements in most browsers
+     * have default values for their margins.
+     *
+     * @param style the style to initialize
+     */
+    public Map<String,String> getDefaultStyles() {
+        // Empty by default; override as necessary.
+        return Collections.emptyMap();
     }
 
     /**
@@ -1582,7 +1596,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the current (calculated) style object for this element.
      * @return the current (calculated) style object for this element
      */
-    public CssStyleDeclaration getStyle() {
+    public ComputedCssStyleDeclaration getComputedStyle() {
         if (!isAttachedToPage()) {
             return null;
         }
