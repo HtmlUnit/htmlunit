@@ -85,8 +85,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     /**
      * see http://tools.ietf.org/html/draft-abarth-mime-sniff-05
      */
-    private static final String[] htmlPatterns = {"<!DOCTYPE HTML", "<HTML", "<HEAD", "<SCRIPT",
-        "<IFRAME", "<H1", "<DIV", "<FONT", "<TABLE", "<A", "<STYLE", "<TITLE", "<B", "<BODY", "<BR", "<P", "<!--" };
+    private static final String[] htmlPatterns = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
+        "IFRAME", "H1", "DIV", "FONT", "TABLE", "A", "STYLE", "TITLE", "B", "BODY", "BR", "P", "!--" };
 
     private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
 
@@ -214,23 +214,25 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return MimeType.TEXT_PLAIN;
             }
 
-            final String asAsciiString = new String(bytes, "ASCII").trim().toUpperCase(Locale.ROOT);
-            for (final String htmlPattern : htmlPatterns) {
-                if (asAsciiString.startsWith(htmlPattern)) {
-                    try {
-                        final char spaceOrBracket = asAsciiString.charAt(htmlPattern.length());
-                        if (' ' == spaceOrBracket || '>' == spaceOrBracket) {
-                            return MimeType.TEXT_HTML;
-                        }
-                    }
-                    catch (final ArrayIndexOutOfBoundsException e) {
-                        // ignore
-                    }
-                }
-            }
-
             if (isBinary(bytes)) {
                 return MimeType.APPLICATION_OCTET_STREAM;
+            }
+
+            final String asAsciiString = new String(bytes, "ASCII").trim().toUpperCase(Locale.ROOT);
+            for (final String htmlPattern : htmlPatterns) {
+                try {
+                    if ('<' == asAsciiString.charAt(0)) {
+                        if (asAsciiString.startsWith(htmlPattern, 1)) {
+                            final char spaceOrBracket = asAsciiString.charAt(htmlPattern.length() + 1);
+                            if (' ' == spaceOrBracket || '>' == spaceOrBracket) {
+                                return MimeType.TEXT_HTML;
+                            }
+                        }
+                    }
+                }
+                catch (final ArrayIndexOutOfBoundsException e) {
+                    // ignore
+                }
             }
         }
         return MimeType.TEXT_PLAIN;
