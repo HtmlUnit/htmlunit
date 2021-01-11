@@ -82,6 +82,12 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     private static final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
     private static final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
 
+    /**
+     * see http://tools.ietf.org/html/draft-abarth-mime-sniff-05
+     */
+    private static final String[] htmlPatterns = {"<!DOCTYPE HTML", "<HTML", "<HEAD", "<SCRIPT",
+        "<IFRAME", "<H1", "<DIV", "<FONT", "<TABLE", "<A", "<STYLE", "<TITLE", "<B", "<BODY", "<BR", "<P", "<!--" };
+
     private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
 
     /**
@@ -198,23 +204,32 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         }
 
         try (InputStream contentAsStream = webResponse.getContentAsStream()) {
-            final byte[] bytes = read(contentAsStream, 500);
+            final byte[] bytes = read(contentAsStream, 512);
             if (bytes.length == 0) {
                 return MimeType.TEXT_PLAIN;
             }
 
-            final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ROOT);
-            if (asAsciiString.contains("<HTML")) {
-                return MimeType.TEXT_HTML;
-            }
-            else if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
+            if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
                     || startsWith(bytes, markerUTF16LE_)) {
                 return MimeType.TEXT_PLAIN;
             }
-            else if (asAsciiString.trim().startsWith("<SCRIPT>")) {
-                return MimeType.APPLICATION_JAVASCRIPT;
+
+            final String asAsciiString = new String(bytes, "ASCII").trim().toUpperCase(Locale.ROOT);
+            for (final String htmlPattern : htmlPatterns) {
+                if (asAsciiString.startsWith(htmlPattern)) {
+                    try {
+                        final char spaceOrBracket = asAsciiString.charAt(htmlPattern.length());
+                        if (' ' == spaceOrBracket || '>' == spaceOrBracket) {
+                            return MimeType.TEXT_HTML;
+                        }
+                    }
+                    catch (final ArrayIndexOutOfBoundsException e) {
+                        // ignore
+                    }
+                }
             }
-            else if (isBinary(bytes)) {
+
+            if (isBinary(bytes)) {
                 return MimeType.APPLICATION_OCTET_STREAM;
             }
         }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Improved content sniffing for html pages.
+            </action>
             <action type="fix" dev="rbri" due-to="Atsushi Nakagawa">
                 The invocation order of events added to XMLHttpRequest, through both addEventListener() and on-handlers
                 is fixed, to be more consistent with major browser such as Chrome / FF / IE, as well as other events already
