@@ -399,6 +399,17 @@ public final class UrlUtils {
     }
 
     /**
+     * Creates and returns a new URL using only the protocol, authority and path
+     * from the given one.
+     * @param u the URL on which to base the returned URL
+     * @return a new URL using only the protocol and authority from the given one
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithoutRefQuery(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getAuthority(), u.getPath(), null, null);
+    }
+
+    /**
      * Creates and returns a new URL identical to the specified URL, except using the specified protocol.
      * @param u the URL on which to base the returned URL
      * @param newProtocol the new protocol to use in the returned URL

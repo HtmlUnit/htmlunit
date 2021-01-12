@@ -179,7 +179,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (!source.isEmpty()) {
             final URL url;
             try {
-                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(source);
+                url = UrlUtils.getUrlWithoutRefQuery(((HtmlPage) getPage()).getFullyQualifiedUrl(source));
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
@@ -454,15 +454,6 @@ public abstract class BaseFrameElement extends HtmlElement {
         }
     }
 
-    @Override
-    protected void onAddedToPage() {
-        super.onAddedToPage();
-
-        if (loadSrcWhenAddedToPage_) {
-            loadSrc();
-        }
-    }
-
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
@@ -505,6 +496,19 @@ public abstract class BaseFrameElement extends HtmlElement {
         return clone;
     }
 
+    @Override
+    protected void onAddedToPage() {
+        super.onAddedToPage();
+
+        if (getEnclosedWindow() == null) {
+            init();
+        }
+
+        if (loadSrcWhenAddedToPage_) {
+            loadSrc();
+        }
+    }
+
     /**
      * Remove our window also.
      * {@inheritDoc}
@@ -513,5 +517,6 @@ public abstract class BaseFrameElement extends HtmlElement {
     public void remove() {
         super.remove();
         getEnclosedWindow().close();
+        enclosedWindow_ = null;
     }
 }
