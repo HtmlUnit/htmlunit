@@ -52,7 +52,7 @@ public class DefaultPageCreator2Test extends WebTestCase {
         assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/css"));
         assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/xhtml"));
 
-        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType(null));
+        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType((String) null));
         assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType(""));
         assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType(" \t"));
         assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType("application/pdf"));
