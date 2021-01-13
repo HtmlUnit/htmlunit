@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -459,7 +460,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);
-            request.setAdditionalHeader(HttpHeader.REFERER, containingPage_.getUrl().toExternalForm());
+            request.setAdditionalHeader(HttpHeader.REFERER,
+                        UrlUtils.getUrlWithoutRef(containingPage_.getUrl()).toExternalForm());
 
             if (!isSameOrigin(pageRequestUrl, fullUrl)) {
                 final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")

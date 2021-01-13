@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.net.URL;
+import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.http.HttpStatus;
@@ -28,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -654,4 +656,34 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html.toString());
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * Tests the 'Referer' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void refererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body><script src='" + URL_SECOND + "'/></body>\n"
+            + "</html>";
+
+        final String secondContent = "var i = 7;";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
 }

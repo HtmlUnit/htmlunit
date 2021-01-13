@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -266,5 +268,41 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Check for the right referrer header.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void referrer() throws Exception {
+        final String framesContent = "<html>\n"
+                + "<head><title>Top Page</title></head>\n"
+                + "<body>\n"
+                + "  <iframe src='iframe.html'></iframe>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final String iFrame = "<html>\n"
+                + "<head></head>\n"
+                + "<body>Body</body>\n"
+                + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL iFrameUrl = new URL(URL_FIRST.toString() + "iframe.html");
+
+        getMockWebConnection().setResponse(indexUrl, framesContent);
+        getMockWebConnection().setResponse(iFrameUrl, iFrame);
+
+        loadPage2(framesContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 }

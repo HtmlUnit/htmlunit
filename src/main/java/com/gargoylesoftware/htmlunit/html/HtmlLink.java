@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -234,7 +235,7 @@ public class HtmlLink extends HtmlElement {
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
 
-        request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+        request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
 
         return request;
     }

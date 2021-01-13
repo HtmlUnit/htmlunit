@@ -21,9 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * Tests for {@link HtmlLink}.
@@ -33,24 +31,6 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlLinkTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getResponse_referer() throws Exception {
-        final String html = "<html><head>\n"
-            + "<link id='myId' href='file1.css'></link>\n"
-            + "</head><body>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-
-        final HtmlLink link = page.getFirstByXPath("//link");
-        final WebResponse respCss = link.getWebResponse(true);
-        assertEquals(page.getUrl().toExternalForm(),
-                respCss.getWebRequest().getAdditionalHeaders().get(HttpHeader.REFERER));
-    }
 
     /**
      * @throws Exception if an error occurs

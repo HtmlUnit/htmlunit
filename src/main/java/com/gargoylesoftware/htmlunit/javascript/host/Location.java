@@ -142,7 +142,7 @@ public class Location extends SimpleScriptable {
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
         if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
-            final String referer = htmlPage.getUrl().toExternalForm();
+            final String referer = UrlUtils.getUrlWithoutRef(htmlPage.getUrl()).toExternalForm();
             request.setAdditionalHeader(HttpHeader.REFERER, referer);
         }
 
@@ -239,7 +239,7 @@ public class Location extends SimpleScriptable {
             }
 
             final WebRequest request = new WebRequest(url);
-            request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+            request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
 
             final WebWindow webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");

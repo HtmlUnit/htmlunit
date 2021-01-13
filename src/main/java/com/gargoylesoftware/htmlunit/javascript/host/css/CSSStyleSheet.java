@@ -301,7 +301,8 @@ public class CSSStyleSheet extends StyleSheet {
                 // Use href.
                 final BrowserVersion browser = client.getBrowserVersion();
                 request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
-                request.setAdditionalHeader(HttpHeader.REFERER, uri);
+                request.setAdditionalHeader(HttpHeader.REFERER,
+                            UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
 
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response

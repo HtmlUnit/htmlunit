@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "input".
@@ -228,7 +229,8 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
                 final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                 browser.getAcceptEncodingHeader());
                 request.setCharset(page.getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+                request.setAdditionalHeader(HttpHeader.REFERER,
+                            UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
                 imageWebResponse_ = webClient.loadWebResponse(request);
             }
 

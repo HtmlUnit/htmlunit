@@ -337,7 +337,14 @@ public class HtmlForm extends HtmlElement {
         }
         request.setCharset(enc);
 
-        request.setAdditionalHeader(HttpHeader.REFERER, htmlPage.getUrl().toExternalForm());
+        URL refUrl = htmlPage.getUrl();
+        try {
+            refUrl = UrlUtils.getUrlWithoutRef(refUrl);
+        }
+        catch (final MalformedURLException e) {
+            // bad luck us the whole url from the page
+        }
+        request.setAdditionalHeader(HttpHeader.REFERER, refUrl.toExternalForm());
 
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {

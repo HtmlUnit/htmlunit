@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "area".
@@ -97,7 +98,7 @@ public class HtmlArea extends HtmlElement {
             }
             final WebRequest request = new WebRequest(url);
             request.setCharset(page.getCharset());
-            request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+            request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             webClient.getPage(
                     webWindow,

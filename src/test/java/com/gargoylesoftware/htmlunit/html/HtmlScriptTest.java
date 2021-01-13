@@ -19,7 +19,6 @@ import static org.junit.Assert.fail;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpStatus;
 import org.junit.Test;
@@ -29,7 +28,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -131,30 +129,6 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final HtmlScript scriptElement = page.getHtmlElementById("s");
         assertEquals("<script id=\"s\">\r\n" + script + "\r\n</script>\r\n",
                 scriptElement.asXml());
-    }
-
-    /**
-     * Tests the 'Referer' HTTP header.
-     * @throws Exception on test failure
-     */
-    @Test
-    public void refererHeader() throws Exception {
-        final String firstContent
-            = "<html><head><title>Page A</title></head>\n"
-            + "<body><script src='" + URL_SECOND + "' id='link'/></body>\n"
-            + "</html>";
-
-        final String secondContent = "alert('test')";
-
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**

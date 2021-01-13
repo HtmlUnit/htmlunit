@@ -1047,7 +1047,8 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
         // at least overwrite this headers
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
-        request.setAdditionalHeader(HttpHeader.REFERER, referringRequest.getUrl().toString());
+        request.setAdditionalHeader(HttpHeader.REFERER,
+                    UrlUtils.getUrlWithoutRef(referringRequest.getUrl()).toExternalForm());
 
         // our cache is a bit strange;
         // loadWebResponse check the cache for the web response
