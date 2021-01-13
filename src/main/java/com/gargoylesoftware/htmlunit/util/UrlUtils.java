@@ -405,8 +405,8 @@ public final class UrlUtils {
      * @return a new URL using only the protocol and authority from the given one
      * @throws MalformedURLException if there is a problem creating the new URL
      */
-    public static URL getUrlWithoutRefQuery(final URL u) throws MalformedURLException {
-        return createNewUrl(u.getProtocol(), u.getAuthority(), u.getPath(), null, null);
+    public static URL getUrlWithoutRef(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getAuthority(), u.getPath(), null, u.getQuery());
     }
 
     /**

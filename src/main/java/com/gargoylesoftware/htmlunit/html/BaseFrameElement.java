@@ -179,7 +179,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (!source.isEmpty()) {
             final URL url;
             try {
-                url = UrlUtils.getUrlWithoutRefQuery(((HtmlPage) getPage()).getFullyQualifiedUrl(source));
+                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(source);
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
@@ -188,7 +188,14 @@ public abstract class BaseFrameElement extends HtmlElement {
 
             final WebRequest request = new WebRequest(url);
             request.setCharset(getPage().getCharset());
-            request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
+            URL refUrl = getPage().getUrl();
+            try {
+                refUrl = UrlUtils.getUrlWithoutRef(refUrl);
+            }
+            catch (final MalformedURLException e) {
+                // bad luck us the whole url from the page
+            }
+            request.setAdditionalHeader(HttpHeader.REFERER, refUrl.toExternalForm());
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
