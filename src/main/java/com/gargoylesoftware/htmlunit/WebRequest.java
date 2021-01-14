@@ -418,10 +418,12 @@ public class WebRequest implements Serializable {
      * @param url the url for the referer HTTP header
      */
     public void setRefererlHeader(final URL url) {
-        URL refUrl = url;
+        if (WebClient.URL_ABOUT_BLANK == url) {
+            return;
+        }
+
         try {
-            refUrl = UrlUtils.getUrlWithoutRef(refUrl);
-            setAdditionalHeader(HttpHeader.REFERER, refUrl.toExternalForm());
+            setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(url).toExternalForm());
         }
         catch (final MalformedURLException e) {
             // bad luck us the whole url from the pager

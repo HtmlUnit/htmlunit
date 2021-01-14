@@ -186,6 +186,10 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getUrl();
+            if (WebClient.URL_ABOUT_BLANK == url) {
+                return url.toExternalForm();
+            }
+
             final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
@@ -200,7 +204,9 @@ public class Location extends SimpleScriptable {
             return s;
         }
         catch (final MalformedURLException e) {
-            LOG.error(e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+            	LOG.error(e.getMessage(), e);
+            }
             return page.getUrl().toExternalForm();
         }
     }
