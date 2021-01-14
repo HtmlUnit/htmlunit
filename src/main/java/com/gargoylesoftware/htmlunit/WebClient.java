@@ -1024,8 +1024,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null
                         && openerPage.getUrl() != null) {
-                    final String referer = UrlUtils.getUrlWithoutRef(openerPage.getUrl()).toExternalForm();
-                    request.setAdditionalHeader(HttpHeader.REFERER, referer);
+                    request.setRefererlHeader(openerPage.getUrl());
                 }
                 getPage(window, request);
             }
@@ -1153,8 +1152,7 @@ public class WebClient implements Serializable, AutoCloseable {
         request.setCharset(UTF_8);
 
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
-            final String referer = UrlUtils.getUrlWithoutRef(openerPage.getUrl()).toExternalForm();
-            request.setAdditionalHeader(HttpHeader.REFERER, referer);
+            request.setRefererlHeader(openerPage.getUrl());
         }
 
         getPage(window, request);

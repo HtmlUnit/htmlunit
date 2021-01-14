@@ -95,7 +95,6 @@ import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -301,8 +300,7 @@ public class CSSStyleSheet extends StyleSheet {
                 // Use href.
                 final BrowserVersion browser = client.getBrowserVersion();
                 request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
-                request.setAdditionalHeader(HttpHeader.REFERER,
-                            UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+                request.setRefererlHeader(page.getUrl());
 
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response

@@ -30,14 +30,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "area".
@@ -98,7 +96,7 @@ public class HtmlArea extends HtmlElement {
             }
             final WebRequest request = new WebRequest(url);
             request.setCharset(page.getCharset());
-            request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+            request.setRefererlHeader(page.getUrl());
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             webClient.getPage(
                     webWindow,

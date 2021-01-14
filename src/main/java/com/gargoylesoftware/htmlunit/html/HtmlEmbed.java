@@ -24,12 +24,10 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "embed".
@@ -67,7 +65,7 @@ public class HtmlEmbed extends HtmlElement {
         final URL url = page.getFullyQualifiedUrl(getAttributeDirect(SRC_ATTRIBUTE));
         final WebRequest request = new WebRequest(url);
         request.setCharset(page.getCharset());
-        request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+        request.setRefererlHeader(page.getUrl());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
         try (OutputStream fos = Files.newOutputStream(file.toPath());

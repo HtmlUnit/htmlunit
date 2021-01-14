@@ -31,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -39,7 +38,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "input".
@@ -229,8 +227,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
                 final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                 browser.getAcceptEncodingHeader());
                 request.setCharset(page.getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER,
-                            UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+                request.setRefererlHeader(page.getUrl());
                 imageWebResponse_ = webClient.loadWebResponse(request);
             }
 

@@ -29,7 +29,6 @@ import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.FrameContentHandler;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -188,14 +187,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
             final WebRequest request = new WebRequest(url);
             request.setCharset(getPage().getCharset());
-            URL refUrl = getPage().getUrl();
-            try {
-                refUrl = UrlUtils.getUrlWithoutRef(refUrl);
-            }
-            catch (final MalformedURLException e) {
-                // bad luck us the whole url from the page
-            }
-            request.setAdditionalHeader(HttpHeader.REFERER, refUrl.toExternalForm());
+            request.setRefererlHeader(getPage().getUrl());
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");

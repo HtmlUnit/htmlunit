@@ -26,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -36,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -234,8 +232,7 @@ public class HtmlLink extends HtmlElement {
         final WebRequest request = new WebRequest(url, browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
-
-        request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+        request.setRefererlHeader(page.getUrl());
 
         return request;
     }

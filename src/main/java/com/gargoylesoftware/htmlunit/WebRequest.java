@@ -21,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.IDN;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collections;
@@ -410,6 +411,21 @@ public class WebRequest implements Serializable {
             }
         }
         return additionalHeaders_.get(newKey);
+    }
+
+    /**
+     * Sets the referer HTTP header.
+     * @param url the url of the referer HTTP header
+     */
+    public void setRefererlHeader(final URL url) {
+        URL refUrl = url;
+        try {
+            refUrl = UrlUtils.getUrlWithoutRef(refUrl);
+        }
+        catch (final MalformedURLException e) {
+            // bad luck us the whole url from the page
+        }
+        setAdditionalHeader(HttpHeader.REFERER, url.toExternalForm());
     }
 
     /**

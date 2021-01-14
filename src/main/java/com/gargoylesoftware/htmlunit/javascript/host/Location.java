@@ -35,7 +35,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -142,8 +141,7 @@ public class Location extends SimpleScriptable {
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
         if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
-            final String referer = UrlUtils.getUrlWithoutRef(htmlPage.getUrl()).toExternalForm();
-            request.setAdditionalHeader(HttpHeader.REFERER, referer);
+            request.setRefererlHeader(htmlPage.getUrl());
         }
 
         final WebWindow webWindow = window_.getWebWindow();
@@ -239,7 +237,7 @@ public class Location extends SimpleScriptable {
             }
 
             final WebRequest request = new WebRequest(url);
-            request.setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+            request.setRefererlHeader(page.getUrl());
 
             final WebWindow webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");

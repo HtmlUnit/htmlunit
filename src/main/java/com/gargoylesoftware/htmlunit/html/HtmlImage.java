@@ -42,7 +42,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -546,8 +545,7 @@ public class HtmlImage extends HtmlElement {
                     final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
-                    request.setAdditionalHeader(HttpHeader.REFERER,
-                                UrlUtils.getUrlWithoutRef(page.getUrl()).toExternalForm());
+                    request.setRefererlHeader(page.getUrl());
                     imageWebResponse_ = webClient.loadWebResponse(request);
                 }
             }
