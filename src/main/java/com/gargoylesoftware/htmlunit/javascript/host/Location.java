@@ -205,7 +205,7 @@ public class Location extends SimpleScriptable {
         }
         catch (final MalformedURLException e) {
             if (LOG.isErrorEnabled()) {
-            	LOG.error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
             return page.getUrl().toExternalForm();
         }
