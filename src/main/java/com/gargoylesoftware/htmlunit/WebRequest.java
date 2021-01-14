@@ -414,18 +414,18 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Sets the referer HTTP header.
-     * @param url the url of the referer HTTP header
+     * Sets the referer HTTP header - only if the provided url is valid.
+     * @param url the url for the referer HTTP header
      */
     public void setRefererlHeader(final URL url) {
         URL refUrl = url;
         try {
             refUrl = UrlUtils.getUrlWithoutRef(refUrl);
+            setAdditionalHeader(HttpHeader.REFERER, refUrl.toExternalForm());
         }
         catch (final MalformedURLException e) {
-            // bad luck us the whole url from the page
+            // bad luck us the whole url from the pager
         }
-        setAdditionalHeader(HttpHeader.REFERER, url.toExternalForm());
     }
 
     /**
