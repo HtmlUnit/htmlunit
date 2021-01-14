@@ -771,4 +771,44 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void controlClick_refererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent
+            = "<html><head><title>Page B</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        new Actions(driver)
+                .keyDown(Keys.CONTROL)
+                .click(driver.findElement(By.id("link")))
+                .keyUp(Keys.CONTROL)
+                .build().perform();
+
+        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
 }

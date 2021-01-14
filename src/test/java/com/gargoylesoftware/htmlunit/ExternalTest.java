@@ -59,7 +59,7 @@ public class ExternalTest {
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.28.0";
+    static String GECKO_DRIVER_ = "0.29.0";
     /** IE driver. */
     static String IE_DRIVER_ = "3.150.1.0";
 
