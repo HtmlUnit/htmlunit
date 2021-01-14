@@ -499,10 +499,6 @@ public abstract class BaseFrameElement extends HtmlElement {
     protected void onAddedToPage() {
         super.onAddedToPage();
 
-        if (getEnclosedWindow() == null) {
-            init();
-        }
-
         if (loadSrcWhenAddedToPage_) {
             loadSrc();
         }
@@ -516,6 +512,5 @@ public abstract class BaseFrameElement extends HtmlElement {
     public void remove() {
         super.remove();
         getEnclosedWindow().close();
-        enclosedWindow_ = null;
     }
 }
