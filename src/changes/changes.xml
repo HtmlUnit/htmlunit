@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+                core-js: Make property __proto__ writable for functions also.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make property only having a getter readonly.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make message handling variadic.
+            </action>
             <action type="fix" dev="rbri" issue="293" due-to="Joerg Werner">
                 KeyboardEvent constructor fixed.
             </action>
