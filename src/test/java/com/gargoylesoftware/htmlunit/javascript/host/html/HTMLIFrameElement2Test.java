@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -893,4 +894,55 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"loaded", "§§URL§§", "§§URL§§", "loaded", "about:blank"})
+    public void removeSourceAttribute() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head><script>\n"
+                + "  function log(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var win = myFrame.contentWindow;\n"
+                + "    var doc = win.document;\n"
+                + "    log(win.location);\n"
+
+                + "    myFrame.removeAttribute('src');\n"
+                + "    log(win.location);\n"
+                + "  }\n"
+
+                + "  function test2() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var win = myFrame.contentWindow;\n"
+                + "    var doc = win.document;\n"
+                + "    log(win.location);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "    <button id='clickMe2' onclick='test2()'>Click Me</button>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickMe")).click();
+        driver.findElement(By.id("clickMe2")).click();
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+    }
 }

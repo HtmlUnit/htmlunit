@@ -9,6 +9,9 @@
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Fix handling of removal of the src attribute from frames.
+            </action>
+            <action type="fix" dev="rbri">
                 Referer header url is without ref part.
             </action>
             <action type="fix" dev="rbri">

@@ -504,13 +504,48 @@ public abstract class BaseFrameElement extends HtmlElement {
         }
     }
 
-    /**
-     * Remove our window also.
-     * {@inheritDoc}
-     */
     @Override
     public void remove() {
         super.remove();
         getEnclosedWindow().close();
+    }
+
+    @Override
+    public final void removeAttribute(final String attributeName) {
+        super.removeAttribute(attributeName);
+
+        // TODO find a better implementation without all the code duplication
+        if (isAttachedToPage()) {
+            loadSrcWhenAddedToPage_ = false;
+            final String src = getSrcAttribute();
+
+            final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            // When src is set from a script, loading is postponed until script finishes
+            // in fact this implementation is probably wrong: JavaScript URL should be
+            // first evaluated and only loading, when any, should be postponed.
+            if (jsEngine == null || !jsEngine.isScriptRunning()) {
+                loadInnerPageIfPossible(src);
+            }
+            else {
+                final Page pageInFrame = getEnclosedPage();
+                final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
+                    public void execute() throws Exception {
+                        loadInnerPage();
+                    }
+
+                    @Override
+                    public boolean isStillAlive() {
+                        // skip if page in frame has already been changed
+                        return super.isStillAlive() && pageInFrame == getEnclosedPage();
+                    }
+                };
+                jsEngine.addPostponedAction(action);
+            }
+        }
+        else {
+            loadSrcWhenAddedToPage_ = true;
+        }
+
     }
 }

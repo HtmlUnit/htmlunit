@@ -310,7 +310,7 @@ public abstract class HtmlElement extends DomElement {
      * @param attributeName the attribute attributeName
      */
     @Override
-    public final void removeAttribute(final String attributeName) {
+    public void removeAttribute(final String attributeName) {
         final String value = getAttribute(attributeName);
         if (value == ATTRIBUTE_NOT_DEFINED) {
             return;
