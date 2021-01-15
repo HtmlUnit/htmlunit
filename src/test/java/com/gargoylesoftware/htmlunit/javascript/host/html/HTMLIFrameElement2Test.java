@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link HTMLIFrameElement}.
@@ -911,7 +914,6 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  function test() {\n"
                 + "    var myFrame = document.getElementById('i');\n"
                 + "    var win = myFrame.contentWindow;\n"
-                + "    var doc = win.document;\n"
                 + "    log(win.location);\n"
 
                 + "    myFrame.removeAttribute('src');\n"
@@ -921,7 +923,6 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  function test2() {\n"
                 + "    var myFrame = document.getElementById('i');\n"
                 + "    var win = myFrame.contentWindow;\n"
-                + "    var doc = win.document;\n"
                 + "    log(win.location);\n"
                 + "  }\n"
                 + "</script></head>\n"
@@ -942,6 +943,160 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("clickMe2")).click();
 
         expandExpectedAlertsVariables(URL_SECOND);
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"loaded", "§§URL§§", "[object HTMLDocument]", "http://localhost:22222/second/",
+                "1", "[object Window]", "[object HTMLDocument]", "http://localhost:22222/second/",
+                "0", "#[object Window]", "#[object HTMLDocument]", "http://localhost:22222/second/"})
+    public void detach() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head><script>\n"
+                + "  function log(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var win = myFrame.contentWindow;\n"
+                + "    log(win.location);\n"
+                + "    log(win.document);\n"
+                + "    log(win.document.URL);\n"
+                + "    log(window.frames.length);\n"
+
+                + "    myFrame.parentNode.removeChild(myFrame);\n"
+                + "    log(win);\n"
+                + "    log(win.document);\n"
+                + "    log(win.document.URL);\n"
+                + "    log(window.frames.length);\n"
+
+                + "    window.setTimeout(function () "
+                            + "{ log('#' + win); log('#' + win.document); log(win.document.URL); }, 42);\n"
+                + "  }\n"
+
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickMe")).click();
+        Thread.sleep(200);
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"iframe script", "loaded", "iframe script", "loaded"})
+    public void detachAppend() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head><script>\n"
+                + "  function log(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+
+                + "    var parent = myFrame.parentNode;\n"
+                + "    parent.removeChild(myFrame);\n"
+
+                + "    parent.appendChild(myFrame);\n"
+                + "  }\n"
+
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>foo<script>parent.log('iframe script');</script></body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(DEFAULT_WAIT_TIME);
+        final int start = getMockWebConnection().getRequestCount();
+
+        driver.findElement(By.id("clickMe")).click();
+        Thread.sleep(DEFAULT_WAIT_TIME);
+
+        assertEquals(1, getMockWebConnection().getRequestCount() - start);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"iframe external script", "loaded", "iframe external script", "loaded"})
+    public void detachAppendExternalScript() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head><script>\n"
+                + "  function log(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+
+                + "    var parent = myFrame.parentNode;\n"
+                + "    parent.removeChild(myFrame);\n"
+
+                + "    parent.appendChild(myFrame);\n"
+                + "  }\n"
+
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='log(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String html2 = "<html><body>foo<script src='"
+                                + URL_SECOND + "ext.js'></script></body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+        final String js = "parent.log('iframe external script');";
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "ext.js"), js, MimeType.APPLICATION_JAVASCRIPT);
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(DEFAULT_WAIT_TIME);
+        final int start = getMockWebConnection().getRequestCount();
+
+        driver.findElement(By.id("clickMe")).click();
+        Thread.sleep(DEFAULT_WAIT_TIME);
+
+        assertEquals(2, getMockWebConnection().getRequestCount() - start);
+
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }

@@ -425,6 +425,14 @@ public abstract class BaseFrameElement extends HtmlElement {
         loadSrcWhenAddedToPage_ = false;
         final String src = getSrcAttribute();
 
+        // recreate a window if the old one was closed
+        if (enclosedWindow_.isClosed()) {
+            final HtmlPage htmlPage = getHtmlPageOrNull();
+            if (null != htmlPage) { // if loaded as part of XHR.responseXML, don't load content
+                enclosedWindow_ = new FrameWindow(this);
+            }
+        }
+
         final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
         // When src is set from a script, loading is postponed until script finishes
         // in fact this implementation is probably wrong: JavaScript URL should be
@@ -507,6 +515,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     @Override
     public void remove() {
         super.remove();
+        loadSrcWhenAddedToPage_ = true;
         getEnclosedWindow().close();
     }
 
@@ -546,6 +555,5 @@ public abstract class BaseFrameElement extends HtmlElement {
         else {
             loadSrcWhenAddedToPage_ = true;
         }
-
     }
 }
