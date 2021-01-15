@@ -44,6 +44,50 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class KeyboardEventTest extends WebDriverTestCase {
 
     /**
+     * Checks that after creating a keyboard event via constructor all event properties have the expected values,
+     * either the default values or the ones passed in the event init object.
+     * 
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"type,,,0,false,false,false,false,false,false,0,0",
+                       "type,,,0,false,false,false,false,false,false,0,0",
+                       "type,,,0,false,false,false,false,false,false,0,0",
+                       "type,,,0,false,false,false,false,false,false,0,0",
+                       "type,null,,0,true,false,false,false,false,false,456,0",
+                       "type,key,code,123,true,true,true,true,true,true,456,789"},
+            IE      = {"exception",
+                       "exception",
+                       "exception",
+                       "exception",
+                       "exception",
+                       "exception"})
+    public void constructor() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    function doTest(f) {\n"
+            + "      try {\n"
+            + "        var e = f();\n"
+            + "        var log = [e.type, e.key, e.code, e.location, e.ctrlKey, e.shiftKey, e.altKey, e.metaKey,\n"
+            + "                   e.repeat, e.isComposing, e.charCode, e.which].join(',');\n"
+            + "        alert(log);\n"
+            + "      } catch(e) {alert('exception')}\n"
+            + "    }\n"
+            + "    doTest(() => new KeyboardEvent('type'));\n"
+            + "    doTest(() => new KeyboardEvent('type', null));\n"
+            + "    doTest(() => new KeyboardEvent('type', undefined));\n"
+            + "    doTest(() => new KeyboardEvent('type', {}));\n"
+            + "    doTest(() => new KeyboardEvent('type', { key: null, code: undefined, ctrlKey: true, charCode: 456 }));\n"
+            + "    doTest(() => new KeyboardEvent('type', { key: 'key', code: 'code', location: 123,\n" 
+            + "                                             ctrlKey: true, shiftKey: true, altKey: true, metaKey: true,\n" 
+            + "                                             repeat: true, isComposing: true, charCode: 456, which: 789 }));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
