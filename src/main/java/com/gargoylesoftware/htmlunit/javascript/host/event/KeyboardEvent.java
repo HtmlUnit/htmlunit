@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_DISTINGUISH_PRINTABLE_KEY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEYBOARD_CTOR_WHICH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -45,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 @JsxClass
 public class KeyboardEvent extends UIEvent {
@@ -1042,21 +1044,21 @@ public class KeyboardEvent extends UIEvent {
      * @return the code value
      */
     private String determineCode() {
-      int code = getKeyCode();
-      if (code == 0) {
-          code = getCharCode();
-      }
-      switch (code) {
+        int code = getKeyCode();
+        if (code == 0) {
+            code = getCharCode();
+        }
+        switch (code) {
             case DOM_VK_SHIFT:
-              return "ShiftLeft";
+                return "ShiftLeft";
             case DOM_VK_PERIOD:
             case '.':
-              return "Period";
+                return "Period";
             case DOM_VK_RETURN:
-              return "Enter";
+                return "Enter";
 
             default:
-              return "Key" + Character.toUpperCase((char) which_);
+                return "Key" + Character.toUpperCase((char) which_);
         }
     }
 
@@ -1067,6 +1069,7 @@ public class KeyboardEvent extends UIEvent {
      * @param details the event details (optional)
      */
     @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @Override
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
@@ -1127,9 +1130,11 @@ public class KeyboardEvent extends UIEvent {
                 setKeyCode(ScriptRuntime.toInt32(keyCode));
             }
 
-            final Object which = details.get("which", details);
-            if (!isMissingOrUndefined(which)) {
-                setWhich(ScriptRuntime.toInt32(which));
+            if (getBrowserVersion().hasFeature(JS_EVENT_KEYBOARD_CTOR_WHICH)) {
+                final Object which = details.get("which", details);
+                if (!isMissingOrUndefined(which)) {
+                    setWhich(ScriptRuntime.toInt32(which));
+                }
             }
         }
     }
@@ -1138,7 +1143,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns whether the given value indicates a missing or undefined property.
      * @return whether the given value indicates a missing or undefined property
      */
-    private static boolean isMissingOrUndefined(Object value) {
+    private static boolean isMissingOrUndefined(final Object value) {
         return value == Scriptable.NOT_FOUND || Undefined.isUndefined(value);
     }
 

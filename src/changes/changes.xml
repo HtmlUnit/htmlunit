@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="293" due-to="Joerg Werner">
+                KeyboardEvent constructor fixed.
+            </action>
+            <action type="fix" dev="rbri" issue="285">
+                Fixes for (re) attaching iframes.
+            </action>
             <action type="fix" dev="rbri">
                 Fix handling of removal of the src attribute from frames.
             </action>

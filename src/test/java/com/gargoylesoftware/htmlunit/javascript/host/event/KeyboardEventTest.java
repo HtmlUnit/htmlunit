@@ -29,7 +29,9 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,51 +41,312 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class KeyboardEventTest extends WebDriverTestCase {
 
+    private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
+            + "    alert(event);\n"
+            + "    alert(event.type);\n"
+            + "    alert(event.bubbles);\n"
+            + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
+
+            + "    var details = [event.key, event.code, event.location, event.ctrlKey,\n"
+            + "                 event.shiftKey, event.altKey, event.metaKey, event.repeat, \n"
+            + "                 event.isComposing, event.charCode, event.which].join(',');\n"
+            + "    alert(details);\n"
+            + "  }\n";
+
     /**
-     * Checks that after creating a keyboard event via constructor all event properties have the expected values,
-     * either the default values or the ones passed in the event init object.
-     * 
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"type,,,0,false,false,false,false,false,false,0,0",
-                       "type,,,0,false,false,false,false,false,false,0,0",
-                       "type,,,0,false,false,false,false,false,false,0,0",
-                       "type,,,0,false,false,false,false,false,false,0,0",
-                       "type,null,,0,true,false,false,false,false,false,456,0",
-                       "type,key,code,123,true,true,true,true,true,true,456,789"},
-            IE      = {"exception",
-                       "exception",
-                       "exception",
-                       "exception",
-                       "exception",
-                       "exception"})
-    public void constructor() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "type", "false", "false", "false",
+                        ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctor() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>foo</title><script>\n"
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var event = new KeyboardEvent('type');\n"
+                + "      dump(event);\n"
+                + "    } catch (e) { alert('exception') }\n"
+                + "  }\n"
+                + DUMP_EVENT_FUNCTION
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    @HtmlUnitNYI(CHROME = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
+                    ",,0,false,false,false,false,false,false,0,0"},
+            EDGE = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
+                    ",,0,false,false,false,false,false,false,0,0"},
+            FF = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
+                    ",,0,false,false,false,false,false,false,0,0"},
+            FF78 = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
+                    ",,0,false,false,false,false,false,false,0,0"})
+    public void create_ctorWithoutType() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    function doTest(f) {\n"
-            + "      try {\n"
-            + "        var e = f();\n"
-            + "        var log = [e.type, e.key, e.code, e.location, e.ctrlKey, e.shiftKey, e.altKey, e.metaKey,\n"
-            + "                   e.repeat, e.isComposing, e.charCode, e.which].join(',');\n"
-            + "        alert(log);\n"
-            + "      } catch(e) {alert('exception')}\n"
-            + "    }\n"
-            + "    doTest(() => new KeyboardEvent('type'));\n"
-            + "    doTest(() => new KeyboardEvent('type', null));\n"
-            + "    doTest(() => new KeyboardEvent('type', undefined));\n"
-            + "    doTest(() => new KeyboardEvent('type', {}));\n"
-            + "    doTest(() => new KeyboardEvent('type', { key: null, code: undefined, ctrlKey: true, charCode: 456 }));\n"
-            + "    doTest(() => new KeyboardEvent('type', { key: 'key', code: 'code', location: 123,\n" 
-            + "                                             ctrlKey: true, shiftKey: true, altKey: true, metaKey: true,\n" 
-            + "                                             repeat: true, isComposing: true, charCode: 456, which: 789 }));\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent();\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
+            + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "42", "false", "false", "false",
+                ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorNumericType() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent(42);\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT =  {"[object KeyboardEvent]", "null", "false", "false", "false",
+                ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorNullType() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent(null);\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void create_ctorUnknownType() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent(unknown);\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "HtmlUnitEvent", "false", "false", "false",
+                ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorArbitraryType() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('HtmlUnitEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        "key,code,123,true,true,true,true,true,true,456,789"},
+            CHROME = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        "key,code,123,true,true,true,true,true,true,456,0"},
+            EDGE = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        "key,code,123,true,true,true,true,true,true,456,0"},
+            IE = "exception")
+    public void create_ctorAllDetails() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('keyboard', "
+                             + "{ key: 'key', code: 'code', location: 123, "
+                             + "ctrlKey: true, shiftKey: true, altKey: true, metaKey: true,"
+                             + "repeat: true, isComposing: true, charCode: 456, which: 789 });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        "null,,0,true,false,false,false,false,false,456,0"},
+            IE = "exception")
+    public void create_ctorSomeDetails() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('keyboard', "
+                             + "{ key: null, code: undefined, ctrlKey: true, charCode: 456 });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorMissingData() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('keyboard', {\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorNullData() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('keyboard', null);\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorUndefinedData() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('keyboard', undefined);\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
+                        ",,0,false,false,false,false,false,false,0,0"},
+            IE = "exception")
+    public void create_ctorWrongData() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new KeyboardEvent('keyboard', {\n"
+            + "        'data': ['Html', 'Unit']\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 

@@ -898,6 +898,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
+    /** Javascript KeyboardEvent reads the which property from data. */
+    @BrowserFeature({FF, FF78, IE})
+    JS_EVENT_KEYBOARD_CTOR_WHICH,
+
     /** do not trigger the onload event if the frame content
      * was not shown because of the csp. */
     @BrowserFeature({FF, FF78})
