@@ -427,10 +427,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         // recreate a window if the old one was closed
         if (enclosedWindow_.isClosed()) {
-            final HtmlPage htmlPage = getHtmlPageOrNull();
-            if (null != htmlPage) { // if loaded as part of XHR.responseXML, don't load content
-                enclosedWindow_ = new FrameWindow(this);
-            }
+            init();
         }
 
         final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();

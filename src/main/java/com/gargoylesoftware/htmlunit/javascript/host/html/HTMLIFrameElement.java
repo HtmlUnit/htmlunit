@@ -101,7 +101,11 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxGetter
     public WindowProxy getContentWindow() {
-        return Window.getProxy(getFrame().getEnclosedWindow());
+        final FrameWindow frameWin = getFrame().getEnclosedWindow();
+        if (frameWin.isClosed()) {
+            return null;
+        }
+        return Window.getProxy(frameWin);
     }
 
     /**
