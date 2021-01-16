@@ -2539,7 +2539,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
     public void event__on_beforeunload_() throws Exception {
         runTest("event: on(beforeunload)");
     }
