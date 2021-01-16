@@ -10672,10 +10672,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),data,dataTransfer,inputType,isComposing",
             FF78 = "constructor(),data,dataTransfer,inputType,isComposing",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF78 = "constructor()",
-            FF = "constructor()")
+    @HtmlUnitNYI(CHROME = "constructor(),data,inputType,isComposing",
+            EDGE = "constructor(),data,inputType,isComposing",
+            FF78 = "constructor(),data,inputType,isComposing",
+            FF = "constructor(),data,inputType,isComposing")
     public void inputEvent() throws Exception {
         testString("", "new InputEvent('input')");
     }

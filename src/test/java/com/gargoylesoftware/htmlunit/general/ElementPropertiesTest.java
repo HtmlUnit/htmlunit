@@ -4206,25 +4206,29 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
+                + "CAPTURING_PHASE,composed,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
+                + "inputType,isComposing,NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
                 + "target,timeStamp,type,view",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
+                + "CAPTURING_PHASE,composed,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
+                + "inputType,isComposing,NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
                 + "target,timeStamp,type,view",
             FF78 = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,"
-                + "CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
-                + "initUIEvent(),META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
+                + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),inputType,isComposing,"
+                + "META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type,view",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,"
-                + "CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
-                + "initUIEvent(),META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
+                + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),inputType,isComposing,"
+                + "META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type,view")
     public void inputEvent() throws Exception {

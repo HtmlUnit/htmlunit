@@ -150,7 +150,6 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @param webResponse the response to investigate
      * @exception IOException if an IO problem occurs
      * @return "xml", "html", "javascript", "text" or "unknown"
-     * @
      */
     public static PageType determinePageType(final WebResponse webResponse) throws IOException {
         final String contentType = webResponse.getContentType();

@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -1137,14 +1136,6 @@ public class KeyboardEvent extends UIEvent {
                 }
             }
         }
-    }
-
-    /**
-     * Returns whether the given value indicates a missing or undefined property.
-     * @return whether the given value indicates a missing or undefined property
-     */
-    private static boolean isMissingOrUndefined(final Object value) {
-        return value == Scriptable.NOT_FOUND || Undefined.isUndefined(value);
     }
 
     /**

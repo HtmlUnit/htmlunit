@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                InputEvent constructor fixed.
+            </action>
             <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
                 core-js: Make property __proto__ writable for functions also.
             </action>

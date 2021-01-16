@@ -1081,4 +1081,13 @@ public class Event extends SimpleScriptable {
     public Object getComposed() {
         return false;
     }
+
+    /**
+     * Returns whether the given value indicates a missing or undefined property.
+     * @param value the new value
+     * @return whether the given value indicates a missing or undefined property
+     */
+    protected static boolean isMissingOrUndefined(final Object value) {
+        return value == Scriptable.NOT_FOUND || Undefined.isUndefined(value);
+    }
 }

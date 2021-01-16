@@ -898,6 +898,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
+    /** Javascript InputEvent reads the inputType property from data. */
+    @BrowserFeature({FF, FF78})
+    JS_EVENT_INPUT_CTOR_INPUTTYPE,
+
     /** Javascript KeyboardEvent reads the which property from data. */
     @BrowserFeature({FF, FF78, IE})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
