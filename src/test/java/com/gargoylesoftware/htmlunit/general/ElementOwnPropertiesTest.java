@@ -10298,12 +10298,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,"
                 + "DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),isComposing,"
-                + "key,keyCode,location,metaKey,repeat,"
-                + "shiftKey",
+                + "key,keyCode,location,metaKey,repeat,shiftKey",
             EDGE = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,getModifierState(),initKeyboardEvent(),"
-                + "isComposing,key,keyCode,location,metaKey,repeat,"
-                + "shiftKey",
+                + "isComposing,key,keyCode,location,metaKey,repeat,shiftKey",
             FF = {"altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                 + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,"
                 + "DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,"
@@ -10376,9 +10374,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
                 + "getModifierState(),initKeyboardEvent(),key,keyCode,locale,location,metaKey,repeat,shiftKey,which")
     @HtmlUnitNYI(CHROME = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                    + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
+                        + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
+                        + "isComposing,key,keyCode,location,metaKey,repeat,shiftKey,which",
                 EDGE = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
-                        + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which",
+                        + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,"
+                        + "isComposing,key,keyCode,location,metaKey,repeat,shiftKey,which",
                 FF78 = {"altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                     + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,"
                     + "DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,"
@@ -10414,7 +10414,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                         + "DOM_VK_WIN_OEM_FJ_MASSHOU,"
                         + "DOM_VK_WIN_OEM_FJ_ROYA,DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
                         + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,"
-                        + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,initKeyEvent(),key,keyCode,metaKey,shiftKey,which"},
+                        + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,"
+                        + "initKeyEvent(),isComposing,key,keyCode,location,metaKey,repeat,shiftKey,which"},
                 FF = {"altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                     + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,"
                     + "DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,"
@@ -10450,10 +10451,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                         + "DOM_VK_WIN_OEM_FJ_MASSHOU,"
                         + "DOM_VK_WIN_OEM_FJ_ROYA,DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
                         + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,"
-                        + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,initKeyEvent(),key,keyCode,metaKey,shiftKey,which"},
+                        + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,"
+                        + "initKeyEvent(),isComposing,key,keyCode,location,metaKey,repeat,shiftKey,which"},
                 IE = "altKey,char,charCode,constructor,ctrlKey,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,"
                     + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
-                    + "DOM_KEY_LOCATION_STANDARD,key,keyCode,metaKey,shiftKey,which")
+                    + "DOM_KEY_LOCATION_STANDARD,key,keyCode,location,metaKey,repeat,shiftKey,which")
     public void keyboardEvent() throws Exception {
         testString("", "document.createEvent('KeyboardEvent')");
     }
