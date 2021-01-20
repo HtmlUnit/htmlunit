@@ -30,7 +30,7 @@
         <htmlunitcorejs.version>2.47.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
-        <jetty.version>9.4.35.v20201120</jetty.version>
+        <jetty.version>9.4.36.v20210114</jetty.version>
         <log4j.version>2.14.0</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 

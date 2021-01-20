@@ -774,9 +774,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "object",
-            FF78 = "object",
+    @Alerts(DEFAULT = "object",
+            EDGE = "function",
             IE = "undefined")
     public void css() throws Exception {
         test("CSS");

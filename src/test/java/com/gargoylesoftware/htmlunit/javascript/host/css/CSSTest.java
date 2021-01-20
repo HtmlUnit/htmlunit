@@ -34,7 +34,8 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function CSS() { [native code] }", "[object CSS]"},
+    @Alerts(DEFAULT = {"[object CSS]", "undefined"},
+            EDGE = {"function CSS() { [native code] }", "[object CSS]"},
             FF = {"[object Object]", "undefined"},
             FF78 = {"[object Object]", "undefined"},
             IE = "Exception")
@@ -57,10 +58,8 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSS]",
-            FF = "ctor Exception",
-            FF78 = "ctor Exception",
-            IE = "ctor Exception")
+    @Alerts(DEFAULT = "ctor Exception",
+            EDGE = "[object CSS]")
     @HtmlUnitNYI(CHROME = "[object Object]",
             EDGE = "[object Object]")
     public void constructor() throws Exception {

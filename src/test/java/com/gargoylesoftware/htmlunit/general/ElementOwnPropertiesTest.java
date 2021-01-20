@@ -400,7 +400,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "assignedSlot,constructor(),getDestinationInsertionPoints(),splitText(),wholeText",
+    @Alerts(CHROME = "assignedSlot,constructor(),splitText(),wholeText",
             EDGE = "assignedSlot,constructor(),getDestinationInsertionPoints(),splitText(),wholeText",
             FF = "assignedSlot,constructor(),splitText(),wholeText",
             FF78 = "assignedSlot,constructor(),splitText(),wholeText",
@@ -486,9 +486,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ariaValueMax,ariaValueMin,ariaValueNow,ariaValueText,"
                 + "assignedSlot,attachShadow(),attributes,attributeStyleMap,before(),"
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
-                + "closest(),computedStyleMap(),constructor(),createShadowRoot(),elementTiming,firstElementChild,"
+                + "closest(),computedStyleMap(),constructor(),elementTiming,firstElementChild,"
                 + "getAnimations(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
-                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getDestinationInsertionPoints(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,matches(),namespaceURI,"
