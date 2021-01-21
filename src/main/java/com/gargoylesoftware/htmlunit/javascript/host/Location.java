@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Adam Afeltowicz
+ * @author Atsushi Nakagawa
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
@@ -137,7 +138,7 @@ public class Location extends SimpleScriptable {
      */
     @JsxFunction
     public void reload(final boolean force) throws IOException {
-        final HtmlPage htmlPage = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+        final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
         if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {

@@ -26,6 +26,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class Location2Test extends WebDriverTestCase {
@@ -970,5 +972,57 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[1], "" + additionalHeaders.get(HttpHeader.ORIGIN));
         assertEquals(getExpectedAlerts()[2], additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
+    }
+
+    /**
+     * Tests that location.reload() works correctly when invoked across frames.
+     */
+    @Test
+    @Alerts({"§§URL§§upper.html", "§§URL§§lower.html"})
+    public void reloadAcrossFrames() throws Exception {
+        final String framesetContent = ""
+            + "<html>\n"
+            + "  <frameset rows='100,*'>\n"
+            + "    <frame name='upper' src='upper.html'/>\n"
+            + "    <frame name='lower' src='lower.html'/>\n"
+            + "  </frameset>\n"
+            + "</html>";
+
+        final String upperContent = "<html><body><h1>upper</h1></body></html>";
+        final String lowerContent = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  parent.upper.location.reload();\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body><h1>lower</h1><button id='tester' onclick='test()'>test</button></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, framesetContent);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "upper.html"), upperContent);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "lower.html"), lowerContent);
+
+        final WebDriver driver = loadPage2(framesetContent, URL_FIRST);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        driver.switchTo().frame("upper");
+        assertEquals(getExpectedAlerts()[0],
+                ((JavascriptExecutor) driver).executeScript("return document.location.href"));
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("lower");
+        assertEquals(getExpectedAlerts()[1],
+                ((JavascriptExecutor) driver).executeScript("return document.location.href"));
+
+        driver.findElement(By.id("tester")).click();
+
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("upper");
+        assertEquals(getExpectedAlerts()[0],
+                ((JavascriptExecutor) driver).executeScript("return document.location.href"));
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("lower");
+        assertEquals(getExpectedAlerts()[1],
+                ((JavascriptExecutor) driver).executeScript("return document.location.href"));
     }
 }

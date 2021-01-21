@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+                Location.reload() reloads to the wrong address when invoked across frames.
+            </action>
+            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+                Return a rejected Promise rather than throw errors for all the methods in SubtleCrypto.
+            </action>
             <action type="fix" dev="rbri">
                 InputEvent constructor fixed.
             </action>
