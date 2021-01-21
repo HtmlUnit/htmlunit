@@ -239,7 +239,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
-        CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/*,*/*;q=0.8";
+        CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
         // there are other issues with Chrome; a different productSub, etc.
