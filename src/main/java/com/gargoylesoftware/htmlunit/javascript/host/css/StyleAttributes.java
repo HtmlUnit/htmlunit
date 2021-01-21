@@ -184,7 +184,7 @@ public final class StyleAttributes {
         ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
 
         /** The style property {@code aspectRatio}. */
-        ASPECT_RATIO("aspectRatio", "aspect-ratio", chrome("")),
+        ASPECT_RATIO("aspectRatio", "aspect-ratio", chrome("auto")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),

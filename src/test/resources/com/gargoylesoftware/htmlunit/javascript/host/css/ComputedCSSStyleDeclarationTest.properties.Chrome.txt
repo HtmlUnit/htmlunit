@@ -14,6 +14,7 @@ animationPlayState=:running
 animationTimingFunction=:ease
 appearance=:none
 ascentOverride=:
+aspectRatio=:auto
 backdropFilter=:none
 backfaceVisibility=:visible
 background=:rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box
