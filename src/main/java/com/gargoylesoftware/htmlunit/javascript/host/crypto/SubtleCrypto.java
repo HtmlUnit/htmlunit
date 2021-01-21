@@ -43,9 +43,8 @@ public class SubtleCrypto extends SimpleScriptable {
     }
 
     private Promise notImplemented() {
-        return Promise.reject(null, this, new Object[] {
-                new DOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR),
-        }, null);
+        return Promise.reject(null, this,
+                new Object[] {new DOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR)}, null);
     }
 
     @JsxFunction
@@ -102,5 +101,4 @@ public class SubtleCrypto extends SimpleScriptable {
     public Promise unwrapKey() {
         return notImplemented();
     }
-
 }

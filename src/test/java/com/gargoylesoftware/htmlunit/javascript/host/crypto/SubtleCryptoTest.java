@@ -38,10 +38,11 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class SubtleCryptoTest extends WebDriverTestCase {
 
     /**
-     * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly
+     * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly.
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMException]"}, IE = {})
+    @Alerts(DEFAULT = "[object DOMException]",
+            IE = {})
     public void unsupportedCall() throws Exception {
         final String html
             = ""
