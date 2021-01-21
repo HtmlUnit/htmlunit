@@ -60,8 +60,7 @@ public class CSSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "ctor Exception",
             EDGE = "[object CSS]")
-    @HtmlUnitNYI(CHROME = "[object Object]",
-            EDGE = "[object Object]")
+    @HtmlUnitNYI(EDGE = "[object Object]")
     public void constructor() throws Exception {
         final String html
             = "<html><body>\n"

@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+        <release version="2.47.0" date="xxxx, 2021" description="Bugfixes, Chrome 88">
             <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
                 Location.reload() reloads to the wrong address when invoked across frames.
             </action>

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeNotIterable;
@@ -181,6 +182,9 @@ public final class StyleAttributes {
 
         /** The style property {@code ascentOverride}. */
         ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
+
+        /** The style property {@code aspectRatio}. */
+        ASPECT_RATIO("aspectRatio", "aspect-ratio", chrome("")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),

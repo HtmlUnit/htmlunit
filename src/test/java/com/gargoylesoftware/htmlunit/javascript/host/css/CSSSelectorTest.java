@@ -949,7 +949,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            FF = "exception")
     public void invalid_not() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1107,7 +1108,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            FF = "exception")
     public void notWithFirstOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1136,7 +1138,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            FF = "exception")
     public void notWithNthOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1183,7 +1186,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            FF = "exception")
     public void notWithLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1212,7 +1216,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
-    @HtmlUnitNYI(FF = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            FF = "exception")
     public void notWithNthLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -38,7 +38,7 @@ public class CSS extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE})
+    @JsxConstructor(EDGE)
     public CSS() {
     }
 
