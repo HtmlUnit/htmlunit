@@ -32,9 +32,35 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class SubtleCryptoTest extends WebDriverTestCase {
+
+    /**
+     * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object DOMException]"}, IE = {})
+    public void unsupportedCall() throws Exception {
+        final String html
+            = ""
+            + "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.crypto) {\n"
+            + "      window.crypto.subtle.generateKey(\n"
+            + "        { name: 'x' }\n"
+            + "      )\n"
+            + "      .catch(function(err) {\n"
+            + "        alert(err);\n"
+            + "      });\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME * 3);
+    }
 
     /**
      * @throws Exception if the test fails
