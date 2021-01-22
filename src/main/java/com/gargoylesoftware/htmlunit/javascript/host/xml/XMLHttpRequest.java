@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -510,7 +511,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
         return !(getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
-                    && "about".equals(newUrl.getProtocol()));
+                    && UrlUtils.ABOUT.equals(newUrl.getProtocol()));
     }
 
     private static boolean isSameOrigin(final URL originUrl, final URL newUrl) {

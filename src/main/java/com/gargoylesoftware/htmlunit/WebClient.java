@@ -1429,7 +1429,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
         switch (webRequest.getUrl().getProtocol()) {
-            case "about":
+            case UrlUtils.ABOUT:
                 return makeWebResponseForAboutUrl(webRequest);
 
             case "file":
