@@ -206,6 +206,27 @@ public class WebClient implements Serializable, AutoCloseable {
     /** target "_top". */
     private static final String TARGET_TOP = "_top";
 
+    /**
+     * "about:".
+     * @deprecated as of version 2.47.0; use UrlUtils.ABOUT_BLANK instead
+     */
+    @Deprecated
+    public static final String ABOUT_SCHEME = UrlUtils.ABOUT_SCHEME;
+
+    /**
+     * "about:blank".
+     * @deprecated as of version 2.47.0; use UrlUtils.ABOUT_BLANK instead
+     */
+    @Deprecated
+    public static final String ABOUT_BLANK = UrlUtils.ABOUT_BLANK;
+
+    /**
+     * URL for "about:blank".
+     * @deprecated as of version 2.47.0; use UrlUtils.URL_ABOUT_BLANK instead
+     */
+    @Deprecated
+    public static final URL URL_ABOUT_BLANK = UrlUtils.URL_ABOUT_BLANK;
+
     private ScriptPreProcessor scriptPreProcessor_;
 
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
