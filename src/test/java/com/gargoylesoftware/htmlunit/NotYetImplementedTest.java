@@ -117,6 +117,9 @@ public class NotYetImplementedTest {
                     if (nyiString.contains("CHROME = ")) {
                         browser += "CHROME";
                     }
+                    if (nyiString.contains("EDGE = ")) {
+                        browser += "EDGE";
+                    }
                     if (nyiString.contains("FF = ")) {
                         if (browser.length() > 0) {
                             browser += ", ";
@@ -137,7 +140,7 @@ public class NotYetImplementedTest {
                     }
                 }
                 if (browser.length() < 2) {
-                    System.out.println(browser);
+                    throw new IllegalArgumentException("'" + nyiString + "' seems to be not supported by @HtmlUnitNYI");
                 }
                 entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser
                         + ';' + description);
