@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.DomNodeIterator;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A basic class of Standard Generalized Markup Language (SGML), e.g. HTML and XML.
@@ -270,7 +271,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     public URL getUrl() {
         final WebResponse wr = getWebResponse();
         if (null == wr) {
-            return WebClient.URL_ABOUT_BLANK;
+            return UrlUtils.URL_ABOUT_BLANK;
         }
         return getWebResponse().getWebRequest().getUrl();
     }

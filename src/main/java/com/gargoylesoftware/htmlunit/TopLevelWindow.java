@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A window representing a top level browser window.
@@ -72,7 +73,7 @@ public class TopLevelWindow extends WebWindowImpl {
     @Override
     protected boolean isJavaScriptInitializationNeeded(final Page page) {
         return getScriptableObject() == null
-            || page.getUrl() == WebClient.URL_ABOUT_BLANK
+            || page.getUrl() == UrlUtils.URL_ABOUT_BLANK
             || !(page.getWebResponse() instanceof StringWebResponse);
         // TODO: find a better way to distinguish content written by document.open(),...
     }

@@ -206,13 +206,6 @@ public class WebClient implements Serializable, AutoCloseable {
     /** target "_top". */
     private static final String TARGET_TOP = "_top";
 
-    /** "about:". */
-    public static final String ABOUT_SCHEME = "about:";
-    /** "about:blank". */
-    public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
-    /** URL for "about:blank". */
-    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
-
     private ScriptPreProcessor scriptPreProcessor_;
 
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
@@ -1302,10 +1295,10 @@ public class WebClient implements Serializable, AutoCloseable {
     private static WebResponse makeWebResponseForAboutUrl(final WebRequest webRequest) throws MalformedURLException {
         final URL url = webRequest.getUrl();
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
-        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, WebClient.ABOUT_SCHEME))) {
+        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
             throw new MalformedURLException(url + " is not supported, only about:blank is supported now.");
         }
-        return new StringWebResponse("", URL_ABOUT_BLANK);
+        return new StringWebResponse("", UrlUtils.URL_ABOUT_BLANK);
     }
 
     /**
@@ -2035,7 +2028,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final FrameWindow fw = (FrameWindow) window;
                 final String enclosingPageState = fw.getEnclosingPage().getDocumentElement().getReadyState();
                 final URL frameUrl = fw.getEnclosedPage().getUrl();
-                if (!DomNode.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == URL_ABOUT_BLANK) {
+                if (!DomNode.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == UrlUtils.URL_ABOUT_BLANK) {
                     return;
                 }
 

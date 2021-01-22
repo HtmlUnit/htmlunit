@@ -310,17 +310,17 @@ public class HtmlForm extends HtmlElement {
             }
 
             if (HttpMethod.GET == method && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
-                    && WebClient.URL_ABOUT_BLANK != url) {
+                    && UrlUtils.URL_ABOUT_BLANK != url) {
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
             else if (HttpMethod.POST == method
                     && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
-                    && WebClient.URL_ABOUT_BLANK != url
+                    && UrlUtils.URL_ABOUT_BLANK != url
                     && StringUtils.isEmpty(actionUrl)) {
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
             else if (anchor != null
-                    && WebClient.URL_ABOUT_BLANK != url) {
+                    && UrlUtils.URL_ABOUT_BLANK != url) {
                 url = UrlUtils.getUrlWithNewRef(url, anchor);
             }
         }

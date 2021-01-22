@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -555,7 +556,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
 
     private URL makeUrlForOpenWindow(final String urlString) {
         if (urlString.isEmpty()) {
-            return WebClient.URL_ABOUT_BLANK;
+            return UrlUtils.URL_ABOUT_BLANK;
         }
 
         try {

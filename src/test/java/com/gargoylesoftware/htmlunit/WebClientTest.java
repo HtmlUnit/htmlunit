@@ -2122,7 +2122,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void openWindowWithAboutBlank() throws Exception {
         final WebClient client = getWebClient();
-        final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
+        final WebWindow window = client.openWindow(UrlUtils.URL_ABOUT_BLANK, "TestingWindow");
         assertNotNull(window);
     }
 
@@ -2490,14 +2490,14 @@ public class WebClientTest extends SimpleWebTestCase {
     public void aboutBlankSharedRequest() throws Exception {
         final WebClient webClient = getWebClient();
 
-        final WebWindow firstWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 1");
+        final WebWindow firstWindow = webClient.openWindow(UrlUtils.URL_ABOUT_BLANK, "Window 1");
         assertNotNull(firstWindow);
 
         final WebRequest firstRequest1 = firstWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", firstRequest1.getUrl().toExternalForm());
-        firstRequest1.setUrl(UrlUtils.toUrlSafe(WebClient.ABOUT_BLANK + "#anchor"));
+        firstRequest1.setUrl(UrlUtils.toUrlSafe(UrlUtils.ABOUT_BLANK + "#anchor"));
 
-        final WebWindow secondWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 2");
+        final WebWindow secondWindow = webClient.openWindow(UrlUtils.URL_ABOUT_BLANK, "Window 2");
         assertNotNull(secondWindow);
         final WebRequest secondRequest = secondWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", secondRequest.getUrl().toExternalForm());

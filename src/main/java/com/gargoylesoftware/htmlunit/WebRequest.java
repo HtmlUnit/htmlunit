@@ -99,7 +99,7 @@ public class WebRequest implements Serializable {
      * @return a new request for about:blank
      */
     public static WebRequest newAboutBlankRequest() {
-        return new WebRequest(WebClient.URL_ABOUT_BLANK, "*/*", "gzip, deflate");
+        return new WebRequest(UrlUtils.URL_ABOUT_BLANK, "*/*", "gzip, deflate");
     }
 
     /**
@@ -418,7 +418,7 @@ public class WebRequest implements Serializable {
      * @param url the url for the referer HTTP header
      */
     public void setRefererlHeader(final URL url) {
-        if (WebClient.URL_ABOUT_BLANK == url) {
+        if (UrlUtils.URL_ABOUT_BLANK == url) {
             return;
         }
 

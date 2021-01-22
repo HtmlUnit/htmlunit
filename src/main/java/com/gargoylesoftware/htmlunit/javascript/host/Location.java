@@ -36,7 +36,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -187,7 +186,7 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getUrl();
-            if (WebClient.URL_ABOUT_BLANK == url) {
+            if (UrlUtils.URL_ABOUT_BLANK == url) {
                 return url.toExternalForm();
             }
 
@@ -439,7 +438,7 @@ public class Location extends SimpleScriptable {
      */
     @JsxGetter
     public String getPathname() {
-        if (WebClient.URL_ABOUT_BLANK == getUrl()) {
+        if (UrlUtils.URL_ABOUT_BLANK == getUrl()) {
             if (getBrowserVersion().hasFeature(URL_ABOUT_BLANK_HAS_BLANK_PATH)) {
                 return "blank";
             }

@@ -72,7 +72,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -140,6 +139,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
@@ -1357,7 +1357,7 @@ public class Document extends Node {
     public String getDomain() {
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
-            if (url == WebClient.URL_ABOUT_BLANK) {
+            if (url == UrlUtils.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow) {
                     url = ((FrameWindow) w).getEnclosingPage().getUrl();
@@ -1404,11 +1404,11 @@ public class Document extends Node {
     public void setDomain(String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
-        // IE (at least 6) doesn't allow to set domain of about:blank
-        if (WebClient.URL_ABOUT_BLANK == getPage().getUrl()
+        // IE doesn't allow to set domain of about:blank
+        if (UrlUtils.URL_ABOUT_BLANK == getPage().getUrl()
             && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
-                    + WebClient.URL_ABOUT_BLANK + "\" to: \""
+                    + UrlUtils.URL_ABOUT_BLANK + "\" to: \""
                     + newDomain + "\".");
         }
 

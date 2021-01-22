@@ -30,7 +30,6 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.protocol.AnyHandler;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
@@ -48,6 +47,16 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Hartmut Arlt
  */
 public final class UrlUtils {
+
+    /** "about". */
+    public static final String ABOUT = "about";
+    /** "about:". */
+    public static final String ABOUT_SCHEME = ABOUT + ":";
+    /** "about:blank". */
+    public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
+    /** URL for "about:blank". */
+    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
+
     private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
     private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
     private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
@@ -227,11 +236,10 @@ public final class UrlUtils {
             return new URL(null, url, JS_HANDLER);
         }
 
-        if ("about".equals(protocol)) {
-            if (WebClient.URL_ABOUT_BLANK != null
-                    && org.apache.commons.lang3.StringUtils.
-                        equalsIgnoreCase(WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
-                return WebClient.URL_ABOUT_BLANK;
+        if (ABOUT.equals(protocol)) {
+            if (org.apache.commons.lang3.StringUtils.
+                        equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
+                return URL_ABOUT_BLANK;
             }
             return new URL(null, url, ABOUT_HANDLER);
         }

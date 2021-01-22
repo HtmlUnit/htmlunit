@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -1303,7 +1304,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 .build();
 
         try (WebClient client = new WebClient(browser)) {
-            client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
+            client.openWindow(UrlUtils.URL_ABOUT_BLANK, "TestWindow");
         }
     }
 

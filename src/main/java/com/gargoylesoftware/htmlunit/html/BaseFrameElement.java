@@ -79,7 +79,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             // if created by the HTMLParser the src attribute is not set via setAttribute() or some other method but is
             // part of the given attributes already.
             final String src = getSrcAttribute();
-            if (src != ATTRIBUTE_NOT_DEFINED && !WebClient.ABOUT_BLANK.equals(src)) {
+            if (src != ATTRIBUTE_NOT_DEFINED && !UrlUtils.ABOUT_BLANK.equals(src)) {
                 loadSrcWhenAddedToPage_ = true;
             }
         }
@@ -116,8 +116,8 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if (source.isEmpty() || StringUtils.startsWithIgnoreCase(source, WebClient.ABOUT_SCHEME)) {
-            source = WebClient.ABOUT_BLANK;
+        if (source.isEmpty() || StringUtils.startsWithIgnoreCase(source, UrlUtils.ABOUT_SCHEME)) {
+            source = UrlUtils.ABOUT_BLANK;
         }
 
         loadInnerPageIfPossible(source);
@@ -172,7 +172,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         final WebClient webClient = getPage().getWebClient();
         final FrameContentHandler handler = webClient.getFrameContentHandler();
         if (null != handler && !handler.loadFrameDocument(this)) {
-            source = WebClient.ABOUT_BLANK;
+            source = UrlUtils.ABOUT_BLANK;
         }
 
         if (!source.isEmpty()) {
@@ -386,7 +386,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         // do not use equals() here
         // see HTMLIFrameElement2Test.documentCreateElement_onLoad_srcAboutBlank()
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && UrlUtils.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
@@ -409,7 +409,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         final Attr result = super.setAttributeNode(attribute);
 
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && !UrlUtils.ABOUT_BLANK.equals(attributeValue)) {
             if (isAttachedToPage()) {
                 loadSrc();
             }

@@ -233,7 +233,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
-        final boolean isAboutBlank = getUrl() == WebClient.URL_ABOUT_BLANK;
+        final boolean isAboutBlank = getUrl() == UrlUtils.URL_ABOUT_BLANK;
         if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
             if (enclosingWindow instanceof FrameWindow
@@ -280,7 +280,7 @@ public class HtmlPage extends SgmlPage {
             isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
 
             final History hist = enclosingWindow.getHistory();
-            if (hist.getLength() > 0 && WebClient.URL_ABOUT_BLANK == hist.getUrl(0)) {
+            if (hist.getLength() > 0 && UrlUtils.URL_ABOUT_BLANK == hist.getUrl(0)) {
                 isFirstPageInFrameWindow = hist.getLength() <= 2;
             }
             else {
@@ -1939,7 +1939,7 @@ public class HtmlPage extends SgmlPage {
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
             if (frame.getEnclosedWindow() != null
-                    && WebClient.URL_ABOUT_BLANK == frame.getEnclosedPage().getUrl()
+                    && UrlUtils.URL_ABOUT_BLANK == frame.getEnclosedPage().getUrl()
                     && !frame.isContentLoaded()) {
                 frame.loadInnerPage();
             }
@@ -2340,7 +2340,7 @@ public class HtmlPage extends SgmlPage {
             final WebWindow window = getEnclosingWindow();
             final boolean frame = window != null && window != window.getTopWindow();
             if (frame) {
-                final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
+                final boolean frameSrcIsNotSet = baseUrl == UrlUtils.URL_ABOUT_BLANK;
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
                 if (frameSrcIsNotSet || frameSrcIsJs) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
