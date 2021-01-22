@@ -55,11 +55,11 @@ public final class UrlUtils {
     /** "about:blank". */
     public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
     /** URL for "about:blank". */
-    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
+    public static final URL URL_ABOUT_BLANK;
 
-    private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
-    private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
-    private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+    private static final URLStreamHandler JS_HANDLER;
+    private static final URLStreamHandler ABOUT_HANDLER;
+    private static final URLStreamHandler DATA_HANDLER;
 
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
@@ -70,6 +70,19 @@ public final class UrlUtils {
      * URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
      */
     static {
+        // make sure the handlers are available first (before calling toUrlSafe())
+        JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
+        ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
+        DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+
+        try {
+            URL_ABOUT_BLANK = new URL(null, ABOUT_BLANK, ABOUT_HANDLER);
+        }
+        catch (final MalformedURLException e) {
+            // should never happen
+            throw new RuntimeException(e);
+        }
+
         final BitSet reserved = new BitSet(256);
         reserved.set(';');
         reserved.set('/');
