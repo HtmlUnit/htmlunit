@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 
 import java.io.IOException;
@@ -116,7 +117,11 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if (source.isEmpty() || StringUtils.startsWithIgnoreCase(source, UrlUtils.ABOUT_SCHEME)) {
+        if (source.isEmpty()) {
+            source = UrlUtils.ABOUT_BLANK;
+        }
+        else if (StringUtils.startsWithIgnoreCase(source, UrlUtils.ABOUT_SCHEME)
+                && hasFeature(FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME)) {
             source = UrlUtils.ABOUT_BLANK;
         }
 

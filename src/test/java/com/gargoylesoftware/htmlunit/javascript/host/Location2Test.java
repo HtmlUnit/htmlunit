@@ -33,6 +33,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -144,7 +145,46 @@ public class Location2Test extends WebDriverTestCase {
             + "  alert(location.search);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "<iframe src='about:blank'></iframe></body></html>";
+            + "  <iframe src='about:blank'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"#hash", "about:blank?query#hash", "blank", "", "about:", "?query"},
+            FF = "exception",
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(FF = {"", "about:blank", "blank", "", "about:", ""},
+            FF78 = {"", "about:blank", "blank", "", "about:", ""},
+            IE = {"", "about:blank", "/blank", "", "about:", ""})
+    public void about_blank_query_hash_attributes() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        var doc = frames[0].document;\n"
+            + "        var location = doc.location;\n"
+            + "        alert(location.hash);\n"
+            + "        alert(location.href);\n"
+            + "        alert(location.pathname);\n"
+            + "        alert(location.port);\n"
+            + "        alert(location.protocol);\n"
+            + "        alert(location.search);\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <iframe src='about:blank?query#hash'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }

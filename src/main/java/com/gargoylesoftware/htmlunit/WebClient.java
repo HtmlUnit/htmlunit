@@ -1315,11 +1315,16 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private static WebResponse makeWebResponseForAboutUrl(final WebRequest webRequest) throws MalformedURLException {
         final URL url = webRequest.getUrl();
-        final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
-        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
-            throw new MalformedURLException(url + " is not supported, only about:blank is supported now.");
+        final String urlString = url.toExternalForm();
+        if (UrlUtils.ABOUT_BLANK.equalsIgnoreCase(urlString)) {
+            return new StringWebResponse("", UrlUtils.URL_ABOUT_BLANK);
         }
-        return new StringWebResponse("", UrlUtils.URL_ABOUT_BLANK);
+
+        final String urlWithoutQuery = StringUtils.substringBefore(urlString, "?");
+        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
+            throw new MalformedURLException(url + " is not supported, only about:blank is supported at the moment.");
+        }
+        return new StringWebResponse("", url);
     }
 
     /**

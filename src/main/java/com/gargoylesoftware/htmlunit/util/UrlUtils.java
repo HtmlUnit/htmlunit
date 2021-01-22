@@ -655,7 +655,7 @@ public final class UrlUtils {
             s.append(ref);
         }
 
-        return new URL(s.toString());
+        return toUrlSafe(s.toString());
     }
 
     /**
