@@ -250,8 +250,7 @@ public final class UrlUtils {
         }
 
         if (ABOUT.equals(protocol)) {
-            if (org.apache.commons.lang3.StringUtils.
-                        equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
+            if (org.apache.commons.lang3.StringUtils.equalsIgnoreCase(ABOUT_BLANK, url)) {
                 return URL_ABOUT_BLANK;
             }
             return new URL(null, url, ABOUT_HANDLER);

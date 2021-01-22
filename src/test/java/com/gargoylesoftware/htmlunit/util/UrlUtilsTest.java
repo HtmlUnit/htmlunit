@@ -39,6 +39,24 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void toUrlSafe() throws Exception {
+        URL url = UrlUtils.toUrlSafe("http://my.home.com/index.html?query#ref");
+        assertEquals("http://my.home.com/index.html?query#ref", url.toExternalForm());
+
+        url = UrlUtils.toUrlSafe("about:blank");
+        assertEquals(UrlUtils.URL_ABOUT_BLANK, url);
+
+        url = UrlUtils.toUrlSafe("about:Blank");
+        assertEquals(UrlUtils.URL_ABOUT_BLANK, url);
+
+        url = UrlUtils.toUrlSafe("about:config");
+        assertEquals("about:config", url.toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void getUrlWithNewProtocol() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
         final URL b = UrlUtils.getUrlWithNewProtocol(a, "ftp");
