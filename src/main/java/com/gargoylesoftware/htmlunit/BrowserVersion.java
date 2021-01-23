@@ -282,7 +282,7 @@ public final class BrowserVersion implements Serializable {
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
-        EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
+        EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
         // there are other issues with Chrome; a different productSub, etc.

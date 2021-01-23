@@ -242,6 +242,7 @@ minInlineSize=:0px
 minWidth=:0px
 minZoom=:
 mixBlendMode=:normal
+msHighContrastAdjust=:auto
 objectFit=:fill
 objectPosition=:50% 50%
 offset=:none 0px auto 0deg
