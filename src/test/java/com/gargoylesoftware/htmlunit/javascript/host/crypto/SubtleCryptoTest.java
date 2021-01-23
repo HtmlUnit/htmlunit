@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -41,8 +42,12 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly.
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMException]",
+    @Alerts(DEFAULT = "TypeError true",
             IE = {})
+    @HtmlUnitNYI(CHROME = "TypeError false",
+            EDGE = "TypeError false",
+            FF = "TypeError false",
+            FF78 = "TypeError false")
     public void unsupportedCall() throws Exception {
         final String html
             = ""
@@ -52,8 +57,8 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "      window.crypto.subtle.generateKey(\n"
             + "        { name: 'x' }\n"
             + "      )\n"
-            + "      .catch(function(err) {\n"
-            + "        alert(err);\n"
+            + "      .catch(function(e) {\n"
+            + "        alert('TypeError ' + (e instanceof TypeError));\n"
             + "      });\n"
             + "    }\n"
             + "  }\n"

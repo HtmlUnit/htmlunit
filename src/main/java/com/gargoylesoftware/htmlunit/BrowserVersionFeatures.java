@@ -257,10 +257,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, IE})
     EVENT_TYPE_WHEELEVENT,
 
-    /** If the frame src has 'about:' scheme use always 'about:blank' as source. */
-    @BrowserFeature({FF, FF78, IE})
-    FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
-
     /** For new pages the focus points to the body node. */
     @BrowserFeature(IE)
     FOCUS_BODY_ELEMENT_AT_START,
@@ -305,6 +301,10 @@ public enum BrowserVersionFeatures {
     /** Form submit is done without the hash part of the action url. */
     @BrowserFeature(IE)
     FORM_SUBMISSION_URL_WITHOUT_HASH,
+
+    /** If the frame src has 'about:' scheme use always 'about:blank' as source. */
+    @BrowserFeature({FF, FF78, IE})
+    FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
 
     /** */
     @BrowserFeature(IE)

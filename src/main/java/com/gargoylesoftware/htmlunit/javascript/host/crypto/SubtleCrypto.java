@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @JsxClass
 public class SubtleCrypto extends SimpleScriptable {
