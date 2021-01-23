@@ -363,9 +363,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false")
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
     }
