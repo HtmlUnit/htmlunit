@@ -1308,7 +1308,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSS]",
-            EDGE = "function CSS() { [native code] }",
             IE = "exception",
             FF = "[object Object]",
             FF78 = "[object Object]")

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeNotIterable;
@@ -184,7 +183,7 @@ public final class StyleAttributes {
         ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
 
         /** The style property {@code aspectRatio}. */
-        ASPECT_RATIO("aspectRatio", "aspect-ratio", chrome("auto")),
+        ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
@@ -2279,7 +2278,7 @@ public final class StyleAttributes {
         MS_GRID_ROWS("msGridRows", "-ms-grid-rows", ie("none")),
 
         /** The style property {@code msHighContrastAdjust}. */
-        MS_HIGH_CONTRAST_ADJUST("msHighContrastAdjust", "-ms-high-contrast-adjust", ie("auto")),
+        MS_HIGH_CONTRAST_ADJUST("msHighContrastAdjust", "-ms-high-contrast-adjust", ie("auto"), edge("auto")),
 
         /** The style property {@code msHyphenateLimitChars}. */
         MS_HYPHENATE_LIMIT_CHARS("msHyphenateLimitChars", "-ms-hyphenate-limit-chars", ie("5 2 2")),

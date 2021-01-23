@@ -775,7 +775,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "object",
-            EDGE = "function",
             IE = "undefined")
     public void css() throws Exception {
         test("CSS");

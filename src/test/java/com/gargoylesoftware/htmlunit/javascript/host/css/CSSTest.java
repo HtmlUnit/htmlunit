@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -35,7 +34,6 @@ public class CSSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSS]", "undefined"},
-            EDGE = {"function CSS() { [native code] }", "[object CSS]"},
             FF = {"[object Object]", "undefined"},
             FF78 = {"[object Object]", "undefined"},
             IE = "Exception")
@@ -58,9 +56,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ctor Exception",
-            EDGE = "[object CSS]")
-    @HtmlUnitNYI(EDGE = "[object Object]")
+    @Alerts("ctor Exception")
     public void constructor() throws Exception {
         final String html
             = "<html><body>\n"

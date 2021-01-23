@@ -401,7 +401,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "assignedSlot,constructor(),splitText(),wholeText",
-            EDGE = "assignedSlot,constructor(),getDestinationInsertionPoints(),splitText(),wholeText",
+            EDGE = "assignedSlot,constructor(),splitText(),wholeText",
             FF = "assignedSlot,constructor(),splitText(),wholeText",
             FF78 = "assignedSlot,constructor(),splitText(),wholeText",
             IE = "constructor,removeNode(),replaceNode(),replaceWholeText(),splitText(),swapNode(),wholeText")
@@ -510,9 +510,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ariaSetSize,ariaSort,ariaValueMax,ariaValueMin,ariaValueNow,ariaValueText,assignedSlot,"
                 + "attachShadow(),attributes,attributeStyleMap,before(),childElementCount,children,classList,"
                 + "className,clientHeight,clientLeft,clientTop,clientWidth,closest(),computedStyleMap(),"
-                + "constructor(),createShadowRoot(),elementTiming,firstElementChild,getAnimations(),getAttribute(),"
+                + "constructor(),elementTiming,firstElementChild,getAnimations(),getAttribute(),"
                 + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
-                + "getBoundingClientRect(),getClientRects(),getDestinationInsertionPoints(),"
+                + "getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,matches(),namespaceURI,"

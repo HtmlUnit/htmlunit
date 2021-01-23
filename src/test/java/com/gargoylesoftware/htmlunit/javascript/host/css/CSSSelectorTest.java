@@ -946,10 +946,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "link_2", "link_3"},
-            EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
             FF = "exception")
     public void invalid_not() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1105,10 +1105,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id2",
-            EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
             FF = "exception")
     public void notWithFirstOfType() throws Exception {
         final String html = "<html>\n"
@@ -1135,10 +1135,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
                     "3", "id1", "id2", "id3"},
-            EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
             FF = "exception")
     public void notWithNthOfType() throws Exception {
         final String html = "<html>\n"
@@ -1183,10 +1183,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id2",
-            EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
             FF = "exception")
     public void notWithLastOfType() throws Exception {
         final String html = "<html>\n"
@@ -1213,10 +1213,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
                     "3", "id1", "id2", "id3"},
-            EDGE = "exception",
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
             FF = "exception")
     public void notWithNthLastOfType() throws Exception {
         final String html = "<html>\n"
