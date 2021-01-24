@@ -8,6 +8,8 @@ Version 2.46.0 / January 2, 2021
 
 [htmlunit.sourceforge.io][4]
 
+<iframe src="https://github.com/sponsors/rbri/button" title="Sponsor rbri" height="35" width="116" style="border: 0;"></iframe>
+
 **News**
 
 [HtmlUnit@Twitter][3]
