@@ -169,8 +169,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Browsers which run by default.
      */
     private static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
-        {BrowserVersion.CHROME, BrowserVersion.EDGE,
-            BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_78,
+        {BrowserVersion.CHROME,
+            BrowserVersion.EDGE,
+            BrowserVersion.FIREFOX,
+            BrowserVersion.FIREFOX_78,
             BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
@@ -1395,7 +1397,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     // limit resource usage
-    private Server buildServer(final int port) {
+    private static Server buildServer(final int port) {
         final QueuedThreadPool threadPool = new QueuedThreadPool(5, 2);
 
         final Server server = new Server(threadPool);

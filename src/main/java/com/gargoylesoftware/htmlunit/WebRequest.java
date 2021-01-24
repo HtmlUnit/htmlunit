@@ -418,7 +418,7 @@ public class WebRequest implements Serializable {
      * @param url the url for the referer HTTP header
      */
     public void setRefererlHeader(final URL url) {
-        if (UrlUtils.URL_ABOUT_BLANK == url) {
+        if (url == null || !url.getProtocol().startsWith("http")) {
             return;
         }
 
