@@ -1207,6 +1207,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             body.setScrollLeft(body.getScrollLeft() + x);
             body.setScrollTop(body.getScrollTop() + y);
         }
+
+        final Event event = new Event(body, Event.TYPE_SCROLL);
+        body.fireEvent(event);
     }
 
     /**
@@ -1245,6 +1248,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             body.setScrollLeft(x);
             body.setScrollTop(y);
         }
+
+        final Event event = new Event(body, Event.TYPE_SCROLL);
+        body.fireEvent(event);
     }
 
     /**

@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -399,6 +400,40 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document", "body"},
+            IE = "document")
+    @HtmlUnitNYI(IE = {"document", "body"})
+    public void scrollEvents() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.scroll(10, 20);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' onscroll='log(\"body\")'>\n"
+            + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
+
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+    }
+
+    /**
      * Test that Window.scrollBy method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
@@ -410,6 +445,40 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document", "body"},
+            IE = "document")
+    @HtmlUnitNYI(IE = {"document", "body"})
+    public void scrollByEvents() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.scrollBy(10, 20);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' onscroll='log(\"body\")'>\n"
+            + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
+
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -462,6 +531,40 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document", "body"},
+            IE = "document")
+    @HtmlUnitNYI(IE = {"document", "body"})
+    public void scrollToEvents() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.scrollTo(10, 20);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' onscroll='log(\"body\")'>\n"
+            + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
+
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
