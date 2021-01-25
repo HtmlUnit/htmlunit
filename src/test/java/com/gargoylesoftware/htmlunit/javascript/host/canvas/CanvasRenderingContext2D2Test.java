@@ -43,8 +43,12 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
         try {
             final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
             final GraphicsDevice[] devices = env.getScreenDevices();
+            System.out.println("---- Skip ----");
+            System.out.println(devices);
+            System.out.println(devices.length);
             if (devices.length == 1) {
                 final GraphicsDevice device = devices[0];
+                System.out.println(device.getDisplayMode().getBitDepth());
                 if (device.getDisplayMode().getBitDepth() < 0) {
                     SKIP_ = true;
                 }
