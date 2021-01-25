@@ -190,6 +190,39 @@ public class Location2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "about:blank", "#foo", "about:blank#foo"},
+            IE = {"", "about:blank", "", "about:blank"})
+    @HtmlUnitNYI(IE = {"", "about:blank", "#foo", "about:blank#foo"})
+    public void about_blank_set_hash() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        var doc = frames[0].document;\n"
+            + "        var location = doc.location;\n"
+
+            + "        alert(location.hash);\n"
+            + "        alert(location.href);\n"
+            + "        location.hash = 'foo';\n"
+            + "        alert(location.hash);\n"
+            + "        alert(location.href);\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <iframe src='about:blank'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

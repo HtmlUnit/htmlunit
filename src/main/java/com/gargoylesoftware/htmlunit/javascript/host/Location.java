@@ -186,10 +186,6 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getUrl();
-            if (UrlUtils.URL_ABOUT_BLANK == url) {
-                return url.toExternalForm();
-            }
-
             final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
