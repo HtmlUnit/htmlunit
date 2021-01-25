@@ -94,6 +94,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAFklEQVR42mNgGErgP4V41MChYODg"
                 + "BADEpF+hx8ArfgAAAABJRU5ErkJggg==")
     public void fillRect() throws Exception {
+        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice[] devices = env.getScreenDevices();
+
+        assertEquals("-skip-", devices);
+        assertEquals("-skip-", devices.length);
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
