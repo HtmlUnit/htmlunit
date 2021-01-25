@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes, Chrome/Edge 88">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Reject old octal's in property names.
+            </action>
             <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
                 Location.reload() reloads to the wrong address when invoked across frames.
             </action>
