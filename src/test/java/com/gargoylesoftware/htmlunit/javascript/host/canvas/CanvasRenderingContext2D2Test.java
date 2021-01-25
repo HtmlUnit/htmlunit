@@ -43,9 +43,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
         try {
             final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
             final GraphicsDevice[] devices = env.getScreenDevices();
-            System.out.println("---- Skip ----");
-            System.out.println(devices);
-            System.out.println(devices.length);
             if (devices.length == 1) {
                 final GraphicsDevice device = devices[0];
                 System.out.println(device.getDisplayMode().getBitDepth());
@@ -94,11 +91,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAFklEQVR42mNgGErgP4V41MChYODg"
                 + "BADEpF+hx8ArfgAAAABJRU5ErkJggg==")
     public void fillRect() throws Exception {
-        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        final GraphicsDevice[] devices = env.getScreenDevices();
-
-        assertEquals("-skip-", devices);
-        assertEquals("-skip-", devices.length);
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
