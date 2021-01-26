@@ -1206,10 +1206,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         if (body != null) {
             body.setScrollLeft(body.getScrollLeft() + x);
             body.setScrollTop(body.getScrollTop() + y);
-        }
 
-        final Event event = new Event(body, Event.TYPE_SCROLL);
-        body.fireEvent(event);
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
+        }
     }
 
     /**
@@ -1221,6 +1221,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (19 * lines));
+
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
         }
     }
 
@@ -1233,6 +1236,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
+
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
         }
     }
 
@@ -1247,10 +1253,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         if (body != null) {
             body.setScrollLeft(x);
             body.setScrollTop(y);
-        }
 
-        final Event event = new Event(body, Event.TYPE_SCROLL);
-        body.fireEvent(event);
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
+        }
     }
 
     /**
