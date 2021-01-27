@@ -808,7 +808,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmessage,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmozfullscreenchange,onmozfullscreenerror,onoffline,ononline,onpagehide,onpageshow,onpause,"
                 + "onplay,onplaying,onpopstate,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onuserproximity,"
+                + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onuserproximity,"
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,"
                 + "parent,performance,postMessage(),print(),prompt(),releaseEvents(),requestAnimationFrame(),"
                 + "resizeBy(),resizeTo(),screen,scroll(),scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),"
@@ -5997,7 +5997,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF78 = "constructor(),label,type",
-            FF = "constructor(),label,type",
+            FF = "constructor()",
             IE = "constructor,type")
     public void menu() throws Exception {
         test("menu");
