@@ -504,7 +504,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onselectstart,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onselect,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
                 + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,spellcheck,style,tabIndex,title",
@@ -2467,7 +2467,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "compact",
-            FF = "compact",
             FF78 = "compact,label,type",
             IE = "compact,type")
     public void menu() throws Exception {
@@ -2482,8 +2481,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-",
             FF78 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
-    @HtmlUnitNYI(FF78 = "-",
-            FF = "-")
+    @HtmlUnitNYI(FF78 = "-")
     public void menuitem() throws Exception {
         test("menuitem");
     }
