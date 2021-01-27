@@ -84,8 +84,8 @@ public class InsecureHttpsServer {
      * @throws Exception in case of exception
      */
     public void start() throws Exception {
-        final URL url = getClass().getClassLoader().getResource("insecureSSL.keystore");
-        final KeyStore keystore = KeyStore.getInstance("jks");
+        final URL url = getClass().getClassLoader().getResource("insecureSSL.pfx");
+        final KeyStore keystore = KeyStore.getInstance("PKCS12");
         final char[] pwd = "nopassword".toCharArray();
         keystore.load(url.openStream(), pwd);
 

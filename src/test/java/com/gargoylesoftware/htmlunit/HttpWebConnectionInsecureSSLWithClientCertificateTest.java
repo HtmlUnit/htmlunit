@@ -47,8 +47,8 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
      */
     @Before
     public void setUp() throws Exception {
-        final URL url = getClass().getClassLoader().getResource("insecureSSL.keystore");
-        final KeyStore keystore = KeyStore.getInstance("jks");
+        final URL url = getClass().getClassLoader().getResource("insecureSSL.pfx");
+        final KeyStore keystore = KeyStore.getInstance("PKCS12");
         final char[] pwd = "nopassword".toCharArray();
         keystore.load(url.openStream(), pwd);
 
@@ -104,8 +104,8 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     @Test
     public void insecureSSL_clientCertificates() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
-                "nopassword", "jks");
+        webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.pfx"),
+                "nopassword", "PKCS12");
         webClient.getOptions().setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
                 + ':' + localServer_.getServer().getLocalPort()
@@ -121,12 +121,12 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     public void insecureSSL_clientCertificatesInputStream() throws Exception {
         final WebClient webClient = getWebClient();
         try (InputStream certificateInputStream = getClass().getClassLoader()
-                .getResourceAsStream("insecureSSL.keystore")) {
-            final byte[] certificateBytes = new byte[2048];
+                .getResourceAsStream("insecureSSL.pfx")) {
+            final byte[] certificateBytes = new byte[4096];
             certificateInputStream.read(certificateBytes);
 
             try (InputStream is = new ByteArrayInputStream(certificateBytes)) {
-                webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
+                webClient.getOptions().setSSLClientCertificate(is, "nopassword", "PKCS12");
                 webClient.getOptions().setUseInsecureSSL(true);
                 webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
                         + ':' + localServer_.getServer().getLocalPort()
