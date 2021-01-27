@@ -3409,7 +3409,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter(FF78)
     public Function getOnshow() {
         return getEventHandler(Event.TYPE_SHOW);
     }
@@ -3418,7 +3418,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter(FF78)
     public void setOnshow(final Object onshow) {
         setEventHandler(Event.TYPE_SHOW, onshow);
     }
