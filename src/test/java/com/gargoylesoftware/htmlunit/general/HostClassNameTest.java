@@ -3909,7 +3909,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function HTMLMenuItemElement() {\n    [native code]\n}",
             FF78 = "function HTMLMenuItemElement() {\n    [native code]\n}")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");

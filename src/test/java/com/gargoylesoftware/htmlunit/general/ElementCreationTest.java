@@ -903,7 +903,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLMenuItemElement]",
             FF78 = "[object HTMLMenuItemElement]")
     public void menuitem() throws Exception {
         test("menuitem");

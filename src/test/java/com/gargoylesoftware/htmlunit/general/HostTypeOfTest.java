@@ -2519,7 +2519,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
             FF78 = "function")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");

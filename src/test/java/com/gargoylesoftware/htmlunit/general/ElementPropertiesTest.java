@@ -492,7 +492,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,"
                 + "translate",
-            FF = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,draggable,focus(),"
+            FF = "accessKey,accessKeyLabel,blur(),click(),contentEditable,dataset,dir,draggable,focus(),"
                 + "hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
                 + "offsetWidth,"
                 + "onabort,onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onauxclick,onblur,"
@@ -1093,7 +1093,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onpopstate,onprogress,onratechange,onrejectionhandled,onreset,onresize,onscroll,"
                 + "onseeked,onseeking,onselect,onselectstart",
-                "onshow,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
+                "onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                     + "ontransitionend,ontransitionrun,ontransitionstart,onunhandledrejection,onunload,"
                     + "onuserproximity,onvolumechange,onvrdisplayactivate,onvrdisplayconnect,"
                     + "onvrdisplaydeactivate,onvrdisplaydisconnect,onvrdisplaypresentchange,"
@@ -2467,7 +2467,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "compact",
-            FF = "compact,label,type",
+            FF = "compact",
             FF78 = "compact,label,type",
             IE = "compact,type")
     public void menu() throws Exception {
@@ -2481,7 +2481,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-",
-            FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
             FF78 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
     @HtmlUnitNYI(FF78 = "-",
             FF = "-")
@@ -4508,7 +4507,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointerlockchange,"
                     + "onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
                     + "onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                    + "onselectionchange,onselectstart,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                    + "onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                     + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                     + "onvisibilitychange,onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,"
                     + "onwebkitanimationstart,onwebkittransitionend,onwheel,open(),plugins,pointerLockElement,"
@@ -4755,7 +4754,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
-                + "onseeked,onseeking,onselect,onselectstart,onshow,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeked,onseeking,onselect,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
                 + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,ownerSVGElement,style,tabIndex,viewportElement",
