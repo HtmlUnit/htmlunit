@@ -1234,7 +1234,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
-                + "name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
+                + "name,navigator,onabort,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,"
                 + "ondevicelight,ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"
@@ -1247,15 +1247,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,postMessage(),print(),process(),prompt(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,scroll(),"
-                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo()",
-                "scrollX,scrollY,self,sessionStorage,"
+                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),scrollX",
+                "scrollY,self,sessionStorage,"
                     + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window"},
             FF = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
-                + "name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
+                + "name,navigator,onabort,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,"
                 + "ondevicelight,ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"
@@ -1268,8 +1268,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,postMessage(),print(),process(),prompt(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,scroll(),"
-                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),scrollX",
-                "scrollY,self,sessionStorage,"
+                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),scrollX,scrollY",
+                "self,sessionStorage,"
                     + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window"},
             IE = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,clipboardData,close(),"
