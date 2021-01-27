@@ -1268,8 +1268,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,"
                 + "pageYOffset,parent,performance,postMessage(),print(),process(),prompt(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),resizeBy(),resizeTo(),screen,scroll(),"
-                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo()",
-                "scrollX,scrollY,self,sessionStorage,"
+                + "scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),scrollX",
+                "scrollY,self,sessionStorage,"
                     + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window"},
             IE = {"addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,clipboardData,close(),"
