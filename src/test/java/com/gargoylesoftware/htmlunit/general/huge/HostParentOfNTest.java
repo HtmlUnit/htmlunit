@@ -651,7 +651,6 @@ public class HostParentOfNTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF78 = "true")
     public void _Node_HTMLMenuItemElement() throws Exception {
         test("Node", "HTMLMenuItemElement");

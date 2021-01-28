@@ -792,7 +792,6 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF78 = "true")
     public void _HTMLElement_HTMLMenuItemElement() throws Exception {
         test("HTMLElement", "HTMLMenuItemElement");
@@ -1430,7 +1429,6 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF78 = "true")
     public void _HTMLMenuItemElement_HTMLMenuItemElement() throws Exception {
         test("HTMLMenuItemElement", "HTMLMenuItemElement");
