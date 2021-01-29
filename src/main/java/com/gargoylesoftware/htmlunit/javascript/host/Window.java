@@ -2163,6 +2163,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     }
 
     /**
+     * Returns the value of {@code netscape} property.
+     * @return the value of {@code netscape} property
+     */
+    @JsxGetter({FF, FF78})
+    public Netscape getNetscape() {
+        return new Netscape(this);
+    }
+
+    /**
      * {@inheritDoc}
      * Used to allow re-declaration of constants (eg: "var undefined;").
      */
