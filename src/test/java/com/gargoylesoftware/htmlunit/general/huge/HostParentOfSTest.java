@@ -185,8 +185,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _SourceBuffer_SourceBuffer() throws Exception {
         test("SourceBuffer", "SourceBuffer");
     }
@@ -195,8 +194,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _SourceBufferList_SourceBufferList() throws Exception {
         test("SourceBufferList", "SourceBufferList");
     }
