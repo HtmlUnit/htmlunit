@@ -35,9 +35,9 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.39</checkstyle.version>
+        <checkstyle.version>8.40</checkstyle.version>
         <spotbugs.version>4.2.0</spotbugs.version>
-        <pmd.version>6.30.0</pmd.version>
+        <pmd.version>6.31.0</pmd.version>
     </properties>
 
     <build>
@@ -55,7 +55,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.1.2</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
