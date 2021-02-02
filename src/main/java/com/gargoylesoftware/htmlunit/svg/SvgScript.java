@@ -98,6 +98,26 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
+     * Returns the value of the attribute {@code defer}. Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code defer}
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getDeferAttribute() {
+        return getAttributeDirect("defer");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDeferred() {
+        return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
+    }
+
+    /**
      * Executes the <tt>onreadystatechange</tt> handler when simulating IE, as well as executing
      * the script itself, if necessary. {@inheritDoc}
      */
