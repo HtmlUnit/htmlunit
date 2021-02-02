@@ -828,7 +828,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <title>test</title>\n"
             + "    <script defer=''>alert('3');</script>\n"
-            + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
+            + "    <script defer onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
             + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
             + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"7\");'></script>\n"
             + "    <script>alert('2')</script>\n"

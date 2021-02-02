@@ -28,6 +28,12 @@ public interface ScriptElement {
     boolean isExecuted();
 
     /**
+     * Returns {@code true} if this script is deferred.
+     * @return {@code true} if this script is deferred
+     */
+    boolean isDeferred();
+
+    /**
      * Sets if executed.
      * @param executed if executed
      */

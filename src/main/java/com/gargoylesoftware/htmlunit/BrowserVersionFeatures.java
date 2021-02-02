@@ -706,10 +706,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DATE_WITH_LEFT_TO_RIGHT_MARK,
 
-    /** */
-    @BrowserFeature(IE)
-    JS_DEFERRED,
-
     /** Javascript doctyp.entities returns null (FF10). */
     @BrowserFeature(IE)
     JS_DOCTYPE_ENTITIES_NULL,

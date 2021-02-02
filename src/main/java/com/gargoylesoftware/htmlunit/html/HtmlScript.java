@@ -135,10 +135,10 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Returns {@code true} if this script is deferred.
-     * @return {@code true} if this script is deferred
+     * {@inheritDoc}
      */
-    protected boolean isDeferred() {
+    @Override
+    public boolean isDeferred() {
         return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
     }
 
@@ -204,14 +204,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             }
         }
         return scriptCode.toString();
-    }
-
-    /**
-     * Sets the <tt>readyState</tt> to the specified state and executes the
-     * <tt>onreadystatechange</tt> handler when simulating IE.
-     * @param state this script ready state
-     */
-    protected void setAndExecuteReadyState(final String state) {
     }
 
     /**

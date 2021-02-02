@@ -84,14 +84,21 @@ public final class ScriptElementSupport {
 
         if (!element.getPage().getWebClient().isJavaScriptEngineEnabled()) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("SvgScript found but not executed because javascript engine is disabled");
+                LOG.debug("Script found but not executed because javascript engine is disabled");
             }
+            return;
+        }
+
+        final ScriptElement script = (ScriptElement) element;
+        final String srcAttrib = script.getSrcAttribute();
+        if (!postponed
+                && ATTRIBUTE_NOT_DEFINED != srcAttrib
+                && script.isDeferred()) {
             return;
         }
 
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         if (webWindow != null) {
-            final String srcAttrib = ((ScriptElement) element).getSrcAttribute();
             final StringBuilder description = new StringBuilder()
                     .append("Execution of ")
                     .append(srcAttrib == ATTRIBUTE_NOT_DEFINED ? "inline " : "external ")

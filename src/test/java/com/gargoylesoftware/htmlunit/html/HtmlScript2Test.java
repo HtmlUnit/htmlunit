@@ -211,16 +211,52 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"deferred", "normal", "onload"})
-    public void defer() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script defer>alert('deferred')</script>\n"
-            + "<script>alert('normal')</script>\n"
+    @Alerts({"deferred", "start", "dcl listener added", "end", "dcLoaded", "onload"})
+    public void deferInline() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script defer>alert('deferred')</script>\n"
+            + "  <script>alert('start')</script>"
+            + "  <script>\n"
+            + "    document.addEventListener('DOMContentLoaded', function(event) { alert('dcLoaded') });\n"
+            + "    alert('dcl listener added')</script>"
+            + "  </script>\n"
             + "</head>\n"
-            + "<body onload='alert(\"onload\")'>test</body>\n"
+            + "<body onload='alert(\"onload\")'>\n"
+            + "</body>\n"
+            + "<script>alert('end')</script>\n"
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"start", "dcl listener added", "end", "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
+    public void deferExternal() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script defer src='script1.js'></script>\n"
+            + "  <script>alert('start')</script>"
+            + "  <script>\n"
+            + "    document.addEventListener('DOMContentLoaded', function(event) { alert('dcLoaded') });\n"
+            + "    alert('dcl listener added')</script>"
+            + "  </script>\n"
+            + "  <script defer src='script2.js'></script>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"onload\")'>\n"
+            + "  <div id='abc'>Test</div>\n"
+            + "</body>\n"
+            + "<script defer src='script3.js'></script>\n"
+            + "<script>alert('end')</script>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
+        loadPageWithAlerts2(html, 7777777);
     }
 
     /**

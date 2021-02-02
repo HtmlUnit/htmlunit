@@ -18,11 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
@@ -256,6 +256,8 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_INTERACTIVE);
         }
 
+        executeDeferredScriptsIfNeeded();
+
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
 
         loadFrames();
@@ -269,9 +271,6 @@ public class HtmlPage extends SgmlPage {
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
-
-        executeDeferredScriptsIfNeeded();
-        setReadyStateOnDeferredScriptsIfNeeded();
 
         // frame initialization has a different order
         boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
@@ -1466,32 +1465,13 @@ public class HtmlPage extends SgmlPage {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
-        if (hasFeature(JS_DEFERRED)) {
-            final DomElement doc = getDocumentElement();
-            final List<HtmlElement> elements = doc.getElementsByTagName("script");
-            for (final HtmlElement e : elements) {
-                if (e instanceof HtmlScript) {
-                    final HtmlScript script = (HtmlScript) e;
-                    if (script.isDeferred()) {
-                        ScriptElementSupport.executeScriptIfNeeded(script);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Sets the ready state on any deferred scripts, if necessary.
-     */
-    private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (getWebClient().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
-            final List<HtmlElement> elements = getDocumentElement().getElementsByTagName("script");
-            for (final HtmlElement e : elements) {
-                if (e instanceof HtmlScript) {
-                    final HtmlScript script = (HtmlScript) e;
-                    if (script.isDeferred()) {
-                        script.setAndExecuteReadyState(READY_STATE_COMPLETE);
-                    }
+        final DomElement doc = getDocumentElement();
+        final List<HtmlElement> elements = doc.getElementsByTagName("script");
+        for (final HtmlElement e : elements) {
+            if (e instanceof HtmlScript) {
+                final HtmlScript script = (HtmlScript) e;
+                if (script.isDeferred() && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
+                    ScriptElementSupport.executeScriptIfNeeded(script);
                 }
             }
         }
