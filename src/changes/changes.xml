@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.47.0" date="xxxx, 2021" description="Bugfixes, Chrome/Edge 88">
+            <action type="fix" dev="RBRi">
+                Defer attribute of scripts was ignored.
+            </action>
             <action type="fix" dev="RBRi" issue="282">
                 Window.scroll()/scrollTo()/scrollBy() now triggers a scroll event.
             </action>
