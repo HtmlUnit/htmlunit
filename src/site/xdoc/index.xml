@@ -11,6 +11,7 @@
 
     <body>
         <section name="HtmlUnit">
+            <iframe src="https://github.com/sponsors/rbri/button" title="Sponsor rbri" height="35" width="116" style="border: 0;"></iframe>
             <p>
                 HtmlUnit is a "GUI-Less browser for Java programs".
                 It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc...
