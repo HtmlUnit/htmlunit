@@ -91,8 +91,7 @@ public final class ScriptElementSupport {
 
         final ScriptElement script = (ScriptElement) element;
         final String srcAttrib = script.getSrcAttribute();
-        if (!postponed
-                && ATTRIBUTE_NOT_DEFINED != srcAttrib
+        if (ATTRIBUTE_NOT_DEFINED != srcAttrib
                 && script.isDeferred()) {
             return;
         }

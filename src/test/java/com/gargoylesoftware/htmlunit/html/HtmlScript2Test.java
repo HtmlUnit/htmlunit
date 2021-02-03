@@ -29,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -256,7 +257,63 @@ public class HtmlScript2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
-        loadPageWithAlerts2(html, 7777777);
+        loadPageWithAlerts2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"dcl listener added", "head-end", "end",
+                        "deferred-2", "deferred-1", "deferred-3", "dcLoaded", "onload"},
+            CHROME = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
+            EDGE = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
+            IE = {"dcl listener added", "head-end", "deferred-2", "end",
+                        "deferred-1", "deferred-3", "dcLoaded", "onload"})
+    @HtmlUnitNYI(CHROME = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+            EDGE = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+            FF = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+            FF78 = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+            IE = {"dcl listener added", "head-end", "end",
+                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
+    public void deferDynamicExternal() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    document.addEventListener('DOMContentLoaded', function(event) { alert('dcLoaded') });\n"
+            + "    alert('dcl listener added')</script>"
+            + "  </script>\n"
+            + "  <script defer src='script1.js'></script>\n"
+            + "  <script>\n"
+            + "    head = document.getElementsByTagName('head')[0];\n"
+
+            + "    script = document.createElement('script');\n"
+            + "    script.setAttribute('defer', 'defer');\n"
+            + "    script.setAttribute('src', 'script2.js');\n"
+            + "    head.appendChild(script);\n"
+            + "  </script>\n"
+            + "  <script defer src='script3.js'></script>\n"
+            + "  <script>alert('head-end')</script>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"onload\")'>\n"
+            + "  <div id='abc'>Test</div>\n"
+            + "</body>\n"
+            + "<script>alert('end')</script>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
+        loadPageWithAlerts2(html);
     }
 
     /**
