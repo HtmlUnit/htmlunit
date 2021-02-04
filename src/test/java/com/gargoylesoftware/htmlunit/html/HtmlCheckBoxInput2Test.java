@@ -873,7 +873,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "null", "true", "null", "false", "null", "true", "", "false", "", "true", "",
-                        "true", "yes", "false", "yes", "true", "yes"})
+                "true", "yes", "false", "yes", "true", "yes"})
     public void checkedAttributeJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -933,7 +933,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "null", "false", "null", "true", "", "true", "",
-                        "true", "yes", "true", "yes"})
+                "true", "yes", "true", "yes"})
     public void defaultCheckedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

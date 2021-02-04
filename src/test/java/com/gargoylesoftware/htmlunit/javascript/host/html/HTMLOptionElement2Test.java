@@ -548,8 +548,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"o2: text: Option 2, label: Option 2, value: 2, defaultSelected: false, selected: false",
-            "o3: text: Option 3, label: Option 3, value: 3, defaultSelected: true, selected: false",
-            "0", "1"})
+                "o3: text: Option 3, label: Option 3, value: 3, defaultSelected: true, selected: false",
+                "0", "1"})
     public void constructor() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -651,9 +651,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false null null", "false null null", "true *selected selected",
-                        "true null null", "false null null", "false *selected selected",
-                        "false null null", "true null null", "false *selected selected",
-                        "true null null", "false null null", "false *selected selected"})
+                "true null null", "false null null", "false *selected selected",
+                "false null null", "true null null", "false *selected selected",
+                "true null null", "false null null", "false *selected selected"})
     public void selectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1238,7 +1238,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false-null", "true-true", "true-null",
-                        "false-selected", "false-null", "true-true"},
+                    "false-selected", "false-null", "true-true"},
             FF = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"},
             FF78 = {"false-null", "true-true", "true-null",
