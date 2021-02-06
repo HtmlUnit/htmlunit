@@ -55,9 +55,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>January 2, 2021</date></dt>
+                    <dt>Latest release <date>February 7, 2021</date></dt>
                     <dd>
-                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.46.0/">version 2.46.0</a></p>
+                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.47.0/">version 2.47.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -169,7 +169,7 @@
 <dependency>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.46.0</version>
+    <version>2.47.0</version>
 </dependency>]]></source>
             </p>
 
