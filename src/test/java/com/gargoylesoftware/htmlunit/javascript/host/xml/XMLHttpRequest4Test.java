@@ -103,6 +103,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
 
     /**
      * Testing event invocation order.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = {

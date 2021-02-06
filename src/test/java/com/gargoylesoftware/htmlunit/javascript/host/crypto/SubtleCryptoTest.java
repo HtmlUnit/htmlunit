@@ -40,6 +40,7 @@ public class SubtleCryptoTest extends WebDriverTestCase {
 
     /**
      * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "TypeError true",

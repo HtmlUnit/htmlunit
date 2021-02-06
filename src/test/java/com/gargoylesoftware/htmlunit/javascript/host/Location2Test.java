@@ -1049,6 +1049,7 @@ public class Location2Test extends WebDriverTestCase {
 
     /**
      * Tests that location.reload() works correctly when invoked across frames.
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts({"§§URL§§upper.html", "§§URL§§lower.html"})
