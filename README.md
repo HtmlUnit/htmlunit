@@ -2,6 +2,8 @@
 
 Version 2.46.0 / January 2, 2021
 
+:heart: [Sponsor](https://github.com/sponsors/rbri)
+
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit)
 
 **Homepage**
@@ -38,7 +40,8 @@ Features
 --------
 * Support for the HTTP and HTTPS protocols
 * Support for cookies
-* Ability to specify whether failing responses from the server should throw exceptions or should be returned as pages of the appropriate type (based on content type)
+* Ability to specify whether failing re
+ses from the server should throw exceptions or should be returned as pages of the appropriate type (based on content type)
 * Support for submit methods POST and GET (as well as HEAD, DELETE, ...)
 * Ability to customize the request headers being sent to the server
 * Support for HTML responses
