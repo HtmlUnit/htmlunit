@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.47.0" date="February 7, 2021" description="Hotfix">
+            <action type="fix" dev="rbri">
+                neko: Fix a regression from the improved table parsing done in 2.44.0.
+            </action>
+        </release>
+
         <release version="2.47.0" date="February 7, 2021" description="Bugfixes, Chrome/Edge 88, Firefox 85">
             <action type="fix" dev="RBRi">
                 Defer attribute of scripts was ignored.
