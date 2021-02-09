@@ -129,7 +129,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
     }
 
     @Override
-    public void closeClinet() throws Exception {
+    public void closeClient() throws Exception {
         if (client_ != null) {
             client_.stop();
             client_.destroy();

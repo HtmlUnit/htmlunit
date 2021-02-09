@@ -402,7 +402,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
 
         try {
-            webSocketImpl_.closeClinet();
+            webSocketImpl_.closeClient();
         }
         catch (final Exception e) {
             throw new RuntimeException(e);

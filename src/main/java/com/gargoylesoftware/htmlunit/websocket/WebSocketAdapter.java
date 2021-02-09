@@ -34,7 +34,7 @@ public interface WebSocketAdapter {
 
     void closeOutgoingSession() throws Exception;
 
-    void closeClinet() throws Exception;
+    void closeClient() throws Exception;
 
     void onWebSocketConnecting();
 
