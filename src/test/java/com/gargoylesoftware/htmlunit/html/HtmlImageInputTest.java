@@ -31,6 +31,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -381,6 +382,122 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"§§URL§§abcd/img.gif", "2"})
+    @HtmlUnitNYI(CHROME = {"§§URL§§abcd/img.gif", "1"},
+            EDGE = {"§§URL§§abcd/img.gif", "1"},
+            FF = {"§§URL§§abcd/img.gif", "1"},
+            FF78 = {"§§URL§§abcd/img.gif", "1"},
+            IE = {"§§URL§§abcd/img.gif", "1"})
+    public void resolveImage() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        }
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='image' src='" + URL_SECOND + "abcd/img.gif'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        final int expectedRequestCount = Integer.parseInt(getExpectedAlerts()[1]);
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        setExpectedAlerts(getExpectedAlerts()[0]);
+        loadPageWithAlerts2(html);
+
+        assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "1"})
+    public void resolveImageEmptySource() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        }
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='image' src=''>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        final int expectedRequestCount = Integer.parseInt(getExpectedAlerts()[1]);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        setExpectedAlerts(getExpectedAlerts()[0]);
+        loadPageWithAlerts2(html);
+
+        assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "1"})
+    public void resolveImageNoSource() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        }
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='image'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        final int expectedRequestCount = Integer.parseInt(getExpectedAlerts()[1]);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        setExpectedAlerts(getExpectedAlerts()[0]);
+        loadPageWithAlerts2(html);
+
+        assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("§§URL§§abcd/img.gif")
     public void lineBreaksInUrl() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
@@ -406,6 +523,88 @@ public class HtmlImageInputTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_SECOND);
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "§§URL§§abcd/img.gif"})
+    public void setSrc() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.src);\n"
+            + "    input.src='" + URL_FIRST + "abcd/img.gif';\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='image'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "§§URL§§abcd/img.gif", "1", "2"})
+    @HtmlUnitNYI(CHROME = {"", "§§URL§§abcd/img.gif", "1", "1"},
+            EDGE = {"", "§§URL§§abcd/img.gif", "1", "1"},
+            FF = {"", "§§URL§§abcd/img.gif", "1", "1"},
+            FF78 = {"", "§§URL§§abcd/img.gif", "1", "1"},
+            IE = {"", "§§URL§§abcd/img.gif", "1", "1"})
+    public void resolveImageOnChange() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "abcd/img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+        }
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "  function update() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    input.src='" + URL_FIRST + "abcd/img.gif';\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='image'>\n"
+            + "  <button id='myUpdate' onclick='update()'>Update</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final int startCount = getMockWebConnection().getRequestCount();
+        final int expectedRequestCount = Integer.parseInt(getExpectedAlerts()[2]);
+        final int expectedRequestCount2 = Integer.parseInt(getExpectedAlerts()[3]);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final String secondUrl = getExpectedAlerts()[1];
+
+        setExpectedAlerts(getExpectedAlerts()[0]);
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
+
+        driver.findElement(By.id("myUpdate")).click();
+        verifyAlerts(driver, secondUrl);
+
+        Thread.sleep(400); // CHROME processes the image async
+        assertEquals(expectedRequestCount2, getMockWebConnection().getRequestCount() - startCount);
     }
 
     /**
