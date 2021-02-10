@@ -46,7 +46,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
@@ -660,7 +659,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxSetter
     public void setSrc(final String src) {
-        getDomNodeOrDie().setAttribute(HtmlElement.SRC_ATTRIBUTE, src);
+        getDomNodeOrDie().setSrcAttribute(src);
     }
 
     /**

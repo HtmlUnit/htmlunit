@@ -280,6 +280,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Sets the {@code src} attribute.
+     *
+     * @param src the {@code src} attribute
+     */
+    public void setSrcAttribute(final String src) {
+        setAttribute(HtmlElement.SRC_ATTRIBUTE, src);
+    }
+
+    /**
      * Returns the value of the attribute {@code alt}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
