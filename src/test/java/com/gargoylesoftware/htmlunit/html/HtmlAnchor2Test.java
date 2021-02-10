@@ -25,6 +25,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -749,5 +751,70 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         assertEquals("Last Name, First Name", anchor.asText());
         assertEquals("\n    Last Name, First Name\n  ", anchor.getTextContent());
+    }
+
+    /**
+     * Not testable with Selenium.
+     *
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "First"},
+            IE = {"0", "First"})
+    @HtmlUnitNYI(IE = {"1", "First"})
+    public void clickWithDownloadAttribute() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>First</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <a id='clickMe' href='" + URL_SECOND + "' >Click Me</a>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<head><title>Second</title>");
+        final int windowsSize = getWebClient().getWebWindows().size();
+        final HtmlPage page = loadPage(html);
+
+        page.getElementById("clickMe").click();
+
+        assertEquals("Should have opened a new window",
+                windowsSize + Integer.parseInt(getExpectedAlerts()[0]), getWebClient().getWebWindows().size());
+        assertEquals("Should not have navigated away", getExpectedAlerts()[1], page.getTitleText());
+    }
+
+
+    /**
+     * Not testable with Selenium.
+     *
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "First"},
+            IE = {"0", "First"})
+    @HtmlUnitNYI(IE = {"1", "First"})
+    public void clickWithDownloadAttributeFromJs() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>First</title>\n"
+                + "  <script>\n"
+                + "    function test(e) {\n"
+                + "      var a = document.getElementById('clickMe');"
+                + "      a.setAttribute('download', 'lora.png');"
+                + "      a.click();"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <a id='clickMe' href='" + URL_SECOND + "' >Click Me</a>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<head><title>Second</title>");
+
+        final int windowsSize = getWebClient().getWebWindows().size();
+        final HtmlPage page = loadPage(html);
+
+        assertEquals("Should have opened a new window",
+                windowsSize + Integer.parseInt(getExpectedAlerts()[0]), getWebClient().getWebWindows().size());
+        assertEquals("Should not have navigated away", getExpectedAlerts()[1], page.getTitleText());
     }
 }

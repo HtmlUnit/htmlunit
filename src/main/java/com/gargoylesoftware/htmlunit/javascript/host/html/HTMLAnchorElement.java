@@ -729,7 +729,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getDownload() {
-        return getDomNodeOrDie().getAttribute("download");
+        return ((HtmlAnchor) getDomNodeOrDie()).getDownloadAttribute();
     }
 
     /**

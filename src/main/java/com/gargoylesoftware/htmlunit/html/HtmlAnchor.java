@@ -132,7 +132,7 @@ public class HtmlAnchor extends HtmlElement {
             }
 
             final String target;
-            if (shiftKey || ctrlKey) {
+            if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
                 target = "_blank";
             }
             else {
@@ -177,7 +177,7 @@ public class HtmlAnchor extends HtmlElement {
                     + page.getUrl());
         }
         final String target;
-        if (shiftKey || ctrlKey) {
+        if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
             target = "_blank";
         }
         else {
@@ -427,4 +427,12 @@ public class HtmlAnchor extends HtmlElement {
         return getAttributeDirect("ping");
     }
 
+    /**
+     * Returns the value of the attribute {@code download}.
+     *
+     * @return the value of the attribute {@code download}
+     */
+    public final String getDownloadAttribute() {
+        return getAttributeDirect("download");
+    }
 }

@@ -9,6 +9,9 @@
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes">
             <action type="fix" dev="rbri" issue="309">
+                Handle the anchor download property like Shift/Ctrl click - open a new window containing the downloaded content as UnknownPage.
+            </action>
+            <action type="fix" dev="rbri" issue="309">
                 HTMLInputElement.src is now setable also.
             </action>
             <action type="fix" dev="rbri">
