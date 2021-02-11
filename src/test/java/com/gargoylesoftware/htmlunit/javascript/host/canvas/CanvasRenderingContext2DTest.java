@@ -76,7 +76,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 final ImageComparison imageComparison = new ImageComparison(expectedImage, currentImage);
                 // imageComparison.setMinimalRectangleSize(10);
                 imageComparison.setPixelToleranceLevel(0.2);
-                imageComparison.setAllowingPercentOfDifferentPixels(10);
+                imageComparison.setAllowingPercentOfDifferentPixels(5);
 
                 final ImageComparisonResult imageComparisonResult = imageComparison.compareImages();
                 final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
@@ -88,7 +88,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
 //                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
 //                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
 //                    ImageComparisonUtil.saveImage(
-//                      new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
+//                            new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
                     fail("different image");
                 }
             }

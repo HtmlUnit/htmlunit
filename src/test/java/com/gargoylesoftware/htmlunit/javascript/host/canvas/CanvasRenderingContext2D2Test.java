@@ -1421,10 +1421,13 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAA"
-            + "AiklEQVR42mNgYGD4T2UMBygcagBaGPgfhH2A+AsQ7wdiURyKSoD4PhD/AmIPQgbOBmImII4H4mk4"
-            + "FHUAMRPIMJChhAyUhHLZgPgDDkUsyHwCBqII/cKmCB8fmwv5kFz4khoG9kC5oDDso4aBaUD8A4g3I"
-            + "FxLmoFIqfw/tXMKyGWDO6eMGjhqIDEAALK8kB4mQXliAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA7UlEQVQ4T+3Ur0pEQRTH8c/ULYIIg"
+            + "iAbFsEmGIXFJvoOBv+wBsEgGmQtIth8htXiKxiFfQKDyWQwb9VguDK7szhcYb1cjPeUA8OZ7/zmd8"
+            + "5MwBU2TWKYcu0U0s4IjTHNDbC6A5mHe8vcjbCFNewSHnJUMWneBbbT+mFgkNeUgV84RQs3uCTEQ8a"
+            + "RgEfooY0TnAc+pjVl4NOPqiKCHwmvJWAnqipYiDBczwJWUfgnMA32zhzHn6x3WFpkf8D9e+5Pj/Yq"
+            + "82c8r9C6ZeOA4YgoZBzxyhmw+0b/pXpPf1fO8LAetnl6zW9TY3L+fWy+AejsRJW3OyxAAAAAAElFT"
+            + "kSuQmCC",
             IE = "no ctor")
     public void fillTextAndTransform() throws Exception {
         final String html = "<html><head>\n"
