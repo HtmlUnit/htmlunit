@@ -775,7 +775,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final int windowsSize = getWebClient().getWebWindows().size();
         final HtmlPage page = loadPage(html);
 
-
         page.getElementById("clickMe").click();
 
         assertEquals("Should have opened a new window",
