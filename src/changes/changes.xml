@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Two convenience methods added: WebClient.loadHtmlCodeIntoCurrentWindow(String) and WebClient.loadXHtmlCodeIntoCurrentWindow(String).
+            </action>
             <action type="fix" dev="rbri" issue="309">
                 Handle the anchor download property like Shift/Ctrl click - open a new window containing the downloaded content as UnknownPage.
             </action>

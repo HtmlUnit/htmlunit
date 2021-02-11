@@ -2554,4 +2554,44 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(new String[]{"true"}, actual);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void loadHtmlCodeIntoCurrentWindow() throws Exception {
+        final String htmlCode = "<html>"
+                + "  <head>"
+                + "    <title>Title</title>"
+                + "  </head>"
+                + "  <body>"
+                + "    content..."
+                + "  </body>"
+                + "</html> ";
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.loadHtmlCodeIntoCurrentWindow(htmlCode);
+        assertEquals("content...", page.getBody().asText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void loadXHtmlCodeIntoCurrentWindow() throws Exception {
+        final String htmlCode = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\""
+                + "\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
+                + "  <head>"
+                + "    <title>Title</title>"
+                + "  </head>"
+                + "  <body>"
+                + "    content..."
+                + "  </body>"
+                + "</html> ";
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.loadXHtmlCodeIntoCurrentWindow(htmlCode);
+        assertEquals("content...", page.getBody().asText());
+    }
 }

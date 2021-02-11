@@ -14,20 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.doc;
 
-import java.net.URL;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 
 /**
  * Tests for the sample code from the documentation to make sure
@@ -57,16 +52,9 @@ public class FaqTest extends SimpleWebTestCase {
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            final WebWindow webWindow = webClient.getCurrentWindow();
+            final XHtmlPage page = webClient.loadXHtmlCodeIntoCurrentWindow(htmlCode);
 
-            final StringWebResponse webResponse =
-                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
-            final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
-            webWindow.setEnclosedPage(page);
-
-            htmlParser.parse(webResponse, page, true);
-            // work with the html page
+            // work with the xhtml page
 
             assertEquals("Title" + ls + "content...", page.asText());
         }
@@ -90,15 +78,8 @@ public class FaqTest extends SimpleWebTestCase {
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            final WebWindow webWindow = webClient.getCurrentWindow();
+            final HtmlPage page = webClient.loadXHtmlCodeIntoCurrentWindow(htmlCode);
 
-            final StringWebResponse webResponse =
-                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
-            final HtmlPage page = new HtmlPage(webResponse, webWindow);
-            webWindow.setEnclosedPage(page);
-
-            htmlParser.parse(webResponse, page, true);
             // work with the html page
 
             assertEquals("Title" + ls + "content...", page.asText());

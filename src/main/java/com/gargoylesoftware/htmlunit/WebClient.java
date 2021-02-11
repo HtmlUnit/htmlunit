@@ -82,6 +82,8 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.FrameWindow.PageDenied;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.XHtmlPage;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -2621,5 +2623,47 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public boolean isJavaScriptEngineEnabled() {
         return javaScriptEngineEnabled_;
+    }
+
+    /**
+     * Parses the given XHtml code string and loads the resulting XHtmlPage into
+     * the current window.
+     *
+     * @param htmlCode the html code as string
+     * @return the HtmlPage
+     * @throws IOException in case of error
+     */
+    public HtmlPage loadHtmlCodeIntoCurrentWindow(final String htmlCode) throws IOException {
+        final HTMLParser htmlParser = getPageCreator().getHtmlParser();
+        final WebWindow webWindow = getCurrentWindow();
+
+        final StringWebResponse webResponse =
+                new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/dummy.html"));
+        final HtmlPage page = new HtmlPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+
+        htmlParser.parse(webResponse, page, true);
+        return page;
+    }
+
+    /**
+     * Parses the given XHtml code string and loads the resulting XHtmlPage into
+     * the current window.
+     *
+     * @param xhtmlCode the xhtml code as string
+     * @return the XHtmlPage
+     * @throws IOException in case of error
+     */
+    public XHtmlPage loadXHtmlCodeIntoCurrentWindow(final String xhtmlCode) throws IOException {
+        final HTMLParser htmlParser = getPageCreator().getHtmlParser();
+        final WebWindow webWindow = getCurrentWindow();
+
+        final StringWebResponse webResponse =
+                new StringWebResponse(xhtmlCode, new URL("http://htmlunit.sourceforge.net/dummy.html"));
+        final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+
+        htmlParser.parse(webResponse, page, true);
+        return page;
     }
 }
