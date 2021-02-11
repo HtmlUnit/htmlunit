@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -387,9 +388,14 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] clearRect(" + x + ", " + y + ", " + w + ", " + h + ")");
         }
 
-        graphics2D_.setColor(Color.WHITE);
+        final Composite saved = graphics2D_.getComposite();
+
+        graphics2D_.setColor(Color.BLACK);
+        graphics2D_.setComposite(AlphaComposite.Clear); // overpaint
         final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
         graphics2D_.fill(transformation_.createTransformedShape(rect));
+
+        graphics2D_.setComposite(saved);
     }
 
     /**
