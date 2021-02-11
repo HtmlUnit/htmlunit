@@ -768,12 +768,13 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
                 + "  <title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "  <a id='clickMe' href='" + URL_SECOND + "' >Click Me</a>\n"
+                + "  <a id='clickMe' href='" + URL_SECOND + "' download='lora.html'>Click Me</a>\n"
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "<head><title>Second</title>");
         final int windowsSize = getWebClient().getWebWindows().size();
         final HtmlPage page = loadPage(html);
+
 
         page.getElementById("clickMe").click();
 
