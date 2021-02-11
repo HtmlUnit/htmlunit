@@ -14,17 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
+import java.util.List;
 
-import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
@@ -35,27 +33,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
-
-    private static boolean SKIP_ = false;
-
-    static {
-        try {
-            final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            final GraphicsDevice[] devices = env.getScreenDevices();
-            if (devices.length == 1) {
-                final GraphicsDevice device = devices[0];
-                System.out.println(device.getDisplayMode().getBitDepth());
-                if (device.getDisplayMode().getBitDepth() < 0) {
-                    SKIP_ = true;
-                }
-            }
-        }
-        catch (final HeadlessException e) {
-            // skip most of the tests in headless mode
-            SKIP_ = true;
-        }
-    }
+public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -80,7 +58,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -106,7 +88,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -132,7 +118,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -159,7 +149,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -171,8 +165,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "TonBLkiG/UczeDIQC5Bq4HEcBsLwayBOAWIWYgyLIWAYMn5MjME8QNwAxJ9JMHg5MS6VAeJuIg12ISU8QQbPh0YINsO2kxvz"
                 + "Bjgiy4LS9OmBZPB6auakACBWGC2daAsAdH9H/STLcEwAAAAASUVORK5CYII=")
     public void rotateFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -189,7 +181,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -216,7 +212,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -227,8 +227,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR42mNg"
                 + "GAUjF/ynAI8aOFQMHAWjgJ4AABYtWaeMf5H/AAAAAElFTkSuQmCC")
     public void translateFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -245,7 +243,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -258,8 +260,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "7CcQjvjwZFxhyQINzxQgng/E14H4OxEG+pCaAhyg4TwfGhnoBkpQmmZ5gNgFiCuAePrQyr8APsZfqrO3m6kAAAAASU"
                 + "VORK5CYII=")
     public void rotateTranslateFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -277,7 +277,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -290,8 +294,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "s2AzdDsQ/ybTUAt84akDxDnQcDpNpCUVpKQCASA2IGDJYUrTrgA0GYEsWQ3E54FYZAQWCgBOMlmQm3"
                 + "NMhgAAAABJRU5ErkJggg==")
     public void transformTranslateFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -309,7 +311,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -317,8 +323,8 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAIklEQVR42mNgGErgP4WYTgbiAqMGEmUgxF"
-                + "TcBpKZdig0EABvINcp3bQJMgAAAABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQ4T2NkoDJgpLJ5DM"
+                + "gG/qfQcLBZdDEQVzAQ8gFOF44gAymMZIh2qqdDAD9SCgvGd82WAAAAAElFTkSuQmCC")
     public void clearRect() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -336,7 +342,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -344,14 +354,10 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAu0lEQVR42mP478Lwn5qYYdTAEWNgmM"
-                + "T//14cVDSwPeY/GDy9/f//ttn//0/I+P+/wIYsSyAG+vL8///z+38M8O3z///3L5NkCSIMj2/+TxQA"
-                + "WXLtOMQSkM+yTFAsQRg4p+I/2WBVNxYDEzXIN/DV4///3VmwJJtT2/////ObPENzLfCkwxSd//8n50"
-                + "DC6eZp4iwBBRnRCTtA4P//dAP8llw+TGFOAVkCSkYgSw6u/v//zvn//4NFRmLhAAByuCKZBcaxyQAA"
-                + "AABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXUlEQVQ4T2P878Lwn4GKgHHUQIpDcy"
+                + "SHIeMeBkZYAFKSlOBhiGwgtpgh1hKiDSTWEpRYJuRKfGkK5oMhZiC6l0gJAqxeJibf4bMEZChVsh7M"
+                + "EqoZiOwzqriQpgYCAH2SSD3nlbP6AAAAAElFTkSuQmCC")
     public void transformTranslateClearRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -371,7 +377,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -383,8 +393,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "Zhr4H4MBBXALEBNQzlAeIQIJ4NxI+heDZUTIAaFugAcQkQ7wbi70Pa9Z+hFlIN8DAM"
                 + "KQAA8ckQClhSuMUAAAAASUVORK5CYII=")
     public void moveToLineToStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -402,7 +410,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -415,8 +427,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
                 + "7En4F4PRAHUMvlIEsSgPg6EN8G4hxqhjUojPcD8WMgTqFmeJtAgwNkuAI1DQZ5/"
                 + "z4QN1PTUFAYr6aFa0OgkUZVIED1UhoAGzcax1ioxw8AAAAASUVORK5CYII=")
     public void moveToBezierCurveToStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -434,7 +444,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -448,8 +462,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "ajDVgAY0U1DVlYepHes1QDybmgbaAPFpahqoAM1FVAM80BKLquD/4C+lAU3wGvNN"
             + "UrLUAAAAAElFTkSuQmCC")
     public void moveToQuadraticCurveToStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -467,7 +479,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -479,8 +495,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "NgGAWjYHAAByBuoCIGE/+piIeAgVQPw1EwCkgEAB1tTchSTfsUAAAAAElF"
             + "TkSuQmCC")
     public void lineWidthMoveToLineToStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -499,7 +513,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -511,8 +529,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "aslkqIHYMMySElIMdMBjIDJWIcXQx0QYmEOKgdOJMHA/KQYGEOltGWIN5AHizUD8nICBGeTEugzUxc1YLFlPrbQK"
             + "s6RitCwYBVQAABQ1QYDFZuLyAAAAAElFTkSuQmCC")
     public void setTransformFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -529,7 +545,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -541,8 +561,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "L/UHo1EFdQaslkqIHYMMySElIMdMBjIDJWIcXQx0QYmEOKgdOJMHA/KQYGEOltGWIN5AHizUD8nICB"
             + "GeTEugzUxc1YLFlPrbQKs6RitCwYBVQAABQ1QYDFZuLyAAAAAElFTkSuQmCC")
     public void transformFillRect() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -559,7 +577,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -588,7 +610,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -600,8 +626,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "Dmob9h6IbwPxaiCuAeIAIFag1FADII4B4n4g3g3Er6EWHQbiyUCcAcQWQMxDiUUSQOwB"
             + "xCVAvBiILwPxZ0oNRQc8o0lupAEAZ+MMgTDcUPEAAAAASUVORK5CYII=")
     public void transformMoveToLineToStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -620,7 +644,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -649,7 +677,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -662,8 +694,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "CVDXngdiD2q5FpS0CqDhux+ITahlMCgFNENTxGZoCqEKAKXZyVAXUzVj8DCMglEwEgAA1S0T6X"
             + "hdMmMAAAAASUVORK5CYII=")
     public void rotateMoveToLineToStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -682,7 +712,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -709,7 +743,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -723,8 +761,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "dTFGaSmSVzptACao+aTmmuGKQAA9NQeZdHpsYYAAAAASUVORK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -745,7 +781,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -759,8 +799,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "RygAA45xHqtsvRxIAAAAASUVORK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseFill() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -782,7 +820,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -794,8 +836,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "NxBzUMCwBiB8DsQa1XAcyzINahikA8XMgZqGWgSZQF+IDv0mN2c9ALIJDXgWIT5PqynYgng7EAl"
             + "A+KKZ1oOIg17uQaiALVPNrqAHfgfg2EC+GGkw24IBGEs9oHh+iAAAZGRFncAWu2AAAAABJRU5ErkJggg==")
     public void arcStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -812,7 +852,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -824,8 +868,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "iBiC+DOXfBuJ2qDhZBh4G4s1AbAI1RAeIVwPxeXIM/Q81DBtYDXUpyQaa4JDTgHqfZAMFcMhxkBNpNHEh1cPwNF"
             + "Isc0BdBjLsOqmxDABQejjNvtDkBwAAAABJRU5ErkJggg==")
     public void arcCircleStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -843,7 +885,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -855,8 +901,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "ALUGIYCxC/BuLdQNwOxN1AfB+IfSgxlAONbwDEj4FYgprBAPL+ZGoaqADE76kdWf9H0+soGDEAADmG"
             + "CbQK8bPUAAAAAElFTkSuQmCC")
     public void arcAnticlockwiseStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -873,7 +917,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -886,8 +934,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "IccBlR9YF1I9DEGxeBopljmgLgMZdp2SpNMANQCWDrvJNWwUDBAAAFFYGYXPy8e+AAAAAElF"
             + "TkSuQmCC")
     public void arcCircleAnticlockwiseStroke() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -904,7 +950,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -916,8 +966,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "CSWGfQbi/2j4N9BQC3IM3I3FMBg+TI6Bz/EY+H5QGEh1L1M5UhCGglz6GppsDpNv2CgYPgAA3MZQoURRzTMAAAAA"
             + "SUVORK5CYII=")
     public void arcFillPath() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -936,7 +984,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -949,8 +1001,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "exGfidAgP/YzOQ3PDbDMQ22Ay8TIIhIN9Mxx4ZpCWZ50BcA8QixGQ1fMkG5PoUcMInCTQwrMaSE1zw5wbC+fg01"
             + "PsaDKNgQAAAd7buKpKXkaMAAAAASUVORK5CYII=")
     public void arcFillPathAngle() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -969,7 +1019,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -981,8 +1035,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "IMt1+FxClutwuYYi12FzEUWuQ3elBzVch+zK/9RwHbIr/1PLdTBgMzzKPwBs1inGPcAUbg"
             + "AAAABJRU5ErkJggg==")
     public void closePath() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1002,7 +1054,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1028,7 +1084,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1038,8 +1098,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
     @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
             + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
     public void closePathPointOnly() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1057,7 +1115,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1084,7 +1146,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1096,8 +1162,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "8hkIuZIcF+N0pQcO2wnJ43Tlfzy2E5LH6sr/eGwnJI8V2FAoPwpGwSjACwDUtCTLu8r4"
             + "+AAAAABJRU5ErkJggg==")
     public void closePathClosesOnlyLastSubpath() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1122,7 +1186,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1165,7 +1233,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1208,7 +1280,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1251,7 +1327,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1265,8 +1345,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "5GpaXiXHZfUJ5Gdmlr4F4NY4IWAy1tASXAQBr/Z3NB0Q1uQAAAABJRU5ErkJggg==",
             IE = "no ctor")
     public void clip() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1289,7 +1367,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1302,8 +1384,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "lkGDh9wJINlQsHUJgCg4Bh2AEAu6/n02vT9rUAAAAASUVORK5CYII=",
             IE = "no ctor")
     public void clipWindingEvenOdd() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1330,7 +1410,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1343,8 +1427,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "FxLmoFIqfw/tXMKyGWDO6eMGjhqIDEAALK8kB4mQXliAAAAAElFTkSuQmCC",
             IE = "no ctor")
     public void fillTextAndTransform() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1377,7 +1459,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1389,8 +1475,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "12IKLxQmkg03BCPq39KTLyKWZmBbkoiKnMqm1MXUWZneFg6k6UOVkhTN2OMpVFx9StlLk5R0zdTBnj"
             + "aWDq3sqYrw1T92109w9/gbiYNMcAAAAASUVORK5CYII=")
     public void pathFill() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1412,7 +1496,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1425,8 +1513,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "e3sHtZJPDZILLlMj+WgguaCGEq8SE6YR1Cw4VlOrJKqhhldxhekQBwCxR4E7tKSxGgAAAA"
             + "BJRU5ErkJggg==")
     public void pathFillTransform() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1455,7 +1541,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1467,8 +1557,6 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "H8pla/KP/eEBRF+aZFEwghQyWJYtB1IYwMK4ky2z9/iwrVkVjwzZjJdlHdxpYQe8MO5ky9Rrs5PasE+iy0Ot2eUD22Japdbs"
             + "cgJbZg+1GVsOHmqvNK1Se4Xspr6wI/1ibuTa0+hbsogUAAAAAElFTkSuQmCC")
     public void pathFillTransform2() throws Exception {
-        Assume.assumeFalse(SKIP_);
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -1500,7 +1588,11 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 
     /**
@@ -1546,6 +1638,10 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        CanvasRenderingContext2DTest.compareImages(expected, current);
     }
 }

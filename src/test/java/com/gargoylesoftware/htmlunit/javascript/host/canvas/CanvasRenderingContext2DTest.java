@@ -16,20 +16,31 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
+import static org.junit.Assert.fail;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import com.github.romankh3.image.comparison.model.ImageComparisonState;
 
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
@@ -41,6 +52,48 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
+
+    public static void compareImages(final String[] expected, final List<String> current) throws IOException {
+        assertEquals(expected.length, current.size());
+        for (int i = 0; i < expected.length; i++) {
+            compareImages(expected[i], current.get(i));
+        }
+    }
+
+    public static void compareImages(final String expected, final String current) throws IOException {
+        final String expectedBase64Image = expected.split(",")[1];
+        final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
+
+        final String currentBase64Image = current.split(",")[1];
+        final byte[] currentImageBytes = Base64.getDecoder().decode(currentBase64Image);
+
+        try (ByteArrayInputStream expectedBis = new ByteArrayInputStream(expectedImageBytes)) {
+            final BufferedImage expectedImage = ImageIO.read(expectedBis);
+
+            try (ByteArrayInputStream currentBis = new ByteArrayInputStream(currentImageBytes)) {
+                final BufferedImage currentImage = ImageIO.read(currentBis);
+
+                final ImageComparison imageComparison = new ImageComparison(expectedImage, currentImage);
+                // imageComparison.setMinimalRectangleSize(10);
+                imageComparison.setPixelToleranceLevel(0.2);
+                imageComparison.setAllowingPercentOfDifferentPixels(10);
+
+                final ImageComparisonResult imageComparisonResult = imageComparison.compareImages();
+                final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
+
+                if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
+                    fail("different size");
+                }
+                else if (ImageComparisonState.MISMATCH == imageComparisonState) {
+//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
+//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
+//                    ImageComparisonUtil.saveImage(
+//                      new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
+                    fail("different image");
+                }
+            }
+        }
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -112,6 +165,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    alert(nbMethods + ' methods');\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
+
         loadPageWithAlerts2(html);
     }
 
@@ -172,7 +226,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "pcjFqCo5YBFYwZVUXFUG8rBtsasZcK7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6k"
                     + "zGkmmOIxWIkopCWAMeh2yDwDIrFPC+sQL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYT"
                     + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC"})
-    @NotYetImplemented
     public void drawImage() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("html.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -200,7 +253,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        compareImages(expected, current);
     }
 
     /**
@@ -282,7 +339,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        compareImages(expected, current);
     }
 
     /**
@@ -298,7 +359,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
                 + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
-    @NotYetImplemented
     // The output depends on the deflation algorithm
     // check the output of: $pngcheck -v file.png
     // chrome gives: zlib: deflated, 256-byte window, fast compression
@@ -321,7 +381,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
                 + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
-    @NotYetImplemented
     public void drawImage_1x1_24bits() throws Exception {
         drawImage("1x1red_24_bit_depth.png");
     }
@@ -387,7 +446,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "sozbq3bxAnpTPPDnlqX3MubqwBjse1iFepw/PMC3bKCd9IV1CMrNsWfYgTz6CGxt3YBfGcIJeZ8w/jB0"
                 + "8QNbMyzbKSS50F7CMo+Ud+piklk5uGZJZkpsl61QSe0e/4QrDTvGT8vpEEbtRdiL2JSvILvtV2sIBrA"
                 + "O/RnFHiychhBBCCCGEEEIIIYQQ4l9Ikiccki+D/HzKtwAAAABJRU5ErkJggg==")
-    @NotYetImplemented
     public void fillText() throws Exception {
         final String html =
             "<html>\n"
@@ -405,7 +463,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body onload='test()'><canvas id='myCanvas' width='42' height='42'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+
+        final String[] expected = getExpectedAlerts();
+        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
+        compareImages(expected, current);
     }
 
     /**
