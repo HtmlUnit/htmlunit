@@ -1598,10 +1598,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     fail("different size");
                 }
                 else if (ImageComparisonState.MISMATCH == imageComparisonState) {
-                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
-                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
-                    ImageComparisonUtil.saveImage(
-                            new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
+//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
+//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
+//                    ImageComparisonUtil.saveImage(
+//                            new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
                     fail("different image");
                 }
             }
