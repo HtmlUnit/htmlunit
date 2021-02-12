@@ -254,10 +254,10 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:",
-            FF = "data:image/png;base64,",
-            FF78 = "data:image/png;base64,",
-            IE = "null")
+    @Alerts(DEFAULT = "#data:",
+            FF = "#data:image/png;base64,",
+            FF78 = "#data:image/png;base64,",
+            IE = "#null")
     public void readAsDataURLEmptyImage() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -268,9 +268,9 @@ public class FileReaderTest extends WebDriverTestCase {
             + "    var file = document.querySelector('input[type=file]').files[0];\n"
             + "    var reader = new FileReader();\n"
             + "    reader.addEventListener('load', function () {\n"
-            + "      alert(reader.result);\n"
+            + "      alert('#' + reader.result);\n"
             + "    }, false);\n"
-            + "\n"
+
             + "    if (file) {\n"
             + "      reader.readAsDataURL(file);\n"
             + "    }\n"

@@ -114,7 +114,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.github.romankh3.image.comparison.ImageComparison;
-import com.github.romankh3.image.comparison.ImageComparisonUtil;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
 import com.github.romankh3.image.comparison.model.ImageComparisonState;
 
@@ -1113,7 +1112,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         assertEquals(expectedAlerts.length, actualAlerts.size());
         for (int i = expectedAlerts.length - 1; i >= 0; i--) {
-            if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
+            if (!useRealBrowser() && expectedAlerts[i].startsWith("data:image/png;base64,")) {
                 compareImages(expectedAlerts[i], actualAlerts.get(i));
             }
             else {
@@ -1573,7 +1572,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
         public void destroy() {
         }
     }
-    public static void compareImages(final String expected, final String current) throws IOException {
+
+    private static void compareImages(final String expected, final String current) throws IOException {
         final String expectedBase64Image = expected.split(",")[1];
         final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
 
