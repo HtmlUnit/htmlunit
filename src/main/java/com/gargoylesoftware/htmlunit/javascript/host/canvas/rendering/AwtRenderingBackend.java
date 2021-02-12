@@ -18,6 +18,7 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -257,6 +258,9 @@ public class AwtRenderingBackend implements RenderingBackend {
         transformation_ = new AffineTransform();
         setGlobalAlpha(1.0);
         graphics2D_.setClip(null);
+
+        final Font font = new Font("SansSerif", Font.PLAIN, 10);
+        graphics2D_.setFont(font);
 
         graphics2D_.setBackground(new Color(0f, 0f, 0f, 0f));
         graphics2D_.setColor(Color.black);
