@@ -125,14 +125,6 @@ public class HostConstantsTest extends WebDriverTestCase {
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean ignoreExpectationsLength() {
-        return true;
-    }
-
     private String getExpectedString() throws Exception {
         if (host_.endsWith("Array") || "Image".equals(host_) || "Option".equals(host_)) {
             return "";

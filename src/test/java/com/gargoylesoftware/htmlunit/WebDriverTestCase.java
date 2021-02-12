@@ -19,6 +19,8 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Enumeration;
@@ -43,6 +46,7 @@ import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 
+import javax.imageio.ImageIO;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -109,6 +113,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.ImageComparisonUtil;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import com.github.romankh3.image.comparison.model.ImageComparisonState;
 
 /**
  * Base class for tests using WebDriver.
@@ -1103,21 +1111,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
             throws Exception {
         final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expectedAlerts.length);
 
-        assertEquals(expectedAlerts, actualAlerts);
-        if (!ignoreExpectationsLength()) {
-            assertEquals(expectedAlerts.length, actualAlerts.size());
-            for (int i = expectedAlerts.length - 1; i >= 0; i--) {
+        assertEquals(expectedAlerts.length, actualAlerts.size());
+        for (int i = expectedAlerts.length - 1; i >= 0; i--) {
+            if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
+                compareImages(expectedAlerts[i], actualAlerts.get(i));
+            }
+            else {
                 assertEquals(expectedAlerts[i], actualAlerts.get(i));
             }
         }
-    }
-
-    /**
-     * Whether the expectations length must match the actual length or this can be ignored.
-     * @return whether to ignore checking the expectations length against the actual one
-     */
-    protected boolean ignoreExpectationsLength() {
-        return false;
     }
 
     /**
@@ -1569,6 +1571,40 @@ public abstract class WebDriverTestCase extends WebTestCase {
          */
         @Override
         public void destroy() {
+        }
+    }
+    public static void compareImages(final String expected, final String current) throws IOException {
+        final String expectedBase64Image = expected.split(",")[1];
+        final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
+
+        final String currentBase64Image = current.split(",")[1];
+        final byte[] currentImageBytes = Base64.getDecoder().decode(currentBase64Image);
+
+        try (ByteArrayInputStream expectedBis = new ByteArrayInputStream(expectedImageBytes)) {
+            final BufferedImage expectedImage = ImageIO.read(expectedBis);
+
+            try (ByteArrayInputStream currentBis = new ByteArrayInputStream(currentImageBytes)) {
+                final BufferedImage currentImage = ImageIO.read(currentBis);
+
+                final ImageComparison imageComparison = new ImageComparison(expectedImage, currentImage);
+                // imageComparison.setMinimalRectangleSize(10);
+                imageComparison.setPixelToleranceLevel(0.2);
+                imageComparison.setAllowingPercentOfDifferentPixels(7);
+
+                final ImageComparisonResult imageComparisonResult = imageComparison.compareImages();
+                final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
+
+                if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
+                    fail("different size");
+                }
+                else if (ImageComparisonState.MISMATCH == imageComparisonState) {
+                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
+                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
+                    ImageComparisonUtil.saveImage(
+                            new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
+                    fail("different image");
+                }
+            }
         }
     }
 }

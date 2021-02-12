@@ -16,31 +16,20 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static org.junit.Assert.fail;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.github.romankh3.image.comparison.ImageComparison;
-import com.github.romankh3.image.comparison.model.ImageComparisonResult;
-import com.github.romankh3.image.comparison.model.ImageComparisonState;
 
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
@@ -52,48 +41,6 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
  */
 @RunWith(BrowserRunner.class)
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
-
-    public static void compareImages(final String[] expected, final List<String> current) throws IOException {
-        assertEquals(expected.length, current.size());
-        for (int i = 0; i < expected.length; i++) {
-            compareImages(expected[i], current.get(i));
-        }
-    }
-
-    public static void compareImages(final String expected, final String current) throws IOException {
-        final String expectedBase64Image = expected.split(",")[1];
-        final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
-
-        final String currentBase64Image = current.split(",")[1];
-        final byte[] currentImageBytes = Base64.getDecoder().decode(currentBase64Image);
-
-        try (ByteArrayInputStream expectedBis = new ByteArrayInputStream(expectedImageBytes)) {
-            final BufferedImage expectedImage = ImageIO.read(expectedBis);
-
-            try (ByteArrayInputStream currentBis = new ByteArrayInputStream(currentImageBytes)) {
-                final BufferedImage currentImage = ImageIO.read(currentBis);
-
-                final ImageComparison imageComparison = new ImageComparison(expectedImage, currentImage);
-                // imageComparison.setMinimalRectangleSize(10);
-                imageComparison.setPixelToleranceLevel(0.2);
-                imageComparison.setAllowingPercentOfDifferentPixels(5);
-
-                final ImageComparisonResult imageComparisonResult = imageComparison.compareImages();
-                final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
-
-                if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
-                    fail("different size");
-                }
-                else if (ImageComparisonState.MISMATCH == imageComparisonState) {
-//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
-//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
-//                    ImageComparisonUtil.saveImage(
-//                            new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
-                    fail("different image");
-                }
-            }
-        }
-    }
 
     /**
      * @throws Exception if an error occurs
@@ -253,11 +200,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -339,11 +282,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -464,11 +403,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  <body onload='test()'><canvas id='myCanvas' width='42' height='42'></canvas></body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**

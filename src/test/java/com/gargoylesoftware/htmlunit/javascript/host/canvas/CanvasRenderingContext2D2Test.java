@@ -14,11 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -58,11 +55,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -88,11 +81,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -118,11 +107,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -149,11 +134,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -181,11 +162,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -212,11 +189,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -243,11 +216,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -277,11 +246,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -311,11 +276,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -342,11 +303,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -377,11 +334,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -410,11 +363,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -444,11 +393,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -479,11 +424,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -513,11 +454,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -545,11 +482,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -577,11 +510,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -610,11 +539,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -644,11 +569,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -677,11 +598,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -712,11 +629,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -743,11 +656,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -781,11 +690,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -820,11 +725,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -852,11 +753,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -885,11 +782,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -917,11 +810,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -950,11 +839,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -984,11 +869,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1019,11 +900,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1054,11 +931,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1084,11 +957,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1115,11 +984,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1146,11 +1011,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1186,11 +1047,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1233,11 +1090,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1280,11 +1133,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1327,11 +1176,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1367,11 +1212,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1410,11 +1251,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1462,11 +1299,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1499,11 +1332,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1544,11 +1373,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1591,11 +1416,7 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1641,10 +1462,6 @@ public class CanvasRenderingContext2D2Test extends WebDriverTestCase {
             + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String[] expected = getExpectedAlerts();
-        final List<String> current = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expected.length);
-        CanvasRenderingContext2DTest.compareImages(expected, current);
+        loadPageWithAlerts2(html);
     }
 }
