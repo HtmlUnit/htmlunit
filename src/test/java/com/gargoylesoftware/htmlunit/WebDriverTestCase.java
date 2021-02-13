@@ -28,6 +28,8 @@ import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -80,6 +82,8 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ComparisonFailure;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
@@ -114,6 +118,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.ImageComparisonUtil;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
 import com.github.romankh3.image.comparison.model.ImageComparisonState;
 
@@ -156,6 +161,12 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
  * @author Frank Danek
  */
 public abstract class WebDriverTestCase extends WebTestCase {
+
+    /**
+     * Make the test method name available to the tests.
+     */
+    @Rule
+    public TestName testMethodName_ = new TestName();
 
     /**
      * The system property for automatically fixing the test case expectations.
@@ -1573,7 +1584,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
     }
 
-    private static void compareImages(final String expected, final String current) throws IOException {
+    private void compareImages(final String expected, final String current) throws IOException {
         final String expectedBase64Image = expected.split(",")[1];
         final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
 
@@ -1598,11 +1609,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     fail("different size");
                 }
                 else if (ImageComparisonState.MISMATCH == imageComparisonState) {
-//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\expected.png"), expectedImage);
-//                    ImageComparisonUtil.saveImage(new File("c:\\rbri\\compare\\current.png"), currentImage);
-//                    ImageComparisonUtil.saveImage(
-//                            new File("c:\\rbri\\compare\\filename.png"), imageComparisonResult.getResult());
-                    fail("different image");
+                    final String dir = "target/" + testMethodName_.getMethodName();
+                    Files.createDirectories(Paths.get(dir));
+
+                    final File expectedOut = new File(dir, "expected.png");
+                    final File currentOut = new File(dir, "current.png");
+                    final File differenceOut = new File(dir, "difference.png");
+                    ImageComparisonUtil.saveImage(expectedOut, expectedImage);
+                    ImageComparisonUtil.saveImage(currentOut, currentImage);
+                    ImageComparisonUtil.saveImage(differenceOut, imageComparisonResult.getResult());
+                    fail("The images are differnet (expected: " + expectedOut.getAbsolutePath()
+                                + " current: " + currentOut.getAbsolutePath()
+                                + " difference: " + differenceOut.getAbsolutePath());
                 }
             }
         }
