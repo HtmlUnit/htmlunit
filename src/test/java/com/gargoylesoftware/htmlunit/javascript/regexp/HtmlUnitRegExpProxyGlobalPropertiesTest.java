@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -35,31 +36,38 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
 
     private void testExec(final String string, final String regexp) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + "  function log(msg) {\n"
+            + "    window.document.title += msg + ';';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
-            + "    alert(myRegExp.exec(str));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
+            + "    log(myRegExp.exec(str));\n"
+            + "    log('$n');\n"
+            + "    log(RegExp.$1);\n"
+            + "    log(RegExp.$2);\n"
+            + "    log(RegExp.$3);\n"
+            + "    log(RegExp.$4);\n"
+            + "    log(RegExp.$5);\n"
+            + "    log(RegExp.$6);\n"
+            + "    log(RegExp.$7);\n"
+            + "    log(RegExp.$8);\n"
+            + "    log(RegExp.$9);\n"
+            + "    log('-');\n"
+            + "    log(RegExp.lastMatch);\n"
+            + "    log(RegExp.lastParen);\n"
+            + "    log(RegExp.leftContext);\n"
+            + "    log(RegExp.rightContext);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+
     }
 
     /**
@@ -165,9 +173,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Html,Html", "$n", "Html", "", "", "", "", "", "", "", "", "-", "Html", "Html", "1234",
-            "Unit for Htnl; Htolxyz"})
+            "Unit for Htnl, Htolxyz"})
     public void regExpExecOneGroupGlobalManyMatches() throws Exception {
-        testExec("1234HtmlUnit for Htnl; Htolxyz", "new RegExp('(Ht.l)', 'g')");
+        testExec("1234HtmlUnit for Htnl, Htolxyz", "new RegExp('(Ht.l)', 'g')");
     }
 
     /**
@@ -193,31 +201,38 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
     }
 
     private void testTest(final String string, final String regexp) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + "  function log(msg) {\n"
+            + "    window.document.title += msg + ';';\n"
+            + "  }\n"
+
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
+            + "    log(myRegExp.test(str));\n"
+            + "    log('$n');\n"
+            + "    log(RegExp.$1);\n"
+            + "    log(RegExp.$2);\n"
+            + "    log(RegExp.$3);\n"
+            + "    log(RegExp.$4);\n"
+            + "    log(RegExp.$5);\n"
+            + "    log(RegExp.$6);\n"
+            + "    log(RegExp.$7);\n"
+            + "    log(RegExp.$8);\n"
+            + "    log(RegExp.$9);\n"
+            + "    log('-');\n"
+            + "    log(RegExp.lastMatch);\n"
+            + "    log(RegExp.lastParen);\n"
+            + "    log(RegExp.leftContext);\n"
+            + "    log(RegExp.rightContext);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
@@ -319,9 +334,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "$n", "Html", "", "", "", "", "", "", "", "", "-", "Html", "Html", "1234",
-            "Unit for Html; Htmlxyz"})
+            "Unit for Html, Htmlxyz"})
     public void regExpTestOneGroupGlobalManyMatches() throws Exception {
-        testTest("1234HtmlUnit for Html; Htmlxyz", "new RegExp('(Html)', 'g')");
+        testTest("1234HtmlUnit for Html, Htmlxyz", "new RegExp('(Html)', 'g')");
     }
 
     /**
