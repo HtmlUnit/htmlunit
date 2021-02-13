@@ -44,24 +44,25 @@ public class ComputedFontTest extends WebDriverTestCase {
     public void fontSizeEm() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(div.style.fontSize);\n"
-            + "    alert(style.fontSize);\n"
+            + "    log(div.style.fontSize);\n"
+            + "    log(style.fontSize);\n"
             + "    div.style.fontSize = '2em';\n"
-            + "    alert(div.style.fontSize);\n"
-            + "    alert(style.fontSize);\n"
+            + "    log(div.style.fontSize);\n"
+            + "    log(style.fontSize);\n"
             + "    div.style.fontSize = '150%';\n"
-            + "    alert(div.style.fontSize);\n"
-            + "    alert(style.fontSize);\n"
+            + "    log(div.style.fontSize);\n"
+            + "    log(style.fontSize);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -80,6 +81,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     public void fontInitial() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    debug(div);\n"
@@ -88,26 +90,26 @@ public class ComputedFontTest extends WebDriverTestCase {
             + "  }\n"
             + "  function debug(div) {\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(div.style.font);\n"
-            + "    alert(style.font);\n"
-            + "    alert(div.style.fontStyle);\n"
-            + "    alert(style.fontStyle);\n"
-            + "    alert(div.style.fontVariant);\n"
-            + "    alert(style.fontVariant);\n"
-            + "    alert(div.style.fontWeight);\n"
-            + "    alert(style.fontWeight);\n"
-            + "    alert(div.style.fontSize);\n"
-            + "    alert(style.fontSize);\n"
-            + "    alert(div.style.lineHeight);\n"
-            + "    alert(style.lineHeight);\n"
-            + "    alert(div.style.fontFamily);\n"
-            + "    alert(style.fontFamily);\n"
+            + "    log(div.style.font);\n"
+            + "    log(style.font);\n"
+            + "    log(div.style.fontStyle);\n"
+            + "    log(style.fontStyle);\n"
+            + "    log(div.style.fontVariant);\n"
+            + "    log(style.fontVariant);\n"
+            + "    log(div.style.fontWeight);\n"
+            + "    log(style.fontWeight);\n"
+            + "    log(div.style.fontSize);\n"
+            + "    log(style.fontSize);\n"
+            + "    log(div.style.lineHeight);\n"
+            + "    log(style.lineHeight);\n"
+            + "    log(div.style.fontFamily);\n"
+            + "    log(style.fontFamily);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -132,6 +134,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     private void font(final String fontToSet, final String property, final String value) throws Exception {
         String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
             + "    div.style.font = '" + fontToSet + "';\n"
@@ -145,17 +148,17 @@ public class ComputedFontTest extends WebDriverTestCase {
         html += "  }\n"
             + "  function debug(div) {\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(div.style.font);\n"
-            + "    alert(style.font);\n"
-            + "    alert(div.style." + property + ");\n"
-            + "    alert(style." + property + ");\n"
+            + "    log(div.style.font);\n"
+            + "    log(style.font);\n"
+            + "    log(div.style." + property + ");\n"
+            + "    log(style." + property + ");\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

@@ -153,26 +153,27 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
             = "<html><head>\n"
             + "  <link rel='stylesheet' href='" + cssUrl + "'/>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.getElementById('c1');\n"
             + "    var style = window.getComputedStyle(node, ':before');\n"
-            + "    alert(style.content);\n"
+            + "    log(style.content);\n"
 
             + "    node = document.getElementById('c2');\n"
             + "    style = window.getComputedStyle(node, ':before');\n"
-            + "    alert(style.content);\n"
+            + "    log(style.content);\n"
 
             + "    node = document.getElementById('c3');\n"
             + "    style = window.getComputedStyle(node, ':before');\n"
-            + "    alert(style.content);\n"
+            + "    log(style.content);\n"
 
             + "    node = document.getElementById('c4');\n"
             + "    style = window.getComputedStyle(node, ':before');\n"
-            + "    alert(style.content);\n"
+            + "    log(style.content);\n"
 
             + "    node = document.getElementById('c5');\n"
             + "    style = window.getComputedStyle(node, ':before');\n"
-            + "    alert(style.content);\n"
+            + "    log(style.content);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -235,19 +236,7 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
             }
             final WebDriver driver = loadPage2(html, URL_FIRST, htmlContentType, htmlResponseCharset, null);
 
-            if (expectedAlerts.length == 1) {
-                final List<String> actualAlerts = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts.length);
-                assertEquals(1, actualAlerts.size());
-
-                final String msg = actualAlerts.get(0);
-                assertEquals(expectedAlerts[0], "Invalid token");
-                assertTrue(msg, msg.contains("Invalid or unexpected token")
-                                || msg.contains("illegal character")
-                                || msg.contains("Ungültiges Zeichen"));
-            }
-            else {
-                verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
-            }
+            assertEquals(String.join("§", getExpectedAlerts()) + '§', driver.getTitle());
         }
         catch (final WebDriverException e) {
             if (!e.getCause().getMessage().contains("illegal character")

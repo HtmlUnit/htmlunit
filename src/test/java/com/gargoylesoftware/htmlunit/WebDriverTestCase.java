@@ -1038,8 +1038,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected final WebDriver loadPageVerifyTitle2(final String html) throws Exception {
         final WebDriver driver = loadPage2(html);
 
-        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        assertEquals(String.join("§", getExpectedAlerts()) + '§', driver.getTitle());
         return driver;
     }
 
