@@ -18,7 +18,7 @@ pipeline {
   }
   post {
     always {
-      junit allowEmptyResults: true, testResults: 'deploy/junit/*.xml'
+      junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
       recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', sourceDirectory: 'src', tools: [
         checkStyle(),
         spotBugs(),
