@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -37,9 +36,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
 
     private void testExec(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
-            + "  function log(msg) {\n"
-            + "    window.document.title += msg + '§';\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
@@ -63,10 +60,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -201,10 +195,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
 
     private void testTest(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
-            + "  function log(msg) {\n"
-            + "    window.document.title += msg + '§';\n"
-            + "  }\n"
-
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
@@ -228,10 +219,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTitle2(html);
     }
 
     /**

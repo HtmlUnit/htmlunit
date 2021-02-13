@@ -169,6 +169,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
     public TestName testMethodName_ = new TestName();
 
     /**
+     * Function used in many tests.
+     */
+    public static final String LOG_TITLE_FUNCTION = "  function log(msg) { window.document.title += msg + '§';}\n";
+
+
+    /**
      * The system property for automatically fixing the test case expectations.
      */
     public static final String AUTOFIX_ = "htmlunit.autofix";
@@ -1020,6 +1026,23 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
         return loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
+
+    /**
+     * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
+     * and loads the page with this URL using the current WebDriver version; finally, asserts that the
+     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * @param html the HTML to use
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageVerifyTitle2(final String html) throws Exception {
+        final WebDriver driver = loadPage2(html);
+
+        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        return driver;
+    }
+
 
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}

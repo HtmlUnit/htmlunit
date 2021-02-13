@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.regexp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -34,9 +33,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
 
     private void testMatch(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
-            + "  function log(msg) {\n"
-            + "    window.document.title += msg + '§';\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
@@ -60,10 +57,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -194,9 +188,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
 
     private void testSearch(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
-            + "  function log(msg) {\n"
-            + "    window.document.title += msg + '§';\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
@@ -220,11 +212,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-
-        final WebDriver driver = loadPage2(html);
-
-        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -349,9 +337,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
 
     private void testReplace(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
-            + "  function log(msg) {\n"
-            + "    window.document.title += msg + '§';\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
@@ -375,10 +361,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        loadPageVerifyTitle2(html);
     }
 
     /**
