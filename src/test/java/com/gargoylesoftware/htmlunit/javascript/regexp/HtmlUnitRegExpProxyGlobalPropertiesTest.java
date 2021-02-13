@@ -38,7 +38,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
     private void testExec(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
             + "  function log(msg) {\n"
-            + "    window.document.title += msg + ';';\n"
+            + "    window.document.title += msg + '§';\n"
             + "  }\n"
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
@@ -65,9 +65,8 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
-
     }
 
     /**
@@ -173,9 +172,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Html,Html", "$n", "Html", "", "", "", "", "", "", "", "", "-", "Html", "Html", "1234",
-            "Unit for Htnl, Htolxyz"})
+            "Unit for Htnl; Htolxyz"})
     public void regExpExecOneGroupGlobalManyMatches() throws Exception {
-        testExec("1234HtmlUnit for Htnl, Htolxyz", "new RegExp('(Ht.l)', 'g')");
+        testExec("1234HtmlUnit for Htnl; Htolxyz", "new RegExp('(Ht.l)', 'g')");
     }
 
     /**
@@ -203,7 +202,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
     private void testTest(final String string, final String regexp) throws Exception {
         final String html = "<html><head><script>\n"
             + "  function log(msg) {\n"
-            + "    window.document.title += msg + ';';\n"
+            + "    window.document.title += msg + '§';\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -231,7 +230,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        final String text = driver.getTitle().trim().replaceAll("§", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -334,9 +333,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "$n", "Html", "", "", "", "", "", "", "", "", "-", "Html", "Html", "1234",
-            "Unit for Html, Htmlxyz"})
+            "Unit for Html; Htmlxyz"})
     public void regExpTestOneGroupGlobalManyMatches() throws Exception {
-        testTest("1234HtmlUnit for Html, Htmlxyz", "new RegExp('(Html)', 'g')");
+        testTest("1234HtmlUnit for Html; Htmlxyz", "new RegExp('(Html)', 'g')");
     }
 
     /**
