@@ -185,18 +185,19 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <div id='tester' style='background: " + backgroundStyle + "' >hello</div>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var myDivStyle = document.getElementById('tester').style;\n"
-            + "    alert(myDivStyle.backgroundColor);\n"
-            + "    alert(myDivStyle.backgroundImage);\n"
-            + "    alert(myDivStyle.backgroundRepeat);\n"
-            + "    alert(myDivStyle.backgroundPosition);\n"
-            + "    alert(myDivStyle.backgroundAttachment);\n"
+            + "    log(myDivStyle.backgroundColor);\n"
+            + "    log(myDivStyle.backgroundImage);\n"
+            + "    log(myDivStyle.backgroundRepeat);\n"
+            + "    log(myDivStyle.backgroundPosition);\n"
+            + "    log(myDivStyle.backgroundAttachment);\n"
             + "  </script>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -333,19 +334,20 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <div id='tester'>hello</div>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var myDiv = document.getElementById('tester');\n"
             + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
-            + "    alert(myDivStyle.backgroundColor);\n"
-            + "    alert(myDivStyle.backgroundImage);\n"
-            + "    alert(myDivStyle.backgroundRepeat);\n"
-            + "    alert(myDivStyle.backgroundPosition);\n"
-            + "    alert(myDivStyle.backgroundAttachment);\n"
+            + "    log(myDivStyle.backgroundColor);\n"
+            + "    log(myDivStyle.backgroundImage);\n"
+            + "    log(myDivStyle.backgroundRepeat);\n"
+            + "    log(myDivStyle.backgroundPosition);\n"
+            + "    log(myDivStyle.backgroundAttachment);\n"
             + "  </script>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

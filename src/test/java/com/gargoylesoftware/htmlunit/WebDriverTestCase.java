@@ -209,6 +209,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String FF_BIN_;
     private static String FF78_BIN_;
 
+    private static final String URL_FIRST_EXT = URL_FIRST.toExternalForm();
+
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
 
@@ -1036,9 +1038,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageVerifyTitle2(final String html) throws Exception {
+        return loadPageVerifyTitle2(html, getExpectedAlerts());
+    }
+
+    protected final WebDriver loadPageVerifyTitle2(final String html, final String... expectedAlerts) throws Exception {
         final WebDriver driver = loadPage2(html);
 
-        assertEquals(String.join("§", getExpectedAlerts()) + '§', driver.getTitle());
+        if (expectedAlerts.length == 0) {
+            assertEquals("", driver.getTitle());
+        }
+        else {
+            final StringBuilder expected = new StringBuilder();
+            for (int i = 0; i < expectedAlerts.length; i++) {
+                expected.append(expectedAlerts[i].replaceAll("§§URL§§", URL_FIRST_EXT)).append('§');
+            }
+            assertEquals(expected.toString(), driver.getTitle());
+        }
         return driver;
     }
 

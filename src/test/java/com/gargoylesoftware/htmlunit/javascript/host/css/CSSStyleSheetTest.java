@@ -57,22 +57,23 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             IE = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
                     "true", "[object HTMLStyleElement]", "true"})
     public void owningNodeOwningElement() throws Exception {
-        final String html = "<html><head><title>test_hasChildNodes</title>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var myStyle = document.getElementById('myStyle');\n"
                 + "  var stylesheet = document.styleSheets[0];\n"
-                + "  alert(stylesheet);\n"
-                + "  alert(stylesheet.ownerNode);\n"
-                + "  alert(stylesheet.ownerNode == myStyle);\n"
-                + "  alert(stylesheet.owningElement);\n"
-                + "  alert(stylesheet.owningElement == myStyle);\n"
+                + "  log(stylesheet);\n"
+                + "  log(stylesheet.ownerNode);\n"
+                + "  log(stylesheet.ownerNode == myStyle);\n"
+                + "  log(stylesheet.owningElement);\n"
+                + "  log(stylesheet.owningElement == myStyle);\n"
                 + "}\n"
                 + "</script>\n"
                 + "<style id='myStyle' type='text/css'></style>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -83,7 +84,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             FF = {"4", "0", "1", "2", "3", "item", "length"},
             FF78 = {"4", "0", "1", "2", "3", "item", "length"})
     public void rules() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -91,20 +92,21 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
                 + "      rules = document.styleSheets[0].cssRules;\n"
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
-                + "    alert(rules.length);\n"
+                + "    log(rules.length);\n"
                 + "    for (var i in rules)\n"
-                + "      alert(i);\n"
+                + "      log(i);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -199,18 +201,19 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var f = document.getElementById('myStyle');\n"
             + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
             + "    var rules = s.cssRules || s.rules;\n"
-            + "    alert(rules.length);\n"
-            + "    alert(s.addRule == undefined);\n"
+            + "    log(rules.length);\n"
+            + "    log(s.addRule == undefined);\n"
             + "    if (s.addRule) {\n"
-            + "      alert(s.addRule('div', 'color: red;'));\n"
-            + "      alert(rules[rules.length - 1].selectorText);\n"
-            + "      alert(rules[rules.length - 1].style.cssText);\n"
+            + "      log(s.addRule('div', 'color: red;'));\n"
+            + "      log(rules[rules.length - 1].selectorText);\n"
+            + "      log(rules[rules.length - 1].style.cssText);\n"
             + "    }\n"
-            + "    alert(rules.length);\n"
+            + "    log(rules.length);\n"
             + "  }\n"
             + "</script>\n"
             + "<style id='myStyle'>p { vertical-align:top }</style>\n"
@@ -218,7 +221,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -231,17 +234,18 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function doTest() {\n"
                 + "    var f = document.getElementById('myStyle');\n"
                 + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
                 + "    var rules = s.cssRules || s.rules;\n"
-                + "    alert(rules.length);\n"
+                + "    log(rules.length);\n"
                 + "    if (s.addRule) {\n"
-                + "      alert(s.addRule('div', 'invalid'));\n"
-                + "      alert(rules[rules.length - 1].selectorText);\n"
-                + "      alert(rules[rules.length - 1].style.cssText);\n"
+                + "      log(s.addRule('div', 'invalid'));\n"
+                + "      log(rules[rules.length - 1].selectorText);\n"
+                + "      log(rules[rules.length - 1].style.cssText);\n"
                 + "    }\n"
-                + "    alert(rules.length);\n"
+                + "    log(rules.length);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "  <style id='myStyle'>p { vertical-align: top } h1 { color: blue; }</style>\n"
@@ -249,7 +253,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "<body onload='doTest()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -259,7 +263,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void addInvalidRule() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
@@ -287,18 +291,19 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var f = document.getElementById('myStyle');\n"
             + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
             + "    var rules = s.cssRules || s.rules;\n"
-            + "    alert(rules.length);\n"
-            + "    alert(s.insertRule == undefined);\n"
+            + "    log(rules.length);\n"
+            + "    log(s.insertRule == undefined);\n"
             + "    if (s.insertRule) {\n"
-            + "      alert(s.insertRule('div { color: red; }', 0));\n"
-            + "      alert(rules[0].selectorText);\n"
-            + "      alert(rules[0].style.cssText);\n"
+            + "      log(s.insertRule('div { color: red; }', 0));\n"
+            + "      log(rules[0].selectorText);\n"
+            + "      log(rules[0].style.cssText);\n"
             + "    }\n"
-            + "    alert(rules.length);\n"
+            + "    log(rules.length);\n"
             + "  }\n"
             + "</script>\n"
             + "<style id='myStyle'>p { vertical-align:top }</style>\n"
@@ -306,7 +311,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -318,18 +323,19 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var f = document.getElementById('myStyle');\n"
             + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
             + "    var rules = s.cssRules || s.rules;\n"
-            + "    alert(rules.length);\n"
-            + "    alert(s.insertRule == undefined);\n"
+            + "    log(rules.length);\n"
+            + "    log(s.insertRule == undefined);\n"
             + "    if (s.insertRule) {\n"
-            + "      alert(s.insertRule('div {invalid}', 0));\n"
-            + "      alert(rules[0].selectorText);\n"
-            + "      alert(rules[0].style.cssText);\n"
+            + "      log(s.insertRule('div {invalid}', 0));\n"
+            + "      log(rules[0].selectorText);\n"
+            + "      log(rules[0].style.cssText);\n"
             + "    }\n"
-            + "    alert(rules.length);\n"
+            + "    log(rules.length);\n"
             + "  }\n"
             + "</script>\n"
             + "<style id='myStyle'>p { vertical-align:top }</style>\n"
@@ -337,7 +343,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -372,27 +378,28 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "false", "false", "undefined", "1", "div", "color: red;"})
     public void removeRule_deleteRule() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
             + "  var rules = s.cssRules || s.rules;\n"
-            + "  alert(rules.length);\n"
-            + "  alert(s.deleteRule == undefined);\n"
-            + "  alert(s.removeRule == undefined);\n"
+            + "  log(rules.length);\n"
+            + "  log(s.deleteRule == undefined);\n"
+            + "  log(s.removeRule == undefined);\n"
             + "  if (s.deleteRule)\n"
-            + "    alert(s.deleteRule(0));\n"
+            + "    log(s.deleteRule(0));\n"
             + "  else\n"
-            + "    alert(s.removeRule(0));\n"
-            + "  alert(rules.length);\n"
-            + "  alert(rules[0].selectorText);\n"
-            + "  alert(rules[0].style.cssText);\n"
+            + "    log(s.removeRule(0));\n"
+            + "  log(rules.length);\n"
+            + "  log(rules[0].selectorText);\n"
+            + "  log(rules[0].style.cssText);\n"
             + "}</script>\n"
             + "<style id='myStyle'>p { vertical-align:top } div { color: red; }</style>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -497,7 +504,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
@@ -505,18 +513,18 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  if (s.insertRule) {\n"
             + "    s.insertRule('.testStyle { width: 24px; }', 0);\n"
             + "    s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
-            + "    alert(rules.length);\n"
-            + "    alert(rules[0].selectorText);\n"
-            + "    alert(rules[0].style.cssText);\n"
-            + "    alert(rules[1].selectorText);\n"
-            + "    alert(rules[1].style.cssText);\n"
+            + "    log(rules.length);\n"
+            + "    log(rules[0].selectorText);\n"
+            + "    log(rules[0].style.cssText);\n"
+            + "    log(rules[1].selectorText);\n"
+            + "    log(rules[1].style.cssText);\n"
             + "  }\n"
             + "}</script>\n"
             + "<style id='myStyle'></style>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -642,11 +650,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     private void doTest(final String cssSelector, final String htmlSnippet) throws Exception {
-        final String html = "<html id='elt0'><head><title>First</title>\n"
+        final String html = "<html id='elt0'><head>\n"
                 + "<style>\n"
                 + cssSelector + " { z-index: 10 }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var getStyle = function(e) {\n"
                 + "      return window.getComputedStyle(e, '');\n"
@@ -655,7 +664,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "    while (true) {\n"
                 + "      var elt = document.getElementById('elt' + i++);\n"
                 + "      if (!elt) return;\n"
-                + "      alert(getStyle(elt).zIndex == 10);\n"
+                + "      log(getStyle(elt).zIndex == 10);\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script>\n"
@@ -663,7 +672,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
                 + "  <div id='elt1'></div>\n"
                 + htmlSnippet
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -881,13 +890,14 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "<div id='d'>hello</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var getStyle = function(e) {\n"
             + "    return window.getComputedStyle(e, '');\n"
             + "  };\n"
-            + "  alert(getStyle(document.getElementById('d')).display);\n"
-            + "  alert(document.styleSheets.length);\n"
+            + "  log(getStyle(document.getElementById('d')).display);\n"
+            + "  log(document.styleSheets.length);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -964,15 +974,16 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "<div id='d'>hello</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var getStyle = function(e) {\n"
             + "    return window.getComputedStyle(e, '');\n"
             + "  };\n"
-            + "  alert(getStyle(document.getElementById('d')).display);\n"
-            + "  alert(document.styleSheets.length);\n"
+            + "  log(getStyle(document.getElementById('d')).display);\n"
+            + "  log(document.styleSheets.length);\n"
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "div { display: none }", MimeType.TEXT_CSS);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1622,14 +1633,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <div id='d'>hello</div>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var getStyle = function(e) {\n"
             + "      return window.getComputedStyle(e, '');\n"
             + "    };\n"
-            + "    alert(getStyle(document.getElementById('d')).display);\n"
-            + "    alert(document.styleSheets.length);\n"
+            + "    log(getStyle(document.getElementById('d')).display);\n"
+            + "    log(document.styleSheets.length);\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

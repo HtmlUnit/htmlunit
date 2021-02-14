@@ -404,13 +404,14 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='o9' style='opacity: auto'>d</div>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "for (var i = 1; i < 10; i++) {\n"
             + "  d = document.getElementById('o' + i);\n"
-            + "  alert(d.style.opacity);\n"
+            + "  log(d.style.opacity);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -505,30 +506,31 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""})
     public void borderStyles_noStyle() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var oDiv = document.getElementById('div1');\n"
-            + "  alert(oDiv.style.borderBottom);\n"
-            + "  alert(oDiv.style.borderBottomColor);\n"
-            + "  alert(oDiv.style.borderBottomStyle);\n"
-            + "  alert(oDiv.style.borderBottomWidth);\n"
-            + "  alert(oDiv.style.borderLeft);\n"
-            + "  alert(oDiv.style.borderLeftColor);\n"
-            + "  alert(oDiv.style.borderLeftStyle);\n"
-            + "  alert(oDiv.style.borderLeftWidth);\n"
-            + "  alert(oDiv.style.borderRight);\n"
-            + "  alert(oDiv.style.borderRightColor);\n"
-            + "  alert(oDiv.style.borderRightStyle);\n"
-            + "  alert(oDiv.style.borderRightWidth);\n"
-            + "  alert(oDiv.style.borderTop);\n"
-            + "  alert(oDiv.style.borderTopColor);\n"
-            + "  alert(oDiv.style.borderTopStyle);\n"
-            + "  alert(oDiv.style.borderTopWidth);\n"
+            + "  log(oDiv.style.borderBottom);\n"
+            + "  log(oDiv.style.borderBottomColor);\n"
+            + "  log(oDiv.style.borderBottomStyle);\n"
+            + "  log(oDiv.style.borderBottomWidth);\n"
+            + "  log(oDiv.style.borderLeft);\n"
+            + "  log(oDiv.style.borderLeftColor);\n"
+            + "  log(oDiv.style.borderLeftStyle);\n"
+            + "  log(oDiv.style.borderLeftWidth);\n"
+            + "  log(oDiv.style.borderRight);\n"
+            + "  log(oDiv.style.borderRightColor);\n"
+            + "  log(oDiv.style.borderRightStyle);\n"
+            + "  log(oDiv.style.borderRightWidth);\n"
+            + "  log(oDiv.style.borderTop);\n"
+            + "  log(oDiv.style.borderTopColor);\n"
+            + "  log(oDiv.style.borderTopStyle);\n"
+            + "  log(oDiv.style.borderTopWidth);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1'>foo</div></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -951,20 +953,21 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var e = document.createElement('tt');\n"
             + "      var style = window.getComputedStyle(e, null);\n"
-            + "      alert(style['display']);\n"
-            + "      alert(style['color']);\n"
+            + "      log(style['display']);\n"
+            + "      log(style['color']);\n"
             + "      document.body.appendChild(e);\n"
-            + "      alert(style['display']);\n"
-            + "      alert(style['color']);\n"
+            + "      log(style['display']);\n"
+            + "      log(style['color']);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1077,13 +1080,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
             + "    <style>\n"
             + "      #m1 { padding: 3px; }\n"
             + "      #m2 { padding-left: 3px; padding: 5px; }\n"
             + "      #m3 { padding: 2px; padding-left: 7px; }\n"
             + "    </style>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        alertComputedPaddings('m1');\n"
             + "        alertComputedPaddings('m2');\n"
@@ -1095,13 +1098,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "      function alertComputedPaddings(id) {\n"
             + "        var e = document.getElementById(id);\n"
             + "        var s = e.currentStyle ? e.currentStyle : getComputedStyle(e, null);\n"
-            + "        alert('L:' + s.paddingLeft + ',R:' + s.paddingRight +\n"
+            + "        log('L:' + s.paddingLeft + ',R:' + s.paddingRight +\n"
             + "          ',T:' + s.paddingTop + ',B:' + s.paddingBottom);\n"
             + "      }\n"
             + "      function alertNonComputedPaddings(id) {\n"
             + "        var e = document.getElementById(id);\n"
             + "        var s = e.style;\n"
-            + "        alert('L:' + s.paddingLeft + ',R:' + s.paddingRight +\n"
+            + "        log('L:' + s.paddingLeft + ',R:' + s.paddingRight +\n"
             + "          ',T:' + s.paddingTop + ',B:' + s.paddingBottom);\n"
             + "      }\n"
             + "    </script>\n"
@@ -1115,7 +1118,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    <div id='m6' style='padding: 2px; padding-left: 7px;'>m6</div>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1291,16 +1294,17 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     private void getAttribute(final String params) throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (document.all['a'].style.getAttribute) {\n"
-            + "    alert(document.all['a'].style.getAttribute(" + params + "));\n"
+            + "    log(document.all['a'].style.getAttribute(" + params + "));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "<a id='a' href='#' style='color:green'>go</a></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1398,21 +1402,22 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='color:green'>go</a>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.all['a'].style.getAttribute) {\n"
-            + "      alert(\"" + params + "\");\n"
-            + "      alert(document.all['a'].style.getAttribute('color'));\n"
+            + "      log(\"" + params + "\");\n"
+            + "      log(document.all['a'].style.getAttribute('color'));\n"
             + "      document.all['a'].style.setAttribute(" + params + ");\n"
-            + "      alert(document.all['a'].style.getAttribute('color'));\n"
+            + "      log(document.all['a'].style.getAttribute('color'));\n"
             + "    }\n"
             + "    else {\n"
-            + "      alert('not supported');\n"
+            + "      log('not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2322,10 +2327,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
             + "<script>\n"
-            + "  function log(msg) {\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    ta.value += msg + '; ';\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.getElementById('a');\n"
             + "    try {\n"
@@ -2334,13 +2336,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    } catch(e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
-            + "<textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", expected) + "; ", textArea.getAttribute("value"));
+        loadPageVerifyTitle2(html, expected);
     }
 
     private void setLength(final String cssProp, final String prop,
@@ -2349,10 +2347,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
             + "<script>\n"
-            + "  function log(msg) {\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    ta.value += msg + '; ';\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.getElementById('a');\n"
             + "    try {\n"
@@ -2361,13 +2356,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    } catch(e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
-            + "<textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", expected) + "; ", textArea.getAttribute("value"));
+        loadPageVerifyTitle2(html, expected);
     }
 
     /**
@@ -2624,18 +2615,19 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void length() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = document.createElement('div');\n"
             + "    a.style.cssText = 'width: 100%';\n"
-            + "    alert(a.style.length);\n"
-            + "    alert(a.style[0]);\n"
-            + "    alert(a.style[1]);\n"
-            + "    alert(a.style[-1]);\n"
+            + "    log(a.style.length);\n"
+            + "    log(a.style[0]);\n"
+            + "    log(a.style[1]);\n"
+            + "    log(a.style[-1]);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2868,6 +2860,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void orphans() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
             + "    debug(div);\n"
@@ -2879,15 +2872,15 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    debug(div);\n"
             + "  }\n"
             + "  function debug(div) {\n"
-            + "    alert(div.style.orphans);\n"
-            + "    alert(window.getComputedStyle(div, null).orphans);\n"
+            + "    log(div.style.orphans);\n"
+            + "    log(window.getComputedStyle(div, null).orphans);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
