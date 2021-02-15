@@ -40,8 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 
-import sun.util.logging.resources.logging;
-
 /**
  * Tests for {@link CSSStyleDeclaration}.
  *
