@@ -156,6 +156,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
     private int timeout_ = 0;
+    private boolean aborted_;
 
     /**
      * Creates a new instance.
@@ -195,6 +196,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private void fireJavascriptEvent(final String eventName) {
+        if (aborted_) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Firing javascript XHR event: " + eventName + " for an already aborted request - ignored.");
+            }
+
+            return;
+        }
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing javascript XHR event: " + eventName);
         }
@@ -366,6 +375,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
         fireJavascriptEvent(Event.TYPE_ABORT);
         fireJavascriptEvent(Event.TYPE_LOAD_END);
+        aborted_ = true;
     }
 
     /**
