@@ -335,6 +335,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n";
         if (fromHtml) {
             html = html
@@ -361,7 +362,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             cloneNode = false;
         }
         html = html
-            + "      alert(input.checked);\n"
+            + "      log(input.checked);\n"
 
             + "      var parent=document.getElementById('myDiv');\n"
             + "      var after=document.getElementById('divAfter');\n";
@@ -369,7 +370,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             html = html
                     + "      var appendix=document.createDocumentFragment();\n"
                     + "      appendix.appendChild(input);\n"
-                    + "      alert(input.checked);\n";
+                    + "      log(input.checked);\n";
         }
         else {
             html = html
@@ -393,18 +394,18 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         }
         html = html
             + "      input = parent.getElementsByTagName('input')[0];\n"
-            + "      alert(input.checked);\n";
+            + "      log(input.checked);\n";
         if (!useFragment) {
             html = html
                 + "      parent.removeChild(input);\n"
-                + "      alert(input.checked);\n"
+                + "      log(input.checked);\n"
                 + "\n"
                 + "      input.defaultChecked = true;\n"
-                + "      alert(input.checked);\n"
+                + "      log(input.checked);\n"
                 + "      parent.appendChild(input);\n"
-                + "      alert(input.checked);\n"
+                + "      log(input.checked);\n"
                 + "      parent.removeChild(input);\n"
-                + "      alert(input.checked);\n";
+                + "      log(input.checked);\n";
         }
         html = html
             + "    }\n"
@@ -413,7 +414,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -427,20 +428,21 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      chkbox = document.getElementById('chkboxChecked');\n"
-            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      log(chkbox.checked + '-' + chkbox.defaultChecked);\n"
             + "      chkbox.defaultChecked = true;\n"
-            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      log(chkbox.checked + '-' + chkbox.defaultChecked);\n"
             + "      chkbox.defaultChecked = false;\n"
-            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      log(chkbox.checked + '-' + chkbox.defaultChecked);\n"
 
             + "      chkbox = document.getElementById('chkboxNotChecked');\n"
-            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      log(chkbox.checked + '-' + chkbox.defaultChecked);\n"
             + "      chkbox.defaultChecked = true;\n"
-            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      log(chkbox.checked + '-' + chkbox.defaultChecked);\n"
             + "      chkbox.defaultChecked = false;\n"
-            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      log(chkbox.checked + '-' + chkbox.defaultChecked);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
@@ -450,7 +452,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -615,23 +617,24 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void defaultValues() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('chkbox1');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.getElementById('chkbox2');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'checkbox';\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"checkbox\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -641,7 +644,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -652,27 +655,28 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void defaultValuesAfterClone() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('chkbox1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.getElementById('chkbox2');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'checkbox';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"checkbox\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -682,7 +686,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -694,26 +698,27 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void resetByClick() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('testId');\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    checkbox.value = 'newValue';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    checkbox.defaultValue = 'newDefault';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -723,7 +728,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -735,26 +740,27 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void resetByJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('testId');\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    checkbox.value = 'newValue';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    checkbox.defaultValue = 'newDefault';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -763,7 +769,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -774,19 +780,20 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('testId');\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    checkbox.defaultValue = 'default';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
 
             + "    checkbox.value = 'newValue';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
             + "    checkbox.defaultValue = 'newDefault';\n"
-            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    log(checkbox.value + '-' + checkbox.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -795,7 +802,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -808,8 +815,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void clickShouldTriggerOnchange() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title>\n"
+                + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var elt = document.getElementById('it');\n"
                 + "    elt.click();\n"
@@ -818,12 +826,12 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "<form>\n"
-                + "  <input type='checkbox' id='it' onchange='alert(\"changed\")'"
-                + "    onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
+                + "  <input type='checkbox' id='it' onchange='log(\"changed\")'"
+                + "    onmousedown='log(\"down\")' onmouseup='log(\"up\")' onfocus='log(\"focused\")'>Check me\n"
                 + "  <input type='text' id='next'>\n"
                 + "</form>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -834,20 +842,21 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void checkedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('c1');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('c2');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('c3');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body>\n"
@@ -865,7 +874,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("c3")).click();
 
         driver.findElement(By.id("clickMe")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -877,44 +886,45 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void checkedAttributeJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('c1');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('c2');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('c3');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -925,7 +935,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -937,32 +947,33 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     public void defaultCheckedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "    var checkbox = document.getElementById('c1');\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('c2');\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('c3');\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -973,7 +984,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -985,9 +996,10 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -998,6 +1010,6 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

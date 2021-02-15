@@ -1043,7 +1043,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     protected final WebDriver loadPageVerifyTitle2(final String html, final String... expectedAlerts) throws Exception {
         final WebDriver driver = loadPage2(html);
+        return verifyTitle2(driver, expectedAlerts);
+    }
 
+    protected final WebDriver verifyTitle2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
         if (expectedAlerts.length == 0) {
             assertEquals("", driver.getTitle());
         }
