@@ -16,10 +16,15 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.apache.commons.lang3.StringUtils.right;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +35,10 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
+import com.gargoylesoftware.htmlunit.UnexpectedPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -782,7 +789,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         assertEquals("Should not have navigated away", getExpectedAlerts()[1], page.getTitleText());
     }
 
-
     /**
      * Not testable with Selenium.
      *
@@ -816,5 +822,65 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         assertEquals("Should have opened a new window",
                 windowsSize + Integer.parseInt(getExpectedAlerts()[0]), getWebClient().getWebWindows().size());
         assertEquals("Should not have navigated away", getExpectedAlerts()[1], page.getTitleText());
+    }
+
+    /**
+     * Not testable with Selenium.
+     *
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "First",
+                        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAAL"
+                        + "GPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IAAAAddEVYdENvbW1l"
+                        + "bnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1JREFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C"
+                        + "7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI"
+                        + "97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg=="},
+            IE = {"0", "First",
+                        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAAL"
+                        + "GPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IAAAAddEVYdENvbW1l"
+                        + "bnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1JREFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C"
+                        + "7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI"
+                        + "97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg=="})
+    @HtmlUnitNYI(IE = {"1", "First",
+                        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAAL"
+                        + "GPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IAAAAddEVYdENvbW1l"
+                        + "bnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1JREFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C"
+                        + "7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI"
+                        + "97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg=="})
+    public void clickWithDownloadAttributeDataUrl() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>First</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <a id='clickMe' href='data:image/png;base64,"
+                    + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGP"
+                    + "C/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9YGARc5KB0XV+IA"
+                    + "AAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAF1J"
+                    + "REFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C7OwQg2JoQ9LE1exdlYvBBeZ7jq"
+                    + "ch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI97CER3N0"
+                    + "vr4MkhoXe0rZigAAAABJRU5ErkJggg==' download='lora.html'>Click Me</a>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<head><title>Second</title>");
+        final int windowsSize = getWebClient().getWebWindows().size();
+        final HtmlPage page = loadPage(html);
+
+        page.getElementById("clickMe").click();
+
+        assertEquals("Should have opened a new window",
+                windowsSize + Integer.parseInt(getExpectedAlerts()[0]), getWebClient().getWebWindows().size());
+        assertEquals("Should not have navigated away", getExpectedAlerts()[1], page.getTitleText());
+
+        final WebWindow dataWindow = getWebClient().getWebWindows().get(getWebClient().getWebWindows().size() - 1);
+        final Page dataPage = dataWindow.getEnclosedPage();
+        assertTrue("Should be an UnexpectedPage", dataPage instanceof UnexpectedPage);
+
+        try (InputStream resultInputStream = ((UnexpectedPage) dataPage).getInputStream()) {
+            final ImageInputStream resultImageIS = ImageIO.createImageInputStream(resultInputStream);
+            final BufferedImage resultBufferedIIS = ImageIO.read(resultImageIS);
+            compareImages(getExpectedAlerts()[2], resultBufferedIIS);
+        }
     }
 }
