@@ -125,9 +125,12 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     /**
      * A checkbox does not have a textual representation,
      * but we invent one for it because it is useful for testing.
+     *
      * @return "checked" or "unchecked" according to the radio state
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         return super.asText();

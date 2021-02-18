@@ -60,8 +60,10 @@ public class HtmlHiddenInput extends HtmlInput {
     /**
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
      * @return an empty string as hidden field is not visible
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         return "";

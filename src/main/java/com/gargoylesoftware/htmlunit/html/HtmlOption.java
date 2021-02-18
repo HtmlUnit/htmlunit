@@ -375,8 +375,10 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      * This implementation will show the label attribute before the
      * content of the tag if the attribute exists.
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         return super.asText();

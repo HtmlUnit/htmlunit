@@ -790,6 +790,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns a normalized textual representation of this element that represents
+     * what would be visible to the user if this page was shown in a web browser.
+     *
+     * @return a normalized textual representation of this element
+     */
+    public String asNormalizedText() {
+//        final HtmlNormalizedTextSerializer ser = new HtmlNormalizedTextSerializer();
+//        return ser.asText(this);
+        final HtmlSerializer ser = new HtmlSerializer();
+        return ser.asText(this);
+    }
+
+    /**
      * Returns a textual representation of this element that represents what would
      * be visible to the user if this page was shown in a web browser. For example,
      * a single-selection select element would return the currently selected value
@@ -797,7 +810,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @return a textual representation of this element that represents what would
      *         be visible to the user if this page was shown in a web browser
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
+    @Deprecated
     public String asText() {
         if (getPage() instanceof XmlPage) {
             final XmlSerializer ser = new XmlSerializer();

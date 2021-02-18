@@ -89,8 +89,10 @@ public class HtmlStyle extends HtmlElement {
     /**
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
      * @return an empty string as the content of style is not visible by itself
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         return "";

@@ -113,7 +113,10 @@ public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
 
     /**
      * {@inheritDoc} Returns "Submit Query" if <tt>value</tt> attribute is not defined.
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
+    @Deprecated
     @Override
     public String asText() {
         String text = getValueAttribute();

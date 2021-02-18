@@ -554,8 +554,10 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * If the user can select multiple options, this method returns all options.
      *
      * @return the element as text
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         final List<HtmlOption> options;
