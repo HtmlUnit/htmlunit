@@ -376,18 +376,19 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
-            + "        alert(oSelect.length);\n"
+            + "        log(oSelect.length);\n"
             + "        var opt = new Option('foo', '123');\n"
             + "        oSelect.options.add(opt" + param + ");\n"
 
-            + "        alert(oSelect.options.length);\n"
+            + "        log(oSelect.options.length);\n"
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-            + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
             + "        }\n"
-            + "      } catch (e) { alert('exception'); }\n"
+            + "      } catch (e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -405,7 +406,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -488,12 +489,13 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        var opt = oSelect.options[" + pos + "];\n"
-            + "        alert(opt ? opt.text + (opt.selected ? '*' : '') : opt);\n"
-            + "      } catch (e) { alert('exception'); }\n"
+            + "        log(opt ? opt.text + (opt.selected ? '*' : '') : opt);\n"
+            + "      } catch (e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -511,7 +513,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -699,18 +701,19 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
-            + "        alert(oSelect.length);\n"
+            + "        log(oSelect.length);\n"
             + "        var opt = new Option('foo', '123');\n"
             + "        oSelect.options[" + pos + "] = " + param + ";\n"
 
-            + "        alert(oSelect.options.length);\n"
+            + "        log(oSelect.options.length);\n"
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-            + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
             + "        }\n"
-            + "      } catch (e) { alert('exception'); }\n"
+            + "      } catch (e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -728,7 +731,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -884,16 +887,17 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
             + "        var oSelect = document.forms.testForm.select1;\n"
             + "        oSelect.options.remove(" + pos + ");\n"
 
-            + "        alert(oSelect.options.length);\n"
+            + "        log(oSelect.options.length);\n"
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-            + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
             + "        }\n"
-            + "      } catch (e) { alert('exception'); }\n"
+            + "      } catch (e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -911,7 +915,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -921,14 +925,15 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Alerts({"0", "1", "3"})
     public void length() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
-            + "  alert(sel.options.length);\n"
+            + "  log(sel.options.length);\n"
             + "  sel = document.form1.select1;\n"
-            + "  alert(sel.options.length);\n"
+            + "  log(sel.options.length);\n"
             + "  sel = document.form1.select3;\n"
-            + "  alert(sel.options.length);\n"
+            + "  log(sel.options.length);\n"
             + "}</script></head>\n"
 
             + "<body onload='test()'>\n"
@@ -947,7 +952,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1011,34 +1016,35 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
     private void setLength(final String lenght) throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
             + "  try {\n"
             + "    sel.options.length = " + lenght + ";\n"
-            + "    alert(sel.options.length);\n"
+            + "    log(sel.options.length);\n"
             + "    for (var i = 0; i < sel.options.length; i++) {\n"
-            + "      alert(sel.options[i].text);\n"
+            + "      log(sel.options[i].text);\n"
             + "    }\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "  } catch (e) { log('exception'); }\n"
 
             + "  var sel = document.form1.select1;\n"
             + "  try {\n"
             + "    sel.options.length = " + lenght + ";\n"
-            + "    alert(sel.options.length);\n"
+            + "    log(sel.options.length);\n"
             + "    for (var i = 0; i < sel.options.length; i++) {\n"
-            + "      alert(sel.options[i].text);\n"
+            + "      log(sel.options[i].text);\n"
             + "    }\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "  } catch (e) { log('exception'); }\n"
 
             + "  var sel = document.form1.select3;\n"
             + "  try {\n"
             + "    sel.options.length = " + lenght + ";\n"
-            + "    alert(sel.options.length);\n"
+            + "    log(sel.options.length);\n"
             + "    for (var i = 0; i < sel.options.length; i++) {\n"
-            + "      alert(sel.options[i].text);\n"
+            + "      log(sel.options[i].text);\n"
             + "    }\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "}</script></head>\n"
 
             + "<body onload='test()'>\n"
@@ -1057,7 +1063,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1067,24 +1073,25 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Alerts({"1", "", "4", "One", "1", "", "0"})
     public void setLength_increase() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
             + "  try {\n"
             + "    sel.options.length = 1;\n"
-            + "    alert(sel.options.length);\n"
-            + "    alert(sel.options[0].text);\n"
-            + "  } catch (e) { alert(e); }\n"
+            + "    log(sel.options.length);\n"
+            + "    log(sel.options[0].text);\n"
+            + "  } catch (e) { log(e); }\n"
 
             + "  sel = document.form1.select1;\n"
             + "  try {\n"
             + "    sel.options.length = 4;\n"
-            + "    alert(sel.options.length);\n"
-            + "    alert(sel.options[0].text);\n"
-            + "    alert(sel.options[0].childNodes.length);\n"
-            + "    alert(sel.options[1].text);\n"
-            + "    alert(sel.options[1].childNodes.length);\n"
-            + "  } catch (e) { alert(e); }\n"
+            + "    log(sel.options.length);\n"
+            + "    log(sel.options[0].text);\n"
+            + "    log(sel.options[0].childNodes.length);\n"
+            + "    log(sel.options[1].text);\n"
+            + "    log(sel.options[1].childNodes.length);\n"
+            + "  } catch (e) { log(e); }\n"
             + "}</script></head>\n"
 
             + "<body onload='test()'>\n"
@@ -1097,7 +1104,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1108,14 +1115,15 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             IE = {"1", "true", "true", "true", "true"})
     public void in() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var opts = document.form1.select.options;\n"
-            + "  alert(opts.length);\n"
-            + "  alert(-1 in opts);\n"
-            + "  alert(0 in opts);\n"
-            + "  alert(1 in opts);\n"
-            + "  alert(42 in opts);\n"
+            + "  log(opts.length);\n"
+            + "  log(-1 in opts);\n"
+            + "  log(0 in opts);\n"
+            + "  log(1 in opts);\n"
+            + "  log(42 in opts);\n"
             + "}</script></head>\n"
 
             + "<body onload='test()'>\n"
@@ -1126,6 +1134,6 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
