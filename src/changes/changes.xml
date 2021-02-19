@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes">
+            <action type="ADD" dev="rbri">
+                DomNode#asNormalizedText() added to provide a more meaningfull and stable normalization.
+                DomNode#asText() is now deprecated.
+            </action>
             <action type="update" dev="rbri">
                 HtmlSerializerVisibleText moved into separate package 'com.gargoylesoftware.htmlunit.html.serializer'.
             </action>

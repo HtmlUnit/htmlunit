@@ -609,7 +609,7 @@ public class HtmlSerializerNormalizedText {
             BLOCK_SEPARATOR_AT_END
         }
 
-        private static final String LINE_SEPARATOR = System.lineSeparator();
+        private static final String LINE_SEPARATOR = "\n";
         private static final int LINE_SEPARATOR_LENGTH = LINE_SEPARATOR.length();
 
         private State state_;

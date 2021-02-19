@@ -36,7 +36,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\r\n")
+    @Alerts("\n")
     public void getVisibleTextWhiteSpaceBreak() throws Exception {
         getVisibleTextWhiteSpaceBreak(null);
     }
@@ -46,7 +46,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\r\n")
+    @Alerts("\n")
     public void getVisibleTextWhiteSpaceBreakNormal() throws Exception {
         getVisibleTextWhiteSpaceBreak("normal");
     }
@@ -56,7 +56,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\r\n")
+    @Alerts("\n")
     public void getVisibleTextWhiteSpaceBreakNowrap() throws Exception {
         getVisibleTextWhiteSpaceBreak("nowrap");
     }
@@ -66,7 +66,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\r\n")
+    @Alerts("\n")
     public void getVisibleTextWhiteSpaceBreakPre() throws Exception {
         getVisibleTextWhiteSpaceBreak("pre");
     }
@@ -76,7 +76,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\r\n")
+    @Alerts("\n")
     public void getVisibleTextWhiteSpaceBreakPreWrap() throws Exception {
         getVisibleTextWhiteSpaceBreak("pre-wrap");
     }
@@ -86,7 +86,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\r\n")
+    @Alerts("\n")
     public void getVisibleTextWhiteSpaceBreakPreLine() throws Exception {
         getVisibleTextWhiteSpaceBreak("pre-line");
     }
@@ -101,7 +101,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -173,13 +173,13 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "  <input type='hidden' name='tester' id='tester' "
                         + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'"))
-                        + " value='  A B  C\t \t  D \r\nEF\nG \n H  <br> I  '>\n"
+                        + " value='  A B  C\t \t  D \nEF\nG \n H  <br> I  '>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -249,12 +249,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <script id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-                + "var x;  \n \t   \r\n var y;</script>\n"
+                + "var x;  \n \t   \n var y;</script>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -324,12 +324,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <style id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-                + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </style>\n"
+                + "  A B  C\t \t  D \nEF\nG \n H  <br> I  </style>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -399,12 +399,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <noframes id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-                + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </noframes>\n"
+                + "  A B  C\t \t  D \nEF\nG \n H  <br> I  </noframes>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -413,7 +413,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceDiv() throws Exception {
         getVisibleTextWhiteSpaceDiv(null);
@@ -424,7 +424,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceDivNormal() throws Exception {
         getVisibleTextWhiteSpaceDiv("normal");
@@ -435,7 +435,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceDivNowrap() throws Exception {
         getVisibleTextWhiteSpaceDiv("nowrap");
@@ -446,7 +446,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceDivPre() throws Exception {
         getVisibleTextWhiteSpaceDiv("pre");
@@ -457,7 +457,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceDivPreWrap() throws Exception {
         getVisibleTextWhiteSpaceDiv("pre-wrap");
@@ -468,7 +468,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceDivPreLine() throws Exception {
         getVisibleTextWhiteSpaceDiv("pre-line");
@@ -480,12 +480,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <div id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-                + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </div>\n"
+                + "  A B  C\t \t  D \nEF\nG \n H  <br> I  </div>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -494,9 +494,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C\t \t  D \n"
+            + "EF\n"
+            + "G \n"
             + " H   I  ")
     public void getVisibleTextWhiteSpacePre() throws Exception {
         getVisibleTextWhiteSpacePre(null);
@@ -507,9 +507,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C\t \t  D \n"
+            + "EF\n"
+            + "G \n"
             + " H   I  ")
     public void getVisibleTextWhiteSpacePreNormal() throws Exception {
         getVisibleTextWhiteSpacePre("normal");
@@ -520,9 +520,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C\t \t  D \n"
+            + "EF\n"
+            + "G \n"
             + " H   I  ")
     public void getVisibleTextWhiteSpacePreNowrap() throws Exception {
         getVisibleTextWhiteSpacePre("nowrap");
@@ -533,9 +533,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C\t \t  D \n"
+            + "EF\n"
+            + "G \n"
             + " H   I  ")
     public void getVisibleTextWhiteSpacePrePre() throws Exception {
         getVisibleTextWhiteSpacePre("pre");
@@ -546,9 +546,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C\t \t  D \n"
+            + "EF\n"
+            + "G \n"
             + " H   I  ")
     public void getVisibleTextWhiteSpacePrePreWrap() throws Exception {
         getVisibleTextWhiteSpacePre("pre-wrap");
@@ -559,9 +559,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C\t \t  D \n"
+            + "EF\n"
+            + "G \n"
             + " H   I  ")
     public void getVisibleTextWhiteSpacePrePreLine() throws Exception {
         getVisibleTextWhiteSpacePre("pre-line");
@@ -573,12 +573,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <pre id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-                    + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </pre>\n"
+                    + "  A B  C\t \t  D \nEF\nG \n H  <br> I  </pre>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -587,9 +587,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C     D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C     D \n"
+            + "EF\n"
+            + "G \n"
             + " H  <br> I")
     public void getVisibleTextWhiteSpaceTextArea() throws Exception {
         getVisibleTextWhiteSpaceTextArea(null);
@@ -600,9 +600,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C     D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C     D \n"
+            + "EF\n"
+            + "G \n"
             + " H  <br> I")
     public void getVisibleTextWhiteSpaceTextAreaNormal() throws Exception {
         getVisibleTextWhiteSpaceTextArea("normal");
@@ -613,9 +613,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C     D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C     D \n"
+            + "EF\n"
+            + "G \n"
             + " H  <br> I")
     public void getVisibleTextWhiteSpaceTextAreaNowrap() throws Exception {
         getVisibleTextWhiteSpaceTextArea("nowrap");
@@ -626,9 +626,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C     D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C     D \n"
+            + "EF\n"
+            + "G \n"
             + " H  <br> I")
     public void getVisibleTextWhiteSpaceTextAreaPre() throws Exception {
         getVisibleTextWhiteSpaceTextArea("pre");
@@ -639,9 +639,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C     D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C     D \n"
+            + "EF\n"
+            + "G \n"
             + " H  <br> I")
     public void getVisibleTextWhiteSpaceTextAreaPreWrap() throws Exception {
         getVisibleTextWhiteSpaceTextArea("pre-wrap");
@@ -652,9 +652,9 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C     D \r\n"
-            + "EF\r\n"
-            + "G \r\n"
+    @Alerts("  A B  C     D \n"
+            + "EF\n"
+            + "G \n"
             + " H  <br> I")
     public void getVisibleTextWhiteSpaceTextAreaPreLine() throws Exception {
         getVisibleTextWhiteSpaceTextArea("pre-line");
@@ -666,12 +666,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <textarea id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-                    + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </textarea>\n"
+                    + "  A B  C\t \t  D \nEF\nG \n H  <br> I  </textarea>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -740,14 +740,14 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<title id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
-            + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </title>\n"
+            + "  A B  C\t \t  D \nEF\nG \n H  <br> I  </title>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -756,7 +756,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
         getVisibleTextWhiteSpaceSelect(null);
@@ -767,7 +767,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
@@ -778,7 +778,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
@@ -789,7 +789,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
@@ -800,7 +800,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");
@@ -811,7 +811,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H \r\n"
+    @Alerts("A B C D EF G H \n"
             + " I")
     public void getVisibleTextWhiteSpaceSelectPreLine() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-line");
@@ -825,14 +825,14 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "  <form>\n"
             + "    <select id='tester' "
                     + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
-            + "      <option>  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </option>\n"
+            + "      <option>  A B  C\t \t  D \nEF\nG \n H  <br> I  </option>\n"
             + "      <option>Second</option>\n"
             + "    </select>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -841,10 +841,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputSubmit() throws Exception {
         getVisibleTextWhiteSpaceInputSubmit(null);
     }
@@ -854,10 +851,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputSubmitNormal() throws Exception {
         getVisibleTextWhiteSpaceInputSubmit("normal");
     }
@@ -867,10 +861,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputSubmitNowrap() throws Exception {
         getVisibleTextWhiteSpaceInputSubmit("nowrap");
     }
@@ -880,10 +871,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputSubmitPre() throws Exception {
         getVisibleTextWhiteSpaceInputSubmit("pre");
     }
@@ -893,10 +881,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputSubmitPreWrap() throws Exception {
         getVisibleTextWhiteSpaceInputSubmit("pre-wrap");
     }
@@ -906,10 +891,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputSubmitPreLine() throws Exception {
         getVisibleTextWhiteSpaceInputSubmit("pre-line");
     }
@@ -922,13 +904,13 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "  <input type='submit' name='tester' id='tester' "
                         + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'"))
-                        + " value='  A B  C\t \t  D \r\nEF\nG \n H  <br> I  '>\n"
+                        + " value='  A B  C\t \t  D \nEF\nG \n H  <br> I  '>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -937,10 +919,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputReset() throws Exception {
         getVisibleTextWhiteSpaceInputReset(null);
     }
@@ -950,10 +929,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputResetNormal() throws Exception {
         getVisibleTextWhiteSpaceInputReset("normal");
     }
@@ -963,10 +939,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputResetNowrap() throws Exception {
         getVisibleTextWhiteSpaceInputReset("nowrap");
     }
@@ -976,10 +949,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputResetPre() throws Exception {
         getVisibleTextWhiteSpaceInputReset("pre");
     }
@@ -989,10 +959,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputResetPreWrap() throws Exception {
         getVisibleTextWhiteSpaceInputReset("pre-wrap");
     }
@@ -1002,10 +969,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("  A B  C\t \t  D \n"
-            + "EF\n"
-            + "G \n"
-            + " H  <br> I  ")
+    @Alerts("A B C D EF G H <br> I")
     public void getVisibleTextWhiteSpaceInputResetPreLine() throws Exception {
         getVisibleTextWhiteSpaceInputReset("pre-line");
     }
@@ -1018,13 +982,13 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "  <input type='reset' name='tester' id='tester' "
                         + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'"))
-                        + " value='  A B  C\t \t  D \r\nEF\nG \n H  <br> I  '>\n"
+                        + " value='  A B  C\t \t  D \nEF\nG \n H  <br> I  '>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -1096,13 +1060,13 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "  <input type='checkbox' name='tester' id='tester' "
                         + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'"))
-                        + " value='  A B  C\t \t  D \r\nEF\nG \n H  <br> I  '>\n"
+                        + " value='  A B  C\t \t  D \nEF\nG \n H  <br> I  '>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -1174,13 +1138,13 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "  <input type='radio' name='tester' id='tester' "
                         + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'"))
-                        + " value='  A B  C\t \t  D \r\nEF\nG \n H  <br> I  '>\n"
+                        + " value='  A B  C\t \t  D \nEF\nG \n H  <br> I  '>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -1189,12 +1153,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1. first item\r\n"
-            + "2. A B C D EF G H \r\n"
-            + " I\r\n"
-            + "3. third item\r\n"
-            + "4. 4. item\r\n"
-            + "some text\r\n"
+    @Alerts("1. first item\n"
+            + "2. A B C D EF G H \n"
+            + " I\n"
+            + "3. third item\n"
+            + "4. 4. item\n"
+            + "some text\n"
             + "5. last item")
     public void getVisibleTextWhiteSpaceOrderedList() throws Exception {
         getVisibleTextWhiteSpaceOrderedList(null);
@@ -1205,12 +1169,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1. first item\r\n"
-            + "2. A B C D EF G H \r\n"
-            + " I\r\n"
-            + "3. third item\r\n"
-            + "4. 4. item\r\n"
-            + "some text\r\n"
+    @Alerts("1. first item\n"
+            + "2. A B C D EF G H \n"
+            + " I\n"
+            + "3. third item\n"
+            + "4. 4. item\n"
+            + "some text\n"
             + "5. last item")
     public void getVisibleTextWhiteSpaceOrderedListNormal() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("normal");
@@ -1221,12 +1185,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1. first item\r\n"
-            + "2. A B C D EF G H \r\n"
-            + " I\r\n"
-            + "3. third item\r\n"
-            + "4. 4. item\r\n"
-            + "some text\r\n"
+    @Alerts("1. first item\n"
+            + "2. A B C D EF G H \n"
+            + " I\n"
+            + "3. third item\n"
+            + "4. 4. item\n"
+            + "some text\n"
             + "5. last item")
     public void getVisibleTextWhiteSpaceOrderedListNowrap() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("nowrap");
@@ -1237,12 +1201,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1. first item\r\n"
-            + "2. A B C D EF G H \r\n"
-            + " I\r\n"
-            + "3. third item\r\n"
-            + "4. 4. item\r\n"
-            + "some text\r\n"
+    @Alerts("1. first item\n"
+            + "2. A B C D EF G H \n"
+            + " I\n"
+            + "3. third item\n"
+            + "4. 4. item\n"
+            + "some text\n"
             + "5. last item")
     public void getVisibleTextWhiteSpaceOrderedListPre() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre");
@@ -1253,12 +1217,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1. first item\r\n"
-            + "2. A B C D EF G H \r\n"
-            + " I\r\n"
-            + "3. third item\r\n"
-            + "4. 4. item\r\n"
-            + "some text\r\n"
+    @Alerts("1. first item\n"
+            + "2. A B C D EF G H \n"
+            + " I\n"
+            + "3. third item\n"
+            + "4. 4. item\n"
+            + "some text\n"
             + "5. last item")
     public void getVisibleTextWhiteSpaceOrderedListPreWrap() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre-wrap");
@@ -1269,12 +1233,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1. first item\r\n"
-            + "2. A B C D EF G H \r\n"
-            + " I\r\n"
-            + "3. third item\r\n"
-            + "4. 4. item\r\n"
-            + "some text\r\n"
+    @Alerts("1. first item\n"
+            + "2. A B C D EF G H \n"
+            + " I\n"
+            + "3. third item\n"
+            + "4. 4. item\n"
+            + "some text\n"
             + "5. last item")
     public void getVisibleTextWhiteSpaceOrderedListPreLine() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre-line");
@@ -1287,7 +1251,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<body>\n"
             + "  <ol id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
             + "    <li>first item</li>\n"
-            + "    <li>  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </li>\n"
+            + "    <li>  A B  C\t \t  D \nEF\nG \n H  <br> I  </li>\n"
             + "    <li>third item</li><li>4. item</li>\n"
             + "    some text \n"
             + "    <li>last item</li>\n"
@@ -1296,7 +1260,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -1305,12 +1269,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first item\r\n"
-            + "A B C D EF G H \r\n"
-            + " I\r\n"
-            + "third item\r\n"
-            + "4. item\r\n"
-            + "some text\r\n"
+    @Alerts("first item\n"
+            + "A B C D EF G H \n"
+            + " I\n"
+            + "third item\n"
+            + "4. item\n"
+            + "some text\n"
             + "last item")
     public void getVisibleTextWhiteSpaceUnorderedList() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList(null);
@@ -1321,12 +1285,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first item\r\n"
-            + "A B C D EF G H \r\n"
-            + " I\r\n"
-            + "third item\r\n"
-            + "4. item\r\n"
-            + "some text\r\n"
+    @Alerts("first item\n"
+            + "A B C D EF G H \n"
+            + " I\n"
+            + "third item\n"
+            + "4. item\n"
+            + "some text\n"
             + "last item")
     public void getVisibleTextWhiteSpaceUnorderedListNormal() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("normal");
@@ -1337,12 +1301,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first item\r\n"
-            + "A B C D EF G H \r\n"
-            + " I\r\n"
-            + "third item\r\n"
-            + "4. item\r\n"
-            + "some text\r\n"
+    @Alerts("first item\n"
+            + "A B C D EF G H \n"
+            + " I\n"
+            + "third item\n"
+            + "4. item\n"
+            + "some text\n"
             + "last item")
     public void getVisibleTextWhiteSpaceUnorderedListNowrap() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("nowrap");
@@ -1353,12 +1317,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first item\r\n"
-            + "A B C D EF G H \r\n"
-            + " I\r\n"
-            + "third item\r\n"
-            + "4. item\r\n"
-            + "some text\r\n"
+    @Alerts("first item\n"
+            + "A B C D EF G H \n"
+            + " I\n"
+            + "third item\n"
+            + "4. item\n"
+            + "some text\n"
             + "last item")
     public void getVisibleTextWhiteSpaceUnorderedListPre() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre");
@@ -1369,12 +1333,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first item\r\n"
-            + "A B C D EF G H \r\n"
-            + " I\r\n"
-            + "third item\r\n"
-            + "4. item\r\n"
-            + "some text\r\n"
+    @Alerts("first item\n"
+            + "A B C D EF G H \n"
+            + " I\n"
+            + "third item\n"
+            + "4. item\n"
+            + "some text\n"
             + "last item")
     public void getVisibleTextWhiteSpaceUnorderedListPreWrap() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre-wrap");
@@ -1385,12 +1349,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first item\r\n"
-            + "A B C D EF G H \r\n"
-            + " I\r\n"
-            + "third item\r\n"
-            + "4. item\r\n"
-            + "some text\r\n"
+    @Alerts("first item\n"
+            + "A B C D EF G H \n"
+            + " I\n"
+            + "third item\n"
+            + "4. item\n"
+            + "some text\n"
             + "last item")
     public void getVisibleTextWhiteSpaceUnorderedListPreLine() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre-line");
@@ -1403,7 +1367,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "<body>\n"
             + "  <ul id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
             + "    <li>first item</li>\n"
-            + "    <li>  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </li>\n"
+            + "    <li>  A B  C\t \t  D \nEF\nG \n H  <br> I  </li>\n"
             + "    <li>third item</li><li>4. item</li>\n"
             + "    some text \n"
             + "    <li>last item</li>\n"
@@ -1412,7 +1376,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getElementById("tester").asText();
+        final String text = page.getElementById("tester").asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 
@@ -1551,7 +1515,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A  \r\n"
+    @Alerts("A  \n"
             + "  NBSPs  ")
     public void getVisibleTextParagraphMultilineNbsp() throws Exception {
         getVisibleTextFormated("<p id='tester'>A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
@@ -1562,7 +1526,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A  \r\n"
+    @Alerts("A  \n"
             + "  NBSPs  ")
     public void getVisibleTextParagraphMultilineNbspNormal() throws Exception {
         getVisibleTextFormated("<p id='tester' style='white-space: normal'>"
@@ -1574,7 +1538,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A  \r\n"
+    @Alerts("A  \n"
             + "  NBSPs  ")
     public void getVisibleTextParagraphMultilineNbspNowrap() throws Exception {
         getVisibleTextFormated("<p id='tester' style='white-space: nowrap'>"
@@ -1586,7 +1550,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A  \r\n"
+    @Alerts("A  \n"
             + "  NBSPs  ")
     public void getVisibleTextParagraphMultilineNbspPre() throws Exception {
         getVisibleTextFormated("<p id='tester' style='white-space: pre'>"
@@ -1598,7 +1562,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A  \r\n"
+    @Alerts("A  \n"
             + "  NBSPs  ")
     public void getVisibleTextParagraphMultilineNbspPreWrap() throws Exception {
         getVisibleTextFormated("<p id='tester' style='white-space: pre-wrap'>"
@@ -1610,7 +1574,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A  \r\n"
+    @Alerts("A  \n"
             + "  NBSPs  ")
     public void getVisibleTextParagraphMultilineNbspPreLine() throws Exception {
         getVisibleTextFormated("<p id='tester' style='white-space: pre-line'>"
@@ -1639,7 +1603,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final String text = page.getBody().asText();
+        final String text = page.getBody().asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
     }
 }
