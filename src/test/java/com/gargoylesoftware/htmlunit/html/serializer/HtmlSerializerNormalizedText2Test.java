@@ -20,7 +20,10 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 
 /**
  * Tests for {@link HtmlSerializerNormalizedText}.
@@ -1605,5 +1608,106 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
 
         final String text = page.getBody().asNormalizedText();
         assertEquals(getExpectedAlerts()[0], text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("01 Jan 2021")
+    public void asTextInsideSpan() throws Exception {
+        final String html = "<html><body><form>\n"
+            + "<span id='test'>\n"
+            + "  <select name='day' size='1'>"
+                    + "<option value='1' selected>01</option>"
+                    + "<option value='2'>02</option></select>\n"
+            + "  <select name='month' size='1'>"
+                    + "<option value='1' selected>Jan</option>"
+                    + "<option value='2'>Feb</option></select>\n"
+            + "  <select name='year' size='1'>"
+                    + "<option value='1'>2022</option>"
+                    + "<option value='2' selected>2021</option></select>\n"
+            + "</span>"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomElement elem = page.getElementById("test");
+        assertEquals(getExpectedAlerts()[0], elem.asNormalizedText());
+    }
+    /**
+     * Tests getTableCell(int,int).
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void getCellAt() throws Exception {
+        final String htmlContent
+            = "<html>"
+            + "<body>\n"
+            + "<table id='table1' summary='Test table'>\n"
+            + "<tr>"
+                + "<td><a>cell1a</a><div><span>cell1b</span></div></td>"
+                + "<td>cell2</td><td rowspan='2'>cell4</td>"
+            + "</tr>\n"
+            + "<tr>"
+                + "<td colspan='2'>cell3</td>"
+            + "</tr>\n"
+            + "</table>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTable table = page.getHtmlElementById("table1");
+
+        final HtmlTableCell cell1 = table.getCellAt(0, 0);
+        // assertEquals("cell1 contents", "cell1acell1b", cell1.asNormalizedText());
+        assertEquals("cell1 contents", "cell1a\ncell1b", cell1.asNormalizedText());
+
+        final HtmlTableCell cell2 = table.getCellAt(0, 1);
+        assertEquals("cell2 contents", "cell2", cell2.asNormalizedText());
+
+        final HtmlTableCell cell3 = table.getCellAt(1, 0);
+        assertEquals("cell3 contents", "cell3", cell3.asNormalizedText());
+        assertSame("cells (1,0) and (1,1)", cell3, table.getCellAt(1, 1));
+
+        final HtmlTableCell cell4 = table.getCellAt(0, 2);
+        assertEquals("cell4 contents", "cell4", cell4.asNormalizedText());
+        assertSame("cells (0,2) and (1,2)", cell4, table.getCellAt(1, 2));
+    }
+
+    /**
+     * Tests getTableCell(int,int).
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void getCellAtWithBreaks() throws Exception {
+        final String htmlContent
+            = "<html>"
+            + "<body>\n"
+            + "<table id='table1' summary='Test table'>\n"
+            + "<tr>"
+                + "<td><a>cell1a</a><div><br><span>cell1b</span></div></td>"
+                + "<td>cell2</td><td rowspan='2'>cell4</td>"
+            + "</tr>\n"
+            + "<tr>"
+                + "<td colspan='2'>cell3</td>"
+            + "</tr>\n"
+            + "</table>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTable table = page.getHtmlElementById("table1");
+
+        final HtmlTableCell cell1 = table.getCellAt(0, 0);
+        // assertEquals("cell1 contents", "cell1a\ncell1b", cell1.asNormalizedText());
+        assertEquals("cell1 contents", "cell1a\n\ncell1b", cell1.asNormalizedText());
+
+        final HtmlTableCell cell2 = table.getCellAt(0, 1);
+        assertEquals("cell2 contents", "cell2", cell2.asNormalizedText());
+
+        final HtmlTableCell cell3 = table.getCellAt(1, 0);
+        assertEquals("cell3 contents", "cell3", cell3.asNormalizedText());
+        assertSame("cells (1,0) and (1,1)", cell3, table.getCellAt(1, 1));
+
+        final HtmlTableCell cell4 = table.getCellAt(0, 2);
+        assertEquals("cell4 contents", "cell4", cell4.asNormalizedText());
+        assertSame("cells (0,2) and (1,2)", cell4, table.getCellAt(1, 2));
     }
 }

@@ -431,7 +431,7 @@ public class HtmlSerializerNormalizedText {
 
         for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
             final HtmlOption currentOption = i.next();
-            appendNode(builder, currentOption);
+            appendChildren(builder, currentOption);
             if (i.hasNext()) {
                 builder.appendBlockSeparator();
             }

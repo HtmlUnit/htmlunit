@@ -793,6 +793,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Returns a normalized textual representation of this element that represents
      * what would be visible to the user if this page was shown in a web browser.
+     * Whitespace is normalized like in the browser and block tags are separated by '\n'.
      *
      * @return a normalized textual representation of this element
      */
