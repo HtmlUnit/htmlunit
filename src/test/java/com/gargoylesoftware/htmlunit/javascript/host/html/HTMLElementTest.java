@@ -64,6 +64,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void all_IndexByInt() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  dumpAll('body');\n"
             + "  dumpAll('testDiv');\n"
@@ -79,9 +80,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    for (var i = 0; i < col.length; i++) {\n"
             + "      str += col[i].tagName + ' ';\n"
             + "    }\n"
-            + "    alert(str);\n"
+            + "    log(str);\n"
             + "  } else {\n"
-            + "    alert('all is not supported');\n"
+            + "    log('all is not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -93,7 +94,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,17 +132,18 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void getAttribute_styleAttribute() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('tester');\n"
-            + "    alert(elem.getAttribute('style'));\n"
+            + "    log(elem.getAttribute('style'));\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
             + "  <div id='tester'>tester</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -153,13 +155,14 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html =
               "<html><body onload='test()'><div id='div' style='color: green;'>abc</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('div');\n"
-            + "    alert(div.getAttribute('style', 2));\n"
+            + "    log(div.getAttribute('style', 2));\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -173,14 +176,14 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void attributes() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>test</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function doTest() {\n"
                 + "    var myNode = document.body.firstChild;\n"
                 + "    if (myNode.attributes.length == 0)\n"
-                + "      alert('0 attribute');\n"
+                + "      log('0 attribute');\n"
                 + "    else\n"
-                + "      alert('at least 1 attribute');\n"
+                + "      log('at least 1 attribute');\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -189,7 +192,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -201,14 +204,14 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<title>test</title>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function doTest() {\n"
                 + "  var myNode = document.getElementById('myNode');\n"
-                + "  alert(myNode.getAttributeNS('myNamespaceURI', 'my:foo'));\n"
+                + "  log(myNode.getAttributeNS('myNamespaceURI', 'my:foo'));\n"
                 + "  myNode.setAttributeNS('myNamespaceURI', 'my:foo', 'bla');\n"
-                + "  alert(myNode.getAttributeNS('myNamespaceURI', 'foo'));\n"
-                + "  alert(myNode.getAttributeNodeNS('myNamespaceURI', 'foo').specified);\n"
+                + "  log(myNode.getAttributeNS('myNamespaceURI', 'foo'));\n"
+                + "  log(myNode.getAttributeNodeNS('myNamespaceURI', 'foo').specified);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -218,7 +221,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -233,21 +236,24 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "  <input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' />\n"
+            + "  <input type='text' id='i' name='i' style='color:red' onclick='log(1)' custom1='a' />\n"
             + "  <script>\n"
             + "    var i = document.getElementById('i');\n"
-            + "    alert(i.type);\n"
-            + "    alert(i.id);\n"
-            + "    alert(i.name);\n"
-            + "    alert(i.style);\n"
-            + "    alert(typeof i.onclick);\n"
-            + "    alert(i.custom1);\n"
-            + "    alert(i.custom2);\n"
+            + "    log(i.type);\n"
+            + "    log(i.id);\n"
+            + "    log(i.name);\n"
+            + "    log(i.style);\n"
+            + "    log(typeof i.onclick);\n"
+            + "    log(i.custom1);\n"
+            + "    log(i.custom2);\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -258,16 +264,16 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setAttribute() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
-            + "    alert(myNode.title);\n"
+            + "    log(myNode.title);\n"
             + "    myNode.setAttribute('title', 'b');\n"
-            + "    alert(myNode.title);\n"
-            + "    alert(myNode.Title);\n"
+            + "    log(myNode.title);\n"
+            + "    log(myNode.Title);\n"
             + "    myNode.Title = 'foo';\n"
-            + "    alert(myNode.Title);\n"
+            + "    log(myNode.Title);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -277,8 +283,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "test");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -322,28 +327,28 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var div = document.getElementById('div2');\n"
-            + "      alert(div.getAttributeNode('notExisting'));\n"
+            + "      log(div.getAttributeNode('notExisting'));\n"
             + "      var customAtt = div.getAttributeNode('custom_attribute');\n"
             + "      alertAttributeProperties(customAtt);\n"
             + "    }\n"
             + "    function alertAttributeProperties(att) {\n"
-            + "      alert('expando=' + att.expando);\n"
-            + "      alert('firstChild=' + att.firstChild);\n"
-            + "      alert('lastChild=' + att.lastChild);\n"
-            + "      alert('name=' + att.name);\n"
-            + "      alert('nextSibling=' + att.nextSibling);\n"
-            + "      alert('nodeName=' + att.nodeName);\n"
-            + "      alert('nodeType=' + att.nodeType);\n"
-            + "      alert('nodeValue=' + att.nodeValue);\n"
-            + "      alert('(ownerDocument == document) = ' + (att.ownerDocument == document));\n"
-            + "      alert('parentNode=' + att.parentNode);\n"
-            + "      alert('previousSibling=' + att.previousSibling);\n"
-            + "      alert('specified=' + att.specified);\n"
-            + "      alert('value=' + att.value);\n"
+            + "      log('expando=' + att.expando);\n"
+            + "      log('firstChild=' + att.firstChild);\n"
+            + "      log('lastChild=' + att.lastChild);\n"
+            + "      log('name=' + att.name);\n"
+            + "      log('nextSibling=' + att.nextSibling);\n"
+            + "      log('nodeName=' + att.nodeName);\n"
+            + "      log('nodeType=' + att.nodeType);\n"
+            + "      log('nodeValue=' + att.nodeValue);\n"
+            + "      log('(ownerDocument == document) = ' + (att.ownerDocument == document));\n"
+            + "      log('parentNode=' + att.parentNode);\n"
+            + "      log('previousSibling=' + att.previousSibling);\n"
+            + "      log('specified=' + att.specified);\n"
+            + "      log('value=' + att.value);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -354,8 +359,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "test");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -553,7 +557,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"inform(\"onclick\")", "inform('newHandler')", "newHandler"})
     public void getAttribute_eventHandler() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var text = document.getElementById('login');\n"
 
@@ -646,7 +650,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"div1", "div2"})
     public void getElementsByTagName2() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    for (var f = 0; (formnode = document.getElementsByTagName('form').item(f)); f++)\n"
             + "      for (var i = 0; (node = formnode.getElementsByTagName('div').item(i)); i++)\n"
@@ -673,12 +677,13 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var form1 = document.getElementById('form1');\n"
             + "  var elements = form1.getElementsByTagName('input');\n"
-            + "  alert(elements['one'].name);\n"
-            + "  alert(elements['two'].name);\n"
-            + "  alert(elements['three'].name);\n"
+            + "  log(elements['one'].name);\n"
+            + "  log(elements['two'].name);\n"
+            + "  log(elements['three'].name);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -689,7 +694,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -701,14 +706,15 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"8", "3"})
     public void getElementsByTagNameAsterisk() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementsByTagName('*').length);\n"
-            + "    alert(document.getElementById('div').getElementsByTagName('*').length);\n"
+            + "    log(document.getElementsByTagName('*').length);\n"
+            + "    log(document.getElementById('div').getElementsByTagName('*').length);\n"
             + "  }\n"
             + "</script>\n"
             + "<div id='div'><p>a</p><p>b</p><p>c</p></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -719,14 +725,15 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void getElementsByTagNameEquality() throws Exception {
         final String html =
               "<html><body><div id='d'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var div = document.getElementById('d');\n"
-            + "alert(document.getElementsByTagName('*') == document.getElementsByTagName('*'));\n"
-            + "alert(document.getElementsByTagName('script') == document.getElementsByTagName('script'));\n"
-            + "alert(document.getElementsByTagName('foo') == document.getElementsByTagName('foo'));\n"
-            + "alert(document.getElementsByTagName('script') == document.getElementsByTagName('body'));\n"
-            + "alert(document.getElementsByTagName('script') == div.getElementsByTagName('script'));\n"
+            + "log(document.getElementsByTagName('*') == document.getElementsByTagName('*'));\n"
+            + "log(document.getElementsByTagName('script') == document.getElementsByTagName('script'));\n"
+            + "log(document.getElementsByTagName('foo') == document.getElementsByTagName('foo'));\n"
+            + "log(document.getElementsByTagName('script') == document.getElementsByTagName('body'));\n"
+            + "log(document.getElementsByTagName('script') == div.getElementsByTagName('script'));\n"
             + "</script></div></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -756,24 +763,26 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"* x # x *", "*\tx\t#\tx\t*", "*  #  *", "*\t\t#\t\t*", "*\t \n \n#\t \n \n*", "*x\ty#x\ty*"})
+    @Alerts({"*!x!#!x!*", "*$x$#$x$*", "*!!#!!*", "*$$#$$*", "*$!%!%#$!%!%*", "*x$y#x$y*"})
     public void getClassNameWhitespace() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + "function log(msg) { msg = msg.replace(/\\n/g, '%'); msg = msg.replace(/\\t/g, '$');"
+                                    + " msg = msg.replace(/\\s/g, '!'); window.document.title += msg + '§';}\n"
             + "function doTest() {\n"
             + "  var elem = document.getElementById('pid1');\n"
-            + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
             + "  elem = document.getElementById('pid2');\n"
-            + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
             + "  elem = document.getElementById('pid3');\n"
-            + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
             + "  elem = document.getElementById('pid4');\n"
-            + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
             + "  elem = document.getElementById('pid5');\n"
-            + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
             + "  elem = document.getElementById('pid6');\n"
-            + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
+            + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -785,7 +794,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <p id='pid6' class='x\ty'>text</p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -927,7 +936,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     public void setInnerHTMLExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = '<scr'+'ipt>alerter();</scr'+'ipt>';\n"
             + "    var outernode = document.getElementById('myNode');\n"
@@ -948,7 +957,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     public void setInnerHTMLExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = '<div><scr'+'ipt>alerter();</scr'+'ipt></div>';\n"
             + "    var outernode = document.getElementById('myNode');\n"
@@ -970,7 +979,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("exception")
     public void setInnerHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = '<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>';\n"
             + "    var outernode = document.getElementById('myNode');\n"
@@ -1016,16 +1025,17 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"<div id=\"div\"><ul></ul></div>", "<ul></ul>", ""})
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('div');\n"
-            + "    alert(div.outerHTML);\n"
-            + "    alert(div.innerHTML);\n"
-            + "    alert(div.innerText);\n"
+            + "    log(div.outerHTML);\n"
+            + "    log(div.innerHTML);\n"
+            + "    log(div.innerText);\n"
             + "  }\n"
             + "</script>\n"
             + "<div id='div'><ul/></div>"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1036,16 +1046,17 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", ""})
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('div');\n"
-            + "    alert(div.outerHTML);\n"
-            + "    alert(div.innerHTML);\n"
-            + "    alert(div.innerText);\n"
+            + "    log(div.outerHTML);\n"
+            + "    log(div.innerHTML);\n"
+            + "    log(div.innerText);\n"
             + "  }\n"
             + "</script>\n"
             + "<div id='div'><span class='a b'></span></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1173,11 +1184,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"},
-            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Children: 1"})
+    @Alerts(DEFAULT = {"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#", "Children:#0"},
+            IE = {"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#null", "Children:#1"})
     public void setOuterHTMLNull() throws Exception {
         final String html = createPageForSetOuterHTML("div", null);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1185,10 +1196,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = undefined", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#undefined", "Children:#1"})
     public void setOuterHTMLUndefined() throws Exception {
         final String html = createPageForSetOuterHTML("div", "undefined");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1196,10 +1207,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#", "Children:#0"})
     public void setOuterHTMLEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1207,10 +1218,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New =   ", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=###", "Children:#1"})
     public void setOuterHTMLBlank() throws Exception {
         final String html = createPageForSetOuterHTML("div", "  ");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1218,10 +1229,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#New##cell#value", "Children:#1"})
     public void setOuterHTMLAddTextToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1229,10 +1240,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#New##cell#value", "Children:#1"})
     public void setOuterHTMLAddTextToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1240,10 +1251,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<div>test</div>", "Children:#1"})
     public void setOuterHTMLAddBlockToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1251,10 +1262,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<div>test</div>", "Children:#1"})
     public void setOuterHTMLAddBlockToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1262,10 +1273,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<span>test</span>", "Children:#1"})
     public void setOuterHTMLAddInlineToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1273,10 +1284,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<span>test</span>", "Children:#1"})
     public void setOuterHTMLAddInlineToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1284,10 +1295,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<br>", "Children:#1"})
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1298,8 +1309,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"-0", "1", "2", "3", "-4", "5", "6", "7", "8", "9", "10", "11"})
     public void setOuterHTMLToReadOnly() throws Exception {
         final String html =  "<html>\n"
-            + "<head>\n"
-            + "  <title>test</title>\n"
+            + "<head>n"
             + "  <script>\n"
             + "  function doTest() {\n"
             + "    var nodeTypes = ['body', 'caption', 'col', 'colgroup', 'head', 'html',\n"
@@ -1335,11 +1345,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <div>test</div>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>",
+                    "New#=#<div>test</div>", "Children:#1"})
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1348,11 +1358,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <p>test</p>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>",
+                    "New#=#<p>test</p>", "Children:#1"})
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1361,10 +1371,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<p>test</p>", "Children:#1"})
     public void setOuterHTMLAddUnclosedParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<p>test");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1373,11 +1383,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <a>test</a>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>",
+                    "New#=#<a>test</a>", "Children:#1"})
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1385,10 +1395,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<div></div>", "Children:#1"})
     public void setOuterHTMLAddSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1401,7 +1411,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @NotYetImplemented
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1409,10 +1419,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<span></span>", "Children:#1"})
     public void setOuterHTMLAddSelfClosingInline() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span/>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1420,10 +1430,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Children: 1"})
+    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<br>", "Children:#1"})
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private static String createPageForSetOuterHTML(final String nodeTag, final String newValue) {
@@ -1436,15 +1446,15 @@ public class HTMLElementTest extends WebDriverTestCase {
         }
         return "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + "  function log(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
             + "    var innerNode = document.getElementById('innerNode');\n"
-            + "    alert('Old = ' + myNode.innerHTML);\n"
+            + "    log('Old = ' + myNode.innerHTML);\n"
             + "    innerNode.outerHTML = " + newVal + ";\n"
-            + "    alert('New = ' + myNode.innerHTML);\n"
-            + "    alert('Children: ' + myNode.childNodes.length);\n"
+            + "    log('New = ' + myNode.innerHTML);\n"
+            + "    log('Children: ' + myNode.childNodes.length);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1501,17 +1511,17 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>test</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    document.body.removeChild(myNode);\n"
-                + "    alert('Old = ' + myNode.innerHTML);\n"
+                + "    log('Old = ' + myNode.innerHTML);\n"
                 + "    try {\n"
                 + "      myNode.outerHTML = undefined;\n"
-                + "      alert('New = ' + myNode.innerHTML);\n"
-                + "      alert('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {alert('exception'); }\n"
+                + "      log('New = ' + myNode.innerHTML);\n"
+                + "      log('Children: ' + myNode.childNodes.length);\n"
+                + "    } catch(e) {log('exception'); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1519,7 +1529,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "  <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
                 + "</body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1603,17 +1613,17 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>test</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    document.body.removeChild(myNode);\n"
-                + "    alert('Old = ' + myNode.innerHTML);\n"
+                + "    log('Old = ' + myNode.innerHTML);\n"
                 + "    try {\n"
                 + "      myNode.outerHTML = '<p>test</p>';\n"
-                + "      alert('New = ' + myNode.innerHTML);\n"
-                + "      alert('Children: ' + myNode.childNodes.length);\n"
-                + "    } catch(e) {alert('exception'); }\n"
+                + "      log('New = ' + myNode.innerHTML);\n"
+                + "      log('Children: ' + myNode.childNodes.length);\n"
+                + "    } catch(e) {log('exception'); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -1621,7 +1631,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "  <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
                 + "</body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1630,19 +1640,20 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     public void setOuterHTMLExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var newnode = '<scr'+'ipt>alerter();</scr'+'ipt>';\n"
             + "    var oldnode = document.getElementById('myNode');\n"
             + "    oldnode.outerHTML = newnode;\n"
             + "  }\n"
             + "  function alerter() {\n"
-            + "    alert('executed');\n"
+            + "    log('executed');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1651,19 +1662,20 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     public void setOuterHTMLExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var newnode = '<div><scr'+'ipt>alerter();</scr'+'ipt></div>';\n"
             + "    var oldnode = document.getElementById('myNode');\n"
             + "    oldnode.outerHTML = newnode;\n"
             + "  }\n"
             + "  function alerter() {\n"
-            + "    alert('executed');\n"
+            + "    log('executed');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1673,7 +1685,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("exception")
     public void setOuterHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = '<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>';\n"
             + "    var oldnode = document.getElementById('myNode');\n"
@@ -1747,16 +1759,17 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var oDiv = document.getElementById('myDiv');\n"
             + "  for (var i = 0; i < oDiv.children.length; i++) {\n"
-            + "    alert(oDiv.children[i].tagName);\n"
+            + "    log(oDiv.children[i].tagName);\n"
             + "  }\n"
             + "  var oCol = oDiv.children;\n"
-            + "  alert(oCol.length);\n"
+            + "  log(oCol.length);\n"
             + "  oDiv.insertAdjacentHTML('beforeEnd', '<br>');\n"
-            + "  alert(oCol.length);\n"
+            + "  log(oCol.length);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1766,7 +1779,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"1", "0"})
     public void childrenDoesNotCountTextNodes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "function test() {\n"
             + "  children = document.getElementById('myBody').children;\n"
             + "  alert(children.length);\n"
@@ -1791,13 +1804,14 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var oDiv = document.getElementById('myDiv');\n"
-            + "  alert(oDiv.children.length);\n"
-            + "  alert(oDiv.children(0).tagName);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(oDiv.children.length);\n"
+            + "  log(oDiv.children(0).tagName);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1837,20 +1851,20 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void removeAttribute() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var myDiv = document.getElementById('aDiv');\n"
-            + "    alert(myDiv.getAttribute('name'));\n"
+            + "    log(myDiv.getAttribute('name'));\n"
             + "    myDiv.removeAttribute('name');\n"
-            + "    alert(myDiv.getAttribute('name'));\n"
+            + "    log(myDiv.getAttribute('name'));\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'><div id='aDiv' name='removeMe'>\n"
             + "</div></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1863,22 +1877,22 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void removeAttribute_property() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var myDiv = document.getElementById('aDiv');\n"
             + "    myDiv.foo = 'hello';\n"
-            + "    alert(myDiv.foo);\n"
-            + "    alert(myDiv.getAttribute('foo'));\n"
+            + "    log(myDiv.foo);\n"
+            + "    log(myDiv.getAttribute('foo'));\n"
             + "    myDiv.removeAttribute('foo');\n"
-            + "    alert(myDiv.foo);\n"
+            + "    log(myDiv.foo);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'><div id='aDiv' name='removeMe'>\n"
             + "</div></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1890,25 +1904,23 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"number", "number", "number", "number", "number", "number", "number", "number"})
     public void scrolls() throws Exception {
         final String html = "<html>\n"
-              + "<head>\n"
-              + "  <title>Test</title>\n"
-              + "</head>\n"
               + "<body>\n"
               + "</div></body>\n"
               + "<div id='div1'>foo</div>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "function alertScrolls(_oElt) {\n"
-              + "  alert(typeof _oElt.scrollHeight);\n"
-              + "  alert(typeof _oElt.scrollWidth);\n"
-              + "  alert(typeof _oElt.scrollLeft);\n"
+              + "  log(typeof _oElt.scrollHeight);\n"
+              + "  log(typeof _oElt.scrollWidth);\n"
+              + "  log(typeof _oElt.scrollLeft);\n"
               + "  _oElt.scrollLeft = 123;\n"
-              + "  alert(typeof _oElt.scrollTop);\n"
+              + "  log(typeof _oElt.scrollTop);\n"
               + "  _oElt.scrollTop = 123;\n"
               + "}\n"
               + "alertScrolls(document.body);\n"
               + "alertScrolls(document.getElementById('div1'));\n"
               + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1941,28 +1953,29 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>\n"
             + "</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var d1 = document.getElementById('d1'), d2 = document.getElementById('d2');\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d1.scrollLeft = -1;\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d1.scrollLeft = 5;\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d2.style.width = '200px';\n"
             + "  d2.style.height = '200px';\n"
             + "  d1.scrollLeft = 7;\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d1.style.overflow = '" + overflow + "';\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d1.scrollLeft = 17;\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d1.style.overflow = 'visible';\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "  d1.scrollLeft = 19;\n"
-            + "  alert(d1.scrollLeft);\n"
+            + "  log(d1.scrollLeft);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2027,28 +2040,29 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>\n"
             + "</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var d1 = document.getElementById('d1'), d2 = document.getElementById('d2');\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d1.scrollTop = -1;\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d1.scrollTop = 5;\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d2.style.width = '200px';\n"
             + "  d2.style.height = '200px';\n"
             + "  d1.scrollTop = 7;\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d1.style.overflow = '" + overflow + "';\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d1.scrollTop = 17;\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d1.style.overflow = 'visible';\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "  d1.scrollTop = 19;\n"
-            + "  alert(d1.scrollTop);\n"
+            + "  log(d1.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2080,6 +2094,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void offsetParent_Basic() throws Exception {
         final String html = "<html><head>\n"
             + "<script type='text/javascript'>\n"
+            + LOG_TITLE_FUNCTION
             + "function alertOffsetParent(id) {\n"
             + "  var element = document.getElementById(id);\n"
             + "  var offsetParent = element.offsetParent;\n"
@@ -2090,7 +2105,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  else {\n"
             + "    alertMessage += offsetParent;\n"
             + "  }\n"
-            + "  alert(alertMessage);\n"
+            + "  log(alertMessage);\n"
             + "}\n"
             + "function test() {\n"
             + "  alertOffsetParent('span3');\n"
@@ -2127,7 +2142,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </span>\n"
             + "</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2185,13 +2200,14 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      </tr>\n"
             + "    </table>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function alertOffsetParentId(id) {\n"
             + "        try {\n"
-            + "          alert(document.getElementById(id).offsetParent.id);\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "          log(document.getElementById(id).offsetParent.id);\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "      function test() {\n"
-            + "        alert(document.getElementById('body').offsetParent);  // null (FF) null (IE)\n"
+            + "        log(document.getElementById('body').offsetParent);  // null (FF) null (IE)\n"
             + "        alertOffsetParentId('a2'); // body body \n"
             + "        alertOffsetParentId('b2'); // body exception \n"
             + "        alertOffsetParentId('c2'); // body body \n"
@@ -2210,7 +2226,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2245,28 +2261,29 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"undefined", "undefined", "undefined", "undefined",
                 "undefined", "123", "from myFunction", "123", "from myFunction"})
     public void prototype() throws Exception {
-        final String html = "<html><head><title>Prototype test</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var d = document.getElementById('foo');\n"
-            + "  alert(d.foo);\n"
-            + "  alert(d.myFunction);\n"
+            + "  log(d.foo);\n"
+            + "  log(d.myFunction);\n"
             + "  var link = document.getElementById('testLink');\n"
-            + "  alert(link.foo);\n"
-            + "  alert(link.myFunction);\n"
+            + "  log(link.foo);\n"
+            + "  log(link.myFunction);\n"
             + "  HTMLElement.prototype.foo = 123;\n"
-            + "  alert(HTMLElement.foo);\n"
+            + "  log(HTMLElement.foo);\n"
             + "  HTMLElement.prototype.myFunction = function() { return 'from myFunction'; };\n"
-            + "  alert(d.foo);\n"
-            + "  alert(d.myFunction());\n"
-            + "  alert(link.foo);\n"
-            + "  alert(link.myFunction());\n"
+            + "  log(d.foo);\n"
+            + "  log(d.myFunction());\n"
+            + "  log(link.foo);\n"
+            + "  log(link.myFunction());\n"
             + "}\n"
             + "</script></head><body onload='test()''>\n"
             + "<div id='foo'>bla</div>\n"
             + "<a id='testLink' href='foo'>bla</a>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2277,7 +2294,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts("in selectNodes")
     public void prototype_Element() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  Element.prototype.selectNodes = function(sExpr){\n"
             + "    alert('in selectNodes');\n"
@@ -2380,11 +2397,12 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void clientLeftTop() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1'>hello</div><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var d1 = document.getElementById('div1');\n"
-            + "  alert(d1.clientLeft);\n"
-            + "  alert(d1.clientTop);\n"
+            + "  log(d1.clientLeft);\n"
+            + "  log(d1.clientTop);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2400,11 +2418,12 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<body>"
             + "<div id='div1'>hello</div><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var d1 = document.documentElement;\n"
-            + "  alert(d1.clientLeft);\n"
-            + "  alert(d1.clientTop);\n"
+            + "  log(d1.clientLeft);\n"
+            + "  log(d1.clientTop);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2415,11 +2434,12 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void clientLeftTopWithBorder() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1' style='border: 4px solid black;'>hello</div><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var d1 = document.getElementById('div1');\n"
-            + "  alert(d1.clientLeft);\n"
-            + "  alert(d1.clientTop);\n"
+            + "  log(d1.clientLeft);\n"
+            + "  log(d1.clientTop);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2444,18 +2464,19 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"400", "100"})
     public void getBoundingClientRect2() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var pos = d1.getBoundingClientRect();\n"
-            + "    alert(pos.left);\n"
-            + "    alert(pos.top);\n"
+            + "    log(pos.left);\n"
+            + "    log(pos.top);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
             + "<div id='div1'></div></div>"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2464,18 +2485,19 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "100", "100", "50"})
     public void getBoundingClientRect_Scroll() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('outer');\n"
             + "    d1.scrollTop = 150;\n"
             + "    var pos = d1.getBoundingClientRect();\n"
-            + "    alert(pos.left);\n"
-            + "    alert(pos.top);\n"
+            + "    log(pos.left);\n"
+            + "    log(pos.top);\n"
 
             + "    d1 = document.getElementById('div1');\n"
             + "    pos = d1.getBoundingClientRect();\n"
-            + "    alert(pos.left);\n"
-            + "    alert(pos.top);\n"
+            + "    log(pos.left);\n"
+            + "    log(pos.top);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2489,7 +2511,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div style='position: absolute; top: 1000px;'>way down</div>\n"
             + "</div>"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2500,7 +2522,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = "exception")
     public void getBoundingClientRectDisconnected() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title><script>\n"
+            + "<head><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.createElement('div');\n"
             + "    try {\n"
@@ -2524,7 +2546,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object DOMRectList]", "1"},
             IE = {"[object ClientRectList]", "1"})
     public void getClientRects() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var rects = d1.getClientRects();\n"
@@ -2546,7 +2568,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = {"[object ClientRectList]", "0"})
     public void getClientRectsDisconnected() throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.createElement('div');\n"
             + "    alert(d1.getClientRects());\n"
@@ -2566,7 +2588,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = {"[object ClientRectList]", "0", "[object ClientRectList]", "0"})
     public void getClientRectsDisplayNone() throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    display(d1);\n"
@@ -2593,7 +2615,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void innerHTML_parentNode() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
             + "    alert(div1.parentNode);\n"
@@ -2614,19 +2636,20 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void innerText_parentNode() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.createElement('div');\n"
-            + "    alert(div1.parentNode);\n"
+            + "    log(div1.parentNode);\n"
             + "    div1.innerText = '<p>hello</p>';\n"
             + "    if(div1.parentNode)\n"
-            + "      alert(div1.parentNode.nodeName);\n"
+            + "      log(div1.parentNode.nodeName);\n"
             + "    else\n"
-            + "      alert(div1.parentNode);\n"
+            + "      log(div1.parentNode);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2636,7 +2659,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true"},
             IE = {"false", "true", "false"})
     public void uniqueID() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    var div2 = document.getElementById('div2');\n"
@@ -2661,7 +2684,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = {"true", "true"})
     public void uniqueIDFormatIE() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    var div2 = document.getElementById('div2');\n"
@@ -2687,7 +2710,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void setExpression() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var div1 = document.getElementById('div1');\n"
@@ -2706,7 +2729,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"ex setExpression", "ex removeExpression"})
     public void removeExpression() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
 
@@ -2803,17 +2826,18 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elt = document.body;\n"
-            + "    alert(elt.hasAttribute('onload'));\n"
-            + "    alert(elt.hasAttribute('onLoad'));\n"
-            + "    alert(elt.hasAttribute('foo'));\n"
+            + "    log(elt.hasAttribute('onload'));\n"
+            + "    log(elt.hasAttribute('onLoad'));\n"
+            + "    log(elt.hasAttribute('foo'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2848,18 +2872,19 @@ public class HTMLElementTest extends WebDriverTestCase {
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elt = document.body;\n"
-            + "    alert(typeof elt.hasAttribute);\n"
-            + "    alert(elt.hasAttribute('onload'));\n"
-            + "    alert(elt.hasAttribute('onLoad'));\n"
-            + "    alert(elt.hasAttribute('foo'));\n"
+            + "    log(typeof elt.hasAttribute);\n"
+            + "    log(elt.hasAttribute('onload'));\n"
+            + "    log(elt.hasAttribute('onLoad'));\n"
+            + "    log(elt.hasAttribute('foo'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2868,21 +2893,22 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined"})
     public void getComponentVersion() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.body.cpuClass);\n"
+            + "  log(document.body.cpuClass);\n"
             + "  document.body.style.behavior = 'url(#default#clientCaps)';\n"
-            + "  alert(document.body.cpuClass);\n"
+            + "  log(document.body.cpuClass);\n"
             + "  if (document.body.getComponentVersion) {\n"
             + "    var ver=document.body.getComponentVersion('{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}','ComponentID');\n"
-            + "    alert(ver.length);\n"
+            + "    log(ver.length);\n"
             + "  }\n"
             + "  document.body.style.behavior = '';\n"
-            + "  alert(document.body.cpuClass);\n"
+            + "  log(document.body.cpuClass);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2892,11 +2918,12 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"36", "46"})
     public void clientWidthAndHeight() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
-            + "    alert(myDiv.clientWidth);\n"
-            + "    alert(myDiv.clientHeight);\n"
+            + "    log(myDiv.clientWidth);\n"
+            + "    log(myDiv.clientHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "<style>#myDiv { width:30px; height:40px; padding:3px; border:5px; margin:7px; }</style>\n"
@@ -2904,7 +2931,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2914,19 +2941,20 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"true", "true", "true", "true", "true"})
     public void clientWidthAndHeightPositionAbsolute() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    var absDiv = document.getElementById('myAbsDiv');\n"
 
-            // + "    alert(div.clientWidth +', ' + absDiv.clientWidth);\n"
-            + "    alert(div.clientWidth > 100);\n"
-            + "    alert(absDiv.clientWidth > 10);\n"
-            + "    alert(absDiv.clientWidth < 100);\n"
+            // + "    log(div.clientWidth +', ' + absDiv.clientWidth);\n"
+            + "    log(div.clientWidth > 100);\n"
+            + "    log(absDiv.clientWidth > 10);\n"
+            + "    log(absDiv.clientWidth < 100);\n"
 
-            // + "    alert(div.clientHeight +', ' + absDiv.clientHeight);\n"
-            + "    alert(div.clientHeight > 10);\n"
-            + "    alert(div.clientHeight == absDiv.clientHeight);\n"
+            // + "    log(div.clientHeight +', ' + absDiv.clientHeight);\n"
+            + "    log(div.clientHeight > 10);\n"
+            + "    log(div.clientHeight == absDiv.clientHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2934,7 +2962,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='myDiv'>Test</div>\n"
             + "  <div id='myAbsDiv' style='position: absolute'>Test</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2944,18 +2972,19 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"0", "0"})
     public void clientWidthAndHeightPositionAbsoluteEmpty() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var absDiv = document.getElementById('myAbsDiv');\n"
-            + "    alert(absDiv.clientWidth);\n"
-            + "    alert(absDiv.clientHeight);\n"
+            + "    log(absDiv.clientWidth);\n"
+            + "    log(absDiv.clientHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myAbsDiv' style='position: absolute'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2965,21 +2994,22 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"true", "true", "false", "true", "true", "true", "true", "true", "true", "true"})
     public void scrollWidthAndHeight() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
-            + "    alert(myDiv1.scrollWidth >= myDiv1.clientWidth);\n"
-            + "    alert(myDiv1.scrollHeight >= myDiv1.clientHeight);\n"
+            + "    log(myDiv1.scrollWidth >= myDiv1.clientWidth);\n"
+            + "    log(myDiv1.scrollHeight >= myDiv1.clientHeight);\n"
 
-            + "    alert(myDiv2.scrollWidth >= myDiv1.scrollWidth);\n"
-            + "    alert(myDiv2.scrollHeight >= myDiv1.scrollHeight);\n"
-            + "    alert(myDiv2.scrollWidth >= myDiv2.clientWidth);\n"
-            + "    alert(myDiv2.scrollHeight >= myDiv2.clientHeight);\n"
+            + "    log(myDiv2.scrollWidth >= myDiv1.scrollWidth);\n"
+            + "    log(myDiv2.scrollHeight >= myDiv1.scrollHeight);\n"
+            + "    log(myDiv2.scrollWidth >= myDiv2.clientWidth);\n"
+            + "    log(myDiv2.scrollHeight >= myDiv2.clientHeight);\n"
 
-            + "    alert(myDiv3.scrollWidth >= myDiv2.scrollWidth);\n"
-            + "    alert(myDiv3.scrollHeight >= myDiv2.scrollHeight);\n"
-            + "    alert(myDiv3.scrollWidth >= myDiv3.clientWidth);\n"
-            + "    alert(myDiv3.scrollHeight >= myDiv3.clientHeight);\n"
+            + "    log(myDiv3.scrollWidth >= myDiv2.scrollWidth);\n"
+            + "    log(myDiv3.scrollHeight >= myDiv2.scrollHeight);\n"
+            + "    log(myDiv3.scrollWidth >= myDiv3.clientWidth);\n"
+            + "    log(myDiv3.scrollHeight >= myDiv3.clientHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2988,7 +3018,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='myDiv2' style='height: 42px; width: 42px' />\n"
             + "  <div id='myDiv3' style='height: 7em; width: 7em' />\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2998,18 +3028,19 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"0", "0"})
     public void scrollWidthAndHeightDisplayNone() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
-            + "    alert(myDiv.scrollWidth);\n"
-            + "    alert(myDiv.scrollHeight);\n"
+            + "    log(myDiv.scrollWidth);\n"
+            + "    log(myDiv.scrollHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' style='display: none;' />\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3019,17 +3050,18 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({"0", "0"})
     public void scrollWidthAndHeightDetached() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.createElement('div');\n"
-            + "    alert(myDiv.scrollWidth);\n"
-            + "    alert(myDiv.scrollHeight);\n"
+            + "    log(myDiv.scrollWidth);\n"
+            + "    log(myDiv.scrollHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3057,21 +3089,22 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var e = document.getElementById('pid');\n"
-            + "  alert(e.getAttribute('class'));\n"
-            + "  alert(e.getAttribute('className'));\n"
-            + "  alert(e.getAttributeNode('class'));\n"
-            + "  alert(e.getAttributeNode('className'));\n"
+            + "  log(e.getAttribute('class'));\n"
+            + "  log(e.getAttribute('className'));\n"
+            + "  log(e.getAttributeNode('class'));\n"
+            + "  log(e.getAttributeNode('className'));\n"
             + "  e.setAttribute('className', 'byClassname');\n"
-            + "  alert(e.getAttribute('class'));\n"
-            + "  alert(e.getAttribute('className'));\n"
+            + "  log(e.getAttribute('class'));\n"
+            + "  log(e.getAttribute('className'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p id='pid' class='x'>text</p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3084,26 +3117,27 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var e = document.getElementById('pid');\n"
-            + "  alert(e['lang'] + '-' + e['class'] + '-' + e['className']);\n"
-            + "  alert(e.getAttribute('lang') + '-' + e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
-            + "  alert(e.getAttributeNode('lang') + '-' + e.getAttributeNode('class') + '-' + "
+            + "  log(e['lang'] + '-' + e['class'] + '-' + e['className']);\n"
+            + "  log(e.getAttribute('lang') + '-' + e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
+            + "  log(e.getAttributeNode('lang') + '-' + e.getAttributeNode('class') + '-' + "
             + "e.getAttributeNode('className'));\n"
-            + "  alert(e.attributes.getNamedItem('lang') + '-' + e.attributes.getNamedItem('class') + '-' + "
+            + "  log(e.attributes.getNamedItem('lang') + '-' + e.attributes.getNamedItem('class') + '-' + "
             + "e.attributes.getNamedItem('className'));\n"
             + "  e.setAttribute('className', 'byClassname');\n"
-            + "  alert(e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
-            + "  alert(e.getAttributeNode('class') + '-' + e.getAttributeNode('className'));\n"
+            + "  log(e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
+            + "  log(e.getAttributeNode('class') + '-' + e.getAttributeNode('className'));\n"
             + "  e.setAttribute('class', 'byClassname');\n"
-            + "  alert(e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
-            + "  alert(e.getAttributeNode('class') + '-' + e.getAttributeNode('className'));\n"
+            + "  log(e.getAttribute('class') + '-' + e.getAttribute('className'));\n"
+            + "  log(e.getAttributeNode('class') + '-' + e.getAttributeNode('className'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p id='pid' class='x'>text</p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3117,24 +3151,25 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
             + "  var text = div2.firstChild;\n"
             + "  var div3 = document.getElementById('div3');\n"
-            + "  alert(div1.contains(div1));\n"
-            + "  alert(div1.contains(div2));\n"
-            + "  alert(div1.contains(div3));\n"
-            + "  alert(div1.contains(div4));\n"
-            + "  alert(div2.contains(div1));\n"
-            + "  alert(div3.contains(div1));\n"
-            + "  alert(div4.contains(div1));\n"
-            + "  alert(div2.contains(div3));\n"
-            + "  alert(div2.contains(text));\n"
-            + "  alert(div3.contains(text));\n"
-            + "  alert(text.contains(div3));\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(div1.contains(div1));\n"
+            + "  log(div1.contains(div2));\n"
+            + "  log(div1.contains(div3));\n"
+            + "  log(div1.contains(div4));\n"
+            + "  log(div2.contains(div1));\n"
+            + "  log(div3.contains(div1));\n"
+            + "  log(div4.contains(div1));\n"
+            + "  log(div2.contains(div3));\n"
+            + "  log(div2.contains(text));\n"
+            + "  log(div3.contains(text));\n"
+            + "  log(text.contains(div3));\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'>\n"
@@ -3147,7 +3182,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3219,18 +3254,19 @@ public class HTMLElementTest extends WebDriverTestCase {
                 "red foo => body: 1, div1: 0", "blue foo => body: 0, div1: 0", "null => body: 0, div1: 0"})
     public void getElementsByClassName() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test(x) {\n"
             + "  var b = document.body;\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var s = x + ' => body: ' + b.getElementsByClassName(x).length;\n"
             + "  s += ', div1: ' + div1.getElementsByClassName(x).length;\n"
-            + "  alert(s);\n"
+            + "  log(s);\n"
             + "}\n"
             + "function doTest() {\n"
             + "  var b = document.body;\n"
             + "  var div1 = document.getElementById('div1');\n"
-            + "  alert(typeof document.body.getElementsByClassName);\n"
+            + "  log(typeof document.body.getElementsByClassName);\n"
             + "  test('*');\n"
             + "  test('foo');\n"
             + "  test('foo red');\n"
@@ -3247,7 +3283,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<span class='red' id='span4'>bye</span>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3259,19 +3295,20 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var fragment = document.createDocumentFragment();\n"
             + "  var div = document.createElement('div');\n"
             + "  var bold = document.createElement('b');\n"
             + "  fragment.appendChild(div);\n"
             + "  div.appendChild(bold);\n"
-            + "  alert(div.parentElement);\n"
-            + "  alert(bold.parentElement);\n"
+            + "  log(div.parentElement);\n"
+            + "  log(bold.parentElement);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3499,25 +3536,26 @@ public class HTMLElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var b = document.getElementById('body');\n"
-            + "        alert(b.vLink);\n"
+            + "        log(b.vLink);\n"
             + "        document.vlinkColor = '#0000aa';\n"
-            + "        alert(b.vLink);\n"
+            + "        log(b.vLink);\n"
             + "        document.vlinkColor = 'x';\n"
-            + "        alert(b.vLink);\n"
+            + "        log(b.vLink);\n"
             + "        document.vlinkColor = 'BlanchedAlmond';\n"
-            + "        alert(b.vLink);\n"
+            + "        log(b.vLink);\n"
             + "        document.vlinkColor = 'aBlue';\n"
-            + "        alert(b.vLink);\n"
+            + "        log(b.vLink);\n"
             + "        document.vlinkColor = 'bluex';\n"
-            + "        alert(b.vLink);\n"
+            + "        log(b.vLink);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body id='body' onload='test()'>blah</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3550,15 +3588,16 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.getElementById('foo');\n"
-            + "    alert(e.getAttribute('type'));\n"
+            + "    log(e.getAttribute('type'));\n"
             + "    try {\n"
-            + "      alert(e.getAttributeNS('bar', 'type'));\n"
-            + "      alert(e.hasAttributeNS('bar', 'type'));\n"
+            + "      log(e.getAttributeNS('bar', 'type'));\n"
+            + "      log(e.hasAttributeNS('bar', 'type'));\n"
             + "      e.removeAttributeNS('bar', 'type');\n"
-            + "      alert(e.hasAttribute('type'));\n"
-            + "    } catch (e) {alert('getAttributeNS() not supported')}\n"
+            + "      log(e.hasAttribute('type'));\n"
+            + "    } catch (e) {log('getAttributeNS() not supported')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -3566,7 +3605,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <input id='foo' type='button' value='someValue'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3734,17 +3773,18 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.createElement('div').tagName);\n"
-            + "      alert(document.createElement('section').tagName);\n"
-            + "      alert(document.createElement('div').cloneNode( true ).outerHTML);\n"
-            + "      alert(document.createElement('section').cloneNode( true ).outerHTML);\n"
+            + "      log(document.createElement('div').tagName);\n"
+            + "      log(document.createElement('section').tagName);\n"
+            + "      log(document.createElement('div').cloneNode( true ).outerHTML);\n"
+            + "      log(document.createElement('section').cloneNode( true ).outerHTML);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -3753,7 +3793,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "ho"})
     public void getSetAttribute_in_xml() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
             + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
@@ -3832,7 +3872,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void appendChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    try {\n"
@@ -3857,7 +3897,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void appendChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('div');\n"
             + "    var newscript = document.createElement('script');\n"
@@ -3884,7 +3924,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("declared")
     public void appendChildDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -3908,7 +3948,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void insertBeforeExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    try {\n"
@@ -3933,7 +3973,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void insertBeforeExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('div');\n"
             + "    var newscript = document.createElement('script');\n"
@@ -3960,7 +4000,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("declared")
     public void insertBeforeDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -3984,7 +4024,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void replaceChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    try {\n"
@@ -4009,7 +4049,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void replaceChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('div');\n"
             + "    var newscript = document.createElement('script');\n"
@@ -4036,7 +4076,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("declared")
     public void replaceChildDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -4111,7 +4151,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     public void insertAdjacentHTMLExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var outernode = document.getElementById('myNode');\n"
             + "    outernode.insertAdjacentHTML('afterend', '<scr'+'ipt>alerter();</scr'+'ipt>');\n"
@@ -4131,7 +4171,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     public void insertAdjacentHTMLExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var outernode = document.getElementById('myNode');\n"
             + "    outernode.insertAdjacentHTML('afterend', '<div><scr'+'ipt>alerter();</scr'+'ipt></div>');\n"
@@ -4152,7 +4192,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("exception")
     public void insertAdjacentHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var outernode = document.getElementById('myNode');\n"
             + "    outernode.insertAdjacentHTML('afterend', "
@@ -4230,7 +4270,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void insertAdjacentElementExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    newnode.appendChild(document.createTextNode('alerter();'));\n"
@@ -4255,7 +4295,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("executed")
     public void insertAdjacentElementExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('div');\n"
             + "    var newscript = document.createElement('script');\n"
@@ -4282,7 +4322,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("declared")
     public void insertAdjacentElementDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
             + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -4315,7 +4355,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     private void insertAdjacentText(final String beforeEnd,
             final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
             + "  if (!oNode.insertAdjacentText) { alert('insertAdjacentText not available'); return }\n"
@@ -4354,7 +4394,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             EDGE = "exception")
     public void setCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
@@ -4383,7 +4423,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             EDGE = "exception")
     public void releaseCapture() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
@@ -4537,10 +4577,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "<title>Test</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(ev) {\n"
-            + "    alert(ev.currentTarget);\n"
+            + "    log(ev.currentTarget);\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -4570,7 +4610,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("over")).click();
-        verifyAlerts(webDriver, getExpectedAlerts());
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
