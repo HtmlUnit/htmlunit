@@ -34,13 +34,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
     private void test(final String className) throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(typeof " + className + ");\n"
+            + "    log(typeof " + className + ");\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

@@ -25,8 +25,8 @@ import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,18 +35,19 @@ import org.junit.runner.RunWith;
  *
  * @author Carsten Steul
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
 
-    private LocalTestServer localServer_;
+    private static LocalTestServer LOCAL_SERVER_;
 
     /**
      * @throws Exception if an error occurs
      */
-    @Before
-    public void setUp() throws Exception {
-        final URL url = getClass().getClassLoader().getResource("self-signed-cert.keystore");
+    @BeforeClass
+    public static void setUp() throws Exception {
+        final URL url = HttpWebConnectionTruststoreTest.class.getClassLoader().getResource("self-signed-cert.keystore");
         final KeyStore keystore = KeyStore.getInstance("jks");
         final char[] pwd = "nopassword".toCharArray();
         keystore.load(url.openStream(), pwd);
@@ -62,8 +63,8 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
         final SSLContext serverSSLContext = SSLContext.getInstance("TLS");
         serverSSLContext.init(keyManagers, trustManagers, null);
 
-        localServer_ = new LocalTestServer(serverSSLContext);
-        localServer_.start();
+        LOCAL_SERVER_ = new LocalTestServer(serverSSLContext);
+        LOCAL_SERVER_.start();
     }
 
     private static KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {
@@ -89,12 +90,12 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @After
-    public void tearDown() throws Exception {
-        if (localServer_ != null) {
-            localServer_.shutDown();
+    @AfterClass
+    public static void tearDown() throws Exception {
+        if (LOCAL_SERVER_ != null) {
+            LOCAL_SERVER_.shutDown();
         }
-        localServer_ = null;
+        LOCAL_SERVER_ = null;
     }
 
     /**
@@ -107,7 +108,7 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
                 getClass().getClassLoader().getResource("self-signed-cert.keystore"),
                 "nopassword", "jks");
         webClient.getPage("https://" + "localhost"
-                + ':' + localServer_.getServer().getLocalPort()
+                + ':' + LOCAL_SERVER_.getServer().getLocalPort()
                 + "/random/100");
     }
 
@@ -118,7 +119,7 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
     public void selfSignedCertNotInTruststore() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.getPage("https://" + "localhost"
-                + ':' + localServer_.getServer().getLocalPort()
+                + ':' + LOCAL_SERVER_.getServer().getLocalPort()
                 + "/random/100");
     }
 }

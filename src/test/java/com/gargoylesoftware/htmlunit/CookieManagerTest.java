@@ -313,17 +313,17 @@ public class CookieManagerTest extends WebDriverTestCase {
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 5500);\n"
+                + "    window.setTimeout(alertCookies, 2500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
 
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 5_000));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 2_000));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + ";"));
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(URL_FIRST, 10_000);
+        loadPageWithAlerts2(URL_FIRST, 4_000);
     }
 
     /**
@@ -597,7 +597,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 5500);\n"
+                + "    window.setTimeout(alertCookies, 2500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
@@ -606,12 +606,12 @@ public class CookieManagerTest extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_FIRST, "/foo/test.html");
 
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 5_000));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 2_000));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
         responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl, 10_000);
+        loadPageWithAlerts2(firstUrl, 4_000);
     }
 
     /**
