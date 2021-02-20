@@ -1633,6 +1633,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
         final DomElement elem = page.getElementById("test");
         assertEquals(getExpectedAlerts()[0], elem.asNormalizedText());
     }
+
     /**
      * Tests getTableCell(int,int).
      * @exception Exception If the test fails

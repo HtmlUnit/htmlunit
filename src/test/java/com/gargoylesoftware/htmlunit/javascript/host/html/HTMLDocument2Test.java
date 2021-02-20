@@ -261,12 +261,23 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"false", "", "", ""})
     public void cookie_write_cookiesDisabled() throws Exception {
-        final String html = HTMLDocumentTest.getCookieWriteHtmlCode();
+        final String html =
+                "<html><head><script>\n"
+              + "  alert(navigator.cookieEnabled);\n"
+              + "  alert(document.cookie);\n"
+              + "  document.cookie = 'foo=bar';\n"
+              + "  alert(document.cookie);\n"
+              + "  document.cookie = 'foo=hello world';\n"
+              + "  alert(document.cookie);\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body>abc</body>\n"
+              + "</html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         client.getCookieManager().setCookiesEnabled(false);
 
-        loadPageWithAlerts(html);
+        loadPage(html);
     }
 
     /**

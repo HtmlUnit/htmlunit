@@ -1631,24 +1631,21 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
 
-        loadPageVerifyTitle2(getCookieWriteHtmlCode());
-    }
-
-    static String getCookieWriteHtmlCode() {
         final String html =
-              "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  log(navigator.cookieEnabled);\n"
-            + "  log(document.cookie);\n"
-            + "  document.cookie = 'foo=bar';\n"
-            + "  log(document.cookie);\n"
-            + "  document.cookie = 'foo=hello world';\n"
-            + "  log(document.cookie);\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>abc</body>\n"
-            + "</html>";
-        return html;
+                "<html><head><script>\n"
+              + LOG_TITLE_FUNCTION
+              + "  log(navigator.cookieEnabled);\n"
+              + "  log(document.cookie);\n"
+              + "  document.cookie = 'foo=bar';\n"
+              + "  log(document.cookie);\n"
+              + "  document.cookie = 'foo=hello world';\n"
+              + "  log(document.cookie);\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body>abc</body>\n"
+              + "</html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
