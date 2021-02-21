@@ -104,7 +104,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
             + "    }\n"
             + "    log('false');\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
