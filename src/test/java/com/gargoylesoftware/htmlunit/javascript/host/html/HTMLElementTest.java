@@ -798,13 +798,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"*!x!#!x!*", "*$x$#$x$*", "*!!#!!*", "*$$#$$*", "*$!%!%#$!%!%*", "*x$y#x$y*"})
+    @Alerts({"* x # x *", "*\tx\t#\tx\t*", "*  #  *", "*\t\t#\t\t*", "*\t \n \n#\t \n \n*", "*x\ty#x\ty*"})
     public void getClassNameWhitespace() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
-            + "function log(msg) { msg = msg.replace(/\\n/g, '%'); msg = msg.replace(/\\t/g, '$'); "
-                    + "msg = msg.replace(/\\s/g, '!'); window.document.title += msg + '§';}\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "function doTest() {\n"
             + "  var elem = document.getElementById('pid1');\n"
             + "  log('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
@@ -827,9 +829,13 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <p id='pid4' class='\t\t'>text</p>\n"
             + "  <p id='pid5' class='\t \r \n'>text</p>\n"
             + "  <p id='pid6' class='x\ty'>text</p>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -1865,15 +1871,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old!=!Old%%innerText", "New!=!New!cell!value"},
-            IE = {"Old!=!Old!%innerText", "New!=!New!cell!value"})
+    @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
+            IE = {"Old = Old \ninnerText", "New = New cell value"})
     @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "function log(msg) { msg = msg.replace(/\\n/g, '%'); msg = msg.replace(/\\t/g, '$'); "
-                        + "msg = msg.replace(/\\s/g, '!'); window.document.title += msg + '§';}\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
             + "    log('Old = ' + myNode.innerText);\n"
@@ -1884,9 +1892,14 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='myNode'><b>Old <p>innerText</p></b></div>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body>\n"
             + "</html>";
-        loadPageVerifyTitle2(html);
+
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
