@@ -68,7 +68,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void parseInt() throws Exception {
         final String html
             = "<html><head><script>\n"
-            +LOG_TITLE_FUNCTION
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(parseInt('0'));\n"
             + "  log(parseInt(' 1 '));\n"

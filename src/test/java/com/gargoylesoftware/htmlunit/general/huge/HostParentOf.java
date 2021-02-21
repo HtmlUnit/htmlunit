@@ -133,7 +133,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
      */
     @After
     public void after() {
-//        parent_ = null;
-//        child_ = null;
+        parent_ = null;
+        child_ = null;
     }
 }
