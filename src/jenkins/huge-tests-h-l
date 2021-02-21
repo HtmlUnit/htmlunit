@@ -4,7 +4,7 @@ pipeline {
     lock resource: 'htmlunit-test-ports'
     disableConcurrentBuilds()
     timestamps()
-    timeout(time: 30, unit: 'MINUTES')
+    timeout(time: 50, unit: 'MINUTES')
   }
   tools {
     jdk 'openjdk-1.8'
