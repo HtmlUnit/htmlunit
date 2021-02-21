@@ -1502,7 +1502,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
+
         final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
         final String expected = "Content-Disposition: form-data; name=\"myField\"\r\n"
             + "\r\n"
@@ -1527,7 +1528,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1555,7 +1556,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1583,7 +1584,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1611,7 +1612,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1639,7 +1640,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1667,7 +1668,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1738,7 +1739,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1765,7 +1766,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1792,7 +1793,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1819,7 +1820,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1846,7 +1847,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -1873,7 +1874,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html, URL_FIRST, "text/html;charset=UTF-16", UTF_16, null);
-        Thread.sleep(400);
+        Thread.sleep(100);
 
         final String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
