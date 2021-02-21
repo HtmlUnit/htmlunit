@@ -45,15 +45,16 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Alerts({"7.89", "7.89"})
     public void parseFloat() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(parseFloat('\\n 7.89 '));\n"
-            + "  alert(parseFloat('7.89em'));\n"
+            + "  log(parseFloat('\\n 7.89 '));\n"
+            + "  log(parseFloat('7.89em'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,35 +67,36 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
                 "100", "NaN", "NaN"})
     public void parseInt() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            +LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(parseInt('0'));\n"
-            + "  alert(parseInt(' 1 '));\n"
-            + "  alert(parseInt('-2345'));\n"
-            + "  alert(parseInt('1.23'));\n"
-            + "  alert(parseInt('12,3'));\n"
-            + "  alert(parseInt('abc'));\n"
+            + "  log(parseInt('0'));\n"
+            + "  log(parseInt(' 1 '));\n"
+            + "  log(parseInt('-2345'));\n"
+            + "  log(parseInt('1.23'));\n"
+            + "  log(parseInt('12,3'));\n"
+            + "  log(parseInt('abc'));\n"
 
-            + "  alert(parseInt('0'));\n"
-            + "  alert(parseInt(' 01 '));\n"
-            + "  alert(parseInt('08'));\n"
-            + "  alert(parseInt('09'));\n"
-            + "  alert(parseInt('0100'));\n"
+            + "  log(parseInt('0'));\n"
+            + "  log(parseInt(' 01 '));\n"
+            + "  log(parseInt('08'));\n"
+            + "  log(parseInt('09'));\n"
+            + "  log(parseInt('0100'));\n"
 
-            + "  alert(parseInt('0', 10));\n"
-            + "  alert(parseInt(' 01 ', 10));\n"
-            + "  alert(parseInt('08', 10));\n"
-            + "  alert(parseInt('09', 10));\n"
-            + "  alert(parseInt('0100', 10));\n"
+            + "  log(parseInt('0', 10));\n"
+            + "  log(parseInt(' 01 ', 10));\n"
+            + "  log(parseInt('08', 10));\n"
+            + "  log(parseInt('09', 10));\n"
+            + "  log(parseInt('0100', 10));\n"
 
-            + "  alert(parseInt('100', 0));\n"
-            + "  alert(parseInt('100', -1));\n"
-            + "  alert(parseInt('100', -7));\n"
+            + "  log(parseInt('100', 0));\n"
+            + "  log(parseInt('100', -1));\n"
+            + "  log(parseInt('100', -7));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -109,7 +111,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
         final String[] methods = {"decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent", "escape",
             "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "unescape"};
         final String html = NativeDateTest.createHTMLTestMethods("this", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -121,7 +123,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};
         final String html = NativeDateTest.createHTMLTestMethods("this", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
