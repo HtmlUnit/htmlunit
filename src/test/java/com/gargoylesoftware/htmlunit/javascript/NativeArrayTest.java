@@ -50,9 +50,10 @@ public class NativeArrayTest extends WebDriverTestCase {
     @NotYetImplemented({CHROME, EDGE, IE})
     public void sortSteps() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
-            + "  alert('' + x + '<>' + y);\n"
+            + "  log('' + x + '<>' + y);\n"
             + "  return x - y;\n"
             + "}\n"
             + "function doTest() {\n"
@@ -62,7 +63,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -77,7 +78,7 @@ public class NativeArrayTest extends WebDriverTestCase {
         final String[] methods = {"concat", "constructor", "isArray", "join", "pop", "push", "reverse", "shift",
             "slice", "sort", "splice", "toLocaleString", "toString", "unshift"};
         final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,7 +92,7 @@ public class NativeArrayTest extends WebDriverTestCase {
         final String[] methods = {"every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
             "reduceRight", "some"};
         final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -102,7 +103,7 @@ public class NativeArrayTest extends WebDriverTestCase {
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -115,17 +116,18 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Alerts({"hello", "foo", "hello"})
     public void deleteShouldNotWalkPrototypeChain() throws Exception {
         final String html = "<html><body><script>\n"
-            + "Array.prototype.foo = function() { alert('hello')};\n"
+            + LOG_TITLE_FUNCTION
+            + "Array.prototype.foo = function() { log('hello')};\n"
             + "[].foo();\n"
             + "var x = [];\n"
             + "for (var i in x) {\n"
-            + "  alert(i);\n"
+            + "  log(i);\n"
             + "  delete x[i];\n"
             + "}\n"
             + "[].foo();\n"
             + "</script></body>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -156,18 +158,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var myFish = [ 'mandarin' ];\n"
-            + "  alert(myFish);\n"
+            + "  log(myFish);\n"
 
             + "  var shifted = myFish.shift();\n"
-            + "  alert(myFish);\n"
-            + "  alert(shifted);\n"
+            + "  log(myFish);\n"
+            + "  log(shifted);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -180,18 +183,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var myFish = [ ];\n"
-            + "  alert(myFish);\n"
+            + "  log(myFish);\n"
 
             + "  var shifted = myFish.shift();\n"
-            + "  alert(myFish);\n"
-            + "  alert(shifted);\n"
+            + "  log(myFish);\n"
+            + "  log(shifted);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -205,21 +209,22 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var arr = Array.from('abc');\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -233,21 +238,22 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var arr = Array.from(['a', 'b', 'c']);\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -261,22 +267,23 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var input = ['a', 'b', 'c'];\n"
             + "    var arr = Array.from(input[Symbol.iterator]());\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -290,21 +297,22 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var arr = Array.from('Test'[Symbol.iterator]());\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -318,22 +326,23 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var s = new Set(['abc', window]);\n"
             + "    var arr = Array.from(s);\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -347,22 +356,23 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var m = new Map([[1, 2], [3, 4], [5, 6]]);\n"
             + "    var arr = Array.from(m);\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -376,6 +386,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var myIterable = {};\n"
             + "    myIterable[Symbol.iterator] = function() {\n"
@@ -392,19 +403,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "    };\n"
 
             + "    var arr = Array.from(myIterable);\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -418,6 +429,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var myIterable = {};\n"
             + "    myIterable[Symbol.iterator] = function() {\n"
@@ -426,16 +438,16 @@ public class NativeArrayTest extends WebDriverTestCase {
 
             + "    try {\n"
             + "      Array.from(myIterable);\n"
-            + "    } catch(e) { alert('TypeError'); }\n"
+            + "    } catch(e) { log('TypeError'); }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -449,21 +461,22 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.from) {\n"
             + "    var arr = Array.from({firstName: 'Erika', age: 42});\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -477,23 +490,24 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test(a) { return Array.from(arguments); }\n"
 
             + "  if (Array.from) {\n"
             + "    var arr = test('abc') \n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
-            + "      alert(arr[i]);\n"
+            + "      log(arr[i]);\n"
             + "    }\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -507,25 +521,26 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(Array.isArray([]));\n"
-            + "  alert(Array.isArray([1]));\n"
-            + "  alert(Array.isArray( new Array() ));\n"
-            + "  alert(Array.isArray( Array.prototype ));\n"
-            + "  alert(Array.isArray());\n"
-            + "  alert(Array.isArray({}));\n"
-            + "  alert(Array.isArray(null));\n"
-            + "  alert(Array.isArray(undefined));\n"
-            + "  alert(Array.isArray(17));\n"
-            + "  alert(Array.isArray('Array'));\n"
-            + "  alert(Array.isArray(true));\n"
-            + "  alert(Array.isArray(false));\n"
-            + "  alert(Array.isArray({ __proto__ : Array.prototype }));\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(Array.isArray([]));\n"
+            + "  log(Array.isArray([1]));\n"
+            + "  log(Array.isArray( new Array() ));\n"
+            + "  log(Array.isArray( Array.prototype ));\n"
+            + "  log(Array.isArray());\n"
+            + "  log(Array.isArray({}));\n"
+            + "  log(Array.isArray(null));\n"
+            + "  log(Array.isArray(undefined));\n"
+            + "  log(Array.isArray(17));\n"
+            + "  log(Array.isArray('Array'));\n"
+            + "  log(Array.isArray(true));\n"
+            + "  log(Array.isArray(false));\n"
+            + "  log(Array.isArray({ __proto__ : Array.prototype }));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -540,19 +555,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert(typeof arr.find);\n"
+            + "  log(typeof arr.find);\n"
             + "  if (typeof arr.find == 'function') {\n"
-            + "    alert(arr.find(isBig));\n"
+            + "    log(arr.find(isBig));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -567,20 +583,21 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var find = Array.prototype.find;\n"
-            + "  alert(typeof find);\n"
+            + "  log(typeof find);\n"
             + "  if (typeof find == 'function') {\n"
-            + "    alert(find.call(arr, isBig));\n"
+            + "    log(find.call(arr, isBig));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -593,19 +610,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
-            + "  alert(typeof Array.find);\n"
+            + "  log(typeof Array.find);\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
-            + "    alert(Array.find(arr, isBig));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.find(arr, isBig));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -620,19 +638,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert(typeof arr.findIndex);\n"
+            + "  log(typeof arr.findIndex);\n"
             + "  if (typeof arr.findIndex == 'function') {\n"
-            + "    alert(arr.findIndex(isBig));\n"
+            + "    log(arr.findIndex(isBig));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -647,20 +666,21 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var findIndex = Array.prototype.findIndex;\n"
-            + "  alert(typeof findIndex);\n"
+            + "  log(typeof findIndex);\n"
             + "  if (typeof findIndex == 'function') {\n"
-            + "    alert(findIndex.call(arr, isBig));\n"
+            + "    log(findIndex.call(arr, isBig));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -673,19 +693,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
-            + "  alert(typeof Array.findIndex);\n"
+            + "  log(typeof Array.findIndex);\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
-            + "    alert(Array.findIndex(arr, isBig));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.findIndex(arr, isBig));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -698,17 +719,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert(typeof arr.filter);\n"
-            + "  alert(arr.filter(isBig));\n"
+            + "  log(typeof arr.filter);\n"
+            + "  log(arr.filter(isBig));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -721,18 +743,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var filter = Array.prototype.filter;\n"
-            + "  alert(typeof filter);\n"
-            + "  alert(filter.call(arr, isBig));\n"
+            + "  log(typeof filter);\n"
+            + "  log(filter.call(arr, isBig));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -745,19 +768,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
-            + "  alert(typeof Array.filter);\n"
+            + "  log(typeof Array.filter);\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
-            + "    alert(Array.filter(arr, isBig));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.filter(arr, isBig));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -770,15 +794,16 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.map);\n"
-            + "  alert(arr.map(Math.sqrt));\n"
+            + "  log(typeof arr.map);\n"
+            + "  log(arr.map(Math.sqrt));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -791,16 +816,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var map = Array.prototype.map;\n"
-            + "  alert(typeof map);\n"
-            + "  alert(map.call(arr, Math.sqrt));\n"
+            + "  log(typeof map);\n"
+            + "  log(map.call(arr, Math.sqrt));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -813,17 +839,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.map);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.map);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.map(arr, Math.sqrt));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.map(arr, Math.sqrt));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -836,17 +863,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.every);\n"
-            + "  alert(arr.every(isSmall));\n"
+            + "  log(typeof arr.every);\n"
+            + "  log(arr.every(isSmall));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -859,18 +887,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var every = Array.prototype.every;\n"
-            + "  alert(typeof every);\n"
-            + "  alert(every.call(arr, isSmall));\n"
+            + "  log(typeof every);\n"
+            + "  log(every.call(arr, isSmall));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -883,19 +912,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
-            + "  alert(typeof Array.every);\n"
+            + "  log(typeof Array.every);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.every(arr, isSmall));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.every(arr, isSmall));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -908,17 +938,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.some);\n"
-            + "  alert(arr.some(isSmall));\n"
+            + "  log(typeof arr.some);\n"
+            + "  log(arr.some(isSmall));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -931,18 +962,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var some = Array.prototype.some;\n"
-            + "  alert(typeof some);\n"
-            + "  alert(some.call(arr, isSmall));\n"
+            + "  log(typeof some);\n"
+            + "  log(some.call(arr, isSmall));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -955,19 +987,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
-            + "  alert(typeof Array.some);\n"
+            + "  log(typeof Array.some);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.some(arr, isSmall));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.some(arr, isSmall));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -980,15 +1013,16 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [4, 7];\n"
-            + "  alert(typeof arr.forEach);\n"
-            + "  arr.forEach(function(elem) { alert(elem) });\n"
+            + "  log(typeof arr.forEach);\n"
+            + "  arr.forEach(function(elem) { log(elem) });\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1001,16 +1035,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [4, 7];\n"
             + "  var forEach = Array.prototype.forEach;\n"
-            + "  alert(typeof forEach);\n"
-            + "  forEach.call(arr, function(elem) { alert(elem) });\n"
+            + "  log(typeof forEach);\n"
+            + "  forEach.call(arr, function(elem) { log(elem) });\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1023,17 +1058,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.forEach);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.forEach);\n"
             + "  var arr = [4, 7];\n"
             + "  try {\n"
-            + "    Array.forEach(arr, function(elem) { alert(elem) });\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    Array.forEach(arr, function(elem) { log(elem) });\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1046,17 +1082,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function sum(acc, val) { return acc + val; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.reduce);\n"
-            + "  alert(arr.reduce(sum));\n"
+            + "  log(typeof arr.reduce);\n"
+            + "  log(arr.reduce(sum));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1069,18 +1106,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function sum(acc, val) { return acc + val; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var reduce = Array.prototype.reduce;\n"
-            + "  alert(typeof reduce);\n"
-            + "  alert(reduce.call(arr, sum));\n"
+            + "  log(typeof reduce);\n"
+            + "  log(reduce.call(arr, sum));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1093,19 +1131,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function sum(acc, val) { return acc + val; }\n"
             + "\n"
-            + "  alert(typeof Array.reduce);\n"
+            + "  log(typeof Array.reduce);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.reduce(arr, sum));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.reduce(arr, sum));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1118,17 +1157,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function diff(acc, val) { return acc - val; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.reduceRight);\n"
-            + "  alert(arr.reduceRight(diff));\n"
+            + "  log(typeof arr.reduceRight);\n"
+            + "  log(arr.reduceRight(diff));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1141,18 +1181,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function diff(acc, val) { return acc - val; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var reduceRight = Array.prototype.reduceRight;\n"
-            + "  alert(typeof reduceRight);\n"
-            + "  alert(reduceRight.call(arr, diff));\n"
+            + "  log(typeof reduceRight);\n"
+            + "  log(reduceRight.call(arr, diff));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1165,19 +1206,20 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function diff(acc, val) { return acc - val; }\n"
             + "\n"
-            + "  alert(typeof Array.reduceRight);\n"
+            + "  log(typeof Array.reduceRight);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.reduceRight(arr, diff));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.reduceRight(arr, diff));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1190,15 +1232,16 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.join);\n"
-            + "  alert(arr.join());\n"
+            + "  log(typeof arr.join);\n"
+            + "  log(arr.join());\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1211,16 +1254,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var join = Array.prototype.join;\n"
-            + "  alert(typeof join);\n"
-            + "  alert(join.call(arr));\n"
+            + "  log(typeof join);\n"
+            + "  log(join.call(arr));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1233,17 +1277,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.join);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.join);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.join(arr));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.join(arr));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1256,15 +1301,16 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.reverse);\n"
-            + "  alert(arr.reverse());\n"
+            + "  log(typeof arr.reverse);\n"
+            + "  log(arr.reverse());\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1277,16 +1323,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var reverse = Array.prototype.reverse;\n"
-            + "  alert(typeof reverse);\n"
-            + "  alert(reverse.call(arr));\n"
+            + "  log(typeof reverse);\n"
+            + "  log(reverse.call(arr));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1299,17 +1346,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.reverse);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.reverse);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.reverse(arr));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.reverse(arr));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1322,15 +1370,16 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.sort);\n"
-            + "  alert(arr.sort());\n"
+            + "  log(typeof arr.sort);\n"
+            + "  log(arr.sort());\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1343,16 +1392,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var sort = Array.prototype.sort;\n"
-            + "  alert(typeof sort);\n"
-            + "  alert(sort.call(arr));\n"
+            + "  log(typeof sort);\n"
+            + "  log(sort.call(arr));\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1365,17 +1415,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.sort);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.sort);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.sort(arr));\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.sort(arr));\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1388,16 +1439,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.push);\n"
-            + "  alert(arr.push(3, 7));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.push);\n"
+            + "  log(arr.push(3, 7));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1410,17 +1462,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var push = Array.prototype.push;\n"
-            + "  alert(typeof push);\n"
-            + "  alert(push.call(arr, 3, 7));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof push);\n"
+            + "  log(push.call(arr, 3, 7));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1433,18 +1486,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.push);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.push);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.push(arr, 3, 7));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.push(arr, 3, 7));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1457,16 +1511,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.pop);\n"
-            + "  alert(arr.pop());\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.pop);\n"
+            + "  log(arr.pop());\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1479,17 +1534,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var pop = Array.prototype.pop;\n"
-            + "  alert(typeof pop);\n"
-            + "  alert(pop.call(arr));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof pop);\n"
+            + "  log(pop.call(arr));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1502,18 +1558,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.pop);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.pop);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.pop(arr));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.pop(arr));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1526,16 +1583,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.shift);\n"
-            + "  alert(arr.shift());\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.shift);\n"
+            + "  log(arr.shift());\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1548,17 +1606,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var shift = Array.prototype.shift;\n"
-            + "  alert(typeof shift);\n"
-            + "  alert(shift.call(arr));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof shift);\n"
+            + "  log(shift.call(arr));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1571,18 +1630,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.shift);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.shift);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.shift(arr));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.shift(arr));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1595,16 +1655,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.unshift);\n"
-            + "  alert(arr.unshift(3, 7));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.unshift);\n"
+            + "  log(arr.unshift(3, 7));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1617,17 +1678,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var unshift = Array.prototype.unshift;\n"
-            + "  alert(typeof unshift);\n"
-            + "  alert(unshift.call(arr, 3, 7));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof unshift);\n"
+            + "  log(unshift.call(arr, 3, 7));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1640,18 +1702,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.unshift);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.unshift);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.unshift(arr, 3, 7));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.unshift(arr, 3, 7));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1664,16 +1727,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.splice);\n"
-            + "  alert(arr.splice(1, 2));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.splice);\n"
+            + "  log(arr.splice(1, 2));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1686,17 +1750,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var splice = Array.prototype.splice;\n"
-            + "  alert(typeof splice);\n"
-            + "  alert(splice.call(arr, 1, 2));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof splice);\n"
+            + "  log(splice.call(arr, 1, 2));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1709,18 +1774,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.splice);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.splice);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.splice(arr, 1, 2));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.splice(arr, 1, 2));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1733,16 +1799,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.concat);\n"
-            + "  alert(arr.concat(1, 2));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.concat);\n"
+            + "  log(arr.concat(1, 2));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1755,17 +1822,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var concat = Array.prototype.concat;\n"
-            + "  alert(typeof concat);\n"
-            + "  alert(concat.call(arr, 1, 2));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof concat);\n"
+            + "  log(concat.call(arr, 1, 2));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1778,18 +1846,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.concat);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.concat);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.concat(arr, 1, 2));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.concat(arr, 1, 2));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1802,16 +1871,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.slice);\n"
-            + "  alert(arr.slice(1, 2));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.slice);\n"
+            + "  log(arr.slice(1, 2));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1824,17 +1894,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var slice = Array.prototype.slice;\n"
-            + "  alert(typeof slice);\n"
-            + "  alert(slice.call(arr, 1, 2));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof slice);\n"
+            + "  log(slice.call(arr, 1, 2));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1847,18 +1918,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.concat);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.concat);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.slice(arr, 1, 2));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.slice(arr, 1, 2));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1871,16 +1943,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.indexOf);\n"
-            + "  alert(arr.indexOf(9));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.indexOf);\n"
+            + "  log(arr.indexOf(9));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1893,17 +1966,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var indexOf = Array.prototype.indexOf;\n"
-            + "  alert(typeof indexOf);\n"
-            + "  alert(indexOf.call(arr, 9));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof indexOf);\n"
+            + "  log(indexOf.call(arr, 9));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1916,18 +1990,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.indexOf);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.indexOf);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.indexOf(arr, 9));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.indexOf(arr, 9));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1940,16 +2015,17 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(typeof arr.lastIndexOf);\n"
-            + "  alert(arr.lastIndexOf(9));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof arr.lastIndexOf);\n"
+            + "  log(arr.lastIndexOf(9));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1962,17 +2038,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var lastIndexOf = Array.prototype.lastIndexOf;\n"
-            + "  alert(typeof lastIndexOf);\n"
-            + "  alert(lastIndexOf.call(arr, 9));\n"
-            + "  alert(arr);\n"
+            + "  log(typeof lastIndexOf);\n"
+            + "  log(lastIndexOf.call(arr, 9));\n"
+            + "  log(arr);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1985,18 +2062,19 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(typeof Array.lastIndexOf);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof Array.lastIndexOf);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
-            + "    alert(Array.lastIndexOf(arr, 9));\n"
-            + "    alert(arr);\n"
-            + "  } catch(e) { alert('TypeError'); }\n"
+            + "    log(Array.lastIndexOf(arr, 9));\n"
+            + "    log(arr);\n"
+            + "  } catch(e) { log('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2010,17 +2088,18 @@ public class NativeArrayTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Array.of) {\n"
             + "    var arr = Array.of(1, 2, 3);;\n"
-            + "    alert(arr.length);\n"
+            + "    log(arr.length);\n"
             + "  } else {\n"
-            + "    alert('not supported');\n"
+            + "    log('not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -40,21 +40,22 @@ public class NativeJSONTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var text = '{\"name\": [\"x\", \"y\"]}';\n"
             + "    var obj = JSON.parse(text);"
-            + "    alert(obj.name);\n"
+            + "    log(obj.name);\n"
 
             + "    text = '{\"name\": [, \"y\"]}';\n"
             + "    try {\n"
             + "      var obj = JSON.parse(text);"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

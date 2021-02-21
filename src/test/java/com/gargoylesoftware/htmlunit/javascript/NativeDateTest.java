@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NativeDateTest extends WebDriverTestCase {
@@ -42,16 +43,17 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"-13", "84", "109"})
     public void getYear() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(new Date(1887, 2, 1).getYear());\n"
-            + "  alert(new Date(1984, 2, 1).getYear());\n"
-            + "  alert(new Date(2009, 2, 1).getYear());\n"
+            + "  log(new Date(1887, 2, 1).getYear());\n"
+            + "  log(new Date(1984, 2, 1).getYear());\n"
+            + "  log(new Date(2009, 2, 1).getYear());\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -82,7 +84,7 @@ public class NativeDateTest extends WebDriverTestCase {
             "toLocaleDateString", "toLocaleString", "toLocaleTimeString", "toString",
             "toTimeString", "toUTCString", "valueOf", "UTC"};
         final String html = createHTMLTestMethods("new Date()", methods);
-        loadPageWithAlerts2(html, 3 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -94,7 +96,7 @@ public class NativeDateTest extends WebDriverTestCase {
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = createHTMLTestMethods("new Date()", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -106,7 +108,7 @@ public class NativeDateTest extends WebDriverTestCase {
     public void methods_differences() throws Exception {
         final String[] methods = {"toISOString", "toJSON"};
         final String html = createHTMLTestMethods("new Date()", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     static String createHTMLTestMethods(final String object, final String... methodNames) throws Exception {
@@ -114,13 +116,14 @@ public class NativeDateTest extends WebDriverTestCase {
         for (final String methodName : methodNames) {
             methodList.append(", '").append(methodName).append("'");
         }
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var o = " + object + ";\n"
             + "  var props = [" + methodList.substring(2) + "];\n"
             + "  for (var i = 0; i < props.length; i++) {\n"
             + "    var p = props[i];\n"
-            + "    alert(p + ': ' + typeof(o[p]));\n"
+            + "    log(p + ': ' + typeof(o[p]));\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -140,14 +143,15 @@ public class NativeDateTest extends WebDriverTestCase {
             FF78 = "1.1.2000")
     public void toLocaleDateString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(new Date(2000, 0, 1).toLocaleDateString());\n"
+            + "  log(new Date(2000, 0, 1).toLocaleDateString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -158,18 +162,19 @@ public class NativeDateTest extends WebDriverTestCase {
                         "2005-07-03T15:14:05.000Z"})
     public void toISOString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (new Date().toISOString) {\n"
-            + "    alert(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toISOString());\n"
-            + "    alert(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toISOString());\n"
-            + "    alert(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toISOString());\n"
+            + "    log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toISOString());\n"
+            + "    log(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toISOString());\n"
+            + "    log(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toISOString());\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -180,16 +185,17 @@ public class NativeDateTest extends WebDriverTestCase {
                         "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toUTCString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toUTCString());\n"
-            + "  alert(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toUTCString());\n"
-            + "  alert(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toUTCString());\n"
+            + "  log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toUTCString());\n"
+            + "  log(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toUTCString());\n"
+            + "  log(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toUTCString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -200,16 +206,17 @@ public class NativeDateTest extends WebDriverTestCase {
                     "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toGMTString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toGMTString());\n"
-            + "  alert(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toGMTString());\n"
-            + "  alert(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toGMTString());\n"
+            + "  log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toGMTString());\n"
+            + "  log(new Date(Date.UTC(2005, 6, 12, 11, 4, 15)).toGMTString());\n"
+            + "  log(new Date(Date.UTC(2005, 6, 3, 15, 14, 5)).toGMTString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -218,17 +225,17 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     public void enumerable() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function test() {\n"
             + "  var date = new Date(2000, 0, 1);\n"
             + "  for (var x in date) {\n"
-            + "    alert(x);\n"
+            + "    log(x);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -242,19 +249,20 @@ public class NativeDateTest extends WebDriverTestCase {
             FF78 = "00:00:00, 07:08:09")
     public void toLocaleTimeString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(new Date(2000, 0, 1).toLocaleTimeString());\n"
+            + "  log(new Date(2000, 0, 1).toLocaleTimeString());\n"
             + "  var date = new Date(2013, 0, 1);\n"
             + "  date.setHours(7);\n"
             + "  date.setMinutes(8);\n"
             + "  date.setSeconds(9);\n"
-            + "  alert(date.toLocaleTimeString());\n"
+            + "  log(date.toLocaleTimeString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }
