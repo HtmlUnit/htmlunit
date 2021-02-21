@@ -42,8 +42,9 @@ public class ImageDataTest extends WebDriverTestCase {
     public void ctorArray() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  if (typeof ImageData != 'function') { alert('no ctor'); return; }"
+            + "  if (typeof ImageData != 'function') { log('no ctor'); return; }"
 
             + "  var arr = new Uint8ClampedArray(8);\n"
             + "  for (var i = 0; i < arr.length; i += 4) {\n"
@@ -54,23 +55,23 @@ public class ImageDataTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  var imageData = new ImageData(arr, 1);\n"
-            + "  alert(imageData.data.length);\n"
-            + "  alert(imageData.width);\n"
-            + "  alert(imageData.height);\n"
+            + "  log(imageData.data.length);\n"
+            + "  log(imageData.width);\n"
+            + "  log(imageData.height);\n"
 
             + "  var data = imageData.data;\n"
             + "  for (var i = 0; i < data.length; i++) {\n"
-            + "    alert(data[i]);\n"
+            + "    log(data[i]);\n"
             + "  }\n"
 
             + "  var imageData = new ImageData(arr, 2);\n"
-            + "  alert(imageData.data.length);\n"
-            + "  alert(imageData.width);\n"
-            + "  alert(imageData.height);\n"
+            + "  log(imageData.data.length);\n"
+            + "  log(imageData.width);\n"
+            + "  log(imageData.height);\n"
 
             + "  var data = imageData.data;\n"
             + "  for (var i = 0; i < data.length; i++) {\n"
-            + "    alert(data[i]);\n"
+            + "    log(data[i]);\n"
             + "  }\n"
 
             + "}\n"
@@ -78,7 +79,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,8 +92,9 @@ public class ImageDataTest extends WebDriverTestCase {
     public void ctorArrayWidthHeight() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  if (typeof ImageData != 'function') { alert('no ctor'); return; }"
+            + "  if (typeof ImageData != 'function') { log('no ctor'); return; }"
 
             + "  var arr = new Uint8ClampedArray(8);\n"
             + "  for (var i = 0; i < arr.length; i += 4) {\n"
@@ -103,20 +105,20 @@ public class ImageDataTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  var imageData = new ImageData(arr, 1, 2);\n"
-            + "  alert(imageData.data.length);\n"
-            + "  alert(imageData.width);\n"
-            + "  alert(imageData.height);\n"
+            + "  log(imageData.data.length);\n"
+            + "  log(imageData.width);\n"
+            + "  log(imageData.height);\n"
 
             + "  var data = imageData.data;\n"
             + "  for (var i = 0; i < data.length; i++) {\n"
-            + "    alert(data[i]);\n"
+            + "    log(data[i]);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -127,45 +129,46 @@ public class ImageDataTest extends WebDriverTestCase {
     public void ctorArrayInvalid() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData();\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(-2, 1);\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(2, -1);\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "  try {\n"
             + "    var imageData = new ImageData(-2, -1);\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "  var arr = new Uint8ClampedArray(8);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 3);\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "  arr = new Uint8ClampedArray(11);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 2);\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "  arr = new Uint8ClampedArray(8);\n"
             + "  try {\n"
             + "    var imageData = new ImageData(arr, 2, 2);\n"
-            + "  } catch (e) { alert('exception');}\n"
+            + "  } catch (e) { log('exception');}\n"
 
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -177,24 +180,25 @@ public class ImageDataTest extends WebDriverTestCase {
     public void ctorWidthHeight() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  if (typeof ImageData != 'function') { alert('no ctor'); return; }"
+            + "  if (typeof ImageData != 'function') { log('no ctor'); return; }"
 
             + "  var imageData = new ImageData(2, 1);\n"
-            + "  alert(imageData.data.length);\n"
-            + "  alert(imageData.width);\n"
-            + "  alert(imageData.height);\n"
+            + "  log(imageData.data.length);\n"
+            + "  log(imageData.width);\n"
+            + "  log(imageData.height);\n"
 
             + "  var data = imageData.data;\n"
             + "  for (var i = 0; i < data.length; i++) {\n"
-            + "    alert(data[i]);\n"
+            + "    log(data[i]);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -205,6 +209,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void getImageData() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -218,7 +223,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    var imageData = ctx.getImageData(0, 0, 3, 1);\n"
             + "    var data = imageData.data;\n"
             + "    for (var i = 0; i < data.length; i++) {\n"
-            + "      alert(data[i]);\n"
+            + "      log(data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -226,7 +231,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -237,6 +242,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void getImageDataOutside() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -250,7 +256,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    var imageData = ctx.getImageData(-10, -10, 3, 1);\n"
             + "    var data = imageData.data;\n"
             + "    for (var i = 0; i < data.length; i++) {\n"
-            + "      alert(data[i]);\n"
+            + "      log(data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -258,7 +264,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -269,6 +275,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void getImageDataOutside2() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -282,7 +289,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    var imageData = ctx.getImageData(500, 500, 3, 1);\n"
             + "    var data = imageData.data;\n"
             + "    for (var i = 0; i < data.length; i++) {\n"
-            + "      alert(data[i]);\n"
+            + "      log(data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -290,7 +297,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -301,6 +308,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void getImageDataPartlyOutside() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -314,7 +322,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    var imageData = ctx.getImageData(-1, 0, 3, 1);\n"
             + "    var data = imageData.data;\n"
             + "    for (var i = 0; i < data.length; i++) {\n"
-            + "      alert(data[i]);\n"
+            + "      log(data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -322,7 +330,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -333,6 +341,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void getImageDataPartlyOutside2() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -346,7 +355,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    var imageData = ctx.getImageData(298, 149, 3, 1);\n"
             + "    var data = imageData.data;\n"
             + "    for (var i = 0; i < data.length; i++) {\n"
-            + "      alert(data[i]);\n"
+            + "      log(data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -354,7 +363,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -365,6 +374,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void getImageDataDrawAfter() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -380,7 +390,7 @@ public class ImageDataTest extends WebDriverTestCase {
 
             + "    var data = imageData.data;\n"
             + "    for (var i = 0; i < data.length; i++) {\n"
-            + "      alert(data[i]);\n"
+            + "      log(data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -388,7 +398,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -399,6 +409,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void data() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -412,7 +423,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    var imageData = ctx.getImageData(0, 0, 3, 1);\n"
             + "    for (var i = 0; i < imageData.data.length; i++) {\n"
             + "      imageData.data[i] = i;\n"
-            + "      alert(imageData.data[i]);\n"
+            + "      log(imageData.data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -420,7 +431,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -432,15 +443,16 @@ public class ImageDataTest extends WebDriverTestCase {
     public void setValues() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
             + "    var ctx = canvas.getContext('2d');\n"
 
             + "    var imageData = ctx.createImageData(1, 2);\n"
-            + "    alert(imageData.data.length);\n"
-            + "    alert(imageData.width);\n"
-            + "    alert(imageData.height);\n"
+            + "    log(imageData.data.length);\n"
+            + "    log(imageData.width);\n"
+            + "    log(imageData.height);\n"
 
             + "    imageData.data[0] = 13;\n"
             + "    imageData.data[2] = 17;\n"
@@ -449,7 +461,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    imageData.data[-5] = 7;\n"
             + "    imageData.data[100] = 11;\n"
             + "    for (var i = 0; i < imageData.data.length; i++) {\n"
-            + "      alert(imageData.data[i]);\n"
+            + "      log(imageData.data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -457,7 +469,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -470,6 +482,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void createImageData() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -477,13 +490,13 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    ctx.fillRect(1, 1, 13, 11);\n"
 
             + "    var imageData = ctx.createImageData(2, 3);\n"
-            + "    alert(imageData.data.length);\n"
-            + "    alert(imageData.width);\n"
-            + "    alert(imageData.height);\n"
+            + "    log(imageData.data.length);\n"
+            + "    log(imageData.width);\n"
+            + "    log(imageData.height);\n"
 
             + "    imageData.data[2] = 17;\n"
             + "    for (var i = 0; i < imageData.data.length; i++) {\n"
-            + "      alert(imageData.data[i]);\n"
+            + "      log(imageData.data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -491,7 +504,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -504,6 +517,7 @@ public class ImageDataTest extends WebDriverTestCase {
     public void createImageDataFlipped() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
@@ -511,13 +525,13 @@ public class ImageDataTest extends WebDriverTestCase {
             + "    ctx.fillRect(1, 1, 13, 11);\n"
 
             + "    var imageData = ctx.createImageData(-2, -3);\n"
-            + "    alert(imageData.data.length);\n"
-            + "    alert(imageData.width);\n"
-            + "    alert(imageData.height);\n"
+            + "    log(imageData.data.length);\n"
+            + "    log(imageData.width);\n"
+            + "    log(imageData.height);\n"
 
             + "    imageData.data[2] = 17;\n"
             + "    for (var i = 0; i < imageData.data.length; i++) {\n"
-            + "      alert(imageData.data[i]);\n"
+            + "      log(imageData.data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -525,7 +539,7 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -539,23 +553,24 @@ public class ImageDataTest extends WebDriverTestCase {
     public void createImageDataFromImageData() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  if (canvas.getContext) {\n"
             + "    var ctx = canvas.getContext('2d');\n"
             + "    var imageData = ctx.createImageData(1, 2);\n"
-            + "    alert(imageData.data.length);\n"
+            + "    log(imageData.data.length);\n"
             + "    imageData.data[2] = 17;\n"
             + "    for (var i = 0; i < imageData.data.length; i++) {\n"
-            + "      alert(imageData.data[i]);\n"
+            + "      log(imageData.data[i]);\n"
             + "    }\n"
 
             + "    var imageDataCopy = ctx.createImageData(imageData);\n"
-            + "    alert(imageDataCopy.data.length);\n"
-            + "    alert(imageDataCopy.width);\n"
-            + "    alert(imageDataCopy.height);\n"
+            + "    log(imageDataCopy.data.length);\n"
+            + "    log(imageDataCopy.width);\n"
+            + "    log(imageDataCopy.height);\n"
             + "    for (var i = 0; i < imageDataCopy.data.length; i++) {\n"
-            + "      alert(imageDataCopy.data[i]);\n"
+            + "      log(imageDataCopy.data[i]);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -563,6 +578,6 @@ public class ImageDataTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
