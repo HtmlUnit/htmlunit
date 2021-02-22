@@ -153,6 +153,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Dennis Duysak
  */
 @JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable {
@@ -2891,7 +2892,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final Element parent = element.getParentElement();
             final int absoluteValue = (parent == null)
                             ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
-            return  Math.round((i / 100f) * (float) absoluteValue);
+            return  Math.round((i / 100f) * absoluteValue);
         }
         if (AUTO.equals(s)) {
             return value.getDefaultValue();

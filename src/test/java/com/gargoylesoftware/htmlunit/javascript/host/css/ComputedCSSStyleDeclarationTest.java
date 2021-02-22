@@ -1070,6 +1070,35 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("9.6px")
+    @HtmlUnitNYI(CHROME = "10px",
+            EDGE =  "10px",
+            FF = "10px",
+            FF78 = "10px",
+            IE = "10px")
+    public void fontSize2() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6em;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
