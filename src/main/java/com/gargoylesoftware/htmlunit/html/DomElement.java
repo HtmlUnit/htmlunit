@@ -850,10 +850,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.<b></b>
-     * This only clicks the element if it is visible and enabled (isDisplayed() & !isDisabled()).
+     * action listeners, etc.<br>
+     * This only clicks the element if it is visible and enabled (isDisplayed() &amp; !isDisabled()).
      * In case the element is not visible and/or disabled, only a log output is generated.
-     * <b></b>
+     * <br>
      * If you circumvent the visible/disabled check use click(shiftKey, ctrlKey, altKey, true, true, false)
      *
      * @param <P> the page type
@@ -868,10 +868,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.<b></b>
-     * This only clicks the element if it is visible and enabled (isDisplayed() & !isDisabled()).
+     * action listeners, etc.<br>
+     * This only clicks the element if it is visible and enabled (isDisplayed() &amp; !isDisabled()).
      * In case the element is not visible and/or disabled, only a log output is generated.
-     * <b></b>
+     * <br>
      * If you circumvent the visible/disabled check use click(shiftKey, ctrlKey, altKey, true, true, false)
      *
      * @param shiftKey {@code true} if SHIFT is pressed during the click
@@ -891,10 +891,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.<b></b>
-     * This only clicks the element if it is visible and enabled (isDisplayed() & !isDisabled()).
+     * action listeners, etc.<br>
+     * This only clicks the element if it is visible and enabled (isDisplayed() &amp; !isDisabled()).
      * In case the element is not visible and/or disabled, only a log output is generated.
-     * <b></b>
+     * <br>
      * If you circumvent the visible/disabled check use click(shiftKey, ctrlKey, altKey, true, true, false)
      *
      * @param shiftKey {@code true} if SHIFT is pressed during the click
