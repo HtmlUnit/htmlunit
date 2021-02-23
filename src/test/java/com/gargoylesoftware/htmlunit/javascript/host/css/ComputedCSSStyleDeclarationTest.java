@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Dennis Duysak
  */
 @RunWith(BrowserRunner.class)
 public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
@@ -1082,6 +1083,70 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void fontSize2() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6em;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.11667px",
+            CHROME = "3.824px",
+            EDGE = "3.836px",
+            IE = "0px")
+    @HtmlUnitNYI(CHROME = "10px",
+            EDGE =  "10px",
+            FF = "10px",
+            FF78 = "10px",
+            IE = "10px")
+    public void fontSizeVH() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6vh;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "7.55px",
+            CHROME = "7.548px",
+            EDGE = "7.548px",
+            IE = "0px")
+    @HtmlUnitNYI(CHROME = "10px",
+            EDGE =  "10px",
+            FF = "10px",
+            FF78 = "10px",
+            IE = "10px")
+    public void fontSizeVW() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6vw;'>\n"
             + "<div id='d1'>inside</div>\n"
             + "</div>\n"
             + "<script>\n"
