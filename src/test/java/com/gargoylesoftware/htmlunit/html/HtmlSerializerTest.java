@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSerializer.HtmlSerializerTextBuild
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@SuppressWarnings("deprecation")
 public class HtmlSerializerTest {
 
     /**
