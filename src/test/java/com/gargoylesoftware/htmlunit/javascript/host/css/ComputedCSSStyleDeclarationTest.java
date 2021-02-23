@@ -1107,11 +1107,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = "3.824px",
             EDGE = "3.836px",
             IE = "0px")
-    @HtmlUnitNYI(CHROME = "10px",
-            EDGE =  "10px",
-            FF = "10px",
-            FF78 = "10px",
-            IE = "10px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF78 = "1px",
+            IE = "1px")
     public void fontSizeVH() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6vh;'>\n"
@@ -1139,11 +1139,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = "7.548px",
             EDGE = "7.548px",
             IE = "0px")
-    @HtmlUnitNYI(CHROME = "10px",
-            EDGE =  "10px",
-            FF = "10px",
-            FF78 = "10px",
-            IE = "10px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF78 = "1px",
+            IE = "1px")
     public void fontSizeVW() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6vw;'>\n"
