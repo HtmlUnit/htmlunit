@@ -30,7 +30,7 @@
         <htmlunitcorejs.version>2.48.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
-        <jetty.version>9.4.36.v20210114</jetty.version>
+        <jetty.version>9.4.37.v20210219</jetty.version>
         <log4j.version>2.14.0</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
@@ -328,7 +328,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>3.4.2</version>
+                <version>3.4.3</version>
             </extension>
         </extensions>
     </build>
@@ -1220,7 +1220,7 @@
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
-            <version>0.16.0</version>
+            <version>0.17.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -1281,7 +1281,7 @@
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
-            <version>1.5.2</version>
+            <version>1.5.3</version>
             <scope>test</scope>
         </dependency>
         <!-- Jetty -->
