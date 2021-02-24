@@ -406,9 +406,12 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
+    public void drawImage(final ImageReader imageReader,
+            final int sx, final int sy, final Integer sWidth, final Integer sHeight,
+            final int dx, final int dy, final Integer dWidth, final Integer dHeight) throws IOException {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("[" + id_ + "] drawImage()");
+            LOG.debug("[" + id_ + "] drawImage(" + sx + ", " + sy + ", " + sWidth + ", " + sHeight
+                    + "," + dx + ", " + dy + ", " + dWidth + ", " + dHeight + ")");
         }
 
         if (imageReader.getNumImages(true) != 0) {
@@ -418,7 +421,54 @@ public class AwtRenderingBackend implements RenderingBackend {
             try {
                 graphics2D_.setTransform(transformation_);
                 graphics2D_.setColor(fillColor_);
-                graphics2D_.drawImage(img, dxI, dyI, image_.getWidth(), image_.getHeight(), null);
+
+                final int sx2;
+                if (sWidth == null) {
+                    sx2 = sx + img.getWidth();
+                }
+                else {
+                    sx2 = sx + sWidth;
+                }
+
+                final int sy2;
+                if (sHeight == null) {
+                    sy2 = sy + img.getHeight();
+                }
+                else {
+                    sy2 = sy + sHeight;
+                }
+
+                int dx1 = dx;
+                final int dx2;
+                if (dWidth == null) {
+                    dx2 = dx + img.getWidth();
+                }
+                else {
+                    if (dWidth < 0) {
+                        dx1 = dx1 + dWidth;
+                        dx2 = dx1 - dWidth;
+                    }
+                    else {
+                        dx2 = dx1 + dWidth;
+                    }
+                }
+
+                int dy1 = dy;
+                final int dy2;
+                if (dHeight == null) {
+                    dy2 = dy + img.getHeight();
+                }
+                else {
+                    if (dHeight < 0) {
+                        dy1 = dy1 + dHeight;
+                        dy2 = dy1 - dHeight;
+                    }
+                    else {
+                        dy2 = dy1 + dHeight;
+                    }
+                }
+
+                graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, null);
             }
             finally {
                 graphics2D_.setTransform(savedTransform);
