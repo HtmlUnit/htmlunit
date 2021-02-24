@@ -330,15 +330,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQYV2P8z8Dwn5GBgZEBCuAM4gUAg+YCBZ6DWDYAAAA"
-            + "ASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJggg==",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJggg==",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
-            + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQYV2P8z8Dwn5GBgZEBCuAM4gUAg+YCBZ6DWDYAAAA"
+                + "ASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
+                + "ggg==",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
+                + "ggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
+                + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
     public void drawImage3Arguments() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -373,15 +375,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQYV2NkQAOMWAX+MzD8Z2RgAEtiqAAAN+YCBdugwDMA"
-            + "AAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSuQmCC",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSuQmCC",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
-            + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQYV2NkQAOMWAX+MzD8Z2RgAEtiqAAAN+YCBdugwDMA"
+                + "AAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
+                + "QmCC",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
+                + "QmCC",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
+                + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
     public void drawImage3ArgumentsPlacement() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -417,17 +421,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAALUlEQVQYVzXI0Q0AIBDCUBjFSWVTR6nhov1qnpEwS/jIkp2EnagN"
-            + "dAAG2oe3voowEQWmniBSAAAAAElFTkSuQmCC",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQImVXKwQkAIBDAsDiKm97m9SOIfYaKVrsIzEzxALp94B4H"
-            + "kskZi4OAPRUAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQImVXKwQkAIBDAsDiKm97m9SOIfYaKVrsIzEzxALp94B4H"
-            + "kskZi4OAPRUAAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVBhXY/jP"
-            + "AET/Ff+DaRBoaGgAc+ACIPAfCkBsJrAIEDAyMgJJBgYAY/AUlK91orEAAAAASUVORK5CYII=")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAALUlEQVQYVzXI0Q0AIBDCUBjFSWVTR6nhov1qnpEwS/jIkp2EnagN"
+                + "dAAG2oe3voowEQWmniBSAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQImVXKwQkAIBDAsDiKm97m9SOIfYaKVrsIzEzxALp94B4H"
+                + "kskZi4OAPRUAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQImVXKwQkAIBDAsDiKm97m9SOIfYaKVrsIzEzxALp94B4H"
+                + "kskZi4OAPRUAAAAASUVORK5CYII=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVBhXY/jP"
+                + "AET/Ff+DaRBoaGgAc+ACIPAfCkBsJrAIEDAyMgJJBgYAY/AUlK91orEAAAAASUVORK5CYII=")
     public void drawImage3ArgumentsPlacementNegative() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -462,17 +466,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAKklEQVQYVy3IsREAIAzEMP8oNMwZtuTSMIopQKXCVDtEkA3BoTl"
-            + "vVhXhu4pUDldubjlMAAAAAElFTkSuQmCC",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
-            + "B04ARksgoEOwAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
-            + "B04ARksgoEOwAAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2BQ"
-            + "+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAKklEQVQYVy3IsREAIAzEMP8oNMwZtuTSMIopQKXCVDtEkA3BoTl"
+                + "vVhXhu4pUDldubjlMAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
+                + "B04ARksgoEOwAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
+                + "B04ARksgoEOwAAAAASUVORK5CYII=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2BQ"
+                + "+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
     public void drawImage3ArgumentsImageTooLarge() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -507,15 +511,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQYV2P8z8Dwn5GBgZEBCuAM4gUAg+YCBZ6DWDYAAAA"
-            + "ASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJggg==",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJggg==",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
-            + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQYV2P8z8Dwn5GBgZEBCuAM4gUAg+YCBZ6DWDYAAAA"
+                + "ASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
+                + "ggg==",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
+                + "ggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
+                + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
     public void drawImage5Arguments() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -550,15 +556,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQYV2NkQAOMWAX+MzD8Z2RgAEtiqAAAN+YCBdugwDMA"
-            + "AAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSuQmCC",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSuQmCC",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
-            + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQYV2NkQAOMWAX+MzD8Z2RgAEtiqAAAN+YCBdugwDMA"
+                + "AAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
+                + "QmCC",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
+                + "QmCC",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
+                + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsPlacement() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -594,17 +602,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJUlEQVQYV2P8f4PhP6MGAyMDFDD+Z2D4z8iAV+D///+MjIxwLQCf"
-            + "NQsFaCO3KAAAAABJRU5ErkJggg==",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGElEQVQImWP4f4PhPwMy+M9AUOD/fxQBAJOmCs946ShRAAAAAElF"
-            + "TkSuQmCC",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGElEQVQImWP4f4PhPwMy+M9AUOD/fxQBAJOmCs946ShRAAAAAElF"
-            + "TkSuQmCC",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAfSURBVBhXY/h"
-            + "/g+E/AzIA8lAEmKA0HDAx/EdWwMAAADhoBtfglrXyAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJUlEQVQYV2P8f4PhP6MGAyMDFDD+Z2D4z8iAV+D///+MjIxwLQCf"
+                + "NQsFaCO3KAAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGElEQVQImWP4f4PhPwMy+M9AUOD/fxQBAJOmCs946ShRAAAAAElF"
+                + "TkSuQmCC",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGElEQVQImWP4f4PhPwMy+M9AUOD/fxQBAJOmCs946ShRAAAAAElF"
+                + "TkSuQmCC",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAfSURBVBhXY/h"
+                + "/g+E/AzIA8lAEmKA0HDAx/EdWwMAAADhoBtfglrXyAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsPlacementNegative() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -639,15 +647,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQYV2P8z8DwnwEJMCJzQGzCAgCDawIDNDdv5wAAAABJR"
-            + "U5ErkJggg==",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEUlEQVQImWP4z8DwHxkzkA4A2ncH+YHCac0AAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEUlEQVQImWP4z8DwHxkzkA4A2ncH+YHCac0AAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhXY/z"
-            + "PwABEFAAGBgCDBQIA1ym4lAAAAABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQYV2P8z8DwnwEJMCJzQGzCAgCDawIDNDdv5wAAAABJR"
+                + "U5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEUlEQVQImWP4z8DwHxkzkA4A2ncH+YHCac0AAAAASUVORK5CY"
+                + "II=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEUlEQVQImWP4z8DwHxkzkA4A2ncH+YHCac0AAAAASUVORK5CY"
+                + "II=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhXY/z"
+                + "PwABEFAAGBgCDBQIA1ym4lAAAAABJRU5ErkJggg==")
     public void drawImageStretch() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -682,17 +692,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAKklEQVQYVy3IsREAIAzEMP8oNMwZtuTSMIopQKXCVDtEkA3BoTl"
-            + "vVhXhu4pUDldubjlMAAAAAElFTkSuQmCC",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
-            + "B04ARksgoEOwAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
-            + "B04ARksgoEOwAAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2BQ"
-            + "+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAKklEQVQYVy3IsREAIAzEMP8oNMwZtuTSMIopQKXCVDtEkA3BoTl"
+                + "vVhXhu4pUDldubjlMAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
+                + "B04ARksgoEOwAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
+                + "B04ARksgoEOwAAAAASUVORK5CYII=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2BQ"
+                + "+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsImageTooLarge() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -727,21 +737,21 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAj0lEQVQoU42QwQlCQQxEJyWIDawXsYJ/NQXZw5IeLGjsZBuQf1N"
-            + "vkWyWj8I/bFgIs7wMkwgmSzp3dtcXUZ/WpR1r76H1TQggHfR4C4DbsL+PHnoB5DJA+MmVH1Rb07Ee0tFWxP+fYysFD9UOXEmU1r"
-            + "b0G/i7j7sHHSFzChFQMuMeSFLNDCSTnbxO5JyrafAL84cwC261IdQAAAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlb2OsQnDQAAD5c4eweDi03gE1xrlRzNZRGu48yiXxjw"
-            + "PTgJpIlBxcAhJP2UFLyGTyWS8pDESzUOCTfC8unV8dOLAA2cmHolHnLnxbfEshb1W9lo5SwGp9e1dwEDo8lVMgm30afF/eQHveW"
-            + "Ud7tvRzAAAAABJRU5ErkJggg==",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlb2OsQnDQAAD5c4eweDi03gE1xrlRzNZRGu48yiXxjw"
-            + "PTgJpIlBxcAhJP2UFLyGTyWS8pDESzUOCTfC8unV8dOLAA2cmHolHnLnxbfEshb1W9lo5SwGp9e1dwEDo8lVMgm30afF/eQHveW"
-            + "Ud7tvRzAAAAABJRU5ErkJggg==",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACCSURBVChTvY7"
-            + "BDcIwDEV/OLUjIHFIL6gTcMXZh3HYx2GTTBL327SoUrlw4SmO/3esr+A3rmZyUdNRolxv3gAeIPkV5kbxcEeea3fPeZrfe1ybTP"
-            + "RsKkOU680fElvOeIm4xb1W5NZCO1xaE3cYv9t7V/YPPj/F6xcqU0spSOkY9leABXrPQu6AWg+SAAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAj0lEQVQoU42QwQlCQQxEJyWIDawXsYJ/NQXZw5IeLGjsZBuQf1N"
+                + "vkWyWj8I/bFgIs7wMkwgmSzp3dtcXUZ/WpR1r76H1TQggHfR4C4DbsL+PHnoB5DJA+MmVH1Rb07Ee0tFWxP+fYysFD9UOXEmU1r"
+                + "b0G/i7j7sHHSFzChFQMuMeSFLNDCSTnbxO5JyrafAL84cwC261IdQAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlb2OsQnDQAAD5c4eweDi03gE1xrlRzNZRGu48yiXxjw"
+                + "PTgJpIlBxcAhJP2UFLyGTyWS8pDESzUOCTfC8unV8dOLAA2cmHolHnLnxbfEshb1W9lo5SwGp9e1dwEDo8lVMgm30afF/eQHveW"
+                + "Ud7tvRzAAAAABJRU5ErkJggg==",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlb2OsQnDQAAD5c4eweDi03gE1xrlRzNZRGu48yiXxjw"
+                + "PTgJpIlBxcAhJP2UFLyGTyWS8pDESzUOCTfC8unV8dOLAA2cmHolHnLnxbfEshb1W9lo5SwGp9e1dwEDo8lVMgm30afF/eQHveW"
+                + "Ud7tvRzAAAAABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACCSURBVChTvY7"
+                + "BDcIwDEV/OLUjIHFIL6gTcMXZh3HYx2GTTBL327SoUrlw4SmO/3esr+A3rmZyUdNRolxv3gAeIPkV5kbxcEeea3fPeZrfe1ybTP"
+                + "RsKkOU680fElvOeIm4xb1W5NZCO1xaE3cYv9t7V/YPPj/F6xcqU0spSOkY9leABXrPQu6AWg+SAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsStretchX() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -776,17 +786,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUUlEQVQoU2NkIBIwgtQ1CDf8r49sYGhc3sAAohmnMIDFkQFEYYP"
-            + "Af/sDBgwHHS4w1Dd8AKnCrhCm8/////8bGxsZGhoa8CvE51wMnbgUDwWFAM8UFQtlZuKEAAAAAElFTkSuQmCC",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYlWNgIAU0CDf8/5/D8B9G41bYIPB/v4PD/4YGgf//GfA"
-            + "ohIH/////b2hoIKxwxAAAo0AXzo4A4+UAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYlWNgIAU0CDf8/5/D8B9G41bYIPB/v4PD/4YGgf//GfA"
-            + "ohIH/////b2hoIKxwxAAAo0AXzo4A4+UAAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA1SURBVChTYyA"
-            + "JNAg3/P+fw/AfRkOFUQATmMydwHDgigOYZpgCFsEP/gNBQ0MDVhNHImBgAADHvxPYgDOEzgAAAABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUUlEQVQoU2NkIBIwgtQ1CDf8r49sYGhc3sAAohmnMIDFkQFEYYP"
+                + "Af/sDBgwHHS4w1Dd8AKnCrhCm8/////8bGxsZGhoa8CvE51wMnbgUDwWFAM8UFQtlZuKEAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYlWNgIAU0CDf8/5/D8B9G41bYIPB/v4PD/4YGgf//GfA"
+                + "ohIH/////b2hoIKxwxAAAo0AXzo4A4+UAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYlWNgIAU0CDf8/5/D8B9G41bYIPB/v4PD/4YGgf//GfA"
+                + "ohIH/////b2hoIKxwxAAAo0AXzo4A4+UAAAAASUVORK5CYII=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA1SURBVChTYyA"
+                + "JNAg3/P+fw/AfRkOFUQATmMydwHDgigOYZpgCFsEP/gNBQ0MDVhNHImBgAADHvxPYgDOEzgAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsShrinkY() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -821,17 +831,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQYVwEtANL/AQAm//9A9sAAAUAcv/8wB9AAAb8JQP8QJ/A"
-            + "AAb9ACP8QGP4AAUC/Gf8w3voAj4MRundMhZwAAAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQImQEtANL/AAAm//9AHL//AEAcv/9wI4//AL8JQP/PMDD"
-            + "/AL9ACP/PWAb/AEC/Gf9wnRP/0o0VF9N8H0sAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQImQEtANL/AAAm//9AHL//AEAcv/9wI4//AL8JQP/PMDD"
-            + "/AL9ACP/PWAb/AEC/Gf9wnRP/0o0VF9N8H0sAAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA0SURBVBhXY2R"
-            + "Q+//f4dsBBiYQYcB+gYFxP6fDfwH1DwwsDOYnGBgk/jEwOuyX/G9w7xcDAHxREIP4we06AAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQYVwEtANL/AQAm//9A9sAAAUAcv/8wB9AAAb8JQP8QJ/A"
+                + "AAb9ACP8QGP4AAUC/Gf8w3voAj4MRundMhZwAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQImQEtANL/AAAm//9AHL//AEAcv/9wI4//AL8JQP/PMDD"
+                + "/AL9ACP/PWAb/AEC/Gf9wnRP/0o0VF9N8H0sAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQImQEtANL/AAAm//9AHL//AEAcv/9wI4//AL8JQP/PMDD"
+                + "/AL9ACP/PWAb/AEC/Gf9wnRP/0o0VF9N8H0sAAAAASUVORK5CYII=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA0SURBVBhXY2R"
+                + "Q+//f4dsBBiYQYcB+gYFxP6fDfwH1DwwsDOYnGBgk/jEwOuyX/G9w7xcDAHxREIP4we06AAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsStretchImageTooLarge() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -866,18 +876,18 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAWklEQVQoU7XQQQqAMAxE0T9H6ab0lsZbihuPMmJQV610YzYD4ZHA"
-            + "iMnRpOMPWG3vQtVk0v8ig9mABleqDSAutg7kQubXxTWCJSILGMKnHttOKHWbeJcXvE0Xns6wHwst5jD0AAAAAElFTkSuQmCC",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYldWMqREAIBDEQikY6rwy6SYIHscNlpiY7MIPNBU8viFo"
-            + "x+1rWKwKbqePETEfs/AMFk8hyeMAl2Uvlc+P3zcAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYldWMqREAIBDEQikY6rwy6SYIHscNlpiY7MIPNBU8viFo"
-            + "x+1rWKwKbqePETEfs/AMFk8hyeMAl2Uvlc+P3zcAAAAASUVORK5CYII=",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABHSURBVChTYxgS"
-            + "QO3///8MDP/hNC4Akvx/A4ihNFQYC/ivCDEJRuMCIMmGhgaIifgUwgDQhWAA5WIAJigNBoyMjFAWOmBgAAAEXSqdGQ47LgAAAABJ"
-            + "RU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAWklEQVQoU7XQQQqAMAxE0T9H6ab0lsZbihuPMmJQV610YzYD4ZHA"
+                + "iMnRpOMPWG3vQtVk0v8ig9mABleqDSAutg7kQubXxTWCJSILGMKnHttOKHWbeJcXvE0Xns6wHwst5jD0AAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYldWMqREAIBDEQikY6rwy6SYIHscNlpiY7MIPNBU8viFo"
+                + "x+1rWKwKbqePETEfs/AMFk8hyeMAl2Uvlc+P3zcAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYldWMqREAIBDEQikY6rwy6SYIHscNlpiY7MIPNBU8viFo"
+                + "x+1rWKwKbqePETEfs/AMFk8hyeMAl2Uvlc+P3zcAAAAASUVORK5CYII=",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABHSURBVChTYxgS"
+                + "QO3///8MDP/hNC4Akvx/A4ihNFQYC/ivCDEJRuMCIMmGhgaIifgUwgDQhWAA5WIAJigNBoyMjFAWOmBgAAAEXSqdGQ47LgAAAABJ"
+                + "RU5ErkJggg==")
     public void drawImage5ArgumentsNegativeWidth() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -913,18 +923,18 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAWUlEQVQoU8XOQQqAMAxE0T9H6ab0lsZbihuPMmJQKGLFnSFkNo8k"
-            + "4l7V9ipUTSZHn6O3BrMADY5UG0BcbG3Ihcy3jXMEU0QeGsLrDdtOKD3/2MPepP5SP8Idu74fCzQIyFMAAAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlc2Mqw0AIBTEyigY5nxjsk0RfAQJBElNzV1hp6jg8glB"
-            + "K04fh8ms4PS1GBG9eBuuw+BpyEvxIxoamS+VaAm+LAAAAABJRU5ErkJggg==",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlc2Mqw0AIBTEyigY5nxjsk0RfAQJBElNzV1hp6jg8glB"
-            + "K04fh8ms4PS1GBG9eBuuw+BpyEvxIxoamS+VaAm+LAAAAABJRU5ErkJggg==",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY8AA"
-            + "av///2dg+A+ncQGQ5P8bQAylocJYwH9FiEkwGhcASTY0NEBMxKcQBoAuBAMol4EJSmMFjIyMUNZQAAwMAKgVKp2FLYz1AAAAAElF"
-            + "TkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAWUlEQVQoU8XOQQqAMAxE0T9H6ab0lsZbihuPMmJQKGLFnSFkNo8k"
+                + "4l7V9ipUTSZHn6O3BrMADY5UG0BcbG3Ihcy3jXMEU0QeGsLrDdtOKD3/2MPepP5SP8Idu74fCzQIyFMAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlc2Mqw0AIBTEyigY5nxjsk0RfAQJBElNzV1hp6jg8glB"
+                + "K04fh8ms4PS1GBG9eBuuw+BpyEvxIxoamS+VaAm+LAAAAABJRU5ErkJggg==",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlc2Mqw0AIBTEyigY5nxjsk0RfAQJBElNzV1hp6jg8glB"
+                + "K04fh8ms4PS1GBG9eBuuw+BpyEvxIxoamS+VaAm+LAAAAABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY8AA"
+                + "av///2dg+A+ncQGQ5P8bQAylocJYwH9FiEkwGhcASTY0NEBMxKcQBoAuBAMol4EJSmMFjIyMUNZQAAwMAKgVKp2FLYz1AAAAAElF"
+                + "TkSuQmCC")
     public void drawImage5ArgumentsNegativeHeight() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -959,18 +969,18 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAXElEQVQoU6XQQQqAMAxE0T9H6ab0lsZbihuPMmJFKNRKwWxm8wiT"
-            + "iMnRpKOH2fYulE1NbtNBg9mAAleqDCBOtg7kRM2vjWsES0StP4TPcbZdofTesYWt+fGewWNPzSgfC+FFt4IAAAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlbWMuw0AIBSEcBQb53xjug0WfjqNMZGG5g74T1HB5R2C"
-            + "VpzeDpNZweljMSJ68TRch8HVkJviMw3cQS+VAulsRwAAAABJRU5ErkJggg==",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlbWMuw0AIBSEcBQb53xjug0WfjqNMZGG5g74T1HB5R2C"
-            + "VpzeDpNZweljMSJ68TRch8HVkJviMw3cQS+VAulsRwAAAABJRU5ErkJggg==",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY6AD"
-            + "UPv//z8Dw384jQuAJP/fAGIoDRXGAv4rQkyC0bgASLKhoQFiIj6FMAB0IRhAuQxMUBorYGRkhLKoDxgYAAFaKp1TOe14AAAAAElF"
-            + "TkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAXElEQVQoU6XQQQqAMAxE0T9H6ab0lsZbihuPMmJFKNRKwWxm8wiT"
+                + "iMnRpKOH2fYulE1NbtNBg9mAAleqDCBOtg7kRM2vjWsES0StP4TPcbZdofTesYWt+fGewWNPzSgfC+FFt4IAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlbWMuw0AIBSEcBQb53xjug0WfjqNMZGG5g74T1HB5R2C"
+                + "VpzeDpNZweljMSJ68TRch8HVkJviMw3cQS+VAulsRwAAAABJRU5ErkJggg==",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlbWMuw0AIBSEcBQb53xjug0WfjqNMZGG5g74T1HB5R2C"
+                + "VpzeDpNZweljMSJ68TRch8HVkJviMw3cQS+VAulsRwAAAABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY6AD"
+                + "UPv//z8Dw384jQuAJP/fAGIoDRXGAv4rQkyC0bgASLKhoQFiIj6FMAB0IRhAuQxMUBorYGRkhLKoDxgYAAFaKp1TOe14AAAAAElF"
+                + "TkSuQmCC")
     public void drawImage9Arguments() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -1005,21 +1015,21 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAi0lEQVQoU2M8FcD+n4GBgWFaBB+IYlgQ8ZoRzEADjOsDTMAKHyi8"
-            + "YBD48IEhccEX7AoXJCRcYeXg4La/dk1U+u1bbsarV3EojI/XNo2IMFWRkMhiY2U1ZdTRwa4QZO3///8dGBgY6h88eOCgqKhIWOGB"
-            + "AwccHB0dcSvE5ksMXxOjCKQGqzVYw5FYEwEUwCcLsjvElwAAAABJRU5ErkJggg==",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlWM4FcD+/1QA+/+EFaL/E1aI/mfABTYEmPzfEGDyf0KB"
-            + "zP8FCTy4FS5ISLiyNCPj/hM7uy//tbXxKIyP1766fXvCz/PnT/2/cgW3QgYGBob///87/P//f//9+/eJU7h//378Cgc5AABrbToy"
-            + "XSlG0gAAAABJRU5ErkJggg==",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlWM4FcD+/1QA+/+EFaL/E1aI/mfABTYEmPzfEGDyf0KB"
-            + "zP8FCTy4FS5ISLiyNCPj/hM7uy//tbXxKIyP1766fXvCz/PnT/2/cgW3QgYGBob///87/P//f//9+/eJU7h//378Cgc5AABrbToy"
-            + "XSlG0gAAAABJRU5ErkJggg==",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABzSURBVChTYzwV"
-            + "wP6fAQimRfCBKIYFEa8ZwQw0wPSUQZcBhPVPsDPY7/gOFcYETB8EdK5+lTB5EHJW8WvCaXmoMBawIC5O+8r27Qk/zp8/9f/KFbAz"
-            + "cIL///87/Pv3b//9+/dxKmSC0mDw4MEDKGsoAgYGAFZxKhyfkxO8AAAAAElFTkSuQmCC")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAi0lEQVQoU2M8FcD+n4GBgWFaBB+IYlgQ8ZoRzEADjOsDTMAKHyi8"
+                + "YBD48IEhccEX7AoXJCRcYeXg4La/dk1U+u1bbsarV3EojI/XNo2IMFWRkMhiY2U1ZdTRwa4QZO3///8dGBgY6h88eOCgqKhIWOGB"
+                + "AwccHB0dcSvE5ksMXxOjCKQGqzVYw5FYEwEUwCcLsjvElwAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlWM4FcD+/1QA+/+EFaL/E1aI/mfABTYEmPzfEGDyf0KB"
+                + "zP8FCTy4FS5ISLiyNCPj/hM7uy//tbXxKIyP1766fXvCz/PnT/2/cgW3QgYGBob///87/P//f//9+/eJU7h//378Cgc5AABrbToy"
+                + "XSlG0gAAAABJRU5ErkJggg==",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlWM4FcD+/1QA+/+EFaL/E1aI/mfABTYEmPzfEGDyf0KB"
+                + "zP8FCTy4FS5ISLiyNCPj/hM7uy//tbXxKIyP1766fXvCz/PnT/2/cgW3QgYGBob///87/P//f//9+/eJU7h//378Cgc5AABrbToy"
+                + "XSlG0gAAAABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABzSURBVChTYzwV"
+                + "wP6fAQimRfCBKIYFEa8ZwQw0wPSUQZcBhPVPsDPY7/gOFcYETB8EdK5+lTB5EHJW8WvCaXmoMBawIC5O+8r27Qk/zp8/9f/KFbAz"
+                + "cIL///87/Pv3b//9+/dxKmSC0mDw4MEDKGsoAgYGAFZxKhyfkxO8AAAAAElFTkSuQmCC")
     public void drawImage9ArgumentsCrop() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -1054,15 +1064,15 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAXElEQVQoU2NkIBIwEqmOYegqVPv/P+HTAob6t40Mir8fgP2B1TPZ"
-            + "YlP+m0udZPBS2sYgsu4tboX7HTj+S6j+ZVAw/MPAmfUft0LRV3L/Q9b8ZCiY8I1B/dZnsEIAKFkcC2BUM+IAAAAASUVORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQYlWNgGAUwoP4/P1F8wcz7rAoz8arLFp+6apFB7P83QcL/"
-            + "8So84Mi56noq6//v0xjxKxR/Jbcqc5r4/5tqvHCFALEhF41FNwM8AAAAAElFTkSuQmCC",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQYlWNgGAUwoP4/P1F8wcz7rAoz8arLFp+6apFB7P83QcL/"
-            + "8So84Mi56noq6//v0xjxKxR/Jbcqc5r4/5tqvHCFALEhF41FNwM8AAAAAElFTkSuQmCC",
-        IE = {})
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAXElEQVQoU2NkIBIwEqmOYegqVPv/P+HTAob6t40Mir8fgP2B1TPZ"
+                + "YlP+m0udZPBS2sYgsu4tboX7HTj+S6j+ZVAw/MPAmfUft0LRV3L/Q9b8ZCiY8I1B/dZnsEIAKFkcC2BUM+IAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQYlWNgGAUwoP4/P1F8wcz7rAoz8arLFp+6apFB7P83QcL/"
+                + "8So84Mi56noq6//v0xjxKxR/Jbcqc5r4/5tqvHCFALEhF41FNwM8AAAAAElFTkSuQmCC",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQYlWNgGAUwoP4/P1F8wcz7rAoz8arLFp+6apFB7P83QcL/"
+                + "8So84Mi56noq6//v0xjxKxR/Jbcqc5r4/5tqvHCFALEhF41FNwM8AAAAAElFTkSuQmCC",
+            IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
             + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPklEQVR42mNgGAUwoPb/f4LE/P//GRj+41WXJTb1/yL92P//Iwko"
             + "PGDP8f9GCuv//4sJKGT4r/g/Yb4oitUApWwZ6B07eGEAAAAASUVORK5CYII=")
@@ -1100,13 +1110,13 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQoU2NkIBIwEqmOYVQh3pAiOngACmkAC5eMKzgAAAAASUV"
-            + "ORK5CYII=",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
-        IE = {})
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQoU2NkIBIwEqmOYVQh3pAiOngACmkAC5eMKzgAAAAASUV"
+                + "ORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
+            IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
             + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVR42mNgGAWDEwAAAZoAAQDqGN4AAAAASUVORK5CYII=")
     public void drawImage9ArgumentsCropNegativWidth() throws Exception {
@@ -1143,17 +1153,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQoU2Ocr5nwn4GBgSHx+gJGEI0LMM6v5oEobP2CX+EBB4f9"
-            + "9gwMDowHDuBXCDJt/vz5/xMTEwkrxOc2mBxeU5ANGAoKAWtoEAsOuLTDAAAAAElFTkSuQmCC",
-        FF = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYlWOYr5nwf75mwn8GQmBBNc//BdU8hBUecHDY/9/BgbBC"
-            + "BgYGhvnz5xOncMQBAL0KD/QH8JFiAAAAAElFTkSuQmCC",
-        FF78 = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYlWOYr5nwf75mwn8GQmBBNc//BdU8hBUecHDY/9/BgbBC"
-            + "BgYGhvnz5xOncMQBAL0KD/QH8JFiAAAAAElFTkSuQmCC",
-        IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAvSURBVChTY5iv"
-            + "mfAfhBkIACaGoDUMYEwIHHBw2P/fwYGgiWAwf/584hSOMMDAAAB1Kw2mrjRWYgAAAABJRU5ErkJggg==")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQoU2Ocr5nwn4GBgSHx+gJGEI0LMM6v5oEobP2CX+EBB4f9"
+                + "9gwMDowHDuBXCDJt/vz5/xMTEwkrxOc2mBxeU5ANGAoKAWtoEAsOuLTDAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYlWOYr5nwf75mwn8GQmBBNc//BdU8hBUecHDY/9/BgbBC"
+                + "BgYGhvnz5xOncMQBAL0KD/QH8JFiAAAAAElFTkSuQmCC",
+            FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYlWOYr5nwf75mwn8GQmBBNc//BdU8hBUecHDY/9/BgbBC"
+                + "BgYGhvnz5xOncMQBAL0KD/QH8JFiAAAAAElFTkSuQmCC",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAvSURBVChTY5iv"
+                + "mfAfhBkIACaGoDUMYEwIHHBw2P/fwYGgiWAwf/584hSOMMDAAAB1Kw2mrjRWYgAAAABJRU5ErkJggg==")
     public void drawImage9ArgumentsStretch() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -1463,6 +1473,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
