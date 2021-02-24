@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Image format support</title>
+    </properties>
+
+    <body>
+        <section name="General">
+            <p>
+                Because HtmlUnit is a headless browsers you might think HtmlUnit can be agnostic to image formats.
+                This is in general true but not if you look at the details. Even if HtmlUnit is headless there is
+                still support for layout related methods like Element.getBoundingClientRect(). A second case is
+                Canvas.drawImage(). To support this HtmlUnit has to be able to determine the dimensions of an given
+                image (for the first case) and produce a raster version (for the second case).
+            </p>
+            <p>
+                For this HtmlUnit uses <a href="https://docs.oracle.com/javase/8/docs/api/javax/imageio/package-summary.html">ImageIO</a>.
+                Sadly there is only support for JPEG, PNG, BMP, WBMP and GIF.
+            </p>
+            <p>
+                If HtmlUnit has to deal with the details of an unsupported image format a message is shown in the log and
+                the image is (more or less) ignored.
+            </p>
+            <p>
+                To overcome this limitation you have to install support for more file formats from
+                <a href=" https://github.com/haraldk/TwelveMonkeys">TwelveMonkeys</a>
+            </p>
+            <subsection name="Example">
+                <p>
+                    Add svg support to be able to include SVG images into your canvas drawings<br></br>
+                    This is simply done by adding some dependencies to your project:
+            </p>
+<source>
+<![CDATA[        <dependency>
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-batik</artifactId>
+            <version>3.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>1.14</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+]]></source>
+            </subsection>
+        </section>
+    </body>
+</document>
+
