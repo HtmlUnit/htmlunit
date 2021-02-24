@@ -1043,7 +1043,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the

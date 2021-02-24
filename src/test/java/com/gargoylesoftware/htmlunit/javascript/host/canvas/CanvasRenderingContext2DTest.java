@@ -24,6 +24,9 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -44,6 +47,55 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
 
     /**
+     * Function used in many tests.
+     */
+    public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
+            + "document.getElementById('myLog').value += msg + '§';}\n";
+
+    /**
+     * HtmlSniped to insert text area used for logging.
+     */
+    public static final String LOG_TEXTAREA = "  <textarea id='myLog' cols='80' rows='42'></textarea>\n";
+
+    protected final WebDriver loadPageVerifyTextArea2(final String html) throws Exception {
+        return loadPageTextArea2(html, getExpectedAlerts());
+    }
+
+    protected final WebDriver loadPageTextArea2(final String html, final String... expectedAlerts) throws Exception {
+        final WebDriver driver = loadPage2(html);
+        return verifyTextArea2(driver, expectedAlerts);
+    }
+
+    protected final WebDriver verifyTextArea2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final WebElement textArea = driver.findElement(By.id("myLog"));
+
+        if (expectedAlerts.length == 0) {
+            assertEquals("", textArea.getAttribute("value"));
+            return driver;
+        }
+
+        if (!useRealBrowser()
+                && expectedAlerts.length == 1
+                && expectedAlerts[0].startsWith("data:image/png;base64,")) {
+            String value = textArea.getAttribute("value");
+            if (value.endsWith("§")) {
+                value = value.substring(0, value.length() - 1);
+            }
+            compareImages(expectedAlerts[0], value);
+            return driver;
+        }
+
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i].replaceAll("§§URL§§", URL_FIRST.toExternalForm())).append('§');
+        }
+        assertEquals(expected.toString(), textArea.getAttribute("value"));
+
+        return driver;
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -51,6 +103,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void test() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  try {\n"
@@ -71,14 +124,16 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    ctx.quadraticCurveTo(0, 10, 15, 10);\n"
             + "    ctx.closePath();\n"
             + "    ctx.rotate(1.234);\n"
-            + "    alert('done');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('done');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "<body onload='test()'>\n"
+            + "  <canvas id='myCanvas'></canvas></body>\n"
+            + LOG_TEXTAREA
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -98,7 +153,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             "setLineDash", "setTransform", "stroke", "strokeRect", "strokeText", "transform", "translate" };
         final String html = "<html><body>\n"
             + "<canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  var nbMethods = 0;\n"
             + "  var methods = ['" + String.join("', '", methods) + "'];\n"
@@ -108,22 +165,50 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "      if (typeof ctx[methods[i]] == 'function')\n"
             + "        nbMethods++;\n"
             + "      else\n"
-            + "        alert(methods[i]);\n"
+            + "        log(methods[i]);\n"
             + "    }\n"
-            + "    alert(nbMethods + ' methods');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(nbMethods + ' methods');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
+    }
+
+    private void drawImage(final String png, final String canvasSetup, final String drawJS) throws Exception {
+        try (InputStream is = getClass().getResourceAsStream(png)) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setDefaultResponse("Test");
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    var img = document.getElementById('myImage');\n"
+            + "    var canvas = document.createElement('canvas');\n"
+            + canvasSetup
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + drawJS
+            + "      log(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAH0lEQVQ4T2NkoBAwUq"
-                    + "ifYdQAhtEwYBgNA1A+Gvi8AAAmmAARf9qcXAAAAABJRU5ErkJggg==",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC60lEQVQ4T32TX2xTVRzHP/d27"
+    @Alerts(DEFAULT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC60lEQVQ4T32TX2xTVRzHP/d27"
                     + "V273i0twTUiMhQeUBJFwQ62dVxxbIglZGa6EPTZwFCUxOe9+yIhRDL24gMJ/6FZgU3dDSYEAglIJDLIiA5Ey0Yd7W7vXbvd"
                     + "P+bepg3bA+fk5JzfOef3Sc75fb8CwMXxcanm8ZP9AUlqEEURUQTRPXi+2TCd1+5/1Kn8+Py24AYXRkYTG95d96tpWgiCgCC"
                     + "A4Pbyojw7DqIocPXGzcPJrg/6KhAPcCKVVto3NqvzpoXoASqjnFwZAb8Py7K4fOXGd93Jzm/dXA9wJjWstG7aoM6bJqIgeg"
@@ -134,10 +219,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "rS0qzOFoucuj6OOlHgt6dz3meBg2BZnjp71kQ4sHUtcr1M6tJPyZ4d1SqkFaW9TbVMi2w2y9k7GU6P5ZieNbFth7Dko3tNl"
                     + "M/Xv8Kyl2NIAYnzQyPJnkoZj51IKR92KqorG9u2MQyD6RmNB091bAdWvSQTi8rIskzA70cUfRw/nUru7u0u6+DQD0ff/2zX"
                     + "p6OuCSpS9rTuOAiiQNlgYlWlricOHj6y45sv9w55gHgisXrfF3sHI5FIXdVp3knZkwucKUBuJj+7v++rPZOTj+941/r7+2v"
-                    + "y+bx/sYNfFOu6bg4MDMz/DxMpOiCCBtdCAAAAAElFTkSuQmCC"},
-            FF = {"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAEklEQVQ4jWNgGAWjYBSMA"
-                    + "ggAAAQQAAF/TXiOAAAAAElFTkSuQmCC",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtUlEQVQ4jXXPz2vTdxzH8e/BMfw"
+                    + "y+bx/sYNfFOu6bg4MDMz/DxMpOiCCBtdCAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtUlEQVQ4jXXPz2vTdxzH8e/BMfw"
                     + "fKoLDgwcP23l0dGy3zcsOHj0LDtaLRTvaMlkPQztBBauwH3VOJSZt2oT8WKt+Eym2DekPutgkjbTNj+/vH/kmMc332/j0IG"
                     + "bEdB943T7vB6+XIAiCkM/nP44/TQ4lFlPjz1+kxp8vp8cXD0lkXjwnHPbCMbFf1U0qsoak6MiqjqIaqJqJqptohoWmmximx"
                     + "Vz0yc0ewB+KDsiqTrGiUJbUbkgzOkjVcTAti5m52C89gKIZlCSlc5wuyMQzMvGMwkpBQTdtdoslXm5lyW8X3kQXEp91Ae8n"
@@ -147,10 +230,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "lziamSNC/eSfH7tH7aKGq77QYNgKDpgWjZlSeb6TJIz1yMcGw5yYjTMidEQn/wY5ORIkMsPEhiGiet5vRNMu4qmm7zcyvGz"
                     + "T+TTn4Icv+Tn2NBjTo1MM/xAJJsvUG808LyD7gn3/cEBy3awbAfDtCmWKqxnsvjFNL5naVYzeSRZpt5o4LouBwdt/vIF/gN"
                     + "u3P3tS7vqYDs1nFqdWr3xLrU69UaD180m+60WruvheQe0220mbt3+tgP09/efvP/3IzEcjac6icVT4dh8KhybT0U+yCNfIN"
-                    + "nX13e6A4yNjR0ZHBw8+i4TRycm/j/v/01OTn4kCILwFgqgq1utHBHHAAAAAElFTkSuQmCC"},
-            FF78 = {"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAEklEQVQ4jWNgGAWjYBSMA"
-                    + "ggAAAQQAAF/TXiOAAAAAElFTkSuQmCC",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACvElEQVQ4jXXPu29TZxzG8TO0Qvw"
+                    + "nX13e6A4yNjR0ZHBw8+i4TRycm/j/v/01OTn4kCILwFgqgq1utHBHHAAAAAElFTkSuQmCC",
+            FF78 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACvElEQVQ4jXXPu29TZxzG8TO0Qvw"
                     + "FmVAlEEOHDu2SpSoJajdgqaKO3SIhpRJZGpUgkKiaoRSB2qK2MEDSVjEEOznkOL5ARGwjRBIrN6UmdhKUxJdzv/jYxvE5Md"
                     + "8OCLeu6Ss92/v76HkEQRCEmZmZQ9HZ1NDck4WR5NOFkeSz9MiTt0SKPf5SeNsTw7OfaIZFSdGRVQNFM1A1E0230AwL3bTRD"
                     + "QvTshEjj37uAO6KUq+iGeRLKkVZa4d0s4WUXRfLtgmJke87AFU3Kchq63hpWyGeUYhnVBa3VQzLYTdf4PlGltzm1qvp6OxH"
@@ -160,10 +241,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "7nAp7/N80NkhYHfU3x89SEbeR3P+0+DoCj1WrZDUVa4PpXizPUIR4ZFjl4Kc/SSxLELIscvipwfT2KaFp7vd06wnDK6YfF8"
                     + "I8d3Ewk+vCzy3jdBjgzd5/2LkwyPJ8hublOt1fD9g/YJo3eDvbbjYjsupuWQL5RYzWQJJpaYmFtiObOJrChUazU8z+PgoMl"
                     + "oYOIf4Novt046ZRfHreBWqlSqtdepVKnWarys19lvNPA8H98/oNlscuXHG6dbQHd39/E//gwkpEgs3Uo0lpai8bQUjafD/0"
-                    + "4snh6/F0x1dXV90AJ6enre6evrO/w6g4cHB/8/b/719/e/KwiC8Dc3QqPsSaO0rwAAAABJRU5ErkJggg=="},
-            IE = {"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAA"
-                    + "RnQU1BAACxjwv8YQUAAAATSURBVDhPYxgFo2AUjAIwYGAAAAQQAAGnRHxjAAAAAElFTkSuQmCC",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BA"
+                    + "4snh6/F0x1dXV90AJ6enre6evrO/w6g4cHB/8/b/719/e/KwiC8Dc3QqPsSaO0rwAAAABJRU5ErkJggg==",
+            IE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BA"
                     + "ACxjwv8YQUAAAKeSURBVDhPjVJNTxNRFD3zTSm1UyKlCsEIRCC6EVFijC5MFE1kqTv1B+jChXsSE6Nx48qYsDPRxI0rjR8J"
                     + "GDFGhRBRdiAhliKlLVRmhmk7nS/vey0IO8/Me2/m3nfuue++K4Dwen5ek5dXb6maFhdFEfSCO3YiAIqmNTc8dPZJ3cLB971"
                     + "6N37mxLGjE57nQxAEGszBVv5RW8OQAgv4PDX9aPjCuZucTSAtYLNcloIggE+DrUEQIiBCEAbEC/lgUWVZwqnBgRsvXr59wN"
@@ -173,35 +252,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "6d/B3H6FD1/ApbaCw/gdTiznMrazhZ3Yd39MFjM/l4Fcd9LZEeLZbkLdmZlTEEKdTEh5+WcVMoQpFZu4QjzM+787LfQm0NE"
                     + "pcjFqCo5YBFYwZVUXFUG8rBtsasZcK7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6k"
                     + "zGkmmOIxWIkopCWAMeh2yDwDIrFPC+sQL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYT"
-                    + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC"})
+                    + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
     public void drawImage() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("html.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = img.width;\n"
-            + "    canvas.height = img.height;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "      context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("html.png",
+                "canvas.width = img.width; canvas.height = img.height;\n",
+                "context.drawImage(img, 0, 0, canvas.width, canvas.height);\n");
     }
 
     /**
@@ -213,18 +268,20 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"
             + "<canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var img = document.getElementById('myImage');\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  var context = canvas.getContext('2d');\n"
-            + "  alert('rendering...');\n"
+            + "  log('rendering...');\n"
             + "  context.drawImage(img, 0, 0, 10, 10);\n"
-            + "  alert('...done');\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log('...done');\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -243,47 +300,20 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"
             + "<canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var img = document.getElementById('myImage');\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  var context = canvas.getContext('2d');\n"
-            + "  alert('rendering...');\n"
+            + "  log('rendering...');\n"
             + "  context.drawImage(img, 0, 0, 10, 10);\n"
-            + "  alert('...done');\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log('...done');\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
-    }
-
-    private void drawImage(final String fileName) throws Exception {
-        try (InputStream is = getClass().getResourceAsStream(fileName)) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = img.width;\n"
-            + "    canvas.height = img.height;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -305,7 +335,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     // java gives:   zlib: deflated, 32K window, maximum compression
     // https://bugs.openjdk.java.net/browse/JDK-8056093
     public void drawImage_1x1_32bits() throws Exception {
-        drawImage("1x1red_32_bit_depth.png");
+        drawImage("1x1red_32_bit_depth.png",
+                "canvas.width = img.width; canvas.height = img.height;\n",
+                "context.drawImage(img, 0, 0, canvas.width, canvas.height);\n");
     }
 
     /**
@@ -322,7 +354,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
                 + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
     public void drawImage_1x1_24bits() throws Exception {
-        drawImage("1x1red_24_bit_depth.png");
+        drawImage("1x1red_24_bit_depth.png",
+                "canvas.width = img.width; canvas.height = img.height;\n",
+                "context.drawImage(img, 0, 0, canvas.width, canvas.height);\n");
     }
 
     /**
@@ -342,32 +376,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
                 + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
     public void drawImage3Arguments() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("1x1red_32_bit_depth.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, 0, 0);\n");
     }
 
     /**
@@ -387,32 +398,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
                 + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
     public void drawImage3ArgumentsPlacement() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 1, 2);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("1x1red_32_bit_depth.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, 1, 2);\n");
     }
 
 
@@ -433,32 +421,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVBhXY/jP"
                 + "AET/Ff+DaRBoaGgAc+ACIPAfCkBsJrAIEDAyMgJJBgYAY/AUlK91orEAAAAASUVORK5CYII=")
     public void drawImage3ArgumentsPlacementNegative() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, -1, -2);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, -1, -2);\n");
     }
 
     /**
@@ -478,32 +443,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2BQ"
                 + "+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
     public void drawImage3ArgumentsImageTooLarge() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 2;\n"
-            + "    canvas.height = 5;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 2; canvas.height = 5;\n",
+                "context.drawImage(img, 0, 0);\n");
     }
 
     /**
@@ -523,32 +465,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
                 + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
     public void drawImage5Arguments() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("1x1red_32_bit_depth.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, 0, 0, img.width, img.height);\n");
     }
 
     /**
@@ -568,34 +487,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
                 + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsPlacement() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 1, 2, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("1x1red_32_bit_depth.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, 1, 2, img.width, img.height);\n");
     }
-
 
     /**
      * @throws Exception if the test fails
@@ -614,32 +509,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAfSURBVBhXY/h"
                 + "/g+E/AzIA8lAEmKA0HDAx/EdWwMAAADhoBtfglrXyAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsPlacementNegative() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, -3, -1, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, -3, -1, img.width, img.height);\n");
     }
 
     /**
@@ -659,32 +531,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhXY/z"
                 + "PwABEFAAGBgCDBQIA1ym4lAAAAABJRU5ErkJggg==")
     public void drawImageStretch() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("1x1red_32_bit_depth.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 4;\n"
-            + "    canvas.height = 4;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("1x1red_32_bit_depth.png",
+                "canvas.width = 4; canvas.height = 4;\n",
+                "context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, img.height);\n");
     }
 
     /**
@@ -704,32 +553,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2BQ"
                 + "+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsImageTooLarge() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 2;\n"
-            + "    canvas.height = 5;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, 4, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 2; canvas.height = 5;\n",
+                "context.drawImage(img, 0, 0, 4, 6);\n");
     }
 
     /**
@@ -753,32 +579,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "BDcIwDEV/OLUjIHFIL6gTcMXZh3HYx2GTTBL327SoUrlw4SmO/3esr+A3rmZyUdNRolxv3gAeIPkV5kbxcEeea3fPeZrfe1ybTP"
                 + "RsKkOU680fElvOeIm4xb1W5NZCO1xaE3cYv9t7V/YPPj/F6xcqU0spSOkY9leABXrPQu6AWg+SAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsStretchX() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 1, 1, 8, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 1, 1, 8, 6);\n");
     }
 
     /**
@@ -798,32 +601,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA1SURBVChTYyA"
                 + "JNAg3/P+fw/AfRkOFUQATmMydwHDgigOYZpgCFsEP/gNBQ0MDVhNHImBgAADHvxPYgDOEzgAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsShrinkY() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 1, 1, 4, 3);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 1, 1, 4, 3);\n");
     }
 
     /**
@@ -843,32 +623,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA0SURBVBhXY2R"
                 + "Q+//f4dsBBiYQYcB+gYFxP6fDfwH1DwwsDOYnGBgk/jEwOuyX/G9w7xcDAHxREIP4we06AAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsStretchImageTooLarge() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 2;\n"
-            + "    canvas.height = 5;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, 8, 12);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 2; canvas.height = 5;\n",
+                "context.drawImage(img, 0, 0, 8, 12);\n");
     }
 
     /**
@@ -889,32 +646,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QO3///8MDP/hNC4Akvx/A4ihNFQYC/ivCDEJRuMCIMmGhgaIifgUwgDQhWAA5WIAJigNBoyMjFAWOmBgAAAEXSqdGQ47LgAAAABJ"
                 + "RU5ErkJggg==")
     public void drawImage5ArgumentsNegativeWidth() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 4, 4, -4, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 4, 4, -4, 6);\n");
     }
 
 
@@ -936,32 +670,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "av///2dg+A+ncQGQ5P8bQAylocJYwH9FiEkwGhcASTY0NEBMxKcQBoAuBAMol4EJSmMFjIyMUNZQAAwMAKgVKp2FLYz1AAAAAElF"
                 + "TkSuQmCC")
     public void drawImage5ArgumentsNegativeHeight() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 4, 6, 4, -6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 4, 6, 4, -6);\n");
     }
 
     /**
@@ -983,32 +694,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "UPv//z8Dw384jQuAJP/fAGIoDRXGAv4rQkyC0bgASLKhoQFiIj6FMAB0IRhAuQxMUBorYGRkhLKoDxgYAAFaKp1TOe14AAAAAElF"
                 + "TkSuQmCC")
     public void drawImage9Arguments() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, img.width, img.height, 4, 2, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 0, 0, img.width, img.height, 4, 2, img.width, img.height);\n");
     }
 
     /**
@@ -1032,32 +720,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "wP6fAQimRfCBKIYFEa8ZwQw0wPSUQZcBhPVPsDPY7/gOFcYETB8EdK5+lTB5EHJW8WvCaXmoMBawIC5O+8r27Qk/zp8/9f/KFbAz"
                 + "cIL///87/Pv3b//9+/dxKmSC0mDw4MEDKGsoAgYGAFZxKhyfkxO8AAAAAElFTkSuQmCC")
     public void drawImage9ArgumentsCrop() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 1, 2, 2, 4, 0, 0, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 1, 2, 2, 4, 0, 0, img.width, img.height);\n");
     }
 
     /**
@@ -1079,32 +744,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPklEQVR42mNgGAUwoPb/f4LE/P//GRj+41WXJTb1/yL92P//Iwko"
             + "PGDP8f9GCuv//4sJKGT4r/g/Yb4oitUApWwZ6B07eGEAAAAASUVORK5CYII=")
     public void drawImage9ArgumentsCropNegativStart() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, -1, -2, 3, 5, 4, 4, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, -1, -2, 3, 5, 4, 4, img.width, img.height);\n");
     }
 
     /**
@@ -1122,32 +764,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "data:image/png;base64,"
             + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVR42mNgGAWDEwAAAZoAAQDqGN4AAAAASUVORK5CYII=")
     public void drawImage9ArgumentsCropNegativWidth() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, -3, 5, 4, 4, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 0, 0, -3, 5, 4, 4, img.width, img.height);\n");
     }
 
     /**
@@ -1167,32 +786,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAvSURBVChTY5iv"
                 + "mfAfhBkIACaGoDUMYEwIHHBw2P/fwYGgiWAwf/584hSOMMDAAAB1Kw2mrjRWYgAAAABJRU5ErkJggg==")
     public void drawImage9ArgumentsStretch() throws Exception {
-        try (InputStream is = getClass().getResourceAsStream("4x6.png")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
-            getMockWebConnection().setDefaultResponse("Test");
-        }
-
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    var canvas = document.createElement('canvas');\n"
-            + "    canvas.width = 10;\n"
-            + "    canvas.height = 10;\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.drawImage(img, 0, 0, img.width, img.height, 0, 0, 2, 4);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        drawImage("4x6.png",
+                "canvas.width = 10; canvas.height = 10;\n",
+                "context.drawImage(img, 0, 0, img.width, img.height, 0, 0, 2, 4);\n");
     }
 
     /**
@@ -1216,6 +812,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void drawImageDataUrlPng() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
             + "    var canvas = document.createElement('canvas');\n"
@@ -1224,7 +821,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    if (canvas.getContext) {\n"
             + "      var context = canvas.getContext('2d');\n"
             + "      context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
-            + "      alert(canvas.toDataURL());\n"
+            + "      log(canvas.toDataURL());\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -1236,9 +833,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                         + "REFUGNO9zL0NglAAxPEfdLTs4BZM4DIO4C7OwQg2JoQ9LE1exdlYvBBeZ7jq"
                         + "ch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI97CER3N0"
                         + "vr4MkhoXe0rZigAAAABJRU5ErkJggg==' alt='red dot' />\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1267,6 +865,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void drawImageDataUrlSvg() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
             + "    var canvas = document.createElement('canvas');\n"
@@ -1275,7 +874,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    if (canvas.getContext) {\n"
             + "      var context = canvas.getContext('2d');\n"
             + "      context.drawImage(img, 0, 0, img.width, img.height);\n"
-            + "      alert(canvas.toDataURL());\n"
+            + "      log(canvas.toDataURL());\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -1285,9 +884,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                             + "overflow=\"hidden\" width=\"10\" height=\"10\">"
                     + "  <circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"
                     + "</svg>' />\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1300,29 +900,55 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "      function test() {\n"
             + "        var canvas = document.getElementById('myCanvas');\n"
             + "        if (canvas.getContext){\n"
             + "          ctx = canvas.getContext('2d');\n"
             + "          try {\n"
-            + "            alert(ctx.measureText());\n"
-            + "          } catch(e) { alert('exception'); }\n"
+            + "            log(ctx.measureText());\n"
+            + "          } catch(e) { log('exception'); }\n"
 
             + "          var metrics = ctx.measureText('');\n"
-            + "          alert(metrics.width);\n"
+            + "          log(metrics.width);\n"
 
             + "          metrics = ctx.measureText('a');\n"
-            + "          alert(metrics.width > 5);\n"
+            + "          log(metrics.width > 5);\n"
 
             + "          metrics = ctx.measureText('abc');\n"
-            + "          alert(metrics.width > 10);\n"
+            + "          log(metrics.width > 10);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "  <body onload='test()'>\n"
+            + "    <canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
+            + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    private void draw(final String canvasSetup, final String drawJS) throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + drawJS
+            + "      log(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + canvasSetup
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1352,24 +978,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "8QNbMyzbKSS50F7CMo+Ud+piklk5uGZJZkpsl61QSe0e/4QrDTvGT8vpEEbtRdiL2JSvILvtV2sIBrA"
                 + "O/RnFHiychhBBCCCGEEEIIIYQQ4l9Ikiccki+D/HzKtwAAAABJRU5ErkJggg==")
     public void fillText() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        var canvas = document.getElementById('myCanvas');\n"
-            + "        if (canvas.getContext){\n"
-            + "          var context = canvas.getContext('2d');\n"
-            + "          context.fillText('HtmlUnit', 3, 7);\n"
-            + "          alert(canvas.toDataURL());\n"
-            + "        }\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'><canvas id='myCanvas' width='42' height='42'></canvas></body>\n"
-            + "</html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='42' height='42'>\n",
+                "context.fillText('HtmlUnit', 3, 7);\n");
     }
 
     /**
@@ -1380,17 +990,22 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void createLinearGradient() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  var ctx = canvas.getContext('2d');\n"
             + "  var gradient = ctx.createLinearGradient(0, 0, 200, 0);\n"
-            + "  alert(gradient);\n"
+            + "  log(gradient);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "<body onload='test()'>\n"
+            + "  <canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1401,17 +1016,22 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void createRadialGradient() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  var ctx = canvas.getContext('2d');\n"
             + "  var gradient = ctx.createRadialGradient(100, 100, 100, 100, 100, 0);\n"
-            + "  alert(gradient);\n"
+            + "  log(gradient);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "<body onload='test()'>\n"
+            + "  <canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1425,26 +1045,31 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void globalAlpha() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  try {\n"
             + "    var ctx = canvas.getContext('2d');\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = 0.5;\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = 0;\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = 0.7;\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = null;\n"
-            + "    alert(ctx.globalAlpha);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(ctx.globalAlpha);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "<body onload='test()'>\n"
+            + "  <canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1455,25 +1080,30 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void globalAlphaInvalid() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
             + "  try {\n"
             + "    var ctx = canvas.getContext('2d');\n"
             + "    ctx.globalAlpha = 0.5;\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = -1;\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = 'test';\n"
-            + "    alert(ctx.globalAlpha);\n"
+            + "    log(ctx.globalAlpha);\n"
             + "    ctx.globalAlpha = undefined;\n"
-            + "    alert(ctx.globalAlpha);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(ctx.globalAlpha);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "<body onload='test()'>\n"
+            + "  <canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1484,22 +1114,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAHklEQVR42mNgGErgPxUwhoGUOmjUQBoYSNVY"
                 + "pgoAANSxK9UjCpiOAAAAAElFTkSuQmCC")
     public void strokeRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.strokeRect(2, 2, 16, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.strokeRect(2, 2, 16, 6);\n");
     }
 
     /**
@@ -1510,22 +1126,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAFklEQVR42mNgGErgP4V41MChYODg"
                 + "BADEpF+hx8ArfgAAAABJRU5ErkJggg==")
     public void fillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillRect(2, 2, 16, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.fillRect(2, 2, 16, 6);\n");
     }
 
     /**
@@ -1536,22 +1138,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAHklEQVR42mNggID/VMJwMGrgqIGjBo4aO"
                 + "GrgiDMQAMu0ZqjgcrwWAAAAAElFTkSuQmCC")
     public void fillRectWidthHeight() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillRect(1, 0, 18, 20);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillRect(1, 0, 18, 20);\n");
     }
 
     /**
@@ -1562,23 +1150,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR"
                 + "42mNgGErgP4V41MChYOAoGAWjYOgCAGnPX6EKEWk8AAAAAElFTkSuQmCC")
     public void fillRectRotate() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillRect(2, 2, 16, 6);\n"
-            + "      context.rotate(.5);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillRect(2, 2, 16, 6); context.rotate(.5);\n");
     }
 
     /**
@@ -1590,23 +1163,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "TonBLkiG/UczeDIQC5Bq4HEcBsLwayBOAWIWYgyLIWAYMn5MjME8QNwAxJ9JMHg5MS6VAeJuIg12ISU8QQbPh0YINsO2kxvz"
                 + "Bjgiy4LS9OmBZPB6auakACBWGC2daAsAdH9H/STLcEwAAAAASUVORK5CYII=")
     public void rotateFillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.rotate(.5);\n"
-            + "      context.fillRect(6, 2, 12, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.rotate(.5); context.fillRect(6, 2, 12, 6);\n");
     }
 
     /**
@@ -1617,23 +1175,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR"
                 + "42mNgGErgP4V41MChYOAoGAWjYOgCAGnPX6EKEWk8AAAAAElFTkSuQmCC")
     public void fillRectTranslate() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillRect(2, 2, 16, 6);\n"
-            + "      context.translate(3, 4);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillRect(2, 2, 16, 6); context.translate(3, 4);\n");
     }
 
     /**
@@ -1644,23 +1187,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR42mNg"
                 + "GAUjF/ynAI8aOFQMHAWjgJ4AABYtWaeMf5H/AAAAAElFTkSuQmCC")
     public void translateFillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.translate(3, 4);\n"
-            + "      context.fillRect(2, 2, 16, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.translate(3, 4); context.fillRect(2, 2, 16, 6);\n");
     }
 
     /**
@@ -1673,24 +1201,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "7CcQjvjwZFxhyQINzxQgng/E14H4OxEG+pCaAhyg4TwfGhnoBkpQmmZ5gNgFiCuAePrQyr8APsZfqrO3m6kAAAAASU"
                 + "VORK5CYII=")
     public void rotateTranslateFillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.rotate(0.2);\n"
-            + "      context.translate(0, 4);\n"
-            + "      context.fillRect(4, 4, 16, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.rotate(0.2); context.translate(0, 4); context.fillRect(4, 4, 16, 6);\n");
     }
 
     /**
@@ -1703,24 +1215,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "s2AzdDsQ/ybTUAt84akDxDnQcDpNpCUVpKQCASA2IGDJYUrTrgA0GYEsWQ3E54FYZAQWCgBOMlmQm3"
                 + "NMhgAAAABJRU5ErkJggg==")
     public void transformTranslateFillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.setTransform(1, .2, .3, 1, 0, 0);\n"
-            + "      context.translate(-5, 4);\n"
-            + "      context.fillRect(4, 4, 16, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.setTransform(1, .2, .3, 1, 0, 0); context.translate(-5, 4); context.fillRect(4, 4, 16, 6);\n");
     }
 
     /**
@@ -1731,23 +1227,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQ4T2NkoDJgpLJ5DM"
                 + "gG/qfQcLBZdDEQVzAQ8gFOF44gAymMZIh2qqdDAD9SCgvGd82WAAAAAElFTkSuQmCC")
     public void clearRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillRect(2, 2, 16, 6);\n"
-            + "      context.clearRect(4, 4, 6, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.fillRect(2, 2, 16, 6); context.clearRect(4, 4, 6, 6);\n");
     }
 
     /**
@@ -1759,26 +1240,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "SHIeMeBkZYAFKSlOBhiGwgtpgh1hKiDSTWEpRYJuRKfGkK5oMhZiC6l0gJAqxeJibf4bMEZChVsh7M"
                 + "EqoZiOwzqriQpgYCAH2SSD3nlbP6AAAAAElFTkSuQmCC")
     public void transformTranslateClearRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillStyle = '#ff4400';\n"
-            + "      context.fillRect(0, 0, 20, 20);\n"
-            + "      context.setTransform(1, .2, .3, 1, 0, 0);\n"
-            + "      context.translate(-5, 4);\n"
-            + "      context.clearRect(4, 4, 16, 6);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillStyle = '#ff4400'; context.fillRect(0, 0, 20, 20); "
+                + "context.setTransform(1, .2, .3, 1, 0, 0); "
+                + "context.translate(-5, 4); context.clearRect(4, 4, 16, 6);\n");
     }
 
     /**
@@ -2832,6 +2297,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    var canvas = document.getElementById('myCanvas');\n"
             + "    if (canvas.getContext) {\n"
             + "      var context = canvas.getContext('2d');\n"
@@ -2852,15 +2318,16 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "      context.closePath();\n"
             + "      context.fill();\n"
 
-            + "      alert(canvas.toDataURL());\n"
+            + "      log(canvas.toDataURL());\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -2873,6 +2340,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void saveRestore() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var canvas = document.getElementById('myCanvas');\n"
             + "    if (canvas.getContext) {\n"
@@ -2898,14 +2366,15 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "      context.restore();\n"
             + "      context.fillRect(16, 16, 4, 4);\n"
 
-            + "      alert(canvas.toDataURL());\n"
+            + "      log(canvas.toDataURL());\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }
