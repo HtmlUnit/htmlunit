@@ -53,6 +53,20 @@
             </answer>
         </faq>
 
+        <faq id="javaScriptExceptions">
+            <question>
+                When launching my WebClient, I am ending with an js error. But when running on browser,
+                we hit the error but keep on. In HtmlUnit, this is where things come to a halt.
+            </question>
+            <answer>
+                <p>
+                Because HtmlUnit was designed as testing tool the initial WebClient setup forces this behavior
+                (in contrast to real browsers trying ot eat each and every page/javascript code). You can change this by
+            <source><![CDATA[webClient.getOptions().setThrowExceptionOnScriptError(false);]]></source>
+                </p>
+            </answer>
+        </faq>
+
         <faq id="AJAXDoesNotWork">
             <question>
                 Nothing happens when using HtmlUnit with AJAX, although page works correctly in browsers. What's wrong?
