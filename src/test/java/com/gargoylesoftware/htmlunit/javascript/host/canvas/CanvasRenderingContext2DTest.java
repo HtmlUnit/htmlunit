@@ -1255,24 +1255,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Zhr4H4MBBXALEBNQzlAeIQIJ4NxI+heDZUTIAaFugAcQkQ7wbi70Pa9Z+hFlIN8DAM"
                 + "KQAA8ckQClhSuMUAAAAASUVORK5CYII=")
     public void moveToLineToStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(2, 2);\n"
-            + "      context.lineTo(16, 6);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2, 2); context.lineTo(16, 6); context.stroke();\n");
     }
 
     /**
@@ -1285,24 +1269,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "7En4F4PRAHUMvlIEsSgPg6EN8G4hxqhjUojPcD8WMgTqFmeJtAgwNkuAI1DQZ5/"
                 + "z4QN1PTUFAYr6aFa0OgkUZVIED1UhoAGzcax1ioxw8AAAAASUVORK5CYII=")
     public void moveToBezierCurveToStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(2, 2);\n"
-            + "      context.bezierCurveTo(2, 17, 1, 4, 19, 17);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2, 2); context.bezierCurveTo(2, 17, 1, 4, 19, 17); context.stroke();\n");
     }
 
     /**
@@ -1316,24 +1284,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "ajDVgAY0U1DVlYepHes1QDybmgbaAPFpahqoAM1FVAM80BKLquD/4C+lAU3wGvNN"
             + "UrLUAAAAAElFTkSuQmCC")
     public void moveToQuadraticCurveToStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(2, 2);\n"
-            + "      context.quadraticCurveTo(19, 4, 19, 17);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2, 2); context.quadraticCurveTo(19, 4, 19, 17); context.stroke();\n");
     }
 
     /**
@@ -1345,25 +1297,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "NgGAWjYHAAByBuoCIGE/+piIeAgVQPw1EwCkgEAB1tTchSTfsUAAAAAElF"
             + "TkSuQmCC")
     public void lineWidthMoveToLineToStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.lineWidth = 4;\n"
-            + "      context.moveTo(2, 10);\n"
-            + "      context.lineTo(18, 10);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.lineWidth = 4; context.moveTo(2, 10); context.lineTo(18, 10); context.stroke();\n");
     }
 
     /**
@@ -1375,23 +1310,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "aslkqIHYMMySElIMdMBjIDJWIcXQx0QYmEOKgdOJMHA/KQYGEOltGWIN5AHizUD8nICBGeTEugzUxc1YLFlPrbQK"
             + "s6RitCwYBVQAABQ1QYDFZuLyAAAAAElFTkSuQmCC")
     public void setTransformFillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.setTransform(1, .2, .3, 1, 0, 0);\n"
-            + "      context.fillRect(3, 3, 10, 7);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.setTransform(1, .2, .3, 1, 0, 0); context.fillRect(3, 3, 10, 7);\n");
     }
 
     /**
@@ -1403,23 +1323,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "L/UHo1EFdQaslkqIHYMMySElIMdMBjIDJWIcXQx0QYmEOKgdOJMHA/KQYGEOltGWIN5AHizUD8nICB"
             + "GeTEugzUxc1YLFlPrbQKs6RitCwYBVQAABQ1QYDFZuLyAAAAAElFTkSuQmCC")
     public void transformFillRect() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.transform(1, .2, .3, 1, 0, 0);\n"
-            + "      context.fillRect(3, 3, 10, 7);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.transform(1, .2, .3, 1, 0, 0); context.fillRect(3, 3, 10, 7);\n");
     }
 
     /**
@@ -1430,25 +1335,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGUlEQVR42m"
             + "NgGAWjYBSQBv6TiEfBKBg5AABEEAv1yW5vkQAAAABJRU5ErkJggg==")
     public void moveToLineToTransformStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(2, 10);\n"
-            + "      context.lineTo(13, 10);\n"
-            + "      context.transform(1, .2, .3, 1, 0, 0);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2, 10); context.lineTo(13, 10);"
+                + "context.transform(1, .2, .3, 1, 0, 0); context.stroke();\n");
     }
 
     /**
@@ -1460,25 +1349,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "Dmob9h6IbwPxaiCuAeIAIFag1FADII4B4n4g3g3Er6EWHQbiyUCcAcQWQMxDiUUSQOwB"
             + "xCVAvBiILwPxZ0oNRQc8o0lupAEAZ+MMgTDcUPEAAAAASUVORK5CYII=")
     public void transformMoveToLineToStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.transform(1, .2, .3, 1, 0, 0);\n"
-            + "      context.moveTo(2, 10);\n"
-            + "      context.lineTo(13, 10);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.transform(1, .2, .3, 1, 0, 0); context.moveTo(2, 10);"
+                + "context.lineTo(13, 10); context.stroke();\n");
     }
 
     /**
@@ -1489,25 +1362,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGUlEQVR42mNgGAW"
             + "jYBSQBv5TAY+CUTA8AQC0ZBDwpDXmmwAAAABJRU5ErkJggg==")
     public void moveToLineToRotateStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(2, 10);\n"
-            + "      context.lineTo(18, 10);\n"
-            + "      context.rotate(90);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2, 10); context.lineTo(18, 10); context.rotate(90); context.stroke();\n");
     }
 
     /**
@@ -1520,25 +1376,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "CVDXngdiD2q5FpS0CqDhux+ITahlMCgFNENTxGZoCqEKAKXZyVAXUzVj8DCMglEwEgAA1S0T6X"
             + "hdMmMAAAAASUVORK5CYII=")
     public void rotateMoveToLineToStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.rotate(.5);\n"
-            + "      context.moveTo(1, 1);\n"
-            + "      context.lineTo(18, 1);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.rotate(.5); context.moveTo(1, 1); context.lineTo(18, 1); context.stroke();\n");
     }
 
     /**
@@ -1549,23 +1388,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR42mNgGErgP"
             + "4V41MChYOAoGAWjYOgCAGnPX6EKEWk8AAAAAElFTkSuQmCC")
     public void rectFill() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.rect(2, 2, 16, 6);\n"
-            + "      context.fill();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.rect(2, 2, 16, 6); context.fill();\n");
     }
 
     /**
@@ -1579,27 +1403,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "dTFGaSmSVzptACao+aTmmuGKQAA9NQeZdHpsYYAAAAASUVORK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      if (context.ellipse) {\n"
-            + "        context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI);\n"
-            + "        context.stroke();\n"
-            + "        alert(canvas.toDataURL());\n"
-            + "      } else {\n"
-            + "        alert('context.ellipse not supported');\n"
-            + "      }\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
+                 + "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.stroke();\n");
     }
 
     /**
@@ -1613,28 +1419,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "RygAA45xHqtsvRxIAAAAASUVORK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseFill() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      if (context.ellipse) {\n"
-            + "        context.fillStyle = 'yellow';\n"
-            + "        context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI);\n"
-            + "        context.fill();\n"
-            + "        alert(canvas.toDataURL());\n"
-            + "      } else {\n"
-            + "        alert('context.ellipse not supported');\n"
-            + "      }\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
+                + "context.fillStyle = 'yellow';"
+                + "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.fill();\n");
     }
 
     /**
@@ -1646,23 +1434,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "NxBzUMCwBiB8DsQa1XAcyzINahikA8XMgZqGWgSZQF+IDv0mN2c9ALIJDXgWIT5PqynYgng7EAl"
             + "A+KKZ1oOIg17uQaiALVPNrqAHfgfg2EC+GGkw24IBGEs9oHh+iAAAZGRFncAWu2AAAAABJRU5ErkJggg==")
     public void arcStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.arc(10, 10, 4, 0, 4.3);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.arc(10, 10, 4, 0, 4.3); context.stroke();\n");
     }
 
     /**
@@ -1674,24 +1447,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "iBiC+DOXfBuJ2qDhZBh4G4s1AbAI1RAeIVwPxeXIM/Q81DBtYDXUpyQaa4JDTgHqfZAMFcMhxkBNpNHEh1cPwNF"
             + "Isc0BdBjLsOqmxDABQejjNvtDkBwAAAABJRU5ErkJggg==")
     public void arcCircleStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.arc(4, 16, 4, 0, 2 * Math.PI);\n"
-            + "      context.stroke();\n"
-            + "      context.strokeRect(0, 0, 20, 20);\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.arc(4, 16, 4, 0, 2 * Math.PI); context.stroke(); context.strokeRect(0, 0, 20, 20);\n");
     }
 
     /**
@@ -1703,23 +1460,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "ALUGIYCxC/BuLdQNwOxN1AfB+IfSgxlAONbwDEj4FYgprBAPL+ZGoaqADE76kdWf9H0+soGDEAADmG"
             + "CbQK8bPUAAAAAElFTkSuQmCC")
     public void arcAnticlockwiseStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.arc(10, 10, 4, 0, 4.3, true);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.arc(10, 10, 4, 0, 4.3, true); context.stroke();\n");
     }
 
     /**
@@ -1732,23 +1474,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "IccBlR9YF1I9DEGxeBopljmgLgMZdp2SpNMANQCWDrvJNWwUDBAAAFFYGYXPy8e+AAAAAElF"
             + "TkSuQmCC")
     public void arcCircleAnticlockwiseStroke() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.arc(10, 10, 4, 0, 2 * Math.PI, true);\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.arc(10, 10, 4, 0, 2 * Math.PI, true); context.stroke();\n");
     }
 
     /**
@@ -1760,25 +1487,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "CSWGfQbi/2j4N9BQC3IM3I3FMBg+TI6Bz/EY+H5QGEh1L1M5UhCGglz6GppsDpNv2CgYPgAA3MZQoURRzTMAAAAA"
             + "SUVORK5CYII=")
     public void arcFillPath() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillStyle = 'green';\n"
-            + "      context.beginPath();\n"
-            + "      context.arc(10, 10, 4, 0, 2 * Math.PI);\n"
-            + "      context.fill();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillStyle = 'green'; context.beginPath();"
+                + "context.arc(10, 10, 4, 0, 2 * Math.PI); context.fill();\n");
     }
 
     /**
@@ -1791,25 +1502,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "exGfidAgP/YzOQ3PDbDMQ22Ay8TIIhIN9Mxx4ZpCWZ50BcA8QixGQ1fMkG5PoUcMInCTQwrMaSE1zw5wbC+fg01"
             + "PsaDKNgQAAAd7buKpKXkaMAAAAASUVORK5CYII=")
     public void arcFillPathAngle() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.fillStyle = 'green';\n"
-            + "      context.beginPath();\n"
-            + "      context.arc(10, 10, 8, 2.3, 2 * Math.PI);\n"
-            + "      context.fill();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillStyle = 'green'; context.beginPath();"
+                + "context.arc(10, 10, 8, 2.3, 2 * Math.PI); context.fill();\n");
     }
 
     /**
@@ -1821,26 +1516,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "IMt1+FxClutwuYYi12FzEUWuQ3elBzVch+zK/9RwHbIr/1PLdTBgMzzKPwBs1inGPcAUbg"
             + "AAAABJRU5ErkJggg==")
     public void closePath() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(4,4);\n"
-            + "      context.lineTo(10,16);\n"
-            + "      context.lineTo(16,4);\n"
-            + "      context.closePath();\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(4,4); context.lineTo(10,16);"
+                + "context.lineTo(16,4); context.closePath(); context.stroke();\n");
     }
 
     /**
@@ -1850,23 +1528,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
             + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
     public void closePathNoSubpath() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.closePath();\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.closePath();context.stroke();\n");
     }
 
     /**
@@ -1876,24 +1539,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
             + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
     public void closePathPointOnly() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(4,4);\n"
-            + "      context.closePath();\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(4,4); context.closePath(); context.stroke();\n");
     }
 
     /**
@@ -1903,24 +1550,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
             + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
     public void closePathTwice() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.closePath();\n"
-            + "      context.closePath();\n"
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.closePath(); context.closePath(); context.stroke();\n");
     }
 
     /**
@@ -1932,31 +1563,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "8hkIuZIcF+N0pQcO2wnJ43Tlfzy2E5LH6sr/eGwnJI8V2FAoPwpGwSjACwDUtCTLu8r4"
             + "+AAAAABJRU5ErkJggg==")
     public void closePathClosesOnlyLastSubpath() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + "      context.moveTo(2,2);\n"
-            + "      context.lineTo(5,8);\n"
-            + "      context.lineTo(8,2);\n"
-
-            + "      context.moveTo(10,2);\n"
-            + "      context.lineTo(13,8);\n"
-            + "      context.lineTo(16,2);\n"
-            + "      context.closePath();\n"
-
-            + "      context.stroke();\n"
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2,2); context.lineTo(5,8); context.lineTo(8,2);"
+                + "context.moveTo(10,2); context.lineTo(13,8); context.lineTo(16,2); context.closePath();"
+                + "context.stroke();\n");
     }
 
     /**
@@ -1968,38 +1578,21 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "g9EyAADAuXABKJOUSgAAAABJRU5ErkJggg==",
             IE = "no ctor")
     public void putImageDataInside() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
+                + "      var arr = new Uint8ClampedArray(64);\n"
+                + "      for (var i = 0; i < 32; i += 4) {\n"
+                + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
+                + "      }\n"
+                + "      for (var i = 32; i < 64; i += 4) {\n"
+                + "        arr[i + 0] = 190; arr[i + 1] = 0; arr[i + 2] = 3; arr[i + 3] = 255;\n"
+                + "      }\n"
 
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-
-            + "      var arr = new Uint8ClampedArray(64);\n"
-            + "      for (var i = 0; i < 32; i += 4) {\n"
-            + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
-            + "      }\n"
-            + "      for (var i = 32; i < 64; i += 4) {\n"
-            + "        arr[i + 0] = 190; arr[i + 1] = 0; arr[i + 2] = 3; arr[i + 3] = 255;\n"
-            + "      }\n"
-
-            + "      var imageData = new ImageData(arr, 4, 4);\n"
-            + "      context.putImageData(imageData, 0, 0);\n"
-            + "      context.putImageData(imageData, 2, 4);\n"
-            + "      context.putImageData(imageData, 16, 0);\n"
-            + "      context.putImageData(imageData, 16, 16);\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+                + "      var imageData = new ImageData(arr, 4, 4);\n"
+                + "      context.putImageData(imageData, 0, 0);\n"
+                + "      context.putImageData(imageData, 2, 4);\n"
+                + "      context.putImageData(imageData, 16, 0);\n"
+                + "      context.putImageData(imageData, 16, 16);\n");
     }
 
     /**
@@ -2011,38 +1604,21 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "pGAV0A1UopNAMBDtE/AR/N0RYAAAAASUVORK5CYII=",
             IE = "no ctor")
     public void putImageDataOutside() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
+                + "      var arr = new Uint8ClampedArray(64);\n"
+                + "      for (var i = 0; i < 32; i += 4) {\n"
+                + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
+                + "      }\n"
+                + "      for (var i = 32; i < 64; i += 4) {\n"
+                + "        arr[i + 0] = 190; arr[i + 1] = 0; arr[i + 2] = 3; arr[i + 3] = 255;\n"
+                + "      }\n"
 
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-
-            + "      var arr = new Uint8ClampedArray(64);\n"
-            + "      for (var i = 0; i < 32; i += 4) {\n"
-            + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
-            + "      }\n"
-            + "      for (var i = 32; i < 64; i += 4) {\n"
-            + "        arr[i + 0] = 190; arr[i + 1] = 0; arr[i + 2] = 3; arr[i + 3] = 255;\n"
-            + "      }\n"
-
-            + "      var imageData = new ImageData(arr, 4, 4);\n"
-            + "      context.putImageData(imageData, -2, 0);\n"
-            + "      context.putImageData(imageData, 2, -2);\n"
-            + "      context.putImageData(imageData, 2, 4);\n"
-            + "      context.putImageData(imageData, 18, 18);\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+                + "      var imageData = new ImageData(arr, 4, 4);\n"
+                + "      context.putImageData(imageData, -2, 0);\n"
+                + "      context.putImageData(imageData, 2, -2);\n"
+                + "      context.putImageData(imageData, 2, 4);\n"
+                + "      context.putImageData(imageData, 18, 18);\n");
     }
 
     /**
@@ -2054,38 +1630,21 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "VUN3AUjIJRwMAAAAneFQEGPcORAAAAAElFTkSuQmCC",
             IE = "no ctor")
     public void putImageDataDirty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
+                + "      var arr = new Uint8ClampedArray(64);\n"
+                + "      for (var i = 0; i < 32; i += 4) {\n"
+                + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
+                + "      }\n"
+                + "      for (var i = 32; i < 64; i += 4) {\n"
+                + "        arr[i + 0] = 190; arr[i + 1] = 0; arr[i + 2] = 3; arr[i + 3] = 255;\n"
+                + "      }\n"
 
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-
-            + "      var arr = new Uint8ClampedArray(64);\n"
-            + "      for (var i = 0; i < 32; i += 4) {\n"
-            + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
-            + "      }\n"
-            + "      for (var i = 32; i < 64; i += 4) {\n"
-            + "        arr[i + 0] = 190; arr[i + 1] = 0; arr[i + 2] = 3; arr[i + 3] = 255;\n"
-            + "      }\n"
-
-            + "      var imageData = new ImageData(arr, 4, 4);\n"
-            + "      context.putImageData(imageData, 0, 0, 1, 2, 1, 1);\n"
-            + "      context.putImageData(imageData, 4, 4, 0, 2, 2, 2);\n"
-            + "      context.putImageData(imageData, 8, 8, 0, 0, 2, 2);\n"
-            + "      context.putImageData(imageData, 18, 0, 1, 1, 2, 3);\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+                + "      var imageData = new ImageData(arr, 4, 4);\n"
+                + "      context.putImageData(imageData, 0, 0, 1, 2, 1, 1);\n"
+                + "      context.putImageData(imageData, 4, 4, 0, 2, 2, 2);\n"
+                + "      context.putImageData(imageData, 8, 8, 0, 0, 2, 2);\n"
+                + "      context.putImageData(imageData, 18, 0, 1, 1, 2, 3);\n");
     }
 
     /**
@@ -2099,29 +1658,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "5GpaXiXHZfUJ5Gdmlr4F4NY4IWAy1tASXAQBr/Z3NB0Q1uQAAAABJRU5ErkJggg==",
             IE = "no ctor")
     public void clip() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
-
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-
-            + "      context.arc(8, 12, 8, 0, 2 * Math.PI);\n"
-            + "      context.stroke();\n"
-            + "      context.clip();\n"
-            + "      context.fillRect(4, 9, 19, 14);\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
+                + "context.moveTo(2,2); context.lineTo(5,8); context.lineTo(8,2);"
+                + "context.arc(8, 12, 8, 0, 2 * Math.PI); context.stroke();"
+                + "context.clip(); context.fillRect(4, 9, 19, 14);\n");
     }
 
     /**
@@ -2134,33 +1675,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "lkGDh9wJINlQsHUJgCg4Bh2AEAu6/n02vT9rUAAAAASUVORK5CYII=",
             IE = "no ctor")
     public void clipWindingEvenOdd() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
-
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-
-            + "      context.rect(6, 2, 2, 16);\n"
-            + "      context.rect(2, 10, 16, 5);\n"
-            + "      context.clip('evenodd');\n"
-
-            + "      context.beginPath();\n"
-            + "      context.arc(10, 10, 8, 0, 2 * Math.PI);\n"
-            + "      context.fillStyle = 'deeppink';\n"
-            + "      context.fill();\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
+                + "context.rect(6, 2, 2, 16); context.rect(2, 10, 16, 5); context.clip('evenodd');"
+                + "context.beginPath(); context.arc(10, 10, 8, 0, 2 * Math.PI);"
+                + "context.fillStyle = 'deeppink';context.fill();\n");
     }
 
     /**
@@ -2176,39 +1695,22 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "kSuQmCC",
             IE = "no ctor")
     public void fillTextAndTransform() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (typeof ImageData != 'function') { alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"
+                + "context.moveTo(0, 0);\n"
+                + "      context.lineTo(20, 0);\n"
+                + "      context.moveTo(2, 0);\n"
+                + "      context.lineTo(2, 20);\n"
+                + "      context.moveTo(0, 10);\n"
+                + "      context.lineTo(20, 10);\n"
+                + "      context.stroke();\n"
 
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
+                + "      context.fillStyle = 'blue';\n"
+                + "      context.fillText('p', 2, 10);\n"
 
-            + "      context.moveTo(0, 0);\n"
-            + "      context.lineTo(20, 0);\n"
-            + "      context.moveTo(2, 0);\n"
-            + "      context.lineTo(2, 20);\n"
-            + "      context.moveTo(0, 10);\n"
-            + "      context.lineTo(20, 10);\n"
-            + "      context.stroke();\n"
-
-            + "      context.fillStyle = 'blue';\n"
-            + "      context.fillText('p', 2, 10);\n"
-
-            + "      context.fillStyle = 'red';\n"
-            + "      context.setTransform(1.0, 0.0, -0.0, 1.0, 11.0, 10.0);\n"
-            + "      context.fillText('n', 0, 0);\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+                + "      context.fillStyle = 'red';\n"
+                + "      context.setTransform(1.0, 0.0, -0.0, 1.0, 11.0, 10.0);\n"
+                + "      context.fillText('n', 0, 0);\n");
     }
 
     /**
@@ -2220,28 +1722,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "12IKLxQmkg03BCPq39KTLyKWZmBbkoiKnMqm1MXUWZneFg6k6UOVkhTN2OMpVFx9StlLk5R0zdTBnj"
             + "aWDq3sqYrw1T92109w9/gbiYNMcAAAAASUVORK5CYII=")
     public void pathFill() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-
-            + "      context.moveTo(2, 2);\n"
-            + "      context.lineTo(10, 18);\n"
-            + "      context.lineTo(18, 2);\n"
-            + "      context.closePath();\n"
-            + "      context.fill();\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.moveTo(2, 2);\n"
+                + "      context.lineTo(10, 18);\n"
+                + "      context.lineTo(18, 2);\n"
+                + "      context.closePath();\n"
+                + "      context.fill();\n");
     }
 
     /**
@@ -2254,35 +1740,19 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "e3sHtZJPDZILLlMj+WgguaCGEq8SE6YR1Cw4VlOrJKqhhldxhekQBwCxR4E7tKSxGgAAAA"
             + "BJRU5ErkJggg==")
     public void pathFillTransform() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.moveTo(2, 2);\n"
+                + "      context.lineTo(6, 14);\n"
+                + "      context.lineTo(14, 2);\n"
+                + "      context.closePath();\n"
 
-            + "      context.moveTo(2, 2);\n"
-            + "      context.lineTo(6, 14);\n"
-            + "      context.lineTo(14, 2);\n"
-            + "      context.closePath();\n"
+                + "      context.setTransform(1.0, 0.0, 0.0, 1.0, 4.0, 4.0);\n"
+                + "      context.moveTo(2, 2);\n"
+                + "      context.lineTo(6, 14);\n"
+                + "      context.lineTo(14, 2);\n"
+                + "      context.closePath();\n"
 
-            + "      context.setTransform(1.0, 0.0, 0.0, 1.0, 4.0, 4.0);\n"
-            + "      context.moveTo(2, 2);\n"
-            + "      context.lineTo(6, 14);\n"
-            + "      context.lineTo(14, 2);\n"
-            + "      context.closePath();\n"
-
-            + "      context.fill();\n"
-
-            + "      alert(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+                + "      context.fill();\n");
     }
 
     /**
@@ -2294,40 +1764,22 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "H8pla/KP/eEBRF+aZFEwghQyWJYtB1IYwMK4ky2z9/iwrVkVjwzZjJdlHdxpYQe8MO5ky9Rrs5PasE+iy0Ot2eUD22Japdbs"
             + "cgJbZg+1GVsOHmqvNK1Se4Xspr6wI/1ibuTa0+hbsogUAAAAAElFTkSuQmCC")
     public void pathFillTransform2() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + LOG_TEXTAREA_FUNCTION
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.beginPath();\n"
+                + "      context.moveTo(2, 2);\n"
+                + "      context.lineTo(6, 14);\n"
+                + "      context.lineTo(14, 2);\n"
+                + "      context.closePath();\n"
+                + "      context.fill();\n"
 
-            + "      context.beginPath();\n"
-            + "      context.moveTo(2, 2);\n"
-            + "      context.lineTo(6, 14);\n"
-            + "      context.lineTo(14, 2);\n"
-            + "      context.closePath();\n"
-            + "      context.fill();\n"
-
-            + "      context.setTransform(1.0, 0.0, 0.0, 1.0, 4.0, 4.0);\n"
-            + "      context.fillStyle = 'red';"
-            + "      context.beginPath();\n"
-            + "      context.moveTo(2, 2);\n"
-            + "      context.lineTo(6, 14);\n"
-            + "      context.lineTo(14, 2);\n"
-            + "      context.closePath();\n"
-            + "      context.fill();\n"
-
-            + "      log(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n"
-            + LOG_TEXTAREA
-            + "</body></html>";
-
-        loadPageVerifyTextArea2(html);
+                + "      context.setTransform(1.0, 0.0, 0.0, 1.0, 4.0, 4.0);\n"
+                + "      context.fillStyle = 'red';"
+                + "      context.beginPath();\n"
+                + "      context.moveTo(2, 2);\n"
+                + "      context.lineTo(6, 14);\n"
+                + "      context.lineTo(14, 2);\n"
+                + "      context.closePath();\n"
+                + "      context.fill();\n");
     }
 
     /**
@@ -2338,43 +1790,25 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQklEQVR42mNgGAXUBw0M/1HwoDUQaBIKHkQGQgHC"
             + "IHSzB4uBSEYPegOxBwXVI4v6sU+tDEB1A3FmUYoNprqB9CqdACh5i4mujJYUAAAAAElFTkSuQmCC")
     public void saveRestore() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TEXTAREA_FUNCTION
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "      context.fillStyle = 'green';\n"
+                + "      context.save();\n"
+                + "      context.fillRect(4, 4, 4, 4);\n"
 
-            + "      context.fillStyle = 'green';\n"
-            + "      context.save();\n"
-            + "      context.fillRect(4, 4, 4, 4);\n"
+                + "      context.fillStyle = 'red';\n"
+                + "      context.fillRect(6, 6, 4, 4);\n"
+                + "      context.save();\n"
 
-            + "      context.fillStyle = 'red';\n"
-            + "      context.fillRect(6, 6, 4, 4);\n"
-            + "      context.save();\n"
+                + "      context.fillStyle = 'blue';\n"
+                + "      context.fillRect(8, 8, 4, 4);\n"
 
-            + "      context.fillStyle = 'blue';\n"
-            + "      context.fillRect(8, 8, 4, 4);\n"
+                + "      context.restore();\n"
+                + "      context.fillRect(12, 12, 4, 4);\n"
 
-            + "      context.restore();\n"
-            + "      context.fillRect(12, 12, 4, 4);\n"
+                + "      context.restore();\n"
+                + "      context.fillRect(14, 14, 4, 4);\n"
 
-            + "      context.restore();\n"
-            + "      context.fillRect(14, 14, 4, 4);\n"
-
-            + "      context.restore();\n"
-            + "      context.fillRect(16, 16, 4, 4);\n"
-
-            + "      log(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n"
-            + LOG_TEXTAREA
-            + "</body></html>";
-
-        loadPageVerifyTextArea2(html);
+                + "      context.restore();\n"
+                + "      context.fillRect(16, 16, 4, 4);\n");
     }
 }
