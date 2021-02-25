@@ -311,8 +311,7 @@
                     </instructions>
                 </configuration>
             </plugin>
-<!-- 
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
                 <version>1.11.0</version>
@@ -323,8 +322,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
- -->
+            </plugin> -->
         </plugins>
         <extensions>
             <extension>
