@@ -791,7 +791,19 @@ public abstract class WebTestCase {
             final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
 
             if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
-                fail("different size");
+                final String dir = "target/" + testMethodName_.getMethodName();
+                Files.createDirectories(Paths.get(dir));
+
+                final File expectedOut = new File(dir, "expected.png");
+                final File currentOut = new File(dir, "current.png");
+                ImageComparisonUtil.saveImage(expectedOut, expectedImage);
+                ImageComparisonUtil.saveImage(currentOut, currentImage);
+
+                fail("The images are differnet in size - "
+                        + "expected: " + expectedImage.getWidth() + "x" + expectedImage.getHeight()
+                        + " current: " + currentImage.getWidth() + "x" + currentImage.getHeight()
+                        + " (expected: " + expectedOut.getAbsolutePath()
+                            + " current: " + currentOut.getAbsolutePath() + ")");
             }
             else if (ImageComparisonState.MISMATCH == imageComparisonState) {
                 final String dir = "target/" + testMethodName_.getMethodName();
@@ -805,7 +817,7 @@ public abstract class WebTestCase {
                 ImageComparisonUtil.saveImage(differenceOut, imageComparisonResult.getResult());
                 fail("The images are differnet (expected: " + expectedOut.getAbsolutePath()
                             + " current: " + currentOut.getAbsolutePath()
-                            + " difference: " + differenceOut.getAbsolutePath());
+                            + " difference: " + differenceOut.getAbsolutePath() + ")");
             }
         }
     }
