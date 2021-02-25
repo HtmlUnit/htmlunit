@@ -30,7 +30,7 @@
                 <p>
                     Add svg support to be able to include SVG images into your canvas drawings<br></br>
                     This is simply done by adding some dependencies to your project:
-            </p>
+                </p>
 <source>
 <![CDATA[        <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
@@ -53,6 +53,15 @@
             </exclusions>
         </dependency>
 ]]></source>
+                <p>
+                    To make sure everything is working you can execute this code and check if you get a BufferedImage.
+                </p>
+<source>
+<![CDATA[        final String svg =  "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\">"
+                           + "<circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"
+                           + "</svg>";
+        BufferedImage img = ImageIO.read(new ByteArrayInputStream(svg.getBytes(StandardCharsets.US_ASCII)));
+        System.out.println(img);]]></source>
             </subsection>
         </section>
     </body>
