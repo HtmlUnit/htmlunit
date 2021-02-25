@@ -14,12 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.doc;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
+import javax.imageio.ImageIO;
+
+import org.junit.Test;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
@@ -30,8 +36,7 @@ import com.gargoylesoftware.htmlunit.html.XHtmlPage;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
-public class FaqTest extends SimpleWebTestCase {
+public class FaqTest {
 
     /**
      * @throws Exception if an error occurs
@@ -60,7 +65,6 @@ public class FaqTest extends SimpleWebTestCase {
         }
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
@@ -84,5 +88,17 @@ public class FaqTest extends SimpleWebTestCase {
 
             assertEquals("Title" + ls + "content...", page.asText());
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void checkSvgSupport() throws Exception {
+        final String svg =  "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\">"
+                + "<circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"
+                + "</svg>";
+        final BufferedImage img = ImageIO.read(new ByteArrayInputStream(svg.getBytes(StandardCharsets.US_ASCII)));
+        assertNotNull(img);
     }
 }
