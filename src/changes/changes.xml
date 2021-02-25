@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Array length limit check fixed.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Exponentiation Operator support added.
+            </action>
             <action type="add" dev="rbri">
                 FAQ updates.
             </action>
