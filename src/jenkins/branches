@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean verify spotbugs:spotbugs checkstyle:checkstyle pmd:pmd pmd:cpd javadoc:javadoc -U -P without-library-and-huge-tests -Dgpg.skip -Djava.awt.headless=true'
+        sh 'mvn clean verify -U -P without-library-and-huge-tests -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }
@@ -20,15 +20,10 @@ pipeline {
     always {
       junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
       recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', sourceDirectory: 'src', tools: [
-        checkStyle(),
-        spotBugs(),
-        pmdParser(),
-        cpd(),
-        java(),
-        javaDoc()]
+        java()]
       step([$class: 'Mailer',
         notifyEveryUnstableBuild: true,
         recipients: "rbri@rbri.de"])
-      }
     }
+  }
 }
