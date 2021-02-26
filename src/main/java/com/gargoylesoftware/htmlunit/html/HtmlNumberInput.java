@@ -231,10 +231,22 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && isMaxValid() && isMinValid();
+        return super.isValid() && isNumber() && isMaxValid() && isMinValid();
     }
 
     /**
+     * Returns if the input element has number as value.
+     */
+    private boolean isNumber() {
+        try {
+            Long.parseLong(getValueAttribute());
+            return true;
+        } catch (final NumberFormatException e) {
+            return false;
+        }
+    }
+
+	/**
      * Returns if the input element has a valid min value. Refer to the
      * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
      * documentation for details.
