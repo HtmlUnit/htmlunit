@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.io.File;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -29,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -213,7 +210,6 @@ public class FileReaderTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "data:application/octet-stream;base64,"
                 + "Niii65mOV9yO6adjkXdWd+zTIXFcOWwumIGlIFRqQ05seTG+J2dx0KcD",
             IE = "data:;base64,Niii65mOV9yO6adjkXdWd+zTIXFcOWwumIGlIFRqQ05seTG+J2dx0KcD")
-    @NotYetImplemented(IE) // fails only on linux
     public void readAsDataURLUnknown() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
