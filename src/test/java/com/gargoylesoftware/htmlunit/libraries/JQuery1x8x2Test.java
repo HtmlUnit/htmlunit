@@ -3749,6 +3749,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented({EDGE, IE})
     public void manipulation__buildFragment_works_even_if_document_0__is_iframe_s_window_object_in_IE9_10___12266_() throws Exception {
         runTest("manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266)");
     }
