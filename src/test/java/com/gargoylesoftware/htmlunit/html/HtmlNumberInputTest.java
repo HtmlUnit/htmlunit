@@ -800,4 +800,30 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    @Test
+    @Alerts("true-false-false-false")
+    public void isNumberValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    var bar = document.getElementById('bar');\n"
+            + "    var baz = document.getElementById('baz');\n"
+            + "    var another = document.getElementById('another');\n"
+            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() + '-' + baz.checkValidity()+ '-' + another.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='number' id='foo' value='8'>\n"
+            + "  <input type='number' id='bar' value='abc'>\n"
+            + "  <input type='number' id='baz' value=''>\n"
+            + "  <input type='number' id='another' value='99999999999999999999999999999'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
