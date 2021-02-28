@@ -1119,6 +1119,9 @@
         <contributor>
             <name>Dennis Duysak</name>
         </contributor>
+        <contributor>
+            <name>Raik Bieniek</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Raik Bieniek
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -48,6 +49,17 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     HtmlNumberInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        final String value = getValueAttribute();
+        if (!getValueAttribute().isEmpty()) {
+            try {
+                Double.parseDouble(value.trim());
+            }
+            catch (final NumberFormatException e) {
+                setValueAttribute("");
+            }
+        }
+
     }
 
     /**
@@ -231,58 +243,46 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && isNumber() && isMaxValid() && isMinValid();
-    }
-
-    /**
-     * Returns if the input element has number as value.
-     */
-    private boolean isNumber() {
-        try {
-            Long.parseLong(getValueAttribute());
-            return true;
-        } catch (final NumberFormatException e) {
+        if (!super.isValid()) {
             return false;
         }
-    }
 
-	/**
-     * Returns if the input element has a valid min value. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
-     * documentation for details.
-     *
-     * @return if the input element has a valid min value
-     */
-    private boolean isMinValid() {
-        if (!getValueAttribute().isEmpty() && !getMin().isEmpty()) {
-            try {
-                final Long value = Long.parseLong(getValueAttribute());
-                final Long min = Long.parseLong(getMin());
-                return min <= value;
-            }
-            catch (final NumberFormatException e) {
-                // ignore
-            }
-        }
-        return true;
-    }
+        final String valueAttr = getValueAttribute();
+        if (!valueAttr.isEmpty()) {
+            final Double value = Double.parseDouble(valueAttr);
+            if (!getMin().isEmpty()) {
+                try {
+                    final Double min = Double.parseDouble(getMin());
+                    if (value < min) {
+                        return false;
+                    }
 
-    /**
-     * Returns if the input element has a valid max value. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
-     * documentation for details.
-     *
-     * @return if the input element has a valid max value
-     */
-    private boolean isMaxValid() {
-        if (!getValueAttribute().isEmpty() && !getMax().isEmpty()) {
-            try {
-                final Long value = Long.parseLong(getValueAttribute());
-                final Long max = Long.parseLong(getMax());
-                return max >= value;
+                    if (!getStep().isEmpty()) {
+                        try {
+                            final Double step = Double.parseDouble(getStep());
+                            if (Math.abs((value - min) % step) > 0.000001d) {
+                                return false;
+                            }
+                        }
+                        catch (final NumberFormatException e) {
+                            // ignore
+                        }
+                    }
+                }
+                catch (final NumberFormatException e) {
+                    // ignore
+                }
             }
-            catch (final NumberFormatException e) {
-                // ignore
+            if (!getMax().isEmpty()) {
+                try {
+                    final Double max = Double.parseDouble(getMax());
+                    if (value > max) {
+                        return false;
+                    }
+                }
+                catch (final NumberFormatException e) {
+                    // ignore
+                }
             }
         }
         return true;
