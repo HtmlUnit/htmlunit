@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.38.v20210224.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Array length limit check fixed.
             </action>
@@ -22,9 +25,6 @@
             </action>
             <action type="update" dev="rbri">
                 A bunch of improvements for the CanvasRenderingContext2D.drawImage() implementations.
-            </action>
-            <action type="update" dev="rbri">
-                Upgrade Jetty to 9.4.37.v20210219.
             </action>
             <action type="fix" issue="302" dev="Dennis Duysak">
                 Improved handling of floats in CSSStyleDeclaration during value conversion.
