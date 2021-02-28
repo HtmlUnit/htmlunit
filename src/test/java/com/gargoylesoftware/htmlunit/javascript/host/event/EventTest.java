@@ -27,6 +27,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -510,7 +511,12 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    @Alerts(DEFAULT = {"124", "124124"},
+            FF = {"1234", "12341234"},
+            FF78 = {"1234", "12341234"},
+            IE = {"1234", "12341234"})
+    @HtmlUnitNYI(CHROME = {"1234", "12341234"},
+            EDGE = {"1234", "12341234"})
     public void typing_input_number() throws Exception {
         testTyping("<input type='number'", "");
     }

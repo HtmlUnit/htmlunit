@@ -21,6 +21,8 @@ import java.text.ParseException;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
@@ -83,6 +85,11 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
+            if (StringUtils.isBlank(newValue)) {
+                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+                return;
+            }
+
             try {
                 Double.parseDouble(newValue);
                 setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
