@@ -301,19 +301,20 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var feature = '" + feature + "';\n"
             + "    var versions = " + versions + ";\n"
             + "    for (var j = 0; j < versions.length; j++) {\n"
             + "      var version = versions[j];\n"
-            + "      alert(feature + ' ' + version + ': ' + document.implementation.hasFeature(feature, version));\n"
+            + "      log(feature + ' ' + version + ': ' + document.implementation.hasFeature(feature, version));\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -323,14 +324,15 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void createDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.implementation.createDocument('', '', null));\n"
+            + "    log(document.implementation.createDocument('', '', null));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -340,18 +342,19 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts({"mydoc", "null", "mydoc", "null"})
     public void createDocument_qualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"
-            + "    alert(doc.documentElement.tagName);\n"
-            + "    alert(doc.documentElement.prefix);\n"
-            + "    alert(doc.documentElement.localName);\n"
-            + "    alert(doc.documentElement.namespaceURI);\n"
+            + "    log(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.prefix);\n"
+            + "    log(doc.documentElement.localName);\n"
+            + "    log(doc.documentElement.namespaceURI);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -361,18 +364,19 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts({"mydoc", "null", "mydoc", "http://mynamespace"})
     public void createDocument_namespaceAndQualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('http://mynamespace', 'mydoc', null);\n"
-            + "    alert(doc.documentElement.tagName);\n"
-            + "    alert(doc.documentElement.prefix);\n"
-            + "    alert(doc.documentElement.localName);\n"
-            + "    alert(doc.documentElement.namespaceURI);\n"
+            + "    log(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.prefix);\n"
+            + "    log(doc.documentElement.localName);\n"
+            + "    log(doc.documentElement.namespaceURI);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -382,18 +386,19 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts({"m:mydoc", "m", "mydoc", "http://mynamespace"})
     public void createDocument_namespaceAndQualifiedNameWithPrefix() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('http://mynamespace', 'm:mydoc', null);\n"
-            + "    alert(doc.documentElement.tagName);\n"
-            + "    alert(doc.documentElement.prefix);\n"
-            + "    alert(doc.documentElement.localName);\n"
-            + "    alert(doc.documentElement.namespaceURI);\n"
+            + "    log(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.prefix);\n"
+            + "    log(doc.documentElement.localName);\n"
+            + "    log(doc.documentElement.namespaceURI);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -406,21 +411,21 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument();\n"
-                + "      alert(doc);\n"
-                + "      alert(doc.window);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc);\n"
+                + "      log(doc.window);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -432,21 +437,21 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('newdoctitle');\n"
-                + "      alert(doc);\n"
-                + "      alert(doc.title);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc);\n"
+                + "      log(doc.title);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -458,21 +463,21 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
-                + "      alert(doc);\n"
-                + "      alert(doc.title);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc);\n"
+                + "      log(doc.title);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -484,21 +489,21 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
                 + "      doc.body.innerHTML = '<form></form><form></form>';\n"
-                + "      alert(doc.body.childNodes.length);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc.body.childNodes.length);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -510,22 +515,22 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
                 + "      var p = doc.createElement('p');\n"
                 + "      p.innertHTML = 'createdElement';\n"
-                + "      alert(p.innertHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(p.innertHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -542,30 +547,30 @@ public class DOMImplementationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument();\n"
-                + "      alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
 
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
-                + "      alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
 
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('abc');\n"
-                + "      alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -579,21 +584,22 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
                 + "      var p = doc.createElement('p');\n"
                 + "      p.innerHTML = 'This is a new paragraph.';\n"
                 + "      doc.body.appendChild(p);"
-                + "      alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -606,46 +612,48 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
                 + "      doc.body.innerHTML = '<p>Hello</p>';\n"
-                + "      alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<html><head><title>test</title></head><body><img src=\"x\" onerror=\"alert(1)\"></body></html>",
-            IE = "<html><head><title>test</title></head><body><img onerror=\"alert(1)\" src=\"x\"></body></html>")
+    @Alerts(DEFAULT = "<html><head><title>test</title></head><body><img src=\"x\" onerror=\"log(1)\"></body></html>",
+            IE = "<html><head><title>test</title></head><body><img onerror=\"log(1)\" src=\"x\"></body></html>")
     @NotYetImplemented(IE)
     public void createHTMLDocumentInnerAddImg() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
-                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"alert(1)\">';\n"
-                + "      alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"log(1)\">';\n"
+                + "      log(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

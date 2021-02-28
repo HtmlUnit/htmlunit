@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -59,35 +60,45 @@ public class DateTimeFormatTest extends WebDriverTestCase {
                 "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
             IE = {"zh-Hans-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
                     "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            FF78 = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var region1 = new Intl.DateTimeFormat('zh-CN', { timeZone: 'UTC' });\n"
                 + "    var options = region1.resolvedOptions();\n"
-                + "    alert(options.locale);\n"
-                + "    alert(options.calendar);\n"
-                + "    alert(options.numberingSystem);\n"
-                + "    alert(options.timeZone);\n"
-                + "    alert(options.hour12);\n"
-                + "    alert(options.weekday);\n"
-                + "    alert(options.era);\n"
-                + "    alert(options.year);\n"
-                + "    alert(options.month);\n"
-                + "    alert(options.day);\n"
-                + "    alert(options.hour);\n"
-                + "    alert(options.minute);\n"
-                + "    alert(options.second);\n"
-                + "    alert(options.timeZoneName);\n"
+                + "    log(options.locale);\n"
+                + "    log(options.calendar);\n"
+                + "    log(options.numberingSystem);\n"
+                + "    log(options.timeZone);\n"
+                + "    log(options.hour12);\n"
+                + "    log(options.weekday);\n"
+                + "    log(options.era);\n"
+                + "    log(options.year);\n"
+                + "    log(options.month);\n"
+                + "    log(options.day);\n"
+                + "    log(options.hour);\n"
+                + "    log(options.minute);\n"
+                + "    log(options.second);\n"
+                + "    log(options.timeZoneName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,17 +110,18 @@ public class DateTimeFormatTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var region1 = new Intl.DateTimeFormat('zh-CN', { timeZone: 'UTC' });\n"
                 + "    var options = region1.resolvedOptions();\n"
-                + "    alert(options);\n"
+                + "    log(options);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void test(final String... string) throws Exception {

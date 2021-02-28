@@ -46,10 +46,11 @@ public class IntlTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(" + string + ");\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(" + string + ");\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

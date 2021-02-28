@@ -106,37 +106,38 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Intl && window.Intl.v8BreakIterator) {\n"
             + "      var iterator = new Intl.v8BreakIterator('" + language + "'"
             + (type == null ? "" : ", {type: '" + type + "'}")
             + ");\n"
-            + "      log(iterator);\n"
+            + "      log1(iterator);\n"
             + "      var text = '" + text.replace("'", "\\'") + "';\n"
             + "      iterator.adoptText(text);\n"
-            + "      log(iterator);\n"
+            + "      log1(iterator);\n"
 
             + "      var pos = iterator.first();\n"
-            + "      log(iterator);\n"
+            + "      log1(iterator);\n"
 
             + "      while (pos !== -1) {\n"
             + "        var nextPos = iterator.next();\n"
-            + "        log(iterator);\n"
+            + "        log1(iterator);\n"
             + "        if (nextPos === -1) {\n"
             + "          break;\n"
             + "        }\n"
             + "      }\n"
-            + "    } else { alert('no support'); }\n"
+            + "    } else { log('no support'); }\n"
             + "  }\n"
-            + "  function log(iterator) {\n"
-            + "    alert(iterator.current());\n"
-            + "    alert(iterator.breakType());\n"
+            + "  function log1(iterator) {\n"
+            + "    log(iterator.current());\n"
+            + "    log(iterator.breakType());\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 4 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -150,18 +151,19 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Intl && window.Intl.v8BreakIterator) {\n"
             + "      var iterator = new Intl.v8BreakIterator([]);\n"
             + "      var options = iterator.resolvedOptions();\n"
-            + "      alert(options.locale);\n"
-            + "    } else { alert('no support'); }\n"
+            + "      log(options.locale);\n"
+            + "    } else { log('no support'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
