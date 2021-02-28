@@ -56,7 +56,7 @@ public class IntlTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,9 +64,7 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Collator() { [native code] }",
-            FF = "function Collator() {\n    [native code]\n}",
-            FF78 = "function Collator() {\n    [native code]\n}",
-            IE = "\nfunction Collator() {\n    [native code]\n}\n")
+            IE = "function Collator() { [native code] } ")
     public void collator() throws Exception {
         test("Intl.Collator");
     }
@@ -76,9 +74,7 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function DateTimeFormat() { [native code] }",
-            FF = "function DateTimeFormat() {\n    [native code]\n}",
-            FF78 = "function DateTimeFormat() {\n    [native code]\n}",
-            IE = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
+            IE = "function DateTimeFormat() { [native code] } ")
     public void dateTimeFormat() throws Exception {
         test("Intl.DateTimeFormat");
     }
@@ -88,9 +84,7 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function NumberFormat() { [native code] }",
-            FF = "function NumberFormat() {\n    [native code]\n}",
-            FF78 = "function NumberFormat() {\n    [native code]\n}",
-            IE = "\nfunction NumberFormat() {\n    [native code]\n}\n")
+            IE = "function NumberFormat() { [native code] } ")
     public void numberFormat() throws Exception {
         test("Intl.NumberFormat");
     }

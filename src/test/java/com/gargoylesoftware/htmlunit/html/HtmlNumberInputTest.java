@@ -950,7 +950,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 7777777);
+        loadPageWithAlerts2(html);
     }
 
     /**
