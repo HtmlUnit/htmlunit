@@ -1144,14 +1144,26 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expectedAlerts.length);
 
         assertEquals(expectedAlerts.length, actualAlerts.size());
-        for (int i = expectedAlerts.length - 1; i >= 0; i--) {
-            if (!useRealBrowser() && expectedAlerts[i].startsWith("data:image/png;base64,")) {
-                compareImages(expectedAlerts[i], actualAlerts.get(i));
-            }
-            else {
-                assertEquals(expectedAlerts[i], actualAlerts.get(i));
+
+        if (!useRealBrowser()) {
+            // check if we have data-image Url
+            for (int i = 0; i < expectedAlerts.length; i++) {
+                if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
+                    // we have to compare element by element
+                    for (int j = 0; i < expectedAlerts.length; i++) {
+                        if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
+                            compareImages(expectedAlerts[i], actualAlerts.get(i));
+                        }
+                        else {
+                            assertEquals(expectedAlerts[i], actualAlerts.get(i));
+                        }
+                    }
+                    return;
+                }
             }
         }
+
+        assertEquals(expectedAlerts, actualAlerts);
     }
 
     /**
