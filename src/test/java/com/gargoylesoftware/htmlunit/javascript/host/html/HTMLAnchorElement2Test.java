@@ -70,23 +70,24 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
               "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var a = document.createElement('a');\n"
-            + "        alert(a.href);\n"
-            + "        alert(a.rel);\n"
-            + "        alert(a.rev);\n"
+            + "        log(a.href);\n"
+            + "        log(a.rel);\n"
+            + "        log(a.rev);\n"
             + "        a.href = 'test.css';\n"
             + "        a.rel  = 'stylesheet';\n"
             + "        a.rev  = 'stylesheet1';\n"
-            + "        alert(a.href);\n"
-            + "        alert(a.rel);\n"
-            + "        alert(a.rev);\n"
+            + "        log(a.href);\n"
+            + "        log(a.rel);\n"
+            + "        log(a.rev);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -96,27 +97,28 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"attachEvent not available", "href"})
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = document.getElementById('link');\n"
-            + "    if (!a.attachEvent) { alert('attachEvent not available'); return }\n"
+            + "    if (!a.attachEvent) { log('attachEvent not available'); return }\n"
             + "    a.attachEvent('onclick', handler);\n"
             + "  }\n"
             + "  function handler() {\n"
             + "    event.returnValue = false;\n"
-            + "    alert('onclick');\n"
+            + "    log('onclick');\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
-            + "  <a id='link' href='javascript: alert(\"href\");'>link</a>\n"
+            + "  <a id='link' href='javascript: log(\"href\");'>link</a>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("link")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -126,25 +128,26 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts("onclick")
     public void javaScriptPreventDefault() throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = document.getElementById('link');\n"
             + "    a.addEventListener('click', handler);\n"
             + "  }\n"
             + "  function handler(event) {\n"
             + "    event.preventDefault();\n"
-            + "    alert('onclick');\n"
+            + "    log('onclick');\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
-            + "<a id='link' href='javascript: alert(\"href\");'>link</a>\n"
+            + "<a id='link' href='javascript: log(\"href\");'>link</a>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("link")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -154,12 +157,13 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"", "§§URL§§foo.html", "javascript:void(0)", "§§URL§§#", "mailto:"})
     public void defaultConversionToString() throws Exception {
         final String html
-            = "<html><head><title>AnchorTest</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.getElementById('myAnchor'));\n"
+            + "  log(document.getElementById('myAnchor'));\n"
             + "  for (var i = 0; i < document.links.length; i++)\n"
             + "  {\n"
-            + "    alert(document.links[i]);\n"
+            + "    log(document.links[i]);\n"
             + "  }\n"
             + "}</script></head>\n"
             + "<body onload='test()'>\n"
@@ -169,7 +173,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "<a href='#'>#</a>\n"
             + "<a href='mailto:'>mail</a>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -214,18 +219,19 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "testsite2.html", "13", "testanchor", "mailto:"})
     public void getAttribute_and_href() throws Exception {
         final String html
-            = "<html><head><title>AnchorTest</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest(anchorElement) {\n"
-            + "    alert(anchorElement.href);\n"
-            + "    alert(anchorElement.getAttribute('href'));\n"
+            + "    log(anchorElement.href);\n"
+            + "    log(anchorElement.getAttribute('href'));\n"
             + "    anchorElement.href = 'testsite2.html';\n"
-            + "    alert(anchorElement.href);\n"
-            + "    alert(anchorElement.getAttribute('href'));\n"
-            + "    alert(anchorElement.getAttribute('id'));\n"
-            + "    alert(anchorElement.getAttribute('name'));\n"
+            + "    log(anchorElement.href);\n"
+            + "    log(anchorElement.getAttribute('href'));\n"
+            + "    log(anchorElement.getAttribute('id'));\n"
+            + "    log(anchorElement.getAttribute('name'));\n"
             + "    var link2 = document.getElementById('link2');\n"
-            + "    alert(link2.href);\n"
+            + "    log(link2.href);\n"
             + "  }\n</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -237,8 +243,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         driver.findElement(By.name("testanchor")).click();
 
         expandExpectedAlertsVariables(URL_FIRST);
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -249,14 +254,15 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         "§§URL§§#", "§§URL§§"})
     public void getDefaultValue() throws Exception {
         final String html
-            = "<html><head><title>AnchorTest</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('absolute'));\n"
-            + "    alert(document.getElementById('relative'));\n"
-            + "    alert(document.getElementById('hash'));\n"
-            + "    alert(document.getElementById('hashOnly'));\n"
-            + "    alert(document.getElementById('empty'));\n"
+            + "    log(document.getElementById('absolute'));\n"
+            + "    log(document.getElementById('relative'));\n"
+            + "    log(document.getElementById('hash'));\n"
+            + "    log(document.getElementById('hashOnly'));\n"
+            + "    log(document.getElementById('empty'));\n"
             + "  }\n</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -270,8 +276,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         expandExpectedAlertsVariables(URL_FIRST);
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -282,14 +287,15 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         "§§URL§§#", "§§URL§§"})
     public void getDefaultValueWithHash() throws Exception {
         final String html
-            = "<html><head><title>AnchorTest</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('absolute'));\n"
-            + "    alert(document.getElementById('relative'));\n"
-            + "    alert(document.getElementById('hash'));\n"
-            + "    alert(document.getElementById('hashOnly'));\n"
-            + "    alert(document.getElementById('empty'));\n"
+            + "    log(document.getElementById('absolute'));\n"
+            + "    log(document.getElementById('relative'));\n"
+            + "    log(document.getElementById('hash'));\n"
+            + "    log(document.getElementById('hashOnly'));\n"
+            + "    log(document.getElementById('empty'));\n"
             + "  }\n</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -304,8 +310,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, UrlUtils.getUrlWithNewRef(URL_FIRST, "ref"));
 
         expandExpectedAlertsVariables(URL_FIRST);
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -318,14 +323,15 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                         "§§URL§§index.html#", "§§URL§§"})
     public void getDefaultValueWithHashAndFileName() throws Exception {
         final String html
-            = "<html><head><title>AnchorTest</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('absolute'));\n"
-            + "    alert(document.getElementById('relative'));\n"
-            + "    alert(document.getElementById('hash'));\n"
-            + "    alert(document.getElementById('hashOnly'));\n"
-            + "    alert(document.getElementById('empty'));\n"
+            + LOG_TITLE_FUNCTION
+            + "    log(document.getElementById('absolute'));\n"
+            + "    log(document.getElementById('relative'));\n"
+            + "    log(document.getElementById('hash'));\n"
+            + "    log(document.getElementById('hashOnly'));\n"
+            + "    log(document.getElementById('empty'));\n"
             + "  }\n</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -340,8 +346,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, UrlUtils.getUrlWithNewPath(URL_FIRST, "/index.html"));
 
         expandExpectedAlertsVariables(URL_FIRST);
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -351,22 +356,23 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"true", "not defined"})
     public void onclickToString() throws Exception {
         final String html
-            = "<html><head><title>AnchorTest</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    for (var i = 0; i < document.links.length; i++) {\n"
             + "      var onclick = document.links[i].onclick;\n"
-            + "      alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
+            + "      log(onclick ? (onclick.toString().indexOf('log(') != -1) : 'not defined');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <a href='foo.html' onClick='alert(\"on click\")'>a1</a>\n"
+            + "  <a href='foo.html' onClick='log(\"on click\")'>a1</a>\n"
             + "  <a href='foo2.html'>a2</a>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -380,25 +386,26 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "  <a id='a1' href='#'></a><a id='a2' href='#' accesskey='A'></a>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-                + "  alert(a1.accessKey);\n"
-                + "  alert(a2.accessKey);\n"
+                + "  log(a1.accessKey);\n"
+                + "  log(a2.accessKey);\n"
                 + "  a1.accessKey = 'a';\n"
                 + "  a2.accessKey = 'A';\n"
-                + "  alert(a1.accessKey);\n"
-                + "  alert(a2.accessKey);\n"
+                + "  log(a1.accessKey);\n"
+                + "  log(a2.accessKey);\n"
                 + "  a1.accessKey = 'a8';\n"
                 + "  a2.accessKey = '8Afoo';\n"
-                + "  alert(a1.accessKey);\n"
-                + "  alert(a2.accessKey);\n"
+                + "  log(a1.accessKey);\n"
+                + "  log(a2.accessKey);\n"
                 + "  a1.accessKey = '8';\n"
                 + "  a2.accessKey = '@';\n"
-                + "  alert(a1.accessKey);\n"
-                + "  alert(a2.accessKey);\n"
+                + "  log(a1.accessKey);\n"
+                + "  log(a2.accessKey);\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -410,13 +417,14 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"9", "9", "true", "false"})
     public void hrefTrimmed() throws Exception {
-        final String html = "<html><head><title>AnchorTest</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('a').href.length);\n"
-            + "    alert(document.getElementById('b').href.length);\n"
-            + "    alert(document.getElementById('c').href === '');\n"
-            + "    alert(document.getElementById('d').href === '');\n"
+            + "    log(document.getElementById('a').href.length);\n"
+            + "    log(document.getElementById('b').href.length);\n"
+            + "    log(document.getElementById('c').href === '');\n"
+            + "    log(document.getElementById('d').href === '');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -428,7 +436,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -582,37 +590,39 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts("true")
     public void thisInJavascriptHref() throws Exception {
         final String html
-            = "<html>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<body>\n"
-            + "  <a href='javascript:alert(this === window)'>link 1</a>\n"
+            + "  <a href='javascript:log(this === window)'>link 1</a>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
 
         assertEquals(1, getMockWebConnection().getRequestCount());
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"§§URL§§second/", "object", "[object HTMLAnchorElement]"},
-            CHROME = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
-            EDGE = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
-            FF = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"},
-            FF78 = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
+    @Alerts(DEFAULT = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
+            IE = {"§§URL§§second/", "object", "[object HTMLAnchorElement]"})
     public void typeof() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(document.links[0]);\n"
-            + "      alert(typeof document.links[0]);\n"
-            + "      alert(HTMLAnchorElement);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(document.links[0]);\n"
+            + "      log(typeof document.links[0]);\n"
+            + "      log(HTMLAnchorElement);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -620,7 +630,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -629,8 +639,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
     public void getType() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    alertType('idWithout');\n"
             + "    alertType('idEmpty');\n"
@@ -642,7 +653,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  }\n"
             + "  function alertType(id) {\n"
             + "    var anchor = document.getElementById(id);\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -656,7 +667,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  <a id='idUnknown' href='" + URL_SECOND + "' type='unknown'>link</a>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -665,36 +676,38 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"})
     public void setType() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var anchor = document.getElementById('id');\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
 
             + "    anchor.type = '';\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
 
             + "    anchor.type = ' TExT/hTMl  ';\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
 
             + "    anchor.type = 'unknown';\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
 
             + "    anchor.type = 'application/pdf';\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
 
             + "  }\n"
             + "  function alertType(id) {\n"
             + "    var anchor = document.getElementById(id);\n"
-            + "    alert(anchor.type);\n"
+            + "    log(anchor.type);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <a id='id' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -724,17 +737,18 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  <a href='p:/TeMp'>p:/TeMp</a>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var links = document.getElementsByTagName('a');\n"
             + "  for (var i = 0; i < links.length; i++) {\n"
             + "    var link = links[i];\n"
             + "    var props = [link.protocol, link.host, link.hostname, \n"
             + "           link.search, link.hash, link.port, link.pathname];\n"
-            + "    alert(props.join('|'));\n"
+            + "    log(props.join('|'));\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -751,17 +765,18 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
               "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var a = document.createElement('a');\n"
-            + "        alert(a." + attribute + ");\n"
+            + "        log(a." + attribute + ");\n"
             + "        a." + attribute + " = '" + value + "';\n"
-            + "        alert(a." + attribute + ");\n"
+            + "        log(a." + attribute + ");\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -809,10 +824,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
                 + "        for(i=0; i<7; i++) {\n"
                 + "          var a = document.getElementById('a'+i);\n"
-                + "          alert(a.origin);\n"
+                + "          log(a.origin);\n"
                 + "        }\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -828,7 +844,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 + "  </body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -845,10 +861,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "      function test() {\n"
                 + "        for(i=0; i<7; i++) {\n"
                 + "          var a = document.getElementById('a'+i);\n"
-                + "          alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "          log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
                 + "        }\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -861,10 +878,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 + "    <a id='a4' referrerPolicy='origin'>a4</a>\n"
                 + "    <a id='a5' referrerPolicy='unsafe-url'>a5</a>\n"
                 + "    <a id='a6' referrerPolicy='unknown'>a6</a>\n"
+                + LOG_TEXTAREA
                 + "  </body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -881,30 +899,31 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
                 + "        var a = document.getElementById('tester');\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.referrerPolicy = 'unknown';\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.referrerPolicy = 'no-referrer';\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.referrerPolicy = '';\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.referrerPolicy = 'NO-reFerrer';\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.setAttribute('referrerPolicy', 'origin');\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.setAttribute('referrerPolicy', ' ');\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
 
                 + "        a.setAttribute('referrerPolicy', 'unknown');\n"
-                + "        alert(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
+                + "        log(a.referrerPolicy + '-' + a.getAttribute('referrerPolicy'));\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -913,7 +932,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 + "  </body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -927,24 +946,24 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var testNode = document.getElementById('myButton');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
 
             + "      testNode = document.getElementById('myA');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
 
             + "      testNode = document.getElementById('myHrefEmpty');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
 
             + "      testNode = document.getElementById('myHref');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -956,7 +975,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1038,23 +1057,24 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     public void readWriteRel() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
-            + "alert(a1.rel);\n"
-            + "alert(a2.rel);\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
 
             + "a1.rel = 'prefetch';\n"
             + "a2.rel = 'prefetch';\n"
-            + "alert(a1.rel);\n"
-            + "alert(a2.rel);\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
 
             + "a1.rel = 'not supported';\n"
             + "a2.rel = 'notsupported';\n"
-            + "alert(a1.rel);\n"
-            + "alert(a2.rel);\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1066,19 +1086,20 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     public void relList() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
             + "try {\n"
-            + "  alert(a1.relList.length);\n"
-            + "  alert(a2.relList.length);\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
 
             + "  for (var i = 0; i < a2.relList.length; i++) {\n"
-            + "    alert(a2.relList[i]);\n"
+            + "    log(a2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1114,40 +1135,41 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     public void readWriteUsername() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a>"
-                    + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
-                    + "<a id='a3' href='https://user@developer.mozilla.org'>a3</a>"
-                    + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
-                    + "<script>\n"
-            + "var a1 = document.getElementById('a1'),"
-                + "a2 = document.getElementById('a2'),"
-                + "a3 = document.getElementById('a3'),"
-                + "a4 = document.getElementById('a4');\n"
+                + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
+                + "<a id='a3' href='https://user@developer.mozilla.org'>a3</a>"
+                + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var a1 = document.getElementById('a1'),"
+                    + "a2 = document.getElementById('a2'),"
+                    + "a3 = document.getElementById('a3'),"
+                    + "a4 = document.getElementById('a4');\n"
 
-            + "alert(a1.username);\n"
-            + "alert(a2.username);\n"
-            + "alert(a3.username);\n"
-            + "alert(a4.username);\n"
+                + "log(a1.username);\n"
+                + "log(a2.username);\n"
+                + "log(a3.username);\n"
+                + "log(a4.username);\n"
 
-            + "if (a1.username != undefined) {\n"
+                + "if (a1.username != undefined) {\n"
 
-            + "a1.username = 'Tester';\n"
-            + "a2.username = 'Tester';\n"
-            + "a3.username = 'Tester';\n"
-            + "a4.username = 'Tester';\n"
+                + "a1.username = 'Tester';\n"
+                + "a2.username = 'Tester';\n"
+                + "a3.username = 'Tester';\n"
+                + "a4.username = 'Tester';\n"
 
-            + "alert(a1.username);\n"
-            + "alert(a1.href);\n"
-            + "alert(a2.username);\n"
-            + "alert(a2.href);\n"
-            + "alert(a3.username);\n"
-            + "alert(a3.href);\n"
-            + "alert(a4.username);\n"
-            + "alert(a4.href);\n"
+                + "log(a1.username);\n"
+                + "log(a1.href);\n"
+                + "log(a2.username);\n"
+                + "log(a2.href);\n"
+                + "log(a3.username);\n"
+                + "log(a3.href);\n"
+                + "log(a4.username);\n"
+                + "log(a4.href);\n"
 
-            + "}\n"
+                + "}\n"
 
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
+                + "</script></body></html>";
+        loadPage2(html);
     }
 
     /**
@@ -1183,39 +1205,40 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     public void readWritePassword() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a>"
-                    + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
-                    + "<a id='a3' href='https://:password@developer.mozilla.org'>a3</a>"
-                    + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
-                    + "<script>\n"
-            + "var a1 = document.getElementById('a1'),"
-                + "a2 = document.getElementById('a2'),"
-                + "a3 = document.getElementById('a3'),"
-                + "a4 = document.getElementById('a4');\n"
+                + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
+                + "<a id='a3' href='https://:password@developer.mozilla.org'>a3</a>"
+                + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var a1 = document.getElementById('a1'),"
+                    + "a2 = document.getElementById('a2'),"
+                    + "a3 = document.getElementById('a3'),"
+                    + "a4 = document.getElementById('a4');\n"
 
-            + "alert(a1.password);\n"
-            + "alert(a2.password);\n"
-            + "alert(a3.password);\n"
-            + "alert(a4.password);\n"
+                + "log(a1.password);\n"
+                + "log(a2.password);\n"
+                + "log(a3.password);\n"
+                + "log(a4.password);\n"
 
-            + "if (a1.password != undefined) {\n"
+                + "if (a1.password != undefined) {\n"
 
-            + "a1.password = 'Tester';\n"
-            + "a2.password = 'Tester';\n"
-            + "a3.password = 'Tester';\n"
-            + "a4.password = 'Tester';\n"
+                + "a1.password = 'Tester';\n"
+                + "a2.password = 'Tester';\n"
+                + "a3.password = 'Tester';\n"
+                + "a4.password = 'Tester';\n"
 
-            + "alert(a1.password);\n"
-            + "alert(a1.href);\n"
-            + "alert(a2.password);\n"
-            + "alert(a2.href);\n"
-            + "alert(a3.password);\n"
-            + "alert(a3.href);\n"
-            + "alert(a4.password);\n"
-            + "alert(a4.href);\n"
+                + "log(a1.password);\n"
+                + "log(a1.href);\n"
+                + "log(a2.password);\n"
+                + "log(a2.href);\n"
+                + "log(a3.password);\n"
+                + "log(a3.href);\n"
+                + "log(a4.password);\n"
+                + "log(a4.href);\n"
 
-            + "}\n"
+                + "}\n"
 
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
     }
 }

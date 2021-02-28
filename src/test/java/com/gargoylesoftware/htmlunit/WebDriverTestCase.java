@@ -77,6 +77,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchSessionException;
@@ -155,6 +156,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     public static final String LOG_TITLE_FUNCTION = "  function log(msg) { window.document.title += msg + '§';}\n";
 
+    /**
+     * Function used in many tests.
+     */
+    public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
+            + "document.getElementById('myLog').value += msg + '§';}\n";
+
+    /**
+     * HtmlSniped to insert text area used for logging.
+     */
+    public static final String LOG_TEXTAREA = "  <textarea id='myLog' cols='80' rows='42'></textarea>\n";
 
     /**
      * The system property for automatically fixing the test case expectations.
@@ -1040,6 +1051,44 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             assertEquals(expected.toString(), driver.getTitle());
         }
+        return driver;
+    }
+
+    protected final WebDriver loadPageVerifyTextArea2(final String html) throws Exception {
+        return loadPageTextArea2(html, getExpectedAlerts());
+    }
+
+    protected final WebDriver loadPageTextArea2(final String html, final String... expectedAlerts) throws Exception {
+        final WebDriver driver = loadPage2(html);
+        return verifyTextArea2(driver, expectedAlerts);
+    }
+
+    protected final WebDriver verifyTextArea2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final WebElement textArea = driver.findElement(By.id("myLog"));
+
+        if (expectedAlerts.length == 0) {
+            assertEquals("", textArea.getAttribute("value"));
+            return driver;
+        }
+
+        if (!useRealBrowser()
+                && expectedAlerts.length == 1
+                && expectedAlerts[0].startsWith("data:image/png;base64,")) {
+            String value = textArea.getAttribute("value");
+            if (value.endsWith("§")) {
+                value = value.substring(0, value.length() - 1);
+            }
+            compareImages(expectedAlerts[0], value);
+            return driver;
+        }
+
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i].replaceAll("§§URL§§", URL_FIRST.toExternalForm())).append('§');
+        }
+        assertEquals(expected.toString(), textArea.getAttribute("value"));
+
         return driver;
     }
 
