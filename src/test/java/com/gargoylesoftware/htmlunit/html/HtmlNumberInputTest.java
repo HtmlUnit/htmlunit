@@ -666,6 +666,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+
     /**
      * @throws Exception if the test fails
      */
@@ -814,6 +815,52 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
         driver.findElement(By.id("testBtn")).click();
         verifyAlerts(driver, getExpectedAlerts()[2]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
+            FF = {"--null-true", "4", "4--null-true", "", "--null-false"},
+            FF78 = {"--null-true", "4", "4--null-true", "", "--null-false"},
+            IE = {"--null-true", "4", "4--null-true", "4a", "4a--null-true"})
+    @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
+            FF78 = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
+            IE = {"--null-true", "4", "4--null-true", "4", "4--null-true"})
+    public void typeInvalidChars() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('testId');\n"
+            + "    alert(input.value + '-' "
+                            + "+ input.defaultValue + '-' "
+                            + "+ input.getAttribute('value')+ '-' "
+                            + "+ input.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='number' id='testId'>\n"
+            + "  <input type='button' id='testBtn' onclick='test()' >\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, getExpectedAlerts()[0]);
+
+        final WebElement t = driver.findElement(By.id("testId"));
+        t.sendKeys(Keys.END, "4");
+        assertEquals(getExpectedAlerts()[1], t.getAttribute("value"));
+
+        driver.findElement(By.id("testBtn")).click();
+        verifyAlerts(driver, getExpectedAlerts()[2]);
+
+        t.sendKeys(Keys.END, "a");
+        assertEquals(getExpectedAlerts()[3], t.getAttribute("value"));
+
+        driver.findElement(By.id("testBtn")).click();
+        verifyAlerts(driver, getExpectedAlerts()[4]);
     }
 
     /**

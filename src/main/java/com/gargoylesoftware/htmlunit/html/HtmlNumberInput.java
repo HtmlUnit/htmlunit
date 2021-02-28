@@ -59,7 +59,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 setValueAttribute("");
             }
         }
-
     }
 
     /**
@@ -84,7 +83,13 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            try {
+                Double.parseDouble(newValue);
+                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
         }
     }
 
