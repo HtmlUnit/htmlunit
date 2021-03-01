@@ -202,8 +202,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String FF_BIN_;
     private static String FF78_BIN_;
 
-    private static final String URL_FIRST_EXT = URL_FIRST.toExternalForm();
-
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
 
@@ -1013,7 +1011,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts.
      * @param html the HTML to use
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -1025,7 +1023,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts.
      * @param html the HTML to use
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -1047,7 +1045,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         else {
             final StringBuilder expected = new StringBuilder();
             for (int i = 0; i < expectedAlerts.length; i++) {
-                expected.append(expectedAlerts[i].replaceAll("§§URL§§", URL_FIRST_EXT)).append('§');
+                expected.append(expectedAlerts[i]).append('§');
             }
             assertEquals(expected.toString(), driver.getTitle());
         }
@@ -1085,7 +1083,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final StringBuilder expected = new StringBuilder();
         for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i].replaceAll("§§URL§§", URL_FIRST.toExternalForm())).append('§');
+            expected.append(expectedAlerts[i]).append('§');
         }
         assertEquals(expected.toString(), textArea.getAttribute("value"));
 
@@ -1095,7 +1093,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts.
      * @param html the HTML to use
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver

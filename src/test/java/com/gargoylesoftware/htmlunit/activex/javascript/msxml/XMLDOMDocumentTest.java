@@ -1002,6 +1002,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setDefaultResponse("<root/>", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(createTestHTML(html));
     }
 
@@ -1934,6 +1935,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(createTestHTML(html));
     }
 }
