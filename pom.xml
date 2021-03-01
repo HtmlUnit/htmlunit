@@ -179,10 +179,10 @@
                     <quiet>true</quiet>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://commons.apache.org/logging/apidocs/</link>
-                        <link>http://commons.apache.org/codec/apidocs/</link>
-                        <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>https://commons.apache.org/logging/apidocs/</link>
+                        <link>https://commons.apache.org/codec/apidocs/</link>
+                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
                     </links>
                 </configuration>
                 <executions>
@@ -663,10 +663,10 @@
                     <excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl:com.gargoylesoftware.htmlunit.html.xpath:com.gargoylesoftware.htmlunit.html.applets:com.gargoylesoftware.htmlunit.html.impl:com.gargoylesoftware.htmlunit.activex</excludePackageNames>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://commons.apache.org/logging/apidocs/</link>
-                        <link>http://commons.apache.org/codec/apidocs/</link>
-                        <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>https://commons.apache.org/logging/apidocs/</link>
+                        <link>https://commons.apache.org/codec/apidocs/</link>
+                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
                     </links>
                 </configuration>
             </plugin>
