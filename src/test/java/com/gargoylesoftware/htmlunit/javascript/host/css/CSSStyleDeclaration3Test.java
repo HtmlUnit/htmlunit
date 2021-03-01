@@ -347,6 +347,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
 

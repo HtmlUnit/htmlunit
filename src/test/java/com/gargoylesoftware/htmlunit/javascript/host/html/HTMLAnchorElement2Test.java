@@ -87,6 +87,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
 
@@ -174,6 +175,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "<a href='mailto:'>mail</a>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
 
@@ -630,6 +632,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
 
@@ -975,6 +978,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
 
