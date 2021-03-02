@@ -9,6 +9,9 @@
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes">
             <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.12.0.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.38.v20210224.
             </action>
             <action type="fix" dev="RhinoTeam">
