@@ -71,9 +71,17 @@ public abstract class DojoTestBase extends WebDriverTestCase {
             final long endTime = System.currentTimeMillis() + runTime;
 
             // wait a bit to let the tests start
-            Thread.sleep(42);
-
             String status = getResultElementText(webdriver);
+            while (!"Tests Running".equals(status)) {
+                Thread.sleep(42);
+
+                if (System.currentTimeMillis() > endTime) {
+                    // don't fail here, maybe we missed the start
+                    break;
+                }
+                status = getResultElementText(webdriver);
+            }
+
             while (!"Stopped".equals(status)) {
                 Thread.sleep(42);
 
