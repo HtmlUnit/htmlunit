@@ -17,6 +17,10 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jetty.server.Server;
@@ -29,10 +33,17 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 
 /**
  * Base class for jQuery Tests.
@@ -41,6 +52,41 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  */
 @RunWith(BrowserRunner.class)
 public abstract class JQueryTestBase extends WebDriverTestCase {
+
+    private static Method MethodGetWebClient_;
+
+    static {
+        try {
+            MethodGetWebClient_ = HtmlUnitDriver.class.getDeclaredMethod("getWebClient");
+            MethodGetWebClient_.setAccessible(true);
+        }
+        catch (final Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static final class OnlyLocalConnectionWrapper extends WebConnectionWrapper {
+        private static final WebResponseData responseData =
+                new WebResponseData("not found".getBytes(StandardCharsets.US_ASCII), 404, "Not Found",
+                        new ArrayList<NameValuePair>());
+
+
+        private OnlyLocalConnectionWrapper(final WebClient webClient) {
+            super(webClient);
+        }
+
+        @Override
+        public WebResponse getResponse(final WebRequest request) throws IOException {
+            final String url = request.getUrl().toExternalForm();
+
+            if (url.contains("localhost")) {
+                return super.getResponse(request);
+            }
+
+
+            return new WebResponse(responseData, request, 0);
+        }
+    }
 
     private static Server SERVER_;
 
@@ -65,28 +111,36 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
-            final WebDriver webdriver = getWebDriver();
-            final String url = buildUrl(testNumber);
-            webdriver.get(url);
+            final WebDriver webDriver = getWebDriver();
 
-            while (!getResultElementText(webdriver).startsWith("Tests completed")) {
-                Thread.sleep(100);
+            if (webDriver instanceof HtmlUnitDriver) {
+                final WebClient webClient = (WebClient) MethodGetWebClient_.invoke(webDriver);
+
+                new OnlyLocalConnectionWrapper(webClient);
+            }
+
+
+            final String url = buildUrl(testNumber);
+            webDriver.get(url);
+
+            while (!getResultElementText(webDriver).startsWith("Tests completed")) {
+                Thread.sleep(42);
 
                 if (System.currentTimeMillis() > endTime) {
                     fail("Test #" + testNumber + " runs too long (longer than " + runTime / 1000 + "s)");
                 }
             }
 
-            final String result = getResultDetailElementText(webdriver, testNumber);
+            final String result = getResultDetailElementText(webDriver, testNumber);
             final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
             if (!expected.contains(result)) {
                 System.out.println("--------------------------------------------");
                 System.out.println("URL: " + url);
                 System.out.println("--------------------------------------------");
-                System.out.println("Test: " + webdriver.findElement(By.id("qunit-tests")).getText());
+                System.out.println("Test: " + webDriver.findElement(By.id("qunit-tests")).getText());
                 System.out.println("--------------------------------------------");
                 System.out.println("Failures:");
-                final List<WebElement> failures = webdriver.findElements(By.cssSelector(".qunit-assert-list li.fail"));
+                final List<WebElement> failures = webDriver.findElements(By.cssSelector(".qunit-assert-list li.fail"));
                 for (final WebElement webElement : failures) {
                     System.out.println("  " + webElement.getText());
                 }
