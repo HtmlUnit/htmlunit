@@ -254,12 +254,16 @@ public final class XMLHttpRequestLifeCycleTest {
         public static class XmlTimeoutServlet extends HttpServlet {
 
             @Override
-            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+            protected void doGet(final HttpServletRequest req, final HttpServletResponse response)
                     throws ServletException, IOException {
-                resp.setContentType(MimeType.TEXT_XML);
-                resp.setContentLength(RETURN_XML.length());
-                resp.setStatus(HttpStatus.SC_OK);
-                final ServletOutputStream outputStream = resp.getOutputStream();
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "*");
+                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+                response.setContentType(MimeType.TEXT_XML);
+                response.setContentLength(RETURN_XML.length());
+                response.setStatus(HttpStatus.SC_OK);
+                final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.flush();
                     Thread.sleep(500);
@@ -1786,7 +1790,8 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("        var url = 'http://' + window.location.hostname + ':"
                     + WebTestCase.PORT2 + PREFLIGHT_ERROR_500_URL + "';\n");
         }
-        else if (Execution.TIMEOUT.equals(execution)) {
+        else if (Execution.TIMEOUT.equals(execution)
+                || Execution.SEND_ABORT.equals(execution)) {
             htmlBuilder.append("        var url = '" + TIMEOUT_URL + "';\n");
         }
         else if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)
