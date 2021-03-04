@@ -3483,9 +3483,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-",
-            CHROME = "getDistributedNodes(),select",
             EDGE = "getDistributedNodes(),select")
-    @HtmlUnitNYI(CHROME = "-", EDGE = "-")
+    @HtmlUnitNYI(EDGE = "-")
     public void content() throws Exception {
         test("content");
     }

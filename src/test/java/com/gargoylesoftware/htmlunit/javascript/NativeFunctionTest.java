@@ -135,15 +135,15 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @NotYetImplemented
     public void functionToString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function foo() {\n"
             + "  return 1;\n"
             + "}\n"
-            + "log(foo);\n"
+            + "alert(foo);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -155,18 +155,18 @@ public class NativeFunctionTest extends WebDriverTestCase {
     public void functionToStringMinimized() throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  var my = function foo(){return 1;}\n"
-            + "  log(my.toString());\n"
+            + "  alert(my.toString());\n"
 
             + "  var my = function foo( )  { \treturn 1  \n ;\n"
             + "    ; }\n"
-            + "  log(my.toString());\n"
+            + "  alert(my.toString());\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 
     /**

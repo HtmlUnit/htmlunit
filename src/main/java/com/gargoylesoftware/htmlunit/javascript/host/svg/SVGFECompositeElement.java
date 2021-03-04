@@ -36,24 +36,34 @@ public class SVGFECompositeElement extends SVGElement {
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_UNKNOWN}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_UNKNOWN = 0;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_OVER}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_OVER = 1;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_IN}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_IN = 2;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_OUT}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_OUT = 3;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_ATOP}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_ATOP = 4;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_XOR}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_XOR = 5;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_ARITHMETIC}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_ARITHMETIC = 6;
+
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_LIGHTER}. */
+    @JsxConstant(FF)
+    public static final int SVG_FECOMPOSITE_OPERATOR_LIGHTER = 7;
 
     /**
      * Creates an instance.

@@ -50,8 +50,8 @@ public class HtmlOption2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"option1", "", "Number Three", "Number 4",
                 "option1\nNumber Three\nNumber 4"},
-            CHROME = {"option1", "      ", "Number Three", "Number 4",
-                "      option1\n      \n      Number Three\n      Number 4\n    "},
+            CHROME = {"option1", "", "Number Three", "Number 4",
+                "      option1\n       Number Three\n      Number 4\n    "},
             EDGE = {"option1", "      ", "Number Three", "Number 4",
                 "      option1\n      \n      Number Three\n      Number 4\n    "},
             IE = {"option1", "", "Number Three", "Number 4",

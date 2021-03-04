@@ -10240,13 +10240,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),getDistributedNodes(),select",
+    @Alerts(DEFAULT = "constructor()",
             EDGE = "constructor(),getDistributedNodes(),select",
-            FF = "constructor()",
-            FF78 = "constructor()",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
+    @HtmlUnitNYI(EDGE = "constructor()",
             IE = "constructor")
     public void content() throws Exception {
         test("content");

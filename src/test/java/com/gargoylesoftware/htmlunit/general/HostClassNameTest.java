@@ -3355,7 +3355,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLContentElement() { [native code] }",
             EDGE = "function HTMLContentElement() { [native code] }")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
@@ -4194,7 +4193,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLShadowElement() { [native code] }",
             EDGE = "function HTMLShadowElement() { [native code] }")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");

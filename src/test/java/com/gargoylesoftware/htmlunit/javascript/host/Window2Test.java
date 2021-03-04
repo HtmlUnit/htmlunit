@@ -919,7 +919,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1274"},
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"},
             FF78 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1274"})
     @NotYetImplemented({FF, FF78})
     public void scrolling1() throws Exception {

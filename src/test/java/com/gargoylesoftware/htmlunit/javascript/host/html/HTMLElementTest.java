@@ -1169,10 +1169,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Outer#=#<div#id=\"myNode\">New##cell#value</div>")
+    @Alerts("Outer = <div id=\"myNode\">New  cell value</div>")
     public void getOuterHTMLFromBlock() throws Exception {
         final String html = createPageForGetOuterHTML("div", "New  cell value", false);
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1180,10 +1180,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Outer#=#<span#id=\"myNode\">New##cell#value</span>")
+    @Alerts("Outer = <span id=\"myNode\">New  cell value</span>")
     public void getOuterHTMLFromInline() throws Exception {
         final String html = createPageForGetOuterHTML("span", "New  cell value", false);
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1191,10 +1191,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Outer#=#<br#id=\"myNode\">")
+    @Alerts("Outer = <br id=\"myNode\">")
     public void getOuterHTMLFromEmpty() throws Exception {
         final String html = createPageForGetOuterHTML("br", "", true);
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1203,19 +1203,21 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Outer = <p id=\"myNode\">New  cell value\n\n</p>",
-            IE = "Outer = <p id=\"myNode\">New  cell value\n\n")
+    @Alerts(DEFAULT = "Outer = <p id=\"myNode\">New  cell value\n"
+                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"42\"></textarea>\n\n</p>",
+            IE = "Outer = <p id=\"myNode\">New  cell value\n"
+                    + "  <textarea id=\"myLog\" rows=\"42\" cols=\"80\"></textarea>\n\n")
     @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     private static String createPageForGetOuterHTML(final String nodeTag, final String value, final boolean unclosed) {
         return "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
-                + "function log(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
+                + LOG_TEXTAREA_FUNCTION
                 + "  function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    log('Outer = ' + myNode.outerHTML);\n"
@@ -1224,6 +1226,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
                 + "  <" + nodeTag + " id='myNode'>" + value + (unclosed ? "" : "</" + nodeTag + ">") + "\n"
+                + LOG_TEXTAREA
                 + "</body>\n"
                 + "</html>";
     }
@@ -1233,11 +1236,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#", "Children:#0"},
-            IE = {"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#null", "Children:#1"})
+    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"},
+            IE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = null", "Children: 1"})
     public void setOuterHTMLNull() throws Exception {
         final String html = createPageForSetOuterHTML("div", null);
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1245,10 +1248,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#undefined", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = undefined", "Children: 1"})
     public void setOuterHTMLUndefined() throws Exception {
         final String html = createPageForSetOuterHTML("div", "undefined");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1256,10 +1259,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#", "Children:#0"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Children: 0"})
     public void setOuterHTMLEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1267,10 +1270,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=###", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New =   ", "Children: 1"})
     public void setOuterHTMLBlank() throws Exception {
         final String html = createPageForSetOuterHTML("div", "  ");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1278,10 +1281,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#New##cell#value", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Children: 1"})
     public void setOuterHTMLAddTextToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1289,10 +1292,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#New##cell#value", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value", "Children: 1"})
     public void setOuterHTMLAddTextToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1300,10 +1303,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<div>test</div>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1311,10 +1314,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<div>test</div>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1322,10 +1325,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<span>test</span>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Children: 1"})
     public void setOuterHTMLAddInlineToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1333,10 +1336,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<span>test</span>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>", "Children: 1"})
     public void setOuterHTMLAddInlineToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1344,10 +1347,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<br>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Children: 1"})
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1394,11 +1397,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>",
-                    "New#=#<div>test</div>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1407,11 +1410,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>",
-                    "New#=#<p>test</p>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <p>test</p>", "Children: 1"})
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1420,10 +1423,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<p>test</p>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>", "Children: 1"})
     public void setOuterHTMLAddUnclosedParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<p>test");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1432,11 +1435,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>",
-                    "New#=#<a>test</a>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <a>test</a>", "Children: 1"})
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1444,10 +1447,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<div></div>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1460,7 +1463,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @NotYetImplemented
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1468,10 +1471,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<span></span>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingInline() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span/>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -1479,10 +1482,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old#=#<span#id=\"innerNode\">Old#outerHTML</span>", "New#=#<br>", "Children:#1"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
-        loadPageVerifyTitle2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     private static String createPageForSetOuterHTML(final String nodeTag, final String newValue) {
@@ -1496,7 +1499,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         return "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "  function log(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
             + "    var innerNode = document.getElementById('innerNode');\n"
@@ -1509,6 +1512,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "  <" + nodeTag + " id='myNode'><span id='innerNode'>Old outerHTML</span></" + nodeTag + ">\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
     }
@@ -4861,7 +4865,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         webDriver.findElement(By.id("over")).click();
         verifyTitle2(webDriver, new String[] {getExpectedAlerts()[0],
-                getExpectedAlerts()[1], "[object HTMLDivElement]"});
+                getExpectedAlerts()[1], "[object HTMLDivElement]", "[object Window]"});
     }
 
     /**

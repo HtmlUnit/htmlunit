@@ -434,13 +434,13 @@ public final class StyleAttributes {
         BORDER_COLOR_("border-color", "border-color", ff("")),
 
         /** The style property {@code borderEndEndRadius}. */
-        BORDER_END_END_RADIUS("borderEndEndRadius", "border-end-end-radius", ff("0px")),
+        BORDER_END_END_RADIUS("borderEndEndRadius", "border-end-end-radius", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-end-end-radius}. */
         BORDER_END_END_RADIUS_("border-end-end-radius", "border-end-end-radius", ff("0px")),
 
         /** The style property {@code borderEndStartRadius}. */
-        BORDER_END_START_RADIUS("borderEndStartRadius", "border-end-start-radius", ff("0px")),
+        BORDER_END_START_RADIUS("borderEndStartRadius", "border-end-start-radius", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-end-start-radius}. */
         BORDER_END_START_RADIUS_("border-end-start-radius", "border-end-start-radius", ff("0px")),
@@ -633,13 +633,14 @@ public final class StyleAttributes {
         BORDER_SPACING_("border-spacing", "border-spacing", ff("0px 0px")),
 
         /** The style property {@code borderStartEndRadius}. */
-        BORDER_START_END_RADIUS("borderStartEndRadius", "border-start-end-radius", ff("0px")),
+        BORDER_START_END_RADIUS("borderStartEndRadius", "border-start-end-radius", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-start-end-radius}. */
         BORDER_START_END_RADIUS_("border-start-end-radius", "border-start-end-radius", ff("0px")),
 
         /** The style property {@code borderStartStartRadius}. */
-        BORDER_START_START_RADIUS("borderStartStartRadius", "border-start-start-radius", ff("0px")),
+        BORDER_START_START_RADIUS("borderStartStartRadius", "border-start-start-radius",
+                chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-start-start-radius}. */
         BORDER_START_START_RADIUS_("border-start-start-radius", "border-start-start-radius", ff("0px")),
@@ -1137,7 +1138,7 @@ public final class StyleAttributes {
 
         /** The style property {@code forcedColorAdjust}. */
         FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
-                edge("auto")),
+                chromeAndEdge("auto")),
 
         /** The style property {@code gap}. */
         GAP("gap", "gap", chromeAndEdge("normal"), ff("")),

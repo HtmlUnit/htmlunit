@@ -2020,7 +2020,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLContentElement]",
             EDGE = "[object HTMLContentElement]")
     public void content() throws Exception {
         test("content");

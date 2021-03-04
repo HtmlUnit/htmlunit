@@ -792,7 +792,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            CHROME = "       A B C D EF G H I\n      Second\n    ",
             EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
             IE = "A B C D EF G H I Second")
     @NotYetImplemented({CHROME, EDGE, IE})
@@ -806,7 +806,6 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
     @NotYetImplemented({CHROME, EDGE, IE})
@@ -820,7 +819,6 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
     @NotYetImplemented({CHROME, EDGE, IE})
@@ -834,6 +832,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            CHROME = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF78 = "A B C D EF G H I\nSecond")
     @NotYetImplemented({FF, FF78})
@@ -847,6 +846,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            CHROME = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF78 = "A B C D EF G H I\nSecond")
     @NotYetImplemented({FF, FF78})
@@ -860,7 +860,6 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D \nEF\nG \n H I \n Second")
     @NotYetImplemented
