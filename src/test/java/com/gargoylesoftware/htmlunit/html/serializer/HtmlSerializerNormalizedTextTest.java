@@ -37,8 +37,6 @@ public class HtmlSerializerNormalizedTextTest {
      */
     @Test
     public void normalize() {
-        final String ls = System.lineSeparator();
-
         HtmlSerializerTextBuilder serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("", Mode.NORMALIZE);
         assertEquals("", serializer.getText());
@@ -76,20 +74,20 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.append(" a  ", Mode.NORMALIZE);
         serializer.appendBlockSeparator();
         serializer.append("  x ", Mode.NORMALIZE);
-        assertEquals("a" + ls + "x", serializer.getText());
+        assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a" + ls + "x", serializer.getText());
+        assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
         serializer.appendBlockSeparator();
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a" + ls + "x", serializer.getText());
+        assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
@@ -97,27 +95,27 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.append("  ", Mode.NORMALIZE);
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a" + ls + "x", serializer.getText());
+        assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.appendNewLine();
-        assertEquals(ls, serializer.getText());
+        assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.appendNewLine();
         serializer.append(" ", Mode.NORMALIZE);
-        assertEquals(ls, serializer.getText());
+        assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append(" ", Mode.NORMALIZE);
         serializer.appendNewLine();
-        assertEquals(ls, serializer.getText());
+        assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append(" ", Mode.NORMALIZE);
         serializer.appendNewLine();
         serializer.append(" ", Mode.NORMALIZE);
-        assertEquals(ls, serializer.getText());
+        assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.appendNewLine();
@@ -130,7 +128,7 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.appendNewLine();
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a" + ls + "x", serializer.getText());
+        assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
@@ -138,7 +136,7 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.appendBlockSeparator();
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a" + ls + "x", serializer.getText());
+        assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
@@ -158,7 +156,7 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.appendNewLine();
         serializer.appendBlockSeparator();
         serializer.appendBlockSeparator();
-        assertEquals("x" + ls + "y", serializer.getText());
+        assertEquals("x\ny", serializer.getText());
 
         serializer = new HtmlSerializerNormalizedText.HtmlSerializerTextBuilder();
         serializer.append("abc", Mode.NORMALIZE);
@@ -254,8 +252,7 @@ public class HtmlSerializerNormalizedTextTest {
      */
     @Test
     public void performanceManyReplaces() {
-        final String ls = System.lineSeparator();
-        final String expected = StringUtils.repeat("x" + ls, 100_000).trim();
+        final String expected = StringUtils.repeat("x\n", 100_000).trim();
 
         final long time = System.currentTimeMillis();
 
