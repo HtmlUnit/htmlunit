@@ -180,20 +180,20 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "u3P3tS7vqYDs1nFqdWr3xLrU69UaD180m+60WruvheQe0220mbt3+tgP09/efvP/3IzEcjac6icVT4dh8KhybT0U+yCNfIN"
                     + "nX13e6A4yNjR0ZHBw8+i4TRycm/j/v/01OTn4kCILwFgqgq1utHBHHAAAAAElFTkSuQmCC",
             FF78 = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtUlEQVQ4jXXPz2vTdxzH8e/BMfwfKoLDgwcP23l0dGy3zcsO"
-                + "Hj0LDtaLRTvaMlkPQztBBauwH3VOJSZt2oT8WKt+Eym2DekPutgkjbTNj+/vH/kmMc332/j0IGbEdB943T7vB6+XIAiCkM/n"
-                + "P44/TQ4lFlPjz1+kxp8vp8cXD0lkXjwnHPbCMbFf1U0qsoak6MiqjqIaqJqJqptohoWmmximxVz0yc0ewB+KDsiqTrGiUJbU"
-                + "bkgzOkjVcTAti5m52C89gKIZlCSlc5wuyMQzMvGMwkpBQTdtdoslXm5lyW8X3kQXEp91Ae8n7FU0HqZK/LFRxZ9zeZxrEctZ"
-                + "hDfKlFQLy3aw7Sq+2fA3XYCmm0iKTiC1y60llT83m8ztvWFF8VgvO4hZmakXuzi1Os3mfjcQDEUHNMMiV1S4OJdleKHMnbUa"
-                + "0wWPSr3NmvSaRE5hajHPZtGgud/qbaAbFslMke8DmwxFX3FFVJjasJGcFrVGk5VtiR8C68ysFtlvufhmY92AYVok/t3j18gq"
-                + "m9s7XBN3uBB6xfnZbeYzZaaXc3xxI8FMeo+W6/Y2MCybnbLCd7ef8XRplbO/L/H1nWW+mlziamSNC/eSfH7tH7aKGq77QYNg"
-                + "KDpgWjZlSeb6TJIz1yMcGw5yYjTMidEQn/wY5ORIkMsPEhiGiet5vRNMu4qmm7zcyvGzT+TTn4Icv+Tn2NBjTo1MM/xAJJsv"
-                + "UG808LyD7gn3/cEBy3awbAfDtCmWKqxnsvjFNL5naVYzeSRZpt5o4LouBwdt/vIF/gNu3P3tS7vqYDs1nFqdWr3xLrU69UaD"
-                + "180m+60WruvheQe0220mbt3+tgP09/efvP/3IzEcjac6icVT4dh8KhybT0U+yCNfINnX13e6A4yNjR0ZHBw8+i4TRycm/j/v"
-                + "/01OTn4kCILwFgqgq1utHBHHAAAAAElFTkSuQmCC",
+                    + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtUlEQVQ4jXXPz2vTdxzH8e/BMfwfKoLDgwcP23l0dGy3zcsO"
+                    + "Hj0LDtaLRTvaMlkPQztBBauwH3VOJSZt2oT8WKt+Eym2DekPutgkjbTNj+/vH/kmMc332/j0IGbEdB943T7vB6+XIAiCkM/n"
+                    + "P44/TQ4lFlPjz1+kxp8vp8cXD0lkXjwnHPbCMbFf1U0qsoak6MiqjqIaqJqJqptohoWmmximxVz0yc0ewB+KDsiqTrGiUJbU"
+                    + "bkgzOkjVcTAti5m52C89gKIZlCSlc5wuyMQzMvGMwkpBQTdtdoslXm5lyW8X3kQXEp91Ae8n7FU0HqZK/LFRxZ9zeZxrEctZ"
+                    + "hDfKlFQLy3aw7Sq+2fA3XYCmm0iKTiC1y60llT83m8ztvWFF8VgvO4hZmakXuzi1Os3mfjcQDEUHNMMiV1S4OJdleKHMnbUa"
+                    + "0wWPSr3NmvSaRE5hajHPZtGgud/qbaAbFslMke8DmwxFX3FFVJjasJGcFrVGk5VtiR8C68ysFtlvufhmY92AYVok/t3j18gq"
+                    + "m9s7XBN3uBB6xfnZbeYzZaaXc3xxI8FMeo+W6/Y2MCybnbLCd7ef8XRplbO/L/H1nWW+mlziamSNC/eSfH7tH7aKGq77QYNg"
+                    + "KDpgWjZlSeb6TJIz1yMcGw5yYjTMidEQn/wY5ORIkMsPEhiGiet5vRNMu4qmm7zcyvGzT+TTn4Icv+Tn2NBjTo1MM/xAJJsv"
+                    + "UG808LyD7gn3/cEBy3awbAfDtCmWKqxnsvjFNL5naVYzeSRZpt5o4LouBwdt/vIF/gNu3P3tS7vqYDs1nFqdWr3xLrU69UaD"
+                    + "180m+60WruvheQe0220mbt3+tgP09/efvP/3IzEcjac6icVT4dh8KhybT0U+yCNfINnX13e6A4yNjR0ZHBw8+i4TRycm/j/v"
+                    + "/01OTn4kCILwFgqgq1utHBHHAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
-                + "Y/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
+                    + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
+                    + "Y/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
     public void drawImage() throws Exception {
         drawImage("html.png",
                 "canvas.width = img.width; canvas.height = img.height;\n",
@@ -696,7 +696,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
             IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVR42mNgGAWDEwAAAZoAAQDqGN4AAAAASUVORK5CYII=")
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVR42mNgGAWDEwAAAZoAAQDqGN4AAAAASUVORK5CYII=")
     public void drawImage9ArgumentsCropNegativWidth() throws Exception {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
