@@ -1005,6 +1005,18 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2", "1", "0", "o2"},
+            FF = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "0", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
+            FF78 = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "0", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "0", "evaluate not supported"})
     public void xpathSelected() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
@@ -1017,6 +1029,18 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2", "1", "1", "o2"},
+            FF = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "1", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
+            FF78 = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "1", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     public void xpathSelectedSetAttribute() throws Exception {
         final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
@@ -1029,6 +1053,18 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2", "1", "-1", "o2"},
+            FF = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "-1", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
+            FF78 = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "-1", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "-1", "evaluate not supported"})
     public void xpathSelectedMultiple() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
@@ -1041,6 +1077,18 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2", "1", "1", "o2"},
+            FF = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "1", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
+            FF78 = {"o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned",
+                    "1", "1", "o2",
+                    "InvalidStateError: XPathResult.iterateNext: "
+                            + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     public void xpathSelectedSetAttributeMultiple() throws Exception {
         final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
