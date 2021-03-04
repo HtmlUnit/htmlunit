@@ -1047,7 +1047,19 @@ public abstract class WebDriverTestCase extends WebTestCase {
             for (int i = 0; i < expectedAlerts.length; i++) {
                 expected.append(expectedAlerts[i]).append('§');
             }
-            assertEquals(expected.toString(), driver.getTitle());
+
+            final String title = driver.getTitle();
+            try {
+                assertEquals(expected.toString(), title);
+            }
+            catch (final AssertionError e) {
+                if (useRealBrowser() && StringUtils.isEmpty(title)) {
+                    Thread.sleep(42);
+                    assertEquals(expected.toString(), driver.getTitle());
+                    return driver;
+                }
+                throw e;
+            }
         }
         return driver;
     }
