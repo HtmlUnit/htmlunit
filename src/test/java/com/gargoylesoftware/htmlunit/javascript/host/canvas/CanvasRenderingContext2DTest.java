@@ -2227,12 +2227,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA7UlEQVQ4T+3Ur0pEQRTH8c/ULYIIg"
-            + "iAbFsEmGIXFJvoOBv+wBsEgGmQtIth8htXiKxiFfQKDyWQwb9VguDK7szhcYb1cjPeUA8OZ7/zmd8"
-            + "5MwBU2TWKYcu0U0s4IjTHNDbC6A5mHe8vcjbCFNewSHnJUMWneBbbT+mFgkNeUgV84RQs3uCTEQ8a"
-            + "RgEfooY0TnAc+pjVl4NOPqiKCHwmvJWAnqipYiDBczwJWUfgnMA32zhzHn6x3WFpkf8D9e+5Pj/Yq"
-            + "82c8r9C6ZeOA4YgoZBzxyhmw+0b/pXpPf1fO8LAetnl6zW9TY3L+fWy+AejsRJW3OyxAAAAAAElFT"
-            + "kSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA7UlEQVQ4T+3Ur0pEQRTH8c/ULYIIg"
+                + "iAbFsEmGIXFJvoOBv+wBsEgGmQtIth8htXiKxiFfQKDyWQwb9VguDK7szhcYb1cjPeUA8OZ7/zmd8"
+                + "5MwBU2TWKYcu0U0s4IjTHNDbC6A5mHe8vcjbCFNewSHnJUMWneBbbT+mFgkNeUgV84RQs3uCTEQ8a"
+                + "RgEfooY0TnAc+pjVl4NOPqiKCHwmvJWAnqipYiDBczwJWUfgnMA32zhzHn6x3WFpkf8D9e+5Pj/Yq"
+                + "82c8r9C6ZeOA4YgoZBzxyhmw+0b/pXpPf1fO8LAetnl6zW9TY3L+fWy+AejsRJW3OyxAAAAAAElFT"
+                + "kSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlklEQVQ4je2SsQnDMBBF30yezCOI1NlAC3gEdW5cuXYX0miB"
                 + "4Am+GyWWDwXFxKSJDz7ow7/H3SEAB/RJ7gCBNUfUfwJ9AHUgJbU2JGgFg9bQtQaMWbveAdO7EUSbKUz4ah9ATQHYZb4K/GTC"
@@ -2242,6 +2242,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iOYvQgSDF12Yw4TZx7JkATywbPIdBNb0qHcCXQQFkDYlGxIMgqQjtLaAqtoDaDoBrpVPgqEx4R6fQPMJMFQ+tIBXJmwCPbDA"
                 + "WCCXYz25YD6tg5hhf89QHESTs8Bul2J3eK/+6B/wAz4M/AGbI3F9tohoTwAAAABJRU5ErkJggg==",
             IE = "no ctor")
+    @HtmlUnitNYI(FF78 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAcElEQVR42mNgYGD4T2UMBygcaoCRaeB/EJ4NxO+AOBCPopVA"
+                + "/AWIA4gxEKjovw8QX8ajyAeIg4D4FzEGsgExOxB/waOIGcYmxkAPIPYG4nO4FGFj4zNwGRC/BGJ3cg1ESuX/qZ1T/v8fzSmj"
+                + "Bg4HAwGGsHedCdecqgAAAABJRU5ErkJggg==")
     public void fillTextAndTransform() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (typeof ImageData != 'function') { log('no ctor'); return; }\n"

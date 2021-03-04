@@ -808,7 +808,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @NotYetImplemented({EDGE, IE})
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -821,7 +821,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @NotYetImplemented({EDGE, IE})
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }
@@ -835,7 +835,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF78 = "A B C D EF G H I\nSecond")
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({CHROME, FF, FF78})
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
     }
@@ -849,7 +849,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF78 = "A B C D EF G H I\nSecond")
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({CHROME, FF, FF78})
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");
     }
