@@ -1263,7 +1263,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Stylesheet list contains only active style sheets. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_STYLESHEETLIST_ACTIVE_ONLY,
 
     /** IE supports accessing unsupported style elements via getter
