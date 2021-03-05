@@ -288,10 +288,6 @@ public class EventTarget extends SimpleScriptable {
      */
     @JsxFunction
     public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        if (isEventHandlerOnWindow()) {
-            getWindow().getEventListenersContainer().removeEventListener(type, listener, useCapture);
-        }
-
         if (eventListenersContainer_ == null) {
             return;
         }

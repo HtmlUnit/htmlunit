@@ -4824,7 +4824,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"added", "removed"})
+    @Alerts({"added", "removed", "[object HTMLDivElement]", "[object Window]"})
     public void addRemoveEventListenerFromBody() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4837,22 +4837,17 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function test() {\n"
-            + "    var byId = document.getElementById.bind(document);\n"
-
-            + "    var under = byId('under');\n"
-            + "    var over = byId('over');\n"
+            + "    var under = document.getElementById('under');\n"
+            + "    var over = document.getElementById('over');\n"
             + "    var body = document.body;\n"
 
-            + "    var types = ['click'];\n"
-            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
-            + "      over.addEventListener(type, handler);\n"
-            + "      body.addEventListener(type, handler);\n"
-            + "      window.addEventListener(type, handler);\n"
-            + "      log('added');\n"
+            + "    over.addEventListener('click', handler);\n"
+            + "    body.addEventListener('click', handler);\n"
+            + "    window.addEventListener('click', handler);\n"
+            + "    log('added');\n"
 
-            + "      body.removeEventListener(type, handler);\n"
-            + "      log('removed');\n"
-            + "    }\n"
+            + "    body.removeEventListener('click', handler);\n"
+            + "    log('removed');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -4861,18 +4856,61 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver webDriver = loadPageVerifyTitle2(html);
+        final WebDriver webDriver = loadPageVerifyTitle2(html,
+                getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         webDriver.findElement(By.id("over")).click();
-        verifyTitle2(webDriver, new String[] {getExpectedAlerts()[0],
-                getExpectedAlerts()[1], "[object HTMLDivElement]", "[object Window]"});
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"added", "removed"})
+    @Alerts({"added", "removed", "[object HTMLDivElement]", "[object Window]"})
+    public void addRemoveEventListenerFromBody2() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler(ev) {\n"
+            + "    log(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var under = document.getElementById('under');\n"
+            + "    var over = document.getElementById('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    over.addEventListener('click', handler);\n"
+            + "    window.addEventListener('click', handler);\n"
+//            + "    body.addEventListener('click', handler);\n"
+            + "    log('added');\n"
+
+            + "    body.removeEventListener('click', handler);\n"
+            + "    log('removed');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPageVerifyTitle2(html,
+                getExpectedAlerts()[0], getExpectedAlerts()[1]);
+
+        webDriver.findElement(By.id("over")).click();
+        verifyTitle2(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"added", "removed", "[object HTMLDivElement]", "[object HTMLBodyElement]"})
     public void addRemoveEventListenerFromWindow() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4885,22 +4923,17 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function test() {\n"
-            + "    var byId = document.getElementById.bind(document);\n"
-
-            + "    var under = byId('under');\n"
-            + "    var over = byId('over');\n"
+            + "    var under = document.getElementById('under');\n"
+            + "    var over = document.getElementById('over');\n"
             + "    var body = document.body;\n"
 
-            + "    var types = ['click'];\n"
-            + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
-            + "      over.addEventListener(type, handler);\n"
-            + "      body.addEventListener(type, handler);\n"
-            + "      window.addEventListener(type, handler);\n"
-            + "      log('added');\n"
+            + "    over.addEventListener('click', handler);\n"
+            + "    body.addEventListener('click', handler);\n"
+            + "    window.addEventListener('click', handler);\n"
+            + "    log('added');\n"
 
-            + "      window.removeEventListener(type, handler);\n"
-            + "      log('removed');\n"
-            + "    }\n"
+            + "    window.removeEventListener('click', handler);\n"
+            + "    log('removed');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -4909,12 +4942,52 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver webDriver = loadPageVerifyTitle2(html);
+        final WebDriver webDriver = loadPageVerifyTitle2(html, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         webDriver.findElement(By.id("over")).click();
-        verifyTitle2(webDriver, new String[] {
-            getExpectedAlerts()[0], getExpectedAlerts()[1],
-            "[object HTMLDivElement]", "[object HTMLBodyElement]"});
+        verifyTitle2(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"added", "removed", "[object HTMLDivElement]", "[object HTMLBodyElement]"})
+    public void addRemoveEventListenerFromWindow1() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler(ev) {\n"
+            + "    log(ev.currentTarget);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var under = document.getElementById('under');\n"
+            + "    var over = document.getElementById('over');\n"
+            + "    var body = document.body;\n"
+
+            + "    over.addEventListener('click', handler);\n"
+            + "    window.addEventListener('click', handler);\n"
+            + "    body.addEventListener('click', handler);\n"
+            + "    log('added');\n"
+
+            + "    window.removeEventListener('click', handler);\n"
+            + "    log('removed');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='over'>abc</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver webDriver = loadPageVerifyTitle2(html, getExpectedAlerts()[0], getExpectedAlerts()[1]);
+
+        webDriver.findElement(By.id("over")).click();
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
