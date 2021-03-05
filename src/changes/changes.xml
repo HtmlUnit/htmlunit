@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.48.0" date="xx, 2021" description="Bugfixes, Chrome 89, Firefox 86">
+        <release version="2.48.0" date="xx, 2021" description="Bugfixes, Chrome/Edge 89, Firefox 86">
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.12.0.
             </action>
