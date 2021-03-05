@@ -257,17 +257,6 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _HTMLContentElement_HTMLContentElement() throws Exception {
-        test("HTMLContentElement", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _HTMLDataElement_HTMLDataElement() throws Exception {
@@ -479,17 +468,6 @@ public class HostParentOfHTest extends HostParentOf {
     @Alerts("true")
     public void _HTMLElement_HTMLCanvasElement() throws Exception {
         test("HTMLElement", "HTMLCanvasElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _HTMLElement_HTMLContentElement() throws Exception {
-        test("HTMLElement", "HTMLContentElement");
     }
 
     /**
@@ -962,17 +940,6 @@ public class HostParentOfHTest extends HostParentOf {
     @Alerts("true")
     public void _HTMLElement_HTMLSelectElement() throws Exception {
         test("HTMLElement", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _HTMLElement_HTMLShadowElement() throws Exception {
-        test("HTMLElement", "HTMLShadowElement");
     }
 
     /**
@@ -1619,17 +1586,6 @@ public class HostParentOfHTest extends HostParentOf {
     @Alerts("true")
     public void _HTMLSelectElement_HTMLSelectElement() throws Exception {
         test("HTMLSelectElement", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _HTMLShadowElement_HTMLShadowElement() throws Exception {
-        test("HTMLShadowElement", "HTMLShadowElement");
     }
 
     /**

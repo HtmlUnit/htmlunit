@@ -301,18 +301,6 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Node_HTMLContentElement() throws Exception {
-        test("Node", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Node_HTMLDataElement() throws Exception {
@@ -839,18 +827,6 @@ public class HostParentOfNTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLSelectElement() throws Exception {
         test("Node", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Node_HTMLShadowElement() throws Exception {
-        test("Node", "HTMLShadowElement");
     }
 
     /**

@@ -2019,8 +2019,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            EDGE = "[object HTMLContentElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void content() throws Exception {
         test("content");
     }

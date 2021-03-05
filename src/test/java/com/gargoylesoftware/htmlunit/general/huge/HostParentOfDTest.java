@@ -574,17 +574,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Element_HTMLContentElement() throws Exception {
-        test("Element", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Element_HTMLDataElement() throws Exception {
@@ -1051,17 +1040,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts("true")
     public void _Element_HTMLSelectElement() throws Exception {
         test("Element", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Element_HTMLShadowElement() throws Exception {
-        test("Element", "HTMLShadowElement");
     }
 
     /**
@@ -3021,17 +2999,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _EventTarget_HTMLContentElement() throws Exception {
-        test("EventTarget", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_HTMLDataElement() throws Exception {
@@ -3497,17 +3464,6 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_HTMLSelectElement() throws Exception {
         test("EventTarget", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _EventTarget_HTMLShadowElement() throws Exception {
-        test("EventTarget", "HTMLShadowElement");
     }
 
     /**

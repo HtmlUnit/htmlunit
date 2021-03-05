@@ -2028,8 +2028,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            EDGE = "function")
+    @Alerts("undefined")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -2765,8 +2764,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            EDGE = "function")
+    @Alerts("undefined")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
     }
