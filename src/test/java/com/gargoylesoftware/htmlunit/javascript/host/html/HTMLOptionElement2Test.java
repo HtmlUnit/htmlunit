@@ -31,6 +31,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -1004,7 +1005,12 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "0", "o2"},
+    @Alerts(DEFAULT = {"o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned.",
+                    "1", "0", "o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned."},
             FF = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
@@ -1018,6 +1024,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "0", "evaluate not supported"})
+    @HtmlUnitNYI(CHROME = {"o2", "1", "0", "o2"},
+            EDGE = {"o2", "1", "0", "o2"},
+            FF = {"o2", "1", "0", "o2"},
+            FF78 = {"o2", "1", "0", "o2"})
     public void xpathSelected() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
 
@@ -1028,7 +1038,12 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "1", "o2"},
+    @Alerts(DEFAULT = {"o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned.",
+                    "1", "1", "o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned."},
             FF = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
@@ -1042,6 +1057,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
+    @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
+            EDGE = {"o2", "1", "1", "o2"},
+            FF = {"o2", "1", "1", "o2"},
+            FF78 = {"o2", "1", "1", "o2"})
     public void xpathSelectedSetAttribute() throws Exception {
         final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
 
@@ -1052,7 +1071,12 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "-1", "o2"},
+    @Alerts(DEFAULT = {"o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned.",
+                    "1", "-1", "o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned."},
             FF = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
@@ -1066,6 +1090,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "-1", "evaluate not supported"})
+    @HtmlUnitNYI(CHROME = {"o2", "1", "-1", "o2"},
+            EDGE = {"o2", "1", "-1", "o2"},
+            FF = {"o2", "1", "-1", "o2"},
+            FF78 = {"o2", "1", "-1", "o2"})
     public void xpathSelectedMultiple() throws Exception {
         final String selectionChangeCode = "    sel.options[1].selected = false;\n";
 
@@ -1076,7 +1104,12 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"o2", "1", "1", "o2"},
+    @Alerts(DEFAULT = {"o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned.",
+                    "1", "1", "o2",
+                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                            + "The document has mutated since the result was returned."},
             FF = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
@@ -1090,6 +1123,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
+    @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
+            EDGE = {"o2", "1", "1", "o2"},
+            FF = {"o2", "1", "1", "o2"},
+            FF78 = {"o2", "1", "1", "o2"})
     public void xpathSelectedSetAttributeMultiple() throws Exception {
         final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
 
