@@ -68,6 +68,7 @@
                 HTMLInputElement.src now returns the value in the context of the page.
             </action>
         </release>
+
         <release version="2.47.1" date="February 7, 2021" description="Hotfix">
             <action type="fix" dev="rbri">
                 neko: Fix a regression from the improved table parsing done in 2.44.0.
