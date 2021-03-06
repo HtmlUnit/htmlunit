@@ -38,7 +38,7 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
     /**
      * Value to use if no specified <tt>value</tt> attribute.
      */
-    private static final String DEFAULT_VALUE = "Reset";
+    public static final String DEFAULT_VALUE = "Reset";
 
     /**
      * Creates an instance.

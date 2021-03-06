@@ -35,66 +35,66 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("\n")
-    public void getVisibleTextWhiteSpaceBreak() throws Exception {
-        getVisibleTextWhiteSpaceBreak(null);
+    public void getNormalizedTextWhiteSpaceBreak() throws Exception {
+        getNormalizedTextWhiteSpaceBreak(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("\n")
-    public void getVisibleTextWhiteSpaceBreakNormal() throws Exception {
-        getVisibleTextWhiteSpaceBreak("normal");
+    public void getNormalizedTextWhiteSpaceBreakNormal() throws Exception {
+        getNormalizedTextWhiteSpaceBreak("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("\n")
-    public void getVisibleTextWhiteSpaceBreakNowrap() throws Exception {
-        getVisibleTextWhiteSpaceBreak("nowrap");
+    public void getNormalizedTextWhiteSpaceBreakNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceBreak("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("\n")
-    public void getVisibleTextWhiteSpaceBreakPre() throws Exception {
-        getVisibleTextWhiteSpaceBreak("pre");
+    public void getNormalizedTextWhiteSpaceBreakPre() throws Exception {
+        getNormalizedTextWhiteSpaceBreak("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("\n")
-    public void getVisibleTextWhiteSpaceBreakPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceBreak("pre-wrap");
+    public void getNormalizedTextWhiteSpaceBreakPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceBreak("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("\n")
-    public void getVisibleTextWhiteSpaceBreakPreLine() throws Exception {
-        getVisibleTextWhiteSpaceBreak("pre-line");
+    public void getNormalizedTextWhiteSpaceBreakPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceBreak("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceBreak(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceBreak(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -109,66 +109,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceInputHidden() throws Exception {
-        getVisibleTextWhiteSpaceInputHidden(null);
+    public void getNormalizedTextWhiteSpaceInputHidden() throws Exception {
+        getNormalizedTextWhiteSpaceInputHidden(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceInputHiddenNormal() throws Exception {
-        getVisibleTextWhiteSpaceInputHidden("normal");
+    public void getNormalizedTextWhiteSpaceInputHiddenNormal() throws Exception {
+        getNormalizedTextWhiteSpaceInputHidden("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceInputHiddenNowrap() throws Exception {
-        getVisibleTextWhiteSpaceInputHidden("nowrap");
+    public void getNormalizedTextWhiteSpaceInputHiddenNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputHidden("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceInputHiddenPre() throws Exception {
-        getVisibleTextWhiteSpaceInputHidden("pre");
+    public void getNormalizedTextWhiteSpaceInputHiddenPre() throws Exception {
+        getNormalizedTextWhiteSpaceInputHidden("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceInputHiddenPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceInputHidden("pre-wrap");
+    public void getNormalizedTextWhiteSpaceInputHiddenPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputHidden("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceInputHiddenPreLine() throws Exception {
-        getVisibleTextWhiteSpaceInputHidden("pre-line");
+    public void getNormalizedTextWhiteSpaceInputHiddenPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceInputHidden("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceInputHidden(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceInputHidden(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -187,66 +187,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceScript() throws Exception {
-        getVisibleTextWhiteSpaceScript(null);
+    public void getNormalizedTextWhiteSpaceScript() throws Exception {
+        getNormalizedTextWhiteSpaceScript(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceScriptNormal() throws Exception {
-        getVisibleTextWhiteSpaceScript("normal");
+    public void getNormalizedTextWhiteSpaceScriptNormal() throws Exception {
+        getNormalizedTextWhiteSpaceScript("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceScriptNowrap() throws Exception {
-        getVisibleTextWhiteSpaceScript("nowrap");
+    public void getNormalizedTextWhiteSpaceScriptNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceScript("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceScriptPre() throws Exception {
-        getVisibleTextWhiteSpaceScript("pre");
+    public void getNormalizedTextWhiteSpaceScriptPre() throws Exception {
+        getNormalizedTextWhiteSpaceScript("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceScriptPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceScript("pre-wrap");
+    public void getNormalizedTextWhiteSpaceScriptPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceScript("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceScriptPreLine() throws Exception {
-        getVisibleTextWhiteSpaceScript("pre-line");
+    public void getNormalizedTextWhiteSpaceScriptPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceScript("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceScript(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceScript(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -262,66 +262,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceStyle() throws Exception {
-        getVisibleTextWhiteSpaceStyle(null);
+    public void getNormalizedTextWhiteSpaceStyle() throws Exception {
+        getNormalizedTextWhiteSpaceStyle(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceStyleNormal() throws Exception {
-        getVisibleTextWhiteSpaceStyle("normal");
+    public void getNormalizedTextWhiteSpaceStyleNormal() throws Exception {
+        getNormalizedTextWhiteSpaceStyle("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceStyleNowrap() throws Exception {
-        getVisibleTextWhiteSpaceStyle("nowrap");
+    public void getNormalizedTextWhiteSpaceStyleNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceStyle("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceStylePre() throws Exception {
-        getVisibleTextWhiteSpaceStyle("pre");
+    public void getNormalizedTextWhiteSpaceStylePre() throws Exception {
+        getNormalizedTextWhiteSpaceStyle("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceStylePreWrap() throws Exception {
-        getVisibleTextWhiteSpaceStyle("pre-wrap");
+    public void getNormalizedTextWhiteSpaceStylePreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceStyle("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceStylePreLine() throws Exception {
-        getVisibleTextWhiteSpaceStyle("pre-line");
+    public void getNormalizedTextWhiteSpaceStylePreLine() throws Exception {
+        getNormalizedTextWhiteSpaceStyle("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceStyle(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceStyle(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -337,66 +337,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceNoframes() throws Exception {
-        getVisibleTextWhiteSpaceNoframes(null);
+    public void getNormalizedTextWhiteSpaceNoframes() throws Exception {
+        getNormalizedTextWhiteSpaceNoframes(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceNoframesNormal() throws Exception {
-        getVisibleTextWhiteSpaceNoframes("normal");
+    public void getNormalizedTextWhiteSpaceNoframesNormal() throws Exception {
+        getNormalizedTextWhiteSpaceNoframes("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceNoframesNowrap() throws Exception {
-        getVisibleTextWhiteSpaceNoframes("nowrap");
+    public void getNormalizedTextWhiteSpaceNoframesNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceNoframes("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceNoframesPre() throws Exception {
-        getVisibleTextWhiteSpaceNoframes("pre");
+    public void getNormalizedTextWhiteSpaceNoframesPre() throws Exception {
+        getNormalizedTextWhiteSpaceNoframes("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceNoframesPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceNoframes("pre-wrap");
+    public void getNormalizedTextWhiteSpaceNoframesPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceNoframes("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getVisibleTextWhiteSpaceNoframesPreLine() throws Exception {
-        getVisibleTextWhiteSpaceNoframes("pre-line");
+    public void getNormalizedTextWhiteSpaceNoframesPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceNoframes("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceNoframes(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceNoframes(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -412,72 +412,72 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceDiv() throws Exception {
-        getVisibleTextWhiteSpaceDiv(null);
+    public void getNormalizedTextWhiteSpaceDiv() throws Exception {
+        getNormalizedTextWhiteSpaceDiv(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceDivNormal() throws Exception {
-        getVisibleTextWhiteSpaceDiv("normal");
+    public void getNormalizedTextWhiteSpaceDivNormal() throws Exception {
+        getNormalizedTextWhiteSpaceDiv("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceDivNowrap() throws Exception {
-        getVisibleTextWhiteSpaceDiv("nowrap");
+    public void getNormalizedTextWhiteSpaceDivNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceDiv("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceDivPre() throws Exception {
-        getVisibleTextWhiteSpaceDiv("pre");
+    public void getNormalizedTextWhiteSpaceDivPre() throws Exception {
+        getNormalizedTextWhiteSpaceDiv("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceDivPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceDiv("pre-wrap");
+    public void getNormalizedTextWhiteSpaceDivPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceDiv("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceDivPreLine() throws Exception {
-        getVisibleTextWhiteSpaceDiv("pre-line");
+    public void getNormalizedTextWhiteSpaceDivPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceDiv("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceDiv(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceDiv(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -493,7 +493,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -501,12 +501,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H   I  ")
-    public void getVisibleTextWhiteSpacePre() throws Exception {
-        getVisibleTextWhiteSpacePre(null);
+    public void getNormalizedTextWhiteSpacePre() throws Exception {
+        getNormalizedTextWhiteSpacePre(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -514,12 +514,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H   I  ")
-    public void getVisibleTextWhiteSpacePreNormal() throws Exception {
-        getVisibleTextWhiteSpacePre("normal");
+    public void getNormalizedTextWhiteSpacePreNormal() throws Exception {
+        getNormalizedTextWhiteSpacePre("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -527,12 +527,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H   I  ")
-    public void getVisibleTextWhiteSpacePreNowrap() throws Exception {
-        getVisibleTextWhiteSpacePre("nowrap");
+    public void getNormalizedTextWhiteSpacePreNowrap() throws Exception {
+        getNormalizedTextWhiteSpacePre("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -540,12 +540,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H   I  ")
-    public void getVisibleTextWhiteSpacePrePre() throws Exception {
-        getVisibleTextWhiteSpacePre("pre");
+    public void getNormalizedTextWhiteSpacePrePre() throws Exception {
+        getNormalizedTextWhiteSpacePre("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -553,12 +553,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H   I  ")
-    public void getVisibleTextWhiteSpacePrePreWrap() throws Exception {
-        getVisibleTextWhiteSpacePre("pre-wrap");
+    public void getNormalizedTextWhiteSpacePrePreWrap() throws Exception {
+        getNormalizedTextWhiteSpacePre("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -566,11 +566,11 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H   I  ")
-    public void getVisibleTextWhiteSpacePrePreLine() throws Exception {
-        getVisibleTextWhiteSpacePre("pre-line");
+    public void getNormalizedTextWhiteSpacePrePreLine() throws Exception {
+        getNormalizedTextWhiteSpacePre("pre-line");
     }
 
-    private void getVisibleTextWhiteSpacePre(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpacePre(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -586,7 +586,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -594,12 +594,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H  <br> I")
-    public void getVisibleTextWhiteSpaceTextArea() throws Exception {
-        getVisibleTextWhiteSpaceTextArea(null);
+    public void getNormalizedTextWhiteSpaceTextArea() throws Exception {
+        getNormalizedTextWhiteSpaceTextArea(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -607,12 +607,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H  <br> I")
-    public void getVisibleTextWhiteSpaceTextAreaNormal() throws Exception {
-        getVisibleTextWhiteSpaceTextArea("normal");
+    public void getNormalizedTextWhiteSpaceTextAreaNormal() throws Exception {
+        getNormalizedTextWhiteSpaceTextArea("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -620,12 +620,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H  <br> I")
-    public void getVisibleTextWhiteSpaceTextAreaNowrap() throws Exception {
-        getVisibleTextWhiteSpaceTextArea("nowrap");
+    public void getNormalizedTextWhiteSpaceTextAreaNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceTextArea("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -633,12 +633,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H  <br> I")
-    public void getVisibleTextWhiteSpaceTextAreaPre() throws Exception {
-        getVisibleTextWhiteSpaceTextArea("pre");
+    public void getNormalizedTextWhiteSpaceTextAreaPre() throws Exception {
+        getNormalizedTextWhiteSpaceTextArea("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -646,12 +646,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H  <br> I")
-    public void getVisibleTextWhiteSpaceTextAreaPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceTextArea("pre-wrap");
+    public void getNormalizedTextWhiteSpaceTextAreaPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceTextArea("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -659,11 +659,11 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "EF\n"
             + "G \n"
             + " H  <br> I")
-    public void getVisibleTextWhiteSpaceTextAreaPreLine() throws Exception {
-        getVisibleTextWhiteSpaceTextArea("pre-line");
+    public void getNormalizedTextWhiteSpaceTextAreaPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceTextArea("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceTextArea(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceTextArea(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -679,66 +679,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceTitle() throws Exception {
-        getVisibleTextWhiteSpaceTitle(null);
+    public void getNormalizedTextWhiteSpaceTitle() throws Exception {
+        getNormalizedTextWhiteSpaceTitle(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceTitleNormal() throws Exception {
-        getVisibleTextWhiteSpaceTitle("normal");
+    public void getNormalizedTextWhiteSpaceTitleNormal() throws Exception {
+        getNormalizedTextWhiteSpaceTitle("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceTitleNowrap() throws Exception {
-        getVisibleTextWhiteSpaceTitle("nowrap");
+    public void getNormalizedTextWhiteSpaceTitleNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceTitle("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceTitlePre() throws Exception {
-        getVisibleTextWhiteSpaceTitle("pre");
+    public void getNormalizedTextWhiteSpaceTitlePre() throws Exception {
+        getNormalizedTextWhiteSpaceTitle("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceTitlePreWrap() throws Exception {
-        getVisibleTextWhiteSpaceTitle("pre-wrap");
+    public void getNormalizedTextWhiteSpaceTitlePreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceTitle("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceTitlePreLine() throws Exception {
-        getVisibleTextWhiteSpaceTitle("pre-line");
+    public void getNormalizedTextWhiteSpaceTitlePreLine() throws Exception {
+        getNormalizedTextWhiteSpaceTitle("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceTitle(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceTitle(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head>\n"
@@ -755,72 +755,72 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceSelect() throws Exception {
-        getVisibleTextWhiteSpaceSelect(null);
+    public void getNormalizedTextWhiteSpaceSelect() throws Exception {
+        getNormalizedTextWhiteSpaceSelect(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
-        getVisibleTextWhiteSpaceSelect("normal");
+    public void getNormalizedTextWhiteSpaceSelectNormal() throws Exception {
+        getNormalizedTextWhiteSpaceSelect("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
-        getVisibleTextWhiteSpaceSelect("nowrap");
+    public void getNormalizedTextWhiteSpaceSelectNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceSelect("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
-        getVisibleTextWhiteSpaceSelect("pre");
+    public void getNormalizedTextWhiteSpaceSelectPre() throws Exception {
+        getNormalizedTextWhiteSpaceSelect("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceSelect("pre-wrap");
+    public void getNormalizedTextWhiteSpaceSelectPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceSelect("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H \n"
             + " I")
-    public void getVisibleTextWhiteSpaceSelectPreLine() throws Exception {
-        getVisibleTextWhiteSpaceSelect("pre-line");
+    public void getNormalizedTextWhiteSpaceSelectPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceSelect("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceSelect(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceSelect(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -840,66 +840,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputSubmit() throws Exception {
-        getVisibleTextWhiteSpaceInputSubmit(null);
+    public void getNormalizedTextWhiteSpaceInputSubmit() throws Exception {
+        getNormalizedTextWhiteSpaceInputSubmit(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputSubmitNormal() throws Exception {
-        getVisibleTextWhiteSpaceInputSubmit("normal");
+    public void getNormalizedTextWhiteSpaceInputSubmitNormal() throws Exception {
+        getNormalizedTextWhiteSpaceInputSubmit("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputSubmitNowrap() throws Exception {
-        getVisibleTextWhiteSpaceInputSubmit("nowrap");
+    public void getNormalizedTextWhiteSpaceInputSubmitNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputSubmit("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputSubmitPre() throws Exception {
-        getVisibleTextWhiteSpaceInputSubmit("pre");
+    public void getNormalizedTextWhiteSpaceInputSubmitPre() throws Exception {
+        getNormalizedTextWhiteSpaceInputSubmit("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputSubmitPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceInputSubmit("pre-wrap");
+    public void getNormalizedTextWhiteSpaceInputSubmitPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputSubmit("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputSubmitPreLine() throws Exception {
-        getVisibleTextWhiteSpaceInputSubmit("pre-line");
+    public void getNormalizedTextWhiteSpaceInputSubmitPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceInputSubmit("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceInputSubmit(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceInputSubmit(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -918,66 +918,110 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputReset() throws Exception {
-        getVisibleTextWhiteSpaceInputReset(null);
+    @Alerts("Submit Query")
+    public void getNormalizedTextInputSubmitNoValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='submit' name='tester' id='tester'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final String text = page.getElementById("tester").asNormalizedText();
+        assertEquals(getExpectedAlerts()[0], text);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputResetNormal() throws Exception {
-        getVisibleTextWhiteSpaceInputReset("normal");
+    @Alerts("")
+    public void getNormalizedTextInputSubmitBlankValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='submit' name='tester' id='tester' value='  \t' >\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final String text = page.getElementById("tester").asNormalizedText();
+        assertEquals(getExpectedAlerts()[0], text);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputResetNowrap() throws Exception {
-        getVisibleTextWhiteSpaceInputReset("nowrap");
+    public void getNormalizedTextWhiteSpaceInputReset() throws Exception {
+        getNormalizedTextWhiteSpaceInputReset(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputResetPre() throws Exception {
-        getVisibleTextWhiteSpaceInputReset("pre");
+    public void getNormalizedTextWhiteSpaceInputResetNormal() throws Exception {
+        getNormalizedTextWhiteSpaceInputReset("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputResetPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceInputReset("pre-wrap");
+    public void getNormalizedTextWhiteSpaceInputResetNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputReset("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A B C D EF G H <br> I")
-    public void getVisibleTextWhiteSpaceInputResetPreLine() throws Exception {
-        getVisibleTextWhiteSpaceInputReset("pre-line");
+    public void getNormalizedTextWhiteSpaceInputResetPre() throws Exception {
+        getNormalizedTextWhiteSpaceInputReset("pre");
     }
 
-    private void getVisibleTextWhiteSpaceInputReset(final String whiteSpace) throws Exception {
+    /**
+     * Verifies getNormalizedText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A B C D EF G H <br> I")
+    public void getNormalizedTextWhiteSpaceInputResetPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputReset("pre-wrap");
+    }
+
+    /**
+     * Verifies getNormalizedText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A B C D EF G H <br> I")
+    public void getNormalizedTextWhiteSpaceInputResetPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceInputReset("pre-line");
+    }
+
+    private void getNormalizedTextWhiteSpaceInputReset(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -996,66 +1040,111 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputCheckbox() throws Exception {
-        getVisibleTextWhiteSpaceInputCheckbox(null);
+    @Alerts("Reset")
+    public void getNormalizedTextInputResetNoValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='reset' name='tester' id='tester' >\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final String text = page.getElementById("tester").asNormalizedText();
+        assertEquals(getExpectedAlerts()[0], text);
+    }
+
+
+    /**
+     * Verifies getNormalizedText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getNormalizedTextInputResetBlankValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='reset' name='tester' id='tester' value='  \t'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final String text = page.getElementById("tester").asNormalizedText();
+        assertEquals(getExpectedAlerts()[0], text);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputCheckboxNormal() throws Exception {
-        getVisibleTextWhiteSpaceInputCheckbox("normal");
+    public void getNormalizedTextWhiteSpaceInputCheckbox() throws Exception {
+        getNormalizedTextWhiteSpaceInputCheckbox(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputCheckboxNowrap() throws Exception {
-        getVisibleTextWhiteSpaceInputCheckbox("nowrap");
+    public void getNormalizedTextWhiteSpaceInputCheckboxNormal() throws Exception {
+        getNormalizedTextWhiteSpaceInputCheckbox("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputCheckboxPre() throws Exception {
-        getVisibleTextWhiteSpaceInputCheckbox("pre");
+    public void getNormalizedTextWhiteSpaceInputCheckboxNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputCheckbox("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputCheckboxPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceInputCheckbox("pre-wrap");
+    public void getNormalizedTextWhiteSpaceInputCheckboxPre() throws Exception {
+        getNormalizedTextWhiteSpaceInputCheckbox("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputCheckboxPreLine() throws Exception {
-        getVisibleTextWhiteSpaceInputCheckbox("pre-line");
+    public void getNormalizedTextWhiteSpaceInputCheckboxPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputCheckbox("pre-wrap");
     }
 
-    private void getVisibleTextWhiteSpaceInputCheckbox(final String whiteSpace) throws Exception {
+    /**
+     * Verifies getNormalizedText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("unchecked")
+    public void getNormalizedTextWhiteSpaceInputCheckboxPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceInputCheckbox("pre-line");
+    }
+
+    private void getNormalizedTextWhiteSpaceInputCheckbox(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -1074,66 +1163,66 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputRadio() throws Exception {
-        getVisibleTextWhiteSpaceInputRadio(null);
+    public void getNormalizedTextWhiteSpaceInputRadio() throws Exception {
+        getNormalizedTextWhiteSpaceInputRadio(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputRadioNormal() throws Exception {
-        getVisibleTextWhiteSpaceInputRadio("normal");
+    public void getNormalizedTextWhiteSpaceInputRadioNormal() throws Exception {
+        getNormalizedTextWhiteSpaceInputRadio("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputRadioNowrap() throws Exception {
-        getVisibleTextWhiteSpaceInputRadio("nowrap");
+    public void getNormalizedTextWhiteSpaceInputRadioNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputRadio("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputRadioPre() throws Exception {
-        getVisibleTextWhiteSpaceInputRadio("pre");
+    public void getNormalizedTextWhiteSpaceInputRadioPre() throws Exception {
+        getNormalizedTextWhiteSpaceInputRadio("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputRadioPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceInputRadio("pre-wrap");
+    public void getNormalizedTextWhiteSpaceInputRadioPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceInputRadio("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("unchecked")
-    public void getVisibleTextWhiteSpaceInputRadioPreLine() throws Exception {
-        getVisibleTextWhiteSpaceInputRadio("pre-line");
+    public void getNormalizedTextWhiteSpaceInputRadioPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceInputRadio("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceInputRadio(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceInputRadio(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -1152,7 +1241,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1163,12 +1252,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. 4. item\n"
             + "some text\n"
             + "5. last item")
-    public void getVisibleTextWhiteSpaceOrderedList() throws Exception {
-        getVisibleTextWhiteSpaceOrderedList(null);
+    public void getNormalizedTextWhiteSpaceOrderedList() throws Exception {
+        getNormalizedTextWhiteSpaceOrderedList(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1179,12 +1268,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. 4. item\n"
             + "some text\n"
             + "5. last item")
-    public void getVisibleTextWhiteSpaceOrderedListNormal() throws Exception {
-        getVisibleTextWhiteSpaceOrderedList("normal");
+    public void getNormalizedTextWhiteSpaceOrderedListNormal() throws Exception {
+        getNormalizedTextWhiteSpaceOrderedList("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1195,12 +1284,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. 4. item\n"
             + "some text\n"
             + "5. last item")
-    public void getVisibleTextWhiteSpaceOrderedListNowrap() throws Exception {
-        getVisibleTextWhiteSpaceOrderedList("nowrap");
+    public void getNormalizedTextWhiteSpaceOrderedListNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceOrderedList("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1211,12 +1300,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. 4. item\n"
             + "some text\n"
             + "5. last item")
-    public void getVisibleTextWhiteSpaceOrderedListPre() throws Exception {
-        getVisibleTextWhiteSpaceOrderedList("pre");
+    public void getNormalizedTextWhiteSpaceOrderedListPre() throws Exception {
+        getNormalizedTextWhiteSpaceOrderedList("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1227,12 +1316,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. 4. item\n"
             + "some text\n"
             + "5. last item")
-    public void getVisibleTextWhiteSpaceOrderedListPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceOrderedList("pre-wrap");
+    public void getNormalizedTextWhiteSpaceOrderedListPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceOrderedList("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1243,11 +1332,11 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. 4. item\n"
             + "some text\n"
             + "5. last item")
-    public void getVisibleTextWhiteSpaceOrderedListPreLine() throws Exception {
-        getVisibleTextWhiteSpaceOrderedList("pre-line");
+    public void getNormalizedTextWhiteSpaceOrderedListPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceOrderedList("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceOrderedList(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceOrderedList(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -1268,7 +1357,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1279,12 +1368,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. item\n"
             + "some text\n"
             + "last item")
-    public void getVisibleTextWhiteSpaceUnorderedList() throws Exception {
-        getVisibleTextWhiteSpaceUnorderedList(null);
+    public void getNormalizedTextWhiteSpaceUnorderedList() throws Exception {
+        getNormalizedTextWhiteSpaceUnorderedList(null);
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1295,12 +1384,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. item\n"
             + "some text\n"
             + "last item")
-    public void getVisibleTextWhiteSpaceUnorderedListNormal() throws Exception {
-        getVisibleTextWhiteSpaceUnorderedList("normal");
+    public void getNormalizedTextWhiteSpaceUnorderedListNormal() throws Exception {
+        getNormalizedTextWhiteSpaceUnorderedList("normal");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1311,12 +1400,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. item\n"
             + "some text\n"
             + "last item")
-    public void getVisibleTextWhiteSpaceUnorderedListNowrap() throws Exception {
-        getVisibleTextWhiteSpaceUnorderedList("nowrap");
+    public void getNormalizedTextWhiteSpaceUnorderedListNowrap() throws Exception {
+        getNormalizedTextWhiteSpaceUnorderedList("nowrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1327,12 +1416,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. item\n"
             + "some text\n"
             + "last item")
-    public void getVisibleTextWhiteSpaceUnorderedListPre() throws Exception {
-        getVisibleTextWhiteSpaceUnorderedList("pre");
+    public void getNormalizedTextWhiteSpaceUnorderedListPre() throws Exception {
+        getNormalizedTextWhiteSpaceUnorderedList("pre");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1343,12 +1432,12 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. item\n"
             + "some text\n"
             + "last item")
-    public void getVisibleTextWhiteSpaceUnorderedListPreWrap() throws Exception {
-        getVisibleTextWhiteSpaceUnorderedList("pre-wrap");
+    public void getNormalizedTextWhiteSpaceUnorderedListPreWrap() throws Exception {
+        getNormalizedTextWhiteSpaceUnorderedList("pre-wrap");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
@@ -1359,11 +1448,11 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
             + "4. item\n"
             + "some text\n"
             + "last item")
-    public void getVisibleTextWhiteSpaceUnorderedListPreLine() throws Exception {
-        getVisibleTextWhiteSpaceUnorderedList("pre-line");
+    public void getNormalizedTextWhiteSpaceUnorderedListPreLine() throws Exception {
+        getNormalizedTextWhiteSpaceUnorderedList("pre-line");
     }
 
-    private void getVisibleTextWhiteSpaceUnorderedList(final String whiteSpace) throws Exception {
+    private void getNormalizedTextWhiteSpaceUnorderedList(final String whiteSpace) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
@@ -1384,219 +1473,219 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("The text to be tested")
-    public void getVisibleTextLabel() throws Exception {
-        getVisibleTextFormated("<label id='tester'>The text to be <span>tested</span></label>");
+    public void getNormalizedTextLabel() throws Exception {
+        getNormalizedTextFormated("<label id='tester'>The text to be <span>tested</span></label>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("The text to be tested")
-    public void getVisibleTextLabelNormal() throws Exception {
-        getVisibleTextFormated("<label id='tester' style='white-space: normal'>"
+    public void getNormalizedTextLabelNormal() throws Exception {
+        getNormalizedTextFormated("<label id='tester' style='white-space: normal'>"
                 + "The text to be <span>tested</span></label>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("The text to be tested")
-    public void getVisibleTextLabelNowrap() throws Exception {
-        getVisibleTextFormated("<label id='tester' style='white-space: nowrap'>"
+    public void getNormalizedTextLabelNowrap() throws Exception {
+        getNormalizedTextFormated("<label id='tester' style='white-space: nowrap'>"
                 + "The text to be <span>tested</span></label>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("The text to be tested")
-    public void getVisibleTextLabelPre() throws Exception {
-        getVisibleTextFormated("<label id='tester' style='white-space: pre'>"
+    public void getNormalizedTextLabelPre() throws Exception {
+        getNormalizedTextFormated("<label id='tester' style='white-space: pre'>"
                 + "The text to be <span>tested</span></label>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("The text to be tested")
-    public void getVisibleTextLabelPreWrap() throws Exception {
-        getVisibleTextFormated("<label id='tester' style='white-space: pre-wrap'>"
+    public void getNormalizedTextLabelPreWrap() throws Exception {
+        getNormalizedTextFormated("<label id='tester' style='white-space: pre-wrap'>"
                 + "The text to be <span>tested</span></label>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("The text to be tested")
-    public void getVisibleTextLabelPreLine() throws Exception {
-        getVisibleTextFormated("<label id='tester' style='white-space: pre-line'>"
+    public void getNormalizedTextLabelPreLine() throws Exception {
+        getNormalizedTextFormated("<label id='tester' style='white-space: pre-line'>"
                 + "The text to be <span>tested</span></label>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A   nbsp and spaces")
-    public void getVisibleTextParagraphNbsp() throws Exception {
-        getVisibleTextFormated("<p id='tester'>A &nbsp; nbsp and spaces</p>");
+    public void getNormalizedTextParagraphNbsp() throws Exception {
+        getNormalizedTextFormated("<p id='tester'>A &nbsp; nbsp and spaces</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A   nbsp and spaces")
-    public void getVisibleTextParagraphNbspNormal() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: normal'>"
+    public void getNormalizedTextParagraphNbspNormal() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: normal'>"
                 + "A &nbsp; nbsp and spaces</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A   nbsp and spaces")
-    public void getVisibleTextParagraphNbspNowrap() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: nowrap'>"
+    public void getNormalizedTextParagraphNbspNowrap() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: nowrap'>"
                 + "A &nbsp; nbsp and spaces</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A   nbsp and spaces")
-    public void getVisibleTextParagraphNbspPre() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: pre'>"
+    public void getNormalizedTextParagraphNbspPre() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: pre'>"
                 + "A &nbsp; nbsp and spaces</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A   nbsp and spaces")
-    public void getVisibleTextParagraphNbspPreWrap() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: pre-wrap'>"
+    public void getNormalizedTextParagraphNbspPreWrap() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: pre-wrap'>"
                 + "A &nbsp; nbsp and spaces</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A   nbsp and spaces")
-    public void getVisibleTextParagraphNbspPreLine() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: pre-line'>"
+    public void getNormalizedTextParagraphNbspPreLine() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: pre-line'>"
                 + "A &nbsp; nbsp and spaces</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A  \n"
             + "  NBSPs  ")
-    public void getVisibleTextParagraphMultilineNbsp() throws Exception {
-        getVisibleTextFormated("<p id='tester'>A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    public void getNormalizedTextParagraphMultilineNbsp() throws Exception {
+        getNormalizedTextFormated("<p id='tester'>A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A  \n"
             + "  NBSPs  ")
-    public void getVisibleTextParagraphMultilineNbspNormal() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: normal'>"
+    public void getNormalizedTextParagraphMultilineNbspNormal() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: normal'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A  \n"
             + "  NBSPs  ")
-    public void getVisibleTextParagraphMultilineNbspNowrap() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: nowrap'>"
+    public void getNormalizedTextParagraphMultilineNbspNowrap() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: nowrap'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A  \n"
             + "  NBSPs  ")
-    public void getVisibleTextParagraphMultilineNbspPre() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: pre'>"
+    public void getNormalizedTextParagraphMultilineNbspPre() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: pre'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A  \n"
             + "  NBSPs  ")
-    public void getVisibleTextParagraphMultilineNbspPreWrap() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: pre-wrap'>"
+    public void getNormalizedTextParagraphMultilineNbspPreWrap() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: pre-wrap'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
     /**
-     * Verifies getVisibleText().
+     * Verifies getNormalizedText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("A  \n"
             + "  NBSPs  ")
-    public void getVisibleTextParagraphMultilineNbspPreLine() throws Exception {
-        getVisibleTextFormated("<p id='tester' style='white-space: pre-line'>"
+    public void getNormalizedTextParagraphMultilineNbspPreLine() throws Exception {
+        getNormalizedTextFormated("<p id='tester' style='white-space: pre-line'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
 
     /**
-     * Verifies getVisibleText() for issue #128
+     * Verifies getNormalizedText() for issue #128
      * (https://github.com/HtmlUnit/htmlunit/issues/128).
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("I have 2 out of 2 stamps")
-    public void getVisibleTextInputInsideP() throws Exception {
-        getVisibleTextFormated("<p id='tester'>"
+    public void getNormalizedTextInputInsideP() throws Exception {
+        getNormalizedTextFormated("<p id='tester'>"
                 + " I have <input type='number' value='2'/> out of 2 stamps</p>");
     }
 
-    private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
+    private void getNormalizedTextFormated(final String htmlTesterSnipped) throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"

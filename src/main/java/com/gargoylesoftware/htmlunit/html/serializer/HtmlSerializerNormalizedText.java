@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
@@ -102,26 +103,26 @@ public class HtmlSerializerNormalizedText {
             appendText(builder, (DomText) node);
         }
         else if (node instanceof DomComment) {
-            appendComment(builder, (DomComment) node);
+            // nothing to do
         }
         else if (node instanceof HtmlApplet
                 && node.getPage().getWebClient().getOptions().isAppletEnabled()) {
-            appendApplet(builder, (HtmlApplet) node);
+            // nothing to do
         }
         else if (node instanceof HtmlBreak) {
             appendBreak(builder, (HtmlBreak) node);
         }
         else if (node instanceof HtmlHiddenInput) {
-            appendHiddenInput(builder, (HtmlHiddenInput) node);
+            // nothing to do
         }
         else if (node instanceof HtmlScript) {
-            appendScript(builder, (HtmlScript) node);
+            // nothing to do
         }
         else if (node instanceof HtmlStyle) {
-            appendStyle(builder, (HtmlStyle) node);
+            // nothing to do
         }
         else if (node instanceof HtmlNoFrames) {
-            appendNoFrames(builder, (HtmlNoFrames) node);
+            // nothing to do
         }
         else if (node instanceof HtmlTextArea) {
             appendTextArea(builder, (HtmlTextArea) node);
@@ -166,7 +167,7 @@ public class HtmlSerializerNormalizedText {
             appendInlineFrame(builder, (HtmlInlineFrame) node);
         }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
-            appendNoScript(builder, (HtmlNoScript) node);
+            // nothing to do
         }
         else {
             appendDomNode(builder, node);
@@ -203,63 +204,18 @@ public class HtmlSerializerNormalizedText {
     }
 
     /**
-     * Process {@link HtmlHiddenInput}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlHiddenInput the target to process
-     */
-    protected void appendHiddenInput(final HtmlSerializerTextBuilder builder, final HtmlHiddenInput htmlHiddenInput) {
-        // nothing to do
-    }
-
-    /**
-     * Process {@link HtmlScript}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlScript the target to process
-     */
-    protected void appendScript(final HtmlSerializerTextBuilder builder, final HtmlScript htmlScript) {
-        // nothing to do
-    }
-
-    /**
-     * Process {@link HtmlStyle}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlStyle the target to process
-     */
-    protected void appendStyle(final HtmlSerializerTextBuilder builder, final HtmlStyle htmlStyle) {
-        // nothing to do
-    }
-
-    /**
-     * Process {@link HtmlNoScript}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlNoScript the target to process
-     */
-    protected void appendNoScript(final HtmlSerializerTextBuilder builder, final HtmlNoScript htmlNoScript) {
-        // nothing to do
-    }
-
-    /**
-     * Process {@link HtmlNoFrames}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlNoFrames the target to process
-     */
-    protected void appendNoFrames(final HtmlSerializerTextBuilder builder, final HtmlNoFrames htmlNoFrames) {
-        // nothing to do
-    }
-
-    /**
      * Process {@link HtmlSubmitInput}.
      *
      * @param builder the StringBuilder to add to
      * @param htmlSubmitInput the target to process
      */
     protected void appendSubmitInput(final HtmlSerializerTextBuilder builder, final HtmlSubmitInput htmlSubmitInput) {
-        builder.append(htmlSubmitInput.asText(), Mode.NORMALIZE);
+        String text = htmlSubmitInput.getValueAttribute();
+        if (text == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            text = HtmlSubmitInput.DEFAULT_VALUE;
+        }
+
+        builder.append(text, Mode.NORMALIZE);
     }
 
     /**
@@ -279,7 +235,12 @@ public class HtmlSerializerNormalizedText {
      * @param htmlResetInput the target to process
      */
     protected void appendResetInput(final HtmlSerializerTextBuilder builder, final HtmlResetInput htmlResetInput) {
-        builder.append(htmlResetInput.asText(), Mode.NORMALIZE);
+        String text = htmlResetInput.getValueAttribute();
+        if (text == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            text = HtmlResetInput.DEFAULT_VALUE;
+        }
+
+        builder.append(text, Mode.NORMALIZE);
     }
 
     /**
@@ -421,13 +382,7 @@ public class HtmlSerializerNormalizedText {
      * @param htmlSelect the target to process
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder, final HtmlSelect htmlSelect) {
-        final List<HtmlOption> options;
-        if (htmlSelect.isMultipleSelectEnabled()) {
-            options = htmlSelect.getOptions();
-        }
-        else {
-            options = htmlSelect.getSelectedOptions();
-        }
+        final List<HtmlOption> options = htmlSelect.getSelectedOptions();
 
         for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
             final HtmlOption currentOption = i.next();
@@ -492,7 +447,7 @@ public class HtmlSerializerNormalizedText {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
-                builder.append(((SgmlPage) page).asText(), Mode.NORMALIZE);
+                builder.append(((SgmlPage) page).asNormalizedText(), Mode.NORMALIZE);
             }
             builder.appendBlockSeparator();
         }
@@ -509,26 +464,6 @@ public class HtmlSerializerNormalizedText {
         if (parent == null || parent instanceof HtmlTitle || isVisible(parent)) {
             builder.append(domText.getData(), Mode.NORMALIZE);
         }
-    }
-
-    /**
-     * Process {@link DomComment}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param domComment the target to process
-     */
-    protected void appendComment(final HtmlSerializerTextBuilder builder, final DomComment domComment) {
-        // nothing to do
-    }
-
-    /**
-     * Process {@link HtmlApplet}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param htmlApplet the target to process
-     */
-    protected void appendApplet(final HtmlSerializerTextBuilder builder, final HtmlApplet htmlApplet) {
-        // nothing to do
     }
 
     /**
