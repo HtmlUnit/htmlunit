@@ -38,23 +38,24 @@ public class CryptoTest extends WebDriverTestCase {
             IE = {"true", "true", "true", "exception"})
     public void getRandomValues() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var array = new Uint32Array(10);\n"
-            + "  alert(array[0] == 0);\n"
-            + "  alert(array[3] == 0);\n"
-            + "  alert(array[9] == 0);\n"
+            + "  log(array[0] == 0);\n"
+            + "  log(array[3] == 0);\n"
+            + "  log(array[9] == 0);\n"
             + "  var res = window.crypto.getRandomValues(array);\n"
-            + "  alert(array[0] == 0);\n"
-            + "  alert(array[3] == 0);\n"
-            + "  alert(array[9] == 0);\n"
+            + "  log(array[0] == 0);\n"
+            + "  log(array[3] == 0);\n"
+            + "  log(array[9] == 0);\n"
 
-            + "  alert(res.length);\n"
-            + "  alert(res === array);\n"
+            + "  log(res.length);\n"
+            + "  log(res === array);\n"
             + "}\n"
-            + "catch(e) { alert('exception'); }\n"
+            + "catch(e) { log('exception'); }\n"
             + "</script></head></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,14 +65,15 @@ public class CryptoTest extends WebDriverTestCase {
     @Alerts("exception")
     public void getRandomValuesQuotaExceeded() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var array = new Uint32Array(16385);\n"
             + "  window.crypto.getRandomValues(array);\n"
             + "}\n"
-            + "catch(e) { alert('exception'); }\n"
+            + "catch(e) { log('exception'); }\n"
             + "</script></head></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -82,12 +84,13 @@ public class CryptoTest extends WebDriverTestCase {
             IE = "exception")
     public void subtle() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(window.crypto.subtle);\n"
+            + "  log(window.crypto.subtle);\n"
             + "}\n"
-            + "catch(e) { alert('exception'); }\n"
+            + "catch(e) { log('exception'); }\n"
             + "</script></head></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

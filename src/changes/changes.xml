@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.48.0" date="xx, 2021" description="Bugfixes, Chrome/Edge 89, Firefox 86">
+            <action type="add" dev="rbri">
+                CI build for pull requests is available at https://jenkins.wetator.org/job/htmlunit/view/change-requests/.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.12.0.
             </action>

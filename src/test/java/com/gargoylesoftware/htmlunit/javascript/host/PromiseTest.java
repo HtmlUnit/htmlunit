@@ -2009,11 +2009,11 @@ public class PromiseTest extends WebDriverTestCase {
               + "  </script>\n"
               + "</head>\n"
               + "<body onload='test()'>\n"
-              + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
               + "</body>\n"
               + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(100);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
 }

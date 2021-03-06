@@ -84,8 +84,9 @@ public class SubtleCryptoTest extends WebDriverTestCase {
     public void rsassa() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.crypto);\n"
+            + "    log(window.crypto);\n"
             + "    if (window.crypto) {\n"
             + "      window.crypto.subtle.generateKey(\n"
             + "        {\n"
@@ -98,27 +99,27 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "        ['sign', 'verify']\n"
             + "      )\n"
             + "      .then(function(key) {\n"
-            + "        alert(key.publicKey.type);\n"
-            + "        alert(key.publicKey.extractable);\n"
-            + "        alert(key.publicKey.usages);\n"
+            + "        log(key.publicKey.type);\n"
+            + "        log(key.publicKey.extractable);\n"
+            + "        log(key.publicKey.usages);\n"
             + "        for(var x in key.publicKey.algorithm) {\n"
-            + "          alert(x + ' ' + key.publicKey.algorithm[x]);\n"
+            + "          log(x + ' ' + key.publicKey.algorithm[x]);\n"
             + "        }\n"
-            + "        alert(key.privateKey.type);\n"
-            + "        alert(key.privateKey.extractable);\n"
-            + "        alert(key.privateKey.usages);\n"
+            + "        log(key.privateKey.type);\n"
+            + "        log(key.privateKey.extractable);\n"
+            + "        log(key.privateKey.usages);\n"
             + "        for(var x in key.privateKey.algorithm) {\n"
-            + "          alert(x + ' ' + key.publicKey.algorithm[x]);\n"
+            + "          log(x + ' ' + key.publicKey.algorithm[x]);\n"
             + "        }\n"
             + "      })\n"
             + "      .catch(function(err) {\n"
-            + "        alert(err);\n"
+            + "        log(err);\n"
             + "      });\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME * 3);
+        loadPageVerifyTitle2(html);
     }
 }
