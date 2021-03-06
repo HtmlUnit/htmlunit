@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -28,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -182,7 +176,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "true")
     public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
         test("PerformanceEntry", "PerformanceNavigationTiming");
     }
@@ -265,7 +259,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "true")
     public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceNavigationTiming");
     }
@@ -642,7 +636,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF78 = "true")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "false",
+            FF78 = "false")
     public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -665,7 +660,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF78 = "true")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "false",
+            FF78 = "false")
     public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -687,7 +683,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false")
     public void _RTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "webkitRTCPeerConnection");
     }
@@ -710,7 +707,8 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF78 = "true")
-    @NotYetImplemented({FF, FF78})
+    @HtmlUnitNYI(FF = "false",
+            FF78 = "false")
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }

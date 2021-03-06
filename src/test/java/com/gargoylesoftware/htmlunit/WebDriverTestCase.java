@@ -1488,12 +1488,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
 
         while (true) {
+            final String title = webdriver.getTitle();
             try {
-                assertEquals(expected, webdriver.getTitle());
+                assertEquals(expected, title);
                 return;
             }
             catch (final ComparisonFailure e) {
-                if (System.currentTimeMillis() > maxWait) {
+                if (expected.length() <= title.length()
+                        || System.currentTimeMillis() > maxWait) {
                     throw e;
                 }
                 Thread.sleep(10);
