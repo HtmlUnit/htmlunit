@@ -39,7 +39,7 @@
                 Upgrade Apache commons-net to 3.8.0.
             </action>
             <action type="add" dev="rbri">
-                DomNode#asNormalizedText() added to provide a more meaningfull and stable normalization.
+                DomNode#asNormalizedText() added to provide a more meaningful and stable normalization.
                 DomNode#asText() is now deprecated.
             </action>
             <action type="update" dev="rbri">
