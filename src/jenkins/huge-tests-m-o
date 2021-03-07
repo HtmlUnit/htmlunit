@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean verify -P only-huge-tests-m-o -Dgpg.skip -Djava.awt.headless=true'
+        sh 'mvn clean test -P only-huge-tests-m-o -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }

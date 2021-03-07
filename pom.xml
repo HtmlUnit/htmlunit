@@ -353,7 +353,7 @@
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -384,7 +384,7 @@
                             <excludes>
                                 <exclude>**/libraries/JQuery3x3x1Test.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -412,7 +412,7 @@
                             <includes>
                                 <include>**/libraries/JQuery3x3x1Test.java</include>
                             </includes>
-                            <argLine>-Xms128m -Xmx512m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -440,7 +440,7 @@
                             <includes>
                                 <include>**/huge/ElementClosesElementTest.java</include>
                             </includes>
-                            <argLine>-Xms256m -Xmx512m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -470,7 +470,7 @@
                                 <include>**/huge/HostParentOfBTest.java</include>
                                 <include>**/huge/HostParentOfCTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -499,7 +499,7 @@
                                 <include>**/huge/HostParentOfDTest.java</include>
                                 <include>**/huge/HostParentOfFTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -528,7 +528,7 @@
                                 <include>**/huge/HostParentOfHTest.java</include>
                                 <include>**/huge/HostParentOfITest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -557,7 +557,7 @@
                                 <include>**/huge/HostParentOfMTest.java</include>
                                 <include>**/huge/HostParentOfNTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -585,7 +585,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfPTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -613,7 +613,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1536m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1536m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -642,7 +642,7 @@
                                 <include>**/huge/HostParentOfTTest.java</include>
                                 <include>**/huge/HostParentOfWTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m -Dmaven.javadoc.skip=true</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
