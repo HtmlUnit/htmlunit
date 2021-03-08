@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
@@ -28,6 +29,7 @@ import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -468,7 +470,45 @@ public class AwtRenderingBackend implements RenderingBackend {
                     }
                 }
 
-                graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, null);
+                final Object done = new Object();
+                final ImageObserver imageObserver = new ImageObserver() {
+                    @Override
+                    public boolean imageUpdate(final Image img, final int flags,
+                                                final int x, final int y, final int width, final int height) {
+
+                        if ((flags & ImageObserver.ALLBITS) == ImageObserver.ALLBITS) {
+                            return true;
+                        }
+
+                        if ((flags & ImageObserver.ABORT) == ImageObserver.ABORT
+                                || (flags & ImageObserver.ERROR) == ImageObserver.ERROR) {
+                            return true;
+                        }
+
+                        synchronized (done) {
+                            done.notify();
+                        }
+
+                        return false;
+                    }
+                };
+
+                synchronized (done) {
+                    final boolean completelyLoaded =
+                            graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, imageObserver);
+                    if (!completelyLoaded) {
+                        while (true) {
+                            try {
+                                done.wait(4 * 1000); // max 4s
+                                break;
+                            }
+                            catch (final InterruptedException e) {
+                                LOG.error("[" + id_ + "] AwtRenderingBackend interrupted "
+                                        + "while waiting for drawImage to finish.", e);
+                            }
+                        }
+                    }
+                }
             }
             finally {
                 graphics2D_.setTransform(savedTransform);
