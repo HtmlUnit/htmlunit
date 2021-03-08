@@ -428,7 +428,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             }
             catch (final IOException ioe) {
                 LOG.info("There is no ImageReader available for you imgage with src '" + imageElem.getSrc() + "'"
-                        + "Please have a look at ... for a possible solution.");
+                        + "Please have a look at https://htmlunit.sourceforge.io/images-howto.html "
+                        + "for a possible solution.");
             }
         }
     }
