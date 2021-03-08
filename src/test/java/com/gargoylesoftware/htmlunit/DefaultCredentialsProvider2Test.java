@@ -393,7 +393,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
-        loadPageWithAlerts(html, URL_FIRST, 200);
+        loadPageWithAlerts(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -421,7 +421,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
-        loadPageWithAlerts(html, URL_FIRST, 100);
+        loadPageWithAlerts(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -447,6 +447,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setResponse(URL_FIRST, html);
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
-        loadPageWithAlerts(html, URL_FIRST, 100);
+        loadPageWithAlerts(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 }

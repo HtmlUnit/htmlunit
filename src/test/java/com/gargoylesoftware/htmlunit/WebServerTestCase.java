@@ -264,7 +264,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @return the page
      * @throws Exception if something goes wrong
      */
-    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final int maxWaitTime)
+    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final long maxWaitTime)
         throws Exception {
         alertHandler_.clear();
         expandExpectedAlertsVariables(URL_FIRST);
