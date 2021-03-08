@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
 
 /**
  * Tests for an element to close another element, which is defined in
@@ -52,7 +52,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = new ArrayList<>(HtmlPageTest.HTML_TAGS_);
+        final List<String> strings = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
         for (final String parent : strings) {
             for (final String child : strings) {
                 list.add(new Object[] {parent, child});

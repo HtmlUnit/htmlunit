@@ -18,8 +18,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigurationTest;
 
 /**
@@ -57,7 +57,7 @@ public final class ElementTestSource {
                 //ignore
             }
         }
-        for (final String tag : HtmlPageTest.HTML_TAGS_) {
+        for (final String tag : DefaultElementFactory.SUPPORTED_TAGS_) {
             System.out.println();
             System.out.println("    /**");
             if (namesMap.containsKey(tag)) {

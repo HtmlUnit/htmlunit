@@ -79,13 +79,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
     public static final String STANDARDS_MODE_PREFIX_
         = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n";
 
-    /** List of all HTML tags.*/
-    public static final List<String> HTML_TAGS_ = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
-
-    static {
-        HTML_TAGS_.add(HtmlInput.TAG_NAME);
-    }
-
     /**
      * @throws Exception if the test fails
      */
