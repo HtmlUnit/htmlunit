@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -1726,6 +1727,49 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xy")
+    public void getVisibleNumberInputValidNumber() throws Exception {
+        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "12");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xy")
+    public void getVisibleNumberInputInvalidNumber() throws Exception {
+        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");
+    }
+
+    private void getVisibleTextFormatedAfterTyping(final String htmlTesterSnipped,
+                        final String... typed) throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  " + htmlTesterSnipped + "\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        for (final String string : typed) {
+            input.sendKeys(string);
+        }
+
         final String text = driver.findElement(By.id("tester")).getText();
         assertEquals(getExpectedAlerts()[0], text);
 

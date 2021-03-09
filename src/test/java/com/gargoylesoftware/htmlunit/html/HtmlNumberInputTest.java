@@ -120,6 +120,201 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"123", "true"})
+    public void typeIntegerValid() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt'/>\n"
+                + "  <button id='check' "
+                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("123");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"12", "true", "123", "false"})
+    public void typeIntegerTooLarge() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' max='100'/>\n"
+                + "  <button id='check' "
+                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("12");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        input.sendKeys("3");
+        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"12", "false", "123", "true"})
+    public void typeIntegerTooSmall() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' min='100'/>\n"
+                + "  <button id='check' "
+                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("12");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        input.sendKeys("3");
+        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "true", "1", "true", "1.2", "false"},
+            FF = {"1", "true", "", "false", "1.2", "false"},
+            IE = {"1", "true", "1.", "true", "1.2", "false"})
+    public void typeIntegerWithDot() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' />\n"
+                + "  <button id='check' "
+                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("1");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        input.sendKeys(".");
+        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+
+        input.sendKeys("2");
+        assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[5], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "false", "-12", "true", "-123", "false"},
+            IE = {"", "true", "12", "true", "123", "true"})
+    public void typeIntegerNegativeValid() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' min='-42' max='1234'/>\n"
+                + "  <button id='check' "
+                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("-");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        input.sendKeys("12");
+        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+
+        input.sendKeys("3");
+        assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[5], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "false", "-12", "false"},
+            IE = {"", "true", "12", "true"})
+    public void typeIntegerNegativeInvalid() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' min='1' max='1234'/>\n"
+                + "  <button id='check' "
+                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("-");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        input.sendKeys("12");
+        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void typeDouble() throws Exception {
         final String html = "<html><head></head><body>\n"
                 + "<input type='number' step='0.01' id='t'/>\n"

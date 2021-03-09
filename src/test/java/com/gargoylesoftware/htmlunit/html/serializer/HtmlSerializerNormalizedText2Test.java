@@ -21,6 +21,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlNumberInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
@@ -1799,5 +1801,44 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
         final HtmlTableCell cell4 = table.getCellAt(0, 2);
         assertEquals("cell4 contents", "cell4", cell4.asNormalizedText());
         assertSame("cells (0,2) and (1,2)", cell4, table.getCellAt(1, 2));
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x 12 y")
+    public void getNormalizedNumberInputValidNumber() throws Exception {
+        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "12");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x ab y")
+    public void getNormalizedNumberInputInvalidNumber() throws Exception {
+        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");
+    }
+
+    private void getVisibleTextFormatedAfterTyping(final String htmlTesterSnipped,
+                        final String... typed) throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  " + htmlTesterSnipped + "\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlNumberInput input = page.getHtmlElementById("inpt");
+        for (final String string : typed) {
+            input.type(string);
+        }
+
+        final HtmlElement tester = page.getHtmlElementById("tester");
+        assertEquals(getExpectedAlerts()[0], tester.getVisibleText());
     }
 }
