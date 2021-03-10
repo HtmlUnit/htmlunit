@@ -175,10 +175,11 @@ public class CSSStyleSheet extends StyleSheet {
             "focus", "lang", "first-child"));
 
     private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
+            "checked", "disabled", "enabled", "indeterminated", "root", "target", "invalid", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
             "optional", "required"));
+
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
