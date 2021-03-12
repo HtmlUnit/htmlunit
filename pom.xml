@@ -31,7 +31,7 @@
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.38.v20210224</jetty.version>
-        <log4j.version>2.14.0</log4j.version>
+        <log4j.version>2.14.1</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
