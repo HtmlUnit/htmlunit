@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
  * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
-public class HostParentOfSTest extends HostParentOf {
+public class HostParentOfS2Test extends HostParentOf {
 
     /**
      * Returns the parameterized data.
@@ -45,7 +45,7 @@ public class HostParentOfSTest extends HostParentOf {
     public static Collection<Object[]> data() throws Exception {
         return HostParentOf.data(input -> {
             final char ch = Character.toUpperCase(input.charAt(0));
-            return ch == 'S' && StringUtils.compareIgnoreCase(input, "SVGG") < 0;
+            return ch == 'S' && StringUtils.compareIgnoreCase(input, "SVGG") >= 0;
         });
     }
 
