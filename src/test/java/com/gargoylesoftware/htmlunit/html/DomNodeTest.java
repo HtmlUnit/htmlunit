@@ -341,7 +341,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final List<?> results = page.getByXPath("//title");
         assertEquals(1, results.size());
         final HtmlTitle title = (HtmlTitle) results.get(0);
-        assertEquals("my title", title.asText());
+        assertEquals("my title", title.asNormalizedText());
 
         final HtmlHead head = (HtmlHead) title.getParentNode();
         assertEquals(results, head.getByXPath("//title"));
@@ -438,7 +438,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlTitle title = page.getFirstByXPath("//title");
-        assertEquals("my title", title.asText());
+        assertEquals("my title", title.asNormalizedText());
 
         final HtmlHead head = (HtmlHead) title.getParentNode();
         assertSame(title, head.getFirstByXPath("//title"));
@@ -495,7 +495,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<div id='a'>a<div id='b'>b</div>a<div id='c'>c</div>a</div><div id='d'>d</div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals("abacad", page.asText().replaceAll("\\s", ""));
+        assertEquals("abacad", page.asNormalizedText().replaceAll("\\s", ""));
         final DescendantElementsIterator<HtmlElement> iterator = (DescendantElementsIterator<HtmlElement>)
             page.getDocumentElement().getHtmlElementDescendants().iterator();
         assertEquals("", iterator.nextNode().getId());
@@ -504,7 +504,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         iterator.remove();
         assertEquals("d", iterator.nextNode().getId());
         assertFalse(iterator.hasNext());
-        assertEquals("d", page.asText().replaceAll("\\s", ""));
+        assertEquals("d", page.asNormalizedText().replaceAll("\\s", ""));
     }
 
     static class DomChangeListenerTestImpl implements DomChangeListener {

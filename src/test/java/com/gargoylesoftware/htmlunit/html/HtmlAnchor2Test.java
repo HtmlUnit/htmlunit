@@ -756,7 +756,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
 
-        assertEquals("Last Name, First Name", anchor.asText());
+        assertEquals("Last Name, First Name", anchor.asNormalizedText());
         assertEquals("\n    Last Name, First Name\n  ", anchor.getTextContent());
     }
 

@@ -88,12 +88,12 @@ public class WebClient2Test extends SimpleWebTestCase {
         final String page1Content = "<html><body>hello 1</body></html>";
         try (WebClient client = getWebClient()) {
             final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
-            assertEquals("hello 1", page1.asText());
+            assertEquals("hello 1", page1.asNormalizedText());
 
             final String page2Content = "<html><body>hello 2</body></html>";
             try (WebClient copy = clone(client)) {
                 final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
-                assertEquals("hello 2", page2.asText());
+                assertEquals("hello 2", page2.asNormalizedText());
             }
         }
     }
