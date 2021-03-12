@@ -771,11 +771,12 @@ public abstract class WebTestCase {
         try (ByteArrayInputStream currentBis = new ByteArrayInputStream(currentImageBytes)) {
             final BufferedImage currentImage = ImageIO.read(currentBis);
 
-            compareImages(expected, currentImage);
+            compareImages(expected, current, currentImage);
         }
     }
 
-    protected void compareImages(final String expected, final BufferedImage currentImage) throws IOException {
+    protected void compareImages(final String expected,
+            final String current, final BufferedImage currentImage) throws IOException {
         final String expectedBase64Image = expected.split(",")[1];
         final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
 
@@ -799,11 +800,15 @@ public abstract class WebTestCase {
                 ImageComparisonUtil.saveImage(expectedOut, expectedImage);
                 ImageComparisonUtil.saveImage(currentOut, currentImage);
 
-                fail("The images are differnet in size - "
+                String fail = "The images are different in size - "
                         + "expected: " + expectedImage.getWidth() + "x" + expectedImage.getHeight()
                         + " current: " + currentImage.getWidth() + "x" + currentImage.getHeight()
                         + " (expected: " + expectedOut.getAbsolutePath()
-                            + " current: " + currentOut.getAbsolutePath() + ")");
+                            + " current: " + currentOut.getAbsolutePath() + ")";
+                if (current != null) {
+                    fail += "; current data: '" + current + "'";
+                }
+                fail(fail);
             }
             else if (ImageComparisonState.MISMATCH == imageComparisonState) {
                 final String dir = "target/" + testMethodName_.getMethodName();
@@ -815,9 +820,14 @@ public abstract class WebTestCase {
                 ImageComparisonUtil.saveImage(expectedOut, expectedImage);
                 ImageComparisonUtil.saveImage(currentOut, currentImage);
                 ImageComparisonUtil.saveImage(differenceOut, imageComparisonResult.getResult());
-                fail("The images are differnet (expected: " + expectedOut.getAbsolutePath()
+
+                String fail = "The images are different (expected: " + expectedOut.getAbsolutePath()
                             + " current: " + currentOut.getAbsolutePath()
-                            + " difference: " + differenceOut.getAbsolutePath() + ")");
+                            + " difference: " + differenceOut.getAbsolutePath() + ")";
+                if (current != null) {
+                    fail += "; current data: '" + current + "'";
+                }
+                fail(fail);
             }
         }
     }

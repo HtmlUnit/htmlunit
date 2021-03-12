@@ -880,7 +880,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         try (InputStream resultInputStream = ((UnexpectedPage) dataPage).getInputStream()) {
             final ImageInputStream resultImageIS = ImageIO.createImageInputStream(resultInputStream);
             final BufferedImage resultBufferedIIS = ImageIO.read(resultImageIS);
-            compareImages(getExpectedAlerts()[2], resultBufferedIIS);
+            compareImages(getExpectedAlerts()[2], null, resultBufferedIIS);
         }
     }
 }

@@ -2271,6 +2271,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF78 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAcElEQVR42mNgYGD4T2UMBygcaoCRaeB/EJ4NxO+AOBCPopVA"
                 + "/AWIA4gxEKjovw8QX8ajyAeIg4D4FzEGsgExOxB/waOIGcYmxkAPIPYG4nO4FGFj4zNwGRC/BGJ3cg1ESuX/qZ1T/v8fzSmj"
+                + "Bg4HAwGGsHedCdecqgAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAcElEQVR42mNgYGD4T2UMBygcaoCRaeB/EJ4NxO+AOBCPopVA"
+                + "/AWIA4gxEKjovw8QX8ajyAeIg4D4FzEGsgExOxB/waOIGcYmxkAPIPYG4nO4FGFj4zNwGRC/BGJ3cg1ESuX/qZ1T/v8fzSmj"
                 + "Bg4HAwGGsHedCdecqgAAAABJRU5ErkJggg==")
     public void fillTextAndTransform() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
