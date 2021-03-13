@@ -91,13 +91,18 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 return;
             }
 
-            if (StringUtils.isBlank(newValue)) {
+            if (StringUtils.isBlank(newValue) || "-".equals(newValue) || "+".equals(newValue)) {
                 setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
                 return;
             }
 
+            String parseValue = newValue;
+            if (parseValue.charAt(parseValue.length() - 1) == '.') {
+                parseValue = parseValue.substring(0, parseValue.length() - 2);
+            }
+
             try {
-                Double.parseDouble(newValue);
+                Double.parseDouble(parseValue);
                 setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
             }
             catch (final NumberFormatException e) {
@@ -268,17 +273,28 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
 
         final String valueAttr = getValueAttribute();
         if (!valueAttr.isEmpty()) {
-            final Double value = Double.parseDouble(valueAttr);
+            if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
+                return false;
+            }
+
+            double value = 0d;
+            try {
+                value = Double.parseDouble(valueAttr);
+            }
+            catch (final NumberFormatException e) {
+                return false;
+            }
+
             if (!getMin().isEmpty()) {
                 try {
-                    final Double min = Double.parseDouble(getMin());
+                    final double min = Double.parseDouble(getMin());
                     if (value < min) {
                         return false;
                     }
 
                     if (!getStep().isEmpty()) {
                         try {
-                            final Double step = Double.parseDouble(getStep());
+                            final double step = Double.parseDouble(getStep());
                             if (Math.abs((value - min) % step) > 0.000001d) {
                                 return false;
                             }
@@ -294,7 +310,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
             }
             if (!getMax().isEmpty()) {
                 try {
-                    final Double max = Double.parseDouble(getMax());
+                    final double max = Double.parseDouble(getMax());
                     if (value > max) {
                         return false;
                     }
