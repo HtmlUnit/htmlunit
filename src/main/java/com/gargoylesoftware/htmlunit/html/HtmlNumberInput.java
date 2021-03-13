@@ -96,10 +96,12 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 return;
             }
 
-            String parseValue = newValue;
+            final String parseValue = newValue;
+            /* TODO
             if (parseValue.charAt(parseValue.length() - 1) == '.') {
                 parseValue = parseValue.substring(0, parseValue.length() - 2);
             }
+            */
 
             try {
                 Double.parseDouble(parseValue);
