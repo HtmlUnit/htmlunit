@@ -208,16 +208,25 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "true", "1", "true", "1.2", "false"},
-            FF = {"1", "true", "", "false", "1.2", "false"},
-            IE = {"1", "true", "1.", "true", "1.2", "false"})
+    @Alerts(DEFAULT = {"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"},
+            FF = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"},
+            IE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
     public void typeIntegerWithDot() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    document.title = input.value + '-' "
+                                + "+ input.defaultValue + '-' "
+                                + "+ input.getAttribute('value')+ '-' "
+                                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='inpt' />\n"
-                + "  <button id='check' "
-                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "  <button id='check' onclick='test()');'>"
                 + "DoIt</button>\n"
                 + "</body>\n"
                 + "</html>";
@@ -246,15 +255,24 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "false", "-12", "true", "-123", "false"},
-            IE = {"", "true", "12", "true", "123", "true"})
+    @Alerts(DEFAULT = {"", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
+            IE = {"", "--null-true", "12", "12--null-true", "123", "123--null-true"})
     public void typeIntegerNegativeValid() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    document.title = input.value + '-' "
+                                + "+ input.defaultValue + '-' "
+                                + "+ input.getAttribute('value')+ '-' "
+                                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='inpt' min='-42' max='1234'/>\n"
-                + "  <button id='check' "
-                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "  <button id='check' onclick='test()');'>"
                 + "DoIt</button>\n"
                 + "</body>\n"
                 + "</html>";
@@ -283,15 +301,24 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "false", "-12", "false"},
-            IE = {"", "true", "12", "true"})
+    @Alerts(DEFAULT = {"", "--null-false", "-12", "-12--null-false"},
+            IE = {"", "--null-true", "12", "12--null-true"})
     public void typeIntegerNegativeInvalid() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    document.title = input.value + '-' "
+                                + "+ input.defaultValue + '-' "
+                                + "+ input.getAttribute('value')+ '-' "
+                                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='inpt' min='1' max='1234'/>\n"
-                + "  <button id='check' "
-                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "  <button id='check' onclick='test()');'>"
                 + "DoIt</button>\n"
                 + "</body>\n"
                 + "</html>";
