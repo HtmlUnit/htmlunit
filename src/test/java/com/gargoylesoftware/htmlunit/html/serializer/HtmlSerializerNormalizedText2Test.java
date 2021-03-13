@@ -1810,19 +1810,22 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Test
     @Alerts("x 12 y")
     public void getNormalizedNumberInputValidNumber() throws Exception {
-        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "12");
+        getNormalizedTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "12");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("x ab y")
+    @Alerts(DEFAULT = "x y",
+            FF = "x ab y",
+            FF78 = "x ab y",
+            IE = "x ab y")
     public void getNormalizedNumberInputInvalidNumber() throws Exception {
-        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");
+        getNormalizedTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");
     }
 
-    private void getVisibleTextFormatedAfterTyping(final String htmlTesterSnipped,
+    private void getNormalizedTextFormatedAfterTyping(final String htmlTesterSnipped,
                         final String... typed) throws Exception {
         final String htmlContent
             = "<html>\n"
@@ -1839,6 +1842,6 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
         }
 
         final HtmlElement tester = page.getHtmlElementById("tester");
-        assertEquals(getExpectedAlerts()[0], tester.getVisibleText());
+        assertEquals(getExpectedAlerts()[0], tester.asNormalizedText());
     }
 }

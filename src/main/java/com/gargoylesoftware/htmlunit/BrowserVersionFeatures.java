@@ -1028,6 +1028,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
 
+    /** FF accepts all chars. */
+    @BrowserFeature({FF, FF78, IE})
+    JS_INPUT_NUMBER_ACCEPT_ALL,
+
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_INPUT_NUMBER_SELECTION_START_END_NULL,

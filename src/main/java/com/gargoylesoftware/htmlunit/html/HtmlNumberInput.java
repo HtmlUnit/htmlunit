@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_ACCEPT_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.text.NumberFormat;
@@ -85,6 +86,11 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
+            if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+                return;
+            }
+
             if (StringUtils.isBlank(newValue)) {
                 setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
                 return;
@@ -97,6 +103,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
             catch (final NumberFormatException e) {
                 // ignore
             }
+
         }
     }
 
