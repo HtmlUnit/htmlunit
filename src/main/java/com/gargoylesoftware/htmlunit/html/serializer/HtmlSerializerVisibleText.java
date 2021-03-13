@@ -148,10 +148,10 @@ public class HtmlSerializerVisibleText {
             appendResetInput(builder, (HtmlResetInput) node, mode);
         }
         else if (node instanceof HtmlCheckBoxInput) {
-            doAppendCheckBoxInput(builder, (HtmlCheckBoxInput) node, mode);
+            appendCheckBoxInput(builder, (HtmlCheckBoxInput) node, mode);
         }
         else if (node instanceof HtmlRadioButtonInput) {
-            doAppendRadioButtonInput(builder, (HtmlRadioButtonInput) node, mode);
+            appendRadioButtonInput(builder, (HtmlRadioButtonInput) node, mode);
         }
         else if (node instanceof HtmlInput) {
             // nothing
@@ -371,7 +371,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendTextArea(final HtmlSerializerTextBuilder builder,
             final HtmlTextArea htmlTextArea, final Mode mode) {
-        if (isVisible(htmlTextArea)) {
+        if (htmlTextArea.isDisplayed()) {
             builder.append(htmlTextArea.getDefaultValue(), whiteSpaceStyle(htmlTextArea, Mode.PRE));
             builder.trimRight(Mode.PRE);
         }
@@ -548,7 +548,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
             final HtmlPreformattedText htmlPreformattedText, final Mode mode) {
-        if (isVisible(htmlPreformattedText)) {
+        if (htmlPreformattedText.isDisplayed()) {
             builder.appendBlockSeparator();
             appendChildren(builder, htmlPreformattedText, whiteSpaceStyle(htmlPreformattedText, Mode.PRE));
             builder.appendBlockSeparator();
@@ -564,7 +564,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendInlineFrame(final HtmlSerializerTextBuilder builder,
             final HtmlInlineFrame htmlInlineFrame, final Mode mode) {
-        if (isVisible(htmlInlineFrame)) {
+        if (htmlInlineFrame.isDisplayed()) {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
@@ -583,7 +583,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, final Mode mode) {
         final DomNode parent = domText.getParentNode();
-        if (parent == null || parent instanceof HtmlTitle || isVisible(parent)) {
+        if (parent == null || parent instanceof HtmlTitle || parent.isDisplayed()) {
             builder.append(domText.getData(), mode);
         }
     }
@@ -631,7 +631,7 @@ public class HtmlSerializerVisibleText {
      * @param htmlCheckBoxInput the target to process
      * @param mode the {@link Mode} to use for processing
      */
-    protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder,
+    protected void appendCheckBoxInput(final HtmlSerializerTextBuilder builder,
                     final HtmlCheckBoxInput htmlCheckBoxInput, final Mode mode) {
         // nothing to do
     }
@@ -643,13 +643,9 @@ public class HtmlSerializerVisibleText {
      * @param htmlRadioButtonInput the target to process
      * @param mode the {@link Mode} to use for processing
      */
-    protected void doAppendRadioButtonInput(final HtmlSerializerTextBuilder builder,
+    protected void appendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput, final Mode mode) {
         // nothing to do
-    }
-
-    private boolean isVisible(final DomNode node) {
-        return node.isDisplayed();
     }
 
     private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {

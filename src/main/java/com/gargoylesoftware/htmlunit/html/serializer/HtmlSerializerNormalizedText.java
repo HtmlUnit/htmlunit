@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.html.HtmlNumberInput;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
 import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
@@ -143,10 +144,13 @@ public class HtmlSerializerNormalizedText {
             appendResetInput(builder, (HtmlResetInput) node);
         }
         else if (node instanceof HtmlCheckBoxInput) {
-            doAppendCheckBoxInput(builder, (HtmlCheckBoxInput) node);
+            appendCheckBoxInput(builder, (HtmlCheckBoxInput) node);
         }
         else if (node instanceof HtmlRadioButtonInput) {
-            doAppendRadioButtonInput(builder, (HtmlRadioButtonInput) node);
+            appendRadioButtonInput(builder, (HtmlRadioButtonInput) node);
+        }
+        else if (node instanceof HtmlNumberInput) {
+            appendNumberInput(builder, (HtmlNumberInput) node);
         }
         else if (node instanceof HtmlInput) {
             appendInput(builder, (HtmlInput) node);
@@ -227,6 +231,25 @@ public class HtmlSerializerNormalizedText {
     protected void appendInput(final HtmlSerializerTextBuilder builder, final HtmlInput htmlInput) {
         builder.append(" ", Mode.NORMALIZE);
         builder.append(htmlInput.getValueAttribute(), Mode.NORMALIZE);
+        builder.append(" ", Mode.NORMALIZE);
+    }
+
+    /**
+     * Process {@link HtmlNumberInput}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlNumberInput the target to process
+     */
+    protected void appendNumberInput(final HtmlSerializerTextBuilder builder, final HtmlNumberInput htmlNumberInput) {
+        builder.append(" ", Mode.NORMALIZE);
+
+        String val = htmlNumberInput.getValueAttribute();
+        final int lastPos = val.length() - 1;
+        if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+            val = val.substring(0, lastPos);
+        }
+        builder.append(val, Mode.NORMALIZE);
+
         builder.append(" ", Mode.NORMALIZE);
     }
 
@@ -484,7 +507,7 @@ public class HtmlSerializerNormalizedText {
      * @param builder the StringBuilder to add to
      * @param htmlCheckBoxInput the target to process
      */
-    protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder,
+    protected void appendCheckBoxInput(final HtmlSerializerTextBuilder builder,
                                             final HtmlCheckBoxInput htmlCheckBoxInput) {
         if (htmlCheckBoxInput.isChecked()) {
             builder.append("checked", Mode.NORMALIZE);
@@ -500,7 +523,7 @@ public class HtmlSerializerNormalizedText {
      * @param builder the StringBuilder to add to
      * @param htmlRadioButtonInput the target to process
      */
-    protected void doAppendRadioButtonInput(final HtmlSerializerTextBuilder builder,
+    protected void appendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput) {
         if (htmlRadioButtonInput.isChecked()) {
             builder.append("checked", Mode.NORMALIZE);
