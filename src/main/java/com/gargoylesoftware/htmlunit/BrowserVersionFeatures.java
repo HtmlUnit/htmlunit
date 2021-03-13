@@ -1032,6 +1032,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78, IE})
     JS_INPUT_NUMBER_ACCEPT_ALL,
 
+    /** FF commat at end is not an integer. */
+    @BrowserFeature(FF)
+    JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
+
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_INPUT_NUMBER_SELECTION_START_END_NULL,

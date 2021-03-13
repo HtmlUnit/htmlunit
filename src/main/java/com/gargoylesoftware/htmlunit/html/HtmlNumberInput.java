@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_ACCEPT_ALL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.text.NumberFormat;
@@ -39,6 +40,8 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
+    private static final char[] VALID_INT_CHARS = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
+
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
@@ -54,7 +57,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
         super(qualifiedName, page, attributes);
 
         final String value = getValueAttribute();
-        if (!getValueAttribute().isEmpty()) {
+        if (!value.isEmpty()) {
             try {
                 Double.parseDouble(value.trim());
             }
@@ -96,12 +99,11 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 return;
             }
 
-            final String parseValue = newValue;
-            /* TODO
-            if (parseValue.charAt(parseValue.length() - 1) == '.') {
-                parseValue = parseValue.substring(0, parseValue.length() - 2);
+            String parseValue = newValue;
+            final int lastPos = parseValue.length() - 1;
+            if (parseValue.charAt(lastPos) == '.') {
+                parseValue = parseValue.substring(0, lastPos);
             }
-            */
 
             try {
                 Double.parseDouble(parseValue);
@@ -277,6 +279,21 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
         if (!valueAttr.isEmpty()) {
             if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
                 return false;
+            }
+
+            // if we have no step, the value has to be an integer
+            if (getStep().isEmpty()) {
+                String val = valueAttr;
+                final int lastPos = val.length() - 1;
+                if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+                    if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
+                        return false;
+                    }
+                    val = val.substring(0, lastPos);
+                }
+                if (!StringUtils.containsOnly(val, VALID_INT_CHARS)) {
+                    return false;
+                }
             }
 
             double value = 0d;

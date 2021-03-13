@@ -211,6 +211,10 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"},
             FF = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"},
             IE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
+    @HtmlUnitNYI(CHROME = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
+            EDGE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
+            FF = {"1", "1--null-true", "1.", "1.--null-false", "1.2", "1.2--null-false"},
+            FF78 = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
     public void typeIntegerWithDot() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -257,6 +261,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             IE = {"", "--null-true", "12", "12--null-true", "123", "123--null-true"})
+    @HtmlUnitNYI(CHROME = {"-", "---null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
+            EDGE = {"-", "---null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
+            FF = {"-", "---null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
+            FF78 = {"-", "---null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
+            IE = {"-", "---null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
     public void typeIntegerNegativeValid() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -303,6 +312,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "--null-false", "-12", "-12--null-false"},
             IE = {"", "--null-true", "12", "12--null-true"})
+    @HtmlUnitNYI(CHROME = {"-", "---null-false", "-12", "-12--null-false"},
+            EDGE = {"-", "---null-false", "-12", "-12--null-false"},
+            FF = {"-", "---null-false", "-12", "-12--null-false"},
+            FF78 = {"-", "---null-false", "-12", "-12--null-false"},
+            IE = {"-", "---null-false", "-12", "-12--null-false"})
     public void typeIntegerNegativeInvalid() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1047,9 +1061,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF = {"--null-true", "4", "4--null-true", "", "--null-false"},
             FF78 = {"--null-true", "4", "4--null-true", "", "--null-false"},
             IE = {"--null-true", "4", "4--null-true", "4a", "4a--null-true"})
-    @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
-            FF78 = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
-            IE = {"--null-true", "4", "4--null-true", "4", "4--null-true"})
+    @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4a", "4a--null-false"},
+            FF78 = {"--null-true", "4", "4--null-true", "4a", "4a--null-false"},
+            IE = {"--null-true", "4", "4--null-true", "4a", "4a--null-false"})
     public void typeInvalidChars() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
