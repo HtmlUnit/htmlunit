@@ -61,7 +61,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
     public static final String HTML_ALERT_COOKIE
         = HtmlPageTest.STANDARDS_MODE_PREFIX_
-        + "<html><head><title>foo</title><script>\n"
+        + "<html><head><script>\n"
         + "  function test() {\n"
         // there is no fixed order, sort for stable testing
         + "    var c = document.cookie;\n"

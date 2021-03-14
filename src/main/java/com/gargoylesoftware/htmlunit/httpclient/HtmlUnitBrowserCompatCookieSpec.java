@@ -103,7 +103,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 new BasicSecureHandler(),
                 new BasicCommentHandler(),
                 new HtmlUnitExpiresHandler(browserVersion),
-                new HtmlUnitHttpOnlyHandler());
+                new HtmlUnitHttpOnlyHandler(),
+                new HtmlUnitSameSiteHandler());
     }
 
     /**

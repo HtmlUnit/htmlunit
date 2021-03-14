@@ -187,6 +187,13 @@ public class Cookie implements Serializable {
     }
 
     /**
+     * @return the SameSite value or {@code null} if not set.
+     */
+    public String getSameSite() {
+        return httpClientCookie_.getAttribute("samesite");
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
