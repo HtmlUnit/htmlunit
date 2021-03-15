@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import org.apache.commons.lang3.StringUtils;
+
 /**
  * Customized CookieAttributeHandler for handling of the samesite attribute.
  *
