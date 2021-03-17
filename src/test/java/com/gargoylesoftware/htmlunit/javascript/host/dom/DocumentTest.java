@@ -1128,7 +1128,7 @@ public class DocumentTest extends WebDriverTestCase {
         final String html
             = "<html>\n"
             + "<head>\n"
-            + "    <script>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      log(document.all['input1'].value);\n"
@@ -2534,9 +2534,9 @@ public class DocumentTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "<script>\n"
+            + "    <script>\n"
             + LOG_TITLE_FUNCTION
-            + "</script>\n"
+            + "    </script>\n"
             + "    <script>log('1: ' + document.body);</script>\n"
             + "    <script defer=''>log('2: ' + document.body);</script>\n"
             + "    <script>window.onload = function() { log('3: ' + document.body); }</script>\n"
