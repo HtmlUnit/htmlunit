@@ -2466,7 +2466,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "      context.fillRect(16, 16, 4, 4);\n");
     }
 
-
     /**
      * @throws Exception if the test fails
      */
