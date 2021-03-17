@@ -1127,6 +1127,57 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-true"},
+            FF = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
+            FF78 = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
+            IE = {"012", "012-0-0-true", "", "-0-0-true", "", "-0-0-true"})
+    @HtmlUnitNYI(FF = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
+            FF78 = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
+            IE = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"})
+    public void typeCharsAndClear() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    document.title = input.value + '-' "
+                                + "+ input.defaultValue + '-' "
+                                + "+ input.getAttribute('value')+ '-' "
+                                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' min='0' max='999' value='0' />\n"
+                + "  <button id='check' onclick='test()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        final WebElement check = driver.findElement(By.id("check"));
+
+        input.sendKeys("12");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        input.clear();
+        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+
+        input.sendKeys("abc");
+        assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
+        check.click();
+        assertEquals(getExpectedAlerts()[5], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"},
             IE = {"13-13-13-true", "15-15-15-true", "17-15-15-false", "17-19-19-false"})
     @HtmlUnitNYI(IE = {"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"})
