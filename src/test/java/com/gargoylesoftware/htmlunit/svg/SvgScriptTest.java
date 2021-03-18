@@ -21,7 +21,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SvgScriptTest extends WebDriverTestCase {
@@ -77,13 +78,18 @@ public class SvgScriptTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object SVGScriptElement]", "[object HTMLScriptElement]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
+            EDGE = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
+            FF = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
+            FF78 = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
+            IE = {"[object SVGScriptElement]", "[object SVGScriptElement]"})
     public void htmlOrSvg() throws Exception {
         final String html = "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
             + "<script id='id1'>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('id1'));\n"
-            + "    alert(document.getElementById('id2'));\n"
+            + "    log(document.getElementById('id1'));\n"
+            + "    log(document.getElementById('id2'));\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
@@ -91,7 +97,7 @@ public class SvgScriptTest extends WebDriverTestCase {
             + "</body>\n"
             + "</svg>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertType(getExpectedAlerts()[0], page.getElementById("id1"));

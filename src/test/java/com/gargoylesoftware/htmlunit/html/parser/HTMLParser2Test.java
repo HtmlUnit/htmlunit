@@ -14,16 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html.parser;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -58,9 +54,13 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\nbeforeafter", "undefined", "undefined"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"beforeafter", "undefined", "undefined"},
+            EDGE = {"beforeafter", "undefined", "undefined"},
+            FF = {"beforeafter", "undefined", "undefined"},
+            FF78 = {"beforeafter", "undefined", "undefined"},
+            IE = {"beforeafter", "undefined", "undefined"})
     public void htmlTableTextAroundTD() throws Exception {
-        final String html = "<html><head><title>test_Table</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var tmp = document.getElementById('testDiv');\n"
@@ -86,19 +86,20 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts("TABLE")
     public void htmlTableWhitespaceAroundTD() throws Exception {
-        final String html = "<html><head><title>test_Table</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.getElementById('testDiv');\n"
             + "  tmp = tmp.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><div id='testDiv'><table><tr> <td></td> </tr></table>\n"
             + "</div></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -109,18 +110,19 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableMisplacedElementInside() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><table><tr><td></td><h2>Wrong Place</h2></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,18 +133,19 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableMisplacedElementInside2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><table><tr><td></td><h2>Wrong Place</h2><td></td></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -153,18 +156,19 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableMisplacedElementInside3() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><table><tr><td></td></tr><h2>Wrong Place</h2></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -175,18 +179,19 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableMisplacedElementInside4() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'><table><tr><td></td></tr><h2>Wrong Place</h2><tr><td></td></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -210,11 +215,12 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +   "</table>\n"
 
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "   var tmp = document.body.firstChild;\n"
-                + "   while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "   while (tmp != null) {if (tmp.tagName) log(tmp.tagName); tmp = tmp.nextSibling;}\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -245,16 +251,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +   "</table>\n"
 
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "   var tmp = document.body.firstChild;\n"
                 + "   while (tmp != null) {\n"
                 + "     if (tmp.tagName) {\n"
-                + "       alert(tmp.tagName + (tmp.id ? '#' + tmp.id : ''));\n"
+                + "       log(tmp.tagName + (tmp.id ? '#' + tmp.id : ''));\n"
                 + "     }\n"
                 + "     tmp = tmp.nextSibling;\n"
                 + "   }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -281,14 +288,15 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +   "</table>\n"
 
                 + "<script>\n"
-                + "  alert(document.body.children.length);\n"
-                + "  alert(document.body.children[0].tagName);\n"
-                + "  alert(document.body.children[1].tagName);\n"
-                + "  alert(document.body.children[2].tagName);\n"
-                + "  alert(document.body.children[3].tagName);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.body.children.length);\n"
+                + "  log(document.body.children[0].tagName);\n"
+                + "  log(document.body.children[1].tagName);\n"
+                + "  log(document.body.children[2].tagName);\n"
+                + "  log(document.body.children[3].tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -317,14 +325,15 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +   "</table>\n"
 
                 + "<script>\n"
-                + "  alert(document.body.children.length);\n"
-                + "  alert(document.body.children[0].tagName);\n"
-                + "  alert(document.body.children[1].tagName);\n"
-                + "  alert(document.body.children[2].tagName);\n"
-                + "  alert(document.body.children[3].tagName);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.body.children.length);\n"
+                + "  log(document.body.children[0].tagName);\n"
+                + "  log(document.body.children[1].tagName);\n"
+                + "  log(document.body.children[2].tagName);\n"
+                + "  log(document.body.children[3].tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -353,13 +362,13 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +   "</table>\n"
 
                 + "<script>\n"
-                + "  alert(document.body.children.length);\n"
-                + "  alert(document.body.children[0].tagName);\n"
-                + "  alert(document.body.children[1].tagName);\n"
-                + "  alert(document.body.children[2].tagName);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.body.children.length);\n"
+                + "  log(document.body.children[0].tagName);\n"
+                + "  log(document.body.children[1].tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -374,12 +383,13 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +     "</tr>\n"
 
                 + "<script>\n"
-                + "  alert(document.body.childNodes.length);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.body.childNodes.length);\n"
                 + "  var tmp = document.body.firstChild;\n"
-                + "  while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "  while (tmp != null) {if (tmp.tagName) log(tmp.tagName); tmp = tmp.nextSibling;}\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -395,14 +405,15 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +     "<tr>"
 
                 + "<script>\n"
-                + "  alert(document.body.childNodes.length);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.body.childNodes.length);\n"
                 + "  var tmp = document.body.firstChild;\n"
-                + "  while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "  while (tmp != null) {if (tmp.tagName) log(tmp.tagName); tmp = tmp.nextSibling;}\n"
                 + "</script>\n"
 
                 +     "</tr>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -419,15 +430,16 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 +       "<td>"
 
                 + "<script>\n"
-                + "  alert(document.body.childNodes.length);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.body.childNodes.length);\n"
                 + "  var tmp = document.body.firstChild;\n"
-                + "  while (tmp != null) {if (tmp.tagName) alert(tmp.tagName); tmp = tmp.nextSibling;}\n"
+                + "  while (tmp != null) {if (tmp.tagName) log(tmp.tagName); tmp = tmp.nextSibling;}\n"
                 + "</script>\n"
 
                 +       "</td>"
                 +     "</tr>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -439,10 +451,11 @@ public class HTMLParser2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -462,7 +475,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "</table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -473,11 +486,12 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableClosesAnotherInsideTr() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -496,7 +510,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "</table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 
@@ -504,15 +518,16 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("TABLE")
+    @Alerts({"TABLE", "null"})
     public void htmlTableNotClosesOnotherInsideTd() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var tmp = document.body.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = document.body.firstChild.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -533,7 +548,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "</table>"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -564,15 +579,16 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void divInsideButton() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var tmp = document.getElementById('myP');\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = tmp.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = tmp.firstChild.tagName;\n"
-            + "  alert(tmp);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(tmp);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -580,7 +596,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<p id='myP'><button><div>Test</div></button></p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -592,15 +608,16 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void objectInsideLabel() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var tmp = document.getElementById('myP');\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = tmp.firstChild;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "  tmp = tmp.firstChild.tagName;\n"
-            + "  alert(tmp);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(tmp);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -608,7 +625,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<p id='myP'><label><object></object></label></p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -635,7 +652,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 + "          }\n"
                 + "        }\n"
                 + "        if (!hasTable) {\n"
-                + "          alert('<' + myNode.nodeName + '>');\n"
+                + "          log('<' + myNode.nodeName + '>');\n"
                 + "        }\n"
                 + "      }\n"
                 + "    }\n"
@@ -678,7 +695,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -687,11 +704,12 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2"})
     public void childNodes_p_parent() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  for (var i = 1; i <= 12; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "    log(document.getElementById('p' + i).childNodes.length);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -710,7 +728,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<p id='p12'> <a href='hi'></a></p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -719,11 +737,12 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3"})
     public void childNodes_f() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  for (var i = 1; i <= 13; i++) {\n"
-            + "    alert(document.getElementById('f' + i).childNodes.length);\n"
+            + "    log(document.getElementById('f' + i).childNodes.length);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -742,7 +761,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<form id='f12'> <a href='hi'></a></form>\n"
             + "<form id='f13'> <div> </div> </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -754,13 +773,14 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void ieConditionalCommentsNotInDom() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var tmp = document.getElementById('my1');\n"
-            + "  alert(tmp.innerHTML);\n"
+            + "  log(tmp.innerHTML);\n"
             + "  tmp = document.getElementById('my2');\n"
-            + "  alert(tmp.innerHTML);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(tmp.innerHTML);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -769,7 +789,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "  <div id='my2'><!--[if lt IE 11]><br><![endif]--></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -784,10 +804,13 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<a href='foo'>\n"
             + "<label>XL</label>\n"
             + "</a>\n"
-            + "<script>alert(document.links.length)</script>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.links.length)\n"
+            + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -859,28 +882,40 @@ public class HTMLParser2Test extends WebDriverTestCase {
             IE = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
                         "1", "IFRAME", "null", "1",
                         "3", "#text", "</div></body></html>"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+                        "1", "IFRAME", "null", "1",
+                        "3", "#text", "</div></body></html>"},
+            EDGE = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+                        "1", "IFRAME", "null", "1",
+                        "3", "#text", "</div></body></html>"},
+            FF = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+                        "1", "IFRAME", "null", "1",
+                        "3", "#text", "</div></body></html>"},
+            FF78 = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+                        "1", "IFRAME", "null", "1",
+                         "3", "#text", "</div></body></html>"})
     public void selfClosingIframe() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var tmp = document.getElementById('myDiv');\n"
-            + "  alert(tmp.innerHTML);\n"
-            + "  alert(tmp.childNodes.length);\n"
+            + "  log(tmp.innerHTML);\n"
+            + "  log(tmp.childNodes.length);\n"
 
             + "  var child = tmp.childNodes[0];\n"
-            + "  alert(child.nodeType);\n"
-            + "  alert(child.nodeName);\n"
-            + "  alert(child.nodeValue);\n"
+            + "  log(child.nodeType);\n"
+            + "  log(child.nodeName);\n"
+            + "  log(child.nodeValue);\n"
 
-            + "  alert(child.childNodes.length);\n"
+            + "  log(child.childNodes.length);\n"
             + "  var child2 = child.childNodes[0];\n"
-            + "  alert(child2.nodeType);\n"
-            + "  alert(child2.nodeName);\n"
-            + "  alert(child2.nodeValue);\n"
+            + "  log(child2.nodeType);\n"
+            + "  log(child2.nodeName);\n"
+            + "  log(child2.nodeValue);\n"
 
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -888,7 +923,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "  <div id='myDiv'><iframe/></div>"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -900,24 +935,25 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void dlShouldCloseDt() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var tmp = document.getElementById('myBody');\n"
-            + "  alert(tmp.childNodes.length);\n"
+            + "  log(tmp.childNodes.length);\n"
 
             + "  var child = tmp.childNodes[0];\n"
-            + "  alert(child.childNodes.length + '-' + child.nodeType + '#' +child.nodeName);\n"
+            + "  log(child.childNodes.length + '-' + child.nodeType + '#' +child.nodeName);\n"
 
             + "  var child2 = child.childNodes[0];\n"
-            + "  alert(child2.childNodes.length + '-' + child2.nodeType + '#' +child2.nodeName);\n"
+            + "  log(child2.childNodes.length + '-' + child2.nodeType + '#' +child2.nodeName);\n"
 
             + "  var child = tmp.childNodes[1];\n"
-            + "  alert(child.childNodes.length + '-' + child.nodeType + '#' +child.nodeName);\n"
+            + "  log(child.childNodes.length + '-' + child.nodeType + '#' +child.nodeName);\n"
 
             + "  var child2 = child.childNodes[0];\n"
-            + "  alert(child2.childNodes.length + '-' + child2.nodeType + '#' +child2.nodeName);\n"
+            + "  log(child2.childNodes.length + '-' + child2.nodeType + '#' +child2.nodeName);\n"
 
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -926,7 +962,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<DL><DT></DL>"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -939,16 +975,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void innerHtmlParagraph() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var tmp = document.getElementById('myP');\n"
             + "  tmp.innerHTML = '<p>HtmlUnit</p>';\n"
-            + "  alert(tmp.childNodes.length);\n"
+            + "  log(tmp.childNodes.length);\n"
 
             + "  var child = tmp.childNodes[0];\n"
-            + "  alert(child.childNodes.length + '-' + child.nodeType + '#' + child.nodeName);\n"
+            + "  log(child.childNodes.length + '-' + child.nodeType + '#' + child.nodeName);\n"
 
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -956,6 +993,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "  <p id='myP'>Test</p>"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
