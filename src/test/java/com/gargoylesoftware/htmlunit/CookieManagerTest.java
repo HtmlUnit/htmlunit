@@ -704,7 +704,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception in case of error
      *
      * This requires an entry in your hosts file
-     * 127.0.0.1       www.htmlunit-local.com
+     * 127.0.0.1       host1.htmlunit.org
      */
     @Test
     @Alerts("JDSessionID=1234567890")
@@ -728,14 +728,14 @@ public class CookieManagerTest extends WebDriverTestCase {
 
             + "var now = new Date();\n"
             + "now.setTime(now.getTime() + 60 * 60 * 1000);\n"
-            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit-local.com');\n"
+            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit.org');\n"
 
 //             + "alert('cookies: ' + document.cookie);\n"
 
             + "</script></body>\n"
             + "</html>";
 
-        final URL firstUrl = new URL("http://www.htmlunit-local.com:" + PORT + "/");
+        final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
         getMockWebConnection().setResponse(firstUrl, html);
         loadPage2(html, firstUrl);
 
