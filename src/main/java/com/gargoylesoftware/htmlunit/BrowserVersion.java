@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *                     .setUserAgent(userAgent)
  *                     .build();
  * </pre>
- * <p>But keep in mind this now one still behaves like a FF78, only the stuff reported to the
+ * <p>But keep in mind this new one still behaves like a FF78, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -988,6 +988,10 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Changes the browser language property. This is used for various output
+         * formating. If you like change the language the browser requests from the server
+         * you have to adjust the {@link #setAcceptLanguageHeader(String)}.
+         *
          * @param browserLanguage the browserLanguage to set
          * @return this for fluent use
          */
