@@ -92,7 +92,7 @@ public class HTMLParser3Test extends WebServerTestCase {
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
-        assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asText()));
+        assertEquals(utf8Encoded, HeaderVsMetaTagContentTypeServlet.utf8String.equals(page.asNormalizedText()));
     }
 
     /**
