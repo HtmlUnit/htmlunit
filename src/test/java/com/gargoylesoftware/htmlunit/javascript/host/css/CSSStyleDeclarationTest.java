@@ -62,20 +62,21 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void style_OneCssAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var node = document.getElementById('div1');\n"
             + "  var style = node.style;\n"
-            + "  alert(style.color);\n"
+            + "  log(style.color);\n"
             + "  style.color = 'pink';\n"
-            + "  alert(style.color);\n"
-            + "  alert(node.getAttribute('style'));\n"
+            + "  log(style.color);\n"
+            + "  log(node.getAttribute('style'));\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
         final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
 
         setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
@@ -95,12 +96,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             IE = {"black", "pink", "color: pink; background: blue; foo: bar;"})
     public void style_MultipleCssAttributes() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var style = document.getElementById('div1').style;\n"
-            + "  alert(style.color);\n"
+            + "  log(style.color);\n"
             + "  style.color = 'pink';\n"
-            + "  alert(style.color);\n"
+            + "  log(style.color);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
@@ -108,7 +110,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
 
         setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
@@ -121,19 +123,20 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void style_OneUndefinedCssAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var style = document.getElementById('div1').style;\n"
-            + "  alert(document.getElementById('nonexistingid'));\n"
-            + "  alert(style.color);\n"
+            + "  log(document.getElementById('nonexistingid'));\n"
+            + "  log(style.color);\n"
             + "  style.color = 'pink';\n"
-            + "  alert(style.color);\n"
+            + "  log(style.color);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
         final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
 
         setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
@@ -606,11 +609,12 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='my' style='htmlunit: foo'>d</div>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  d = document.getElementById('my');\n"
-            + "  alert(d.style.htmlunit);\n"
+            + "  log(d.style.htmlunit);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1592,18 +1596,19 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               "<html><body onload='test()'>\n"
             + "<a id='a' href='#' style='background-color:green'>go</a>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.getElementById('a');\n"
             + "    try {\n"
             + "      node.style.setProperty(" + params + ");\n"
-            + "      alert(node.style.backgroundColor + ' ' + node.style.getPropertyPriority('background-color'));\n"
-            + "    } catch(e) { alert(e); }\n"
+            + "      log(node.style.backgroundColor + ' ' + node.style.getPropertyPriority('background-color'));\n"
+            + "    } catch(e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
         setExpectedAlerts(expected);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2437,13 +2442,14 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var node = document.getElementById('div1');\n"
             + "  var style = node.style;\n"
-            + "  alert(style.color);\n"
+            + "  log(style.color);\n"
             + "  style.color = 'pink';\n"
-            + "  alert(style.color);\n"
-            + "  alert(node.getAttribute('style'));\n"
+            + "  log(style.color);\n"
+            + "  log(node.getAttribute('style'));\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
@@ -2451,7 +2457,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
 
         setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
@@ -2586,26 +2592,27 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var css = window.CSSStyleDeclaration;\n"
             + "    var oldDisplay = css.prototype.__lookupSetter__('display');\n"
-            + "    alert(typeof oldDisplay);\n"
+            + "    log(typeof oldDisplay);\n"
 
             + "    var newDisplay = function(x){\n"
-            + "                       alert('before');\n"
-            + "                       alert(x);\n"
+            + "                       log('before');\n"
+            + "                       log(x);\n"
             + "                       oldDisplay.call(this, x);\n"
-            + "                       alert('after');\n"
+            + "                       log('after');\n"
             + "                     };\n"
             + "    css.prototype.__defineSetter__('display', newDisplay);\n"
 
             + "    var div = document.getElementById('d');\n"
             + "    div.style.display = 'none';\n"
-            + "    alert(div.style.display);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(div.style.display);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2616,28 +2623,29 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void setToNull() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div1 = document.getElementById('div1');\n"
-            + "  alert(div1.style.border);\n"
+            + "  log(div1.style.border);\n"
             + "  try {\n"
             + "    div1.style.border = null;\n"
             + "  } catch (e) {\n"
-            + "    alert('error');\n"
+            + "    log('error');\n"
             + "  }\n"
-            + "  alert(div1.style.border);\n"
-            + "  alert(div1.style.display);\n"
+            + "  log(div1.style.border);\n"
+            + "  log(div1.style.display);\n"
             + "  try {\n"
             + "    div1.style.display = null;\n"
             + "  } catch (e) {\n"
-            + "    alert('error');\n"
+            + "    log('error');\n"
             + "  }\n"
-            + "  alert(div1.style.display);\n"
+            + "  log(div1.style.display);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "<div id='div1'>foo</div></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2701,14 +2709,15 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('test');\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(style.top);\n"
+            + "    log(style.top);\n"
 
             + "    div = document.createElement('div');\n"
             + "    style = window.getComputedStyle(div, null);\n"
-            + "    alert(style.top);\n"
+            + "    log(style.top);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2716,7 +2725,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='test'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2862,6 +2871,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void widows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
             + "    debug(div);\n"
@@ -2873,15 +2883,15 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    debug(div);\n"
             + "  }\n"
             + "  function debug(div) {\n"
-            + "    alert(div.style.widows);\n"
-            + "    alert(window.getComputedStyle(div, null).widows);\n"
+            + "    log(div.style.widows);\n"
+            + "    log(window.getComputedStyle(div, null).widows);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2965,20 +2975,21 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     public void setStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
-            + "    alert(div.style);\n"
+            + "    log(div.style);\n"
             + "    div.style = 'color: green; font-family: abc';\n"
-            + "    alert(div.style);\n"
-            + "    alert(div.style.color);\n"
-            + "    alert(div.style.fontFamily);\n"
+            + "    log(div.style);\n"
+            + "    log(div.style.color);\n"
+            + "    log(div.style.fontFamily);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
