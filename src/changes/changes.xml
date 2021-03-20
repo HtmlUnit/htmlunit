@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.48.0" date="xx, 2021" description="Bugfixes, Chrome/Edge 89, Firefox 86">
+        <release version="2.48.0" date="March 20, 2021" description="Bugfixes, Chrome/Edge 89, Firefox 86">
+            <action type="fix" dev="rbri">
+                HtmlNumberInput checkValidity() fixes.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.14.1.
             </action>
@@ -24,7 +27,7 @@
                 core-js: Array length limit check fixed.
             </action>
             <action type="add" dev="RhinoTeam">
-                core-js: Exponentiation Operator support added.
+                core-js: Exponentiation operator support added.
             </action>
             <action type="add" dev="rbri">
                 FAQ updates.
