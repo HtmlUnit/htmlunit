@@ -1862,7 +1862,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     * Test HtmlContent.
      *
      * @throws Exception if the test fails
      */

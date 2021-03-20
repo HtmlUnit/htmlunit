@@ -2759,7 +2759,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     * Test HTMLShadowElement.
      *
      * @throws Exception if the test fails
      */
