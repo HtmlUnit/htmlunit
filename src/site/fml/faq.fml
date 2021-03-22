@@ -53,6 +53,23 @@
             </answer>
         </faq>
 
+        <faq id="clickNotWorking">
+            <question>
+                HtmlElement.click() does not triggering anything (e.g. no Javascript event).
+            </question>
+            <answer>
+                <p>The click() processes the click only if the element is visible. Please check the log output - if the element is not visible there should be a warning in the log
+                like "Calling click() ignored because the target element 'xxxx' is not displayed." or "Calling click() ignored because the target element 'xxxx' is disabled."
+<br/>
+If this is the case then you  can use a more advanced version of the click method to ignore the visibility checks
+<source><![CDATA[click(boolean shiftKey, boolean ctrlKey, boolean altKey, boolean triggerMouseEvents, boolean ignoreVisibility, boolean disableProcessLabelAfterBubbling)
+e.g.
+  anchor.click(false, false, false, true, true, false);
+]]></source>
+</p>
+            </answer>
+        </faq>
+
         <faq id="javaScriptExceptions">
             <question>
                 When launching my WebClient, I am ending with an js error. But when running on browser,
