@@ -173,7 +173,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             final PostponedAction action = new PostponedAction(getPage()) {
                 @Override
                 public void execute() {
-                    ScriptElementSupport.executeScriptIfNeeded(HtmlScript.this);
+                    ScriptElementSupport.executeScriptIfNeeded(HtmlScript.this, false, false);
                 }
             };
             final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();

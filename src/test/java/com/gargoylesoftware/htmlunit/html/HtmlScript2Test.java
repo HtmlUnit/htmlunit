@@ -317,6 +317,37 @@ public class HtmlScript2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"end", "s0 5", "4", "deferred-1", "deferred-2", "deferred-3", "onload"},
+            IE = {"end", "s0 5", "4", "deferred-1", "deferred-2", "onload"})
+    public void deferRemovesScript() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script defer id='s0' src='script0.js'></script>\n"
+            + "  <script defer id='s1' src='script1.js'></script>\n"
+            + "  <script defer id='s2' src='script2.js'></script>\n"
+            + "  <script defer id='s3' src='script3.js'></script>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"onload\")'>\n"
+            + "</body>\n"
+            + "<script>alert('end')</script>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script0.js"),
+                "alert('s0 ' + document.getElementsByTagName('script').length);\n"
+                + "var scr = document.getElementById('s3');\n"
+                + "scr.parentNode.removeChild(scr);\n"
+                + " alert(document.getElementsByTagName('script').length);\n");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for replaceChild.
      * @throws Exception if the test fails
      */

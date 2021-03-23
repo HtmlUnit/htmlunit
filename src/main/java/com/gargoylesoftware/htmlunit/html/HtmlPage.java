@@ -1466,12 +1466,12 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         final DomElement doc = getDocumentElement();
-        final List<HtmlElement> elements = doc.getElementsByTagName("script");
+        final List<HtmlElement> elements = new ArrayList<HtmlElement>(doc.getElementsByTagName("script"));
         for (final HtmlElement e : elements) {
             if (e instanceof HtmlScript) {
                 final HtmlScript script = (HtmlScript) e;
                 if (script.isDeferred() && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
-                    ScriptElementSupport.executeScriptIfNeeded(script);
+                    ScriptElementSupport.executeScriptIfNeeded(script, true, true);
                 }
             }
         }

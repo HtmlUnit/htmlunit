@@ -117,7 +117,7 @@ public final class ScriptElementSupport {
                                 && srcAttrib != ATTRIBUTE_NOT_DEFINED);
                     }
                     try {
-                        executeScriptIfNeeded(element);
+                        executeScriptIfNeeded(element, false, false);
                     }
                     finally {
                         if (jsDoc != null) {
@@ -157,9 +157,12 @@ public final class ScriptElementSupport {
      *
      * Executes this script node if necessary and/or possible.
      * @param element the element
+     * @param ignoreAttachedToPage don't do the isAttachedToPage check
+     * @param ignorePageIsAncestor don't do the element.getPage().isAncestorOf(element) check
      */
-    public static void executeScriptIfNeeded(final DomElement element) {
-        if (!isExecutionNeeded(element)) {
+    public static void executeScriptIfNeeded(final DomElement element, final boolean ignoreAttachedToPage,
+            final boolean ignorePageIsAncestor) {
+        if (!isExecutionNeeded(element, ignoreAttachedToPage, ignorePageIsAncestor)) {
             return;
         }
 
@@ -240,14 +243,17 @@ public final class ScriptElementSupport {
      * Indicates if script execution is necessary and/or possible.
      *
      * @param element the element
+     * @param ignoreAttachedToPage don't do the isAttachedToPage check
+     * @param ignorePageIsAncestor don't do the element.getPage().isAncestorOf(element) check
      * @return {@code true} if the script should be executed
      */
-    private static boolean isExecutionNeeded(final DomElement element) {
+    private static boolean isExecutionNeeded(final DomElement element, final boolean ignoreAttachedToPage,
+            final boolean ignorePageIsAncestor) {
         if (((ScriptElement) element).isExecuted()) {
             return false;
         }
 
-        if (!element.isAttachedToPage()) {
+        if (!ignoreAttachedToPage && !element.isAttachedToPage()) {
             return false;
         }
 
@@ -291,7 +297,7 @@ public final class ScriptElementSupport {
 
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
-        return element.getPage().isAncestorOf(element);
+        return ignorePageIsAncestor || element.getPage().isAncestorOf(element);
     }
 
     /**
@@ -332,7 +338,7 @@ public final class ScriptElementSupport {
      * Executes this script node as inline script if necessary and/or possible.
      */
     private static void executeInlineScriptIfNeeded(final DomElement element) {
-        if (!isExecutionNeeded(element)) {
+        if (!isExecutionNeeded(element, false, false)) {
             return;
         }
 

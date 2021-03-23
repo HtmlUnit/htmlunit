@@ -111,7 +111,7 @@ public class HTMLScriptElement extends HTMLElement {
         final DomNode textChild = new DomText(htmlElement.getPage(), text);
         htmlElement.appendChild(textChild);
 
-        ScriptElementSupport.executeScriptIfNeeded(htmlElement);
+        ScriptElementSupport.executeScriptIfNeeded(htmlElement, false, false);
     }
 
     /**
@@ -145,7 +145,7 @@ public class HTMLScriptElement extends HTMLElement {
         final Object result = super.appendChild(childObject);
 
         if (wasEmpty) {
-            ScriptElementSupport.executeScriptIfNeeded(tmpScript);
+            ScriptElementSupport.executeScriptIfNeeded(tmpScript, false, false);
         }
         return result;
     }

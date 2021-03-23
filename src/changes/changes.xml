@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.49.0" date="April xx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Execution of deferred scripts might fail if one script removes another.
+            </action>
+        </release>
+
         <release version="2.48.0" date="March 20, 2021" description="Bugfixes, Chrome/Edge 89, Firefox 86">
             <action type="fix" dev="rbri">
                 HtmlNumberInput checkValidity() fixes.
