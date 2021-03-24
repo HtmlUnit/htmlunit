@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -229,15 +230,20 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
-            final HtmlPage page = webClient.getPage(url);
-            for (final HtmlAnchor anchor : page.getAnchors()) {
-                String itemVersion = anchor.getTextContent();
-                itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
-                if (!isIgnored(groupId, artifactId, itemVersion)) {
-                    if (isVersionAfter(itemVersion, latestVersion)) {
-                        latestVersion = itemVersion;
+            try {
+                final HtmlPage page = webClient.getPage(url);
+                for (final HtmlAnchor anchor : page.getAnchors()) {
+                    String itemVersion = anchor.getTextContent();
+                    itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
+                    if (!isIgnored(groupId, artifactId, itemVersion)) {
+                        if (isVersionAfter(itemVersion, latestVersion)) {
+                            latestVersion = itemVersion;
+                        }
                     }
                 }
+            }
+            catch (final UnknownHostException e) {
+                // ignore because our ci machine sometimes fails
             }
         }
         if (!version.endsWith("-SNAPSHOT")
