@@ -111,18 +111,20 @@ public class MessageEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM2: exception", "DOM3: [object MessageEvent]"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert('DOM2: ' + document.createEvent('MessageEvents'));\n"
-            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "      log('DOM2: ' + document.createEvent('MessageEvents'));\n"
+            + "    } catch(e) {log('DOM2: exception')}\n"
             + "    try {\n"
-            + "      alert('DOM3: ' + document.createEvent('MessageEvent'));\n"
-            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "      log('DOM3: ' + document.createEvent('MessageEvent'));\n"
+            + "    } catch(e) {log('DOM3: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -142,6 +144,7 @@ public class MessageEventTest extends WebDriverTestCase {
 
         final String origin = "http://localhost:" + PORT;
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var e = document.createEvent('MessageEvent');\n"
             + "if (e.initMessageEvent) {\n"
             + "  try {\n"
@@ -149,7 +152,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception '; }\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');\n"
+            + "  document.title += 'no initMessageEvent';\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
@@ -182,7 +185,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception '; }\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');\n"
+            + "  document.title += 'no initMessageEvent';\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
@@ -213,7 +216,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception' + e; }\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');\n"
+            + "  document.title += 'no initMessageEvent';\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";

@@ -431,16 +431,20 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts({"pass", "fail:66", "fail:undefined"})
     public void eventOnKeyDown() throws Exception {
         final String html
-            = "<html><head></head>\n"
+            = "<html><head>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>"
+            + "</head>\n"
             + "<body>\n"
             + "  <button type='button' id='clickId'>Click Me</button>\n"
             + "  <script>\n"
             + "    function handler(_e) {\n"
             + "      var e = _e ? _e : window.event;\n"
             + "      if (e.keyCode == 65)\n"
-            + "        alert('pass');\n"
+            + "        log('pass');\n"
             + "      else\n"
-            + "        alert('fail:' + e.keyCode);\n"
+            + "        log('fail:' + e.keyCode);\n"
             + "    }\n"
             + "    document.getElementById('clickId').onkeydown = handler;\n"
             + "    document.getElementById('clickId').onclick = handler;\n"
@@ -450,11 +454,13 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("clickId"));
         element.sendKeys("a");
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
+
         element.sendKeys("b");
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyTitle2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
+
         element.click();
-        verifyAlerts(driver, getExpectedAlerts()[2]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -471,12 +477,13 @@ public class Event2Test extends WebDriverTestCase {
     public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test(e) {\n"
-            + "    alert(typeof e);\n"
-            + "    alert(e.shiftKey);\n"
-            + "    alert(e.ctrlKey);\n"
-            + "    alert(e.altKey);\n"
-            + "    alert(e.metaKey);\n"
+            + "    log(typeof e);\n"
+            + "    log(e.shiftKey);\n"
+            + "    log(e.ctrlKey);\n"
+            + "    log(e.altKey);\n"
+            + "    log(e.metaKey);\n"
             + "  }\n"
             + "</script>\n"
             + "<div id='div' onclick='test(event)'>abc</div>\n"
@@ -486,11 +493,11 @@ public class Event2Test extends WebDriverTestCase {
         int i = 0;
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
         final WebElement element = driver.findElement(By.id("div"));
         element.click();
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts);
     }
 
     /**
@@ -532,18 +539,18 @@ public class Event2Test extends WebDriverTestCase {
     public void dOMContentLoaded() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "<title>DOMContentLoaded</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  document.addEventListener('DOMContentLoaded', onDCL, false);\n"
             + "  function onDCL(e) {\n"
-            + "    alert('DOMContentLoaded type=' + e.type);\n"
+            + "    log('DOMContentLoaded type=' + e.type);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='alert(\"onLoad\")'>\n"
+            + "<body onload='log(\"onLoad\")'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -554,8 +561,8 @@ public class Event2Test extends WebDriverTestCase {
     public void testPreventDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "<title>preventDefault - copied from mozilla.org</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function preventDef(event) {\n"
             + "    event.preventDefault();\n"
             + "  }\n"
@@ -572,20 +579,20 @@ public class Event2Test extends WebDriverTestCase {
             + "    var canceled = !cb.dispatchEvent(evt);\n"
             + "    if(canceled) {\n"
             + "      // A handler called preventDefault\n"
-            + "      alert('canceled');\n"
+            + "      log('canceled');\n"
             + "    } else {\n"
             + "      // None of the handlers called preventDefault\n"
-            + "      alert('not canceled');\n"
+            + "      log('not canceled');\n"
             + "    }\n"
             + "  }\n"
 
             + "  function test() {\n"
-            + "    alert(document.getElementById('checkbox').checked);\n"
+            + "    log(document.getElementById('checkbox').checked);\n"
             + "    simulateClick();\n"
-            + "    alert(document.getElementById('checkbox').checked);\n"
+            + "    log(document.getElementById('checkbox').checked);\n"
             + "    addHandler();\n"
             + "    simulateClick();\n"
-            + "    alert(document.getElementById('checkbox').checked);\n"
+            + "    log(document.getElementById('checkbox').checked);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -593,7 +600,7 @@ public class Event2Test extends WebDriverTestCase {
             + "  <input type='checkbox' id='checkbox'/><label for='checkbox'>Checkbox</label>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -608,12 +615,13 @@ public class Event2Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <span id='clickMe'>foo</span>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function handler(e) {\n"
-            + "      alert(e == null);\n"
-            + "      alert(window.event == null);\n"
+            + "      log(e == null);\n"
+            + "      log(window.event == null);\n"
             + "      var theEvent = (e != null) ? e : window.event;\n"
             + "      var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
-            + "      alert(target.tagName);\n"
+            + "      log(target.tagName);\n"
             + "    }\n"
             + "    document.getElementById('clickMe').onclick = handler;\n"
             + "</script>\n"
@@ -622,7 +630,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -634,6 +642,7 @@ public class Event2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function init() {\n"
             + "    var form = document.forms[0];\n"
             + "    form.addEventListener('click', alertPhase, true);\n"
@@ -642,10 +651,10 @@ public class Event2Test extends WebDriverTestCase {
 
             + "  function alertPhase(e) {\n"
             + "    switch (e.eventPhase) {\n"
-            + "      case 1: alert('capturing'); break;\n"
-            + "      case 2: alert('at target'); break;\n"
-            + "      case 3: alert('bubbling'); break;\n"
-            + "      default: alert('unknown');\n"
+            + "      case 1: log('capturing'); break;\n"
+            + "      case 2: log('at target'); break;\n"
+            + "      case 3: log('bubbling'); break;\n"
+            + "      default: log('unknown');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head>\n"
@@ -658,7 +667,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("b")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -670,10 +679,11 @@ public class Event2Test extends WebDriverTestCase {
                 "span bubbling", "div", "div bubbling", "window bubbling"})
     public void eventCapturingAndBubbling() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function t(_s) {\n"
-            + "    return function() { alert(_s) };\n"
+            + "    return function() { log(_s) };\n"
             + "  }\n"
 
             + "  function init() {\n"
@@ -689,7 +699,7 @@ public class Event2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='init()'>\n"
-            + "  <div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "  <div onclick=\"log('div')\" id='theDiv'>\n"
             + "    <span id='theSpan'>blabla</span>\n"
             + "  </div>\n"
             + "</body></html>";
@@ -697,7 +707,7 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -718,8 +728,6 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
                 "true"},
-            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "true",
-                "div capturing", "true", "true", "span capturing", "true", "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
                 "div capturing", "false", "false", "span capturing", "false", "true"})
     @NotYetImplemented(IE)
@@ -729,16 +737,17 @@ public class Event2Test extends WebDriverTestCase {
 
     private void stopPropagation(final String cancelMethod) throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var counter = 0;\n"
             + "  function t(_s) {\n"
             + "    return function(e) {\n"
-            + "      alert(_s); counter++;\n"
+            + "      log(_s); counter++;\n"
             + "      if (counter >= 4) {\n"
-            + "        alert(e.cancelBubble);\n"
+            + "        log(e.cancelBubble);\n"
             + "        e." + cancelMethod + ";\n"
-            + "        alert(e.cancelBubble);\n"
+            + "        log(e.cancelBubble);\n"
             + "      }\n"
             + "    };\n"
             + "  }\n"
@@ -752,7 +761,7 @@ public class Event2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='init()'>\n"
-            + "  <div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "  <div onclick=\"log('div')\" id='theDiv'>\n"
             + "    <span id='theSpan'>blabla</span>\n"
             + "  </div>\n"
             + "</body></html>";
@@ -762,10 +771,10 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
         driver.findElement(By.id("theSpan")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts);
     }
 
     /**
@@ -775,11 +784,12 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts({"w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2"})
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var counter = 0;\n"
             + "  function t(_s) {\n"
-            + "    return function(e) { alert(_s); counter++; if (counter >= 5) e.stopPropagation(); };\n"
+            + "    return function(e) { log(_s); counter++; if (counter >= 5) e.stopPropagation(); };\n"
             + "  }\n"
             + "  function init() {\n"
             + "    window.addEventListener('click', t('w'), true);\n"
@@ -803,10 +813,10 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
         driver.findElement(By.id("theSpan")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts);
     }
 
     /**
@@ -827,11 +837,12 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts({"w", "w 2", "d", "d 2", "s", "w"})
     public void stopImmediatePropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var counter = 0;\n"
             + "  function t(_s) {\n"
-            + "    return function(e) { alert(_s); counter++; if (counter >= 5) e.stopImmediatePropagation(); };\n"
+            + "    return function(e) { log(_s); counter++; if (counter >= 5) e.stopImmediatePropagation(); };\n"
             + "  }\n"
             + "  function init() {\n"
             + "    window.addEventListener('click', t('w'), true);\n"
@@ -855,10 +866,10 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("theSpan")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
         driver.findElement(By.id("theSpan")).click();
-        verifyAlerts(driver, alerts[i++]);
+        verifyTitle2(driver, alerts);
     }
 
     /**
@@ -871,14 +882,15 @@ public class Event2Test extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(window.event);\n"
+                + "    log(window.event);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
