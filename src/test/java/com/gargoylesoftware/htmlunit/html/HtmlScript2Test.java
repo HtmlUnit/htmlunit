@@ -322,6 +322,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"end", "s0 5", "4", "deferred-1", "deferred-2", "deferred-3", "onload"},
             IE = {"end", "s0 5", "4", "deferred-1", "deferred-2", "onload"})
+    @HtmlUnitNYI(IE = {"end", "s0 5", "4", "deferred-1", "deferred-2", "deferred-3", "onload"})
     public void deferRemovesScript() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
