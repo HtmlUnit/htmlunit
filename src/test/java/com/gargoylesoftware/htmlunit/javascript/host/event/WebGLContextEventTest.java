@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link WebGLContextEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebGLContextEventTest extends WebDriverTestCase {
@@ -37,15 +38,17 @@ public class WebGLContextEventTest extends WebDriverTestCase {
             IE = {"undefined", "undefined", "undefined"})
     public void constants() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(WebGLContextEvent.CAPTURING_PHASE);\n"
-            + "      alert(WebGLContextEvent.AT_TARGET);\n"
-            + "      alert(WebGLContextEvent.BUBBLING_PHASE);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(WebGLContextEvent.CAPTURING_PHASE);\n"
+            + "      log(WebGLContextEvent.AT_TARGET);\n"
+            + "      log(WebGLContextEvent.BUBBLING_PHASE);\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

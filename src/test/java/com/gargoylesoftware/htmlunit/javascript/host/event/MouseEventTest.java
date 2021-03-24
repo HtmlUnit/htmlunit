@@ -33,29 +33,30 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MouseEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-            + "    alert(event);\n"
-            + "    alert(event.type);\n"
-            + "    alert(event.bubbles);\n"
-            + "    alert(event.cancelable);\n"
-            + "    alert(event.composed);\n"
+            + "    log(event);\n"
+            + "    log(event.type);\n"
+            + "    log(event.bubbles);\n"
+            + "    log(event.cancelable);\n"
+            + "    log(event.composed);\n"
 
-            + "    alert(event.view == window);\n"
-            + "    alert(event.screenX);\n"
-            + "    alert(event.screenY);\n"
-            + "    alert(event.clientX);\n"
-            + "    alert(event.clientY);\n"
-            + "    alert(event.ctrlKey);\n"
-            + "    alert(event.altKey);\n"
-            + "    alert(event.shiftKey);\n"
-            + "    alert(event.metaKey);\n"
-            + "    alert(event.button);\n"
-            + "    alert(event.buttons);\n"
-            + "    alert(event.which);\n"
+            + "    log(event.view == window);\n"
+            + "    log(event.screenX);\n"
+            + "    log(event.screenY);\n"
+            + "    log(event.clientX);\n"
+            + "    log(event.clientY);\n"
+            + "    log(event.ctrlKey);\n"
+            + "    log(event.altKey);\n"
+            + "    log(event.shiftKey);\n"
+            + "    log(event.metaKey);\n"
+            + "    log(event.button);\n"
+            + "    log(event.buttons);\n"
+            + "    log(event.which);\n"
             + "  }\n";
 
     /**
@@ -67,18 +68,19 @@ public class MouseEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent('click');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -96,18 +98,19 @@ public class MouseEventTest extends WebDriverTestCase {
                         "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -119,18 +122,19 @@ public class MouseEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -150,18 +154,19 @@ public class MouseEventTest extends WebDriverTestCase {
 //                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -171,18 +176,19 @@ public class MouseEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -194,18 +200,19 @@ public class MouseEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -217,7 +224,8 @@ public class MouseEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MouseEvent('click', {\n"
@@ -235,13 +243,13 @@ public class MouseEventTest extends WebDriverTestCase {
             + "        'buttons': 4\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -250,18 +258,19 @@ public class MouseEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert('DOM2: ' + document.createEvent('MouseEvents'));\n"
-            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "      log('DOM2: ' + document.createEvent('MouseEvents'));\n"
+            + "    } catch(e) {log('DOM2: exception')}\n"
             + "    try {\n"
-            + "      alert('DOM3: ' + document.createEvent('MouseEvent'));\n"
-            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "      log('DOM3: ' + document.createEvent('MouseEvent'));\n"
+            + "    } catch(e) {log('DOM3: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -271,23 +280,24 @@ public class MouseEventTest extends WebDriverTestCase {
     @Alerts({"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true"})
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.createEvent('MouseEvents');\n"
             + "  e.initMouseEvent('click', true, true, window, 0, 1, 2, 3, 4, true, true, true, true, 0, null);\n"
-            + "  alert(e.type);\n"
-            + "  alert(e.bubbles);\n"
-            + "  alert(e.cancelable);\n"
-            + "  alert(e.view == window);\n"
-            + "  alert(e.screenX);\n"
-            + "  alert(e.screenY);\n"
-            + "  alert(e.clientX);\n"
-            + "  alert(e.clientY);\n"
-            + "  alert(e.ctrlKey);\n"
-            + "  alert(e.altKey);\n"
-            + "  alert(e.shiftKey);\n"
-            + "  alert(e.metaKey);\n"
+            + "  log(e.type);\n"
+            + "  log(e.bubbles);\n"
+            + "  log(e.cancelable);\n"
+            + "  log(e.view == window);\n"
+            + "  log(e.screenX);\n"
+            + "  log(e.screenY);\n"
+            + "  log(e.clientX);\n"
+            + "  log(e.clientY);\n"
+            + "  log(e.ctrlKey);\n"
+            + "  log(e.altKey);\n"
+            + "  log(e.shiftKey);\n"
+            + "  log(e.metaKey);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -296,7 +306,8 @@ public class MouseEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1"})
     public void dispatchEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var clickCount = 0;\n"
             + "  var dblClickCount = 0;\n"
             + "  function test() {\n"
@@ -317,8 +328,8 @@ public class MouseEventTest extends WebDriverTestCase {
             + " false, false, false, false, 1, null);\n"
             + "      div.dispatchEvent(dblclickEvent);\n"
             + "    }\n"
-            + "    alert(clickCount);\n"
-            + "    alert(dblClickCount);\n"
+            + "    log(clickCount);\n"
+            + "    log(dblClickCount);\n"
             + "  }\n"
             + "  function clickHandler() {\n"
             + "    clickCount++;\n"
@@ -337,7 +348,8 @@ public class MouseEventTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -349,8 +361,9 @@ public class MouseEventTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<p id='clicker'>Click me!</p>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(event) {\n"
-            + "    alert(event.button);\n"
+            + "    log(event.button);\n"
             + "  }\n"
             + "  var p = document.getElementById('clicker');\n"
             + "  if (p.addEventListener ) {\n"
@@ -363,7 +376,7 @@ public class MouseEventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clicker")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -375,8 +388,9 @@ public class MouseEventTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<p id='clicker'>Click me!</p>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(event) {\n"
-            + "    alert(event.button);\n"
+            + "    log(event.button);\n"
             + "  }\n"
             + "  var p = document.getElementById('clicker');\n"
             + "  if (p.addEventListener ) {\n"
@@ -389,7 +403,7 @@ public class MouseEventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clicker")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -435,8 +449,7 @@ public class MouseEventTest extends WebDriverTestCase {
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts();
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "Mouse Event coordinates");
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         final WebElement textarea = driver.findElement(By.id("myTextarea"));
         assertEquals("", textarea.getText());
@@ -452,12 +465,13 @@ public class MouseEventTest extends WebDriverTestCase {
     @Alerts({"0", "0"})
     public void pageX() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.createEvent('MouseEvents');\n"
-            + "  alert(e.pageX);\n"
-            + "  alert(e.pageY);\n"
+            + "  log(e.pageX);\n"
+            + "  log(e.pageY);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

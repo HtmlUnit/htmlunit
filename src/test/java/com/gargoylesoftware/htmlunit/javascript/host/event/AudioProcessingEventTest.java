@@ -36,11 +36,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class AudioProcessingEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-            + "    alert(event);\n"
-            + "    alert(event.type);\n"
-            + "    alert(event.bubbles);\n"
-            + "    alert(event.cancelable);\n"
-            + "    alert(event.composed);\n"
+            + "    log(event);\n"
+            + "    log(event.type);\n"
+            + "    log(event.bubbles);\n"
+            + "    log(event.cancelable);\n"
+            + "    log(event.composed);\n"
             + "  }\n";
 
     /**
@@ -50,16 +50,17 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -75,7 +76,8 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             EDGE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var audioCtx = new AudioContext();\n"
@@ -87,13 +89,13 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "        'playbackTime': 4,\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -103,18 +105,19 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorMissingDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -125,6 +128,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('AudioProcessingEvent');\n"
@@ -150,8 +154,9 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('AudioProcessingEvent' in window);\n"
+            + "      log('AudioProcessingEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -159,7 +164,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -181,10 +186,11 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "  }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var el = document.getElementById('div1');\n"
             + "  el.addEventListener('animationend', function(e) {\n"
-            + "    alert(e);\n"
+            + "    log(e);\n"
             + "  });\n"
             + "  el.className = 'animate';\n"
             + "}\n"
@@ -193,6 +199,6 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "<div id='div1'>TXT</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
