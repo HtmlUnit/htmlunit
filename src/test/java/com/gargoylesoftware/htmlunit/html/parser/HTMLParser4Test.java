@@ -159,8 +159,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>first</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var headChildren = document.getElementsByTagName('body')[0].childNodes;\n"
             + "        log(headChildren.length);\n"
@@ -622,17 +622,17 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      log('titles');\n"
+            + "      alert('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        log(titles[i].parentNode.nodeName);\n"
-            + "        log(titles[i].text);\n"
+            + "        alert(titles[i].parentNode.nodeName);\n"
+            + "        alert(titles[i].text);\n"
             + "      }\n"
-            + "      log('misc');\n"
-            + "      log(document.body != null);\n"
+            + "      alert('misc');\n"
+            + "      alert(document.body != null);\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
             + "      if (innerDiv != null) {\n"
-            + "        log(innerDiv.parentNode.nodeName);\n"
+            + "        alert(innerDiv.parentNode.nodeName);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -646,12 +646,12 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "      document.getElementsByTagName('html')[0].innerHTML ="
             + "        '<html><head><title>Inner Html</title></head>"
             + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
-            + "    } catch(e) { log('exception') }\n"
+            + "    } catch(e) { alert('exception') }\n"
             + "  </script>\n"
             + "</body>\n"
             + "</html>\n";
 
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
