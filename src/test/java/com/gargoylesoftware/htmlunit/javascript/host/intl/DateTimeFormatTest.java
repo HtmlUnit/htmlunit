@@ -128,6 +128,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
         final StringBuilder html = new StringBuilder(HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var date = new Date(Date.UTC(2013, 11, 20, 3, 0, 0));\n"
             + "    try {\n");
@@ -135,15 +136,16 @@ public class DateTimeFormatTest extends WebDriverTestCase {
             html.append(string[i]).append("\n");
         }
         html.append(
-            "      alert(" + string[string.length - 1] + ");\n"
-            + "    } catch(e) {alert('exception')}\n"
+            "      log(" + string[string.length - 1] + ");\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>");
 
         try {
-            loadPageWithAlerts2(html.toString());
+            loadPageVerifyTextArea2(html.toString());
         }
         catch (final ComparisonFailure e) {
             final String msg = e.getMessage();
