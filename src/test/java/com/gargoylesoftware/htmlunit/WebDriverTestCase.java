@@ -1209,12 +1209,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
             for (int i = 0; i < expectedAlerts.length; i++) {
                 if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
                     // we have to compare element by element
-                    for (int j = 0; i < expectedAlerts.length; i++) {
-                        if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
-                            compareImages(expectedAlerts[i], actualAlerts.get(i));
+                    for (int j = 0; j < expectedAlerts.length; i++) {
+                        if (expectedAlerts[j].startsWith("data:image/png;base64,")) {
+                            compareImages(expectedAlerts[j], actualAlerts.get(j));
                         }
                         else {
-                            assertEquals(expectedAlerts[i], actualAlerts.get(i));
+                            assertEquals(expectedAlerts[j], actualAlerts.get(j));
                         }
                     }
                     return;
@@ -1277,7 +1277,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final URL url, final long maxWaitTime) throws Exception {
-        expandExpectedAlertsVariables(url);
         final String[] expectedAlerts = getExpectedAlerts();
 
         startWebServer(getMockWebConnection(), null);
