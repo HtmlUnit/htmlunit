@@ -111,15 +111,18 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "        for(var x in key.privateKey.algorithm) {\n"
             + "          log(x + ' ' + key.publicKey.algorithm[x]);\n"
             + "        }\n"
+            + "        alert('done');\n"
             + "      })\n"
             + "      .catch(function(err) {\n"
             + "        log(err);\n"
             + "      });\n"
-            + "    }\n"
+            + "    } else { alert('done'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyAlerts(getWebDriver(), "done");
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 }
