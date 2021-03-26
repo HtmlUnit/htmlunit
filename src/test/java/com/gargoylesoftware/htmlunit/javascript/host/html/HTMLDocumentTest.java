@@ -2458,6 +2458,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
@@ -2479,6 +2480,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         final URL url = new URL(URL_FIRST.toString() + "details/abc");
         final WebDriver driver = loadPageWithAlerts2(html, url);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
@@ -2501,6 +2503,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         final URL url = new URL(URL_FIRST.toString() + "?x=y&z=zz");
         final WebDriver driver = loadPageWithAlerts2(html, url);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
@@ -2524,6 +2527,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         final URL url = new URL(URL_FIRST.toString() + "details/abc;jsessionid=42?x=y&z=zz");
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPageWithAlerts2(html, url);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
@@ -2585,6 +2589,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
@@ -2605,6 +2610,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
@@ -2625,6 +2631,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
@@ -2645,6 +2652,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
@@ -2665,6 +2673,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 

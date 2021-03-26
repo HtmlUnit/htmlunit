@@ -1136,12 +1136,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime)
             throws Exception {
-        expandExpectedAlertsVariables(URL_FIRST);
-        final String[] expectedAlerts = getExpectedAlerts();
-
         final WebDriver driver = loadPage2(html, url);
 
-        verifyAlerts(maxWaitTime, driver, expectedAlerts);
+        verifyAlerts(maxWaitTime, driver, getExpectedAlerts());
         return driver;
     }
 
@@ -1209,7 +1206,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             for (int i = 0; i < expectedAlerts.length; i++) {
                 if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
                     // we have to compare element by element
-                    for (int j = 0; j < expectedAlerts.length; i++) {
+                    for (int j = 0; j < expectedAlerts.length; j++) {
                         if (expectedAlerts[j].startsWith("data:image/png;base64,")) {
                             compareImages(expectedAlerts[j], actualAlerts.get(j));
                         }

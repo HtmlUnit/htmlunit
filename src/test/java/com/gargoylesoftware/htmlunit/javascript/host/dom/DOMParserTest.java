@@ -74,6 +74,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(content);
     }
 
@@ -98,6 +99,7 @@ public class DOMParserTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(content);
     }
 

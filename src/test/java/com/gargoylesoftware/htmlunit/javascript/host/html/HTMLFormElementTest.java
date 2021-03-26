@@ -762,6 +762,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -781,6 +782,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -799,6 +801,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -817,6 +820,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

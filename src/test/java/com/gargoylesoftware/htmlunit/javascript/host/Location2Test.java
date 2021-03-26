@@ -72,6 +72,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -124,6 +125,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -247,6 +249,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -263,6 +266,7 @@ public class Location2Test extends WebDriverTestCase {
             + "alert(window.location.href);\n"
             + "</script></body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -279,6 +283,7 @@ public class Location2Test extends WebDriverTestCase {
             + "alert(window.location.href);\n"
             + "</script></body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -609,6 +614,7 @@ public class Location2Test extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

@@ -328,6 +328,7 @@ public class AttrTest extends WebDriverTestCase {
             + "<div id='tester' testAttr='test'></div>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -347,6 +348,7 @@ public class AttrTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object Attr]", "§§URL§§foo.xml"},
             IE = {"[object Attr]", "undefined"})
     public void xml_baseURI() throws Exception {
+        expandExpectedAlertsVariables(URL_FIRST);
         xml("baseURI");
     }
 

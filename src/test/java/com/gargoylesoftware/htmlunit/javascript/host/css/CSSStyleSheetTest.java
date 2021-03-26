@@ -141,6 +141,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_FIRST, "style3.css"), "", MimeType.TEXT_CSS);
         conn.setResponse(new URL(URL_FIRST, "style4.css"), "", MimeType.TEXT_CSS);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
     }
 
@@ -187,6 +188,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_FIRST, "style7.css"), "div { color: red; }", MimeType.TEXT_PLAIN);
         conn.setResponse(new URL(URL_FIRST, "style8.css"), "div { color: red; }", "");
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
     }
 

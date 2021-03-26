@@ -951,6 +951,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

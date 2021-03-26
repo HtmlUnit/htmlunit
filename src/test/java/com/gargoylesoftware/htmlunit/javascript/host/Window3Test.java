@@ -1520,6 +1520,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -1545,6 +1546,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -1569,6 +1571,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

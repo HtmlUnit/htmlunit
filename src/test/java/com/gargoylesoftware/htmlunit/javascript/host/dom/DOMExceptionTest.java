@@ -105,6 +105,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'><span>hi</span></body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 }

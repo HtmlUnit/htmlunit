@@ -306,7 +306,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title><script>\n"
+                + "<html><head><script>\n"
                 + "  function alertCookies() {\n"
                 + "    alert('cookies: ' + document.cookie);\n"
                 + "  }\n"

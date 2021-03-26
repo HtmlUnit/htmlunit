@@ -895,6 +895,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
               + "  <body onload='test()'>\n"
               + "  </body>\n"
               + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

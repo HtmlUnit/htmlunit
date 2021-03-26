@@ -126,6 +126,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("", "text/javascript");
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

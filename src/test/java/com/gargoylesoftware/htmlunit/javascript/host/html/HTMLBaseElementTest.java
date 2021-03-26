@@ -53,6 +53,8 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body onload='test()'>foo</body>\n"
             + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
