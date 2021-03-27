@@ -54,20 +54,21 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Alerts("myValue")
     public void insertBefore() throws Exception {
         final String html
-            = "<html><head><title>Page A</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var script = document.createElement('script');\n"
             + "    script.text = \"foo = 'myValue';\";\n"
             + "    document.body.insertBefore(script, document.body.firstChild);\n"
-            + "    alert(foo);\n"
+            + "    log(foo);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -79,19 +80,20 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"
             + "<script>\n"
-            + "var text = '<script>alert(\"hello\");</sc' + 'ript>';\n"
+            + LOG_TITLE_FUNCTION
+            + "var text = '<script>log(\"hello\");</sc' + 'ript>';\n"
             + "var element = document.getElementById('A');\n"
             + "try {\n"
             + "  var range = element.ownerDocument.createRange();\n"
             + "  range.selectNode(element);\n"
             + "  var fragment = range.createContextualFragment(text);\n"
-            + "  alert('created');\n"
+            + "  log('created');\n"
             + "  element.parentNode.replaceChild(fragment, element);\n"
-            + "  alert('replaced');\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log('replaced');\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -102,15 +104,16 @@ public class HtmlScript2Test extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <script id='myId'></script>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         assertEquals("script", driver.findElement(By.id("myId")).getTagName());
     }
 
@@ -123,11 +126,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <script type='text/JavaScript'>\n"
-            + "    alert('Hello');\n"
+            + LOG_TITLE_FUNCTION
+            + "    log('Hello');\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -137,27 +141,32 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G"})
     public void typeValues() throws Exception {
-        final String html = "<html>\n"
+        final String html = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<body>\n"
-            + "  <script type='application/javascript'>alert('1');</script>\n"
-            + "  <script type='application/ecmascript'>alert('2');</script>\n"
-            + "  <script type='application/x-ecmascript'>alert('3');</script>\n"
-            + "  <script type='application/x-javascript'>alert('4');</script>\n"
-            + "  <script type='text/javascript'>alert('5');</script>\n"
-            + "  <script type='text/ecmascript'>alert('6');</script>\n"
-            + "  <script type='text/javascript1.0'>alert('7');</script>\n"
-            + "  <script type='text/javascript1.1'>alert('8');</script>\n"
-            + "  <script type='text/javascript1.2'>alert('9');</script>\n"
-            + "  <script type='text/javascript1.3'>alert('A');</script>\n"
-            + "  <script type='text/javascript1.4'>alert('B');</script>\n"
-            + "  <script type='text/javascript1.5'>alert('C');</script>\n"
-            + "  <script type='text/jscript'>alert('D');</script>\n"
-            + "  <script type='text/livescript'>alert('E');</script>\n"
-            + "  <script type='text/x-ecmascript'>alert('F');</script>\n"
-            + "  <script type='text/x-javascript'>alert('G');</script>\n"
+            + "  <script type='application/javascript'>log('1');</script>\n"
+            + "  <script type='application/ecmascript'>log('2');</script>\n"
+            + "  <script type='application/x-ecmascript'>log('3');</script>\n"
+            + "  <script type='application/x-javascript'>log('4');</script>\n"
+            + "  <script type='text/javascript'>log('5');</script>\n"
+            + "  <script type='text/ecmascript'>log('6');</script>\n"
+            + "  <script type='text/javascript1.0'>log('7');</script>\n"
+            + "  <script type='text/javascript1.1'>log('8');</script>\n"
+            + "  <script type='text/javascript1.2'>log('9');</script>\n"
+            + "  <script type='text/javascript1.3'>log('A');</script>\n"
+            + "  <script type='text/javascript1.4'>log('B');</script>\n"
+            + "  <script type='text/javascript1.5'>log('C');</script>\n"
+            + "  <script type='text/jscript'>log('D');</script>\n"
+            + "  <script type='text/livescript'>log('E');</script>\n"
+            + "  <script type='text/x-ecmascript'>log('F');</script>\n"
+            + "  <script type='text/x-javascript'>log('G');</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -167,31 +176,36 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Alerts({"1", "5", "7"})
     public void type_language() throws Exception {
         final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<body>\n"
             + "  <script>\n"
-            + "    alert('1');\n"
+            + "    log('1');\n"
             + "  </script>\n"
             + "  <script language='anything'>\n"
-            + "    alert('2');\n"
+            + "    log('2');\n"
             + "  </script>\n"
             + "  <script type='anything'>\n"
-            + "    alert('3');\n"
+            + "    log('3');\n"
             + "  </script>\n"
             + "  <script language='anything' type='anything'>\n"
-            + "    alert('4');\n"
+            + "    log('4');\n"
             + "  </script>\n"
             + "  <script language='anything' type='text/javascript'>\n"
-            + "    alert('5');\n"
+            + "    log('5');\n"
             + "  </script>\n"
             + "  <script language='javascript' type='anything'>\n"
-            + "    alert('6');\n"
+            + "    log('6');\n"
             + "  </script>\n"
             + "  <script language='javascript'>\n"
-            + "    alert('7');\n"
+            + "    log('7');\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -202,10 +216,16 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     @Alerts("a")
     public void scriptIsNotRunWhenCloned() throws Exception {
-        final String html = "<html><body onload='document.body.cloneNode(true)'>\n"
-            + "<script>alert('a')</script></body></html>";
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='document.body.cloneNode(true)'>\n"
+            + "<script>log('a')</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -216,19 +236,22 @@ public class HtmlScript2Test extends WebDriverTestCase {
     public void deferInline() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <script defer>alert('deferred')</script>\n"
-            + "  <script>alert('start')</script>"
             + "  <script>\n"
-            + "    document.addEventListener('DOMContentLoaded', function(event) { alert('dcLoaded') });\n"
-            + "    alert('dcl listener added')</script>"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
+            + "  <script defer>log('deferred')</script>\n"
+            + "  <script>log('start')</script>"
+            + "  <script>\n"
+            + "    document.addEventListener('DOMContentLoaded', function(event) { log('dcLoaded') });\n"
+            + "    log('dcl listener added')</script>"
             + "  </script>\n"
             + "</head>\n"
-            + "<body onload='alert(\"onload\")'>\n"
+            + "<body onload='log(\"onload\")'>\n"
             + "</body>\n"
-            + "<script>alert('end')</script>\n"
+            + "<script>log('end')</script>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -239,25 +262,29 @@ public class HtmlScript2Test extends WebDriverTestCase {
     public void deferExternal() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <script defer src='script1.js'></script>\n"
-            + "  <script>alert('start')</script>"
             + "  <script>\n"
-            + "    document.addEventListener('DOMContentLoaded', function(event) { alert('dcLoaded') });\n"
-            + "    alert('dcl listener added')</script>"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
+            + "  <script defer src='script1.js'></script>\n"
+            + "  <script>log('start')</script>"
+            + "  <script>\n"
+            + "    document.addEventListener('DOMContentLoaded', function(event) { log('dcLoaded') });\n"
+            + "    log('dcl listener added')</script>"
             + "  </script>\n"
             + "  <script defer src='script2.js'></script>\n"
             + "</head>\n"
-            + "<body onload='alert(\"onload\")'>\n"
+            + "<body onload='log(\"onload\")'>\n"
             + "  <div id='abc'>Test</div>\n"
             + "</body>\n"
             + "<script defer src='script3.js'></script>\n"
-            + "<script>alert('end')</script>\n"
+            + "<script>log('end')</script>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
-        loadPageWithAlerts2(html);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "log('deferred-1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "log('deferred-2');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "log('deferred-3');");
+
+        loadPageVerifyTitle2(html);
     }
 
 
@@ -287,8 +314,9 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    document.addEventListener('DOMContentLoaded', function(event) { alert('dcLoaded') });\n"
-            + "    alert('dcl listener added')</script>"
+            + LOG_TITLE_FUNCTION
+            + "    document.addEventListener('DOMContentLoaded', function(event) { log('dcLoaded') });\n"
+            + "    log('dcl listener added')</script>"
             + "  </script>\n"
             + "  <script defer src='script1.js'></script>\n"
             + "  <script>\n"
@@ -300,52 +328,54 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "    head.appendChild(script);\n"
             + "  </script>\n"
             + "  <script defer src='script3.js'></script>\n"
-            + "  <script>alert('head-end')</script>\n"
+            + "  <script>log('head-end')</script>\n"
             + "</head>\n"
-            + "<body onload='alert(\"onload\")'>\n"
+            + "<body onload='log(\"onload\")'>\n"
             + "  <div id='abc'>Test</div>\n"
             + "</body>\n"
-            + "<script>alert('end')</script>\n"
+            + "<script>log('end')</script>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "log('deferred-1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "log('deferred-2');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "log('deferred-3');");
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"end", "s0 5", "4", "deferred-1", "deferred-2", "deferred-3", "onload"},
-            IE = {"end", "s0 5", "4", "deferred-1", "deferred-2", "onload"})
-    @HtmlUnitNYI(IE = {"end", "s0 5", "4", "deferred-1", "deferred-2", "deferred-3", "onload"})
+    @Alerts(DEFAULT = {"end", "s0 6", "5", "deferred-1", "deferred-2", "deferred-3", "onload"},
+            IE = {"end", "s0 6", "5", "deferred-1", "deferred-2", "onload"})
+    @HtmlUnitNYI(IE = {"end", "s0 6", "5", "deferred-1", "deferred-2", "deferred-3", "onload"})
     public void deferRemovesScript() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
             + "  <script defer id='s0' src='script0.js'></script>\n"
             + "  <script defer id='s1' src='script1.js'></script>\n"
             + "  <script defer id='s2' src='script2.js'></script>\n"
             + "  <script defer id='s3' src='script3.js'></script>\n"
             + "</head>\n"
-            + "<body onload='alert(\"onload\")'>\n"
+            + "<body onload='log(\"onload\")'>\n"
             + "</body>\n"
-            + "<script>alert('end')</script>\n"
+            + "<script>log('end')</script>\n"
             + "</html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script0.js"),
-                "alert('s0 ' + document.getElementsByTagName('script').length);\n"
+                "log('s0 ' + document.getElementsByTagName('script').length);\n"
                 + "var scr = document.getElementById('s3');\n"
                 + "scr.parentNode.removeChild(scr);\n"
-                + " alert(document.getElementsByTagName('script').length);\n");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "alert('deferred-1');");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert('deferred-2');");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert('deferred-3');");
+                + " log(document.getElementsByTagName('script').length);\n");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script1.js"), "log('deferred-1');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "log('deferred-2');");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "log('deferred-3');");
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -358,17 +388,18 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var div1 = document.createElement('div');\n"
             + "  div1.id = 'div1';\n"
             + "  var script = document.createElement('script');\n"
-            + "  script.text = 'alert(document.getElementById(\"div1\") == null)';\n"
+            + "  script.text = 'log(document.getElementById(\"div1\") == null)';\n"
             + "  div1.appendChild(script);\n"
             + "  document.body.appendChild(div1);\n"
-            + "  alert(document.getElementById('div1') == null);\n"
+            + "  log(document.getElementById('div1') == null);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -380,18 +411,19 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var script = document.createElement('script');\n"
             + "  try {\n"
-            + "    script.appendChild(document.createTextNode('alert(\"1\");'));\n"
-            + "    script.appendChild(document.createTextNode('alert(\"2\");'));\n"
+            + "    script.appendChild(document.createTextNode('log(\"1\");'));\n"
+            + "    script.appendChild(document.createTextNode('log(\"2\");'));\n"
             + "  } catch(e) {\n"
-            + "    script.text = 'alert(\"1\");alert(\"2\");';\n"
+            + "    script.text = 'log(\"1\");log(\"2\");';\n"
             + "  }\n"
             + "  document.body.appendChild(script);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -403,6 +435,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var script = document.createElement('script');\n"
             + "  try {\n"
             + "  script.appendChild(document.createTextNode('var x=1;'));\n;\n"
@@ -411,11 +444,11 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "    script.text = 'var x=1;x=2;';\n;\n"
             + "  }\n"
             + "  document.body.appendChild(script);\n"
-            + "  alert(script.text);\n"
+            + "  log(script.text);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -427,17 +460,18 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var script = document.createElement('script');\n"
-            + "    script.appendChild(document.createTextNode('alert(\"1\");'));\n"
-            + "    script.appendChild(document.createTextNode('alert(\"2\");'));\n"
-            + "    script.text = 'alert(\"3\");';\n"
+            + "    script.appendChild(document.createTextNode('log(\"1\");'));\n"
+            + "    script.appendChild(document.createTextNode('log(\"2\");'));\n"
+            + "    script.text = 'log(\"3\");';\n"
             + "    document.body.appendChild(script);\n"
-            + "  } catch (e) {alert('exception');}\n"
+            + "  } catch (e) {log('exception');}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -450,9 +484,11 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script>\n"
             + "    <script id='a'></script>\n"
-            + "    <script id='b'>alert('1');</script>\n"
+            + "    <script id='b'>log('1');</script>\n"
             + "    <script id='c' src='script2.js'></script>\n"
             + "    <script>\n"
             + "      function test() {\n"
@@ -467,12 +503,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert(2);");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert(3);");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script4.js"), "alert(4);");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "script5.js"), "alert(5);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "log(2);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "log(3);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script4.js"), "log(4);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script5.js"), "log(5);");
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -485,20 +521,21 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var s1 = document.createElement('script');\n"
-            + "    s1.text = 'alert(\"s-x\")';\n"
-            + "    s1.addEventListener('load', function() {alert('x')}, false);\n"
+            + "    s1.text = 'log(\"s-x\")';\n"
+            + "    s1.addEventListener('load', function() {log('x')}, false);\n"
             + "    document.body.insertBefore(s1, document.body.firstChild);\n"
             + "    \n"
             + "    var s2 = document.createElement('script');\n"
             + "    s2.src = '//:';\n"
-            + "    s2.addEventListener('load', function() {alert('y')}, false);\n"
+            + "    s2.addEventListener('load', function() {log('y')}, false);\n"
             + "    document.body.insertBefore(s2, document.body.firstChild);\n"
             + "    \n"
             + "    var s3 = document.createElement('script');\n"
             + "    s3.src = 'script.js';\n"
-            + "    s3.addEventListener('load', function() {alert('z')}, false);\n"
+            + "    s3.addEventListener('load', function() {log('z')}, false);\n"
             + "    document.body.insertBefore(s3, document.body.firstChild);\n"
             + "  }\n"
             + "</script>\n"
@@ -507,7 +544,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("", MimeType.APPLICATION_JAVASCRIPT);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -523,11 +560,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var s1 = document.createElement('script');\n"
             + "    s1.src = '" + scriptUrl + "';\n"
-            + "    s1.addEventListener('load', function() {alert('load')}, false);\n"
-            + "    s1.addEventListener('error', function() {alert('error')}, false);\n"
+            + "    s1.addEventListener('load', function() {log('load')}, false);\n"
+            + "    s1.addEventListener('error', function() {log('error')}, false);\n"
             + "    document.body.insertBefore(s1, document.body.firstChild);\n"
             + "  }\n"
             + "</script>\n"
@@ -537,7 +575,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(scriptUrl, (String) null, HttpStatus.SC_NO_CONTENT, "No Content",
                                                 MimeType.APPLICATION_JAVASCRIPT, null);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -547,10 +585,10 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     public void badSrcUrl() throws Exception {
         final String html = "<html><head>\n"
-                + "<script src='http://'>alert(1)</script>\n"
+                + "<script src='http://'>log(1)</script>\n"
                 + "</head><body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -645,15 +683,18 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
                 = "<html>\n"
                 + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  </script>\n"
                 + "  <script " + attribs
-                        + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'></script>\n"
+                        + " onload='log(\"onLoad\")' onerror='log(\"onError\")'></script>\n"
                 + "</head>\n"
-                + "<body onload='alert(\"body onLoad\")'>\n"
+                + "<body onload='log(\"body onLoad\")'>\n"
                 + "</body>\n"
                 + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -702,14 +743,15 @@ public class HtmlScript2Test extends WebDriverTestCase {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script id='tester'>\n"
-                + "    alert(document.currentScript);\n"
+                + LOG_TITLE_FUNCTION
+                + "    log(document.currentScript);\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -723,8 +765,9 @@ public class HtmlScript2Test extends WebDriverTestCase {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script id='tester'>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
-                + "      alert(document.currentScript);\n"
+                + "      log(document.currentScript);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -732,7 +775,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -742,17 +785,20 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLScriptElement]",
             IE = "undefined")
     public void currentScriptExternal() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "alert(document.currentScript);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "log(document.currentScript);");
         final String html
                 = "<html>\n"
                 + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  </script>\n"
                 + "  <script id='tester' src='simple.js' type='text/javascript'></script>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

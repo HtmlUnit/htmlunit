@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlScriptTest extends SimpleWebTestCase {
@@ -94,7 +95,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final String html = "<html><body><script id='s'>var foo = 132;</script></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlScript script = page.getHtmlElementById("s");
-        assertEquals("", script.asText());
+        assertEquals("", script.asNormalizedText());
     }
 
     /**
