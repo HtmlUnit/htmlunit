@@ -217,8 +217,11 @@ public class Cookie implements Serializable {
         final Cookie other = (Cookie) o;
         final String path = getPath() == null ? "/" : getPath();
         final String otherPath = other.getPath() == null ? "/" : other.getPath();
-        return new EqualsBuilder().append(getName(), other.getName()).append(getDomain(), other.getDomain())
-                .append(path, otherPath).isEquals();
+        return new EqualsBuilder()
+                    .append(getName(), other.getName())
+                    .append(getDomain(), other.getDomain())
+                    .append(path, otherPath)
+                    .isEquals();
     }
 
     /**
@@ -227,7 +230,11 @@ public class Cookie implements Serializable {
     @Override
     public int hashCode() {
         final String path = getPath() == null ? "/" : getPath();
-        return new HashCodeBuilder().append(getName()).append(getDomain()).append(path).toHashCode();
+        return new HashCodeBuilder()
+                    .append(getName())
+                    .append(getDomain())
+                    .append(path)
+                    .toHashCode();
     }
 
     /**
