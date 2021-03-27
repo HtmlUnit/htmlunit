@@ -109,6 +109,7 @@ public class WebClient4Test extends WebServerTestCase {
         private int count_;
         private int status_;
         private String location_;
+
         /**
          * Creates a new instance.
          * @param status the HTTP status to return
@@ -119,7 +120,10 @@ public class WebClient4Test extends WebServerTestCase {
             status_ = status;
             location_ = location;
         }
-        /** {@inheritDoc} */
+
+        /**
+         * {@inheritDoc}
+         */
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             count_++;
@@ -173,6 +177,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     public static class ServeBodySlowlyServlet extends HttpServlet {
         private static volatile long LastRequestTime_ = -1;
+
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             final long before = System.currentTimeMillis();
@@ -297,6 +302,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     public static class NotModifiedServlet extends HttpServlet {
         private boolean first_ = true;
+
         /**
          * {@inheritDoc}
          */
