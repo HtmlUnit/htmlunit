@@ -89,7 +89,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
@@ -103,6 +102,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='testSync()'>\n"
+            + LOG_TEXTAREA
             + "  </body>\n"
             + "</html>";
 
@@ -128,20 +128,20 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "        if (window.XMLHttpRequest) {\n"
-            + "          alert(new XMLHttpRequest());\n"
+            + "          log(new XMLHttpRequest());\n"
             + "        }\n"
             + "        else if (window.ActiveXObject) {\n"
             + "          new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "          alert('activeX created');\n"
+            + "          log('activeX created');\n"
             + "        }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -153,13 +153,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var xhr = new XMLHttpRequest();\n"
 
             + "  alertStatus('1: ');\n"
             + "  xhr.open('GET', '/foo.xml', false);\n"
-            + "  alert('2: ');\n"
+            + "  log('2: ');\n"
 
             + "  xhr.send();\n"
             + "  alertStatus('3: ');\n"
@@ -172,7 +172,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    try {\n"
             + "      msg = msg + xhr.statusText;;\n"
             + "    } catch(e) { msg = msg + 'ex: statusText' }\n"
-            + "    alert(msg);\n"
+            + "    log(msg);\n"
             + "  }\n"
             + "</script>\n"
             + "  </head>\n"
@@ -180,7 +180,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -360,18 +360,18 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "        var request = new XMLHttpRequest();\n"
 
-            + "        alert(request.getResponseHeader('content-length'));\n"
+            + "        log(request.getResponseHeader('content-length'));\n"
             + "        request.open('GET', '/foo.xml', false);\n"
-            + "        alert(request.getResponseHeader('content-length'));\n"
+            + "        log(request.getResponseHeader('content-length'));\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -386,7 +386,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
@@ -423,18 +422,19 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.txt', false);\n"
             + "  request.send('');\n"
-            + "  alert(request.responseText);\n"
+            + "  log(request.responseText);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("bla bla", MimeType.TEXT_PLAIN);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -447,20 +447,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         shutDownRealIE();
 
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.xml', false);\n"
             + "    xhr.send('');\n"
             + "    try {\n"
-            + "      alert(xhr.responseXML);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(xhr.responseXML);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<html></html>", MimeType.TEXT_HTML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -473,20 +475,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         shutDownRealIE();
 
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.xml', false);\n"
             + "    xhr.send('');\n"
             + "    try {\n"
-            + "      alert(xhr.responseXML);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(xhr.responseXML);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -499,20 +503,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         shutDownRealIE();
 
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.xml', false);\n"
             + "    xhr.send('');\n"
             + "    try {\n"
-            + "      alert(xhr.responseXML);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(xhr.responseXML);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<note/>", "application/xml");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -525,20 +531,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         shutDownRealIE();
 
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.xml', false);\n"
             + "    xhr.send('');\n"
             + "    try {\n"
-            + "      alert(xhr.responseXML);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(xhr.responseXML);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<html/>", "application/xhtml+xml");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -551,20 +559,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         shutDownRealIE();
 
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.xml', false);\n"
             + "    xhr.send('');\n"
             + "    try {\n"
-            + "      alert(xhr.responseXML);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(xhr.responseXML);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<svg xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -579,16 +589,17 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.xml', false);\n"
             + "  request.send('');\n"
             + "  var childNodes = request.responseXML.childNodes;\n"
-            + "  alert(childNodes.length);\n"
+            + "  log(childNodes.length);\n"
             + "  var rootNode = childNodes[0];\n"
-            + "  alert(rootNode.attributes[0].nodeName);\n"
-            + "  alert(rootNode.attributes[0].text);\n"
-            + "  alert(rootNode.attributes[0].xml);\n"
+            + "  log(rootNode.attributes[0].nodeName);\n"
+            + "  log(rootNode.attributes[0].text);\n"
+            + "  log(rootNode.attributes[0].xml);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -598,7 +609,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -609,20 +620,21 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     public void responseXML_siteNotExisting() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "try {\n"
             + "  request.open('GET', 'http://this.doesnt.exist/foo.xml', false);\n"
             + "  request.send('');\n"
             + "} catch(e) {\n"
-            + "  alert('received: ' + request.responseXML);\n"
+            + "  log('received: ' + request.responseXML);\n"
             + "}\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -632,6 +644,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     public void sendNull() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.txt', false);\n"
@@ -642,7 +655,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -669,6 +682,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     private void send(final String sendArg) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.txt', false);\n"
@@ -679,7 +693,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -714,17 +728,18 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     public void overrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.xml.txt', false);\n"
             + "  request.send('');\n"
-            + "  alert(request.responseXML == null);\n"
+            + "  log(request.responseXML == null);\n"
             + "  request.open('GET', 'foo.xml.txt', false);\n"
             + "  request.overrideMimeType('text/xml');\n"
             + "  request.send('');\n"
-            + "  alert(request.responseXML == null);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log(request.responseXML == null);\n"
+            + "} catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -734,7 +749,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             MimeType.TEXT_PLAIN);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -745,15 +760,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.xml.txt', false);\n"
             + "  request.send('');\n"
-            + "  alert(request.responseXML == null);\n"
+            + "  log(request.responseXML == null);\n"
             + "  try {\n"
             + "    request.overrideMimeType('text/xml');\n"
-            + "    alert('overwritten');\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "    log('overwritten');\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -763,7 +779,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             MimeType.TEXT_PLAIN);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -777,21 +793,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=GBK');\n"
             + "  request.send('');\n"
-            + "  alert(request.responseText.charCodeAt(0));\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -805,21 +822,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; chaRSet=GBK');\n"
             + "  request.send('');\n"
-            + "  alert(request.responseText.charCodeAt(0));\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -833,21 +851,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=');\n"
             + "  request.send('');\n"
-            + "  alert(request.responseText.charCodeAt(0));\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -862,6 +881,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var request = new XMLHttpRequest();\n"
@@ -870,16 +890,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    request.send('');\n"
             + "    var text = request.responseText;\n"
             + "    for (var i = 0; i < text.length; i++) {\n"
-            + "      alert(text.charCodeAt(i));\n"
+            + "      log(text.charCodeAt(i));\n"
             + "    }\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -898,8 +918,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      var request;\n"
             + "      function testReplace() {\n"
             + "        request = new XMLHttpRequest();\n"
@@ -915,9 +935,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          var theUpdate = theElements[0];\n"
             + "          var theData = theUpdate.firstChild.data;\n"
             + "          theResult = theData.replace('a','i');\n"
-            + "          alert(theResult);\n"
+            + "          log(theResult);\n"
             + "          theResult = theData.replace('abcde', 'xxxxx');\n"
-            + "          alert(theResult);\n"
+            + "          log(theResult);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -933,7 +953,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</updates>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -969,20 +989,22 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ActiveXObject not available",
             IE = {"0", "0"})
     public void caseInsensitivityActiveXConstructor() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var req = new ActiveXObject('MSXML2.XmlHttp');\n"
-            + "    alert(req.readyState);\n"
+            + "    log(req.readyState);\n"
 
             + "    var req = new ActiveXObject('msxml2.xMLhTTp');\n"
-            + "    alert(req.readyState);\n"
-            + "  } catch (e) { alert('ActiveXObject not available'); }\n"
+            + "    log(req.readyState);\n"
+            + "  } catch (e) { log('ActiveXObject not available'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -994,14 +1016,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
-            + "        if (!request.responseXML.selectNodes) { alert('selectNodes not available'); return }\n"
-            + "        alert(request.responseXML.selectNodes('//content').length);\n"
+            + "        if (!request.responseXML.selectNodes) { log('selectNodes not available'); return }\n"
+            + "        log(request.responseXML.selectNodes('//content').length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1016,7 +1038,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1032,20 +1054,20 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        if (request.responseXML.getElementById) {\n"
-            + "          alert(request.responseXML.getElementById('id1'));\n"
-            + "          alert(request.responseXML.getElementById('myID').id);\n"
-            + "          alert(request.responseXML.getElementById('myID').innerHTML);\n"
-            + "          alert(request.responseXML.getElementById('myID').tagName);\n"
-            + "          alert(request.responseXML.getElementById('myID').ownerDocument);\n"
+            + "          log(request.responseXML.getElementById('id1'));\n"
+            + "          log(request.responseXML.getElementById('myID').id);\n"
+            + "          log(request.responseXML.getElementById('myID').innerHTML);\n"
+            + "          log(request.responseXML.getElementById('myID').tagName);\n"
+            + "          log(request.responseXML.getElementById('myID').ownerDocument);\n"
             + "        } else  {\n"
-            + "          alert('responseXML.getElementById not available');\n"
+            + "          log('responseXML.getElementById not available');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -1065,7 +1087,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1081,21 +1103,21 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
-            + "        alert(doc.documentElement);\n"
-            + "        alert(doc.documentElement.childNodes[0]);\n"
-            + "        alert(doc.documentElement.childNodes[1]);\n"
+            + "        log(doc.documentElement);\n"
+            + "        log(doc.documentElement.childNodes[0]);\n"
+            + "        log(doc.documentElement.childNodes[1]);\n"
             + "        if (doc.getElementById) {\n"
-            + "          alert(doc.getElementById('out'));\n"
-            + "          alert(doc.getElementById('out').ownerDocument);\n"
+            + "          log(doc.getElementById('out'));\n"
+            + "          log(doc.getElementById('out').ownerDocument);\n"
             + "        }\n"
-            + "        alert(doc.documentElement.childNodes[1].xml);\n"
+            + "        log(doc.documentElement.childNodes[1].xml);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1113,7 +1135,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1130,11 +1152,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
-            + "        alert(request.responseText);\n"
+            + "        log(request.responseText);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1147,7 +1170,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", MimeType.TEXT_HTML,
             new ArrayList<NameValuePair>());
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1224,15 +1247,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var request = new XMLHttpRequest();\n"
             + "          request.open('GET', '" + URL_SECOND + "', false);\n"
             + "          request.send('');\n"
-            + "          alert(request.responseXML.getElementById('myID').id);\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "          log(request.responseXML.getElementById('myID').id);\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1250,7 +1273,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1265,15 +1288,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var request = new XMLHttpRequest();\n"
             + "          request.open('GET', '" + URL_SECOND + "', false);\n"
             + "          request.send('');\n"
-            + "          alert(request.responseXML.getElementById('myID').myInput.name);\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "          log(request.responseXML.getElementById('myID').myInput.name);\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1291,7 +1314,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1301,17 +1324,19 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ActiveXObject not available",
             IE = {"0", "0"})
     public void caseSensitivity_activeX() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var req = new ActiveXObject('MSXML2.XmlHttp');\n"
-            + "    alert(req.readyState);\n"
-            + "    alert(req.reAdYsTaTe);\n"
-            + "  } catch (e) { alert('ActiveXObject not available'); }\n"
+            + "    log(req.readyState);\n"
+            + "    log(req.reAdYsTaTe);\n"
+            + "  } catch (e) { log('ActiveXObject not available'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1320,17 +1345,19 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "undefined"})
     public void caseSensitivity_XMLHttpRequest() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var req = new XMLHttpRequest();\n"
-            + "    alert(req.readyState);\n"
-            + "    alert(req.reAdYsTaTe);\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "    log(req.readyState);\n"
+            + "    log(req.reAdYsTaTe);\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1373,6 +1400,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
@@ -1380,16 +1408,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  request.overrideMimeType('text/plain; charset=GBK');\n"
             + "  request.send('');\n"
             + "  for (var i = 0; i < request.responseText.length; i++) {\n"
-            + "    alert(request.responseText.charCodeAt(i));\n"
+            + "    log(request.responseText.charCodeAt(i));\n"
             + "  }\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "} catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", MimeType.TEXT_PLAIN, UTF_8);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1423,8 +1451,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function someLoad(e) {\n"
-            + "        alert(e);\n"
+            + "        log(e);\n"
             + "      }\n"
             + "      function test() {\n"
             + "        try {\n"
@@ -1432,7 +1461,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          request.onload = someLoad;\n"
             + "          request.open('GET', '" + URL_SECOND + "', false);\n"
             + "          request.send('');\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1443,7 +1472,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String xml = "<abc></abc>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1457,12 +1486,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function someLoad(event) {\n"
-            + "        alert('someLoad ' + event);\n"
-            + "        alert(event.type);\n"
-            + "        alert(event.lengthComputable);\n"
-            + "        alert(event.loaded);\n"
-            + "        alert(event.total);\n"
+            + "        log('someLoad ' + event);\n"
+            + "        log(event.type);\n"
+            + "        log(event.lengthComputable);\n"
+            + "        log(event.loaded);\n"
+            + "        log(event.total);\n"
             + "      }\n"
             + "      function test() {\n"
             + "        try {\n"
@@ -1470,7 +1500,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          request.addEventListener('load', someLoad, false);\n"
             + "          request.open('GET', '" + URL_SECOND + "', false);\n"
             + "          request.send('');\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1481,7 +1511,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String xml = "<abc></abc>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1495,12 +1525,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function someLoad(event) {\n"
-            + "        alert('someLoad ' + event);\n"
-            + "        alert(event.type);\n"
-            + "        alert(event.lengthComputable);\n"
-            + "        alert(event.loaded);\n"
-            + "        alert(event.total);\n"
+            + "        log('someLoad ' + event);\n"
+            + "        log(event.type);\n"
+            + "        log(event.lengthComputable);\n"
+            + "        log(event.loaded);\n"
+            + "        log(event.total);\n"
             + "      }\n"
             + "      function test() {\n"
             + "        try {\n"
@@ -1508,7 +1539,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          request.addEventListener('load', someLoad, false);\n"
             + "          request.open('GET', '" + URL_SECOND + "', false);\n"
             + "          request.send('');\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1519,7 +1550,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String xml = "<abc></abc>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1538,9 +1569,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function someLoad(event) {\n"
             + "        var caller = arguments.callee.caller;\n"
-            + "        alert(typeof caller == 'function' ? 'function' : caller);\n"
+            + "        log(typeof caller == 'function' ? 'function' : caller);\n"
             + "      }\n"
             + "      function test() {\n"
             + "        try {\n"
@@ -1548,7 +1580,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          request.addEventListener('load', someLoad, false);\n"
             + "          request.open('GET', '" + URL_SECOND + "', false);\n"
             + "          request.send('');\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1559,7 +1591,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String xml = "<abc></abc>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1573,11 +1605,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var request = new XMLHttpRequest();\n"
-            + "          alert(request.upload);\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "          log(request.upload);\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1585,7 +1618,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1599,7 +1632,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      var request;\n"
             + "      function testAsync() {\n"
@@ -1641,42 +1673,42 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() { [native code] }",
                         "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
-                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                        " function onreadystatechange() { [native code] } ",
                         "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function () {\n    return !0;\n}",
+                        "function () { return !0; }",
                         "function onreadystatechange() { [native code] }",
                         "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function () {\n    return !0;\n}",
+                        "function () { return !0; }",
                         "function onreadystatechange() { [native code] }",
                         "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function () {\n    return !0;\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function () { return !0; }",
+                        "function onreadystatechange() { [native code] }",
                         "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function () {\n    return !0;\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function () { return !0; }",
+                        "function onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        "function () {\n    return !0;\n}",
-                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                        "function () { return !0; }",
+                        " function onreadystatechange() { [native code] } ",
                         "true", "true"})
     public void defineProperty() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      var request;\n"
             + "      function test() {\n"
             + "        Object.defineProperty(XMLHttpRequest.prototype, 'onreadystatechange', {\n"
@@ -1685,13 +1717,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "                                 get: function() { return !0 }\n"
             + "                             });\n"
             + "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
-            + "        alert(desc);\n"
-            + "        alert(desc.value);\n"
-            + "        alert(desc.writable);\n"
-            + "        alert(desc.get);\n"
-            + "        alert(desc.set);\n"
-            + "        alert(desc.configurable);\n"
-            + "        alert(desc.enumerable);\n"
+            + "        log(desc);\n"
+            + "        log(desc.value);\n"
+            + "        log(desc.writable);\n"
+            + "        log(desc.get);\n"
+            + "        log(desc.set);\n"
+            + "        log(desc.configurable);\n"
+            + "        log(desc.enumerable);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1699,7 +1731,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1715,13 +1747,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      var request;\n"
             + "      function test() {\n"
             + "        var t = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
             + "        var res = Object.defineProperty(XMLHttpRequest.prototype, 'onreadystatechange', t);\n"
-            + "        alert(res);\n"
+            + "        log(res);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1729,7 +1761,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1744,6 +1776,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var debug = {hello: 'world'};\n"
@@ -1752,9 +1785,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(blob);\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
+            + "    log('error: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -1766,7 +1799,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+        verifyTitle2(driver, new String[] {"done"});
 
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -1791,15 +1824,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var typedArray = new Int8Array(8);\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(typedArray);\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
+            + "    log('error: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -1811,7 +1845,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+        verifyTitle2(driver, new String[] {"done"});
 
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -1833,23 +1867,24 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var searchParams = '1234';\n"
             + "  try {\n"
             + "    searchParams = new URLSearchParams();\n"
             + "    searchParams.append('q', 'HtmlUnit');\n"
             + "    searchParams.append('u', '\u043B\u0189');\n"
-            + "    alert(searchParams);\n"
+            + "    log(searchParams);\n"
             + "  } catch (e) {\n"
-            + "    alert('error: URLSearchParams');\n"
+            + "    log('error: URLSearchParams');\n"
             + "  }\n"
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(searchParams);\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
+            + "    log('error: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -1861,7 +1896,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -1886,15 +1921,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var formData = new FormData(document.testForm);\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send(formData);\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
+            + "    log('error: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -1909,7 +1945,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+        verifyTitle2(driver, new String[] {"done"});
 
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -1929,14 +1965,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.send('HtmlUnit \u043B\u0189');\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
+            + "    log('error: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -1949,7 +1986,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         // use utf8 here to be able to send all chars
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+        verifyTitle2(driver, new String[] {"done"});
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -1968,15 +2005,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('post', '/test2', false);\n"
             + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
             + "    xhr.send('HtmlUnit \u043B\u0189');\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error: ' + e.message);\n"
+            + "    log('error: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -1988,7 +2026,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {"done"});
+        verifyTitle2(driver, new String[] {"done"});
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);
@@ -2007,13 +2045,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.setRequestHeader('Content-Type', 'text/jpeg');\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  } catch (e) {\n"
-            + "    alert('error');\n"
+            + "    log('error');\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -2022,7 +2061,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2031,8 +2070,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onabort() {\n    [native code]\n}\n",
-                        "\nfunction onabort() {\n    [native code]\n}\n",
+                        " function onabort() { [native code] } ",
+                        " function onabort() { [native code] } ",
                         "true", "true"})
     public void getOwnPropertyDescriptor_onabort() throws Exception {
         getOwnPropertyDescriptor("onabort");
@@ -2044,8 +2083,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onerror() {\n    [native code]\n}\n",
-                        "\nfunction onerror() {\n    [native code]\n}\n",
+                        " function onerror() { [native code] } ",
+                        " function onerror() { [native code] } ",
                         "true", "true"})
     public void getOwnPropertyDescriptor_onerror() throws Exception {
         getOwnPropertyDescriptor("onerror");
@@ -2057,8 +2096,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onload() {\n    [native code]\n}\n",
-                        "\nfunction onload() {\n    [native code]\n}\n",
+                        " function onload() { [native code] } ",
+                        " function onload() { [native code] } ",
                         "true", "true"})
     public void getOwnPropertyDescriptor_onload() throws Exception {
         getOwnPropertyDescriptor("onload");
@@ -2070,8 +2109,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onloadstart() {\n    [native code]\n}\n",
-                        "\nfunction onloadstart() {\n    [native code]\n}\n",
+                        " function onloadstart() { [native code] } ",
+                        " function onloadstart() { [native code] } ",
                         "true", "true"})
     public void getOwnPropertyDescriptor_onloadstart() throws Exception {
         getOwnPropertyDescriptor("onloadstart");
@@ -2083,8 +2122,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onloadend() {\n    [native code]\n}\n",
-                        "\nfunction onloadend() {\n    [native code]\n}\n",
+                        " function onloadend() { [native code] } ",
+                        " function onloadend() { [native code] } ",
                         "true", "true"})
     public void getOwnPropertyDescriptor_onloadend() throws Exception {
         getOwnPropertyDescriptor("onloadend");
@@ -2096,8 +2135,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onprogress() {\n    [native code]\n}\n",
-                        "\nfunction onprogress() {\n    [native code]\n}\n",
+                        " function onprogress() { [native code] } ",
+                        " function onprogress() { [native code] } ",
                         "true", "true"})
     public void getOwnPropertyDescriptor_onprogress() throws Exception {
         getOwnPropertyDescriptor("onprogress");
@@ -2112,16 +2151,16 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function set onreadystatechange() { [native code] }",
                         "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() { [native code] }",
+                        "function onreadystatechange() { [native code] }",
                         "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() { [native code] }",
+                        "function onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
-                        "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                        " function onreadystatechange() { [native code] } ",
+                        " function onreadystatechange() { [native code] } ",
                         "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
                         "function onreadystatechange() { [native code] }",
@@ -2141,8 +2180,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE = {"[object Object]", "undefined", "undefined",
-                    "\nfunction ontimeout() {\n    [native code]\n}\n",
-                    "\nfunction ontimeout() {\n    [native code]\n}\n",
+                    " function ontimeout() { [native code] } ",
+                    " function ontimeout() { [native code] } ",
                     "true", "true"})
     public void getOwnPropertyDescriptor_ontimeout() throws Exception {
         getOwnPropertyDescriptor("ontimeout");
@@ -2152,21 +2191,21 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      var request;\n"
             + "      function test() {\n"
             + "        var desc = Object.getOwnPropertyDescriptor("
                                 + "XMLHttpRequest.prototype, '" + event + "');\n"
-            + "        alert(desc);\n"
+            + "        log(desc);\n"
             + "        if(!desc) { return; }\n"
 
-            + "        alert(desc.value);\n"
-            + "        alert(desc.writable);\n"
-            + "        alert(desc.get);\n"
-            + "        alert(desc.set);\n"
-            + "        alert(desc.configurable);\n"
-            + "        alert(desc.enumerable);\n"
+            + "        log(desc.value);\n"
+            + "        log(desc.writable);\n"
+            + "        log(desc.get);\n"
+            + "        log(desc.set);\n"
+            + "        log(desc.configurable);\n"
+            + "        log(desc.enumerable);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -2174,6 +2213,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
