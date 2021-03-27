@@ -61,14 +61,15 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<link id='myId' href='file1.css'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
@@ -114,7 +115,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         final boolean displayed = driver.findElement(By.id("l")).isDisplayed();
         assertFalse(displayed);
     }
@@ -213,15 +214,18 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String html
                 = "<html>\n"
                 + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  </script>\n"
                 + "  <link " + attribs
-                        + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
+                        + " onload='log(\"onLoad\")' onerror='log(\"onError\")'>\n"
                 + "</head>\n"
-                + "<body onload='alert(\"body onLoad\")'>\n"
+                + "<body onload='log(\"body onLoad\")'>\n"
                 + "</body>\n"
                 + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -441,15 +445,16 @@ public class HtmlLink2Test extends WebDriverTestCase {
     public void polymerImportCheck() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert('import' in document.createElement('link'));\n"
+            + "    log('import' in document.createElement('link'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
