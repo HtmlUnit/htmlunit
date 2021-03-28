@@ -67,21 +67,22 @@ public class FormDataTest extends WebDriverTestCase {
     public void functions() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.FormData) {\n"
             + "      var formData = new FormData();\n"
-            + "      alert(typeof formData.append);\n"
-            + "      alert(typeof formData.delete);\n"
-            + "      alert(typeof formData.get);\n"
-            + "      alert(typeof formData.getAll);\n"
-            + "      alert(typeof formData.has);\n"
-            + "      alert(typeof formData.set);\n"
+            + "      log(typeof formData.append);\n"
+            + "      log(typeof formData.delete);\n"
+            + "      log(typeof formData.get);\n"
+            + "      log(typeof formData.getAll);\n"
+            + "      log(typeof formData.has);\n"
+            + "      log(typeof formData.set);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -449,29 +450,31 @@ public class FormDataTest extends WebDriverTestCase {
     public void get() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData();\n"
-            + "    if (!formData.get) { alert('no get'); return; }\n"
+            + "    if (!formData.get) { log('no get'); return; }\n"
 
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey', 'myValue2');\n"
             + "    formData.append('mykey3', 'myValue3');\n"
             + "    formData.append('mykey4', '');\n"
             + "  } catch (e) {\n"
-            + "    alert('create: ' + e.message);\n"
+            + "    log('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
 
             + "  try {\n"
-            + "    alert(formData.get('myKey'));\n"
-            + "    alert(formData.get('mykey'));\n"
-            + "    alert(formData.get('myKey3'));\n"
-            + "    alert(formData.get('myKey4'));\n"
-            + "    alert(formData.get(''));\n"
+            + "    log(formData.get('myKey'));\n"
+            + "    log(formData.get('mykey'));\n"
+            + "    log(formData.get('myKey3'));\n"
+            + "    log(formData.get('myKey4'));\n"
+            + "    log(formData.get(''));\n"
             + "  } catch (e) {\n"
-            + "    alert('get: ' + e.message);\n"
+            + "    log('get: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
             + "}\n"
@@ -480,7 +483,8 @@ public class FormDataTest extends WebDriverTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", PostServlet.class);
 
-        loadPageWithAlerts2(html, servlets);
+        loadPage2(html, URL_FIRST, servlets);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -492,29 +496,31 @@ public class FormDataTest extends WebDriverTestCase {
     public void getAll() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData();\n"
-            + "    if (!formData.get) { alert('no getAll'); return; }\n"
+            + "    if (!formData.get) { log('no getAll'); return; }\n"
 
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey', 'myValue2');\n"
             + "    formData.append('mykey3', 'myValue3');\n"
             + "    formData.append('mykey4', '');\n"
             + "  } catch (e) {\n"
-            + "    alert('create: ' + e.message);\n"
+            + "    log('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
 
             + "  try {\n"
-            + "    alert(formData.getAll('myKey'));\n"
-            + "    alert(formData.getAll('mykey'));\n"
-            + "    alert(formData.getAll('myKey3'));\n"
-            + "    alert(formData.getAll('myKey4'));\n"
-            + "    alert(formData.getAll(''));\n"
+            + "    log(formData.getAll('myKey'));\n"
+            + "    log(formData.getAll('mykey'));\n"
+            + "    log(formData.getAll('myKey3'));\n"
+            + "    log(formData.getAll('myKey4'));\n"
+            + "    log(formData.getAll(''));\n"
             + "  } catch (e) {\n"
-            + "    alert('getAll: ' + e.message);\n"
+            + "    log('getAll: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
             + "}\n"
@@ -523,7 +529,8 @@ public class FormDataTest extends WebDriverTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", PostServlet.class);
 
-        loadPageWithAlerts2(html, servlets);
+        loadPage2(html, URL_FIRST, servlets);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -535,26 +542,28 @@ public class FormDataTest extends WebDriverTestCase {
     public void has() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData();\n"
-            + "    if (!formData.has) { alert('no has'); return; }\n"
+            + "    if (!formData.has) { log('no has'); return; }\n"
 
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey1', '');\n"
             + "    formData.append('mykey 2', '');\n"
             + "  } catch (e) {\n"
-            + "    alert('create: ' + e.message);\n"
+            + "    log('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
 
             + "  try {\n"
-            + "    alert(formData.has('myKey'));\n"
-            + "    alert(formData.has('mykey'));\n"
-            + "    alert(formData.has(''));\n"
+            + "    log(formData.has('myKey'));\n"
+            + "    log(formData.has('mykey'));\n"
+            + "    log(formData.has(''));\n"
             + "  } catch (e) {\n"
-            + "    alert('has: ' + e.message);\n"
+            + "    log('has: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
@@ -562,7 +571,7 @@ public class FormDataTest extends WebDriverTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", PostServlet.class);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -907,6 +916,7 @@ public class FormDataTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var formData = new FormData(document.testForm);\n"
@@ -914,7 +924,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "  } catch (e) {\n"
-            + "    alert('send: ' + e.message);\n"
+            + "    log('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -930,7 +940,7 @@ public class FormDataTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {});
+        verifyTitle2(driver, new String[] {});
 
         driver.findElement(By.id("testBtn")).click();
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
@@ -951,11 +961,13 @@ public class FormDataTest extends WebDriverTestCase {
     public void entries_forOf() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var formData = new FormData();\n"
             + "  if (!formData.get) {\n"
-            + "    alert('no entries');\n"
+            + "    log('no entries');\n"
             + "    return;"
             + "  }\n"
 
@@ -964,8 +976,8 @@ public class FormDataTest extends WebDriverTestCase {
             + "  formData.append('myKey', 'myvalue2');\n"
 
             + "  for (var pair of formData.entries()) {\n"
-            + "    alert(pair[0]);\n"
-            + "    alert(pair[1]);\n"
+            + "    log(pair[0]);\n"
+            + "    log(pair[1]);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -973,7 +985,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -999,11 +1011,12 @@ public class FormDataTest extends WebDriverTestCase {
     public void entriesIterator() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var formData = new FormData();\n"
             + "  if (!formData.get) {\n"
-            + "    alert('no entries');\n"
+            + "    log('no entries');\n"
             + "    return;"
             + "  }\n"
 
@@ -1012,16 +1025,16 @@ public class FormDataTest extends WebDriverTestCase {
             + "  formData.append('myKey', 'myvalue2');\n"
 
             + "  var iterator = formData.entries();\n"
-            + "  alert(iterator);\n"
+            + "  log(iterator);\n"
 
             + "  var nextItem = iterator.next();\n"
             + "  for (var x in nextItem) {\n"
-            + "    alert(x);\n"
+            + "    log(x);\n"
             + "  }\n"
 
             + "  while (nextItem.done == false) {\n"
-            + "    alert(nextItem.value[0]);\n"
-            + "    alert(nextItem.value[1]);\n"
+            + "    log(nextItem.value[0]);\n"
+            + "    log(nextItem.value[1]);\n"
             + "    nextItem = iterator.next();\n"
             + "  }\n"
 
@@ -1031,7 +1044,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

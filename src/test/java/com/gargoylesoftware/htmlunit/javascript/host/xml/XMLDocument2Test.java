@@ -48,7 +48,9 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"myTarget,myData,7", "myTarget,myData", "<?myTarget myData?>"})
     public void createProcessingInstruction() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
@@ -57,14 +59,15 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    doc.appendChild(d);\n"
             + "    var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
             + "    doc.insertBefore(pi, d);\n"
-            + "    alert(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
-            + "    alert(pi.target + ',' + pi.data);\n"
-            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
+            + "    log(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
+            + "    log(pi.target + ',' + pi.data);\n"
+            + "    log(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
             + "  }\n"
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -74,21 +77,24 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>"},
             IE = {"#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij"})
     public void createCDATASection() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
             + "    d.appendChild(cdata);\n"
-            + "    alert(cdata.nodeName + ',' + cdata.nodeValue + ',' + cdata.nodeType);\n"
-            + "    alert(cdata.data);\n"
-            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
+            + "    log(cdata.nodeName + ',' + cdata.nodeValue + ',' + cdata.nodeType);\n"
+            + "    log(cdata.data);\n"
+            + "    log(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -98,21 +104,25 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>"},
             IE = {"#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?"})
     public void createCDATASection_specialChars() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var d = doc.createElement('doc');\n"
             + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('<>&?');\n"
             + "    d.appendChild(cdata);\n"
-            + "    alert(cdata.nodeName + ',' + cdata.nodeValue + ',' + cdata.nodeType);\n"
-            + "    alert(cdata.data);\n"
-            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
+            + "    log(cdata.nodeName + ',' + cdata.nodeValue + ',' + cdata.nodeType);\n"
+            + "    log(cdata.data);\n"
+            + "    log(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -121,20 +131,24 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("createNode not available")
     public void createNode() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("'<root><child/></root>'") + ";\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(2, 'Sci-Fi', '');\n"
             + "      doc.documentElement.childNodes.item(0).attributes.setNamedItem(node);\n"
-            + "      alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("doc.documentElement") + ");\n"
-            + "    } else { alert('createNode not available'); }\n"
+            + "      log(" + XMLDocumentTest.callSerializeXMLDocumentToString("doc.documentElement") + ");\n"
+            + "    } else { log('createNode not available'); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -143,20 +157,23 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("createNode not available")
     public void createNode_element() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
-            + "      alert(node.localName);\n"
-            + "      alert(node.prefix);\n"
-            + "      alert(node.namespaceURI);\n"
-            + "      alert(node.nodeName);\n"
-            + "    } else { alert('createNode not available'); }\n"
+            + "      log(node.localName);\n"
+            + "      log(node.prefix);\n"
+            + "      log(node.namespaceURI);\n"
+            + "      log(node.nodeName);\n"
+            + "    } else { log('createNode not available'); }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -165,21 +182,25 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"a", "null", "b"})
     public void documentElementCaching() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var a = doc.createElement('a');\n"
             + "    var b = doc.createElement('b');\n"
             + "    doc.appendChild(a);\n"
-            + "    alert(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.tagName);\n"
             + "    doc.removeChild(a);\n"
-            + "    alert(doc.documentElement);\n"
+            + "    log(doc.documentElement);\n"
             + "    doc.appendChild(b);\n"
-            + "    alert(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.tagName);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -188,15 +209,19 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("a:b")
     public void createElement_namespace() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var a = doc.createElement('a:b');\n"
-            + "    alert(a.tagName);\n"
+            + "    log(a.tagName);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -208,12 +233,14 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"content", "content"})
     public void text() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "      return;\n"
             + "    }\n"
             + "    var xmldoc = new ActiveXObject('Microsoft.XMLDOM');\n"
@@ -222,12 +249,13 @@ public class XMLDocument2Test extends WebDriverTestCase {
 
             + "    var expression = '/Envelope/Body';\n"
             + "    var body = xmldoc.documentElement.selectSingleNode(expression);\n"
-            + "    alert(body.text);\n"
-            + "    alert(body.firstChild.text);\n"
+            + "    log(body.text);\n"
+            + "    log(body.firstChild.text);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -236,14 +264,17 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "foo"})
     public void firstChild_element() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -253,7 +284,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -263,20 +294,23 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"foo", "foo"})
     public void firstChild_element_activeX() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "      return;\n"
             + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -286,7 +320,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -296,11 +330,13 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts({"foo", "foo"})
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -314,7 +350,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -326,20 +362,23 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @HtmlUnitNYI(IE = {"foo", "foo"})
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "      return;\n"
             + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -350,7 +389,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -359,14 +398,17 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"apache", "foo"})
     public void firstChild_processingInstruction() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -377,7 +419,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -387,20 +429,23 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"apache", "foo"})
     public void firstChild_processingInstruction_activeX() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "      return;\n"
             + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -411,7 +456,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -420,14 +465,17 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"dtd", "a"})
     public void firstChild_documentType() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -435,7 +483,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "<a><b>1</b><b>2</b></a>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -445,17 +493,19 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"dtd", "a"})
     public void firstChild_documentType_activeX() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "      return;\n"
             + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -466,7 +516,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "<a><b>1</b><b>2</b></a>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -475,14 +525,17 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"#comment", "foo"})
     public void firstChild_comment() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -493,7 +546,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -503,20 +556,23 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"#comment", "foo"})
     public void firstChild_comment_activeX() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "      return;\n"
             + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.firstChild.nodeName);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+            + "    log(doc.firstChild.nodeName);\n"
+            + "    log(doc.documentElement.nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -527,7 +583,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -537,18 +593,20 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"foo", "fooc1", "null"},
             IE = "not available")
     public void firstElementChild() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
 
-            + "    if (doc.firstElementChild == null) { alert('not available'); return };\n"
+            + "    if (doc.firstElementChild == null) { log('not available'); return };\n"
 
-            + "    alert(doc.firstElementChild.nodeName);\n"
-            + "    alert(doc.firstElementChild.firstElementChild.nodeName);\n"
-            + "    alert(doc.firstElementChild.firstElementChild.firstElementChild);\n"
+            + "    log(doc.firstElementChild.nodeName);\n"
+            + "    log(doc.firstElementChild.firstElementChild.nodeName);\n"
+            + "    log(doc.firstElementChild.firstElementChild.firstElementChild);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -558,7 +616,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -568,18 +626,21 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"foo", "fooc2", "null"},
             IE = "not available")
     public void lastElementChild() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
 
-            + "    if (doc.firstElementChild == null) { alert('not available'); return };\n"
+            + "    if (doc.firstElementChild == null) { log('not available'); return };\n"
 
-            + "    alert(doc.lastElementChild.nodeName);\n"
-            + "    alert(doc.firstElementChild.lastElementChild.nodeName);\n"
-            + "    alert(doc.firstElementChild.firstElementChild.lastElementChild);\n"
+            + "    log(doc.lastElementChild.nodeName);\n"
+            + "    log(doc.firstElementChild.lastElementChild.nodeName);\n"
+            + "    log(doc.firstElementChild.firstElementChild.lastElementChild);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final String xml =
@@ -589,7 +650,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -600,7 +661,9 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3"},
             IE = {"id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3"})
     public void attributeOrder() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString(
                     "'<items>"
@@ -612,13 +675,15 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    for(var i = 0; i < items.length; i++) {\n"
             + "      var attribs = items[i].attributes;\n"
             + "      for(var j = 0; j < attribs.length; j++) {\n"
-            + "        alert(attribs[j].name + ': ' + attribs[j].value);\n"
+            + "        log(attribs[j].name + ': ' + attribs[j].value);\n"
             + "      }\n"
             + "    }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }
