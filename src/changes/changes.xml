@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.0" date="April xx, 2021" description="Bugfixes, Firefox 87">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.39.v20210325.
+            </action>
             <action type="fix" dev="rbri">
                 Execution of deferred scripts might fail if one script removes another.
             </action>
