@@ -282,15 +282,16 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
                 + "    xhr.open('GET', url, false);\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { alert('exception') }\n"
-                + "  alert(xhr.readyState);\n"
-                + "  alert(xhr.status);\n"
+                + "  } catch(e) { log('exception') }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -301,7 +302,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "/simple1"));
+        loadPage2(html, new URL(URL_FIRST, "/simple1"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -425,6 +427,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var xhr = new XMLHttpRequest();\n"
             + "function test() {\n"
             + "  try {\n"
@@ -433,13 +436,13 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
             + "    xhr.setRequestHeader('Content-Type' , '" + contentType + "');\n"
             + "    xhr.send();\n"
-            + "    alert(xhr.readyState);\n"
-            + "    alert(xhr.status);\n"
-            + "    alert(xhr.responseXML.firstChild.childNodes[0].firstChild.nodeValue);\n"
-            + "    alert(xhr.responseXML.firstChild.childNodes[1].firstChild.nodeValue);\n"
-            + "    alert(xhr.responseXML.firstChild.childNodes[2].firstChild.nodeValue);\n"
-            + "    alert(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);\n"
-            + "  } catch(e) { alert(e) }\n"
+            + "    log(xhr.readyState);\n"
+            + "    log(xhr.status);\n"
+            + "    log(xhr.responseXML.firstChild.childNodes[0].firstChild.nodeValue);\n"
+            + "    log(xhr.responseXML.firstChild.childNodes[1].firstChild.nodeValue);\n"
+            + "    log(xhr.responseXML.firstChild.childNodes[2].firstChild.nodeValue);\n"
+            + "    log(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);\n"
+            + "  } catch(e) { log(e) }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -452,7 +455,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -518,6 +522,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
@@ -525,9 +530,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.open('GET', url, false);\n"
                 + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { alert('exception') }\n"
-                + "  alert(xhr.readyState);\n"
-                + "  alert(xhr.status);\n"
+                + "  } catch(e) { log('exception') }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -540,7 +545,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -555,6 +561,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
@@ -563,11 +570,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.setRequestHeader('X-PING', 'ping');\n"
                 + "    xhr.setRequestHeader('X-PONG', 'pong');\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { alert('exception') }\n"
-                + "  alert(xhr.readyState);\n"
-                + "  alert(xhr.status);\n"
-                + "  alert(xhr.responseXML.firstChild.childNodes[3].tagName);\n"
-                + "  alert(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);\n"
+                + "  } catch(e) { log('exception') }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+                + "  log(xhr.responseXML.firstChild.childNodes[3].tagName);\n"
+                + "  log(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -580,7 +587,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "/preflight1"));
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -696,29 +704,30 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
-                + "    alert(xhr.withCredentials);\n"
+                + "    log(xhr.withCredentials);\n"
                 + "    xhr.open('GET', '/foo.xml', false);\n"
-                + "    alert(xhr.withCredentials);\n"
+                + "    log(xhr.withCredentials);\n"
 
                 + "    try {\n"
                 + "      xhr.withCredentials = true;\n"
-                + "      alert(xhr.withCredentials);\n"
-                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+                + "      log(xhr.withCredentials);\n"
+                + "    } catch(e) { log('ex: withCredentials=true') }\n"
 
                 + "    try {\n"
                 + "      xhr.withCredentials = false;\n"
-                + "      alert(xhr.withCredentials);\n"
-                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
-                + "  } catch(ex) { alert(ex) }\n"
+                + "      log(xhr.withCredentials);\n"
+                + "    } catch(e) { log('ex: withCredentials=false') }\n"
+                + "  } catch(ex) { log(ex) }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -729,29 +738,30 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
-                + "    alert(xhr.withCredentials);\n"
+                + "    log(xhr.withCredentials);\n"
                 + "    xhr.open('GET', '/foo.xml', false);\n"
-                + "    alert(xhr.withCredentials);\n"
+                + "    log(xhr.withCredentials);\n"
 
                 + "    try {\n"
                 + "      xhr.withCredentials = true;\n"
-                + "      alert(xhr.withCredentials);\n"
-                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+                + "      log(xhr.withCredentials);\n"
+                + "    } catch(e) { log('ex: withCredentials=true') }\n"
 
                 + "    try {\n"
                 + "      xhr.withCredentials = false;\n"
-                + "      alert(xhr.withCredentials);\n"
-                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
-                + "  } catch(ex) { alert(ex) }\n"
+                + "      log(xhr.withCredentials);\n"
+                + "    } catch(e) { log('ex: withCredentials=false') }\n"
+                + "  } catch(ex) { log(ex) }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
