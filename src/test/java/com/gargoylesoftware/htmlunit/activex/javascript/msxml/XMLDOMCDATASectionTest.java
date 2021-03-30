@@ -49,7 +49,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(cdata));\n");
+        tester("log(Object.prototype.toString.call(cdata));\n");
     }
 
     /**
@@ -79,7 +79,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void childNodes() throws Exception {
-        tester("alert(cdata.childNodes.length);\n");
+        tester("log(cdata.childNodes.length);\n");
     }
 
     /**
@@ -87,41 +87,42 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {" ", " ", " ",
+            IE = {"#", " ", " ", " ",
                     "exception-setNull",
                     "", "", "",
                     "test", "test", "test",
-                    "test\ntest", "test\ntest", "test\ntest",
+                    "test\\ntest", "test\\ntest", "test\\ntest",
                     "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.text);\n"
+            + "log('#');\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
             // null
             + "try {\n"
             + "  cdata.data = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "cdata.data = '';\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
             // normal
             + "cdata.data = 'test';\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
             // linebreak
             + "cdata.data = 'test\\ntest';\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
             // xml
             + "cdata.data = '<tag/>';\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.text);\n";
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.text);\n";
 
         final String xml = ""
             + "<root>"
@@ -179,19 +180,19 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             IE = {"1", "0", "4", "9", "6"})
     public void length() throws Exception {
         final String test = ""
-            + "alert(cdata.length);\n"
+            + "log(cdata.length);\n"
             // empty
             + "cdata.data = '';\n"
-            + "alert(cdata.length);\n"
+            + "log(cdata.length);\n"
             // normal
             + "cdata.data = 'test';\n"
-            + "alert(cdata.length);\n"
+            + "log(cdata.length);\n"
             // linebreak
             + "cdata.data = 'test\\ntest';\n"
-            + "alert(cdata.length);\n"
+            + "log(cdata.length);\n"
             // xml
             + "cdata.data = '<tag/>';\n"
-            + "alert(cdata.length);\n";
+            + "log(cdata.length);\n";
 
         final String xml = ""
             + "<root>"
@@ -236,41 +237,42 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {" ", " ", " ",
+            IE = {"#", " ", " ", " ",
                     "exception-setNull",
                     "", "", "",
                     "test", "test", "test",
-                    "test\ntest", "test\ntest", "test\ntest",
+                    "test\\ntest", "test\\ntest", "test\\ntest",
                     "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.text);\n"
+            + "log('#');\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.text);\n"
             // null
             + "try {\n"
             + "  cdata.nodeValue = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "cdata.nodeValue = '';\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.text);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.text);\n"
             // normal
             + "cdata.nodeValue = 'test';\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.text);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.text);\n"
             // linebreak
             + "cdata.nodeValue = 'test\\ntest';\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.text);\n"
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.text);\n"
             // xml
             + "cdata.nodeValue = '<tag/>';\n"
-            + "alert(cdata.nodeValue);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.text);\n";
+            + "log(cdata.nodeValue);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.text);\n";
 
         final String xml = ""
             + "<root>"
@@ -295,7 +297,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             + "<![CDATA[]]>"
             + "</root>";
 
-        tester("alert(cdata.nodeValue);\n", xml);
+        tester("log(cdata.nodeValue);\n", xml);
     }
 
     /**
@@ -305,7 +307,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
-        tester("alert(cdata.ownerDocument === doc);\n");
+        tester("log(cdata.ownerDocument === doc);\n");
     }
 
     /**
@@ -316,17 +318,18 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             IE = "true")
     public void ownerDocument_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var cdata = doc.createCDATASection('something');\n"
             + "    try {\n"
-            + "      alert(cdata.ownerDocument === doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(cdata.ownerDocument === doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -341,7 +344,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             + "<child-element/>"
             + "</root>";
 
-        tester("alert(root === root.childNodes[0].parentNode);\n", xml);
+        tester("log(root === root.childNodes[0].parentNode);\n", xml);
     }
 
     /**
@@ -352,17 +355,18 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             IE = "true")
     public void parentNode_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var cdata = doc.createCDATASection('something');\n"
             + "    try {\n"
-            + "      alert(cdata.parentNode == null);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(cdata.parentNode == null);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -380,41 +384,42 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {" ", " ", " ",
+            IE = {"#", " ", " ", " ",
                     "exception-setNull",
                     "", "", "",
                     "test", "test", "test",
-                    "test\ntest", "test\ntest", "test\ntest",
+                    "test\\ntest", "test\\ntest", "test\\ntest",
                     "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
-            + "alert(cdata.text);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
+            + "log('#');\n"
+            + "log(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
             // null
             + "try {\n"
             + "  cdata.text = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "cdata.text = '';\n"
-            + "alert(cdata.text);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
             // normal
             + "cdata.text = 'test';\n"
-            + "alert(cdata.text);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
             // linebreak
             + "cdata.text = 'test\\ntest';\n"
-            + "alert(cdata.text);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n"
+            + "log(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n"
             // xml
             + "cdata.text = '<tag/>';\n"
-            + "alert(cdata.text);\n"
-            + "alert(cdata.data);\n"
-            + "alert(cdata.nodeValue);\n";
+            + "log(cdata.text);\n"
+            + "log(cdata.data);\n"
+            + "log(cdata.nodeValue);\n";
 
         final String xml = ""
             + "<root>"
@@ -432,25 +437,16 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             IE = {"<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\\r\\ntext]]>", "<![CDATA[<tag/>]]>"})
     public void xml() throws Exception {
         final String test = ""
-            + "alert(cdata.xml);\n"
+            + "log(cdata.xml);\n"
             // text
             + "cdata = root.childNodes[1];\n"
-            + "var txt = cdata.xml;\n"
-            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
-            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "alert(txt);\n"
+            + "log(cdata.xml);\n"
             // linebreak
             + "cdata = root.childNodes[2];\n"
-            + "txt = cdata.xml;\n"
-            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
-            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "alert(txt);\n"
+            + "log(cdata.xml);\n"
             // xml
             + "cdata = root.childNodes[3];\n"
-            + "txt = cdata.xml;\n"
-            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
-            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "alert(txt);\n";
+            + "log(cdata.xml);\n";
 
         final String xml = ""
             + "<root>"
@@ -471,17 +467,18 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             IE = "<![CDATA[]]>")
     public void xml_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var cdata = doc.createCDATASection('');\n"
             + "    try {\n"
-            + "      alert(cdata.xml);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(cdata.xml);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -489,24 +486,23 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\n"})
+            IE = {"myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\\n"})
     public void appendData() throws Exception {
         final String test = ""
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // normal
             + "cdata.appendData('-appended');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // null
             + "try {\n"
             + "  cdata.appendData(null);\n"
-            + "} catch(e) { alert('exception-appendNull'); }\n"
+            + "} catch(e) { log('exception-appendNull'); }\n"
             // empty
             + "cdata.appendData('');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // linebreak
             + "cdata.appendData('\\n');\n"
-            + "alert(cdata.data);\n";
-
+            + "log(cdata.data);\n";
         tester(test);
     }
 
@@ -523,37 +519,37 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
                        "y"})
     public void deleteData() throws Exception {
         final String test = ""
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // back
             + "cdata.deleteData(6, 1);\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // middle
             + "cdata.deleteData(2, 3);\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // front
             + "cdata.deleteData(0, 1);\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // position negative
             + "try {\n"
             + "  cdata.deleteData(-1, 1);\n"
-            + "} catch(e) { alert('exception-deletePosNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-deletePosNegative'); }\n"
+            + "log(cdata.data);\n"
             // position too high
             + "try {\n"
             + "  cdata.deleteData(5, 1);\n"
-            + "} catch(e) { alert('exception-deletePosTooHigh'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-deletePosTooHigh'); }\n"
+            + "log(cdata.data);\n"
             // count zero
             + "cdata.deleteData(1, 0);\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // count negative
             + "try {\n"
             + "  cdata.deleteData(1, -1);\n"
-            + "} catch(e) { alert('exception-deleteCntNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-deleteCntNegative'); }\n"
+            + "log(cdata.data);\n"
             // count too high
             + "cdata.deleteData(1, 5);\n"
-            + "alert(cdata.data);\n";
+            + "log(cdata.data);\n";
 
         tester(test);
     }
@@ -564,49 +560,49 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myCDATA", "myCDATA-b", "myC-m-DATA-b", "f-myC-m-DATA-b",
-                    "exception-insertNull", "f-myC-m-DATA-b", "\nf-myC-m-DATA-b",
-                    "\nf-myC-m-DATA-b",
-                    "exception-insertPosNegative", "\nf-myC-m-DATA-b",
-                    "\nf-myC-m-DATA-b",
-                    "exception-insertPosTooHigh", "\nf-myC-m-DATA-b"})
+                    "exception-insertNull", "f-myC-m-DATA-b", "\\nf-myC-m-DATA-b",
+                    "\\nf-myC-m-DATA-b",
+                    "exception-insertPosNegative", "\\nf-myC-m-DATA-b",
+                    "\\nf-myC-m-DATA-b",
+                    "exception-insertPosTooHigh", "\\nf-myC-m-DATA-b"})
     public void insertData() throws Exception {
         final String test = ""
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // back
             + "cdata.insertData(7, '-b');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // middle
             + "cdata.insertData(3, '-m-');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // front
             + "cdata.insertData(0, 'f-');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // null
             + "try {\n"
             + "  cdata.insertData(0, null);\n"
-            + "} catch(e) { alert('exception-insertNull'); }\n"
+            + "} catch(e) { log('exception-insertNull'); }\n"
             // empty
             + "cdata.insertData(5, '');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // linebreak
             + "cdata.insertData(0, '\\n');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // empty and position negative
             + "cdata.insertData(-1, '');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // position negative
             + "try {\n"
             + "  cdata.insertData(-1, 'X');\n"
-            + "} catch(e) { alert('exception-insertPosNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-insertPosNegative'); }\n"
+            + "log(cdata.data);\n"
             // empty and position too high
             + "cdata.insertData(25, '');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // position too high
             + "try {\n"
             + "  cdata.insertData(25, 'Y');\n"
-            + "} catch(e) { alert('exception-insertPosTooHigh'); }\n"
-            + "alert(cdata.data);\n";
+            + "} catch(e) { log('exception-insertPosTooHigh'); }\n"
+            + "log(cdata.data);\n";
 
         tester(test);
     }
@@ -617,55 +613,55 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myCDATA", "myCDAT-b", "my-m-T-b", "f-y-m-T-b",
-                    "exception-replaceNull", "f-y--T-b", "f-y\nT-b",
-                    "exception-replacePosNegative", "f-y\nT-b",
-                    "exception-replacePosTooHigh", "f-y\nT-b",
-                    "f-y\nT-b",
-                    "exception-replaceCntNegative", "f-y\nT-b",
+                    "exception-replaceNull", "f-y--T-b", "f-y\\nT-b",
+                    "exception-replacePosNegative", "f-y\\nT-b",
+                    "exception-replacePosTooHigh", "f-y\\nT-b",
+                    "f-y\\nT-b",
+                    "exception-replaceCntNegative", "f-y\\nT-b",
                     "f"})
     public void replaceData() throws Exception {
         final String test = ""
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // back
             + "cdata.replaceData(6, 1, '-b');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // middle
             + "cdata.replaceData(2, 3, '-m-');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // front
             + "cdata.replaceData(0, 1, 'f-');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // null
             + "try {\n"
             + "  cdata.replaceData(0, 1, null);\n"
-            + "} catch(e) { alert('exception-replaceNull'); }\n"
+            + "} catch(e) { log('exception-replaceNull'); }\n"
             // empty
             + "cdata.replaceData(4, 1, '');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // linebreak
             + "cdata.replaceData(3, 2, '\\n');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // position negative
             + "try {\n"
             + "  cdata.replaceData(-1, 1, '');\n"
-            + "} catch(e) { alert('exception-replacePosNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-replacePosNegative'); }\n"
+            + "log(cdata.data);\n"
             // position too high
             + "try {\n"
             + "  cdata.replaceData(25, 1, '');\n"
-            + "} catch(e) { alert('exception-replacePosTooHigh'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-replacePosTooHigh'); }\n"
+            + "log(cdata.data);\n"
             // count zero
             + "cdata.replaceData(1, 0, '');\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // count negative
             + "try {\n"
             + "  cdata.replaceData(1, -1, '');\n"
-            + "} catch(e) { alert('exception-replaceCntNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-replaceCntNegative'); }\n"
+            + "log(cdata.data);\n"
             // count too high
             + "cdata.replaceData(1, 25, '');\n"
-            + "alert(cdata.data);\n";
+            + "log(cdata.data);\n";
 
         tester(test);
     }
@@ -680,26 +676,26 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
                     "exception-splitPosTooHigh", "my"})
     public void splitText() throws Exception {
         final String test = ""
-            + "alert(root.childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
             + "var node = cdata.splitText(2);\n"
-            + "alert(root.childNodes.length);\n"
-            + "alert(root.childNodes[0].nodeName);\n"
-            + "alert(root.childNodes[0].length);\n"
-            + "alert(root.childNodes[0].text);\n"
-            + "alert(root.childNodes[1].nodeName);\n"
-            + "alert(root.childNodes[1].length);\n"
-            + "alert(root.childNodes[1].text);\n"
-            + "alert(node === root.childNodes[1]);\n"
+            + "log(root.childNodes.length);\n"
+            + "log(root.childNodes[0].nodeName);\n"
+            + "log(root.childNodes[0].length);\n"
+            + "log(root.childNodes[0].text);\n"
+            + "log(root.childNodes[1].nodeName);\n"
+            + "log(root.childNodes[1].length);\n"
+            + "log(root.childNodes[1].text);\n"
+            + "log(node === root.childNodes[1]);\n"
             // position negative
             + "try {\n"
             + "  cdata.splitText(-1);\n"
-            + "} catch(e) { alert('exception-splitPosNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-splitPosNegative'); }\n"
+            + "log(cdata.data);\n"
             // position too high
             + "try {\n"
             + "  cdata.splitText(25);\n"
-            + "} catch(e) { alert('exception-splitPosTooHigh'); }\n"
-            + "alert(cdata.data);\n";
+            + "} catch(e) { log('exception-splitPosTooHigh'); }\n"
+            + "log(cdata.data);\n";
         tester(test);
     }
 
@@ -716,43 +712,43 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
                     "yCDATA", "myCDATA"})
     public void substringData() throws Exception {
         final String test = ""
-            + "alert(cdata.data);\n"
+            + "log(cdata.data);\n"
             // back
-            + "alert(cdata.substringData(6, 1));\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.substringData(6, 1));\n"
+            + "log(cdata.data);\n"
             // middle
-            + "alert(cdata.substringData(2, 3));\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.substringData(2, 3));\n"
+            + "log(cdata.data);\n"
             // front
-            + "alert(cdata.substringData(0, 1));\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.substringData(0, 1));\n"
+            + "log(cdata.data);\n"
             // position negative
             + "try {\n"
             + "  cdata.substringData(-1, 1);\n"
-            + "} catch(e) { alert('exception-substringPosNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-substringPosNegative'); }\n"
+            + "log(cdata.data);\n"
             // position too high
             + "try {\n"
             + "  cdata.substringData(25, 1);\n"
-            + "} catch(e) { alert('exception-substringPosTooHigh'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-substringPosTooHigh'); }\n"
+            + "log(cdata.data);\n"
             // count zero
-            + "alert(cdata.substringData(1, 0));\n"
-            + "alert(cdata.data);\n"
+            + "log(cdata.substringData(1, 0));\n"
+            + "log(cdata.data);\n"
             // count negative
             + "try {\n"
             + "  cdata.substringData(1, -1);\n"
-            + "} catch(e) { alert('exception-substringCntNegative'); }\n"
-            + "alert(cdata.data);\n"
+            + "} catch(e) { log('exception-substringCntNegative'); }\n"
+            + "log(cdata.data);\n"
             // count too high
-            + "alert(cdata.substringData(1, 25));\n"
-            + "alert(cdata.data);\n";
+            + "log(cdata.substringData(1, 25));\n"
+            + "log(cdata.data);\n";
 
         tester(test);
     }
 
     private void property(final String property) throws Exception {
-        tester("alert(cdata." + property + ");\n");
+        tester("log(cdata." + property + ");\n");
     }
 
     private void tester(final String test) throws Exception {
@@ -763,6 +759,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
+            + LOG_TITLE_NORMALIZE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
@@ -770,11 +767,11 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var cdata = root.firstChild;\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

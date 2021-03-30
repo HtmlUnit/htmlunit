@@ -26,7 +26,7 @@ public final class MSXMLTestHelper {
 
     /** Helper. */
     public static final String ACTIVEX_CHECK =
-            "    if (!('ActiveXObject' in window)) { alert('no ActiveX'); return; }\n";
+            "    if (!('ActiveXObject' in window)) { log('no ActiveX'); return; }\n";
 
     /** Helper. */
     public static final String CREATE_XMLDOMDOCUMENT_FUNCTION_NAME = "createXMLDOMDocument";
@@ -152,7 +152,7 @@ public final class MSXMLTestHelper {
      */
     public static String createTestHTML(final String scriptContent) {
         return HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + scriptContent
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

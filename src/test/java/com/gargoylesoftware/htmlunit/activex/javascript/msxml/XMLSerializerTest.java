@@ -67,7 +67,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                 + "</outer> "
                 + "</note>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -82,7 +82,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a><!--32abc32--></a>\\r\\n";
 
         final String serializationText = "<a><!-- abc --></a>";
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -96,7 +96,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     public void xmlEntities() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a>&lt;&gt;&amp;</a>\\r\\n";
         final String serializationText = "<a>&lt;&gt;&amp;</a>";
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -126,7 +126,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                 + "  </xsl:template>\\r\\n"
                 + "</xsl:stylesheet>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -148,7 +148,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                                             + "<meta attrib=\"attribValue\"/>"
                                             + "</outer></document>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -178,7 +178,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                                           + "</body>"
                                           + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -193,7 +193,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
 
         final StringBuilder builder = new StringBuilder();
         builder.append(
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n" + ACTIVEX_CHECK);
 
         builder.append("    var text = '").append(escapedText).append("';\n").append(
@@ -222,18 +223,19 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"<foo/>\\r\\n", "<foo/>"})
     public void document() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      doc.documentElement = doc.createElement('foo');\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("doc") + ");\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("doc.documentElement") + ");\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("doc") + ");\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("doc.documentElement") + ");\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -243,24 +245,25 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"<img/>", "<?myTarget myData?>"})
     public void xml() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      testFragment(doc);\n"
             + "      var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("pi") + ");\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("pi") + ");\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function testFragment(doc) {\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    var img = doc.createElement('img');\n"
             + "    fragment.appendChild(img);\n"
-            + "    alert(" + callSerializeXMLDOMDocumentToString("fragment") + ");\n"
+            + "    log(" + callSerializeXMLDOMDocumentToString("fragment") + ");\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -270,7 +273,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\\r\\n")
     public void namespace() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
@@ -280,8 +284,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "      root.appendChild(parent);\n"
             + "      parent.appendChild(createNS(doc, 'my:child', 'myUri'));\n"
             + "      parent.appendChild(doc.createElement('another_child'));\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("doc") + ");\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("doc") + ");\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function createNS(doc, name, uri) {\n"
             + "    return typeof doc.createNode == 'function' || typeof doc.createNode == 'unknown' ? "
@@ -289,7 +293,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -299,17 +303,18 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "<teXtaREa/>")
     public void mixedCase() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      var t = doc.createElement('teXtaREa');\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("t") + ");\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("t") + ");\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -319,17 +324,18 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "<img href=\"mypage.htm\"/>")
     public void noClosingTagWithAttribute() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      var t = doc.createElement('img');\n"
             + "      t.setAttribute('href', 'mypage.htm');\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("t") + ");\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("t") + ");\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

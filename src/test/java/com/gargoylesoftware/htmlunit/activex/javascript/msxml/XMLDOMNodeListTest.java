@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDOMNodeListTest extends WebDriverTestCase {
@@ -42,7 +43,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(list));\n");
+        tester("log(Object.prototype.toString.call(list));\n");
     }
 
     /**
@@ -52,7 +53,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "2")
     public void length() throws Exception {
-        tester("alert(list.length);\n");
+        tester("log(list.length);\n");
     }
 
     /**
@@ -62,7 +63,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "0")
     public void length_empty() throws Exception {
-        tester("alert(list.length);\n", "<root/>");
+        tester("log(list.length);\n", "<root/>");
     }
 
     /**
@@ -72,7 +73,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "undefined")
     public void byName_attribute() throws Exception {
-        tester("alert(list.child1);\n");
+        tester("log(list.child1);\n");
     }
 
     /**
@@ -82,7 +83,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "undefined")
     public void byName_map() throws Exception {
-        tester("alert(list['child1']);\n");
+        tester("log(list['child1']);\n");
     }
 
     /**
@@ -133,7 +134,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
             IE = {"2", "child1=null", "child2=null", "null"})
     public void nextNode() throws Exception {
         final String test = ""
-            + "alert(list.length);\n"
+            + "log(list.length);\n"
             + "debug(list.nextNode());\n"
             + "debug(list.nextNode());\n"
             + "debug(list.nextNode());\n";
@@ -149,7 +150,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
             IE = {"2", "child1=null", "child1=null", "child2=null", "child1=null"})
     public void reset() throws Exception {
         final String test = ""
-            + "alert(list.length);\n"
+            + "log(list.length);\n"
             + "debug(list.nextNode());\n"
             + "list.reset();\n"
             + "debug(list.nextNode());\n"
@@ -167,7 +168,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "true")
     public void in() throws Exception {
-        tester("alert(0 in list);\n");
+        tester("log(0 in list);\n");
     }
 
     /**
@@ -177,7 +178,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "true")
     public void in_length() throws Exception {
-        tester("alert('length' in list);\n");
+        tester("log('length' in list);\n");
     }
 
     /**
@@ -187,7 +188,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "false")
     public void in_unknownIndex() throws Exception {
-        tester("alert(-1 in list);\n");
+        tester("log(-1 in list);\n");
     }
 
     /**
@@ -197,7 +198,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "true")
     public void in_unknownIndex2() throws Exception {
-        tester("alert(2 in list);\n");
+        tester("log(2 in list);\n");
     }
 
     /**
@@ -207,7 +208,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "false")
     public void in_unknown() throws Exception {
-        tester("alert('child1' in list);\n");
+        tester("log('child1' in list);\n");
     }
 
     private void tester(final String test) throws Exception {
@@ -221,25 +222,25 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     }
 
     private void tester(final String test, final String xml) throws Exception {
-        final String html = ""
+        final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
             + "      var root = doc.documentElement;\n"
             + "      var list = root.childNodes;\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function debug(e) {\n"
             + "    if (e != null) {\n"
-            + "      alert(e.nodeName + '=' + e.nodeValue);\n"
+            + "      log(e.nodeName + '=' + e.nodeValue);\n"
             + "    } else {\n"
-            + "      alert('null');\n"
+            + "      log('null');\n"
             + "    }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

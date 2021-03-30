@@ -45,7 +45,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(doctype));\n");
+        tester("log(Object.prototype.toString.call(doctype));\n");
     }
 
     /**
@@ -55,7 +55,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void attributes() throws Exception {
-        tester("alert(doctype.attributes.length);\n");
+        tester("log(doctype.attributes.length);\n");
     }
 
     /**
@@ -75,7 +75,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void childNodes() throws Exception {
-        tester("alert(doctype.childNodes.length);\n");
+        tester("log(doctype.childNodes.length);\n");
     }
 
     /**
@@ -105,7 +105,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void entities() throws Exception {
-        tester("alert(doctype.entities.length);\n");
+        tester("log(doctype.entities.length);\n");
     }
 
     /**
@@ -176,19 +176,19 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
             IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void nodeValue() throws Exception {
         final String test = ""
-            + "alert(doctype.nodeValue);\n"
+            + "log(doctype.nodeValue);\n"
             // null
             + "try {\n"
             + "  doctype.nodeValue = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "try {\n"
             + "  doctype.nodeValue = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // normal
             + "try {\n"
             + "  doctype.nodeValue = 'test';\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
 
         tester(test);
     }
@@ -200,7 +200,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void notations() throws Exception {
-        tester("alert(doctype.notations.length);\n");
+        tester("log(doctype.notations.length);\n");
     }
 
     /**
@@ -210,7 +210,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
-        tester("alert(doctype.ownerDocument === doc);\n");
+        tester("log(doctype.ownerDocument === doc);\n");
     }
 
     /**
@@ -220,7 +220,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void parentNode() throws Exception {
-        tester("alert(doctype.parentNode === doc);\n");
+        tester("log(doctype.parentNode === doc);\n");
     }
 
     /**
@@ -254,15 +254,15 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
             // normal
               "try {\n"
             + "  doctype.text = 'text';\n"
-            + "} catch(e) { alert('exception-set'); }\n"
+            + "} catch(e) { log('exception-set'); }\n"
             // empty
             + "try {\n"
             + "  doctype.text = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // null
             + "try {\n"
             + "  doctype.text = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n";
+            + "} catch(e) { log('exception-setNull'); }\n";
 
         tester(test);
     }
@@ -280,7 +280,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
     }
 
     private void property(final String property) throws Exception {
-        tester("alert(doctype." + property + ");\n");
+        tester("log(doctype." + property + ");\n");
     }
 
     private void tester(final String test) throws Exception {
@@ -292,6 +292,7 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
@@ -299,11 +300,11 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var doctype = doc.doctype;\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

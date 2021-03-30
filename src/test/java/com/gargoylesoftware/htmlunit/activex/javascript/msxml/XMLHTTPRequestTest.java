@@ -108,17 +108,18 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
     private void createRequest(final String activeXName) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var xhr = " + callCreateXMLHTTPRequest() + ";\n"
-            + "    alert(Object.prototype.toString.call(xhr));\n"
+            + "    log(Object.prototype.toString.call(xhr));\n"
             + "  }\n"
             + "  function " + CREATE_XMLHTTPREQUEST_FUNCTION_NAME + "() {\n"
             + "    return new ActiveXObject('" + activeXName + "');\n"
             + "  }\n";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -128,7 +129,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(xhr));\n");
+        tester("log(Object.prototype.toString.call(xhr));\n");
     }
 
     /**
@@ -139,13 +140,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "0")
     public void properties_caseSensitive() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var xhr = " + callCreateXMLHTTPRequest() + ";\n"
-            + "    alert(xhr.reAdYsTaTe);\n"
+            + "    log(xhr.reAdYsTaTe);\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -169,16 +171,16 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "xhr.onreadystatechange = onStateChange;\n"
             // open
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
-            + "alert('opened 1');\n"
+            + "log('opened 1');\n"
             // send
             + "xhr.send();\n"
-            + "alert('sent 1');\n"
+            + "log('sent 1');\n"
             // re-open
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
-            + "alert('opened 2');\n"
+            + "log('opened 2');\n"
             // send
             + "xhr.send();\n"
-            + "alert('sent 2');\n";
+            + "log('sent 2');\n";
 
         tester(test);
     }
@@ -194,10 +196,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "xhr.onreadystatechange = onStateChange;\n"
             // open
             + "xhr.open(\"GET\", \"" + URL_SECOND + "delay500/\", true);\n"
-            + "alert('opened 1');\n"
+            + "log('opened 1');\n"
             // send
             + "xhr.send();\n"
-            + "alert('sent 1');\n";
+            + "log('sent 1');\n";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         tester(test);
@@ -259,6 +261,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "<root/>")
     public void responseText_contentTypeNull() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -267,14 +270,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        alert(xhr.responseText);\n"
-            + "      } catch(e) { alert('exception-text'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseText);\n"
+            + "      } catch(e) { log('exception-text'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, "<root/>", null);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -285,6 +288,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "<root/>")
     public void responseText_contentTypeText() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -293,14 +297,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        alert(xhr.responseText);\n"
-            + "      } catch(e) { alert('exception-text'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseText);\n"
+            + "      } catch(e) { log('exception-text'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, "<root/>", MimeType.TEXT_PLAIN);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -311,6 +315,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "<root/>")
     public void responseText_contentTypeApplicationXML() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -319,14 +324,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        alert(xhr.responseText);\n"
-            + "      } catch(e) { alert('exception-text'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseText);\n"
+            + "      } catch(e) { log('exception-text'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, "<root/>", "application/xml");
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -338,6 +343,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "ol\u00E9")
     public void responseText_defaultEncodingIsUTF8() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -346,9 +352,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        alert(xhr.responseText);\n"
-            + "      } catch(e) { alert('exception-text'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseText);\n"
+            + "      } catch(e) { log('exception-text'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
@@ -357,7 +363,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", MimeType.TEXT_PLAIN,
             new ArrayList<NameValuePair>());
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -392,6 +398,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "")
     public void responseXML_contentTypeNull() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -400,14 +407,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        alert(xhr.responseXML.xml);\n"
-            + "      } catch(e) { alert('exception-xml'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseXML.xml);\n"
+            + "      } catch(e) { log('exception-xml'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, "<root/>", null);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -418,6 +425,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "")
     public void responseXML_contentTypeText() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -426,14 +434,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        alert(xhr.responseXML.xml);\n"
-            + "      } catch(e) { alert('exception-xml'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseXML.xml);\n"
+            + "      } catch(e) { log('exception-xml'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, "<root/>", MimeType.TEXT_PLAIN);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -444,6 +452,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "<root/>\\r\\n")
     public void responseXML_contentTypeApplicationXML() throws Exception {
         final String html = ""
+            + LOG_TITLE_NORMALIZE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -452,17 +461,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        var txt = xhr.responseXML.xml;\n"
-            + "        txt = txt.replace(/\\r/g, '\\\\r');\n"
-            + "        txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "        alert(txt);\n"
-            + "      } catch(e) { alert('exception-xml'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseXML.xml);\n"
+            + "      } catch(e) { log('exception-xml'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, "<root/>", "application/xml");
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -474,6 +480,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = "<root>ol\u00E9</root>\\r\\n")
     public void responseXML_defaultEncodingIsUTF8() throws Exception {
         final String html = ""
+            + LOG_TITLE_NORMALIZE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -482,12 +489,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "      xhr.send();\n"
             + "      try {\n"
-            + "        var txt = xhr.responseXML.xml;\n"
-            + "        txt = txt.replace(/\\r/g, '\\\\r');\n"
-            + "        txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "        alert(txt);\n"
-            + "      } catch(e) { alert('exception-xml'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(xhr.responseXML.xml);\n"
+            + "      } catch(e) { log('exception-xml'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
@@ -496,7 +500,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", MimeType.TEXT_XML,
             new ArrayList<NameValuePair>());
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -567,7 +571,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "debugRequest(xhr);\n"
             + "try {\n"
             + "  xhr.abort();\n"
-            + "} catch(e) { alert('exception-abort'); }\n"
+            + "} catch(e) { log('exception-abort'); }\n"
             + "debugRequest(xhr);\n";
 
         tester(test);
@@ -586,7 +590,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "debugRequest(xhr);\n"
             + "try {\n"
             + "  xhr.abort();\n"
-            + "} catch(e) { alert('exception-abort'); }\n"
+            + "} catch(e) { log('exception-abort'); }\n"
             + "debugRequest(xhr);\n";
 
         tester(test);
@@ -606,7 +610,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "debugRequest(xhr);\n"
             + "try {\n"
             + "  xhr.abort();\n"
-            + "} catch(e) { alert('exception-abort'); }\n"
+            + "} catch(e) { log('exception-abort'); }\n"
             + "debugRequest(xhr);\n";
 
         tester(test);
@@ -651,13 +655,13 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
         final String test = ""
             // create
             + "try {\n"
-            + "  alert(xhr.getAllResponseHeaders());\n"
-            + "} catch(e) { alert('exception-created'); }\n"
+            + "  log(xhr.getAllResponseHeaders());\n"
+            + "} catch(e) { log('exception-created'); }\n"
             // open
             + "xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "try {\n"
-            + "  alert(xhr.getAllResponseHeaders());\n"
-            + "} catch(e) { alert('exception-opened'); }\n"
+            + "  log(xhr.getAllResponseHeaders());\n"
+            + "} catch(e) { log('exception-opened'); }\n"
             // send
             + "xhr.send();\n"
             + "try {\n"
@@ -666,8 +670,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  txt = txt.replace(/Date.*GMT/, 'Date XYZ GMT');\n"
             + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
             + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "} catch(e) { alert('exception-sent'); }\n";
+            + "  log(txt);\n"
+            + "} catch(e) { log('exception-sent'); }\n";
 
         tester(test, "<root/>");
     }
@@ -687,33 +691,33 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     public void getResponseHeader() throws Exception {
         final String test = ""
             + "try {\n"
-            + "  alert(xhr.getResponseHeader('Content-Type'));\n"
-            + "} catch(e) { alert('exception-created'); }\n"
+            + "  log(xhr.getResponseHeader('Content-Type'));\n"
+            + "} catch(e) { log('exception-created'); }\n"
             + "xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "try {\n"
-            + "  alert(xhr.getResponseHeader('Content-Type'));\n"
-            + "} catch(e) { alert('exception-opened'); }\n"
+            + "  log(xhr.getResponseHeader('Content-Type'));\n"
+            + "} catch(e) { log('exception-opened'); }\n"
             + "xhr.send();\n"
             // normal
             + "try {\n"
-            + "  alert(xhr.getResponseHeader('Content-Type'));\n"
-            + "} catch(e) { alert('exception-sent'); }\n"
+            + "  log(xhr.getResponseHeader('Content-Type'));\n"
+            + "} catch(e) { log('exception-sent'); }\n"
             // null
             + "try {\n"
-            + "  alert(xhr.getResponseHeader(null));\n"
-            + "} catch(e) { alert('exception-getNull'); }\n"
+            + "  log(xhr.getResponseHeader(null));\n"
+            + "} catch(e) { log('exception-getNull'); }\n"
             // empty
             + "try {\n"
-            + "  alert(xhr.getResponseHeader(''));\n"
-            + "} catch(e) { alert('exception-getEmpty'); }\n"
+            + "  log(xhr.getResponseHeader(''));\n"
+            + "} catch(e) { log('exception-getEmpty'); }\n"
             // unknown
             + "try {\n"
-            + "  alert(xhr.getResponseHeader('XXX'));\n"
-            + "} catch(e) { alert('exception-getUnknown'); }\n"
+            + "  log(xhr.getResponseHeader('XXX'));\n"
+            + "} catch(e) { log('exception-getUnknown'); }\n"
             // case-sensitive
             + "try {\n"
-            + "  alert(xhr.getResponseHeader('cOntEnt-typE'));\n"
-            + "} catch(e) { alert('exception-getCase'); }\n";
+            + "  log(xhr.getResponseHeader('cOntEnt-typE'));\n"
+            + "} catch(e) { log('exception-getCase'); }\n";
 
         tester(test, "<root/>");
     }
@@ -726,11 +730,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             IE = {"4:200 GET localhost/bounce?null,-1 ",
                    "4:200 POST localhost/bounce?null,0 ",
                    "4:200 PUT localhost/bounce?null,0 ",
-                   "4:200  ",
+                   "4:200 ",
                    "exception-methodTRACE", "0:ex status ex text ex xml",
                    "exception-methodNull", "0:ex status ex text ex xml",
                    "exception-methodEmpty", "0:ex status ex text ex xml",
-                   "1:ex status ex text ", "4:  "})
+                   "1:ex status ex text ", "4: "})
     public void open_method() throws Exception {
         final String test = ""
             // GET
@@ -738,39 +742,39 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('GET', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-methodGET'); }\n"
+            + "} catch(e) { log('exception-methodGET'); }\n"
             // POST
             + "try {\n"
             + "  xhr.open('POST', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-methodPOST'); }\n"
+            + "} catch(e) { log('exception-methodPOST'); }\n"
             // PUT
             + "try {\n"
             + "  xhr.open('PUT', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-methodPUT'); }\n"
+            + "} catch(e) { log('exception-methodPUT'); }\n"
             // HEAD
             + "try {\n"
             + "  xhr.open('HEAD', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-methodHEAD'); }\n"
+            + "} catch(e) { log('exception-methodHEAD'); }\n"
             // TRACE
             + "try {\n"
             + "  xhr.open('TRACE', '/bounce', false);\n"
-            + "} catch(e) { alert('exception-methodTRACE'); }\n"
+            + "} catch(e) { log('exception-methodTRACE'); }\n"
             + "debugRequest(xhr);\n"
             // null
             + "try {\n"
             + "  xhr.open(null, '/bounce', false);\n"
-            + "} catch(e) { alert('exception-methodNull'); }\n"
+            + "} catch(e) { log('exception-methodNull'); }\n"
             + "debugRequest(xhr);\n"
             // empty
             + "try {\n"
             + "  xhr.open('', '/bounce', false);\n"
-            + "} catch(e) { alert('exception-methodEmpty'); }\n"
+            + "} catch(e) { log('exception-methodEmpty'); }\n"
             + "debugRequest(xhr);\n"
             // invalid
             + "try {\n"
@@ -785,8 +789,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  try {\n"
             + "    msg += ' ' + xhr.responseXML.xml;\n"
             + "  } catch(e) { msg += ' ex xml'; }\n"
-            + "  alert(msg);\n"
-            + "} catch(e) { alert('exception-methodInvalid'); }\n";
+            + "  log(msg);\n"
+            + "} catch(e) { log('exception-methodInvalid'); }\n";
 
         tester_bounce(test);
     }
@@ -807,13 +811,13 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('DELETE', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-methodDELETE'); }\n"
+            + "} catch(e) { log('exception-methodDELETE'); }\n"
             // OPTIONS
             + "try {\n"
             + "  xhr.open('OPTIONS', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-methodOPTIONS'); }\n";
+            + "} catch(e) { log('exception-methodOPTIONS'); }\n";
 
         tester_bounce(test);
     }
@@ -827,7 +831,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
                    "4:200 GET localhost/bounce?null,-1 ",
                    "exception-urlNull", "4:200 GET localhost/bounce?null,-1 ",
                    "exception-urlEmpty", "0:ex status ex text ex xml",
-                   "exception-urlNotFound", "4:  "})
+                   "exception-urlNotFound", "4: "})
     public void open_url() throws Exception {
         final String test = ""
             // relative
@@ -835,28 +839,28 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('GET', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-urlRelative'); }\n"
+            + "} catch(e) { log('exception-urlRelative'); }\n"
             // absolute
             + "try {\n"
             + "  xhr.open('GET', '" + URL_FIRST + "bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-urlAbsolute'); }\n"
+            + "} catch(e) { log('exception-urlAbsolute'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('GET', null, false);\n"
-            + "} catch(e) { alert('exception-urlNull'); }\n"
+            + "} catch(e) { log('exception-urlNull'); }\n"
             + "debugRequest(xhr);\n"
             // empty
             + "try {\n"
             + "  xhr.open('GET', '', false);\n"
-            + "} catch(e) { alert('exception-urlEmpty'); }\n"
+            + "} catch(e) { log('exception-urlEmpty'); }\n"
             + "debugRequest(xhr);\n"
             // not found
             + "try {\n"
             + "  xhr.open('GET', 'http://localhost:9876/doesntexist', false);\n"
             + "  xhr.send();\n"
-            + "} catch(e) { alert('exception-urlNotFound'); }\n"
+            + "} catch(e) { log('exception-urlNotFound'); }\n"
             // debug without status
             + "var msg = xhr.readyState + ':';\n"
             + "try {\n"
@@ -865,7 +869,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "try {\n"
             + "  msg += ' ' + xhr.responseXML.xml;\n"
             + "} catch(e) { msg += ' ex xml'; }\n"
-            + "alert(msg);\n";
+            + "log(msg);\n";
 
         tester_bounce(test);
     }
@@ -882,16 +886,17 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('GET', '/protected/token', false, 'foo', 'bar');\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-auth'); }\n";
+            + "} catch(e) { log('exception-auth'); }\n";
 
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    xhr = " + callCreateXMLHTTPRequest() + ";\n"
             + "    try {\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function debugRequest(r) {\r"
             + "    var msg = r.readyState + ':';\n"
@@ -904,14 +909,15 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "    try {\n"
             + "      msg += ' ' + r.responseXML.xml;\n"
             + "    } catch(e) { msg += ' ex xml'; }\n"
-            + "    alert(msg);\n"
+            + "    log(msg);\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/protected/token", BasicAuthenticationServlet.class);
 
-        loadPageWithAlerts2(createTestHTML(html), servlets);
+        loadPage2(createTestHTML(html), servlets);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -930,25 +936,25 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('GET', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNoParameter'); }\n"
+            + "} catch(e) { log('exception-sendNoParameter'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('GET', '/bounce', false);\n"
             + "  xhr.send(null);\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNull'); }\n"
+            + "} catch(e) { log('exception-sendNull'); }\n"
             // empty
             + "try {\n"
             + "  xhr.open('GET', '/bounce', false);\n"
             + "  xhr.send('');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendEmpty'); }\n"
+            + "} catch(e) { log('exception-sendEmpty'); }\n"
             // normal
             + "try {\n"
             + "  xhr.open('GET', '/bounce', false);\n"
             + "  xhr.send('test');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester_bounce(test);
     }
@@ -969,25 +975,25 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('POST', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNoParameter'); }\n"
+            + "} catch(e) { log('exception-sendNoParameter'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('POST', '/bounce', false);\n"
             + "  xhr.send(null);\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNull'); }\n"
+            + "} catch(e) { log('exception-sendNull'); }\n"
             // empty
             + "try {\n"
             + "  xhr.open('POST', '/bounce', false);\n"
             + "  xhr.send('');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendEmpty'); }\n"
+            + "} catch(e) { log('exception-sendEmpty'); }\n"
             // normal
             + "try {\n"
             + "  xhr.open('POST', '/bounce', false);\n"
             + "  xhr.send('test');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester_bounce(test);
     }
@@ -1008,25 +1014,25 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('PUT', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNoParameter'); }\n"
+            + "} catch(e) { log('exception-sendNoParameter'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('PUT', '/bounce', false);\n"
             + "  xhr.send(null);\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNull'); }\n"
+            + "} catch(e) { log('exception-sendNull'); }\n"
             // empty
             + "try {\n"
             + "  xhr.open('PUT', '/bounce', false);\n"
             + "  xhr.send('');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendEmpty'); }\n"
+            + "} catch(e) { log('exception-sendEmpty'); }\n"
             // normal
             + "try {\n"
             + "  xhr.open('PUT', '/bounce', false);\n"
             + "  xhr.send('test');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester_bounce(test);
     }
@@ -1036,10 +1042,10 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"4:200  ",
-                   "4:200  ",
-                   "4:200  ",
-                   "4:200  "})
+            IE = {"4:200 ",
+                   "4:200 ",
+                   "4:200 ",
+                   "4:200 "})
     public void send_head() throws Exception {
         final String test = ""
             // no parameter
@@ -1047,25 +1053,25 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('HEAD', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNoParameter'); }\n"
+            + "} catch(e) { log('exception-sendNoParameter'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('HEAD', '/bounce', false);\n"
             + "  xhr.send(null);\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNull'); }\n"
+            + "} catch(e) { log('exception-sendNull'); }\n"
             // empty
             + "try {\n"
             + "  xhr.open('HEAD', '/bounce', false);\n"
             + "  xhr.send('');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendEmpty'); }\n"
+            + "} catch(e) { log('exception-sendEmpty'); }\n"
             // normal
             + "try {\n"
             + "  xhr.open('HEAD', '/bounce', false);\n"
             + "  xhr.send('test');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester_bounce(test);
     }
@@ -1088,25 +1094,25 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('DELETE', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNoParameter'); }\n"
+            + "} catch(e) { log('exception-sendNoParameter'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('DELETE', '/bounce', false);\n"
             + "  xhr.send(null);\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNull'); }\n"
+            + "} catch(e) { log('exception-sendNull'); }\n"
             // empty
             + "try {\n"
             + "  xhr.open('DELETE', '/bounce', false);\n"
             + "  xhr.send('');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendEmpty'); }\n"
+            + "} catch(e) { log('exception-sendEmpty'); }\n"
             // normal
             + "try {\n"
             + "  xhr.open('DELETE', '/bounce', false);\n"
             + "  xhr.send('test');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester_bounce(test);
     }
@@ -1129,25 +1135,25 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  xhr.open('OPTIONS', '/bounce', false);\n"
             + "  xhr.send();\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNoParameter'); }\n"
+            + "} catch(e) { log('exception-sendNoParameter'); }\n"
             // null
             + "try {\n"
             + "  xhr.open('OPTIONS', '/bounce', false);\n"
             + "  xhr.send(null);\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendNull'); }\n"
+            + "} catch(e) { log('exception-sendNull'); }\n"
             // empty
             + "try {\n"
             + "  xhr.open('OPTIONS', '/bounce', false);\n"
             + "  xhr.send('');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-sendEmpty'); }\n"
+            + "} catch(e) { log('exception-sendEmpty'); }\n"
             // normal
             + "try {\n"
             + "  xhr.open('OPTIONS', '/bounce', false);\n"
             + "  xhr.send('test');\n"
             + "  debugRequest(xhr);\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester_bounce(test);
     }
@@ -1165,7 +1171,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "xhr.send();\n"
             + "try {\n"
             + "  xhr.send();\n"
-            + "} catch(e) { alert('exception-resend'); }\n"
+            + "} catch(e) { log('exception-resend'); }\n"
             + "debugRequest(xhr);\n";
 
         tester_bounce(test);
@@ -1192,7 +1198,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "try {\n"
             + "  xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "  xhr.send();\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester(test, "");
 
@@ -1228,7 +1234,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "try {\n"
             + "  xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "  xhr.send('1234');\n"
-            + "} catch(e) { alert('exception-send'); }\n";
+            + "} catch(e) { log('exception-send'); }\n";
 
         tester(test, "");
 
@@ -1276,36 +1282,36 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             // before open
             + "try {\n"
             + "  xhr.setRequestHeader('Foo', 'bar');\n"
-            + "} catch(e) { alert('exception-unopened'); }\n"
+            + "} catch(e) { log('exception-unopened'); }\n"
             + "xhr.open('GET', '" + URL_SECOND + "', false);\n"
             // normal
             + "try {\n"
             + "  xhr.setRequestHeader('foo', 'bar');\n"
-            + "} catch(e) { alert('exception-set'); }\n"
+            + "} catch(e) { log('exception-set'); }\n"
             // overwrite
             + "try {\n"
             + "  xhr.setRequestHeader('Accept', 'application/javascript');\n"
-            + "} catch(e) { alert('exception-setOverwrite'); }\n"
+            + "} catch(e) { log('exception-setOverwrite'); }\n"
             // null name
             + "try {\n"
             + "  xhr.setRequestHeader(null, 'NameNull');\n"
-            + "} catch(e) { alert('exception-setNameNull'); }\n"
+            + "} catch(e) { log('exception-setNameNull'); }\n"
             // empty name
             + "try {\n"
             + "  xhr.setRequestHeader('', 'NameEmpty');\n"
-            + "} catch(e) { alert('exception-setNameEmpty'); }\n"
+            + "} catch(e) { log('exception-setNameEmpty'); }\n"
             // null value
             + "try {\n"
             + "  xhr.setRequestHeader('ValueNull', null);\n"
-            + "} catch(e) { alert('exception-setValueNull'); }\n"
+            + "} catch(e) { log('exception-setValueNull'); }\n"
             // empty value
             + "try {\n"
             + "  xhr.setRequestHeader('ValueEmpty', '');\n"
-            + "} catch(e) { alert('exception-setValueEmpty'); }\n"
+            + "} catch(e) { log('exception-setValueEmpty'); }\n"
             // blank value
             + "try {\n"
             + "  xhr.setRequestHeader('ValueEmpty', ' ');\n"
-            + "} catch(e) { alert('exception-setValueBlank'); }\n"
+            + "} catch(e) { log('exception-setValueBlank'); }\n"
             + "xhr.send();\n";
 
         tester(test, "");
@@ -1336,7 +1342,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "xhr.open('GET', '" + URL_SECOND + "', false);\n"
             + "try {\n"
             + "  xhr.setRequestHeader('Content-Length', '20');\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
         if (content == null) {
             test += "xhr.send();\n";
         }
@@ -1352,7 +1358,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     }
 
     private void property(final String property) throws Exception {
-        tester("alert(xhr." + property + ");\n");
+        tester("log(xhr." + property + ");\n");
     }
 
     private void property_lifecycleSync(final String property) throws Exception {
@@ -1362,40 +1368,40 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  var txt = '' + xhr." + property + ";\n"
             + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
             + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "} catch(e) { alert('exception-created'); }\n"
+            + "  log(txt);\n"
+            + "} catch(e) { log('exception-created'); }\n"
             // open
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "try {\n"
             + "  txt = '' + xhr." + property + ";\n"
             + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
             + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "} catch(e) { alert('exception-opened'); }\n"
+            + "  log(txt);\n"
+            + "} catch(e) { log('exception-opened'); }\n"
             // send
             + "xhr.send();\n"
             + "try {\n"
             + "  txt = '' + xhr." + property + ";\n"
             + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
             + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "} catch(e) { alert('exception-sent'); }\n"
+            + "  log(txt);\n"
+            + "} catch(e) { log('exception-sent'); }\n"
             // re-open
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
             + "try {\n"
             + "  txt = '' + xhr." + property + ";\n"
             + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
             + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "} catch(e) { alert('exception-reopened'); }\n"
+            + "  log(txt);\n"
+            + "} catch(e) { log('exception-reopened'); }\n"
             // send
             + "xhr.send();\n"
             + "try {\n"
             + "  txt = '' + xhr." + property + ";\n"
             + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
             + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "} catch(e) { alert('exception-sent'); }\n";
+            + "  log(txt);\n"
+            + "} catch(e) { log('exception-sent'); }\n";
 
         tester(test);
     }
@@ -1405,10 +1411,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "xhr.onreadystatechange = function() {\n"
             + "  try {\n"
             + "    var txt = xhr.readyState + ':' + xhr." + property + ";\n"
-            + "    txt = txt.replace(/\\r/g, '\\\\r');\n"
-            + "    txt = txt.replace(/\\n/g, '\\\\n');\n"
-            + "    alert(txt);\n"
-            + "  } catch(e) { alert(xhr.readyState + ':exception-async'); }\n"
+            + "    log(txt);\n"
+            + "  } catch(e) { log(xhr.readyState + ':exception-async'); }\n"
             + "};\n"
             // open
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
@@ -1428,16 +1432,17 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
+            + LOG_TITLE_NORMALIZE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    xhr = " + callCreateXMLHTTPRequest() + ";\n"
             + "    try {\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function onStateChange() {\n"
-            + "    alert('orsc:' + xhr.readyState);\n"
+            + "    log('orsc:' + xhr.readyState);\n"
             + "  }\n"
             + "  function debugRequest(r) {\r"
             + "    var msg = r.readyState + ':';\n"
@@ -1453,26 +1458,28 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "      txt = txt.replace(/\\n/g, '\\\\n');\n"
             + "      msg += ' ' + txt;\n"
             + "    } catch(e) { msg += ' ex xml'; }\n"
-            + "    alert(msg);\n"
+            + "    log(msg);\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html), URL_FIRST, 10 * DEFAULT_WAIT_TIME);
+        loadPage2(createTestHTML(html), URL_FIRST);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     private void tester_bounce(final String test) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    xhr = " + callCreateXMLHTTPRequest() + ";\n"
             + "    try {\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function onStateChange() {\n"
-            + "    alert('orsc:' + xhr.readyState);\n"
+            + "    log('orsc:' + xhr.readyState);\n"
             + "  }\n"
             + "  function debugRequest(r) {\r"
             + "    var msg = r.readyState + ':';\n"
@@ -1485,14 +1492,15 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "    try {\n"
             + "      msg += ' ' + r.responseXML.xml;\n"
             + "    } catch(e) { msg += ' ex xml'; }\n"
-            + "    alert(msg);\n"
+            + "    log(msg);\n"
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/bounce", BounceServlet.class);
 
-        loadPageWithAlerts2(createTestHTML(html), URL_FIRST, DEFAULT_WAIT_TIME * 2, servlets);
+        loadPage2(createTestHTML(html), URL_FIRST, servlets);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**

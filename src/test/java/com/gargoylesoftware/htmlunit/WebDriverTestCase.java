@@ -159,6 +159,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Function used in many tests.
      */
+    public static final String LOG_TITLE_NORMALIZE_FUNCTION = "  function log(msg) { "
+            + "msg = ('' + msg).replace(/\\t/g, '\\\\t');"
+            + "msg = msg.replace(/\\r/g, '\\\\r');"
+            + "msg = msg.replace(/\\n/g, '\\\\n');"
+            + "window.document.title += msg + '§';}\n";
+
+    /**
+     * Function used in many tests.
+     */
     public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
             + "document.getElementById('myLog').value += msg + '§';}\n";
 
@@ -1034,6 +1043,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     protected final WebDriver loadPageVerifyTitle2(final String html, final String... expectedAlerts) throws Exception {
         final WebDriver driver = loadPage2(html);
+        return verifyTitle2(driver, expectedAlerts);
+    }
+
+    protected final WebDriver verifyTitle2(final long maxWaitTime, final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+
+        while (System.currentTimeMillis() < maxWait) {
+            try {
+                return verifyTitle2(driver, expectedAlerts);
+            }
+            catch (final AssertionError e) {
+                // ignore and wait
+            }
+        }
+
         return verifyTitle2(driver, expectedAlerts);
     }
 
