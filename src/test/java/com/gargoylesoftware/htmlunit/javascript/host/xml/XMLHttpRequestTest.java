@@ -90,14 +90,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_NORMALIZE_FUNCTION
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
-            + "        alert(request.readyState);\n"
+            + "        log(request.readyState);\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
-            + "        alert(request.readyState);\n"
+            + "        log(request.readyState);\n"
             + "        request.send('');\n"
-            + "        alert(request.readyState);\n"
-            + "        alert(request.responseText);\n"
+            + "        log(request.readyState);\n"
+            + "        log(request.responseText);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -112,10 +113,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        setExpectedAlerts(UNINITIALIZED, LOADING, COMPLETED, xml);
+        setExpectedAlerts(UNINITIALIZED, LOADING, COMPLETED, xml.replace("\n", "\\n"));
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -387,12 +388,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '/foo.xml', false);\n"
             + "        request.send('');\n"
-            + "        alert(request.readyState);\n"
-            + "        alert(request.responseText);\n"
+            + "        log(request.readyState);\n"
+            + "        log(request.responseText);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -408,7 +410,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         setExpectedAlerts(COMPLETED, xml);
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
     }
 
     /**
@@ -703,8 +704,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     public void responseNotInWindow() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.txt', false);\n"
@@ -715,9 +717,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
-        assertTitle(driver, "foo");
     }
 
     /**
@@ -1633,18 +1634,19 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_NORMALIZE_FUNCTION
             + "      var request;\n"
             + "      function testAsync() {\n"
             + "        request = new XMLHttpRequest();\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
-            + "        alert(request.readyState);\n"
+            + "        log(request.readyState);\n"
             + "        request.open('GET', '" + URL_SECOND + "', true);\n"
             + "        request.send('');\n"
             + "      }\n"
             + "      function onReadyStateChange() {\n"
-            + "        alert(request.readyState);\n"
+            + "        log(request.readyState);\n"
             + "        if (request.readyState == 4)\n"
-            + "          alert(request.responseText);\n"
+            + "          log(request.responseText);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1659,8 +1661,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml2>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        setExpectedAlerts(ArrayUtils.add(getExpectedAlerts(), xml));
-        loadPageWithAlerts2(html);
+        setExpectedAlerts(ArrayUtils.add(getExpectedAlerts(), xml.replace("\n", "\\n")));
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
