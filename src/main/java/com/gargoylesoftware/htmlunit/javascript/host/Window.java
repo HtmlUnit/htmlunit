@@ -2239,7 +2239,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
-        final Page page = getWebWindow().getEnclosedPage();
+        final WebWindow webWindow = getWebWindow();
+        final Page page = webWindow.getEnclosedPage();
         final URL currentURL = page.getUrl();
 
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
@@ -2271,8 +2272,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 
-        final JavaScriptEngine jsEngine = (JavaScriptEngine) getWebWindow().getWebClient().getJavaScriptEngine();
-        final PostponedAction action = new PostponedAction(page) {
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
+        final PostponedAction action = new PostponedAction(page, "Window.postMessage") {
             @Override
             public void execute() throws Exception {
                 final ContextAction<Object> contextAction = new ContextAction<Object>() {

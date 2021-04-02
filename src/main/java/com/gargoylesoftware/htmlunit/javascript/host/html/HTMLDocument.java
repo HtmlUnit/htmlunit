@@ -276,20 +276,21 @@ public class HTMLDocument extends Document {
             closePostponedAction_ = true;
             final HtmlPage page = (HtmlPage) getDomNodeOrDie();
             final WebWindow enclosingWindow = page.getEnclosingWindow();
-            page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
-                @Override
-                public void execute() throws Exception {
-                    if (writeBuilder_.length() != 0) {
-                        close();
-                    }
-                    closePostponedAction_ = false;
-                }
+            page.getWebClient().getJavaScriptEngine().addPostponedAction(
+                    new PostponedAction(page, "HTMLDocument.scheduleImplicitClose") {
+                        @Override
+                        public void execute() throws Exception {
+                            if (writeBuilder_.length() != 0) {
+                                close();
+                            }
+                            closePostponedAction_ = false;
+                        }
 
-                @Override
-                public boolean isStillAlive() {
-                    return !enclosingWindow.isClosed();
-                }
-            });
+                        @Override
+                        public boolean isStillAlive() {
+                            return !enclosingWindow.isClosed();
+                        }
+                    });
         }
     }
 

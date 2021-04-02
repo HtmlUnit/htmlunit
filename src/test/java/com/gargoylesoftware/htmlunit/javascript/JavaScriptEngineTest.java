@@ -1214,7 +1214,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
 
-        engine.addPostponedAction(new PostponedAction(page) {
+        engine.addPostponedAction(new PostponedAction(page, "shutdown test") {
             @Override
             public void execute() throws Exception {
                 // empty

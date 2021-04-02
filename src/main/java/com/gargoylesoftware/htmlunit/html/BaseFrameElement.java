@@ -131,9 +131,9 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
-            final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = htmlPage.getWebClient().getJavaScriptEngine();
             if (jsEngine != null && jsEngine.isScriptRunning()) {
-                final PostponedAction action = new PostponedAction(getPage()) {
+                final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.loadInnerPage") {
                     @Override
                     public void execute() throws Exception {
                         htmlPage.setReadyState(READY_STATE_COMPLETE);
@@ -445,7 +445,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         }
         else {
             final Page pageInFrame = getEnclosedPage();
-            final PostponedAction action = new PostponedAction(getPage()) {
+            final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.loadSrc") {
                 @Override
                 public void execute() throws Exception {
                     if (!src.isEmpty() && getSrcAttribute().equals(src)) {
@@ -539,7 +539,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             }
             else {
                 final Page pageInFrame = getEnclosedPage();
-                final PostponedAction action = new PostponedAction(getPage()) {
+                final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.removeAttribute") {
                     @Override
                     public void execute() throws Exception {
                         loadInnerPage();

@@ -153,7 +153,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
             final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
             final JavaScriptEngine jsEngine =
                     (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
-            jsEngine.addPostponedAction(new PostponedAction(owningPage) {
+            jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.characterDataChanged") {
                 @Override
                 public void execute() throws Exception {
                     final NativeArray array = new NativeArray(new Object[] {mutationRecord});
@@ -203,7 +203,7 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                 final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
                 final JavaScriptEngine jsEngine =
                         (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
-                jsEngine.addPostponedAction(new PostponedAction(owningPage) {
+                jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.attributeReplaced") {
                     @Override
                     public void execute() throws Exception {
                         final NativeArray array = new NativeArray(new Object[] {mutationRecord});

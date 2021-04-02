@@ -72,7 +72,7 @@ public class AudioContext extends BaseAudioContext {
                 (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
 
         if (error != null) {
-            jsEngine.addPostponedAction(new PostponedAction(owningPage) {
+            jsEngine.addPostponedAction(new PostponedAction(owningPage, "AudioContext.decodeAudioData") {
                 @Override
                 public void execute() throws Exception {
                     jsEngine.callFunction(owningPage, error, getParentScope(), AudioContext.this, new Object[] {});

@@ -170,7 +170,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 notifyMutationObservers);
 
         if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {
-            final PostponedAction action = new PostponedAction(getPage()) {
+            final PostponedAction action = new PostponedAction(getPage(), "HtmlScript.setAttributeNS") {
                 @Override
                 public void execute() {
                     ScriptElementSupport.executeScriptIfNeeded(HtmlScript.this, false, false);

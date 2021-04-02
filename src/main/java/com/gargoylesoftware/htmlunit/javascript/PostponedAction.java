@@ -22,20 +22,14 @@ import com.gargoylesoftware.htmlunit.Page;
  * An action triggered by a script execution but that should be executed first when the script is finished.
  * Example: when a script sets the source of an (i)frame, the request to the specified page will be first
  * triggered after the script execution.
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public abstract class PostponedAction {
 
     private final WeakReference<Page> owningPageRef_; // as weak ref in case it may allow page to be GCed
     private final String description_;
-
-    /**
-     * C'tor.
-     * @param owningPage the page that initiates this action
-     */
-    public PostponedAction(final Page owningPage) {
-        this(owningPage, null);
-    }
 
     /**
      * C'tor.
