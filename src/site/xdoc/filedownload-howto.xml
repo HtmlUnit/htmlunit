@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Details about HtmlUnit file download</title>
+        <author>RBRi</author>
+    </properties>
+
+    <body>
+        <section name="File downloads in real browsers">
+            <p>
+                Because file download is a tricky story (at least with HtmlUnit), i like to start from the beginning with some info about
+                file download in real browsers.<br/>
+                When surfing the internet, you usually opening url's pointing to content (files) containing (X)Html. And your favorite browser
+                'eats' this stuff and renders the content on your screen. There are also some more file types your browser is able to handle like
+                CSS or JavaScript stuff. And for course all kind of images, sound and video files. This is all done behind the scenes
+                and you can see all the fancy stuff the internet has to offer.<br/>
+                Only in three cases, your browser hands over the control about the content handling to you
+            </p>
+            <ul>
+              <li>the file type (mime type) is not supported by your browser (e.g. an excel/word file) or</li>
+              <li>the <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition'>Content-Disposition Header</a>
+              of the response flags the response as <strong>attachment.</strong></li>
+              <li>The last case is triggered from the client (browser) side - if an anchor, having the 
+              <a href='https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download'>'download'</a> property set, is clicked,
+              the content is saved as a local file.</li>
+            </ul>
+            <p>
+                In all cases, the content is saved as file to your local disk and depending on some user settings this is done automatically or
+                by presenting a file dialog to let you save the file wherever you like.
+            </p>
+        </section>
+
+        <section name="">
+            <p>
+                Because HtmlUnit is an headless browser, there is no real rendering. But like real browsers HtmlUnit 'understands' the page from the server.
+                If the response type is supported the content will be available as HtmlPage (or XHtmlPage) including access to all the embedded stuff
+                like javascript, css and images.
+                Like real browsers, there is also support for text only content (TextPage) and XML content (XmlPage).
+                <br></br>
+                But HtmlUnit can't offer a file dialog because the main use case are automatic testing and scraping. Based on this the current implementation
+                offers two ways to handle downloads:
+            </p>
+
+            <subsection name="UnexpectedPage (default)">
+                <p>
+                    I the response content type is not supported by HtmlUnit
+                </p>
+                <ul>
+                  <li>a new Window is added to the WebClient.</li>
+                  <li>The new Window has an UnexpectedPage as enclosed page.
+                  </li>
+                </ul>
+                <p>
+                You can get this page from the window and access the plain content stream from the enclosed UnexpectedPage.
+                </p>
+            <source><![CDATA[
+try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+    HtmlPage page = webClient.getPage(uri);
+
+    .... // click some anchor/button that forces a file download
+
+    // the new window is the last one
+    WebWindow newWindow = webClient().getWebWindows().get(webClient().getWebWindows().size() -1);
+
+    // we now processing the animation
+    UnexpectedPage downloadPage = (UnexpectedPage) newWindow.getEnclosedPage();
+
+    try (InputStream downloadedContent = downloadPage.getInputStream()) {
+
+        // e.g. save the input to a local file
+        .... 
+}
+]]></source>
+
+                <p>
+                This approach will also work in the third case (an anchor with the download 'attribute' set).
+                </p>
+            </subsection>
+
+            <subsection name="AttachmentHandler">
+                <p>
+                    If you don't like the default behavior, you can implement your own way of processing. This is done by registering your onw
+                    implementation of the AttachmentHandler interface in the WebClient.
+                </p>
+            <source><![CDATA[
+final List<WebResponse> attachments = new ArrayList<>();
+
+try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+
+        client.setAttachmentHandler(new AttachmentHandler() {
+            @Override
+            public boolean handleAttachment(final WebResponse response) {
+                attachments.add(response);
+                return true;
+            }
+
+            @Override
+            public void handleAttachment(final Page page) {
+                throw new IllegalAccessError("handleAttachment(Page) called");
+            }
+        });
+
+    // start browsing
+    HtmlPage page = webClient.getPage(uri);
+
+    ....
+}
+]]></source>
+
+                <p>
+                    For more details check the AttachmentHandler javadoc.
+                </p>
+                <p>
+                    The AttachmentHandler based download support works in addition to the default UnexpectedPage based support. This means, if your AttachmentHandler
+                    does not handle the content, the webClient will fall back to the default solution and place an UnexpectedPage inside a new window.
+                    You can overwrite the method isAttachment() in your AttachmentHandler to only handle dedicated responses.
+                </p>
+            <source><![CDATA[boolean isAttachment(final WebResponse response)]]></source>
+                
+            </subsection>
+        </section>
+    </body>
+</document>
