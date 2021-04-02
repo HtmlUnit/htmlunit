@@ -2300,8 +2300,10 @@ public class WebClient implements Serializable, AutoCloseable {
         private final WeakReference<Page> originalPage_;
         private final WebRequest request_;
 
-        LoadJob(final WebRequest request, final WebWindow requestingWindow, final String target,
-                final WebResponse response) {
+        // we can't us the WebRequest from the WebResponse because
+        // we need the original request e.g. after a redirect
+        LoadJob(final WebRequest request, final WebResponse response,
+                final WebWindow requestingWindow, final String target) {
             request_ = request;
             requestingWindow_ = requestingWindow;
             target_ = target;
@@ -2369,11 +2371,11 @@ public class WebClient implements Serializable, AutoCloseable {
 
         synchronized (loadQueue_) {
             // verify if this load job doesn't already exist
-            for (final LoadJob loadJob : loadQueue_) {
-                if (loadJob.response_ == null) {
+            for (final LoadJob otherLoadJob : loadQueue_) {
+                if (otherLoadJob.response_ == null) {
                     continue;
                 }
-                final WebRequest otherRequest = loadJob.request_;
+                final WebRequest otherRequest = otherLoadJob.request_;
                 final URL otherUrl = otherRequest.getUrl();
 
                 // TODO: investigate but it seems that IE considers query string too but not FF
@@ -2397,7 +2399,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);
                 response = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, request, 0);
             }
-            loadJob = new LoadJob(request, requestingWindow, target, response);
+            loadJob = new LoadJob(request, response, requestingWindow, target);
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
