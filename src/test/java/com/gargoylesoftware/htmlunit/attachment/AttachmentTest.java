@@ -219,7 +219,7 @@ public class AttachmentTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void handleResponseFromHanlder() throws Exception {
+    public void handleResponseFromHandler() throws Exception {
         final String content1 = "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
