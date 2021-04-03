@@ -32,40 +32,35 @@
             </p>
         </section>
 
-        <section name="">
+        <section name="File downloads with HtmlUnit">
             <p>
-                Because HtmlUnit is an headless browser, there is no real rendering. But like real browsers HtmlUnit 'understands' the page from the server.
+                Because HtmlUnit nature as headless browser, there is no real rendering. But like real browsers HtmlUnit 'understands' the pages delivered by the server.
                 If the response type is supported the content will be available as HtmlPage (or XHtmlPage) including access to all the embedded stuff
                 like javascript, css and images.
-                Like real browsers, there is also support for text only content (TextPage) and XML content (XmlPage).
+                Like real browsers, there is also support for text only content (TextPage) and plain XML content (XmlPage).
                 <br></br>
-                But HtmlUnit can't offer a file dialog because the main use case are automatic testing and scraping. Based on this the current implementation
+                But HtmlUnit can't offer a file dialog because the main use cases are automatic testing and scraping. Based on this the current implementation
                 offers two ways to handle downloads:
             </p>
 
             <subsection name="UnexpectedPage (default)">
                 <p>
-                    I the response content type is not supported by HtmlUnit
+                    HtmlUnit handles all unknown content similar to known content - the content is wrapped in an page object and the page is placed inside the window.
+                    For all unknown content HtmlUnit uses the UnexpectedPage. In most cases the UnexpectedPage replaces the current (Html)page in the current window,
+                    but in some cases a new additional window gets opend (e.g. clicking an anchor with a download attribute defined).
                 </p>
-                <ul>
-                  <li>a new Window is added to the WebClient.</li>
-                  <li>The new Window has an UnexpectedPage as enclosed page.
-                  </li>
-                </ul>
                 <p>
-                You can get this page from the window and access the plain content stream from the enclosed UnexpectedPage.
+                You can then access the plain content stream from the enclosed UnexpectedPage.
                 </p>
             <source><![CDATA[
 try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
     HtmlPage page = webClient.getPage(uri);
+    WebWindow window = page.getEnclosingWindow();
 
     .... // click some anchor/button that forces a file download
 
-    // the new window is the last one
-    WebWindow newWindow = webClient().getWebWindows().get(webClient().getWebWindows().size() -1);
-
     // we now processing the animation
-    UnexpectedPage downloadPage = (UnexpectedPage) newWindow.getEnclosedPage();
+    UnexpectedPage downloadPage = (UnexpectedPage) window.getEnclosedPage();
 
     try (InputStream downloadedContent = downloadPage.getInputStream()) {
 
@@ -75,14 +70,46 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
 ]]></source>
 
                 <p>
-                This approach will also work in the third case (an anchor with the download 'attribute' set).
+                In the case the download is placed inside a new window you can do something like this:
+                <source><![CDATA[WebWindow newWindow = webClient().getWebWindows().get(webClient().getWebWindows().size() -1);]]></source>
                 </p>
             </subsection>
 
             <subsection name="AttachmentHandler">
                 <p>
-                    If you don't like the default behavior, you can implement your own way of processing. This is done by registering your onw
+                    If you don't like the default behavior, you can implement your own way of processing. This is done by registering your own
                     implementation of the AttachmentHandler interface in the WebClient.
+                </p>
+                <p>
+                    The AttachmentHandler based download support works in addition to the default UnexpectedPage based support. This means, if your AttachmentHandler
+                    does not handle the content, the webClient will fall back to the default solution and place an UnexpectedPage inside a new window.
+                    You can overwrite the method isAttachment() in your AttachmentHandler to only handle dedicated responses - the default implementation
+                    only detects responses having a content-disposition header of type 'attachment'.
+                </p>
+                <p>
+                    The method <source><![CDATA[boolean handleAttachment(final WebResponse response)]]></source>
+                    is called if the response was detected as attachment (see above isAttachment()). You can process the attachment in your implementation
+                    (e.g. by saving it to a file) or simply return false. Based on the result of the call, the AttachmentHandler supports two operation modes.
+                </p>
+                <ol>
+                  <li>
+                    <strong>true</strong> signals the rest of the code the
+                    response is handled by your code; there is NO replacement of the current page with an UnexpectedPage and also the method 
+                    <source><![CDATA[void handleAttachment(Page page)]]></source> from you AttachmentHandler is NOT called.
+                  </li>
+                  <li>
+                    By returning <strong>false</strong>, the response will be processed further like this:
+	                <ul>
+	                  <li>at first a new window will be created, </li>
+	                  <li>next the UnexpectedPage will be build,</li>
+	                  <li>then the method <source><![CDATA[void handleAttachment(Page page)]]></source> from you AttachmentHandler is called and </li>
+	                  <li>finally the UnexpectedPage will be placed inside the new window.</li>
+	                </ul>
+                  </li>
+                </ol>
+
+                <p>
+                    The following example code collects the attachment-response inside a list without replacing the content of the current window.
                 </p>
             <source><![CDATA[
 final List<WebResponse> attachments = new ArrayList<>();
@@ -108,17 +135,9 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
     ....
 }
 ]]></source>
-
                 <p>
                     For more details check the AttachmentHandler javadoc.
                 </p>
-                <p>
-                    The AttachmentHandler based download support works in addition to the default UnexpectedPage based support. This means, if your AttachmentHandler
-                    does not handle the content, the webClient will fall back to the default solution and place an UnexpectedPage inside a new window.
-                    You can overwrite the method isAttachment() in your AttachmentHandler to only handle dedicated responses.
-                </p>
-            <source><![CDATA[boolean isAttachment(final WebResponse response)]]></source>
-                
             </subsection>
         </section>
     </body>
