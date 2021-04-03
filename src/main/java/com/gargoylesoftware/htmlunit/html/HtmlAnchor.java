@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -133,12 +134,13 @@ public class HtmlAnchor extends HtmlElement {
 
             final String target;
             if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
-                target = "_blank";
+                target = WebClient.TARGET_BLANK;
             }
             else {
                 target = page.getResolvedTarget(getTargetAttribute());
             }
-            final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(), target, "_self");
+            final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
+                    target, WebClient.TARGET_SELF);
             Page enclosedPage = win.getEnclosedPage();
             if (enclosedPage == null) {
                 win.getWebClient().getPage(win, WebRequest.newAboutBlankRequest());
@@ -178,7 +180,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         final String target;
         if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
-            target = "_blank";
+            target = WebClient.TARGET_BLANK;
         }
         else {
             target = page.getResolvedTarget(getTargetAttribute());

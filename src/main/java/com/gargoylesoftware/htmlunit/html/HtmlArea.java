@@ -98,10 +98,9 @@ public class HtmlArea extends HtmlElement {
             request.setCharset(page.getCharset());
             request.setRefererlHeader(page.getUrl());
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-            webClient.getPage(
-                    webWindow,
-                    enclosingPage.getResolvedTarget(getTargetAttribute()),
-                    request);
+
+            final String target = enclosingPage.getResolvedTarget(getTargetAttribute());
+            webClient.getPage(webClient.openTargetWindow(webWindow, target, WebClient.TARGET_SELF), request);
         }
         return false;
     }

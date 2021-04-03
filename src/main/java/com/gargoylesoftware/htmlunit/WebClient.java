@@ -200,9 +200,11 @@ public class WebClient implements Serializable, AutoCloseable {
     private Cache cache_ = new Cache();
 
     /** target "_blank". */
-    private static final String TARGET_BLANK = "_blank";
-    /** target "_parent". */
-    private static final String TARGET_SELF = "_self";
+    public static final String TARGET_BLANK = "_blank";
+
+    /** target "_self". */
+    public static final String TARGET_SELF = "_self";
+
     /** target "_parent". */
     private static final String TARGET_PARENT = "_parent";
     /** target "_top". */
@@ -481,28 +483,6 @@ public class WebClient implements Serializable, AutoCloseable {
         // check and report problems if needed
         throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
         return (P) webWindow.getEnclosedPage();
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * <p>Open a new web window and populate it with a page loaded by
-     * {@link #getPage(WebWindow,WebRequest)}</p>
-     *
-     * @param opener the web window that initiated the request
-     * @param target the name of the window to be opened (the name that will be passed into the
-     *        JavaScript <tt>open()</tt> method)
-     * @param params any parameters
-     * @param <P> the page type
-     * @return the new page
-     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException if an IO problem occurs
-     */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequest params)
-        throws FailingHttpStatusCodeException, IOException {
-        return (P) getPage(openTargetWindow(opener, target, TARGET_SELF), params);
     }
 
     /**
@@ -2449,7 +2429,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 continue;
             }
 
-            final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, "_self");
+            final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, TARGET_SELF);
             final Page pageBeforeLoad = win.getEnclosedPage();
             loadWebResponseInto(loadJob.response_, win);
 
