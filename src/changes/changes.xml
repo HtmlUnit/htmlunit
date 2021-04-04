@@ -8,6 +8,18 @@
 
     <body>
         <release version="2.49.0" date="April xx, 2021" description="Bugfixes, Firefox 87">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make variable which has been defined null available in script.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Speed of bitwiseNOT improved.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Copying nodes in an XML tree no longer removes the source node.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Object.assign fixed.
+            </action>
             <action type="update" dev="rbri">
                 Documentation for the animation frame support added.
             </action>
