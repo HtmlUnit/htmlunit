@@ -155,14 +155,15 @@ public class HtmlAnchor extends HtmlElement {
 
         final URL url = getTargetUrl(href, page);
 
-        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+        final WebClient webClient = page.getWebClient();
+        final BrowserVersion browser = webClient.getBrowserVersion();
         if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
             final URL pingUrl = getTargetUrl(getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
             pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());
             pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
             pingRequest.setRequestBody("PING");
-            page.getWebClient().loadWebResponse(pingRequest);
+            webClient.loadWebResponse(pingRequest);
         }
 
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader(),
@@ -178,14 +179,17 @@ public class HtmlAnchor extends HtmlElement {
                     + "', using the originating URL "
                     + page.getUrl());
         }
+
         final String target;
-        if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
+        if (shiftKey || ctrlKey
+                || (webClient.getAttachmentHandler() == null
+                        && ATTRIBUTE_NOT_DEFINED != getDownloadAttribute())) {
             target = WebClient.TARGET_BLANK;
         }
         else {
             target = page.getResolvedTarget(getTargetAttribute());
         }
-        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest, true, false, "Link click");
+        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest, true, false, true, "Link click");
     }
 
     /**

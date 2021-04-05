@@ -338,7 +338,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
             final boolean checkHash =
                     !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
             webClient.download(page.getEnclosingWindow(),
-                        target, request, checkHash, forceDownload, "JS form.submit()");
+                        target, request, checkHash, forceDownload, false, "JS form.submit()");
         }
     }
 

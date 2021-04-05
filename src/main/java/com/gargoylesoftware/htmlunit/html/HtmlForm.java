@@ -181,7 +181,7 @@ public class HtmlForm extends HtmlElement {
         /** Calling form.submit() twice forces double download. */
         final boolean checkHash =
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
-        webClient.download(webWindow, target, request, checkHash, false, "JS form.submit()");
+        webClient.download(webWindow, target, request, checkHash, false, false, "JS form.submit()");
     }
 
     /**

@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -32,6 +33,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -40,7 +42,9 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.UnexpectedPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link HtmlAnchor}.
@@ -881,6 +885,207 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             final ImageInputStream resultImageIS = ImageIO.createImageInputStream(resultInputStream);
             final BufferedImage resultBufferedIIS = ImageIO.read(resultImageIS);
             compareImages(getExpectedAlerts()[2], null, resultBufferedIIS);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPage() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(1, getWebClient().getWebWindows().size());
+
+        page.getElementById("link").click();
+        assertEquals(1, getWebClient().getWebWindows().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageAttachmentHandler() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final LinkedList<Page> pages = new LinkedList<Page>();
+        getWebClient().setAttachmentHandler(new AttachmentHandler() {
+            @Override
+            public void handleAttachment(final Page page) {
+                pages.add(page);
+            }
+        });
+
+        try {
+            final HtmlPage page = loadPage(html);
+            assertEquals(1, getWebClient().getWebWindows().size());
+
+            page.getElementById("link").click();
+            assertEquals(2, getWebClient().getWebWindows().size());
+            assertEquals(1, pages.size());
+            assertTrue(pages.get(0) instanceof UnexpectedPage);
+        }
+        finally {
+            getWebClient().setAttachmentHandler(null);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageAttachmentHandlerHandles() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final LinkedList<WebResponse> pages = new LinkedList<WebResponse>();
+        getWebClient().setAttachmentHandler(new AttachmentHandler() {
+
+            @Override
+            public boolean handleAttachment(final WebResponse response) {
+                pages.add(response);
+                return true;
+            }
+
+            @Override
+            public void handleAttachment(final Page page) {
+                throw new IllegalAccessError("handleAttachment(Page) called");
+            }
+        });
+
+        try {
+            final HtmlPage page = loadPage(html);
+            assertEquals(1, getWebClient().getWebWindows().size());
+
+            page.getElementById("link").click();
+            assertEquals(1, getWebClient().getWebWindows().size());
+            assertEquals(1, pages.size());
+        }
+        finally {
+            getWebClient().setAttachmentHandler(null);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageDownloadAttribute() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link' download='test.json'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(1, getWebClient().getWebWindows().size());
+
+        page.getElementById("link").click();
+        assertEquals(2, getWebClient().getWebWindows().size());
+
+        final WebWindow newWindow = getWebClient().getWebWindows().get(getWebClient().getWebWindows().size() - 1);
+        assertTrue(newWindow.getEnclosedPage() instanceof UnexpectedPage);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageDownloadAttributeAttachmentHandler() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link' download='test.json'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final LinkedList<Page> pages = new LinkedList<Page>();
+        getWebClient().setAttachmentHandler(new AttachmentHandler() {
+            @Override
+            public void handleAttachment(final Page page) {
+                pages.add(page);
+            }
+        });
+
+        try {
+            final HtmlPage page = loadPage(html);
+            assertEquals(1, getWebClient().getWebWindows().size());
+
+            page.getElementById("link").click();
+            assertEquals(2, getWebClient().getWebWindows().size());
+            assertEquals(1, pages.size());
+            assertTrue(pages.get(0) instanceof UnexpectedPage);
+        }
+        finally {
+            getWebClient().setAttachmentHandler(null);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageDownloadAttributeAttachmentHandlerHandles() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link' download='test.json'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final LinkedList<WebResponse> pages = new LinkedList<WebResponse>();
+        getWebClient().setAttachmentHandler(new AttachmentHandler() {
+
+            @Override
+            public boolean handleAttachment(final WebResponse response) {
+                pages.add(response);
+                return true;
+            }
+
+            @Override
+            public void handleAttachment(final Page page) {
+                throw new IllegalAccessError("handleAttachment(Page) called");
+            }
+        });
+
+        try {
+            final HtmlPage page = loadPage(html);
+            assertEquals(1, getWebClient().getWebWindows().size());
+
+            page.getElementById("link").click();
+            assertEquals(1, getWebClient().getWebWindows().size());
+            assertEquals(1, pages.size());
+        }
+        finally {
+            getWebClient().setAttachmentHandler(null);
         }
     }
 }

@@ -145,7 +145,7 @@ public class Location extends SimpleScriptable {
         }
 
         final WebWindow webWindow = window_.getWebWindow();
-        webWindow.getWebClient().download(webWindow, "", request, true, false, "JS location.reload");
+        webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS location.reload");
     }
 
     /**
@@ -242,7 +242,7 @@ public class Location extends SimpleScriptable {
             request.setRefererlHeader(page.getUrl());
 
             final WebWindow webWindow = window_.getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");
+            webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS set location");
         }
         catch (final MalformedURLException e) {
             if (LOG.isErrorEnabled()) {

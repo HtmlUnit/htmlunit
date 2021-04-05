@@ -138,6 +138,11 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 <p>
                     For more details check the AttachmentHandler javadoc.
                 </p>
+                <p>
+                    There is one special case - if you click an anchor with the download attribute set, the processing of the request is passed
+                    to the AttachmentHandler (if there is one) without calling the isAttachment() method. The response is always treated as
+                    attachment in this case.
+                </p>
             </subsection>
         </section>
     </body>
