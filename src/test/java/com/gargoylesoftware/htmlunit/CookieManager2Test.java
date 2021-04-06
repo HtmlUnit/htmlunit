@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CookieManager2Test extends SimpleWebTestCase {
@@ -43,7 +44,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
     @Test
     public void resettingCookie() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function createCookie(name, value, days, path) {\n"
             + "    if (days) {\n"
