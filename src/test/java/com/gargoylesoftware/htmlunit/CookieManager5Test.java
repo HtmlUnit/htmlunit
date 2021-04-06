@@ -15,8 +15,10 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -30,6 +32,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link CookieManager}.
@@ -38,6 +42,90 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 @RunWith(BrowserRunner.class)
 public class CookieManager5Test extends WebServerTestCase {
+
+    @Test
+    public void sameDomainWithClientCookie() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        getMockWebConnection().setDefaultResponse("something", 200, "Ok", MimeType.TEXT_HTML, headers);
+        startWebServer(getMockWebConnection());
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.getCookieManager().clearCookies();
+
+            webClient.getPage(CookieManager4Test.URL_HOST3);
+            WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+            assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+
+            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value");
+            webClient.getCookieManager().addCookie(cookie);
+            webClient.getPage(CookieManager4Test.URL_HOST3);
+            lastRequest = getMockWebConnection().getLastWebRequest();
+            assertEquals("name=value", lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+        }
+    }
+
+    @Test
+    public void unqualifiedHostWithClientCookie() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        getMockWebConnection().setDefaultResponse("something", 200, "Ok", MimeType.TEXT_HTML, headers);
+        startWebServer(getMockWebConnection());
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.getCookieManager().clearCookies();
+
+            webClient.getPage(CookieManager4Test.URL_HOST4);
+            WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+            assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+
+            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value");
+            webClient.getCookieManager().addCookie(cookie);
+            webClient.getPage(CookieManager4Test.URL_HOST4);
+            lastRequest = getMockWebConnection().getLastWebRequest();
+            assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+        }
+    }
+
+    @Test
+    public void subdomainWithClientCookie() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        getMockWebConnection().setDefaultResponse("something", 200, "Ok", MimeType.TEXT_HTML, headers);
+        startWebServer(getMockWebConnection());
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.getCookieManager().clearCookies();
+
+            webClient.getPage(CookieManager4Test.URL_HOST1);
+            WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+            assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+
+            final Cookie cookie = new Cookie(CookieManager4Test.DOMAIN, "name", "value");
+            webClient.getCookieManager().addCookie(cookie);
+            webClient.getPage(CookieManager4Test.URL_HOST1);
+            lastRequest = getMockWebConnection().getLastWebRequest();
+            assertEquals("name=value", lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+        }
+    }
+
+    @Test
+    public void differentSubdomainWithClientCookie() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        getMockWebConnection().setDefaultResponse("something", 200, "Ok", MimeType.TEXT_HTML, headers);
+        startWebServer(getMockWebConnection());
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.getCookieManager().clearCookies();
+
+            webClient.getPage(CookieManager4Test.URL_HOST1);
+            WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+            assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+
+            final Cookie cookie = new Cookie("host2." + CookieManager4Test.DOMAIN, "name", "value");
+            webClient.getCookieManager().addCookie(cookie);
+            webClient.getPage(CookieManager4Test.URL_HOST1);
+            lastRequest = getMockWebConnection().getLastWebRequest();
+            assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
+        }
+    }
 
     /**
      * Check the cookie expires gets overwritten.

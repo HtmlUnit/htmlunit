@@ -82,13 +82,18 @@ public class Cookie implements Serializable {
         }
 
         final BasicClientCookie cookie = new BasicClientCookie(name, value == null ? "" : value);
+
         cookie.setDomain(domain);
+        // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attib also (see #333)
+        cookie.setAttribute(ClientCookie.DOMAIN_ATTR, domain);
+
         cookie.setPath(path);
         cookie.setExpiryDate(expires);
         cookie.setSecure(secure);
         if (httpOnly) {
             cookie.setAttribute("httponly", "true");
         }
+
         httpClientCookie_ = cookie;
     }
 

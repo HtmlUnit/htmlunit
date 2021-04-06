@@ -55,11 +55,15 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class CookieManager4Test extends WebDriverTestCase {
 
-    private static final String DOMAIN = "htmlunit.org";
-    private static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT + '/';
+    /** "htmlunit.org". */
+    public static final String DOMAIN = "htmlunit.org";
+    /** "http://host1." + DOMAIN + ":" + PORT + '/'. */
+    public static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT + '/';
     private static final String URL_HOST2 = "http://host2." + DOMAIN + ":" + PORT + '/';
-    private static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT + '/';
-    private static final String URL_HOST4 = "http://" + "htmlunit" + ":" + PORT + '/';
+    /** "http://" + DOMAIN + ":" + PORT + '/'. */
+    public static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT + '/';
+    /** "http://" + "htmlunit" + ":" + PORT + '/'. */
+    public static final String URL_HOST4 = "http://" + "htmlunit" + ":" + PORT + '/';
 
     /**
      * {@link org.junit.Assume Assumes} that the host configurations are present.
