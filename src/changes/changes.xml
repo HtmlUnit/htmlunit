@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.0" date="April xx, 2021" description="Bugfixes, Firefox 87">
+            <action type="add" dev="rbri" issue="334">
+                HTMLDetailsElement supports setting the open property.
+            </action>
             <action type="add" dev="rbri" issue="248">
                 Method HtmlFileInput.setDirectory(File) added to support input elements with
                 type file and webkitdirectory attribute.

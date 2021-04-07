@@ -23,6 +23,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * The JavaScript object {@code HTMLDetailsElement}.
@@ -47,5 +50,20 @@ public class HTMLDetailsElement extends HTMLElement {
     @JsxGetter
     public boolean isOpen() {
         return getDomNodeOrDie().hasAttribute("open");
+    }
+
+    /**
+     * Sets the open attribute.
+     * @param newValue the new value to set
+     */
+    @JsxSetter
+    public void setOpen(final Object newValue) {
+        final boolean bool = ScriptRuntime.toBoolean(newValue);
+        if (bool) {
+            getDomNodeOrDie().setAttribute("open", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("open");
+        }
     }
 }
