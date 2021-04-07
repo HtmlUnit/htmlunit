@@ -628,8 +628,6 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         page.<HtmlFileInput>getHtmlElementById("f").setFiles(pom);
         page.getElementById("clickMe").click();
         Thread.sleep(100);
-        final String[] expectedAlerts = getExpectedAlerts();
-        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", pom.getAbsolutePath());
-        assertEquals(expectedAlerts, getCollectedAlerts(page));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
     }
 }
