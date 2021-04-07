@@ -178,7 +178,7 @@ public class CSSStyleSheet extends StyleSheet {
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required"));
+            "optional", "required", "invalid"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -814,6 +814,10 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                 }
                 return true;
+
+            case "invalid":
+                return (element instanceof HtmlElement
+                        && !((HtmlElement) element).isValid());
 
             case "empty":
                 return isEmpty(element);
