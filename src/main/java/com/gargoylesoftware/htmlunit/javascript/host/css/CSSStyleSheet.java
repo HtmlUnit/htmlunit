@@ -110,9 +110,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -743,16 +741,10 @@ public class CSSStyleSheet extends StyleSheet {
                                 || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
 
             case "required":
-                return (element instanceof HtmlInput
-                            || element instanceof HtmlSelect
-                            || element instanceof HtmlTextArea)
-                        && element.hasAttribute("required");
+                return element instanceof HtmlElement && ((HtmlElement) element).isRequired();
 
             case "optional":
-                return (element instanceof HtmlInput
-                            || element instanceof HtmlSelect
-                            || element instanceof HtmlTextArea)
-                        && !element.hasAttribute("required");
+                return element instanceof HtmlElement && !((HtmlElement) element).isRequired();
 
             case "first-child":
                 for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {

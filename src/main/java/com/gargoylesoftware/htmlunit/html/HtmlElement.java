@@ -138,6 +138,8 @@ public abstract class HtmlElement extends DomElement {
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
+    private static final String ATTRIBUTE_REQUIRED = "required";
+
     /** The listeners which are to be notified of attribute changes. */
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
 
@@ -1343,7 +1345,8 @@ public abstract class HtmlElement extends DomElement {
      * @return whether this element satisfies all form validation constraints set
      */
     public boolean isValid() {
-        return !isRequiredSupported() || getAttributeDirect("required") == ATTRIBUTE_NOT_DEFINED
+        return !isRequiredSupported()
+                || getAttributeDirect(ATTRIBUTE_REQUIRED) == ATTRIBUTE_NOT_DEFINED
                 || !getAttributeDirect("value").isEmpty();
     }
 
@@ -1356,11 +1359,10 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns the {@code required} attribute.
-     * @return the {@code required} attribute
+     * @return the true if the required attribute is set
      */
     public boolean isRequired() {
-        return isRequiredSupported() && hasAttribute("required");
+        return isRequiredSupported() && hasAttribute(ATTRIBUTE_REQUIRED);
     }
 
     /**
@@ -1370,10 +1372,10 @@ public abstract class HtmlElement extends DomElement {
     public void setRequired(final boolean required) {
         if (isRequiredSupported()) {
             if (required) {
-                setAttribute("required", "required");
+                setAttribute(ATTRIBUTE_REQUIRED, ATTRIBUTE_REQUIRED);
             }
             else {
-                removeAttribute("required");
+                removeAttribute(ATTRIBUTE_REQUIRED);
             }
         }
     }
