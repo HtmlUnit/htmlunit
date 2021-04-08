@@ -1150,6 +1150,9 @@
         <contributor>
             <name>Raik Bieniek</name>
         </contributor>
+        <contributor>
+            <name>Uberto Barbini</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
