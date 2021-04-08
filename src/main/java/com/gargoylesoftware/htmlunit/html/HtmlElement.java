@@ -1366,6 +1366,13 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * @return the true if the required attribute is supported and set
+     */
+    public boolean isOptional() {
+        return isRequiredSupported() && !hasAttribute(ATTRIBUTE_REQUIRED);
+    }
+
+    /**
      * Sets the {@code required} attribute.
      * @param required the new attribute value
      */

@@ -744,7 +744,7 @@ public class CSSStyleSheet extends StyleSheet {
                 return element instanceof HtmlElement && ((HtmlElement) element).isRequired();
 
             case "optional":
-                return element instanceof HtmlElement && !((HtmlElement) element).isRequired();
+                return element instanceof HtmlElement && ((HtmlElement) element).isOptional();
 
             case "first-child":
                 for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
