@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -45,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSummary;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
@@ -170,6 +172,9 @@ public class HtmlSerializerNormalizedText {
         else if (node instanceof HtmlInlineFrame) {
             appendInlineFrame(builder, (HtmlInlineFrame) node);
         }
+        else if (node instanceof HtmlDetails) {
+            appendDetails(builder, (HtmlDetails) node);
+        }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
             // nothing to do
         }
@@ -285,6 +290,25 @@ public class HtmlSerializerNormalizedText {
             appendNode(builder, item);
         }
         builder.appendBlockSeparator();
+    }
+
+    /**
+     * Process {@link HtmlDetails}.
+     * @param builder the StringBuilder to add to
+     * @param htmlDetails the target to process
+     */
+    protected void appendDetails(final HtmlSerializerTextBuilder builder,
+                    final HtmlDetails htmlDetails) {
+        if (htmlDetails.isOpen()) {
+            appendChildren(builder, htmlDetails);
+            return;
+        }
+
+        for (final DomNode child : htmlDetails.getChildren()) {
+            if (child instanceof HtmlSummary) {
+                appendNode(builder, child);
+            }
+        }
     }
 
     /**

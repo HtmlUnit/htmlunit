@@ -25,6 +25,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -1716,6 +1717,51 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     public void getVisibleTextInputInsideP() throws Exception {
         getVisibleTextFormated("<p id='tester'>"
                 + " I have <input type='number' value='2'/> out of 2 stamps</p>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Sum")
+    @BuggyWebDriver(FF = "Sum\ndetail",
+            FF78 = "Sum\ndetail")
+    @HtmlUnitNYI(IE = "Sum\ndetail")
+    public void getVisibleTextDetails() throws Exception {
+        getVisibleTextFormated("<details id='tester'>"
+                + "<summary>Sum</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sum\nSum2",
+            IE = "SumSum2")
+    @BuggyWebDriver(FF = "Sum\nSum2\ndetail",
+            FF78 = "Sum\nSum2\ndetail")
+    @HtmlUnitNYI(IE = "SumSum2\ndetail")
+    public void getVisibleTextDetailsTwoSums() throws Exception {
+        getVisibleTextFormated("<details id='tester'>"
+                + "<summary>Sum</summary>"
+                + "<summary>Sum2</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Sum\ndetail")
+    @BuggyWebDriver(IE = "Sum")
+    public void getVisibleTextDetailsOpen() throws Exception {
+        getVisibleTextFormated("<details id='tester' open=true>"
+                + "<summary>Sum</summary>"
+                + "<p>detail</p>"
+                + "</details>");
     }
 
     private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {

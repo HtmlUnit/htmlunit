@@ -1687,6 +1687,46 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
                 + " I have <input type='number' value='2'/> out of 2 stamps</p>");
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sum",
+            IE = "Sum\ndetail")
+    public void getNormalizedTextDetails() throws Exception {
+        getNormalizedTextFormated("<details id='tester'>"
+                + "<summary>Sum</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sum\nSum2",
+            IE = "SumSum2\ndetail")
+    public void getNormalizedTextDetailsTwoSums() throws Exception {
+        getNormalizedTextFormated("<details id='tester'>"
+                + "<summary>Sum</summary>"
+                + "<summary>Sum2</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Sum\ndetail")
+    public void getNormalizedTextDetailsOpen() throws Exception {
+        getNormalizedTextFormated("<details id='tester' open=true>"
+                + "<summary>Sum</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
     private void getNormalizedTextFormated(final String htmlTesterSnipped) throws Exception {
         final String htmlContent
             = "<html>\n"

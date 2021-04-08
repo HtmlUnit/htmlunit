@@ -49,7 +49,7 @@ public class HTMLDetailsElement extends HTMLElement {
      */
     @JsxGetter
     public boolean isOpen() {
-        return getDomNodeOrDie().hasAttribute("open");
+        return ((HtmlDetails) getDomNodeOrDie()).isOpen();
     }
 
     /**

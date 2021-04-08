@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "details".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlDetails extends HtmlElement {
 
@@ -40,4 +41,11 @@ public class HtmlDetails extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * Returns the {@code open} property.
+     * @return the {@code open} property
+     */
+    public boolean isOpen() {
+        return hasAttribute("open");
+    }
 }

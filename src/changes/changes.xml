@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.0" date="April xx, 2021" description="Bugfixes, Firefox 87">
+            <action type="fix">
+                HtmlDetails.asNormalizedText() and HtmlDetails.asVisibleText() fixed.
+            </action>
             <action type="add" dev="rbri" due-to="Uberto Barbini">
                 Support for the CSS3 ':invalid' pseudo class added.
             </action>
