@@ -892,20 +892,52 @@ public class CSSSelectorTest extends WebDriverTestCase {
     }
 
     /**
-     * See https://www.w3.org/TR/selectors-4/#validity-pseudos
+     * See https://www.w3.org/TR/selectors-4/#validity-pseudos.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"id3", "id5", "id6"},
-            IE = {"id3"}) //minLength and maxLength not supported in IE
+    @Alerts(DEFAULT = {"theform", "id3"},
+            IE = "id3") //minLength and maxLength not supported in IE
     public void pseudoInvalid() throws Exception {
         final String html = "<html><head>\n"
-                + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var list = document.querySelectorAll(':invalid');\n"
+                + "  for (var i = 0 ; i < list.length; i++) {\n"
+                + "    log(list[i].id);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "<form id='theform'>\n"
+                + "  <input id='id1' type='text' value='foo' required>\n"
+                + "  <input id='id2' type='text' value=''>\n"
+                + "  <input id='id3' type='text' value='' required>\n"
+                + "  <input id='id4' type='text' minLength='2' maxLength='5' value='foo'>\n"
+                + "  <input id='id5' type='text' maxLength='2' value='foo'>\n"
+                + "  <input id='id6' type='text' minLength='5' value='foo'>\n"
+                + "  <p id='id7'>foo</p>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://www.w3.org/TR/selectors-4/#validity-pseudos.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"id1", "id2", "id4", "id5", "id6"})
+    public void pseudoValid() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.querySelectorAll(':valid');\n"
                 + "  for (var i = 0 ; i < list.length; i++) {\n"
                 + "    log(list[i].id);\n"
                 + "  }\n"
