@@ -133,6 +133,38 @@ public class CookieManager5Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void updateCookieExpiresWithClientCookie() throws Exception {
+        final Date date = new Date(System.currentTimeMillis() + 500_000);
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put(SetCookieExpires10Servlet.URL, SetCookieExpires10Servlet.class);
+        servlets.put(SetCookieExpires1000Servlet.URL, SetCookieExpires1000Servlet.class);
+        startWebServer("./", null, servlets);
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.getCookieManager().clearCookies();
+
+            final Date expires = new Date(System.currentTimeMillis() + 10_000L);
+            Cookie cookie = new Cookie("localhost", "first", "1", null, expires, false, false);
+            webClient.getCookieManager().addCookie(cookie);
+
+            assertEquals(1, webClient.getCookieManager().getCookies().size());
+            cookie = webClient.getCookieManager().getCookies().iterator().next();
+            assertFalse("" + cookie.getExpires(), cookie.getExpires().after(date));
+
+            webClient.getPage("http://localhost:" + PORT + SetCookieExpires1000Servlet.URL);
+            assertEquals(1, webClient.getCookieManager().getCookies().size());
+            cookie = webClient.getCookieManager().getCookies().iterator().next();
+            assertTrue("" + cookie.getExpires(), cookie.getExpires().after(date));
+        }
+    }
+
+
+    /**
+     * Check the cookie expires gets overwritten.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
     public void updateCookieExpires() throws Exception {
         final Date date = new Date(System.currentTimeMillis() + 500_000);
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
