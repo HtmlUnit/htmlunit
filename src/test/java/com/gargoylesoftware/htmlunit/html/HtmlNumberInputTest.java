@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1172,6 +1173,45 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
         check.click();
         assertEquals(getExpectedAlerts()[5], driver.getTitle());
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "-0-0-true",
+            FF = "-0-0-false",
+            FF78 = "-0-0-false")
+    @HtmlUnitNYI(IE = "-0-0-false")
+    public void issue321() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    log(input.value + '-' "
+                                + "+ input.defaultValue + '-' "
+                                + "+ input.getAttribute('value')+ '-' "
+                                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='inpt' min='0' max='999' value='0' />\n"
+                + "  <button id='check' onclick='test()');'>"
+                + "DoIt</button>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+
+        input.clear();
+        input.sendKeys("abc");
+        ((JavascriptExecutor) driver).executeScript("test();");
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
