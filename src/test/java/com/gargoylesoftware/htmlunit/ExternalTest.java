@@ -51,16 +51,21 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class ExternalTest {
 
+    static String SONATYPE_SNAPSHOT_REPO_URL_ = "https://oss.sonatype.org/content/repositories/snapshots/";
+    static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
+
     /** Chrome driver. */
     static String CHROME_DRIVER_ = "89.0.4389.23";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_"
                                             + BrowserVersion.CHROME.getBrowserVersionNumeric();
 
-    static String EDGE_DRIVER_ = "89.0.774.68";
+    static String EDGE_DRIVER_ = "89.0.774.75";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.29.0";
+    static String GECKO_DRIVER_ = "0.29.1";
+    static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
+
     /** IE driver. */
     static String IE_DRIVER_ = "3.150.1.0";
 
@@ -176,7 +181,7 @@ public class ExternalTest {
     public void assertGeckoDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             try {
-                final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
+                final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
                 final DomNodeList<DomNode> divs = page.querySelectorAll(".release-header div");
                 assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), GECKO_DRIVER_);
             }
@@ -206,8 +211,8 @@ public class ExternalTest {
         assertNotNull(version);
         if (version.contains("SNAPSHOT")) {
             try (WebClient webClient = buildWebClient()) {
-                final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
-                        + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
+                final XmlPage page = webClient.getPage(SONATYPE_SNAPSHOT_REPO_URL_
+                                        + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
                 final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
                 final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
                 final long snapshotMillis = format.parse(timestamp).getTime();
@@ -221,7 +226,7 @@ public class ExternalTest {
     private static void assertVersion(final String groupId, final String artifactId, final String version)
             throws Exception {
         String latestVersion = null;
-        String url = "https://repo1.maven.org/maven2/"
+        String url = MAVEN_REPO_URL_
                         + groupId.replace('.', '/') + '/'
                         + artifactId.replace('.', '/');
         if (!url.endsWith("/")) {
