@@ -899,6 +899,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"theform", "id3"},
             IE = "id3") //minLength and maxLength not supported in IE
+    @HtmlUnitNYI(CHROME = {"id3", "id5", "id6"},
+            EDGE = {"id3", "id5", "id6"},
+            FF = {"id3", "id5", "id6"},
+            FF78 = {"id3", "id5", "id6"})
     public void pseudoInvalid() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -932,6 +936,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"id1", "id2", "id4", "id5", "id6"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            EDGE = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            FF = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            FF78 = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            IE = {"", "", "", "", "theform", "id1", "id2", "id4", "id5", "id6", "id7"})
     public void pseudoValid() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
