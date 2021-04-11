@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -907,13 +908,14 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         page.getElementById("link").click();
         assertEquals(1, getWebClient().getWebWindows().size());
+        assertTrue(page.getEnclosingWindow().getEnclosedPage() instanceof UnexpectedPage);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void click_unexpectedPageAttachmentHandler() throws Exception {
+    public void click_unexpectedPageAttachmentHandlerDoesNotHandleContentType() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body>\n"
@@ -925,6 +927,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         final LinkedList<Page> pages = new LinkedList<Page>();
         getWebClient().setAttachmentHandler(new AttachmentHandler() {
+
             @Override
             public void handleAttachment(final Page page) {
                 pages.add(page);
@@ -936,9 +939,57 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
             assertEquals(1, getWebClient().getWebWindows().size());
 
             page.getElementById("link").click();
-            assertEquals(2, getWebClient().getWebWindows().size());
+
+            assertEquals(1, getWebClient().getWebWindows().size());
+            assertTrue(getWebClient().getCurrentWindow().getEnclosedPage() instanceof UnexpectedPage);
+
+            assertEquals(0, pages.size());
+        }
+        finally {
+            getWebClient().setAttachmentHandler(null);
+        }
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageAttachmentHandlerHandleContentType() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final LinkedList<Page> pages = new LinkedList<Page>();
+        getWebClient().setAttachmentHandler(new AttachmentHandler() {
+
+            @Override
+            public boolean isAttachment(final WebResponse response) {
+                return MimeType.APPLICATION_JSON
+                        .equalsIgnoreCase(response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE));
+            }
+
+            @Override
+            public void handleAttachment(final Page page) {
+                pages.add(page);
+            }
+        });
+
+        try {
+            final HtmlPage page = loadPage(html);
+            assertEquals(1, getWebClient().getWebWindows().size());
+
+            page.getElementById("link").click();
+
+            final WebWindow newWindow = getWebClient().getWebWindows().get(getWebClient().getWebWindows().size() - 1);
+            assertTrue(newWindow.getEnclosedPage() instanceof UnexpectedPage);
+
             assertEquals(1, pages.size());
-            assertTrue(pages.get(0) instanceof UnexpectedPage);
         }
         finally {
             getWebClient().setAttachmentHandler(null);
@@ -949,7 +1000,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void click_unexpectedPageAttachmentHandlerHandles() throws Exception {
+    public void click_unexpectedPageAttachmentHandlerHandleResponseDoesNotHandleContentType() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body>\n"
@@ -980,6 +1031,58 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
             page.getElementById("link").click();
             assertEquals(1, getWebClient().getWebWindows().size());
+            assertTrue(page.getEnclosingWindow().getEnclosedPage() instanceof UnexpectedPage);
+
+            assertEquals(0, pages.size());
+        }
+        finally {
+            getWebClient().setAttachmentHandler(null);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void click_unexpectedPageAttachmentHandlerHandleResponseHandlesContentType() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
+
+        final LinkedList<WebResponse> pages = new LinkedList<WebResponse>();
+        getWebClient().setAttachmentHandler(new AttachmentHandler() {
+
+            @Override
+            public boolean isAttachment(final WebResponse response) {
+                return MimeType.APPLICATION_JSON
+                        .equalsIgnoreCase(response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE));
+            }
+
+            @Override
+            public boolean handleAttachment(final WebResponse response) {
+                pages.add(response);
+                return true;
+            }
+
+            @Override
+            public void handleAttachment(final Page page) {
+                throw new IllegalAccessError("handleAttachment(Page) called");
+            }
+        });
+
+        try {
+            final HtmlPage page = loadPage(html);
+            assertEquals(1, getWebClient().getWebWindows().size());
+
+            page.getElementById("link").click();
+            assertEquals(1, getWebClient().getWebWindows().size());
+            assertTrue(page.getEnclosingWindow().getEnclosedPage() == page);
+
             assertEquals(1, pages.size());
         }
         finally {
@@ -1039,6 +1142,10 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
             page.getElementById("link").click();
             assertEquals(2, getWebClient().getWebWindows().size());
+
+            final WebWindow newWindow = getWebClient().getWebWindows().get(getWebClient().getWebWindows().size() - 1);
+            assertTrue(newWindow.getEnclosedPage() instanceof UnexpectedPage);
+
             assertEquals(1, pages.size());
             assertTrue(pages.get(0) instanceof UnexpectedPage);
         }
@@ -1051,7 +1158,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void click_unexpectedPageDownloadAttributeAttachmentHandlerHandles() throws Exception {
+    public void click_unexpectedPageDownloadAttributeAttachmentHandlerHandleResponse() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body>\n"
@@ -1063,7 +1170,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         final LinkedList<WebResponse> pages = new LinkedList<WebResponse>();
         getWebClient().setAttachmentHandler(new AttachmentHandler() {
-
             @Override
             public boolean handleAttachment(final WebResponse response) {
                 pages.add(response);
@@ -1082,6 +1188,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
             page.getElementById("link").click();
             assertEquals(1, getWebClient().getWebWindows().size());
+            assertTrue(page.getEnclosingWindow().getEnclosedPage() == page);
+
             assertEquals(1, pages.size());
         }
         finally {

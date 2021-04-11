@@ -189,7 +189,8 @@ public class HtmlAnchor extends HtmlElement {
         else {
             target = page.getResolvedTarget(getTargetAttribute());
         }
-        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest, true, false, true, "Link click");
+        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
+                true, false, ATTRIBUTE_NOT_DEFINED != getDownloadAttribute(), "Link click");
     }
 
     /**
