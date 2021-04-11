@@ -1,6 +1,6 @@
 # HtmlUnit
 
-Version 2.49.0 / April 11, 2021
+Version 2.49.1 / April 11, 2021
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -25,7 +25,7 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.49.0</version>
+        <version>2.49.1</version>
     </dependency>
 
 Overview
@@ -91,7 +91,7 @@ License
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.49.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.49.1/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20Headless/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"

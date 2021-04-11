@@ -47,7 +47,7 @@
                 <p>
                     HtmlUnit handles all unknown content similar to known content - the content is wrapped in an page object and the page is placed inside the window.
                     For all unknown content HtmlUnit uses the UnexpectedPage. In most cases the UnexpectedPage replaces the current (Html)page in the current window,
-                    but in some cases a new additional window gets opend (e.g. clicking an anchor with a download attribute defined).
+                    but in some cases a new additional window gets opened (e.g. clicking an anchor with a download attribute defined).
                 </p>
                 <p>
                 You can then access the plain content stream from the enclosed UnexpectedPage.
@@ -82,7 +82,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 </p>
                 <p>
                     The AttachmentHandler based download support works in addition to the default UnexpectedPage based support. This means, if your AttachmentHandler
-                    does not handle the content, the webClient will fall back to the default solution and place an UnexpectedPage inside a new window.
+                    does not handle the content, the webClient will fall back to the default solution and place an UnexpectedPage inside the window.
                     You can overwrite the method isAttachment() in your AttachmentHandler to only handle dedicated responses - the default implementation
                     only detects responses having a content-disposition header of type 'attachment'.
                 </p>

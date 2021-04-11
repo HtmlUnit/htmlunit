@@ -7,11 +7,18 @@
     </properties>
 
     <body>
+        <release version="2.49.1" date="April 11, 2021" description="Hotfix">
+            <action type="fix" dev="rbri">
+                Clicking an anchor was always calling the attachment handler (if set). This was a regression from anchor
+                download attribute support.
+            </action>
+        </release>
+
         <release version="2.49.0" date="April 11, 2021" description="Bugfixes, Firefox 87">
-            <action type="fix">
+            <action type="fix" dev="rbri">
                 Fix :required and :optional pseudo classes to work with all html elements supporting the 'required' attribute.
             </action>
-            <action type="fix">
+            <action type="fix" dev="rbri">
                 HtmlDetails.asNormalizedText() and HtmlDetails.asVisibleText() fixed.
             </action>
             <action type="add" dev="rbri" due-to="Uberto Barbini">
