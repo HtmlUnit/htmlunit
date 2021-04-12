@@ -35,7 +35,9 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
  * @author Ronald Brill
  */
 public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
+    private Object clientLock_ = new Object();
     private WebSocketClient client_;
+
     private volatile Session incomingSession_;
     private Session outgoingSession_;
 
@@ -78,24 +80,28 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
 
     @Override
     public void start() throws Exception {
-        client_.start();
+        synchronized (clientLock_) {
+            client_.start();
+        }
     }
 
     @Override
     public void connect(final URI url) throws Exception {
-        final Future<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
-        client_.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    onWebSocketConnecting();
-                    incomingSession_ = connectFuture.get();
+        synchronized (clientLock_) {
+            final Future<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
+            client_.getExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        onWebSocketConnecting();
+                        incomingSession_ = connectFuture.get();
+                    }
+                    catch (final Exception e) {
+                        onWebSocketConnectError(e);
+                    }
                 }
-                catch (final Exception e) {
-                    onWebSocketConnectError(e);
-                }
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -130,12 +136,14 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
 
     @Override
     public void closeClient() throws Exception {
-        if (client_ != null) {
-            client_.stop();
-            client_.destroy();
+        synchronized (clientLock_) {
+            if (client_ != null) {
+                client_.stop();
+                client_.destroy();
 
-            // TODO finally ?
-            client_ = null;
+                // TODO finally ?
+                client_ = null;
+            }
         }
     }
 

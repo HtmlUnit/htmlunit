@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.1" date="April 11, 2021" description="Hotfix">
+            <action type="fix" dev="rbri" issue="310">
+                Synchronize access to the WebSocketClient from the JettyWebSocketAdapter to avoid NPE.
+            </action>
             <action type="fix" dev="rbri">
                 Clicking an anchor was always calling the attachment handler (if set). This was a regression from anchor
                 download attribute support.
