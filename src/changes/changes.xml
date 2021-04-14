@@ -9,6 +9,10 @@
     <body>
         <release version="2.49.1" date="April 11, 2021" description="Hotfix">
             <action type="add" dev="rbri">
+                MediaDevices.getUserMedia() added - but other than in real browsers this always throws an error
+                because MediaStream's are not supported at the moment.
+            </action>
+            <action type="add" dev="rbri">
                 Navigator.mediaDevices property added.
             </action>
             <action type="add" dev="rbri" issue="340">

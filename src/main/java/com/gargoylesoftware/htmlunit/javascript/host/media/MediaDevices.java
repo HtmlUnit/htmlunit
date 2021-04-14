@@ -21,6 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.Promise;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -37,5 +40,12 @@ public class MediaDevices extends EventTarget {
      */
     @JsxConstructor
     public MediaDevices() {
+    }
+
+    @JsxFunction
+    public Promise getUserMedia() {
+        return Promise.reject(null, this,
+                new Object[] {new DOMException("HtmlUnit does not support media streaming.",
+                        DOMException.NOT_FOUND_ERR)}, null);
     }
 }
