@@ -255,17 +255,17 @@ public class HttpWebConnection implements WebConnection {
         if (webRequest.getProxyHost() == null) {
             requestBuilder.setProxy(null);
             httpRequest.setConfig(requestBuilder.build());
+            return;
+        }
+
+        final HttpHost proxy = new HttpHost(webRequest.getProxyHost(),
+                                    webRequest.getProxyPort(), webRequest.getProxyScheme());
+        if (webRequest.isSocksProxy()) {
+            SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
         }
         else {
-            final HttpHost proxy = new HttpHost(webRequest.getProxyHost(),
-                                        webRequest.getProxyPort(), webRequest.getProxyScheme());
-            if (webRequest.isSocksProxy()) {
-                SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
-            }
-            else {
-                requestBuilder.setProxy(proxy);
-                httpRequest.setConfig(requestBuilder.build());
-            }
+            requestBuilder.setProxy(proxy);
+            httpRequest.setConfig(requestBuilder.build());
         }
     }
 

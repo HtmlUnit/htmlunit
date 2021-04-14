@@ -649,6 +649,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
         assertNull(webConnection.getLastWebRequest().getProxyScheme());
+        assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
         //
         // Second time redirection is turned off
@@ -661,6 +662,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
         assertNull(webConnection.getLastWebRequest().getProxyScheme());
+        assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
         webClient.close();
     }
@@ -1197,6 +1199,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Change the webclient default proxy settings.
             final String defaultProxyHost2 = "defaultProxyHost2";
@@ -1209,6 +1212,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(defaultProxyHost2, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort2, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure the custom proxy settings are used.
             final String customProxyHost = "customProxyHost";
@@ -1220,6 +1224,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(customProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure the proxy bypass works with default proxy settings.
             webClient.getOptions().getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
@@ -1227,12 +1232,14 @@ public class WebClientTest extends SimpleWebTestCase {
             assertNull(webConnection.getLastWebRequest().getProxyHost());
             assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure the proxy bypass doesn't work with custom proxy settings.
             webClient.getPage(request);
             assertEquals(customProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure we can remove proxy bypass filters.
             webClient.getOptions().getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
@@ -1240,6 +1247,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(defaultProxyHost2, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort2, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
         }
     }
 
@@ -1268,6 +1276,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
             assertEquals(location2, page2.getUrl());
 
             // Make sure default proxy settings are used.
@@ -1277,6 +1286,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
             assertEquals(URL_FIRST, page1.getUrl());
         }
     }
@@ -1302,6 +1312,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure proxy bypass works with default proxy settings.
             webClient.getOptions().getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
@@ -1309,6 +1320,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertNull(webConnection.getLastWebRequest().getProxyHost());
             assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure we can remove proxy bypass filters.
             webClient.getOptions().getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
@@ -1316,6 +1328,7 @@ public class WebClientTest extends SimpleWebTestCase {
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
             assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
         }
     }
 
@@ -2584,7 +2597,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.loadHtmlCodeIntoCurrentWindow(htmlCode);
-        assertEquals("content...", page.getBody().asText());
+        assertEquals("content...", page.getBody().asNormalizedText());
     }
 
     /**
@@ -2605,6 +2618,6 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.loadXHtmlCodeIntoCurrentWindow(htmlCode);
-        assertEquals("content...", page.getBody().asText());
+        assertEquals("content...", page.getBody().asNormalizedText());
     }
 }
