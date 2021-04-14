@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * Tests for {@link Navigator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Navigator2Test extends SimpleWebTestCase {
@@ -41,13 +42,14 @@ public class Navigator2Test extends SimpleWebTestCase {
 
     private void cookieEnabled(final boolean cookieEnabled) throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  alert(navigator.cookieEnabled);\n"
             + "}\n"
             + "</script>\n"
-            + "</head><body onload='test()'></body>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
             + "</html>";
 
         setExpectedAlerts(Boolean.toString(cookieEnabled));
@@ -93,5 +95,4 @@ public class Navigator2Test extends SimpleWebTestCase {
         setExpectedAlerts(name + " = " + value);
         loadPageWithAlerts(html);
     }
-
 }
