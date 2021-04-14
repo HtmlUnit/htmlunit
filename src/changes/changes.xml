@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.1" date="April 11, 2021" description="Hotfix">
+            <action type="add" dev="rbri">
+                Navigator.mediaDevices property added.
+            </action>
             <action type="add" dev="rbri" issue="340">
                 Support for https proxies - the Webclient constructors are supporting a proxyScheme now.
             </action>
