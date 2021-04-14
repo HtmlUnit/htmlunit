@@ -52,7 +52,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
 
         final WebClient webClient = getWebClient();
 
-        final ProxyConfig proxy = new ProxyConfig(SOCKS_PROXY_HOST, PORT_PROXY_SERVER);
+        final ProxyConfig proxy = new ProxyConfig(SOCKS_PROXY_HOST, PORT_PROXY_SERVER, null);
         proxy.addHostsToProxyBypass("127.0.0.1");
         webClient.getOptions().setProxyConfig(proxy);
     }
