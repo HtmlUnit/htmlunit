@@ -24,12 +24,14 @@ import java.util.regex.Pattern;
  * class. One instance of this class exists for each <tt>WebClient</tt> instance.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  * @see WebClientOptions#getProxyConfig()
  */
 public class ProxyConfig implements Serializable {
 
     private String proxyHost_;
     private int proxyPort_;
+    private String proxyScheme_;
     private boolean isSocksProxy_;
     private final Map<String, Pattern> proxyBypassHosts_ = new HashMap<>();
     private String proxyAutoConfigUrl_;
@@ -39,27 +41,30 @@ public class ProxyConfig implements Serializable {
      * Creates a new instance.
      */
     public ProxyConfig() {
-        this(null, 0);
+        this(null, 0, null, false);
     }
 
     /**
      * Creates a new instance.
      * @param proxyHost the proxy host
      * @param proxyPort the proxy port
+     * @param proxyScheme the scheme http/https; null defaults to http
      */
-    public ProxyConfig(final String proxyHost, final int proxyPort) {
-        this(proxyHost, proxyPort, false);
+    public ProxyConfig(final String proxyHost, final int proxyPort, final String proxyScheme) {
+        this(proxyHost, proxyPort, proxyScheme, false);
     }
 
     /**
      * Creates a new instance.
      * @param proxyHost the proxy host
      * @param proxyPort the proxy port
+     * @param proxyScheme the scheme http/https
      * @param isSocks whether SOCKS proxy or not
      */
-    public ProxyConfig(final String proxyHost, final int proxyPort, final boolean isSocks) {
+    public ProxyConfig(final String proxyHost, final int proxyPort, final String proxyScheme, final boolean isSocks) {
         proxyHost_ = proxyHost;
         proxyPort_ = proxyPort;
+        proxyScheme_ = proxyScheme;
         isSocksProxy_ = isSocks;
     }
 
@@ -93,6 +98,22 @@ public class ProxyConfig implements Serializable {
      */
     public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
+    }
+
+    /**
+     * Returns the proxy scheme used to perform HTTP requests.
+     * @return the proxy scheme used to perform HTTP requests
+     */
+    public String getProxyScheme() {
+        return proxyScheme_;
+    }
+
+    /**
+     * Sets the proxy scheme used to perform HTTP requests.
+     * @param proxyScheme the proxy scheme used to perform HTTP requests
+     */
+    public void setProxyPort(final String proxyScheme) {
+        proxyScheme_ = proxyScheme;
     }
 
     /**

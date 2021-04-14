@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.1" date="April 11, 2021" description="Hotfix">
+            <action type="add" dev="rbri" issue="340">
+                Support for https proxies - the Webclient constructors are supporting a proxyScheme now.
+            </action>
             <action type="fix" dev="rbri" issue="310">
                 Synchronize access to the WebSocketClient from the JettyWebSocketAdapter to avoid NPE.
             </action>

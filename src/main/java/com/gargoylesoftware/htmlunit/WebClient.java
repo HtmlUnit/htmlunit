@@ -266,7 +266,19 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param proxyPort the port to use on the proxy server
      */
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
-        this(browserVersion, true, proxyHost, proxyPort);
+        this(browserVersion, true, proxyHost, proxyPort, null);
+    }
+
+    /**
+     * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
+     * @param browserVersion the browser version to simulate
+     * @param proxyHost the server that will act as proxy or null for no proxy
+     * @param proxyPort the port to use on the proxy server
+     * @param proxyScheme the scheme http/https
+     */
+    public WebClient(final BrowserVersion browserVersion,
+            final String proxyHost, final int proxyPort, final String proxyScheme) {
+        this(browserVersion, true, proxyHost, proxyPort, proxyScheme);
     }
 
     /**
@@ -278,6 +290,19 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebClient(final BrowserVersion browserVersion, final boolean javaScriptEngineEnabled,
             final String proxyHost, final int proxyPort) {
+        this(browserVersion, javaScriptEngineEnabled, proxyHost, proxyPort, null);
+    }
+
+    /**
+     * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
+     * @param browserVersion the browser version to simulate
+     * @param javaScriptEngineEnabled set to false if the simulated browser should not support javaScript
+     * @param proxyHost the server that will act as proxy or null for no proxy
+     * @param proxyPort the port to use on the proxy server
+     * @param proxyScheme the scheme http/https
+     */
+    public WebClient(final BrowserVersion browserVersion, final boolean javaScriptEngineEnabled,
+            final String proxyHost, final int proxyPort, final String proxyScheme) {
         WebAssert.notNull("browserVersion", browserVersion);
 
         browserVersion_ = browserVersion;
@@ -287,7 +312,7 @@ public class WebClient implements Serializable, AutoCloseable {
             getOptions().setProxyConfig(new ProxyConfig());
         }
         else {
-            getOptions().setProxyConfig(new ProxyConfig(proxyHost, proxyPort));
+            getOptions().setProxyConfig(new ProxyConfig(proxyHost, proxyPort, proxyScheme));
         }
 
         webConnection_ = new HttpWebConnection(this); // this has to be done after the browser version was set
@@ -1540,6 +1565,7 @@ public class WebClient implements Serializable, AutoCloseable {
             else if (!proxyConfig.shouldBypassProxy(webRequest.getUrl().getHost())) {
                 webRequest.setProxyHost(proxyConfig.getProxyHost());
                 webRequest.setProxyPort(proxyConfig.getProxyPort());
+                webRequest.setProxyScheme(proxyConfig.getProxyScheme());
                 webRequest.setSocksProxy(proxyConfig.isSocksProxy());
             }
         }

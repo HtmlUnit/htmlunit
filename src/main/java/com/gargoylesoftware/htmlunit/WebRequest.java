@@ -64,6 +64,7 @@ public class WebRequest implements Serializable {
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
     private int proxyPort_;
+    private String proxyScheme_;
     private boolean isSocksProxy_;
     private HttpMethod httpMethod_ = HttpMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
@@ -245,6 +246,22 @@ public class WebRequest implements Serializable {
      */
     public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
+    }
+
+    /**
+     * Returns the proxy scheme to use.
+     * @return the proxy scheme to use
+     */
+    public String getProxyScheme() {
+        return proxyScheme_;
+    }
+
+    /**
+     * Sets the proxy scheme to use.
+     * @param proxyScheme the proxy scheme to use
+     */
+    public void setProxyScheme(final String proxyScheme) {
+        proxyScheme_ = proxyScheme;
     }
 
     /**
