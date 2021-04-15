@@ -52,8 +52,7 @@ public final class ProxyAutoConfig {
      * @return semicolon-separated result
      */
     public static String evaluate(final String content, final URL url) {
-        final Context cx = Context.enter();
-        try {
+        try (Context cx = Context.enter()) {
             final ProxyAutoConfig config = new ProxyAutoConfig();
             final Scriptable scope = cx.initSafeStandardObjects();
 
@@ -78,9 +77,6 @@ public final class ProxyAutoConfig {
             final NativeFunction f = (NativeFunction) fObj;
             final Object result = f.call(cx, scope, scope, functionArgs);
             return Context.toString(result);
-        }
-        finally {
-            Context.exit();
         }
     }
 

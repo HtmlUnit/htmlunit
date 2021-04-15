@@ -104,7 +104,7 @@ public class MSXMLScriptable extends SimpleScriptable {
 
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
-        throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
+        throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter",
                 name, getClassName(), Context.toString(value));
     }
 

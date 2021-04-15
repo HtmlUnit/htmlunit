@@ -4239,7 +4239,7 @@ public class Document extends Node {
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
         if ("body".equals(name)) {
-            throw ScriptRuntime.typeError3("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
+            throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
         }
         return super.isReadOnlySettable(name, value);
     }
