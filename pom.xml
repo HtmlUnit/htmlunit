@@ -1255,7 +1255,7 @@
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
-            <version>0.17.0</version>
+            <version>0.18.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
