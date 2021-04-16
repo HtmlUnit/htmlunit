@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.49.1" date="April 11, 2021" description="Hotfix">
+            <action type="fix" dev="rbri" issue="319">
+                Selection.toString() now returns the same value as implicit converting.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js:  Improved JSON.stringify() implementation.
             </action>

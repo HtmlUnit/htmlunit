@@ -60,16 +60,25 @@ public class Selection extends SimpleScriptable {
     }
 
     /**
+     * @return a string currently being represented by the selection object,
+     * i.e. the currently selected text.
+     */
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
+        final StringBuilder sb = new StringBuilder();
+        for (final Range r : getRanges()) {
+            sb.append(r.toString());
+        }
+        return sb.toString();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (getPrototype() != null && (String.class.equals(hint) || hint == null)) {
-            final StringBuilder sb = new StringBuilder();
-            for (final Range r : getRanges()) {
-                sb.append(r.toString());
-            }
-            return sb.toString();
+            return jsToString();
         }
         return super.getDefaultValue(hint);
     }
