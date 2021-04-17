@@ -3487,7 +3487,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-")
+    @Alerts("-")
     public void content() throws Exception {
         test("content");
     }
