@@ -352,9 +352,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1",
-            FF = "cookie1=1; cookie2=2; cookie3=3",
-            FF78 = "cookie1=1; cookie2=2; cookie3=3",
+    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -376,9 +374,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1",
-            FF = "cookie1=1; cookie2=2; cookie3=3",
-            FF78 = "cookie1=1; cookie2=2; cookie3=3",
+    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();

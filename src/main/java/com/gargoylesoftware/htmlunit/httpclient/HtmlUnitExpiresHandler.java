@@ -18,9 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_E
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.MalformedCookieException;
@@ -108,12 +106,6 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
             }
 
             if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2)) {
-                final Calendar calendar = Calendar.getInstance(Locale.ROOT);
-                calendar.setTimeZone(DateUtils.GMT);
-                calendar.set(1969, Calendar.JANUARY, 1, 0, 0, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                startDate = calendar.getTime();
-
                 datePatterns = EXTENDED_DATE_PATTERNS_2;
             }
         }
