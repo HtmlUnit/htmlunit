@@ -1628,15 +1628,15 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsElEQVQ4T+3SsQkCQRSE4f9yMbACESzBJgwswSY0EI01twnR"
-                + "GixCsAQxFjM5MJAH82SDc9ldDQzuxTsfw7AV0ANu/OgqYA/cgQ1w+dY1sAMsgYXQNfAohQ306wMrYCJ4W4KGoOdHajwUvMuB"
-                + "m0DPjwU/AZvhmALHQM9PNcVZjU8xOAX0/EyND4KvTXAOaPmu0HnwI+oQzgU9OxBsu1rj95WCH2dswZSvG3/TbviHG74ATQkZ"
-                + "FRYHbk0AAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsElEQVQ4T+3SsQkCQRCF4f9ysQYRTC+zCQNLsAkNROMztwnR"
+                + "GmxCLEEswEwEAxl4Ixucy+5qYHATz/sYHlMBNXDmR1MBe+AGbIDLt66BPWAFLIFG8L0UNtBnAKyBqdBtCRqCnh/r4pHgXQ7c"
+                + "Bnp+IvipKo4pcAz0/ExV2CdYx6cYnAJ6fq6LD6ri2gbngJbvC10EH/EI4VzQs0PB1qtd/J5S8GONHZjyuvGdrsM/7PAFTW0Z"
+                + "FZFBvS8AAAAASUVORK5CYII=",
             EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsElEQVQ4T+3SsQkCQRSE4f9yMbACESzBJgwswSY0EI01twnR"
-                + "GixCsAQxFjM5MJAH82SDc9ldDQzuxTsfw7AV0ANu/OgqYA/cgQ1w+dY1sAMsgYXQNfAohQ306wMrYCJ4W4KGoOdHajwUvMuB"
-                + "m0DPjwU/AZvhmALHQM9PNcVZjU8xOAX0/EyND4KvTXAOaPmu0HnwI+oQzgU9OxBsu1rj95WCH2dswZSvG3/TbviHG74ATQkZ"
-                + "FRYHbk0AAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsElEQVQ4T+3SsQkCQRCF4f9ysQYRTC+zCQNLsAkNROMztwnR"
+                + "GmxCLEEswEwEAxl4Ixucy+5qYHATz/sYHlMBNXDmR1MBe+AGbIDLt66BPWAFLIFG8L0UNtBnAKyBqdBtCRqCnh/r4pHgXQ7c"
+                + "Bnp+IvipKo4pcAz0/ExV2CdYx6cYnAJ6fq6LD6ri2gbngJbvC10EH/EI4VzQs0PB1qtd/J5S8GONHZjyuvGdrsM/7PAFTW0Z"
+                + "FZFBvS8AAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdklEQVQ4je3MsQ0BAQAF0NdKxAQicRtco1YpjKAxgsIGl4tY"
                 + "4HISuQk0RlAYQXMjaEwgYomvcm+Axw80OGGWCsc44IMao1Q8xxlP7FIpLHDFA5tkvMYdN6yS8RY9LiiT8R4vtJim0gmOeKNK"
