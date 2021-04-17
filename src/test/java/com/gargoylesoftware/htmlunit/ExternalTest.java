@@ -55,11 +55,11 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "89.0.4389.23";
+    static String CHROME_DRIVER_ = "90.0.4430.24";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_"
                                             + BrowserVersion.CHROME.getBrowserVersionNumeric();
 
-    static String EDGE_DRIVER_ = "89.0.774.76";
+    static String EDGE_DRIVER_ = "90.0.818.41";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -157,16 +157,16 @@ public class ExternalTest {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
             String content = page.asNormalizedText();
             content = content.substring(content.indexOf("Release " + BrowserVersion.EDGE.getBrowserVersionNumeric()));
-            content = content.substring(0, content.indexOf("Microsoft Edge Legacy"));
             content = content.replace("\r\n", "");
 
             String version = "0.0.0.0";
             final Pattern regex =
-                    Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*) \\| Choose your OS:\\sx86\\s,\\sx64");
+                    Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*):\\sx86\\s\\|\\sx64");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
                     version = matcher.group(1);
+                    break;
                 }
             }
             assertEquals("Edge Driver", version, EDGE_DRIVER_);
