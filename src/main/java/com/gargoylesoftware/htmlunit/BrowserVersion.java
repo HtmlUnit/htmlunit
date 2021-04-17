@@ -212,9 +212,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4389.72 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4389.72 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -253,11 +253,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4324.96 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.705.50";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.818.41";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4324.96 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.705.50";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.818.41";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
@@ -427,7 +427,7 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 32.0 r0", "32.0.0.387", "Flash.ocx"); //NOPMD
+                "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);

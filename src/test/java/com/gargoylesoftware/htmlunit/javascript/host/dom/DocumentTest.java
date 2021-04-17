@@ -2243,6 +2243,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "    <div id='d' onclick='var c = arguments.callee.caller; log(c ? c.name : c)'>abc</div>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var event = document.createEvent('MouseEvents');\n"
@@ -2254,7 +2255,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2268,6 +2269,7 @@ public class DocumentTest extends WebDriverTestCase {
               "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var c = arguments.callee.caller;\n"
             + "        log(c ? c.name : c);\n"
@@ -2276,7 +2278,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
