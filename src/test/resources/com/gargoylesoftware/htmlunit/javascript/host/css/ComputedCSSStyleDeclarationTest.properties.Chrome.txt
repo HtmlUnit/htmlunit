@@ -263,6 +263,7 @@ outlineStyle=:none
 outlineWidth=:0px
 overflow=:visible
 overflowAnchor=:auto
+overflowClipMargin=:0px
 overflowWrap=:normal
 overflowX=:visible
 overflowY=:visible

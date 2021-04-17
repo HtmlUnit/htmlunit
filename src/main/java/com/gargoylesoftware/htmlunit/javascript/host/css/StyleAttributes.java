@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeNotIterable;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.edge;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffLatest;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffNotIterable;
@@ -2279,7 +2278,7 @@ public final class StyleAttributes {
         MS_GRID_ROWS("msGridRows", "-ms-grid-rows", ie("none")),
 
         /** The style property {@code msHighContrastAdjust}. */
-        MS_HIGH_CONTRAST_ADJUST("msHighContrastAdjust", "-ms-high-contrast-adjust", ie("auto"), edge("auto")),
+        MS_HIGH_CONTRAST_ADJUST("msHighContrastAdjust", "-ms-high-contrast-adjust", ie("auto")),
 
         /** The style property {@code msHyphenateLimitChars}. */
         MS_HYPHENATE_LIMIT_CHARS("msHyphenateLimitChars", "-ms-hyphenate-limit-chars", ie("5 2 2")),
@@ -2492,6 +2491,9 @@ public final class StyleAttributes {
 
         /** The style property {@code overflow-block}. */
         OVERFLOW_BLOCK_("overflow-block", "overflow-block", ff("visible")),
+
+        /** The style property {@code overflowClipMargin}. */
+        OVERFLOW_CLIP_MARGIN("overflowClipMargin", "overflow-clip-margin", chromeAndEdge("0px")),
 
         /** The style property {@code overflowInline}. */
         OVERFLOW_INLINE("overflowInline", "overflow-inline", ff("visible")),
