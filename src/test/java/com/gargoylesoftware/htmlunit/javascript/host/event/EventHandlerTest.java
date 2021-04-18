@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link EventHandler}.
@@ -57,6 +58,21 @@ public class EventHandlerTest extends WebDriverTestCase {
     @Alerts({"function onload(event) { test() }",
                 "function onload(event) { test() }",
                 "function onload(event) { test() }"})
+    @HtmlUnitNYI(CHROME = {"function onload(event) { test(); }",
+                "function onload(event) { test(); }",
+                "function onload(event) { test(); }"},
+            EDGE = {"function onload(event) { test(); }",
+                "function onload(event) { test(); }",
+                "function onload(event) { test(); }"},
+            FF = {"function onload(event) { test(); }",
+                "function onload(event) { test(); }",
+                "function onload(event) { test(); }"},
+            FF78 = {"function onload(event) { test(); }",
+                "function onload(event) { test(); }",
+                "function onload(event) { test(); }"},
+            IE = {"function onload(event) { test(); }",
+                "function onload(event) { test(); }",
+                "function onload(event) { test(); }"})
     public void testToString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
