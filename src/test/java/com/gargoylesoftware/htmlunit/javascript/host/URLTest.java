@@ -44,23 +44,22 @@ public class URLTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function URL() { [native code] }",
-            FF = "function URL() {\n    [native code]\n}",
-            FF78 = "function URL() {\n    [native code]\n}",
             IE = "[object URL]")
     public void windowURL() throws Exception {
         final String html =
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(window.URL);\n"
+            + "      log(window.URL);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -77,23 +76,24 @@ public class URLTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (typeof window.URL === 'function') {\n"
-            + "        alert(new URL('/', 'https://developer.mozilla.org'));\n"
+            + "        log(new URL('/', 'https://developer.mozilla.org'));\n"
             + "        var b = new URL('https://developer.mozilla.org');\n"
-            + "        alert(b);\n"
-            + "        alert(new URL('en-US/docs', b));\n"
+            + "        log(b);\n"
+            + "        log(new URL('en-US/docs', b));\n"
             + "        var d = new URL('/en-US/docs', b);\n"
-            + "        alert(d);\n"
-            + "        alert(new URL('/en-US/docs', d));\n"
-            + "        alert(new URL('/en-US/docs', 'https://developer.mozilla.org/fr-FR/toto'));\n"
-            + "        alert(new URL('http://www.example.com', 'https://developers.mozilla.com'));\n"
+            + "        log(d);\n"
+            + "        log(new URL('/en-US/docs', d));\n"
+            + "        log(new URL('/en-US/docs', 'https://developer.mozilla.org/fr-FR/toto'));\n"
+            + "        log(new URL('http://www.example.com', 'https://developers.mozilla.com'));\n"
             + "        try {\n"
             + "          new URL('/en-US/docs', '');\n"
-            + "        } catch(e) { alert('type error'); }\n"
+            + "        } catch(e) { log('type error'); }\n"
             + "        try {\n"
             + "          new URL('/en-US/docs');\n"
-            + "        } catch(e) { alert('type error'); }\n"
+            + "        } catch(e) { log('type error'); }\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -101,7 +101,8 @@ public class URLTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -115,10 +116,11 @@ public class URLTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (typeof window.URL === 'function') {\n"
             + "        var u = new URL('http://developer.mozilla.org/en-US/docs');\n"
-            + "        alert(u.origin);\n"
+            + "        log(u.origin);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -126,7 +128,7 @@ public class URLTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -138,7 +140,7 @@ public class URLTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if (document.testForm.fileupload.files) {\n"
@@ -189,12 +191,13 @@ public class URLTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (typeof window.URL === 'function') {\n"
             + "        var u = new URL('http://developer.mozilla.org/en-US/docs');\n"
-            + "        alert(u.searchParams);\n"
+            + "        log(u.searchParams);\n"
             + "        u = new URL('http://developer.mozilla.org/en-US/docs?a=u&x');\n"
-            + "        alert(u.searchParams);\n"
+            + "        log(u.searchParams);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -202,6 +205,37 @@ public class URLTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function URL() { [native code] }",
+                "function URL() { [native code] }",
+                "function URL() { [native code] }",
+                "https://developer.mozilla.org/",
+                "https://developer.mozilla.org/",
+                "https://developer.mozilla.org/"},
+            IE = {})
+    public void testToString() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  if (typeof window.URL === 'function') {\n"
+            + "    log(URL);\n"
+            + "    log('' + URL);\n"
+            + "    log(URL.toString());\n"
+
+            + "    var u = new URL('/', 'https://developer.mozilla.org');\n"
+            + "    log(u);\n"
+            + "    log('' + u);\n"
+            + "    log(u.toString());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

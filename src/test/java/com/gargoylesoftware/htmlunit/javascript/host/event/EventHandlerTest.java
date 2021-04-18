@@ -20,11 +20,13 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link EventHandler}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class EventHandlerTest extends WebDriverTestCase {
@@ -34,15 +36,41 @@ public class EventHandlerTest extends WebDriverTestCase {
      */
     @Test
     public void caller() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(test.caller);\n"
+            + "    log(test.caller);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String alert = getCollectedAlerts(driver, 1).get(0);
-        assertTrue(alert.contains("function onload(event)"));
+        assertTrue(driver.getTitle().contains("function onload(event)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function onload(event) { test() }",
+                "function onload(event) { test() }",
+                "function onload(event) { test() }"})
+    public void testToString() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e = test.caller;\n"
+            + "    log(e);\n"
+            + "    log('' + e);\n"
+            + "    log(e.toString());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }
