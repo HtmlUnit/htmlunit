@@ -47,7 +47,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myTarget,myData,7", "myTarget,myData", "abcdefghij",
-                   "<?myTarget myData?>", "<![CDATA[abcdefghij]]>"})
+                  "<?myTarget myData?>", "<![CDATA[abcdefghij]]>"})
     public void createProcessingInstruction() throws Exception {
         final String html = ""
             + LOG_TITLE_FUNCTION

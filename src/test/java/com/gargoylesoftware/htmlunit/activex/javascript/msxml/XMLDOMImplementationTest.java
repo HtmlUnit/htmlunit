@@ -271,8 +271,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"MutationNameEvents 1.0: false",
-                   "MutationNameEvents 2.0: false",
-                   "MutationNameEvents 3.0: false"})
+                  "MutationNameEvents 2.0: false",
+                  "MutationNameEvents 3.0: false"})
     public void hasFeature_MutationNameEvents() throws Exception {
         hasFeature("MutationNameEvents", "['1.0', '2.0', '3.0']");
     }
@@ -353,8 +353,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
-                   "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
-                   "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false"})
+                  "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
+                  "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false"})
     public void hasFeature_SVG_BasicStructure() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "['1.0', '1.1', '1.2']");
     }
@@ -365,8 +365,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
-                   "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
-                   "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false"})
+                  "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
+                  "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false"})
     public void hasFeature_SVG_Shape() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "['1.0', '1.1', '1.2']");
     }

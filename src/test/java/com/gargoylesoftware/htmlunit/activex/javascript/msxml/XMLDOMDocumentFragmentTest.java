@@ -74,7 +74,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"4", "#cdata-section=child-cdata", "true", "#comment=child-comment", "true",
-                   "child-element=null", "true", "#text=child-text", "true"})
+                  "child-element=null", "true", "#text=child-text", "true"})
     public void childNodes() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"

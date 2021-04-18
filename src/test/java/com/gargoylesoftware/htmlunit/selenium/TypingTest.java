@@ -344,9 +344,9 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @Alerts(DEFAULT = {"keydown (target) keyup (target) keyup (body)",
-                "keydown (target) a pressed; removing keyup (body)"},
+                       "keydown (target) a pressed; removing keyup (body)"},
             IE = {"keydown (target) keyup (target) keyup (body)",
-                "keydown (target) a pressed; removing"})
+                  "keydown (target) a pressed; removing"})
     public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
         final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 

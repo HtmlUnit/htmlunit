@@ -408,9 +408,9 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1",
-                   "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
-                   "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
-                   "ownerDocument: doc2", "in first: 1", "in 2nd: 4"})
+                  "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
+                  "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
+                  "ownerDocument: doc2", "in first: 1", "in 2nd: 4"})
     public void moveChildBetweenDocuments() throws Exception {
         final String html = LOG_TITLE_FUNCTION
             + "function test() {\n"

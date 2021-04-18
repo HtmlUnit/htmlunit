@@ -98,7 +98,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function", "function", "function", "function", "function", "function", "function", "function",
-            "function", "function", "function"})
+             "function", "function", "function"})
     public void methods() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"

@@ -154,11 +154,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test test", "test test", "test test",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test test", "test test", "test test",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
             + "log(instr.data);\n"
@@ -198,9 +198,9 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-                   "exception-setNull",
-                   "exception-setEmpty",
-                   "exception-set"})
+                  "exception-setNull",
+                  "exception-setEmpty",
+                  "exception-set"})
     public void data_xmlDecl() throws Exception {
         final String test = ""
             + "log(instr.data);\n"
@@ -368,11 +368,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test test", "test test", "test test",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test test", "test test", "test test",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "log(instr.nodeValue);\n"
@@ -412,9 +412,9 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-                   "exception-setNull",
-                   "exception-setEmpty",
-                   "exception-set"})
+                  "exception-setNull",
+                  "exception-setEmpty",
+                  "exception-set"})
     public void nodeValue_xmlDecl() throws Exception {
         final String test = ""
             + "log(instr.nodeValue);\n"
@@ -610,11 +610,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test test", "test test", "test test",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test test", "test test", "test test",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
             + "log(instr.text);\n"
@@ -654,9 +654,9 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-                   "exception-setNull",
-                   "exception-setEmpty",
-                   "exception-set"})
+                  "exception-setNull",
+                  "exception-setEmpty",
+                  "exception-set"})
     public void text_xmlDecl() throws Exception {
         final String test = ""
             + "log(instr.text);\n"

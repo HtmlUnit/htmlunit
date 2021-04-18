@@ -297,9 +297,9 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"http://www.w3.org/1999/xhtml",
-                   "http://www.w3.org/1999/xhtml",
-                   "http://www.appcelerator.org",
-                   "http://www.appcelerator.org"})
+                  "http://www.w3.org/1999/xhtml",
+                  "http://www.appcelerator.org",
+                  "http://www.appcelerator.org"})
     public void namespaceURI_namespace() throws Exception {
         namespace("namespaceURI");
     }
@@ -831,7 +831,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"1", "child-element=null", "0", "1", "child-element=null", "0", "1", "grand-child-element=null",
-                   "2", "child-element3=null", "child-element3=null", "0", "0", "exception-getNull"})
+                  "2", "child-element3=null", "child-element3=null", "0", "0", "exception-getNull"})
     public void getElementsByTagName() throws Exception {
         final String test =
             // normal
@@ -885,8 +885,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"6", "#cdata-section=child-cdata", "#comment=child-comment", "child-element=null",
-                   "child-element2=null", "grand-child-element=null", "#text=child-text", "6",
-                   "1", "grand-child-element=null"})
+                  "child-element2=null", "grand-child-element=null", "#text=child-text", "6",
+                  "1", "grand-child-element=null"})
     public void getElementsByTagName_allByEmpty() throws Exception {
         final String test =
             // normal
@@ -932,7 +932,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"3", "child-element=null", "child-element2=null", "grand-child-element=null", "3",
-                   "1", "grand-child-element=null"})
+                  "1", "grand-child-element=null"})
     public void getElementsByTagName_allByStar() throws Exception {
         final String test =
             // normal
@@ -1156,7 +1156,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"0", "1", "test1", "1", "test2", "exception-setNameNull",
-                   "exception-setNameEmpty", "exception-setValueNull", "1", ""})
+                  "exception-setNameEmpty", "exception-setValueNull", "1", ""})
     public void setAttribute() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -1225,7 +1225,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"0", "1", "attr=test1", "null", "1", "attr=test2", "attr=test1", "true",
-                   "exception-setNull"})
+                  "exception-setNull"})
     public void setAttributeNode() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"

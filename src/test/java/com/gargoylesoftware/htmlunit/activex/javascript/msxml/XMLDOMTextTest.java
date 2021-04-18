@@ -87,11 +87,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"X", "X", "X",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test\\ntest", "test\\ntest", "test\\ntest",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test\\ntest", "test\\ntest", "test\\ntest",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
             + "log(text.data);\n"
@@ -236,11 +236,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"X", "X", "X",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test\\ntest", "test\\ntest", "test\\ntest",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test\\ntest", "test\\ntest", "test\\ntest",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
             + "log(text.nodeValue);\n"
@@ -388,11 +388,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"X", "X", "X",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test\\ntest", "test\\ntest", "test\\ntest",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test\\ntest", "test\\ntest", "test\\ntest",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
             + "log(text.text);\n"
@@ -522,11 +522,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myText", "myTex", "myx", "yx",
-                   "exception-deletePosNegative", "yx",
-                   "exception-deletePosTooHigh", "yx",
-                   "yx",
-                   "exception-deleteCntNegative", "yx",
-                   "y"})
+                  "exception-deletePosNegative", "yx",
+                  "exception-deletePosTooHigh", "yx",
+                  "yx",
+                  "exception-deleteCntNegative", "yx",
+                  "y"})
     public void deleteData() throws Exception {
         final String test = ""
             + "log(text.data);\n"
@@ -570,11 +570,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myText", "myText-b", "myT-m-ext-b", "f-myT-m-ext-b",
-                   "exception-insertNull", "f-myT-m-ext-b", "\\nf-myT-m-ext-b",
-                   "\\nf-myT-m-ext-b",
-                   "exception-insertPosNegative", "\\nf-myT-m-ext-b",
-                   "\\nf-myT-m-ext-b",
-                   "exception-insertPosTooHigh", "\\nf-myT-m-ext-b"})
+                  "exception-insertNull", "f-myT-m-ext-b", "\\nf-myT-m-ext-b",
+                  "\\nf-myT-m-ext-b",
+                  "exception-insertPosNegative", "\\nf-myT-m-ext-b",
+                  "\\nf-myT-m-ext-b",
+                  "exception-insertPosTooHigh", "\\nf-myT-m-ext-b"})
     public void insertData() throws Exception {
         final String test = ""
             + "log(text.data);\n"
@@ -623,12 +623,12 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myText", "myTex-b", "my-m-x-b", "f-y-m-x-b",
-                   "exception-replaceNull", "f-y--x-b", "f-y\\nx-b",
-                   "exception-replacePosNegative", "f-y\\nx-b",
-                   "exception-replacePosTooHigh", "f-y\\nx-b",
-                   "f-y\\nx-b",
-                   "exception-replaceCntNegative", "f-y\\nx-b",
-                   "f"})
+                  "exception-replaceNull", "f-y--x-b", "f-y\\nx-b",
+                  "exception-replacePosNegative", "f-y\\nx-b",
+                  "exception-replacePosTooHigh", "f-y\\nx-b",
+                  "f-y\\nx-b",
+                  "exception-replaceCntNegative", "f-y\\nx-b",
+                  "f"})
     public void replaceData() throws Exception {
         final String test = ""
             + "log(text.data);\n"
@@ -682,8 +682,8 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"1", "2", "#text", "2", "my", "#text", "4", "Text", "true",
-                   "exception-splitPosNegative", "my",
-                   "exception-splitPosTooHigh", "my"})
+                  "exception-splitPosNegative", "my",
+                  "exception-splitPosTooHigh", "my"})
     public void splitText() throws Exception {
         final String test = ""
             + "log(root.childNodes.length);\n"
@@ -715,11 +715,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myText", "t", "myText", "Te", "myText", "m", "myText",
-                   "exception-substringPosNegative", "myText",
-                   "exception-substringPosTooHigh", "myText",
-                   "", "myText",
-                   "exception-substringCntNegative", "myText",
-                   "yText", "myText"})
+                  "exception-substringPosNegative", "myText",
+                  "exception-substringPosTooHigh", "myText",
+                  "", "myText",
+                  "exception-substringCntNegative", "myText",
+                  "yText", "myText"})
     public void substringData() throws Exception {
         final String test = ""
             + "log(text.data);\n"

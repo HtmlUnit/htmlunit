@@ -51,11 +51,11 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"body", "active: body", "onload", "active: body",
-                "onfocus:[object Window]", "active: body"},
+                       "onfocus:[object Window]", "active: body"},
             CHROME = {"body", "active: body", "onload", "active: body"},
             EDGE = {"body", "active: body", "onload", "active: body"},
             IE = {"body", "active: null", "onfocusin:body", "active: body", "onload", "active: body",
-                "onfocus:[object Window]", "active: body"})
+                  "onfocus:[object Window]", "active: body"})
     @HtmlUnitNYI(FF = {"body", "active: body", "onload", "active: body"},
             FF78 = {"body", "active: body", "onload", "active: body"},
             IE = {"body", "active: body", "onload", "active: body"})
@@ -87,11 +87,11 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"onfocus:[object Window]", "active: focusId",
-                "before", "active: focusId", "after", "active: focusId"},
+                       "before", "active: focusId", "after", "active: focusId"},
             CHROME = {"before", "active: focusId", "after", "active: focusId"},
             EDGE = {"before", "active: focusId", "after", "active: focusId"},
             IE = {"onfocusin:focusId", "active: focusId", "onfocus:[object Window]", "active: focusId",
-                "before", "active: focusId", "after", "active: focusId"})
+                  "before", "active: focusId", "after", "active: focusId"})
     @HtmlUnitNYI(FF = {"before", "active: focusId", "after", "active: focusId"},
             FF78 = {"before", "active: focusId", "after", "active: focusId"},
             IE = {"before", "active: focusId", "onfocusout:focusId", "active: focusId", "after", "active: focusId"})
@@ -125,11 +125,11 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body",
-                "before", "active: body", "after", "active: body"},
+                       "before", "active: body", "after", "active: body"},
             CHROME = {"before", "active: body", "after", "active: body"},
             EDGE = {"before", "active: body", "after", "active: body"},
             IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
-                "before", "active: body", "after", "active: body"})
+                  "before", "active: body", "after", "active: body"})
     @HtmlUnitNYI(FF = {"before", "active: body", "after", "active: body"},
             FF78 = {"before", "active: body", "after", "active: body"},
             IE = {"before", "active: body", "after", "active: body"})
@@ -162,48 +162,48 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body",
-                "before", "active: body",
-                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
-                "active: focusId", "onfocusin:focusId", "active: focusId",
-                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
-                "active: body", "onfocusout:focusId", "active: body",
-                "after", "active: body"},
+                       "before", "active: body",
+                       "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                       "active: focusId", "onfocusin:focusId", "active: focusId",
+                       "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                       "active: body", "onfocusout:focusId", "active: body",
+                       "after", "active: body"},
             CHROME = {"before", "active: body",
-                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
-                "active: focusId", "onfocusin:focusId", "active: focusId",
-                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
-                "active: body", "onfocusout:focusId", "active: body",
-                "after", "active: body"},
+                      "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                      "active: focusId", "onfocusin:focusId", "active: focusId",
+                      "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                      "active: body", "onfocusout:focusId", "active: body",
+                      "after", "active: body"},
             EDGE = {"before", "active: body",
-                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
-                "active: focusId", "onfocusin:focusId", "active: focusId",
-                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
-                "active: body", "onfocusout:focusId", "active: body",
-                "after", "active: body"},
+                    "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                    "active: focusId", "onfocusin:focusId", "active: focusId",
+                    "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                    "active: body", "onfocusout:focusId", "active: body",
+                    "after", "active: body"},
             IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
-                "before", "active: body", "onfocusout:body", "active: focusId",
-                "onfocusinF:focusId", "active: focusId", "onfocusin:focusId",
-                "active: focusId", "onfocusoutF:focusId", "active: body",
-                "onfocusout:focusId", "active: body", "onfocusin:body", "active: body", "after", "active: body",
-                "onfocusF:focusId", "active: body", "onblurF:focusId", "active: body"})
+                  "before", "active: body", "onfocusout:body", "active: focusId",
+                  "onfocusinF:focusId", "active: focusId", "onfocusin:focusId",
+                  "active: focusId", "onfocusoutF:focusId", "active: body",
+                  "onfocusout:focusId", "active: body", "onfocusin:body", "active: body", "after", "active: body",
+                  "onfocusF:focusId", "active: body", "onblurF:focusId", "active: body"})
     @HtmlUnitNYI(FF = {"before", "active: body",
-                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
-                "active: focusId", "onfocusin:focusId", "active: focusId",
-                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
-                "active: body", "onfocusout:focusId", "active: body",
-                "after", "active: body"},
+                       "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                       "active: focusId", "onfocusin:focusId", "active: focusId",
+                       "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                       "active: body", "onfocusout:focusId", "active: body",
+                       "after", "active: body"},
             FF78 = {"before", "active: body",
-                "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
-                "active: focusId", "onfocusin:focusId", "active: focusId",
-                "onblurF:focusId", "active: body", "onfocusoutF:focusId",
-                "active: body", "onfocusout:focusId", "active: body",
-                "after", "active: body"},
+                    "onfocusF:focusId", "active: focusId", "onfocusinF:focusId",
+                    "active: focusId", "onfocusin:focusId", "active: focusId",
+                    "onblurF:focusId", "active: body", "onfocusoutF:focusId",
+                    "active: body", "onfocusout:focusId", "active: body",
+                    "after", "active: body"},
             IE = {"before", "active: body", "onfocusout:body", "active: body",
-                "onfocusinF:focusId", "active: body", "onfocusin:focusId",
-                "active: body", "onfocusF:focusId", "active: focusId",
-                "onfocusoutF:focusId", "active: body", "onfocusout:focusId",
-                "active: body", "onblurF:focusId", "active: body",
-                "after", "active: body"})
+                  "onfocusinF:focusId", "active: body", "onfocusin:focusId",
+                  "active: body", "onfocusF:focusId", "active: focusId",
+                  "onfocusoutF:focusId", "active: body", "onfocusout:focusId",
+                  "active: body", "onblurF:focusId", "active: body",
+                  "after", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromBodyToFocusable() throws Exception {
         final String html =
@@ -233,12 +233,12 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body",
-                "before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
+                       "before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
             CHROME = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
             EDGE = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
             IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
-                "before", "active: body", "onfocusout:body", "active: focusId1",
-                "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"})
+                  "before", "active: body", "onfocusout:body", "active: focusId1",
+                  "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"})
     @HtmlUnitNYI(FF = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
             FF78 = {"before", "active: body", "onfocusin:focusId1", "active: focusId1", "after", "active: focusId1"},
             IE = {"before", "active: body", "onfocusout:body", "active: body", "onfocusin:focusId1",
@@ -254,34 +254,34 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"onfocus:[object Window]", "active: body", "before", "active: body",
-                "onfocusin:focusId1", "active: focusId1",
-                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
-                "after", "active: focusId2"},
+                       "onfocusin:focusId1", "active: focusId1",
+                       "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                       "after", "active: focusId2"},
             CHROME = {"before", "active: body",
-                "onfocusin:focusId1", "active: focusId1",
-                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
-                "after", "active: focusId2"},
+                      "onfocusin:focusId1", "active: focusId1",
+                      "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                      "after", "active: focusId2"},
             EDGE = {"before", "active: body",
-                "onfocusin:focusId1", "active: focusId1",
-                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
-                "after", "active: focusId2"},
+                    "onfocusin:focusId1", "active: focusId1",
+                    "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                    "after", "active: focusId2"},
             IE = {"onfocusin:body", "active: body", "onfocus:[object Window]", "active: body",
-                "before", "active: body", "onfocusout:body", "active: focusId1",
-                "onfocusin:focusId1", "active: focusId1", "onfocusout:focusId1", "active: focusId2",
-                "onfocusin:focusId2", "active: focusId2",
-                "after", "active: focusId2"})
+                  "before", "active: body", "onfocusout:body", "active: focusId1",
+                  "onfocusin:focusId1", "active: focusId1", "onfocusout:focusId1", "active: focusId2",
+                  "onfocusin:focusId2", "active: focusId2",
+                  "after", "active: focusId2"})
     @HtmlUnitNYI(FF = {"before", "active: body",
-                "onfocusin:focusId1", "active: focusId1",
-                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
-                "after", "active: focusId2"},
+                       "onfocusin:focusId1", "active: focusId1",
+                       "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                       "after", "active: focusId2"},
             FF78 = {"before", "active: body",
-                "onfocusin:focusId1", "active: focusId1",
-                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
-                "after", "active: focusId2"},
+                    "onfocusin:focusId1", "active: focusId1",
+                    "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: focusId2",
+                    "after", "active: focusId2"},
             IE = {"before", "active: body", "onfocusout:body", "active: body",
-                "onfocusin:focusId1", "active: body",
-                "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: body",
-                "after", "active: focusId2"})
+                  "onfocusin:focusId1", "active: body",
+                  "onfocusout:focusId1", "active: body", "onfocusin:focusId2", "active: body",
+                  "after", "active: focusId2"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromFocusableToFocusable() throws Exception {
         testBodySwitchWithCallFocusAndBlur("<input type='text' id='focusId1'>\n"
