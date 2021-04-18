@@ -570,4 +570,33 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function URLSearchParams() { [native code] }",
+                "function URLSearchParams() { [native code] }",
+                "function URLSearchParams() { [native code] }",
+                "key1=val1", "key1=val1", "key1=val1"},
+            IE = {})
+    public void testToString() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  if (self.URLSearchParams) {\n"
+            + "    log(URLSearchParams);\n"
+            + "    log('' + URLSearchParams);\n"
+            + "    log(URLSearchParams.toString());\n"
+
+            + "    var p = new URLSearchParams('key1=val1');\n"
+            + "    log(p);\n"
+            + "    log('' + p);\n"
+            + "    log(p.toString());\n"
+            + "  }"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

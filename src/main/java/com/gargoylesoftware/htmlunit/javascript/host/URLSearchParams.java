@@ -329,6 +329,15 @@ public class URLSearchParams extends SimpleScriptable {
     }
 
     /**
+     * Returns the text of the Range.
+     * @return the text
+     */
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
+        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
+    }
+
+    /**
      * Calls for instance for implicit conversion to string.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
@@ -336,7 +345,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
+        return jsToString();
     }
 
     /**
