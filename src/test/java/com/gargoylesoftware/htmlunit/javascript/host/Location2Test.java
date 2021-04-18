@@ -604,14 +604,15 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts({"§§URL§§", "§§URL§§", "§§URL§§"})
     public void testToString() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = "<html><body>\n"
             + "<script>\n"
-            + " alert(window.location.toString());\n"
+            + "  var l = window.location;\n"
+            + "  alert(l);\n"
+            + "  alert('' + l);\n"
+            + "  alert(l.toString());\n"
             + "</script>\n"
-            + "<body>\n"
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);

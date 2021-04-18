@@ -473,9 +473,8 @@ public class Range extends SimpleScriptable {
      * Returns the text of the Range.
      * @return the text
      */
-    @Override
-    @JsxFunction
-    public String toString() {
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
         return toW3C().toString();
     }
 

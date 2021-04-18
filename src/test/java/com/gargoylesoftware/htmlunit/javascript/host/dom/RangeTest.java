@@ -438,4 +438,24 @@ public class RangeTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"tyxy", "tyxy", "tyxy"})
+    public void testToString() throws Exception {
+        final String html =
+              "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(s.firstChild, 4);\n"
+            + "  r.setEnd(d.childNodes[2], 2);\n"
+            + "  alert(r);\n"
+            + "  alert('' + r);\n"
+            + "  alert(r.toString());\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

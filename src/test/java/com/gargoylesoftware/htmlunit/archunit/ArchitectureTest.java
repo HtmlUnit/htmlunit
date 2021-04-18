@@ -74,4 +74,13 @@ public class ArchitectureTest {
                     .or().areAnnotatedWith(JsxFunction.class)
             .should().beDeclaredInClassesThat().areAnnotatedWith(JsxClass.class)
             .orShould().beDeclaredInClassesThat().areAnnotatedWith(JsxClasses.class);
+
+    /**
+     * Do not overwrite toString for javascript, use jsToString and define the
+     * functionName in the @JsxFunction annotation.
+     */
+    @ArchTest
+    public static final ArchRule jsToString = methods()
+            .that().areAnnotatedWith(JsxFunction.class)
+            .should().haveNameNotMatching("toString");
 }

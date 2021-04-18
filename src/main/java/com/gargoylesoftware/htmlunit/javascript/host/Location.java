@@ -164,9 +164,8 @@ public class Location extends SimpleScriptable {
      * Returns the location URL.
      * @return the location URL
      */
-    @Override
-    @JsxFunction
-    public String toString() {
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
         if (window_ != null) {
             return getHref();
         }
