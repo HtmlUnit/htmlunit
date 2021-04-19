@@ -64,7 +64,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
-                   "true", "false", "true", "false", "", "null", "", "null"})
+             "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -110,13 +110,13 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined",
-                    "null", "", "blah", "context", "ToolBar", "list",
-                    "context", "toolbar", "ConText", "", "unknown"},
+                       "null", "", "blah", "context", "ToolBar", "list",
+                       "context", "toolbar", "ConText", "", "unknown"},
             FF78 = {"", "", "blah", "context", "ToolBar", "null", "", "blah",
                     "context", "ToolBar", "list", "context", "toolbar", "ConText",
                     "", "unknown"},
             IE = {"", "", "", "", "", "null", "", "blah",
-                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", ""})
+                  "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", ""})
     public void type() throws Exception {
         final String html =
                 "<html>\n"

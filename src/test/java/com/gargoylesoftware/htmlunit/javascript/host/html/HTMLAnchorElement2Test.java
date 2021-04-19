@@ -218,7 +218,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"§§URL§§testsite1.html", "testsite1.html", "§§URL§§testsite2.html",
-                "testsite2.html", "13", "testanchor", "mailto:"})
+             "testsite2.html", "13", "testanchor", "mailto:"})
     public void getAttribute_and_href() throws Exception {
         final String html
             = "<html><head>\n"
@@ -253,7 +253,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#test",
-        "§§URL§§#", "§§URL§§"})
+             "§§URL§§#", "§§URL§§"})
     public void getDefaultValue() throws Exception {
         final String html
             = "<html><head>\n"
@@ -286,7 +286,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#test",
-        "§§URL§§#", "§§URL§§"})
+             "§§URL§§#", "§§URL§§"})
     public void getDefaultValueWithHash() throws Exception {
         final String html
             = "<html><head>\n"
@@ -320,9 +320,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
-                        "§§URL§§index.html#", "§§URL§§index.html"},
+                       "§§URL§§index.html#", "§§URL§§index.html"},
             IE = {"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
-                        "§§URL§§index.html#", "§§URL§§"})
+                  "§§URL§§index.html#", "§§URL§§"})
     public void getDefaultValueWithHashAndFileName() throws Exception {
         final String html
             = "<html><head>\n"
@@ -718,13 +718,13 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"},
+                  "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"},
             CHROME = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
+                      "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             EDGE = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
+                    "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
-                    "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
+                  "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
             FF78 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
                     "foo:||||||", "p:||||||", "p:||||||", "p:||||||"})
     public void propertiesNonStandardHref() throws Exception {
@@ -817,9 +817,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "§§URL§§", "§§URL§§", "§§URL§§", "http://www.htmlunit.org",
-                        "http://www.htmlunit.org:1234", "https://www.htmlunit.org:1234"},
+                       "http://www.htmlunit.org:1234", "https://www.htmlunit.org:1234"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined"})
+                  "undefined", "undefined"})
     public void originAttrib() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -855,10 +855,10 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
-                        "origin-origin", "unsafe-url-unsafe-url", "-unknown"},
+                       "origin-origin", "unsafe-url-unsafe-url", "-unknown"},
             IE = {"undefined-null", "undefined-", "undefined-  \t ",
-                        "undefined-no-referrer", "undefined-origin",
-                        "undefined-unsafe-url", "undefined-unknown"})
+                  "undefined-no-referrer", "undefined-origin",
+                  "undefined-unsafe-url", "undefined-unknown"})
     public void referrerPolicy() throws Exception {
         final String html =
                 "<html>\n"
@@ -893,10 +893,10 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"origin-origin", "-unknown", "no-referrer-no-referrer",
-                        "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"},
+                       "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"},
             IE = {"undefined-origin", "unknown-origin", "no-referrer-origin",
-                        "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
-                        "NO-reFerrer- ", "NO-reFerrer-unknown"})
+                  "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
+                  "NO-reFerrer- ", "NO-reFerrer-unknown"})
     public void setReferrerPolicy() throws Exception {
         final String html =
                 "<html>\n"
@@ -943,7 +943,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
-                "§§URL§§", "http://srv/htmlunit.org"})
+             "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1111,31 +1111,31 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "user", "user", "",
-                "", "",
-                "Tester", "https://Tester:password@developer.mozilla.org/",
-                "Tester", "https://Tester@developer.mozilla.org/",
-                "Tester", "https://Tester@developer.mozilla.org/"},
+                       "", "",
+                       "Tester", "https://Tester:password@developer.mozilla.org/",
+                       "Tester", "https://Tester@developer.mozilla.org/",
+                       "Tester", "https://Tester@developer.mozilla.org/"},
             IE = {"undefined", "undefined", "undefined", "undefined"})
     @HtmlUnitNYI(CHROME = {"", "user", "user", "",
-                "", "",
-                "Tester", "https://Tester:password@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org"},
+                           "", "",
+                           "Tester", "https://Tester:password@developer.mozilla.org",
+                           "Tester", "https://Tester@developer.mozilla.org",
+                           "Tester", "https://Tester@developer.mozilla.org"},
             EDGE = {"", "user", "user", "",
-                "", "",
-                "Tester", "https://Tester:password@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org"},
+                    "", "",
+                    "Tester", "https://Tester:password@developer.mozilla.org",
+                    "Tester", "https://Tester@developer.mozilla.org",
+                    "Tester", "https://Tester@developer.mozilla.org"},
             FF78 = {"", "user", "user", "",
-                "", "",
-                "Tester", "https://Tester:password@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org"},
+                    "", "",
+                    "Tester", "https://Tester:password@developer.mozilla.org",
+                    "Tester", "https://Tester@developer.mozilla.org",
+                    "Tester", "https://Tester@developer.mozilla.org"},
             FF = {"", "user", "user", "",
-                "", "",
-                "Tester", "https://Tester:password@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org",
-                "Tester", "https://Tester@developer.mozilla.org"})
+                  "", "",
+                  "Tester", "https://Tester:password@developer.mozilla.org",
+                  "Tester", "https://Tester@developer.mozilla.org",
+                  "Tester", "https://Tester@developer.mozilla.org"})
     public void readWriteUsername() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a>"
@@ -1181,31 +1181,31 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "password", "password", "",
-                "", "",
-                "Tester", "https://user:Tester@developer.mozilla.org/",
-                "Tester", "https://:Tester@developer.mozilla.org/",
-                "Tester", "https://:Tester@developer.mozilla.org/"},
+                       "", "",
+                       "Tester", "https://user:Tester@developer.mozilla.org/",
+                       "Tester", "https://:Tester@developer.mozilla.org/",
+                       "Tester", "https://:Tester@developer.mozilla.org/"},
             IE = {"undefined", "undefined", "undefined", "undefined"})
     @HtmlUnitNYI(CHROME = {"", "password", "password", "",
-                "", "",
-                "Tester", "https://user:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org"},
+                           "", "",
+                           "Tester", "https://user:Tester@developer.mozilla.org",
+                           "Tester", "https://:Tester@developer.mozilla.org",
+                           "Tester", "https://:Tester@developer.mozilla.org"},
             EDGE = {"", "password", "password", "",
-                "", "",
-                "Tester", "https://user:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org"},
+                    "", "",
+                    "Tester", "https://user:Tester@developer.mozilla.org",
+                    "Tester", "https://:Tester@developer.mozilla.org",
+                    "Tester", "https://:Tester@developer.mozilla.org"},
             FF78 = {"", "password", "password", "",
-                "", "",
-                "Tester", "https://user:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org"},
+                    "", "",
+                    "Tester", "https://user:Tester@developer.mozilla.org",
+                    "Tester", "https://:Tester@developer.mozilla.org",
+                    "Tester", "https://:Tester@developer.mozilla.org"},
             FF = {"", "password", "password", "",
-                "", "",
-                "Tester", "https://user:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org",
-                "Tester", "https://:Tester@developer.mozilla.org"})
+                  "", "",
+                  "Tester", "https://user:Tester@developer.mozilla.org",
+                  "Tester", "https://:Tester@developer.mozilla.org",
+                  "Tester", "https://:Tester@developer.mozilla.org"})
     public void readWritePassword() throws Exception {
         final String html
             = "<html><body><a id='a1'>a1</a>"

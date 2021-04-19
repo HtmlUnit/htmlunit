@@ -555,8 +555,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"o2: text: Option 2, label: Option 2, value: 2, defaultSelected: false, selected: false",
-                "o3: text: Option 3, label: Option 3, value: 3, defaultSelected: true, selected: false",
-                "0", "1"})
+             "o3: text: Option 3, label: Option 3, value: 3, defaultSelected: true, selected: false",
+             "0", "1"})
     public void constructor() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -622,7 +622,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "[object Attr]", "null", "null", "null",
-                "null", "null", "null", "null", "null"})
+             "null", "null", "null", "null", "null"})
     public void getAttributeNode() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -661,9 +661,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false null null", "false null null", "true *selected selected",
-                "true null null", "false null null", "false *selected selected",
-                "false null null", "true null null", "false *selected selected",
-                "true null null", "false null null", "false *selected selected"})
+             "true null null", "false null null", "false *selected selected",
+             "false null null", "true null null", "false *selected selected",
+             "true null null", "false null null", "false *selected selected"})
     public void selectedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -714,9 +714,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false null null", "false null null", "true *selected selected",
-                "true null null", "false null null", "true *selected selected",
-                "true null null", "true null null", "true *selected selected",
-                "true null null", "false null null", "true *selected selected"})
+             "true null null", "false null null", "true *selected selected",
+             "true null null", "true null null", "true *selected selected",
+             "true null null", "false null null", "true *selected selected"})
     public void selectedAttributeMultiple() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1006,17 +1006,17 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned.",
-                    "1", "0", "o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "1", "0", "o2",
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned."},
             FF = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned",
-                    "1", "0", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned"},
+                  "InvalidStateError: XPathResult.iterateNext: "
+                        + "The document has been mutated since the result was returned",
+                  "1", "0", "o2",
+                  "InvalidStateError: XPathResult.iterateNext: "
+                        + "The document has been mutated since the result was returned"},
             FF78 = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
@@ -1039,23 +1039,23 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned.",
-                    "1", "1", "o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "1", "1", "o2",
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned."},
             FF = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned",
-                    "1", "1", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned"},
+                  "InvalidStateError: XPathResult.iterateNext: "
+                        + "The document has been mutated since the result was returned",
+                  "1", "1", "o2",
+                  "InvalidStateError: XPathResult.iterateNext: "
+                        + "The document has been mutated since the result was returned"},
             FF78 = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned",
+                        + "The document has been mutated since the result was returned",
                     "1", "1", "o2",
                     "InvalidStateError: XPathResult.iterateNext: "
-                            + "The document has been mutated since the result was returned"},
+                        + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
             EDGE = {"o2", "1", "1", "o2"},
@@ -1072,16 +1072,16 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned.",
-                    "1", "-1", "o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "1", "-1", "o2",
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned."},
             FF = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                  "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
-                    "1", "-1", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                  "1", "-1", "o2",
+                  "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             FF78 = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
@@ -1105,16 +1105,16 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned.",
-                    "1", "1", "o2",
-                    "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
+                       "1", "1", "o2",
+                       "InvalidStateError: Failed to execute 'iterateNext' on 'XPathResult': "
                             + "The document has mutated since the result was returned."},
             FF = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                  "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
-                    "1", "1", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                  "1", "1", "o2",
+                  "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             FF78 = {"o2",
                     "InvalidStateError: XPathResult.iterateNext: "
@@ -1296,8 +1296,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false-null", "true-selected", "false-null",
-                "true-null", "false-selected", "false-null",
-                "false-null", "false-selected", "false-null"})
+             "true-null", "false-selected", "false-null",
+             "false-null", "false-selected", "false-null"})
     public void selectAndAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1345,9 +1345,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false-null", "true-true", "true-null",
-                    "false-selected", "false-null", "true-true"},
+                       "false-selected", "false-null", "true-true"},
             FF = {"false-null", "true-true", "true-null",
-                    "false-selected", "false-null", "false-true"},
+                  "false-selected", "false-null", "false-true"},
             FF78 = {"false-null", "true-true", "true-null",
                     "false-selected", "false-null", "false-true"})
     @NotYetImplemented({FF, FF78})
@@ -1396,9 +1396,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false-null", "true-true", "false-null",
-                        "false-null", "true-true", "false-null"},
+                       "false-null", "true-true", "false-null"},
             IE = {"false-null", "true-true", "true-",
-                    "false-null", "true-true", "false-null"})
+                  "false-null", "true-true", "false-null"})
     @NotYetImplemented(IE)
     public void createOption() throws Exception {
         final String html =

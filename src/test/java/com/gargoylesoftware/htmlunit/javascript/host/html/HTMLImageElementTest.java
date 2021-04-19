@@ -123,13 +123,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+                       "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             FF = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+                  "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             FF78 = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+                    "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             IE = {"[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
+                  "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
     public void image() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -323,13 +323,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"left", "right", "center", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+                       "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             FF = {"left", "right", "middle", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
+                  "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF78 = {"left", "right", "middle", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
+                    "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"left", "right", "center", "", "bottom", "middle",
-                "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
+                  "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented({FF, FF78})
     public void getAlign() throws Exception {
         final String html
@@ -362,14 +362,14 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "center", "justify",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
+                       "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
             FF = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
+                  "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             FF78 = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
+                    "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             IE = {"center", "error", "center", "error", "center", "left", "right",
-                "center", "error", "center", "bottom", "middle", "top", "absBottom",
-                "absMiddle", "baseline", "textTop"})
+                  "center", "error", "center", "bottom", "middle", "top", "absBottom",
+                  "absMiddle", "baseline", "textTop"})
     @NotYetImplemented({FF, FF78})
     public void setAlign() throws Exception {
         final String html

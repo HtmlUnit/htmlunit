@@ -38,7 +38,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined", "undefined"},
+                       "undefined", "undefined", "undefined"},
             IE = {"left", "right", "bottom", "middle", "top", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {

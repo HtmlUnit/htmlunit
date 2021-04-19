@@ -254,7 +254,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
-        "/frame2.html", "oFrame.foo: foo of frame 2"})
+             "/frame2.html", "oFrame.foo: foo of frame 2"})
     public void changingFrameDocumentLocation() throws Exception {
         final String firstHtml = "<html><head><script>\n"
             + "var oFrame;\n"
@@ -435,9 +435,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"OnloadTest", "header -> content -> frameSet",
-                "content\nClick for new frame content with onload",
-                "header -> content -> frameSet -> onloadFrame",
-                "onloadFrame\nNew content loaded..."})
+             "content\nClick for new frame content with onload",
+             "header -> content -> frameSet -> onloadFrame",
+             "onloadFrame\nNew content loaded..."})
     public void windowLocationReplaceOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
@@ -518,9 +518,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"OnloadTest", "header -> content -> frameSet",
-            "content\nClick for new frame content with onload",
-            "header -> content -> frameSet -> onloadFrame",
-            "onloadFrame\nNew content loaded..."})
+             "content\nClick for new frame content with onload",
+             "header -> content -> frameSet -> onloadFrame",
+             "onloadFrame\nNew content loaded..."})
     public void windowLocationAssignOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
@@ -601,9 +601,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"OnloadTest", "header -> content -> frameSet",
-                "content\nClick for new frame content with onload",
-                "header -> content -> frameSet -> onloadFrame",
-                "onloadFrame\nNew content loaded..."})
+             "content\nClick for new frame content with onload",
+             "header -> content -> frameSet -> onloadFrame",
+             "onloadFrame\nNew content loaded..."})
     @NotYetImplemented
     public void windowLocationSetOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"

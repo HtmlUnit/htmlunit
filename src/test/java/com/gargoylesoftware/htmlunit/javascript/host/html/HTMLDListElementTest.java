@@ -64,7 +64,7 @@ public class HTMLDListElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
-                        "true", "false", "true", "false", "", "null", "", "null"})
+             "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -110,7 +110,7 @@ public class HTMLDListElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined",
-                        "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
+             "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
     public void type() throws Exception {
         final String html =
                 "<html>\n"

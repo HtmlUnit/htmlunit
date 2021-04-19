@@ -43,15 +43,15 @@ public class FileTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "ScriptExceptionTest1.txt",
-                            "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
-                            "1437920507000", "", "14", MimeType.TEXT_PLAIN},
+                       "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
+                       "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             FF = {"1", "ScriptExceptionTest1.txt", "undefined",
-                            "1437920507000", "", "14", MimeType.TEXT_PLAIN},
+                  "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             FF78 = {"1", "ScriptExceptionTest1.txt", "undefined",
                     "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             IE = {"1", "ScriptExceptionTest1.txt",
-                            "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
-                            "undefined", "undefined", "14", MimeType.TEXT_PLAIN})
+                  "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
+                  "undefined", "undefined", "14", MimeType.TEXT_PLAIN})
     public void properties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -260,8 +260,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "0",
-                ""},
+    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "0", ""},
             IE = "TypeError true")
     public void ctorEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -294,8 +293,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "8",
-                "HtmlUnit"},
+    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "8", "HtmlUnit"},
             IE = "TypeError true")
     public void ctorString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -329,7 +327,7 @@ public class FileTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
-                "HtmlUnit"},
+                       "HtmlUnit"},
             IE = "TypeError true")
     public void ctorStringWithOptions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -364,7 +362,7 @@ public class FileTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "16",
-                "HtmlUnitis great"},
+                       "HtmlUnitis great"},
             IE = "TypeError true")
     public void ctorStrings() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -397,8 +395,7 @@ public class FileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "12",
-                "HtmlUnitMMMK"},
+    @Alerts(DEFAULT = {"[object File]", "htMluniT.txt", "", "true", "12", "HtmlUnitMMMK"},
             IE = "TypeError true")
     public void ctorMixed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

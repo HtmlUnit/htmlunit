@@ -47,7 +47,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "type", "false", "false", "false",
-                        ",,false"},
+                       ",,false"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -72,11 +72,11 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     @HtmlUnitNYI(CHROME = {"[object InputEvent]", "undefined", "false", "false", "false",
-                    ",,false"},
+                           ",,false"},
             EDGE = {"[object InputEvent]", "undefined", "false", "false", "false",
                     ",,false"},
             FF = {"[object InputEvent]", "undefined", "false", "false", "false",
-                    ",,false"},
+                  ",,false"},
             FF78 = {"[object InputEvent]", "undefined", "false", "false", "false",
                     ",,false"})
     public void create_ctorWithoutType() throws Exception {
@@ -101,7 +101,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "42", "false", "false", "false",
-                ",,false"},
+                       ",,false"},
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -125,7 +125,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT =  {"[object InputEvent]", "null", "false", "false", "false",
-                ",,false"},
+                        ",,false"},
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -171,7 +171,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "HtmlUnitEvent", "false", "false", "false",
-                ",,false"},
+                       ",,false"},
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -195,11 +195,11 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                        "data,inputType,true"},
+                       "data,inputType,true"},
             CHROME = {"[object InputEvent]", "input", "false", "false", "false",
-                        "data,,true"},
+                      "data,,true"},
             EDGE = {"[object InputEvent]", "input", "false", "false", "false",
-                        "data,,true"},
+                    "data,,true"},
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -224,7 +224,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                        ",,true"},
+                       ",,true"},
             IE = "exception")
     public void create_ctorSomeDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -249,7 +249,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                        ",,false"},
+                       ",,false"},
             IE = "exception")
     public void create_ctorMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -274,7 +274,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                        ",,false"},
+                       ",,false"},
             IE = "exception")
     public void create_ctorNullData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -298,7 +298,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                        ",,false"},
+                       ",,false"},
             IE = "exception")
     public void create_ctorUndefinedData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -322,7 +322,7 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                        "Html,Unit,,false"},
+                       "Html,Unit,,false"},
             IE = "exception")
     public void create_ctorWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

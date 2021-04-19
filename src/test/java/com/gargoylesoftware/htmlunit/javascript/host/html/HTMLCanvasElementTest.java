@@ -70,7 +70,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAOA1v9QAATX68/0AAAAASUVORK5CYII=",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
+                  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
                     + "oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -82,7 +82,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAOA1v9QAATX68/0AAAAASUVORK5CYII=",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
                     + "oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -95,7 +95,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAONUAv9QAAcDhjokAAAAASUVORK5CYII=",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAARnQU1BAACx"
+                  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAARnQU1BAACx"
                     + "jwv8YQUAAADGSURBVHhe7cExAQAAAMKg9U9tCF8gAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                     + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -132,7 +132,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "AAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkE"
                     + "JEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMg"
                     + "IGK1OVoAQIGCw/QIBARsBgZaoSlACBB1YxAJfjJb2jAAAAAElFTkSuQmCC",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAA"
+                      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAA"
                     + "ABkW7XSAAAEYklEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw"
                     + "5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZa"
                     + "oSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQC"
@@ -193,7 +193,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "AAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKk"
                     + "EJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMg"
                     + "IGK1OVoAQIGCw/QIBARsBgZaoSlACBB1YxAJfjJb2jAAAAAElFTkSuQmCC",
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAA"
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAA"
                     + "ABkW7XSAAAEYklEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw"
                     + "5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZao"
                     + "SlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQC"
@@ -246,9 +246,9 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
-                        "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"},
+                       "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"},
             IE = {"[object CanvasRenderingContext2D]", "null",
-                        "[object WebGLRenderingContext]", "null", "null", "null"})
+                  "[object WebGLRenderingContext]", "null", "null", "null"})
     @NotYetImplemented
     public void getContext() throws Exception {
         final String html =
@@ -346,5 +346,4 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
-
 }

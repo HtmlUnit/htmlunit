@@ -67,7 +67,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
-                "true", "false", "true", "false", "", "null", "", "null"})
+             "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -113,7 +113,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined",
-                        "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"},
+                       "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"},
             IE = {"", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I"})
     @NotYetImplemented(IE)
     public void type() throws Exception {

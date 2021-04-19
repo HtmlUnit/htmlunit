@@ -442,9 +442,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"},
             IE = {"true", "true", "2.0555555555555553", "3.0555555555555553",
-                    "4.111111111111111", "5.111111111111111", "6.111111111111111",
-                    "7.166666666666667", "8.166666666666666", "9.222222222222221",
-                    "101.22222222222223", "203.44444444444446", "6132.333333333333"})
+                  "4.111111111111111", "5.111111111111111", "6.111111111111111",
+                  "7.166666666666667", "8.166666666666666", "9.222222222222221",
+                  "101.22222222222223", "203.44444444444446", "6132.333333333333"})
     @NotYetImplemented(IE)
     public void offsetTopWithPreviousSiblings() throws Exception {
         String html =
@@ -1462,7 +1462,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"First: body1", "Second:", "Second: body1 setActive not available"},
             IE = {"First: body1", "Second:",
-                    "Second: body1 text1 [object HTMLButtonElement] text2 [object Window] onfocus text2"})
+                  "Second: body1 text1 [object HTMLButtonElement] text2 [object Window] onfocus text2"})
     // alert conflicts with focus/blur
     @NotYetImplemented(IE)
     public void setActiveAndFocus() throws Exception {
@@ -1528,7 +1528,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"DIV,DIV,http://www.w3.org/1999/xhtml,null,div", "svg,svg,http://www.w3.org/2000/svg,null,svg",
-            "g,g,http://www.w3.org/2000/svg,null,g", "svg,svg,http://www.w3.org/2000/svg,null,svg"})
+             "g,g,http://www.w3.org/2000/svg,null,g", "svg,svg,http://www.w3.org/2000/svg,null,svg"})
     public void variousNames() throws Exception {
         final String html =
             "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "

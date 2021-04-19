@@ -57,7 +57,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-false",
-                            "-null", "-", "-", "-null"},
+                       "-null", "-", "-", "-null"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -81,7 +81,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-false",
-                            "-test-data", "-test-origin", "-42", "-[object Window]"},
+                       "-test-data", "-test-origin", "-42", "-[object Window]"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -133,7 +133,7 @@ public class MessageEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
-                            "-http://localhost:", "-undefined", "-[object Window]"})
+                  "-http://localhost:", "-undefined", "-[object Window]"})
     @NotYetImplemented(IE)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
@@ -166,9 +166,9 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-false", "-hello",
-                        "-http://localhost:", "-2", "-[object Window]"},
+                       "-http://localhost:", "-2", "-[object Window]"},
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
-                            "-http://localhost:", "-undefined", "-[object Window]"})
+                  "-http://localhost:", "-undefined", "-[object Window]"})
     public void initMessageEventPortsUndefined() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
@@ -199,9 +199,9 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-false", "-hello",
-                            "-http://localhost:", "-2", "-[object Window]"},
+                       "-http://localhost:", "-2", "-[object Window]"},
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
-                            "-http://localhost:", "-undefined", "-[object Window]"})
+                  "-http://localhost:", "-undefined", "-[object Window]"})
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[6] += PORT;

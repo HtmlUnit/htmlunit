@@ -61,9 +61,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"16", "button1", "button2", "checkbox1", "fileupload1", "hidden1",
-            "radio1", "radio1",
-            "select1", "select2", "password1", "reset1",
-            "reset2", "submit1", "submit2", "textInput1", "textarea1"})
+             "radio1", "radio1",
+             "select1", "select2", "password1", "reset1",
+             "reset2", "submit1", "submit2", "textInput1", "textarea1"})
     public void elementsAccessor() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -310,10 +310,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"},
+                       "application/x-www-form-urlencoded",
+                       "application/x-www-form-urlencoded"},
             IE = {"exception", "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"})
+                  "application/x-www-form-urlencoded"})
     public void jsDefaultEnctype() throws Exception {
         jsEnctype(null);
         jsEncoding(null);
@@ -324,10 +324,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"},
+                       "application/x-www-form-urlencoded",
+                       "application/x-www-form-urlencoded"},
             IE = {"exception", "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"})
+                  "application/x-www-form-urlencoded"})
     public void jsEmptyEnctype() throws Exception {
         jsEnctype("");
         jsEncoding("");
@@ -338,10 +338,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"},
+                       "application/x-www-form-urlencoded",
+                       "application/x-www-form-urlencoded"},
             IE = {"exception", "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"})
+                  "application/x-www-form-urlencoded"})
     public void jsBlankEnctype() throws Exception {
         jsEnctype(" ");
         jsEncoding(" ");
@@ -352,10 +352,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"},
+                       "application/x-www-form-urlencoded",
+                       "application/x-www-form-urlencoded"},
             IE = {"exception", "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"})
+                  "application/x-www-form-urlencoded"})
     public void jsUnknownEnctype() throws Exception {
         jsEnctype("unknown");
         jsEncoding("unknown");
@@ -366,8 +366,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-                "application/x-www-form-urlencoded",
-                "application/x-www-form-urlencoded"})
+             "application/x-www-form-urlencoded",
+             "application/x-www-form-urlencoded"})
     public void jsUrlencodedEnctype() throws Exception {
         jsEnctype("application/x-www-form-urlencoded");
         jsEncoding("application/x-www-form-urlencoded");
@@ -398,10 +398,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"},
+                       "application/x-www-form-urlencoded",
+                       "application/x-www-form-urlencoded"},
             IE = {"exception", "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"})
+                  "application/x-www-form-urlencoded"})
     public void jsXmlEnctype() throws Exception {
         jsEnctype("text/xml");
         jsEncoding("text/xml");
@@ -412,10 +412,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"},
+                       "application/x-www-form-urlencoded",
+                       "application/x-www-form-urlencoded"},
             IE = {"exception", "application/x-www-form-urlencoded",
-                        "application/x-www-form-urlencoded"})
+                  "application/x-www-form-urlencoded"})
     public void jsJsonEnctype() throws Exception {
         jsEnctype("application/json");
         jsEncoding("application/json");
@@ -2014,11 +2014,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "undefined",
-                        "[object HTMLInputElement]", "[object HTMLInputElement]",
-                        "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]"},
+                       "[object HTMLInputElement]", "[object HTMLInputElement]",
+                       "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]"},
             IE = {"[object HTMLInputElement]", "undefined",
-                        "undefined", "[object HTMLInputElement]",
-                        "undefined", "undefined", "[object HTMLInputElement]"})
+                  "undefined", "[object HTMLInputElement]",
+                  "undefined", "undefined", "[object HTMLInputElement]"})
     public void accessByNameAfterNameChange() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -2127,7 +2127,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"srcElement null: false", "srcElement==form: true",
-                                                        "target null: false", "target==form: true"})
+             "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

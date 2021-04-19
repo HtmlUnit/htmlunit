@@ -127,7 +127,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HashChangeEvent]", "[object HashChangeEvent]",
-                            "hashchange", "true", "false", "false", "§§URL§§", "§§URL§§#1"},
+                       "hashchange", "true", "false", "false", "§§URL§§", "§§URL§§#1"},
             CHROME = {"[object HashChangeEvent]", "missing initHashChangeEvent"},
             EDGE = {"[object HashChangeEvent]", "missing initHashChangeEvent"},
             IE = "exception createEvent")

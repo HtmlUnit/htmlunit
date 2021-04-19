@@ -64,7 +64,7 @@ public class HTMLOListElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
-                   "true", "false", "true", "false", "", "null", "", "null"})
+             "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"

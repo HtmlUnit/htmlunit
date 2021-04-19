@@ -1010,19 +1010,19 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"iframe script", "loaded", "null", "[object Window]",
-                    "about:blank", "iframe script", "loaded"},
+                       "about:blank", "iframe script", "loaded"},
             IE = {"iframe script", "loaded", "null", "[object Window]",
-                    "§§URL§§", "iframe script", "loaded"})
+                  "§§URL§§", "iframe script", "loaded"})
     @HtmlUnitNYI(CHROME = {"iframe script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe script", "loaded"},
+                           "about:blank", "iframe script", "loaded"},
             EDGE = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                     "about:blank", "iframe script", "loaded"},
             FF = {"iframe script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe script", "loaded"},
+                  "about:blank", "iframe script", "loaded"},
             FF78 = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                     "about:blank", "iframe script", "loaded"},
             IE = {"iframe script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe script", "loaded"})
+                  "about:blank", "iframe script", "loaded"})
     public void detachAppend() throws Exception {
         final String html =
                 "<html>\n"
@@ -1075,19 +1075,19 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"iframe external script", "loaded", "null", "[object Window]",
-                    "about:blank", "iframe external script", "loaded"},
+                       "about:blank", "iframe external script", "loaded"},
             IE = {"iframe external script", "loaded", "null", "[object Window]",
-                    "§§URL§§", "iframe external script", "loaded"})
+                  "§§URL§§", "iframe external script", "loaded"})
     @HtmlUnitNYI(CHROME = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe external script", "loaded"},
+                           "about:blank", "iframe external script", "loaded"},
             EDGE = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                     "about:blank", "iframe external script", "loaded"},
             FF = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe external script", "loaded"},
+                  "about:blank", "iframe external script", "loaded"},
             FF78 = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                     "about:blank", "iframe external script", "loaded"},
             IE = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe external script", "loaded"})
+                  "about:blank", "iframe external script", "loaded"})
     public void detachAppendExternalScript() throws Exception {
         final String html =
                 "<html>\n"

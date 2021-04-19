@@ -93,7 +93,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLButtonElement]", "[object HTMLButtonElement]",
-                "§§URL§§", "http://srv/htmlunit.org"},
+                       "§§URL§§", "http://srv/htmlunit.org"},
             FF = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"},
             FF78 = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
