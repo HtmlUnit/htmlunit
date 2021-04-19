@@ -284,8 +284,8 @@ public class Int16ArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0", "1", "1,3", "1,3,4,7,11,0,123"},
             IE = {"[object Int16Array]", "[object Int16Array]",
-                    "[object Int16Array]", "[object Int16Array]",
-                    "[object Int16Array]"})
+                  "[object Int16Array]", "[object Int16Array]",
+                  "[object Int16Array]"})
     @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html

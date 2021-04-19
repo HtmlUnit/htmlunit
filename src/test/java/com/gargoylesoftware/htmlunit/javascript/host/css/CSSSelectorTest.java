@@ -1239,7 +1239,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
-                    "3", "id1", "id2", "id3"},
+                       "3", "id1", "id2", "id3"},
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
@@ -1318,7 +1318,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
-                    "3", "id1", "id2", "id3"},
+                       "3", "id1", "id2", "id3"},
             FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
@@ -2119,9 +2119,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
-                "1", "Two", "0", "0"},
+                       "1", "Two", "0", "0"},
             IE = {"2", "undefined", "undefined",
-                    "1", "undefined", "0", "0"})
+                  "1", "undefined", "0", "0"})
     public void xmlTagName() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -2173,15 +2173,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "ONE", "<CHILD>Two</CHILD>",
-                    "0",
-                    "2", "ONE", "<CHILD>Two</CHILD>",
-                    "1", "ONE",
-                    "1", "Two"},
+                       "0",
+                       "2", "ONE", "<CHILD>Two</CHILD>",
+                       "1", "ONE",
+                       "1", "Two"},
             IE = {"2", "undefined", "undefined",
-                    "0",
-                    "2", "undefined", "undefined",
-                    "1", "undefined",
-                    "1", "undefined"})
+                  "0",
+                  "2", "undefined", "undefined",
+                  "1", "undefined",
+                  "1", "undefined"})
     public void xmlAttribute() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"

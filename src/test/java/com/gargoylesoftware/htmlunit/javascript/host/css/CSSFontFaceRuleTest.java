@@ -35,11 +35,11 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSFontFaceRule]", "5",
-                "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"},
+                       "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"},
             FF78 = {"[object CSSFontFaceRule]", "5",
-                "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
+                    "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
             IE = {"[object CSSFontFaceRule]", "5",
-                "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(Delicious-Bold.otf);\n}\n"})
+                  "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(Delicious-Bold.otf);\n}\n"})
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

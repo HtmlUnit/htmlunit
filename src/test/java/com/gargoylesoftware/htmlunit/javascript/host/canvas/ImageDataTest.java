@@ -35,9 +35,9 @@ public class ImageDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"8", "1", "2",
-                "0", "190", "3", "255", "0", "190", "3", "255",
-              "8", "2", "1",
-              "0", "190", "3", "255", "0", "190", "3", "255"},
+                       "0", "190", "3", "255", "0", "190", "3", "255",
+                       "8", "2", "1",
+                       "0", "190", "3", "255", "0", "190", "3", "255"},
             IE = "no ctor")
     public void ctorArray() throws Exception {
         final String html =
@@ -87,7 +87,7 @@ public class ImageDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"8", "1", "2",
-                "0", "190", "3", "255", "0", "190", "3", "255"},
+                       "0", "190", "3", "255", "0", "190", "3", "255"},
             IE = "no ctor")
     public void ctorArrayWidthHeight() throws Exception {
         final String html =

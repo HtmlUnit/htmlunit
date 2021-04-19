@@ -34,7 +34,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object HTMLDivElement]", "[object HTMLSpanElement]", "[object HTMLSpanElement]",
-            "[object HTMLSpanElement]"})
+             "[object HTMLSpanElement]"})
     public void filterNull() throws Exception {
         final String html
             = "<html>\n"

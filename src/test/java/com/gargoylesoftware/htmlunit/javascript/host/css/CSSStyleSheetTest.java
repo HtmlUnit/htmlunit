@@ -55,7 +55,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false"},
             IE = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
-                    "true", "[object HTMLStyleElement]", "true"})
+                  "true", "[object HTMLStyleElement]", "true"})
     public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -150,9 +150,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"8", "§§URL§§style1.css 1", "§§URL§§style2.css 0",
-                        "§§URL§§style3.css 0", "§§URL§§style4.css 1",
-                        "§§URL§§style5.css 1", "§§URL§§style6.css 0",
-                        "§§URL§§style7.css 0", "§§URL§§style8.css 1"},
+                       "§§URL§§style3.css 0", "§§URL§§style4.css 1",
+                       "§§URL§§style5.css 1", "§§URL§§style6.css 0",
+                       "§§URL§§style7.css 0", "§§URL§§style8.css 1"},
             IE = {"2", "§§URL§§style1.css 1", "§§URL§§style5.css 1"})
     @NotYetImplemented(IE)
     public void hrefWrongContentType() throws Exception {

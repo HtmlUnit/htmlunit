@@ -391,10 +391,10 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"<p>a & b</p> &amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '",
-                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
-                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '"})
+             "<p>a & b</p> &amp; \u0162 \" '",
+             "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
+             "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+             "<p>a & b</p> &amp; \u0162 \" '"})
     public void createTextNodeWithHtml() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  function test() {\n"

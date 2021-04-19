@@ -256,7 +256,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
-                   "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px"})
+             "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px"})
     public void lengthsConvertedToPixels() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d' style='width:1em; height:1em; border:1em solid black; padding:1em; margin:1em;'>d</div>\n"
@@ -594,7 +594,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"inline", "inline", "inline", "inline-block", "inline-block",
-                    "inline-block", "inline-block", "inline-block", "inline-block", "inline"})
+             "inline-block", "inline-block", "inline-block", "inline-block", "inline"})
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -863,9 +863,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "block", "inline"},
+                       "inline", "inline", "inline", "inline", "inline", "block", "inline"},
             IE = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
+                  "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -925,9 +925,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
-                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+                  "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF78 = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
@@ -1711,9 +1711,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "0", "0", "0", "", "", "", "", "", "", "", "",
-                    "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"},
+                       "104", "104", "104", "104", "auto", "100px", "100px",
+                       "3px", "block", "content-box", "0px", "0px"},
             IE = {"0", "0", "0", "0", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px",
-                    "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"})
+                  "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"})
     public void offsetWidth() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

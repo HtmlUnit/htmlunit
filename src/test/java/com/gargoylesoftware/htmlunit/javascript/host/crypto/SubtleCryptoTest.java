@@ -74,11 +74,11 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Crypto]", "public", "true", "verify",
-                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                        "publicExponent 1,0,1",
-                        "private", "false", "sign",
-                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                        "publicExponent 1,0,1"},
+                       "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                       "publicExponent 1,0,1",
+                       "private", "false", "sign",
+                       "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                       "publicExponent 1,0,1"},
             IE = "undefined")
     @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void rsassa() throws Exception {

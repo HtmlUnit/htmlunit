@@ -274,11 +274,11 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
-                        "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
-                        "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true"},
+                       "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
+                       "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true"},
             IE = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
-                        "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
-                        "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false"})
+                  "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
+                  "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false"})
     public void hasFeature_SVG_BasicStructure() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "['1.0', '1.1', '1.2']");
     }
@@ -288,11 +288,11 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
-                        "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
-                        "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true"},
+                       "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
+                       "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true"},
             IE = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
-                        "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
-                        "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false"})
+                  "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
+                  "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false"})
     public void hasFeature_SVG_Shape() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "['1.0', '1.1', '1.2']");
     }
@@ -538,11 +538,11 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"<html><head></head><body></body></html>",
-                        "<html><head><title></title></head><body></body></html>",
-                        "<html><head><title>abc</title></head><body></body></html>"},
+                       "<html><head><title></title></head><body></body></html>",
+                       "<html><head><title>abc</title></head><body></body></html>"},
             IE = {"exception",
-                    "<html><head><title></title></head><body></body></html>",
-                    "<html><head><title>abc</title></head><body></body></html>"})
+                  "<html><head><title></title></head><body></body></html>",
+                  "<html><head><title>abc</title></head><body></body></html>"})
     public void createHTMLDocument_htmlCode() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"

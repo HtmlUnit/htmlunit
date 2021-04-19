@@ -99,9 +99,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "removeHitRegion",
-                        "scrollPathIntoView", "36 methods"},
+                       "scrollPathIntoView", "36 methods"},
             IE = {"addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
-                        "removeHitRegion", "scrollPathIntoView", "35 methods"})
+                  "removeHitRegion", "scrollPathIntoView", "35 methods"})
     public void methods() throws Exception {
         final String[] methods = {"addHitRegion", "arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip",
             "closePath", "createImageData", "createLinearGradient", "createPattern", "createRadialGradient",

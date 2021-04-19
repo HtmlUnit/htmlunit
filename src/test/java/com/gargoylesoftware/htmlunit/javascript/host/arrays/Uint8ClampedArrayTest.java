@@ -192,8 +192,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0", "1", "1,3", "1,3,4,7,11,0,123"},
             IE = {"[object Uint8ClampedArray]", "[object Uint8ClampedArray]",
-                    "[object Uint8ClampedArray]", "[object Uint8ClampedArray]",
-                    "[object Uint8ClampedArray]"})
+                  "[object Uint8ClampedArray]", "[object Uint8ClampedArray]",
+                  "[object Uint8ClampedArray]"})
     @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html

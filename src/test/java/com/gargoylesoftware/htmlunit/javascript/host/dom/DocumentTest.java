@@ -1309,9 +1309,9 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
-                "1", "Two", "0", "0"},
+                       "1", "Two", "0", "0"},
             IE = {"2", "undefined", "undefined",
-                    "1", "undefined", "0", "0"})
+                  "1", "undefined", "0", "0"})
     public void getElementsByTagNameXml() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
