@@ -44,14 +44,15 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"assign: undefined", "constructor: function", "create: undefined", "defineProperties: undefined",
-                "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
-                "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
-                "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
-                "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
-                "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function",
-                "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"})
+             "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
+             "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
+             "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
+             "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
+             "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function",
+             "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"})
     public void common() throws Exception {
-        final String[] methods = {"assign", "constructor", "create", "defineProperties", "defineProperty", "freeze",
+        final String[] methods = {
+            "assign", "constructor", "create", "defineProperties", "defineProperty", "freeze",
             "getOwnPropertyDescriptor", "getOwnPropertyNames", "getPrototypeOf", "hasOwnProperty", "isExtensible",
             "isFrozen", "isPrototypeOf", "isSealed", "keys", "preventExtensions", "propertyIsEnumerable", "seal",
             "toLocaleString", "toString", "valueOf", "__defineGetter__", "__defineSetter__",
@@ -397,7 +398,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElementPrototype]",
-                        "[object Object]", "function"},
+                       "[object Object]", "function"},
             CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             EDGE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
@@ -434,26 +435,26 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function get value() { [native code] }",
-                        "x.get.call = function call() { [native code] }"},
+                       "x.get = function get value() { [native code] }",
+                       "x.get.call = function call() { [native code] }"},
             FF = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() {\n    [native code]\n}",
-                        "x.get.call = function call() {\n    [native code]\n}"},
+                  "x.get = function value() {\n    [native code]\n}",
+                  "x.get.call = function call() {\n    [native code]\n}"},
             FF78 = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() {\n    [native code]\n}",
-                        "x.get.call = function call() {\n    [native code]\n}"},
+                    "x.get = function value() {\n    [native code]\n}",
+                    "x.get.call = function call() {\n    [native code]\n}"},
             IE = {"[object HTMLInputElementPrototype]", "x = [object Object]",
-                        "x.get = \nfunction value() {\n    [native code]\n}\n",
-                        "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+                  "x.get = \nfunction value() {\n    [native code]\n}\n",
+                  "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     @HtmlUnitNYI(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() { [native code] }",
-                        "x.get.call = function call() { [native code] }"},
+                           "x.get = function value() { [native code] }",
+                           "x.get.call = function call() { [native code] }"},
             EDGE = {"[object HTMLInputElement]", "x = [object Object]",
                     "x.get = function value() { [native code] }",
                     "x.get.call = function call() { [native code] }"},
             IE = {"[object HTMLInputElement]", "x = [object Object]",
-                    "x.get = \nfunction value() {\n    [native code]\n}\n",
-                    "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+                  "x.get = \nfunction value() {\n    [native code]\n}\n",
+                  "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"

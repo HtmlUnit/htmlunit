@@ -453,7 +453,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
     @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-            "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
+                          "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void completeHtmlInsideDiv() throws Exception {
@@ -510,7 +510,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
     @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-                 "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
+                          "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void writeCompleteHtmlInsideDIV() throws Exception {

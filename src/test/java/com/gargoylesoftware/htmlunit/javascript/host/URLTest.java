@@ -66,10 +66,10 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "https://developer.mozilla.org/", "https://developer.mozilla.org/",
-                "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
-                "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
-                "http://www.example.com/", "type error", "type error" },
+    @Alerts(DEFAULT = {"https://developer.mozilla.org/", "https://developer.mozilla.org/",
+                       "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
+                       "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
+                       "http://www.example.com/", "type error", "type error" },
             IE = {})
     public void ctor() throws Exception {
         final String html =
@@ -213,11 +213,11 @@ public class URLTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function URL() { [native code] }",
-                "function URL() { [native code] }",
-                "function URL() { [native code] }",
-                "https://developer.mozilla.org/",
-                "https://developer.mozilla.org/",
-                "https://developer.mozilla.org/"},
+                       "function URL() { [native code] }",
+                       "function URL() { [native code] }",
+                       "https://developer.mozilla.org/",
+                       "https://developer.mozilla.org/",
+                       "https://developer.mozilla.org/"},
             IE = {})
     public void testToString() throws Exception {
         final String html = "<html><body>\n"

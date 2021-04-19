@@ -62,20 +62,21 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"constructor: function", "getDate: function", "getDay: function", "getFullYear: function",
-            "getHours: function", "getMilliseconds: function", "getMinutes: function", "getMonth: function",
-            "getSeconds: function", "getTime: function", "getTimezoneOffset: function", "getUTCDate: function",
-            "getUTCDay: function", "getUTCFullYear: function", "getUTCHours: function", "getUTCMilliseconds: function",
-            "getUTCMinutes: function", "getUTCMonth: function", "getUTCSeconds: function", "getYear: function",
-            "now: undefined", "parse: undefined", "setDate: function", "setFullYear: function", "setHours: function",
-            "setMilliseconds: function", "setMinutes: function", "setMonth: function", "setSeconds: function",
-            "setTime: function", "setUTCDate: function", "setUTCFullYear: function", "setUTCHours: function",
-            "setUTCMilliseconds: function", "setUTCMinutes: function", "setUTCMonth: function",
-            "setUTCSeconds: function", "setYear: function", "toDateString: function",
-            "toLocaleDateString: function", "toLocaleString: function",
-            "toLocaleTimeString: function", "toString: function", "toTimeString: function",
-            "toUTCString: function", "valueOf: function", "UTC: undefined"})
+             "getHours: function", "getMilliseconds: function", "getMinutes: function", "getMonth: function",
+             "getSeconds: function", "getTime: function", "getTimezoneOffset: function", "getUTCDate: function",
+             "getUTCDay: function", "getUTCFullYear: function", "getUTCHours: function", "getUTCMilliseconds: function",
+             "getUTCMinutes: function", "getUTCMonth: function", "getUTCSeconds: function", "getYear: function",
+             "now: undefined", "parse: undefined", "setDate: function", "setFullYear: function", "setHours: function",
+             "setMilliseconds: function", "setMinutes: function", "setMonth: function", "setSeconds: function",
+             "setTime: function", "setUTCDate: function", "setUTCFullYear: function", "setUTCHours: function",
+             "setUTCMilliseconds: function", "setUTCMinutes: function", "setUTCMonth: function",
+             "setUTCSeconds: function", "setYear: function", "toDateString: function",
+             "toLocaleDateString: function", "toLocaleString: function",
+             "toLocaleTimeString: function", "toString: function", "toTimeString: function",
+             "toUTCString: function", "valueOf: function", "UTC: undefined"})
     public void methods_common() throws Exception {
-        final String[] methods = {"constructor", "getDate", "getDay", "getFullYear", "getHours", "getMilliseconds",
+        final String[] methods = {
+            "constructor", "getDate", "getDay", "getFullYear", "getHours", "getMilliseconds",
             "getMinutes", "getMonth", "getSeconds", "getTime", "getTimezoneOffset", "getUTCDate", "getUTCDay",
             "getUTCFullYear", "getUTCHours", "getUTCMilliseconds", "getUTCMinutes", "getUTCMonth", "getUTCSeconds",
             "getYear", "now", "parse", "setDate", "setFullYear", "setHours", "setMilliseconds", "setMinutes",
@@ -159,7 +160,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
-                        "2005-07-03T15:14:05.000Z"})
+             "2005-07-03T15:14:05.000Z"})
     public void toISOString() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -182,7 +183,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                        "Sun, 03 Jul 2005 15:14:05 GMT"})
+             "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toUTCString() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -203,7 +204,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                    "Sun, 03 Jul 2005 15:14:05 GMT"})
+             "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toGMTString() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -244,7 +245,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"12:00:00 AM", "7:08:09 AM"},
             IE = {"\u200E12\u200E:\u200E00\u200E:\u200E00\u200E \u200EAM",
-                    "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM"})
+                  "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM"})
     @BuggyWebDriver(FF = "00:00:00, 07:08:09",
             FF78 = "00:00:00, 07:08:09")
     public void toLocaleTimeString() throws Exception {

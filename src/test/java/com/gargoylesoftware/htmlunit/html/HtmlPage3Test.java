@@ -397,7 +397,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object SVGSVGElement]", "http://www.w3.org/2000/svg",
-            "[object SVGRectElement]", "http://www.w3.org/2000/svg"})
+             "[object SVGRectElement]", "http://www.w3.org/2000/svg"})
     public void htmlPageEmbeddedSvgWithoutNamespace() throws Exception {
         final String content
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"

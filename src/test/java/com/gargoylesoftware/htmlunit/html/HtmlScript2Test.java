@@ -293,23 +293,23 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"dcl listener added", "head-end", "end",
-                        "deferred-2", "deferred-1", "deferred-3", "dcLoaded", "onload"},
+                       "deferred-2", "deferred-1", "deferred-3", "dcLoaded", "onload"},
             CHROME = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
+                      "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
             EDGE = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
+                    "deferred-1", "deferred-3", "dcLoaded", "deferred-2", "onload"},
             IE = {"dcl listener added", "head-end", "deferred-2", "end",
-                        "deferred-1", "deferred-3", "dcLoaded", "onload"})
+                  "deferred-1", "deferred-3", "dcLoaded", "onload"})
     @HtmlUnitNYI(CHROME = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+                           "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             EDGE = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+                    "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             FF = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+                  "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             FF78 = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+                    "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             IE = {"dcl listener added", "head-end", "end",
-                        "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
+                  "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
     public void deferDynamicExternal() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

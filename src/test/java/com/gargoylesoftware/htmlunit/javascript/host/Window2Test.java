@@ -265,22 +265,23 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
-            "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
-            "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
-            "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
-            "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
-            "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
-            "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
-            "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
-            "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
-            "Java: undefined,undefined", "JSAdapter: undefined,undefined",
-            "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
-            "parseInt: function,function", "parseFloat: function,function",
-            "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
-            "encodeURIComponent: function,function", "decodeURI: function,function",
-            "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function"})
+             "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
+             "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
+             "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
+             "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
+             "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
+             "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
+             "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
+             "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
+             "Java: undefined,undefined", "JSAdapter: undefined,undefined",
+             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
+             "parseInt: function,function", "parseFloat: function,function",
+             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
+             "encodeURIComponent: function,function", "decodeURI: function,function",
+             "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function"})
     public void topLevelProperties() throws Exception {
-        final String[] properties = {"getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
+        final String[] properties = {
+            "getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
             "JavaImporter", "Continuation", "Packages", "XML", "XMLList", "Namespace", "QName", "arguments", "load",
             "loadWithNewGlobal", "exit", "quit", "__FILE__", "__DIR__", "__LINE__", "context", "engine",
             "__noSuchProperty__", "Java", "JSAdapter",
@@ -567,8 +568,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object Window]", "[object Window]", "[object Window]", "1", "true", "true",
-                    "[object Window]", "true", "true", "no function", "undefined", "true", "true",
-                    "[object History]", "true", "true", "[object Window]", "true", "true"})
+             "[object Window]", "true", "true", "no function", "undefined", "true", "true",
+             "[object History]", "true", "true", "[object Window]", "true", "true"})
     public void framesAreWindows() throws Exception {
         final String html = "<html><body><iframe name='f'></iframe><script>\n"
             + LOG_TITLE_FUNCTION
@@ -708,9 +709,9 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
-                    "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"},
+                       "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"},
             IE = {"[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
-                "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"})
+                  "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"})
     public void set_opener() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1894,9 +1895,9 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: "},
+                       "origin: ", "source: [object Window]", "lastEventId: "},
             IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: undefined"})
+                  "origin: ", "source: [object Window]", "lastEventId: undefined"})
     public void postMessage() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[4] += "http://localhost:" + PORT;
@@ -2223,7 +2224,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "function Window() { [native code] }",
-                        "TEMPORARY, PERSISTENT, "},
+                       "TEMPORARY, PERSISTENT, "},
             FF = {"[object Window]", "function Window() { [native code] }", ""},
             FF78 = {"[object Window]", "function Window() { [native code] }", ""},
             IE = {"[object Window]", "[object Window]", ""})

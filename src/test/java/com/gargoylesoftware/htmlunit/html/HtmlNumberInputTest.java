@@ -634,11 +634,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"8-8-8-true", "-abc-abc-true", "---true",
-                "99999999999999999999999999999-99999999999999999999999999999-99999999999999999999999999999-true"},
+                       "99999999999999999999999999999-99999999999999999999999999999"
+                               + "-99999999999999999999999999999-true"},
             IE = {"8-8-8-true", "---true", "---true",
-                "99999999999999999999999999999-99999999999999999999999999999-99999999999999999999999999999-true"})
+                  "99999999999999999999999999999-99999999999999999999999999999-99999999999999999999999999999-true"})
     @HtmlUnitNYI(IE = {"8-8-8-true", "-abc-abc-true", "---true",
-                "99999999999999999999999999999-99999999999999999999999999999-99999999999999999999999999999-true"})
+                       "99999999999999999999999999999-99999999999999999999999999999"
+                               + "-99999999999999999999999999999-true"})
     public void defaultValuesInvalidValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1369,7 +1371,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                        "null,null", "exception", "null,null"},
+                       "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
@@ -1380,7 +1382,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                        "null,null", "exception", "null,null"},
+                       "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
@@ -1391,7 +1393,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "null,null", "exception",
-                        "null,null", "exception", "null,null"},
+                       "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
         selection2(10, 5);

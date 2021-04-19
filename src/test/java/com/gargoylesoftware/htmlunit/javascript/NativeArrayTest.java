@@ -87,7 +87,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"every: function", "filter: function", "forEach: function", "indexOf: function",
-            "lastIndexOf: function", "map: function", "reduce: function", "reduceRight: function", "some: function"})
+             "lastIndexOf: function", "map: function", "reduce: function", "reduceRight: function", "some: function"})
     public void methods_different() throws Exception {
         final String[] methods = {"every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
             "reduceRight", "some"};

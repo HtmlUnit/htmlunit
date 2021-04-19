@@ -72,7 +72,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false"},
+                       "false", "false", "false", "false", "false"},
             IE = "no Number.isInteger")
     @NotYetImplemented(IE)
     public void isInteger() throws Exception {
@@ -112,7 +112,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false", "false", "false"},
+                       "false", "false", "false", "false", "false", "false", "false"},
             IE = "no Number.isNaN")
     @NotYetImplemented(IE)
     public void isNaN() throws Exception {

@@ -64,11 +64,11 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }",
-                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
+                       "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             FF = {"function entries() {\n    [native code]\n}",
-                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
+                  "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             FF78 = {"function entries() {\n    [native code]\n}",
-                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
+                    "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             IE = {})
     public void iterator() throws Exception {
         final String html =
@@ -103,11 +103,11 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }",
-                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
+                       "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             FF = {"function entries() {\n    [native code]\n}",
-                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
+                  "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             FF78 = {"function entries() {\n    [native code]\n}",
-                "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
+                    "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             IE = {})
     public void entries() throws Exception {
         final String html =
@@ -142,11 +142,11 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
-                "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
+                       "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
             FF = {"function values() {\n    [native code]\n}",
-                "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
+                  "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
             FF78 = {"function values() {\n    [native code]\n}",
-                "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
+                    "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -181,11 +181,11 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function keys() { [native code] }",
-                "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
+                       "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
             FF = {"function keys() {\n    [native code]\n}",
-                "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
+                  "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
             FF78 = {"function keys() {\n    [native code]\n}",
-                "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
+                    "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
             IE = {})
     public void keys() throws Exception {
         final String html =
@@ -375,9 +375,9 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"value1", "key1", "[object Map]", "[object Window]",
-            "[object Object]", "key2", "[object Map]", "[object Window]",
-            "null", "key3", "[object Map]", "[object Window]",
-            "undefined", "key4", "[object Map]", "[object Window]"},
+                       "[object Object]", "key2", "[object Map]", "[object Window]",
+                       "null", "key3", "[object Map]", "[object Window]",
+                       "undefined", "key4", "[object Map]", "[object Window]"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEach() throws Exception {
@@ -409,9 +409,9 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"value1", "key1", "[object Map]", "undefined",
-            "[object Object]", "key2", "[object Map]", "undefined",
-            "null", "key3", "[object Map]", "undefined",
-            "undefined", "key4", "[object Map]", "undefined"},
+                       "[object Object]", "key2", "[object Map]", "undefined",
+                       "null", "key3", "[object Map]", "undefined",
+                       "undefined", "key4", "[object Map]", "undefined"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEachStrict() throws Exception {
@@ -444,9 +444,9 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"value1", "key1", "[object Map]", "hello",
-            "[object Object]", "key2", "[object Map]", "hello",
-            "null", "key3", "[object Map]", "hello",
-            "undefined", "key4", "[object Map]", "hello"},
+                       "[object Object]", "key2", "[object Map]", "hello",
+                       "null", "key3", "[object Map]", "hello",
+                       "undefined", "key4", "[object Map]", "hello"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEachThis() throws Exception {
@@ -501,7 +501,7 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"value1", "undefined", "[object Map]", "[object Window]",
-            "[object Object]", "key2", "[object Map]", "[object Window]"},
+                       "[object Object]", "key2", "[object Map]", "[object Window]"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEach_withElision() throws Exception {

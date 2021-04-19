@@ -40,7 +40,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function", "undefined", "undefined",
-                "undefined", "undefined", "function", "function"},
+                       "undefined", "undefined", "function", "function"},
             IE = {})
     public void staticMethods() throws Exception {
         final String html =
@@ -104,18 +104,18 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "function () { [native code] }",
-                        "function () { [native code] }",
-                        "[object Window]",
-                        "done", "resolved value"},
-            FF = { "function () {\n    [native code]\n}",
-                       "function () {\n    [native code]\n}",
+    @Alerts(DEFAULT = {"function () { [native code] }",
+                       "function () { [native code] }",
                        "[object Window]",
                        "done", "resolved value"},
-            FF78 = { "function () {\n    [native code]\n}",
-                        "function () {\n    [native code]\n}",
-                        "[object Window]",
-                        "done", "resolved value"},
+            FF = {"function () {\n    [native code]\n}",
+                  "function () {\n    [native code]\n}",
+                  "[object Window]",
+                  "done", "resolved value"},
+            FF78 = {"function () {\n    [native code]\n}",
+                    "function () {\n    [native code]\n}",
+                    "[object Window]",
+                    "done", "resolved value"},
             IE = {})
     public void constructor() throws Exception {
         final String html = "<html>\n"

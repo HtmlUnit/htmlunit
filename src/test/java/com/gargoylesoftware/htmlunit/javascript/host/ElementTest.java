@@ -43,7 +43,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "attrName attrValue", "attrValue", "null", "anotherValue",
-                    "1", "4", "<span id='label'>changed</span>"})
+             "1", "4", "<span id='label'>changed</span>"})
     public void attributes() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -287,9 +287,9 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
-                "1", "Two", "0", "0"},
+                       "1", "Two", "0", "0"},
             IE = {"2", "undefined", "undefined",
-                    "1", "undefined", "0", "0"})
+                  "1", "undefined", "0", "0"})
     public void getElementsByTagNameXml() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1184,9 +1184,9 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
-                        "function Element() { [native code] }"},
+                       "function Element() { [native code] }"},
             FF = {"function Element() {\n    [native code]\n}",
-                    "[object Element]", "function Element() {\n    [native code]\n}"},
+                  "[object Element]", "function Element() {\n    [native code]\n}"},
             FF78 = {"function Element() {\n    [native code]\n}",
                     "[object Element]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
@@ -1220,11 +1220,11 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
-                        "function Element() { [native code] }"},
+                       "function Element() { [native code] }"},
             FF = {"function Element() {\n    [native code]\n}",
-                        "[object Element]", "function Element() {\n    [native code]\n}"},
+                  "[object Element]", "function Element() {\n    [native code]\n}"},
             FF78 = {"function Element() {\n    [native code]\n}",
-                        "[object Element]", "function Element() {\n    [native code]\n}"},
+                    "[object Element]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented(IE)
     public void prototypConstructorStandards() throws Exception {

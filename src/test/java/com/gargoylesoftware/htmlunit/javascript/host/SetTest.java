@@ -68,9 +68,9 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                       "[object Set Iterator]", "0", "1", "[object Object]"},
             FF = {"function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]"},
+                  "[object Set Iterator]", "0", "1", "[object Object]"},
             FF78 = {"function values() {\n    [native code]\n}",
                     "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
@@ -106,11 +106,11 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                       "[object Set Iterator]", "0", "1", "[object Object]"},
             FF = {"function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                  "[object Set Iterator]", "0", "1", "[object Object]"},
             FF78 = {"function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                    "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -316,8 +316,8 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "[object Window]",
-            "undefined", "undefined", "[object Set]", "[object Window]",
-            "null", "null", "[object Set]", "[object Window]"},
+                       "undefined", "undefined", "[object Set]", "[object Window]",
+                       "null", "null", "[object Set]", "[object Window]"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEach() throws Exception {
@@ -347,8 +347,8 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "undefined",
-            "undefined", "undefined", "[object Set]", "undefined",
-            "null", "null", "[object Set]", "undefined"},
+                       "undefined", "undefined", "[object Set]", "undefined",
+                       "null", "null", "[object Set]", "undefined"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEachStrict() throws Exception {
@@ -379,7 +379,7 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
-            "null", "null", "[object Set]", "hello"},
+                       "null", "null", "[object Set]", "hello"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEachThis() throws Exception {

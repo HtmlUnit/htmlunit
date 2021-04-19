@@ -40,7 +40,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"apply: function", "arguments: object", "call: function", "constructor: function",
-            "toString: function"})
+             "toString: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"apply", "arguments", "call", "constructor", "toString"};
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", methods);
@@ -244,7 +244,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"t: [object Window]", "0", "t: ", "1", "a0: x",
-                            "t: ab", "2", "a0: x", "a1: y"})
+             "t: ab", "2", "a0: x", "a1: y"})
     public void bind() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

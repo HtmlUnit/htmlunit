@@ -229,9 +229,9 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"},
+                       "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"},
             IE = {"#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"})
+                  "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"})
     public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
