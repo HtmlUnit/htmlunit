@@ -96,9 +96,9 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
-                    "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
+                       "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
             IE = {"1:null/0/null/0/true/undefined/0/",
-                    "2:s2/0/s2/1/false/undefined/1/xyz[xyz"})
+                  "2:s2/0/s2/1/false/undefined/1/xyz[xyz"})
     public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
@@ -112,13 +112,12 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {
-                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                        "2:s2/0/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "3:s2/0/s3/2/false/Range/1/xyzfoo---[xyzfoo---",
-                        "4:s2/0/s3/3/false/Range/1/xyzfoo---foo[xyzfoo---foo"},
+    @Alerts(DEFAULT = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                       "2:s2/0/s3/1/false/Range/1/xyzfoo[xyzfoo",
+                       "3:s2/0/s3/2/false/Range/1/xyzfoo---[xyzfoo---",
+                       "4:s2/0/s3/3/false/Range/1/xyzfoo---foo[xyzfoo---foo"},
             IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz",
-                        "selection.extend not available"})
+                  "selection.extend not available"})
     public void extend() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -139,10 +138,10 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                        "2:s2/0/s2/0/true/Caret/1/["},
-            IE = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
-                    "2:s2/0/s2/0/true/undefined/1/["})
+    @Alerts(DEFAULT = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                       "2:s2/0/s2/0/true/Caret/1/["},
+            IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+                  "2:s2/0/s2/0/true/undefined/1/["})
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -157,10 +156,10 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                        "2:s2/1/s2/1/true/Caret/1/["},
-            IE = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
-                        "2:s2/1/s2/1/true/undefined/1/["})
+    @Alerts(DEFAULT = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                       "2:s2/1/s2/1/true/Caret/1/["},
+            IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+                  "2:s2/1/s2/1/true/undefined/1/["})
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -176,7 +175,7 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
-                        "2:null/0/null/0/true/None/0/"},
+                       "2:null/0/null/0/true/None/0/"},
             IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz", "exception"})
     public void empty() throws Exception {
         final String jsSnippet = ""
@@ -193,14 +192,14 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
-                        "2:null/0/null/0/true/None/0/",
-                        "3:s2/1/s3/1/false/Range/1/foo[foo"},
+                       "2:null/0/null/0/true/None/0/",
+                       "3:s2/1/s3/1/false/Range/1/foo[foo"},
             IE = {"1:null/0/null/0/true/undefined/0/",
-                        "2:[object Text]/0/[object Text]/0/true/undefined/1/[",
-                        "3:s2/1/s3/1/false/undefined/1/foo[foo"})
+                  "2:[object Text]/0/[object Text]/0/true/undefined/1/[",
+                  "3:s2/1/s3/1/false/undefined/1/foo[foo"})
     @HtmlUnitNYI(IE = {"1:null/0/null/0/true/undefined/0/",
-                        "2:null/0/null/0/true/undefined/0/",
-                        "3:s2/1/s3/1/false/undefined/1/foo[foo"})
+                       "2:null/0/null/0/true/undefined/0/",
+                       "3:s2/1/s3/1/false/undefined/1/foo[foo"})
     public void addRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -221,11 +220,11 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "3:null/0/null/0/true/None/0/"},
+                       "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
+                       "3:null/0/null/0/true/None/0/"},
             IE = {"1:null/0/null/0/true/undefined/0/",
-                    "2:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
-                    "3:null/0/null/0/true/undefined/0/"})
+                  "2:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
+                  "3:null/0/null/0/true/undefined/0/"})
     public void removeAllRanges() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -247,9 +246,9 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
-                        "2:null/0/null/0/true/None/0/"},
+                       "2:null/0/null/0/true/None/0/"},
             IE = {"1:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
-                        "2:null/0/null/0/true/undefined/0/"})
+                  "2:null/0/null/0/true/undefined/0/"})
     public void removeAllRanges2() throws Exception {
         final String jsSnippet = ""
             + "      var range = document.createRange();\n"
@@ -269,17 +268,17 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/0/s1/1/false/Range/1/abc[abc",
-                        "3:null/0/null/0/true/None/0/"},
+                       "2:s1/0/s1/1/false/Range/1/abc[abc",
+                       "3:null/0/null/0/true/None/0/"},
             FF = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
-                        "3:null/0/null/0/true/None/0/"},
+                  "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                  "3:null/0/null/0/true/None/0/"},
             FF78 = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
-                        "3:null/0/null/0/true/None/0/"},
+                    "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                    "3:null/0/null/0/true/None/0/"},
             IE = {"1:null/0/null/0/true/undefined/0/",
-                        "2:s1/0/s1/1/false/undefined/1/abc[abc",
-                        "3:null/0/null/0/true/undefined/0/"})
+                  "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                  "3:null/0/null/0/true/undefined/0/"})
     @NotYetImplemented
     public void selectAllChildrenAddRange() throws Exception {
         final String jsSnippet = ""
@@ -302,14 +301,12 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {
-                        "1:null/0/null/0/true/None/0/",
-                        "2:s1/0/s1/1/false/Range/1/abc[abc",
-                        "3:null/0/null/0/true/None/0/"},
-            IE = {
-                    "1:null/0/null/0/true/undefined/0/",
-                    "2:s1/0/s1/1/false/undefined/1/abc[abc",
-                    "3:null/0/null/0/true/undefined/0/"})
+    @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
+                       "2:s1/0/s1/1/false/Range/1/abc[abc",
+                       "3:null/0/null/0/true/None/0/"},
+            IE = {"1:null/0/null/0/true/undefined/0/",
+                  "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                  "3:null/0/null/0/true/undefined/0/"})
     public void addRangeSelectAllChildren() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -332,21 +329,21 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/0/s1/1/false/Range/1/abc[abc",
-                        "3:s1/0/s1/1/false/Range/1/abc[abc",
-                        "4:null/0/null/0/true/None/0/"},
+                       "2:s1/0/s1/1/false/Range/1/abc[abc",
+                       "3:s1/0/s1/1/false/Range/1/abc[abc",
+                       "4:null/0/null/0/true/None/0/"},
             FF = {"1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s2/1/false/Range/2/abcxyz[abc[xyz",
-                        "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
-                        "4:null/0/null/0/true/None/0/"},
+                  "2:s1/1/s2/1/false/Range/2/abcxyz[abc[xyz",
+                  "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                  "4:null/0/null/0/true/None/0/"},
             FF78 = {"1:null/0/null/0/true/None/0/",
                     "2:s1/1/s2/1/false/Range/2/abcxyz[abc[xyz",
                     "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
                     "4:null/0/null/0/true/None/0/"},
             IE = {"1:null/0/null/0/true/undefined/0/",
-                        "2:s1/0/s1/1/false/undefined/1/abc[abc",
-                        "3:s1/0/s1/1/false/undefined/1/abc[abc",
-                        "4:null/0/null/0/true/undefined/0/"})
+                  "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                  "3:s1/0/s1/1/false/undefined/1/abc[abc",
+                  "4:null/0/null/0/true/undefined/0/"})
     @NotYetImplemented
     public void addRangeAddRange() throws Exception {
         final String jsSnippet = ""
@@ -378,11 +375,11 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
-                    "2:null/0/null/0/true/None/0/",
-                    "false", "true"},
+                       "2:null/0/null/0/true/None/0/",
+                       "false", "true"},
             IE = {"1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo[yzfo",
-                    "2:null/0/null/0/true/undefined/0/",
-                    "false", "true"})
+                  "2:null/0/null/0/true/undefined/0/",
+                  "false", "true"})
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
             + "    var range = document.createRange();\n"

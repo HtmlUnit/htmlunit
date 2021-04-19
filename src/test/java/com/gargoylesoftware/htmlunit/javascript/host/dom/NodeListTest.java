@@ -209,8 +209,8 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
-                "[object HTMLTitleElement]", "[object HTMLScriptElement]",
-                "[object HTMLBodyElement]", "[object HTMLDivElement]"},
+                       "[object HTMLTitleElement]", "[object HTMLScriptElement]",
+                       "[object HTMLBodyElement]", "[object HTMLDivElement]"},
             IE = "no for..of")
     public void iterator() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>test</title>\n"
@@ -239,11 +239,11 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLHtmlElement] 0 [object NodeList] undefined",
-                "[object HTMLHeadElement] 1 [object NodeList] undefined",
-                "[object HTMLTitleElement] 2 [object NodeList] undefined",
-                "[object HTMLScriptElement] 3 [object NodeList] undefined",
-                "[object HTMLBodyElement] 4 [object NodeList] undefined",
-                "[object HTMLDivElement] 5 [object NodeList] undefined"},
+                       "[object HTMLHeadElement] 1 [object NodeList] undefined",
+                       "[object HTMLTitleElement] 2 [object NodeList] undefined",
+                       "[object HTMLScriptElement] 3 [object NodeList] undefined",
+                       "[object HTMLBodyElement] 4 [object NodeList] undefined",
+                       "[object HTMLDivElement] 5 [object NodeList] undefined"},
             IE = "no forEach")
     public void forEach() throws Exception {
         final String html = "<html><head><title>test</title>\n"
@@ -334,8 +334,8 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,[object HTMLHtmlElement]", "1,[object HTMLHeadElement]",
-            "2,[object HTMLTitleElement]", "3,[object HTMLScriptElement]",
-            "4,[object HTMLBodyElement]"},
+                       "2,[object HTMLTitleElement]", "3,[object HTMLScriptElement]",
+                       "4,[object HTMLBodyElement]"},
             IE = {})
     @HtmlUnitNYI(IE = "not defined")
     public void entriesForOf() throws Exception {
@@ -536,8 +536,8 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
-            "[object HTMLTitleElement]", "[object HTMLScriptElement]",
-            "[object HTMLBodyElement]"},
+                       "[object HTMLTitleElement]", "[object HTMLScriptElement]",
+                       "[object HTMLBodyElement]"},
             IE = {})
     @HtmlUnitNYI(IE = "not defined")
     public void valuesForOf() throws Exception {

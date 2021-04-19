@@ -506,7 +506,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>"})
+             "<div>one</div><div>two</div><div id=\"myDiv3\"></div>"})
     public void replaceChild() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -536,7 +536,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div id=\"myDiv3\"></div>"})
+             "<div id=\"myDiv3\"></div>"})
     public void replaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

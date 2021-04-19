@@ -473,7 +473,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"object", "undefined", "undefined", "undefined", "undefined",
-            "object", "false", "false", "false", "false"})
+             "object", "false", "false", "false", "false"})
     public void testKeys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -727,9 +727,9 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
-                "true"},
+                       "true"},
             IE = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false", "false",
-                "div capturing", "false", "false", "span capturing", "false", "true"})
+                  "div capturing", "false", "false", "span capturing", "false", "true"})
     @NotYetImplemented(IE)
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
@@ -934,11 +934,11 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"nullwindow at beforeunload rv=",
-                        "window onbeforeunload rv=1",
-                        "window at beforeunload rv=1"},
+                       "window onbeforeunload rv=1",
+                       "window at beforeunload rv=1"},
             IE = {"nullwindow at beforeunload rv=undefined",
-                        "window onbeforeunload rv=1",
-                        "window at beforeunload rv=2"})
+                  "window onbeforeunload rv=1",
+                  "window at beforeunload rv=2"})
     public void returnPriority2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

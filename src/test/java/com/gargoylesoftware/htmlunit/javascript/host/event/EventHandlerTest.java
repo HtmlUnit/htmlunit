@@ -56,23 +56,23 @@ public class EventHandlerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function onload(event) { test() }",
-                "function onload(event) { test() }",
-                "function onload(event) { test() }"})
+             "function onload(event) { test() }",
+             "function onload(event) { test() }"})
     @HtmlUnitNYI(CHROME = {"function onload(event) { test(); }",
-                "function onload(event) { test(); }",
-                "function onload(event) { test(); }"},
+                           "function onload(event) { test(); }",
+                           "function onload(event) { test(); }"},
             EDGE = {"function onload(event) { test(); }",
-                "function onload(event) { test(); }",
-                "function onload(event) { test(); }"},
+                    "function onload(event) { test(); }",
+                    "function onload(event) { test(); }"},
             FF = {"function onload(event) { test(); }",
-                "function onload(event) { test(); }",
-                "function onload(event) { test(); }"},
+                  "function onload(event) { test(); }",
+                  "function onload(event) { test(); }"},
             FF78 = {"function onload(event) { test(); }",
-                "function onload(event) { test(); }",
-                "function onload(event) { test(); }"},
+                    "function onload(event) { test(); }",
+                    "function onload(event) { test(); }"},
             IE = {"function onload(event) { test(); }",
-                "function onload(event) { test(); }",
-                "function onload(event) { test(); }"})
+                  "function onload(event) { test(); }",
+                  "function onload(event) { test(); }"})
     public void testToString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

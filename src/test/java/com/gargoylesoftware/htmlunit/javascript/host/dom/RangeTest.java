@@ -149,7 +149,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
-            "[object HTMLSpanElement]"})
+             "[object HTMLSpanElement]"})
     public void extractContents() throws Exception {
         final String html =
               "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -173,14 +173,13 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({
-            "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
-            "2 text1",
-            "3 [object DocumentFragment]",
-            "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
-            "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
-            "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
-            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
+    @Alerts({"1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
+             "2 text1",
+             "3 [object DocumentFragment]",
+             "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
+             "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
+             "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
+             "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
     public void extractContents2() throws Exception {
         final String html =
               "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"
@@ -274,7 +273,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
-            "qwerty", "[object HTMLSpanElement]"})
+             "qwerty", "[object HTMLSpanElement]"})
     public void cloneContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
