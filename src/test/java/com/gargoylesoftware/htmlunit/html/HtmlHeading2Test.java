@@ -126,9 +126,9 @@ public class HtmlHeading2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                        "undefined", "left", "none", "right", "all", "2", "abc", "8"},
+                       "undefined", "left", "none", "right", "all", "2", "abc", "8"},
             IE = {"", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
-                   "", ""})
+                  "", ""})
     public void clear() throws Exception {
         final String html
             = "<html><body>\n"

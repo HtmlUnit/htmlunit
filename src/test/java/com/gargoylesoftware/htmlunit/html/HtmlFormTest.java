@@ -874,13 +874,13 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
-                        "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
-                        "foo#anchor",
-                        "foo?foo=12#anchor"},
+                       "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
+                       "foo#anchor",
+                       "foo?foo=12#anchor"},
             IE = {"foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
-                    "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
-                    "foo#anchor",
-                    "foo?foo=12#anchor"})
+                  "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
+                  "foo#anchor",
+                  "foo?foo=12#anchor"})
     public void urlAfterSubmitWithAnchor() throws Exception {
         urlAfterSubmit("get", "foo#anchor", getExpectedAlerts()[0]);
         urlAfterSubmit("get", "foo?foo=12#anchor", getExpectedAlerts()[1]);

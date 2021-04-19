@@ -662,7 +662,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     @Alerts({"C:\\fakepath\\pom.xml-Hello world-Hello world",
-                    "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
+             "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
     public void value() throws Exception {
         final String html =
               "<html>\n"
@@ -694,7 +694,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     @Alerts({"C:\\fakepath\\index.html-Hello world-Hello world",
-                    "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\" webkitdirectory=\"\">"})
+             "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\" webkitdirectory=\"\">"})
     public void valueWebkitdirectory() throws Exception {
         final String html =
               "<html>\n"

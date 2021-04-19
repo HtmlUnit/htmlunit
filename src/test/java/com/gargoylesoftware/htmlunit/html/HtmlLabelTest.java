@@ -775,11 +775,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
-                    "textclick:text1", "parentclick:text1"},
+                       "textclick:text1", "parentclick:text1"},
             IE = {"labelclick:label1", "parentclick:label1", "textclick:text1",
-                    "parentclick:text1", "textfocus:text1"})
+                  "parentclick:text1", "textfocus:text1"})
     @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
-                    "textclick:text1", "parentclick:text1"})
+                       "textclick:text1", "parentclick:text1"})
     public void clickForEventBubbling() throws Exception {
         final String html =
               "  <div onclick='log(\"parentclick:\" + event.target.id)' "
@@ -966,11 +966,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                        "text1click:text1", "labelclick:text1", "parentclick:text1"},
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"},
             IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
-                        "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+                  "labelclick:text1", "parentclick:text1", "text1focus:text1"})
     @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                        "text1click:text1", "labelclick:text1", "parentclick:text1"})
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickNestedEventBubbling() throws Exception {
         final String html =
               "  <div onclick='log(\"parentclick:\" + event.target.id)' "
@@ -996,11 +996,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                    "text1click:text1", "labelclick:text1", "parentclick:text1"},
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"},
             IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
-                    "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+                  "labelclick:text1", "parentclick:text1", "text1focus:text1"})
     @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                    "text1click:text1", "labelclick:text1", "parentclick:text1"})
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickForAndNestedEventBubbling() throws Exception {
         final String html =
               "  <div onclick='log(\"parentclick:\" + event.target.id)' "
