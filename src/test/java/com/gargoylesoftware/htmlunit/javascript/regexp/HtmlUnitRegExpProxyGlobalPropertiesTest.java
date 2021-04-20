@@ -95,9 +95,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-                "HtmlUnitxy", "y", "1234", "z"},
+                       "HtmlUnitxy", "y", "1234", "z"},
             IE = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-                "HtmlUnitxy", "", "1234", "z"})
+                  "HtmlUnitxy", "", "1234", "z"})
     @NotYetImplemented(IE)
     public void regExpExecTooManyGroups() throws Exception {
         testExec("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
@@ -135,9 +135,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-                 "HtmlUnitxy", "y", "1234", "z"},
+                       "HtmlUnitxy", "y", "1234", "z"},
             IE = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-                "HtmlUnitxy", "", "1234", "z"})
+                  "HtmlUnitxy", "", "1234", "z"})
     @NotYetImplemented(IE)
     public void regExpExecTooManyGroupsIgnoreCase() throws Exception {
         testExec("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
@@ -166,7 +166,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Html,Html", "$n", "Html", "", "", "", "", "", "", "", "", "-", "Html", "Html", "1234",
-            "Unit for Htnl; Htolxyz"})
+             "Unit for Htnl; Htolxyz"})
     public void regExpExecOneGroupGlobalManyMatches() throws Exception {
         testExec("1234HtmlUnit for Htnl; Htolxyz", "new RegExp('(Ht.l)', 'g')");
     }
@@ -185,9 +185,9 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-                "HtmlUnitxy", "y", "1234", "z"},
+                       "HtmlUnitxy", "y", "1234", "z"},
             IE = {"HtmlUnitxy,H,t,m,l,U,n,i,t,x,y", "$n", "H", "t", "m", "l", "U", "n", "i", "t", "x", "-",
-                "HtmlUnitxy", "", "1234", "z"})
+                  "HtmlUnitxy", "", "1234", "z"})
     @NotYetImplemented(IE)
     public void regExpExecTooManyGroupsGlobal() throws Exception {
         testExec("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
@@ -321,7 +321,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "$n", "Html", "", "", "", "", "", "", "", "", "-", "Html", "Html", "1234",
-            "Unit for Html; Htmlxyz"})
+             "Unit for Html; Htmlxyz"})
     public void regExpTestOneGroupGlobalManyMatches() throws Exception {
         testTest("1234HtmlUnit for Html; Htmlxyz", "new RegExp('(Html)', 'g')");
     }

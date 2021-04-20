@@ -111,7 +111,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function", "function", "function", "function",
-            "undefined", "undefined", "undefined", "undefined"},
+                       "undefined", "undefined", "undefined", "undefined"},
             IE = "exception")
     public void methods() throws Exception {
         final String html = "<html><head>\n"
@@ -146,7 +146,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function XSLTProcessor() { [native code] }",
-                "[object XSLTProcessor]"},
+                       "[object XSLTProcessor]"},
             IE = {"undefined", "exception"})
     public void type() throws Exception {
         final String html = "<html><head>\n"

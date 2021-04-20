@@ -1217,7 +1217,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_NoHttpResponseException() throws Exception {
@@ -1251,7 +1251,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException() throws Exception {
@@ -1300,7 +1300,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
@@ -1341,18 +1341,18 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 FF = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                      "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "progress_1_0_false", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
@@ -1383,12 +1383,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_preflight_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1434,12 +1434,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1479,7 +1479,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_NoHttpResponseException() throws Exception {
@@ -1513,7 +1513,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException() throws Exception {
@@ -1562,7 +1562,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
@@ -1603,18 +1603,18 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 FF = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                      "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "progress_1_0_false", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
@@ -1645,12 +1645,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_preflight_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1696,12 +1696,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
