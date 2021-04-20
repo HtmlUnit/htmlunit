@@ -57,19 +57,19 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
-                "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
+                       "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
             IE = {"zh-Hans-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
-                    "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
+                  "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
     @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+                           "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             FF78 = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"

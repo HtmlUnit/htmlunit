@@ -70,7 +70,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "justify", "char", "center"},
             IE = {"center", "error", "center", "error", "center", "left", "right",
-                    "error", "right", "error", "right", "center"})
+                  "error", "right", "error", "right", "center"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html

@@ -43,7 +43,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"caption1", "caption2", "null", "caption3", "exception",
-                            "[object HTMLTableCaptionElement]", "caption3", "caption4"})
+             "[object HTMLTableCaptionElement]", "caption3", "caption4"})
     public void tableCaptions() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -84,7 +84,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"thead1", "thead2", "null", "thead3", "exception",
-                            "[object HTMLTableSectionElement]", "thead3", "thead4"})
+             "[object HTMLTableSectionElement]", "thead3", "thead4"})
     public void tableHeaders() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -221,7 +221,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "true", "8 2 2 2 2",
-        "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"})
+             "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"})
     public void tableRowsWithManySections() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
@@ -278,7 +278,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"tfoot1", "tfoot2", "null", "tfoot3", "exception",
-                            "[object HTMLTableSectionElement]", "tfoot3", "tfoot4"})
+             "[object HTMLTableSectionElement]", "tfoot3", "tfoot4"})
     public void tableFooters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -548,13 +548,13 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"table: [object HTMLTableElement]",
-                "row: [object HTMLTableRowElement]",
-                "headcell: [object HTMLTableCellElement]",
-                "datacell: [object HTMLTableCellElement]"},
+                       "row: [object HTMLTableRowElement]",
+                       "headcell: [object HTMLTableCellElement]",
+                       "datacell: [object HTMLTableCellElement]"},
             IE = {"table: [object HTMLTableElement]",
-                "row: [object HTMLTableRowElement]",
-                "headcell: [object HTMLTableHeaderCellElement]",
-                "datacell: [object HTMLTableDataCellElement]"})
+                  "row: [object HTMLTableRowElement]",
+                  "headcell: [object HTMLTableHeaderCellElement]",
+                  "datacell: [object HTMLTableDataCellElement]"})
     public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"

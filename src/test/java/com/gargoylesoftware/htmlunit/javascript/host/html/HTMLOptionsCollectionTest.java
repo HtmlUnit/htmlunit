@@ -1008,8 +1008,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"10", "", "", "", "", "", "", "", "", "", "",
-              "10", "One", "", "", "", "", "", "", "", "", "",
-              "10", "One", "Two", "Three", "", "", "", "", "", "", ""})
+             "10", "One", "", "", "", "", "", "", "", "", "",
+             "10", "One", "Two", "Three", "", "", "", "", "", "", ""})
     public void setLengthTen() throws Exception {
         setLength("10");
     }

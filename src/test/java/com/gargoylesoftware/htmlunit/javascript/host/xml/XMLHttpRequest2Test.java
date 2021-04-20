@@ -981,28 +981,25 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "",
-                "content-type: text/xml;charset=iso-8859-1\\n"
-                + "date XYZ GMT\\n"
-                + "server: Jetty(XXX)\\n"
-                + "transfer-encoding: chunked\\n"},
-            IE = {"", "",
-                "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                    + "Transfer-Encoding: chunked\\n"
-                    + "Server: Jetty(XXX)\\n\\n"})
-    @HtmlUnitNYI(CHROME = {"", "",
-                "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                    + "Transfer-Encoding: chunked\\n"
-                    + "Server: Jetty(XXX)\\n"},
+    @Alerts(DEFAULT = {"", "", "content-type: text/xml;charset=iso-8859-1\\n"
+                                + "date XYZ GMT\\n"
+                                + "server: Jetty(XXX)\\n"
+                                + "transfer-encoding: chunked\\n"},
+            IE = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
+                            + "Transfer-Encoding: chunked\\n"
+                            + "Server: Jetty(XXX)\\n\\n"})
+    @HtmlUnitNYI(CHROME = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
+                                        + "Transfer-Encoding: chunked\\n"
+                                        + "Server: Jetty(XXX)\\n"},
             EDGE = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                + "Transfer-Encoding: chunked\\n"
-                + "Server: Jetty(XXX)\\n"},
+                                + "Transfer-Encoding: chunked\\n"
+                                + "Server: Jetty(XXX)\\n"},
             FF = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                + "Transfer-Encoding: chunked\\n"
-                + "Server: Jetty(XXX)\\n"},
+                                + "Transfer-Encoding: chunked\\n"
+                                + "Server: Jetty(XXX)\\n"},
             FF78 = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                + "Transfer-Encoding: chunked\\n"
-                + "Server: Jetty(XXX)\\n"})
+                                + "Transfer-Encoding: chunked\\n"
+                                + "Server: Jetty(XXX)\\n"})
     public void getAllResponseHeaders() throws Exception {
         shutDownRealIE();
 
@@ -1049,8 +1046,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "null", "null", "null",
-            "text/xml;charset=iso-8859-1", "text/xml;charset=iso-8859-1",
-            "text/xml;charset=iso-8859-1", "null"})
+             "text/xml;charset=iso-8859-1", "text/xml;charset=iso-8859-1",
+             "text/xml;charset=iso-8859-1", "null"})
     public void getResponseHeader() throws Exception {
         final String html =
                 "<html>\n"

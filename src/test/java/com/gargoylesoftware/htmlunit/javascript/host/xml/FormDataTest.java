@@ -294,9 +294,9 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                        "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
+                       "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
             IE = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                        "Content-Type: text/plain", "", "Hello HtmlUnit"})
+                  "Content-Type: text/plain", "", "Hello HtmlUnit"})
     public void appendFileWithUnknownExtension() throws Exception {
         final String alerts = appendFile(".htmlunit", "test");
 
@@ -315,9 +315,9 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                        "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
+                       "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
               IE = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
-                      "Content-Type: text/plain", "", "Hello HtmlUnit"})
+                    "Content-Type: text/plain", "", "Hello HtmlUnit"})
     public void appendFileWithoutExtension() throws Exception {
         final String alerts = appendFile("", "test");
 
@@ -994,20 +994,20 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Iterator]", "done", "value",
-                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+                       "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF = {"[object FormData Iterator]", "done", "value",
-                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+                  "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF78 = {"[object FormData Iterator]", "done", "value",
-                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+                    "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             IE = "no entries")
     @HtmlUnitNYI(CHROME = {"[object Iterator]", "value", "done",
-                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+                           "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             EDGE = {"[object Iterator]", "value", "done",
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF = {"[object FormData Iterator]", "value", "done",
-                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+                  "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF78 = {"[object FormData Iterator]", "value", "done",
-                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
+                    "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entriesIterator() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

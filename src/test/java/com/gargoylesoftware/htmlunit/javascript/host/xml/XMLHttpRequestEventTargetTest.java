@@ -79,29 +79,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onabort() { [native code] }",
-                        "function set onabort() { [native code] }",
-                        "true", "true"},
+                       "function get onabort() { [native code] }",
+                       "function set onabort() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onabort() { [native code] }",
-                        "function onabort() { [native code] }",
-                        "true", "true"},
+                  "function onabort() { [native code] }",
+                  "function onabort() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onabort() { [native code] }",
-                        "function onabort() { [native code] }",
-                        "true", "true"},
+                    "function onabort() { [native code] }",
+                    "function onabort() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function onabort() { [native code] } ",
-                        " function onabort() { [native code] } ",
-                        "true", "true"})
+                  " function onabort() { [native code] } ",
+                  " function onabort() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function onabort() { [native code] }",
-                        "function onabort() { [native code] }",
-                        "true", "true"},
+                           "function onabort() { [native code] }",
+                           "function onabort() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function onabort() { [native code] }",
-                        "function onabort() { [native code] }",
-                        "true", "true"})
+                    "function onabort() { [native code] }",
+                    "function onabort() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_onabort() throws Exception {
         getOwnPropertyDescriptor("onabort");
     }
@@ -111,29 +111,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onerror() { [native code] }",
-                        "function set onerror() { [native code] }",
-                        "true", "true"},
+                       "function get onerror() { [native code] }",
+                       "function set onerror() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onerror() { [native code] }",
-                        "function onerror() { [native code] }",
-                        "true", "true"},
+                  "function onerror() { [native code] }",
+                  "function onerror() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onerror() { [native code] }",
-                        "function onerror() { [native code] }",
-                        "true", "true"},
+                    "function onerror() { [native code] }",
+                    "function onerror() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function onerror() { [native code] } ",
-                        " function onerror() { [native code] } ",
-                        "true", "true"})
+                  " function onerror() { [native code] } ",
+                  " function onerror() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function onerror() { [native code] }",
-                        "function onerror() { [native code] }",
-                        "true", "true"},
+                           "function onerror() { [native code] }",
+                           "function onerror() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function onerror() { [native code] }",
-                        "function onerror() { [native code] }",
-                        "true", "true"})
+                    "function onerror() { [native code] }",
+                    "function onerror() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_onerror() throws Exception {
         getOwnPropertyDescriptor("onerror");
     }
@@ -143,29 +143,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onload() { [native code] }",
-                        "function set onload() { [native code] }",
-                        "true", "true"},
+                       "function get onload() { [native code] }",
+                       "function set onload() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onload() { [native code] }",
-                        "function onload() { [native code] }",
-                        "true", "true"},
+                  "function onload() { [native code] }",
+                  "function onload() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onload() { [native code] }",
-                        "function onload() { [native code] }",
-                        "true", "true"},
+                    "function onload() { [native code] }",
+                    "function onload() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function onload() { [native code] } ",
-                        " function onload() { [native code] } ",
-                        "true", "true"})
+                  " function onload() { [native code] } ",
+                  " function onload() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function onload() { [native code] }",
-                        "function onload() { [native code] }",
-                        "true", "true"},
+                           "function onload() { [native code] }",
+                           "function onload() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function onload() { [native code] }",
-                        "function onload() { [native code] }",
-                        "true", "true"})
+                    "function onload() { [native code] }",
+                    "function onload() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_onload() throws Exception {
         getOwnPropertyDescriptor("onload");
     }
@@ -175,29 +175,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onloadstart() { [native code] }",
-                        "function set onloadstart() { [native code] }",
-                        "true", "true"},
+                       "function get onloadstart() { [native code] }",
+                       "function set onloadstart() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onloadstart() { [native code] }",
-                        "function onloadstart() { [native code] }",
-                        "true", "true"},
+                  "function onloadstart() { [native code] }",
+                  "function onloadstart() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onloadstart() { [native code] }",
-                        "function onloadstart() { [native code] }",
-                        "true", "true"},
+                    "function onloadstart() { [native code] }",
+                    "function onloadstart() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function onloadstart() { [native code] } ",
-                        " function onloadstart() { [native code] } ",
-                        "true", "true"})
+                  " function onloadstart() { [native code] } ",
+                  " function onloadstart() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function onloadstart() { [native code] }",
-                        "function onloadstart() { [native code] }",
-                        "true", "true"},
+                           "function onloadstart() { [native code] }",
+                           "function onloadstart() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function onloadstart() { [native code] }",
-                        "function onloadstart() { [native code] }",
-                        "true", "true"})
+                    "function onloadstart() { [native code] }",
+                    "function onloadstart() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_onloadstart() throws Exception {
         getOwnPropertyDescriptor("onloadstart");
     }
@@ -207,29 +207,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onloadend() { [native code] }",
-                        "function set onloadend() { [native code] }",
-                        "true", "true"},
+                       "function get onloadend() { [native code] }",
+                       "function set onloadend() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onloadend() { [native code] }",
-                        "function onloadend() { [native code] }",
-                        "true", "true"},
+                  "function onloadend() { [native code] }",
+                  "function onloadend() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onloadend() { [native code] }",
-                        "function onloadend() { [native code] }",
-                        "true", "true"},
+                    "function onloadend() { [native code] }",
+                    "function onloadend() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function onloadend() { [native code] } ",
-                        " function onloadend() { [native code] } ",
-                        "true", "true"})
+                  " function onloadend() { [native code] } ",
+                  " function onloadend() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function onloadend() { [native code] }",
-                        "function onloadend() { [native code] }",
-                        "true", "true"},
+                           "function onloadend() { [native code] }",
+                           "function onloadend() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function onloadend() { [native code] }",
-                        "function onloadend() { [native code] }",
-                        "true", "true"})
+                    "function onloadend() { [native code] }",
+                    "function onloadend() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_onloadend() throws Exception {
         getOwnPropertyDescriptor("onloadend");
     }
@@ -239,29 +239,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get onprogress() { [native code] }",
-                        "function set onprogress() { [native code] }",
-                        "true", "true"},
+                       "function get onprogress() { [native code] }",
+                       "function set onprogress() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function onprogress() { [native code] }",
-                        "function onprogress() { [native code] }",
-                        "true", "true"},
+                  "function onprogress() { [native code] }",
+                  "function onprogress() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function onprogress() { [native code] }",
-                        "function onprogress() { [native code] }",
-                        "true", "true"},
+                    "function onprogress() { [native code] }",
+                    "function onprogress() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function onprogress() { [native code] } ",
-                        " function onprogress() { [native code] } ",
-                        "true", "true"})
+                  " function onprogress() { [native code] } ",
+                  " function onprogress() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function onprogress() { [native code] }",
-                        "function onprogress() { [native code] }",
-                        "true", "true"},
+                           "function onprogress() { [native code] }",
+                           "function onprogress() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function onprogress() { [native code] }",
-                        "function onprogress() { [native code] }",
-                        "true", "true"})
+                    "function onprogress() { [native code] }",
+                    "function onprogress() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_onprogress() throws Exception {
         getOwnPropertyDescriptor("onprogress");
     }
@@ -280,29 +280,29 @@ public class XMLHttpRequestEventTargetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function get ontimeout() { [native code] }",
-                        "function set ontimeout() { [native code] }",
-                        "true", "true"},
+                       "function get ontimeout() { [native code] }",
+                       "function set ontimeout() { [native code] }",
+                       "true", "true"},
             FF = {"[object Object]", "undefined", "undefined",
-                        "function ontimeout() { [native code] }",
-                        "function ontimeout() { [native code] }",
-                        "true", "true"},
+                  "function ontimeout() { [native code] }",
+                  "function ontimeout() { [native code] }",
+                  "true", "true"},
             FF78 = {"[object Object]", "undefined", "undefined",
-                        "function ontimeout() { [native code] }",
-                        "function ontimeout() { [native code] }",
-                        "true", "true"},
+                    "function ontimeout() { [native code] }",
+                    "function ontimeout() { [native code] }",
+                    "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
-                        " function ontimeout() { [native code] } ",
-                        " function ontimeout() { [native code] } ",
-                        "true", "true"})
+                  " function ontimeout() { [native code] } ",
+                  " function ontimeout() { [native code] } ",
+                  "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                        "function ontimeout() { [native code] }",
-                        "function ontimeout() { [native code] }",
-                        "true", "true"},
+                           "function ontimeout() { [native code] }",
+                           "function ontimeout() { [native code] }",
+                           "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                        "function ontimeout() { [native code] }",
-                        "function ontimeout() { [native code] }",
-                        "true", "true"})
+                    "function ontimeout() { [native code] }",
+                    "function ontimeout() { [native code] }",
+                    "true", "true"})
     public void getOwnPropertyDescriptor_ontimeout() throws Exception {
         getOwnPropertyDescriptor("ontimeout");
     }
