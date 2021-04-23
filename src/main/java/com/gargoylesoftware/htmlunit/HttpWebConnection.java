@@ -24,17 +24,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -154,6 +160,8 @@ public class HttpWebConnection implements WebConnection {
     /** Maintains a separate {@link HttpClientContext} object per HttpWebConnection and thread. */
     private final Map<Thread, HttpClientContext> httpClientContextByThread_ = new WeakHashMap<>();
 
+    private final Timer timeoutGuard = new Timer(true);
+
     /**
      * Creates a new HTTP web connection instance.
      * @param webClient the WebClient that is using this connection
@@ -162,6 +170,22 @@ public class HttpWebConnection implements WebConnection {
         webClient_ = webClient;
         htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient.getBrowserVersion());
         usedOptions_ = new WebClientOptions();
+    }
+
+    private AtomicBoolean startTimeoutGuard(final WebRequest webRequest, final HttpUriRequest httpMethod) {
+        AtomicBoolean aborted = new AtomicBoolean(false);
+        int timeoutMs = getTimeout(webRequest);
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if (httpMethod != null && !httpMethod.isAborted()) {
+                    httpMethod.abort();
+                    aborted.set(true);
+                }
+            }
+        };
+        timeoutGuard.schedule(task, timeoutMs);
+        return aborted;
     }
 
     /**
@@ -184,12 +208,19 @@ public class HttpWebConnection implements WebConnection {
             final URL url = webRequest.getUrl();
             final HttpHost httpHost = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
             final long startTime = System.currentTimeMillis();
+            final AtomicBoolean timedOut = startTimeoutGuard(webRequest, httpMethod);
 
             final HttpContext httpContext = getHttpContext();
             HttpResponse httpResponse = null;
             try {
                 try (CloseableHttpClient closeableHttpClient = builder.build()) {
                     httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
+                } catch (SocketException ex) {
+                    if (timedOut.get()) {
+                        //translate socket closed exception to timeout exception
+                        throw new SocketTimeoutException();
+                    }
+                    throw ex;
                 }
             }
             catch (final SSLPeerUnverifiedException s) {

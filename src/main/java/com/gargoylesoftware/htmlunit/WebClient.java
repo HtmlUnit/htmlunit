@@ -33,11 +33,15 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
+import java.nio.channels.InterruptedByTimeoutException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -1504,6 +1508,31 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
+     * Returns the hard timeout to use for the whole request.
+     * @param webRequest the request might have his own timeout
+     * @return the WebClient's timeout
+     */
+    protected int getTimeout(final WebRequest webRequest) {
+        if (webRequest == null || webRequest.getTimeout() < 0) {
+            return getOptions().getTimeout();
+        }
+        return webRequest.getTimeout();
+    }
+
+    private void setTimeout(WebRequest request, int remainingTimeoutMs, Instant start) throws IOException {
+        int timeout = (int) (remainingTimeoutMs - Duration.between(start, Instant.now()).toMillis());
+        if (timeout <= 0) {
+            throw new SocketTimeoutException();
+        }
+        request.setTimeout(timeout);
+    }
+
+    private WebResponse loadWebResponseFromWebConnection(final WebRequest webRequest,
+            final int allowedRedirects) throws IOException {
+        return loadWebResponseFromWebConnection(webRequest, allowedRedirects, null, 0);
+    }
+
+    /**
      * Loads a {@link WebResponse} from the server through the WebConnection.
      * @param webRequest the request
      * @param allowedRedirects the number of allowed redirects remaining
@@ -1511,8 +1540,13 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return the resultant {@link WebResponse}
      */
     private WebResponse loadWebResponseFromWebConnection(final WebRequest webRequest,
-        final int allowedRedirects) throws IOException {
+        final int allowedRedirects, Instant start, int timeoutMs) throws IOException {
 
+        if(start == null) {
+            //set timeout using first request (used in next redirect requests)
+            timeoutMs = getTimeout(webRequest);
+            start = Instant.now();
+        }
         URL url = webRequest.getUrl();
         final HttpMethod method = webRequest.getHttpMethod();
         final List<NameValuePair> parameters = webRequest.getRequestParameters();
@@ -1577,6 +1611,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebResponse fromCache = getCache().getCachedResponse(webRequest);
         final WebResponse webResponse;
         if (fromCache == null) {
+            setTimeout(webRequest, timeoutMs, start);
             webResponse = getWebConnection().getResponse(webRequest);
         }
         else {
@@ -1638,7 +1673,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
-                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
+                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1, start, timeoutMs);
             }
             else if (status == HttpStatus.SC_TEMPORARY_REDIRECT
                         || status == 308) {
@@ -1663,7 +1698,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
 
-                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
+                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1, start, timeoutMs);
             }
         }
 
