@@ -31,7 +31,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -160,7 +159,7 @@ public class HttpWebConnection implements WebConnection {
     /** Maintains a separate {@link HttpClientContext} object per HttpWebConnection and thread. */
     private final Map<Thread, HttpClientContext> httpClientContextByThread_ = new WeakHashMap<>();
 
-    private final Timer timeoutGuard = new Timer(true);
+    private final Timer timeoutTimer = new Timer(true);
 
     /**
      * Creates a new HTTP web connection instance.
@@ -172,20 +171,27 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_ = new WebClientOptions();
     }
 
-    private AtomicBoolean startTimeoutGuard(final WebRequest webRequest, final HttpUriRequest httpMethod) {
-        AtomicBoolean aborted = new AtomicBoolean(false);
-        int timeoutMs = getTimeout(webRequest);
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                if (httpMethod != null && !httpMethod.isAborted()) {
-                    httpMethod.abort();
-                    aborted.set(true);
-                }
+    private class TimeoutGuardTask extends TimerTask {
+
+        private final AtomicBoolean aborted = new AtomicBoolean(false);
+        private final HttpUriRequest httpMethod;
+
+        public TimeoutGuardTask(final HttpUriRequest httpMethod, final int timeoutMs) {
+            this.httpMethod = httpMethod;
+            timeoutTimer.schedule(this, timeoutMs);
+        }
+
+        @Override
+        public void run() {
+            if (httpMethod != null && !httpMethod.isAborted()) {
+                aborted.set(true);
+                httpMethod.abort();
             }
-        };
-        timeoutGuard.schedule(task, timeoutMs);
-        return aborted;
+        }
+
+        public boolean isTimedOut() {
+            return aborted.get();
+        }
     }
 
     /**
@@ -208,7 +214,7 @@ public class HttpWebConnection implements WebConnection {
             final URL url = webRequest.getUrl();
             final HttpHost httpHost = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
             final long startTime = System.currentTimeMillis();
-            final AtomicBoolean timedOut = startTimeoutGuard(webRequest, httpMethod);
+            final TimeoutGuardTask timedOutGuard = new TimeoutGuardTask(httpMethod, getTimeout(webRequest));
 
             final HttpContext httpContext = getHttpContext();
             HttpResponse httpResponse = null;
@@ -216,7 +222,7 @@ public class HttpWebConnection implements WebConnection {
                 try (CloseableHttpClient closeableHttpClient = builder.build()) {
                     httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
                 } catch (SocketException ex) {
-                    if (timedOut.get()) {
+                    if (timedOutGuard.isTimedOut()) {
                         //translate socket closed exception to timeout exception
                         throw new SocketTimeoutException();
                     }
@@ -242,6 +248,8 @@ public class HttpWebConnection implements WebConnection {
                 // => best solution, discard the HttpClient instance.
                 httpClientBuilder_.remove(Thread.currentThread());
                 throw e;
+            } finally {
+                timedOutGuard.cancel();
             }
 
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
