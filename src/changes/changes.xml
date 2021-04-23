@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Chrome/Edge 89">
+        <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
             <action type="fix" dev="rbri">
                 URL.toString() now returns the same value as implicit converting.
             </action>
