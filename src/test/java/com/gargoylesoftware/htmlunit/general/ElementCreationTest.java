@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -903,7 +903,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLMenuItemElement]",
             FF78 = "[object HTMLMenuItemElement]")
     public void menuitem() throws Exception {
         test("menuitem");
@@ -2015,14 +2014,12 @@ public class ElementCreationTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     * Test HtmlContent.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLContentElement]",
-            EDGE = "[object HTMLContentElement]")
+    @Alerts("[object HTMLUnknownElement]")
     public void content() throws Exception {
         test("content");
     }

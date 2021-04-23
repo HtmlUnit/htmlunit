@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -57,7 +57,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @return the value of the {@code type} property
      */
     @Override
-    @JsxGetter({FF, FF78, IE})
+    @JsxGetter({FF78, IE})
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             return "";
@@ -83,7 +83,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @param type the value of the {@code type} property
      */
     @Override
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter({FF78, IE})
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             if (StringUtils.isEmpty(type)) {
@@ -113,7 +113,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code label} property.
      * @return the value of the {@code label} property
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter(FF78)
     public String getLabel() {
         return label_;
     }
@@ -122,7 +122,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code label} property.
      * @param label the value of the {@code label} property
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter(FF78)
     public void setLabel(final String label) {
         label_ = label;
     }

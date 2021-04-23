@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -57,111 +57,6 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Rule
     public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("25")
-    public void loadExternalJavaScript() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script>\n"
-            + "function makeIframe() {\n"
-            + "  var iframesrc = '<html><head>';\n"
-            + "  iframesrc += '<script src=\"" + "js.js" + "\"></' + 'script>';\n"
-            + "  iframesrc += '<script>';\n"
-            + "  iframesrc += 'function doSquared() {';\n"
-            + "  iframesrc += '    try {';\n"
-            + "  iframesrc += '      var y = squared(5);';\n"
-            + "  iframesrc += '      alert(y);';\n"
-            + "  iframesrc += '    } catch (e) {';\n"
-            + "  iframesrc += '      alert(\"error\");';\n"
-            + "  iframesrc += '    }';\n"
-            + "  iframesrc += '}';\n"
-            + "  iframesrc += '</' + 'script>';\n"
-            + "  iframesrc += '</head>';\n"
-            + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
-            + "  iframesrc += '</body>';\n"
-            + "  iframesrc += '</html>';\n"
-            + "  var iframe = document.createElement('IFRAME');\n"
-            + "  iframe.id = 'iMessage';\n"
-            + "  iframe.name = 'iMessage';\n"
-            + "  iframe.src = \"javascript:'\" + iframesrc + \"'\";\n"
-            + "  document.body.appendChild(iframe);\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='makeIframe()'>\n"
-            + "</body></html>";
-
-        final String js = "function squared(n) {return n * n}";
-
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(new URL(URL_FIRST, "js.js"), js);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * Differs from {@link #loadExternalJavaScript()} by the absolute reference of the javascript source.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("25")
-    public void loadExternalJavaScript_absolute() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script>\n"
-            + "function makeIframe() {\n"
-            + "  var iframesrc = '<html><head>';\n"
-            + "  iframesrc += '<script src=\"" + URL_SECOND + "\"></' + 'script>';\n"
-            + "  iframesrc += '<script>';\n"
-            + "  iframesrc += 'function doSquared() {';\n"
-            + "  iframesrc += '    try {';\n"
-            + "  iframesrc += '      var y = squared(5);';\n"
-            + "  iframesrc += '      alert(y);';\n"
-            + "  iframesrc += '    } catch (e) {';\n"
-            + "  iframesrc += '      alert(\"error\");';\n"
-            + "  iframesrc += '    }';\n"
-            + "  iframesrc += '}';\n"
-            + "  iframesrc += '</' + 'script>';\n"
-            + "  iframesrc += '</head>';\n"
-            + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
-            + "  iframesrc += '</body>';\n"
-            + "  iframesrc += '</html>';\n"
-            + "  var iframe = document.createElement('IFRAME');\n"
-            + "  iframe.id = 'iMessage';\n"
-            + "  iframe.name = 'iMessage';\n"
-            + "  iframe.src = \"javascript:'\" + iframesrc + \"'\";\n"
-            + "  document.body.appendChild(iframe);\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='makeIframe()'>\n"
-            + "</body></html>";
-
-        final String js = "function squared(n) {return n * n}";
-
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(URL_SECOND, js);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
 
     /**
      * @throws Exception if the test fails

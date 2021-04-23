@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.html.serializer;
 
 import java.util.List;
 
@@ -20,7 +20,40 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
+import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlBreak;
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlDetails;
+import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlMenu;
+import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
+import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
+import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
+import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSummary;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
+import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
+import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.html.HtmlTitle;
+import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
+import com.gargoylesoftware.htmlunit.html.TableRowGroup;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -117,10 +150,10 @@ public class HtmlSerializerVisibleText {
             appendResetInput(builder, (HtmlResetInput) node, mode);
         }
         else if (node instanceof HtmlCheckBoxInput) {
-            doAppendCheckBoxInput(builder, (HtmlCheckBoxInput) node, mode);
+            appendCheckBoxInput(builder, (HtmlCheckBoxInput) node, mode);
         }
         else if (node instanceof HtmlRadioButtonInput) {
-            doAppendRadioButtonInput(builder, (HtmlRadioButtonInput) node, mode);
+            appendRadioButtonInput(builder, (HtmlRadioButtonInput) node, mode);
         }
         else if (node instanceof HtmlInput) {
             // nothing
@@ -142,6 +175,9 @@ public class HtmlSerializerVisibleText {
         }
         else if (node instanceof HtmlMenu) {
             appendMenu(builder, (HtmlMenu) node, mode);
+        }
+        else if (node instanceof HtmlDetails) {
+            appendDetails(builder, (HtmlDetails) node, mode);
         }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
             appendNoScript(builder, (HtmlNoScript) node, mode);
@@ -300,6 +336,26 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
+     * Process {@link HtmlDetails}.
+     * @param builder the StringBuilder to add to
+     * @param htmlDetails the target to process
+     * @param mode the {@link Mode} to use for processing
+     */
+    protected void appendDetails(final HtmlSerializerTextBuilder builder,
+                    final HtmlDetails htmlDetails, final Mode mode) {
+        if (htmlDetails.isOpen()) {
+            appendChildren(builder, htmlDetails, mode);
+            return;
+        }
+
+        for (final DomNode child : htmlDetails.getChildren()) {
+            if (child instanceof HtmlSummary) {
+                appendNode(builder, child, mode);
+            }
+        }
+    }
+
+    /**
      * Process {@link HtmlTitle}.
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
@@ -340,7 +396,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendTextArea(final HtmlSerializerTextBuilder builder,
             final HtmlTextArea htmlTextArea, final Mode mode) {
-        if (isVisible(htmlTextArea)) {
+        if (htmlTextArea.isDisplayed()) {
             builder.append(htmlTextArea.getDefaultValue(), whiteSpaceStyle(htmlTextArea, Mode.PRE));
             builder.trimRight(Mode.PRE);
         }
@@ -517,7 +573,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
             final HtmlPreformattedText htmlPreformattedText, final Mode mode) {
-        if (isVisible(htmlPreformattedText)) {
+        if (htmlPreformattedText.isDisplayed()) {
             builder.appendBlockSeparator();
             appendChildren(builder, htmlPreformattedText, whiteSpaceStyle(htmlPreformattedText, Mode.PRE));
             builder.appendBlockSeparator();
@@ -533,7 +589,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendInlineFrame(final HtmlSerializerTextBuilder builder,
             final HtmlInlineFrame htmlInlineFrame, final Mode mode) {
-        if (isVisible(htmlInlineFrame)) {
+        if (htmlInlineFrame.isDisplayed()) {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
@@ -552,7 +608,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, final Mode mode) {
         final DomNode parent = domText.getParentNode();
-        if (parent == null || parent instanceof HtmlTitle || isVisible(parent)) {
+        if (parent == null || parent instanceof HtmlTitle || parent.isDisplayed()) {
             builder.append(domText.getData(), mode);
         }
     }
@@ -600,7 +656,7 @@ public class HtmlSerializerVisibleText {
      * @param htmlCheckBoxInput the target to process
      * @param mode the {@link Mode} to use for processing
      */
-    protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder,
+    protected void appendCheckBoxInput(final HtmlSerializerTextBuilder builder,
                     final HtmlCheckBoxInput htmlCheckBoxInput, final Mode mode) {
         // nothing to do
     }
@@ -612,13 +668,9 @@ public class HtmlSerializerVisibleText {
      * @param htmlRadioButtonInput the target to process
      * @param mode the {@link Mode} to use for processing
      */
-    protected void doAppendRadioButtonInput(final HtmlSerializerTextBuilder builder,
+    protected void appendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput, final Mode mode) {
         // nothing to do
-    }
-
-    private boolean isVisible(final DomNode node) {
-        return node.isDisplayed();
     }
 
     private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {

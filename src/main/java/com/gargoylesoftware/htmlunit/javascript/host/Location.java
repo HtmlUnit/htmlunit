@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,9 +35,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -65,6 +63,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Adam Afeltowicz
+ * @author Atsushi Nakagawa
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
@@ -138,16 +137,15 @@ public class Location extends SimpleScriptable {
      */
     @JsxFunction
     public void reload(final boolean force) throws IOException {
-        final HtmlPage htmlPage = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+        final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
         if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
-            final String referer = htmlPage.getUrl().toExternalForm();
-            request.setAdditionalHeader(HttpHeader.REFERER, referer);
+            request.setRefererlHeader(htmlPage.getUrl());
         }
 
         final WebWindow webWindow = window_.getWebWindow();
-        webWindow.getWebClient().download(webWindow, "", request, true, false, "JS location.reload");
+        webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS location.reload");
     }
 
     /**
@@ -166,9 +164,8 @@ public class Location extends SimpleScriptable {
      * Returns the location URL.
      * @return the location URL
      */
-    @Override
-    @JsxFunction
-    public String toString() {
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
         if (window_ != null) {
             return getHref();
         }
@@ -202,7 +199,9 @@ public class Location extends SimpleScriptable {
             return s;
         }
         catch (final MalformedURLException e) {
-            LOG.error(e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error(e.getMessage(), e);
+            }
             return page.getUrl().toExternalForm();
         }
     }
@@ -239,10 +238,10 @@ public class Location extends SimpleScriptable {
             }
 
             final WebRequest request = new WebRequest(url);
-            request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+            request.setRefererlHeader(page.getUrl());
 
             final WebWindow webWindow = window_.getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");
+            webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS set location");
         }
         catch (final MalformedURLException e) {
             if (LOG.isErrorEnabled()) {
@@ -434,7 +433,7 @@ public class Location extends SimpleScriptable {
      */
     @JsxGetter
     public String getPathname() {
-        if (WebClient.URL_ABOUT_BLANK == getUrl()) {
+        if (UrlUtils.URL_ABOUT_BLANK == getUrl()) {
             if (getBrowserVersion().hasFeature(URL_ABOUT_BLANK_HAS_BLANK_PATH)) {
                 return "blank";
             }

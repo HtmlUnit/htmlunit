@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -329,6 +329,15 @@ public class URLSearchParams extends SimpleScriptable {
     }
 
     /**
+     * Returns the text of the Range.
+     * @return the text
+     */
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
+        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
+    }
+
+    /**
      * Calls for instance for implicit conversion to string.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
@@ -336,7 +345,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
+        return jsToString();
     }
 
     /**

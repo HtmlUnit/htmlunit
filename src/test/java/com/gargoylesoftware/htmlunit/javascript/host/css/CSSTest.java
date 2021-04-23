@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -34,7 +33,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function CSS() { [native code] }", "[object CSS]"},
+    @Alerts(DEFAULT = {"[object CSS]", "undefined"},
             FF = {"[object Object]", "undefined"},
             FF78 = {"[object Object]", "undefined"},
             IE = "Exception")
@@ -57,12 +56,7 @@ public class CSSTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSS]",
-            FF = "ctor Exception",
-            FF78 = "ctor Exception",
-            IE = "ctor Exception")
-    @HtmlUnitNYI(CHROME = "[object Object]",
-            EDGE = "[object Object]")
+    @Alerts("ctor Exception")
     public void constructor() throws Exception {
         final String html
             = "<html><body>\n"

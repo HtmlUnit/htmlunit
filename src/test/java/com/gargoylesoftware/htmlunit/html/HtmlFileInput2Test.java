@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,6 +27,8 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -532,6 +534,39 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         assertTrue(response.contains("Second"));
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void webkitdirectory() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/upload1", MultipleWebkitdirectoryServlet.class);
+        servlets.put("/upload2", PrintRequestServlet.class);
+        startWebServer("./", null, servlets);
+
+        final String filename1 = "HtmlFileInputTest_one.txt";
+        final File dir = new File("src/test/resources/pjl-comp-filter");
+        assertTrue(dir.exists());
+        assertTrue(dir.isDirectory());
+
+        final WebClient client = getWebClient();
+        final HtmlPage firstPage = client.getPage(URL_FIRST + "upload1");
+
+        final HtmlForm form = firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = form.getInputByName("myInput");
+        fileInput.setDirectory(dir);
+
+        final HtmlSubmitInput submitInput = form.getInputByValue("Upload");
+        final HtmlPage secondPage = submitInput.click();
+
+        final String response = secondPage.getWebResponse().getContentAsString();
+
+        assertTrue(response.contains("index.html"));
+        assertTrue(response.contains("web.xml"));
+        assertTrue(response.contains("pjl-comp-filter-1.8.1.jar"));
+    }
+
     /**
      * Servlet for '/upload1'.
      */
@@ -554,6 +589,27 @@ public class HtmlFileInput2Test extends WebServerTestCase {
     }
 
     /**
+     * Servlet for '/upload1'.
+     */
+    public static class MultipleWebkitdirectoryServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setCharacterEncoding(UTF_8.name());
+            response.setContentType(MimeType.TEXT_HTML);
+            response.getWriter().write("<html>\n"
+                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file' multiple webkitdirectory><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form></body></html>\n");
+        }
+    }
+
+    /**
      * Prints request content to the response.
      */
     public static class PrintRequestServlet extends HttpServlet {
@@ -570,7 +626,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
             final BufferedReader reader = request.getReader();
             String line;
             while ((line = reader.readLine()) != null) {
-                writer.write(line);
+                final String normalized = Normalizer.normalize(line, Form.NFD);
+                writer.write(normalized);
             }
         }
     }
@@ -605,7 +662,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     @Alerts({"C:\\fakepath\\pom.xml-Hello world-Hello world",
-                    "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
+             "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
     public void value() throws Exception {
         final String html =
               "<html>\n"
@@ -628,8 +685,39 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         page.<HtmlFileInput>getHtmlElementById("f").setFiles(pom);
         page.getElementById("clickMe").click();
         Thread.sleep(100);
-        final String[] expectedAlerts = getExpectedAlerts();
-        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", pom.getAbsolutePath());
-        assertEquals(expectedAlerts, getCollectedAlerts(page));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"C:\\fakepath\\index.html-Hello world-Hello world",
+             "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\" webkitdirectory=\"\">"})
+    public void valueWebkitdirectory() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var input = document.getElementById('f');\n"
+              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    alert(input.outerHTML);\n"
+              + "  }\n"
+              + "</script></head>\n"
+              + "<body>\n"
+              + "  <input type='file' id='f' value='Hello world' multiple webkitdirectory>\n"
+              + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
+              + "</body></html>";
+
+        final File dir = new File("src/test/resources/pjl-comp-filter");
+        System.out.println(dir.getAbsolutePath());
+
+        final HtmlPage page = loadPage(html);
+        page.<HtmlFileInput>getHtmlElementById("f").setDirectory(dir);
+        page.getElementById("clickMe").click();
+        Thread.sleep(100);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
     }
 }

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,20 +44,21 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"assign: undefined", "constructor: function", "create: undefined", "defineProperties: undefined",
-                "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
-                "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
-                "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
-                "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
-                "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function",
-                "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"})
+             "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
+             "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
+             "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
+             "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
+             "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function",
+             "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"})
     public void common() throws Exception {
-        final String[] methods = {"assign", "constructor", "create", "defineProperties", "defineProperty", "freeze",
+        final String[] methods = {
+            "assign", "constructor", "create", "defineProperties", "defineProperty", "freeze",
             "getOwnPropertyDescriptor", "getOwnPropertyNames", "getPrototypeOf", "hasOwnProperty", "isExtensible",
             "isFrozen", "isPrototypeOf", "isSealed", "keys", "preventExtensions", "propertyIsEnumerable", "seal",
             "toLocaleString", "toString", "valueOf", "__defineGetter__", "__defineSetter__",
             "__lookupGetter__", "__lookupSetter__"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,7 +70,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     public void others() throws Exception {
         final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,17 +82,18 @@ public class NativeObjectTest extends WebDriverTestCase {
     public void assign() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (Object.assign) {\n"
             + "    var obj = { a: 1 };\n"
             + "    var copy = Object.assign({}, obj);\n"
-            + "    alert(copy.a);\n"
+            + "    log(copy.a);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -104,16 +106,17 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "  if (Object.assign) {\n"
             + "    var obj = { a: 1 };\n"
             + "    var copy = Object.assign({}, undefined, obj);\n"
-            + "    alert(copy.a);\n"
+            + "    log(copy.a);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -126,15 +129,16 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html
                 = "<html><head><script>\n"
                 + "function test() {\n"
+                + LOG_TITLE_FUNCTION
                 + "  if (Object.assign) {\n"
                 + "    var copy = Object.assign({}, undefined, undefined);\n"
-                + "    alert(copy.a);\n"
+                + "    log(copy.a);\n"
                 + "  }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -147,15 +151,16 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html
                 = "<html><head><script>\n"
                 + "function test() {\n"
+                + LOG_TITLE_FUNCTION
                 + "  if (Object.assign) {\n"
                 + "    var copy = Object.assign({}, null);\n"
-                + "    alert(copy.a);\n"
+                + "    log(copy.a);\n"
                 + "  }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -168,15 +173,16 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html
                 = "<html><head><script>\n"
                 + "function test() {\n"
+                + LOG_TITLE_FUNCTION
                 + "  if (Object.assign) {\n"
                 + "    var copy = Object.assign({}, null, null);\n"
-                + "    alert(copy.a);\n"
+                + "    log(copy.a);\n"
                 + "  }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -214,16 +220,17 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert({}.__proto__);\n"
-            + "    alert({}.__proto__.__proto__);\n"
+            + "    log({}.__proto__);\n"
+            + "    log({}.__proto__.__proto__);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -239,17 +246,18 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(String.prototype === Object.getPrototypeOf(''));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(String.prototype === Object.getPrototypeOf(''));\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -263,17 +271,18 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(Number.prototype === Object.getPrototypeOf(1));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(Number.prototype === Object.getPrototypeOf(1));\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -287,17 +296,18 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(Boolean.prototype === Object.getPrototypeOf(true));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(Boolean.prototype === Object.getPrototypeOf(true));\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -311,17 +321,18 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(typeof Object.getPrototypeOf(1));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(typeof Object.getPrototypeOf(1));\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -334,6 +345,7 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var obj = {};\n"
@@ -344,17 +356,17 @@ public class NativeObjectTest extends WebDriverTestCase {
             + "      obj[b] = 'globalSymbol';\n"
             + "\n"
             + "      var objectSymbols = Object.getOwnPropertySymbols(obj);\n"
-            + "      alert(objectSymbols.length);\n"
-            + "      alert(objectSymbols[0] === a);\n"
-            + "      alert(objectSymbols[1] === b);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(objectSymbols.length);\n"
+            + "      log(objectSymbols[0] === a);\n"
+            + "      log(objectSymbols[1] === b);\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -366,18 +378,19 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var objectSymbols = Object.getOwnPropertySymbols();\n"
-            + "      alert(objectSymbols.length);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(objectSymbols.length);\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -385,7 +398,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElementPrototype]",
-                        "[object Object]", "function"},
+                       "[object Object]", "function"},
             CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             EDGE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
@@ -395,17 +408,18 @@ public class NativeObjectTest extends WebDriverTestCase {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var input = document.getElementById('myInput');\n"
-            + "      alert(input);\n"
+            + "      log(input);\n"
             + "      var proto = input.constructor.prototype;\n"
-            + "      alert(proto);\n"
+            + "      log(proto);\n"
             + "      var desc = Object.getOwnPropertyDescriptor(proto, 'value');\n"
-            + "      alert(desc);\n"
+            + "      log(desc);\n"
 
-            + "      alert(typeof desc.get);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(typeof desc.get);\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -413,7 +427,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             + "  <input id='myInput' value='some test'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -421,28 +435,28 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function get value() { [native code] }",
-                        "x.get.call = function call() { [native code] }"},
+                       "x.get = function get value() { [native code] }",
+                       "x.get.call = function call() { [native code] }"},
             FF = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() {\n    [native code]\n}",
-                        "x.get.call = function call() {\n    [native code]\n}"},
+                  "x.get = function value() {\n    [native code]\n}",
+                  "x.get.call = function call() {\n    [native code]\n}"},
             FF78 = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() {\n    [native code]\n}",
-                        "x.get.call = function call() {\n    [native code]\n}"},
+                    "x.get = function value() {\n    [native code]\n}",
+                    "x.get.call = function call() {\n    [native code]\n}"},
             IE = {"[object HTMLInputElementPrototype]", "x = [object Object]",
-                        "x.get = \nfunction value() {\n    [native code]\n}\n",
-                        "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+                  "x.get = \nfunction value() {\n    [native code]\n}\n",
+                  "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     @HtmlUnitNYI(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
-                        "x.get = function value() { [native code] }",
-                        "x.get.call = function call() { [native code] }"},
+                           "x.get = function value() { [native code] }",
+                           "x.get.call = function call() { [native code] }"},
             EDGE = {"[object HTMLInputElement]", "x = [object Object]",
                     "x.get = function value() { [native code] }",
                     "x.get.call = function call() { [native code] }"},
             IE = {"[object HTMLInputElement]", "x = [object Object]",
-                    "x.get = \nfunction value() {\n    [native code]\n}\n",
-                    "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+                  "x.get = \nfunction value() {\n    [native code]\n}\n",
+                  "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var proto = i1.constructor.prototype;\n"
             + "  alert(proto);\n"

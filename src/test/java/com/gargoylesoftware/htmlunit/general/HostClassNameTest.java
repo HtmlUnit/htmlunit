@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -1307,7 +1307,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function CSS() { [native code] }",
+    @Alerts(DEFAULT = "[object CSS]",
             IE = "exception",
             FF = "[object Object]",
             FF78 = "[object Object]")
@@ -3354,9 +3354,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLContentElement() { [native code] }",
-            EDGE = "function HTMLContentElement() { [native code] }")
+    @Alerts("exception")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -3909,7 +3907,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function HTMLMenuItemElement() {\n    [native code]\n}",
             FF78 = "function HTMLMenuItemElement() {\n    [native code]\n}")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");
@@ -4189,14 +4186,12 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     * Test HTMLShadowElement.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLShadowElement() { [native code] }",
-            EDGE = "function HTMLShadowElement() { [native code] }")
+    @Alerts("exception")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
     }

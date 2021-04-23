@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,21 +55,22 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
-            + "  alert(this);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(this);\n"
             + "  try {\n"
-            + "    alert(abc);\n"
-            + "  } catch(e) {alert('exception')}\n"
-            + "  alert(this.abc);\n"
-            + "  alert(this.def);\n"
+            + "    log(abc);\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "  log(this.abc);\n"
+            + "  log(this.def);\n"
             + "  this.abc = 'hello';\n"
             + "  def = 'world';\n"
-            + "  alert(abc);\n"
-            + "  alert(this.abc);\n"
-            + "  alert(def);\n"
-            + "  alert(this.def);\n"
+            + "  log(abc);\n"
+            + "  log(this.abc);\n"
+            + "  log(def);\n"
+            + "  log(this.def);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,14 +82,15 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function hello() {\n"
             + "    var x = 1;\n"
             + "  } \n"
-            + "  alert(typeof hello);\n"
-            + "  alert(typeof window.hello);\n"
+            + "  log(typeof hello);\n"
+            + "  log(typeof window.hello);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -103,15 +105,16 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "if (window.controllers)\n"
-            + "  alert('found');\n"
+            + "  log('found');\n"
             + "else\n"
-            + "  alert('not found');\n"
+            + "  log('not found');\n"
             + "window.controllers = 'hello';\n"
-            + "alert(window.controllers == 'hello');\n"
+            + "log(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -123,11 +126,12 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  window.controllers = 'hello';\n"
-            + "  alert(window.controllers == 'hello');\n"
+            + "  log(window.controllers == 'hello');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -153,12 +157,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var data = window.btoa('Hello World!');\n"
-            + "  alert(data);\n"
-            + "  alert(atob(data));\n"
+            + "  log(data);\n"
+            + "  log(atob(data));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -170,15 +175,16 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.btoa('I \\u2661 Unicode!');\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  } catch(e) {log('exception')}\n"
             + "  try {\n"
             + "    window.atob('I \\u2661 Unicode!');\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  } catch(e) {log('exception')}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -224,12 +230,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var data = window.btoa(null);\n"
-            + "  alert(data);\n"
-            + "  alert(atob(data));\n"
+            + "  log(data);\n"
+            + "  log(atob(data));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -241,12 +248,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var data = window.btoa(undefined);\n"
-            + "  alert(data);\n"
-            + "  alert(atob(data));\n"
+            + "  log(data);\n"
+            + "  log(atob(data));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -257,22 +265,23 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"getClass: undefined,undefined", "java: undefined,undefined", "javax: undefined,undefined",
-            "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
-            "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
-            "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
-            "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
-            "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
-            "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
-            "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
-            "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
-            "Java: undefined,undefined", "JSAdapter: undefined,undefined",
-            "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
-            "parseInt: function,function", "parseFloat: function,function",
-            "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
-            "encodeURIComponent: function,function", "decodeURI: function,function",
-            "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function"})
+             "javafx: undefined,undefined", "org: undefined,undefined", "com: undefined,undefined",
+             "edu: undefined,undefined", "net: undefined,undefined", "JavaAdapter: undefined,undefined",
+             "JavaImporter: undefined,undefined", "Continuation: undefined,undefined", "Packages: undefined,undefined",
+             "XML: undefined,undefined", "XMLList: undefined,undefined", "Namespace: undefined,undefined",
+             "QName: undefined,undefined", "arguments: undefined,undefined", "load: undefined,undefined",
+             "loadWithNewGlobal: undefined,undefined", "exit: undefined,undefined", "quit: undefined,undefined",
+             "__FILE__: undefined,undefined", "__DIR__: undefined,undefined", "__LINE__: undefined,undefined",
+             "context: undefined,undefined", "engine: undefined,undefined", "__noSuchProperty__: undefined,undefined",
+             "Java: undefined,undefined", "JSAdapter: undefined,undefined",
+             "NaN: number,number", "Infinity: number,number", "eval: function,function", "print: function,function",
+             "parseInt: function,function", "parseFloat: function,function",
+             "isNaN: function,function", "isFinite: function,function", "encodeURI: function,function",
+             "encodeURIComponent: function,function", "decodeURI: function,function",
+             "decodeURIComponent: function,function", "escape: function,function", "unescape: function,function"})
     public void topLevelProperties() throws Exception {
-        final String[] properties = {"getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
+        final String[] properties = {
+            "getClass", "java", "javax", "javafx", "org", "com", "edu", "net", "JavaAdapter",
             "JavaImporter", "Continuation", "Packages", "XML", "XMLList", "Namespace", "QName", "arguments", "load",
             "loadWithNewGlobal", "exit", "quit", "__FILE__", "__DIR__", "__LINE__", "context", "engine",
             "__noSuchProperty__", "Java", "JSAdapter",
@@ -281,12 +290,13 @@ public class Window2Test extends WebDriverTestCase {
 
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var props = ['" + String.join("', '", properties) + "'];\n"
             + "  for (var i = 0; i < props.length; i++)\n"
-            + "    alert(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
+            + "    log(props[i] + ': ' + typeof(window[props[i]]) + ',' + typeof(eval('this.' + props[i])));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html, 3 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -299,12 +309,14 @@ public class Window2Test extends WebDriverTestCase {
 
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var props = ['" + String.join("', '", properties) + "'];\n"
             + "  for (var i = 0; i < props.length; i++)\n"
-            + "    alert(props[i] + ': ' + typeof(window[props[i]]));\n"
+            + "    log(props[i] + ': ' + typeof(window[props[i]]));\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -313,17 +325,18 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void execScript2() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      window.execScript('alert(1);');\n"
+            + "      window.execScript('log(1);');\n"
             + "    }\n"
-            + "    catch(e) { alert('exception') }\n"
+            + "    catch(e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -332,15 +345,16 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void execScript_returnValue() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(window.execScript('1') === undefined);\n"
+            + "  log(window.execScript('1') === undefined);\n"
             + "}\n"
-            + "catch(e) { alert('exception') }\n"
+            + "catch(e) { log('exception') }\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -350,14 +364,15 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = "function")
     public void collectGarbage() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(typeof CollectGarbage);\n"
+            + "    log(typeof CollectGarbage);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -366,12 +381,13 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts({"original", "changed"})
     public void eval_localVariable() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var f = document.getElementById('testForm1');\n"
-            + "    alert(f.text1.value);\n"
+            + "    log(f.text1.value);\n"
             + "    eval('f.text_' + 1).value = 'changed';\n"
-            + "    alert(f.text1.value);\n"
+            + "    log(f.text1.value);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <form id='testForm1'>\n"
@@ -379,7 +395,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -388,21 +404,20 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}"},
-            CHROME = {"function Node() { [native code] }", "function Element() { [native code] }"},
-            EDGE = {"function Node() { [native code] }", "function Element() { [native code] }"},
+    @Alerts(DEFAULT = {"function Node() { [native code] }", "function Element() { [native code] }"},
             IE = {"[object Node]", "[object Element]"})
     public void windowProperties() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.Node);\n"
-            + "    alert(window.Element);\n"
+            + "    log(window.Node);\n"
+            + "    log(window.Element);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -413,12 +428,13 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"0", "0"})
     public void framesLengthZero() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "alert(window.length);\n"
-            + "alert(window.frames.length);\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "log(window.length);\n"
+            + "log(window.frames.length);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -431,11 +447,12 @@ public class Window2Test extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.length);\n"
-            + "  alert(window.frames.length);\n"
-            + "  alert(window.frames[0].name);\n"
-            + "  alert(window.frames.frame2.name);\n"
+            + "  log(window.length);\n"
+            + "  log(window.frames.length);\n"
+            + "  log(window.frames[0].name);\n"
+            + "  log(window.frames.frame2.name);\n"
             + "}\n"
             + "</script>\n"
             + "<frameset rows='50,*' onload='test()'>\n"
@@ -444,7 +461,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -456,14 +473,15 @@ public class Window2Test extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "<script>\n"
-            + "alert(window.length);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(window.length);\n"
             + "var oFrames = window.frames;\n"
-            + "alert(oFrames.length);\n"
+            + "log(oFrames.length);\n"
             + "function test() {\n"
-            + "  alert(oFrames.length);\n"
-            + "  alert(window.length);\n"
-            + "  alert(window.frames.length);\n"
-            + "  alert(oFrames == window.frames);\n"
+            + "  log(oFrames.length);\n"
+            + "  log(window.length);\n"
+            + "  log(window.frames.length);\n"
+            + "  log(oFrames == window.frames);\n"
             + "}\n"
             + "</script>\n"
             + "<frameset rows='50,*' onload='test()'>\n"
@@ -472,7 +490,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -484,15 +502,16 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts("hello")
     public void overwriteFunctions_navigator() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    function navigator() {\n"
-            + "      alert('hello');\n"
+            + "      log('hello');\n"
             + "    }\n"
             + "    navigator();\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -532,13 +551,14 @@ public class Window2Test extends WebDriverTestCase {
     private void onbeforeunload(final String name, final String js) throws Exception {
         final String html
             = "<html><body" + (js != null ? " " + name + "='" + js + "'" : "") + "><script>\n"
-            + "  alert('" + name + "' in window);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('" + name + "' in window);\n"
             + "  var x = false;\n"
             + "  for(var p in window) { if(p == '" + name + "') { x = true; break; } }\n"
-            + "  alert(x);\n"
-            + "  alert(typeof window." + name + ");\n"
+            + "  log(x);\n"
+            + "  log(typeof window." + name + ");\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -548,37 +568,38 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object Window]", "[object Window]", "[object Window]", "1", "true", "true",
-                    "[object Window]", "true", "true", "no function", "undefined", "true", "true",
-                    "[object History]", "true", "true", "[object Window]", "true", "true"})
+             "[object Window]", "true", "true", "no function", "undefined", "true", "true",
+             "[object History]", "true", "true", "[object Window]", "true", "true"})
     public void framesAreWindows() throws Exception {
         final String html = "<html><body><iframe name='f'></iframe><script>\n"
-            + "alert(window.frames);\n"
-            + "alert(window.f);\n"
-            + "alert(window.frames.f);\n"
-            + "alert(window.length);\n"
-            + "alert(window.length == window.frames.length);\n"
-            + "alert(window.length == window.frames.frames.length);\n"
-            + "alert(window[0]);\n"
-            + "alert(window[0] == window.frames[0]);\n"
-            + "alert(window[0] == window.frames.frames[0]);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(window.frames);\n"
+            + "log(window.f);\n"
+            + "log(window.frames.f);\n"
+            + "log(window.length);\n"
+            + "log(window.length == window.frames.length);\n"
+            + "log(window.length == window.frames.frames.length);\n"
+            + "log(window[0]);\n"
+            + "log(window[0] == window.frames[0]);\n"
+            + "log(window[0] == window.frames.frames[0]);\n"
             + "try {\n"
-            + "  alert(window(0));\n"
-            + "  alert(window(0) == window.frames(0));\n"
-            + "  alert(window(0) == window.frames.frames(0));\n"
+            + "  log(window(0));\n"
+            + "  log(window(0) == window.frames(0));\n"
+            + "  log(window(0) == window.frames.frames(0));\n"
             + "} catch(e) {\n"
-            + "  alert('no function');\n"
+            + "  log('no function');\n"
             + "}\n"
-            + "alert(window[1]);\n"
-            + "alert(window[1] == window.frames[1]);\n"
-            + "alert(window[1] == window.frames.frames[1]);\n"
-            + "alert(window.history);\n"
-            + "alert(window.history == window.frames.history);\n"
-            + "alert(window.history == window.frames.frames.history);\n"
-            + "alert(window.self);\n"
-            + "alert(window.self == window.frames.self);\n"
-            + "alert(window.self == window.frames.frames.self);\n"
+            + "log(window[1]);\n"
+            + "log(window[1] == window.frames[1]);\n"
+            + "log(window[1] == window.frames.frames[1]);\n"
+            + "log(window.history);\n"
+            + "log(window.history == window.frames.history);\n"
+            + "log(window.history == window.frames.frames.history);\n"
+            + "log(window.self);\n"
+            + "log(window.self == window.frames.self);\n"
+            + "log(window.self == window.frames.frames.self);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -590,9 +611,7 @@ public class Window2Test extends WebDriverTestCase {
     public void open() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function info(msg) {\n"
-            + "    alert(msg);\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -603,12 +622,12 @@ public class Window2Test extends WebDriverTestCase {
         final String windowContent = "<html><head></head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  window.opener.info('Hello window');\n"
-                + "  window.opener.info(window.name);\n"
+                + "  window.opener.log('Hello window');\n"
+                + "  window.opener.log(window.name);\n"
                 + "</script>\n"
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
         releaseResources();
@@ -624,9 +643,7 @@ public class Window2Test extends WebDriverTestCase {
     public void openWindowParams() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function info(msg) {\n"
-            + "    alert(msg);\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -637,12 +654,12 @@ public class Window2Test extends WebDriverTestCase {
         final String windowContent = "<html><head></head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  window.opener.info('Hello window');\n"
-                + "  window.opener.info(window.name);\n"
+                + "  window.opener.log('Hello window');\n"
+                + "  window.opener.log(window.name);\n"
                 + "</script>\n"
                 + "</body></html>";
         getMockWebConnection().setDefaultResponse(windowContent);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         // for unknown reason, the selenium driven browser is in an invalid state after this test
         releaseResources();
@@ -692,22 +709,23 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
-                    "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"},
+                       "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"},
             IE = {"[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
-                "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"})
+                  "[object Window] (true)", "[object Window] (true)", "[object Window] (true)"})
     public void set_opener() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var otherWindow = window.open('about:blank');\n"
             + "function trySetOpener1(_win, value) {\n"
             + "  try {\n"
             + "    _win.opener = value;\n"
-            + "    alert(_win.opener + ' (' + (_win.opener === value) + ')');\n"
+            + "    log(_win.opener + ' (' + (_win.opener === value) + ')');\n"
             + "  }\n"
-            + "  catch(e) { alert('exception') }\n"
+            + "  catch(e) { log('exception') }\n"
             + "}\n"
             + "function trySetOpener(_win) {\n"
             + "  var originalValue = _win.opener;\n"
-            + "  alert(originalValue);\n"
+            + "  log(originalValue);\n"
             + "  trySetOpener1(_win, _win.opener);\n"
             + "  trySetOpener1(_win, 1234);\n"
             + "  trySetOpener1(_win, null);\n"
@@ -723,7 +741,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
         // for some reason, the selenium driven browser is in an invalid state after this test
         releaseResources();
         shutDownAll();
@@ -737,14 +755,15 @@ public class Window2Test extends WebDriverTestCase {
             IE = {"JScript", "11", "0", "number"})
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
-            + "try { alert(ScriptEngine()); } catch(e) { alert('exception') }\n"
-            + "try { alert(ScriptEngineMajorVersion()); } catch(e) { alert('exception') }\n"
-            + "try { alert(ScriptEngineMinorVersion()); } catch(e) { alert('exception') }\n"
-            + "try { alert(typeof ScriptEngineBuildVersion()); } catch(e) { alert('exception') }\n"
+            + LOG_TITLE_FUNCTION
+            + "try { log(ScriptEngine()); } catch(e) { log('exception') }\n"
+            + "try { log(ScriptEngineMajorVersion()); } catch(e) { log('exception') }\n"
+            + "try { log(ScriptEngineMinorVersion()); } catch(e) { log('exception') }\n"
+            + "try { log(typeof ScriptEngineBuildVersion()); } catch(e) { log('exception') }\n"
             + "</script></head>\n"
             + "<body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -760,17 +779,18 @@ public class Window2Test extends WebDriverTestCase {
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.innerHeight > 0);\n"
-            + "  alert(window.innerHeight == document.body.clientHeight);\n"
-            + "  alert(window.outerHeight - window.innerHeight);\n"
-            + "  alert(window.innerWidth > 0);\n"
-            + "  alert(window.innerWidth == document.body.clientWidth);\n"
-            + "  alert(window.outerWidth - window.innerWidth);\n"
+            + "  log(window.innerHeight > 0);\n"
+            + "  log(window.innerHeight == document.body.clientHeight);\n"
+            + "  log(window.outerHeight - window.innerHeight);\n"
+            + "  log(window.innerWidth > 0);\n"
+            + "  log(window.innerWidth == document.body.clientWidth);\n"
+            + "  log(window.outerWidth - window.innerWidth);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -783,14 +803,15 @@ public class Window2Test extends WebDriverTestCase {
     public void setInnerWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.innerWidth > 0);\n"
+            + "  log(window.innerWidth > 0);\n"
             + "  window.innerWidth = 1234;\n"
-            + "  alert(window.innerWidth);\n"
+            + "  log(window.innerWidth);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -803,14 +824,15 @@ public class Window2Test extends WebDriverTestCase {
     public void setInnerHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.innerHeight > 0);\n"
+            + "  log(window.innerHeight > 0);\n"
             + "  window.innerHeight = 1234;\n"
-            + "  alert(window.innerHeight);\n"
+            + "  log(window.innerHeight);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -823,14 +845,15 @@ public class Window2Test extends WebDriverTestCase {
     public void setOuterWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.outerWidth > 0);\n"
+            + "  log(window.outerWidth > 0);\n"
             + "  window.outerWidth = 1234;\n"
-            + "  alert(window.outerWidth);\n"
+            + "  log(window.outerWidth);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -843,14 +866,15 @@ public class Window2Test extends WebDriverTestCase {
     public void setOuterHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.outerHeight > 0);\n"
+            + "  log(window.outerHeight > 0);\n"
             + "  window.outerHeight = 1234;\n"
-            + "  alert(window.outerHeight);\n"
+            + "  log(window.outerHeight);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -870,23 +894,24 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script language='javascript'>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var oldHeight = document.body.clientHeight;\n"
             + "    var oldWidth = document.body.clientWidth;\n"
-            + "    alert(document.body.clientHeight);\n"
-            + "    alert(document.body.clientWidth);\n"
+            + "    log(document.body.clientHeight);\n"
+            + "    log(document.body.clientWidth);\n"
             + "    newDiv = document.createElement('div');\n"
             + "    document.body.appendChild(newDiv);\n"
             + "    newDiv.style['height'] = oldHeight + 100 + 'px';\n"
             + "    newDiv.style['width'] = oldWidth + 100 + 'px';\n"
-            + "    alert(document.body.clientHeight);\n"
-            + "    alert(document.body.clientWidth);\n"
+            + "    log(document.body.clientHeight);\n"
+            + "    log(document.body.clientWidth);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -895,7 +920,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1274"},
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"},
             FF78 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1274"})
     @NotYetImplemented({FF, FF78})
     public void scrolling1() throws Exception {
@@ -919,32 +944,33 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><body onload='test()'>\n"
             + (addHugeDiv ? "<div id='d' style='width:10000px;height:10000px;background-color:blue;'></div>\n" : "")
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var b = document.body;\n"
-            + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  window.scrollTo(100, 200);\n"
-            + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  window.scrollBy(10, 30);\n"
-            + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  window.scrollTo(-5, -20);\n"
-            + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  if(window.scrollByLines) {\n"
             + "    window.scrollByLines(5);\n"
-            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "    log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  } else {\n"
-            + "    alert('no scrollByLines()');\n"
+            + "    log('no scrollByLines()');\n"
             + "  }\n"
             + "  window.scroll(0, 0);\n"
-            + "  alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "  log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  if(window.scrollByPages) {\n"
             + "    window.scrollByPages(2);\n"
-            + "    alert(b.scrollLeft + ',' + b.scrollTop);\n"
+            + "    log(b.scrollLeft + ',' + b.scrollTop);\n"
             + "  } else {\n"
-            + "    alert('no scrollByPages()');\n"
+            + "    log('no scrollByPages()');\n"
             + "  }\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -956,16 +982,17 @@ public class Window2Test extends WebDriverTestCase {
     public void pageXOffset() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  window.scrollBy(5, 10);\n"
-            + "  alert(window.pageXOffset);\n"
-            + "  alert(window.pageYOffset);\n"
-            + "  alert(window.scrollX);\n"
-            + "  alert(window.scrollY);\n"
+            + "  log(window.pageXOffset);\n"
+            + "  log(window.pageYOffset);\n"
+            + "  log(window.scrollX);\n"
+            + "  log(window.scrollY);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -976,9 +1003,10 @@ public class Window2Test extends WebDriverTestCase {
     public void typeof() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "  alert(typeof window);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -991,13 +1019,14 @@ public class Window2Test extends WebDriverTestCase {
     public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.mozInnerScreenX);\n"
-            + "  alert(window.mozInnerScreenY);\n"
+            + "  log(window.mozInnerScreenX);\n"
+            + "  log(window.mozInnerScreenY);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1008,12 +1037,13 @@ public class Window2Test extends WebDriverTestCase {
     public void mozPaintCount() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(typeof window.mozPaintCount);\n"
+            + "  log(typeof window.mozPaintCount);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1024,22 +1054,23 @@ public class Window2Test extends WebDriverTestCase {
     public void eval() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var x = new Object();\n"
             + "  x.a = 'Success';\n"
             + "  try {\n"
-            + "    alert(window['eval']('x.a'));\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(window['eval']('x.a'));\n"
+            + "  } catch(e) {log('exception')}\n"
             + "  try {\n"
-            + "    alert(window.eval('x.a'));\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(window.eval('x.a'));\n"
+            + "  } catch(e) {log('exception')}\n"
             + "  try {\n"
-            + "    alert(eval('x.a'));\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(eval('x.a'));\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1050,25 +1081,26 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"true", "I was here"})
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
+            "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var myEvent;\n"
             + "  var listener = function(x) {\n"
-            + "    alert(x == myEvent);\n"
+            + "    log(x == myEvent);\n"
             + "    x.foo = 'I was here';\n"
             + "  }\n"
             + "  window.addEventListener('click', listener, false);\n"
             + "  myEvent = document.createEvent('HTMLEvents');\n"
             + "  myEvent.initEvent('click', true, true);\n"
             + "  window.dispatchEvent(myEvent);\n"
-            + "  alert(myEvent.foo);\n"
+            + "  log(myEvent.foo);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1078,19 +1110,20 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"true", "true", "true", "true"})
     public void thisEquals() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
+            "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(this === window);\n"
-            + "  alert(window === this);\n"
-            + "  alert(this == window);\n"
-            + "  alert(window == this);\n"
+            + "  log(this === window);\n"
+            + "  log(window === this);\n"
+            + "  log(this == window);\n"
+            + "  log(window == this);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1100,24 +1133,25 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts({"null", "function", "null", "null"})
     public void onbeforeunload() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
+            "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.onbeforeunload);\n"
+            + "  log(window.onbeforeunload);\n"
             + "  var handle = function() {};\n"
             + "  window.onbeforeunload = handle;\n"
-            + "  alert(typeof window.onbeforeunload);\n"
+            + "  log(typeof window.onbeforeunload);\n"
             + "  window.onbeforeunload = null;\n"
-            + "  alert(window.onbeforeunload);\n"
+            + "  log(window.onbeforeunload);\n"
             + "  window.onbeforeunload = undefined;\n"
-            + "  alert(window.onbeforeunload);\n"
+            + "  log(window.onbeforeunload);\n"
             + "  \n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1134,19 +1168,20 @@ public class Window2Test extends WebDriverTestCase {
               "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + " \n"
             + "    Function.prototype.doAlerts = function() {\n"
-            + "      alert(this == o.f);\n"
-            + "      alert(arguments ? arguments.length : 'null');\n"
-            + "      alert(this.arguments ? this.arguments.length : 'null');\n"
+            + "      log(this == o.f);\n"
+            + "      log(arguments ? arguments.length : 'null');\n"
+            + "      log(this.arguments ? this.arguments.length : 'null');\n"
             + "    }\n"
             + " \n"
             + "    var o = function() {};\n"
             + "    o.f = function(x, y, z) {\n"
             + "      this.f.doAlerts();\n"
-            + "      alert(arguments ? arguments.length : 'null');\n"
-            + "      alert(this.arguments ? this.arguments.length : 'null');\n"
+            + "      log(arguments ? arguments.length : 'null');\n"
+            + "      log(this.arguments ? this.arguments.length : 'null');\n"
             + "    }\n"
             + "    o.f('a', 'b');\n"
             + "  }\n"
@@ -1154,7 +1189,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1167,19 +1202,20 @@ public class Window2Test extends WebDriverTestCase {
               "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + " \n"
             + "    Function.prototype.doAlerts = function() {\n"
-            + "      alert(this == o.f);\n"
-            + "      alert(arguments);\n"
-            + "      alert(this.arguments);\n"
+            + "      log(this == o.f);\n"
+            + "      log(arguments);\n"
+            + "      log(this.arguments);\n"
             + "    }\n"
             + " \n"
             + "    var o = function() {};\n"
             + "    o.f = function(x, y, z) {\n"
-            + "      alert(this == o);\n"
-            + "      alert(arguments);\n"
-            + "      alert(this.arguments);\n"
+            + "      log(this == o);\n"
+            + "      log(arguments);\n"
+            + "      log(this.arguments);\n"
             + "      this.f.doAlerts();\n"
             + "    }\n"
             + "    o.f('a', 'b');\n"
@@ -1188,7 +1224,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1201,17 +1237,18 @@ public class Window2Test extends WebDriverTestCase {
               "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var o = function() {};\n"
             + "    o.x = function() {\n"
-            + "      alert(this == o);\n"
-            + "      alert(arguments);\n"
-            + "      alert(this.arguments);\n"
+            + "      log(this == o);\n"
+            + "      log(arguments);\n"
+            + "      log(this.arguments);\n"
             + "    }\n"
             + "    o.f = function(x, y, z) {\n"
-            + "      alert(this == o);\n"
-            + "      alert(arguments);\n"
-            + "      alert(this.arguments);\n"
+            + "      log(this == o);\n"
+            + "      log(arguments);\n"
+            + "      log(this.arguments);\n"
             + "      this.x();\n"
             + "    }\n"
             + "    o.f('a', 'b');\n"
@@ -1220,7 +1257,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1231,32 +1268,34 @@ public class Window2Test extends WebDriverTestCase {
     public void onError() throws Exception {
         final String html
             = "<script>\n"
-            + "  alert(window.onerror);\n"
-            + "  window.onerror = function() { alert(arguments.length); };\n"
-            + "  alert(typeof window.onerror);\n"
-            + "  try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
-            + "  alert(undef);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.onerror);\n"
+            + "  window.onerror = function() { log(arguments.length); };\n"
+            + "  log(typeof window.onerror);\n"
+            + "  try { log(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
+            + "  log(undef);\n"
             + "</script>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
             getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
                 .getOptions().setThrowExceptionOnScriptError(false);
         }
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"string string 7 number string",
-                "string string 8 number object"})
+    @Alerts({"string string 8 number string",
+                "string string 9 number object"})
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
-                + "    alert(typeof messageOrEvent + ' ' + typeof source + ' '"
+                + "    log(typeof messageOrEvent + ' ' + typeof source + ' '"
                                 + " + lineno + ' ' + typeof colno + ' ' + typeof error);\n"
                 + "  };\n"
                 + "</script>\n"
@@ -1268,22 +1307,23 @@ public class Window2Test extends WebDriverTestCase {
             getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
                     .getOptions().setThrowExceptionOnScriptError(false);
         }
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"string string 7 number object", "string string 1 number object"},
-            IE = {"string string 7 number object", "string string 8 number object"})
+    @Alerts(DEFAULT = {"string string 8 number object", "string string 1 number object"},
+            IE = {"string string 9 number object", "string string 8 number object"})
     @NotYetImplemented(IE)
     public void onErrorExceptionInstance2() throws Exception {
         final String html
                 = "<html>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
-                + "    alert(typeof messageOrEvent + ' ' + typeof source + ' '"
+                + "    log(typeof messageOrEvent + ' ' + typeof source + ' '"
                                 + " + lineno + ' ' + typeof colno + ' ' + typeof error);\n"
                 + "  };\n"
                 + "</script>\n"
@@ -1295,7 +1335,7 @@ public class Window2Test extends WebDriverTestCase {
             getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
                     .getOptions().setThrowExceptionOnScriptError(false);
         }
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1307,9 +1347,10 @@ public class Window2Test extends WebDriverTestCase {
         final String html
                 = "<html>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
                 + "    error.property = 'success'\n"
-                + "    alert(error.property);\n"
+                + "    log(error.property);\n"
                 + "  };\n"
                 + "</script>\n"
                 + "<script>throw {};</script>\n"
@@ -1319,7 +1360,7 @@ public class Window2Test extends WebDriverTestCase {
             getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
                     .getOptions().setThrowExceptionOnScriptError(false);
         }
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1331,12 +1372,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<div id='myDiv'></div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.getElementById('myDiv');\n"
-            + "  alert(window.getComputedStyle(e, null).color);\n"
+            + "  log(window.getComputedStyle(e, null).color);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1350,9 +1392,10 @@ public class Window2Test extends WebDriverTestCase {
             + "  <head>\n"
             + "    <style>div.x { color: red; }</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.getElementById('d');\n"
-            + "    alert(window.getComputedStyle(e, '').color);\n"
+            + "    log(window.getComputedStyle(e, '').color);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1361,7 +1404,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1374,12 +1417,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.getElementById('myId');\n"
-            + "  alert(window.getComputedStyle(e, null).color);\n"
+            + "  log(window.getComputedStyle(e, null).color);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1393,12 +1437,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<iframe id='it'></iframe>;\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  Object(top);\n"
-            + "  alert(window.foo);\n"
+            + "  log(window.foo);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1411,11 +1456,12 @@ public class Window2Test extends WebDriverTestCase {
     public void equalsString() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
-            + "  alert('foo' == window);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('foo' == window);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1428,12 +1474,13 @@ public class Window2Test extends WebDriverTestCase {
     public void equalsInt() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var i = 0;\n"
-            + "  alert(i == window);\n"
+            + "  log(i == window);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1762,10 +1809,11 @@ public class Window2Test extends WebDriverTestCase {
     public void onchange_noHandler() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "  alert('onchange' in window);\n"
-            + "  alert(window.onchange);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('onchange' in window);\n"
+            + "  log(window.onchange);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1801,11 +1849,12 @@ public class Window2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert('onsubmit' in window);\n"
-            + "  alert(window.onsubmit);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('onsubmit' in window);\n"
+            + "  log(window.onsubmit);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1846,9 +1895,9 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: "},
+                       "origin: ", "source: [object Window]", "lastEventId: "},
             IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                "origin: ", "source: [object Window]", "lastEventId: undefined"})
+                  "origin: ", "source: [object Window]", "lastEventId: undefined"})
     public void postMessage() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[4] += "http://localhost:" + PORT;
@@ -1856,17 +1905,18 @@ public class Window2Test extends WebDriverTestCase {
 
         final String html
             = "<html>\n"
-            + "<head><title>foo</title></head>\n"
+            + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function receiveMessage(event) {\n"
-            + "    alert('type: ' + event.type);\n"
-            + "    alert('bubbles: ' + event.bubbles);\n"
-            + "    alert('cancelable: ' + event.cancelable);\n"
-            + "    alert('data: ' + event.data);\n"
-            + "    alert('origin: ' + event.origin);\n"
-            + "    alert('source: ' + event.source);\n"
-            + "    alert('lastEventId: ' + event.lastEventId);\n"
+            + "    log('type: ' + event.type);\n"
+            + "    log('bubbles: ' + event.bubbles);\n"
+            + "    log('cancelable: ' + event.cancelable);\n"
+            + "    log('data: ' + event.data);\n"
+            + "    log('origin: ' + event.origin);\n"
+            + "    log('source: ' + event.source);\n"
+            + "    log('lastEventId: ' + event.lastEventId);\n"
             + "  }\n"
 
             + "  window.addEventListener('message', receiveMessage, false);\n"
@@ -1879,7 +1929,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1924,12 +1974,13 @@ public class Window2Test extends WebDriverTestCase {
     public void postMessageSyncOrAsync() throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title></head>\n"
+            + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var sync = true;\n"
             + "  function receiveMessage(event) {\n"
-            + "    alert('sync: ' + sync);\n"
+            + "    log('sync: ' + sync);\n"
             + "  }\n"
             + "  window.addEventListener('message', receiveMessage, false);\n"
             + "</script>\n"
@@ -1942,7 +1993,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2047,15 +2098,16 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var w = window.open('');\n"
-            + "alert(w ? w.document.location : w);\n"
+            + "log(w ? w.document.location : w);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2067,13 +2119,14 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
-            + "  alert(location === window.location);\n"
-            + "  alert(location === document.location);\n"
-            + "  alert(window.location === document.location);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(location === window.location);\n"
+            + "  log(location === document.location);\n"
+            + "  log(window.location === document.location);\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2171,30 +2224,31 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "function Window() { [native code] }",
-                        "TEMPORARY, PERSISTENT, "},
-            FF = {"[object Window]", "function Window() {\n    [native code]\n}", ""},
-            FF78 = {"[object Window]", "function Window() {\n    [native code]\n}", ""},
+                       "TEMPORARY, PERSISTENT, "},
+            FF = {"[object Window]", "function Window() { [native code] }", ""},
+            FF78 = {"[object Window]", "function Window() { [native code] }", ""},
             IE = {"[object Window]", "[object Window]", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '';\n"
-            + "    alert(window);\n"
-            + "    alert(Window);\n"
+            + "    log(window);\n"
+            + "    log(Window);\n"
             + "    var str = '';\n"
             + "    for (var i in Window) {\n"
             + "      str += i + ', ';\n"
             + "    }\n"
-            + "    alert(str);\n"
+            + "    log(str);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2209,11 +2263,12 @@ public class Window2Test extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert(typeof window.dump);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window.dump);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2224,11 +2279,12 @@ public class Window2Test extends WebDriverTestCase {
     public void requestAnimationFrame() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "  alert(typeof window.requestAnimationFrame);\n"
-            + "  alert(typeof window.cancelAnimationFrame);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window.requestAnimationFrame);\n"
+            + "  log(typeof window.cancelAnimationFrame);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2240,10 +2296,11 @@ public class Window2Test extends WebDriverTestCase {
     public void showModalDialog() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "  alert(typeof window.showModalDialog);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window.showModalDialog);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2255,10 +2312,11 @@ public class Window2Test extends WebDriverTestCase {
     public void showModelessDialog() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "  alert(typeof window.showModelessDialog);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window.showModelessDialog);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2271,10 +2329,11 @@ public class Window2Test extends WebDriverTestCase {
     public void find() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "  alert(typeof window.find);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window.find);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2294,9 +2353,10 @@ public class Window2Test extends WebDriverTestCase {
             + "    }\n"
             + "  </style>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var div = document.getElementById('mydiv');\n"
-            + "      alert(window.getComputedStyle(div, ':before').getPropertyValue('content'));\n"
+            + "      log(window.getComputedStyle(div, ':before').getPropertyValue('content'));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -2305,7 +2365,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2325,10 +2385,11 @@ public class Window2Test extends WebDriverTestCase {
             + "    }\n"
             + "  </style>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var div = document.getElementById('mydiv');\n"
             + "      div.getBoundingClientRect();\n"
-            + "      alert(window.getComputedStyle(div, ':before').getPropertyValue('content'));\n"
+            + "      log(window.getComputedStyle(div, ':before').getPropertyValue('content'));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -2337,7 +2398,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2351,6 +2412,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  tt { display: none; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var iframe = document.createElement('iframe');\n"
             + "    document.body.appendChild(iframe);\n"
@@ -2358,12 +2420,12 @@ public class Window2Test extends WebDriverTestCase {
             + "    var doc = iframe.contentWindow.document;\n"
             + "    var tt = doc.createElement('tt');\n"
             + "    doc.body.appendChild(tt);\n"
-            + "    alert(window.getComputedStyle(tt, null).display);\n"
+            + "    log(window.getComputedStyle(tt, null).display);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2375,12 +2437,13 @@ public class Window2Test extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.length);\n"
-            + "  alert(-1 in window);\n"
-            + "  alert(0 in window);\n"
-            + "  alert(1 in window);\n"
-            + "  alert(42 in window);\n"
+            + "  log(window.length);\n"
+            + "  log(-1 in window);\n"
+            + "  log(0 in window);\n"
+            + "  log(1 in window);\n"
+            + "  log(42 in window);\n"
             + "}\n"
             + "</script>\n"
             + "<frameset rows='50,*' onload='test()'>\n"
@@ -2388,7 +2451,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2399,18 +2462,16 @@ public class Window2Test extends WebDriverTestCase {
     public void calledTwice() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function info(msg) {\n"
-            + "    alert(msg);\n"
-            + "  }\n"
+            + LOG_TITLE_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  info('a');\n"
-            + "  info('b');\n"
+            + "  log('a');\n"
+            + "  log('b');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2421,16 +2482,17 @@ public class Window2Test extends WebDriverTestCase {
     public void constructor() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(new Window());\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(new Window());\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2481,18 +2543,19 @@ public class Window2Test extends WebDriverTestCase {
     public void test__proto__() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      for (var p = this.__proto__; p != null; p = p.__proto__) {\n"
-            + "        alert(p);\n"
+            + "        log(p);\n"
             + "      }\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2506,16 +2569,17 @@ public class Window2Test extends WebDriverTestCase {
     public void clientInformation() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.clientInformation);\n"
+            + "    log(window.clientInformation);\n"
             + "    window.clientInformation = '##test##';\n"
-            + "    alert(window.clientInformation);\n"
+            + "    log(window.clientInformation);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2527,11 +2591,12 @@ public class Window2Test extends WebDriverTestCase {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert('XML' in window);\n"
-            + "    alert('XMLList' in window);\n"
-            + "    alert('Namespace' in window);\n"
-            + "    alert('QName' in window);\n"
+            + "    log('XML' in window);\n"
+            + "    log('XMLList' in window);\n"
+            + "    log('Namespace' in window);\n"
+            + "    log('QName' in window);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2539,6 +2604,6 @@ public class Window2Test extends WebDriverTestCase {
             + "  <app:dIv xmlns='http://anotherURL'></app:dIv>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

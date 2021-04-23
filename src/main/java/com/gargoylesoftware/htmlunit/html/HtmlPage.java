@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,11 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
@@ -233,7 +233,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
-        final boolean isAboutBlank = getUrl() == WebClient.URL_ABOUT_BLANK;
+        final boolean isAboutBlank = getUrl() == UrlUtils.URL_ABOUT_BLANK;
         if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
             if (enclosingWindow instanceof FrameWindow
@@ -256,6 +256,8 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_INTERACTIVE);
         }
 
+        executeDeferredScriptsIfNeeded();
+
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
 
         loadFrames();
@@ -270,9 +272,6 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        executeDeferredScriptsIfNeeded();
-        setReadyStateOnDeferredScriptsIfNeeded();
-
         // frame initialization has a different order
         boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
         boolean isFirstPageInFrameWindow = false;
@@ -280,7 +279,7 @@ public class HtmlPage extends SgmlPage {
             isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
 
             final History hist = enclosingWindow.getHistory();
-            if (hist.getLength() > 0 && WebClient.URL_ABOUT_BLANK == hist.getUrl(0)) {
+            if (hist.getLength() > 0 && UrlUtils.URL_ABOUT_BLANK == hist.getUrl(0)) {
                 isFirstPageInFrameWindow = hist.getLength() <= 2;
             }
             else {
@@ -1047,7 +1046,7 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
         // at least overwrite this headers
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
-        request.setAdditionalHeader(HttpHeader.REFERER, referringRequest.getUrl().toString());
+        request.setRefererlHeader(referringRequest.getUrl());
 
         // our cache is a bit strange;
         // loadWebResponse check the cache for the web response
@@ -1466,32 +1465,13 @@ public class HtmlPage extends SgmlPage {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
-        if (hasFeature(JS_DEFERRED)) {
-            final DomElement doc = getDocumentElement();
-            final List<HtmlElement> elements = doc.getElementsByTagName("script");
-            for (final HtmlElement e : elements) {
-                if (e instanceof HtmlScript) {
-                    final HtmlScript script = (HtmlScript) e;
-                    if (script.isDeferred()) {
-                        ScriptElementSupport.executeScriptIfNeeded(script);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Sets the ready state on any deferred scripts, if necessary.
-     */
-    private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (getWebClient().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
-            final List<HtmlElement> elements = getDocumentElement().getElementsByTagName("script");
-            for (final HtmlElement e : elements) {
-                if (e instanceof HtmlScript) {
-                    final HtmlScript script = (HtmlScript) e;
-                    if (script.isDeferred()) {
-                        script.setAndExecuteReadyState(READY_STATE_COMPLETE);
-                    }
+        final DomElement doc = getDocumentElement();
+        final List<HtmlElement> elements = new ArrayList<HtmlElement>(doc.getElementsByTagName("script"));
+        for (final HtmlElement e : elements) {
+            if (e instanceof HtmlScript) {
+                final HtmlScript script = (HtmlScript) e;
+                if (script.isDeferred() && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
+                    ScriptElementSupport.executeScriptIfNeeded(script, true, true);
                 }
             }
         }
@@ -1939,7 +1919,7 @@ public class HtmlPage extends SgmlPage {
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
             if (frame.getEnclosedWindow() != null
-                    && WebClient.URL_ABOUT_BLANK == frame.getEnclosedPage().getUrl()
+                    && UrlUtils.URL_ABOUT_BLANK == frame.getEnclosedPage().getUrl()
                     && !frame.isContentLoaded()) {
                 frame.loadInnerPage();
             }
@@ -2340,7 +2320,7 @@ public class HtmlPage extends SgmlPage {
             final WebWindow window = getEnclosingWindow();
             final boolean frame = window != null && window != window.getTopWindow();
             if (frame) {
-                final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
+                final boolean frameSrcIsNotSet = baseUrl == UrlUtils.URL_ABOUT_BLANK;
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
                 if (frameSrcIsNotSet || frameSrcIsJs) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()

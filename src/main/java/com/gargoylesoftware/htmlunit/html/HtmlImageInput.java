@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_NAME_VALUE_PARAMS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
@@ -22,16 +21,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -42,6 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Wrapper for the HTML element "input".
+ * HtmlUnit does not download the associated image for performance reasons.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
@@ -53,6 +55,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlImageInput extends HtmlInput implements LabelableElement {
+
+    private static final Log LOG = LogFactory.getLog(HtmlImageInput.class);
 
     // For click with x, y position.
     private boolean wasPositionSpecified_;
@@ -208,6 +212,39 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String getSrcAttribute() {
+        final String src = getSrcAttributeNormalized();
+        if (ATTRIBUTE_NOT_DEFINED == src) {
+            return src;
+        }
+
+        final HtmlPage page = getHtmlPageOrNull();
+        if (page != null) {
+            try {
+                return page.getFullyQualifiedUrl(src).toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                // Log the error and fall through to the return values below.
+                LOG.warn(e.getMessage(), e);
+            }
+        }
+        return src;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSrcAttribute(final String src) {
+        super.setSrcAttribute(src);
+        downloaded_ = false;
+        imageWebResponse_ = null;
+    }
+
+    /**
      * <p>Downloads the image contained by this image element.</p>
      * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
      * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
@@ -216,19 +253,16 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      */
     private void downloadImageIfNeeded() throws IOException {
         if (!downloaded_) {
-            // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
-            if (!"".equals(src)
-                    && !(hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
+            if (!"".equals(src)) {
                 final HtmlPage page = (HtmlPage) getPage();
                 final WebClient webClient = page.getWebClient();
 
-                final URL url = page.getFullyQualifiedUrl(src);
                 final BrowserVersion browser = webClient.getBrowserVersion();
-                final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
+                final WebRequest request = new WebRequest(new URL(src), browser.getImgAcceptHeader(),
                                                                 browser.getAcceptEncodingHeader());
                 request.setCharset(page.getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+                request.setRefererlHeader(page.getUrl());
                 imageWebResponse_ = webClient.loadWebResponse(request);
             }
 

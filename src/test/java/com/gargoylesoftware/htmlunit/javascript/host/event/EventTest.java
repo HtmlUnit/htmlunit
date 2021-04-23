@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,6 +27,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -46,11 +47,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class EventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-        + "    alert(event);\n"
-        + "    alert(event.type);\n"
-        + "    alert(event.bubbles);\n"
-        + "    alert(event.cancelable);\n"
-        + "    alert(event.composed);\n"
+        + "    log(event);\n"
+        + "    log(event.type);\n"
+        + "    log(event.bubbles);\n"
+        + "    log(event.cancelable);\n"
+        + "    log(event.composed);\n"
         + "  }\n";
 
     /**
@@ -61,18 +62,19 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -83,20 +85,21 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event', {\n"
             + "        'bubbles': true\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -107,20 +110,21 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetailsBoolAsString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event', {\n"
             + "        'bubbles': 'true'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,20 +135,21 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetailsBoolAsNumber() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event', {\n"
             + "        'bubbles': 1\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,20 +160,21 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetailsBoolAsObject() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event', {\n"
             + "        'bubbles': {}\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -179,20 +185,21 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetailsBoolAsUndefined() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event', {\n"
             + "        'bubbles': undefined\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -203,20 +210,21 @@ public class EventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetailsBoolAsNull() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new Event('event', {\n"
             + "        'bubbles': null\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -227,18 +235,19 @@ public class EventTest extends WebDriverTestCase {
             IE = {"[object Event]", "", "false", "false", "undefined"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -248,21 +257,23 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({"DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]"})
     public void create_createEventForDifferentTypes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert('DOM2: ' + document.createEvent('HTMLEvents'));\n"
-            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "      log('DOM2: ' + document.createEvent('HTMLEvents'));\n"
+            + "    } catch(e) {log('DOM2: exception')}\n"
             + "    try {\n"
-            + "      alert('DOM3: ' + document.createEvent('Event'));\n"
-            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "      log('DOM3: ' + document.createEvent('Event'));\n"
+            + "    } catch(e) {log('DOM3: exception')}\n"
             + "    try {\n"
-            + "      alert('vendor: ' + document.createEvent('Events'));\n"
-            + "    } catch(e) {alert('vendor: exception')}\n"
+            + "      log('vendor: ' + document.createEvent('Events'));\n"
+            + "    } catch(e) {log('vendor: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -273,19 +284,20 @@ public class EventTest extends WebDriverTestCase {
             IE = {"[object Event]", "event", "true", "false", "undefined"})
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('event', true, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -300,7 +312,8 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "  function handler(event) { alert(this.getAttribute('id')); }\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler(event) { log(this.getAttribute('id')); }\n"
             + "  document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
         onClickPageTest(content);
@@ -318,7 +331,8 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "  function handler(event) { alert(this.madeUpProperty); }\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler(event) { log(this.madeUpProperty); }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
             + "  document.getElementById('clickId').madeUpProperty = 'foo';\n"
             + "</script>\n"
@@ -334,8 +348,12 @@ public class EventTest extends WebDriverTestCase {
     @Alerts("defined")
     public void eventArgDefinedByWrapper() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
-            + "<input type='button' id='clickId' onclick=\"alert(event ? 'defined' : 'undefined')\"/>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<input type='button' id='clickId' onclick=\"log(event ? 'defined' : 'undefined')\"/>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -352,7 +370,8 @@ public class EventTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "  function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler(event) { log(event ? 'defined' : 'undefined'); }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
             + "</script>\n"
             + "</body></html>";
@@ -370,8 +389,9 @@ public class EventTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(event) {\n"
-            + "    alert(event.target == this ? 'pass' : event.target + '!=' + this);\n"
+            + "    log(event.target == this ? 'pass' : event.target + '!=' + this);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
             + "</script>\n"
@@ -389,10 +409,11 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(event) {\n"
             + "    event = event ? event : window.event;\n"
-            + "    alert(event.srcElement);\n"
-            + "    alert(event.srcElement == this);\n"
+            + "    log(event.srcElement);\n"
+            + "    log(event.srcElement == this);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
             + "</script>\n"
@@ -412,8 +433,9 @@ public class EventTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(event) {\n"
-            + "    alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this);\n"
+            + "    log(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onclick = handler;\n"
             + "</script>\n"
@@ -432,8 +454,9 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<div id='clickId'>click me</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler(event) {\n"
-            + "    alert(event.currentTarget);\n"
+            + "    log(event.currentTarget);\n"
             + "  }\n"
             + "  document.getElementById('clickId').onmousedown = handler;\n"
             + "  window.addEventListener('mousedown', handler, true);\n"
@@ -451,14 +474,15 @@ public class EventTest extends WebDriverTestCase {
         final String content
             = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.addEventListener('mousedown', null, true);\n"
             + "} catch (err) {\n"
-            + "  alert('error');\n"
+            + "  log('error');\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -510,7 +534,12 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    @Alerts(DEFAULT = {"124", "124124"},
+            FF = {"1234", "12341234"},
+            FF78 = {"1234", "12341234"},
+            IE = {"1234", "12341234"})
+    @HtmlUnitNYI(CHROME = {"1234", "12341234"},
+            EDGE = {"1234", "12341234"})
     public void typing_input_number() throws Exception {
         testTyping("<input type='number'", "");
     }
@@ -527,32 +556,34 @@ public class EventTest extends WebDriverTestCase {
     private void testTyping(final String opening, final String closing) throws Exception {
         final String html =
               "<html><body>\n"
-            + "<script>var x = '';\n"
-            + "function log(s) { x += s; }</script>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var x = '';\n"
+            + "function msg(s) { x += s; }</script>\n"
             + "<form>\n"
-            + opening + " id='t' onkeydown='log(1 + this.value)' "
-            + "onkeypress='log(2 + this.value)' "
-            + "oninput='log(3 + this.value)'"
-            + "onkeyup='log(4 + this.value)'>" + closing
+            + opening + " id='t' onkeydown='msg(1 + this.value)' "
+            + "onkeypress='msg(2 + this.value)' "
+            + "oninput='msg(3 + this.value)'"
+            + "onkeyup='msg(4 + this.value)'>" + closing
             + "</form>\n"
-            + "<div id='d' onclick='alert(x); x=\"\"'>abc</div>\n"
+            + "<div id='d' onclick='log(x); x=\"\"'>abc</div>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("t")).sendKeys("a");
         driver.findElement(By.id("d")).click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("t")).sendKeys("bc");
         driver.findElement(By.id("d")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyTitle2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
 
     private void onClickPageTest(final String html) throws Exception {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickId")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -563,8 +594,13 @@ public class EventTest extends WebDriverTestCase {
     public void thisInEventHandler() throws Exception {
         final String html
             = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<body>\n"
-            + "  <button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
+            + "  <button name='button1' id='button1' onclick='log(this.name)'>1</button>\n"
             + "  <iframe src='default' name='frame1' id='frame1'></iframe>\n"
             + "  <script>\n"
             + "    var e = document.getElementById('frame1');\n"
@@ -573,7 +609,7 @@ public class EventTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<html><body></body></html>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -585,8 +621,9 @@ public class EventTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert('called');\n"
+            + "    log('called');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -599,7 +636,7 @@ public class EventTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<html><body></body></html>");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -613,13 +650,14 @@ public class EventTest extends WebDriverTestCase {
             + "<body>\n"
             + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.getElementById('frame1');\n"
-            + "  e.onload = alert('inline');\n"
-            + "  alert(e.onload);\n"
+            + "  e.onload = log('inline');\n"
+            + "  log(e.onload);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -632,16 +670,17 @@ public class EventTest extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.event == null);\n"
+            + "  log(window.event == null);\n"
             + "  try {\n"
-            + "    alert(event == null);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(event == null);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -656,13 +695,17 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({"1", "2"})
     public void commentInEventHandlerDeclaration() throws Exception {
         final String html
-            = "<html><head></head>\n"
-            + "<body onload='alert(1);\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(1);\n"
             + "// a comment within the onload declaration\n"
-            + "alert(2)'>\n"
+            + "log(2)'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -674,15 +717,16 @@ public class EventTest extends WebDriverTestCase {
     public void nullEventHandler() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
-            + "    alert(div.onclick);\n"
+            + "    log(div.onclick);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='myDiv'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -693,14 +737,16 @@ public class EventTest extends WebDriverTestCase {
             IE = {"[object Event]", "load", "false", "false", "undefined"})
     public void onload() throws Exception {
         final String html =
-              "<html><body onload='test(event)'><script>\n"
+              "<html><body onload='test(event)'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test(e) {\n"
             + "      dump(e);\n"
             + "    }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -710,14 +756,16 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({"[object Event]", "number"})
     public void timeStamp() throws Exception {
         final String html =
-              "<html><body onload='test(event)'><script>\n"
+              "<html><body onload='test(event)'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test(e) {\n"
-            + "    alert(e);\n"
-            + "    alert(typeof e.timeStamp);\n"
+            + "    log(e);\n"
+            + "    log(typeof e.timeStamp);\n"
             + "  }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -759,27 +807,28 @@ public class EventTest extends WebDriverTestCase {
     private void testInitEvent(final String eventType) throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.createEvent('Event');\n"
             + "    try {\n"
             + "      e.initEvent('" + eventType + "', true, true);\n"
-            + "      alert(e.type);\n"
-            + "      alert(e.bubbles);\n"
-            + "      alert(e.cancelable);\n"
-            + "    } catch(e) { alert('e-' + '" + eventType + "'); }\n"
+            + "      log(e.type);\n"
+            + "      log(e.bubbles);\n"
+            + "      log(e.cancelable);\n"
+            + "    } catch(e) { log('e-' + '" + eventType + "'); }\n"
 
             + "    var e = document.createEvent('Event');\n"
             + "    try {\n"
             + "      e.initEvent('" + eventType + "', false, false);\n"
-            + "      alert(e.type);\n"
-            + "      alert(e.bubbles);\n"
-            + "      alert(e.cancelable);\n"
-            + "    } catch(e) { alert('e2-' + '" + eventType + "'); }\n"
+            + "      log(e.type);\n"
+            + "      log(e.bubbles);\n"
+            + "      log(e.cancelable);\n"
+            + "    } catch(e) { log('e2-' + '" + eventType + "'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -789,14 +838,15 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({"true", "I was here"})
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
+            "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var e = document.getElementById('myDiv');\n"
             + "  \n"
             + "  var myEvent;\n"
             + "  var listener = function(x) {\n"
-            + "    alert(x == myEvent);\n"
+            + "    log(x == myEvent);\n"
             + "    x.foo = 'I was here';\n"
             + "  }\n"
             + "  \n"
@@ -804,14 +854,14 @@ public class EventTest extends WebDriverTestCase {
             + "  myEvent = document.createEvent('HTMLEvents');\n"
             + "  myEvent.initEvent('click', true, true);\n"
             + "  e.dispatchEvent(myEvent);\n"
-            + "  alert(myEvent.foo);\n"
+            + "  log(myEvent.foo);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<div id='myDiv'>toti</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -819,17 +869,17 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"e-0", "e-1", "e-2", "e-3", "e-4", "e-5",
-                        "e-6", "e-7", "e-8", "e-9", "e-10", "e-11",
-                        "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "e-18",
-                        "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
-                        "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
-                        "e-33"},
+                       "e-6", "e-7", "e-8", "e-9", "e-10", "e-11",
+                       "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "e-18",
+                       "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
+                       "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
+                       "e-33"},
             FF = {"e-0", "1", "e-2", "e-3", "e-4", "e-5",
-                     "2", "e-7", "e-8", "e-9", "e-10", "e-11",
-                     "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
-                     "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
-                     "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
-                     "e-33"},
+                  "2", "e-7", "e-8", "e-9", "e-10", "e-11",
+                  "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
+                  "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
+                  "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
+                  "e-33"},
             FF78 = {"e-0", "1", "e-2", "e-3", "e-4", "e-5",
                     "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                     "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
@@ -840,6 +890,7 @@ public class EventTest extends WebDriverTestCase {
         final String html =
               "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var constants = [Event.ABORT, Event.ALT_MASK, Event.BACK, Event.BLUR, Event.CHANGE, Event.CLICK, "
             + "Event.CONTROL_MASK, Event.DBLCLICK, Event.DRAGDROP, Event.ERROR, Event.FOCUS, Event.FORWARD, "
             + "Event.HELP, Event.KEYDOWN, Event.KEYPRESS, Event.KEYUP, Event.LOAD, Event.LOCATE, Event.META_MASK, "
@@ -848,13 +899,13 @@ public class EventTest extends WebDriverTestCase {
             + "Event.UNLOAD, Event.XFER_DONE];\n"
             + "  for (var x in constants) {\n"
             + "    try {\n"
-            + "      alert(constants[x].toString(16));\n"
-            + "    } catch(e) { alert('e-' + x); }\n"
+            + "      log(constants[x].toString(16));\n"
+            + "    } catch(e) { log('e-' + x); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -865,15 +916,16 @@ public class EventTest extends WebDriverTestCase {
     public void text() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test(e) {\n"
             + "    try {\n"
-            + "      alert(e.TEXT.toString(16));\n"// But Event.TEXT is undefined!!!
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(e.TEXT.toString(16));\n"// But Event.TEXT is undefined!!!
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -884,30 +936,32 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"form1 -> custom", "form2 -> [object HTMLFormElement]",
-            "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
-            "form1 -> custom", "form2 -> [object HTMLFormElement]"})
+             "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
+             "form1 -> custom", "form2 -> [object HTMLFormElement]"})
     public void nameResolution() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var form1 = 'custom';\n"
             + "function testFunc() {\n"
-            + "  alert('form1 -> ' + form1);\n"
-            + "  alert('form2 -> ' + form2);\n"
+            + "  log('form1 -> ' + form1);\n"
+            + "  log('form2 -> ' + form2);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='testFunc()'>\n"
             + "<form name='form1'></form>\n"
             + "<form name='form2'></form>\n"
-            + "<button onclick=\"alert('form1: ' + form1); alert('form2: ' + form2); testFunc()\">click me</button>\n"
+            + "<button onclick=\"log('form1: ' + form1); log('form2: ' + form2); testFunc()\">click me</button>\n"
             + "</body></html>";
 
         final String[] alerts = getExpectedAlerts();
         int i = 0;
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++]);
 
+        i = 0;
         driver.findElement(By.tagName("button")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
     }
 
     /**
@@ -1017,10 +1071,16 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts({"2from window", "1from document"})
     public void eventHandlersParentScope() throws Exception {
-        final String html = "<html><body>\n"
-            + "<button name='button1' id='button1' onclick='alert(1 + foo)'>click me</button>\n"
+        final String html = "<html>\n"
+            + "<head>\n"
             + "<script>\n"
-            + "  window.addEventListener('click', function() { alert(2 + foo); }, true);\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<button name='button1' id='button1' onclick='log(1 + foo)'>click me</button>\n"
+            + "<script>\n"
+            + "  window.addEventListener('click', function() { log(2 + foo); }, true);\n"
             + "  document.foo = 'from document';\n"
             + "  var foo = 'from window';\n"
             + "</script>\n"
@@ -1029,7 +1089,7 @@ public class EventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("button1")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1075,11 +1135,15 @@ public class EventTest extends WebDriverTestCase {
 
     private void eventHandlersParentScopeChain(final String startTag, final String endTag) throws Exception {
         final String html = "<html><html>\n"
-            + "<head><title>foo</title></head>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<body id='body'>\n"
             + "<form id='theForm'>\n"
             + "  <div id='theDiv'>\n"
-            + "    " + startTag + " id='theField' onclick='alert(foo); return false;'>click me" + endTag + "\n"
+            + "    " + startTag + " id='theField' onclick='log(foo); return false;'>click me" + endTag + "\n"
             + "  </div>\n"
             + "</form>\n"
             + "<script>\n"
@@ -1096,24 +1160,24 @@ public class EventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("theField"));
         field.click();
-        verifyAlerts(driver, alerts[0]);
+        verifyTitle2(driver, alerts[0]);
 
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
         // remove property on field
         jsExecutor.executeScript("delete document.getElementById('theField').foo");
         field.click();
-        verifyAlerts(driver, alerts[1]);
+        verifyTitle2(driver, alerts[0], alerts[1]);
 
         // remove property on form
         jsExecutor.executeScript("delete document.getElementById('theForm').foo");
         field.click();
-        verifyAlerts(driver, alerts[2]);
+        verifyTitle2(driver, alerts[0], alerts[1], alerts[2]);
 
         // remove property on document
         jsExecutor.executeScript("delete document.foo");
         field.click();
-        verifyAlerts(driver, alerts[3]);
+        verifyTitle2(driver, alerts[0], alerts[1], alerts[2], alerts[3]);
     }
 
     /**
@@ -1126,6 +1190,7 @@ public class EventTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<button id='button1' onclick='identify(open)'>click me</button>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function identify(fnOpen) {\n"
             + "  var origin = 'unknown';\n"
             + "  if (fnOpen === window.open) {\n"
@@ -1134,7 +1199,7 @@ public class EventTest extends WebDriverTestCase {
             + "  else if (fnOpen === document.open) {\n"
             + "    origin = 'from document';\n"
             + "  }\n"
-            + "  alert(origin);\n"
+            + "  log(origin);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -1142,7 +1207,7 @@ public class EventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("button1")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1152,18 +1217,19 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({"false", "boolean"})
     public void defaultPrevented() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
-            + "      alert(event.defaultPrevented);\n"
-            + "      alert(typeof event.defaultPrevented);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(event.defaultPrevented);\n"
+            + "      log(typeof event.defaultPrevented);\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1174,18 +1240,19 @@ public class EventTest extends WebDriverTestCase {
             IE = {"undefined", "undefined"})
     public void returnValue() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(event.returnValue);\n"
+            + "      log(typeof event.returnValue);\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1193,47 +1260,48 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "false", "boolean",
-                        "true", "boolean", "false - false",
-                        "true", "boolean"},
+                       "true", "true - false",
+                       "false", "boolean",
+                       "true", "boolean", "false - false",
+                       "true", "boolean"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "undefined", "undefined",
-                        "undefined", "undefined", "false - false",
-                        "undefined", "undefined"})
+                  "undefined", "true - false",
+                  "undefined", "undefined",
+                  "undefined", "undefined", "false - false",
+                  "undefined", "undefined"})
     public void returnValueSetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "      log(event.returnValue);\n"
+            + "      log(typeof event.returnValue);\n"
+            + "      log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
             + "      event.initEvent('click', 'true', 'true');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "      log(event.returnValue);\n"
+            + "      log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
             + "      event.preventDefault();\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
+            + "      log(event.returnValue);\n"
+            + "      log(typeof event.returnValue);\n"
 
             + "      event = document.createEvent('Event');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "      log(event.returnValue);\n"
+            + "      log(typeof event.returnValue);\n"
+            + "      log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
             + "      event.preventDefault();\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(event.returnValue);\n"
+            + "      log(typeof event.returnValue);\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1241,19 +1309,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "false", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "false", "boolean", "false"},
+                       "true", "true - false",
+                       "false", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "false", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "false", "boolean", "true",
-                        "undefined", "undefined", "false - false",
-                        "false", "boolean", "true",
-                        "undefined", "undefined", "true - false",
-                        "false", "boolean", "true"})
+                  "undefined", "true - false",
+                  "false", "boolean", "true",
+                  "undefined", "undefined", "false - false",
+                  "false", "boolean", "true",
+                  "undefined", "undefined", "true - false",
+                  "false", "boolean", "true"})
     public void returnValueSetterFalse() throws Exception {
         returnValueSetterUndefined("false");
     }
@@ -1263,19 +1331,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "true", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "true", "boolean", "false"},
+                       "true", "true - false",
+                       "true", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "true", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "true", "boolean", "false",
-                        "undefined", "undefined", "false - false",
-                        "true", "boolean", "false",
-                        "undefined", "undefined", "true - false",
-                        "true", "boolean", "false"})
+                  "undefined", "true - false",
+                  "true", "boolean", "false",
+                  "undefined", "undefined", "false - false",
+                  "true", "boolean", "false",
+                  "undefined", "undefined", "true - false",
+                  "true", "boolean", "false"})
     public void returnValueSetterTrue() throws Exception {
         returnValueSetterUndefined("true");
     }
@@ -1285,19 +1353,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "true", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "true", "boolean", "false"},
+                       "true", "true - false",
+                       "true", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "true", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "test", "string", "false",
-                        "undefined", "undefined", "false - false",
-                        "test", "string", "false",
-                        "undefined", "undefined", "true - false",
-                        "test", "string", "false"})
+                  "undefined", "true - false",
+                  "test", "string", "false",
+                  "undefined", "undefined", "false - false",
+                  "test", "string", "false",
+                  "undefined", "undefined", "true - false",
+                  "test", "string", "false"})
     public void returnValueSetterString() throws Exception {
         returnValueSetterUndefined("'test'");
     }
@@ -1307,19 +1375,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "false", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "false", "boolean", "false"},
+                       "true", "true - false",
+                       "false", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "false", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "0", "number", "true",
-                        "undefined", "undefined", "false - false",
-                        "0", "number", "true",
-                        "undefined", "undefined", "true - false",
-                        "0", "number", "true"})
+                  "undefined", "true - false",
+                  "0", "number", "true",
+                  "undefined", "undefined", "false - false",
+                  "0", "number", "true",
+                  "undefined", "undefined", "true - false",
+                  "0", "number", "true"})
     public void returnValueSetterZero() throws Exception {
         returnValueSetterUndefined("0");
     }
@@ -1329,19 +1397,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "true", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "true", "boolean", "false"},
+                       "true", "true - false",
+                       "true", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "true", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "1", "number", "false",
-                        "undefined", "undefined", "false - false",
-                        "1", "number", "false",
-                        "undefined", "undefined", "true - false",
-                        "1", "number", "false"})
+                  "undefined", "true - false",
+                  "1", "number", "false",
+                  "undefined", "undefined", "false - false",
+                  "1", "number", "false",
+                  "undefined", "undefined", "true - false",
+                  "1", "number", "false"})
     public void returnValueSetterOne() throws Exception {
         returnValueSetterUndefined("1");
     }
@@ -1351,19 +1419,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "true", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "true", "boolean", "false"},
+                       "true", "true - false",
+                       "true", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "true", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "-1", "number", "false",
-                        "undefined", "undefined", "false - false",
-                        "-1", "number", "false",
-                        "undefined", "undefined", "true - false",
-                        "-1", "number", "false"})
+                  "undefined", "true - false",
+                  "-1", "number", "false",
+                  "undefined", "undefined", "false - false",
+                  "-1", "number", "false",
+                  "undefined", "undefined", "true - false",
+                  "-1", "number", "false"})
     public void returnValueSetterMinusOne() throws Exception {
         returnValueSetterUndefined("-1");
     }
@@ -1373,19 +1441,19 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "boolean", "false - false",
-                        "true", "true - false",
-                        "false", "boolean", "false",
-                        "true", "boolean", "false - false",
-                        "true", "boolean", "true",
-                        "true", "boolean", "true - false",
-                        "false", "boolean", "false"},
+                       "true", "true - false",
+                       "false", "boolean", "false",
+                       "true", "boolean", "false - false",
+                       "true", "boolean", "true",
+                       "true", "boolean", "true - false",
+                       "false", "boolean", "false"},
             IE = {"undefined", "undefined", "false - false",
-                        "undefined", "true - false",
-                        "undefined", "undefined", "true",
-                        "undefined", "undefined", "false - false",
-                        "undefined", "undefined", "true",
-                        "undefined", "undefined", "true - false",
-                        "undefined", "undefined", "true"})
+                  "undefined", "true - false",
+                  "undefined", "undefined", "true",
+                  "undefined", "undefined", "false - false",
+                  "undefined", "undefined", "true",
+                  "undefined", "undefined", "true - false",
+                  "undefined", "undefined", "true"})
     public void returnValueSetterUndefined() throws Exception {
         returnValueSetterUndefined("undefined");
     }
@@ -1464,11 +1532,11 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false - false", "true - false", "true - true",
-                        "false - false", "false - false", "false - false",
-                        "false - false", "true - false"},
+                       "false - false", "false - false", "false - false",
+                       "false - false", "true - false"},
             IE = {"false - false", "true - false", "true - false",
-                    "false - false", "false - false", "false - false",
-                    "false - false", "true - false"})
+                  "false - false", "false - false", "false - false",
+                  "false - false", "true - false"})
     @NotYetImplemented(IE)
     public void preventDefault() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

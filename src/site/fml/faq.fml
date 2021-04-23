@@ -53,6 +53,37 @@
             </answer>
         </faq>
 
+        <faq id="clickNotWorking">
+            <question>
+                HtmlElement.click() does not triggering anything (e.g. no Javascript event).
+            </question>
+            <answer>
+                <p>The click() processes the click only if the element is visible. Please check the log output - if the element is not visible there should be a warning in the log
+                like "Calling click() ignored because the target element 'xxxx' is not displayed." or "Calling click() ignored because the target element 'xxxx' is disabled."
+<br/>
+If this is the case then you  can use a more advanced version of the click method to ignore the visibility checks
+<source><![CDATA[click(boolean shiftKey, boolean ctrlKey, boolean altKey, boolean triggerMouseEvents, boolean ignoreVisibility, boolean disableProcessLabelAfterBubbling)
+e.g.
+  anchor.click(false, false, false, true, true, false);
+]]></source>
+</p>
+            </answer>
+        </faq>
+
+        <faq id="javaScriptExceptions">
+            <question>
+                When launching my WebClient, I am ending with an js error. But when running on browser,
+                we hit the error but keep on. In HtmlUnit, this is where things come to a halt.
+            </question>
+            <answer>
+                <p>
+                Because HtmlUnit was designed as testing tool the initial WebClient setup forces this behavior
+                (in contrast to real browsers trying ot eat each and every page/javascript code). You can change this by
+            <source><![CDATA[webClient.getOptions().setThrowExceptionOnScriptError(false);]]></source>
+                </p>
+            </answer>
+        </faq>
+
         <faq id="AJAXDoesNotWork">
             <question>
                 Nothing happens when using HtmlUnit with AJAX, although page works correctly in browsers. What's wrong?
@@ -145,16 +176,8 @@
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            final WebWindow webWindow = webClient.getCurrentWindow();
-
-            final StringWebResponse webResponse =
-                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
-            final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
-            webWindow.setEnclosedPage(page);
-
-            htmlParser.parse(webResponse, page, true);
-            // work with the html page
+            final XHtmlPage page = webClient.loadXHtmlCodeIntoCurrentWindow(htmlCode);
+            // work with the xhtml page
         }
             ]]></source>
                 Html
@@ -169,15 +192,7 @@
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            final WebWindow webWindow = webClient.getCurrentWindow();
-
-            final StringWebResponse webResponse =
-                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
-            final HtmlPage page = new HtmlPage(webResponse, webWindow);
-            webWindow.setEnclosedPage(page);
-
-            htmlParser.parse(webResponse, page, true);
+            final HtmlPage page = webClient.loadHtmlCodeIntoCurrentWindow(htmlCode);
             // work with the html page
         }
             ]]></source>

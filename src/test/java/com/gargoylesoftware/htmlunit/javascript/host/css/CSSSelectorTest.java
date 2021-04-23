@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,12 +41,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void querySelectorAll_nullUndefined() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll(null).length);\n"
-            + "  alert(document.querySelectorAll(undefined).length);\n"
+            + "  log(document.querySelectorAll(null).length);\n"
+            + "  log(document.querySelectorAll(undefined).length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -57,7 +58,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,16 +67,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"exception", "exception"})
     public void querySelectorAll_emptyString() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll(''));\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(document.querySelectorAll(''));\n"
+            + "  } catch(e) {log('exception')}\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll('  '));\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(document.querySelectorAll('  '));\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -86,7 +88,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -97,20 +99,21 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2"})
     public void nth_child() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(n)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(2n)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(n)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(2n)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
 
-            + "  alert(document.querySelectorAll('li:nth-child(-n+2)').length);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(-n+2)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(-n+2)')[1].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(-n+2)').length);\n"
+            + "  log(document.querySelectorAll('li:nth-child(-n+2)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(-n+2)')[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -121,7 +124,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -130,15 +133,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "li2", "2", "li1", "li3"})
     public void nth_child_even_odd() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('li:nth-child(even)').length);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(eVen)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(odd)').length);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(OdD)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-child(ODD)')[1].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(even)').length);\n"
+            + "  log(document.querySelectorAll('li:nth-child(eVen)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(odd)').length);\n"
+            + "  log(document.querySelectorAll('li:nth-child(OdD)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-child(ODD)')[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -149,7 +153,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -158,16 +162,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLBodyElement]", "1", "0"})
     public void childSelector_html_body() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('html > body').length);\n"
-            + "  alert(document.querySelectorAll('html > body')[0]);\n"
-            + "  alert(document.querySelectorAll('  \\t\\r\\n  html > body  \\t\\r\\n  ').length);\n"
+            + "  log(document.querySelectorAll('html > body').length);\n"
+            + "  log(document.querySelectorAll('html > body')[0]);\n"
+            + "  log(document.querySelectorAll('  \\t\\r\\n  html > body  \\t\\r\\n  ').length);\n"
 
             + "  elem = document.getElementById('root');\n"
-            + "  alert(elem.querySelectorAll('html > body').length);\n"
+            + "  log(elem.querySelectorAll('html > body').length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -175,7 +180,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -185,11 +190,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts("exception")
     public void nth_child_no_argument() throws Exception {
         final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll('li:nth-child()'));\n"
-            + "  } catch (e) {alert('exception')}\n"
+            + "    log(document.querySelectorAll('li:nth-child()'));\n"
+            + "  } catch (e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -200,7 +206,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -210,11 +216,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts({"li1", "li4", "li7", "li10"})
     public void nth_child_equation() throws Exception {
         final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -233,7 +240,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -245,17 +252,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts("exception")
     public void invalid() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll('td:gt(4)').length);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(document.querySelectorAll('td:gt(4)').length);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -264,13 +272,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "ul2"})
     public void directAdjacentSelector() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('p+ul');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -280,7 +289,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='ul2'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -289,13 +298,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "thing1"})
     public void prefixAttribute() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[id^=\"thing\"]');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -305,7 +315,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='thing1'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -314,14 +324,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void prefixAttributeEmpty() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[id^=\"\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
+            + "    log(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -332,7 +343,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='thing1'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -341,13 +352,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "something"})
     public void suffixAttribute() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[id$=\"thing\"]');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -357,7 +369,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='thing2'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -366,14 +378,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void suffixAttributeEmpty() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[id$=\"\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
+            + "    log(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -384,7 +397,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='thing2'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -393,14 +406,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "something", "thing2"})
     public void substringAttribute() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[id*=\"thing\"]');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
-            + "  alert(list[1].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "  log(list[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -410,7 +424,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='thing2'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -419,14 +433,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void substringAttributeEmpty() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[id*=\"\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
+            + "    log(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -437,7 +452,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='thing2'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -446,14 +461,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id2"})
     public void oneOfAttribute() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title~=\"w2\"]');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
-            + "  alert(list[1].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "  log(list[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -463,7 +479,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='id3' title='w1w2 w3'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -472,12 +488,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void oneOfAttributeEmpty() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title~=\"\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -487,7 +504,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='id3' title='w1w2 w3'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -496,14 +513,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id2", "id3"})
     public void hasAttribute() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -514,7 +532,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='id3' title=''></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -523,14 +541,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"5", "id1", "id2", "id5", "id6", "id7"})
     public void hyphenSeparatedAttributeValue() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title|=\"abc\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -549,7 +568,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <p id='id11' title=' abc-def gh'></p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -558,14 +577,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id4"})
     public void hyphenSeparatedAttributeValueHyphenInSelector() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title|=\"ab-c\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -577,7 +597,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <p id='id4' title='ab-c-d'></p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -586,14 +606,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id2", "id6"})
     public void hyphenSeparatedAttributeValueEmpty() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title|=\"\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -608,7 +629,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <p id='id7' title='\\t'></p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -617,14 +638,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "id3"})
     public void emptyAttributeValue() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('[title=\"\"]');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -635,7 +657,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='id3' title=''></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -644,14 +666,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "ul2", "ul3"})
     public void generalAdjacentSelector() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('div~ul');\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -662,7 +685,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='ul3'></ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -671,14 +694,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"li3", "2", "li1", "li3"})
     public void nth_last_child() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-last-child(odd)').length);\n"
-            + "  alert(document.querySelectorAll('li:nth-last-child(odd)')[0].id);\n"
-            + "  alert(document.querySelectorAll('li:nth-last-child(odd)')[1].id);\n"
+            + "  log(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-last-child(odd)').length);\n"
+            + "  log(document.querySelectorAll('li:nth-last-child(odd)')[0].id);\n"
+            + "  log(document.querySelectorAll('li:nth-last-child(odd)')[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -689,7 +713,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -698,26 +722,27 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0"})
     public void nth_last_child2() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "  alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
-            + "  alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
+            + "  log(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  log(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "  log(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
             + "  elem = document.getElementById('root');\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
             + "  elem = document.getElementById('parent');\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
             + "  elem = document.getElementById('div1');\n"
-            + "  alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "  log(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -730,7 +755,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -739,7 +764,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void nth_of_type() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -763,7 +788,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void nth_last_of_type() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -812,17 +837,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "checkbox2", "1", "checkbox2"})
     public void pseudoCheckboxChecked() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('input[type=checkbox]:checked');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
 
             + "  var list = document.querySelectorAll('#t2 > input[type=checkbox]:checked');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -832,7 +858,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  </div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -841,17 +867,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "radio2", "1", "radio2"})
     public void pseudoRadioChecked() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('input[type=radio]:checked');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
 
             + "  var list = document.querySelectorAll('#t2 > input[type=radio]:checked');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0].id);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -861,7 +888,83 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  </div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://www.w3.org/TR/selectors-4/#validity-pseudos.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"theform", "id3"},
+            IE = "id3") //minLength and maxLength not supported in IE
+    @HtmlUnitNYI(CHROME = {"id3", "id5", "id6"},
+            EDGE = {"id3", "id5", "id6"},
+            FF = {"id3", "id5", "id6"},
+            FF78 = {"id3", "id5", "id6"})
+    public void pseudoInvalid() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.querySelectorAll(':invalid');\n"
+                + "  for (var i = 0 ; i < list.length; i++) {\n"
+                + "    log(list[i].id);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "<form id='theform'>\n"
+                + "  <input id='id1' type='text' value='foo' required>\n"
+                + "  <input id='id2' type='text' value=''>\n"
+                + "  <input id='id3' type='text' value='' required>\n"
+                + "  <input id='id4' type='text' minLength='2' maxLength='5' value='foo'>\n"
+                + "  <input id='id5' type='text' maxLength='2' value='foo'>\n"
+                + "  <input id='id6' type='text' minLength='5' value='foo'>\n"
+                + "  <p id='id7'>foo</p>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://www.w3.org/TR/selectors-4/#validity-pseudos.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"id1", "id2", "id4", "id5", "id6"})
+    @HtmlUnitNYI(CHROME = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            EDGE = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            FF = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            FF78 = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            IE = {"", "", "", "", "theform", "id1", "id2", "id4", "id5", "id6", "id7"})
+    public void pseudoValid() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.querySelectorAll(':valid');\n"
+                + "  for (var i = 0 ; i < list.length; i++) {\n"
+                + "    log(list[i].id);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "<form id='theform'>\n"
+                + "  <input id='id1' type='text' value='foo' required>\n"
+                + "  <input id='id2' type='text' value=''>\n"
+                + "  <input id='id3' type='text' value='' required>\n"
+                + "  <input id='id4' type='text' minLength='2' maxLength='5' value='foo'>\n"
+                + "  <input id='id5' type='text' maxLength='2' value='foo'>\n"
+                + "  <input id='id6' type='text' minLength='5' value='foo'>\n"
+                + "  <p id='id7'>foo</p>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -870,7 +973,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("li1")
     public void first_child() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -894,7 +997,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("li3")
     public void last_child() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -918,7 +1021,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id2")
     public void first_of_type() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -945,20 +1048,24 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"2", "link_2", "link_3"})
-    @HtmlUnitNYI(FF = "exception")
+    @Alerts(DEFAULT = {"2", "link_2", "link_3"},
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception")
     public void invalid_not() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var found = document.querySelectorAll('p a:not(a:first-of-type)');\n"
-            + "    alert(found.length);\n"
-            + "    alert(found[0].id);\n"
-            + "    alert(found[1].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(found.length);\n"
+            + "    log(found[0].id);\n"
+            + "    log(found[1].id);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -971,7 +1078,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -980,7 +1087,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id4")
     public void last_of_type() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1006,7 +1113,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void only_child() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1032,7 +1139,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void only_of_type() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1058,12 +1165,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"id2", "span1"})
     public void empty() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('p:empty')[0].id);\n"
-            + "  alert(document.querySelectorAll('span:empty')[0].id);\n"
+            + "  log(document.querySelectorAll('p:empty')[0].id);\n"
+            + "  log(document.querySelectorAll('span:empty')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1073,7 +1181,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <span id='span2'>a text</span>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1082,7 +1190,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id2")
     public void not() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1101,9 +1209,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "id2")
-    @HtmlUnitNYI(FF = "exception")
+    @Alerts(DEFAULT = "id2",
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception")
     public void notWithFirstOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1127,37 +1238,41 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
-                    "3", "id1", "id2", "id3"})
-    @HtmlUnitNYI(FF = "exception")
+    @Alerts(DEFAULT = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
+                       "3", "id1", "id2", "id3"},
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception")
     public void notWithNthOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var res = document.querySelectorAll('div:not(div:nth-of-type(1))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
 
             + "    res = document.querySelectorAll('div:not(div:nth-of-type(2))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
 
             + "    res = document.querySelectorAll('div:not(div:nth-of-type(3))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
 
             + "    res = document.querySelectorAll('div:not(div:nth-of-type(4))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
-            + "    alert(res[2].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
+            + "    log(res[2].id);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1166,16 +1281,19 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <div id='id3'>3</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "id2")
-    @HtmlUnitNYI(FF = "exception")
+    @Alerts(DEFAULT = "id2",
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception")
     public void notWithLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1199,37 +1317,41 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
-                    "3", "id1", "id2", "id3"})
-    @HtmlUnitNYI(FF = "exception")
+    @Alerts(DEFAULT = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
+                       "3", "id1", "id2", "id3"},
+            FF78 = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception")
     public void notWithNthLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var res = document.querySelectorAll('div:not(div:nth-last-of-type(1))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
 
             + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(2))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
 
             + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(3))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
 
             + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(4))');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].id);\n"
-            + "    alert(res[1].id);\n"
-            + "    alert(res[2].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].id);\n"
+            + "    log(res[1].id);\n"
+            + "    log(res[2].id);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1238,7 +1360,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <div id='id3'>3</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1247,14 +1369,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "item_2", "item_3"})
     public void childNot() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var res = document.querySelectorAll('#list li:not(#item_1)');\n"
-            + "  alert(res.length);\n"
-            + "  alert(res[0].id);\n"
-            + "  alert(res[1].id);\n"
+            + "  log(res.length);\n"
+            + "  log(res[0].id);\n"
+            + "  log(res[1].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1265,7 +1388,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  </ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1274,13 +1397,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "item_2"})
     public void childNotNot() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var res = document.querySelectorAll('#list li:not(#item_1):not(#item_3)');\n"
-            + "  alert(res.length);\n"
-            + "  alert(res[0].id);\n"
+            + "  log(res.length);\n"
+            + "  log(res[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1291,7 +1415,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  </ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1301,20 +1425,21 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0", "undefined", "1", "[object HTMLInputElement]", "id2"},
             IE = {"1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2"})
     public void focus() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':focus');\n"
-            + "  alert(found.length);\n"
-            + "  alert(found[0]);\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
             + "\n"
             + "  document.getElementById('id2').focus();\n"
             + "\n"
             + "  found = document.querySelectorAll(':focus');\n"
-            + "  alert(found.length);\n"
-            + "  alert(found[0]);\n"
-            + "  alert(found[0].id);\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "  log(found[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1322,7 +1447,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='id2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1331,13 +1456,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"5", "cb1", "rd1", "sl1", "ml1", "ml3"})
     public void checked() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':checked');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1359,7 +1485,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  </select>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1368,21 +1494,22 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "cb1", "rd1", "2", "cb2", "rd2"})
     public void checkedChanged() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':checked');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
 
             + "  document.getElementById('cb1').checked = false;\n"
             + "  document.getElementById('cb2').checked = true;\n"
             + "  document.getElementById('rd1').checked = false;\n"
             + "  document.getElementById('rd2').checked = true;\n"
             + "  found = document.querySelectorAll(':checked');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1392,7 +1519,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input type='radio' name='radiobuttons' id='rd2' value='Off' />\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1401,21 +1528,22 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "cb1", "rd1", "2", "cb1", "rd1"})
     public void checkedAttribute() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll('[checked]');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
 
             + "  document.getElementById('cb1').checked = false;\n"
             + "  document.getElementById('cb2').checked = true;\n"
             + "  document.getElementById('rd1').checked = false;\n"
             + "  document.getElementById('rd2').checked = true;\n"
             + "  found = document.querySelectorAll('[checked]');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1425,7 +1553,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input type='radio' name='radiobuttons' id='rd2' value='Off' />\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1434,22 +1562,23 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1-iy", "1-iy", "2", "1-iy", "1-iz"})
     public void selectedChecked() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.getElementById('s1').selectedIndex);\n"
+            + "  log(document.getElementById('s1').selectedIndex);\n"
             + "  var sel = document.querySelectorAll('[selected]');\n"
-            + "  alert(sel.length + '-' + sel[0].id);\n"
+            + "  log(sel.length + '-' + sel[0].id);\n"
             + "  sel = document.querySelectorAll(':checked');\n"
-            + "  alert(sel.length + '-' + sel[0].id);\n"
+            + "  log(sel.length + '-' + sel[0].id);\n"
 
             + "  document.getElementById('iz').selected = 'selected';\n"
-            + "  alert(document.getElementById('s1').selectedIndex);\n"
+            + "  log(document.getElementById('s1').selectedIndex);\n"
             + "  var sel = document.querySelectorAll('[selected]');\n"
-            + "  alert(sel.length + '-' + sel[0].id);\n"
+            + "  log(sel.length + '-' + sel[0].id);\n"
             + "  sel = document.querySelectorAll(':checked');\n"
-            + "  alert(sel.length + '-' + sel[0].id);\n"
+            + "  log(sel.length + '-' + sel[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1460,7 +1589,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  </select>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1469,13 +1598,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id3"})
     public void enabled() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll('input:enabled');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1484,7 +1614,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='id3' type'hidden'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1493,13 +1623,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "id2"})
     public void disabled() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll('input:disabled');\n"
-            + "  alert(found.length);\n"
-            + "  for (var i = 0; i < found.length; i++) { alert(found[i].id); }\n"
+            + "  log(found.length);\n"
+            + "  for (var i = 0; i < found.length; i++) { log(found[i].id); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1508,7 +1639,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='id3' type'hidden'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1519,7 +1650,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void target() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  found = document.querySelectorAll(':target');\n"
@@ -1542,7 +1673,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void targetNoHash() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1564,7 +1695,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void targetUnknown() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -1587,19 +1718,20 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLHtmlElement]"})
     public void root() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll(':root');\n"
-            + "  alert(list.length);\n"
-            + "  alert(list[0]);\n"
+            + "  log(list.length);\n"
+            + "  log(list[0]);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1614,15 +1746,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='first' name='foo[bar]'>\n"
             + "  <input id='second' name='foo.bar'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(document.querySelectorAll('input[name=foo\\\\[bar\\\\]]')[0].id);\n"
-            + "} catch(e) {alert(e)}\n"
+            + "  log(document.querySelectorAll('input[name=foo\\\\[bar\\\\]]')[0].id);\n"
+            + "} catch(e) {log(e)}\n"
             + "try {\n"
-            + "  alert(document.querySelectorAll('input[name=foo\\\\.bar]')[0].id);\n"
-            + "} catch(e) {alert(e)}\n"
+            + "  log(document.querySelectorAll('input[name=foo\\\\.bar]')[0].id);\n"
+            + "} catch(e) {log(e)}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1647,13 +1780,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='third' class='foobar'>\n"
             + "  <input id='third' class='abcfoobar'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(document.querySelectorAll('.foo').length);\n"
-            + "  alert(document.querySelectorAll('.bar').length);\n"
-            + "} catch(e) {alert('exception')}\n"
+            + "  log(document.querySelectorAll('.foo').length);\n"
+            + "  log(document.querySelectorAll('.bar').length);\n"
+            + "} catch(e) {log('exception')}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1669,14 +1803,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='second' class='foo.bar'>\n"
             + "  <input id='third' class='foo:bar'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(document.querySelectorAll('.foo\\\\[bar\\\\]')[0].id);\n"
-            + "  alert(document.querySelectorAll('.foo\\\\.bar')[0].id);\n"
-            + "  alert(document.querySelectorAll('.foo\\\\:bar')[0].id);\n"
-            + "} catch(e) {alert('exception')}\n"
+            + "  log(document.querySelectorAll('.foo\\\\[bar\\\\]')[0].id);\n"
+            + "  log(document.querySelectorAll('.foo\\\\.bar')[0].id);\n"
+            + "  log(document.querySelectorAll('.foo\\\\:bar')[0].id);\n"
+            + "} catch(e) {log('exception')}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1691,16 +1826,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='silly:id::with:colons'>\n"
             + "  <input id='silly~id'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(document.querySelectorAll('#silly\\\\:id\\\\:\\\\:with\\\\:colons')[0].id);\n"
-            + "  alert(document.querySelectorAll(\"#silly\\\\:id\\\\:\\\\:with\\\\:colons\")[0].id);\n"
+            + "  log(document.querySelectorAll('#silly\\\\:id\\\\:\\\\:with\\\\:colons')[0].id);\n"
+            + "  log(document.querySelectorAll(\"#silly\\\\:id\\\\:\\\\:with\\\\:colons\")[0].id);\n"
 
-            + "  alert(document.querySelectorAll('#silly\\\\~id')[0].id);\n"
-            + "  alert(document.querySelectorAll(\"#silly\\\\~id\")[0].id);\n"
-            + "} catch(e) {alert('exception ' + e)}\n"
+            + "  log(document.querySelectorAll('#silly\\\\~id')[0].id);\n"
+            + "  log(document.querySelectorAll(\"#silly\\\\~id\")[0].id);\n"
+            + "} catch(e) {log('exception ' + e)}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1946,35 +2082,36 @@ public class CSSSelectorTest extends WebDriverTestCase {
     private void emptyAndDetached(final String selector) throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title>\n"
+            + "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
-            + "    alert(found);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(found);\n"
+            + "  } catch(e) {log('exception')}\n"
 
             + "  div = document.createElement('div');\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
-            + "    alert(found);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(found);\n"
+            + "  } catch(e) {log('exception')}\n"
 
             + "  var input = document.createElement('span');\n"
             + "  div.appendChild(input);\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
-            + "    alert(found);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(found);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'></myDiv>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1982,15 +2119,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "<nested>Three</nested>", "Four",
-                "1", "Two", "0", "0"},
+                       "1", "Two", "0", "0"},
             IE = {"2", "undefined", "undefined",
-                    "1", "undefined", "0", "0"})
+                  "1", "undefined", "0", "0"})
     public void xmlTagName() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "<script>\n"
-
+            + LOG_TITLE_FUNCTION
             + "  var xmlString = [\n"
             + "                 '<ResultSet>',\n"
             + "                 '<Result>One</Result>',\n"
@@ -2012,23 +2149,23 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  try {\n"
 
             + "    var res = de.querySelectorAll('result');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].innerHTML);\n"
-            + "    alert(res[1].innerHTML);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].innerHTML);\n"
+            + "    log(res[1].innerHTML);\n"
 
             + "    res = de.querySelectorAll('RESULT');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].innerHTML);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].innerHTML);\n"
 
             + "    res = de.querySelectorAll('resulT');\n"
-            + "    alert(res.length);\n"
+            + "    log(res.length);\n"
 
             + "    res = de.querySelectorAll('rEsulT');\n"
-            + "    alert(res.length);\n"
-            + "  } catch(e) {alert('exception ' + e)}\n"
+            + "    log(res.length);\n"
+            + "  } catch(e) {log('exception ' + e)}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2036,21 +2173,21 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "ONE", "<CHILD>Two</CHILD>",
-                    "0",
-                    "2", "ONE", "<CHILD>Two</CHILD>",
-                    "1", "ONE",
-                    "1", "Two"},
+                       "0",
+                       "2", "ONE", "<CHILD>Two</CHILD>",
+                       "1", "ONE",
+                       "1", "Two"},
             IE = {"2", "undefined", "undefined",
-                    "0",
-                    "2", "undefined", "undefined",
-                    "1", "undefined",
-                    "1", "undefined"})
+                  "0",
+                  "2", "undefined", "undefined",
+                  "1", "undefined",
+                  "1", "undefined"})
     public void xmlAttribute() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "<script>\n"
-
+            + LOG_TITLE_FUNCTION
             + "  var xmlString = [\n"
             + "                 '<ResultSet>',\n"
             + "                 '<RESULT thinger=\"blah\">ONE</RESULT>',\n"
@@ -2070,29 +2207,29 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  try {\n"
 
             + "    var res = de.querySelectorAll('RESULT');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].innerHTML);\n"
-            + "    alert(res[1].innerHTML);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].innerHTML);\n"
+            + "    log(res[1].innerHTML);\n"
 
             + "    res = de.querySelectorAll('RESULT[THINGER]');\n"
-            + "    alert(res.length);\n"
+            + "    log(res.length);\n"
 
             + "    res = de.querySelectorAll('RESULT[thinger]');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].innerHTML);\n"
-            + "    alert(res[1].innerHTML);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].innerHTML);\n"
+            + "    log(res[1].innerHTML);\n"
 
             + "    res = de.querySelectorAll('RESULT[thinger=blah]');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].innerHTML);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].innerHTML);\n"
 
             + "    res = de.querySelectorAll('RESULT > CHILD');\n"
-            + "    alert(res.length);\n"
-            + "    alert(res[0].innerHTML);\n"
+            + "    log(res.length);\n"
+            + "    log(res[0].innerHTML);\n"
 
-            + "  } catch(e) {alert('exception ' + e)}\n"
+            + "  } catch(e) {log('exception ' + e)}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

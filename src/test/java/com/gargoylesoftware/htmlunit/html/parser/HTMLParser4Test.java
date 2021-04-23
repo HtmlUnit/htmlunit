@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,11 +52,12 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<tfoot id='tf'><tr><td>foot</td></tr></tfoot>"
             + "</table>\n"
             + "<script>\n"
-            + "alert(document.getElementById('tf').parentNode.nodeName);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.getElementById('tf').parentNode.nodeName);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -68,10 +69,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts("myForm")
     public void badlyFormedHTML() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>first</title>\n"
+            + "<html><head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.getElementById('myInput').form.id);\n"
+            + "      log(document.getElementById('myInput').form.id);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -85,7 +87,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  </table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,21 +101,22 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<script>var i = 7;</script>\n"
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>first</title>\n"
+            + "    <title></title>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      var headChildren = document.getElementsByTagName('head')[0].childNodes;\n"
-            + "      alert(headChildren.length);\n"
-            + "      alert(headChildren[0]);\n"
-            + "      alert(headChildren[1]);\n"
-            + "      alert(headChildren[2]);\n"
-            + "      alert(headChildren[3]);\n"
+            + "      log(headChildren.length);\n"
+            + "      log(headChildren[0]);\n"
+            + "      log(headChildren[1]);\n"
+            + "      log(headChildren[2]);\n"
+            + "      log(headChildren[3]);\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -127,21 +130,22 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>first</title>\n"
+            + "    <title></title>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      var headChildren = document.getElementsByTagName('head')[0].childNodes;\n"
-            + "      alert(headChildren.length);\n"
-            + "      alert(headChildren[0]);\n"
-            + "      alert(headChildren[1]);\n"
-            + "      alert(headChildren[2]);\n"
-            + "      alert(headChildren[3]);\n"
+            + "      log(headChildren.length);\n"
+            + "      log(headChildren[0]);\n"
+            + "      log(headChildren[1]);\n"
+            + "      log(headChildren[2]);\n"
+            + "      log(headChildren[3]);\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,15 +159,15 @@ public class HTMLParser4Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>first</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var headChildren = document.getElementsByTagName('body')[0].childNodes;\n"
-            + "        alert(headChildren.length);\n"
-            + "        alert(headChildren[0]);\n"
-            + "        alert(headChildren[1]);\n"
-            + "        alert(headChildren[2]);\n"
-            + "        alert(headChildren[3]);\n"
+            + "        log(headChildren.length);\n"
+            + "        log(headChildren[0]);\n"
+            + "        log(headChildren[1]);\n"
+            + "        log(headChildren[2]);\n"
+            + "        log(headChildren[3]);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -171,7 +175,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</html>"
             + "<script>var i = 7;</script>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -184,7 +188,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html>\n"
             + "  <head>\n"
             + "  <head>\n"
-            + "    <title>foo</title>\n"
             + "    <script src='script.js'></script>\n"
             + "  </head>\n"
             + "  </head>\n"
@@ -230,17 +233,17 @@ public class HTMLParser4Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>foo</title>\n"
             + "  </head>\n"
             + "  <body>\n"
             + "    <div id='tester'><p title='Nimbus&#84823000 X'>Nimbus&#84823000 X</p></div>\n"
             + "    <script>\n"
-            + "      alert(document.getElementById('tester').innerHTML);\n"
+            + LOG_TITLE_FUNCTION
+            + "      log(document.getElementById('tester').innerHTML);\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -279,9 +282,10 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "</head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.getElementById('foo') == null);\n"
-            + "      alert(document.getElementById('bla') == null);\n"
+            + "      log(document.getElementById('foo') == null);\n"
+            + "      log(document.getElementById('bla') == null);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -289,7 +293,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  <span id='foo' id='bla'></span>"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -304,23 +308,24 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('script1'));\n"
-            + "    alert(document.getElementById('script2'));\n"
-            + "    alert(document.getElementById('message1'));\n"
-            + "    alert(document.getElementById('form1'));\n"
+            + "    log(document.getElementById('script1'));\n"
+            + "    log(document.getElementById('script2'));\n"
+            + "    log(document.getElementById('message1'));\n"
+            + "    log(document.getElementById('form1'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<script id='script1'>alert(1)</script>\n"
-            + "<app:script id='script2'>alert(2)</app:script>\n"
-            + "<script>alert(3)</script>\n"
+            + "<script id='script1'>log(1)</script>\n"
+            + "<app:script id='script2'>log(2)</app:script>\n"
+            + "<script>log(3)</script>\n"
             + "<app:message name='r:tasks.request' id='message1'>hello</app:message>\n"
             + "<form id='form1' xmlns='http://org.pentaho'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -336,26 +341,27 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      div = document.createElementNS('http://www.appcelerator.org', 'app:script');\n"
             + "      debug(div);\n"
-            + "    } catch (e) {alert('createElementNS() is not defined')}\n"
+            + "    } catch (e) {log('createElementNS() is not defined')}\n"
             + "    debug(document.getElementById('script1'));\n"
             + "    debug(document.getElementById('script2'));\n"
             + "  }\n"
             + "  function debug(e) {\n"
-            + "    alert(e);\n"
-            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+            + "    log(e);\n"
+            + "    log(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<script id='script1'>alert(1)</script>\n"
-            + "<app:script id='script2'>alert(2)</app:script>\n"
+            + "<script id='script1'>log(1)</script>\n"
+            + "<app:script id='script2'>log(2)</app:script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 // this tests fails and breaks the driver for follow up tests - have to investigate what is going wrong here
@@ -382,15 +388,15 @@ public class HTMLParser4Test extends WebDriverTestCase {
 //            + "    debug(elem);\n"
 //            + "  }\n"
 //            + "  function debug(e) {\n"
-//            + "    alert(e);\n"
-//            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+//            + "    log(e);\n"
+//            + "    log(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head>\n"
 //            + "<body onload='test()'>\n"
 //            + "</body></html>";
 //
-//        loadPageWithAlerts2(html);
+//        loadPageVerifyTitle2(html);
 //    }
 
     /**
@@ -409,6 +415,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    elem = document.getElementsByTagName('head')[0];\n"
             + "    debug(elem);\n"
@@ -418,8 +425,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    debug(elem);\n"
             + "  }\n"
             + "  function debug(e) {\n"
-            + "    alert(e);\n"
-            + "    alert(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
+            + "    log(e);\n"
+            + "    log(e.nodeName + ',' + e.tagName + ',' + e.namespaceURI + ',' + e.prefix + ',' + e.localName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -431,7 +438,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -446,7 +453,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
     @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-            "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
+                          "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void completeHtmlInsideDiv() throws Exception {
@@ -454,22 +461,23 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
-            + "      alert('titles');\n"
+            + "      log('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        alert(titles[i].parentNode.nodeName);\n"
-            + "        alert(titles[i].text);\n"
+            + "        log(titles[i].parentNode.nodeName);\n"
+            + "        log(titles[i].text);\n"
             + "      }\n"
-            + "      alert('bodyTitles');\n"
+            + "      log('bodyTitles');\n"
             + "      var bodyTitles = document.body.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < bodyTitles.length; i++) {\n"
-            + "        alert(bodyTitles[i].parentNode.nodeName);\n"
-            + "        alert(bodyTitles[i].text);\n"
+            + "        log(bodyTitles[i].parentNode.nodeName);\n"
+            + "        log(bodyTitles[i].text);\n"
             + "      }\n"
-            + "      alert('innerDiv');\n"
+            + "      log('innerDiv');\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
-            + "      alert(innerDiv.parentNode.id);\n"
+            + "      log(innerDiv.parentNode.id);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -483,10 +491,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "      </body>\n"
             + "    </html>\n"
             + "  </DIV>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -501,7 +510,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
     @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-                 "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
+                          "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void writeCompleteHtmlInsideDIV() throws Exception {
@@ -509,22 +518,23 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
-            + "      alert('titles');\n"
+            + "      log('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        alert(titles[i].parentNode.nodeName);\n"
-            + "        alert(titles[i].text);\n"
+            + "        log(titles[i].parentNode.nodeName);\n"
+            + "        log(titles[i].text);\n"
             + "      }\n"
-            + "      alert('bodyTitles');\n"
+            + "      log('bodyTitles');\n"
             + "      var bodyTitles = document.body.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < bodyTitles.length; i++) {\n"
-            + "        alert(bodyTitles[i].parentNode.nodeName);\n"
-            + "        alert(bodyTitles[i].text);\n"
+            + "        log(bodyTitles[i].parentNode.nodeName);\n"
+            + "        log(bodyTitles[i].text);\n"
             + "      }\n"
-            + "      alert('innerDiv');\n"
+            + "      log('innerDiv');\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
-            + "      alert(innerDiv.parentNode.id);\n"
+            + "      log(innerDiv.parentNode.id);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -536,10 +546,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "         <body><DIV id=innerDiv>Inner DIV</DIV></body></html>');\n"
             + "     </script>\n"
             + "  </DIV>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -559,22 +570,23 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
-            + "      alert('titles');\n"
+            + "      log('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        alert(titles[i].parentNode.nodeName);\n"
-            + "        alert(titles[i].text);\n"
+            + "        log(titles[i].parentNode.nodeName);\n"
+            + "        log(titles[i].text);\n"
             + "      }\n"
-            + "      alert('bodyTitles');\n"
+            + "      log('bodyTitles');\n"
             + "      var bodyTitles = document.body.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < bodyTitles.length; i++) {\n"
-            + "        alert(bodyTitles[i].parentNode.nodeName);\n"
-            + "        alert(bodyTitles[i].text);\n"
+            + "        log(bodyTitles[i].parentNode.nodeName);\n"
+            + "        log(bodyTitles[i].text);\n"
             + "      }\n"
-            + "      alert('innerDiv');\n"
+            + "      log('innerDiv');\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
-            + "      alert(innerDiv.parentNode.id);\n"
+            + "      log(innerDiv.parentNode.id);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -587,10 +599,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "        '<html><head><title>Inner Html</title></head>"
             + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
             + "    </script>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**

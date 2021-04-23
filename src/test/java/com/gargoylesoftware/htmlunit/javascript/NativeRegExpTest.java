@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for NativeRegExp.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NativeRegExpTest extends WebDriverTestCase {
@@ -37,12 +38,13 @@ public class NativeRegExpTest extends WebDriverTestCase {
     public void undefined() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(new RegExp(undefined).test('AA'));\n"
+            + "  log(new RegExp(undefined).test('AA'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

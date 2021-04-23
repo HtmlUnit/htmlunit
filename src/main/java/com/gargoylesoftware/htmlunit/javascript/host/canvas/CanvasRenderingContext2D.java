@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -390,35 +390,47 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @SuppressWarnings("unused")
     public void drawImage(final Object image, final int sx, final int sy, final Object sWidth, final Object sHeight,
             final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
-        final Integer dxI;
-        final Integer dyI;
-        Integer dWidthI = null;
-        Integer dHeightI = null;
-        Integer sWidthI = null;
-        Integer sHeightI = null;
-        if (!Undefined.isUndefined(dx)) {
-            dxI = ((Number) dx).intValue();
-            dyI = ((Number) dy).intValue();
-            dWidthI = ((Number) dWidth).intValue();
-            dHeightI = ((Number) dHeight).intValue();
-        }
-        else {
-            dxI = sx;
-            dyI = sy;
-        }
-        if (!Undefined.isUndefined(sWidth)) {
-            sWidthI = ((Number) sWidth).intValue();
-            sHeightI = ((Number) sHeight).intValue();
-        }
 
-        try {
-            if (image instanceof HTMLImageElement) {
-                final ImageReader imageReader =
-                        ((HtmlImage) ((HTMLImageElement) image).getDomNodeOrDie()).getImageReader();
-                getRenderingBackend().drawImage(imageReader, dxI, dyI);
+        if (image instanceof HTMLImageElement) {
+            final HTMLImageElement imageElem = (HTMLImageElement) image;
+            try {
+                final ImageReader imageReader = ((HtmlImage) imageElem.getDomNodeOrDie()).getImageReader();
+
+                // 3 arguments
+                //   void ctx.drawImage(image, dx, dy);
+                if (Undefined.isUndefined(sWidth)) {
+                    getRenderingBackend().drawImage(imageReader, 0, 0, null, null, sx, sy, null, null);
+                }
+
+                // 5 arguments
+                //   void ctx.drawImage(image, dx, dy, dWidth, dHeight);
+                else if (Undefined.isUndefined(dx)) {
+                    final int dWidthI = ScriptRuntime.toInt32(sWidth);
+                    final int dHeightI = ScriptRuntime.toInt32(sHeight);
+
+                    getRenderingBackend().drawImage(imageReader, 0, 0, null, null, sx, sy, dWidthI, dHeightI);
+                }
+
+                // all 9 arguments
+                //   void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+                else {
+                    final int sWidthI = ScriptRuntime.toInt32(sWidth);
+                    final int sHeightI = ScriptRuntime.toInt32(sHeight);
+
+                    final int dxI = ScriptRuntime.toInt32(dx);
+                    final int dyI = ScriptRuntime.toInt32(dy);
+                    final int dWidthI = ScriptRuntime.toInt32(dWidth);
+                    final int dHeightI = ScriptRuntime.toInt32(dHeight);
+
+                    getRenderingBackend().drawImage(imageReader,
+                            sx, sy, sWidthI, sHeightI, dxI, dyI, dWidthI, dHeightI);
+                }
             }
-        }
-        catch (final IOException ioe) {
+            catch (final IOException ioe) {
+                LOG.info("There is no ImageReader available for you imgage with src '" + imageElem.getSrc() + "'"
+                        + "Please have a look at https://htmlunit.sourceforge.io/images-howto.html "
+                        + "for a possible solution.");
+            }
         }
     }
 

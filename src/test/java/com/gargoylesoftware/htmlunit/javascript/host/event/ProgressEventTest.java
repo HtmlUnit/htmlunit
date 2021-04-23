@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,17 +32,17 @@ public class ProgressEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    if (event) {\n"
-        + "      alert(event);\n"
-        + "      alert(event.type);\n"
-        + "      alert(event.bubbles);\n"
-        + "      alert(event.cancelable);\n"
-        + "      alert(event.composed);\n"
+        + "      log(event);\n"
+        + "      log(event.type);\n"
+        + "      log(event.bubbles);\n"
+        + "      log(event.cancelable);\n"
+        + "      log(event.composed);\n"
 
-        + "      alert(event.lengthComputable);\n"
-        + "      alert(event.loaded);\n"
-        + "      alert(event.total);\n"
+        + "      log(event.lengthComputable);\n"
+        + "      log(event.loaded);\n"
+        + "      log(event.total);\n"
         + "    } else {\n"
-        + "      alert('no event');\n"
+        + "      log('no event');\n"
         + "    }\n"
         + "  }\n";
 
@@ -54,18 +54,19 @@ public class ProgressEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new ProgressEvent('progress');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -76,7 +77,8 @@ public class ProgressEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new ProgressEvent('test', {\n"
@@ -86,13 +88,13 @@ public class ProgressEventTest extends WebDriverTestCase {
             + "        'total': 666\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -103,17 +105,18 @@ public class ProgressEventTest extends WebDriverTestCase {
             IE = {"[object ProgressEvent]", "", "false", "false", "undefined", "false", "0", "0"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('ProgressEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

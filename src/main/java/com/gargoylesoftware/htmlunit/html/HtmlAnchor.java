@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -132,13 +133,14 @@ public class HtmlAnchor extends HtmlElement {
             }
 
             final String target;
-            if (shiftKey || ctrlKey) {
-                target = "_blank";
+            if (shiftKey || ctrlKey || ATTRIBUTE_NOT_DEFINED != getDownloadAttribute()) {
+                target = WebClient.TARGET_BLANK;
             }
             else {
                 target = page.getResolvedTarget(getTargetAttribute());
             }
-            final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(), target, "_self");
+            final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
+                    target, WebClient.TARGET_SELF);
             Page enclosedPage = win.getEnclosedPage();
             if (enclosedPage == null) {
                 win.getWebClient().getPage(win, WebRequest.newAboutBlankRequest());
@@ -153,14 +155,15 @@ public class HtmlAnchor extends HtmlElement {
 
         final URL url = getTargetUrl(href, page);
 
-        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+        final WebClient webClient = page.getWebClient();
+        final BrowserVersion browser = webClient.getBrowserVersion();
         if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
             final URL pingUrl = getTargetUrl(getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
             pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());
             pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
             pingRequest.setRequestBody("PING");
-            page.getWebClient().loadWebResponse(pingRequest);
+            webClient.loadWebResponse(pingRequest);
         }
 
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader(),
@@ -168,7 +171,7 @@ public class HtmlAnchor extends HtmlElement {
         // use the page encoding even if this is a GET requests
         webRequest.setCharset(page.getCharset());
 
-        webRequest.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+        webRequest.setRefererlHeader(page.getUrl());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()
@@ -176,14 +179,18 @@ public class HtmlAnchor extends HtmlElement {
                     + "', using the originating URL "
                     + page.getUrl());
         }
+
         final String target;
-        if (shiftKey || ctrlKey) {
-            target = "_blank";
+        if (shiftKey || ctrlKey
+                || (webClient.getAttachmentHandler() == null
+                        && ATTRIBUTE_NOT_DEFINED != getDownloadAttribute())) {
+            target = WebClient.TARGET_BLANK;
         }
         else {
             target = page.getResolvedTarget(getTargetAttribute());
         }
-        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest, true, false, "Link click");
+        page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
+                true, false, ATTRIBUTE_NOT_DEFINED != getDownloadAttribute(), "Link click");
     }
 
     /**
@@ -427,4 +434,12 @@ public class HtmlAnchor extends HtmlElement {
         return getAttributeDirect("ping");
     }
 
+    /**
+     * Returns the value of the attribute {@code download}.
+     *
+     * @return the value of the attribute {@code download}
+     */
+    public final String getDownloadAttribute() {
+        return getAttributeDirect("download");
+    }
 }

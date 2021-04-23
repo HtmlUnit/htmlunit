@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -2539,7 +2539,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
     public void event__on_beforeunload_() throws Exception {
         runTest("event: on(beforeunload)");
     }
@@ -6672,7 +6671,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 12, 12")
-    @NotYetImplemented
     public void effects__animate_relative_values() throws Exception {
         runTest("effects: animate relative values");
     }

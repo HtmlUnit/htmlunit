@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -77,6 +77,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchSessionException;
@@ -151,6 +152,31 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
+     * Function used in many tests.
+     */
+    public static final String LOG_TITLE_FUNCTION = "  function log(msg) { window.document.title += msg + '§';}\n";
+
+    /**
+     * Function used in many tests.
+     */
+    public static final String LOG_TITLE_NORMALIZE_FUNCTION = "  function log(msg) { "
+            + "msg = ('' + msg).replace(/\\t/g, '\\\\t');"
+            + "msg = msg.replace(/\\r/g, '\\\\r');"
+            + "msg = msg.replace(/\\n/g, '\\\\n');"
+            + "window.document.title += msg + '§';}\n";
+
+    /**
+     * Function used in many tests.
+     */
+    public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
+            + "document.getElementById('myLog').value += msg + '§';}\n";
+
+    /**
+     * HtmlSniped to insert text area used for logging.
+     */
+    public static final String LOG_TEXTAREA = "  <textarea id='myLog' cols='80' rows='42'></textarea>\n";
+
+    /**
      * The system property for automatically fixing the test case expectations.
      */
     public static final String AUTOFIX_ = "htmlunit.autofix";
@@ -169,8 +195,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Browsers which run by default.
      */
     private static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
-        {BrowserVersion.CHROME, BrowserVersion.EDGE,
-            BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_78,
+        {BrowserVersion.CHROME,
+            BrowserVersion.EDGE,
+            BrowserVersion.FIREFOX,
+            BrowserVersion.FIREFOX_78,
             BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
@@ -992,7 +1020,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts.
      * @param html the HTML to use
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -1004,7 +1032,105 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current WebDriver version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts.
+     * @param html the HTML to use
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageVerifyTitle2(final String html) throws Exception {
+        return loadPageVerifyTitle2(html, getExpectedAlerts());
+    }
+
+    protected final WebDriver loadPageVerifyTitle2(final String html, final String... expectedAlerts) throws Exception {
+        final WebDriver driver = loadPage2(html);
+        return verifyTitle2(driver, expectedAlerts);
+    }
+
+    protected final WebDriver verifyTitle2(final long maxWaitTime, final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+
+        while (System.currentTimeMillis() < maxWait) {
+            try {
+                return verifyTitle2(driver, expectedAlerts);
+            }
+            catch (final AssertionError e) {
+                // ignore and wait
+            }
+        }
+
+        return verifyTitle2(driver, expectedAlerts);
+    }
+
+    protected final WebDriver verifyTitle2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        if (expectedAlerts.length == 0) {
+            assertEquals("", driver.getTitle());
+        }
+        else {
+            final StringBuilder expected = new StringBuilder();
+            for (int i = 0; i < expectedAlerts.length; i++) {
+                expected.append(expectedAlerts[i]).append('§');
+            }
+
+            final String title = driver.getTitle();
+            try {
+                assertEquals(expected.toString(), title);
+            }
+            catch (final AssertionError e) {
+                if (useRealBrowser() && StringUtils.isEmpty(title)) {
+                    Thread.sleep(42);
+                    assertEquals(expected.toString(), driver.getTitle());
+                    return driver;
+                }
+                throw e;
+            }
+        }
+        return driver;
+    }
+
+    protected final WebDriver loadPageVerifyTextArea2(final String html) throws Exception {
+        return loadPageTextArea2(html, getExpectedAlerts());
+    }
+
+    protected final WebDriver loadPageTextArea2(final String html, final String... expectedAlerts) throws Exception {
+        final WebDriver driver = loadPage2(html);
+        return verifyTextArea2(driver, expectedAlerts);
+    }
+
+    protected final WebDriver verifyTextArea2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final WebElement textArea = driver.findElement(By.id("myLog"));
+
+        if (expectedAlerts.length == 0) {
+            assertEquals("", textArea.getAttribute("value"));
+            return driver;
+        }
+
+        if (!useRealBrowser()
+                && expectedAlerts.length == 1
+                && expectedAlerts[0].startsWith("data:image/png;base64,")) {
+            String value = textArea.getAttribute("value");
+            if (value.endsWith("§")) {
+                value = value.substring(0, value.length() - 1);
+            }
+            compareImages(expectedAlerts[0], value);
+            return driver;
+        }
+
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i]).append('§');
+        }
+        assertEquals(expected.toString(), textArea.getAttribute("value"));
+
+        return driver;
+    }
+
+    /**
+     * Defines the provided HTML as the response for {@link WebTestCase#URL_FIRST}
+     * and loads the page with this URL using the current WebDriver version; finally, asserts that the
+     * alerts equal the expected alerts.
      * @param html the HTML to use
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver
@@ -1035,12 +1161,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime)
             throws Exception {
-        expandExpectedAlertsVariables(URL_FIRST);
-        final String[] expectedAlerts = getExpectedAlerts();
-
         final WebDriver driver = loadPage2(html, url);
 
-        verifyAlerts(maxWaitTime, driver, expectedAlerts);
+        verifyAlerts(maxWaitTime, driver, getExpectedAlerts());
         return driver;
     }
 
@@ -1101,21 +1224,27 @@ public abstract class WebDriverTestCase extends WebTestCase {
             throws Exception {
         final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expectedAlerts.length);
 
-        assertEquals(expectedAlerts, actualAlerts);
-        if (!ignoreExpectationsLength()) {
-            assertEquals(expectedAlerts.length, actualAlerts.size());
-            for (int i = expectedAlerts.length - 1; i >= 0; i--) {
-                assertEquals(expectedAlerts[i], actualAlerts.get(i));
+        assertEquals(expectedAlerts.length, actualAlerts.size());
+
+        if (!useRealBrowser()) {
+            // check if we have data-image Url
+            for (int i = 0; i < expectedAlerts.length; i++) {
+                if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
+                    // we have to compare element by element
+                    for (int j = 0; j < expectedAlerts.length; j++) {
+                        if (expectedAlerts[j].startsWith("data:image/png;base64,")) {
+                            compareImages(expectedAlerts[j], actualAlerts.get(j));
+                        }
+                        else {
+                            assertEquals(expectedAlerts[j], actualAlerts.get(j));
+                        }
+                    }
+                    return;
+                }
             }
         }
-    }
 
-    /**
-     * Whether the expectations length must match the actual length or this can be ignored.
-     * @return whether to ignore checking the expectations length against the actual one
-     */
-    protected boolean ignoreExpectationsLength() {
-        return false;
+        assertEquals(expectedAlerts, actualAlerts);
     }
 
     /**
@@ -1170,7 +1299,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final URL url, final long maxWaitTime) throws Exception {
-        expandExpectedAlertsVariables(url);
         final String[] expectedAlerts = getExpectedAlerts();
 
         startWebServer(getMockWebConnection(), null);
@@ -1381,12 +1509,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
 
         while (true) {
+            final String title = webdriver.getTitle();
             try {
-                assertEquals(expected, webdriver.getTitle());
+                assertEquals(expected, title);
                 return;
             }
             catch (final ComparisonFailure e) {
-                if (System.currentTimeMillis() > maxWait) {
+                if (expected.length() <= title.length()
+                        || System.currentTimeMillis() > maxWait) {
                     throw e;
                 }
                 Thread.sleep(10);
@@ -1395,7 +1525,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     // limit resource usage
-    private Server buildServer(final int port) {
+    private static Server buildServer(final int port) {
         final QueuedThreadPool threadPool = new QueuedThreadPool(5, 2);
 
         final Server server = new Server(threadPool);

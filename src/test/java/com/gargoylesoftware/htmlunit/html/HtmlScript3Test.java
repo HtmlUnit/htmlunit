@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -31,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
@@ -161,14 +163,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
 
         String html
             = "<html><head>\n"
-            + "  <script type='text/javascript'>window.onerror=function(msg) { alert(msg); }</script>"
+            + "  <script>var logMsg = ''; function log(msg) { logMsg += msg + '§§'; }</script>\n"
+            + "  <script type='text/javascript'>window.onerror=function(msg) { log(msg); }</script>"
             + "  <script src='" + scriptUrl + "'";
         if (charsetAttribute != null) {
             html = html + " charset='" + charsetAttribute.getCharset().name().toLowerCase() + "'";
         }
         html = html + "></script>\n"
             + "</head>\n"
-            + "<body></body>\n"
+            + "<body>\n"
+            + "</body>\n"
             + "</html>";
 
         String scriptContentType = MimeType.APPLICATION_JAVASCRIPT;
@@ -176,7 +180,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
             scriptContentType = scriptContentType + "; charset="
                                     + charsetResponseHeader.getCharset().name().toLowerCase();
         }
-        final String js = "alert('a'); alert('ä'); alert('أهلاً'); alert('мир'); alert('房间');";
+        final String js = "log('a'); log('ä'); log('أهلاً'); log('мир'); log('房间');";
 
         byte[] script = null;
         if (charsetResponseEncoding == null) {
@@ -217,18 +221,20 @@ public class HtmlScript3Test extends WebDriverTestCase {
             }
             final WebDriver driver = loadPage2(html, URL_FIRST, htmlContentType, htmlResponseCharset, null);
 
-            if (expectedAlerts.length == 1) {
-                final List<String> actualAlerts = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts.length);
-                assertEquals(1, actualAlerts.size());
+            final String logMsg = (String) ((JavascriptExecutor) driver).executeScript("return logMsg;");
+            final String[] actualAlerts = logMsg.split("§§");
 
-                final String msg = actualAlerts.get(0);
+            if (actualAlerts.length == 1) {
+                assertEquals(1, actualAlerts.length);
+
+                final String msg = actualAlerts[0];
                 assertEquals(expectedAlerts[0], "Invalid token");
                 assertTrue(msg, msg.contains("Invalid or unexpected token")
                                 || msg.contains("illegal character")
                                 || msg.contains("Ungültiges Zeichen"));
             }
             else {
-                verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
+                assertArrayEquals(getExpectedAlerts(), actualAlerts);
             }
         }
         catch (final WebDriverException e) {

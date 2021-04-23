@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -172,18 +172,18 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
-                "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
-                "true", "function"},
+                       "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
+                       "true", "function"},
             FF = {"function Window() {\n    [native code]\n}",
-                "function Window() {\n    [native code]\n}", "true",
-                "function HTMLDocument() {\n    [native code]\n}",
-                "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
+                  "function Window() {\n    [native code]\n}", "true",
+                  "function HTMLDocument() {\n    [native code]\n}",
+                  "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
             FF78 = {"function Window() {\n    [native code]\n}",
-                "function Window() {\n    [native code]\n}", "true",
-                "function HTMLDocument() {\n    [native code]\n}",
-                "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
+                    "function Window() {\n    [native code]\n}", "true",
+                    "function HTMLDocument() {\n    [native code]\n}",
+                    "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
             IE = {"[object Window]", "[object Window]", "true",
-                "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"})
+                  "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"})
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -634,8 +634,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"rstlne-rstlne-rstlne", "rstlno-rstlne-rstlne",
-            "rstlna-rstlne-rstlne", "rstlne-rstlne-rstlne",
-            "rstlni-rstlni-rstlni", "rstlna-rstlna-rstlna"})
+             "rstlna-rstlne-rstlne", "rstlne-rstlne-rstlne",
+             "rstlni-rstlni-rstlni", "rstlna-rstlna-rstlna"})
     public void regExpSupport() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.DomNodeIterator;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A basic class of Standard Generalized Markup Language (SGML), e.g. HTML and XML.
@@ -270,7 +271,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     public URL getUrl() {
         final WebResponse wr = getWebResponse();
         if (null == wr) {
-            return WebClient.URL_ABOUT_BLANK;
+            return UrlUtils.URL_ABOUT_BLANK;
         }
         return getWebResponse().getWebRequest().getUrl();
     }

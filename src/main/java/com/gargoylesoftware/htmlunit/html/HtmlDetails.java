@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "details".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlDetails extends HtmlElement {
 
@@ -40,4 +41,11 @@ public class HtmlDetails extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * Returns the {@code open} property.
+     * @return the {@code open} property
+     */
+    public boolean isOpen() {
+        return hasAttribute("open");
+    }
 }

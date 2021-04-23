@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -737,4 +739,76 @@ public class HtmlAnchorTest extends WebDriverTestCase {
                 windowsSize + Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
         assertEquals("Should not have navigated away", getExpectedAlerts()[1], driver.getTitle());
     }
+
+    /**
+     * Tests the 'Referer' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void click_refererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body><a href='" + URL_SECOND + "' id='link'>link</a></body>\n"
+            + "</html>";
+        final String secondContent
+            = "<html><head><title>Page B</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("link")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void controlClick_refererHeader() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body>\n"
+            + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent
+            = "<html><head><title>Page B</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        new Actions(driver)
+                .keyDown(Keys.CONTROL)
+                .click(driver.findElement(By.id("link")))
+                .keyUp(Keys.CONTROL)
+                .build().perform();
+
+        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
 }

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -149,7 +149,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
-            "[object HTMLSpanElement]"})
+             "[object HTMLSpanElement]"})
     public void extractContents() throws Exception {
         final String html =
               "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -173,14 +173,13 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({
-            "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
-            "2 text1",
-            "3 [object DocumentFragment]",
-            "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
-            "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
-            "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
-            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
+    @Alerts({"1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
+             "2 text1",
+             "3 [object DocumentFragment]",
+             "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
+             "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
+             "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
+             "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
     public void extractContents2() throws Exception {
         final String html =
               "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"
@@ -274,7 +273,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
-            "qwerty", "[object HTMLSpanElement]"})
+             "qwerty", "[object HTMLSpanElement]"})
     public void cloneContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -436,6 +435,26 @@ public class RangeTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"tyxy", "tyxy", "tyxy"})
+    public void testToString() throws Exception {
+        final String html =
+              "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = document.getElementById('s');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(s.firstChild, 4);\n"
+            + "  r.setEnd(d.childNodes[2], 2);\n"
+            + "  alert(r);\n"
+            + "  alert('' + r);\n"
+            + "  alert(r.toString());\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }

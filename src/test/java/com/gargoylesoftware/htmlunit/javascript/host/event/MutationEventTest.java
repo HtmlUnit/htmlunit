@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,11 +33,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class MutationEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-            + "    alert(event);\n"
-            + "    alert(event.type);\n"
-            + "    alert(event.bubbles);\n"
-            + "    alert(event.cancelable);\n"
-            + "    alert(event.composed);\n"
+            + "    log(event);\n"
+            + "    log(event.type);\n"
+            + "    log(event.bubbles);\n"
+            + "    log(event.cancelable);\n"
+            + "    log(event.composed);\n"
 
             // TODO all properties
             + "  }\n";
@@ -49,18 +49,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent('mutant');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -70,18 +71,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,18 +93,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -112,18 +115,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -133,18 +137,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -154,18 +159,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -175,20 +181,21 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent('mutant', {\n"
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -198,19 +205,20 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent('mutant', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -220,20 +228,21 @@ public class MutationEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new MutationEvent('mutant', {\n"
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -246,8 +255,9 @@ public class MutationEventTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('MutationEvent' in window);\n"
+            + "      log('MutationEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -255,7 +265,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -264,18 +274,19 @@ public class MutationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "    try {\n"
-            + "      alert('DOM2: ' + document.createEvent('MutationEvents'));\n"
-            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "      log('DOM2: ' + document.createEvent('MutationEvents'));\n"
+            + "    } catch(e) {log('DOM2: exception')}\n"
             + "    try {\n"
-            + "      alert('DOM3: ' + document.createEvent('MutationEvent'));\n"
-            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "      log('DOM3: ' + document.createEvent('MutationEvent'));\n"
+            + "    } catch(e) {log('DOM3: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

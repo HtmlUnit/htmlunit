@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
 import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
 
 /**
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
  */
@@ -48,6 +50,7 @@ public class Navigator extends SimpleScriptable {
 
     private PluginArray plugins_;
     private MimeTypeArray mimeTypes_;
+    private MediaDevices mediaDevices_;
 
     /**
      * Creates an instance.
@@ -334,5 +337,19 @@ public class Navigator extends SimpleScriptable {
         networkInformation.setPrototype(getPrototype(networkInformation.getClass()));
         networkInformation.setParentScope(getParentScope());
         return networkInformation;
+    }
+
+    /**
+     * Returns the {@code mimeTypes} property.
+     * @return the {@code mimeTypes} property
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF78})
+    public MediaDevices getMediaDevices() {
+        if (mediaDevices_ == null) {
+            mediaDevices_ = new MediaDevices();
+            mediaDevices_.setPrototype(getPrototype(mediaDevices_.getClass()));
+            mediaDevices_.setParentScope(getParentScope());
+        }
+        return mediaDevices_;
     }
 }

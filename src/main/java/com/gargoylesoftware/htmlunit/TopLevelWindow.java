@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A window representing a top level browser window.
@@ -72,7 +73,7 @@ public class TopLevelWindow extends WebWindowImpl {
     @Override
     protected boolean isJavaScriptInitializationNeeded(final Page page) {
         return getScriptableObject() == null
-            || page.getUrl() == WebClient.URL_ABOUT_BLANK
+            || page.getUrl() == UrlUtils.URL_ABOUT_BLANK
             || !(page.getWebResponse() instanceof StringWebResponse);
         // TODO: find a better way to distinguish content written by document.open(),...
     }

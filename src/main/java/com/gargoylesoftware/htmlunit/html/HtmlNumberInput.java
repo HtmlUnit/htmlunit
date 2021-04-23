@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_ACCEPT_ALL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
@@ -32,8 +36,11 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Raik Bieniek
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
+
+    private static final char[] VALID_INT_CHARS = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
@@ -48,6 +55,16 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     HtmlNumberInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        final String value = getValueAttribute();
+        if (!value.isEmpty()) {
+            try {
+                Double.parseDouble(value.trim());
+            }
+            catch (final NumberFormatException e) {
+                setValueAttribute("");
+            }
+        }
     }
 
     /**
@@ -72,7 +89,30 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+                return;
+            }
+
+            if (StringUtils.isBlank(newValue) || "-".equals(newValue) || "+".equals(newValue)) {
+                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+                return;
+            }
+
+            String parseValue = newValue;
+            final int lastPos = parseValue.length() - 1;
+            if (parseValue.charAt(lastPos) == '.') {
+                parseValue = parseValue.substring(0, lastPos);
+            }
+
+            try {
+                Double.parseDouble(parseValue);
+                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+
         }
     }
 
@@ -231,46 +271,72 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && isMaxValid() && isMinValid();
-    }
-
-    /**
-     * Returns if the input element has a valid min value. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
-     * documentation for details.
-     *
-     * @return if the input element has a valid min value
-     */
-    private boolean isMinValid() {
-        if (!getValueAttribute().isEmpty() && !getMin().isEmpty()) {
-            try {
-                final Long value = Long.parseLong(getValueAttribute());
-                final Long min = Long.parseLong(getMin());
-                return min <= value;
-            }
-            catch (final NumberFormatException e) {
-                // ignore
-            }
+        if (!super.isValid()) {
+            return false;
         }
-        return true;
-    }
 
-    /**
-     * Returns if the input element has a valid max value. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
-     * documentation for details.
-     *
-     * @return if the input element has a valid max value
-     */
-    private boolean isMaxValid() {
-        if (!getValueAttribute().isEmpty() && !getMax().isEmpty()) {
+        final String valueAttr = getValueAttribute();
+        if (!valueAttr.isEmpty()) {
+            if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
+                return false;
+            }
+
+            // if we have no step, the value has to be an integer
+            if (getStep().isEmpty()) {
+                String val = valueAttr;
+                final int lastPos = val.length() - 1;
+                if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+                    if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
+                        return false;
+                    }
+                    val = val.substring(0, lastPos);
+                }
+                if (!StringUtils.containsOnly(val, VALID_INT_CHARS)) {
+                    return false;
+                }
+            }
+
+            double value = 0d;
             try {
-                final Long value = Long.parseLong(getValueAttribute());
-                final Long max = Long.parseLong(getMax());
-                return max >= value;
+                value = Double.parseDouble(valueAttr);
             }
             catch (final NumberFormatException e) {
-                // ignore
+                return false;
+            }
+
+            if (!getMin().isEmpty()) {
+                try {
+                    final double min = Double.parseDouble(getMin());
+                    if (value < min) {
+                        return false;
+                    }
+
+                    if (!getStep().isEmpty()) {
+                        try {
+                            final double step = Double.parseDouble(getStep());
+                            if (Math.abs((value - min) % step) > 0.000001d) {
+                                return false;
+                            }
+                        }
+                        catch (final NumberFormatException e) {
+                            // ignore
+                        }
+                    }
+                }
+                catch (final NumberFormatException e) {
+                    // ignore
+                }
+            }
+            if (!getMax().isEmpty()) {
+                try {
+                    final double max = Double.parseDouble(getMax());
+                    if (value > max) {
+                        return false;
+                    }
+                }
+                catch (final NumberFormatException e) {
+                    // ignore
+                }
             }
         }
         return true;

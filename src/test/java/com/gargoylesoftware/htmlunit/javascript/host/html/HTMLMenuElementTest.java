@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -64,7 +64,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
-                   "true", "false", "true", "false", "", "null", "", "null"})
+             "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
         final String html =
                 "<html>\n"
@@ -110,16 +110,13 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined",
-                    "null", "", "blah", "context", "ToolBar", "list",
-                    "context", "toolbar", "ConText", "", "unknown"},
-            FF = {"", "", "blah", "context", "ToolBar", "null", "", "blah",
-                    "context", "ToolBar", "list", "context", "toolbar", "ConText",
-                    "", "unknown"},
+                       "null", "", "blah", "context", "ToolBar", "list",
+                       "context", "toolbar", "ConText", "", "unknown"},
             FF78 = {"", "", "blah", "context", "ToolBar", "null", "", "blah",
                     "context", "ToolBar", "list", "context", "toolbar", "ConText",
                     "", "unknown"},
             IE = {"", "", "", "", "", "null", "", "blah",
-                    "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", ""})
+                  "context", "ToolBar", "ex", "", "ex", "", "ex", "", "ex", "", "", "ex", ""})
     public void type() throws Exception {
         final String html =
                 "<html>\n"
@@ -173,7 +170,6 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "new", ""},
-            FF = {"", "", "new", ""},
             FF78 = {"", "", "new", ""})
     public void label() throws Exception {
         final String html =

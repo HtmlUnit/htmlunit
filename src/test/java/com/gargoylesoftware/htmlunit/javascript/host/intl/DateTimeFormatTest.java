@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -56,38 +57,48 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
-                "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
+                       "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
             IE = {"zh-Hans-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
-                    "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
-    @NotYetImplemented
+                  "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                           "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            EDGE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            FF78 = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var region1 = new Intl.DateTimeFormat('zh-CN', { timeZone: 'UTC' });\n"
                 + "    var options = region1.resolvedOptions();\n"
-                + "    alert(options.locale);\n"
-                + "    alert(options.calendar);\n"
-                + "    alert(options.numberingSystem);\n"
-                + "    alert(options.timeZone);\n"
-                + "    alert(options.hour12);\n"
-                + "    alert(options.weekday);\n"
-                + "    alert(options.era);\n"
-                + "    alert(options.year);\n"
-                + "    alert(options.month);\n"
-                + "    alert(options.day);\n"
-                + "    alert(options.hour);\n"
-                + "    alert(options.minute);\n"
-                + "    alert(options.second);\n"
-                + "    alert(options.timeZoneName);\n"
+                + "    log(options.locale);\n"
+                + "    log(options.calendar);\n"
+                + "    log(options.numberingSystem);\n"
+                + "    log(options.timeZone);\n"
+                + "    log(options.hour12);\n"
+                + "    log(options.weekday);\n"
+                + "    log(options.era);\n"
+                + "    log(options.year);\n"
+                + "    log(options.month);\n"
+                + "    log(options.day);\n"
+                + "    log(options.hour);\n"
+                + "    log(options.minute);\n"
+                + "    log(options.second);\n"
+                + "    log(options.timeZoneName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,23 +110,25 @@ public class DateTimeFormatTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var region1 = new Intl.DateTimeFormat('zh-CN', { timeZone: 'UTC' });\n"
                 + "    var options = region1.resolvedOptions();\n"
-                + "    alert(options);\n"
+                + "    log(options);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void test(final String... string) throws Exception {
         final StringBuilder html = new StringBuilder(HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var date = new Date(Date.UTC(2013, 11, 20, 3, 0, 0));\n"
             + "    try {\n");
@@ -123,15 +136,16 @@ public class DateTimeFormatTest extends WebDriverTestCase {
             html.append(string[i]).append("\n");
         }
         html.append(
-            "      alert(" + string[string.length - 1] + ");\n"
-            + "    } catch(e) {alert('exception')}\n"
+            "      log(" + string[string.length - 1] + ");\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>");
 
         try {
-            loadPageWithAlerts2(html.toString());
+            loadPageVerifyTextArea2(html.toString());
         }
         catch (final ComparisonFailure e) {
             final String msg = e.getMessage();
@@ -309,7 +323,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
-                + "\u0645\u064a\u0644\u0627\u062f\u064a 4:00:00 \u0635",
+                + "\u0645\u064a\u0644\u0627\u062f\u064a, 4:00:00 \u0635",
             FF78 = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
                 + " \u0664:\u0660\u0660:\u0660\u0660 \u0635",
@@ -559,9 +573,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_be() throws Exception {
         test("new Intl.DateTimeFormat('be').format(date)");
@@ -571,9 +584,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_be_by() throws Exception {
         test("new Intl.DateTimeFormat('be-BY').format(date)");
@@ -1173,9 +1185,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20/12/2013",
-            FF78 = "20/12/2013",
+    @Alerts(DEFAULT = "20/12/2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2013")
     public void format_ga() throws Exception {
         test("new Intl.DateTimeFormat('ga').format(date)");
@@ -1185,9 +1196,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20/12/2013",
-            FF78 = "20/12/2013",
+    @Alerts(DEFAULT = "20/12/2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2013")
     public void format_ga_ie() throws Exception {
         test("new Intl.DateTimeFormat('ga-IE').format(date)");
@@ -1267,9 +1277,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_is() throws Exception {
         test("new Intl.DateTimeFormat('is').format(date)");
@@ -1279,9 +1288,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_is_is() throws Exception {
         test("new Intl.DateTimeFormat('is-IS').format(date)");
@@ -1421,9 +1429,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_mk() throws Exception {
         test("new Intl.DateTimeFormat('mk').format(date)");
@@ -1433,9 +1440,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_mk_mk() throws Exception {
         test("new Intl.DateTimeFormat('mk-MK').format(date)");
@@ -1678,9 +1684,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_sq() throws Exception {
         test("new Intl.DateTimeFormat('sq').format(date)");
@@ -1690,9 +1695,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
-            FF78 = "20.12.2013",
+    @Alerts(DEFAULT = "20.12.2013",
+            CHROME = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_sq_al() throws Exception {
         test("new Intl.DateTimeFormat('sq-AL').format(date)");

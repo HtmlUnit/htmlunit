@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,7 +42,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -153,7 +152,7 @@ public class HtmlImage extends HtmlElement {
 
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
-                    final PostponedAction action = new PostponedAction(getPage()) {
+                    final PostponedAction action = new PostponedAction(getPage(), "HtmlImage.setAttributeNS") {
                         @Override
                         public void execute() throws Exception {
                             doOnLoad();
@@ -303,7 +302,7 @@ public class HtmlImage extends HtmlElement {
             }
 
             if (READY_STATE_LOADING.equals(htmlPage.getReadyState())) {
-                final PostponedAction action = new PostponedAction(getPage()) {
+                final PostponedAction action = new PostponedAction(getPage(), "HtmlImage.doOnLoad") {
                     @Override
                     public void execute() throws Exception {
                         HtmlImage.this.fireEvent(event);
@@ -546,7 +545,7 @@ public class HtmlImage extends HtmlElement {
                     final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
                                                                     browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
-                    request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+                    request.setRefererlHeader(page.getUrl());
                     imageWebResponse_ = webClient.loadWebResponse(request);
                 }
             }

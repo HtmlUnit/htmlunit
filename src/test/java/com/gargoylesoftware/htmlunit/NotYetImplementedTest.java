@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -117,6 +117,9 @@ public class NotYetImplementedTest {
                     if (nyiString.contains("CHROME = ")) {
                         browser += "CHROME";
                     }
+                    if (nyiString.contains("EDGE = ")) {
+                        browser += "EDGE";
+                    }
                     if (nyiString.contains("FF = ")) {
                         if (browser.length() > 0) {
                             browser += ", ";
@@ -137,7 +140,7 @@ public class NotYetImplementedTest {
                     }
                 }
                 if (browser.length() < 2) {
-                    System.out.println(browser);
+                    throw new IllegalArgumentException("'" + nyiString + "' seems to be not supported by @HtmlUnitNYI");
                 }
                 entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser
                         + ';' + description);

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,11 +32,11 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class StorageEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-            + "    alert(event);\n"
-            + "    alert(event.type);\n"
-            + "    alert(event.bubbles);\n"
-            + "    alert(event.cancelable);\n"
-            + "    alert(event.composed);\n"
+            + "    log(event);\n"
+            + "    log(event.type);\n"
+            + "    log(event.bubbles);\n"
+            + "    log(event.cancelable);\n"
+            + "    log(event.composed);\n"
             + "  }\n";
 
     /**
@@ -47,18 +47,19 @@ public class StorageEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent('storage');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -72,18 +73,19 @@ public class StorageEventTest extends WebDriverTestCase {
                 FF78 = {"[object StorageEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -94,18 +96,19 @@ public class StorageEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,18 +119,19 @@ public class StorageEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -137,18 +141,19 @@ public class StorageEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorUnknownType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -159,18 +164,19 @@ public class StorageEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -181,7 +187,8 @@ public class StorageEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var debug = {hello: 'world'};\n"
@@ -193,13 +200,13 @@ public class StorageEventTest extends WebDriverTestCase {
             + "        'url': 'aUrl'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -210,19 +217,20 @@ public class StorageEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent('storage', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -236,20 +244,21 @@ public class StorageEventTest extends WebDriverTestCase {
                 FF78 = {"[object StorageEvent]", "storage", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new StorageEvent('storage', {\n"
             + "        'storageArea': 'wrong'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -262,8 +271,9 @@ public class StorageEventTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('StorageEvent' in window);\n"
+            + "      log('StorageEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -271,6 +281,6 @@ public class StorageEventTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

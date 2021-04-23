@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -200,13 +200,13 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                    "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                    "[object PopStateEvent]", "null", "true",
-                    "[object PopStateEvent]", "null", "true",
-                    "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                    "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
-                    "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                    "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
+                       "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+                       "[object PopStateEvent]", "null", "true",
+                       "[object PopStateEvent]", "null", "true",
+                       "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+                       "[object PopStateEvent]", "{\"hi\":\"there\"}", "true",
+                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
+                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
             IE = {})
     public void pushStateClone() throws Exception {
         final String html = "<html>\n"
@@ -445,9 +445,9 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "null", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
-                        "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
+                       "[object PopStateEvent]", "null", "true",
+                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true",
+                       "[object PopStateEvent]", "{\"hi2\":\"there2\"}", "true"},
             IE = {})
     public void replaceStateClone() throws Exception {
         final String html = "<html>\n"
@@ -709,7 +709,7 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"back", "forward", "go", "length", "pushState", "replaceState",
-                        "scrollRestoration", "state"},
+                       "scrollRestoration", "state"},
             IE = {"back", "forward", "go", "length", "pushState", "replaceState", "state"})
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"

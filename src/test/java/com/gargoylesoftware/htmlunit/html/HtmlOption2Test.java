@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,10 +13,6 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.html;
-
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -49,14 +45,19 @@ public class HtmlOption2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"option1", "", "Number Three", "Number 4",
-                "option1\nNumber Three\nNumber 4"},
-            CHROME = {"option1", "      ", "Number Three", "Number 4",
-                "      option1\n      \n      Number Three\n      Number 4\n    "},
-            EDGE = {"option1", "      ", "Number Three", "Number 4",
-                "      option1\n      \n      Number Three\n      Number 4\n    "},
+                       "option1\nNumber Three\nNumber 4"},
+            CHROME = {"option1", "", "Number Three", "Number 4",
+                      "      option1\n       Number Three\n      Number 4\n    "},
+            EDGE = {"option1", "", "Number Three", "Number 4",
+                    "      option1\n       Number Three\n      Number 4\n    "},
             IE = {"option1", "", "Number Three", "Number 4",
-                "option1 Number Three Number 4"})
-    @NotYetImplemented({CHROME, EDGE, IE})
+                  "option1 Number Three Number 4"})
+    @HtmlUnitNYI(CHROME = {"option1", "", "Number Three", "Number 4",
+                           "option1\nNumber Three\nNumber 4"},
+            EDGE = {"option1", "", "Number Three", "Number 4",
+                    "option1\nNumber Three\nNumber 4"},
+            IE = {"option1", "", "Number Three", "Number 4",
+                  "option1\nNumber Three\nNumber 4"})
     public void getVisibleText() throws Exception {
         final String htmlContent
             = "<html>\n"

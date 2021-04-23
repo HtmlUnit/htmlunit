@@ -1,6 +1,8 @@
 # HtmlUnit
 
-Version 2.46.0 / January 2, 2021
+Version 2.49.1 / April 11, 2021
+
+:heart: [Sponsor](https://github.com/sponsors/rbri)
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit)
 
@@ -23,7 +25,7 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.46.0</version>
+        <version>2.49.1</version>
     </dependency>
 
 Overview
@@ -38,7 +40,8 @@ Features
 --------
 * Support for the HTTP and HTTPS protocols
 * Support for cookies
-* Ability to specify whether failing responses from the server should throw exceptions or should be returned as pages of the appropriate type (based on content type)
+* Ability to specify whether failing re
+ses from the server should throw exceptions or should be returned as pages of the appropriate type (based on content type)
 * Support for submit methods POST and GET (as well as HEAD, DELETE, ...)
 * Ability to customize the request headers being sent to the server
 * Support for HTML responses
@@ -68,7 +71,7 @@ If you use maven please add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.47.0-SNAPSHOT</version>
+        <version>2.50.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
@@ -88,7 +91,7 @@ License
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.46.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.49.1/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20Headless/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"

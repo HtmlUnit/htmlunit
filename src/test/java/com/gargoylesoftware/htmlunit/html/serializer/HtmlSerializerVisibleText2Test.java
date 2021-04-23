@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,26 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.html.serializer;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -52,7 +51,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             CHROME = "",
             EDGE = "",
             IE = "<foo>\n<bar>baz</bar>\n</foo>")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @HtmlUnitNYI(CHROME = "baz",
+            EDGE = "baz",
+            IE = "baz")
     public void xmlPage() throws Exception {
         final String xml = "<xml>\n"
                 + "  <foo>\n"
@@ -790,10 +791,12 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            CHROME = "       A B C D EF G H I\n      Second\n    ",
+            EDGE = "       A B C D EF G H I\n      Second\n    ",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
+            EDGE = "A B C D EF G H I\nSecond",
+            IE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
         getVisibleTextWhiteSpaceSelect(null);
     }
@@ -804,10 +807,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
-            EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @HtmlUnitNYI(IE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -818,10 +819,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
-            EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D EF G H I Second")
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @HtmlUnitNYI(IE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }
@@ -831,10 +830,14 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
-            FF78 = "A B C D EF G H I\nSecond")
-    @NotYetImplemented({FF, FF78})
+            FF78 = "A B C D EF G H I\nSecond",
+            IE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
+    @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
     }
@@ -844,10 +847,14 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
-            FF78 = "A B C D EF G H I\nSecond")
-    @NotYetImplemented({FF, FF78})
+            FF78 = "A B C D EF G H I\nSecond",
+            IE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
+    @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");
     }
@@ -858,10 +865,12 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
-            EDGE = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D \nEF\nG \n H I \n Second")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "A B C D \nEF\nG \n H I\n Second",
+            EDGE = "A B C D \nEF\nG \n H I\n Second",
+            FF = "A B C D \nEF\nG \n H I\n Second",
+            FF78 = "A B C D \nEF\nG \n H I\n Second",
+            IE = "A B C D \nEF\nG \n H I\n Second")
     public void getVisibleTextWhiteSpaceSelectPreLine() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-line");
     }
@@ -958,6 +967,110 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             + "  <input type='submit' name='tester' id='tester' "
                         + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'"))
                         + " value='  A B  C\t \t  D \r\nEF\nG \n H  <br> I  '>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getVisibleTextInputSubmitNoValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='submit' name='tester' id='tester' >\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getVisibleTextInputResetNoValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='reset' name='tester' id='tester' >\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getVisibleTextInputResetBlankValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='reset' name='tester' id='tester' value='  \t'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getVisibleTextInputSubmitBlankValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='submit' name='tester' id='tester' value='  \t'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -1275,7 +1388,11 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("first item\nA B C D \nEF\nG \n H\nI\nthird item\n4. item\nsome text\nlast item")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            EDGE = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            FF = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            FF78 = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            IE = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item")
     public void getVisibleTextWhiteSpaceOrderedListPreLine() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre-line");
     }
@@ -1362,7 +1479,11 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("first item\nA B C D \nEF\nG \n H\nI\nthird item\n4. item\nsome text\nlast item")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            EDGE = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            FF = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            FF78 = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item",
+            IE = "first item\n A B C D \nEF\nG \n H\nI\n third item\n4. item\n some text \n\nlast item")
     public void getVisibleTextWhiteSpaceUnorderedListPreLine() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre-line");
     }
@@ -1598,6 +1719,51 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
                 + " I have <input type='number' value='2'/> out of 2 stamps</p>");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Sum")
+    @BuggyWebDriver(FF = "Sum\ndetail",
+            FF78 = "Sum\ndetail")
+    @HtmlUnitNYI(IE = "Sum\ndetail")
+    public void getVisibleTextDetails() throws Exception {
+        getVisibleTextFormated("<details id='tester'>"
+                + "<summary>Sum</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Sum\nSum2",
+            IE = "SumSum2")
+    @BuggyWebDriver(FF = "Sum\nSum2\ndetail",
+            FF78 = "Sum\nSum2\ndetail")
+    @HtmlUnitNYI(IE = "SumSum2\ndetail")
+    public void getVisibleTextDetailsTwoSums() throws Exception {
+        getVisibleTextFormated("<details id='tester'>"
+                + "<summary>Sum</summary>"
+                + "<summary>Sum2</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Sum\ndetail")
+    @BuggyWebDriver(IE = "Sum")
+    public void getVisibleTextDetailsOpen() throws Exception {
+        getVisibleTextFormated("<details id='tester' open=true>"
+                + "<summary>Sum</summary>"
+                + "<p>detail</p>"
+                + "</details>");
+    }
+
     private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
         final String htmlContent
             = "<html>\n"
@@ -1607,6 +1773,49 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xy")
+    public void getVisibleNumberInputValidNumber() throws Exception {
+        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "12");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xy")
+    public void getVisibleNumberInputInvalidNumber() throws Exception {
+        getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");
+    }
+
+    private void getVisibleTextFormatedAfterTyping(final String htmlTesterSnipped,
+                        final String... typed) throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  " + htmlTesterSnipped + "\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final WebElement input = driver.findElement(By.id("inpt"));
+        for (final String string : typed) {
+            input.sendKeys(string);
+        }
+
         final String text = driver.findElement(By.id("tester")).getText();
         assertEquals(getExpectedAlerts()[0], text);
 

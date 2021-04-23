@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -93,7 +93,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLButtonElement]", "[object HTMLButtonElement]",
-                "§§URL§§", "http://srv/htmlunit.org"},
+                       "§§URL§§", "http://srv/htmlunit.org"},
             FF = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"},
             FF78 = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
@@ -135,6 +135,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 

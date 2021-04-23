@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -73,10 +73,10 @@ public class MooTools121Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Alerts(DEFAULT = {"364", "1", "0",
-                    "should return the function bound to an object with multiple arguments"},
+                       "should return the function bound to an object with multiple arguments"},
             IE = {"364", "2", "0",
-                    "should return the function bound to an object with multiple arguments",
-                    "should return a CSS string representing the Element's styles"})
+                  "should return the function bound to an object with multiple arguments",
+                  "should return a CSS string representing the Element's styles"})
     @Test
     @NotYetImplemented(IE)
     public void mooTools() throws Exception {

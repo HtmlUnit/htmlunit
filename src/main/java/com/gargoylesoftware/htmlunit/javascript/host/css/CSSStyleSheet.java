@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -95,7 +95,6 @@ import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -111,9 +110,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -179,7 +176,7 @@ public class CSSStyleSheet extends StyleSheet {
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required"));
+            "optional", "required", "valid", "invalid"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -301,7 +298,7 @@ public class CSSStyleSheet extends StyleSheet {
                 // Use href.
                 final BrowserVersion browser = client.getBrowserVersion();
                 request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
-                request.setAdditionalHeader(HttpHeader.REFERER, uri);
+                request.setRefererlHeader(page.getUrl());
 
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
@@ -744,16 +741,10 @@ public class CSSStyleSheet extends StyleSheet {
                                 || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
 
             case "required":
-                return (element instanceof HtmlInput
-                            || element instanceof HtmlSelect
-                            || element instanceof HtmlTextArea)
-                        && element.hasAttribute("required");
+                return element instanceof HtmlElement && ((HtmlElement) element).isRequired();
 
             case "optional":
-                return (element instanceof HtmlInput
-                            || element instanceof HtmlSelect
-                            || element instanceof HtmlTextArea)
-                        && !element.hasAttribute("required");
+                return element instanceof HtmlElement && ((HtmlElement) element).isOptional();
 
             case "first-child":
                 for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
@@ -815,6 +806,12 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                 }
                 return true;
+
+            case "valid":
+                return element instanceof HtmlElement && ((HtmlElement) element).isValid();
+
+            case "invalid":
+                return element instanceof HtmlElement && !((HtmlElement) element).isValid();
 
             case "empty":
                 return isEmpty(element);

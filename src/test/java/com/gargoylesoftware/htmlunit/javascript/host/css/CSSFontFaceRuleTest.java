@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,11 +35,11 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSFontFaceRule]", "5",
-                "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"},
+                       "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"},
             FF78 = {"[object CSSFontFaceRule]", "5",
-                "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
+                    "@font-face {\n  font-family: Delicious;\n  src: url(\"Delicious-Bold.otf\");\n}"},
             IE = {"[object CSSFontFaceRule]", "5",
-                "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(Delicious-Bold.otf);\n}\n"})
+                  "@font-face {\n\tfont-family: Delicious;\n\tsrc: url(Delicious-Bold.otf);\n}\n"})
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

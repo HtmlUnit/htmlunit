@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,9 +19,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -143,7 +145,10 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     /**
      * {@inheritDoc}
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
+    @Deprecated
     @Override
     public String asText() {
         return "";
@@ -166,10 +171,44 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      */
     public void setFiles(final File... files) {
         if (files.length > 1 && getAttributeDirect("multiple") == ATTRIBUTE_NOT_DEFINED) {
-            throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
+            throw new IllegalStateException("HtmlFileInput - 'multiple' is not set.");
         }
+
         for (int i = 0; i < files.length; i++) {
             files[i] = normalizeFile(files[i]);
+        }
+        files_ = files;
+        fireEvent(Event.TYPE_CHANGE);
+    }
+
+    /**
+     * Used to specify the upload directory.
+     *
+     * @param directory the directory to upload all files
+     */
+    public void setDirectory(final File directory) {
+        if (directory == null) {
+            return;
+        }
+
+        if (getAttributeDirect("webkitdirectory") == ATTRIBUTE_NOT_DEFINED) {
+            throw new IllegalStateException("HtmlFileInput - 'webkitdirectory' is not set.");
+        }
+
+        if (getAttributeDirect("multiple") == ATTRIBUTE_NOT_DEFINED) {
+            throw new IllegalStateException("HtmlFileInput - 'multiple' is not set.");
+        }
+
+        if (!directory.isDirectory()) {
+            throw new IllegalStateException("HtmlFileInput - the provided directory '"
+                        + directory.getAbsolutePath() + "' is not a directory.");
+        }
+
+        final Collection<File> fileColl = FileUtils.listFiles(directory, null, true);
+        final File[] files = new File[fileColl.size()];
+        int i = 0;
+        for (final File file : fileColl) {
+            files[i++] = normalizeFile(file);
         }
         files_ = files;
         fireEvent(Event.TYPE_CHANGE);

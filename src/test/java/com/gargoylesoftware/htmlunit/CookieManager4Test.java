@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.junit.Assume.assumeTrue;
+import static com.gargoylesoftware.htmlunit.CookieManagerTest.HTML_ALERT_COOKIE;
+import static org.junit.Assert.fail;
 
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -28,8 +30,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -51,11 +55,15 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class CookieManager4Test extends WebDriverTestCase {
 
-    private static final String DOMAIN = "htmlunit.org";
-    private static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT + '/';
+    /** "htmlunit.org". */
+    public static final String DOMAIN = "htmlunit.org";
+    /** "http://host1." + DOMAIN + ":" + PORT + '/'. */
+    public static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT + '/';
     private static final String URL_HOST2 = "http://host2." + DOMAIN + ":" + PORT + '/';
-    private static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT + '/';
-    private static final String URL_HOST4 = "http://" + "htmlunit" + ":" + PORT + '/';
+    /** "http://" + DOMAIN + ":" + PORT + '/'. */
+    public static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT + '/';
+    /** "http://" + "htmlunit" + ":" + PORT + '/'. */
+    public static final String URL_HOST4 = "http://" + "htmlunit" + ":" + PORT + '/';
 
     /**
      * {@link org.junit.Assume Assumes} that the host configurations are present.
@@ -68,28 +76,28 @@ public class CookieManager4Test extends WebDriverTestCase {
             InetAddress.getByName(new URL(URL_HOST1).getHost());
         }
         catch (final UnknownHostException e) {
-            assumeTrue("Host configuration '" + URL_HOST1 + "' are not present", false);
+            fail("Host configuration '" + URL_HOST1 + "' are not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST2).getHost());
         }
         catch (final UnknownHostException e) {
-            assumeTrue("Host configuration '" + URL_HOST2 + "' are not present", false);
+            fail("Host configuration '" + URL_HOST2 + "' are not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST3).getHost());
         }
         catch (final UnknownHostException e) {
-            assumeTrue("Host configuration '" + URL_HOST3 + "' are not present", false);
+            fail("Host configuration '" + URL_HOST3 + "' are not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST4).getHost());
         }
         catch (final UnknownHostException e) {
-            assumeTrue("Host configuration '" + URL_HOST4 + "' are not present", false);
+            fail("Host configuration '" + URL_HOST4 + "' are not present");
         }
     }
 
@@ -100,6 +108,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Before
     public void clearCookies() throws Exception {
+        shutDownAll();
+
         getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
         startWebServer(getMockWebConnection(), null);
         final WebDriver driver = getWebDriver();
@@ -228,7 +238,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "c11=11; c12=12",
-            CHROME = "c12=12")
+            CHROME = "c12=12",
+            EDGE = "c12=12")
     public void storedDomain4() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
@@ -365,7 +376,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
-            CHROME = {"1", "c12=12; path=/; domain=htmlunit"})
+            CHROME = {"1", "c12=12; path=/; domain=htmlunit"},
+            EDGE = {"1", "c12=12; path=/; domain=htmlunit"})
     public void storedDomainFromJs4() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -655,4 +667,344 @@ public class CookieManager4Test extends WebDriverTestCase {
         testCookies(new URL(URL_HOST1), "key1=\"Hi there\"", "key2=Howdy");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; c6=strict; c7=stRiCT; first=1")
+    public void sameSite() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c6=strict; SameSite=strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c7=stRiCT; SameSite=stRiCT"));
+
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST1 + "foo");
+
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertEquals(70, lastCookies.length());
+
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("c2=Lax")
+                    && lastCookies.contains("c3=Strict")
+                    && lastCookies.contains("c4=empty")
+                    && lastCookies.contains("c5=unknown")
+                    && lastCookies.contains("c6=strict")
+                    && lastCookies.contains("c7=stRiCT"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            assertEquals(8, mgr.getCookies().size());
+            assertNull(mgr.getCookie("first").getSameSite());
+            assertEquals("lax", mgr.getCookie("c2").getSameSite());
+            assertEquals("strict", mgr.getCookie("c3").getSameSite());
+            assertEquals("", mgr.getCookie("c4").getSameSite());
+            assertEquals("unknown", mgr.getCookie("c5").getSameSite());
+            assertEquals("strict", mgr.getCookie("c6").getSameSite());
+            assertEquals("strict", mgr.getCookie("c7").getSameSite());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; first=1")
+    public void sameSiteOtherSubdomain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST2 + "foo");
+
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertNull(lastCookies);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; first=1")
+    public void sameSiteOriginOtherSubdomain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST2 + "foo");
+        driver.get(URL_HOST1 + "foo");
+
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertEquals(48, lastCookies.length());
+
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("c2=Lax")
+                    && lastCookies.contains("c3=Strict")
+                    && lastCookies.contains("c4=empty")
+                    && lastCookies.contains("c5=unknown"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            assertEquals(6, mgr.getCookies().size());
+            assertNull(mgr.getCookie("first").getSameSite());
+            assertEquals("lax", mgr.getCookie("c2").getSameSite());
+            assertEquals("strict", mgr.getCookie("c3").getSameSite());
+            assertEquals("", mgr.getCookie("c4").getSameSite());
+            assertEquals("unknown", mgr.getCookie("c5").getSameSite());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; first=1")
+    public void sameSiteIncludeFromSameDomain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "  <link rel='stylesheet' href='" + URL_HOST1 + "css/style.css'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                200, "OK", MimeType.TEXT_HTML, responseHeader);
+        getMockWebConnection().setResponse(new URL(URL_HOST1 + "include"), html,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST1 + "include");
+
+        assertEquals(URL_HOST1 + "css/style.css", getMockWebConnection().getLastWebRequest().getUrl());
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertEquals(48, lastCookies.length());
+
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("c2=Lax")
+                    && lastCookies.contains("c3=Strict")
+                    && lastCookies.contains("c4=empty")
+                    && lastCookies.contains("c5=unknown"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            assertEquals(6, mgr.getCookies().size());
+            assertNull(mgr.getCookie("first").getSameSite());
+            assertEquals("lax", mgr.getCookie("c2").getSameSite());
+            assertEquals("strict", mgr.getCookie("c3").getSameSite());
+            assertEquals("", mgr.getCookie("c4").getSameSite());
+            assertEquals("unknown", mgr.getCookie("c5").getSameSite());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; first=1")
+    public void sameSiteIncludeFromSubDomain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "  <link rel='stylesheet' href='" + URL_HOST1 + "css/style.css'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                200, "OK", MimeType.TEXT_HTML, responseHeader);
+        getMockWebConnection().setResponse(new URL(URL_HOST2), html,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST2);
+
+        assertEquals(URL_HOST1 + "css/style.css", getMockWebConnection().getLastWebRequest().getUrl());
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertEquals(48, lastCookies.length());
+
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("c2=Lax")
+                    && lastCookies.contains("c3=Strict")
+                    && lastCookies.contains("c4=empty")
+                    && lastCookies.contains("c5=unknown"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            assertEquals(12, mgr.getCookies().size());
+            assertNull(mgr.getCookie("first").getSameSite());
+            assertEquals("lax", mgr.getCookie("c2").getSameSite());
+            assertEquals("strict", mgr.getCookie("c3").getSameSite());
+            assertEquals("", mgr.getCookie("c4").getSameSite());
+            assertEquals("unknown", mgr.getCookie("c5").getSameSite());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; first=1")
+    public void sameSiteIFrameFromSameDomain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<iframe src='" + URL_HOST1 + "iframe.html'></iframe>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+        getMockWebConnection().setResponse(new URL(URL_HOST1 + "include"), html,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST1 + "include");
+
+        assertEquals(URL_HOST1 + "iframe.html", getMockWebConnection().getLastWebRequest().getUrl());
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertEquals(48, lastCookies.length());
+
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("c2=Lax")
+                    && lastCookies.contains("c3=Strict")
+                    && lastCookies.contains("c4=empty")
+                    && lastCookies.contains("c5=unknown"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            assertEquals(6, mgr.getCookies().size());
+            assertNull(mgr.getCookie("first").getSameSite());
+            assertEquals("lax", mgr.getCookie("c2").getSameSite());
+            assertEquals("strict", mgr.getCookie("c3").getSameSite());
+            assertEquals("", mgr.getCookie("c4").getSameSite());
+            assertEquals("unknown", mgr.getCookie("c5").getSameSite());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c2=Lax; c3=Strict; c4=empty; c5=unknown; first=1")
+    public void sameSiteIFrameFromSubDomain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1;"));
+
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=None; SameSite=None; Secure"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=Lax; SameSite=Lax"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=Strict; SameSite=Strict"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<iframe src='" + URL_HOST1 + "iframe.html'></iframe>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+        getMockWebConnection().setResponse(new URL(URL_HOST2 + "include"), html,
+                                        200, "OK", MimeType.TEXT_HTML, responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        driver.get(URL_HOST2 + "include");
+
+        assertEquals(URL_HOST1 + "iframe.html", getMockWebConnection().getLastWebRequest().getUrl());
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
+        assertEquals(48, lastCookies.length());
+
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("c2=Lax")
+                    && lastCookies.contains("c3=Strict")
+                    && lastCookies.contains("c4=empty")
+                    && lastCookies.contains("c5=unknown"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            assertEquals(12, mgr.getCookies().size());
+            assertNull(mgr.getCookie("first").getSameSite());
+            assertEquals("lax", mgr.getCookie("c2").getSameSite());
+            assertEquals("strict", mgr.getCookie("c3").getSameSite());
+            assertEquals("", mgr.getCookie("c4").getSameSite());
+            assertEquals("unknown", mgr.getCookie("c5").getSameSite());
+        }
+    }
 }

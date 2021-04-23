@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,7 +48,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(att));\n");
+        tester("log(Object.prototype.toString.call(att));\n");
     }
 
     /**
@@ -79,11 +79,11 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             IE = {"1", "#text", "test", "true", "true"})
     public void childNodes() throws Exception {
         final String test = ""
-            + "alert(att.childNodes.length);\n"
-            + "alert(att.childNodes.item(0).nodeName);\n"
-            + "alert(att.childNodes.item(0).text);\n"
-            + "alert(att.childNodes.item(0).parentNode === att);\n"
-            + "alert(att.childNodes.item(0).ownerDocument === doc);\n";
+            + "log(att.childNodes.length);\n"
+            + "log(att.childNodes.item(0).nodeName);\n"
+            + "log(att.childNodes.item(0).text);\n"
+            + "log(att.childNodes.item(0).parentNode === att);\n"
+            + "log(att.childNodes.item(0).ownerDocument === doc);\n";
 
         tester(test);
     }
@@ -100,7 +100,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             + "<elem testAttr=''/>"
             + "</root>";
 
-        tester("alert(att.childNodes.length);\n", xml);
+        tester("log(att.childNodes.length);\n", xml);
     }
 
     /**
@@ -131,11 +131,11 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             IE = {"true", "#text", "test", "true", "true"})
     public void firstChild() throws Exception {
         final String test = ""
-            + "alert(att.firstChild != null);\n"
-            + "alert(att.firstChild.nodeName);\n"
-            + "alert(att.firstChild.text);\n"
-            + "alert(att.firstChild.parentNode === att);\n"
-            + "alert(att.firstChild.ownerDocument === doc);\n";
+            + "log(att.firstChild != null);\n"
+            + "log(att.firstChild.nodeName);\n"
+            + "log(att.firstChild.text);\n"
+            + "log(att.firstChild.parentNode === att);\n"
+            + "log(att.firstChild.ownerDocument === doc);\n";
 
         tester(test);
     }
@@ -152,7 +152,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             + "<elem testAttr=''/>"
             + "</root>";
 
-        tester("alert(att.firstChild != null);\n", xml);
+        tester("log(att.firstChild != null);\n", xml);
     }
 
     /**
@@ -163,11 +163,11 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             IE = {"true", "#text", "test", "true", "true"})
     public void lastChild() throws Exception {
         final String test = ""
-            + "alert(att.lastChild != null);\n"
-            + "alert(att.lastChild.nodeName);\n"
-            + "alert(att.lastChild.text);\n"
-            + "alert(att.firstChild.parentNode === att);\n"
-            + "alert(att.firstChild.ownerDocument === doc);\n";
+            + "log(att.lastChild != null);\n"
+            + "log(att.lastChild.nodeName);\n"
+            + "log(att.lastChild.text);\n"
+            + "log(att.firstChild.parentNode === att);\n"
+            + "log(att.firstChild.ownerDocument === doc);\n";
 
         tester(test);
     }
@@ -184,7 +184,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             + "<elem testAttr=''/>"
             + "</root>";
 
-        tester("alert(att.lastChild != null);\n", xml);
+        tester("log(att.lastChild != null);\n", xml);
     }
 
     /**
@@ -196,11 +196,11 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     public void name() throws Exception {
         final String test = ""
             + "try {\n"
-            + "  alert(att.name);\n"
-            + "} catch(e) { alert('exception-read'); }\n"
+            + "  log(att.name);\n"
+            + "} catch(e) { log('exception-read'); }\n"
             + "try {\n"
             + "  att.name = 'other';\n"
-            + "} catch(e) { alert('exception-write'); }\n";
+            + "} catch(e) { log('exception-write'); }\n";
 
         tester(test);
     }
@@ -244,15 +244,15 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     public void nodeValue() throws Exception {
         final String test = ""
             + "try {\n"
-            + "  alert(att.nodeValue);\n"
-            + "} catch(e) { alert('exception-read'); }\n"
+            + "  log(att.nodeValue);\n"
+            + "} catch(e) { log('exception-read'); }\n"
             + "try {\n"
             + "  att.nodeValue = 'other';\n"
-            + "  alert(att.nodeValue);\n"
-            + "  alert(att.text);\n"
-            + "  alert(att.value);\n"
-            + "  alert(att.childNodes.length);\n"
-            + "} catch(e) { alert('exception-write'); }\n";
+            + "  log(att.nodeValue);\n"
+            + "  log(att.text);\n"
+            + "  log(att.value);\n"
+            + "  log(att.childNodes.length);\n"
+            + "} catch(e) { log('exception-write'); }\n";
 
         tester(test);
     }
@@ -264,7 +264,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
-        tester("alert(att.ownerDocument === doc);\n");
+        tester("log(att.ownerDocument === doc);\n");
     }
 
     /**
@@ -274,18 +274,18 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument_created() throws Exception {
-        final String html = ""
+        final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var att = doc.createAttribute('something');\n"
             + "    try {\n"
-            + "      alert(att.ownerDocument === doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(att.ownerDocument === doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -295,7 +295,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void parentNode() throws Exception {
-        tester("alert(att.parentNode == null);\n");
+        tester("log(att.parentNode == null);\n");
     }
 
     /**
@@ -345,15 +345,15 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     public void text() throws Exception {
         final String test = ""
             + "try {\n"
-            + "  alert(att.text);\n"
-            + "} catch(e) { alert('exception-read'); }\n"
+            + "  log(att.text);\n"
+            + "} catch(e) { log('exception-read'); }\n"
             + "try {\n"
             + "  att.text = 'other';\n"
-            + "  alert(att.text);\n"
-            + "  alert(att.nodeValue);\n"
-            + "  alert(att.value);\n"
-            + "  alert(att.childNodes.length);\n"
-            + "} catch(e) { alert('exception-write'); }\n";
+            + "  log(att.text);\n"
+            + "  log(att.nodeValue);\n"
+            + "  log(att.value);\n"
+            + "  log(att.childNodes.length);\n"
+            + "} catch(e) { log('exception-write'); }\n";
 
         tester(test);
     }
@@ -367,15 +367,15 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     public void value() throws Exception {
         final String test = ""
             + "try {\n"
-            + "  alert(att.value);\n"
-            + "} catch(e) { alert('exception-read'); }\n"
+            + "  log(att.value);\n"
+            + "} catch(e) { log('exception-read'); }\n"
             + "try {\n"
             + "  att.value = 'other';\n"
-            + "  alert(att.value);\n"
-            + "  alert(att.nodeValue);\n"
-            + "  alert(att.text);\n"
-            + "  alert(att.childNodes.length);\n"
-            + "} catch(e) { alert('exception-write'); }\n";
+            + "  log(att.value);\n"
+            + "  log(att.nodeValue);\n"
+            + "  log(att.text);\n"
+            + "  log(att.childNodes.length);\n"
+            + "} catch(e) { log('exception-write'); }\n";
 
         tester(test);
     }
@@ -446,11 +446,11 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     }
 
     private void property(final String property) throws Exception {
-        tester("alert(att." + property + ");\n");
+        tester("log(att." + property + ");\n");
     }
 
     private void property(final String property, final String xml) throws Exception {
-        tester("alert(att." + property + ");\n", xml);
+        tester("log(att." + property + ");\n", xml);
     }
 
     private void tester(final String test) throws Exception {
@@ -463,7 +463,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
     }
 
     private void tester(final String test, final String xml) throws Exception {
-        final String html = ""
+        final String html = LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
@@ -471,11 +471,11 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             + "      var elem = doc.documentElement.firstChild;\n"
             + "      var att = elem.getAttributeNode('testAttr');\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

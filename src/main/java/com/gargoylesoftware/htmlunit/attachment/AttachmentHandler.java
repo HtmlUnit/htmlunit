@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,9 +48,10 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 public interface AttachmentHandler extends Serializable {
 
     /**
-     * Handles the specified attached page.
+     * Handles the specified attached page. This is some kind of information
+     * that the page was handled as attachment.
      * This method will only be called if {@link #handleAttachment(WebResponse)}
-     * has retund false for the response..
+     * has returned false for the response..
      * @param page an attached page, which doesn't get loaded inline
      */
     void handleAttachment(Page page);

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,15 +40,16 @@ public class EventListenersContainerTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function MyEventListener(name) {\n"
             + "    this.name = name;\n"
             + "  }\n"
             + "\n"
             + "  MyEventListener.prototype = {\n"
             + "    handleEvent: function(evt) {\n"
-            + "      alert(this.name);\n"
-            + "      alert(evt.type);\n"
-            + "      alert(evt.target);\n"
+            + "      log(this.name);\n"
+            + "      log(evt.type);\n"
+            + "      log(evt.target);\n"
             + "    }\n"
             + "  }\n"
             + "\n"
@@ -58,14 +59,14 @@ public class EventListenersContainerTest extends WebDriverTestCase {
             + "      window.addEventListener('myevent', listener, false);\n"
             + "      window.dispatchEvent(new Event('myevent'));\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -78,15 +79,16 @@ public class EventListenersContainerTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function MyEventListener(name) {\n"
             + "    this.name = name;\n"
             + "  }\n"
             + "\n"
             + "  MyEventListener.prototype = {\n"
             + "    handleEvent: function(evt) {\n"
-            + "      alert(this.name);\n"
-            + "      alert(evt.type);\n"
-            + "      alert(evt.target);\n"
+            + "      log(this.name);\n"
+            + "      log(evt.type);\n"
+            + "      log(evt.target);\n"
             + "    }\n"
             + "  }\n"
             + "\n"
@@ -96,14 +98,14 @@ public class EventListenersContainerTest extends WebDriverTestCase {
             + "      document.body.addEventListener('myevent', listener, false);\n"
             + "      document.body.dispatchEvent(new Event('myevent'));\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,6 +118,7 @@ public class EventListenersContainerTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function MyEventListener(name) {\n"
             + "    this.name = name;\n"
             + "  }\n"
@@ -126,13 +129,13 @@ public class EventListenersContainerTest extends WebDriverTestCase {
             + "      window.addEventListener('myevent', listener, false);\n"
             + "      window.dispatchEvent(new Event('myevent'));\n"
             + "    } catch (e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

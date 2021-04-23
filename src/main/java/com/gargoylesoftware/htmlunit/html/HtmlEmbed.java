@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -66,7 +65,7 @@ public class HtmlEmbed extends HtmlElement {
         final URL url = page.getFullyQualifiedUrl(getAttributeDirect(SRC_ATTRIBUTE));
         final WebRequest request = new WebRequest(url);
         request.setCharset(page.getCharset());
-        request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+        request.setRefererlHeader(page.getUrl());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
         try (OutputStream fos = Files.newOutputStream(file.toPath());

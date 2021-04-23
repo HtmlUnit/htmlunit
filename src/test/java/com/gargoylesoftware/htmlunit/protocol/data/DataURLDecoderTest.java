@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -79,7 +78,6 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABwSURBVDhP"
                 + "pZPbDsAgCENh///P27qsxhFEGCcxPiht8aLnjTQ43rmMqj5zWQCFGAw+WqBihrnrj8C8YLEG3JtqgcWegSuAgpWjZZvACllc"
                 + "AbpF0Un5Gi1LAbpG7iBMsCsGvx4SoPhIkHHzaB9i8zuLXD7IOwUJXM3pAAAAAElFTkSuQmCC")
-    @NotYetImplemented
     public void base64WithPlus() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

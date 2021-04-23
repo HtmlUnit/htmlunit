@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,14 +60,15 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void standardProperties_Text() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(document.form1.textfield1.value);\n"
-            + "  alert(document.form1.textfield1.type);\n"
-            + "  alert(document.form1.textfield1.name);\n"
-            + "  alert(document.form1.textfield1.form.name);\n"
+            + "  log(document.form1.textfield1.value);\n"
+            + "  log(document.form1.textfield1.type);\n"
+            + "  log(document.form1.textfield1.name);\n"
+            + "  log(document.form1.textfield1.form.name);\n"
             + "  document.form1.textfield1.value = 'cat';\n"
-            + "  alert(document.form1.textfield1.value);\n"
+            + "  log(document.form1.textfield1.value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -76,24 +77,24 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "",
-                        "", "", "50", "abc", "abc", "abc", "abc"},
-            FF = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
-                    "abc", "", "50", "abc", "abc", "abc", "abc"},
-            FF78 = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+    @Alerts(DEFAULT = {"error.fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                       "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "",
+                       "", "", "50", "abc", "abc", "abc", "abc"},
+            FF = {"error.fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                  "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
+                  "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF78 = {"error.fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                     "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
                     "abc", "", "50", "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
-                    "abc", "", "50", "abc", "abc", "abc", "abc"})
+                  "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
+                  "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
     public void setValueString() throws Exception {
         testValue("'abc'");
@@ -103,11 +104,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"", "", "", "", "", "", "", "", "",
-                        "", "", "", "", "", "", "#000000", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""},
+                       "", "", "", "", "", "", "#000000", "", "", "", "", "",
+                       "", "", "50", "", "", "", ""},
             IE = {"", "", "", "", "", "", "", "", "",
-                        "", "", "", "", "", "", "", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""})
+                  "", "", "", "", "", "", "", "", "", "", "", "",
+                  "", "", "50", "", "", "", ""})
     @Test
     public void setValueEmptyString() throws Exception {
         testValue("''");
@@ -116,18 +117,18 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "  ", "", "  ",
-                        "  ", "", "50", "  ", "", "  ", ""},
-            CHROME = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "", "", "",
-                        "", "", "50", "  ", "", "  ", ""},
-            EDGE = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "", "", "",
-                        "", "", "50", "  ", "", "  ", ""},
-            IE = {"  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ",
-                        "  ", "", "50", "  ", "  ", "  ", "  "})
+    @Alerts(DEFAULT = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+                       ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", ". ", "", ". ",
+                       ". ", "", "50", ". ", "", ". ", ""},
+            CHROME = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+                      ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", "", "", "",
+                      "", "", "50", ". ", "", ". ", ""},
+            EDGE = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+                    ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", "", "", "",
+                    "", "", "50", ". ", "", ". ", ""},
+            IE = {". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+                  ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ",
+                  ". ", "", "50", ". ", ". ", ". ", ". "})
     @Test
     public void setValueBlankString() throws Exception {
         testValue("'  '");
@@ -136,18 +137,18 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "",
-                        "", "12", "12", "12", "12", "12", "12"},
-            FF = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
-                        "12", "12", "12", "12", "12", "12", "12"},
-            FF78 = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
-                        "12", "12", "12", "12", "12", "12", "12"},
+    @Alerts(DEFAULT = {"error.fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                       "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "",
+                       "", "12", "12", "12", "12", "12", "12"},
+            FF = {"error.fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                  "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
+                  "12", "12", "12", "12", "12", "12", "12"},
+            FF78 = {"error.fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                    "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
+                    "12", "12", "12", "12", "12", "12", "12"},
             IE = {"12", "12", "12", "", "12", "", "", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "12"})
+                  "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
+                  "12", "12", "12", "12", "12", "12", "12"})
     @Test
     public void setValueNumber() throws Exception {
         testValue("12");
@@ -157,11 +158,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"", "null", "", "", "", "", "", "", "",
-                        "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""},
+                       "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
+                       "", "", "50", "", "", "", ""},
             IE = {"", "null", "", "", "", "", "", "", "",
-                        "", "null", "", "null", "", "null", "", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""})
+                  "", "null", "", "null", "", "null", "", "", "", "", "", "",
+                  "", "", "50", "", "", "", ""})
     @Test
     public void setValueNull() throws Exception {
         testValue("null");
@@ -169,13 +170,14 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
     private void testValue(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + "function log(msg) { window.document.title += msg.replace(' ', '.') + '§';}\n"
             + "function doTest() {\n"
 
             + "  document.form1.button1.value = " + value + ";\n"
             + "  document.form1.button2.value = " + value + ";\n"
             + "  document.form1.checkbox1.value = " + value + ";\n"
-            + "  try { document.form1.fileupload1.value = " + value + " } catch(e) { alert('error fileupload1') }\n"
+            + "  try { document.form1.fileupload1.value = " + value + " } catch(e) { log('error fileupload1') }\n"
             + "  document.form1.hidden1.value = " + value + ";\n"
             + "  document.form1.select1.value = " + value + ";\n"
             + "  document.form1.select2.value = " + value + ";\n"
@@ -201,34 +203,34 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  document.form1.tel1.value = " + value + ";\n"
             + "  document.form1.url1.value = " + value + ";\n"
 
-            + "  alert(document.form1.button1.value);\n"
-            + "  alert(document.form1.button2.value);\n"
-            + "  alert(document.form1.checkbox1.value);\n"
-            + "  alert(document.form1.fileupload1.value);\n"
-            + "  alert(document.form1.hidden1.value);\n"
-            + "  alert(document.form1.select1.value);\n"
-            + "  alert(document.form1.select2.value);\n"
-            + "  alert(document.form1.password1.value);\n"
-            + "  alert(document.form1.radio1.value);\n"
-            + "  alert(document.form1.reset1.value);\n"
-            + "  alert(document.form1.reset2.value);\n"
-            + "  alert(document.form1.submit1.value);\n"
-            + "  alert(document.form1.submit2.value);\n"
-            + "  alert(document.form1.textInput1.value);\n"
-            + "  alert(document.form1.textarea1.value);\n"
-            + "  alert(document.form1.color1.value);\n"
-            + "  alert(document.form1.date1.value);\n"
-            + "  alert(document.form1.datetime1.value);\n"
-            + "  alert(document.form1.datetimeLocal1.value);\n"
-            + "  alert(document.form1.time1.value);\n"
-            + "  alert(document.form1.week1.value);\n"
-            + "  alert(document.form1.month1.value);\n"
-            + "  alert(document.form1.number1.value);\n"
-            + "  alert(document.form1.range1.value);\n"
-            + "  alert(document.form1.search1.value);\n"
-            + "  alert(document.form1.email1.value);\n"
-            + "  alert(document.form1.tel1.value);\n"
-            + "  alert(document.form1.url1.value);\n"
+            + "  log(document.form1.button1.value);\n"
+            + "  log(document.form1.button2.value);\n"
+            + "  log(document.form1.checkbox1.value);\n"
+            + "  log(document.form1.fileupload1.value);\n"
+            + "  log(document.form1.hidden1.value);\n"
+            + "  log(document.form1.select1.value);\n"
+            + "  log(document.form1.select2.value);\n"
+            + "  log(document.form1.password1.value);\n"
+            + "  log(document.form1.radio1.value);\n"
+            + "  log(document.form1.reset1.value);\n"
+            + "  log(document.form1.reset2.value);\n"
+            + "  log(document.form1.submit1.value);\n"
+            + "  log(document.form1.submit2.value);\n"
+            + "  log(document.form1.textInput1.value);\n"
+            + "  log(document.form1.textarea1.value);\n"
+            + "  log(document.form1.color1.value);\n"
+            + "  log(document.form1.date1.value);\n"
+            + "  log(document.form1.datetime1.value);\n"
+            + "  log(document.form1.datetimeLocal1.value);\n"
+            + "  log(document.form1.time1.value);\n"
+            + "  log(document.form1.week1.value);\n"
+            + "  log(document.form1.month1.value);\n"
+            + "  log(document.form1.number1.value);\n"
+            + "  log(document.form1.range1.value);\n"
+            + "  log(document.form1.search1.value);\n"
+            + "  log(document.form1.email1.value);\n"
+            + "  log(document.form1.tel1.value);\n"
+            + "  log(document.form1.url1.value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -268,7 +270,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -276,25 +278,25 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
-                        "password", "radio", "reset", "reset",
-                        "submit", "submit", "text", "textarea", "color", "date", "text",
-                        "datetime-local", "time", "week", "month", "number",
-                        "range", "search", "email", "tel", "url"},
+                       "password", "radio", "reset", "reset",
+                       "submit", "submit", "text", "textarea", "color", "date", "text",
+                       "datetime-local", "time", "week", "month", "number",
+                       "range", "search", "email", "tel", "url"},
             FF = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
-                        "password", "radio", "reset", "reset",
-                        "submit", "submit", "text", "textarea", "color", "date", "text",
-                        "text", "time", "text", "text", "number", "range",
-                        "search", "email", "tel", "url"},
+                  "password", "radio", "reset", "reset",
+                  "submit", "submit", "text", "textarea", "color", "date", "text",
+                  "text", "time", "text", "text", "number", "range",
+                  "search", "email", "tel", "url"},
             FF78 = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
-                        "password", "radio", "reset", "reset",
-                        "submit", "submit", "text", "textarea", "color", "date", "text",
-                        "text", "time", "text", "text", "number", "range",
-                        "search", "email", "tel", "url"},
+                    "password", "radio", "reset", "reset",
+                    "submit", "submit", "text", "textarea", "color", "date", "text",
+                    "text", "time", "text", "text", "number", "range",
+                    "search", "email", "tel", "url"},
             IE = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
-                        "password", "radio", "reset", "reset",
-                        "submit", "submit", "text", "textarea", "text", "text", "text",
-                        "text", "text", "text", "text", "number", "range",
-                        "search", "email", "tel", "url"}
+                  "password", "radio", "reset", "reset",
+                  "submit", "submit", "text", "textarea", "text", "text", "text",
+                  "text", "text", "text", "text", "number", "range",
+                  "search", "email", "tel", "url"}
             )
     public void type() throws Exception {
         testAttribute("type", "", null);
@@ -304,12 +306,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"null", "undefined", "null", "[object FileList]", "null", "undefined", "undefined", "null",
-                "null", "null", "undefined", "null", "undefined", "null", "undefined", "null", "null", "null", "null",
-                "null", "null", "null", "null", "null", "null", "null", "null", "null"},
+                       "null", "null", "undefined", "null", "undefined", "null", "undefined", "null", "null", "null",
+                       "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"},
             IE = {"undefined", "undefined", "undefined", "[object FileList]", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined"})
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
+                  "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     @Test
     public void files() throws Exception {
         testAttribute("files", "", null);
@@ -319,9 +321,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts({"false", "undefined", "false", "false", "false", "undefined", "undefined",
-                "false", "false", "false", "undefined", "false", "undefined", "false",
-                "undefined", "false", "false", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false", "false", "false"})
+             "false", "false", "false", "undefined", "false", "undefined", "false",
+             "undefined", "false", "false", "false", "false", "false", "false",
+             "false", "false", "false", "false", "false", "false", "false"})
     @Test
     public void checked() throws Exception {
         testAttribute("checked", "", null);
@@ -331,13 +333,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"true", "undefined", "true", "true", "true", "undefined", "undefined",
-                "true", "true", "true", "undefined", "true", "undefined", "true",
-                "undefined", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true"},
+                       "true", "true", "true", "undefined", "true", "undefined", "true",
+                       "undefined", "true", "true", "true", "true", "true", "true",
+                       "true", "true", "true", "true", "true", "true", "true"},
             IE = {"false", "undefined", "true", "false", "false", "undefined", "undefined",
-                "false", "true", "false", "undefined", "false", "undefined", "false",
-                "undefined", "false", "false", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false", "false", "false"})
+                  "false", "true", "false", "undefined", "false", "undefined", "false",
+                  "undefined", "false", "false", "false", "false", "false", "false",
+                  "false", "false", "false", "false", "false", "false", "false"})
     @Test
     @NotYetImplemented(IE)
     public void checkedWithAttribute() throws Exception {
@@ -348,9 +350,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts({"true", "undefined", "true", "true", "true", "undefined", "undefined",
-                "true", "true", "true", "undefined", "true", "undefined", "true",
-                "undefined", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true"})
+             "true", "true", "true", "undefined", "true", "undefined", "true",
+             "undefined", "true", "true", "true", "true", "true", "true",
+             "true", "true", "true", "true", "true", "true", "true"})
     @Test
     public void setCheckedTrue() throws Exception {
         testAttribute("checked", "", "true");
@@ -360,9 +362,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts({"true", "undefined", "true", "true", "true", "undefined", "undefined",
-                "true", "true", "true", "undefined", "true", "undefined", "true",
-                "undefined", "true", "true", "true", "true", "true", "true",
-                "true", "true", "true", "true", "true", "true", "true"})
+             "true", "true", "true", "undefined", "true", "undefined", "true",
+             "undefined", "true", "true", "true", "true", "true", "true",
+             "true", "true", "true", "true", "true", "true", "true"})
     @Test
     public void setCheckedBlank() throws Exception {
         testAttribute("checked", "", "");
@@ -372,17 +374,17 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                    "", "", "", "", "", "50", "abc", "abc", "abc", "abc"},
+                       "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
+                       "", "", "", "", "", "50", "abc", "abc", "abc", "abc"},
             FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+                  "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
+                  "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             FF78 = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                     "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
                     "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
+                  "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
+                  "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
     public void setValueAttribute() throws Exception {
         testAttribute("value", "", "abc");
@@ -391,7 +393,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     private void testAttribute(final String property, final String attrib, final String value) throws Exception {
         String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n";
 
         if (value != null) {
@@ -427,34 +430,34 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         }
 
         html = html
-            + "  alert(document.form1.button1." + property + ");\n"
-            + "  alert(document.form1.button2." + property + ");\n"
-            + "  alert(document.form1.checkbox1." + property + ");\n"
-            + "  alert(document.form1.fileupload1." + property + ");\n"
-            + "  alert(document.form1.hidden1." + property + ");\n"
-            + "  alert(document.form1.select1." + property + ");\n"
-            + "  alert(document.form1.select2." + property + ");\n"
-            + "  alert(document.form1.password1." + property + ");\n"
-            + "  alert(document.form1.radio1." + property + ");\n"
-            + "  alert(document.form1.reset1." + property + ");\n"
-            + "  alert(document.form1.reset2." + property + ");\n"
-            + "  alert(document.form1.submit1." + property + ");\n"
-            + "  alert(document.form1.submit2." + property + ");\n"
-            + "  alert(document.form1.textInput1." + property + ");\n"
-            + "  alert(document.form1.textarea1." + property + ");\n"
-            + "  alert(document.form1.color1." + property + ");\n"
-            + "  alert(document.form1.date1." + property + ");\n"
-            + "  alert(document.form1.datetime1." + property + ");\n"
-            + "  alert(document.form1.datetimeLocal1." + property + ");\n"
-            + "  alert(document.form1.time1." + property + ");\n"
-            + "  alert(document.form1.week1." + property + ");\n"
-            + "  alert(document.form1.month1." + property + ");\n"
-            + "  alert(document.form1.number1." + property + ");\n"
-            + "  alert(document.form1.range1." + property + ");\n"
-            + "  alert(document.form1.search1." + property + ");\n"
-            + "  alert(document.form1.email1." + property + ");\n"
-            + "  alert(document.form1.tel1." + property + ");\n"
-            + "  alert(document.form1.url1." + property + ");\n"
+            + "  log(document.form1.button1." + property + ");\n"
+            + "  log(document.form1.button2." + property + ");\n"
+            + "  log(document.form1.checkbox1." + property + ");\n"
+            + "  log(document.form1.fileupload1." + property + ");\n"
+            + "  log(document.form1.hidden1." + property + ");\n"
+            + "  log(document.form1.select1." + property + ");\n"
+            + "  log(document.form1.select2." + property + ");\n"
+            + "  log(document.form1.password1." + property + ");\n"
+            + "  log(document.form1.radio1." + property + ");\n"
+            + "  log(document.form1.reset1." + property + ");\n"
+            + "  log(document.form1.reset2." + property + ");\n"
+            + "  log(document.form1.submit1." + property + ");\n"
+            + "  log(document.form1.submit2." + property + ");\n"
+            + "  log(document.form1.textInput1." + property + ");\n"
+            + "  log(document.form1.textarea1." + property + ");\n"
+            + "  log(document.form1.color1." + property + ");\n"
+            + "  log(document.form1.date1." + property + ");\n"
+            + "  log(document.form1.datetime1." + property + ");\n"
+            + "  log(document.form1.datetimeLocal1." + property + ");\n"
+            + "  log(document.form1.time1." + property + ");\n"
+            + "  log(document.form1.week1." + property + ");\n"
+            + "  log(document.form1.month1." + property + ");\n"
+            + "  log(document.form1.number1." + property + ");\n"
+            + "  log(document.form1.range1." + property + ");\n"
+            + "  log(document.form1.search1." + property + ");\n"
+            + "  log(document.form1.email1." + property + ");\n"
+            + "  log(document.form1.tel1." + property + ");\n"
+            + "  log(document.form1.url1." + property + ");\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -494,7 +497,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -505,11 +508,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void checkedAttribute_Checkbox() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.form1.checkbox1.checked);\n"
+            + "  log(document.form1.checkbox1.checked);\n"
             + "  document.form1.checkbox1.checked = true;\n"
-            + "  alert(document.form1.checkbox1.checked);\n"
+            + "  log(document.form1.checkbox1.checked);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -524,7 +528,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertFalse(checkBox.isSelected());
 
         driver.findElement(By.id("clickme")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
         assertTrue(checkBox.isSelected());
     }
 
@@ -536,15 +540,16 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void checkedAttribute_Radio() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.form1.radio1[0].checked);\n"
-            + "  alert(document.form1.radio1[1].checked);\n"
-            + "  alert(document.form1.radio1[2].checked);\n"
+            + "  log(document.form1.radio1[0].checked);\n"
+            + "  log(document.form1.radio1[1].checked);\n"
+            + "  log(document.form1.radio1[2].checked);\n"
             + "  document.form1.radio1[1].checked = true;\n"
-            + "  alert(document.form1.radio1[0].checked);\n"
-            + "  alert(document.form1.radio1[1].checked);\n"
-            + "  alert(document.form1.radio1[2].checked);\n"
+            + "  log(document.form1.radio1[0].checked);\n"
+            + "  log(document.form1.radio1[1].checked);\n"
+            + "  log(document.form1.radio1[2].checked);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -565,7 +570,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertFalse(radioC.isSelected());
 
         driver.findElement(By.id("clickme")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
         assertFalse(radioA.isSelected());
         assertTrue(radioB.isSelected());
         assertFalse(radioC.isSelected());
@@ -579,17 +584,18 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void disabledAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.form1.button1.disabled);\n"
-            + "  alert(document.form1.button2.disabled);\n"
-            + "  alert(document.form1.button3.disabled);\n"
+            + "  log(document.form1.button1.disabled);\n"
+            + "  log(document.form1.button2.disabled);\n"
+            + "  log(document.form1.button3.disabled);\n"
             + "  document.form1.button1.disabled = true;\n"
             + "  document.form1.button2.disabled = false;\n"
             + "  document.form1.button3.disabled = true;\n"
-            + "  alert(document.form1.button1.disabled);\n"
-            + "  alert(document.form1.button2.disabled);\n"
-            + "  alert(document.form1.button3.disabled);\n"
+            + "  log(document.form1.button1.disabled);\n"
+            + "  log(document.form1.button2.disabled);\n"
+            + "  log(document.form1.button3.disabled);\n"
             + "}\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -611,7 +617,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertTrue(button3.isEnabled());
 
         driver.findElement(By.id("clickme")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
         assertFalse(button1.isEnabled());
         assertTrue(button2.isEnabled());
         assertFalse(button3.isEnabled());
@@ -706,14 +712,15 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title><script>\n"
+            + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var f = document.form1;\n"
-            + "  alert(f == f.mySubmit.form);\n"
-            + "  alert(f == f.myText.form);\n"
-            + "  alert(f == f.myPassword.form);\n"
-            + "  alert(f == document.getElementById('myImage').form);\n"
-            + "  alert(f == f.myButton.form);\n"
+            + "  log(f == f.mySubmit.form);\n"
+            + "  log(f == f.myText.form);\n"
+            + "  log(f == f.myPassword.form);\n"
+            + "  log(f == document.getElementById('myImage').form);\n"
+            + "  log(f == f.myButton.form);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -728,7 +735,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -793,7 +800,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void onChangeSetByJavaScript() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title></title>\n"
+            + "<html><head>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -826,10 +833,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void defautValue() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(document.myForm.myRadio.value);\n"
-            + "  alert(document.myForm.myCheckbox.value);\n"
+            + "  log(document.myForm.myRadio.value);\n"
+            + "  log(document.myForm.myCheckbox.value);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
@@ -837,7 +845,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<input type='checkbox' name='myCheckbox'/>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -847,25 +855,27 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, "
-                + "radio, hidden, password, image, reset, button, file, number, range, search, tel, url, text, text",
-                "text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, radio, "
-                + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text" },
+                        + "radio, hidden, password, image, reset, button, file, number,"
+                        + " range, search, tel, url, text, text",
+                       "text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, radio, "
+                        + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text" },
             FF = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
-                + "password, image, reset, button, file, number, range, search, tel, url, text, text",
+                    + "password, image, reset, button, file, number, range, search, tel, url, text, text",
                 "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
-                + "image, reset, button, file, number, range, search, tel, url, text, text"},
+                    + "image, reset, button, file, number, range, search, tel, url, text, text"},
             FF78 = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
-                + "password, image, reset, button, file, number, range, search, tel, url, text, text",
+                    + "password, image, reset, button, file, number, range, search, tel, url, text, text",
                 "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
-                + "image, reset, button, file, number, range, search, tel, url, text, text"},
+                    + "image, reset, button, file, number, range, search, tel, url, text, text"},
             IE = {"text, checkbox, error, error, error, error, error, error, email, text, submit, radio, hidden, "
-                + "password, image, reset, button, file, number, range, search, tel, url, error, text",
+                    + "password, image, reset, button, file, number, range, search, tel, url, error, text",
                 "text, checkbox, text, text, text, text, text, text, email, text, submit, radio, hidden, password, "
-                + "image, reset, button, file, number, range, search, tel, url, text, text" })
+                    + "image, reset, button, file, number, range, search, tel, url, text, text" })
     public void changeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.myForm.myInput;\n"
             + "  var types = ['checkbox', 'date', 'datetime-local', 'month', 'time', 'week', 'color'"
@@ -878,7 +888,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "      result = result + ', ' + input.type;\n"
             + "    } catch(e) { result = result + ', error';}\n"
             + "  }\n"
-            + "  alert(result);\n"
+            + "  log(result);\n"
             + "  result = input.type;\n"
             + "  for(i = 0; i < types.length; i++) {\n"
             + "    try {\n"
@@ -886,7 +896,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "      result = result + ', ' + input.type;\n"
             + "    } catch(e) { result = result + ', error';}\n"
             + "  }\n"
-            + "  alert(result);\n"
+            + "  log(result);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -895,7 +905,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -903,14 +913,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({
-            "button: false, false, function, function, , ",
-            "submit: false, false, function, function, submit it!, submit it!",
-            "file: false, false, function, function, , ",
-            "checkbox: true, true, function, function, , on",
-            "radio: true, true, function, function, , on",
-            "text: false, false, function, function, , ",
-            "password: false, false, function, function, , "})
+    @Alerts({"button: false, false, function, function, , ",
+             "submit: false, false, function, function, submit it!, submit it!",
+             "file: false, false, function, function, , ",
+             "checkbox: true, true, function, function, , on",
+             "radio: true, true, function, function, , on",
+             "text: false, false, function, function, , ",
+             "password: false, false, function, function, , "})
     public void defaultValues() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -925,8 +934,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<input type='password' name='myPwd'/>\n"
             + "</form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function details(_oInput) {\n"
-            + "  alert(_oInput.type + ': '\n"
+            + "  log(_oInput.type + ': '\n"
             + "  + _oInput.checked + ', '\n"
             + "  + _oInput.defaultChecked + ', '\n"
             + "  + ((String(_oInput.click).indexOf('function') != -1) ? 'function' : 'unknown') + ', '\n"
@@ -946,7 +956,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -957,20 +967,21 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void createInputAndChangeType() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.createElement('INPUT');\n"
-            + "  alert(input.type);\n"
-            + "  alert(input.getAttribute('type'));\n"
+            + "  log(input.type);\n"
+            + "  log(input.getAttribute('type'));\n"
             + "  input.type = 'hidden';\n"
-            + "  alert(input.type);\n"
-            + "  alert(input.getAttribute('type'));\n"
+            + "  log(input.type);\n"
+            + "  log(input.getAttribute('type'));\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -981,20 +992,21 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void createInputAndChangeTypeToText() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.createElement('INPUT');\n"
-            + "  alert(input.type);\n"
-            + "  alert(input.getAttribute('type'));\n"
+            + "  log(input.type);\n"
+            + "  log(input.getAttribute('type'));\n"
             + "  input.type = 'text';\n"
-            + "  alert(input.type);\n"
-            + "  alert(input.getAttribute('type'));\n"
+            + "  log(input.type);\n"
+            + "  log(input.getAttribute('type'));\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1005,7 +1017,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void buttonOutsideForm() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title></head><body>\n"
+            + "<html><head></head><body>\n"
             + "<button id='clickme' onclick='alert(123)'>click me</button>\n"
             + "</body></html>";
 
@@ -1055,28 +1067,29 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"})
     public void maxLength() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
-            + "  alert(input.maxlength);\n"
-            + "  alert(input.maxLength);\n"
-            + "  alert(input.MaxLength);\n"
-            + "  alert(input.getAttribute('maxlength'));\n"
-            + "  alert(input.getAttribute('maxLength'));\n"
-            + "  alert(input.getAttribute('MaxLength'));\n"
+            + "  log(input.maxlength);\n"
+            + "  log(input.maxLength);\n"
+            + "  log(input.MaxLength);\n"
+            + "  log(input.getAttribute('maxlength'));\n"
+            + "  log(input.getAttribute('maxLength'));\n"
+            + "  log(input.getAttribute('MaxLength'));\n"
             + "  input.setAttribute('MaXlenGth', 40);\n"
-            + "  alert(input.maxLength);\n"
+            + "  log(input.maxLength);\n"
             + "  input.maxLength = 50;\n"
-            + "  alert(input.getAttribute('maxlength'));\n"
-            + "  alert(typeof input.getAttribute('maxLength'));\n"
-            + "  alert(typeof input.maxLength);\n"
+            + "  log(input.getAttribute('maxlength'));\n"
+            + "  log(typeof input.getAttribute('maxLength'));\n"
+            + "  log(typeof input.maxLength);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='text' id='text1' maxlength='30'/>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1085,31 +1098,32 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"},
             IE = {"undefined", "undefined", "undefined", "30", "30", "30",
-                        "undefined", "40", "string", "number"})
+                  "undefined", "40", "string", "number"})
     public void minLength() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
-            + "  alert(input.minlength);\n"
-            + "  alert(input.minLength);\n"
-            + "  alert(input.MinLength);\n"
-            + "  alert(input.getAttribute('minlength'));\n"
-            + "  alert(input.getAttribute('minLength'));\n"
-            + "  alert(input.getAttribute('MinLength'));\n"
+            + "  log(input.minlength);\n"
+            + "  log(input.minLength);\n"
+            + "  log(input.MinLength);\n"
+            + "  log(input.getAttribute('minlength'));\n"
+            + "  log(input.getAttribute('minLength'));\n"
+            + "  log(input.getAttribute('MinLength'));\n"
             + "  input.setAttribute('MiNlenGth', 40);\n"
-            + "  alert(input.minLength);\n"
+            + "  log(input.minLength);\n"
             + "  input.minLength = 50;\n"
-            + "  alert(input.getAttribute('minlength'));\n"
-            + "  alert(typeof input.getAttribute('minLength'));\n"
-            + "  alert(typeof input.minLength);\n"
+            + "  log(input.getAttribute('minlength'));\n"
+            + "  log(typeof input.getAttribute('minLength'));\n"
+            + "  log(typeof input.minLength);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='text' id='text1' minlength='30'/>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1202,31 +1216,32 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"text TeXt", "password PassWord", "hidden Hidden",
-                    "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX"},
+                       "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX"},
             IE = {"text TeXt", "password PassWord", "hidden Hidden",
-                    "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox"})
+                  "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox"})
     public void typeCase() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var t = document.getElementById('aText');\n"
-            + "  alert(t.type + ' ' + t.getAttribute('type'));\n"
+            + "  log(t.type + ' ' + t.getAttribute('type'));\n"
             + "  var p = document.getElementById('aPassword');\n"
-            + "  alert(p.type + ' ' + p.getAttribute('type'));\n"
+            + "  log(p.type + ' ' + p.getAttribute('type'));\n"
             + "  var h = document.getElementById('aHidden');\n"
-            + "  alert(h.type + ' ' + h.getAttribute('type'));\n"
+            + "  log(h.type + ' ' + h.getAttribute('type'));\n"
             + "  var cb = document.getElementById('aCb');\n"
-            + "  alert(cb.type + ' ' + cb.getAttribute('type'));\n"
+            + "  log(cb.type + ' ' + cb.getAttribute('type'));\n"
             + "  var r = document.getElementById('aRadio');\n"
-            + "  alert(r.type + ' ' + r.getAttribute('type'));\n"
+            + "  log(r.type + ' ' + r.getAttribute('type'));\n"
             + "  var f = document.getElementById('aFile');\n"
-            + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
+            + "  log(f.type + ' ' + f.getAttribute('type'));\n"
 
             + "  try {\n"
             + "    f.type = 'CHECKBOX';\n"
-            + "    alert(f.type + ' ' + f.getAttribute('type'));\n"
-            + "  } catch(e) { alert('error');}\n"
+            + "    log(f.type + ' ' + f.getAttribute('type'));\n"
+            + "  } catch(e) { log('error');}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1240,30 +1255,31 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text text", "text  password", "text hidden ", "text checkbox ", "text \tradio"})
+    @Alerts({"text-text", "text- password", "text-hidden ", "text-checkbox ", "text-\\tradio"})
     public void typeTrim() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + "function log(msg) { window.document.title += msg.replace('\t', '\\\\t') + '§';}\n"
             + "function test() {\n"
             + "  var t = document.getElementById('aText');\n"
-            + "  alert(t.type + ' ' + t.getAttribute('type'));\n"
+            + "  log(t.type + '-' + t.getAttribute('type'));\n"
             + "  var p = document.getElementById('aPassword');\n"
-            + "  alert(p.type + ' ' + p.getAttribute('type'));\n"
+            + "  log(p.type + '-' + p.getAttribute('type'));\n"
             + "  var h = document.getElementById('aHidden');\n"
-            + "  alert(h.type + ' ' + h.getAttribute('type'));\n"
+            + "  log(h.type + '-' + h.getAttribute('type'));\n"
             + "  var cb = document.getElementById('aCb');\n"
-            + "  alert(cb.type + ' ' + cb.getAttribute('type'));\n"
+            + "  log(cb.type + '-' + cb.getAttribute('type'));\n"
             + "  var r = document.getElementById('aRadio');\n"
-            + "  alert(r.type + ' ' + r.getAttribute('type'));\n"
+            + "  log(r.type + '-' + r.getAttribute('type'));\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -1277,7 +1293,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1289,11 +1305,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.readOnly);\n"
+            + "    log(input.readOnly);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1301,7 +1318,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <input id='myInput' value='some test' readonly='false'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1313,13 +1330,14 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.readOnly);\n"
+            + "    log(input.readOnly);\n"
             + "    input = document.getElementById('myReadonlyInput');\n"
-            + "    alert(input.readOnly);\n"
+            + "    log(input.readOnly);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1328,7 +1346,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <input id='myReadonlyInput' type='file' value='some test' readonly='false'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1352,12 +1370,13 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 7; i++) {\n"
-            + "    alert(document.getElementById('i' + i).align);\n"
+            + "    log(document.getElementById('i' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1375,11 +1394,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('i1');\n"
@@ -1395,7 +1415,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'top');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1410,30 +1430,31 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <input id='a1'>\n"
             + "  <input id='a2' accesskey='A'>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var a1 = document.getElementById('a1');\n"
             + "    var a2 = document.getElementById('a2');\n"
-            + "    alert(a1.accessKey);\n"
-            + "    alert(a2.accessKey);\n"
+            + "    log(a1.accessKey);\n"
+            + "    log(a2.accessKey);\n"
 
             + "    a1.accessKey = 'a';\n"
-            + "    alert(a1.accessKey);\n"
+            + "    log(a1.accessKey);\n"
 
             + "    a1.accessKey = 'A';\n"
-            + "    alert(a1.accessKey);\n"
+            + "    log(a1.accessKey);\n"
 
             + "    a1.accessKey = 'a8';\n"
-            + "    alert(a1.accessKey);\n"
+            + "    log(a1.accessKey);\n"
 
             + "    a1.accessKey = '8Afoo';\n"
-            + "    alert(a1.accessKey);\n"
+            + "    log(a1.accessKey);\n"
 
             + "    a1.accessKey = '8';\n"
-            + "    alert(a1.accessKey);\n"
+            + "    log(a1.accessKey);\n"
 
             + "    a1.accessKey = '@';\n"
-            + "    alert(a1.accessKey);\n"
+            + "    log(a1.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1444,24 +1465,25 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void getAttributeAndSetValue() throws Exception {
         final String html
             = "<html>\n"
-            + "  <head><title>foo</title>\n"
+            + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
             + "        t.value = 'test';\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
 
             + "        t.value = 42;\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
 
             + "        t.value = document.getElementById('t');\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1470,7 +1492,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1482,19 +1504,20 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "  <head><title>foo</title>\n"
+            + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
             + "        t.value = 'null';\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
 
             + "        t.value = null;\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1503,7 +1526,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1514,22 +1537,23 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void selectionRange() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
-            + "  alert(input.selectionStart);\n"
-            + "  alert(input.selectionEnd);\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
 
             + "  input.setSelectionRange(2, 7);\n"
-            + "  alert(input.selectionStart);\n"
-            + "  alert(input.selectionEnd);\n"
+            + "  log(input.selectionStart);\n"
+            + "  log(input.selectionEnd);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='myInput' value='some test'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1689,26 +1713,27 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void min() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
-            + "  alert(input.min);\n"
-            + "  alert(input.Min);\n"
-            + "  alert(input.getAttribute('min'));\n"
-            + "  alert(input.getAttribute('Min'));\n"
+            + "  log(input.min);\n"
+            + "  log(input.Min);\n"
+            + "  log(input.getAttribute('min'));\n"
+            + "  log(input.getAttribute('Min'));\n"
             + "  input.setAttribute('MiN', 40);\n"
-            + "  alert(input.min);\n"
+            + "  log(input.min);\n"
             + "  input.min = 50;\n"
-            + "  alert(input.getAttribute('min'));\n"
-            + "  alert(typeof input.getAttribute('min'));\n"
-            + "  alert(typeof input.min);\n"
+            + "  log(input.getAttribute('min'));\n"
+            + "  log(typeof input.getAttribute('min'));\n"
+            + "  log(typeof input.min);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='text' id='text1' min='30'/>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1718,26 +1743,27 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void max() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
-            + "  alert(input.max);\n"
-            + "  alert(input.Max);\n"
-            + "  alert(input.getAttribute('max'));\n"
-            + "  alert(input.getAttribute('Max'));\n"
+            + "  log(input.max);\n"
+            + "  log(input.Max);\n"
+            + "  log(input.getAttribute('max'));\n"
+            + "  log(input.getAttribute('Max'));\n"
             + "  input.setAttribute('MaX', 40);\n"
-            + "  alert(input.max);\n"
+            + "  log(input.max);\n"
             + "  input.max = 50;\n"
-            + "  alert(input.getAttribute('max'));\n"
-            + "  alert(typeof input.getAttribute('max'));\n"
-            + "  alert(typeof input.max);\n"
+            + "  log(input.getAttribute('max'));\n"
+            + "  log(typeof input.getAttribute('max'));\n"
+            + "  log(typeof input.max);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<form name='myForm' action='foo'>\n"
             + "<input type='text' id='text1' max='30'/>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1750,6 +1776,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      debug(document.getElementById('e1'));\n"
             + "      debug(document.getElementById('e2'));\n"
@@ -1758,10 +1785,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "      var labels = document.getElementById('e4').labels;\n"
             + "      document.body.removeChild(document.getElementById('l4'));\n"
             + "      debug(document.getElementById('e4'));\n"
-            + "      alert(labels ? labels.length : labels);\n"
+            + "      log(labels ? labels.length : labels);\n"
             + "    }\n"
             + "    function debug(e) {\n"
-            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "      log(e.labels ? e.labels.length : e.labels);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1774,7 +1801,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <label> this<input id='e4'></label><br>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1787,21 +1814,22 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = {"143", "19", "145", "20", "13", "13", "13", "13"})
     @NotYetImplemented(IE)
     public void defaultClientWidthHeight() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var elem = document.getElementById('txt');\n"
-                + "    alert(elem.clientWidth);\n"
-                + "    alert(elem.clientHeight);\n"
+                + "    log(elem.clientWidth);\n"
+                + "    log(elem.clientHeight);\n"
                 + "    elem = document.getElementById('pw');\n"
-                + "    alert(elem.clientWidth);\n"
-                + "    alert(elem.clientHeight);\n"
+                + "    log(elem.clientWidth);\n"
+                + "    log(elem.clientHeight);\n"
                 + "    elem = document.getElementById('chkbx');\n"
-                + "    alert(elem.clientWidth);\n"
-                + "    alert(elem.clientHeight);\n"
+                + "    log(elem.clientWidth);\n"
+                + "    log(elem.clientHeight);\n"
                 + "    elem = document.getElementById('radio');\n"
-                + "    alert(elem.clientWidth);\n"
-                + "    alert(elem.clientHeight);\n"
+                + "    log(elem.clientWidth);\n"
+                + "    log(elem.clientHeight);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -1812,7 +1840,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + "  <input type='radio' id='radio'/>\n"
                 + "</form>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1828,11 +1856,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "    <input type='text' id='a'>\n"
             + "  </form>"
             + "  <script>\n"
-            + "    alert(document.getElementById('a').form);\n"
+            + LOG_TITLE_FUNCTION
+            + "    log(document.getElementById('a').form);\n"
             + "  </script>"
             + "</body>"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2046,19 +2075,20 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void getAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
-            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  input.setAttribute('value', 'text1');\n"
-            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='myInput' value='Test'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2069,19 +2099,20 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void getAttributeCase() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
-            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  input.setAttribute('vALue', 'text1');\n"
-            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='myInput' value='Test'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2092,19 +2123,20 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void setAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
-            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  input.setAttribute('autocomplete', 'text1');\n"
-            + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='myInput' value='Test'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2116,17 +2148,18 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
             + "  input.setAttribute('value', 'text1');\n"
-            + "  alert('finish');\n"
+            + "  log('finish');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
+            + "  <input id='myInput' value='Test' onchange=\"log('changed')\">\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2154,14 +2187,16 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void clear() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head></head>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
             + "<body>\n"
-            + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
+            + "  <input id='myInput' value='Test' onchange=\"log('changed')\">\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         final WebElement element = driver.findElement(By.id("myInput"));
         element.clear();
-        verifyAlerts(driver, "changed");
+        verifyTitle2(driver, "changed");
     }
 }

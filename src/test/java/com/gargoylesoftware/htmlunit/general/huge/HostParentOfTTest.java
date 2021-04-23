@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -24,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -440,7 +438,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "true")
     public void _URL_URL() throws Exception {
         test("URL", "URL");
     }

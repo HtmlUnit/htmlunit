@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -294,18 +294,6 @@ public class HostParentOfNTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLCanvasElement() throws Exception {
         test("Node", "HTMLCanvasElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Node_HTMLContentElement() throws Exception {
-        test("Node", "HTMLContentElement");
     }
 
     /**
@@ -651,7 +639,6 @@ public class HostParentOfNTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF78 = "true")
     public void _Node_HTMLMenuItemElement() throws Exception {
         test("Node", "HTMLMenuItemElement");
@@ -840,18 +827,6 @@ public class HostParentOfNTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLSelectElement() throws Exception {
         test("Node", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Node_HTMLShadowElement() throws Exception {
-        test("Node", "HTMLShadowElement");
     }
 
     /**
@@ -1855,7 +1830,11 @@ public class HostParentOfNTest extends HostParentOf {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF78 = "true",
+            IE = "true")
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }

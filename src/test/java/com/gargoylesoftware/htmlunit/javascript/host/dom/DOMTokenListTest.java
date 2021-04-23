@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -39,22 +42,23 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"3", "b", "b", "true", "false", "c d"})
     public void various() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.item(1));\n"
-            + "  alert(list[1]);\n"
-            + "  alert(list.contains('c'));\n"
+            + "  log(list.length);\n"
+            + "  log(list.item(1));\n"
+            + "  log(list[1]);\n"
+            + "  log(list.contains('c'));\n"
             + "  list.add('d');\n"
             + "  list.remove('a');\n"
-            + "  alert(list.toggle('b'));\n"
-            + "  alert(list);\n"
+            + "  log(list.toggle('b'));\n"
+            + "  log(list);\n"
             + "}\n"
             + "</script></head><body onload='test()' class='a b c'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,19 +68,20 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"0", "null", "false", "# removed", ""})
     public void noAttribute() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.item(0));\n"
-            + "  alert(list.contains('#'));\n"
-            + "  list.remove('#'); alert('# removed');\n"
-            + "  alert(document.body.className);\n"
+            + "  log(list.length);\n"
+            + "  log(list.item(0));\n"
+            + "  log(list.contains('#'));\n"
+            + "  list.remove('#'); log('# removed');\n"
+            + "  log(document.body.className);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -86,18 +91,19 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"0", "undefined", "1", "#"})
     public void noAttributeAdd() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.add('#'));\n"
-            + "  alert(list.length);\n"
-            + "  alert(document.body.className);\n"
+            + "  log(list.length);\n"
+            + "  log(list.add('#'));\n"
+            + "  log(list.length);\n"
+            + "  log(document.body.className);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -107,18 +113,19 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"0", "true", "1", "#"})
     public void noAttributeToggle() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.toggle('#'));\n"
-            + "  alert(list.length);\n"
-            + "  alert(document.body.className);\n"
+            + "  log(list.length);\n"
+            + "  log(list.toggle('#'));\n"
+            + "  log(list.length);\n"
+            + "  log(document.body.className);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -129,16 +136,17 @@ public class DOMTokenListTest extends WebDriverTestCase {
             IE = {"3", "0", "3", "7"})
     public void length() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  list = document.getElementById('d2').classList;\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  list = document.getElementById('d3').classList;\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "  list = document.getElementById('d4').classList;\n"
-            + "  alert(list.length);\n"
+            + "  log(list.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class=' a b c '></div>\n"
@@ -147,7 +155,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  <div id='d4' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -158,21 +166,22 @@ public class DOMTokenListTest extends WebDriverTestCase {
             IE = {"a", "b", "c", "d", "e", "f", "g", "null", "null", "null"})
     public void item() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
             + "  for (var i = 0; i < list.length; i++) {\n"
-            + "    alert(list.item(i));\n"
+            + "    log(list.item(i));\n"
             + "  }\n"
-            + "  alert(list.item(-1));\n"
-            + "  alert(list.item(list.length));\n"
-            + "  alert(list.item(100));\n"
+            + "  log(list.item(-1));\n"
+            + "  log(list.item(list.length));\n"
+            + "  log(list.item(100));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -225,25 +234,26 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
     private void item(final String in, final int pos) throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
             + "    var list = elem.classList;\n"
-            + "    if (!list) { alert('no list'); return; }\n"
+            + "    if (!list) { log('no list'); return; }\n"
 
-            + "    alert(elem.className);\n"
-            + "    alert(list.length);\n"
+            + "    log(elem.className);\n"
+            + "    log(list.length);\n"
             + "    try {\n"
-            + "      alert(list.item(" + pos + "));\n"
-            + "      alert(list[" + pos + "]);\n"
-            + "    } catch(e) { alert('exception');}\n"
+            + "      log(list.item(" + pos + "));\n"
+            + "      log(list[" + pos + "]);\n"
+            + "    } catch(e) { log('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='" + in + "'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -398,24 +408,32 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
     private void contains(final String in, final String toAdd) throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
             + "    var list = elem.classList;\n"
-            + "    if (!list) { alert('no list'); return; }\n"
+            + "    if (!list) { log('no list'); return; }\n"
 
-            + "    alert(elem.className);\n"
-            + "    alert(list.length);\n"
+            + "    log(elem.className);\n"
+            + "    log(list.length);\n"
             + "    try {\n"
-            + "      alert(list.contains('" + toAdd + "'));\n"
-            + "    } catch(e) { alert('exception');}\n"
+            + "      log(list.contains('" + toAdd + "'));\n"
+            + "    } catch(e) { log('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='" + in + "'></div>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -559,26 +577,34 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
     private void add(final String in, final String toAdd) throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
             + "    var list = elem.classList;\n"
-            + "    if (!list) { alert('no list'); return; }\n"
+            + "    if (!list) { log('no list'); return; }\n"
 
-            + "    alert(elem.className);\n"
-            + "    alert(list.length);\n"
+            + "    log(elem.className);\n"
+            + "    log(list.length);\n"
             + "    try {\n"
             + "      list.add('" + toAdd + "');\n"
-            + "    } catch(e) { alert('exception');}\n"
-            + "    alert(list.length);\n"
-            + "    alert(elem.className);\n"
+            + "    } catch(e) { log('exception');}\n"
+            + "    log(list.length);\n"
+            + "    log(elem.className);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='" + in + "'></div>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -589,18 +615,19 @@ public class DOMTokenListTest extends WebDriverTestCase {
             IE = "no list")
     public void addSvg() throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('myId');\n"
             + "    var list = elem.classList;\n"
-            + "    if (!list) { alert('no list'); return; }\n"
+            + "    if (!list) { log('no list'); return; }\n"
 
-            + "    alert(list.length);\n"
+            + "    log(list.length);\n"
             + "    try {\n"
             + "      list.add('new');\n"
-            + "    } catch(e) { alert('exception');}\n"
-            + "    alert(list.length);\n"
+            + "    } catch(e) { log('exception');}\n"
+            + "    log(list.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
@@ -608,7 +635,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -618,18 +645,19 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"block", "none"})
     public void addStyleCheck() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<style>\n"
             + "  #d1.hidden { display: none; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div1 = document.getElementById('d1');\n"
             + "  var list = div1.classList;\n"
 
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
             + "  list.add('hidden');\n"
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
             + "}\n"
             + "</script>"
             + "</head>\n"
@@ -637,7 +665,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  <div id='d1' class='nice'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -773,26 +801,34 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
     private void remove(final String in, final String toRemove) throws Exception {
         final String html
-            = "<html><head><title>Test</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
             + "    var list = elem.classList;\n"
-            + "    if (!list) { alert('no list'); return; }\n"
+            + "    if (!list) { log('no list'); return; }\n"
 
-            + "    alert(elem.className);\n"
-            + "    alert(list.length);\n"
+            + "    log(elem.className);\n"
+            + "    log(list.length);\n"
             + "    try {\n"
             + "      list.remove('" + toRemove + "');\n"
-            + "    } catch(e) { alert('exception');}\n"
-            + "    alert(list.length);\n"
-            + "    alert(elem.className);\n"
+            + "    } catch(e) { log('exception');}\n"
+            + "    log(list.length);\n"
+            + "    log(elem.className);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='" + in + "'></div>\n"
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -802,18 +838,19 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({ "none", "block"})
     public void removeStyleCheck() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<style>\n"
             + "  #d1.hidden { display: none; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div1 = document.getElementById('d1');\n"
             + "  var list = div1.classList;\n"
 
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
             + "  list.remove('hidden');\n"
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
             + "}\n"
             + "</script>"
             + "</head>\n"
@@ -821,7 +858,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  <div id='d1' class='hidden'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -831,29 +868,30 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true"})
     public void toggle() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
             + "  try {\n"
             + "    list.toggle('ab e');\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "  } catch(e) { log('exception');}\n"
             + "  try {\n"
             + "    list.toggle('');\n"
-            + "  } catch(e) { alert('exception');}\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.contains('e'));\n"
-            + "  alert(list.toggle('e'));\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.contains('e'));\n"
-            + "  alert(list.toggle('e'));\n"
-            + "  alert(list.length);\n"
-            + "  alert(list.contains('e'));\n"
+            + "  } catch(e) { log('exception');}\n"
+            + "  log(list.length);\n"
+            + "  log(list.contains('e'));\n"
+            + "  log(list.toggle('e'));\n"
+            + "  log(list.length);\n"
+            + "  log(list.contains('e'));\n"
+            + "  log(list.toggle('e'));\n"
+            + "  log(list.length);\n"
+            + "  log(list.contains('e'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='a e'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -864,20 +902,21 @@ public class DOMTokenListTest extends WebDriverTestCase {
             IE = {"2", "true", "true", "true", "true"})
     public void in() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
-            + "  alert(list.length);\n"
-            + "  alert(-1 in list);\n"
-            + "  alert(0 in list);\n"
-            + "  alert(2 in list);\n"
-            + "  alert(42 in list);\n"
+            + "  log(list.length);\n"
+            + "  log(-1 in list);\n"
+            + "  log(0 in list);\n"
+            + "  log(2 in list);\n"
+            + "  log(42 in list);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='d1' class='a e'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -887,21 +926,22 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts({"none", "block", "none"})
     public void toggleStyleCheck() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<style>\n"
             + "  #d1.hidden { display: none; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div1 = document.getElementById('d1');\n"
             + "  var list = div1.classList;\n"
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
 
             + "  list.toggle('hidden');\n"
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
 
             + "  list.toggle('hidden');\n"
-            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  log(getComputedStyle(div1, null).display);\n"
             + "}\n"
             + "</script>"
             + "</head>\n"
@@ -909,6 +949,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "  <div id='d1' class='hidden'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

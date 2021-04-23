@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -153,10 +153,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Dennis Duysak
  */
 @JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable {
-    private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
+    private static final Pattern TO_FLOAT_PATTERN = Pattern.compile("(\\d+(?:\\.\\d+)?).*");
     private static final Pattern URL_PATTERN =
         Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
     private static final Pattern POSITION_PATTERN =
@@ -2886,11 +2887,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static int pixelValue(final Element element, final CssValue value, final boolean percentMode) {
         final String s = value.get(element);
         if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
-            final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
+            final float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(s).replaceAll("$1"), 100);
+
             final Element parent = element.getParentElement();
             final int absoluteValue = (parent == null)
                             ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
-            return (int) ((i / 100D) * absoluteValue);
+            return  Math.round((i / 100f) * absoluteValue);
         }
         if (AUTO.equals(s)) {
             return value.getDefaultValue();
@@ -2925,12 +2927,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @see #pixelValue(Element, CssValue)
      */
     protected static int pixelValue(final String value) {
-        int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.length() < 2) {
-            return i;
+            return Math.round(i);
         }
         if (value.endsWith("px")) {
-            return i;
+            return Math.round(i);
         }
 
         if (value.endsWith("em")) {
@@ -2957,7 +2959,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         else if (value.endsWith("pc")) {
             i = i * 24;
         }
-        return i;
+        return Math.round(i);
     }
 
     @Override

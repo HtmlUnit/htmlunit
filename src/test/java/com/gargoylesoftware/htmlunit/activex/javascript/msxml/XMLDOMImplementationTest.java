@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,14 +44,15 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        final String html =  "  function test() {\n"
+        final String html =  LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
-            + "    alert(Object.prototype.toString.call(doc.implementation));\n"
+            + "    log(Object.prototype.toString.call(doc.implementation));\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -61,16 +62,17 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "exception")
     public void hasFeature_featureNull() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    try {\n"
             + "      doc.implementation.hasFeature(null, '1.0');\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -78,7 +80,7 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = " 1.0: false")
+            IE = "1.0: false")
     public void hasFeature_featureEmpty() throws Exception {
         hasFeature("", "['1.0']");
     }
@@ -90,16 +92,17 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "exception")
     public void hasFeature_versionNull() throws Exception {
-        final String html = "  function test() {\n"
+        final String html = LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    try {\n"
             + "      doc.implementation.hasFeature('MS-DOM', null);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -268,8 +271,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"MutationNameEvents 1.0: false",
-                   "MutationNameEvents 2.0: false",
-                   "MutationNameEvents 3.0: false"})
+                  "MutationNameEvents 2.0: false",
+                  "MutationNameEvents 3.0: false"})
     public void hasFeature_MutationNameEvents() throws Exception {
         hasFeature("MutationNameEvents", "['1.0', '2.0', '3.0']");
     }
@@ -350,8 +353,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
-                   "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
-                   "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false"})
+                  "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
+                  "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false"})
     public void hasFeature_SVG_BasicStructure() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "['1.0', '1.1', '1.2']");
     }
@@ -362,8 +365,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
-                   "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
-                   "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false"})
+                  "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
+                  "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false"})
     public void hasFeature_SVG_Shape() throws Exception {
         hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "['1.0', '1.1', '1.2']");
     }
@@ -389,18 +392,20 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
     }
 
     private void hasFeature(final String feature, final String versions) throws Exception {
-        final String html = "  function test() {\n"
+        final String html =
+            LOG_TITLE_FUNCTION
+            + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var feature = '" + feature + "';\n"
             + "    var versions = " + versions + ";\n"
             + "    for (var j = 0; j < versions.length; j++) {\n"
             + "      var version = versions[j];\n"
-            + "      alert(feature + ' ' + version + ': ' + doc.implementation.hasFeature(feature, version));\n"
+            + "      log(feature + ' ' + version + ': ' + doc.implementation.hasFeature(feature, version));\n"
             + "    }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

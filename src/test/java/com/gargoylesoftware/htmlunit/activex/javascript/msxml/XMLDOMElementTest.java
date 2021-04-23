@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,7 +47,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(root));\n", "<root/>");
+        tester("log(Object.prototype.toString.call(root));\n", "<root/>");
     }
 
     /**
@@ -58,20 +58,21 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"true", "0", "1"})
     public void attributes() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var element = doc.createElement('something');\n"
             + "    try {\n"
-            + "      alert(element.attributes != null);\n"
-            + "      alert(element.attributes.length);\n"
+            + "      log(element.attributes != null);\n"
+            + "      log(element.attributes.length);\n"
             + "      element.setAttribute('attr', 'test');\n"
-            + "      alert(element.attributes.length);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(element.attributes.length);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -112,7 +113,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"4", "#cdata-section=child-cdata", "#comment=child-comment", "child-element=null", "#text=child-text"})
     public void childNodes() throws Exception {
         final String test = ""
-            + "alert(root.childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
             // cdata
             + "debug(root.childNodes[0]);\n"
             // comment
@@ -141,7 +142,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"2", "child-element=null", "child-element=null"})
     public void childNodes_lineBreak() throws Exception {
         final String test = ""
-            + "alert(root.childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
             + "debug(root.childNodes[0]);\n"
             + "debug(root.childNodes[1]);\n";
 
@@ -161,7 +162,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void childNodes_none() throws Exception {
-        tester("alert(root.childNodes.length);\n", "<root/>");
+        tester("log(root.childNodes.length);\n", "<root/>");
     }
 
     /**
@@ -296,9 +297,9 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"http://www.w3.org/1999/xhtml",
-                   "http://www.w3.org/1999/xhtml",
-                   "http://www.appcelerator.org",
-                   "http://www.appcelerator.org"})
+                  "http://www.w3.org/1999/xhtml",
+                  "http://www.appcelerator.org",
+                  "http://www.appcelerator.org"})
     public void namespaceURI_namespace() throws Exception {
         namespace("namespaceURI");
     }
@@ -381,16 +382,16 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void nodeValue() throws Exception {
         final String test = ""
-            + "alert(root.nodeValue);\n"
+            + "log(root.nodeValue);\n"
             + "try {\n"
             + "  root.nodeValue = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             + "try {\n"
             + "  root.nodeValue = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             + "try {\n"
             + "  root.nodeValue = 'test';\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
 
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -410,7 +411,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
-        tester("alert(root.ownerDocument === doc);\n", "<root/>");
+        tester("log(root.ownerDocument === doc);\n", "<root/>");
     }
 
     /**
@@ -421,17 +422,18 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = "true")
     public void ownerDocument_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var element = doc.createElement('something');\n"
             + "    try {\n"
-            + "      alert(element.ownerDocument === doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(element.ownerDocument === doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -443,7 +445,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     public void parentNode() throws Exception {
         final String test = ""
             + "debug(root.parentNode);\n"
-            + "alert(root === root.childNodes[0].parentNode);\n";
+            + "log(root === root.childNodes[0].parentNode);\n";
 
         final String xml = ""
             + "<root>"
@@ -461,17 +463,18 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = "true")
     public void parentNode_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var element = doc.createElement('something');\n"
             + "    try {\n"
-            + "      alert(element.parentNode == null);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(element.parentNode == null);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -550,7 +553,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "child-text"
             + "</root>";
 
-        tester("alert(root.text);\n", xml);
+        tester("log(root.text);\n", xml);
     }
 
     /**
@@ -561,19 +564,19 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"5", "child-cdatagrand-child-textchild-text", "1", "test", "", "exception-setNull"})
     public void text_set() throws Exception {
         final String test = ""
-            + "alert(root.childNodes.length);\n"
-            + "alert(root.text);\n"
+            + "log(root.childNodes.length);\n"
+            + "log(root.text);\n"
             // normal
             + "root.text = 'test';\n"
-            + "alert(root.childNodes.length);\n"
-            + "alert(root.text);\n"
+            + "log(root.childNodes.length);\n"
+            + "log(root.text);\n"
             // empty
             + "root.text = '';\n"
-            + "alert(root.text);\n"
+            + "log(root.text);\n"
             // null
             + "try {\n"
             + "  root.text = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n";
+            + "} catch(e) { log('exception-setNull'); }\n";
 
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -592,10 +595,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "child-cdata\n"
-                        + " grand-child-text\n"
-                        + "\n"
-                        + "child-text")
+            IE = "child-cdata\\n"
+                        + " grand-child-text\\n\\nchild-text")
     public void text_lineBreak() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>\n"
@@ -606,7 +607,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "child-text\n"
             + "</root>";
 
-        tester("alert(root.text);\n", xml);
+        tester("var txt = root.text; txt = txt.replace(/\\n/g, '\\\\n'); log(txt);", xml);
     }
 
     /**
@@ -617,17 +618,18 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = "")
     public void text_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var element = doc.createElement('something');\n"
             + "    try {\n"
-            + "      alert(element.text);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(element.text);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -647,7 +649,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "child-text"
             + "</root>";
 
-        tester("alert(root.xml);\n", xml);
+        tester("log(root.xml);\n", xml);
     }
 
     /**
@@ -656,10 +658,10 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = "<root child-attribute=\"test\">\\r\\n"
-                        + "\t<![CDATA[child-cdata]]>\\r\\n"
-                        + "\t<!--child-comment-->\\r\\n"
-                        + "\t<child-element/>\\r\\n"
-                        + "\t<child-element2><grand-child-element/></child-element2>\\r\\n"
+                        + "\\t<![CDATA[child-cdata]]>\\r\\n"
+                        + "\\t<!--child-comment-->\\r\\n"
+                        + "\\t<child-element/>\\r\\n"
+                        + "\\t<child-element2><grand-child-element/></child-element2>\\r\\n"
                         + "child-text\\r\\n"
                         + "</root>")
     public void xml_lineBreak() throws Exception {
@@ -674,9 +676,10 @@ public class XMLDOMElementTest extends WebDriverTestCase {
 
         final String tester =
                         "var txt = root.xml;\n"
+                        + "txt = txt.replace(/\\t/g, '\\\\t');\n"
                         + "txt = txt.replace(/\\r/g, '\\\\r');\n"
                         + "txt = txt.replace(/\\n/g, '\\\\n');\n"
-                        + "alert(txt);\n";
+                        + "log(txt);\n";
         tester(tester, xml);
     }
 
@@ -688,17 +691,18 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = "<something/>")
     public void xml_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var element = doc.createElement('something');\n"
             + "    try {\n"
-            + "      alert(element.xml);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(element.xml);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -711,19 +715,19 @@ public class XMLDOMElementTest extends WebDriverTestCase {
         final String test = ""
             + "var element = root.childNodes[0];\n"
             // normal
-            + "alert(element.getAttribute('attr'));\n"
+            + "log(element.getAttribute('attr'));\n"
             // case-sensitive
-            + "alert(element.getAttribute('AttR'));\n"
+            + "log(element.getAttribute('AttR'));\n"
             // unknown
-            + "alert(element.getAttribute('unknown'));\n"
+            + "log(element.getAttribute('unknown'));\n"
             // null
             + "try {\n"
             + "  element.getAttribute(null);\n"
-            + "} catch(e) { alert('exception-getNull'); }\n"
+            + "} catch(e) { log('exception-getNull'); }\n"
             // empty
             + "try {\n"
             + "  element.getAttribute('');\n"
-            + "} catch(e) { alert('exception-getEmpty'); }\n";
+            + "} catch(e) { log('exception-getEmpty'); }\n";
 
         final String xml = ""
             + "<root>\n"
@@ -743,14 +747,14 @@ public class XMLDOMElementTest extends WebDriverTestCase {
         final String test = ""
             + "var element = root.childNodes[0];\n"
             + "try {\n"
-            + "  alert(element.getAttribute('attr'));\n"
-            + "  alert(element.getAttribute('tst:attr'));\n"
-            + "} catch(e) { alert('exception1'); }\n"
+            + "  log(element.getAttribute('attr'));\n"
+            + "  log(element.getAttribute('tst:attr'));\n"
+            + "} catch(e) { log('exception1'); }\n"
             + "element = root.childNodes[1];\n"
             + "try {\n"
-            + "  alert(element.getAttribute('attr'));\n"
-            + "  alert(element.getAttribute('tst:attr'));\n"
-            + "} catch(e) { alert('exception2'); }\n";
+            + "  log(element.getAttribute('attr'));\n"
+            + "  log(element.getAttribute('tst:attr'));\n"
+            + "} catch(e) { log('exception2'); }\n";
 
         final String xml = ""
             + "<root xmlns:tst=\"http://test.com\">\n"
@@ -779,11 +783,11 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             // null
             + "try {\n"
             + "  element.getAttributeNode(null);\n"
-            + "} catch(e) { alert('exception-getNull'); }\n"
+            + "} catch(e) { log('exception-getNull'); }\n"
             // empty
             + "try {\n"
             + "  element.getAttributeNode('');\n"
-            + "} catch(e) { alert('exception-getEmpty'); }\n";
+            + "} catch(e) { log('exception-getEmpty'); }\n";
 
         final String xml = ""
             + "<root>\n"
@@ -805,12 +809,12 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "try {\n"
             + "  debug(element.getAttributeNode('attr'));\n"
             + "  debug(element.getAttributeNode('tst:attr'));\n"
-            + "} catch(e) { alert('exception1'); }\n"
+            + "} catch(e) { log('exception1'); }\n"
             + "element = doc.documentElement.childNodes[1];\n"
             + "try {\n"
             + "  debug(element.getAttributeNode('attr'));\n"
             + "  debug(element.getAttributeNode('tst:attr'));\n"
-            + "} catch(e) { alert('exception2'); }\n";
+            + "} catch(e) { log('exception2'); }\n";
 
         final String xml = ""
             + "<root xmlns:tst=\"http://test.com\">\n"
@@ -827,42 +831,42 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"1", "child-element=null", "0", "1", "child-element=null", "0", "1", "grand-child-element=null",
-                   "2", "child-element3=null", "child-element3=null", "0", "0", "exception-getNull"})
+                  "2", "child-element3=null", "child-element3=null", "0", "0", "exception-getNull"})
     public void getElementsByTagName() throws Exception {
         final String test =
             // normal
               "var elements = root.getElementsByTagName('child-element');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "debug(elements[0]);\n"
             // case-sensitive
             + "elements = root.getElementsByTagName('chIld-ElEmEnt');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             // trim
             + "elements = root.getElementsByTagName(' child-element ');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "debug(elements[0]);\n"
             // unknown
             + "elements = root.getElementsByTagName('unknown');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             // recursive
             + "elements = root.getElementsByTagName('grand-child-element');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "debug(elements[0]);\n"
             // multiple
             + "elements = root.getElementsByTagName('child-element3');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "debug(elements[0]);\n"
             + "debug(elements[1]);\n"
             // not self
             + "elements = root.childNodes[1].getElementsByTagName('child-element2');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             // only children
             + "elements = root.childNodes[1].getElementsByTagName('child-element');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             // null
             + "try {\n"
             + "  root.getElementsByTagName(null);\n"
-            + "} catch(e) { alert('exception-getNull'); }\n";
+            + "} catch(e) { log('exception-getNull'); }\n";
 
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -881,13 +885,13 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"6", "#cdata-section=child-cdata", "#comment=child-comment", "child-element=null",
-                   "child-element2=null", "grand-child-element=null", "#text=child-text", "6",
-                   "1", "grand-child-element=null"})
+                  "child-element2=null", "grand-child-element=null", "#text=child-text", "6",
+                  "1", "grand-child-element=null"})
     public void getElementsByTagName_allByEmpty() throws Exception {
         final String test =
             // normal
               "var elements = root.getElementsByTagName('');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             //   cdata
             + "debug(elements[0]);\n"
             //   comment
@@ -903,10 +907,10 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "debug(elements[5]);\n"
             // trim
             + "elements = root.getElementsByTagName(' \t ');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             // only children
             + "elements = root.childNodes[3].getElementsByTagName('');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "debug(elements[0]);\n";
 
         final String xml = ""
@@ -928,12 +932,12 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"3", "child-element=null", "child-element2=null", "grand-child-element=null", "3",
-                   "1", "grand-child-element=null"})
+                  "1", "grand-child-element=null"})
     public void getElementsByTagName_allByStar() throws Exception {
         final String test =
             // normal
               "var elements = root.getElementsByTagName('*');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             //   element
             + "debug(elements[0]);\n"
             //   element2
@@ -942,10 +946,10 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "debug(elements[2]);\n"
             // trim
             + "elements = root.getElementsByTagName(' * ');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             // only children
             + "elements = root.childNodes[3].getElementsByTagName('*');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "debug(elements[0]);\n";
 
         final String xml = ""
@@ -970,11 +974,11 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     public void getElementsByTagName_none() throws Exception {
         final String test = ""
             + "var elements = root.getElementsByTagName('unknown');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "elements = root.getElementsByTagName('');\n"
-            + "alert(elements.length);\n"
+            + "log(elements.length);\n"
             + "elements = root.getElementsByTagName('*');\n"
-            + "alert(elements.length);\n";
+            + "log(elements.length);\n";
 
         tester(test, "<root/>");
     }
@@ -990,9 +994,9 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "root.appendChild(doc.createTextNode('Hello '));\n"
             + "root.appendChild(doc.createTextNode('World'));\n"
             + "root.appendChild(doc.createTextNode('!'));\n"
-            + "alert(root.childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
             + "root.normalize();\n"
-            + "alert(root.childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
             + "debug(root.childNodes[0]);\n";
 
         tester(test, "<root/>");
@@ -1013,11 +1017,11 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "element.appendChild(doc.createTextNode('Hello '));\n"
             + "element.appendChild(doc.createTextNode('World'));\n"
             + "element.appendChild(doc.createTextNode('!'));\n"
-            + "alert(root.childNodes.length);\n"
-            + "alert(root.childNodes[1].childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
+            + "log(root.childNodes[1].childNodes.length);\n"
             + "root.normalize();\n"
-            + "alert(root.childNodes.length);\n"
-            + "alert(root.childNodes[1].childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
+            + "log(root.childNodes[1].childNodes.length);\n"
             + "debug(root.childNodes[1].childNodes[0]);\n";
 
         tester(test, "<root/>");
@@ -1031,9 +1035,9 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"7", "7"})
     public void normalize_mixed() throws Exception {
         final String test = ""
-            + "alert(root.childNodes.length);\n"
+            + "log(root.childNodes.length);\n"
             + "root.normalize();\n"
-            + "alert(root.childNodes.length);\n";
+            + "log(root.childNodes.length);\n";
 
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -1058,24 +1062,24 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     public void removeAttribute() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // case-sensitive
             + "element.removeAttribute('AttR');\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // normal
             + "element.removeAttribute('attr');\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // unknown
             + "element.removeAttribute('unknown');\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // null
             + "try {\n"
             + "  element.removeAttribute(null);\n"
-            + "} catch(e) { alert('exception-removeNull'); }\n"
+            + "} catch(e) { log('exception-removeNull'); }\n"
             // empty
             + "try {\n"
             + "  element.removeAttribute('');\n"
-            + "} catch(e) { alert('exception-removeEmpty'); }\n";
+            + "} catch(e) { log('exception-removeEmpty'); }\n";
 
         final String xml = ""
             + "<root>\n"
@@ -1095,20 +1099,20 @@ public class XMLDOMElementTest extends WebDriverTestCase {
         final String test = ""
             + "var element = root.childNodes[0];\n"
             + "try {\n"
-            + "  alert(element.attributes.length);\n"
+            + "  log(element.attributes.length);\n"
             + "  element.removeAttribute('tst:attr');\n"
-            + "  alert(element.attributes.length);\n"
+            + "  log(element.attributes.length);\n"
             + "  element.removeAttribute('attr');\n"
-            + "  alert(element.attributes.length);\n"
-            + "} catch(e) { alert('exception1'); }\n"
+            + "  log(element.attributes.length);\n"
+            + "} catch(e) { log('exception1'); }\n"
             + "element = doc.documentElement.childNodes[1];\n"
             + "try {\n"
-            + "  alert(element.attributes.length);\n"
+            + "  log(element.attributes.length);\n"
             + "  element.removeAttribute('attr');\n"
-            + "  alert(element.attributes.length);\n"
+            + "  log(element.attributes.length);\n"
             + "  element.removeAttribute('tst:attr');\n"
-            + "  alert(element.attributes.length);\n"
-            + "} catch(e) { alert('exception2'); }\n";
+            + "  log(element.attributes.length);\n"
+            + "} catch(e) { log('exception2'); }\n";
 
         final String xml = ""
             + "<root xmlns:tst=\"http://test.com\">\n"
@@ -1129,14 +1133,14 @@ public class XMLDOMElementTest extends WebDriverTestCase {
         final String test = ""
             + "var element = root.childNodes[0];\n"
             + "var attribute = element.getAttributeNode('attr');\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             + "var removed = element.removeAttributeNode(attribute);\n"
-            + "alert(element.attributes.length);\n"
-            + "alert(attribute === removed);\n"
+            + "log(element.attributes.length);\n"
+            + "log(attribute === removed);\n"
             // null
             + "try {\n"
             + "  element.removeAttributeNode(null);\n"
-            + "} catch(e) { alert('exception-removeNull'); }\n";
+            + "} catch(e) { log('exception-removeNull'); }\n";
 
         final String xml = ""
             + "<root>\n"
@@ -1152,35 +1156,35 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"0", "1", "test1", "1", "test2", "exception-setNameNull",
-                   "exception-setNameEmpty", "exception-setValueNull", "1", ""})
+                  "exception-setNameEmpty", "exception-setValueNull", "1", ""})
     public void setAttribute() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // normal
             + "element.setAttribute('attr', 'test1');\n"
-            + "alert(element.attributes.length);\n"
-            + "alert(element.getAttribute('attr'));\n"
+            + "log(element.attributes.length);\n"
+            + "log(element.getAttribute('attr'));\n"
             // overwrite
             + "element.setAttribute('attr', 'test2');\n"
-            + "alert(element.attributes.length);\n"
-            + "alert(element.getAttribute('attr'));\n"
+            + "log(element.attributes.length);\n"
+            + "log(element.getAttribute('attr'));\n"
             // null name
             + "try {\n"
             + "  element.setAttribute(null, 'test');\n"
-            + "} catch(e) { alert('exception-setNameNull'); }\n"
+            + "} catch(e) { log('exception-setNameNull'); }\n"
             // empty name
             + "try {\n"
             + "element.setAttribute('', 'test');\n"
-            + "} catch(e) { alert('exception-setNameEmpty'); }\n"
+            + "} catch(e) { log('exception-setNameEmpty'); }\n"
             // null value
             + "try {\n"
             + "  element.setAttribute('attr', null);\n"
-            + "} catch(e) { alert('exception-setValueNull'); }\n"
+            + "} catch(e) { log('exception-setValueNull'); }\n"
             // empty value
             + "element.setAttribute('attr', '');\n"
-            + "alert(element.attributes.length);\n"
-            + "alert(element.getAttribute('attr'));\n";
+            + "log(element.attributes.length);\n"
+            + "log(element.getAttribute('attr'));\n";
 
         final String xml = ""
             + "<root>\n"
@@ -1199,13 +1203,13 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     public void setAttribute_namespace() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             + "element.setAttribute('attr', 'test1');\n"
-            + "alert(element.attributes.length);\n"
-            + "alert(element.getAttribute('attr'));\n"
+            + "log(element.attributes.length);\n"
+            + "log(element.getAttribute('attr'));\n"
             + "element.setAttribute('tst:attr', 'test2');\n"
-            + "alert(element.attributes.length);\n"
-            + "alert(element.getAttribute('tst:attr'));\n";
+            + "log(element.attributes.length);\n"
+            + "log(element.getAttribute('tst:attr'));\n";
 
         final String xml = ""
             + "<root xmlns:tst=\"http://test.com\">\n"
@@ -1221,7 +1225,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"0", "1", "attr=test1", "null", "1", "attr=test2", "attr=test1", "true",
-                   "exception-setNull"})
+                  "exception-setNull"})
     public void setAttributeNode() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -1230,22 +1234,22 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "var attribute2 = doc.createAttribute('attr');\n"
             + "attribute2.value = 'test2';\n"
 
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // normal
             + "var replaced = element.setAttributeNode(attribute1);\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             + "debug(element.getAttributeNode('attr'));\n"
             + "debug(replaced);\n"
             // overwrite
             + "var replaced = element.setAttributeNode(attribute2);\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             + "debug(element.getAttributeNode('attr'));\n"
             + "debug(replaced);\n"
-            + "alert(replaced === attribute1);\n"
+            + "log(replaced === attribute1);\n"
             // null
             + "try {\n"
             + "  element.setAttributeNode(null);\n"
-            + "} catch(e) { alert('exception-setNull'); }\n";
+            + "} catch(e) { log('exception-setNull'); }\n";
 
         final String xml = ""
             + "<root>\n"
@@ -1269,20 +1273,20 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "var attribute2 = doc.createAttribute('tst:attr');\n"
             + "attribute2.value = 'test2';\n"
 
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             // normal
             + "var replaced = element.setAttributeNode(attribute1);\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             + "debug(element.getAttributeNode('attr'));\n"
             + "debug(element.getAttributeNode('tst:attr'));\n"
             + "debug(replaced);\n"
             // overwrite
             + "var replaced = element.setAttributeNode(attribute2);\n"
-            + "alert(element.attributes.length);\n"
+            + "log(element.attributes.length);\n"
             + "debug(element.getAttributeNode('attr'));\n"
             + "debug(element.getAttributeNode('tst:attr'));\n"
             + "debug(replaced);\n"
-            + "alert(replaced === attribute1);\n";
+            + "log(replaced === attribute1);\n";
 
         final String xml = ""
             + "<root xmlns:tst=\"http://test.com\">\n"
@@ -1324,6 +1328,7 @@ public class XMLDOMElementTest extends WebDriverTestCase {
 
     private void created(final String methodName) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
@@ -1332,22 +1337,22 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      debug(elem1);\n"
             + "      debug(elem2);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function debug(e) {\n"
-            + "    alert(e." + methodName + ");\n"
+            + "    log(e." + methodName + ");\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     private void xml(final String methodName) throws Exception {
         final String test = ""
-            + "alert(root.childNodes[0]." + methodName + ");\n"
-            + "alert(root.childNodes[1]." + methodName + ");\n"
-            + "alert(root.childNodes[2]." + methodName + ");\n"
-            + "alert(root.childNodes[3]." + methodName + ");\n";
+            + "log(root.childNodes[0]." + methodName + ");\n"
+            + "log(root.childNodes[1]." + methodName + ");\n"
+            + "log(root.childNodes[2]." + methodName + ");\n"
+            + "log(root.childNodes[3]." + methodName + ");\n";
 
         final String xml = ""
             + "<xml>"
@@ -1362,10 +1367,10 @@ public class XMLDOMElementTest extends WebDriverTestCase {
 
     private void namespace(final String methodName) throws Exception {
         final String test = ""
-            + "alert(root.childNodes[0]." + methodName + ");\n"
-            + "alert(root.childNodes[1]." + methodName + ");\n"
-            + "alert(root.childNodes[2]." + methodName + ");\n"
-            + "alert(root.childNodes[3]." + methodName + ");\n";
+            + "log(root.childNodes[0]." + methodName + ");\n"
+            + "log(root.childNodes[1]." + methodName + ");\n"
+            + "log(root.childNodes[2]." + methodName + ");\n"
+            + "log(root.childNodes[3]." + methodName + ");\n";
 
         final String xml = ""
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>"
@@ -1380,25 +1385,26 @@ public class XMLDOMElementTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
             + "    var root = doc.documentElement;\n"
             + "    try {\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function debug(e) {\n"
             + "    if (e != null) {\n"
-            + "      alert(e.nodeName + '=' + e.nodeValue);\n"
+            + "      log(e.nodeName + '=' + e.nodeValue);\n"
             + "    } else {\n"
-            + "      alert('null');\n"
+            + "      log('null');\n"
             + "    }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -1409,20 +1415,21 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"2", "1"})
     public void removeChild() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
             + "    var parent = doc.documentElement.firstChild;\n"
-            + "    alert(parent.childNodes.length);\n"
+            + "    log(parent.childNodes.length);\n"
             + "    parent.removeChild(parent.firstChild);\n"
-            + "    alert(parent.childNodes.length);\n"
+            + "    log(parent.childNodes.length);\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -1433,22 +1440,23 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"book", "0", "1"})
     public void selectNode_root() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
             + "    var child = doc.documentElement.firstChild;\n"
-            + "    alert(child.tagName);\n"
+            + "    log(child.tagName);\n"
             + "    try {\n"
-            + "      alert(child.selectNodes('/title').length);\n"
-            + "      alert(child.selectNodes('title').length);\n"
-            + "    } catch (e) { alert('exception'); }\n"
+            + "      log(child.selectNodes('/title').length);\n"
+            + "      log(child.selectNodes('title').length);\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -1459,14 +1467,15 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             IE = {"1", "title"})
     public void selectNodes() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
             + "    try {\n"
             + "      var nodes = doc.documentElement.selectNodes('//title');\n"
-            + "      alert(nodes.length);\n"
-            + "      alert(nodes[0].tagName);\n"
-            + "    } catch (e) { alert('exception'); }\n"
+            + "      log(nodes.length);\n"
+            + "      log(nodes[0].tagName);\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
@@ -1479,6 +1488,6 @@ public class XMLDOMElementTest extends WebDriverTestCase {
             + "</books>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

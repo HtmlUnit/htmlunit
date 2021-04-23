@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,8 +42,8 @@ public class HtmlApplet2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined"},
             IE = {"[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]"})
     @BuggyWebDriver(IE = {"The page you are viewing uses Java. More information on Java support "
-                        + "is available from the Microsoft website.",
-                  "[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]"})
+                            + "is available from the Microsoft website.",
+                          "[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

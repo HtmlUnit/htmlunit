@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,8 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
+import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
@@ -66,7 +67,10 @@ public final class TestCaseTest {
                         if (line.contains("(\"xmp\")")) {
                             final String relativePath = file.getAbsolutePath().substring(
                                     new File(".").getAbsolutePath().length() - 1);
-                            checkLines(relativePath, line, lines, "xmp", new HashSet<String>(HtmlPageTest.HTML_TAGS_));
+                            final HashSet<String> tags = new HashSet<String>(DefaultElementFactory.SUPPORTED_TAGS_);
+                            // title tag is special
+                            tags.remove(HtmlTitle.TAG_NAME);
+                            checkLines(relativePath, line, lines, "xmp", tags);
                         }
                         else if (line.contains("(\"ClientRect\")")) {
                             final String relativePath = file.getAbsolutePath().substring(

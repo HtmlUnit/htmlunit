@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -82,6 +82,8 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.FrameWindow.PageDenied;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.XHtmlPage;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -198,20 +200,36 @@ public class WebClient implements Serializable, AutoCloseable {
     private Cache cache_ = new Cache();
 
     /** target "_blank". */
-    private static final String TARGET_BLANK = "_blank";
-    /** target "_parent". */
-    private static final String TARGET_SELF = "_self";
+    public static final String TARGET_BLANK = "_blank";
+
+    /** target "_self". */
+    public static final String TARGET_SELF = "_self";
+
     /** target "_parent". */
     private static final String TARGET_PARENT = "_parent";
     /** target "_top". */
     private static final String TARGET_TOP = "_top";
 
-    /** "about:". */
-    public static final String ABOUT_SCHEME = "about:";
-    /** "about:blank". */
-    public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
-    /** URL for "about:blank". */
-    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
+    /**
+     * "about:".
+     * @deprecated as of version 2.47.0; use UrlUtils.ABOUT_BLANK instead
+     */
+    @Deprecated
+    public static final String ABOUT_SCHEME = UrlUtils.ABOUT_SCHEME;
+
+    /**
+     * "about:blank".
+     * @deprecated as of version 2.47.0; use UrlUtils.ABOUT_BLANK instead
+     */
+    @Deprecated
+    public static final String ABOUT_BLANK = UrlUtils.ABOUT_BLANK;
+
+    /**
+     * URL for "about:blank".
+     * @deprecated as of version 2.47.0; use UrlUtils.URL_ABOUT_BLANK instead
+     */
+    @Deprecated
+    public static final URL URL_ABOUT_BLANK = UrlUtils.URL_ABOUT_BLANK;
 
     private ScriptPreProcessor scriptPreProcessor_;
 
@@ -248,7 +266,19 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param proxyPort the port to use on the proxy server
      */
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
-        this(browserVersion, true, proxyHost, proxyPort);
+        this(browserVersion, true, proxyHost, proxyPort, null);
+    }
+
+    /**
+     * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
+     * @param browserVersion the browser version to simulate
+     * @param proxyHost the server that will act as proxy or null for no proxy
+     * @param proxyPort the port to use on the proxy server
+     * @param proxyScheme the scheme http/https
+     */
+    public WebClient(final BrowserVersion browserVersion,
+            final String proxyHost, final int proxyPort, final String proxyScheme) {
+        this(browserVersion, true, proxyHost, proxyPort, proxyScheme);
     }
 
     /**
@@ -260,6 +290,19 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebClient(final BrowserVersion browserVersion, final boolean javaScriptEngineEnabled,
             final String proxyHost, final int proxyPort) {
+        this(browserVersion, javaScriptEngineEnabled, proxyHost, proxyPort, null);
+    }
+
+    /**
+     * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
+     * @param browserVersion the browser version to simulate
+     * @param javaScriptEngineEnabled set to false if the simulated browser should not support javaScript
+     * @param proxyHost the server that will act as proxy or null for no proxy
+     * @param proxyPort the port to use on the proxy server
+     * @param proxyScheme the scheme http/https
+     */
+    public WebClient(final BrowserVersion browserVersion, final boolean javaScriptEngineEnabled,
+            final String proxyHost, final int proxyPort, final String proxyScheme) {
         WebAssert.notNull("browserVersion", browserVersion);
 
         browserVersion_ = browserVersion;
@@ -269,7 +312,7 @@ public class WebClient implements Serializable, AutoCloseable {
             getOptions().setProxyConfig(new ProxyConfig());
         }
         else {
-            getOptions().setProxyConfig(new ProxyConfig(proxyHost, proxyPort));
+            getOptions().setProxyConfig(new ProxyConfig(proxyHost, proxyPort, proxyScheme));
         }
 
         webConnection_ = new HttpWebConnection(this); // this has to be done after the browser version was set
@@ -468,28 +511,6 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * <p>Open a new web window and populate it with a page loaded by
-     * {@link #getPage(WebWindow,WebRequest)}</p>
-     *
-     * @param opener the web window that initiated the request
-     * @param target the name of the window to be opened (the name that will be passed into the
-     *        JavaScript <tt>open()</tt> method)
-     * @param params any parameters
-     * @param <P> the page type
-     * @return the new page
-     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
-     * @throws IOException if an IO problem occurs
-     */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequest params)
-        throws FailingHttpStatusCodeException, IOException {
-        return (P) getPage(openTargetWindow(opener, target, TARGET_SELF), params);
-    }
-
-    /**
      * Convenient method to build a URL and load it into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequest)}.
      * @param url the URL of the new content
@@ -560,7 +581,33 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow)
         throws IOException, FailingHttpStatusCodeException {
+        return loadWebResponseInto(webResponse, webWindow, false);
+    }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * <p>Creates a page based on the specified response and inserts it into the specified window. All page
+     * initialization and event notification is handled here.</p>
+     *
+     * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
+     * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
+     * the page is loaded into a new window, and attachment handling is delegated to the registered
+     * <tt>AttachmentHandler</tt>.</p>
+     *
+     * @param webResponse the response that will be used to create the new page
+     * @param webWindow the window that the new page will be placed within
+     * @param forceAttachment handle this as attachment (is set to true if the call was triggered from
+     * anchor with download property set).
+     * @throws IOException if an IO error occurs
+     * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     * @return the newly created page
+     * @see #setAttachmentHandler(AttachmentHandler)
+     */
+    public Page loadWebResponseInto(final WebResponse webResponse, final WebWindow webWindow,
+            final boolean forceAttachment)
+            throws IOException, FailingHttpStatusCodeException {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
 
@@ -573,7 +620,8 @@ public class WebClient implements Serializable, AutoCloseable {
             return webWindow.getEnclosedPage();
         }
 
-        if (attachmentHandler_ != null && attachmentHandler_.isAttachment(webResponse)) {
+        if (attachmentHandler_ != null
+                && (forceAttachment || attachmentHandler_.isAttachment(webResponse))) {
             if (attachmentHandler_.handleAttachment(webResponse)) {
                 // the handling is done by the attachment handler;
                 // do not open a new window
@@ -1024,8 +1072,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null
                         && openerPage.getUrl() != null) {
-                    final String referer = openerPage.getUrl().toExternalForm();
-                    request.setAdditionalHeader(HttpHeader.REFERER, referer);
+                    request.setRefererlHeader(openerPage.getUrl());
                 }
                 getPage(window, request);
             }
@@ -1153,8 +1200,7 @@ public class WebClient implements Serializable, AutoCloseable {
         request.setCharset(UTF_8);
 
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
-            final String referer = openerPage.getUrl().toExternalForm();
-            request.setAdditionalHeader(HttpHeader.REFERER, referer);
+            request.setRefererlHeader(openerPage.getUrl());
         }
 
         getPage(window, request);
@@ -1303,11 +1349,16 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private static WebResponse makeWebResponseForAboutUrl(final WebRequest webRequest) throws MalformedURLException {
         final URL url = webRequest.getUrl();
-        final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
-        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, WebClient.ABOUT_SCHEME))) {
-            throw new MalformedURLException(url + " is not supported, only about:blank is supported now.");
+        final String urlString = url.toExternalForm();
+        if (UrlUtils.ABOUT_BLANK.equalsIgnoreCase(urlString)) {
+            return new StringWebResponse("", UrlUtils.URL_ABOUT_BLANK);
         }
-        return new StringWebResponse("", URL_ABOUT_BLANK);
+
+        final String urlWithoutQuery = StringUtils.substringBefore(urlString, "?");
+        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
+            throw new MalformedURLException(url + " is not supported, only about:blank is supported at the moment.");
+        }
+        return new StringWebResponse("", url);
     }
 
     /**
@@ -1438,7 +1489,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
         switch (webRequest.getUrl().getProtocol()) {
-            case "about":
+            case UrlUtils.ABOUT:
                 return makeWebResponseForAboutUrl(webRequest);
 
             case "file":
@@ -1514,6 +1565,7 @@ public class WebClient implements Serializable, AutoCloseable {
             else if (!proxyConfig.shouldBypassProxy(webRequest.getUrl().getHost())) {
                 webRequest.setProxyHost(proxyConfig.getProxyHost());
                 webRequest.setProxyPort(proxyConfig.getProxyPort());
+                webRequest.setProxyScheme(proxyConfig.getProxyScheme());
                 webRequest.setSocksProxy(proxyConfig.isSocksProxy());
             }
         }
@@ -2037,7 +2089,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final FrameWindow fw = (FrameWindow) window;
                 final String enclosingPageState = fw.getEnclosingPage().getDocumentElement().getReadyState();
                 final URL frameUrl = fw.getEnclosedPage().getUrl();
-                if (!DomNode.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == URL_ABOUT_BLANK) {
+                if (!DomNode.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == UrlUtils.URL_ABOUT_BLANK) {
                     return;
                 }
 
@@ -2280,14 +2332,18 @@ public class WebClient implements Serializable, AutoCloseable {
         private final WebResponse response_;
         private final WeakReference<Page> originalPage_;
         private final WebRequest request_;
+        private final boolean forceAttachment_;
 
-        LoadJob(final WebRequest request, final WebWindow requestingWindow, final String target,
-                final WebResponse response) {
+        // we can't us the WebRequest from the WebResponse because
+        // we need the original request e.g. after a redirect
+        LoadJob(final WebRequest request, final WebResponse response,
+                final WebWindow requestingWindow, final String target, final boolean forceAttachment) {
             request_ = request;
             requestingWindow_ = requestingWindow;
             target_ = target;
             response_ = response;
             originalPage_ = new WeakReference<>(requestingWindow.getEnclosedPage());
+            forceAttachment_ = forceAttachment;
         }
 
         public boolean isOutdated() {
@@ -2318,10 +2374,14 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param request the request to perform
      * @param checkHash if true check for hashChenage
      * @param forceLoad if true always load the request even if there is already the same in the queue
+     * @param forceAttachment if true the AttachmentHandler isAttachment() method is not called, the
+     * response has to be handled as attachment in any case
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final boolean checkHash, final boolean forceLoad, final String description) {
+        final WebRequest request, final boolean checkHash, final boolean forceLoad,
+        final boolean forceAttachment, final String description) {
+
         final WebWindow targetWindow = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
         boolean justHashJump = false;
@@ -2350,11 +2410,11 @@ public class WebClient implements Serializable, AutoCloseable {
 
         synchronized (loadQueue_) {
             // verify if this load job doesn't already exist
-            for (final LoadJob loadJob : loadQueue_) {
-                if (loadJob.response_ == null) {
+            for (final LoadJob otherLoadJob : loadQueue_) {
+                if (otherLoadJob.response_ == null) {
                     continue;
                 }
-                final WebRequest otherRequest = loadJob.request_;
+                final WebRequest otherRequest = otherLoadJob.request_;
                 final URL otherUrl = otherRequest.getUrl();
 
                 // TODO: investigate but it seems that IE considers query string too but not FF
@@ -2378,7 +2438,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);
                 response = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, request, 0);
             }
-            loadJob = new LoadJob(request, requestingWindow, target, response);
+            loadJob = new LoadJob(request, response, requestingWindow, target, forceAttachment);
         }
         catch (final IOException e) {
             throw new RuntimeException(e);
@@ -2428,9 +2488,9 @@ public class WebClient implements Serializable, AutoCloseable {
                 continue;
             }
 
-            final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, "_self");
+            final WebWindow win = openTargetWindow(loadJob.requestingWindow_, loadJob.target_, TARGET_SELF);
             final Page pageBeforeLoad = win.getEnclosedPage();
-            loadWebResponseInto(loadJob.response_, win);
+            loadWebResponseInto(loadJob.response_, win, loadJob.forceAttachment_);
 
             // start execution here.
             if (scriptEngine_ != null) {
@@ -2604,5 +2664,47 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public boolean isJavaScriptEngineEnabled() {
         return javaScriptEngineEnabled_;
+    }
+
+    /**
+     * Parses the given XHtml code string and loads the resulting XHtmlPage into
+     * the current window.
+     *
+     * @param htmlCode the html code as string
+     * @return the HtmlPage
+     * @throws IOException in case of error
+     */
+    public HtmlPage loadHtmlCodeIntoCurrentWindow(final String htmlCode) throws IOException {
+        final HTMLParser htmlParser = getPageCreator().getHtmlParser();
+        final WebWindow webWindow = getCurrentWindow();
+
+        final StringWebResponse webResponse =
+                new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/dummy.html"));
+        final HtmlPage page = new HtmlPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+
+        htmlParser.parse(webResponse, page, true);
+        return page;
+    }
+
+    /**
+     * Parses the given XHtml code string and loads the resulting XHtmlPage into
+     * the current window.
+     *
+     * @param xhtmlCode the xhtml code as string
+     * @return the XHtmlPage
+     * @throws IOException in case of error
+     */
+    public XHtmlPage loadXHtmlCodeIntoCurrentWindow(final String xhtmlCode) throws IOException {
+        final HTMLParser htmlParser = getPageCreator().getHtmlParser();
+        final WebWindow webWindow = getCurrentWindow();
+
+        final StringWebResponse webResponse =
+                new StringWebResponse(xhtmlCode, new URL("http://htmlunit.sourceforge.net/dummy.html"));
+        final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
+        webWindow.setEnclosedPage(page);
+
+        htmlParser.parse(webResponse, page, true);
+        return page;
     }
 }

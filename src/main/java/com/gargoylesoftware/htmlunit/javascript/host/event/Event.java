@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -247,6 +247,9 @@ public class Event extends SimpleScriptable {
 
     /** The pointerover event type, triggered by {@code pointerover} event handlers. */
     public static final String TYPE_POINTEROVER = "pointerover";
+
+    /** The animationcancel event type, triggered by {@code animationcancel} event handlers. */
+    public static final String TYPE_ANIMATIONCANCEL = "animationcancel";
 
     /** The animationend event type, triggered by {@code animationend} event handlers. */
     public static final String TYPE_ANIMATIONEND = "animationend";
@@ -507,6 +510,18 @@ public class Event extends SimpleScriptable {
 
     /** The storagecommit event type, triggered by {@code storagecommit} event handlers. */
     public static final String TYPE_STORAGECOMMIT = "storagecommit";
+
+    /** The ontransitioncancel event type, triggered by {@code ontransitioncancel} event handlers. */
+    public static final String TYPE_ONTRANSITIONCANCEL = "ontransitioncancel";
+
+    /** The ontransitionend event type, triggered by {@code ontransitionend} event handlers. */
+    public static final String TYPE_ONTRANSITIONEND = "ontransitionend";
+
+    /** The ontransitionrun event type, triggered by {@code ontransitionrun} event handlers. */
+    public static final String TYPE_ONTRANSITIONRUN = "ontransitionrun";
+
+    /** The ontransitionstart event type, triggered by {@code ontransitionstart} event handlers. */
+    public static final String TYPE_ONTRANSITIONSTART = "ontransitionstart";
 
     /**
      * The mssitemodejumplistitemremoved event type, triggered
@@ -1065,5 +1080,14 @@ public class Event extends SimpleScriptable {
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Object getComposed() {
         return false;
+    }
+
+    /**
+     * Returns whether the given value indicates a missing or undefined property.
+     * @param value the new value
+     * @return whether the given value indicates a missing or undefined property
+     */
+    protected static boolean isMissingOrUndefined(final Object value) {
+        return value == Scriptable.NOT_FOUND || Undefined.isUndefined(value);
     }
 }

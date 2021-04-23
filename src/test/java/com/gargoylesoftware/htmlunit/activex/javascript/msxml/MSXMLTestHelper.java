@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ public final class MSXMLTestHelper {
 
     /** Helper. */
     public static final String ACTIVEX_CHECK =
-            "    if (!('ActiveXObject' in window)) { alert('no ActiveX'); return; }\n";
+            "    if (!('ActiveXObject' in window)) { log('no ActiveX'); return; }\n";
 
     /** Helper. */
     public static final String CREATE_XMLDOMDOCUMENT_FUNCTION_NAME = "createXMLDOMDocument";
@@ -152,7 +152,7 @@ public final class MSXMLTestHelper {
      */
     public static String createTestHTML(final String scriptContent) {
         return HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + scriptContent
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

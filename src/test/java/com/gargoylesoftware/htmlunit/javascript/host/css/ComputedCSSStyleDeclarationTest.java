@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,6 +27,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Dennis Duysak
  */
 @RunWith(BrowserRunner.class)
 public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
@@ -50,10 +52,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
             + "    var s = window.getComputedStyle(e, null);\n"
-            + "    alert(s.cssFloat);\n"
+            + "    log(s.cssFloat);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -61,7 +64,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -143,27 +146,28 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "auto", "pointer"})
     public void styleElement() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
             + "  #myDiv2 {cursor: pointer}\n"
             + "  /* ]]> */\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('myDiv1');\n"
             + "    var div2 = document.getElementById('myDiv2');\n"
-            + "    alert(div1.style.cursor);\n"
-            + "    alert(div2.style.cursor);\n"
-            + "    alert(window.getComputedStyle(div1, null).cursor);\n"
-            + "    alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "    log(div1.style.cursor);\n"
+            + "    log(div2.style.cursor);\n"
+            + "    log(window.getComputedStyle(div1, null).cursor);\n"
+            + "    log(window.getComputedStyle(div2, null).cursor);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv1'/>\n"
             + "  <div id='myDiv2'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -177,27 +181,28 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "pointer", "pointer"})
     public void styleElement2() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
             + "  #style_test_1 {cursor: pointer}\n"
             + "  /* ]]> */\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('style_test_1');\n"
             + "    var div2 = document.getElementById('myDiv2');\n"
-            + "    alert(div1.style.cursor);\n"
-            + "    alert(div2.style.cursor);\n"
-            + "    alert(window.getComputedStyle(div1, null).cursor);\n"
-            + "    alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "    log(div1.style.cursor);\n"
+            + "    log(div2.style.cursor);\n"
+            + "    log(window.getComputedStyle(div1, null).cursor);\n"
+            + "    log(window.getComputedStyle(div2, null).cursor);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='style_test_1'/>\n"
             + "  <div id='myDiv2'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -209,11 +214,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d = document.getElementById('myDiv');\n"
             + "    var style = window.getComputedStyle(d, null);\n"
-            + "    alert(style.zIndex);\n"
-            + "    alert(typeof style.zIndex);\n"
+            + "    log(style.zIndex);\n"
+            + "    log(typeof style.zIndex);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -221,7 +227,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -235,13 +241,14 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='d' style='width:50px'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var d = document.getElementById('d');\n"
             + "var style = window.getComputedStyle(d, null);\n"
-            + "alert(style.width);\n"
+            + "log(style.width);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -249,30 +256,31 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
-                   "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px"})
+             "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px"})
     public void lengthsConvertedToPixels() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d' style='width:1em; height:1em; border:1em solid black; padding:1em; margin:1em;'>d</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var d = document.getElementById('d');\n"
             + "var cs = window.getComputedStyle(d, null);\n"
-            + "alert(d.style.width + ' ' + cs.width);\n"
-            + "alert(d.style.height + ' ' + cs.height);\n"
-            + "alert(d.style.borderBottomWidth + ' ' + cs.borderBottomWidth);\n"
-            + "alert(d.style.borderLeftWidth + ' ' + cs.borderLeftWidth);\n"
-            + "alert(d.style.borderTopWidth + ' ' + cs.borderTopWidth);\n"
-            + "alert(d.style.borderRightWidth + ' ' + cs.borderRightWidth);\n"
-            + "alert(d.style.paddingBottom + ' ' + cs.paddingBottom);\n"
-            + "alert(d.style.paddingLeft + ' ' + cs.paddingLeft);\n"
-            + "alert(d.style.paddingTop + ' ' + cs.paddingTop);\n"
-            + "alert(d.style.paddingRight + ' ' + cs.paddingRight);\n"
-            + "alert(d.style.marginBottom + ' ' + cs.marginBottom);\n"
-            + "alert(d.style.marginLeft + ' ' + cs.marginLeft);\n"
-            + "alert(d.style.marginTop + ' ' + cs.marginTop);\n"
-            + "alert(d.style.marginRight + ' ' + cs.marginRight);\n"
+            + "log(d.style.width + ' ' + cs.width);\n"
+            + "log(d.style.height + ' ' + cs.height);\n"
+            + "log(d.style.borderBottomWidth + ' ' + cs.borderBottomWidth);\n"
+            + "log(d.style.borderLeftWidth + ' ' + cs.borderLeftWidth);\n"
+            + "log(d.style.borderTopWidth + ' ' + cs.borderTopWidth);\n"
+            + "log(d.style.borderRightWidth + ' ' + cs.borderRightWidth);\n"
+            + "log(d.style.paddingBottom + ' ' + cs.paddingBottom);\n"
+            + "log(d.style.paddingLeft + ' ' + cs.paddingLeft);\n"
+            + "log(d.style.paddingTop + ' ' + cs.paddingTop);\n"
+            + "log(d.style.paddingRight + ' ' + cs.paddingRight);\n"
+            + "log(d.style.marginBottom + ' ' + cs.marginBottom);\n"
+            + "log(d.style.marginLeft + ' ' + cs.marginLeft);\n"
+            + "log(d.style.marginTop + ' ' + cs.marginTop);\n"
+            + "log(d.style.marginRight + ' ' + cs.marginRight);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -303,11 +311,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </img>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -322,7 +331,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('audio');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -343,11 +352,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </p>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -361,7 +371,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('button');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -391,11 +401,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </menu>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -409,7 +420,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('command');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -438,11 +449,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <dir id='div'></div>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -459,7 +471,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -476,11 +488,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <embed id='embed'>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -489,7 +502,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -514,11 +527,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <footer id='footer'></footer>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -531,7 +545,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -552,11 +566,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <hr id='hr'>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -571,7 +586,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -579,7 +594,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"inline", "inline", "inline", "inline-block", "inline-block",
-                    "inline-block", "inline-block", "inline-block", "inline-block", "inline"})
+             "inline-block", "inline-block", "inline-block", "inline-block", "inline"})
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -600,11 +615,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -623,7 +639,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -651,11 +667,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -668,7 +685,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -696,11 +713,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <meter id='meter'></meter>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -711,7 +729,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -746,11 +764,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -764,7 +783,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('output');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -785,11 +804,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <progress id='progress'></progress>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -801,7 +821,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('q');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -821,11 +841,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </ruby> \n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -834,7 +855,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('rp');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -842,9 +863,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "block", "inline"},
+                       "inline", "inline", "inline", "inline", "inline", "block", "inline"},
             IE = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
+                  "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -872,11 +893,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "  <script id='script'>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -895,7 +917,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('sup');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -903,9 +925,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
-                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+                  "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF78 = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
@@ -930,11 +952,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </video>\n"
 
             + "  <script id='script'>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -951,7 +974,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('tt');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -974,11 +997,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <video id='video'></video>\n"
 
             + "  <script id='script'>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
             + "      var cs = window.getComputedStyle(e, null);\n"
             + "      var disp = cs ? cs.display : null;\n"
-            + "      alert(disp);\n"
+            + "      log(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
@@ -989,7 +1013,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('wbr');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1005,20 +1029,21 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='d2' style='background: white url(http://htmlunit.sf.net/foo.png) repeat-x fixed top right'>\n"
             + "second div</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function getStyle(x) {\n"
             + "  var d = document.getElementById(x);\n"
             + "  var cs = window.getComputedStyle(d, null);\n"
             + "  return cs;\n"
             + "}\n"
             + "var cs0 = getStyle('d0');\n"
-            + "alert(cs0.backgroundColor);\n"
+            + "log(cs0.backgroundColor);\n"
             + "var cs1 = getStyle('d1');\n"
-            + "alert(cs1.backgroundColor);\n"
+            + "log(cs1.backgroundColor);\n"
             + "var cs2 = getStyle('d2');\n"
-            + "alert(cs2.backgroundColor);\n"
+            + "log(cs2.backgroundColor);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1032,16 +1057,110 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='d1'>inside</div>\n"
             + "</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function getStyle(x) {\n"
             + "  var d = document.getElementById(x);\n"
             + "  var cs = window.getComputedStyle(d, null);\n"
             + "  return cs;\n"
             + "}\n"
             + "var cs1 = getStyle('d1');\n"
-            + "alert(cs1.fontSize);\n"
+            + "log(cs1.fontSize);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("9.6px")
+    @HtmlUnitNYI(CHROME = "10px",
+            EDGE =  "10px",
+            FF = "10px",
+            FF78 = "10px",
+            IE = "10px")
+    public void fontSize2() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6em;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.11667px",
+            CHROME = "3.816px",
+            EDGE = "3.828px",
+            IE = "0px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF78 = "1px",
+            IE = "1px")
+    public void fontSizeVH() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6vh;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "7.55px",
+            CHROME = "7.536px",
+            EDGE = "7.536px",
+            IE = "0px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF78 = "1px",
+            IE = "1px")
+    public void fontSizeVW() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6vw;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1051,14 +1170,15 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"111px", "auto"})
     @NotYetImplemented
     public void computedWidthOfHiddenElements() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('myDiv1');\n"
             + "    var cs1 = window.getComputedStyle(div1, null);\n"
-            + "    alert(cs1.width);\n"
+            + "    log(cs1.width);\n"
             + "    var div2 = document.getElementById('myDiv2');\n"
             + "    var cs2 = window.getComputedStyle(div2, null);\n"
-            + "    alert(cs2.width);\n"
+            + "    log(cs2.width);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div style='width: 111px'>\n"
@@ -1066,7 +1186,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    <div id='myDiv2' style='display:none'/>\n"
             + "  </div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -1079,19 +1199,20 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void inheritedImplicitly() throws Exception {
         final String html
             = "<html><body><table id='a'><tr id='b'><td>a</td></tr></table><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a = document.getElementById('a');\n"
             + "var b = document.getElementById('b');\n"
             + "var as = a.style;\n"
             + "var bs = b.style;\n"
             + "var acs = window.getComputedStyle(a, null);\n"
             + "var bcs = window.getComputedStyle(b, null);\n"
-            + "alert(as.borderCollapse + ',' + bs.borderCollapse);\n"
-            + "alert(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
+            + "log(as.borderCollapse + ',' + bs.borderCollapse);\n"
+            + "log(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
             + "as.borderCollapse = 'collapse';\n"
-            + "alert(as.borderCollapse + ',' + bs.borderCollapse);\n"
-            + "alert(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
+            + "log(as.borderCollapse + ',' + bs.borderCollapse);\n"
+            + "log(acs.borderCollapse + ',' + bcs.borderCollapse);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1109,10 +1230,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function readDecoration(id) {\n"
             + "  var e = document.getElementById(id);\n"
             + "  var s = window.getComputedStyle(e, null);\n"
-            + "  alert(s.textDecoration);\n"
+            + "  log(s.textDecoration);\n"
             + "}\n"
             + "function test() {\n"
             + "  var fooA = document.getElementById('fooA');\n"
@@ -1130,7 +1252,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div class='A' id='fooA'>A\n"
             + "<div class='B' id='fooB'>B</div></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1142,21 +1264,22 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('d1');\n"
             + "    var s1 = window.getComputedStyle(d1, null);\n"
             + "    var d2 = document.getElementById('d2');\n"
             + "    var s2 = window.getComputedStyle(d2, null);\n"
-            + "    alert(d1.style.width + ',' + d1.style.height);\n"
-            + "    alert(d1.offsetWidth + ',' + d1.offsetHeight);\n"
-            + "    alert(s1.width + ',' + s1.height);\n"
-            + "    alert(d2.style.width + ',' + d2.style.height);\n"
-            + "    alert(d2.offsetWidth + ',' + d2.offsetHeight);\n"
-            + "    alert(s2.width + ',' + s2.height);\n"
+            + "    log(d1.style.width + ',' + d1.style.height);\n"
+            + "    log(d1.offsetWidth + ',' + d1.offsetHeight);\n"
+            + "    log(s1.width + ',' + s1.height);\n"
+            + "    log(d2.style.width + ',' + d2.style.height);\n"
+            + "    log(d2.offsetWidth + ',' + d2.offsetHeight);\n"
+            + "    log(s2.width + ',' + s2.height);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1168,21 +1291,22 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:10em;height:20em'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('d1');\n"
             + "    var s1 = window.getComputedStyle(d1, null);\n"
             + "    var d2 = document.getElementById('d2');\n"
             + "    var s2 = window.getComputedStyle(d2, null);\n"
-            + "    alert(d1.style.width + ',' + d1.style.height);\n"
-            + "    alert(d1.offsetWidth + ',' + d1.offsetHeight);\n"
-            + "    alert(s1.width + ',' + s1.height);\n"
-            + "    alert(d2.style.width + ',' + d2.style.height);\n"
-            + "    alert(d2.offsetWidth + ',' + d2.offsetHeight);\n"
-            + "    alert(s2.width + ',' + s2.height);\n"
+            + "    log(d1.style.width + ',' + d1.style.height);\n"
+            + "    log(d1.offsetWidth + ',' + d1.offsetHeight);\n"
+            + "    log(s1.width + ',' + s1.height);\n"
+            + "    log(d2.style.width + ',' + d2.style.height);\n"
+            + "    log(d2.offsetWidth + ',' + d2.offsetHeight);\n"
+            + "    log(s2.width + ',' + s2.height);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1195,12 +1319,13 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html style='height: 100%'>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var h = document.documentElement;\n"
-            + "  alert(h.offsetWidth > 0);\n"
-            + "  alert(h.offsetHeight > 0);\n"
+            + "  log(h.offsetWidth > 0);\n"
+            + "  log(h.offsetHeight > 0);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1226,10 +1351,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
-            + "      alert(e.offsetWidth > 0);\n"
-            + "      alert(e.offsetHeight > 0);\n"
+            + "      log(e.offsetWidth > 0);\n"
+            + "      log(e.offsetHeight > 0);\n"
             + "    }\n"
             + "  </script>\n"
 
@@ -1245,7 +1371,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('myTextarea');\n"
             + "  </script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1258,17 +1384,18 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var e = document.createElement('div');\n"
             + "      var style = window.getComputedStyle(e, null);\n"
-            + "      alert(style.width);\n"
-            + "      alert(style.height);\n"
+            + "      log(style.width);\n"
+            + "      log(style.height);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1280,25 +1407,26 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
                 + "      tester(document.body);\n"
                 + "      tester(document.getElementById('div'));\n"
                 + "    }\n"
                 + "    function tester(el) {\n"
-                + "      alert(el.style.width == 'auto');\n"
-                + "      alert(el.clientWidth > 100);\n"
-                + "      alert(el.offsetWidth > 100);\n"
+                + "      log(el.style.width == 'auto');\n"
+                + "      log(el.clientWidth > 100);\n"
+                + "      log(el.offsetWidth > 100);\n"
 
                 + "      var style = window.getComputedStyle(el, null);\n"
-                + "      alert(/\\d+px/.test(style.width));\n"
-                + "      alert(style.width == 'auto');\n"
+                + "      log(/\\d+px/.test(style.width));\n"
+                + "      log(style.width == 'auto');\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body style='width: auto' onload='test();'>\n"
                 + "<div id='div'></div>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1309,20 +1437,21 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
             + "    var d = document.getElementById('div1');\n"
             + "    var s = window.getComputedStyle(d, null);\n"
-            + "    alert(s.getPropertyValue('test'));\n"
-            + "    alert(s.getPropertyValue('color'));\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "    log(s.getPropertyValue('test'));\n"
+            + "    log(s.getPropertyValue('color'));\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "<style>#div1 { test: red }</style>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: blue'>foo</div></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1332,6 +1461,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"roman", "swiss", "roman"})
     public void handleImportant() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    alertFF(document.getElementById('div1'));\n"
             + "    alertFF(document.getElementById('div2'));\n"
@@ -1339,7 +1469,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  }\n"
             + "  function alertFF(e) {\n"
             + "    var s = window.getComputedStyle(e, null);\n"
-            + "    alert(s.getPropertyValue('font-family'));\n"
+            + "    log(s.getPropertyValue('font-family'));\n"
             + "  }\n"
             + "</script>\n"
             + "  <style>#div1 { font-family: swiss }</style>\n"
@@ -1351,7 +1481,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='div2' style='font-family: roman'>foo</div>\n"
             + "  <div id='div3' style='font-family: roman !important'>foo</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1361,15 +1491,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts("0")
     public void offsetHeight_empty_tag() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "    log(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1379,15 +1510,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts("0")
     public void offsetHeight_empty() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "    log(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPage2(html);
     }
 
     /**
@@ -1397,15 +1529,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts("0")
     public void offsetHeight_displayNone() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "    log(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1' style='display: none'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1415,15 +1548,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts("18")
     public void offsetHeight_with_content() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "    log(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'>foo</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1433,15 +1567,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts("18")
     public void offsetHeight_with_child() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "    log(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'><div>foo</div></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1452,15 +1587,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented
     public void offsetHeight_with_childHeight() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "    log(document.getElementById('div1').offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'><iframe height='77'>foo</iframe></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1476,18 +1612,19 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
-            + "    alert(div1.offsetHeight == 0);\n"
+            + "    log(div1.offsetHeight == 0);\n"
             + "    div1.className = 'v-loading-indicator';\n"
-            + "    alert(div1.offsetHeight == 0);\n"
+            + "    log(div1.offsetHeight == 0);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1497,21 +1634,22 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"true", "false"})
     public void scrollbarWidth() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
             + "    scroller.style['width'] = '50px';\n"
             + "    scroller.style['height'] = '50px';\n"
             + "    scroller.style['overflow'] = 'scroll';\n"
-            + "    alert(scroller.offsetWidth - scroller.clientWidth == 0);\n"
+            + "    log(scroller.offsetWidth - scroller.clientWidth == 0);\n"
             + "    document.body.appendChild(scroller);\n"
-            + "    alert(scroller.offsetWidth - scroller.clientWidth == 0);\n"
+            + "    log(scroller.offsetWidth - scroller.clientWidth == 0);\n"
             + "    document.body.removeChild(scroller);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1521,21 +1659,22 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"true", "false"})
     public void scrollbarHeight() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
             + "    scroller.style['width'] = '50px';\n"
             + "    scroller.style['height'] = '50px';\n"
             + "    scroller.style['overflow'] = 'scroll';\n"
-            + "    alert(scroller.offsetHeight - scroller.clientHeight == 0);\n"
+            + "    log(scroller.offsetHeight - scroller.clientHeight == 0);\n"
             + "    document.body.appendChild(scroller);\n"
-            + "    alert(scroller.offsetHeight - scroller.clientHeight == 0);\n"
+            + "    log(scroller.offsetHeight - scroller.clientHeight == 0);\n"
             + "    document.body.removeChild(scroller);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1549,21 +1688,22 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  .abc { z-index: 10; color:green }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
-            + "    alert(div.style.zIndex);\n"
-            + "    alert(div.style['z-index']);\n"
-            + "    alert(div.style.color);\n"
-            + "    alert(window.getComputedStyle(div, '').zIndex);\n"
-            + "    alert(window.getComputedStyle(div, '')['z-index']);\n"
-            + "    alert(window.getComputedStyle(div, '').color);\n"
+            + "    log(div.style.zIndex);\n"
+            + "    log(div.style['z-index']);\n"
+            + "    log(div.style.color);\n"
+            + "    log(window.getComputedStyle(div, '').zIndex);\n"
+            + "    log(window.getComputedStyle(div, '')['z-index']);\n"
+            + "    log(window.getComputedStyle(div, '').color);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' class='abc'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1571,12 +1711,14 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "0", "0", "0", "", "", "", "", "", "", "", "",
-                    "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"},
+                       "104", "104", "104", "104", "auto", "100px", "100px",
+                       "3px", "block", "content-box", "0px", "0px"},
             IE = {"0", "0", "0", "0", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px",
-                    "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"})
+                  "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"})
     public void offsetWidth() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    div.style.width = '100px';\n"
@@ -1584,37 +1726,37 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    div.style.padding = '2px';\n"
             + "    div.style.margin = '3px';\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(div.offsetWidth);\n"
-            + "    alert(div.offsetHeight);\n"
-            + "    alert(div.clientWidth);\n"
-            + "    alert(div.clientHeight);\n"
-            + "    alert(style.top);\n"
-            + "    alert(style.width);\n"
-            + "    alert(style.height);\n"
-            + "    alert(style.marginRight);\n"
-            + "    alert(style.display);\n"
-            + "    alert(style.boxSizing);\n"
-            + "    alert(style.borderRightWidth);\n"
-            + "    alert(style.borderLeftWidth);\n"
+            + "    log(div.offsetWidth);\n"
+            + "    log(div.offsetHeight);\n"
+            + "    log(div.clientWidth);\n"
+            + "    log(div.clientHeight);\n"
+            + "    log(style.top);\n"
+            + "    log(style.width);\n"
+            + "    log(style.height);\n"
+            + "    log(style.marginRight);\n"
+            + "    log(style.display);\n"
+            + "    log(style.boxSizing);\n"
+            + "    log(style.borderRightWidth);\n"
+            + "    log(style.borderLeftWidth);\n"
             + "    document.body.appendChild(div);\n"
-            + "    alert(div.offsetWidth);\n"
-            + "    alert(div.offsetHeight);\n"
-            + "    alert(div.clientWidth);\n"
-            + "    alert(div.clientHeight);\n"
-            + "    alert(style.top);\n"
-            + "    alert(style.width);\n"
-            + "    alert(style.height);\n"
-            + "    alert(style.marginRight);\n"
-            + "    alert(style.display);\n"
-            + "    alert(style.boxSizing);\n"
-            + "    alert(style.borderRightWidth);\n"
-            + "    alert(style.borderLeftWidth);\n"
+            + "    log(div.offsetWidth);\n"
+            + "    log(div.offsetHeight);\n"
+            + "    log(div.clientWidth);\n"
+            + "    log(div.clientHeight);\n"
+            + "    log(style.top);\n"
+            + "    log(style.width);\n"
+            + "    log(style.height);\n"
+            + "    log(style.marginRight);\n"
+            + "    log(style.display);\n"
+            + "    log(style.boxSizing);\n"
+            + "    log(style.borderRightWidth);\n"
+            + "    log(style.borderLeftWidth);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1630,26 +1772,27 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  .abc { float: right }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.createElement('div');\n"
             + "    div.style.float = 'left';\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(style.float);\n"
-            + "    alert(style.cssFloat);\n"
+            + "    log(style.float);\n"
+            + "    log(style.cssFloat);\n"
             + "    document.body.appendChild(div);\n"
-            + "    alert(style.float);\n"
-            + "    alert(style.cssFloat);\n"
+            + "    log(style.float);\n"
+            + "    log(style.cssFloat);\n"
             + "    div = document.getElementById('mydiv');\n"
             + "    style = window.getComputedStyle(div, null);\n"
-            + "    alert(style.float);\n"
-            + "    alert(style.cssFloat);\n"
+            + "    log(style.float);\n"
+            + "    log(style.cssFloat);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv' class='abc'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1666,14 +1809,15 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </table>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var r1 = document.getElementById('row1');\n"
             + "  var r2 = document.getElementById('row2');\n"
-            + "  alert(r2.offsetTop > r1.offsetTop);\n"
+            + "  log(r2.offsetTop > r1.offsetTop);\n"
             + "</script>\n"
 
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1690,14 +1834,15 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </ul>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var li1 = document.getElementById('li1');\n"
             + "  var li2 = document.getElementById('li2');\n"
-            + "  alert(li2.offsetTop > li1.offsetTop);\n"
+            + "  log(li2.offsetTop > li1.offsetTop);\n"
             + "</script>\n"
 
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1714,13 +1859,14 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='mydiv'>Heho</div>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var d1 = document.getElementById('mydiv');\n"
-            + "  alert(d1.offsetLeft < 10);\n"
+            + "  log(d1.offsetLeft < 10);\n"
             + "</script>\n"
 
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1735,17 +1881,18 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  .abc { xyz: 1 }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('mydiv');\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(style.xyz);\n"
+            + "    log(style.xyz);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='mydiv' class='abc'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1756,8 +1903,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void selector() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.querySelectorAll('div *').length);\n"
+            + "    log(document.querySelectorAll('div *').length);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1766,7 +1914,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    <p>p</p>\n"
             + "  </div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1779,34 +1927,35 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented({FF, FF78})
     public void marginLeftRight() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    var container = document.createElement('div');\n"
             + "    container.style.width = '400px';\n"
             + "    div1.appendChild(container);\n"
-            + "    alert(container.style.marginRight);\n"
-            + "    alert(window.getComputedStyle(container, null).marginRight);\n"
+            + "    log(container.style.marginRight);\n"
+            + "    log(window.getComputedStyle(container, null).marginRight);\n"
             + "\n"
             + "    var el = document.createElement('div');\n"
             + "    el.style.width = '10%';\n"
             + "    el.style.marginRight = '20%';\n"
             + "    container.appendChild(el);\n"
-            + "    alert(el.style.marginRight);\n"
-            + "    alert(window.getComputedStyle(el, null).marginRight);\n"
+            + "    log(el.style.marginRight);\n"
+            + "    log(window.getComputedStyle(el, null).marginRight);\n"
             + "\n"
             + "    el = document.createElement('div');\n"
             + "    el.style.width = '30%';\n"
             + "    el.style.minWidth = '300px';\n"
             + "    el.style.marginLeft = '25%';\n"
             + "    container.appendChild(el);\n"
-            + "    alert(el.style.marginLeft);\n"
-            + "    alert(window.getComputedStyle(el, null).marginLeft);\n"
+            + "    log(el.style.marginLeft);\n"
+            + "    log(window.getComputedStyle(el, null).marginLeft);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'></div>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1818,6 +1967,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    var parent = document.createElement('div');\n"
@@ -1829,20 +1979,20 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    div.style = 'position: absolute; width: 20px; height: 20px; top: 50%; left: 50%';\n"
             + "    parent.appendChild(div);\n"
             + "\n"
-            + "    alert(parent.style.top);\n"
-            + "    alert(window.getComputedStyle(parent, null).top);\n"
-            + "    alert(parent.style.left);\n"
-            + "    alert(window.getComputedStyle(parent, null).left);\n"
-            + "    alert(div.style.top);\n"
-            + "    alert(window.getComputedStyle(div, null).top);\n"
-            + "    alert(div.style.left);\n"
-            + "    alert(window.getComputedStyle(div, null).left);\n"
+            + "    log(parent.style.top);\n"
+            + "    log(window.getComputedStyle(parent, null).top);\n"
+            + "    log(parent.style.left);\n"
+            + "    log(window.getComputedStyle(parent, null).left);\n"
+            + "    log(div.style.top);\n"
+            + "    log(window.getComputedStyle(div, null).top);\n"
+            + "    log(div.style.left);\n"
+            + "    log(window.getComputedStyle(div, null).left);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'></div>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1855,14 +2005,15 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    var empty = getOffsetWidth('width: 300px; height: 300px;');\n"
             + "    var marginAndPadding = getOffsetWidth('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
             + "    var withBorderBox = getOffsetWidth('width: 300px; height: 300px; margin: 3px; padding: 5px;"
             + " box-sizing: border-box;');\n"
-            + "    alert(marginAndPadding - empty);\n"
-            + "    alert(withBorderBox - empty);\n"
+            + "    log(marginAndPadding - empty);\n"
+            + "    log(withBorderBox - empty);\n"
             + "  }\n"
             + "  function getOffsetWidth(style) {\n"
             + "    var d = document.createElement('div');\n"
@@ -1879,7 +2030,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='div1'></div>\n"
             + "</body>\n"
             + "</html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1892,6 +2043,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
 
@@ -1899,8 +2051,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    var marginAndPadding = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
             + "    var withBorderBox = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;"
                                                             + " box-sizing: border-box;');\n"
-            + "    alert(marginAndPadding - empty);\n"
-            + "    alert(withBorderBox - empty);\n"
+            + "    log(marginAndPadding - empty);\n"
+            + "    log(withBorderBox - empty);\n"
             + "  }\n"
             + "  function getOffsetHeight(style) {\n"
             + "    var d = document.createElement('div');\n"
@@ -1917,7 +2069,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='div1'></div>\n"
             + "</body>\n"
             + "</html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1928,16 +2080,17 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void offsetWidthWithDisplayInline() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "    var div = document.createElement('div');\n"
             + "    document.body.appendChild(div);\n"
             + "    div.style.cssText = 'display: inline; margin:0; border: 0; padding: 5px; width: 7px';\n"
-            + "    alert(div.offsetWidth);\n"
+            + "    log(div.offsetWidth);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1948,6 +2101,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             IE = "true")
     public void borderBoxAffectsOffsetWidth2() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var divNormal = document.createElement('div');\n"
             + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
@@ -1955,16 +2109,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    document.body.appendChild(divNormal);\n"
             + "\n"
             + "   if (window.navigator.userAgent.indexOf('Trident/') == -1) {\n"
-            + "     alert(divNormal.offsetWidth);\n"
+            + "     log(divNormal.offsetWidth);\n"
             + "   } else {\n"
-            + "     alert(divNormal.offsetWidth == window.innerWidth - 16);\n"
+            + "     log(divNormal.offsetWidth == window.innerWidth - 16);\n"
             + "   }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1975,6 +2129,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             IE = "0")
     public void borderBoxAffectsOffsetHeight2() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var divNormal = document.createElement('div');\n"
             + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
@@ -1982,16 +2137,16 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    document.body.appendChild(divNormal);\n"
             + "\n"
             + "   if (window.navigator.userAgent.indexOf('Trident/') == -1) {\n"
-            + "     alert(divNormal.offsetHeight);\n"
+            + "     log(divNormal.offsetHeight);\n"
             + "   } else {\n"
-            + "     alert(divNormal.offsetHeight);\n"
+            + "     log(divNormal.offsetHeight);\n"
             + "   }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2004,19 +2159,20 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @NotYetImplemented({CHROME, EDGE, IE})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var win = window.innerWidth;\n"
             + "    var html = document.documentElement.offsetWidth;\n"
             + "    var body = document.body.offsetWidth;\n"
-            + "    alert(window.getComputedStyle(document.body, null).margin);\n"
-            + "    alert(win - html);\n"
-            + "    alert(win - body);\n"
+            + "    log(window.getComputedStyle(document.body, null).margin);\n"
+            + "    log(win - html);\n"
+            + "    log(win - body);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2028,24 +2184,25 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void offsetHeightTable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var table = document.createElement('table');\n"
             + "    table.style.fontSize = '16px';\n"
             + "    document.getElementById('myDiv').appendChild(table);\n"
-            + "    alert(table.offsetHeight);\n"
+            + "    log(table.offsetHeight);\n"
             + "\n"
             + "    var tr = document.createElement('tr');\n"
             + "    table.appendChild(tr);\n"
             + "    var td = document.createElement('td');\n"
             + "    tr.appendChild(td);\n"
             + "    td.appendChild(document.createTextNode('DATA'));\n"
-            + "    alert(table.offsetHeight);\n"
+            + "    log(table.offsetHeight);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2062,18 +2219,19 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    }\n"
             + "  </style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    var style = window.getComputedStyle(div, null);\n"
-            + "    alert(style.height == '0px');\n"
+            + "    log(style.height == '0px');\n"
             + "    div.className = 'autoheight';\n"
-            + "    alert(style.height == '0px');\n"
+            + "    log(style.height == '0px');\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>A</div>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2086,16 +2244,17 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void heightManyLines() throws Exception {
         final String html = "<html>\n"
             + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('test1');\n"
-            + "    alert(div.offsetHeight);\n"
-            + "    alert(window.getComputedStyle(div, null).height);\n"
+            + "    log(div.offsetHeight);\n"
+            + "    log(window.getComputedStyle(div, null).height);\n"
             + "    div = document.getElementById('test2');\n"
-            + "    alert(div.offsetHeight);\n"
-            + "    alert(window.getComputedStyle(div, null).height);\n"
+            + "    log(div.offsetHeight);\n"
+            + "    log(window.getComputedStyle(div, null).height);\n"
             + "    div = document.getElementById('test3');\n"
-            + "    alert(div.offsetHeight);\n"
-            + "    alert(window.getComputedStyle(div, null).height);\n"
+            + "    log(div.offsetHeight);\n"
+            + "    log(window.getComputedStyle(div, null).height);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2103,7 +2262,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id=\"test2\">This is a long string of text.<br>Some more text<br></div>\n"
             + "  <div id=\"test3\">This is a long string of text.<br>Some more text<br>and some more...</div>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2111,7 +2270,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0 17")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0 0",
+            EDGE = "0 0",
+            FF = "0 0",
+            FF78 = "0 0",
+            IE = "0 0")
     public void iFrameInnerWidth() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2153,12 +2316,13 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void getHeightInvisible() throws Exception {
         final String html = "<html><head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var node = document.getElementById('outer');\n"
               + "    var style = node.style;\n"
-              + "    alert(style.height);\n"
+              + "    log(style.height);\n"
               + "    var style = window.getComputedStyle(node, null);\n"
-              + "    alert(style.height);\n" + "  }\n"
+              + "    log(style.height);\n" + "  }\n"
               + "</script>\n"
               + "</head>\n"
               + "<body onload='test()'>\n"
@@ -2167,7 +2331,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
               + "    <div>line 2</div>\n"
               + "  </div>\n"
               + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2187,22 +2351,23 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 + "  /* ]]> */\n"
                 + "</style>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var node = document.getElementById('myDiv');\n"
               + "    var style = window.getComputedStyle(node, ':before');\n"
-              + "    alert(style.content);\n"
+              + "    log(style.content);\n"
               + "    var style = window.getComputedStyle(node, 'before');\n"
-              + "    alert(style.content);\n"
+              + "    log(style.content);\n"
               + "    var style = window.getComputedStyle(node, '::before');\n"
-              + "    alert(style.content);\n"
+              + "    log(style.content);\n"
 
               + "    node = document.getElementById('myDiv2');\n"
               + "    var style = window.getComputedStyle(node, ':before');\n"
-              + "    alert(style.content);\n"
+              + "    log(style.content);\n"
               + "    var style = window.getComputedStyle(node, 'before');\n"
-              + "    alert(style.content);\n"
+              + "    log(style.content);\n"
               + "    var style = window.getComputedStyle(node, '::before');\n"
-              + "    alert(style.content);\n"
+              + "    log(style.content);\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
@@ -2210,7 +2375,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
               + "  <div id='myDiv' >Test</div>\n"
               + "  <div id='myDiv2' >Test</div>\n"
               + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2225,10 +2390,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                     + "<img />\n"
                     + "<textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
                     + "<script>\n"
-                    + "  alert(document.body.offsetHeight > 10);\n"
+                    + LOG_TITLE_FUNCTION
+                    + "  log(document.body.offsetHeight > 10);\n"
                     + "</script>\n"
                     + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2243,10 +2409,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  div { margin: 10px 20px 30px 40px; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('div1');\n"
             + "    var left = div.style.marginLeft;\n" // force the resolution
-            + "    alert(div.offsetLeft);\n"
+            + "    log(div.offsetLeft);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2254,7 +2421,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='div1' style='margin-left: 123px'></div>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2269,10 +2436,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  div { margin: 10px 20px 30px 40px !important; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('div1');\n"
             + "    var left = div.style.marginLeft;\n" // force the resolution
-            + "    alert(div.offsetLeft);\n"
+            + "    log(div.offsetLeft);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2280,7 +2448,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='div1' style='margin-left: 123px'></div>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2296,10 +2464,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  div { margin: 20px; }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('div1');\n"
             + "    var left = div.style.marginLeft;\n" // force the resolution
-            + "    alert(div.offsetLeft);\n"
+            + "    log(div.offsetLeft);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2307,7 +2476,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='div1'></div>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2323,11 +2492,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</tr>\n"
             + "</table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.getElementById('a');\n"
-            + "  alert(e.getBoundingClientRect().left < 12);\n"
+            + "  log(e.getBoundingClientRect().left < 12);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2342,11 +2512,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<span id='tester'>tester</span>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var e = document.getElementById('tester');\n"
-            + "  alert(e.getBoundingClientRect().top < 120);\n"
+            + "  log(e.getBoundingClientRect().top < 120);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2362,12 +2533,13 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <div id='mydiv' >Heho</div>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var d1 = document.getElementById('mydiv');\n"
-            + "  alert(d1.offsetLeft < 10);\n"
+            + "  log(d1.offsetLeft < 10);\n"
             + "</script>\n"
 
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

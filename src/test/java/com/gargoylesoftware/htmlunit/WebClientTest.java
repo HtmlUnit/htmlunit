@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -648,6 +648,8 @@ public class WebClientTest extends SimpleWebTestCase {
         }
         assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
+        assertNull(webConnection.getLastWebRequest().getProxyScheme());
+        assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
         //
         // Second time redirection is turned off
@@ -659,6 +661,8 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals(initialRequestMethod, webConnection.getLastMethod());
         assertEquals(proxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(proxyPort, webConnection.getLastWebRequest().getProxyPort());
+        assertNull(webConnection.getLastWebRequest().getProxyScheme());
+        assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
         webClient.close();
     }
@@ -1194,6 +1198,8 @@ public class WebClientTest extends SimpleWebTestCase {
             webClient.getPage(URL_FIRST);
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Change the webclient default proxy settings.
             final String defaultProxyHost2 = "defaultProxyHost2";
@@ -1205,6 +1211,8 @@ public class WebClientTest extends SimpleWebTestCase {
             webClient.getPage(URL_FIRST);
             assertEquals(defaultProxyHost2, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort2, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure the custom proxy settings are used.
             final String customProxyHost = "customProxyHost";
@@ -1215,23 +1223,31 @@ public class WebClientTest extends SimpleWebTestCase {
             webClient.getPage(request);
             assertEquals(customProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure the proxy bypass works with default proxy settings.
             webClient.getOptions().getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
             webClient.getPage(URL_FIRST);
-            assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
+            assertNull(webConnection.getLastWebRequest().getProxyHost());
             assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure the proxy bypass doesn't work with custom proxy settings.
             webClient.getPage(request);
             assertEquals(customProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure we can remove proxy bypass filters.
             webClient.getOptions().getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
             webClient.getPage(URL_FIRST);
             assertEquals(defaultProxyHost2, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort2, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
         }
     }
 
@@ -1259,6 +1275,8 @@ public class WebClientTest extends SimpleWebTestCase {
             webClient.getPage(URL_FIRST);
             assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
             assertEquals(location2, page2.getUrl());
 
             // Make sure default proxy settings are used.
@@ -1267,6 +1285,8 @@ public class WebClientTest extends SimpleWebTestCase {
             final Page page1 = webClient.getPage(URL_FIRST);
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
             assertEquals(URL_FIRST, page1.getUrl());
         }
     }
@@ -1291,18 +1311,24 @@ public class WebClientTest extends SimpleWebTestCase {
             webClient.getPage(URL_FIRST);
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure proxy bypass works with default proxy settings.
             webClient.getOptions().getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
             webClient.getPage(URL_FIRST);
-            assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
+            assertNull(webConnection.getLastWebRequest().getProxyHost());
             assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
 
             // Make sure we can remove proxy bypass filters.
             webClient.getOptions().getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
             webClient.getPage(URL_FIRST);
             assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
             assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
+            assertNull(webConnection.getLastWebRequest().getProxyScheme());
+            assertFalse(webConnection.getLastWebRequest().isSocksProxy());
         }
     }
 
@@ -2122,7 +2148,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void openWindowWithAboutBlank() throws Exception {
         final WebClient client = getWebClient();
-        final WebWindow window = client.openWindow(WebClient.URL_ABOUT_BLANK, "TestingWindow");
+        final WebWindow window = client.openWindow(UrlUtils.URL_ABOUT_BLANK, "TestingWindow");
         assertNotNull(window);
     }
 
@@ -2490,14 +2516,14 @@ public class WebClientTest extends SimpleWebTestCase {
     public void aboutBlankSharedRequest() throws Exception {
         final WebClient webClient = getWebClient();
 
-        final WebWindow firstWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 1");
+        final WebWindow firstWindow = webClient.openWindow(UrlUtils.URL_ABOUT_BLANK, "Window 1");
         assertNotNull(firstWindow);
 
         final WebRequest firstRequest1 = firstWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", firstRequest1.getUrl().toExternalForm());
-        firstRequest1.setUrl(UrlUtils.toUrlSafe(WebClient.ABOUT_BLANK + "#anchor"));
+        firstRequest1.setUrl(UrlUtils.toUrlSafe(UrlUtils.ABOUT_BLANK + "#anchor"));
 
-        final WebWindow secondWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 2");
+        final WebWindow secondWindow = webClient.openWindow(UrlUtils.URL_ABOUT_BLANK, "Window 2");
         assertNotNull(secondWindow);
         final WebRequest secondRequest = secondWindow.getEnclosedPage().getWebResponse().getWebRequest();
         assertEquals("about:blank", secondRequest.getUrl().toExternalForm());
@@ -2553,5 +2579,45 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getOptions().setWebSocketEnabled(true);
         client.getPage(URL_FIRST);
         assertEquals(new String[]{"true"}, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void loadHtmlCodeIntoCurrentWindow() throws Exception {
+        final String htmlCode = "<html>"
+                + "  <head>"
+                + "    <title>Title</title>"
+                + "  </head>"
+                + "  <body>"
+                + "    content..."
+                + "  </body>"
+                + "</html> ";
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.loadHtmlCodeIntoCurrentWindow(htmlCode);
+        assertEquals("content...", page.getBody().asNormalizedText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void loadXHtmlCodeIntoCurrentWindow() throws Exception {
+        final String htmlCode = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\""
+                + "\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
+                + "  <head>"
+                + "    <title>Title</title>"
+                + "  </head>"
+                + "  <body>"
+                + "    content..."
+                + "  </body>"
+                + "</html> ";
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.loadXHtmlCodeIntoCurrentWindow(htmlCode);
+        assertEquals("content...", page.getBody().asNormalizedText());
     }
 }

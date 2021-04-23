@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,11 +40,11 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"apply: function", "arguments: object", "call: function", "constructor: function",
-            "toString: function"})
+             "toString: function"})
     public void methods_common() throws Exception {
         final String[] methods = {"apply", "arguments", "call", "constructor", "toString"};
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -54,7 +54,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("toSource: undefined")
     public void methods_toSource() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", "toSource");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,7 +64,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("bind: function")
     public void methods_bind() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", "bind");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -77,17 +77,18 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("true")
     public void arguments_prototype() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var f1 = function() {};\n"
             + "var f2 = function() {};\n"
             + "Object.prototype.myFunction = f1;\n"
             + "Array.prototype.myFunction = f2;\n"
             + "var a = (function() { return arguments;})();\n"
-            + "alert(a.myFunction == f1);\n"
+            + "log(a.myFunction == f1);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,13 +100,14 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("true")
     public void newFunctionWithSlashSlash() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "var f1 = new Function('alert(true) //');\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var f1 = new Function('log(true) //');\n"
             + "f1.call();\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,7 +118,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             IE = "function anonymous() {\n    var x = 1;\n}")
     public void newFunctionToString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "var f1 = new Function('    var x = 1;');\n"
             + "alert(f1);\n"
             + "</script></head><body>\n"
@@ -133,7 +135,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @NotYetImplemented
     public void functionToString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
             + "function foo() {\n"
             + "  return 1;\n"
             + "}\n"
@@ -153,7 +155,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     public void functionToStringMinimized() throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  var my = function foo(){return 1;}\n"
             + "  alert(my.toString());\n"
@@ -175,11 +177,12 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("foo1 done")
     public void in() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function foo1() {\n"
             + "  for (var i in foo1) {\n"
-            + "    alert(i);\n"
+            + "    log(i);\n"
             + "  }\n"
-            + "  alert('foo1 done');\n"
+            + "  log('foo1 done');\n"
             + "}\n"
             + "function foo0() {\n"
             + "  foo1();\n"
@@ -187,7 +190,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "foo0();\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -198,16 +201,17 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("true")
     public void definitionInScope() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var $ = function() { return 1; };\n"
             + "var ori = $;\n"
             + "function foo() {\n"
             + "  var $ = function $() { return 2; };\n"
             + "}\n"
             + "foo();\n"
-            + "alert(ori == $);\n"
+            + "log(ori == $);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -217,21 +221,22 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts({"2", "eat", "bananas"})
     public void apply() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var myObject = {'length': 2, '0': 'eat', '1': 'bananas'};\n"
             + "  function test() {\n"
             + "    test2.apply(null, myObject);\n"
             + "  }\n"
             + "\n"
             + "  function test2() {\n"
-            + "    alert(arguments.length);\n"
+            + "    log(arguments.length);\n"
             + "    for (var i in arguments) {\n"
-            + "      alert(arguments[i]);\n"
+            + "      log(arguments[i]);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -239,21 +244,22 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"t: [object Window]", "0", "t: ", "1", "a0: x",
-                            "t: ab", "2", "a0: x", "a1: y"})
+             "t: ab", "2", "a0: x", "a1: y"})
     public void bind() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function bindTest() {\n"
-            + "    alert('t: ' + this);\n"
-            + "    alert(arguments.length);\n"
+            + "    log('t: ' + this);\n"
+            + "    log(arguments.length);\n"
             + "    for (var i in arguments) {\n"
-            + "      alert('a' + i + ': ' + arguments[i]);\n"
+            + "      log('a' + i + ': ' + arguments[i]);\n"
             + "    }\n"
             + "  }\n"
 
             + "  function test() {\n"
-            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }\n"
+            + "    if (!Function.prototype.bind) { log('bind not supported'); return }\n"
 
             + "    var foo = bindTest.bind(null);\n"
             + "    foo();\n"
@@ -269,7 +275,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -281,16 +287,17 @@ public class NativeFunctionTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function bindTest() {\n"
-            + "    alert('t: ' + this);\n"
-            + "    alert(arguments.length);\n"
+            + "    log('t: ' + this);\n"
+            + "    log(arguments.length);\n"
             + "    for (var i in arguments) {\n"
-            + "      alert('a' + i + ': ' + arguments[i]);\n"
+            + "      log('a' + i + ': ' + arguments[i]);\n"
             + "    }\n"
             + "  }\n"
 
             + "  function test() {\n"
-            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }\n"
+            + "    if (!Function.prototype.bind) { log('bind not supported'); return }\n"
 
             + "    var foo = bindTest.bind('ab', ['x', 'y']);\n"
             + "    foo();\n"
@@ -300,7 +307,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -310,15 +317,16 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("my y var")
     public void commaOperator() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var obj = {default: eval};\n"
             + "  (0, obj.default)('var y=\"my y var\"');\n"
-            + "  alert(y);\n"
+            + "  log(y);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -328,6 +336,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("my y var")
     public void commaOperatorFunction() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
             + "}\n"
@@ -335,12 +344,12 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "  var obj = {};\n"
             + "  setFunction(obj);\n"
             + "  (0, obj.default)('var y=\"my y var\"');\n"
-            + "  alert(y);\n"
+            + "  log(y);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -350,17 +359,18 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts({"my x var", "my y var"})
     public void commaOperatorTwice() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var obj = {default: eval};\n"
             + "  (0, obj.default)('var x=\"my x var\"');\n"
-            + "  alert(x);\n"
+            + "  log(x);\n"
             + "  (0, obj.default)('var y=\"my y var\"');\n"
-            + "  alert(y);\n"
+            + "  log(y);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -370,6 +380,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("my y var")
     public void commaOperatorFunctionTry() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
             + "}\n"
@@ -378,13 +389,13 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "  setFunction(obj);\n"
             + "  try {\n"
             + "    (0, obj.default)('var y=\"my y var\"');\n"
-            + "    alert(y);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(y);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -394,6 +405,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("my y var")
     public void commaOperatorFunctionCall() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
             + "}\n"
@@ -403,7 +415,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
             + "  function b() {\n"
             + "    (0, obj.default)('var y=\"my y var\"');\n"
-            + "    alert(y);\n"
+            + "    log(y);\n"
             + "  }\n"
 
             + "  b();\n"
@@ -411,7 +423,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -421,6 +433,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts("my y var")
     public void commaOperatorFunctionAnonymous() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
             + "}\n"
@@ -430,13 +443,13 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
             + "  (function b() {\n"
             + "    (0, obj.default)('var y=\"my y var\"');\n"
-            + "    alert(y);\n"
+            + "    log(y);\n"
             + "  })();\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -448,20 +461,21 @@ public class NativeFunctionTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function foo() { return this }\n"
 
             + "  function test() {\n"
             + "    try {\n"
             + "      var a = foo.call(null);\n"
-            + "      alert ('a=' + a);\n"
-            + "    } catch (e) { alert(e); }\n"
+            + "      log('a=' + a);\n"
+            + "    } catch (e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -473,20 +487,21 @@ public class NativeFunctionTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function foo() { return this }\n"
 
             + "  function test() {\n"
             + "    try {\n"
             + "      var a = foo.call(undefined);\n"
-            + "      alert ('a=' + a);\n"
-            + "    } catch (e) { alert(e); }\n"
+            + "      log('a=' + a);\n"
+            + "    } catch (e) { log(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

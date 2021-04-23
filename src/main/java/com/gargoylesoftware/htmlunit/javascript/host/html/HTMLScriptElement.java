@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -111,7 +111,7 @@ public class HTMLScriptElement extends HTMLElement {
         final DomNode textChild = new DomText(htmlElement.getPage(), text);
         htmlElement.appendChild(textChild);
 
-        ScriptElementSupport.executeScriptIfNeeded(htmlElement);
+        ScriptElementSupport.executeScriptIfNeeded(htmlElement, false, false);
     }
 
     /**
@@ -145,7 +145,7 @@ public class HTMLScriptElement extends HTMLElement {
         final Object result = super.appendChild(childObject);
 
         if (wasEmpty) {
-            ScriptElementSupport.executeScriptIfNeeded(tmpScript);
+            ScriptElementSupport.executeScriptIfNeeded(tmpScript, false, false);
         }
         return result;
     }

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,7 +47,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(instr));\n");
+        tester("log(Object.prototype.toString.call(instr));\n");
     }
 
     /**
@@ -70,9 +70,9 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     // DOM processing instructions do not support attributes
     public void attributes_xmlDecl() throws Exception {
         final String test = ""
-            + "alert(instr.attributes.length);\n"
+            + "log(instr.attributes.length);\n"
             + "var attr = instr.attributes[0];\n"
-            + "alert(attr.nodeName + '=' + attr.nodeValue);\n";
+            + "log(attr.nodeName + '=' + attr.nodeValue);\n";
         tester_xmlDecl(test);
     }
 
@@ -86,6 +86,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     // DOM processing instructions do not support attributes
     public void attributes_complete_xmlDecl() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + ACTIVEX_CHECK
             + "  var doc = " + callCreateXMLDOMDocument() + ";\n"
@@ -93,18 +94,18 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             + "'xml', 'version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"');\n"
             + "  doc.appendChild(instr);\n"
             + "  try {\n"
-            + "    alert(instr.attributes.length);\n"
+            + "    log(instr.attributes.length);\n"
             + "    var attr = instr.attributes[0];\n"
-            + "    alert(attr.nodeName + '=' + attr.nodeValue);\n"
+            + "    log(attr.nodeName + '=' + attr.nodeValue);\n"
             + "    attr = instr.attributes[1];\n"
-            + "    alert(attr.nodeName + '=' + attr.nodeValue);\n"
+            + "    log(attr.nodeName + '=' + attr.nodeValue);\n"
             + "    attr = instr.attributes[2];\n"
-            + "    alert(attr.nodeName + '=' + attr.nodeValue);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(attr.nodeName + '=' + attr.nodeValue);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -134,7 +135,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void childNodes() throws Exception {
-        tester("alert(instr.childNodes.length);\n");
+        tester("log(instr.childNodes.length);\n");
     }
 
     /**
@@ -144,7 +145,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void childNodes_xmlDecl() throws Exception {
-        tester_xmlDecl("alert(instr.childNodes.length);\n");
+        tester_xmlDecl("log(instr.childNodes.length);\n");
     }
 
     /**
@@ -153,40 +154,40 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test test", "test test", "test test",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void data() throws Exception {
         final String test = ""
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.text);\n"
             // null
             + "try {\n"
             + "  instr.data = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "instr.data = '';\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.text);\n"
             // normal
             + "instr.data = 'test';\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.text);\n"
             // linebreak
             + "instr.data = 'test\\ntest';\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.text);\n"
             // xml
             + "instr.data = '<tag/>';\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.text);\n";
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.text);\n";
 
         tester(test);
     }
@@ -197,26 +198,26 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-                   "exception-setNull",
-                   "exception-setEmpty",
-                   "exception-set"})
+                  "exception-setNull",
+                  "exception-setEmpty",
+                  "exception-set"})
     public void data_xmlDecl() throws Exception {
         final String test = ""
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.text);\n"
             // null
             + "try {\n"
             + "  instr.data = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "try {\n"
             + "  instr.data = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // normal
             + "try {\n"
             + "  instr.data = 'test';\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
 
         tester_xmlDecl(test);
     }
@@ -367,40 +368,40 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test test", "test test", "test test",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void nodeValue() throws Exception {
         final String test = ""
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.data);\n"
+            + "log(instr.text);\n"
             // null
             + "try {\n"
             + "  instr.nodeValue = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "instr.nodeValue = '';\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.data);\n"
+            + "log(instr.text);\n"
             // normal
             + "instr.nodeValue = 'test';\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.data);\n"
+            + "log(instr.text);\n"
             // linebreak
             + "instr.nodeValue = 'test\\ntest';\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.data);\n"
+            + "log(instr.text);\n"
             // xml
             + "instr.nodeValue = '<tag/>';\n"
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.text);\n";
+            + "log(instr.nodeValue);\n"
+            + "log(instr.data);\n"
+            + "log(instr.text);\n";
 
         tester(test);
     }
@@ -411,26 +412,26 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-                   "exception-setNull",
-                   "exception-setEmpty",
-                   "exception-set"})
+                  "exception-setNull",
+                  "exception-setEmpty",
+                  "exception-set"})
     public void nodeValue_xmlDecl() throws Exception {
         final String test = ""
-            + "alert(instr.nodeValue);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.text);\n"
+            + "log(instr.nodeValue);\n"
+            + "log(instr.data);\n"
+            + "log(instr.text);\n"
             // null
             + "try {\n"
             + "  instr.nodeValue = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "try {\n"
             + "  instr.nodeValue = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // normal
             + "try {\n"
             + "  instr.nodeValue = 'test';\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
 
         tester_xmlDecl(test);
     }
@@ -442,7 +443,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
-        tester("alert(instr.ownerDocument === doc);\n");
+        tester("log(instr.ownerDocument === doc);\n");
     }
 
     /**
@@ -452,7 +453,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument_xmlDecl() throws Exception {
-        tester_xmlDecl("alert(instr.ownerDocument === doc);\n");
+        tester_xmlDecl("log(instr.ownerDocument === doc);\n");
     }
 
     /**
@@ -463,17 +464,18 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             IE = "true")
     public void ownerDocument_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('apache', 'file=\"header.html\"');\n"
             + "    try {\n"
-            + "      alert(instr.ownerDocument === doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(instr.ownerDocument === doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -484,17 +486,18 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             IE = "true")
     public void ownerDocument_created_xmlDecl() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('xml', 'version=\"1.0\"');\n"
             + "    try {\n"
-            + "      alert(instr.ownerDocument === doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(instr.ownerDocument === doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -504,7 +507,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void parentNode() throws Exception {
-        tester("alert(doc === instr.parentNode);\n");
+        tester("log(doc === instr.parentNode);\n");
     }
 
     /**
@@ -514,7 +517,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void parentNode_xmlDecl() throws Exception {
-        tester_xmlDecl("alert(doc === instr.parentNode);\n");
+        tester_xmlDecl("log(doc === instr.parentNode);\n");
     }
 
     /**
@@ -525,17 +528,18 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             IE = "true")
     public void parentNode_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('apache', 'file=\"header.html\"');\n"
             + "    try {\n"
-            + "      alert(instr.parentNode == null);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(instr.parentNode == null);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -546,17 +550,18 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             IE = "true")
     public void parentNode_created_xmlDecl() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('xml', 'version=\"1.0\"');\n"
             + "    try {\n"
-            + "      alert(instr.parentNode == null);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(instr.parentNode == null);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -605,40 +610,40 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-                   "exception-setNull",
-                   "", "", "",
-                   "test", "test", "test",
-                   "test\ntest", "test\ntest", "test\ntest",
-                   "<tag/>", "<tag/>", "<tag/>"})
+                  "exception-setNull",
+                  "", "", "",
+                  "test", "test", "test",
+                  "test test", "test test", "test test",
+                  "<tag/>", "<tag/>", "<tag/>"})
     public void text() throws Exception {
         final String test = ""
-            + "alert(instr.text);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
+            + "log(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
             // null
             + "try {\n"
             + "  instr.text = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "instr.text = '';\n"
-            + "alert(instr.text);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
+            + "log(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
             // normal
             + "instr.text = 'test';\n"
-            + "alert(instr.text);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
+            + "log(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
             // linebreak
             + "instr.text = 'test\\ntest';\n"
-            + "alert(instr.text);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
+            + "log(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
             // xml
             + "instr.text = '<tag/>';\n"
-            + "alert(instr.text);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n";
+            + "log(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n";
 
         tester(test);
     }
@@ -649,26 +654,26 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-                   "exception-setNull",
-                   "exception-setEmpty",
-                   "exception-set"})
+                  "exception-setNull",
+                  "exception-setEmpty",
+                  "exception-set"})
     public void text_xmlDecl() throws Exception {
         final String test = ""
-            + "alert(instr.text);\n"
-            + "alert(instr.data);\n"
-            + "alert(instr.nodeValue);\n"
+            + "log(instr.text);\n"
+            + "log(instr.data);\n"
+            + "log(instr.nodeValue);\n"
             // null
             + "try {\n"
             + "  instr.text = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "try {\n"
             + "  instr.text = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // normal
             + "try {\n"
             + "  instr.text = 'test';\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
 
         tester_xmlDecl(test);
     }
@@ -701,25 +706,26 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             IE = "<?x ?>")
     public void xml_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('x', '');\n"
             + "    try {\n"
-            + "      alert(instr.xml);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(instr.xml);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     private void property(final String property) throws Exception {
-        tester("alert(instr." + property + ");\n");
+        tester("log(instr." + property + ");\n");
     }
 
     private void property_xmlDecl(final String property) throws Exception {
-        tester_xmlDecl("alert(instr." + property + ");\n");
+        tester_xmlDecl("log(instr." + property + ");\n");
     }
 
     private void tester(final String test) throws Exception {
@@ -731,6 +737,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
 
     private void tester_xmlDecl(final String test) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
@@ -738,15 +745,16 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             + "    doc.appendChild(instr);\n"
             + "    try {\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
@@ -754,11 +762,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var instr = doc.firstChild;\n"
             + test
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

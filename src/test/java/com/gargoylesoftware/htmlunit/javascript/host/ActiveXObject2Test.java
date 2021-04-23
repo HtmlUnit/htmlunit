@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -38,7 +38,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "NaN", "false", "No", "No", "No", "No"},
             IE = {"undefined", "\nfunction ActiveXObject() {\n    [native code]\n}\n",
-                    "NaN", "false", "No", "No", "Yes", "Yes"})
+                  "NaN", "false", "No", "No", "Yes", "Yes"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

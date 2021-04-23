@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,6 +55,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
@@ -789,6 +791,18 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns a normalized textual representation of this element that represents
+     * what would be visible to the user if this page was shown in a web browser.
+     * Whitespace is normalized like in the browser and block tags are separated by '\n'.
+     *
+     * @return a normalized textual representation of this element
+     */
+    public String asNormalizedText() {
+        final HtmlSerializerNormalizedText ser = new HtmlSerializerNormalizedText();
+        return ser.asText(this);
+    }
+
+    /**
      * Returns a textual representation of this element that represents what would
      * be visible to the user if this page was shown in a web browser. For example,
      * a single-selection select element would return the currently selected value
@@ -796,7 +810,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @return a textual representation of this element that represents what would
      *         be visible to the user if this page was shown in a web browser
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
+    @Deprecated
     public String asText() {
         if (getPage() instanceof XmlPage) {
             final XmlSerializer ser = new XmlSerializer();

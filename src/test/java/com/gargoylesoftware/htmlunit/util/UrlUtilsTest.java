@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,6 +34,24 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Hartmut Arlt
  */
 public class UrlUtilsTest extends SimpleWebTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void toUrlSafe() throws Exception {
+        URL url = UrlUtils.toUrlSafe("http://my.home.com/index.html?query#ref");
+        assertEquals("http://my.home.com/index.html?query#ref", url.toExternalForm());
+
+        url = UrlUtils.toUrlSafe("about:blank");
+        assertEquals(UrlUtils.URL_ABOUT_BLANK, url);
+
+        url = UrlUtils.toUrlSafe("about:Blank");
+        assertEquals(UrlUtils.URL_ABOUT_BLANK, url);
+
+        url = UrlUtils.toUrlSafe("about:config");
+        assertEquals("about:config", url.toExternalForm());
+    }
 
     /**
      * @throws Exception if the test fails
@@ -495,8 +513,8 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         // issue #1787
         // final URL u1 = new URL("http://sourceforge.net/");
         // final URL u2 = new URL("http://ch3.sourceforge.net/");
-        final URL u1 = new URL("http://rbri.de/");
-        final URL u2 = new URL("http://jonas.rbri.de/");
+        final URL u1 = new URL("http://htmlunit.org/");
+        final URL u2 = new URL("http://host1.htmlunit.org/");
         assertEquals(InetAddress.getByName(u1.getHost()), InetAddress.getByName(u2.getHost()));
         assertFalse(UrlUtils.sameFile(u1, u2));
     }

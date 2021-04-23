@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -850,7 +850,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.
+     * action listeners, etc.<br>
+     * This only clicks the element if it is visible and enabled (isDisplayed() &amp; !isDisabled()).
+     * In case the element is not visible and/or disabled, only a log output is generated.
+     * <br>
+     * If you circumvent the visible/disabled check use click(shiftKey, ctrlKey, altKey, true, true, false)
      *
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
@@ -864,7 +868,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.
+     * action listeners, etc.<br>
+     * This only clicks the element if it is visible and enabled (isDisplayed() &amp; !isDisabled()).
+     * In case the element is not visible and/or disabled, only a log output is generated.
+     * <br>
+     * If you circumvent the visible/disabled check use click(shiftKey, ctrlKey, altKey, true, true, false)
      *
      * @param shiftKey {@code true} if SHIFT is pressed during the click
      * @param ctrlKey {@code true} if CTRL is pressed during the click
@@ -883,7 +891,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Simulates clicking on this element, returning the page in the window that has the focus
      * after the element has been clicked. Note that the returned page may or may not be the same
      * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.
+     * action listeners, etc.<br>
+     * This only clicks the element if it is visible and enabled (isDisplayed() &amp; !isDisabled()).
+     * In case the element is not visible and/or disabled, only a log output is generated.
+     * <br>
+     * If you circumvent the visible/disabled check use click(shiftKey, ctrlKey, altKey, true, true, false)
      *
      * @param shiftKey {@code true} if SHIFT is pressed during the click
      * @param ctrlKey {@code true} if CTRL is pressed during the click

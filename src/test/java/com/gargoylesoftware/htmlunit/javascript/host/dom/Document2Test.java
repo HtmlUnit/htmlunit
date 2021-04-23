@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -391,10 +391,10 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"<p>a & b</p> &amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '",
-                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
-                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '"})
+             "<p>a & b</p> &amp; \u0162 \" '",
+             "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
+             "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+             "<p>a & b</p> &amp; \u0162 \" '"})
     public void createTextNodeWithHtml() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "  function test() {\n"

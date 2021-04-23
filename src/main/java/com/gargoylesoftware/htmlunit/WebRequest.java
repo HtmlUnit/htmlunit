@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.IDN;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collections;
@@ -63,6 +64,7 @@ public class WebRequest implements Serializable {
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
     private int proxyPort_;
+    private String proxyScheme_;
     private boolean isSocksProxy_;
     private HttpMethod httpMethod_ = HttpMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
@@ -98,7 +100,7 @@ public class WebRequest implements Serializable {
      * @return a new request for about:blank
      */
     public static WebRequest newAboutBlankRequest() {
-        return new WebRequest(WebClient.URL_ABOUT_BLANK, "*/*", "gzip, deflate");
+        return new WebRequest(UrlUtils.URL_ABOUT_BLANK, "*/*", "gzip, deflate");
     }
 
     /**
@@ -244,6 +246,22 @@ public class WebRequest implements Serializable {
      */
     public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
+    }
+
+    /**
+     * Returns the proxy scheme to use.
+     * @return the proxy scheme to use
+     */
+    public String getProxyScheme() {
+        return proxyScheme_;
+    }
+
+    /**
+     * Sets the proxy scheme to use.
+     * @param proxyScheme the proxy scheme to use
+     */
+    public void setProxyScheme(final String proxyScheme) {
+        proxyScheme_ = proxyScheme;
     }
 
     /**
@@ -410,6 +428,23 @@ public class WebRequest implements Serializable {
             }
         }
         return additionalHeaders_.get(newKey);
+    }
+
+    /**
+     * Sets the referer HTTP header - only if the provided url is valid.
+     * @param url the url for the referer HTTP header
+     */
+    public void setRefererlHeader(final URL url) {
+        if (url == null || !url.getProtocol().startsWith("http")) {
+            return;
+        }
+
+        try {
+            setAdditionalHeader(HttpHeader.REFERER, UrlUtils.getUrlWithoutRef(url).toExternalForm());
+        }
+        catch (final MalformedURLException e) {
+            // bad luck us the whole url from the pager
+        }
     }
 
     /**

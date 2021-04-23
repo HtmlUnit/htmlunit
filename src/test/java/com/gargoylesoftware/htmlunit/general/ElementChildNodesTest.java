@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,13 +34,14 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class ElementChildNodesTest extends WebDriverTestCase {
 
     private static String test(final String tagName) {
-        return "<html><head><title>test_getChildNodes</title>\n"
+        return "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  for (var i = 1; i <= 6; i++) {\n"
                 + "    var element = document.getElementById('p' + i);\n"
                 + "    if (element) {\n"
-                + "      alert(element.childNodes.length);\n"
+                + "      log(element.childNodes.length);\n"
                 + "    }\n"
                 + "  }\n"
                 + "}\n"
@@ -63,7 +64,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void abbr() throws Exception {
-        loadPageWithAlerts2(test("abbr"));
+        loadPageVerifyTitle2(test("abbr"));
     }
 
     /**
@@ -74,7 +75,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void acronym() throws Exception {
-        loadPageWithAlerts2(test("acronym"));
+        loadPageVerifyTitle2(test("acronym"));
     }
 
     /**
@@ -85,7 +86,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void a() throws Exception {
-        loadPageWithAlerts2(test("a"));
+        loadPageVerifyTitle2(test("a"));
     }
 
     /**
@@ -96,7 +97,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void address() throws Exception {
-        loadPageWithAlerts2(test("address"));
+        loadPageVerifyTitle2(test("address"));
     }
 
     /**
@@ -107,7 +108,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void applet() throws Exception {
-        loadPageWithAlerts2(test("applet"));
+        loadPageVerifyTitle2(test("applet"));
     }
 
     /**
@@ -118,7 +119,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void area() throws Exception {
-        loadPageWithAlerts2(test("area"));
+        loadPageVerifyTitle2(test("area"));
     }
 
     /**
@@ -129,7 +130,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void article() throws Exception {
-        loadPageWithAlerts2(test("article"));
+        loadPageVerifyTitle2(test("article"));
     }
 
     /**
@@ -140,7 +141,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void aside() throws Exception {
-        loadPageWithAlerts2(test("aside"));
+        loadPageVerifyTitle2(test("aside"));
     }
 
     /**
@@ -151,7 +152,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void audio() throws Exception {
-        loadPageWithAlerts2(test("audio"));
+        loadPageVerifyTitle2(test("audio"));
     }
 
     /**
@@ -162,7 +163,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void bgsound() throws Exception {
-        loadPageWithAlerts2(test("bgsound"));
+        loadPageVerifyTitle2(test("bgsound"));
     }
 
     /**
@@ -173,7 +174,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void base() throws Exception {
-        loadPageWithAlerts2(test("base"));
+        loadPageVerifyTitle2(test("base"));
     }
 
     /**
@@ -184,7 +185,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void basefont() throws Exception {
-        loadPageWithAlerts2(test("basefont"));
+        loadPageVerifyTitle2(test("basefont"));
     }
 
     /**
@@ -195,7 +196,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void bdi() throws Exception {
-        loadPageWithAlerts2(test("bdi"));
+        loadPageVerifyTitle2(test("bdi"));
     }
 
     /**
@@ -206,7 +207,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void bdo() throws Exception {
-        loadPageWithAlerts2(test("bdo"));
+        loadPageVerifyTitle2(test("bdo"));
     }
 
     /**
@@ -217,7 +218,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void big() throws Exception {
-        loadPageWithAlerts2(test("big"));
+        loadPageVerifyTitle2(test("big"));
     }
 
     /**
@@ -228,7 +229,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void blink() throws Exception {
-        loadPageWithAlerts2(test("blink"));
+        loadPageVerifyTitle2(test("blink"));
     }
 
     /**
@@ -239,7 +240,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void blockquote() throws Exception {
-        loadPageWithAlerts2(test("blockquote"));
+        loadPageVerifyTitle2(test("blockquote"));
     }
 
     /**
@@ -250,7 +251,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void body() throws Exception {
-        loadPageWithAlerts2(test("body"));
+        loadPageVerifyTitle2(test("body"));
     }
 
     /**
@@ -261,7 +262,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void b() throws Exception {
-        loadPageWithAlerts2(test("b"));
+        loadPageVerifyTitle2(test("b"));
     }
 
     /**
@@ -272,7 +273,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "3", "3", "5", "4", "4"})
     public void br() throws Exception {
-        loadPageWithAlerts2(test("br"));
+        loadPageVerifyTitle2(test("br"));
     }
 
     /**
@@ -283,7 +284,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void button() throws Exception {
-        loadPageWithAlerts2(test("button"));
+        loadPageVerifyTitle2(test("button"));
     }
 
     /**
@@ -294,7 +295,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void canvas() throws Exception {
-        loadPageWithAlerts2(test("canvas"));
+        loadPageVerifyTitle2(test("canvas"));
     }
 
     /**
@@ -305,7 +306,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void caption() throws Exception {
-        loadPageWithAlerts2(test("caption"));
+        loadPageVerifyTitle2(test("caption"));
     }
 
     /**
@@ -316,7 +317,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void center() throws Exception {
-        loadPageWithAlerts2(test("center"));
+        loadPageVerifyTitle2(test("center"));
     }
 
     /**
@@ -327,7 +328,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void cite() throws Exception {
-        loadPageWithAlerts2(test("cite"));
+        loadPageVerifyTitle2(test("cite"));
     }
 
     /**
@@ -338,7 +339,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void code() throws Exception {
-        loadPageWithAlerts2(test("code"));
+        loadPageVerifyTitle2(test("code"));
     }
 
     /**
@@ -351,7 +352,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
             FF = {"3", "2", "2", "3", "2", "2"},
             FF78 = {"3", "2", "2", "3", "2", "2"})
     public void command() throws Exception {
-        loadPageWithAlerts2(test("command"));
+        loadPageVerifyTitle2(test("command"));
     }
 
     /**
@@ -362,7 +363,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void datalist() throws Exception {
-        loadPageWithAlerts2(test("datalist"));
+        loadPageVerifyTitle2(test("datalist"));
     }
 
     /**
@@ -373,7 +374,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void dfn() throws Exception {
-        loadPageWithAlerts2(test("dfn"));
+        loadPageVerifyTitle2(test("dfn"));
     }
 
     /**
@@ -384,7 +385,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dd() throws Exception {
-        loadPageWithAlerts2(test("dd"));
+        loadPageVerifyTitle2(test("dd"));
     }
 
     /**
@@ -395,7 +396,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void del() throws Exception {
-        loadPageWithAlerts2(test("del"));
+        loadPageVerifyTitle2(test("del"));
     }
 
     /**
@@ -406,7 +407,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void details() throws Exception {
-        loadPageWithAlerts2(test("details"));
+        loadPageVerifyTitle2(test("details"));
     }
 
     /**
@@ -421,7 +422,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF = {"3", "2", "2", "3", "2", "2"},
             FF78 = {"3", "2", "2", "3", "2", "2"})
     public void dialog() throws Exception {
-        loadPageWithAlerts2(test("dialog"));
+        loadPageVerifyTitle2(test("dialog"));
     }
 
     /**
@@ -432,7 +433,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dir() throws Exception {
-        loadPageWithAlerts2(test("dir"));
+        loadPageVerifyTitle2(test("dir"));
     }
 
     /**
@@ -443,7 +444,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void div() throws Exception {
-        loadPageWithAlerts2(test("div"));
+        loadPageVerifyTitle2(test("div"));
     }
 
     /**
@@ -454,7 +455,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dl() throws Exception {
-        loadPageWithAlerts2(test("dl"));
+        loadPageVerifyTitle2(test("dl"));
     }
 
     /**
@@ -465,7 +466,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void dt() throws Exception {
-        loadPageWithAlerts2(test("dt"));
+        loadPageVerifyTitle2(test("dt"));
     }
 
     /**
@@ -476,7 +477,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void embed() throws Exception {
-        loadPageWithAlerts2(test("embed"));
+        loadPageVerifyTitle2(test("embed"));
     }
 
     /**
@@ -487,7 +488,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void em() throws Exception {
-        loadPageWithAlerts2(test("em"));
+        loadPageVerifyTitle2(test("em"));
     }
 
     /**
@@ -498,7 +499,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void fieldset() throws Exception {
-        loadPageWithAlerts2(test("fieldset"));
+        loadPageVerifyTitle2(test("fieldset"));
     }
 
     /**
@@ -509,7 +510,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void figcaption() throws Exception {
-        loadPageWithAlerts2(test("figcaption"));
+        loadPageVerifyTitle2(test("figcaption"));
     }
 
     /**
@@ -520,7 +521,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void figure() throws Exception {
-        loadPageWithAlerts2(test("figure"));
+        loadPageVerifyTitle2(test("figure"));
     }
 
     /**
@@ -531,7 +532,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void font() throws Exception {
-        loadPageWithAlerts2(test("font"));
+        loadPageVerifyTitle2(test("font"));
     }
 
     /**
@@ -542,7 +543,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void form() throws Exception {
-        loadPageWithAlerts2(test("form"));
+        loadPageVerifyTitle2(test("form"));
     }
 
     /**
@@ -553,7 +554,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void footer() throws Exception {
-        loadPageWithAlerts2(test("footer"));
+        loadPageVerifyTitle2(test("footer"));
     }
 
     /**
@@ -564,7 +565,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void frame() throws Exception {
-        loadPageWithAlerts2(test("frame"));
+        loadPageVerifyTitle2(test("frame"));
     }
 
     /**
@@ -575,7 +576,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void frameset() throws Exception {
-        loadPageWithAlerts2(test("frameset"));
+        loadPageVerifyTitle2(test("frameset"));
     }
 
     /**
@@ -586,7 +587,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h1() throws Exception {
-        loadPageWithAlerts2(test("h1"));
+        loadPageVerifyTitle2(test("h1"));
     }
 
     /**
@@ -597,7 +598,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h2() throws Exception {
-        loadPageWithAlerts2(test("h2"));
+        loadPageVerifyTitle2(test("h2"));
     }
 
     /**
@@ -608,7 +609,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h3() throws Exception {
-        loadPageWithAlerts2(test("h3"));
+        loadPageVerifyTitle2(test("h3"));
     }
 
     /**
@@ -619,7 +620,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h4() throws Exception {
-        loadPageWithAlerts2(test("h4"));
+        loadPageVerifyTitle2(test("h4"));
     }
 
     /**
@@ -630,7 +631,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h5() throws Exception {
-        loadPageWithAlerts2(test("h5"));
+        loadPageVerifyTitle2(test("h5"));
     }
 
     /**
@@ -641,7 +642,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void h6() throws Exception {
-        loadPageWithAlerts2(test("h6"));
+        loadPageVerifyTitle2(test("h6"));
     }
 
     /**
@@ -652,7 +653,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void head() throws Exception {
-        loadPageWithAlerts2(test("head"));
+        loadPageVerifyTitle2(test("head"));
     }
 
     /**
@@ -663,7 +664,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void header() throws Exception {
-        loadPageWithAlerts2(test("header"));
+        loadPageVerifyTitle2(test("header"));
     }
 
     /**
@@ -674,7 +675,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void hr() throws Exception {
-        loadPageWithAlerts2(test("hr"));
+        loadPageVerifyTitle2(test("hr"));
     }
 
     /**
@@ -685,7 +686,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void html() throws Exception {
-        loadPageWithAlerts2(test("html"));
+        loadPageVerifyTitle2(test("html"));
     }
 
     /**
@@ -696,7 +697,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void iframe() throws Exception {
-        loadPageWithAlerts2(test("iframe"));
+        loadPageVerifyTitle2(test("iframe"));
     }
 
     /**
@@ -707,7 +708,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void image() throws Exception {
-        loadPageWithAlerts2(test("image"));
+        loadPageVerifyTitle2(test("image"));
     }
 
     /**
@@ -718,7 +719,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void img() throws Exception {
-        loadPageWithAlerts2(test("img"));
+        loadPageVerifyTitle2(test("img"));
     }
 
     /**
@@ -729,7 +730,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void ins() throws Exception {
-        loadPageWithAlerts2(test("ins"));
+        loadPageVerifyTitle2(test("ins"));
     }
 
     /**
@@ -741,7 +742,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
             IE = {"1", "0", "1", "1", "0", "1"})
     public void isindex() throws Exception {
-        loadPageWithAlerts2(test("isindex"));
+        loadPageVerifyTitle2(test("isindex"));
     }
 
     /**
@@ -752,7 +753,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void i() throws Exception {
-        loadPageWithAlerts2(test("i"));
+        loadPageVerifyTitle2(test("i"));
     }
 
     /**
@@ -763,7 +764,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void kbd() throws Exception {
-        loadPageWithAlerts2(test("kbd"));
+        loadPageVerifyTitle2(test("kbd"));
     }
 
     /**
@@ -772,7 +773,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void keygen() throws Exception {
-        loadPageWithAlerts2(test("keygen"));
+        loadPageVerifyTitle2(test("keygen"));
     }
 
     /**
@@ -783,7 +784,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void label() throws Exception {
-        loadPageWithAlerts2(test("label"));
+        loadPageVerifyTitle2(test("label"));
     }
 
     /**
@@ -794,7 +795,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void layer() throws Exception {
-        loadPageWithAlerts2(test("layer"));
+        loadPageVerifyTitle2(test("layer"));
     }
 
     /**
@@ -805,7 +806,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void legend() throws Exception {
-        loadPageWithAlerts2(test("legend"));
+        loadPageVerifyTitle2(test("legend"));
     }
 
     /**
@@ -816,7 +817,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void listing() throws Exception {
-        loadPageWithAlerts2(test("listing"));
+        loadPageVerifyTitle2(test("listing"));
     }
 
     /**
@@ -827,7 +828,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void li() throws Exception {
-        loadPageWithAlerts2(test("li"));
+        loadPageVerifyTitle2(test("li"));
     }
 
     /**
@@ -838,7 +839,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void link() throws Exception {
-        loadPageWithAlerts2(test("link"));
+        loadPageVerifyTitle2(test("link"));
     }
 
     /**
@@ -850,7 +851,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
             IE = {"3", "2", "2", "3", "2", "2"})
     public void main() throws Exception {
-        loadPageWithAlerts2(test("main"));
+        loadPageVerifyTitle2(test("main"));
     }
 
     /**
@@ -861,7 +862,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void map() throws Exception {
-        loadPageWithAlerts2(test("map"));
+        loadPageVerifyTitle2(test("map"));
     }
 
     /**
@@ -872,7 +873,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void marquee() throws Exception {
-        loadPageWithAlerts2(test("marquee"));
+        loadPageVerifyTitle2(test("marquee"));
     }
 
     /**
@@ -883,7 +884,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void mark() throws Exception {
-        loadPageWithAlerts2(test("mark"));
+        loadPageVerifyTitle2(test("mark"));
     }
 
     /**
@@ -894,7 +895,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void menu() throws Exception {
-        loadPageWithAlerts2(test("menu"));
+        loadPageVerifyTitle2(test("menu"));
     }
 
     /**
@@ -905,7 +906,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void menuitem() throws Exception {
-        loadPageWithAlerts2(test("menuitem"));
+        loadPageVerifyTitle2(test("menuitem"));
     }
 
     /**
@@ -916,7 +917,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void meta() throws Exception {
-        loadPageWithAlerts2(test("meta"));
+        loadPageVerifyTitle2(test("meta"));
     }
 
     /**
@@ -927,7 +928,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void meter() throws Exception {
-        loadPageWithAlerts2(test("meter"));
+        loadPageVerifyTitle2(test("meter"));
     }
 
     /**
@@ -938,7 +939,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void multicol() throws Exception {
-        loadPageWithAlerts2(test("multicol"));
+        loadPageVerifyTitle2(test("multicol"));
     }
 
     /**
@@ -949,7 +950,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void nav() throws Exception {
-        loadPageWithAlerts2(test("nav"));
+        loadPageVerifyTitle2(test("nav"));
     }
 
     /**
@@ -960,7 +961,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void nextid() throws Exception {
-        loadPageWithAlerts2(test("nextid"));
+        loadPageVerifyTitle2(test("nextid"));
     }
 
     /**
@@ -971,7 +972,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void nobr() throws Exception {
-        loadPageWithAlerts2(test("nobr"));
+        loadPageVerifyTitle2(test("nobr"));
     }
 
     /**
@@ -982,7 +983,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void noembed() throws Exception {
-        loadPageWithAlerts2(test("noembed"));
+        loadPageVerifyTitle2(test("noembed"));
     }
 
     /**
@@ -993,7 +994,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void noframes() throws Exception {
-        loadPageWithAlerts2(test("noframes"));
+        loadPageVerifyTitle2(test("noframes"));
     }
 
     /**
@@ -1004,7 +1005,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void nolayer() throws Exception {
-        loadPageWithAlerts2(test("nolayer"));
+        loadPageVerifyTitle2(test("nolayer"));
     }
 
     /**
@@ -1015,7 +1016,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void noscript() throws Exception {
-        loadPageWithAlerts2(test("noscript"));
+        loadPageVerifyTitle2(test("noscript"));
     }
 
     /**
@@ -1026,7 +1027,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void object() throws Exception {
-        loadPageWithAlerts2(test("object"));
+        loadPageVerifyTitle2(test("object"));
     }
 
     /**
@@ -1037,7 +1038,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void ol() throws Exception {
-        loadPageWithAlerts2(test("ol"));
+        loadPageVerifyTitle2(test("ol"));
     }
 
     /**
@@ -1048,7 +1049,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void optgroup() throws Exception {
-        loadPageWithAlerts2(test("optgroup"));
+        loadPageVerifyTitle2(test("optgroup"));
     }
 
     /**
@@ -1059,7 +1060,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void option() throws Exception {
-        loadPageWithAlerts2(test("option"));
+        loadPageVerifyTitle2(test("option"));
     }
 
     /**
@@ -1070,7 +1071,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void output() throws Exception {
-        loadPageWithAlerts2(test("output"));
+        loadPageVerifyTitle2(test("output"));
     }
 
     /**
@@ -1081,7 +1082,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void p() throws Exception {
-        loadPageWithAlerts2(test("p"));
+        loadPageVerifyTitle2(test("p"));
     }
 
     /**
@@ -1092,7 +1093,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void param() throws Exception {
-        loadPageWithAlerts2(test("param"));
+        loadPageVerifyTitle2(test("param"));
     }
 
     /**
@@ -1103,7 +1104,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void plaintext() throws Exception {
-        loadPageWithAlerts2(test("plaintext"));
+        loadPageVerifyTitle2(test("plaintext"));
     }
 
     /**
@@ -1114,7 +1115,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void pre() throws Exception {
-        loadPageWithAlerts2(test("pre"));
+        loadPageVerifyTitle2(test("pre"));
     }
 
     /**
@@ -1125,7 +1126,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void progress() throws Exception {
-        loadPageWithAlerts2(test("progress"));
+        loadPageVerifyTitle2(test("progress"));
     }
 
     /**
@@ -1136,7 +1137,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void q() throws Exception {
-        loadPageWithAlerts2(test("q"));
+        loadPageVerifyTitle2(test("q"));
     }
 
     /**
@@ -1147,7 +1148,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void ruby() throws Exception {
-        loadPageWithAlerts2(test("ruby"));
+        loadPageVerifyTitle2(test("ruby"));
     }
 
     /**
@@ -1158,7 +1159,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void rt() throws Exception {
-        loadPageWithAlerts2(test("rt"));
+        loadPageVerifyTitle2(test("rt"));
     }
 
     /**
@@ -1169,7 +1170,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void rp() throws Exception {
-        loadPageWithAlerts2(test("rp"));
+        loadPageVerifyTitle2(test("rp"));
     }
 
     /**
@@ -1180,7 +1181,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void s() throws Exception {
-        loadPageWithAlerts2(test("s"));
+        loadPageVerifyTitle2(test("s"));
     }
 
     /**
@@ -1191,7 +1192,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void samp() throws Exception {
-        loadPageWithAlerts2(test("samp"));
+        loadPageVerifyTitle2(test("samp"));
     }
 
     /**
@@ -1202,7 +1203,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void script() throws Exception {
-        loadPageWithAlerts2(test("script"));
+        loadPageVerifyTitle2(test("script"));
     }
 
     /**
@@ -1213,7 +1214,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void section() throws Exception {
-        loadPageWithAlerts2(test("section"));
+        loadPageVerifyTitle2(test("section"));
     }
 
     /**
@@ -1224,7 +1225,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void select() throws Exception {
-        loadPageWithAlerts2(test("select"));
+        loadPageVerifyTitle2(test("select"));
     }
 
     /**
@@ -1235,7 +1236,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void small() throws Exception {
-        loadPageWithAlerts2(test("small"));
+        loadPageVerifyTitle2(test("small"));
     }
 
     /**
@@ -1246,7 +1247,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void source() throws Exception {
-        loadPageWithAlerts2(test("source"));
+        loadPageVerifyTitle2(test("source"));
     }
 
     /**
@@ -1255,7 +1256,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void spacer() throws Exception {
-        loadPageWithAlerts2(test("spacer"));
+        loadPageVerifyTitle2(test("spacer"));
     }
 
     /**
@@ -1266,7 +1267,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void span() throws Exception {
-        loadPageWithAlerts2(test("span"));
+        loadPageVerifyTitle2(test("span"));
     }
 
     /**
@@ -1277,7 +1278,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void strike() throws Exception {
-        loadPageWithAlerts2(test("strike"));
+        loadPageVerifyTitle2(test("strike"));
     }
 
     /**
@@ -1288,7 +1289,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void strong() throws Exception {
-        loadPageWithAlerts2(test("strong"));
+        loadPageVerifyTitle2(test("strong"));
     }
 
     /**
@@ -1299,7 +1300,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void style() throws Exception {
-        loadPageWithAlerts2(test("style"));
+        loadPageVerifyTitle2(test("style"));
     }
 
     /**
@@ -1310,7 +1311,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void sub() throws Exception {
-        loadPageWithAlerts2(test("sub"));
+        loadPageVerifyTitle2(test("sub"));
     }
 
     /**
@@ -1321,7 +1322,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void summary() throws Exception {
-        loadPageWithAlerts2(test("summary"));
+        loadPageVerifyTitle2(test("summary"));
     }
 
     /**
@@ -1332,7 +1333,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void sup() throws Exception {
-        loadPageWithAlerts2(test("sup"));
+        loadPageVerifyTitle2(test("sup"));
     }
 
     /**
@@ -1343,7 +1344,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void svg() throws Exception {
-        loadPageWithAlerts2(test("svg"));
+        loadPageVerifyTitle2(test("svg"));
     }
 
     /**
@@ -1354,7 +1355,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "3", "2"})
     public void table() throws Exception {
-        loadPageWithAlerts2(test("table"));
+        loadPageVerifyTitle2(test("table"));
     }
 
     /**
@@ -1365,7 +1366,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void col() throws Exception {
-        loadPageWithAlerts2(test("col"));
+        loadPageVerifyTitle2(test("col"));
     }
 
     /**
@@ -1376,7 +1377,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void colgroup() throws Exception {
-        loadPageWithAlerts2(test("colgroup"));
+        loadPageVerifyTitle2(test("colgroup"));
     }
 
     /**
@@ -1387,7 +1388,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void tbody() throws Exception {
-        loadPageWithAlerts2(test("tbody"));
+        loadPageVerifyTitle2(test("tbody"));
     }
 
     /**
@@ -1398,7 +1399,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void td() throws Exception {
-        loadPageWithAlerts2(test("td"));
+        loadPageVerifyTitle2(test("td"));
     }
 
     /**
@@ -1409,7 +1410,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void th() throws Exception {
-        loadPageWithAlerts2(test("th"));
+        loadPageVerifyTitle2(test("th"));
     }
 
     /**
@@ -1420,7 +1421,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void tr() throws Exception {
-        loadPageWithAlerts2(test("tr"));
+        loadPageVerifyTitle2(test("tr"));
     }
 
     /**
@@ -1431,7 +1432,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void track() throws Exception {
-        loadPageWithAlerts2(test("track"));
+        loadPageVerifyTitle2(test("track"));
     }
 
     /**
@@ -1442,7 +1443,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void textarea() throws Exception {
-        loadPageWithAlerts2(test("textarea"));
+        loadPageVerifyTitle2(test("textarea"));
     }
 
     /**
@@ -1453,7 +1454,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void tfoot() throws Exception {
-        loadPageWithAlerts2(test("tfoot"));
+        loadPageVerifyTitle2(test("tfoot"));
     }
 
     /**
@@ -1464,7 +1465,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "1", "1", "1", "1"})
     public void thead() throws Exception {
-        loadPageWithAlerts2(test("thead"));
+        loadPageVerifyTitle2(test("thead"));
     }
 
     /**
@@ -1475,7 +1476,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void tt() throws Exception {
-        loadPageWithAlerts2(test("tt"));
+        loadPageVerifyTitle2(test("tt"));
     }
 
     /**
@@ -1486,7 +1487,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void time() throws Exception {
-        loadPageWithAlerts2(test("time"));
+        loadPageVerifyTitle2(test("time"));
     }
 
     /**
@@ -1497,7 +1498,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void title() throws Exception {
-        loadPageWithAlerts2(test("title"));
+        loadPageVerifyTitle2(test("title"));
     }
 
     /**
@@ -1508,7 +1509,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void u() throws Exception {
-        loadPageWithAlerts2(test("u"));
+        loadPageVerifyTitle2(test("u"));
     }
 
     /**
@@ -1519,7 +1520,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void ul() throws Exception {
-        loadPageWithAlerts2(test("ul"));
+        loadPageVerifyTitle2(test("ul"));
     }
 
     /**
@@ -1530,7 +1531,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void var() throws Exception {
-        loadPageWithAlerts2(test("var"));
+        loadPageVerifyTitle2(test("var"));
     }
 
     /**
@@ -1541,7 +1542,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void video() throws Exception {
-        loadPageWithAlerts2(test("video"));
+        loadPageVerifyTitle2(test("video"));
     }
 
     /**
@@ -1552,7 +1553,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void wbr() throws Exception {
-        loadPageWithAlerts2(test("wbr"));
+        loadPageVerifyTitle2(test("wbr"));
     }
 
     /**
@@ -1563,7 +1564,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "1", "0", "1"})
     public void xmp() throws Exception {
-        loadPageWithAlerts2(test("xmp"));
+        loadPageVerifyTitle2(test("xmp"));
     }
 
     /**
@@ -1574,7 +1575,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "3"})
     public void input() throws Exception {
-        loadPageWithAlerts2(test("input"));
+        loadPageVerifyTitle2(test("input"));
     }
 
     /**
@@ -1585,18 +1586,18 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void data() throws Exception {
-        loadPageWithAlerts2(test("data"));
+        loadPageVerifyTitle2(test("data"));
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     * Test HtmlContent.
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void content() throws Exception {
-        loadPageWithAlerts2(test("content"));
+        loadPageVerifyTitle2(test("content"));
     }
 
     /**
@@ -1607,7 +1608,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void picture() throws Exception {
-        loadPageWithAlerts2(test("picture"));
+        loadPageVerifyTitle2(test("picture"));
     }
 
     /**
@@ -1618,7 +1619,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void template() throws Exception {
-        loadPageWithAlerts2(test("template"));
+        loadPageVerifyTitle2(test("template"));
     }
 
     /**
@@ -1629,6 +1630,6 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "2", "2", "3", "2", "2"})
     public void slot() throws Exception {
-        loadPageWithAlerts2(test("slot"));
+        loadPageVerifyTitle2(test("slot"));
     }
 }

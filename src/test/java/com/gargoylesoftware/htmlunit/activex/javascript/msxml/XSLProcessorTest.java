@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,10 +47,11 @@ public class XSLProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined",
-            "undefined", "undefined", "unknown", "unknown"})
+                  "undefined", "undefined", "unknown", "unknown"})
     @NotYetImplemented(IE)
     public void methods() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             // document must be free threaded
@@ -62,16 +63,16 @@ public class XSLProcessorTest extends WebDriverTestCase {
             + "    xslt.stylesheet = xslDoc;\n"
             + "    var xslProc = xslt.createProcessor();\n"
             + "    try {\n"
-            + "      alert(typeof xslProc.importStylesheet);\n"
-            + "      alert(typeof xslProc.transformToDocument);\n"
-            + "      alert(typeof xslProc.transformToFragment);\n"
-            + "      alert(typeof xslProc.setParameter);\n"
-            + "      alert(typeof xslProc.getParameter);\n"
-            + "      alert(typeof xslProc.input);\n"
-            + "      alert(typeof xslProc.ouput);\n"
-            + "      alert(typeof xslProc.addParameter);\n"
-            + "      alert(typeof xslProc.transform);\n"
-            + "    } catch (e) {alert(e)}\n"
+            + "      log(typeof xslProc.importStylesheet);\n"
+            + "      log(typeof xslProc.transformToDocument);\n"
+            + "      log(typeof xslProc.transformToFragment);\n"
+            + "      log(typeof xslProc.setParameter);\n"
+            + "      log(typeof xslProc.getParameter);\n"
+            + "      log(typeof xslProc.input);\n"
+            + "      log(typeof xslProc.ouput);\n"
+            + "      log(typeof xslProc.addParameter);\n"
+            + "      log(typeof xslProc.transform);\n"
+            + "    } catch (e) {log(e)}\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -86,7 +87,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, xsl, MimeType.TEXT_XML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,6 +100,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var xmlDoc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
@@ -114,7 +116,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
             + "    xslProc.input = xmlDoc;\n"
             + "    xslProc.transform();\n"
             + "    var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
-            + "    alert(s.length);\n"
+            + "    log(s.length);\n"
             + "    xslProc.input = xmlDoc.documentElement;\n"
             + "    xslProc.transform();\n"
             + "  }\n"
@@ -153,6 +155,6 @@ public class XSLProcessorTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         getMockWebConnection().setResponse(urlThird, xsl, MimeType.TEXT_XML);
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

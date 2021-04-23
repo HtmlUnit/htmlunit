@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CookieManager2Test extends SimpleWebTestCase {
@@ -43,7 +44,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
     @Test
     public void resettingCookie() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function createCookie(name, value, days, path) {\n"
             + "    if (days) {\n"

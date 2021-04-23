@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,21 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.Collection;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -50,7 +45,7 @@ public class HostParentOfSTest extends HostParentOf {
     public static Collection<Object[]> data() throws Exception {
         return HostParentOf.data(input -> {
             final char ch = Character.toUpperCase(input.charAt(0));
-            return ch == 'S';
+            return ch == 'S' && StringUtils.compareIgnoreCase(input, "SVGG") < 0;
         });
     }
 
@@ -185,8 +180,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _SourceBuffer_SourceBuffer() throws Exception {
         test("SourceBuffer", "SourceBuffer");
     }
@@ -195,8 +189,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts("true")
     public void _SourceBufferList_SourceBufferList() throws Exception {
         test("SourceBufferList", "SourceBufferList");
     }
@@ -1680,7 +1673,8 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false")
     public void _SVGGraphicsElement_SVGClipPathElement() throws Exception {
         test("SVGGraphicsElement", "SVGClipPathElement");
     }
@@ -2691,7 +2685,9 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             EDGE = "true")
-    @NotYetImplemented({FF, FF78, IE})
+    @HtmlUnitNYI(FF = "true",
+            FF78 = "true",
+            IE = "true")
     public void _SVGUnitTypes_SVGUnitTypes() throws Exception {
         test("SVGUnitTypes", "SVGUnitTypes");
     }
