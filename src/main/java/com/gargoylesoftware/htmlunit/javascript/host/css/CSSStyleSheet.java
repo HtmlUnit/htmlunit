@@ -89,12 +89,6 @@ public class CSSStyleSheet extends StyleSheet {
         setParentScope(win);
         setPrototype(getPrototype(CSSStyleSheet.class));
 
-            case "valid":
-                return element instanceof HtmlElement && ((HtmlElement) element).isValid();
-
-            case "invalid":
-                return element instanceof HtmlElement && !((HtmlElement) element).isValid();
-
         this.cssStyleSheet = cssStyleSheet;
         this.ownerNode_ = element;
     }

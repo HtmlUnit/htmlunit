@@ -779,6 +779,12 @@ public class CssStyleSheet implements Serializable {
                 }
                 return true;
 
+            case "valid":
+                return element instanceof HtmlElement && ((HtmlElement) element).isValid();
+
+            case "invalid":
+                return element instanceof HtmlElement && !((HtmlElement) element).isValid();
+
             case "empty":
                 return isEmpty(element);
 
