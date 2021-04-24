@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -68,9 +68,9 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                       "[object Set Iterator]", "0", "1", "[object Object]"},
             FF = {"function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]"},
+                  "[object Set Iterator]", "0", "1", "[object Object]"},
             FF78 = {"function values() {\n    [native code]\n}",
                     "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
@@ -106,11 +106,11 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                       "[object Set Iterator]", "0", "1", "[object Object]"},
             FF = {"function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                  "[object Set Iterator]", "0", "1", "[object Object]"},
             FF78 = {"function values() {\n    [native code]\n}",
-                "[object Set Iterator]", "0", "1", "[object Object]"},
+                    "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -316,8 +316,8 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "[object Window]",
-            "undefined", "undefined", "[object Set]", "[object Window]",
-            "null", "null", "[object Set]", "[object Window]"},
+                       "undefined", "undefined", "[object Set]", "[object Window]",
+                       "null", "null", "[object Set]", "[object Window]"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEach() throws Exception {
@@ -347,8 +347,8 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "undefined",
-            "undefined", "undefined", "[object Set]", "undefined",
-            "null", "null", "[object Set]", "undefined"},
+                       "undefined", "undefined", "[object Set]", "undefined",
+                       "null", "null", "[object Set]", "undefined"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEachStrict() throws Exception {
@@ -379,7 +379,7 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
-            "null", "null", "[object Set]", "hello"},
+                       "null", "null", "[object Set]", "hello"},
             IE = {})
     @NotYetImplemented(IE)
     public void forEachThis() throws Exception {

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -84,14 +84,20 @@ public final class ScriptElementSupport {
 
         if (!element.getPage().getWebClient().isJavaScriptEngineEnabled()) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("SvgScript found but not executed because javascript engine is disabled");
+                LOG.debug("Script found but not executed because javascript engine is disabled");
             }
+            return;
+        }
+
+        final ScriptElement script = (ScriptElement) element;
+        final String srcAttrib = script.getSrcAttribute();
+        if (ATTRIBUTE_NOT_DEFINED != srcAttrib
+                && script.isDeferred()) {
             return;
         }
 
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         if (webWindow != null) {
-            final String srcAttrib = ((ScriptElement) element).getSrcAttribute();
             final StringBuilder description = new StringBuilder()
                     .append("Execution of ")
                     .append(srcAttrib == ATTRIBUTE_NOT_DEFINED ? "inline " : "external ")
@@ -111,7 +117,7 @@ public final class ScriptElementSupport {
                                 && srcAttrib != ATTRIBUTE_NOT_DEFINED);
                     }
                     try {
-                        executeScriptIfNeeded(element);
+                        executeScriptIfNeeded(element, false, false);
                     }
                     finally {
                         if (jsDoc != null) {
@@ -151,9 +157,12 @@ public final class ScriptElementSupport {
      *
      * Executes this script node if necessary and/or possible.
      * @param element the element
+     * @param ignoreAttachedToPage don't do the isAttachedToPage check
+     * @param ignorePageIsAncestor don't do the element.getPage().isAncestorOf(element) check
      */
-    public static void executeScriptIfNeeded(final DomElement element) {
-        if (!isExecutionNeeded(element)) {
+    public static void executeScriptIfNeeded(final DomElement element, final boolean ignoreAttachedToPage,
+            final boolean ignorePageIsAncestor) {
+        if (!isExecutionNeeded(element, ignoreAttachedToPage, ignorePageIsAncestor)) {
             return;
         }
 
@@ -234,14 +243,17 @@ public final class ScriptElementSupport {
      * Indicates if script execution is necessary and/or possible.
      *
      * @param element the element
+     * @param ignoreAttachedToPage don't do the isAttachedToPage check
+     * @param ignorePageIsAncestor don't do the element.getPage().isAncestorOf(element) check
      * @return {@code true} if the script should be executed
      */
-    private static boolean isExecutionNeeded(final DomElement element) {
+    private static boolean isExecutionNeeded(final DomElement element, final boolean ignoreAttachedToPage,
+            final boolean ignorePageIsAncestor) {
         if (((ScriptElement) element).isExecuted()) {
             return false;
         }
 
-        if (!element.isAttachedToPage()) {
+        if (!ignoreAttachedToPage && !element.isAttachedToPage()) {
             return false;
         }
 
@@ -285,7 +297,7 @@ public final class ScriptElementSupport {
 
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
-        return element.getPage().isAncestorOf(element);
+        return ignorePageIsAncestor || element.getPage().isAncestorOf(element);
     }
 
     /**
@@ -326,7 +338,7 @@ public final class ScriptElementSupport {
      * Executes this script node as inline script if necessary and/or possible.
      */
     private static void executeInlineScriptIfNeeded(final DomElement element) {
-        if (!isExecutionNeeded(element)) {
+        if (!isExecutionNeeded(element, false, false)) {
             return;
         }
 

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -155,6 +156,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
     private int timeout_ = 0;
+    private boolean aborted_;
 
     /**
      * Creates a new instance.
@@ -194,6 +196,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private void fireJavascriptEvent(final String eventName) {
+        if (aborted_) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Firing javascript XHR event: " + eventName + " for an already aborted request - ignored.");
+            }
+
+            return;
+        }
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing javascript XHR event: " + eventName);
         }
@@ -365,6 +375,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
         fireJavascriptEvent(Event.TYPE_ABORT);
         fireJavascriptEvent(Event.TYPE_LOAD_END);
+        aborted_ = true;
     }
 
     /**
@@ -459,7 +470,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);
-            request.setAdditionalHeader(HttpHeader.REFERER, containingPage_.getUrl().toExternalForm());
+            request.setRefererlHeader(containingPage_.getUrl());
 
             if (!isSameOrigin(pageRequestUrl, fullUrl)) {
                 final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")
@@ -510,7 +521,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
         return !(getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
-                    && "about".equals(newUrl.getProtocol()));
+                    && UrlUtils.ABOUT.equals(newUrl.getProtocol()));
     }
 
     private static boolean isSameOrigin(final URL originUrl, final URL newUrl) {

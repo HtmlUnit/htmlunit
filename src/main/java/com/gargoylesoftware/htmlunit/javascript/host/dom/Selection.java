@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,16 +60,25 @@ public class Selection extends SimpleScriptable {
     }
 
     /**
+     * @return a string currently being represented by the selection object,
+     * i.e. the currently selected text.
+     */
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
+        final StringBuilder sb = new StringBuilder();
+        for (final Range r : getRanges()) {
+            sb.append(r.toString());
+        }
+        return sb.toString();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (getPrototype() != null && (String.class.equals(hint) || hint == null)) {
-            final StringBuilder sb = new StringBuilder();
-            for (final Range r : getRanges()) {
-                sb.append(r.toString());
-            }
-            return sb.toString();
+            return jsToString();
         }
         return super.getDefaultValue(hint);
     }

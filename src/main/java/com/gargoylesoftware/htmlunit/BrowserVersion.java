@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *                     .setUserAgent(userAgent)
  *                     .build();
  * </pre>
- * <p>But keep in mind this now one still behaves like a FF78, only the stuff reported to the
+ * <p>But keep in mind this new one still behaves like a FF78, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -94,7 +94,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN64 = "Win64";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(84, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(88, "FF");
 
     /** Firefox 78 ESR. */
     public static final BrowserVersion FIREFOX_78 = new BrowserVersion(78, "FF78");
@@ -103,10 +103,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge */
-    public static final BrowserVersion EDGE = new BrowserVersion(87, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(90, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(87, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(90, "Chrome");
 
     /**
      * Array with all supported browsers
@@ -212,9 +212,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4280.66 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4280.66 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -239,7 +239,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
-        CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/*,*/*;q=0.8";
+        CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
         // there are other issues with Chrome; a different productSub, etc.
@@ -253,11 +253,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4280.67 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.664.47";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.818.41";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4280.67 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.664.47";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.818.41";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
@@ -282,7 +282,7 @@ public final class BrowserVersion implements Serializable {
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.9";
-        EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
+        EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
         // there are other issues with Chrome; a different productSub, etc.
@@ -427,7 +427,7 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 32.0 r0", "32.0.0.387", "Flash.ocx"); //NOPMD
+                "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);
@@ -988,6 +988,10 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Changes the browser language property. This is used for various output
+         * formating. If you like change the language the browser requests from the server
+         * you have to adjust the {@link #setAcceptLanguageHeader(String)}.
+         *
          * @param browserLanguage the browserLanguage to set
          * @return this for fluent use
          */

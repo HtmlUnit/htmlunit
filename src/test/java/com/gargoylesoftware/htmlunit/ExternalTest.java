@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -50,16 +51,21 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class ExternalTest {
 
+    static String SONATYPE_SNAPSHOT_REPO_URL_ = "https://oss.sonatype.org/content/repositories/snapshots/";
+    static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
+
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "87.0.4280.88";
+    static String CHROME_DRIVER_ = "90.0.4430.24";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_"
                                             + BrowserVersion.CHROME.getBrowserVersionNumeric();
 
-    static String EDGE_DRIVER_ = "87.0.669.0";
+    static String EDGE_DRIVER_ = "90.0.818.46";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.28.0";
+    static String GECKO_DRIVER_ = "0.29.1";
+    static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
+
     /** IE driver. */
     static String IE_DRIVER_ = "3.150.1.0";
 
@@ -149,17 +155,18 @@ public class ExternalTest {
     public void assertEdgeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
-            String content = page.asText();
+            String content = page.asNormalizedText();
             content = content.substring(content.indexOf("Release " + BrowserVersion.EDGE.getBrowserVersionNumeric()));
-            content = content.substring(0, content.indexOf("Microsoft Edge Legacy"));
             content = content.replace("\r\n", "");
 
             String version = "0.0.0.0";
-            final Pattern regex = Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*) \\| Choose your OS: x86, x64");
+            final Pattern regex =
+                    Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*):\\sx86\\s\\|\\sx64");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
                     version = matcher.group(1);
+                    break;
                 }
             }
             assertEquals("Edge Driver", version, EDGE_DRIVER_);
@@ -174,9 +181,9 @@ public class ExternalTest {
     public void assertGeckoDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             try {
-                final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
+                final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
                 final DomNodeList<DomNode> divs = page.querySelectorAll(".release-header div");
-                assertEquals("Gecko Driver", divs.get(0).asText(), GECKO_DRIVER_);
+                assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), GECKO_DRIVER_);
             }
             catch (final FailingHttpStatusCodeException e) {
                 // ignore
@@ -204,8 +211,8 @@ public class ExternalTest {
         assertNotNull(version);
         if (version.contains("SNAPSHOT")) {
             try (WebClient webClient = buildWebClient()) {
-                final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
-                        + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
+                final XmlPage page = webClient.getPage(SONATYPE_SNAPSHOT_REPO_URL_
+                                        + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
                 final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
                 final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
                 final long snapshotMillis = format.parse(timestamp).getTime();
@@ -219,7 +226,7 @@ public class ExternalTest {
     private static void assertVersion(final String groupId, final String artifactId, final String version)
             throws Exception {
         String latestVersion = null;
-        String url = "https://repo1.maven.org/maven2/"
+        String url = MAVEN_REPO_URL_
                         + groupId.replace('.', '/') + '/'
                         + artifactId.replace('.', '/');
         if (!url.endsWith("/")) {
@@ -228,15 +235,20 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
-            final HtmlPage page = webClient.getPage(url);
-            for (final HtmlAnchor anchor : page.getAnchors()) {
-                String itemVersion = anchor.getTextContent();
-                itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
-                if (!isIgnored(groupId, artifactId, itemVersion)) {
-                    if (isVersionAfter(itemVersion, latestVersion)) {
-                        latestVersion = itemVersion;
+            try {
+                final HtmlPage page = webClient.getPage(url);
+                for (final HtmlAnchor anchor : page.getAnchors()) {
+                    String itemVersion = anchor.getTextContent();
+                    itemVersion = itemVersion.substring(0, itemVersion.length() - 1);
+                    if (!isIgnored(groupId, artifactId, itemVersion)) {
+                        if (isVersionAfter(itemVersion, latestVersion)) {
+                            latestVersion = itemVersion;
+                        }
                     }
                 }
+            }
+            catch (final UnknownHostException e) {
+                // ignore because our ci machine sometimes fails
             }
         }
         if (!version.endsWith("-SNAPSHOT")

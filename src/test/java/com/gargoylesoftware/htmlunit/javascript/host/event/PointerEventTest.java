@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,30 +26,31 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link PointerEvent}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class PointerEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    if (event) {\n"
-        + "      alert(event);\n"
-        + "      alert(event.type);\n"
-        + "      alert(event.bubbles);\n"
-        + "      alert(event.cancelable);\n"
-        + "      alert(event.composed);\n"
+        + "      log(event);\n"
+        + "      log(event.type);\n"
+        + "      log(event.bubbles);\n"
+        + "      log(event.cancelable);\n"
+        + "      log(event.composed);\n"
 
-        + "      alert(event.pointerId);\n"
-        + "      alert(event.width);\n"
-        + "      alert(event.height);\n"
-        + "      alert(event.pressure);\n"
-        + "      alert(event.tiltX);\n"
-        + "      alert(event.tiltY);\n"
-        + "      alert(event.pointerType);\n"
-        + "      alert(event.isPrimary);\n"
-        + "      alert(event.altitudeAngle);\n"
-        + "      alert(event.azimuthAngle);\n"
+        + "      log(event.pointerId);\n"
+        + "      log(event.width);\n"
+        + "      log(event.height);\n"
+        + "      log(event.pressure);\n"
+        + "      log(event.tiltX);\n"
+        + "      log(event.tiltY);\n"
+        + "      log(event.pointerType);\n"
+        + "      log(event.isPrimary);\n"
+        + "      log(event.altitudeAngle);\n"
+        + "      log(event.azimuthAngle);\n"
         + "    } else {\n"
-        + "      alert('no event');\n"
+        + "      log('no event');\n"
         + "    }\n"
         + "  }\n";
 
@@ -58,26 +59,27 @@ public class PointerEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PointerEvent]", "click", "false", "false", "false",
-                            "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0"},
+                       "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0"},
             FF = {"[object PointerEvent]", "click", "false", "false", "false",
-                    "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
+                  "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
             FF78 = {"[object PointerEvent]", "click", "false", "false", "false",
                     "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new PointerEvent('click');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -85,15 +87,16 @@ public class PointerEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PointerEvent]", "click", "true", "false", "false",
-                            "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0"},
+                       "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0"},
             FF = {"[object PointerEvent]", "click", "true", "false", "false",
-                    "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
+                  "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
             FF78 = {"[object PointerEvent]", "click", "true", "false", "false",
                     "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new PointerEvent('click', {\n"
@@ -102,13 +105,13 @@ public class PointerEventTest extends WebDriverTestCase {
             + "        'pointerType': 'mouse'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -117,21 +120,22 @@ public class PointerEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"[object PointerEvent]", "", "false", "false", "undefined",
-                    "0", "0", "0", "0", "0", "0", "", "false", "undefined", "undefined"})
+                  "0", "0", "0", "0", "0", "0", "", "false", "undefined", "undefined"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PointerEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -140,23 +144,24 @@ public class PointerEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"[object PointerEvent]", "click", "true", "false", "undefined",
-                    "123", "4", "5", "6", "17", "18", "mouse", "false", "undefined", "undefined"})
+                  "123", "4", "5", "6", "17", "18", "mouse", "false", "undefined", "undefined"})
     public void initPointerEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PointerEvent');\n"
             + "      event.initPointerEvent('click', true, false, window, 3, 10, 11, 12, 13, true, true, true, false, "
             + "0, null, 14, 15, 4, 5, 6, 16, 17, 18, 123, 'mouse', 987, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -165,17 +170,18 @@ public class PointerEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"[object PointerEvent]", "click", "true", "false", "undefined", "123", "4", "5", "6", "17", "18",
-                "mouse", "false", "undefined", "undefined"})
+                  "mouse", "false", "undefined", "undefined"})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PointerEvent');\n"
             + "      event.initPointerEvent('click', true, false, window, 3, 10, 11, 12, 13, true, true, true, false, "
             + "0, null, 14, 15, 4, 5, 6, 16, 17, 18, 123, 'mouse', 987, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
@@ -184,6 +190,6 @@ public class PointerEventTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

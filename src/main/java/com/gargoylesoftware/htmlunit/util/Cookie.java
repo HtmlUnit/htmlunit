@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -82,13 +82,18 @@ public class Cookie implements Serializable {
         }
 
         final BasicClientCookie cookie = new BasicClientCookie(name, value == null ? "" : value);
+
         cookie.setDomain(domain);
+        // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attib also (see #333)
+        cookie.setAttribute(ClientCookie.DOMAIN_ATTR, domain);
+
         cookie.setPath(path);
         cookie.setExpiryDate(expires);
         cookie.setSecure(secure);
         if (httpOnly) {
             cookie.setAttribute("httponly", "true");
         }
+
         httpClientCookie_ = cookie;
     }
 
@@ -187,6 +192,13 @@ public class Cookie implements Serializable {
     }
 
     /**
+     * @return the SameSite value or {@code null} if not set.
+     */
+    public String getSameSite() {
+        return httpClientCookie_.getAttribute("samesite");
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -210,8 +222,11 @@ public class Cookie implements Serializable {
         final Cookie other = (Cookie) o;
         final String path = getPath() == null ? "/" : getPath();
         final String otherPath = other.getPath() == null ? "/" : other.getPath();
-        return new EqualsBuilder().append(getName(), other.getName()).append(getDomain(), other.getDomain())
-                .append(path, otherPath).isEquals();
+        return new EqualsBuilder()
+                    .append(getName(), other.getName())
+                    .append(getDomain(), other.getDomain())
+                    .append(path, otherPath)
+                    .isEquals();
     }
 
     /**
@@ -220,7 +235,11 @@ public class Cookie implements Serializable {
     @Override
     public int hashCode() {
         final String path = getPath() == null ? "/" : getPath();
-        return new HashCodeBuilder().append(getName()).append(getDomain()).append(path).toHashCode();
+        return new HashCodeBuilder()
+                    .append(getName())
+                    .append(getDomain())
+                    .append(path)
+                    .toHashCode();
     }
 
     /**

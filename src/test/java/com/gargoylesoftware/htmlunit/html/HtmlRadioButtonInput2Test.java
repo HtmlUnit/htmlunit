@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -350,6 +350,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var existing = document.getElementById('rad1');\n";
         if (fromHtml) {
@@ -378,7 +379,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             cloneNode = false;
         }
         html += ""
-            + "      alert(input.checked);\n"
+            + "      log(input.checked);\n"
 
             + "      var parent = document.getElementById('myDiv');\n"
             + "      var after = document.getElementById('divAfter');\n";
@@ -386,7 +387,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             html += ""
                     + "      var appendix = document.createDocumentFragment();\n"
                     + "      appendix.appendChild(input);\n"
-                    + "      alert(input.checked + '-' + existing.checked);\n";
+                    + "      log(input.checked + '-' + existing.checked);\n";
         }
         else {
             html += "      var appendix = input;\n";
@@ -409,16 +410,16 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         }
         html += ""
             + "      input = document.getElementById('rad2');\n"
-            + "      alert(input.checked + '-' + existing.checked);\n"
+            + "      log(input.checked + '-' + existing.checked);\n"
             + "      parent.removeChild(input);\n"
-            + "      alert(input.checked + '-' + existing.checked);\n"
+            + "      log(input.checked + '-' + existing.checked);\n"
             + "\n"
             + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked + '-' + existing.checked);\n"
+            + "      log(input.checked + '-' + existing.checked);\n"
             + "      parent.appendChild(input);\n"
-            + "      alert(input.checked + '-' + existing.checked);\n"
+            + "      log(input.checked + '-' + existing.checked);\n"
             + "      parent.removeChild(input);\n"
-            + "      alert(input.checked + '-' + existing.checked);\n"
+            + "      log(input.checked + '-' + existing.checked);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
@@ -427,7 +428,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  <div id='divAfter'></div></div></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -441,19 +442,20 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      radio = document.getElementById('rad1');\n"
             + "      radio2 = document.getElementById('rad2');\n"
-            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
-            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "      log(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      log(radio2.checked + '-' + radio2.defaultChecked);\n"
 
             + "      radio.defaultChecked = true;\n"
-            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
-            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "      log(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      log(radio2.checked + '-' + radio2.defaultChecked);\n"
 
             + "      radio.defaultChecked = false;\n"
-            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
-            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "      log(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      log(radio2.checked + '-' + radio2.defaultChecked);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
@@ -463,7 +465,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -477,19 +479,20 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      radio = document.getElementById('rad1');\n"
             + "      radio2 = document.getElementById('rad2');\n"
-            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
-            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "      log(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      log(radio2.checked + '-' + radio2.defaultChecked);\n"
 
             + "      radio.defaultChecked = true;\n"
-            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
-            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "      log(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      log(radio2.checked + '-' + radio2.defaultChecked);\n"
 
             + "      radio.defaultChecked = false;\n"
-            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
-            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "      log(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      log(radio2.checked + '-' + radio2.defaultChecked);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
@@ -499,7 +502,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -515,12 +518,13 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
             + "<script>\n"
-            + "  alert('send request');\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('send request');\n"
             + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', 'foo.xml', false);\n"
             + "  xhr.send('');\n"
             + "  var x = xhr.responseXML;\n" // this is what caused the exception
-            + "  alert('response read');\n"
+            + "  log('response read');\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -532,7 +536,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -700,23 +704,24 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void defaultValues() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('radio1');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.getElementById('radio2');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'radio';\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"radio\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -726,7 +731,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -737,27 +742,28 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void defaultValuesAfterClone() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('radio1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.getElementById('radio2');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'radio';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"radio\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -767,7 +773,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -779,26 +785,27 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void resetByClick() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var radio = document.getElementById('testId');\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    radio.value = 'newValue';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    radio.defaultValue = 'newDefault';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -808,7 +815,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -820,26 +827,27 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void resetByJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var radio = document.getElementById('testId');\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    radio.value = 'newValue';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    radio.defaultValue = 'newDefault';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -848,7 +856,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -859,19 +867,20 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void defaultValue() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var radio = document.getElementById('testId');\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    radio.defaultValue = 'default';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
 
             + "    radio.value = 'newValue';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
             + "    radio.defaultValue = 'newDefault';\n"
-            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    log(radio.value + '-' + radio.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -880,7 +889,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -893,8 +902,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void clickShouldTriggerOnchange() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title>\n"
+                + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var elt = document.getElementById('it');\n"
                 + "    elt.click();\n"
@@ -903,12 +913,12 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "<form>\n"
-                + "  <input type='radio' id='it' onchange='alert(\"changed\")'"
-                + "    onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
+                + "  <input type='radio' id='it' onchange='log(\"changed\")'"
+                + "    onmousedown='log(\"down\")' onmouseup='log(\"up\")' onfocus='log(\"focused\")'>Check me\n"
                 + "  <input type='text' id='next'>\n"
                 + "</form>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -928,17 +938,18 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "  <input type='radio' name='myRadio'>\n"
             + "</form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var r1 = document.forms.myForm.myRadio[0];\n"
             + "  var r2 = document.forms.myForm.myRadio[1];\n"
-            + "  alert(r1.checked + ',' + r2.checked);\n"
+            + "  log(r1.checked + ',' + r2.checked);\n"
             + "  r1.checked = true;\n"
-            + "  alert(r1.checked + ',' + r2.checked);\n"
+            + "  log(r1.checked + ',' + r2.checked);\n"
             + "  r2.checked = true;\n"
-            + "  alert(r1.checked + ',' + r2.checked);\n"
+            + "  log(r1.checked + ',' + r2.checked);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -949,20 +960,21 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     public void checkedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('r1');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('r2');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('r3');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body'>\n"
@@ -987,7 +999,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("r3")).click();
 
         driver.findElement(By.id("clickMe")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -995,48 +1007,49 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "null", "true", "null", "false", "null", "true", "", "false", "",
-                        "true", "", "true", "yes", "false", "yes", "true", "yes"})
+             "true", "", "true", "yes", "false", "yes", "true", "yes"})
     public void checkedAttributeJS() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('r1');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('r2');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('r3');\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.checked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.checked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -1054,7 +1067,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1062,36 +1075,37 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "null", "false", "null", "true", "", "true", "",
-                        "true", "yes", "true", "yes"})
+             "true", "yes", "true", "yes"})
     public void defaultCheckedAttribute() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var checkbox = document.getElementById('r1');\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = true;\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('r2');\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox = document.getElementById('r3');\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
 
             + "    checkbox.checked = false;\n"
-            + "    alert(checkbox.defaultChecked);\n"
-            + "    alert(checkbox.getAttribute('checked'));\n"
+            + "    log(checkbox.defaultChecked);\n"
+            + "    log(checkbox.getAttribute('checked'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -1109,7 +1123,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1179,9 +1193,10 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1192,6 +1207,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

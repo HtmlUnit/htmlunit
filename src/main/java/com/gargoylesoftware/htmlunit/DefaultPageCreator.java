@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -82,6 +82,12 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     private static final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
     private static final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
 
+    /**
+     * See http://tools.ietf.org/html/draft-abarth-mime-sniff-05
+     */
+    private static final String[] htmlPatterns = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
+        "IFRAME", "H1", "DIV", "FONT", "TABLE", "A", "STYLE", "TITLE", "B", "BODY", "BR", "P", "!--" };
+
     private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
 
     /**
@@ -110,7 +116,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return PageType.UNKNOWN;
         }
 
-        switch (contentType) {
+        final String contentTypeLC = contentType.toLowerCase(Locale.ROOT);
+        switch (contentTypeLC) {
             case MimeType.TEXT_HTML:
             case "image/svg+xml":
                 return PageType.HTML;
@@ -126,16 +133,64 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return PageType.XML;
 
             default:
-                if (contentType.endsWith("+xml")) {
+                if (contentTypeLC.endsWith("+xml")) {
                     return PageType.XML;
                 }
 
-                if (contentType.startsWith("text/")) {
+                if (contentTypeLC.startsWith("text/")) {
                     return PageType.TEXT;
                 }
 
                 return PageType.UNKNOWN;
         }
+    }
+
+    /**
+     * Determines the kind of page to create from the content type.
+     * @param webResponse the response to investigate
+     * @exception IOException if an IO problem occurs
+     * @return "xml", "html", "javascript", "text" or "unknown"
+     */
+    public static PageType determinePageType(final WebResponse webResponse) throws IOException {
+        final String contentType = webResponse.getContentType();
+        if (!StringUtils.isEmpty(contentType)) {
+            return determinePageType(contentType);
+        }
+
+        // sniff - http://tools.ietf.org/html/draft-abarth-mime-sniff-05
+        try (InputStream contentAsStream = webResponse.getContentAsStream()) {
+            final byte[] bytes = read(contentAsStream, 512);
+            if (bytes.length == 0) {
+                return determinePageType(MimeType.TEXT_PLAIN);
+            }
+
+            if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
+                    || startsWith(bytes, markerUTF16LE_)) {
+                return determinePageType(MimeType.TEXT_PLAIN);
+            }
+
+            if (isBinary(bytes)) {
+                return determinePageType(MimeType.APPLICATION_OCTET_STREAM);
+            }
+
+            final String asAsciiString = new String(bytes, "ASCII").trim().toUpperCase(Locale.ROOT);
+            for (final String htmlPattern : htmlPatterns) {
+                try {
+                    if ('<' == asAsciiString.charAt(0)) {
+                        if (asAsciiString.startsWith(htmlPattern, 1)) {
+                            final char spaceOrBracket = asAsciiString.charAt(htmlPattern.length() + 1);
+                            if (' ' == spaceOrBracket || '>' == spaceOrBracket) {
+                                return determinePageType(MimeType.TEXT_HTML);
+                            }
+                        }
+                    }
+                }
+                catch (final ArrayIndexOutOfBoundsException e) {
+                    // ignore and try next
+                }
+            }
+        }
+        return determinePageType(MimeType.TEXT_PLAIN);
     }
 
     /**
@@ -155,9 +210,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     @Override
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final String contentType = determineContentType(webResponse);
-
-        final PageType pageType = determinePageType(contentType);
+        final PageType pageType = determinePageType(webResponse);
         switch (pageType) {
             case HTML:
                 return createHtmlPage(webResponse, webWindow);
@@ -179,46 +232,6 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             default:
                 return createUnexpectedPage(webResponse, webWindow);
         }
-    }
-
-    /**
-     * Tries to determine the content type.
-     * TODO: implement a content type sniffer based on the
-     * <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">Content-Type Processing Model</a>
-     * @param webResponse the response from the server
-     * @return the sniffed mime type
-     * @exception IOException if an IO problem occurs
-     */
-    private static String determineContentType(final WebResponse webResponse)
-        throws IOException {
-
-        final String contentType = webResponse.getContentType();
-        if (!StringUtils.isEmpty(contentType)) {
-            return contentType.toLowerCase(Locale.ROOT);
-        }
-
-        try (InputStream contentAsStream = webResponse.getContentAsStream()) {
-            final byte[] bytes = read(contentAsStream, 500);
-            if (bytes.length == 0) {
-                return MimeType.TEXT_PLAIN;
-            }
-
-            final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ROOT);
-            if (asAsciiString.contains("<HTML")) {
-                return MimeType.TEXT_HTML;
-            }
-            else if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
-                    || startsWith(bytes, markerUTF16LE_)) {
-                return MimeType.TEXT_PLAIN;
-            }
-            else if (asAsciiString.trim().startsWith("<SCRIPT>")) {
-                return MimeType.APPLICATION_JAVASCRIPT;
-            }
-            else if (isBinary(bytes)) {
-                return MimeType.APPLICATION_OCTET_STREAM;
-            }
-        }
-        return MimeType.TEXT_PLAIN;
     }
 
     /**

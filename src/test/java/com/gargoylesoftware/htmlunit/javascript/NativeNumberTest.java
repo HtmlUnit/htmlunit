@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,23 +47,24 @@ public class NativeNumberTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    if (Number.isFinite === undefined) {\n"
-            + "      alert('no Number.isFinite');\n"
+            + "      log('no Number.isFinite');\n"
             + "    } else {\n"
-            + "      alert(Number.isFinite(Infinity));\n"
-            + "      alert(Number.isFinite(NaN));\n"
-            + "      alert(Number.isFinite(-Infinity));\n"
-            + "      alert(Number.isFinite(0));\n"
-            + "      alert(Number.isFinite(2e64));\n"
-            + "      alert(Number.isFinite('0'));\n"
-            + "      alert(Number.isFinite(null));\n"
+            + "      log(Number.isFinite(Infinity));\n"
+            + "      log(Number.isFinite(NaN));\n"
+            + "      log(Number.isFinite(-Infinity));\n"
+            + "      log(Number.isFinite(0));\n"
+            + "      log(Number.isFinite(2e64));\n"
+            + "      log(Number.isFinite('0'));\n"
+            + "      log(Number.isFinite(null));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -71,7 +72,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false"},
+                       "false", "false", "false", "false", "false"},
             IE = "no Number.isInteger")
     @NotYetImplemented(IE)
     public void isInteger() throws Exception {
@@ -79,30 +80,31 @@ public class NativeNumberTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    if (Number.isInteger === undefined) {\n"
-            + "      alert('no Number.isInteger');\n"
+            + "      log('no Number.isInteger');\n"
             + "    } else {\n"
-            + "      alert(Number.isInteger(0));\n"
-            + "      alert(Number.isInteger(1));\n"
-            + "      alert(Number.isInteger(-100000));\n"
+            + "      log(Number.isInteger(0));\n"
+            + "      log(Number.isInteger(1));\n"
+            + "      log(Number.isInteger(-100000));\n"
 
-            + "      alert(Number.isInteger(0.1));\n"
-            + "      alert(Number.isInteger(Math.PI));\n"
+            + "      log(Number.isInteger(0.1));\n"
+            + "      log(Number.isInteger(Math.PI));\n"
 
-            + "      alert(Number.isInteger(NaN));\n"
-            + "      alert(Number.isInteger(Infinity));\n"
-            + "      alert(Number.isInteger(-Infinity));\n"
-            + "      alert(Number.isInteger('10'));\n"
-            + "      alert(Number.isInteger(true));\n"
-            + "      alert(Number.isInteger(false));\n"
-            + "      alert(Number.isInteger([1]));\n"
+            + "      log(Number.isInteger(NaN));\n"
+            + "      log(Number.isInteger(Infinity));\n"
+            + "      log(Number.isInteger(-Infinity));\n"
+            + "      log(Number.isInteger('10'));\n"
+            + "      log(Number.isInteger(true));\n"
+            + "      log(Number.isInteger(false));\n"
+            + "      log(Number.isInteger([1]));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -110,7 +112,7 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
-                "false", "false", "false", "false", "false", "false", "false"},
+                       "false", "false", "false", "false", "false", "false", "false"},
             IE = "no Number.isNaN")
     @NotYetImplemented(IE)
     public void isNaN() throws Exception {
@@ -118,32 +120,33 @@ public class NativeNumberTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    if (Number.isNaN === undefined) {\n"
-            + "      alert('no Number.isNaN');\n"
+            + "      log('no Number.isNaN');\n"
             + "    } else {\n"
-            + "      alert(Number.isNaN(NaN));\n"
-            + "      alert(Number.isNaN(Number.NaN));\n"
-            + "      alert(Number.isNaN(0 / 0));\n"
+            + "      log(Number.isNaN(NaN));\n"
+            + "      log(Number.isNaN(Number.NaN));\n"
+            + "      log(Number.isNaN(0 / 0));\n"
 
-            + "      alert(Number.isNaN('NaN'));\n"
-            + "      alert(Number.isNaN(undefined));\n"
-            + "      alert(Number.isNaN({}));\n"
-            + "      alert(Number.isNaN('blabla'));\n"
+            + "      log(Number.isNaN('NaN'));\n"
+            + "      log(Number.isNaN(undefined));\n"
+            + "      log(Number.isNaN({}));\n"
+            + "      log(Number.isNaN('blabla'));\n"
 
-            + "      alert(Number.isNaN(true));\n"
-            + "      alert(Number.isNaN(null));\n"
-            + "      alert(Number.isNaN(37));\n"
-            + "      alert(Number.isNaN('37'));\n"
-            + "      alert(Number.isNaN('37.37'));\n"
-            + "      alert(Number.isNaN(''));\n"
-            + "      alert(Number.isNaN(' '));\n"
+            + "      log(Number.isNaN(true));\n"
+            + "      log(Number.isNaN(null));\n"
+            + "      log(Number.isNaN(37));\n"
+            + "      log(Number.isNaN('37'));\n"
+            + "      log(Number.isNaN('37.37'));\n"
+            + "      log(Number.isNaN(''));\n"
+            + "      log(Number.isNaN(' '));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -158,24 +161,25 @@ public class NativeNumberTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    if (Number.isSafeInteger === undefined) {\n"
-            + "      alert('no Number.isSafeInteger');\n"
+            + "      log('no Number.isSafeInteger');\n"
             + "    } else {\n"
-            + "      alert(Number.isSafeInteger(3));\n"
-            + "      alert(Number.isSafeInteger(Math.pow(2, 53)));\n"
-            + "      alert(Number.isSafeInteger(Math.pow(2, 53) - 1));\n"
-            + "      alert(Number.isSafeInteger(NaN));\n"
-            + "      alert(Number.isSafeInteger(Infinity));\n"
-            + "      alert(Number.isSafeInteger('3'));\n"
-            + "      alert(Number.isSafeInteger(3.1));\n"
-            + "      alert(Number.isSafeInteger(3.0));\n"
+            + "      log(Number.isSafeInteger(3));\n"
+            + "      log(Number.isSafeInteger(Math.pow(2, 53)));\n"
+            + "      log(Number.isSafeInteger(Math.pow(2, 53) - 1));\n"
+            + "      log(Number.isSafeInteger(NaN));\n"
+            + "      log(Number.isSafeInteger(Infinity));\n"
+            + "      log(Number.isSafeInteger('3'));\n"
+            + "      log(Number.isSafeInteger(3.1));\n"
+            + "      log(Number.isSafeInteger(3.0));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -190,17 +194,18 @@ public class NativeNumberTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    if (Number.parseFloat === undefined) {\n"
-            + "      alert('no Number.parseFloat');\n"
+            + "      log('no Number.parseFloat');\n"
             + "    } else {\n"
-            + "      alert(Number.parseFloat('3.14'));\n"
+            + "      log(Number.parseFloat('3.14'));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -215,17 +220,18 @@ public class NativeNumberTest extends WebDriverTestCase {
             "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    if (Number.parseInt === undefined) {\n"
-            + "      alert('no Number.parseInt');\n"
+            + "      log('no Number.parseInt');\n"
             + "    } else {\n"
-            + "      alert(Number.parseInt('4'));\n"
+            + "      log(Number.parseInt('4'));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -238,7 +244,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     public void methods_common() throws Exception {
         final String[] methods = {"toFixed", "toExponential", "toLocaleString", "toPrecision", "toString", "valueOf"};
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -249,7 +255,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts("toSource: undefined")
     public void methods_different() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", "toSource");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -259,11 +265,12 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("2.274341322658976e-309")
     public void toStringRhinoBug538172() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "alert(2.274341322658976E-309);\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "log(2.274341322658976E-309);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -273,10 +280,11 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts("12,345")
     public void toLocaleString() throws Exception {
         final String html = "<html><head><script>\n"
-            + "  alert((12345).toLocaleString('en'));\n"
+            + LOG_TITLE_FUNCTION
+            + "  log((12345).toLocaleString('en'));\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -286,10 +294,11 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts("12.345")
     public void toLocaleStringDe() throws Exception {
         final String html = "<html><head><script>\n"
-            + "  alert((12345).toLocaleString('de'));\n"
+            + LOG_TITLE_FUNCTION
+            + "  log((12345).toLocaleString('de'));\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -299,10 +308,11 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts("12,345")
     public void toLocaleStringEnUS() throws Exception {
         final String html = "<html><head><script>\n"
-            + "  alert((12345).toLocaleString('en-US'));\n"
+            + LOG_TITLE_FUNCTION
+            + "  log((12345).toLocaleString('en-US'));\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -314,12 +324,13 @@ public class NativeNumberTest extends WebDriverTestCase {
             FF78 = "12.345")
     public void toLocaleStringNoParam() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert((12345).toLocaleString());\n"
-            + "  } catch(e) { alert(e); }\n"
+            + "    log((12345).toLocaleString());\n"
+            + "  } catch(e) { log(e); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -329,11 +340,12 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts("exception")
     public void toLocaleStringHintertupfingen() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert((12345).toLocaleString('Hintertupfingen'));\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log((12345).toLocaleString('Hintertupfingen'));\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

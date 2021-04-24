@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,6 +23,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * The JavaScript object {@code HTMLDetailsElement}.
@@ -46,6 +49,21 @@ public class HTMLDetailsElement extends HTMLElement {
      */
     @JsxGetter
     public boolean isOpen() {
-        return getDomNodeOrDie().hasAttribute("open");
+        return ((HtmlDetails) getDomNodeOrDie()).isOpen();
+    }
+
+    /**
+     * Sets the open attribute.
+     * @param newValue the new value to set
+     */
+    @JsxSetter
+    public void setOpen(final Object newValue) {
+        final boolean bool = ScriptRuntime.toBoolean(newValue);
+        if (bool) {
+            getDomNodeOrDie().setAttribute("open", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("open");
+        }
     }
 }

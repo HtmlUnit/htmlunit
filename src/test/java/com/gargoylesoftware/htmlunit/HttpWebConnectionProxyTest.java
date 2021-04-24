@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,7 +52,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
 
         final WebClient webClient = getWebClient();
 
-        final ProxyConfig proxy = new ProxyConfig(SOCKS_PROXY_HOST, PORT_PROXY_SERVER);
+        final ProxyConfig proxy = new ProxyConfig(SOCKS_PROXY_HOST, PORT_PROXY_SERVER, null);
         proxy.addHostsToProxyBypass("127.0.0.1");
         webClient.getOptions().setProxyConfig(proxy);
     }

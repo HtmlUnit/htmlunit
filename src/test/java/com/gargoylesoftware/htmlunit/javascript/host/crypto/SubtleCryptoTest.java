@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -32,27 +33,60 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class SubtleCryptoTest extends WebDriverTestCase {
+
+    /**
+     * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError true",
+            IE = {})
+    @HtmlUnitNYI(CHROME = "TypeError false",
+            EDGE = "TypeError false",
+            FF = "TypeError false",
+            FF78 = "TypeError false")
+    public void unsupportedCall() throws Exception {
+        final String html
+            = ""
+            + "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.crypto) {\n"
+            + "      window.crypto.subtle.generateKey(\n"
+            + "        { name: 'x' }\n"
+            + "      )\n"
+            + "      .catch(function(e) {\n"
+            + "        alert('TypeError ' + (e instanceof TypeError));\n"
+            + "      });\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME * 3);
+    }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = {"[object Crypto]", "public", "true", "verify",
-                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                        "publicExponent 1,0,1",
-                        "private", "false", "sign",
-                        "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
-                        "publicExponent 1,0,1"},
+                       "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                       "publicExponent 1,0,1",
+                       "private", "false", "sign",
+                       "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
+                       "publicExponent 1,0,1"},
             IE = "undefined")
     @NotYetImplemented({CHROME, EDGE, FF, FF78})
     public void rsassa() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.crypto);\n"
+            + "    log(window.crypto);\n"
             + "    if (window.crypto) {\n"
             + "      window.crypto.subtle.generateKey(\n"
             + "        {\n"
@@ -65,27 +99,30 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "        ['sign', 'verify']\n"
             + "      )\n"
             + "      .then(function(key) {\n"
-            + "        alert(key.publicKey.type);\n"
-            + "        alert(key.publicKey.extractable);\n"
-            + "        alert(key.publicKey.usages);\n"
+            + "        log(key.publicKey.type);\n"
+            + "        log(key.publicKey.extractable);\n"
+            + "        log(key.publicKey.usages);\n"
             + "        for(var x in key.publicKey.algorithm) {\n"
-            + "          alert(x + ' ' + key.publicKey.algorithm[x]);\n"
+            + "          log(x + ' ' + key.publicKey.algorithm[x]);\n"
             + "        }\n"
-            + "        alert(key.privateKey.type);\n"
-            + "        alert(key.privateKey.extractable);\n"
-            + "        alert(key.privateKey.usages);\n"
+            + "        log(key.privateKey.type);\n"
+            + "        log(key.privateKey.extractable);\n"
+            + "        log(key.privateKey.usages);\n"
             + "        for(var x in key.privateKey.algorithm) {\n"
-            + "          alert(x + ' ' + key.publicKey.algorithm[x]);\n"
+            + "          log(x + ' ' + key.publicKey.algorithm[x]);\n"
             + "        }\n"
+            + "        alert('done');\n"
             + "      })\n"
             + "      .catch(function(err) {\n"
-            + "        alert(err);\n"
+            + "        log(err);\n"
             + "      });\n"
-            + "    }\n"
+            + "    } else { alert('done'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME * 3);
+        loadPage2(html);
+        verifyAlerts(getWebDriver(), "done");
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 }

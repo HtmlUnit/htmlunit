@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,11 +20,14 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link EventHandler}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class EventHandlerTest extends WebDriverTestCase {
@@ -34,15 +37,56 @@ public class EventHandlerTest extends WebDriverTestCase {
      */
     @Test
     public void caller() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(test.caller);\n"
+            + "    log(test.caller);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String alert = getCollectedAlerts(driver, 1).get(0);
-        assertTrue(alert.contains("function onload(event)"));
+        assertTrue(driver.getTitle().contains("function onload(event)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function onload(event) { test() }",
+             "function onload(event) { test() }",
+             "function onload(event) { test() }"})
+    @HtmlUnitNYI(CHROME = {"function onload(event) { test(); }",
+                           "function onload(event) { test(); }",
+                           "function onload(event) { test(); }"},
+            EDGE = {"function onload(event) { test(); }",
+                    "function onload(event) { test(); }",
+                    "function onload(event) { test(); }"},
+            FF = {"function onload(event) { test(); }",
+                  "function onload(event) { test(); }",
+                  "function onload(event) { test(); }"},
+            FF78 = {"function onload(event) { test(); }",
+                    "function onload(event) { test(); }",
+                    "function onload(event) { test(); }"},
+            IE = {"function onload(event) { test(); }",
+                  "function onload(event) { test(); }",
+                  "function onload(event) { test(); }"})
+    public void testToString() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e = test.caller;\n"
+            + "    log(e);\n"
+            + "    log('' + e);\n"
+            + "    log(e.toString());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

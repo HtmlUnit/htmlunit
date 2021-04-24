@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -103,56 +103,55 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
 
     /**
      * Testing event invocation order.
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {
-            "onreadystatechange_1: readyState=1",
-            "onreadystatechange_2: readyState=1",
-            "onreadystatechange_p: readyState=1",
-            "onreadystatechange_3: readyState=1",
-            "onreadystatechange_4: readyState=1",
-            "onreadystatechange_1: readyState=2",
-            "onreadystatechange_2: readyState=2",
-            "onreadystatechange_p: readyState=2",
-            "onreadystatechange_3: readyState=2",
-            "onreadystatechange_4: readyState=2",
-            "onreadystatechange_1: readyState=3",
-            "onreadystatechange_2: readyState=3",
-            "onreadystatechange_p: readyState=3",
-            "onreadystatechange_3: readyState=3",
-            "onreadystatechange_4: readyState=3",
-            "onreadystatechange_1: readyState=4",
-            "onreadystatechange_2: readyState=4",
-            "onreadystatechange_p: readyState=4",
-            "onreadystatechange_3: readyState=4",
-            "onreadystatechange_4: readyState=4"},
-            IE = {
-            "onreadystatechange_1: readyState=1",
-            "onreadystatechange_2: readyState=1",
-            "onreadystatechange_p: readyState=1",
-            "onreadystatechange_3: readyState=1",
-            "onreadystatechange_4: readyState=1",
-            "onreadystatechange_1: readyState=1",
-            "onreadystatechange_2: readyState=1",
-            "onreadystatechange_p: readyState=1",
-            "onreadystatechange_3: readyState=1",
-            "onreadystatechange_4: readyState=1",
-            "onreadystatechange_1: readyState=2",
-            "onreadystatechange_2: readyState=2",
-            "onreadystatechange_p: readyState=2",
-            "onreadystatechange_3: readyState=2",
-            "onreadystatechange_4: readyState=2",
-            "onreadystatechange_1: readyState=3",
-            "onreadystatechange_2: readyState=3",
-            "onreadystatechange_p: readyState=3",
-            "onreadystatechange_3: readyState=3",
-            "onreadystatechange_4: readyState=3",
-            "onreadystatechange_1: readyState=4",
-            "onreadystatechange_2: readyState=4",
-            "onreadystatechange_p: readyState=4",
-            "onreadystatechange_3: readyState=4",
-            "onreadystatechange_4: readyState=4"
-        })
+    @Alerts(DEFAULT = {"onreadystatechange_1: readyState=1",
+                       "onreadystatechange_2: readyState=1",
+                       "onreadystatechange_p: readyState=1",
+                       "onreadystatechange_3: readyState=1",
+                       "onreadystatechange_4: readyState=1",
+                       "onreadystatechange_1: readyState=2",
+                       "onreadystatechange_2: readyState=2",
+                       "onreadystatechange_p: readyState=2",
+                       "onreadystatechange_3: readyState=2",
+                       "onreadystatechange_4: readyState=2",
+                       "onreadystatechange_1: readyState=3",
+                       "onreadystatechange_2: readyState=3",
+                       "onreadystatechange_p: readyState=3",
+                       "onreadystatechange_3: readyState=3",
+                       "onreadystatechange_4: readyState=3",
+                       "onreadystatechange_1: readyState=4",
+                       "onreadystatechange_2: readyState=4",
+                       "onreadystatechange_p: readyState=4",
+                       "onreadystatechange_3: readyState=4",
+                       "onreadystatechange_4: readyState=4"},
+            IE = {"onreadystatechange_1: readyState=1",
+                  "onreadystatechange_2: readyState=1",
+                  "onreadystatechange_p: readyState=1",
+                  "onreadystatechange_3: readyState=1",
+                  "onreadystatechange_4: readyState=1",
+                  "onreadystatechange_1: readyState=1",
+                  "onreadystatechange_2: readyState=1",
+                  "onreadystatechange_p: readyState=1",
+                  "onreadystatechange_3: readyState=1",
+                  "onreadystatechange_4: readyState=1",
+                  "onreadystatechange_1: readyState=2",
+                  "onreadystatechange_2: readyState=2",
+                  "onreadystatechange_p: readyState=2",
+                  "onreadystatechange_3: readyState=2",
+                  "onreadystatechange_4: readyState=2",
+                  "onreadystatechange_1: readyState=3",
+                  "onreadystatechange_2: readyState=3",
+                  "onreadystatechange_p: readyState=3",
+                  "onreadystatechange_3: readyState=3",
+                  "onreadystatechange_4: readyState=3",
+                  "onreadystatechange_1: readyState=4",
+                  "onreadystatechange_2: readyState=4",
+                  "onreadystatechange_p: readyState=4",
+                  "onreadystatechange_3: readyState=4",
+                  "onreadystatechange_4: readyState=4"
+            })
     public void eventInvocationOrder() throws Exception {
         final String html = ""
             + "<html>\n"

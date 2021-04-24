@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,9 +47,10 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"myTarget,myData,7", "myTarget,myData", "abcdefghij",
-                   "<?myTarget myData?>", "<![CDATA[abcdefghij]]>"})
+                  "<?myTarget myData?>", "<![CDATA[abcdefghij]]>"})
     public void createProcessingInstruction() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
@@ -59,17 +60,17 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
             + "    doc.appendChild(d);\n"
             + "    var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
             + "    doc.insertBefore(pi, d);\n"
-            + "    alert(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
-            + "    alert(pi.target + ',' + pi.data);\n"
+            + "    log(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
+            + "    log(pi.target + ',' + pi.data);\n"
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
             + "    d.appendChild(cdata);\n"
-            + "    alert(cdata.data);\n"
-            + "    alert(" + callSerializeXMLDOMDocumentToString("pi") + ");\n"
-            + "    alert(" + callSerializeXMLDOMDocumentToString("cdata") + ");\n"
+            + "    log(cdata.data);\n"
+            + "    log(" + callSerializeXMLDOMDocumentToString("pi") + ");\n"
+            + "    log(" + callSerializeXMLDOMDocumentToString("cdata") + ");\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -80,18 +81,19 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
             IE = "createNode not available")
     public void createNode() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromString("'<root><child/></root>'") + ";\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(2, 'Sci-Fi', '');\n"
             + "      doc.documentElement.childNodes.item(0).attributes.setNamedItem(node);\n"
-            + "      alert(" + callSerializeXMLDOMDocumentToString("doc.documentElement") + ");\n"
-            + "    } else { alert('createNode not available'); }\n"
+            + "      log(" + callSerializeXMLDOMDocumentToString("doc.documentElement") + ");\n"
+            + "    } else { log('createNode not available'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION
             + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -102,19 +104,20 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
             IE = "createNode not available")
     public void createNode_element() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
-            + "      alert(node.localName);\n"
-            + "      alert(node.prefix);\n"
-            + "      alert(node.namespaceURI);\n"
-            + "      alert(node.nodeName);\n"
-            + "    } else { alert('createNode not available'); }\n"
+            + "      log(node.localName);\n"
+            + "      log(node.prefix);\n"
+            + "      log(node.namespaceURI);\n"
+            + "      log(node.nodeName);\n"
+            + "    } else { log('createNode not available'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -125,20 +128,21 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
             IE = {"a", "null", "b"})
     public void documentElementCaching() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var a = doc.createElement('a');\n"
             + "    var b = doc.createElement('b');\n"
             + "    doc.appendChild(a);\n"
-            + "    alert(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.tagName);\n"
             + "    doc.removeChild(a);\n"
-            + "    alert(doc.documentElement);\n"
+            + "    log(doc.documentElement);\n"
             + "    doc.appendChild(b);\n"
-            + "    alert(doc.documentElement.tagName);\n"
+            + "    log(doc.documentElement.tagName);\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -149,14 +153,15 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
             IE = "a:b")
     public void createElement_namespace() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var a = doc.createElement('a:b');\n"
-            + "    alert(a.tagName);\n"
+            + "    log(a.tagName);\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -169,6 +174,7 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
             IE = {"content", "content"})
     public void text() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var xml = '<Envelope><Body>content</Body></Envelope>';\n"
@@ -176,10 +182,10 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
 
             + "    var expression = '/Envelope/Body';\n"
             + "    var body = xmldoc.documentElement.selectSingleNode(expression);\n"
-            + "    alert(body.text);\n"
-            + "    alert(body.firstChild.text);\n"
+            + "    log(body.text);\n"
+            + "    log(body.firstChild.text);\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

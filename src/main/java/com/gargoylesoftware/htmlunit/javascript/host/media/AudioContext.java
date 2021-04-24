@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -72,7 +72,7 @@ public class AudioContext extends BaseAudioContext {
                 (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
 
         if (error != null) {
-            jsEngine.addPostponedAction(new PostponedAction(owningPage) {
+            jsEngine.addPostponedAction(new PostponedAction(owningPage, "AudioContext.decodeAudioData") {
                 @Override
                 public void execute() throws Exception {
                     jsEngine.callFunction(owningPage, error, getParentScope(), AudioContext.this, new Object[] {});

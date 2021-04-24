@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,24 +36,34 @@ public class SVGFECompositeElement extends SVGElement {
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_UNKNOWN}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_UNKNOWN = 0;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_OVER}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_OVER = 1;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_IN}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_IN = 2;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_OUT}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_OUT = 3;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_ATOP}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_ATOP = 4;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_XOR}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_XOR = 5;
+
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_ARITHMETIC}. */
     @JsxConstant
     public static final int SVG_FECOMPOSITE_OPERATOR_ARITHMETIC = 6;
+
+    /** The constant {@code SVG_FECOMPOSITE_OPERATOR_LIGHTER}. */
+    @JsxConstant(FF)
+    public static final int SVG_FECOMPOSITE_OPERATOR_LIGHTER = 7;
 
     /**
      * Creates an instance.

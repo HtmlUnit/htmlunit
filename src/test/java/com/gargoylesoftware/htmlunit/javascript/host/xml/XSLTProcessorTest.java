@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,7 +40,9 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void test() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var xmlDoc = createXmlDocument();\n"
@@ -55,10 +57,10 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      var processor = new XSLTProcessor();\n"
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
-            + "      alert(new XMLSerializer().serializeToString(newDocument.documentElement).length);\n"
+            + "      log(new XMLSerializer().serializeToString(newDocument.documentElement).length);\n"
             + "      newDocument = processor.transformToDocument(xmlDoc.documentElement);\n"
-            + "      alert(newDocument.documentElement);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(newDocument.documentElement);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
 
             + "  function createXmlDocument() {\n"
@@ -101,7 +103,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_SECOND, "1"), xml, MimeType.TEXT_XML);
         conn.setResponse(new URL(URL_SECOND, "2"), xsl, MimeType.TEXT_XML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -109,32 +111,34 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function", "function", "function", "function",
-            "undefined", "undefined", "undefined", "undefined"},
+                       "undefined", "undefined", "undefined", "undefined"},
             IE = "exception")
     public void methods() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      if (XSLTProcessor) {\n"
             + "        var processor = new XSLTProcessor();\n"
-            + "        alert(typeof processor.importStylesheet);\n"
-            + "        alert(typeof processor.transformToDocument);\n"
-            + "        alert(typeof processor.transformToFragment);\n"
-            + "        alert(typeof processor.setParameter);\n"
-            + "        alert(typeof processor.getParameter);\n"
-            + "        alert(typeof processor.input);\n"
-            + "        alert(typeof processor.ouput);\n"
-            + "        alert(typeof processor.addParameter);\n"
-            + "        alert(typeof processor.transform);\n"
+            + "        log(typeof processor.importStylesheet);\n"
+            + "        log(typeof processor.transformToDocument);\n"
+            + "        log(typeof processor.transformToFragment);\n"
+            + "        log(typeof processor.setParameter);\n"
+            + "        log(typeof processor.getParameter);\n"
+            + "        log(typeof processor.input);\n"
+            + "        log(typeof processor.ouput);\n"
+            + "        log(typeof processor.addParameter);\n"
+            + "        log(typeof processor.transform);\n"
             + "      } else {\n"
-            + "        alert('XSLTProcessor not available');\n"
+            + "        log('XSLTProcessor not available');\n"
             + "      }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -142,25 +146,23 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function", "function XSLTProcessor() { [native code] }",
-                "[object XSLTProcessor]"},
-            FF = {"function", "function XSLTProcessor() {\n    [native code]\n}",
-                "[object XSLTProcessor]"},
-            FF78 = {"function", "function XSLTProcessor() {\n    [native code]\n}",
-                "[object XSLTProcessor]"},
+                       "[object XSLTProcessor]"},
             IE = {"undefined", "exception"})
     public void type() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(typeof XSLTProcessor);\n"
-            + "      alert(XSLTProcessor);\n"
-            + "      alert(new XSLTProcessor());\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "      log(typeof XSLTProcessor);\n"
+            + "      log(XSLTProcessor);\n"
+            + "      log(new XSLTProcessor());\n"
+            + "    } catch (e) {log('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -168,34 +170,33 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
-            FF = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
-            FF78 = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
             IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(String(XSLTProcessor));\n"
-            + "    } catch(e) { alert('exception str'); }\n"
+            + "      log(String(XSLTProcessor));\n"
+            + "    } catch(e) { log('exception str'); }\n"
             + "    try {\n"
-            + "      alert(Number(XSLTProcessor));\n"
-            + "    } catch(e) { alert('exception numb'); }\n"
+            + "      log(Number(XSLTProcessor));\n"
+            + "    } catch(e) { log('exception numb'); }\n"
             + "    try {\n"
-            + "      alert(Boolean(XSLTProcessor));\n"
-            + "    } catch(e) { alert('exception bool'); }\n"
+            + "      log(Boolean(XSLTProcessor));\n"
+            + "    } catch(e) { log('exception bool'); }\n"
             + "    try {\n"
-            + "      alert(XSLTProcessor ? 'Yes' : 'No');\n"
-            + "    } catch(e) { alert('exception ?'); }\n"
+            + "      log(XSLTProcessor ? 'Yes' : 'No');\n"
+            + "    } catch(e) { log('exception ?'); }\n"
             + "    try {\n"
-            + "      if (XSLTProcessor) { alert('Yes') } else { alert('No') }\n"
-            + "    } catch(e) { alert('exception if'); }\n"
+            + "      if (XSLTProcessor) { log('Yes') } else { log('No') }\n"
+            + "    } catch(e) { log('exception if'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

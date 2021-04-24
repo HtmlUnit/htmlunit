@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,13 +35,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
     private void test(final String className) throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(typeof " + className + ");\n"
+            + "    log(typeof " + className + ");\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -775,9 +776,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "object",
-            FF78 = "object",
+    @Alerts(DEFAULT = "object",
             IE = "undefined")
     public void css() throws Exception {
         test("CSS");
@@ -2030,9 +2029,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts("undefined")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -2522,7 +2519,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
             FF78 = "function")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");
@@ -2764,14 +2760,12 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     * Test HTMLShadowElement.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts("undefined")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
     }

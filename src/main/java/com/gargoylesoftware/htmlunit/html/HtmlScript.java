@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -135,10 +135,10 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Returns {@code true} if this script is deferred.
-     * @return {@code true} if this script is deferred
+     * {@inheritDoc}
      */
-    protected boolean isDeferred() {
+    @Override
+    public boolean isDeferred() {
         return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
     }
 
@@ -170,10 +170,10 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 notifyMutationObservers);
 
         if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {
-            final PostponedAction action = new PostponedAction(getPage()) {
+            final PostponedAction action = new PostponedAction(getPage(), "HtmlScript.setAttributeNS") {
                 @Override
                 public void execute() {
-                    ScriptElementSupport.executeScriptIfNeeded(HtmlScript.this);
+                    ScriptElementSupport.executeScriptIfNeeded(HtmlScript.this, false, false);
                 }
             };
             final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
@@ -207,18 +207,13 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Sets the <tt>readyState</tt> to the specified state and executes the
-     * <tt>onreadystatechange</tt> handler when simulating IE.
-     * @param state this script ready state
-     */
-    protected void setAndExecuteReadyState(final String state) {
-    }
-
-    /**
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
+     *
      * @return an empty string as the content of script is not visible by itself
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         return "";

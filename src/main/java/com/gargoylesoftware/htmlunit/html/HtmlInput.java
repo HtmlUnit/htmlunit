@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -275,8 +275,17 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code src}
      * or an empty string if that attribute isn't defined.
      */
-    public final String getSrcAttribute() {
+    public String getSrcAttribute() {
         return getSrcAttributeNormalized();
+    }
+
+    /**
+     * Sets the {@code src} attribute.
+     *
+     * @param src the {@code src} attribute
+     */
+    public void setSrcAttribute(final String src) {
+        setAttribute(HtmlElement.SRC_ATTRIBUTE, src);
     }
 
     /**

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -126,10 +126,10 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-            "string item", "string length", "string namedItem"},
+                       "string item", "string length", "string namedItem"},
             IE = {"string 1", "string action", "string first_submit", "string item",
-                "string length", "string namedItem", "string second_submit", "string val1",
-                "string val2"})
+                  "string length", "string namedItem", "string second_submit", "string val1",
+                  "string val2"})
     @NotYetImplemented(IE)
     public void for_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

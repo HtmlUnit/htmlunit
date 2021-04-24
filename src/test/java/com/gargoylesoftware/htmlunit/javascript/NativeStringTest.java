@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,14 +40,15 @@ public class NativeStringTest extends WebDriverTestCase {
     @Alerts("key\\:b_M")
     public void replace() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+                    + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert('key:b_M'.replace(':', '\\\\:'));\n"
+            + "  log('key:b_M'.replace(':', '\\\\:'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -56,22 +57,23 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
-            "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
-            "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
-            "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
-            "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
-            "slice: function", "small: function", "split: function", "strike: function", "sub: function",
-            "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
-            "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
-            "valueOf: function"})
+             "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
+             "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
+             "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
+             "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
+             "slice: function", "small: function", "split: function", "strike: function", "sub: function",
+             "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
+             "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
+             "valueOf: function"})
     public void methods_common() throws Exception {
-        final String[] methods = {"anchor", "big", "blink", "bold", "charAt", "charCodeAt", "concat", "constructor",
+        final String[] methods = {
+            "anchor", "big", "blink", "bold", "charAt", "charCodeAt", "concat", "constructor",
             "equals", "equalsIgnoreCase", "fixed", "fontcolor", "fontsize", "fromCharCode", "indexOf", "italics",
             "lastIndexOf", "link", "localeCompare", "match", "replace", "search", "slice", "small", "split",
             "strike", "sub", "substr", "substring", "sup", "toLocaleLowerCase", "toLocaleUpperCase", "toLowerCase",
             "toString", "toUpperCase", "valueOf"};
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -84,7 +86,7 @@ public class NativeStringTest extends WebDriverTestCase {
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -95,17 +97,18 @@ public class NativeStringTest extends WebDriverTestCase {
     public void trim() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var string = ' hi  ';\n"
             + "  if (''.trim) {\n"
-            + "    alert(string.trim().length);\n"
+            + "    log(string.trim().length);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -117,17 +120,18 @@ public class NativeStringTest extends WebDriverTestCase {
     public void trimRight() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var string = ' hi  ';\n"
             + "  if (''.trimRight) {\n"
-            + "    alert(string.trimRight().length);\n"
+            + "    log(string.trimRight().length);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -139,17 +143,18 @@ public class NativeStringTest extends WebDriverTestCase {
     public void trimLeft() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var string = ' hi  ';\n"
             + "  if (''.trimLeft) {\n"
-            + "    alert(string.trimLeft().length);\n"
+            + "    log(string.trimLeft().length);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -160,33 +165,34 @@ public class NativeStringTest extends WebDriverTestCase {
     public void contains() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  if ('contains' in String.prototype) {\n"
             + "    var str = 'To be, or not to be, that is the question.';\n"
-            + "    alert(str.contains('To be'));\n"
-            + "    alert(str.contains('TO'));\n"
-            + "    alert(str.contains(''));\n"
-            + "    alert(str.contains(' '));\n"
-            + "    alert(str.contains('To be', 0));\n"
-            + "    alert(str.contains('TO', 0));\n"
-            + "    alert(str.contains(' ', 0));\n"
-            + "    alert(str.contains('', 0));\n"
-            + "    alert(str.contains('or', 7));\n"
-            + "    alert(str.contains('or', 8));\n"
+            + "    log(str.contains('To be'));\n"
+            + "    log(str.contains('TO'));\n"
+            + "    log(str.contains(''));\n"
+            + "    log(str.contains(' '));\n"
+            + "    log(str.contains('To be', 0));\n"
+            + "    log(str.contains('TO', 0));\n"
+            + "    log(str.contains(' ', 0));\n"
+            + "    log(str.contains('', 0));\n"
+            + "    log(str.contains('or', 7));\n"
+            + "    log(str.contains('or', 8));\n"
 
-            + "    alert(str.contains('or', -3));\n"
-            + "    alert(str.contains('or', 7.9));\n"
-            + "    alert(str.contains('or', 8.1));\n"
-            + "    alert(str.contains());\n"
+            + "    log(str.contains('or', -3));\n"
+            + "    log(str.contains('or', 7.9));\n"
+            + "    log(str.contains('or', 8.1));\n"
+            + "    log(str.contains());\n"
             + "  } else {\n"
-            + "    alert('contains not supported');\n"
+            + "    log('contains not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -198,23 +204,24 @@ public class NativeStringTest extends WebDriverTestCase {
     public void startsWith() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  if ('startsWith' in String.prototype) {\n"
             + "    var str = 'To be, or not to be, that is the question.';\n"
-            + "    alert(str.startsWith('To be'));\n"
-            + "    alert(str.startsWith('T'));\n"
-            + "    alert(str.startsWith(str));\n"
+            + "    log(str.startsWith('To be'));\n"
+            + "    log(str.startsWith('T'));\n"
+            + "    log(str.startsWith(str));\n"
 
-            + "    alert(str.startsWith('question.'));\n"
+            + "    log(str.startsWith('question.'));\n"
             + "  } else {\n"
-            + "    alert('startsWith not supported');\n"
+            + "    log('startsWith not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -226,23 +233,24 @@ public class NativeStringTest extends WebDriverTestCase {
     public void endsWith() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  if ('endsWith' in String.prototype) {\n"
             + "    var str = 'To be, or not to be, that is the question.';\n"
-            + "    alert(str.endsWith('question.'));\n"
-            + "    alert(str.endsWith('.'));\n"
-            + "    alert(str.endsWith(str));\n"
+            + "    log(str.endsWith('question.'));\n"
+            + "    log(str.endsWith('.'));\n"
+            + "    log(str.endsWith(str));\n"
 
-            + "    alert(str.endsWith('the'));\n"
+            + "    log(str.endsWith('the'));\n"
             + "  } else {\n"
-            + "    alert('endsWith not supported');\n"
+            + "    log('endsWith not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -254,24 +262,25 @@ public class NativeStringTest extends WebDriverTestCase {
     public void includes() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  if ('includes' in String.prototype) {\n"
             + "    var str = 'To be, or not to be, that is the question.';\n"
-            + "    alert(str.includes('to be'));\n"
-            + "    alert(str.includes('question.'));\n"
-            + "    alert(str.includes('To be'));\n"
-            + "    alert(str.includes(str));\n"
+            + "    log(str.includes('to be'));\n"
+            + "    log(str.includes('question.'));\n"
+            + "    log(str.includes('To be'));\n"
+            + "    log(str.includes(str));\n"
 
-            + "    alert(str.includes('test'));\n"
+            + "    log(str.includes('test'));\n"
             + "  } else {\n"
-            + "    alert('includes not supported');\n"
+            + "    log('includes not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -283,20 +292,21 @@ public class NativeStringTest extends WebDriverTestCase {
     public void repeat() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  if ('repeat' in String.prototype) {\n"
             + "    var str = 'abc';\n"
-            + "    alert(str.repeat(0));\n"
-            + "    alert(str.repeat(1));\n"
-            + "    alert(str.repeat(2));\n"
+            + "    log(str.repeat(0));\n"
+            + "    log(str.repeat(1));\n"
+            + "    log(str.repeat(2));\n"
             + "  } else {\n"
-            + "    alert('repeat not supported');\n"
+            + "    log('repeat not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

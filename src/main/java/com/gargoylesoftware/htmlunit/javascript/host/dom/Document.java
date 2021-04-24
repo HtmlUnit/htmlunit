@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -72,7 +72,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -140,6 +139,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
@@ -1357,7 +1357,7 @@ public class Document extends Node {
     public String getDomain() {
         if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
-            if (url == WebClient.URL_ABOUT_BLANK) {
+            if (url == UrlUtils.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow) {
                     url = ((FrameWindow) w).getEnclosingPage().getUrl();
@@ -1404,11 +1404,11 @@ public class Document extends Node {
     public void setDomain(String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
-        // IE (at least 6) doesn't allow to set domain of about:blank
-        if (WebClient.URL_ABOUT_BLANK == getPage().getUrl()
+        // IE doesn't allow to set domain of about:blank
+        if (UrlUtils.URL_ABOUT_BLANK == getPage().getUrl()
             && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
-                    + WebClient.URL_ABOUT_BLANK + "\" to: \""
+                    + UrlUtils.URL_ABOUT_BLANK + "\" to: \""
                     + newDomain + "\".");
         }
 
@@ -3409,7 +3409,7 @@ public class Document extends Node {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter(FF78)
     public Function getOnshow() {
         return getEventHandler(Event.TYPE_SHOW);
     }
@@ -3418,7 +3418,7 @@ public class Document extends Node {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter(FF78)
     public void setOnshow(final Object onshow) {
         setEventHandler(Event.TYPE_SHOW, onshow);
     }
@@ -4239,7 +4239,7 @@ public class Document extends Node {
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
         if ("body".equals(name)) {
-            throw ScriptRuntime.typeError3("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
+            throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
         }
         return super.isReadOnlySettable(name, value);
     }

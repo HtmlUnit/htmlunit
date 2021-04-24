@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -254,12 +254,16 @@ public final class XMLHttpRequestLifeCycleTest {
         public static class XmlTimeoutServlet extends HttpServlet {
 
             @Override
-            protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+            protected void doGet(final HttpServletRequest req, final HttpServletResponse response)
                     throws ServletException, IOException {
-                resp.setContentType(MimeType.TEXT_XML);
-                resp.setContentLength(RETURN_XML.length());
-                resp.setStatus(HttpStatus.SC_OK);
-                final ServletOutputStream outputStream = resp.getOutputStream();
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "*");
+                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+                response.setContentType(MimeType.TEXT_XML);
+                response.setContentLength(RETURN_XML.length());
+                response.setStatus(HttpStatus.SC_OK);
+                final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.flush();
                     Thread.sleep(500);
@@ -289,8 +293,8 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done",
-                "readystatechange_4_200_true", "load_4_200_false",
-                "loadend_4_200_false", "send-done"})
+                 "readystatechange_4_200_true", "load_4_200_false",
+                 "loadend_4_200_false", "send-done"})
         public void addEventListener_sync() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
@@ -302,8 +306,8 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_200_true", "load_4_200_false",
-                        "loadend_4_200_false", "send-done"})
+                 "readystatechange_4_200_true", "load_4_200_false",
+                 "loadend_4_200_false", "send-done"})
         public void addEventListener_sync_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
@@ -315,10 +319,10 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
-                        "ExceptionThrown"},
+                           "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false", "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false", "ExceptionThrown"})
@@ -334,8 +338,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -351,8 +355,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -368,7 +372,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_networkError() throws Exception {
@@ -392,7 +396,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_networkError_preflight() throws Exception {
@@ -415,7 +419,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
-                    "load_4_403_false", "loadend_4_403_false", "send-done"})
+                 "load_4_403_false", "loadend_4_403_false", "send-done"})
         public void addEventListener_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403), URL_FIRST,
                     servlets_);
@@ -427,7 +431,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
-                    "load_4_403_false", "loadend_4_403_false", "send-done"})
+                 "load_4_403_false", "loadend_4_403_false", "send-done"})
         public void addEventListener_sync_Error403_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -440,8 +444,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -456,7 +460,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
-                    "load_4_500_false", "loadend_4_500_false", "send-done"})
+                 "load_4_500_false", "loadend_4_500_false", "send-done"})
         public void addEventListener_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
@@ -468,7 +472,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
-                    "load_4_500_false", "loadend_4_500_false", "send-done"})
+                 "load_4_500_false", "loadend_4_500_false", "send-done"})
         public void addEventListener_sync_Error500_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -481,8 +485,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -519,14 +523,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
-                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                        "loadend_4_200_false"},
+                           "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                           "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                           "loadend_4_200_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_200_true", "readystatechange_3_200_true",
-                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                        "loadend_4_200_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_200_true", "readystatechange_3_200_true",
+                      "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                      "loadend_4_200_false"})
         public void addEventListener_async() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
@@ -538,13 +542,13 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
-                        "progress_3_200_false", "readystatechange_4_200_true",
-                        "load_4_200_false", "loadend_4_200_false"},
+                           "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                           "progress_3_200_false", "readystatechange_4_200_true",
+                           "load_4_200_false", "loadend_4_200_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
-                        "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
-                        "load_4_200_false", "loadend_4_200_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
+                      "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
+                      "load_4_200_false", "loadend_4_200_false"})
         public void addEventListener_async_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
@@ -556,11 +560,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_preflight_forbidden() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN),
                     URL_FIRST, servlets_, servlets_);
@@ -572,11 +576,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
-                        "loadstart_1_0_false", "send-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                           "loadstart_1_0_false", "send-done", "readystatechange_4_0_true",
+                           "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.WITHOUT_ORIGIN),
                     URL_FIRST, servlets_, servlets_);
@@ -588,11 +592,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
-                        "loadstart_1_0_false", "send-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                           "loadstart_1_0_false", "send-done", "readystatechange_4_0_true",
+                           "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_preflight_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.WITHOUT_ORIGIN_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
@@ -604,11 +608,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "abort_4_0", "loadend_4_0_false",
-                        "abort-done"},
+                           "send-done", "readystatechange_4_0_true", "abort_4_0", "loadend_4_0_false",
+                           "abort-done"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "readystatechange_4_0_true", "abort_4_0",
-                        "loadend_4_0_false", "abort-done"})
+                      "send-done", "readystatechange_4_0_true", "abort_4_0",
+                      "loadend_4_0_false", "abort-done"})
         public void addEventListener_async_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT), URL_FIRST,
                     servlets_);
@@ -620,11 +624,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_networkErrorTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR), URL_FIRST,
                     servlets_);
@@ -636,11 +640,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_networkErrorTriggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -653,14 +657,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true",
-                        "load_4_500_false", "loadend_4_500_false"},
+                           "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                           "progress_3_500_false", "readystatechange_4_500_true",
+                           "load_4_500_false", "loadend_4_500_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true",
-                        "load_4_500_false", "loadend_4_500_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_500_true", "readystatechange_3_500_true",
+                      "progress_3_500_false", "readystatechange_4_500_true",
+                      "load_4_500_false", "loadend_4_500_false"})
         public void addEventListener_async_Error500Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
@@ -673,14 +677,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true",
-                        "load_4_500_false", "loadend_4_500_false"},
+                           "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                           "progress_3_500_false", "readystatechange_4_500_true",
+                           "load_4_500_false", "loadend_4_500_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true",
-                        "load_4_500_false", "loadend_4_500_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_500_true", "readystatechange_3_500_true",
+                      "progress_3_500_false", "readystatechange_4_500_true",
+                      "load_4_500_false", "loadend_4_500_false"})
         public void addEventListener_async_Error500Triggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -693,11 +697,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true",
+                           "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_Error500Triggered_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -709,12 +713,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
-                        "readystatechange_4_0_true", "timeout_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
+                      "readystatechange_4_0_true", "timeout_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_timeout() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT), URL_FIRST,
                     servlets_);
@@ -727,7 +731,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_200_true",
-                    "load_4_200_false", "loadend_4_200_false", "send-done"})
+                 "load_4_200_false", "loadend_4_200_false", "send-done"})
         public void onKeyWord_sync() throws Exception {
             // we can register ourselves for every state here since it's in sync mode and
             // most of them won't fire anyway.
@@ -741,8 +745,8 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_200_true", "load_4_200_false",
-                        "loadend_4_200_false", "send-done"})
+                 "readystatechange_4_200_true", "load_4_200_false",
+                 "loadend_4_200_false", "send-done"})
         public void onKeyWord_sync_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
@@ -754,10 +758,10 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done",
-                        "ExceptionThrown"},
+                           "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false", "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false", "ExceptionThrown"})
@@ -773,8 +777,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -790,8 +794,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -807,7 +811,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_networkError() throws Exception {
@@ -833,7 +837,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
-                    "load_4_403_false", "loadend_4_403_false", "send-done"})
+                 "load_4_403_false", "loadend_4_403_false", "send-done"})
         public void onKeyWord_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_403), URL_FIRST,
                     servlets_);
@@ -845,7 +849,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_403_true",
-                    "load_4_403_false", "loadend_4_403_false", "send-done"})
+                 "load_4_403_false", "loadend_4_403_false", "send-done"})
         public void onKeyWord_sync_Error403_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD,
                     Execution.ERROR_403_PREFLIGHT), URL_FIRST,
@@ -859,8 +863,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -876,7 +880,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
-                    "load_4_500_false", "loadend_4_500_false", "send-done"})
+                 "load_4_500_false", "loadend_4_500_false", "send-done"})
         public void onKeyWord_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500), URL_FIRST,
                     servlets_);
@@ -888,7 +892,7 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts({"readystatechange_1_0_true", "open-done", "readystatechange_4_500_true",
-                    "load_4_500_false", "loadend_4_500_false", "send-done"})
+                 "load_4_500_false", "loadend_4_500_false", "send-done"})
         public void onKeyWord_sync_Error500_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD,
                     Execution.ERROR_500_PREFLIGHT), URL_FIRST,
@@ -902,8 +906,8 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
-                        "ExceptionThrown"},
+                      "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
+                      "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
@@ -930,14 +934,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
-                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                        "loadend_4_200_false"},
+                           "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                           "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                           "loadend_4_200_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_200_true", "readystatechange_3_200_true",
-                        "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
-                        "loadend_4_200_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_200_true", "readystatechange_3_200_true",
+                      "progress_3_200_false", "readystatechange_4_200_true", "load_4_200_false",
+                      "loadend_4_200_false"})
         public void onKeyWord_async() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
@@ -949,13 +953,13 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
-                        "progress_3_200_false", "readystatechange_4_200_true",
-                        "load_4_200_false", "loadend_4_200_false"},
+                           "send-done", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                           "progress_3_200_false", "readystatechange_4_200_true",
+                           "load_4_200_false", "loadend_4_200_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
-                        "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
-                        "load_4_200_false", "loadend_4_200_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
+                      "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
+                      "load_4_200_false", "loadend_4_200_false"})
         public void onKeyWord_async_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
@@ -967,11 +971,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "abort_4_0",
-                        "loadend_4_0_false", "abort-done"},
+                           "send-done", "readystatechange_4_0_true", "abort_4_0",
+                           "loadend_4_0_false", "abort-done"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "readystatechange_4_0_true", "abort_4_0",
-                        "loadend_4_0_false", "abort-done"})
+                      "send-done", "readystatechange_4_0_true", "abort_4_0",
+                      "loadend_4_0_false", "abort-done"})
         public void onKeyWord_async_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT),
                     URL_FIRST, servlets_);
@@ -983,11 +987,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                    "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                    "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void onKeyWord_async_networkErrorTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR),
                     URL_FIRST, servlets_);
@@ -1001,14 +1005,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"},
+                           "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
+                           "progress_3_403_false", "readystatechange_4_403_true",
+                           "load_4_403_false", "loadend_4_403_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_403_true", "readystatechange_3_403_true",
+                      "progress_3_403_false", "readystatechange_4_403_true",
+                      "load_4_403_false", "loadend_4_403_false"})
         public void onKeyWord_async_Error403Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_403), URL_FIRST,
                     servlets_);
@@ -1021,14 +1025,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"},
+                           "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
+                           "progress_3_403_false", "readystatechange_4_403_true",
+                           "load_4_403_false", "loadend_4_403_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_403_true", "readystatechange_3_403_true",
+                      "progress_3_403_false", "readystatechange_4_403_true",
+                      "load_4_403_false", "loadend_4_403_false"})
         public void onKeyWord_async_Error403Triggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_403_PREFLIGHT), URL_FIRST,
@@ -1042,11 +1046,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true",
+                           "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void onKeyWord_async_Error403Triggered_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_403_DURING_PREFLIGHT), URL_FIRST,
@@ -1060,14 +1064,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
-                        "loadend_4_500_false"},
+                           "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                           "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
+                           "loadend_4_500_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
-                        "loadend_4_500_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_500_true", "readystatechange_3_500_true",
+                      "progress_3_500_false", "readystatechange_4_500_true", "load_4_500_false",
+                      "loadend_4_500_false"})
         public void onKeyWord_async_Error500Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500),
                     URL_FIRST, servlets_);
@@ -1080,14 +1084,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"},
+                           "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
+                           "progress_3_403_false", "readystatechange_4_403_true",
+                           "load_4_403_false", "loadend_4_403_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_403_true", "readystatechange_3_403_true",
+                      "progress_3_403_false", "readystatechange_4_403_true",
+                      "load_4_403_false", "loadend_4_403_false"})
         public void addEventListener_async_Error403Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_403), URL_FIRST,
                     servlets_);
@@ -1100,14 +1104,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"},
+                           "send-done", "readystatechange_2_403_true", "readystatechange_3_403_true",
+                           "progress_3_403_false", "readystatechange_4_403_true",
+                           "load_4_403_false", "loadend_4_403_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_403_true", "readystatechange_3_403_true",
-                        "progress_3_403_false", "readystatechange_4_403_true",
-                        "load_4_403_false", "loadend_4_403_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_403_true", "readystatechange_3_403_true",
+                      "progress_3_403_false", "readystatechange_4_403_true",
+                      "load_4_403_false", "loadend_4_403_false"})
         public void addEventListener_async_Error403Triggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_403_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -1120,11 +1124,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true",
+                           "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void addEventListener_async_Error403Triggered_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_403_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
@@ -1137,14 +1141,14 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true",
-                        "load_4_500_false", "loadend_4_500_false"},
+                           "send-done", "readystatechange_2_500_true", "readystatechange_3_500_true",
+                           "progress_3_500_false", "readystatechange_4_500_true",
+                           "load_4_500_false", "loadend_4_500_false"},
                 IE = {"readystatechange_1_0_true", "open-done",
-                        "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
-                        "readystatechange_2_500_true", "readystatechange_3_500_true",
-                        "progress_3_500_false", "readystatechange_4_500_true",
-                        "load_4_500_false", "loadend_4_500_false"})
+                      "readystatechange_1_0_true", "send-done", "loadstart_1_0_false",
+                      "readystatechange_2_500_true", "readystatechange_3_500_true",
+                      "progress_3_500_false", "readystatechange_4_500_true",
+                      "load_4_500_false", "loadend_4_500_false"})
         public void onKeyWord_async_Error500Triggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_500_PREFLIGHT), URL_FIRST,
@@ -1158,11 +1162,11 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true",
+                           "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"})
         public void onKeyWord_async_Error500Triggered_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
@@ -1175,12 +1179,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "timeout_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
-                        "readystatechange_4_0_true", "timeout_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false", "readystatechange_2_200_true",
+                      "readystatechange_4_0_true", "timeout_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_timeout() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT),
                     URL_FIRST, servlets_);
@@ -1213,7 +1217,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_NoHttpResponseException() throws Exception {
@@ -1247,7 +1251,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException() throws Exception {
@@ -1296,7 +1300,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
@@ -1337,18 +1341,18 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 FF = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                      "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "progress_1_0_false", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
@@ -1379,12 +1383,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_preflight_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1430,12 +1434,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void addEventListener_async_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1475,7 +1479,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_NoHttpResponseException() throws Exception {
@@ -1509,7 +1513,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException() throws Exception {
@@ -1558,7 +1562,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
+                      "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
@@ -1599,18 +1603,18 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 FF = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "progress_1_0_false", "readystatechange_4_0_true",
-                        "error_4_0_false", "loadend_4_0_false"},
+                      "send-done", "progress_1_0_false", "readystatechange_4_0_true",
+                      "error_4_0_false", "loadend_4_0_false"},
                 FF78 = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
                         "send-done", "progress_1_0_false", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
@@ -1641,12 +1645,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_preflight_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1692,12 +1696,12 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done", "loadstart_1_0_false",
-                        "send-done", "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"},
+                           "send-done", "readystatechange_4_0_true", "error_4_0_false",
+                           "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done", "readystatechange_1_0_true",
-                        "send-done", "loadstart_1_0_false",
-                        "readystatechange_4_0_true", "error_4_0_false",
-                        "loadend_4_0_false"})
+                      "send-done", "loadstart_1_0_false",
+                      "readystatechange_4_0_true", "error_4_0_false",
+                      "loadend_4_0_false"})
         public void onKeyWord_async_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT));
@@ -1786,7 +1790,8 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("        var url = 'http://' + window.location.hostname + ':"
                     + WebTestCase.PORT2 + PREFLIGHT_ERROR_500_URL + "';\n");
         }
-        else if (Execution.TIMEOUT.equals(execution)) {
+        else if (Execution.TIMEOUT.equals(execution)
+                || Execution.SEND_ABORT.equals(execution)) {
             htmlBuilder.append("        var url = '" + TIMEOUT_URL + "';\n");
         }
         else if (Execution.ONLY_SEND_PREFLIGHT.equals(execution)

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,13 +36,13 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class UIEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
-            + "    alert(event);\n"
-            + "    alert(event.type);\n"
-            + "    alert(event.bubbles);\n"
-            + "    alert(event.cancelable);\n"
-            + "    alert(event.composed);\n"
+            + "    log(event);\n"
+            + "    log(event.type);\n"
+            + "    log(event.bubbles);\n"
+            + "    log(event.cancelable);\n"
+            + "    log(event.composed);\n"
 
-            + "    alert(event.view == window);\n"
+            + "    log(event.view == window);\n"
             + "  }\n";
 
     /**
@@ -53,18 +53,19 @@ public class UIEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new UIEvent('event');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -75,7 +76,8 @@ public class UIEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new UIEvent('event', {\n"
@@ -83,13 +85,13 @@ public class UIEventTest extends WebDriverTestCase {
             + "        'view': window\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,19 +101,20 @@ public class UIEventTest extends WebDriverTestCase {
     @Alerts("exception")
     public void create_ctorWithDetailsViewNotWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new UIEvent('event', {\n"
             + "        'view': {}\n"
             + "      });\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -120,18 +123,19 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM2: [object UIEvent]", "DOM3: [object UIEvent]"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert('DOM2: ' + document.createEvent('UIEvents'));\n"
-            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "      log('DOM2: ' + document.createEvent('UIEvents'));\n"
+            + "    } catch(e) {log('DOM2: exception')}\n"
             + "    try {\n"
-            + "      alert('DOM3: ' + document.createEvent('UIEvent'));\n"
-            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "      log('DOM3: ' + document.createEvent('UIEvent'));\n"
+            + "    } catch(e) {log('DOM3: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -141,18 +145,19 @@ public class UIEventTest extends WebDriverTestCase {
     @Alerts({"[object UIEvent]", "click", "true", "true", "true", "7"})
     public void initUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var e = document.createEvent('UIEvents');\n"
-            + "  alert(e);\n"
+            + "  log(e);\n"
             + "  e.initUIEvent('click', true, true, window, 7);\n"
-            + "  alert(e.type);\n"
-            + "  alert(e.bubbles);\n"
-            + "  alert(e.cancelable);\n"
-            + "  alert(e.view == window);\n"
-            + "  alert(e.detail);\n"
-            + "} catch(e) { alert('exception') }\n"
+            + "  log(e.type);\n"
+            + "  log(e.bubbles);\n"
+            + "  log(e.cancelable);\n"
+            + "  log(e.view == window);\n"
+            + "  log(e.detail);\n"
+            + "} catch(e) { log('exception') }\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -164,9 +169,10 @@ public class UIEventTest extends WebDriverTestCase {
     public void detail() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function alertDetail(e) {\n"
-            + "    alert(e);\n"
-            + "    alert(e.detail);\n"
+            + "    log(e);\n"
+            + "    log(e.detail);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='alertDetail(event)'>\n"
@@ -178,15 +184,16 @@ public class UIEventTest extends WebDriverTestCase {
         int i = 0;
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++]);
 
+        i = 0;
         driver.findElement(By.id("a")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
         final Actions action = new Actions(driver);
         action.doubleClick(driver.findElement(By.id("b")));
         action.perform();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts);
     }
 
     /**
@@ -198,21 +205,21 @@ public class UIEventTest extends WebDriverTestCase {
     public void view() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function alertView(e) {\n"
-            + "    alert(e);\n"
-            + "    alert(e.view);\n"
+            + "    log(e);\n"
+            + "    log(e.view);\n"
             + "  }\n"
             + "</script>\n"
             + "<form><input type='button' id='b' onclick='alertView(event)'></form>\n"
             + "</body></html>";
 
         final String[] alerts = getExpectedAlerts();
-        int i = 0;
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[0], alerts[1]);
 
         driver.findElement(By.id("b")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts);
     }
 }

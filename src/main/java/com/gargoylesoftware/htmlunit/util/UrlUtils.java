@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,6 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.protocol.AnyHandler;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
@@ -48,9 +47,19 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Hartmut Arlt
  */
 public final class UrlUtils {
-    private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
-    private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
-    private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+
+    /** "about". */
+    public static final String ABOUT = "about";
+    /** "about:". */
+    public static final String ABOUT_SCHEME = ABOUT + ":";
+    /** "about:blank". */
+    public static final String ABOUT_BLANK = ABOUT_SCHEME + "blank";
+    /** URL for "about:blank". */
+    public static final URL URL_ABOUT_BLANK;
+
+    private static final URLStreamHandler JS_HANDLER;
+    private static final URLStreamHandler ABOUT_HANDLER;
+    private static final URLStreamHandler DATA_HANDLER;
 
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
@@ -61,6 +70,19 @@ public final class UrlUtils {
      * URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
      */
     static {
+        // make sure the handlers are available first (before calling toUrlSafe())
+        JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
+        ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
+        DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+
+        try {
+            URL_ABOUT_BLANK = new URL(null, ABOUT_BLANK, ABOUT_HANDLER);
+        }
+        catch (final MalformedURLException e) {
+            // should never happen
+            throw new RuntimeException(e);
+        }
+
         final BitSet reserved = new BitSet(256);
         reserved.set(';');
         reserved.set('/');
@@ -227,11 +249,9 @@ public final class UrlUtils {
             return new URL(null, url, JS_HANDLER);
         }
 
-        if ("about".equals(protocol)) {
-            if (WebClient.URL_ABOUT_BLANK != null
-                    && org.apache.commons.lang3.StringUtils.
-                        equalsIgnoreCase(WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
-                return WebClient.URL_ABOUT_BLANK;
+        if (ABOUT.equals(protocol)) {
+            if (org.apache.commons.lang3.StringUtils.equalsIgnoreCase(ABOUT_BLANK, url)) {
+                return URL_ABOUT_BLANK;
             }
             return new URL(null, url, ABOUT_HANDLER);
         }
@@ -396,6 +416,17 @@ public final class UrlUtils {
      */
     public static URL getUrlWithoutPathRefQuery(final URL u) throws MalformedURLException {
         return createNewUrl(u.getProtocol(), u.getAuthority(), null, null, null);
+    }
+
+    /**
+     * Creates and returns a new URL using only the protocol, authority and path
+     * from the given one.
+     * @param u the URL on which to base the returned URL
+     * @return a new URL using only the protocol and authority from the given one
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithoutRef(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getAuthority(), u.getPath(), null, u.getQuery());
     }
 
     /**
@@ -624,7 +655,7 @@ public final class UrlUtils {
             s.append(ref);
         }
 
-        return new URL(s.toString());
+        return toUrlSafe(s.toString());
     }
 
     /**

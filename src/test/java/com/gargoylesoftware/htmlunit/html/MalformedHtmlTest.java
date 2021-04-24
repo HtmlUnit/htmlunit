@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,17 +48,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"in test", "BODY"})
     public void bodyAttributeWhenOpeningBodyGenerated() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert('in test');\n"
-            + "  alert(document.getElementById('span1').parentNode.tagName);\n"
+            + "  log('in test');\n"
+            + "  log(document.getElementById('span1').parentNode.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "<span id='span1'>hello</span>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -67,13 +68,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "3", "text3", "text3", "null"})
     public void lostFormChildren() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.forms[0].childNodes.length);\n"
-            + "  alert(document.forms[0].elements.length);\n"
-            + "  alert(document.forms[0].elements[2].name);\n"
-            + "  alert(document.forms[0].text3.name);\n"
-            + "  alert(document.getElementById('text4').form);\n"
+            + "  log(document.forms[0].childNodes.length);\n"
+            + "  log(document.forms[0].elements.length);\n"
+            + "  log(document.forms[0].elements[2].name);\n"
+            + "  log(document.forms[0].text3.name);\n"
+            + "  log(document.getElementById('text4').form);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -87,7 +89,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "<input type='text' name='text4' id='text4'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -132,10 +134,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts({"DIV", "TABLE"})
     public void div_between_table_and_tr() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var c1 = document.body.firstChild;\n"
-            + "  alert(c1.tagName);\n"
-            + "  alert(c1.nextSibling.tagName);\n"
+            + "  log(c1.tagName);\n"
+            + "  log(c1.nextSibling.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>"
@@ -143,7 +146,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "<tr><td>world</td></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -236,16 +239,17 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(document.getElementById('myBody').firstChild.type);\n"
-                + "    alert(document.getElementById('myBody').firstChild.value);\n"
+                + "    log(document.getElementById('myBody').firstChild.type);\n"
+                + "    log(document.getElementById('myBody').firstChild.value);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body id='myBody' onload='test()'>"
                 +   "<input width:250px' type='submit' value='button'>"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -258,16 +262,17 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(document.getElementById('myBody').firstChild.type);\n"
-                + "    alert(document.getElementById('myBody').firstChild.value);\n"
+                + "    log(document.getElementById('myBody').firstChild.type);\n"
+                + "    log(document.getElementById('myBody').firstChild.value);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body id='myBody' onload='test()'>"
                 +   "<input width:250px\" type=\"submit\" value=\"button\">"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -363,7 +368,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     // <a id="outerA">V<div id="innerDiv">W</div></a><a id="innerA">X</a>YZ
     public void nestedAnchorInDivision() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var outerA = document.getElementById('outerA');\n"
             + "    var innerDiv = document.getElementById('innerDiv');\n"
@@ -489,20 +494,21 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  </tr>\n"
                 + "</table>"
                 + "<script>\n"
-                + "  alert(document.getElementById('bdy').children.length);\n"
-                + "  alert(document.getElementById('bdy').children[0].tagName);\n"
-                + "  alert(document.getElementById('bdy').children[1].tagName);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.getElementById('bdy').children.length);\n"
+                + "  log(document.getElementById('bdy').children[0].tagName);\n"
+                + "  log(document.getElementById('bdy').children[1].tagName);\n"
 
-                + "  alert(document.getElementById('td0').children.length);\n"
-                + "  alert(document.getElementById('td0').children[0].tagName);\n"
-                + "  alert(document.getElementById('td0').children[0].children.length);\n"
-                + "  alert(document.getElementById('td0').children[0].children[0].tagName);\n"
-                + "  alert(document.getElementById('td0').children[0].children[1].tagName);\n"
+                + "  log(document.getElementById('td0').children.length);\n"
+                + "  log(document.getElementById('td0').children[0].tagName);\n"
+                + "  log(document.getElementById('td0').children[0].children.length);\n"
+                + "  log(document.getElementById('td0').children[0].children[0].tagName);\n"
+                + "  log(document.getElementById('td0').children[0].children[1].tagName);\n"
 
-                + "  alert(document.getElementById('td0').children[0].children[0].children.length);\n"
+                + "  log(document.getElementById('td0').children[0].children[0].children.length);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -549,17 +555,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</table>"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -582,17 +589,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </table>"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -652,17 +660,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </tr>\n"
                 + "  </table>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -693,17 +702,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  </tr>\n"
                 + "</table>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -735,17 +745,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </div>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -781,18 +792,19 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </div>\n"
                 + "  </form>\n"
                 + "<script>\n"
-                + "  alert(document.form1.elements.length);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.form1.elements.length);\n"
                 + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
-                + "    alert(document.form1.elements[j].name);\n"
+                + "    log(document.form1.elements[j].name);\n"
                 + "  }\n"
-                + "  alert(document.form1.children.length);\n"
-                + "  alert(document.form1.parentNode.tagName);\n"
-                + "  alert(document.form1['1b'].parentNode.tagName);\n"
-                + "  alert(document.getElementById('colgroup').parentNode.tagName);\n"
-                + "  alert(document.getElementById('colgroup').children.length);\n"
+                + "  log(document.form1.children.length);\n"
+                + "  log(document.form1.parentNode.tagName);\n"
+                + "  log(document.form1['1b'].parentNode.tagName);\n"
+                + "  log(document.getElementById('colgroup').parentNode.tagName);\n"
+                + "  log(document.getElementById('colgroup').children.length);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -821,15 +833,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </table>\n"
                 + "<script>\n"
-                + "  alert(document.form1.elements.length);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.form1.elements.length);\n"
                 + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
-                + "    alert(document.form1.elements[j].name);\n"
+                + "    log(document.form1.elements[j].name);\n"
                 + "  }\n"
-                + "  alert(document.form1.children.length);\n"
-                + "  alert(document.form1.parentNode.tagName);\n"
+                + "  log(document.form1.children.length);\n"
+                + "  log(document.form1.parentNode.tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -853,15 +866,16 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </table>\n"
                 + "<script>\n"
-                + "  alert(document.form1.elements.length);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.form1.elements.length);\n"
                 + "  for(var j = 0; j < document.form1.elements.length; j++) {\n"
-                + "    alert(document.form1.elements[j].name);\n"
+                + "    log(document.form1.elements[j].name);\n"
                 + "  }\n"
-                + "  alert(document.form1.children.length);\n"
-                + "  alert(document.form1.parentNode.tagName);\n"
+                + "  log(document.form1.children.length);\n"
+                + "  log(document.form1.parentNode.tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -881,11 +895,12 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </tr>\n"
                 + "  </table>"
                 + "<script>\n"
-                + "  alert(document.getElementById('caption').innerHTML.replace(/\\s+/g, ''));\n"
-                + "  alert(document.getElementById('caption').parentNode.tagName);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.getElementById('caption').innerHTML.replace(/\\s+/g, ''));\n"
+                + "  log(document.getElementById('caption').parentNode.tagName);\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -912,17 +927,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </form>\n"
                 + "  </div>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

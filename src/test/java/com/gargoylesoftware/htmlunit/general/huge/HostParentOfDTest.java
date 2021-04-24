@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -574,17 +574,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Element_HTMLContentElement() throws Exception {
-        test("Element", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Element_HTMLDataElement() throws Exception {
@@ -881,7 +870,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF78 = "true")
     public void _Element_HTMLMenuItemElement() throws Exception {
         test("Element", "HTMLMenuItemElement");
@@ -1052,17 +1040,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts("true")
     public void _Element_HTMLSelectElement() throws Exception {
         test("Element", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _Element_HTMLShadowElement() throws Exception {
-        test("Element", "HTMLShadowElement");
     }
 
     /**
@@ -3022,17 +2999,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _EventTarget_HTMLContentElement() throws Exception {
-        test("EventTarget", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_HTMLDataElement() throws Exception {
@@ -3335,7 +3301,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF78 = "true")
     public void _EventTarget_HTMLMenuItemElement() throws Exception {
         test("EventTarget", "HTMLMenuItemElement");
@@ -3499,17 +3464,6 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_HTMLSelectElement() throws Exception {
         test("EventTarget", "HTMLSelectElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _EventTarget_HTMLShadowElement() throws Exception {
-        test("EventTarget", "HTMLShadowElement");
     }
 
     /**

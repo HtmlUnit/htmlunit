@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,16 +48,17 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    try {\n"
-            + "      alert(Object.prototype.toString.call(doc.parseError));\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(Object.prototype.toString.call(doc.parseError));\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -68,29 +69,30 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
             IE = {"false", "true", "true", "true", "true", "true", "true", "true", "exception-Other"})
     public void parseError_createXMLDocument() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
-            + "      alert(doc.parseError == null);\n"
+            + "      log(doc.parseError == null);\n"
             + "      try {\n"
-            + "        alert(doc.parseError.errorCode === 0);\n"
-            + "        alert(doc.parseError.filepos === 0);\n"
-            + "        alert(doc.parseError.line === 0);\n"
-            + "        alert(doc.parseError.linepos === 0);\n"
-            + "        alert(doc.parseError.reason === '');\n"
-            + "        alert(doc.parseError.srcText === '');\n"
-            + "        alert(doc.parseError.url === '');\n"
-            + "      } catch(e) { alert('exception-MSXML'); }\n"
+            + "        log(doc.parseError.errorCode === 0);\n"
+            + "        log(doc.parseError.filepos === 0);\n"
+            + "        log(doc.parseError.line === 0);\n"
+            + "        log(doc.parseError.linepos === 0);\n"
+            + "        log(doc.parseError.reason === '');\n"
+            + "        log(doc.parseError.srcText === '');\n"
+            + "        log(doc.parseError.url === '');\n"
+            + "      } catch(e) { log('exception-MSXML'); }\n"
             + "      try {\n"
-            + "        alert(doc.documentElement.nodeName == 'parsererror');\n"
-            + "        alert(doc.documentElement.childNodes[0].nodeValue);\n"
-            + "      } catch(e) { alert('exception-Other'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(doc.documentElement.nodeName == 'parsererror');\n"
+            + "        log(doc.documentElement.childNodes[0].nodeValue);\n"
+            + "      } catch(e) { log('exception-Other'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -101,30 +103,31 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
             IE = {"false", "false", "false", "false", "false", "false", "false", "true", "exception-Other"})
     public void parseError_loadXML() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var text='<root><element></root>';\n"
             + "    try {\n"
             + "      var doc = " + callLoadXMLDOMDocumentFromString("text") + ";\n"
-            + "      alert(doc.parseError == null);\n"
+            + "      log(doc.parseError == null);\n"
             + "      try {\n"
-            + "        alert(doc.parseError.errorCode === 0);\n"
-            + "        alert(doc.parseError.filepos === 0);\n"
-            + "        alert(doc.parseError.line === 0);\n"
-            + "        alert(doc.parseError.linepos === 0);\n"
-            + "        alert(doc.parseError.reason === '');\n"
-            + "        alert(doc.parseError.srcText === '');\n"
-            + "        alert(doc.parseError.url === '');\n"
-            + "      } catch(e) { alert('exception-MSXML'); }\n"
+            + "        log(doc.parseError.errorCode === 0);\n"
+            + "        log(doc.parseError.filepos === 0);\n"
+            + "        log(doc.parseError.line === 0);\n"
+            + "        log(doc.parseError.linepos === 0);\n"
+            + "        log(doc.parseError.reason === '');\n"
+            + "        log(doc.parseError.srcText === '');\n"
+            + "        log(doc.parseError.url === '');\n"
+            + "      } catch(e) { log('exception-MSXML'); }\n"
             + "      try {\n"
-            + "        alert(doc.documentElement.nodeName == 'parsererror');\n"
-            + "        alert(doc.documentElement.childNodes[0].nodeValue === '');\n"
-            + "      } catch(e) { alert('exception-Other'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(doc.documentElement.nodeName == 'parsererror');\n"
+            + "        log(doc.documentElement.childNodes[0].nodeValue === '');\n"
+            + "      } catch(e) { log('exception-Other'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -135,25 +138,26 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
             IE = {"false", "false", "false", "false", "false", "false", "false", "false", "exception-Other"})
     public void parseError_load() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
-            + "      alert(doc.parseError == null);\n"
+            + "      log(doc.parseError == null);\n"
             + "      try {\n"
-            + "        alert(doc.parseError.errorCode === 0);\n"
-            + "        alert(doc.parseError.filepos === 0);\n"
-            + "        alert(doc.parseError.line === 0);\n"
-            + "        alert(doc.parseError.linepos === 0);\n"
-            + "        alert(doc.parseError.reason === '');\n"
-            + "        alert(doc.parseError.srcText === '');\n"
-            + "        alert(doc.parseError.url === '');\n"
-            + "      } catch(e) { alert('exception-MSXML'); }\n"
+            + "        log(doc.parseError.errorCode === 0);\n"
+            + "        log(doc.parseError.filepos === 0);\n"
+            + "        log(doc.parseError.line === 0);\n"
+            + "        log(doc.parseError.linepos === 0);\n"
+            + "        log(doc.parseError.reason === '');\n"
+            + "        log(doc.parseError.srcText === '');\n"
+            + "        log(doc.parseError.url === '');\n"
+            + "      } catch(e) { log('exception-MSXML'); }\n"
             + "      try {\n"
-            + "        alert(doc.documentElement.nodeName == 'parsererror');\n"
-            + "        alert(doc.documentElement.childNodes[0].nodeValue === '');\n"
-            + "      } catch(e) { alert('exception-Other'); }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "        log(doc.documentElement.nodeName == 'parsererror');\n"
+            + "        log(doc.documentElement.childNodes[0].nodeValue === '');\n"
+            + "      } catch(e) { log('exception-Other'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
@@ -163,6 +167,6 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
             + "</root>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -184,7 +184,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     /**
      * Defines the provided HTML as the response of the MockWebConnection for {@link WebTestCase#URL_FIRST}
      * and loads the page with this URL using the current browser version; finally, asserts that the
-     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
+     * alerts equal the expected alerts.
      * @param html the HTML to use
      * @return the new page
      * @throws Exception if something goes wrong

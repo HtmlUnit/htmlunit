@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -61,7 +61,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
     public static final String HTML_ALERT_COOKIE
         = HtmlPageTest.STANDARDS_MODE_PREFIX_
-        + "<html><head><title>foo</title><script>\n"
+        + "<html><head><script>\n"
         + "  function test() {\n"
         // there is no fixed order, sort for stable testing
         + "    var c = document.cookie;\n"
@@ -306,24 +306,24 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title><script>\n"
+                + "<html><head><script>\n"
                 + "  function alertCookies() {\n"
                 + "    alert('cookies: ' + document.cookie);\n"
                 + "  }\n"
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 5500);\n"
+                + "    window.setTimeout(alertCookies, 2500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
 
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 5_000));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 2_000));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + ";"));
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(URL_FIRST, 10_000);
+        loadPageWithAlerts2(URL_FIRST, 4_000);
     }
 
     /**
@@ -352,9 +352,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1",
-            FF = "cookie1=1; cookie2=2; cookie3=3",
-            FF78 = "cookie1=1; cookie2=2; cookie3=3",
+    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -376,9 +374,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1",
-            FF = "cookie1=1; cookie2=2; cookie3=3",
-            FF78 = "cookie1=1; cookie2=2; cookie3=3",
+    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -597,7 +593,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
                 + "  function test() {\n"
                 + "    alertCookies();\n"
-                + "    window.setTimeout(alertCookies, 5500);\n"
+                + "    window.setTimeout(alertCookies, 2500);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
@@ -606,12 +602,12 @@ public class CookieManagerTest extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_FIRST, "/foo/test.html");
 
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 5_000));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 2_000));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
         responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl, 10_000);
+        loadPageWithAlerts2(firstUrl, 4_000);
     }
 
     /**
@@ -704,7 +700,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception in case of error
      *
      * This requires an entry in your hosts file
-     * 127.0.0.1       www.htmlunit-local.com
+     * 127.0.0.1       host1.htmlunit.org
      */
     @Test
     @Alerts("JDSessionID=1234567890")
@@ -728,14 +724,14 @@ public class CookieManagerTest extends WebDriverTestCase {
 
             + "var now = new Date();\n"
             + "now.setTime(now.getTime() + 60 * 60 * 1000);\n"
-            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit-local.com');\n"
+            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit.org');\n"
 
 //             + "alert('cookies: ' + document.cookie);\n"
 
             + "</script></body>\n"
             + "</html>";
 
-        final URL firstUrl = new URL("http://www.htmlunit-local.com:" + PORT + "/");
+        final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
         getMockWebConnection().setResponse(firstUrl, html);
         loadPage2(html, firstUrl);
 

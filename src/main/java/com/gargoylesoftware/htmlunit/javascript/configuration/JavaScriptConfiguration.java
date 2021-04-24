@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -441,7 +441,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBaseElement.class, HTMLBaseFontElement.class, HTMLBGSoundElement.class, HTMLBlockElement.class,
         HTMLBodyElement.class, HTMLBRElement.class, HTMLButtonElement.class,
-        HTMLCanvasElement.class, HTMLCollection.class, HTMLContentElement.class,
+        HTMLCanvasElement.class, HTMLCollection.class,
         HTMLDataElement.class, HTMLDataListElement.class,
         HTMLDDElement.class, HTMLDetailsElement.class, HTMLDialogElement.class, HTMLDirectoryElement.class,
         HTMLDivElement.class, HTMLDListElement.class, HTMLDocument.class, HTMLDTElement.class, HTMLElement.class,
@@ -459,7 +459,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
         HTMLParagraphElement.class, HTMLParamElement.class, HTMLPhraseElement.class, HTMLPictureElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLQuoteElement.class, HTMLScriptElement.class,
-        HTMLSelectElement.class, HTMLShadowElement.class, HTMLSlotElement.class, HTMLSourceElement.class,
+        HTMLSelectElement.class, HTMLSlotElement.class, HTMLSourceElement.class,
         HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableDataCellElement.class, HTMLTableElement.class,

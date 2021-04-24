@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.net.URL;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -96,16 +98,17 @@ public class MessagePort extends EventTarget {
     public void postMessage(final String message, final Object transfer) {
         if (port1_ != null) {
             final Window w = getWindow();
-            final URL currentURL = w.getWebWindow().getEnclosedPage().getUrl();
+            final WebWindow webWindow = w.getWebWindow();
+            final Page page = webWindow.getEnclosedPage();
+            final URL currentURL = page.getUrl();
             final MessageEvent event = new MessageEvent();
             final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
             event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", w, transfer);
             event.setParentScope(port1_);
             event.setPrototype(getPrototype(event.getClass()));
 
-            final JavaScriptEngine jsEngine
-                = (JavaScriptEngine) w.getWebWindow().getWebClient().getJavaScriptEngine();
-            final PostponedAction action = new PostponedAction(w.getWebWindow().getEnclosedPage()) {
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
+            final PostponedAction action = new PostponedAction(page, "MessagePort.postMessage") {
                 @Override
                 public void execute() throws Exception {
                     final ContextFactory cf = jsEngine.getContextFactory();

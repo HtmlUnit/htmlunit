@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -1191,5 +1191,23 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Alerts("x-bxc d efg 1 23")
     public void regExMinusInRangeBorderCase8() throws Exception {
         testEvaluate("'a-b_c d efg 1 23'.replace(/[_-\\a]+/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("https://www.youtube.com/watch?v=1234567,https,1234567")
+    public void realWorld1() throws Exception {
+        testEvaluate("'https://www.youtube.com/watch?v=1234567'.match(/^(?:(https?):\\/\\/)?(?:(?:www|m)\\.)?youtube\\.com\\/watch.*v=([a-zA-Z0-9_-]+)/)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("http://m.youtu.be/abcd,http,abcd")
+    public void realWorld2() throws Exception {
+        testEvaluate("'http://m.youtu.be/abcd'.match(/^(?:(https?):\\/\\/)?(?:(?:www|m)\\.)?youtu\\.be\\/([a-zA-Z0-9_-]+)/)");
     }
 }

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -32,6 +33,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -59,14 +61,15 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<link id='myId' href='file1.css'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
@@ -112,7 +115,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         final boolean displayed = driver.findElement(By.id("l")).isDisplayed();
         assertFalse(displayed);
     }
@@ -211,15 +214,18 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String html
                 = "<html>\n"
                 + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  </script>\n"
                 + "  <link " + attribs
-                        + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
+                        + " onload='log(\"onLoad\")' onerror='log(\"onError\")'>\n"
                 + "</head>\n"
-                + "<body onload='alert(\"body onLoad\")'>\n"
+                + "<body onload='log(\"body onLoad\")'>\n"
                 + "</body>\n"
                 + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -439,14 +445,41 @@ public class HtmlLink2Test extends WebDriverTestCase {
     public void polymerImportCheck() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert('import' in document.createElement('link'));\n"
+            + "    log('import' in document.createElement('link'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void getResponse_referer() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link rel='stylesheet' href='" + URL_SECOND + "'></link>\n"
+            + "</head><body>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, html);
+        getMockWebConnection().setResponse(URL_SECOND, "");
+
+        loadPage2(html, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 }

@@ -47,41 +47,16 @@
  10 tests to run in 1 groups
  ------------------------------------------------------------
  GROUP "dojo/request/iframe" has 10 tests to run
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetText
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetText x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostJson
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostJson x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostWithoutForm
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostWithoutForm x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJson
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJson x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetWithForm
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetWithForm x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJavascript
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJavascript x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetHtml
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetHtml x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetXml
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetXml x ms
-     Error: test timeout in ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeDataArray
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeDataArray x ms
-     _AssertFailure: assertEqual() failed:
-  expected
-  3
- but got
-  11
-
-     ERROR IN:  function...
- FAILED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::iframeQueue x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetText x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostJson x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframePostWithoutForm x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJson x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetWithForm x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetJavascript x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetHtml x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeGetXml x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::ioIframeDataArray x ms
+ PASSED test: ../../dojo/tests/request/iframe.html::dojo/request/iframe::iframeQueue x ms
  PASSED test: ../../dojo/tests/request/iframe.html x ms
  ------------------------------------------------------------
  GROUP "tests.request.registry" has 1 test to run
@@ -105,9 +80,10 @@
  PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::done/stop x ms
  PASSED test: ../../dojo/tests/request/notify.html::dojo/request/notify::cancel x ms
  PASSED test: ../../dojo/tests/request/notify.html x ms
+ WOOHOO!!
  ------------------------------------------------------------
  | TEST SUMMARY:
  ------------------------------------------------------------
       50 tests in 6 groups
-      11 errors
-      1 failures
+      2 errors
+      0 failures

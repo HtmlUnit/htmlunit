@@ -892,4 +892,4 @@ Portions adapted from `Rico`_ are available under the terms of the
 Portions adapted from `Scriptaculous`_ are available under the terms
 of the `MIT License`_.
 
-.. _`Apache License, Version 2.0`: http://www.apache.org/licenses/LICENSE-2.0.html
+.. _`Apache License, Version 2.0`: https://www.apache.org/licenses/LICENSE-2.0.html

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -46,7 +46,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.io.IOException;
 
 import com.gargoylesoftware.htmlunit.StringWebResponse;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -57,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -281,7 +281,7 @@ public class DOMImplementation extends SimpleScriptable {
                         + Context.toString(titleObj)
                         + "</title></head><body></body></html>";
             }
-            final WebResponse webResponse = new StringWebResponse(html, WebClient.URL_ABOUT_BLANK);
+            final WebResponse webResponse = new StringWebResponse(html, UrlUtils.URL_ABOUT_BLANK);
             final HtmlPage page = new HtmlPage(webResponse, webWindow);
             // According to spec and behavior of function in browsers new document
             // has no location object and is not connected with any window

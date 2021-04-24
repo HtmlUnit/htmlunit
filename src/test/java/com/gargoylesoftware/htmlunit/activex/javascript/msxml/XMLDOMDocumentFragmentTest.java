@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,7 +45,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "[object Object]")
     public void scriptableToString() throws Exception {
-        tester("alert(Object.prototype.toString.call(fragment));\n");
+        tester("log(Object.prototype.toString.call(fragment));\n");
     }
 
     /**
@@ -74,7 +74,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"4", "#cdata-section=child-cdata", "true", "#comment=child-comment", "true",
-                   "child-element=null", "true", "#text=child-text", "true"})
+                  "child-element=null", "true", "#text=child-text", "true"})
     public void childNodes() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"
@@ -87,19 +87,19 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "fragment.appendChild(text);\n"
             + "var fragment2 = doc.createDocumentFragment();\n"
             + "fragment.appendChild(fragment2);\n"
-            + "alert(fragment.childNodes.length);\n"
+            + "log(fragment.childNodes.length);\n"
             // cdata
             + "debug(fragment.childNodes[0]);\n"
-            + "alert(fragment.childNodes[0] === cdata);\n"
+            + "log(fragment.childNodes[0] === cdata);\n"
             // comment
             + "debug(fragment.childNodes[1]);\n"
-            + "alert(fragment.childNodes[1] === comment);\n"
+            + "log(fragment.childNodes[1] === comment);\n"
             // element
             + "debug(fragment.childNodes[2]);\n"
-            + "alert(fragment.childNodes[2] === element);\n"
+            + "log(fragment.childNodes[2] === element);\n"
             // text
             + "debug(fragment.childNodes[3]);\n"
-            + "alert(fragment.childNodes[3] === text);\n";
+            + "log(fragment.childNodes[3] === text);\n";
             // no fragment
 
         tester(test);
@@ -112,7 +112,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "0")
     public void childNodes_none() throws Exception {
-        tester("alert(fragment.childNodes.length);\n");
+        tester("log(fragment.childNodes.length);\n");
     }
 
     /**
@@ -146,7 +146,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "var element = doc.createElement('child-element');\n"
             + "fragment.appendChild(element);\n"
             + "debug(fragment.firstChild);\n"
-            + "alert(fragment.firstChild === element);\n";
+            + "log(fragment.firstChild === element);\n";
 
         tester(test);
     }
@@ -172,7 +172,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "var element = doc.createElement('child-element');\n"
             + "fragment.appendChild(element);\n"
             + "debug(fragment.lastChild);\n"
-            + "alert(fragment.lastChild === element);\n";
+            + "log(fragment.lastChild === element);\n";
 
         tester(test);
     }
@@ -225,19 +225,19 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             IE = {"null", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void nodeValue() throws Exception {
         final String test = ""
-            + "alert(fragment.nodeValue);\n"
+            + "log(fragment.nodeValue);\n"
             // null
             + "try {\n"
             + "  fragment.nodeValue = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n"
+            + "} catch(e) { log('exception-setNull'); }\n"
             // empty
             + "try {\n"
             + "  fragment.nodeValue = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // normal
             + "try {\n"
             + "  fragment.nodeValue = 'test';\n"
-            + "} catch(e) { alert('exception-set'); }\n";
+            + "} catch(e) { log('exception-set'); }\n";
 
         tester(test);
     }
@@ -249,7 +249,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
-        tester("alert(fragment.ownerDocument === doc);\n");
+        tester("log(fragment.ownerDocument === doc);\n");
     }
 
     /**
@@ -294,7 +294,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "fragment.appendChild(text);\n"
             + "var fragment2 = doc.createDocumentFragment();\n"
             + "fragment.appendChild(fragment2);\n"
-            + "alert(fragment.text);\n";
+            + "log(fragment.text);\n";
 
         tester(test);
     }
@@ -310,15 +310,15 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             // normal
               "try {\n"
             + "  fragment.text = 'text';\n"
-            + "} catch(e) { alert('exception-set'); }\n"
+            + "} catch(e) { log('exception-set'); }\n"
             // empty
             + "try {\n"
             + "  fragment.text = '';\n"
-            + "} catch(e) { alert('exception-setEmpty'); }\n"
+            + "} catch(e) { log('exception-setEmpty'); }\n"
             // null
             + "try {\n"
             + "  fragment.text = null;\n"
-            + "} catch(e) { alert('exception-setNull'); }\n";
+            + "} catch(e) { log('exception-setNull'); }\n";
 
         tester(test);
     }
@@ -328,14 +328,14 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "c\nct\nt")
+            IE = "c ct t")
     public void text_lineBreak() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('c\\nc');\n"
             + "fragment.appendChild(cdata);\n"
             + "var text = doc.createTextNode('t\\nt');\n"
             + "fragment.appendChild(text);\n"
-            + "alert(fragment.text);\n";
+            + "log(fragment.text);\n";
 
         tester(test);
     }
@@ -348,17 +348,18 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             IE = "")
     public void text_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    try {\n"
-            + "      alert(fragment.text);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(fragment.text);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     /**
@@ -384,7 +385,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "fragment.appendChild(text);\n"
             + "var fragment2 = doc.createDocumentFragment();\n"
             + "fragment.appendChild(fragment2);\n"
-            + "alert(fragment.xml);\n";
+            + "log(fragment.xml);\n";
 
         tester(test);
     }
@@ -402,7 +403,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
               + "var txt = fragment.xml;\n"
               + "txt = txt.replace('\\r', '\\\\r');\n"
               + "txt = txt.replace('\\n', '\\\\n');\n"
-              + "alert(txt);\n";
+              + "log(txt);\n";
 
         tester(test);
     }
@@ -415,21 +416,22 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             IE = "")
     public void xml_created() throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    try {\n"
-            + "      alert(fragment.xml);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(fragment.xml);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + CREATE_XMLDOMDOCUMENT_FUNCTION;
 
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 
     private void property(final String property) throws Exception {
-        tester("alert(fragment." + property + ");\n");
+        tester("log(fragment." + property + ");\n");
     }
 
     private void tester(final String test) throws Exception {
@@ -438,6 +440,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
@@ -445,18 +448,18 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    try {\n"
             + "      " + test + "\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "  function debug(e) {\n"
             + "    if (e != null) {\n"
-            + "      alert(e.nodeName + '=' + e.nodeValue);\n"
+            + "      log(e.nodeName + '=' + e.nodeValue);\n"
             + "    } else {\n"
-            + "      alert('null');\n"
+            + "      log('null');\n"
             + "    }\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(createTestHTML(html));
+        loadPageVerifyTitle2(createTestHTML(html));
     }
 }

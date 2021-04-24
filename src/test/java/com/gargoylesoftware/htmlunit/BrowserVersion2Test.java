@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -156,8 +156,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: image/webp,*/*",
-            CHROME = "Accept: image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
-            EDGE = "Accept: image/webp,image/apng,image/*,*/*;q=0.8",
+            CHROME = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+            EDGE = "Accept: image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             IE = "Accept: image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html

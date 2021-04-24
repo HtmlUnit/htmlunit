@@ -7,9 +7,225 @@
     </properties>
 
     <body>
-        <release version="2.47.0" date="xxxx, 2021" description="Bugfixes">
+        <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
             <action type="fix" dev="rbri">
-                Properties oncopy, oncut, onpaste, classList and hasAttribute fixed for many elements.
+                URL.toString() now returns the same value as implicit converting.
+            </action>
+            <action type="fix" dev="rbri">
+                URLSearchParams.toString() now returns the same value as implicit converting.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.40.v20210413.
+            </action>
+            <action type="fix" dev="rbri" issue="319">
+                Selection.toString() now returns the same value as implicit converting.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js:  Improved JSON.stringify() implementation.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js:  NPE fixed for code like for ({};;);
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Improved shorthand assignment support
+            </action>
+            <action type="add" dev="rbri">
+                MediaDevices.getUserMedia() added - but other than in real browsers this always throws an error
+                because MediaStream's are not supported at the moment.
+            </action>
+            <action type="add" dev="rbri">
+                Navigator.mediaDevices property added.
+            </action>
+            <action type="add" dev="rbri" issue="340">
+                Support for https proxies - the Webclient constructors are supporting a proxyScheme now.
+            </action>
+            <action type="fix" dev="rbri" issue="310">
+                Synchronize access to the WebSocketClient from the JettyWebSocketAdapter to avoid NPE.
+            </action>
+        </release>
+
+        <release version="2.49.1" date="April 11, 2021" description="Hotfix">
+            <action type="fix" dev="rbri">
+                Clicking an anchor was always calling the attachment handler (if set). This was a regression from anchor
+                download attribute support.
+            </action>
+        </release>
+
+        <release version="2.49.0" date="April 11, 2021" description="Bugfixes, Firefox 87">
+            <action type="fix" dev="rbri">
+                Fix :required and :optional pseudo classes to work with all html elements supporting the 'required' attribute.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlDetails.asNormalizedText() and HtmlDetails.asVisibleText() fixed.
+            </action>
+            <action type="add" dev="rbri" due-to="Uberto Barbini">
+                Support for the CSS3 ':invalid' pseudo class added.
+            </action>
+            <action type="add" dev="rbri" issue="334">
+                HTMLDetailsElement supports setting the open property.
+            </action>
+            <action type="add" dev="rbri" issue="248">
+                Method HtmlFileInput.setDirectory(File) added to support input elements with
+                type file and webkitdirectory attribute.
+            </action>
+            <action type="fix" dev="rbri" issue="333">
+                Cookies generated from client code now sent to subdomains also.
+            </action>
+            <action type="update" dev="rbri">
+                Anchors having the download attribute set are now passing the response into the AttachmentHandler
+                if there is one defined.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make variable which has been defined null available in script.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Speed of bitwiseNOT improved.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Copying nodes in an XML tree no longer removes the source node.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Object.assign fixed.
+            </action>
+            <action type="update" dev="rbri">
+                Documentation for the animation frame support added.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.39.v20210325.
+            </action>
+            <action type="fix" dev="rbri">
+                Execution of deferred scripts might fail if one script removes another.
+            </action>
+        </release>
+
+        <release version="2.48.0" date="March 20, 2021" description="Bugfixes, Chrome/Edge 89, Firefox 86">
+            <action type="fix" dev="rbri">
+                HtmlNumberInput checkValidity() fixes.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.14.1.
+            </action>
+            <action type="add" dev="rbri">
+                CI build for pull requests is available at https://jenkins.wetator.org/job/htmlunit/view/change-requests/.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.12.0.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.38.v20210224.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Array length limit check fixed.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Exponentiation operator support added.
+            </action>
+            <action type="add" dev="rbri">
+                FAQ updates.
+            </action>
+            <action type="add" dev="rbri">
+                Documentation for image file format support added.
+            </action>
+            <action type="update" dev="rbri">
+                A bunch of improvements for the CanvasRenderingContext2D.drawImage() implementations.
+            </action>
+            <action type="fix" issue="302" dev="Dennis Duysak">
+                Improved handling of floats in CSSStyleDeclaration during value conversion.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Addition with string literal is now closer to the ECMAScript spec.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-net to 3.8.0.
+            </action>
+            <action type="add" dev="rbri">
+                DomNode#asNormalizedText() added to provide a more meaningful and stable normalization.
+                DomNode#asText() is now deprecated.
+            </action>
+            <action type="update" dev="rbri">
+                HtmlSerializerVisibleText moved into separate package 'com.gargoylesoftware.htmlunit.html.serializer'.
+            </action>
+            <action type="add" dev="rbri">
+                Image comparison integrated into our test environment based on https://github.com/romankh3/image-comparison.
+                We are able now to run the CanvasRenderingcontext2D test now as part of our CI build (and found already some issues)
+            </action>
+            <action type="fix" dev="rbri">
+                Fix the font size used by the AwtRenderingBackend implementation.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix the AwtRenderingBackend implementation of clearRect to make it transparent instead of white.
+            </action>
+            <action type="add" dev="rbri" issue="271">
+                Two convenience methods added: WebClient.loadHtmlCodeIntoCurrentWindow(String) and WebClient.loadXHtmlCodeIntoCurrentWindow(String).
+            </action>
+            <action type="fix" dev="rbri" issue="309">
+                Handle the anchor download property like Shift/Ctrl click - open a new window containing the downloaded content as UnknownPage.
+            </action>
+            <action type="fix" dev="rbri" issue="309">
+                HTMLInputElement.src is now setable also.
+            </action>
+            <action type="fix" dev="rbri">
+                HTMLInputElement.src now returns the value in the context of the page.
+            </action>
+        </release>
+
+        <release version="2.47.1" date="February 7, 2021" description="Hotfix">
+            <action type="fix" dev="rbri">
+                neko: Fix a regression from the improved table parsing done in 2.44.0.
+            </action>
+        </release>
+
+        <release version="2.47.0" date="February 7, 2021" description="Bugfixes, Chrome/Edge 88, Firefox 85">
+            <action type="fix" dev="RBRi">
+                Defer attribute of scripts was ignored.
+            </action>
+            <action type="fix" dev="RBRi" issue="282">
+                Window.scroll()/scrollTo()/scrollBy() now triggers a scroll event.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Reject old octal's in property names.
+            </action>
+            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+                Location.reload() reloads to the wrong address when invoked across frames.
+            </action>
+            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+                Return a rejected Promise rather than throw errors for all the methods in SubtleCrypto.
+            </action>
+            <action type="fix" dev="rbri">
+                InputEvent constructor fixed.
+            </action>
+            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+                core-js: Make property __proto__ writable for functions also.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make property only having a getter readonly.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make message handling variadic.
+            </action>
+            <action type="fix" dev="rbri" issue="293" due-to="Joerg Werner">
+                KeyboardEvent constructor fixed.
+            </action>
+            <action type="fix" dev="rbri" issue="285">
+                Fixes for (re) attaching iframes.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix handling of removal of the src attribute from frames.
+            </action>
+            <action type="fix" dev="rbri">
+                Referer header url is without ref part.
+            </action>
+            <action type="fix" dev="rbri">
+                Improved content sniffing for html pages.
+            </action>
+            <action type="fix" dev="rbri" due-to="Atsushi Nakagawa">
+                The invocation order of events added to XMLHttpRequest, through both addEventListener() and on-handlers
+                is fixed, to be more consistent with major browser such as Chrome / FF / IE, as well as other events already
+                implemented in HtmlUnit that use EventTarget's framework.
+            </action>
+            <action type="fix" dev="rbri">
+                Properties oncopy, oncut, onpaste, classList and hasAttribute, onselectionchange,
+                ontransitioncancel,ontransitionend,ontransitionrun  and ontransitionstart fixed for many elements.
             </action>
             <action type="fix" dev="rbri">
                 Various fixes for body element properties.
@@ -21,6 +237,7 @@
                 Deprecated method HtmlLabel.getReferencedElement() removed.
             </action>
         </release>
+
         <release version="2.46.0" date="January 2, 2021" description="Bugfixes, Chrome/Edge 87, Firefox 84">
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix bug with node position in labeled loops.
@@ -95,6 +312,7 @@
                 Constructor improved for StorageEvent, TimeEvent, TouchEvent, TrackEvent, TransitionEvent and WheelEvent.
             </action>
         </release>
+
         <release version="2.45.0" date="November 12, 2020" description="Bugfixes, switch from FF68 to FF78 ESR; Chrome/Edge 86, FF82">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Method signature for AbstractJavaScriptEngine.initialize(WebWindow, Page) changed,
@@ -210,6 +428,7 @@
                 Upgrade Apache log4j-api to 2.14.0.
             </action>
         </release>
+
         <release version="2.44.0" date="October 3, 2020" description="Bugfixes, Chrome/Edge 85, FF80, XMLHttpRequest event handling">
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.7.1.
@@ -332,6 +551,7 @@
                 neko: Setting innerHtml produces sometimes a stack overflow.
             </action>
         </release>
+
         <release version="2.43.0" date="August 8, 2020" description="Bugfixes, Rhino fixes, Chrome 84, FF79, Edge added, FF60 removed">
             <action type="add" dev="rbri" issue="#202" due-to="Thorsten Wendelmuth">
                 Initial support for new File(bits, name[, options]);.
@@ -397,6 +617,7 @@
                 FF60 support removed.
             </action>
         </release>
+
         <release version="2.42.0" date="July 11, 2020" description="Bugfixes, many Rhino fixes">
             <action type="fix" dev="rbri">
                 core-js: Fix wrong start object for getter in Object.assign().
@@ -466,6 +687,7 @@
                 core-js: Support for ES6 generators was added to Rhino.
             </action>
         </release>
+
         <release version="2.41.0" date="June 6, 2020" description="Bugfixes, Chrome 83, Firefox 77">
             <action type="fix" dev="rbri">
                 core-js:  It should be not possible to change the prototype of a non-extensible object.
@@ -545,6 +767,7 @@
                 Fix NPE getting event handlers without JS engine.
             </action>
         </release>
+
         <release version="2.40.0" date="May 2, 2020" description="Bugfixes, Chrome 81, Firefox 75">
             <action type="add" dev="rbri" issue="161">
                 New WebClientConfiguration option ConnectionTimeToLive added.
@@ -605,6 +828,7 @@
                 opening a new WebClinet window.
             </action>
         </release>
+
         <release version="2.39.0" date="April 5, 2020" description="Bugfixes, Firefox 74">
             <action type="fix" dev="rbri">
                 Neko: fix encoding of blanks in file uri's.
@@ -669,6 +893,7 @@
                 Deprecated constructor WebRequest.WebRequest(URL, String) removed.
             </action>
         </release>
+
         <release version="2.38.0" date="March 8, 2020" description="Bugfixes, CHROME 80">
             <action type="update" dev="rbri">
                 Upgrade Apache HttpComponents to 4.5.12.
@@ -743,6 +968,7 @@
                 Neko: Make sure rewind is working in all cases.
             </action>
         </release>
+
         <release version="2.37.0" date="January 28, 2020" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
             <action type="fix" dev="rbri">
                 Security: prevent Rhinos access to Java resources; e.g. call java methods.
@@ -850,6 +1076,7 @@
                 Upgrade Apache HttpComponents to 4.5.10.
             </action>
         </release>
+
         <release version="2.36.0" date="August 24, 2019" description="Bugfixes, CHROME 76, Brotli, FF52 deprecated">
             <action type="update" dev="rbri" due-to="Le Stephane">
                 INCOMPATIBLE CHANGE: WebConnection.close() and WebConnectionWrapper.close() are throwing an
@@ -1425,6 +1652,7 @@
                 JavaScript: URL constructor and origin property added.
             </action>
         </release>
+
         <release version="2.28" date="November 12, 2017" description="Bugfixes, Chrome 62, improved Promise">
             <action type="fix" dev="rbri" issue="1927">
                 The link tag now supports the onLoad and the onError handler.
@@ -1542,6 +1770,7 @@
                             scale, scaleNonUniform, skewX, skewY, translate) implemented.
             </action>
         </release>
+
         <release version="2.27" date="June 4, 2017" description="FF52, Bugfixes">
             <action type="fix" dev="rbri" issue="1891">
                 JavaScript: fix Array out of bounds Exception in insertBefore implementation when calling without any parameters.
@@ -1652,6 +1881,7 @@
                 HtmlOption: fix .setSelected().
             </action>
         </release>
+
         <release version="2.26" date="April 4, 2017" description="Bugfixes">
             <action type="fix" dev="asashour">
                 Handle infinite meta refresh.
@@ -1709,6 +1939,7 @@
                 Reduce the number of temp files created when asking images for width/height.
             </action>
         </release>
+
         <release version="2.25" date="February 23, 2017" description="Java 8, InteractivePage and SvgPage removed, PromptHandler, WebRequest.getCharset, ScriptPreProcessor, Bugfixes">
             <action type="update" dev="asashour">
                 Deprecate SgmlPage.getPageEncoding() and WebResponse.getContentAsString(String) variants.
@@ -1821,6 +2052,7 @@
                 Mandate Java 8 as a minimum requirement.
             </action>
         </release>
+
         <release version="2.24" date="January 9, 2017" description="Bugfixes">
             <action type="update" dev="asashour">
                 XmlPage: to ignore ByteOrderMark at the beginning of file.
@@ -1961,6 +2193,7 @@
                 Support the special replacement patterns for the replacement string if replace was called for a string like 'abcd'.replace('cd', 'x$&amp;').
             </action>
         </release>
+
         <release version="2.23" date="July 27, 2016" description="Bugfixes, hover styles are supported, various layout calculation improvements, DefaultJavaScriptErrorListener added">
             <action type="fix" dev="rbri" issue="1669">
                 ClientWidth is not correctly calculated for div with 'position: absolute'.
@@ -2025,6 +2258,7 @@
                 NPE in CSSStyleSheet.fixIndex().
             </action>
         </release>
+
         <release version="2.22" date="May 27, 2016" description="Bugfixes, Chrome is best supported">
             <action type="fix" dev="rbri" issue="1748">
                 JavaScript: Implementation for DOMImplementation.createHTMLDocument() added.
@@ -2126,6 +2360,7 @@
                 Fix CSS selector regression introduced during handling pseudo element in window.getComputedStyle().
             </action>
         </release>
+
         <release version="2.21" date="Apr 6, 2016" description="FF45, Bugfixes">
             <action type="update" dev="asashour">
                 Use Neko-HtmlUnit fork.
@@ -2296,6 +2531,7 @@
                 SubmittableElement: rename getSubmitKeyValuePairs() to getSubmitNameValuePairs().
             </action>
         </release>
+
         <release version="2.20" date="Feb 28, 2016" description="IE8 is no longer supported, Bugfixes">
             <action type="fix" dev="asashour">
                 JavaScript: correct calculation of clientWidth and .clientHeight styles.
@@ -2490,6 +2726,7 @@
                 HtmlPage: fix base URL with leading whitespace.
             </action>
         </release>
+
         <release version="2.19" date="Nov 12, 2015" description="Bugfixes, Media query support">
             <action type="add" dev="asashour">
                 JavaScript: support document.hasFocus().
@@ -2781,6 +3018,7 @@
                 File.lastModified is not available in FF31.
             </action>
         </release>
+
         <release version="2.18" date="Jul 26, 2015" description="Bugfixes, SvgPage, .type(Keyboard), PATCH method for HTTP">
             <action type="add" dev="asashour">
                 Introduce AbstractPage.
@@ -2923,6 +3161,7 @@
                 Event, KeyboardEvent and MouseEvent.
             </action>
         </release>
+
         <release version="2.17" date="Jun 3, 2015" description="FF38, Bugfixes">
             <action type="update" dev="asashour">
                 CSS: cssparser updated to 0.9.16.
@@ -3015,6 +3254,7 @@
                 Upgrade Xalan to 2.7.2.
             </action>
         </release>
+
         <release version="2.16" date="Apr 20, 2015" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri">
                 CSS selectors checking for an empty attribute (e.g. [data-section='']) are checking now the existence
@@ -3379,6 +3619,7 @@
                 Fix EOFException when processing responses with broken gzip'ed content.
             </action>
         </release>
+
         <release version="2.15" date="Jun 2, 2014" description="Bugfixes, IE11 progress">
             <action type="update" dev="asashour">
                 Upgrade NekoHtml to 1.9.21.
@@ -3519,6 +3760,7 @@
                 of the anchors target.
             </action>
         </release>
+
         <release version="2.14" date="Feb 17, 2014" description="FF24, Bugfixes, initial work on IE11">
             <action type="update" dev="mguillem">
                 Upgrade NekoHtml to 1.9.20.
@@ -3759,6 +4001,7 @@
                 and remove UrlUtils.encodeUrl().
             </action>
         </release>
+
         <release version="2.13" date="Oct 11, 2013" description="Bugfixes">
             <action type="update" dev="asashour" issue="1541">
                 HtmlImage: close imageReader in finalize().
@@ -3992,6 +4235,7 @@
                 Remove deprecated BaseFrame, Htmlpage.getElementByAccessKey(), HtmlPage.getElementsByAccessKey().
             </action>
         </release>
+
         <release version="2.12" date="Mar 6, 2013" description="Bugfixes, CSS3 Selectors">
             <action type="update" dev="mguillem">
                 BrowserVersion: support FF17, deprecate FF3.6.
@@ -4230,6 +4474,7 @@
                 Cookie: remove deprecated (String name, String value) constructor.
             </action>
         </release>
+
         <release version="2.11" date="Nov 6, 2012" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https, CORS">
             <action type="update" dev="mguillem">
                 Upgrade NekoHtml to 1.9.17.
@@ -4560,6 +4805,7 @@
                 Remove deprecated BrowserVersion.FIREFOX_3.
             </action>
         </release>
+
         <release version="2.10" date="Jul 21, 2012" description="Bugfixes, SSL client certificate">
             <action type="fix" dev="asashour">
                 CSS: handling attributes which do not need explicit values, e.g. [disabled].
@@ -4860,6 +5106,7 @@
                 DefaultCredentialsProvider.addProxyCredentials() and WebResponse.getContentAsBytes().
             </action>
         </release>
+
         <release version="2.9" date="Aug 9, 2011" description="Bugfixes, performance improvements">
             <action type="fix" dev="rbri">
                 CSS: pseudo class 'disabled' now supported in FF mode.
@@ -5188,6 +5435,7 @@
                 Remove deprecated BrowserVersion.FIREFOX_2, DomNode.getAllHtmlChildElements() and WebResponse.getRequestUrl().
             </action>
         </release>
+
         <release version="2.8" date="Aug 5, 2010" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6, support for GoogleAppEngine">
             <action type="add" dev="asashour" issue="1153">
                 HtmlOptionGroup: add utility method getEnclosingSelect().
@@ -5473,6 +5721,7 @@
                 and WebRequestSettings.addAdditionalHeader().
             </action>
         </release>
+
         <release version="2.7" date="Feb 9, 2010" description="Bugfixes, initial IE8 support, HttpClient 4 migration preparation">
             <action type="fix" dev="mguillem">
                 JavaScript: allow access to a frame through document.frameName (IE only).
@@ -5914,6 +6163,7 @@
                 Remove deprecated ClickableElement and StyledElement.
             </action>
         </release>
+
         <release version="2.6" date="Sep 2, 2009" description="Bugfixes, add HtmlPage.save(), better XHTML support, Proxy Auto-Config, improved cache">
             <action type="add" dev="asashour" issue="897">
                 JavaScript: add basic support for element.scopeName and .tagUrn (IE only).
@@ -6285,6 +6535,7 @@
                 HtmlPage.createHtmlElement(), WebResponse.getLoadTimeInMilliSeconds(), .getResponseBody(), and .getUrl().
             </action>
         </release>
+
         <release version="2.5" date="Apr 21, 2009" description="Bugfixes, MooTools support, support all HTML elements and various JavaScript properties">
             <action type="update" dev="asashour">
                 Upgrade HtmlUnit-core-js to 2.5.
@@ -6580,6 +6831,7 @@
                 and removeHostsFromProxyBypass().
             </action>
         </release>
+
         <release version="2.4" date="Dec 30, 2008" description="Bugfixes, ActiveX support, JQuery &amp; MochiKit support, minimal applet support, IE conditional comments">
             <action type="update" dev="mguillem">
                 Upgrade HtmlUnit-core-js to 2.4 (corresponds to head of Rhino branch 1.7R2 from Dec 12, 2008).
@@ -6934,6 +7186,7 @@
                 favor of getRequestUrl(), add getContentAsString(String).
             </action>
         </release>
+
         <release version="2.3" date="Sept 16, 2008" description="Bugfixes, better generics, add Firefox 3 emulation, GWT 1.5 support">
             <action type="update" dev="asashour">
                 Better generics: avoid the need for casting when calling methods like WebClient.getPage(), HtmlPage.getHtmlElementById(), ...
@@ -7104,6 +7357,7 @@
                 JavaScript: 'window.event' should be preserved after another event firing.
             </action>
         </release>
+
         <release version="2.2" date="Jul 24, 2008" description="Numerous bugfixes (handling of ill formed HTML code, document.write, ...), speed improvements, and move to HtmlUnit-core-js (Rhino fork)">
             <action type="fix" dev="sudhan_moghe" issue="655">
                 JavaScript: fix endless recursion when innerHTML has script that modifies the innerHTML.
@@ -7372,6 +7626,7 @@
                 Use HtmlUnit-core-js (which is a Rhino fork) instead of Rhino.
             </action>
         </release>
+
         <release version="2.1" date="Apr 15, 2008" description="Performance improvements in CSS processing and a few bug fixes">
             <action type="update" dev="asashour">
                 Deprecate HtmlPage.getDocumentHtmlElement().
@@ -7408,6 +7663,7 @@
                 text inputs.
             </action>
         </release>
+
         <release version="2.0" date="Apr 7, 2008" description="Migration to Java 5, implementation of org.w3c.dom.*, better support for incorrect html code, large improvements in JavaScript support (GWT 1.4 tests now pass, ...)">
             <action type="update" dev="asashour">
                 Upgrade NekoHtml to 1.9.7.
@@ -7742,6 +7998,7 @@
                 Remove the public (deprecated) constructor of HtmlElement and its subclasses.
             </action>
         </release>
+
         <release version="1.14" date="Jan 9, 2008" description="Enormous improvements particularly in JavaScript support and execution speed">
             <action type="fix" dev="mguillem">
                 JavaScript: allow script node's onreadystatechange handler to be set to null.
@@ -8147,6 +8404,7 @@
                 JavaScript: add support for 'onunload' event handler.
             </action>
         </release>
+
         <release version="1.13" date="Aug 17, 2007" description="Fixes bad maven packaging of version 1.12 + different improvements">
             <action type="update" dev="sdanig" due-to="Rob Di Marco">
                 Add document.createEvent() and document.createEventObject().
@@ -8195,6 +8453,7 @@
                 JavaScript: if window object could not find a property or function, it returns 'undefined' instead of null (#1771549).
             </action>
         </release>
+
         <release version="1.12" date="Aug 10, 2007" description="Enormous improvements particularly in JavaScript support and execution speed">
             <action type="add" dev="sdanig">
                 Add method HtmlPage.getHtmlElementsByName(String).
@@ -8574,6 +8833,7 @@
                 JavaScript: XMLHttpRequest now encodes post body in UTF-8.
             </action>
         </release>
+
         <release version="1.11" date="Mar 15, 2007">
             <action type="update" dev="mguillem" issue="431">
                 Respect non proxy hosts in redirects from a host using proxy.
@@ -8717,6 +8977,7 @@
                 Ignore invalid URLs specified in &amp;lt;base href="..."/&amp;gt;.
             </action>
         </release>
+
         <release version="1.10" date="Nov 03, 2006">
             <action type="update" dev="mguillem" issue="395">
                 Fixed asText() for script node. Now returns an empty string.
@@ -8835,6 +9096,7 @@
                 JavaScript: table/tbody.deleteRow(-1) will now delete the last row
             </action>
         </release>
+
         <release version="1.9" date="Jun 27, 2006">
             <action type="update" dev="bradclarke">
                 Upgraded commons-collections to version 3.2
@@ -8926,6 +9188,7 @@
                 Allow &amp;lt;button...&amp;gt;s located outside of a form to be clicked and their onclick handler to be called.
             </action>
         </release>
+
         <release version="1.8" date="Feb 17, 2006">
             <action type="update" dev="mguillem" issue="304">
                 Cookies can now be shared between HTTP and HTTPS.
@@ -9139,6 +9402,7 @@
                 JavaScript: implemented property offsetParent.
             </action>
         </release>
+
         <release version="1.7" date="Aug 23, 2005">
             <action type="update" dev="mguillem" issue="236">
                 JavaScript: img nodes can be accessed by id or name within a form.
@@ -9278,6 +9542,7 @@
                 A click on a &amp;lt;label ...&amp;gt; is now propagated to the referenced element.
             </action>
         </release>
+
         <release version="1.6" date="May 10, 2005">
             <action type="update" dev="bradclarke" issue="1194006" due-to="Daniel Gredler">
                 Added XMLHttpRequest support. Patch submitted by Daniel Gredler.
@@ -9546,6 +9811,7 @@
                 JavaScript: document.getElementById("") now returns null.
             </action>
         </release>
+
         <release version="1.4" date="January 9, 2005">
             <action type="add" dev="mbowler" due-to="David D. Kilzer" issue="197">
                 Fixed platform specific encoding problem in test WebClientTest.testLoadPage_EncodeQueryString()

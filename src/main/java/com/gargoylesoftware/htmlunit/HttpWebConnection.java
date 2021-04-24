@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -255,16 +255,17 @@ public class HttpWebConnection implements WebConnection {
         if (webRequest.getProxyHost() == null) {
             requestBuilder.setProxy(null);
             httpRequest.setConfig(requestBuilder.build());
+            return;
+        }
+
+        final HttpHost proxy = new HttpHost(webRequest.getProxyHost(),
+                                    webRequest.getProxyPort(), webRequest.getProxyScheme());
+        if (webRequest.isSocksProxy()) {
+            SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
         }
         else {
-            final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
-            if (webRequest.isSocksProxy()) {
-                SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
-            }
-            else {
-                requestBuilder.setProxy(proxy);
-                httpRequest.setConfig(requestBuilder.build());
-            }
+            requestBuilder.setProxy(proxy);
+            httpRequest.setConfig(requestBuilder.build());
         }
     }
 

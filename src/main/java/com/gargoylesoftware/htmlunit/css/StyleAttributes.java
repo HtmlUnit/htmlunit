@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.css;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
-import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.edge;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffLatest;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNotIterable;
@@ -181,6 +180,9 @@ public final class StyleAttributes {
 
         /** The style property {@code ascentOverride}. */
         ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
+
+        /** The style property {@code aspectRatio}. */
+        ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
@@ -431,13 +433,13 @@ public final class StyleAttributes {
         BORDER_COLOR_("border-color", "border-color", ff("")),
 
         /** The style property {@code borderEndEndRadius}. */
-        BORDER_END_END_RADIUS("borderEndEndRadius", "border-end-end-radius", ff("0px")),
+        BORDER_END_END_RADIUS("borderEndEndRadius", "border-end-end-radius", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-end-end-radius}. */
         BORDER_END_END_RADIUS_("border-end-end-radius", "border-end-end-radius", ff("0px")),
 
         /** The style property {@code borderEndStartRadius}. */
-        BORDER_END_START_RADIUS("borderEndStartRadius", "border-end-start-radius", ff("0px")),
+        BORDER_END_START_RADIUS("borderEndStartRadius", "border-end-start-radius", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-end-start-radius}. */
         BORDER_END_START_RADIUS_("border-end-start-radius", "border-end-start-radius", ff("0px")),
@@ -630,13 +632,14 @@ public final class StyleAttributes {
         BORDER_SPACING_("border-spacing", "border-spacing", ff("0px 0px")),
 
         /** The style property {@code borderStartEndRadius}. */
-        BORDER_START_END_RADIUS("borderStartEndRadius", "border-start-end-radius", ff("0px")),
+        BORDER_START_END_RADIUS("borderStartEndRadius", "border-start-end-radius", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-start-end-radius}. */
         BORDER_START_END_RADIUS_("border-start-end-radius", "border-start-end-radius", ff("0px")),
 
         /** The style property {@code borderStartStartRadius}. */
-        BORDER_START_START_RADIUS("borderStartStartRadius", "border-start-start-radius", ff("0px")),
+        BORDER_START_START_RADIUS("borderStartStartRadius", "border-start-start-radius",
+                chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code border-start-start-radius}. */
         BORDER_START_START_RADIUS_("border-start-start-radius", "border-start-start-radius", ff("0px")),
@@ -1134,7 +1137,7 @@ public final class StyleAttributes {
 
         /** The style property {@code forcedColorAdjust}. */
         FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
-                edge("auto")),
+                chromeAndEdge("auto")),
 
         /** The style property {@code gap}. */
         GAP("gap", "gap", chromeAndEdge("normal"), ff("")),
@@ -2488,6 +2491,9 @@ public final class StyleAttributes {
 
         /** The style property {@code overflow-block}. */
         OVERFLOW_BLOCK_("overflow-block", "overflow-block", ff("visible")),
+
+        /** The style property {@code overflowClipMargin}. */
+        OVERFLOW_CLIP_MARGIN("overflowClipMargin", "overflow-clip-margin", chromeAndEdge("0px")),
 
         /** The style property {@code overflowInline}. */
         OVERFLOW_INLINE("overflowInline", "overflow-inline", ff("visible")),

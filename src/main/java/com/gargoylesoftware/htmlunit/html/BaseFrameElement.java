@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 
 import java.io.IOException;
@@ -29,7 +30,6 @@ import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.FrameContentHandler;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -80,7 +80,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             // if created by the HTMLParser the src attribute is not set via setAttribute() or some other method but is
             // part of the given attributes already.
             final String src = getSrcAttribute();
-            if (src != ATTRIBUTE_NOT_DEFINED && !WebClient.ABOUT_BLANK.equals(src)) {
+            if (src != ATTRIBUTE_NOT_DEFINED && !UrlUtils.ABOUT_BLANK.equals(src)) {
                 loadSrcWhenAddedToPage_ = true;
             }
         }
@@ -117,8 +117,12 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if (source.isEmpty() || StringUtils.startsWithIgnoreCase(source, WebClient.ABOUT_SCHEME)) {
-            source = WebClient.ABOUT_BLANK;
+        if (source.isEmpty()) {
+            source = UrlUtils.ABOUT_BLANK;
+        }
+        else if (StringUtils.startsWithIgnoreCase(source, UrlUtils.ABOUT_SCHEME)
+                && hasFeature(FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME)) {
+            source = UrlUtils.ABOUT_BLANK;
         }
 
         loadInnerPageIfPossible(source);
@@ -127,9 +131,9 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
-            final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            final AbstractJavaScriptEngine<?> jsEngine = htmlPage.getWebClient().getJavaScriptEngine();
             if (jsEngine != null && jsEngine.isScriptRunning()) {
-                final PostponedAction action = new PostponedAction(getPage()) {
+                final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.loadInnerPage") {
                     @Override
                     public void execute() throws Exception {
                         htmlPage.setReadyState(READY_STATE_COMPLETE);
@@ -173,7 +177,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         final WebClient webClient = getPage().getWebClient();
         final FrameContentHandler handler = webClient.getFrameContentHandler();
         if (null != handler && !handler.loadFrameDocument(this)) {
-            source = WebClient.ABOUT_BLANK;
+            source = UrlUtils.ABOUT_BLANK;
         }
 
         if (!source.isEmpty()) {
@@ -188,7 +192,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
             final WebRequest request = new WebRequest(url);
             request.setCharset(getPage().getCharset());
-            request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
+            request.setRefererlHeader(getPage().getUrl());
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
@@ -387,7 +391,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         // do not use equals() here
         // see HTMLIFrameElement2Test.documentCreateElement_onLoad_srcAboutBlank()
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && UrlUtils.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
@@ -410,7 +414,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         final Attr result = super.setAttributeNode(attribute);
 
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && !UrlUtils.ABOUT_BLANK.equals(attributeValue)) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
@@ -426,6 +430,11 @@ public abstract class BaseFrameElement extends HtmlElement {
         loadSrcWhenAddedToPage_ = false;
         final String src = getSrcAttribute();
 
+        // recreate a window if the old one was closed
+        if (enclosedWindow_.isClosed()) {
+            init();
+        }
+
         final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
         // When src is set from a script, loading is postponed until script finishes
         // in fact this implementation is probably wrong: JavaScript URL should be
@@ -436,7 +445,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         }
         else {
             final Page pageInFrame = getEnclosedPage();
-            final PostponedAction action = new PostponedAction(getPage()) {
+            final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.loadSrc") {
                 @Override
                 public void execute() throws Exception {
                     if (!src.isEmpty() && getSrcAttribute().equals(src)) {
@@ -451,15 +460,6 @@ public abstract class BaseFrameElement extends HtmlElement {
                 }
             };
             jsEngine.addPostponedAction(action);
-        }
-    }
-
-    @Override
-    protected void onAddedToPage() {
-        super.onAddedToPage();
-
-        if (loadSrcWhenAddedToPage_) {
-            loadSrc();
         }
     }
 
@@ -505,13 +505,57 @@ public abstract class BaseFrameElement extends HtmlElement {
         return clone;
     }
 
-    /**
-     * Remove our window also.
-     * {@inheritDoc}
-     */
+    @Override
+    protected void onAddedToPage() {
+        super.onAddedToPage();
+
+        if (loadSrcWhenAddedToPage_) {
+            loadSrc();
+        }
+    }
+
     @Override
     public void remove() {
         super.remove();
+        loadSrcWhenAddedToPage_ = true;
         getEnclosedWindow().close();
+    }
+
+    @Override
+    public final void removeAttribute(final String attributeName) {
+        super.removeAttribute(attributeName);
+
+        // TODO find a better implementation without all the code duplication
+        if (isAttachedToPage()) {
+            loadSrcWhenAddedToPage_ = false;
+            final String src = getSrcAttribute();
+
+            final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            // When src is set from a script, loading is postponed until script finishes
+            // in fact this implementation is probably wrong: JavaScript URL should be
+            // first evaluated and only loading, when any, should be postponed.
+            if (jsEngine == null || !jsEngine.isScriptRunning()) {
+                loadInnerPageIfPossible(src);
+            }
+            else {
+                final Page pageInFrame = getEnclosedPage();
+                final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.removeAttribute") {
+                    @Override
+                    public void execute() throws Exception {
+                        loadInnerPage();
+                    }
+
+                    @Override
+                    public boolean isStillAlive() {
+                        // skip if page in frame has already been changed
+                        return super.isStillAlive() && pageInFrame == getEnclosedPage();
+                    }
+                };
+                jsEngine.addPostponedAction(action);
+            }
+        }
+        else {
+            loadSrcWhenAddedToPage_ = true;
+        }
     }
 }

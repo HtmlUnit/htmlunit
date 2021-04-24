@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -106,7 +106,7 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("fi", ddDot);
         commonFormats.put("fr", ddSlash);
         commonFormats.put("fr-CA", yyyyDash);
-        commonFormats.put("ga", yyyyDash);
+        commonFormats.put("ga", ddSlash);
         commonFormats.put("hi", ddSlash);
         commonFormats.put("hr", ddDotBlankDot);
         commonFormats.put("hu", yyyyDotBlankDot);
@@ -128,10 +128,10 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("pt", ddSlash);
         commonFormats.put("ro", ddDot);
         commonFormats.put("ru", ddDot);
-        commonFormats.put("sk", ddDot);
+        commonFormats.put("sk", ddDotBlank);
         commonFormats.put("sl", ddDotBlank);
-        commonFormats.put("sq", ddSlash);
-        commonFormats.put("sr", ddDotBlankDot);
+        commonFormats.put("sq", ddDot);
+        commonFormats.put("sr", ddDotDot);
         commonFormats.put("sv", yyyyDash);
         commonFormats.put("th", ddSlash);
         commonFormats.put("tr", ddDot);
@@ -149,12 +149,8 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("en-CA", yyyyDash);
         commonFormats.put("en-PH", ddSlash);
         commonFormats.put("es-US", ddSlash);
-        commonFormats.put("ga", ddSlash);
         commonFormats.put("fr-CH", ddDot);
         commonFormats.put("nl-BE", ddSlash);
-        commonFormats.put("sk", ddDotBlank);
-        commonFormats.put("sr", ddDotDot);
-        commonFormats.put("sq", ddDot);
 
         FF_FORMATS_.putAll(commonFormats);
         FF_FORMATS_.put("ban", ddDot);
@@ -178,11 +174,8 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("iw", ddDot);
         CHROME_FORMATS_.put("mk", mmSlash);
         CHROME_FORMATS_.put("nl-BE", ddSlash);
-        CHROME_FORMATS_.put("sk", ddDotBlank);
         CHROME_FORMATS_.put("sq", mmSlash);
-        CHROME_FORMATS_.put("sr", ddDotDot);
 
-        EDGE_FORMATS_.put("be", mmSlash);
         EDGE_FORMATS_.put("da", ddDot);
         EDGE_FORMATS_.put("en-CA", yyyyDash);
         EDGE_FORMATS_.put("en-IE", ddSlash);
@@ -190,16 +183,10 @@ public class DateTimeFormat extends SimpleScriptable {
         EDGE_FORMATS_.put("en-PH", ddSlash);
         EDGE_FORMATS_.put("es-US", ddSlash);
         EDGE_FORMATS_.put("fr-CH", ddDot);
-        EDGE_FORMATS_.put("ga", mmSlash);
         EDGE_FORMATS_.put("hr", ddDotBlankDot);
         EDGE_FORMATS_.put("in-ID", ddSlash);
-        EDGE_FORMATS_.put("is", mmSlash);
         EDGE_FORMATS_.put("iw", ddDot);
-        EDGE_FORMATS_.put("mk", mmSlash);
         EDGE_FORMATS_.put("nl-BE", ddSlash);
-        EDGE_FORMATS_.put("sk", ddDotBlank);
-        EDGE_FORMATS_.put("sq", mmSlash);
-        EDGE_FORMATS_.put("sr", ddDotDot);
 
         IE_FORMATS_.put("ar", rightToLeft);
         IE_FORMATS_.put("ar-AE", rightToLeft);
@@ -247,10 +234,8 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("no", ddDot);
         IE_FORMATS_.put("pl", ddDot);
         IE_FORMATS_.put("pt-PT", ddSlash);
-        IE_FORMATS_.put("sk", ddDotBlank);
         IE_FORMATS_.put("sl", ddDotBlank);
         IE_FORMATS_.put("sq", ddDot);
-        IE_FORMATS_.put("sr", ddDotDot);
         IE_FORMATS_.put("sr-BA", ddDot);
         IE_FORMATS_.put("sr-CS", ddDot);
         IE_FORMATS_.put("sr-ME", ddDot);

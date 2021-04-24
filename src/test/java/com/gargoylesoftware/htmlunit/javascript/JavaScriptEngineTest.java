@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -1213,7 +1214,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
 
-        engine.addPostponedAction(new PostponedAction(page) {
+        engine.addPostponedAction(new PostponedAction(page, "shutdown test") {
             @Override
             public void execute() throws Exception {
                 // empty
@@ -1303,7 +1304,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 .build();
 
         try (WebClient client = new WebClient(browser)) {
-            client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
+            client.openWindow(UrlUtils.URL_ABOUT_BLANK, "TestWindow");
         }
     }
 

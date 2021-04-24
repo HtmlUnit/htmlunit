@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,7 +60,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                 + "</outer> "
                 + "</note>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -74,7 +74,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final String expectedString = getExpectedAlerts()[0];
         setExpectedAlerts();
         final String serializationText = "<a><!-- abc --></a>";
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -88,7 +88,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final String expectedString = getExpectedAlerts()[0];
         setExpectedAlerts();
         final String serializationText = "<a>&lt;&gt;&amp;</a>";
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -140,7 +140,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                 + "  </xsl:template>\\n"
                 + "</xsl:stylesheet>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -162,7 +162,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                                             + "<meta attrib=\"attribValue\"/>"
                                             + "</outer></document>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -238,7 +238,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                                           + "</body>"
                                           + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
+        final WebDriver driver = loadPageVerifyTitle2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
         assertEquals(expectedString, textArea.getAttribute("value"));
     }
@@ -253,7 +253,9 @@ public class XMLSerializerTest extends WebDriverTestCase {
 
         final StringBuilder builder = new StringBuilder();
         builder.append(
-              "<html><head><title>foo</title><script>\n"
+              "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n");
 
         builder.append("    var text = '").append(escapedText).append("';\n").append(
@@ -282,15 +284,17 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"<foo/>", "<foo/>"},
             IE = {"<foo />", "<foo />"})
     public void document() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var doc = document.implementation.createDocument('', 'foo', null);\n"
-            + "  alert(new XMLSerializer().serializeToString(doc));\n"
-            + "  alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "  log(new XMLSerializer().serializeToString(doc));\n"
+            + "  log(new XMLSerializer().serializeToString(doc.documentElement));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -299,14 +303,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("#")
     public void emptyDocumentFragment() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var fragment = document.createDocumentFragment();\n"
-            + "  alert('#' + new XMLSerializer().serializeToString(fragment));\n"
+            + "  log('#' + new XMLSerializer().serializeToString(fragment));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -320,7 +326,9 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
             FF78 = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>")
     public void documentFragment() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var fragment = document.createDocumentFragment();\n"
 
@@ -332,11 +340,11 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "  heading.textContent = 'is great';\n"
             + "  fragment.appendChild(heading);\n"
 
-            + "  alert(new XMLSerializer().serializeToString(fragment));\n"
+            + "  log(new XMLSerializer().serializeToString(fragment));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -346,23 +354,25 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"},
             IE = {"<img />", "", "<?myTarget myData?>"})
     public void xml() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    testFragment(doc);\n"
             + "    testFragment(document);\n"
             + "    var pi = doc.createProcessingInstruction('myTarget', 'myData');\n"
-            + "    alert(new XMLSerializer().serializeToString(pi));\n"
+            + "    log(new XMLSerializer().serializeToString(pi));\n"
             + "  }\n"
             + "  function testFragment(doc) {\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    var img = doc.createElement('img');\n"
             + "    fragment.appendChild(img);\n"
-            + "    alert(new XMLSerializer().serializeToString(fragment));\n"
+            + "    log(new XMLSerializer().serializeToString(fragment));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -372,7 +382,9 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
             IE = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
     public void namespace() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.createElement('root');\n"
@@ -381,7 +393,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + "    root.appendChild(parent);\n"
             + "    parent.appendChild(createNS(doc, 'my:child', 'myUri'));\n"
             + "    parent.appendChild(doc.createElement('another_child'));\n"
-            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("doc") + ");\n"
+            + "    log(" + XMLDocumentTest.callSerializeXMLDocumentToString("doc") + ");\n"
             + "  }\n"
             + "  function createNS(doc, name, uri) {\n"
             + "    return typeof doc.createNode == 'function' || typeof doc.createNode == 'unknown' ? "
@@ -390,7 +402,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -401,14 +413,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
             IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
     @HtmlUnitNYI(IE = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var t = document.createElement('teXtaREa');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -416,36 +430,38 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
+             "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
+             "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
+             "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
+             "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
+             "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
+             "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
+             "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void noClosingTag() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var t = document.createElement('area');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('base');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('basefont');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('br');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('hr');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('input');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('link');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('meta');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -460,14 +476,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void inputTagWithoutType() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var t = document.createElement('input');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -477,37 +495,39 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
-                    "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
-                    "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
-                    "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"},
+                       "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
+                       "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
+                       "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
+                       "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"},
             IE = {"<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />"})
+                  "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                  "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                  "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",
+                  "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     @HtmlUnitNYI(IE = {"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
-                    "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
-                    "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
-                    "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
-                    "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
+                       "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
+                       "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
+                       "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
+                       "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
     public void otherTags() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var t = document.createElement('div');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('h1');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('p');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('li');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "    var t = document.createElement('textarea');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -516,15 +536,17 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
     public void noClosingTagWithAttribute() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var t = document.createElement('img');\n"
             + "    t.setAttribute('href', 'mypage.htm');\n"
-            + "    alert(new XMLSerializer().serializeToString(t));\n"
+            + "    log(new XMLSerializer().serializeToString(t));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

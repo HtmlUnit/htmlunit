@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
-
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -101,14 +99,16 @@ public class NavigatorTest extends WebDriverTestCase {
             EDGE = {"string", "20030107"},
             IE = {"undefined", "undefined"})
     public void productSub() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "alert(typeof(navigator.productSub));\n"
-            + "alert(navigator.productSub);\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof(navigator.productSub));\n"
+            + "  log(navigator.productSub);\n"
             + "</script>\n"
             + "</head><body></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -218,26 +218,26 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Shockwave Flash not available",
-            IE = {"Shockwave Flash", "Shockwave Flash 32.0 r0", "32.0.0.387", "Flash.ocx"})
+            IE = {"Shockwave Flash", "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>test</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function doTest() {\n"
                 + "    var flash = false;\n"
                 + "    for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
                 + "      var plugin = window.navigator.plugins[i];\n"
                 + "      if ('Shockwave Flash' == window.navigator.plugins[i].name) {\n"
                 + "        flash = true;\n"
-                + "        alert(plugin.name);\n"
-                + "        alert(plugin.description);\n"
-                + "        alert(plugin.version);\n"
-                + "        alert(plugin.filename);\n"
+                + "        log(plugin.name);\n"
+                + "        log(plugin.description);\n"
+                + "        log(plugin.version);\n"
+                + "        log(plugin.filename);\n"
                 + "      }\n"
                 + "    }\n"
                 + "    if (!flash) {\n"
-                + "      alert('Shockwave Flash not available');\n"
+                + "      log('Shockwave Flash not available');\n"
                 + "    }\n"
                 + "  }\n"
                 + "  </script>\n"
@@ -246,7 +246,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -260,12 +260,12 @@ public class NavigatorTest extends WebDriverTestCase {
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>test</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function doTest() {\n"
                 + "    try {\n"
-                + "      alert(window.navigator.taintEnabled());\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(window.navigator.taintEnabled());\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -273,7 +273,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -285,10 +285,10 @@ public class NavigatorTest extends WebDriverTestCase {
     void attribute(final String name, final String value, final String... ignore) throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>test</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function doTest() {\n"
-                + "      alert(window.navigator." + name + ");\n"
+                + "      log(window.navigator." + name + ");\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -297,13 +297,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "</html>";
 
         setExpectedAlerts(value);
-        final WebDriver driver = loadPage2(html);
-        final List<String> alerts = getCollectedAlerts(driver);
-
-        for (int i = 0; i < ignore.length; i++) {
-            alerts.set(0, alerts.get(0).replace(ignore[i], ""));
-        }
-        assertEquals(getExpectedAlerts(), alerts);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -314,11 +308,15 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts("en-US")
     public void language() throws Exception {
         final String html
-            = "<html><head><title>First</title></head>\n"
-            + "<body onload='alert(window.navigator.language)'></body>\n"
+            = "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='log(window.navigator.language)'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -328,17 +326,18 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts({"number", "number"})
     public void mozilla() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(typeof window.navigator.mimeTypes.length);\n"
-            + "  alert(typeof window.navigator.plugins.length);\n"
+            + "  log(typeof window.navigator.mimeTypes.length);\n"
+            + "  log(typeof window.navigator.plugins.length);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -348,16 +347,17 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts("Gecko")
     public void product() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(navigator.product);\n"
+            + "  log(navigator.product);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -367,16 +367,17 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts("[object Geolocation]")
     public void geolocation() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(navigator.geolocation);\n"
+            + "  log(navigator.geolocation);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -388,16 +389,17 @@ public class NavigatorTest extends WebDriverTestCase {
             FF78 = "20181001000000")
     public void buildID() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(navigator.buildID);\n"
+            + "  log(navigator.buildID);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -410,17 +412,18 @@ public class NavigatorTest extends WebDriverTestCase {
             IE = {"", "undefined"})
     public void vendor() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(navigator.vendor);\n"
-            + "  alert(navigator.vendorSub);\n"
+            + "  log(navigator.vendor);\n"
+            + "  log(navigator.vendorSub);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -432,16 +435,17 @@ public class NavigatorTest extends WebDriverTestCase {
             FF78 = "true")
     public void oscpu() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(navigator.oscpu != undefined);\n"
+            + "  log(navigator.oscpu != undefined);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -455,16 +459,17 @@ public class NavigatorTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(navigator.connection);\n"
-            + "    alert(navigator.mozConnection);\n"
-            + "    alert(navigator.webkitConnection);\n"
+            + "    log(navigator.connection);\n"
+            + "    log(navigator.mozConnection);\n"
+            + "    log(navigator.webkitConnection);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -479,15 +484,38 @@ public class NavigatorTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(navigator.doNotTrack);\n"
-            + "    alert(navigator.msDoNotTrack);\n"
-            + "    alert(window.doNotTrack);\n"
+            + "    log(navigator.doNotTrack);\n"
+            + "    log(navigator.msDoNotTrack);\n"
+            + "    log(window.doNotTrack);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object MediaDevices]", "true"},
+            IE = {"undefined", "true"})
+    public void mediaDevices() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(navigator.mediaDevices);\n"
+            + "    log(navigator.mediaDevices === navigator.mediaDevices);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

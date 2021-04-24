@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -775,11 +775,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
-                    "textclick:text1", "parentclick:text1"},
+                       "textclick:text1", "parentclick:text1"},
             IE = {"labelclick:label1", "parentclick:label1", "textclick:text1",
-                    "parentclick:text1", "textfocus:text1"})
+                  "parentclick:text1", "textfocus:text1"})
     @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "textfocus:text1",
-                    "textclick:text1", "parentclick:text1"})
+                       "textclick:text1", "parentclick:text1"})
     public void clickForEventBubbling() throws Exception {
         final String html =
               "  <div onclick='log(\"parentclick:\" + event.target.id)' "
@@ -966,11 +966,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                        "text1click:text1", "labelclick:text1", "parentclick:text1"},
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"},
             IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
-                        "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+                  "labelclick:text1", "parentclick:text1", "text1focus:text1"})
     @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                        "text1click:text1", "labelclick:text1", "parentclick:text1"})
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickNestedEventBubbling() throws Exception {
         final String html =
               "  <div onclick='log(\"parentclick:\" + event.target.id)' "
@@ -996,11 +996,11 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                    "text1click:text1", "labelclick:text1", "parentclick:text1"},
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"},
             IE = {"labelclick:label1", "parentclick:label1", "text1click:text1",
-                    "labelclick:text1", "parentclick:text1", "text1focus:text1"})
+                  "labelclick:text1", "parentclick:text1", "text1focus:text1"})
     @HtmlUnitNYI(IE = {"labelclick:label1", "parentclick:label1", "text1focus:text1",
-                    "text1click:text1", "labelclick:text1", "parentclick:text1"})
+                       "text1click:text1", "labelclick:text1", "parentclick:text1"})
     public void clickForAndNestedEventBubbling() throws Exception {
         final String html =
               "  <div onclick='log(\"parentclick:\" + event.target.id)' "

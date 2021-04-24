@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -376,8 +376,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            FF78 = "0")
+    @Alerts("1")
     public void submitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -395,7 +394,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void submitGet_url_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -417,7 +415,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR2 },
-            FF78 = {"0", ANCHOR2},
             IE = {"1", ""})
     public void submitGet_url_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -455,7 +452,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void submitGet_url_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -551,7 +547,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void submitGet_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById(URL_FIRST + "reload.html#anchor", "submitGetEmpty",
@@ -575,7 +570,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void submitGet_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -597,7 +591,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR2 },
-            FF78 = {"0", ANCHOR2 },
             IE = {"1", ""})
     public void submitGet_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -636,7 +629,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void submitGet_urlHash_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -1074,8 +1066,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            FF78 = "0")
+    @Alerts("1")
     public void jsSubmitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -1093,7 +1084,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void jsSubmitGet_url_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -1115,7 +1105,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR2 },
-            FF78 = {"0", ANCHOR2},
             IE = {"1", ""})
     public void jsSubmitGet_url_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -1153,7 +1142,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void jsSubmitGet_url_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -1247,7 +1235,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void jsSubmitGet_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById(URL_FIRST + "reload.html#anchor",
@@ -1270,7 +1257,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void jsSubmitGet_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
@@ -1292,7 +1278,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR2 },
-            FF78 = {"0", ANCHOR2},
             IE = {"1", ""})
     public void jsSubmitGet_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentHash",
@@ -1330,7 +1315,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", ANCHOR},
-            FF78 = {"0", ANCHOR},
             IE = {"1", ""})
     public void jsSubmitGet_urlHash_urlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),

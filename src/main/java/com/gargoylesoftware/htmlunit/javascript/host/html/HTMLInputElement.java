@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYP
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION;
@@ -48,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlNumberInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
@@ -654,6 +656,15 @@ public class HTMLInputElement extends HTMLElement {
     }
 
     /**
+     * Sets the value of the {@code src} attribute.
+     * @param src the new value
+     */
+    @JsxSetter
+    public void setSrc(final String src) {
+        getDomNodeOrDie().setSrcAttribute(src);
+    }
+
+    /**
      * Returns the value of the JavaScript attribute {@code value}.
      *
      * @return the value of this attribute
@@ -674,6 +685,32 @@ public class HTMLInputElement extends HTMLElement {
             }
             return "C:\\fakepath\\" + name;
         }
+
+        if (htmlInput instanceof HtmlNumberInput) {
+            final HtmlNumberInput htmlNumberInput = (HtmlNumberInput) htmlInput;
+            final String valueAttr = htmlInput.getAttributeDirect("value");
+            if (!valueAttr.isEmpty()) {
+                if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
+                    return "";
+                }
+
+                String val = valueAttr;
+                final int lastPos = val.length() - 1;
+                if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+                    if (htmlNumberInput.hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
+                        return "";
+                    }
+                    val = val.substring(0, lastPos);
+                }
+                try {
+                    Double.parseDouble(valueAttr);
+                }
+                catch (final NumberFormatException e) {
+                    return "";
+                }
+            }
+        }
+
         return htmlInput.getAttributeDirect("value");
     }
 

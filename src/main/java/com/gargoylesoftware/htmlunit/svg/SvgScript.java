@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -95,6 +95,26 @@ public class SvgScript extends SvgElement implements ScriptElement {
     @Override
     public final String getCharsetAttribute() {
         return getAttributeDirect("charset");
+    }
+
+    /**
+     * Returns the value of the attribute {@code defer}. Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code defer}
+     * or an empty string if that attribute isn't defined.
+     */
+    public final String getDeferAttribute() {
+        return getAttributeDirect("defer");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDeferred() {
+        return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
     }
 
     /**

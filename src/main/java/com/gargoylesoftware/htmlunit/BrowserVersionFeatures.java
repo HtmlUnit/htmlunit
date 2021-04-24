@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -278,7 +278,7 @@ public enum BrowserVersionFeatures {
     FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
 
     /** Form submit forces a real request also if only the hash was changed. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
 
     /** Form submit takes care of fields outside the form linked to the form
@@ -301,6 +301,10 @@ public enum BrowserVersionFeatures {
     /** Form submit is done without the hash part of the action url. */
     @BrowserFeature(IE)
     FORM_SUBMISSION_URL_WITHOUT_HASH,
+
+    /** If the frame src has 'about:' scheme use always 'about:blank' as source. */
+    @BrowserFeature({FF, FF78, IE})
+    FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
 
     /** */
     @BrowserFeature(IE)
@@ -702,10 +706,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DATE_WITH_LEFT_TO_RIGHT_MARK,
 
-    /** */
-    @BrowserFeature(IE)
-    JS_DEFERRED,
-
     /** Javascript doctyp.entities returns null (FF10). */
     @BrowserFeature(IE)
     JS_DOCTYPE_ENTITIES_NULL,
@@ -898,6 +898,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
+    /** Javascript InputEvent reads the inputType property from data. */
+    @BrowserFeature({FF, FF78})
+    JS_EVENT_INPUT_CTOR_INPUTTYPE,
+
+    /** Javascript KeyboardEvent reads the which property from data. */
+    @BrowserFeature({FF, FF78, IE})
+    JS_EVENT_KEYBOARD_CTOR_WHICH,
+
     /** do not trigger the onload event if the frame content
      * was not shown because of the csp. */
     @BrowserFeature({FF, FF78})
@@ -1019,6 +1027,14 @@ public enum BrowserVersionFeatures {
     /** Ignore negative selection starts. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
+
+    /** FF accepts all chars. */
+    @BrowserFeature({FF, FF78, IE})
+    JS_INPUT_NUMBER_ACCEPT_ALL,
+
+    /** FF commat at end is not an integer. */
+    @BrowserFeature(FF)
+    JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
 
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
@@ -1255,7 +1271,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Stylesheet list contains only active style sheets. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_STYLESHEETLIST_ACTIVE_ONLY,
 
     /** IE supports accessing unsupported style elements via getter

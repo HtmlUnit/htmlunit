@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -95,18 +95,16 @@ public class WebClient6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT =
-                { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
-                    "3"},
-            IE = {"§§URL§§page2.html?ignorefrom=pwr&",
-                    "3"})
+    @Alerts(DEFAULT = {"§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;"
+                            + "ignoresearch_submit=Get%20Resumes&#x26;mne=4", "3"},
+            IE = {"§§URL§§page2.html?ignorefrom=pwr&", "3"})
     @HtmlUnitNYI(CHROME = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
                             + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    EDGE = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                EDGE = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
                             + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    FF = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                FF = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
                             + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    FF78 = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                FF78 = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
                             + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"})
     public void redirect301WithQueryAndHashSpecialChars() throws Exception {
         redirectGet(301, HttpMethod.GET,
@@ -133,19 +131,17 @@ public class WebClient6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT =
-                { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
-                    "3"},
-            IE = {"§§URL§§page2.html?ignorefrom=pwr&",
-                    "3"})
+    @Alerts(DEFAULT = {"§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;"
+                            + "ignoresearch_submit=Get%20Resumes&#x26;mne=4", "3"},
+            IE = {"§§URL§§page2.html?ignorefrom=pwr&", "3"})
     @HtmlUnitNYI(CHROME = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    EDGE = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    FF = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    FF78 = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"})
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
+            EDGE = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
+            FF = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
+            FF78 = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"})
     public void redirectAbsolute301WithQueryAndHashSpecialChars() throws Exception {
         redirectGet(301, HttpMethod.GET, new URL(URL_FIRST,
             "/page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4")
@@ -367,18 +363,17 @@ public class WebClient6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT =
-                { "§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4",
-                        "3"},
+    @Alerts(DEFAULT = {"§§URL§§page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;"
+                        + "ignoresearch_submit=Get%20Resumes&#x26;mne=4", "3"},
             IE = {"§§URL§§page2.html?ignorefrom=pwr&", "3"})
     @HtmlUnitNYI(CHROME = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    EDGE = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    FF = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
-                    FF78 = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
-                            + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"})
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
+            EDGE = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
+            FF = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"},
+            FF78 = {"http://localhost:22222/page2.html?ignorefrom=pwr&"
+                        + "#x26;ignorenai=1&%23x26;ignoresearch_submit=Get%20Resumes&%23x26;mne=4", "3"})
     public void redirect302WithQueryAndHashSpecialChars() throws Exception {
         redirectGet(302, HttpMethod.GET,
                 "/page2.html?ignorefrom=pwr&#x26;ignorenai=1&#x26;ignoresearch_submit=Get%20Resumes&#x26;mne=4");

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -38,16 +38,16 @@ public class PopStateEventTest extends WebDriverTestCase {
     private static final String DUMP_EVENT_FUNCTION =
           "  function dump(event) {\n"
         + "    if (event) {\n"
-        + "      alert(event);\n"
-        + "      alert(event.target);\n"
-        + "      alert(event.type);\n"
-        + "      alert(event.bubbles);\n"
-        + "      alert(event.cancelable);\n"
-        + "      alert(event.composed);\n"
+        + "      log(event);\n"
+        + "      log(event.target);\n"
+        + "      log(event.type);\n"
+        + "      log(event.bubbles);\n"
+        + "      log(event.cancelable);\n"
+        + "      log(event.composed);\n"
 
-        + "      alert(event.state);\n"
+        + "      log(event.state);\n"
         + "    } else {\n"
-        + "      alert('no event');\n"
+        + "      log('no event');\n"
         + "    }\n"
         + "  }\n";
 
@@ -59,18 +59,19 @@ public class PopStateEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new PopStateEvent('popstate');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,7 +82,8 @@ public class PopStateEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new PopStateEvent('popstate', {\n"
@@ -89,13 +91,13 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "        'state': 2,\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -108,18 +110,19 @@ public class PopStateEventTest extends WebDriverTestCase {
             IE = {"[object PopStateEvent]", "null", "", "false", "false", "undefined", "null"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -132,19 +135,20 @@ public class PopStateEventTest extends WebDriverTestCase {
             IE = {"[object PopStateEvent]", "null", "", "false", "false", "undefined", "null"})
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      event.state = 'test';\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -156,17 +160,18 @@ public class PopStateEventTest extends WebDriverTestCase {
             FF78 = "exception ctor")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      event.initEvent('', true, true);\n"
-            + "    } catch (e) { alert('exception ctor'); return; }\n"
+            + "    } catch (e) { log('exception ctor'); return; }\n"
 
             + "    try {\n"
             + "      dispatchEvent(event);\n"
-            + "      alert('dispatched');\n"
-            + "    } catch (e) { alert('exception' + e) }\n"
+            + "      log('dispatched');\n"
+            + "    } catch (e) { log('exception' + e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
@@ -175,7 +180,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -188,16 +193,17 @@ public class PopStateEventTest extends WebDriverTestCase {
     @NotYetImplemented({CHROME, EDGE, IE})
     public void dispatchEventWithoutInit() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
-            + "    } catch (e) { alert('exception ctor') }\n"
+            + "    } catch (e) { log('exception ctor'); return; }\n"
 
             + "    try {\n"
             + "      dispatchEvent(event);\n"
-            + "      alert('dispatched');\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log('dispatched');\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
@@ -206,7 +212,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -219,21 +225,22 @@ public class PopStateEventTest extends WebDriverTestCase {
             IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "undefined", "html"})
     public void initPopStateEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
-            + "    } catch (e) { alert('exception ctor'); return }\n"
+            + "    } catch (e) { log('exception ctor'); return }\n"
 
             + "    if (event.initPopStateEvent) {\n"
             + "      event.initPopStateEvent('PopState', true, false, 'html');\n"
             + "      dump(event);\n"
-            + "    } else { alert('no initPopStateEvent'); }\n"
+            + "    } else { log('no initPopStateEvent'); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

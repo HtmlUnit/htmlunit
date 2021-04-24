@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -147,8 +147,8 @@ public class YuiTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"test_blank_image", "test_insertimage", "test_image_props",
-                    "test_close_window",
-                    "test_createlink", "test_selected_element", "test_dom_path"},
+                      "test_close_window",
+                      "test_createlink", "test_selected_element", "test_dom_path"},
             EDGE = {"test_blank_image", "test_insertimage", "test_image_props",
                     "test_close_window",
                     "test_createlink", "test_selected_element", "test_dom_path"},

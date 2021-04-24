@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -399,6 +400,40 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document", "body"},
+            IE = "document")
+    @HtmlUnitNYI(IE = {"document", "body"})
+    public void scrollEvents() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.scroll(10, 20);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' onscroll='log(\"body\")'>\n"
+            + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
+
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+    }
+
+    /**
      * Test that Window.scrollBy method gets correctly called and handled by the scripting engine.
      * @throws Exception if the test fails
      */
@@ -410,6 +445,40 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document", "body"},
+            IE = "document")
+    @HtmlUnitNYI(IE = {"document", "body"})
+    public void scrollByEvents() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.scrollBy(10, 20);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' onscroll='log(\"body\")'>\n"
+            + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
+
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -462,6 +531,40 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document", "body"},
+            IE = "document")
+    @HtmlUnitNYI(IE = {"document", "body"})
+    public void scrollToEvents() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var ta = document.getElementById('myTextArea');\n"
+            + "    ta.value += msg + '; ';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.scrollTo(10, 20);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()' onscroll='log(\"body\")'>\n"
+            + "  <div onscroll='log(\"div\")' style='height: 1000px;'></div>\n"
+
+            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
     }
 
     /**
@@ -1417,6 +1520,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -1442,6 +1546,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -1466,6 +1571,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -1609,37 +1715,37 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"window DOMContentLoaded 1 capture",
-                        "window DOMContentLoaded 2 capture",
-                        "document DOMContentLoaded 1",
-                        "document DOMContentLoaded 1 capture",
-                        "document DOMContentLoaded 2",
-                        "document DOMContentLoaded 2 capture",
-                        "window DOMContentLoaded 1",
-                        "window DOMContentLoaded 2",
-                        "window at load 1",
-                        "window at load 1 capture",
-                        "window at load 2",
-                        "onload 2",
-                        "window at load 2 capture",
-                        "after"},
+                       "window DOMContentLoaded 2 capture",
+                       "document DOMContentLoaded 1",
+                       "document DOMContentLoaded 1 capture",
+                       "document DOMContentLoaded 2",
+                       "document DOMContentLoaded 2 capture",
+                       "window DOMContentLoaded 1",
+                       "window DOMContentLoaded 2",
+                       "window at load 1",
+                       "window at load 1 capture",
+                       "window at load 2",
+                       "onload 2",
+                       "window at load 2 capture",
+                       "after"},
             IE = {"window DOMContentLoaded 1 capture",
-                        "window DOMContentLoaded 2 capture",
-                        "document DOMContentLoaded 1",
-                        "document DOMContentLoaded 1 capture",
-                        "document DOMContentLoaded 2",
-                        "document DOMContentLoaded 2 capture",
-                        "window DOMContentLoaded 1",
-                        "window DOMContentLoaded 2",
-                        "window at load 1",
-                        "window at load 1 capture",
-                        "window at load 2",
-                        "onload 2",
-                        "window at load 2 capture",
-                        "document at load 1 capture",
-                        "document at load 2 capture",
-                        "document at load 1 capture",
-                        "document at load 2 capture",
-                        "after"})
+                  "window DOMContentLoaded 2 capture",
+                  "document DOMContentLoaded 1",
+                  "document DOMContentLoaded 1 capture",
+                  "document DOMContentLoaded 2",
+                  "document DOMContentLoaded 2 capture",
+                  "window DOMContentLoaded 1",
+                  "window DOMContentLoaded 2",
+                  "window at load 1",
+                  "window at load 1 capture",
+                  "window at load 2",
+                  "onload 2",
+                  "window at load 2 capture",
+                  "document at load 1 capture",
+                  "document at load 2 capture",
+                  "document at load 1 capture",
+                  "document at load 2 capture",
+                  "after"})
     @NotYetImplemented(IE) // The extra 'document at load' from <script> not yet handled (waiting on onloadScript())
     public void onload() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1718,28 +1824,28 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"document at load capture",
-                        "element 1 onload",
-                        "window at error capture",
-                        "document at error capture",
-                        "element 2 onerror",
-                        "document DOMContentLoaded",
-                        "window DOMContentLoaded",
-                        "window at load",
-                        "window at load capture",
-                        "body onload"},
+                       "element 1 onload",
+                       "window at error capture",
+                       "document at error capture",
+                       "element 2 onerror",
+                       "document DOMContentLoaded",
+                       "window DOMContentLoaded",
+                       "window at load",
+                       "window at load capture",
+                       "body onload"},
             IE = {"window at error",
-                        "window at error capture",
-                        "document at load capture",
-                        "element 1 onload",
-                        "window at error capture",
-                        "document at error capture",
-                        "element 2 onerror",
-                        "document DOMContentLoaded",
-                        "window DOMContentLoaded",
-                        "window at load",
-                        "window at load capture",
-                        "body onload",
-                        "document at load capture"})
+                  "window at error capture",
+                  "document at load capture",
+                  "element 1 onload",
+                  "window at error capture",
+                  "document at error capture",
+                  "element 2 onerror",
+                  "document DOMContentLoaded",
+                  "window DOMContentLoaded",
+                  "window at load",
+                  "window at load capture",
+                  "body onload",
+                  "document at load capture"})
     @NotYetImplemented
     public void onloadScript() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "");
@@ -1789,36 +1895,36 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"img2: window at error capture",
-                        "img2: document at error capture",
-                        "img2: element 2 onerror",
-                        "#document: document DOMContentLoaded",
-                        "#document: window DOMContentLoaded",
-                        "img1: document at load capture",
-                        "img1: element 1 onload",
-                        "#document: window at load",
-                        "#document: window at load capture",
-                        "#document: body onload"},
+                       "img2: document at error capture",
+                       "img2: element 2 onerror",
+                       "#document: document DOMContentLoaded",
+                       "#document: window DOMContentLoaded",
+                       "img1: document at load capture",
+                       "img1: element 1 onload",
+                       "#document: window at load",
+                       "#document: window at load capture",
+                       "#document: body onload"},
             CHROME = {"#document: document DOMContentLoaded",
-                        "#document: window DOMContentLoaded",
-                        "img2: window at error capture",
-                        "img2: document at error capture",
-                        "img2: element 2 onerror",
-                        "img1: document at load capture",
-                        "img1: element 1 onload",
-                        "#document: window at load",
-                        "#document: window at load capture",
-                        "#document: body onload"},
+                      "#document: window DOMContentLoaded",
+                      "img2: window at error capture",
+                      "img2: document at error capture",
+                      "img2: element 2 onerror",
+                      "img1: document at load capture",
+                      "img1: element 1 onload",
+                      "#document: window at load",
+                      "#document: window at load capture",
+                      "#document: body onload"},
             IE = {"img1: document at load capture",
-                        "img1: element 1 onload",
-                        "#document: document DOMContentLoaded",
-                        "#document: window DOMContentLoaded",
-                        "#document: window at load",
-                        "#document: window at load capture",
-                        "#document: body onload",
-                        "SCRIPT: document at load capture",
-                        "img2: window at error capture",
-                        "img2: document at error capture",
-                        "img2: element 2 onerror"})
+                  "img1: element 1 onload",
+                  "#document: document DOMContentLoaded",
+                  "#document: window DOMContentLoaded",
+                  "#document: window at load",
+                  "#document: window at load capture",
+                  "#document: body onload",
+                  "SCRIPT: document at load capture",
+                  "img2: window at error capture",
+                  "img2: document at error capture",
+                  "img2: element 2 onerror"})
     @NotYetImplemented(IE) // The extra SCRIPT is not yet handled (waiting on onloadScript())
     public void onloadImg() throws Exception {
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
@@ -1890,56 +1996,56 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"framing window DOMContentLoaded 1 capture",
-                        "framing document DOMContentLoaded 1",
-                        "framing document DOMContentLoaded 1 capture",
-                        "framing window DOMContentLoaded 1",
-                        "window DOMContentLoaded 1 capture",
-                        "window DOMContentLoaded 2 capture",
-                        "document DOMContentLoaded 1",
-                        "document DOMContentLoaded 1 capture",
-                        "document DOMContentLoaded 2",
-                        "document DOMContentLoaded 2 capture",
-                        "window DOMContentLoaded 1",
-                        "window DOMContentLoaded 2",
-                        "window at load 1",
-                        "window at load 1 capture",
-                        "window at load 2",
-                        "onload 2",
-                        "window at load 2 capture",
-                        "framing document at load 1 capture",
-                        "frame onload",
-                        "framing window at load 1",
-                        "framing window at load 1 capture",
-                        "frameset onload",
-                        "after"},
+                       "framing document DOMContentLoaded 1",
+                       "framing document DOMContentLoaded 1 capture",
+                       "framing window DOMContentLoaded 1",
+                       "window DOMContentLoaded 1 capture",
+                       "window DOMContentLoaded 2 capture",
+                       "document DOMContentLoaded 1",
+                       "document DOMContentLoaded 1 capture",
+                       "document DOMContentLoaded 2",
+                       "document DOMContentLoaded 2 capture",
+                       "window DOMContentLoaded 1",
+                       "window DOMContentLoaded 2",
+                       "window at load 1",
+                       "window at load 1 capture",
+                       "window at load 2",
+                       "onload 2",
+                       "window at load 2 capture",
+                       "framing document at load 1 capture",
+                       "frame onload",
+                       "framing window at load 1",
+                       "framing window at load 1 capture",
+                       "frameset onload",
+                       "after"},
             IE = {"framing window DOMContentLoaded 1 capture",
-                        "framing document DOMContentLoaded 1",
-                        "framing document DOMContentLoaded 1 capture",
-                        "framing window DOMContentLoaded 1",
-                        "framing document at load 1 capture",
-                        "window DOMContentLoaded 1 capture",
-                        "window DOMContentLoaded 2 capture",
-                        "document DOMContentLoaded 1",
-                        "document DOMContentLoaded 1 capture",
-                        "document DOMContentLoaded 2",
-                        "document DOMContentLoaded 2 capture",
-                        "window DOMContentLoaded 1",
-                        "window DOMContentLoaded 2",
-                        "window at load 1",
-                        "window at load 1 capture",
-                        "window at load 2",
-                        "onload 2",
-                        "window at load 2 capture",
-                        "framing document at load 1 capture",
-                        "frame onload",
-                        "framing window at load 1",
-                        "framing window at load 1 capture",
-                        "frameset onload",
-                        "document at load 1 capture",
-                        "document at load 2 capture",
-                        "document at load 1 capture",
-                        "document at load 2 capture",
-                        "after"})
+                  "framing document DOMContentLoaded 1",
+                  "framing document DOMContentLoaded 1 capture",
+                  "framing window DOMContentLoaded 1",
+                  "framing document at load 1 capture",
+                  "window DOMContentLoaded 1 capture",
+                  "window DOMContentLoaded 2 capture",
+                  "document DOMContentLoaded 1",
+                  "document DOMContentLoaded 1 capture",
+                  "document DOMContentLoaded 2",
+                  "document DOMContentLoaded 2 capture",
+                  "window DOMContentLoaded 1",
+                  "window DOMContentLoaded 2",
+                  "window at load 1",
+                  "window at load 1 capture",
+                  "window at load 2",
+                  "onload 2",
+                  "window at load 2 capture",
+                  "framing document at load 1 capture",
+                  "frame onload",
+                  "framing window at load 1",
+                  "framing window at load 1 capture",
+                  "frameset onload",
+                  "document at load 1 capture",
+                  "document at load 2 capture",
+                  "document at load 1 capture",
+                  "document at load 2 capture",
+                  "after"})
     @NotYetImplemented(IE) // The extra 'document at load' from <script> not yet handled (waiting on onloadScript())
     public void onloadFrame() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2026,14 +2132,14 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function () { log(\"onload from body\") }",
-                "function () { log(\"onload from body\") }",
-                "function () { log(\"onload from window\") }",
-                "function () { log(\"onload from window\") }",
-                "null",
-                "null",
-                "function () { log(\"onload from body\") }",
-                "function () { log(\"onload from body\") }",
-                "onload from body"})
+             "function () { log(\"onload from body\") }",
+             "function () { log(\"onload from window\") }",
+             "function () { log(\"onload from window\") }",
+             "null",
+             "null",
+             "function () { log(\"onload from body\") }",
+             "function () { log(\"onload from body\") }",
+             "onload from body"})
     public void onloadFromBody() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2204,24 +2310,24 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"window at click 1 capture",
-                "window at click 2 capture",
-                "d1 at click 1 capture",
-                "d1 at click 2 capture",
-                "d2 at click 1 capture",
-                "d2 at click 2 capture",
-                "d3 at click 1",
-                "d3 onclick",
-                "d3 at click 1 capture",
-                "d3 at click 2",
-                "d3 at click 2 capture",
-                "d2 at click 1",
-                "d2 onclick",
-                "d2 at click 2",
-                "d1 at click 1",
-                "d1 onclick",
-                "d1 at click 2",
-                "window at click 1",
-                "window at click 2"})
+             "window at click 2 capture",
+             "d1 at click 1 capture",
+             "d1 at click 2 capture",
+             "d2 at click 1 capture",
+             "d2 at click 2 capture",
+             "d3 at click 1",
+             "d3 onclick",
+             "d3 at click 1 capture",
+             "d3 at click 2",
+             "d3 at click 2 capture",
+             "d2 at click 1",
+             "d2 onclick",
+             "d2 at click 2",
+             "d1 at click 1",
+             "d1 onclick",
+             "d1 at click 2",
+             "window at click 1",
+             "window at click 2"})
     public void propagationNested() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2363,27 +2469,27 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"listener: stop propagation & return false",
-                "FIRED a1",
-                "listener: return true",
-                "property: return false",
-                "listener: return true",
-                "listener: prevented=false returnValue: true -> false (false)",
-                "listener: prevented=true returnValue: false -> true (false)",
-                "listener: prevented=true returnValue: false -> preventDefault() (false)",
-                "property: prevented=true returnValue: false -> return true",
-                "listener: prevented=true returnValue: false -> x (false)",
-                "listener: prevented=true returnValue: false -> null (false)"},
+                       "FIRED a1",
+                       "listener: return true",
+                       "property: return false",
+                       "listener: return true",
+                       "listener: prevented=false returnValue: true -> false (false)",
+                       "listener: prevented=true returnValue: false -> true (false)",
+                       "listener: prevented=true returnValue: false -> preventDefault() (false)",
+                       "property: prevented=true returnValue: false -> return true",
+                       "listener: prevented=true returnValue: false -> x (false)",
+                       "listener: prevented=true returnValue: false -> null (false)"},
             IE = {"listener: stop propagation & return false",
-                "FIRED a1",
-                "listener: return true",
-                "property: return false",
-                "listener: return true",
-                "listener: prevented=false returnValue: undefined -> false (false)",
-                "listener: prevented=false returnValue: false -> true (true)",
-                "listener: prevented=false returnValue: true -> preventDefault() (true)",
-                "property: prevented=true returnValue: true -> return true",
-                "listener: prevented=true returnValue: true -> x (x)",
-                "listener: prevented=true returnValue: x -> null (null)"})
+                  "FIRED a1",
+                  "listener: return true",
+                  "property: return false",
+                  "listener: return true",
+                  "listener: prevented=false returnValue: undefined -> false (false)",
+                  "listener: prevented=false returnValue: false -> true (true)",
+                  "listener: prevented=false returnValue: true -> preventDefault() (true)",
+                  "property: prevented=true returnValue: true -> return true",
+                  "listener: prevented=true returnValue: true -> x (x)",
+                  "listener: prevented=true returnValue: x -> null (null)"})
     public void stopPropagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

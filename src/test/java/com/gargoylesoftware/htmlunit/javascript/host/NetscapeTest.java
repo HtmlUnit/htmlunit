@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NetscapeTest extends WebDriverTestCase {
@@ -50,4 +52,26 @@ public class NetscapeTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = {"true", "false", "true"},
+            FF78 = {"true", "false", "true"})
+    @HtmlUnitNYI(FF = {"undefined", "true", "true"},
+            FF78 = {"undefined", "true", "true"})
+    public void netscapeDescriptor() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  var d1 = Object.getOwnPropertyDescriptor(window, 'netscape');\n"
+            + "  alert(d1.writable);\n"
+            + "  alert(d1.enumerable);\n"
+            + "  alert(d1.configurable);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,9 +39,9 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined"},
+                       "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"left", "right", "bottom", "middle",
-                "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
+                  "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
         final String html
@@ -74,10 +74,9 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
+                       "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
            IE = {"center", "error", "center", "error", "center", "left", "right",
-                "bottom", "middle", "top", "absBottom",
-                "absMiddle", "baseline", "textTop"})
+                 "bottom", "middle", "top", "absBottom", "absMiddle", "baseline", "textTop"})
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html

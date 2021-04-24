@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -681,11 +681,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-initial-initial", "-initial-initial",
-                    "exception", "-initial-initial", "-initial-initial",
-                    "-newDefault-newDefault", "-newDefault-newDefault"},
+                       "exception", "-initial-initial", "-initial-initial",
+                       "-newDefault-newDefault", "-newDefault-newDefault"},
             IE = {"-initial-initial", "-initial-initial",
-                    "-initial-initial", "-initial-initial",
-                    "-newDefault-newDefault", "-newDefault-newDefault"})
+                  "-initial-initial", "-initial-initial",
+                  "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -726,11 +726,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-initial-initial", "-initial-initial",
-                "exception", "-initial-initial", "-initial-initial",
-                "-newDefault-newDefault", "-newDefault-newDefault"},
+                       "exception", "-initial-initial", "-initial-initial",
+                       "-newDefault-newDefault", "-newDefault-newDefault"},
             IE = {"-initial-initial", "-initial-initial",
-                "-initial-initial", "-initial-initial",
-                "-newDefault-newDefault", "-newDefault-newDefault"})
+                  "-initial-initial", "-initial-initial",
+                  "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -770,11 +770,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-initial-initial", "-default-default",
-                        "exception", "-default-default", "-attribValue-attribValue",
-                        "-newDefault-newDefault"},
+                       "exception", "-default-default", "-attribValue-attribValue",
+                       "-newDefault-newDefault"},
             IE = {"-initial-initial", "-default-default",
-                    "-default-default", "-attribValue-attribValue",
-                    "-newDefault-newDefault"})
+                  "-default-default", "-attribValue-attribValue",
+                  "-newDefault-newDefault"})
     public void value() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -870,11 +870,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
-                        "exception", "null,null",
-                        "exception", "null,null"},
+                       "exception", "null,null",
+                       "exception", "null,null"},
             IE = {"exception", "exception",
-                        "exception", "exception",
-                        "exception", "exception"})
+                  "exception", "exception",
+                  "exception", "exception"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -884,11 +884,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
-                        "exception", "null,null",
-                        "exception", "null,null"},
+                       "exception", "null,null",
+                       "exception", "null,null"},
             IE = {"exception", "exception",
-                        "exception", "exception",
-                        "exception", "exception"})
+                  "exception", "exception",
+                  "exception", "exception"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -898,11 +898,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
-                        "exception", "null,null",
-                        "exception", "null,null"},
+                       "exception", "null,null",
+                       "exception", "null,null"},
             IE = {"exception", "exception",
-                        "exception", "exception",
-                        "exception", "exception"})
+                  "exception", "exception",
+                  "exception", "exception"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }

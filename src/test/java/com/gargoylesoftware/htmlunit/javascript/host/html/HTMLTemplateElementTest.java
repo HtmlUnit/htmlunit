@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -79,9 +79,9 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DocumentFragment]", "0-0",
-                        "[object DocumentFragment]", "0-0",
-                        "[object DocumentFragment]", "0-1",
-                        "[object DocumentFragment]", "0-2"},
+                       "[object DocumentFragment]", "0-0",
+                       "[object DocumentFragment]", "0-1",
+                       "[object DocumentFragment]", "0-2"},
             IE = "not available")
     public void content() throws Exception {
         final String html =
@@ -202,17 +202,17 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"<template></template>", "<template></template>",
-                    "<template><p></p></template>", "<template id=\"tEmpty\"></template>",
-                    "<template id=\"tText\">HtmlUnit</template>",
-                    "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"},
+                       "<template><p></p></template>", "<template id=\"tEmpty\"></template>",
+                       "<template id=\"tText\">HtmlUnit</template>",
+                       "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"},
             IE = {"<?XML:NAMESPACE PREFIX = \"PUBLIC\" NS = \"URN:COMPONENT\" /><template></template>",
-                    "<template><div></div></template>", "<template id=\"tEmpty\"></template>",
-                    "<template id=\"tText\">HtmlUnit</template>",
-                    "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
+                  "<template><div></div></template>", "<template id=\"tEmpty\"></template>",
+                  "<template id=\"tText\">HtmlUnit</template>",
+                  "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
     @HtmlUnitNYI(IE = {"<template></template>", "<template><div></div></template>",
-                    "<template id=\"tEmpty\"></template>",
-                    "<template id=\"tText\">HtmlUnit</template>",
-                    "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
+                       "<template id=\"tEmpty\"></template>",
+                       "<template id=\"tText\">HtmlUnit</template>",
+                       "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
     public void outerHTML() throws Exception {
         final String html =
             "<html>\n"

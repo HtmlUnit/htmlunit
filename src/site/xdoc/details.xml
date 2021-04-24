@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Details about HtmlUnit</title>
@@ -40,6 +40,43 @@ wr.setAdditionalHeader("from htmlunit", "yes");
 ....
 client .getPage(wr);
 ]]></source>
+        </section>
+
+        <section name="Animations based on Window.requestAnimationFrame()">
+            <p>
+                All browsers supporded by HtmlUnit are able to do animations based on the
+                <a href='https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame'>Window.requestAnimationFrame() API</a>.
+                A typical example for this is <a href='https://www.chartjs.org/'>Chart.js</a>.
+                This kind of animation support is not triggered automatically because HtmlUnit is headless.
+                The javascript part of the API is implemented but the user of the HtmlUnit library has to force the triggering of the callback(s).
+            </p>
+            <p>
+                Example:
+            </p>
+            <source><![CDATA[
+try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+    HtmlPage page = webClient.getPage(uri);
+    webClient.waitForBackgroundJavaScript(1_000);
+
+    // page is loaded and async js done
+
+    // we now processing the animation
+    Window window = page.getEnclosingWindow().getScriptableObject();
+    int i = 0; // to be able to limit the animation cycles
+    do {
+        i++;
+
+        // force one animation cycle
+        // this invokes all the animation callbacks registered for this
+        // window (by calling requestAnimationFrame(Object)) once.
+        int pendingFrames = window.animateAnimationsFrames();
+    } while (pendingFrames > 0 && i < 200);
+}
+]]></source>
+            <p>
+                Based on this you have to full control over the animation, you can skip all, but you are also
+                check the current page state after each single animation step.
+            </p>
         </section>
 
         <section name="Attachments">

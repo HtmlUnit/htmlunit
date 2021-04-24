@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -78,13 +78,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
     /** The doctype prefix for standards mode. */
     public static final String STANDARDS_MODE_PREFIX_
         = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n";
-
-    /** List of all HTML tags.*/
-    public static final List<String> HTML_TAGS_ = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
-
-    static {
-        HTML_TAGS_.add(HtmlInput.TAG_NAME);
-    }
 
     /**
      * @throws Exception if the test fails

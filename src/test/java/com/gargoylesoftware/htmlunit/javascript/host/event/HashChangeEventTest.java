@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,16 +35,16 @@ public class HashChangeEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    if (event) {\n"
-        + "      alert(event);\n"
-        + "      alert(event.type);\n"
-        + "      alert(event.bubbles);\n"
-        + "      alert(event.cancelable);\n"
-        + "      alert(event.composed);\n"
+        + "      log(event);\n"
+        + "      log(event.type);\n"
+        + "      log(event.bubbles);\n"
+        + "      log(event.cancelable);\n"
+        + "      log(event.composed);\n"
 
-        + "      alert(event.oldURL);\n"
-        + "      alert(event.newURL);\n"
+        + "      log(event.oldURL);\n"
+        + "      log(event.newURL);\n"
         + "    } else {\n"
-        + "      alert('no event');\n"
+        + "      log('no event');\n"
         + "    }\n"
         + "  }\n";
 
@@ -56,18 +56,19 @@ public class HashChangeEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new HashChangeEvent('hashchange');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -78,7 +79,8 @@ public class HashChangeEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new HashChangeEvent('hashchange', {\n"
@@ -87,13 +89,14 @@ public class HashChangeEventTest extends WebDriverTestCase {
             + "        'newURL': '" + URL_FIRST + "#1'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -104,18 +107,19 @@ public class HashChangeEventTest extends WebDriverTestCase {
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -123,32 +127,34 @@ public class HashChangeEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HashChangeEvent]", "[object HashChangeEvent]",
-                            "hashchange", "true", "false", "false", "§§URL§§", "§§URL§§#1"},
+                       "hashchange", "true", "false", "false", "§§URL§§", "§§URL§§#1"},
             CHROME = {"[object HashChangeEvent]", "missing initHashChangeEvent"},
             EDGE = {"[object HashChangeEvent]", "missing initHashChangeEvent"},
             IE = "exception createEvent")
     public void initHashChangeEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
-            + "      alert(event);\n"
-            + "    } catch (e) { alert('exception createEvent'); return; }\n"
+            + "      log(event);\n"
+            + "    } catch (e) { log('exception createEvent'); return; }\n"
 
-            + "    if (!event.initHashChangeEvent) {alert('missing initHashChangeEvent'); return;}\n"
+            + "    if (!event.initHashChangeEvent) {log('missing initHashChangeEvent'); return;}\n"
 
             + "    try {\n"
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { alert('exception initHashChangeEvent') }\n"
+            + "    } catch (e) { log('exception initHashChangeEvent') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -160,21 +166,23 @@ public class HashChangeEventTest extends WebDriverTestCase {
             FF78 = {"[object HashChangeEvent]", "hashchange", "true", "false", "false", "§§URL§§", "§§URL§§#1"})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('HashChangeEvent');\n"
             + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_FIRST + "', '"
             + URL_FIRST + "#1');\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -185,20 +193,21 @@ public class HashChangeEventTest extends WebDriverTestCase {
             IE = {"[object Event]", "hashchange", "true", "false", "undefined", "undefined", "undefined"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('hashchange', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -208,14 +217,15 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts("supported")
     public void onHashChange_supported() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if ('onhashchange' in window) { alert('supported') }\n"
+            + "    if ('onhashchange' in window) { log('supported') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -226,7 +236,8 @@ public class HashChangeEventTest extends WebDriverTestCase {
             IE = {"[object Event]", "hashchange", "false", "false", "undefined", "undefined", "undefined"})
     public void onHashChange() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + DUMP_EVENT_FUNCTION
             + "  window.onhashchange = dump;\n"
             + "</script></head><body>\n"
@@ -237,6 +248,6 @@ public class HashChangeEventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }

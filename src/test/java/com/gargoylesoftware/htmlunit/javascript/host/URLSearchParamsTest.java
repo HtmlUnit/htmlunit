@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -195,8 +195,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
-                        "key=value&empty-key=undefined&key=overwrite",
-                        "key=value&empty-key=undefined&key=overwrite&key-null=null"},
+                       "key=value&empty-key=undefined&key=overwrite",
+                       "key=value&empty-key=undefined&key=overwrite&key-null=null"},
             IE = {})
     public void append() throws Exception {
         final String html =
@@ -350,10 +350,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"key1=val1&key2=val2&key2=val3&key4=val4",
-                        "key1=new1&key2=val2&key2=val3&key4=val4",
-                        "key1=new1&key2=new2&key4=val4",
-                        "key1=new1&key2=new2&key4=val4&key3=undefined",
-                        "key1=new1&key2=new2&key4=null&key3=undefined"},
+                       "key1=new1&key2=val2&key2=val3&key4=val4",
+                       "key1=new1&key2=new2&key4=val4",
+                       "key1=new1&key2=new2&key4=val4&key3=undefined",
+                       "key1=new1&key2=new2&key4=null&key3=undefined"},
             IE = {})
     public void set() throws Exception {
         final String html =
@@ -388,9 +388,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function keys() { [native code] }", "[object Iterator]",
-                    "key1", "key2", "key1", "", "true"},
+                       "key1", "key2", "key1", "", "true"},
             FF = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
-                    "key1", "key2", "key1", "", "true"},
+                  "key1", "key2", "key1", "", "true"},
             FF78 = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
             IE = {})
@@ -432,9 +432,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }", "[object Iterator]",
-                    "val1", "", "val3", "val4", "true"},
+                       "val1", "", "val3", "val4", "true"},
             FF = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
-                    "val1", "", "val3", "val4", "true"},
+                  "val1", "", "val3", "val4", "true"},
             FF78 = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
             IE = {})
@@ -504,9 +504,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }", "[object Iterator]",
-                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
+                       "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
-                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
+                  "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF78 = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
@@ -569,5 +569,34 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function URLSearchParams() { [native code] }",
+                       "function URLSearchParams() { [native code] }",
+                       "function URLSearchParams() { [native code] }",
+                       "key1=val1", "key1=val1", "key1=val1"},
+            IE = {})
+    public void testToString() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  if (self.URLSearchParams) {\n"
+            + "    log(URLSearchParams);\n"
+            + "    log('' + URLSearchParams);\n"
+            + "    log(URLSearchParams.toString());\n"
+
+            + "    var p = new URLSearchParams('key1=val1');\n"
+            + "    log(p);\n"
+            + "    log('' + p);\n"
+            + "    log(p.toString());\n"
+            + "  }"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

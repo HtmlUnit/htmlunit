@@ -148,7 +148,7 @@ public class CssStyleSheet implements Serializable {
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required"));
+            "optional", "required", "valid", "invalid"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -245,7 +245,7 @@ public class CssStyleSheet implements Serializable {
             final BrowserVersion browser = client.getBrowserVersion();
             WebRequest request = new WebRequest(new URL(url), browser.getCssAcceptHeader(),
                 browser.getAcceptEncodingHeader());
-            request.setAdditionalHeader(HttpHeader.REFERER, uri);
+            request.setRefererlHeader(page.getUrl());
 
             // our cache is a bit strange;
             // loadWebResponse check the cache for the web response
@@ -713,16 +713,10 @@ public class CssStyleSheet implements Serializable {
                                 || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
 
             case "required":
-                return (element instanceof HtmlInput
-                            || element instanceof HtmlSelect
-                            || element instanceof HtmlTextArea)
-                        && element.hasAttribute("required");
+                return element instanceof HtmlElement && ((HtmlElement) element).isRequired();
 
             case "optional":
-                return (element instanceof HtmlInput
-                            || element instanceof HtmlSelect
-                            || element instanceof HtmlTextArea)
-                        && !element.hasAttribute("required");
+                return element instanceof HtmlElement && ((HtmlElement) element).isOptional();
 
             case "first-child":
                 for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {

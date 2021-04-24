@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,8 +26,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,19 +36,21 @@ import org.junit.runner.RunWith;
  *
  * @author Martin Huber
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends SimpleWebTestCase {
 
-    private LocalTestServer localServer_;
+    private static LocalTestServer LOCAL_SERVER_;
 
     /**
      * @throws Exception if an error occurs
      */
-    @Before
-    public void setUp() throws Exception {
-        final URL url = getClass().getClassLoader().getResource("insecureSSL.keystore");
-        final KeyStore keystore = KeyStore.getInstance("jks");
+    @BeforeClass
+    public static void setUp() throws Exception {
+        final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
+                .getClassLoader().getResource("insecureSSL.pfx");
+        final KeyStore keystore = KeyStore.getInstance("PKCS12");
         final char[] pwd = "nopassword".toCharArray();
         keystore.load(url.openStream(), pwd);
 
@@ -63,8 +65,8 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         final SSLContext serverSSLContext = SSLContext.getInstance("TLS");
         serverSSLContext.init(keyManagers, trustManagers, null);
 
-        localServer_ = new LocalTestServer(serverSSLContext);
-        localServer_.start();
+        LOCAL_SERVER_ = new LocalTestServer(serverSSLContext);
+        LOCAL_SERVER_.start();
     }
 
     private static KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {
@@ -90,12 +92,14 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     /**
      * @throws Exception if an error occurs
      */
-    @After
-    public void tearDown() throws Exception {
-        if (localServer_ != null) {
-            localServer_.shutDown();
+    @AfterClass
+    public static void tearDown() throws Exception {
+        System.out.println("+" + System.currentTimeMillis());
+        if (LOCAL_SERVER_ != null) {
+            LOCAL_SERVER_.shutDown();
         }
-        localServer_ = null;
+        LOCAL_SERVER_ = null;
+        System.out.println("+" + System.currentTimeMillis());
     }
 
     /**
@@ -104,11 +108,11 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     @Test
     public void insecureSSL_clientCertificates() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
-                "nopassword", "jks");
+        webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.pfx"),
+                "nopassword", "PKCS12");
         webClient.getOptions().setUseInsecureSSL(true);
-        webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
-                + ':' + localServer_.getServer().getLocalPort()
+        webClient.getPage("https://" + LOCAL_SERVER_.getServer().getInetAddress().getHostName()
+                + ':' + LOCAL_SERVER_.getServer().getLocalPort()
                 + "/random/100");
     }
 
@@ -121,15 +125,15 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     public void insecureSSL_clientCertificatesInputStream() throws Exception {
         final WebClient webClient = getWebClient();
         try (InputStream certificateInputStream = getClass().getClassLoader()
-                .getResourceAsStream("insecureSSL.keystore")) {
-            final byte[] certificateBytes = new byte[2048];
+                .getResourceAsStream("insecureSSL.pfx")) {
+            final byte[] certificateBytes = new byte[4096];
             certificateInputStream.read(certificateBytes);
 
             try (InputStream is = new ByteArrayInputStream(certificateBytes)) {
-                webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
+                webClient.getOptions().setSSLClientCertificate(is, "nopassword", "PKCS12");
                 webClient.getOptions().setUseInsecureSSL(true);
-                webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
-                        + ':' + localServer_.getServer().getLocalPort()
+                webClient.getPage("https://" + LOCAL_SERVER_.getServer().getInetAddress().getHostName()
+                        + ':' + LOCAL_SERVER_.getServer().getLocalPort()
                         + "/random/100");
             }
         }

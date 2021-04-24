@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -113,6 +113,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -467,7 +468,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
 
     private URL makeUrlForOpenWindow(final String urlString) {
         if (urlString.isEmpty()) {
-            return WebClient.URL_ABOUT_BLANK;
+            return UrlUtils.URL_ABOUT_BLANK;
         }
 
         try {
@@ -1117,6 +1118,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         if (body != null) {
             body.setScrollLeft(body.getScrollLeft() + x);
             body.setScrollTop(body.getScrollTop() + y);
+
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
         }
     }
 
@@ -1129,6 +1133,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (19 * lines));
+
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
         }
     }
 
@@ -1141,6 +1148,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
+
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
         }
     }
 
@@ -1155,6 +1165,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         if (body != null) {
             body.setScrollLeft(x);
             body.setScrollTop(y);
+
+            final Event event = new Event(body, Event.TYPE_SCROLL);
+            body.fireEvent(event);
         }
     }
 
@@ -2076,7 +2089,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
-        final Page page = getWebWindow().getEnclosedPage();
+        final WebWindow webWindow = getWebWindow();
+        final Page page = webWindow.getEnclosedPage();
         final URL currentURL = page.getUrl();
 
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
@@ -2108,8 +2122,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 
-        final JavaScriptEngine jsEngine = (JavaScriptEngine) getWebWindow().getWebClient().getJavaScriptEngine();
-        final PostponedAction action = new PostponedAction(page) {
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
+        final PostponedAction action = new PostponedAction(page, "Window.postMessage") {
             @Override
             public void execute() throws Exception {
                 final ContextAction<Object> contextAction = new ContextAction<Object>() {
@@ -4191,7 +4205,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the {@code onshow} event handler.
      * @return the {@code onshow} event handler
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter(FF78)
     public Function getOnshow() {
         return getEventHandler(Event.TYPE_SHOW);
     }
@@ -4200,7 +4214,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Sets the {@code onshow} event handler.
      * @param onshow the {@code onshow} event handler
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter(FF78)
     public void setOnshow(final Object onshow) {
         setHandlerForJavaScript(Event.TYPE_SHOW, onshow);
     }

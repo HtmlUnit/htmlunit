@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -108,9 +108,9 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void noContentType() throws Exception {
+    public void noContentTypeDoctype() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/test", NoContentTypeServlet.class);
+        servlets.put("/test", NoContentTypeDoctypeServlet.class);
         startWebServer("./", null, servlets);
 
         final WebClient client = getWebClient();
@@ -119,16 +119,119 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #noContentType()}.
+     * Servlet for {@link #noContentTypeDoctype()}.
      */
-    public static class NoContentTypeServlet extends HttpServlet {
+    public static class NoContentTypeDoctypeServlet extends HttpServlet {
         /** {@inheritDoc} */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final Writer writer = response.getWriter();
-            writer.write("<html><head><meta http-equiv='Content-Type' content='text/html'></head>\n"
+            writer.write("<!DOCTYPE HTML><body>Hello World</body>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeHtml() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeHtmlServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeHtml()}.
+     */
+    public static class NoContentTypeHtmlServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("  <html  ><head><meta http-equiv='Content-Type' content='text/html'></head>\n"
                 + "<body>Hello World</body></html>");
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeHtmlStartsNotWith() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeHtmlStartsNotWithServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final TextPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeHtmlStartsNotWith()}.
+     */
+    public static class NoContentTypeHtmlStartsNotWithServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("  Just to confuse the russians :-) <html><head></head><body>Hello World</body></html>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeHead() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeHeadServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeHead()}.
+     */
+    public static class NoContentTypeHeadServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("  <head></head><body>Hello World</body>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeScript() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeScriptServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeScript()}.
+     */
+    public static class NoContentTypeScriptServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("\n<script>");
+        }
+    }
 }

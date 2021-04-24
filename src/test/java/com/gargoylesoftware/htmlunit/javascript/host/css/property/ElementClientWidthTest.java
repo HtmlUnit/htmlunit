@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,18 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -45,27 +39,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             return headElementClosesItself(tagName);
         }
 
-        if ("title".equals(tagName)) {
-            // title is a bit special, we have to provide at least
-            // one closing tab otherwise title spans to the end of the file
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + "  alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "<title id='outer'><title></title>\n"
-                    + "</head><body onload='test()'>\n"
-                    + "</body></html>";
-        }
-
         if ("frame".equals(tagName)) {
             return "<html><head>\n"
                     + "<script>\n"
+                    + LOG_TITLE_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(" + VALUE_ + ");\n"
+                    + "  log(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
@@ -76,9 +56,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
         if ("script".equals(tagName)) {
             return "<html><head>\n"
                     + "<script>\n"
+                    + LOG_TITLE_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(" + VALUE_ + ");\n"
+                    + "  log(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head><body onload='test()'>\n"
@@ -89,9 +70,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
         if ("frameset".equals(tagName)) {
             return "<html><head>\n"
                     + "<script>\n"
+                    + LOG_TITLE_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(" + VALUE_ + ");\n"
+                    + "  log(" + VALUE_ + ");\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
@@ -102,9 +84,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
 
         return "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(" + VALUE_ + ");\n"
+                + "  log(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -115,9 +98,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     private static String testInput(final String type) {
         return "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(" + VALUE_ + ");\n"
+                + "  log(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -129,9 +113,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
         return "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(" + VALUE_ + ");\n"
+                + "  log(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -146,7 +131,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void abbr() throws Exception {
-        loadPageWithAlerts2(test("abbr"));
+        loadPageVerifyTitle2(test("abbr"));
     }
 
     /**
@@ -157,7 +142,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void acronym() throws Exception {
-        loadPageWithAlerts2(test("acronym"));
+        loadPageVerifyTitle2(test("acronym"));
     }
 
     /**
@@ -168,7 +153,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void a() throws Exception {
-        loadPageWithAlerts2(test("a"));
+        loadPageVerifyTitle2(test("a"));
     }
 
     /**
@@ -179,7 +164,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void address() throws Exception {
-        loadPageWithAlerts2(test("address"));
+        loadPageVerifyTitle2(test("address"));
     }
 
     /**
@@ -190,7 +175,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void applet() throws Exception {
-        loadPageWithAlerts2(test("applet"));
+        loadPageVerifyTitle2(test("applet"));
     }
 
     /**
@@ -201,7 +186,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void area() throws Exception {
-        loadPageWithAlerts2(test("area"));
+        loadPageVerifyTitle2(test("area"));
     }
 
     /**
@@ -212,7 +197,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void article() throws Exception {
-        loadPageWithAlerts2(test("article"));
+        loadPageVerifyTitle2(test("article"));
     }
 
     /**
@@ -223,7 +208,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void aside() throws Exception {
-        loadPageWithAlerts2(test("aside"));
+        loadPageVerifyTitle2(test("aside"));
     }
 
     /**
@@ -234,7 +219,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void audio() throws Exception {
-        loadPageWithAlerts2(test("audio"));
+        loadPageVerifyTitle2(test("audio"));
     }
 
     /**
@@ -245,7 +230,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void bgsound() throws Exception {
-        loadPageWithAlerts2(test("bgsound"));
+        loadPageVerifyTitle2(test("bgsound"));
     }
 
     /**
@@ -256,7 +241,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void base() throws Exception {
-        loadPageWithAlerts2(test("base"));
+        loadPageVerifyTitle2(test("base"));
     }
 
     /**
@@ -267,7 +252,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void basefont() throws Exception {
-        loadPageWithAlerts2(test("basefont"));
+        loadPageVerifyTitle2(test("basefont"));
     }
 
     /**
@@ -278,7 +263,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void bdi() throws Exception {
-        loadPageWithAlerts2(test("bdi"));
+        loadPageVerifyTitle2(test("bdi"));
     }
 
     /**
@@ -289,7 +274,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void bdo() throws Exception {
-        loadPageWithAlerts2(test("bdo"));
+        loadPageVerifyTitle2(test("bdo"));
     }
 
     /**
@@ -300,7 +285,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void big() throws Exception {
-        loadPageWithAlerts2(test("big"));
+        loadPageVerifyTitle2(test("big"));
     }
 
     /**
@@ -311,7 +296,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void blink() throws Exception {
-        loadPageWithAlerts2(test("blink"));
+        loadPageVerifyTitle2(test("blink"));
     }
 
     /**
@@ -321,9 +306,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-96")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16",
+            FF = "-16",
+            FF78 = "-16",
+            IE = "-16")
     public void blockquote() throws Exception {
-        loadPageWithAlerts2(test("blockquote"));
+        loadPageVerifyTitle2(test("blockquote"));
     }
 
     /**
@@ -334,7 +323,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void body() throws Exception {
-        loadPageWithAlerts2(test("body"));
+        loadPageVerifyTitle2(test("body"));
     }
 
     /**
@@ -345,7 +334,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void b() throws Exception {
-        loadPageWithAlerts2(test("b"));
+        loadPageVerifyTitle2(test("b"));
     }
 
     /**
@@ -356,7 +345,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void br() throws Exception {
-        loadPageWithAlerts2(test("br"));
+        loadPageVerifyTitle2(test("br"));
     }
 
     /**
@@ -369,9 +358,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "16",
             FF78 = "16",
             IE = "20")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "10",
+            EDGE = "10",
+            FF = "10",
+            FF78 = "10",
+            IE = "10")
     public void button() throws Exception {
-        loadPageWithAlerts2(test("button"));
+        loadPageVerifyTitle2(test("button"));
     }
 
     /**
@@ -382,7 +375,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("300")
     public void canvas() throws Exception {
-        loadPageWithAlerts2(test("canvas"));
+        loadPageVerifyTitle2(test("canvas"));
     }
 
     /**
@@ -393,7 +386,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void caption() throws Exception {
-        loadPageWithAlerts2(test("caption"));
+        loadPageVerifyTitle2(test("caption"));
     }
 
     /**
@@ -404,7 +397,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void center() throws Exception {
-        loadPageWithAlerts2(test("center"));
+        loadPageVerifyTitle2(test("center"));
     }
 
     /**
@@ -415,7 +408,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void cite() throws Exception {
-        loadPageWithAlerts2(test("cite"));
+        loadPageVerifyTitle2(test("cite"));
     }
 
     /**
@@ -426,7 +419,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void code() throws Exception {
-        loadPageWithAlerts2(test("code"));
+        loadPageVerifyTitle2(test("code"));
     }
 
     /**
@@ -437,7 +430,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void command() throws Exception {
-        loadPageWithAlerts2(test("command"));
+        loadPageVerifyTitle2(test("command"));
     }
 
     /**
@@ -448,7 +441,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void datalist() throws Exception {
-        loadPageWithAlerts2(test("datalist"));
+        loadPageVerifyTitle2(test("datalist"));
     }
 
     /**
@@ -460,7 +453,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-16",
             IE = "0")
     public void details() throws Exception {
-        loadPageWithAlerts2(test("details"));
+        loadPageVerifyTitle2(test("details"));
     }
 
     /**
@@ -471,7 +464,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void dfn() throws Exception {
-        loadPageWithAlerts2(test("dfn"));
+        loadPageVerifyTitle2(test("dfn"));
     }
 
     /**
@@ -481,9 +474,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-56")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16",
+            FF = "-16",
+            FF78 = "-16",
+            IE = "-16")
     public void dd() throws Exception {
-        loadPageWithAlerts2(test("dd"));
+        loadPageVerifyTitle2(test("dd"));
     }
 
     /**
@@ -494,7 +491,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void del() throws Exception {
-        loadPageWithAlerts2(test("del"));
+        loadPageVerifyTitle2(test("del"));
     }
 
     /**
@@ -505,7 +502,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void dialog() throws Exception {
-        loadPageWithAlerts2(test("dialog"));
+        loadPageVerifyTitle2(test("dialog"));
     }
 
     /**
@@ -516,7 +513,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void dir() throws Exception {
-        loadPageWithAlerts2(test("dir"));
+        loadPageVerifyTitle2(test("dir"));
     }
 
     /**
@@ -527,7 +524,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void div() throws Exception {
-        loadPageWithAlerts2(test("div"));
+        loadPageVerifyTitle2(test("div"));
     }
 
     /**
@@ -538,7 +535,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void dl() throws Exception {
-        loadPageWithAlerts2(test("dl"));
+        loadPageVerifyTitle2(test("dl"));
     }
 
     /**
@@ -549,7 +546,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void dt() throws Exception {
-        loadPageWithAlerts2(test("dt"));
+        loadPageVerifyTitle2(test("dt"));
     }
 
     /**
@@ -560,9 +557,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "16")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "0")
     public void embed() throws Exception {
-        loadPageWithAlerts2(test("embed"));
+        loadPageVerifyTitle2(test("embed"));
     }
 
     /**
@@ -573,7 +570,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void em() throws Exception {
-        loadPageWithAlerts2(test("em"));
+        loadPageVerifyTitle2(test("em"));
     }
 
     /**
@@ -584,9 +581,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-24",
             IE = "-22")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16",
+            FF = "-16",
+            FF78 = "-16",
+            IE = "-16")
     public void fieldset() throws Exception {
-        loadPageWithAlerts2(test("fieldset"));
+        loadPageVerifyTitle2(test("fieldset"));
     }
 
     /**
@@ -597,7 +598,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void figcaption() throws Exception {
-        loadPageWithAlerts2(test("figcaption"));
+        loadPageVerifyTitle2(test("figcaption"));
     }
 
     /**
@@ -607,9 +608,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-96")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16",
+            FF = "-16",
+            FF78 = "-16",
+            IE = "-16")
     public void figure() throws Exception {
-        loadPageWithAlerts2(test("figure"));
+        loadPageVerifyTitle2(test("figure"));
     }
 
     /**
@@ -620,7 +625,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void font() throws Exception {
-        loadPageWithAlerts2(test("font"));
+        loadPageVerifyTitle2(test("font"));
     }
 
     /**
@@ -631,7 +636,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void footer() throws Exception {
-        loadPageWithAlerts2(test("footer"));
+        loadPageVerifyTitle2(test("footer"));
     }
 
     /**
@@ -642,7 +647,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void form() throws Exception {
-        loadPageWithAlerts2(test("form"));
+        loadPageVerifyTitle2(test("form"));
     }
 
     /**
@@ -653,7 +658,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void frame() throws Exception {
-        loadPageWithAlerts2(test("frame"));
+        loadPageVerifyTitle2(test("frame"));
     }
 
     /**
@@ -664,7 +669,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void frameset() throws Exception {
-        loadPageWithAlerts2(test("frameset"));
+        loadPageVerifyTitle2(test("frameset"));
     }
 
     /**
@@ -675,7 +680,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void h1() throws Exception {
-        loadPageWithAlerts2(test("h1"));
+        loadPageVerifyTitle2(test("h1"));
     }
 
     /**
@@ -686,7 +691,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void h2() throws Exception {
-        loadPageWithAlerts2(test("h2"));
+        loadPageVerifyTitle2(test("h2"));
     }
 
     /**
@@ -697,7 +702,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void h3() throws Exception {
-        loadPageWithAlerts2(test("h3"));
+        loadPageVerifyTitle2(test("h3"));
     }
 
     /**
@@ -708,7 +713,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void h4() throws Exception {
-        loadPageWithAlerts2(test("h4"));
+        loadPageVerifyTitle2(test("h4"));
     }
 
     /**
@@ -719,7 +724,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void h5() throws Exception {
-        loadPageWithAlerts2(test("h5"));
+        loadPageVerifyTitle2(test("h5"));
     }
 
     /**
@@ -730,7 +735,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void h6() throws Exception {
-        loadPageWithAlerts2(test("h6"));
+        loadPageVerifyTitle2(test("h6"));
     }
 
     /**
@@ -741,7 +746,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void head() throws Exception {
-        loadPageWithAlerts2(test("head"));
+        loadPageVerifyTitle2(test("head"));
     }
 
     /**
@@ -752,7 +757,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void header() throws Exception {
-        loadPageWithAlerts2(test("header"));
+        loadPageVerifyTitle2(test("header"));
     }
 
     /**
@@ -763,9 +768,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-18",
             IE = "0")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16",
+            FF = "-16",
+            FF78 = "-16",
+            IE = "-16")
     public void hr() throws Exception {
-        loadPageWithAlerts2(test("hr"));
+        loadPageVerifyTitle2(test("hr"));
     }
 
     /**
@@ -776,7 +785,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void html() throws Exception {
-        loadPageWithAlerts2(test("html"));
+        loadPageVerifyTitle2(test("html"));
     }
 
     /**
@@ -786,9 +795,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("300")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void iframe() throws Exception {
-        loadPageWithAlerts2(test("iframe"));
+        loadPageVerifyTitle2(test("iframe"));
     }
 
     /**
@@ -799,7 +812,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void q() throws Exception {
-        loadPageWithAlerts2(test("q"));
+        loadPageVerifyTitle2(test("q"));
     }
 
     /**
@@ -810,9 +823,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "28")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "0")
     public void image() throws Exception {
-        loadPageWithAlerts2(test("image"));
+        loadPageVerifyTitle2(test("image"));
     }
 
     /**
@@ -823,9 +836,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "28")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "0")
     public void img() throws Exception {
-        loadPageWithAlerts2(test("img"));
+        loadPageVerifyTitle2(test("img"));
     }
 
     /**
@@ -836,7 +849,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void ins() throws Exception {
-        loadPageWithAlerts2(test("ins"));
+        loadPageVerifyTitle2(test("ins"));
     }
 
     /**
@@ -847,9 +860,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "143")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "30",
+            EDGE = "30",
+            FF = "30",
+            FF78 = "30",
+            IE = "0")
     public void isindex() throws Exception {
-        loadPageWithAlerts2(test("isindex"));
+        loadPageVerifyTitle2(test("isindex"));
     }
 
     /**
@@ -860,7 +877,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void i() throws Exception {
-        loadPageWithAlerts2(test("i"));
+        loadPageVerifyTitle2(test("i"));
     }
 
     /**
@@ -871,7 +888,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void kbd() throws Exception {
-        loadPageWithAlerts2(test("kbd"));
+        loadPageVerifyTitle2(test("kbd"));
     }
 
     /**
@@ -880,7 +897,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void keygen() throws Exception {
-        loadPageWithAlerts2(test("keygen"));
+        loadPageVerifyTitle2(test("keygen"));
     }
 
     /**
@@ -891,7 +908,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void label() throws Exception {
-        loadPageWithAlerts2(test("label"));
+        loadPageVerifyTitle2(test("label"));
     }
 
     /**
@@ -904,7 +921,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             CHROME = "-16",
             EDGE = "-16")
     public void layer() throws Exception {
-        loadPageWithAlerts2(test("layer"));
+        loadPageVerifyTitle2(test("layer"));
     }
 
     /**
@@ -915,9 +932,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "8")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "0")
     public void legend() throws Exception {
-        loadPageWithAlerts2(test("legend"));
+        loadPageVerifyTitle2(test("legend"));
     }
 
     /**
@@ -928,9 +945,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "-16")
     public void listing() throws Exception {
-        loadPageWithAlerts2(test("listing"));
+        loadPageVerifyTitle2(test("listing"));
     }
 
     /**
@@ -940,9 +957,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-16")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void li() throws Exception {
-        loadPageWithAlerts2(test("li"));
+        loadPageVerifyTitle2(test("li"));
     }
 
     /**
@@ -953,7 +974,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void link() throws Exception {
-        loadPageWithAlerts2(test("link"));
+        loadPageVerifyTitle2(test("link"));
     }
 
     /**
@@ -965,7 +986,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-16",
             IE = "0")
     public void main() throws Exception {
-        loadPageWithAlerts2(test("main"));
+        loadPageVerifyTitle2(test("main"));
     }
 
     /**
@@ -976,7 +997,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void map() throws Exception {
-        loadPageWithAlerts2(test("map"));
+        loadPageVerifyTitle2(test("map"));
     }
 
     /**
@@ -987,9 +1008,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "-16")
     public void marquee() throws Exception {
-        loadPageWithAlerts2(test("marquee"));
+        loadPageVerifyTitle2(test("marquee"));
     }
 
     /**
@@ -1000,7 +1025,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void mark() throws Exception {
-        loadPageWithAlerts2(test("mark"));
+        loadPageVerifyTitle2(test("mark"));
     }
 
     /**
@@ -1011,7 +1036,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void menu() throws Exception {
-        loadPageWithAlerts2(test("menu"));
+        loadPageVerifyTitle2(test("menu"));
     }
 
     /**
@@ -1022,7 +1047,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void menuitem() throws Exception {
-        loadPageWithAlerts2(test("menuitem"));
+        loadPageVerifyTitle2(test("menuitem"));
     }
 
     /**
@@ -1033,7 +1058,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void meta() throws Exception {
-        loadPageWithAlerts2(test("meta"));
+        loadPageVerifyTitle2(test("meta"));
     }
 
     /**
@@ -1044,9 +1069,12 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "80",
             IE = "0")
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0")
     public void meter() throws Exception {
-        loadPageWithAlerts2(test("meter"));
+        loadPageVerifyTitle2(test("meter"));
     }
 
     /**
@@ -1059,7 +1087,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "-16",
             FF78 = "-16")
     public void multicol() throws Exception {
-        loadPageWithAlerts2(test("multicol"));
+        loadPageVerifyTitle2(test("multicol"));
     }
 
     /**
@@ -1070,7 +1098,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void nobr() throws Exception {
-        loadPageWithAlerts2(test("nobr"));
+        loadPageVerifyTitle2(test("nobr"));
     }
 
     /**
@@ -1081,7 +1109,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void nav() throws Exception {
-        loadPageWithAlerts2(test("nav"));
+        loadPageVerifyTitle2(test("nav"));
     }
 
     /**
@@ -1092,7 +1120,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void nextid() throws Exception {
-        loadPageWithAlerts2(test("nextid"));
+        loadPageVerifyTitle2(test("nextid"));
     }
 
     /**
@@ -1103,7 +1131,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void noembed() throws Exception {
-        loadPageWithAlerts2(test("noembed"));
+        loadPageVerifyTitle2(test("noembed"));
     }
 
     /**
@@ -1114,7 +1142,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void noframes() throws Exception {
-        loadPageWithAlerts2(test("noframes"));
+        loadPageVerifyTitle2(test("noframes"));
     }
 
     /**
@@ -1125,7 +1153,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void nolayer() throws Exception {
-        loadPageWithAlerts2(test("nolayer"));
+        loadPageVerifyTitle2(test("nolayer"));
     }
 
     /**
@@ -1135,9 +1163,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "100",
+            EDGE = "100")
     public void noscript() throws Exception {
-        loadPageWithAlerts2(test("noscript"));
+        loadPageVerifyTitle2(test("noscript"));
     }
 
     /**
@@ -1148,7 +1177,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void object() throws Exception {
-        loadPageWithAlerts2(test("object"));
+        loadPageVerifyTitle2(test("object"));
     }
 
     /**
@@ -1159,7 +1188,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void ol() throws Exception {
-        loadPageWithAlerts2(test("ol"));
+        loadPageVerifyTitle2(test("ol"));
     }
 
     /**
@@ -1171,7 +1200,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-16",
             IE = "0")
     public void optgroup() throws Exception {
-        loadPageWithAlerts2(test("optgroup"));
+        loadPageVerifyTitle2(test("optgroup"));
     }
 
     /**
@@ -1183,7 +1212,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-16",
             IE = "0")
     public void option() throws Exception {
-        loadPageWithAlerts2(test("option"));
+        loadPageVerifyTitle2(test("option"));
     }
 
     /**
@@ -1194,7 +1223,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void output() throws Exception {
-        loadPageWithAlerts2(test("output"));
+        loadPageVerifyTitle2(test("output"));
     }
 
     /**
@@ -1205,7 +1234,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void p() throws Exception {
-        loadPageWithAlerts2(test("p"));
+        loadPageVerifyTitle2(test("p"));
     }
 
     /**
@@ -1216,7 +1245,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void param() throws Exception {
-        loadPageWithAlerts2(test("param"));
+        loadPageVerifyTitle2(test("param"));
     }
 
     /**
@@ -1227,7 +1256,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void plaintext() throws Exception {
-        loadPageWithAlerts2(test("plaintext"));
+        loadPageVerifyTitle2(test("plaintext"));
     }
 
     /**
@@ -1238,7 +1267,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void pre() throws Exception {
-        loadPageWithAlerts2(test("pre"));
+        loadPageVerifyTitle2(test("pre"));
     }
 
     /**
@@ -1249,9 +1278,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "160",
             IE = "280")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void progress() throws Exception {
-        loadPageWithAlerts2(test("progress"));
+        loadPageVerifyTitle2(test("progress"));
     }
 
     /**
@@ -1262,7 +1295,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void ruby() throws Exception {
-        loadPageWithAlerts2(test("ruby"));
+        loadPageVerifyTitle2(test("ruby"));
     }
 
     /**
@@ -1273,7 +1306,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void rp() throws Exception {
-        loadPageWithAlerts2(test("rp"));
+        loadPageVerifyTitle2(test("rp"));
     }
 
     /**
@@ -1283,9 +1316,10 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16")
     public void rt() throws Exception {
-        loadPageWithAlerts2(test("rt"));
+        loadPageVerifyTitle2(test("rt"));
     }
 
     /**
@@ -1296,7 +1330,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void s() throws Exception {
-        loadPageWithAlerts2(test("s"));
+        loadPageVerifyTitle2(test("s"));
     }
 
     /**
@@ -1307,7 +1341,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void samp() throws Exception {
-        loadPageWithAlerts2(test("samp"));
+        loadPageVerifyTitle2(test("samp"));
     }
 
     /**
@@ -1318,7 +1352,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void script() throws Exception {
-        loadPageWithAlerts2(test("script"));
+        loadPageVerifyTitle2(test("script"));
     }
 
     /**
@@ -1329,7 +1363,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void section() throws Exception {
-        loadPageWithAlerts2(test("section"));
+        loadPageVerifyTitle2(test("section"));
     }
 
     /**
@@ -1342,9 +1376,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "27",
             FF78 = "27",
             IE = "23")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void select() throws Exception {
-        loadPageWithAlerts2(test("select"));
+        loadPageVerifyTitle2(test("select"));
     }
 
     /**
@@ -1355,7 +1393,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void small() throws Exception {
-        loadPageWithAlerts2(test("small"));
+        loadPageVerifyTitle2(test("small"));
     }
 
     /**
@@ -1366,7 +1404,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void source() throws Exception {
-        loadPageWithAlerts2(test("source"));
+        loadPageVerifyTitle2(test("source"));
     }
 
     /**
@@ -1375,7 +1413,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void spacer() throws Exception {
-        loadPageWithAlerts2(test("spacer"));
+        loadPageVerifyTitle2(test("spacer"));
     }
 
     /**
@@ -1386,7 +1424,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void span() throws Exception {
-        loadPageWithAlerts2(test("span"));
+        loadPageVerifyTitle2(test("span"));
     }
 
     /**
@@ -1397,7 +1435,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void strike() throws Exception {
-        loadPageWithAlerts2(test("strike"));
+        loadPageVerifyTitle2(test("strike"));
     }
 
     /**
@@ -1408,7 +1446,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void strong() throws Exception {
-        loadPageWithAlerts2(test("strong"));
+        loadPageVerifyTitle2(test("strong"));
     }
 
     /**
@@ -1419,7 +1457,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void style() throws Exception {
-        loadPageWithAlerts2(test("style"));
+        loadPageVerifyTitle2(test("style"));
     }
 
     /**
@@ -1430,7 +1468,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void sub() throws Exception {
-        loadPageWithAlerts2(test("sub"));
+        loadPageVerifyTitle2(test("sub"));
     }
 
     /**
@@ -1442,7 +1480,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-16",
             IE = "0")
     public void summary() throws Exception {
-        loadPageWithAlerts2(test("summary"));
+        loadPageVerifyTitle2(test("summary"));
     }
 
     /**
@@ -1453,7 +1491,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void sup() throws Exception {
-        loadPageWithAlerts2(test("sup"));
+        loadPageVerifyTitle2(test("sup"));
     }
 
     /**
@@ -1464,9 +1502,12 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "300",
             IE = "-16")
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16",
+            FF = "-16",
+            FF78 = "-16")
     public void svg() throws Exception {
-        loadPageWithAlerts2(test("svg"));
+        loadPageVerifyTitle2(test("svg"));
     }
 
     /**
@@ -1477,9 +1518,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "2")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "0")
     public void table() throws Exception {
-        loadPageWithAlerts2(test("table"));
+        loadPageVerifyTitle2(test("table"));
     }
 
     /**
@@ -1490,7 +1531,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void col() throws Exception {
-        loadPageWithAlerts2(test("col"));
+        loadPageVerifyTitle2(test("col"));
     }
 
     /**
@@ -1501,7 +1542,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void colgroup() throws Exception {
-        loadPageWithAlerts2(test("colgroup"));
+        loadPageVerifyTitle2(test("colgroup"));
     }
 
     /**
@@ -1512,7 +1553,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void tbody() throws Exception {
-        loadPageWithAlerts2(test("tbody"));
+        loadPageVerifyTitle2(test("tbody"));
     }
 
     /**
@@ -1523,7 +1564,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void td() throws Exception {
-        loadPageWithAlerts2(test("td"));
+        loadPageVerifyTitle2(test("td"));
     }
 
     /**
@@ -1534,7 +1575,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void th() throws Exception {
-        loadPageWithAlerts2(test("th"));
+        loadPageVerifyTitle2(test("th"));
     }
 
     /**
@@ -1545,7 +1586,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void tr() throws Exception {
-        loadPageWithAlerts2(test("tr"));
+        loadPageVerifyTitle2(test("tr"));
     }
 
     /**
@@ -1556,7 +1597,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void track() throws Exception {
-        loadPageWithAlerts2(test("track"));
+        loadPageVerifyTitle2(test("track"));
     }
 
     /**
@@ -1569,9 +1610,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "181",
             FF78 = "181",
             IE = "164")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "100",
+            EDGE = "100",
+            FF = "100",
+            FF78 = "100",
+            IE = "100")
     public void textarea() throws Exception {
-        loadPageWithAlerts2(test("textarea"));
+        loadPageVerifyTitle2(test("textarea"));
     }
 
     /**
@@ -1582,7 +1627,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void tfoot() throws Exception {
-        loadPageWithAlerts2(test("tfoot"));
+        loadPageVerifyTitle2(test("tfoot"));
     }
 
     /**
@@ -1593,7 +1638,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void thead() throws Exception {
-        loadPageWithAlerts2(test("thead"));
+        loadPageVerifyTitle2(test("thead"));
     }
 
     /**
@@ -1604,7 +1649,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void tt() throws Exception {
-        loadPageWithAlerts2(test("tt"));
+        loadPageVerifyTitle2(test("tt"));
     }
 
     /**
@@ -1615,7 +1660,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void time() throws Exception {
-        loadPageWithAlerts2(test("time"));
+        loadPageVerifyTitle2(test("time"));
     }
 
     /**
@@ -1626,7 +1671,20 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void title() throws Exception {
-        loadPageWithAlerts2(test("title"));
+        // title is a bit special, we have to provide at least
+        // one closing tab otherwise title spans to the end of the file
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(" + VALUE_ + ");\n"
+                + "}\n"
+                + "</script>\n"
+                + "<title id='outer'><title></title>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1637,7 +1695,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void u() throws Exception {
-        loadPageWithAlerts2(test("u"));
+        loadPageVerifyTitle2(test("u"));
     }
 
     /**
@@ -1648,7 +1706,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("-16")
     public void ul() throws Exception {
-        loadPageWithAlerts2(test("ul"));
+        loadPageVerifyTitle2(test("ul"));
     }
 
     /**
@@ -1659,7 +1717,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void var() throws Exception {
-        loadPageWithAlerts2(test("var"));
+        loadPageVerifyTitle2(test("var"));
     }
 
     /**
@@ -1669,9 +1727,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("300")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void video() throws Exception {
-        loadPageWithAlerts2(test("video"));
+        loadPageVerifyTitle2(test("video"));
     }
 
     /**
@@ -1682,7 +1744,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void wbr() throws Exception {
-        loadPageWithAlerts2(test("wbr"));
+        loadPageVerifyTitle2(test("wbr"));
     }
 
     /**
@@ -1693,9 +1755,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "0")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "-16")
     public void xmp() throws Exception {
-        loadPageWithAlerts2(test("xmp"));
+        loadPageVerifyTitle2(test("xmp"));
     }
 
     /**
@@ -1709,7 +1771,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF78 = "145",
             IE = "143")
     public void input() throws Exception {
-        loadPageWithAlerts2(test("input"));
+        loadPageVerifyTitle2(test("input"));
     }
 
     /**
@@ -1722,9 +1784,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "16",
             FF78 = "16",
             IE = "20")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "10",
+            EDGE = "10",
+            FF = "10",
+            FF78 = "10",
+            IE = "10")
     public void inputButton() throws Exception {
-        loadPageWithAlerts2(testInput("button"));
+        loadPageVerifyTitle2(testInput("button"));
     }
 
     /**
@@ -1735,7 +1801,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("13")
     public void inputCheckbox() throws Exception {
-        loadPageWithAlerts2(testInput("checkbox"));
+        loadPageVerifyTitle2(testInput("checkbox"));
     }
 
     /**
@@ -1748,9 +1814,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "271",
             FF78 = "240",
             IE = "228")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "10",
+            EDGE = "10",
+            FF = "10",
+            FF78 = "10",
+            IE = "10")
     public void inputFile() throws Exception {
-        loadPageWithAlerts2(testInput("file"));
+        loadPageVerifyTitle2(testInput("file"));
     }
 
     /**
@@ -1761,7 +1831,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void inputHidden() throws Exception {
-        loadPageWithAlerts2(testInput("hidden"));
+        loadPageVerifyTitle2(testInput("hidden"));
     }
 
     /**
@@ -1774,9 +1844,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "145",
             FF78 = "145",
             IE = "145")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "143")
     public void inputPassword() throws Exception {
-        loadPageWithAlerts2(testInput("password"));
+        loadPageVerifyTitle2(testInput("password"));
     }
 
     /**
@@ -1787,7 +1857,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("13")
     public void inputRadio() throws Exception {
-        loadPageWithAlerts2(testInput("radio"));
+        loadPageVerifyTitle2(testInput("radio"));
     }
 
     /**
@@ -1800,9 +1870,12 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "91",
             FF78 = "48",
             IE = "55")
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = "55",
+            EDGE = "55",
+            FF = "55",
+            FF78 = "55")
     public void inputReset() throws Exception {
-        loadPageWithAlerts2(testInput("reset"));
+        loadPageVerifyTitle2(testInput("reset"));
     }
 
     /**
@@ -1817,7 +1890,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF78 = "145",
             IE = "143")
     public void inputSelect() throws Exception {
-        loadPageWithAlerts2(testInput("select"));
+        loadPageVerifyTitle2(testInput("select"));
     }
 
     /**
@@ -1830,9 +1903,13 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF = "108",
             FF78 = "94",
             IE = "101")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "118",
+            EDGE = "118",
+            FF = "118",
+            FF78 = "118",
+            IE = "118")
     public void inputSubmit() throws Exception {
-        loadPageWithAlerts2(testInput("submit"));
+        loadPageVerifyTitle2(testInput("submit"));
     }
 
     /**
@@ -1846,7 +1923,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
             FF78 = "145",
             IE = "143")
     public void inputText() throws Exception {
-        loadPageWithAlerts2(testInput("text"));
+        loadPageVerifyTitle2(testInput("text"));
     }
 
     /**
@@ -1857,18 +1934,18 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void data() throws Exception {
-        loadPageWithAlerts2(test("data"));
+        loadPageVerifyTitle2(test("data"));
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     * Test HtmlContent.
      *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("0")
     public void content() throws Exception {
-        loadPageWithAlerts2(test("content"));
+        loadPageVerifyTitle2(test("content"));
     }
 
     /**
@@ -1879,7 +1956,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void picture() throws Exception {
-        loadPageWithAlerts2(test("picture"));
+        loadPageVerifyTitle2(test("picture"));
     }
 
     /**
@@ -1890,7 +1967,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void template() throws Exception {
-        loadPageWithAlerts2(test("template"));
+        loadPageVerifyTitle2(test("template"));
     }
 
     /**
@@ -1901,7 +1978,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void slot() throws Exception {
-        loadPageWithAlerts2(test("slot"));
+        loadPageVerifyTitle2(test("slot"));
     }
 
 }

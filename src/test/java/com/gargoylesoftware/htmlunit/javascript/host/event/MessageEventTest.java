@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -57,7 +57,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-false",
-                            "-null", "-", "-", "-null"},
+                       "-null", "-", "-", "-null"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -81,7 +81,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-false",
-                            "-test-data", "-test-origin", "-42", "-[object Window]"},
+                       "-test-data", "-test-origin", "-42", "-[object Window]"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -111,18 +111,20 @@ public class MessageEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM2: exception", "DOM3: [object MessageEvent]"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert('DOM2: ' + document.createEvent('MessageEvents'));\n"
-            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "      log('DOM2: ' + document.createEvent('MessageEvents'));\n"
+            + "    } catch(e) {log('DOM2: exception')}\n"
             + "    try {\n"
-            + "      alert('DOM3: ' + document.createEvent('MessageEvent'));\n"
-            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "      log('DOM3: ' + document.createEvent('MessageEvent'));\n"
+            + "    } catch(e) {log('DOM3: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,7 +133,7 @@ public class MessageEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
-                            "-http://localhost:", "-undefined", "-[object Window]"})
+                  "-http://localhost:", "-undefined", "-[object Window]"})
     @NotYetImplemented(IE)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
@@ -142,6 +144,7 @@ public class MessageEventTest extends WebDriverTestCase {
 
         final String origin = "http://localhost:" + PORT;
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var e = document.createEvent('MessageEvent');\n"
             + "if (e.initMessageEvent) {\n"
             + "  try {\n"
@@ -149,7 +152,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception '; }\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');\n"
+            + "  document.title += 'no initMessageEvent';\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
@@ -163,9 +166,9 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-false", "-hello",
-                        "-http://localhost:", "-2", "-[object Window]"},
+                       "-http://localhost:", "-2", "-[object Window]"},
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
-                            "-http://localhost:", "-undefined", "-[object Window]"})
+                  "-http://localhost:", "-undefined", "-[object Window]"})
     public void initMessageEventPortsUndefined() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
@@ -182,7 +185,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception '; }\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');\n"
+            + "  document.title += 'no initMessageEvent';\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
@@ -196,9 +199,9 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-false", "-hello",
-                            "-http://localhost:", "-2", "-[object Window]"},
+                       "-http://localhost:", "-2", "-[object Window]"},
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-undefined", "-hello",
-                            "-http://localhost:", "-undefined", "-[object Window]"})
+                  "-http://localhost:", "-undefined", "-[object Window]"})
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[6] += PORT;
@@ -213,7 +216,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception' + e; }\n"
             + "} else {\n"
-            + "  alert('no initMessageEvent');\n"
+            + "  document.title += 'no initMessageEvent';\n"
             + "}\n"
             + DUMP_EVENT_FUNCTION
             + "</script></body></html>";

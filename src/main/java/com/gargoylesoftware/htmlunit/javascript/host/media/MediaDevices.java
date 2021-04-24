@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.Promise;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -37,5 +40,12 @@ public class MediaDevices extends EventTarget {
      */
     @JsxConstructor
     public MediaDevices() {
+    }
+
+    @JsxFunction
+    public Promise getUserMedia() {
+        return Promise.reject(null, this,
+                new Object[] {new DOMException("HtmlUnit does not support media streaming.",
+                        DOMException.NOT_FOUND_ERR)}, null);
     }
 }

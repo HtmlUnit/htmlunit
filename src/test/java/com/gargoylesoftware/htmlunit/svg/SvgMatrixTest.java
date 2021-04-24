@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.svg;
-
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -100,32 +98,33 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function", "function", "function", "function", "function", "function", "function", "function",
-            "function", "function", "function"})
+             "function", "function", "function"})
     public void methods() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var svg =  document.getElementById('myId');\n"
             + "try {\n"
             + "  var m = svg.createSVGMatrix();\n"
-            + "  alert(typeof m.flipX);\n"
-            + "  alert(typeof m.flipY);\n"
-            + "  alert(typeof m.inverse);\n"
-            + "  alert(typeof m.multiply);\n"
-            + "  alert(typeof m.rotate);\n"
-            + "  alert(typeof m.rotateFromVector);\n"
-            + "  alert(typeof m.scale);\n"
-            + "  alert(typeof m.scaleNonUniform);\n"
-            + "  alert(typeof m.skewX);\n"
-            + "  alert(typeof m.skewY);\n"
-            + "  alert(typeof m.translate);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(typeof m.flipX);\n"
+            + "  log(typeof m.flipY);\n"
+            + "  log(typeof m.inverse);\n"
+            + "  log(typeof m.multiply);\n"
+            + "  log(typeof m.rotate);\n"
+            + "  log(typeof m.rotateFromVector);\n"
+            + "  log(typeof m.scale);\n"
+            + "  log(typeof m.scaleNonUniform);\n"
+            + "  log(typeof m.skewX);\n"
+            + "  log(typeof m.skewY);\n"
+            + "  log(typeof m.translate);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -265,7 +264,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "3, 4, -1, -2, 5, 6")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "exception")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
     }
@@ -276,7 +275,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "1, 2, 3, 4, 5, 6")
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = "exception")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
     }

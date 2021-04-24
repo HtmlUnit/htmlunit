@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.47.0-SNAPSHOT</version>
+    <version>2.50.0-SNAPSHOT</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -24,20 +24,20 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>2.46.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.49.1</htmlunitdriver.version>
         <htmlunitcssparser.version>1.7.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.46.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.46.0</htmlunitcorejs.version>
+        <htmlunitneko.version>2.49.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.50.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
-        <jetty.version>9.4.35.v20201120</jetty.version>
-        <log4j.version>2.14.0</log4j.version>
+        <jetty.version>9.4.40.v20210413</jetty.version>
+        <log4j.version>2.14.1</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.39</checkstyle.version>
-        <spotbugs.version>4.2.0</spotbugs.version>
-        <pmd.version>6.30.0</pmd.version>
+        <checkstyle.version>8.41.1</checkstyle.version>
+        <spotbugs.version>4.2.3</spotbugs.version>
+        <pmd.version>6.33.0</pmd.version>
     </properties>
 
     <build>
@@ -55,7 +55,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.1.2</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
@@ -72,7 +72,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.2.0</version>
+                <version>4.2.3</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
@@ -179,10 +179,10 @@
                     <quiet>true</quiet>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://commons.apache.org/logging/apidocs/</link>
-                        <link>http://commons.apache.org/codec/apidocs/</link>
-                        <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>https://commons.apache.org/logging/apidocs/</link>
+                        <link>https://commons.apache.org/codec/apidocs/</link>
+                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
                     </links>
                 </configuration>
                 <executions>
@@ -209,7 +209,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>6.0.5</version>
+                <version>6.1.5</version>
                 <configuration>
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
@@ -300,7 +300,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.1</version>
+                <version>5.1.2</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -311,10 +311,10 @@
                     </instructions>
                 </configuration>
             </plugin>
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.11.0</version>
+                <version>1.12.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -322,13 +322,13 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>3.4.2</version>
+                <version>3.4.3</version>
             </extension>
         </extensions>
     </build>
@@ -613,7 +613,35 @@
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1536m</argLine>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <systemPropertyVariables>
+                                <htmlunit.maven>maven</htmlunit.maven>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>only-huge-tests-s2</id>
+            <activation>
+                <property>
+                    <name>onlyHugeS2</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.2</version>
+                        <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
+                            <includes>
+                                <include>**/huge/HostParentOfS2Test.java</include>
+                            </includes>
+                            <argLine>-Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -663,10 +691,10 @@
                     <excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl:com.gargoylesoftware.htmlunit.html.xpath:com.gargoylesoftware.htmlunit.html.applets:com.gargoylesoftware.htmlunit.html.impl:com.gargoylesoftware.htmlunit.activex</excludePackageNames>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://commons.apache.org/logging/apidocs/</link>
-                        <link>http://commons.apache.org/codec/apidocs/</link>
-                        <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>https://commons.apache.org/logging/apidocs/</link>
+                        <link>https://commons.apache.org/codec/apidocs/</link>
+                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
                     </links>
                 </configuration>
             </plugin>
@@ -678,7 +706,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -714,7 +742,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -1116,6 +1144,15 @@
         <contributor>
             <name>Markus Heiden</name>
         </contributor>
+        <contributor>
+            <name>Dennis Duysak</name>
+        </contributor>
+        <contributor>
+            <name>Raik Bieniek</name>
+        </contributor>
+        <contributor>
+            <name>Uberto Barbini</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -1136,7 +1173,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.11</version>
+            <version>3.12.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -1183,7 +1220,7 @@
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
-            <version>3.7.2</version>
+            <version>3.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.brotli</groupId>
@@ -1201,23 +1238,24 @@
             <artifactId>websocket-client</artifactId>
             <version>${jetty.version}</version>
         </dependency>
+
         <!-- Test dependencies. -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>4.2</version>
+            <version>4.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
-            <version>0.15.0</version>
+            <version>0.18.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -1257,6 +1295,30 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- make our test for rendering svg images on canvas run -->
+        <dependency>
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-batik</artifactId>
+            <version>3.6.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>1.14</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -1270,9 +1332,15 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>com.github.romankh3</groupId>
+            <artifactId>image-comparison</artifactId>
+            <version>4.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
-            <version>1.5.2</version>
+            <version>1.5.3</version>
             <scope>test</scope>
         </dependency>
         <!-- Jetty -->

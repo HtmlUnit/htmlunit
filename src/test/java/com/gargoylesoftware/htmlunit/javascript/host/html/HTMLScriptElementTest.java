@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -126,6 +126,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("", "text/javascript");
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageWithAlerts2(html);
     }
 
@@ -828,7 +829,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <title>test</title>\n"
             + "    <script defer=''>alert('3');</script>\n"
-            + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
+            + "    <script defer onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
             + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
             + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"7\");'></script>\n"
             + "    <script>alert('2')</script>\n"

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -230,8 +230,10 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      * A radio button does not have a textual representation,
      * but we invent one for it because it is useful for testing.
      * @return "checked" or "unchecked" according to the radio state
+     *
+     * @deprecated as of version 2.48.0; use asNormalizedText() instead
      */
-    // we need to preserve this method as it is there since many versions with the above documentation.
+    @Deprecated
     @Override
     public String asText() {
         return super.asText();

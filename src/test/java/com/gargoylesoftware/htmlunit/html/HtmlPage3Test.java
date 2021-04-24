@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,9 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,6 +34,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -39,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * Tests for {@link HtmlPage}.
  *
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
  * @author Joerg Werner
@@ -393,7 +397,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object SVGSVGElement]", "http://www.w3.org/2000/svg",
-            "[object SVGRectElement]", "http://www.w3.org/2000/svg"})
+             "[object SVGRectElement]", "http://www.w3.org/2000/svg"})
     public void htmlPageEmbeddedSvgWithoutNamespace() throws Exception {
         final String content
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
@@ -513,5 +517,104 @@ public class HtmlPage3Test extends WebDriverTestCase {
                 + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("25")
+    public void loadExternalJavaScript() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "function makeIframe() {\n"
+            + "  var iframesrc = '<html><head>';\n"
+            + "  iframesrc += '<script src=\"" + "js.js" + "\"></' + 'script>';\n"
+            + "  iframesrc += '<script>';\n"
+            + "  iframesrc += 'function doSquared() {';\n"
+            + "  iframesrc += '    try {';\n"
+            + "  iframesrc += '      var y = squared(5);';\n"
+            + "  iframesrc += '      alert(y);';\n"
+            + "  iframesrc += '    } catch (e) {';\n"
+            + "  iframesrc += '      alert(\"error\");';\n"
+            + "  iframesrc += '    }';\n"
+            + "  iframesrc += '}';\n"
+            + "  iframesrc += '</' + 'script>';\n"
+            + "  iframesrc += '</head>';\n"
+            + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
+            + "  iframesrc += '</body>';\n"
+            + "  iframesrc += '</html>';\n"
+            + "  var iframe = document.createElement('IFRAME');\n"
+            + "  iframe.id = 'iMessage';\n"
+            + "  iframe.name = 'iMessage';\n"
+            + "  iframe.src = \"javascript:'\" + iframesrc + \"'\";\n"
+            + "  document.body.appendChild(iframe);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='makeIframe()'>\n"
+            + "</body></html>";
+
+        final String js = "function squared(n) {return n * n}";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), js);
+
+        loadPageWithAlerts2(URL_FIRST);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Differs from {@link #loadExternalJavaScript()} by the absolute reference of the javascript source.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("25")
+    public void loadExternalJavaScript_absolute() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "function makeIframe() {\n"
+            + "  var iframesrc = '<html><head>';\n"
+            + "  iframesrc += '<script src=\"" + URL_SECOND + "\"></' + 'script>';\n"
+            + "  iframesrc += '<script>';\n"
+            + "  iframesrc += 'function doSquared() {';\n"
+            + "  iframesrc += '    try {';\n"
+            + "  iframesrc += '      var y = squared(5);';\n"
+            + "  iframesrc += '      alert(y);';\n"
+            + "  iframesrc += '    } catch (e) {';\n"
+            + "  iframesrc += '      alert(\"error\");';\n"
+            + "  iframesrc += '    }';\n"
+            + "  iframesrc += '}';\n"
+            + "  iframesrc += '</' + 'script>';\n"
+            + "  iframesrc += '</head>';\n"
+            + "  iframesrc += '<body onLoad=\"doSquared()\" >';\n"
+            + "  iframesrc += '</body>';\n"
+            + "  iframesrc += '</html>';\n"
+            + "  var iframe = document.createElement('IFRAME');\n"
+            + "  iframe.id = 'iMessage';\n"
+            + "  iframe.name = 'iMessage';\n"
+            + "  iframe.src = \"javascript:'\" + iframesrc + \"'\";\n"
+            + "  document.body.appendChild(iframe);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='makeIframe()'>\n"
+            + "</body></html>";
+
+        final String js = "function squared(n) {return n * n}";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(URL_FIRST);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 }

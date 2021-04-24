@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -153,23 +153,23 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"success", "letterSpacing 42% - 42em",
-                        "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                        "success",
-                        "success",
-                        "wordSpacing 42% - 42em"},
+                       "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
+                       "success",
+                       "success",
+                       "wordSpacing 42% - 42em"},
             FF = {"success", "letterSpacing 42% - 42em",
-                        "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                        "success",
-                        "success",
-                        "success"},
+                  "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
+                  "success",
+                  "success",
+                  "success"},
             FF78 = {"success", "letterSpacing 42% - 42em",
-                        "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                        "success",
-                        "success",
-                        "success"},
+                    "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
+                    "success",
+                    "success",
+                    "success"},
             IE = {"success", "letterSpacing 42% - 42em",
-                    "outlineWidth 42% - 42em", "success", "success",
-                    "wordSpacing 42% - 42em"})
+                  "outlineWidth 42% - 42em", "success", "success",
+                  "wordSpacing 42% - 42em"})
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");

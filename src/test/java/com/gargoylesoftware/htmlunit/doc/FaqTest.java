@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,20 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.doc;
 
-import java.net.URL;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 
 /**
  * Tests for the sample code from the documentation to make sure
@@ -35,8 +36,7 @@ import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
-public class FaqTest extends SimpleWebTestCase {
+public class FaqTest {
 
     /**
      * @throws Exception if an error occurs
@@ -57,21 +57,13 @@ public class FaqTest extends SimpleWebTestCase {
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            final WebWindow webWindow = webClient.getCurrentWindow();
+            final XHtmlPage page = webClient.loadXHtmlCodeIntoCurrentWindow(htmlCode);
 
-            final StringWebResponse webResponse =
-                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
-            final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
-            webWindow.setEnclosedPage(page);
-
-            htmlParser.parse(webResponse, page, true);
-            // work with the html page
+            // work with the xhtml page
 
             assertEquals("Title" + ls + "content...", page.asText());
         }
     }
-
 
     /**
      * @throws Exception if an error occurs
@@ -90,18 +82,23 @@ public class FaqTest extends SimpleWebTestCase {
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-            final WebWindow webWindow = webClient.getCurrentWindow();
+            final HtmlPage page = webClient.loadXHtmlCodeIntoCurrentWindow(htmlCode);
 
-            final StringWebResponse webResponse =
-                    new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/test.html"));
-            final HtmlPage page = new HtmlPage(webResponse, webWindow);
-            webWindow.setEnclosedPage(page);
-
-            htmlParser.parse(webResponse, page, true);
             // work with the html page
 
             assertEquals("Title" + ls + "content...", page.asText());
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void checkSvgSupport() throws Exception {
+        final String svg =  "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\">"
+                + "<circle cx=\"5\" cy=\"5\" r=\"4\" stroke=\"black\" stroke-width=\"1\" fill=\"red\" />"
+                + "</svg>";
+        final BufferedImage img = ImageIO.read(new ByteArrayInputStream(svg.getBytes(StandardCharsets.US_ASCII)));
+        assertNotNull(img);
     }
 }
