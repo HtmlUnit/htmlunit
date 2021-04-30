@@ -577,4 +577,21 @@ public class URLTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    @Test
+    @Alerts(DEFAULT = {"https://developer.mozilla.org/"},
+            IE = {})
+    public void testToJSON() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  if (typeof window.URL === 'function') {\n"
+                + "    var u = new URL('/', 'https://developer.mozilla.org');\n"
+                + "    log(u.toJSON());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
