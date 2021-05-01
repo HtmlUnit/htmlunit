@@ -847,24 +847,45 @@ public final class UrlUtils {
         return url;
     }
 
-    /*
+    /**
      * Returns true if specified string is a valid scheme name.
+     *
+     * https://tools.ietf.org/html/rfc1738
+     *
+     * Scheme names consist of a sequence of characters. The lower case
+     * letters "a"--"z", digits, and the characters plus ("+"), period
+     * ("."), and hyphen ("-") are allowed. For resiliency, programs
+     * interpreting URLs should treat upper case letters as equivalent to
+     * lower case in scheme names (e.g., allow "HTTP" as well as "http").
+     *
+     * @param scheme the scheme string to check
+     * @return true if valid
      */
-    private static boolean isValidScheme(final String scheme) {
+    public static boolean isValidScheme(final String scheme) {
         final int length = scheme.length();
         if (length < 1) {
             return false;
         }
+
         char c = scheme.charAt(0);
-        if (!Character.isLetter(c)) {
+        boolean isValid = ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
+        if (!isValid) {
             return false;
         }
+
         for (int i = 1; i < length; i++) {
             c = scheme.charAt(i);
-            if (!Character.isLetterOrDigit(c) && c != '.' && c != '+' && c != '-') {
+            isValid =
+                    ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
+                    || ('0' <= c && c <= '9')
+                    || c == '+'
+                    || c == '.'
+                    || c == '-';
+            if (!isValid) {
                 return false;
             }
         }
+
         return true;
     }
 
