@@ -77,6 +77,7 @@ public class URL extends SimpleScriptable {
                 final java.net.URL baseUrl = UrlUtils.toUrlUnsafe(baseStr);
                 url_ = new java.net.URL(baseUrl, url);
             }
+            checkRemoveRedundantPort();
         }
         catch (final MalformedURLException e) {
             throw ScriptRuntime.typeError(e.toString());
@@ -201,6 +202,7 @@ public class URL extends SimpleScriptable {
         }
 
         url_ = UrlUtils.toUrlUnsafe(href);
+        checkRemoveRedundantPort();
     }
 
     /**
@@ -310,10 +312,17 @@ public class URL extends SimpleScriptable {
 
     @JsxSetter
     public void setProtocol(final String protocol) throws MalformedURLException {
-        if (url_ == null || protocol.isEmpty()) {
+        if (url_ == null || protocol.isEmpty() || !UrlUtils.isValidScheme(protocol)) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewProtocol(url_, protocol);
+
+        try {
+            url_ = UrlUtils.getUrlWithNewProtocol(url_, protocol);
+            checkRemoveRedundantPort();
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
     }
 
     /**
@@ -325,7 +334,7 @@ public class URL extends SimpleScriptable {
             return null;
         }
         final String search = url_.getQuery();
-        return search == null ? "" : search;
+        return search == null ? "" : "?" + search;
     }
 
     @JsxSetter

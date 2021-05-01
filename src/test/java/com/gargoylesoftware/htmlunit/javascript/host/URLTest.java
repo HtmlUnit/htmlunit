@@ -237,8 +237,8 @@ public class URLTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"/path", "/path",
-            "http://developer.mozilla.org/new/path?a=u&x",
-            "http://developer.mozilla.org/?a=u&x"},
+                       "http://developer.mozilla.org/new/path?a=u&x",
+                       "http://developer.mozilla.org/?a=u&x"},
             IE = {})
     public void setPathName() throws Exception {
         final String html =
@@ -297,8 +297,8 @@ public class URLTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"developer.mozilla.org", "developer.mozilla.org", "new.host", "new.host:1234",
-            "new.host", "new.host",
-            "developer.mozilla.org", "developer.mozilla.org:4097"},
+                       "new.host", "new.host",
+                       "developer.mozilla.org", "developer.mozilla.org:4097"},
             IE = {})
     public void host() throws Exception {
         final String html =
@@ -338,8 +338,8 @@ public class URLTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"developer.mozilla.org", "developer.mozilla.org",
-            "https://developer.mozilla.org:443/en-US/docs/Web/API/URL/host",
-            "https://newhost:443/en-US/docs/Web/API/URL/host",},
+                       "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                       "https://newhost/en-US/docs/Web/API/URL/host"},
             IE = {})
     public void hostname() throws Exception {
         final String html =
@@ -367,8 +367,8 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https://developer.mozilla.org:443/en-US/docs/Web/API/URL/host",
-            "http://new.com/href"},
+    @Alerts(DEFAULT = {"https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                       "http://new.com/href", "http://new.com/hrefWithPort"},
             IE = {})
     public void href() throws Exception {
         final String html =
@@ -380,7 +380,11 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('https://developer.mozilla.org:443/en-US/docs/Web/API/URL/host');\n"
                         + "        log(u.href);\n"
+
                         + "        u.href = 'http://new.com/href';\n"
+                        + "        log(u.href);\n"
+
+                        + "        u.href = 'http://new.com:80/hrefWithPort';\n"
                         + "        log(u.href);\n"
                         + "      }\n"
                         + "    }\n"
@@ -394,8 +398,8 @@ public class URLTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"flabada", "",
-            "https://anonymous@developer.mozilla.org/en-US/docs/Web/API/URL/password",
-            "https://anonymous:pass@developer.mozilla.org/en-US/docs/Web/API/URL/password"},
+                       "https://anonymous@developer.mozilla.org/",
+                       "https://anonymous:pass@developer.mozilla.org/"},
             IE = {})
     public void password() throws Exception {
         final String html =
@@ -405,7 +409,7 @@ public class URLTest extends WebDriverTestCase {
                         + LOG_TITLE_FUNCTION
                         + "    function test() {\n"
                         + "      if (typeof window.URL === 'function') {\n"
-                        + "        var u = new URL('https://anonymous:flabada@developer.mozilla.org/en-US/docs/Web/API/URL/password');\n"
+                        + "        var u = new URL('https://anonymous:flabada@developer.mozilla.org');\n"
                         + "        log(u.password);\n"
                         + "        u.password = '';\n"
                         + "        log(u.password);\n"
@@ -424,7 +428,7 @@ public class URLTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"80", "123", "", "https://mydomain.com/svn/Repos/",
-            "", "http://mydomain.com/svn/Repos/",},
+                       "", "http://mydomain.com/svn/Repos/"},
             IE = {})
     public void port() throws Exception {
         final String html =
@@ -456,8 +460,15 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https:", "http:",
-            "http://mydomain.com:80/svn/Repos/", "http://mydomain.com:80/svn/Repos/"},
+    @Alerts(DEFAULT = {"https:",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "null:", "null://mydomain.com/svn/Repos/",
+                       "ex-unknown"},
             IE = {})
     public void protocol() throws Exception {
         final String html =
@@ -469,11 +480,42 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('https://mydomain.com:80/svn/Repos/');\n"
                         + "        log(u.protocol);\n"
+
                         + "        u.protocol = 'http';\n"
                         + "        log(u.protocol);\n"
                         + "        log(u.toString());\n"
+
                         + "        u.protocol = '';\n"
+                        + "        log(u.protocol);\n"
                         + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'axdeg';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'hTTp';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'axdeg ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = ' axdeg ';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        try {\n"
+                        + "        u.protocol = null;\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "        } catch(e) { log('ex-null') }\n"
+
+                        + "        try {\n"
+                        + "        u.protocol = unknown;\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "        } catch(e) { log('ex-unknown') }\n"
                         + "      }\n"
                         + "    }\n"
                         + "  </script>\n"
@@ -485,8 +527,8 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"q=123", "a=b&c=d", "https://developer.mozilla.org/en-US/docs/Web/API/URL/search?a=b&c=d",
-            "", "https://developer.mozilla.org/en-US/docs/Web/API/URL/search"},
+    @Alerts(DEFAULT = {"?q=123", "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
+                       "", "https://developer.mozilla.org/search"},
             IE = {})
     public void search() throws Exception {
         final String html =
@@ -496,11 +538,13 @@ public class URLTest extends WebDriverTestCase {
                         + LOG_TITLE_FUNCTION
                         + "    function test() {\n"
                         + "      if (typeof window.URL === 'function') {\n"
-                        + "        var u = new URL('https://developer.mozilla.org/en-US/docs/Web/API/URL/search?q=123');\n"
+                        + "        var u = new URL('https://developer.mozilla.org/search?q=123');\n"
                         + "        log(u.search);\n"
+
                         + "        u.search = 'a=b&c=d';\n"
                         + "        log(u.search);\n"
                         + "        log(u.toString());\n"
+
                         + "        u.search = '';\n"
                         + "        log(u.search);\n"
                         + "        log(u.toString());\n"
@@ -516,8 +560,8 @@ public class URLTest extends WebDriverTestCase {
 
     @Test
     @Alerts(DEFAULT = {"anonymous", "user", "",
-            "https://:flabada@developer.mozilla.org/en-US/docs/Web/API/URL/username",
-            "https://developer.mozilla.org/en-US/docs/Web/API/URL/username"},
+                       "https://:flabada@developer.mozilla.org/",
+                       "https://developer.mozilla.org/"},
             IE = {})
     public void username() throws Exception {
         final String html =
@@ -527,14 +571,14 @@ public class URLTest extends WebDriverTestCase {
                         + LOG_TITLE_FUNCTION
                         + "    function test() {\n"
                         + "      if (typeof window.URL === 'function') {\n"
-                        + "        var u = new URL('https://anonymous:flabada@developer.mozilla.org/en-US/docs/Web/API/URL/username');\n"
+                        + "        var u = new URL('https://anonymous:flabada@developer.mozilla.org');\n"
                         + "        log(u.username);\n"
                         + "        u.username = 'user';\n"
                         + "        log(u.username);\n"
                         + "        u.username = '';\n"
                         + "        log(u.username);\n"
                         + "        log(u.toString());\n"
-                        + "        var u = new URL('https://anonymous@developer.mozilla.org/en-US/docs/Web/API/URL/username');\n"
+                        + "        var u = new URL('https://anonymous@developer.mozilla.org');\n"
                         + "        u.username = '';\n"
                         + "        log(u.toString());\n"
                         + "      }\n"
@@ -579,7 +623,7 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"https://developer.mozilla.org/"},
+    @Alerts(DEFAULT = "https://developer.mozilla.org/",
             IE = {})
     public void testToJSON() throws Exception {
         final String html = "<html><body>\n"
