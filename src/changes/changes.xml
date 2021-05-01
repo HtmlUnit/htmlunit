@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+            <action type="add" dev="rbri">
+                Anchor.protocol fixes for various border cases.
+            </action>
+            <action type="add" dev="rbri" due-to="cdalexndr">
+                URL properties hash, host, hostname, href, password, pathname, port, protocol, search,
+                username and function toJSON added.
+            </action>
             <action type="fix" dev="RBRi">
                 core-js: Support numeric separator '_'.
             </action>
