@@ -118,12 +118,12 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        String ref = url_.getRef();
+        final String ref = url_.getRef();
         return ref == null ? "" : "#" + ref;
     }
 
     @JsxSetter
-    public void setHash(String fragment) throws MalformedURLException {
+    public void setHash(final String fragment) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
@@ -139,12 +139,12 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        int port = url_.getPort();
+        final int port = url_.getPort();
         return url_.getHost() + (port > 0 ? ":" + port : "");
     }
 
     @JsxSetter
-    public void setHost(String host) throws MalformedURLException {
+    public void setHost(final String host) throws MalformedURLException {
         if (url_ == null || host.isEmpty()) {
             return;
         }
@@ -152,7 +152,7 @@ public class URL extends SimpleScriptable {
         checkRemoveRedundantPort();
     }
 
-    /** Removes port if it can be deduced from protocol **/
+    /** Removes port if it can be deduced from protocol */
     private void checkRemoveRedundantPort() throws MalformedURLException {
         if (("https".equals(url_.getProtocol()) && url_.getPort() == 443)
                 || ("http".equals(url_.getProtocol()) && url_.getPort() == 80)) {
@@ -174,7 +174,7 @@ public class URL extends SimpleScriptable {
     }
 
     @JsxSetter
-    public void setHostname(String hostname) throws MalformedURLException {
+    public void setHostname(final String hostname) throws MalformedURLException {
         if (url_ == null || hostname.isEmpty()) {
             return;
         }
@@ -195,7 +195,7 @@ public class URL extends SimpleScriptable {
     }
 
     @JsxSetter
-    public void setHref(String href) throws MalformedURLException {
+    public void setHref(final String href) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
@@ -236,13 +236,13 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        String userInfo = url_.getUserInfo();
-        int idx = userInfo == null ? -1 : userInfo.indexOf(':');
+        final String userInfo = url_.getUserInfo();
+        final int idx = userInfo == null ? -1 : userInfo.indexOf(':');
         return idx == -1 ? "" : userInfo.substring(idx + 1);
     }
 
     @JsxSetter
-    public void setPassword(String password) throws MalformedURLException {
+    public void setPassword(final String password) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
@@ -259,12 +259,12 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        String path = url_.getPath();
+        final String path = url_.getPath();
         return path.isEmpty() ? "/" : path;
     }
 
     @JsxSetter
-    public void setPathname(String path) throws MalformedURLException {
+    public void setPathname(final String path) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
@@ -282,16 +282,16 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        int port = url_.getPort();
+        final int port = url_.getPort();
         return port == -1 ? "" : Integer.toString(port);
     }
 
     @JsxSetter
-    public void setPort(String port) throws MalformedURLException {
+    public void setPort(final String port) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
-        int portInt = port.isEmpty() ? -1 : Integer.parseInt(port);
+        final int portInt = port.isEmpty() ? -1 : Integer.parseInt(port);
         url_ = UrlUtils.getUrlWithNewPort(url_, portInt);
         checkRemoveRedundantPort();
     }
@@ -304,12 +304,12 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        String protocol = url_.getProtocol();
+        final String protocol = url_.getProtocol();
         return protocol.isEmpty() ? "" : (protocol + ":");
     }
 
     @JsxSetter
-    public void setProtocol(String protocol) throws MalformedURLException {
+    public void setProtocol(final String protocol) throws MalformedURLException {
         if (url_ == null || protocol.isEmpty()) {
             return;
         }
@@ -324,12 +324,12 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        String search = url_.getQuery();
+        final String search = url_.getQuery();
         return search == null ? "" : search;
     }
 
     @JsxSetter
-    public void setSearch(String search) throws MalformedURLException {
+    public void setSearch(final String search) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
@@ -344,13 +344,13 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        String userInfo = url_.getUserInfo();
-        int colonIdx = userInfo == null ? -1 : userInfo.indexOf(':');
+        final String userInfo = url_.getUserInfo();
+        final int colonIdx = userInfo == null ? -1 : userInfo.indexOf(':');
         return colonIdx == -1 ? "" : userInfo.substring(0, colonIdx);
     }
 
     @JsxSetter
-    public void setUsername(String username) throws MalformedURLException {
+    public void setUsername(final String username) throws MalformedURLException {
         if (url_ == null) {
             return;
         }
@@ -379,7 +379,7 @@ public class URL extends SimpleScriptable {
      * @return a serialized version of the URL,
      * although in practice it seems to have the same effect as URL.toString().
      */
-    @JsxFunction(functionName = "toJSON")
+    @JsxFunction
     public String toJSON() {
         return jsToString();
     }
