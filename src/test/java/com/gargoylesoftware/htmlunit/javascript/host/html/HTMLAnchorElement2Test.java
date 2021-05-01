@@ -1245,4 +1245,135 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"http:", "https:", "https://§§URL§§/foo.html#O"})
+    public void readWriteProtocol() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.protocol);\n"
+
+            + "        tester.protocol = 'httPS';\n"
+            + "        log(tester.protocol);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("localhost:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"})
+    public void readWriteProtocolUnknown() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.protocol);\n"
+
+            + "        tester.protocol = 'axdeg';\n"
+            + "        log(tester.protocol);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("localhost:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"http:", "http:", "http://§§URL§§/foo.html#O",
+                       "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"},
+            IE = {"http:", "invalid argument",
+                  "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"})
+    public void readWriteProtocolBroken() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.protocol);\n"
+
+            + "        try {\n"
+            + "          tester.protocol = ' axdeg ';\n"
+            + "          log(tester.protocol);\n"
+            + "          log(tester.href);\n"
+            + "        } catch(e) { log('invalid argument') }\n"
+
+            + "        tester = document.getElementById('invalidHref');\n"
+            + "        log(tester.protocol);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "    <a id='invalidHref' href='abc_xyz://localhost/foo.html'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("localhost:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"localhost", "motion", "http://§§URL§§/foo.html#O"})
+    public void readWriteAnchorHostname() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.hostname);\n"
+
+            + "        tester.hostname = 'motion';\n"
+            + "        log(tester.hostname);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("motion:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
 }

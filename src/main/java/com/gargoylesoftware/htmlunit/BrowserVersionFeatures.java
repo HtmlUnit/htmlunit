@@ -618,6 +618,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL,
 
+    /** The anchor protocol property setter throws an error if the protocol is not valid. */
+    @BrowserFeature(IE)
+    JS_ANCHOR_PROTOCOL_INVALID_THROWS,
+
     /** An area element without a href attribute is focusable. */
     @BrowserFeature({FF, FF78})
     JS_AREA_WITHOUT_HREF_FOCUSABLE,
