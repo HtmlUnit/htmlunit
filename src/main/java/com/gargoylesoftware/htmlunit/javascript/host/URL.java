@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -171,16 +172,19 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        return url_.getHost();
+        return UrlUtils.encodeAnchor(url_.getHost());
     }
 
     @JsxSetter
     public void setHostname(final String hostname) throws MalformedURLException {
-        if (url_ == null || hostname.isEmpty()) {
-            return;
+        if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
+            if (!StringUtils.isBlank(hostname)) {
+                url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+            }
         }
-
-        url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+        else if (!StringUtils.isEmpty(hostname)) {
+            url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+        }
     }
 
     /**

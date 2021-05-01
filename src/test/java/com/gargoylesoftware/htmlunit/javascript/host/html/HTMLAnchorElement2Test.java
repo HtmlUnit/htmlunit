@@ -1306,7 +1306,6 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
@@ -1374,6 +1373,53 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</html>";
 
         expandExpectedAlertsVariables("motion:" + PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
+                       "localhost", "http://localhost:§§URL§§/foo.html#O"},
+            CHROME =  {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
+                       "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"},
+            EDGE =  {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
+                     "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"},
+            IE =  {"localhost", "", "http://:§§URL§§/foo.html#O",
+                   "%20%20%20%20", "http://%20%20%20%20:§§URL§§/foo.html#O"})
+    @HtmlUnitNYI(CHROME = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
+                           "%20%20%20%20", "http:// :§§URL§§/foo.html#O"},
+                EDGE = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
+                        "%20%20%20%20", "http:// :§§URL§§/foo.html#O"},
+                IE = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
+                      "%20%20%20%20", "http:// :§§URL§§/foo.html#O"})
+    public void readWriteAnchorHostnameEmpty() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var tester = document.getElementById('tester');\n"
+            + "        log(tester.hostname);\n"
+
+            + "        tester.hostname = '';\n"
+            + "        log(tester.hostname);\n"
+            + "        log(tester.href);\n"
+
+            + "        tester.hostname = '    ';\n"
+            + "        log(tester.hostname);\n"
+            + "        log(tester.href);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  <head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <a id='tester' href='foo.html#O'>link 1</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables("" + PORT);
         loadPageVerifyTitle2(html);
     }
 }

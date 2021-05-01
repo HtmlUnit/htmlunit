@@ -27,6 +27,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -337,10 +338,27 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"developer.mozilla.org", "developer.mozilla.org",
-                       "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "https://newhost/en-US/docs/Web/API/URL/host"},
+    @Alerts(DEFAULT = {"developer.mozilla.org",
+                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host"},
+            CHROME =  {"developer.mozilla.org",
+                       "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                       "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"},
+            EDGE = {"developer.mozilla.org",
+                    "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                    "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                    "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"},
             IE = {})
+    @HtmlUnitNYI(CHROME =  {"developer.mozilla.org",
+                            "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                            "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                            "%20%20", "https:// /en-US/docs/Web/API/URL/host"},
+                EDGE = {"developer.mozilla.org",
+                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
+                        "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                        "%20%20", "https:// /en-US/docs/Web/API/URL/host"})
     public void hostname() throws Exception {
         final String html =
                 "<html>\n"
@@ -351,10 +369,17 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('https://developer.mozilla.org:443/en-US/docs/Web/API/URL/host');\n"
                         + "        log(u.hostname);\n"
+
                         + "        u.hostname = '';\n"
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
+
                         + "        u.hostname = 'newhost';\n"
+                        + "        log(u.hostname);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.hostname = '  ';\n"
+                        + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
                         + "      }\n"
                         + "    }\n"

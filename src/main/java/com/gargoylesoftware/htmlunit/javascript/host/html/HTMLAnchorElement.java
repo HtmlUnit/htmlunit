@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL;
@@ -367,7 +368,8 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getHostname() {
         try {
-            return getUrl().getHost();
+            final String host = getUrl().getHost();
+            return UrlUtils.encodeAnchor(host);
         }
         catch (final MalformedURLException e) {
             return "";
@@ -382,7 +384,14 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setHostname(final String hostname) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+        if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
+            if (!StringUtils.isBlank(hostname)) {
+                setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+            }
+        }
+        else if (!StringUtils.isEmpty(hostname)) {
+            setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+        }
     }
 
     /**
@@ -558,7 +567,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getText() {
         final DomNode htmlElement = getDomNodeOrDie();
-        return htmlElement.asText();
+        return htmlElement.asNormalizedText();
     }
 
     /**

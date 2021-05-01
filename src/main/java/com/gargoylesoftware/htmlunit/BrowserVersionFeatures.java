@@ -590,6 +590,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
+    /** The anchor hostname setter ignores blank url's. */
+    @BrowserFeature({FF, FF78})
+    JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
+
     /** The anchor pathname detects url's starting with one letter as file url's. */
     @BrowserFeature({CHROME, EDGE, IE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
