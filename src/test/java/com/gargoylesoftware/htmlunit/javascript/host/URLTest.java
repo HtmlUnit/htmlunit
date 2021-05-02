@@ -270,7 +270,11 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"", "#hash", ""},
+    @Alerts(DEFAULT = {"", "#abcd", "#bcd",
+                       "#hash", "http://developer.mozilla.org/?a=b#hash",
+                       "", "http://developer.mozilla.org/?a=b",
+                       "#undefined", "http://developer.mozilla.org/#undefined",
+                       "#null", "http://developer.mozilla.org/#null"},
             IE = {})
     public void hash() throws Exception {
         final String html =
@@ -282,10 +286,30 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('http://developer.mozilla.org');\n"
                         + "        log(u.hash);\n"
+
+                        + "        u = new URL('http://developer.mozilla.org#abcd');\n"
+                        + "        log(u.hash);\n"
+
+                        + "        u = new URL('http://developer.mozilla.org?a=b#bcd');\n"
+                        + "        log(u.hash);\n"
+
                         + "        u.hash = 'hash';\n"
                         + "        log(u.hash);\n"
+                        + "        log(u.toString());\n"
+
                         + "        u.hash = '';\n"
                         + "        log(u.hash);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u = new URL('http://developer.mozilla.org#bcd');\n"
+                        + "        u.hash = undefined;\n"
+                        + "        log(u.hash);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u = new URL('http://developer.mozilla.org#bcd');\n"
+                        + "        u.hash = null;\n"
+                        + "        log(u.hash);\n"
+                        + "        log(u.toString());\n"
                         + "      }\n"
                         + "    }\n"
                         + "  </script>\n"

@@ -129,7 +129,7 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewRef(url_, fragment.isEmpty() ? null : fragment);
+        url_ = UrlUtils.getUrlWithNewRef(url_, StringUtils.isEmpty(fragment) ? null : fragment);
     }
 
     /**
@@ -420,7 +420,12 @@ public class URL extends SimpleScriptable {
     @JsxFunction(functionName = "toString")
     public String jsToString() {
         if (StringUtils.isEmpty(url_.getPath())) {
-            return url_.toExternalForm() + "/";
+            try {
+                return UrlUtils.getUrlWithNewPath(url_, "/").toExternalForm();
+            }
+            catch (final MalformedURLException e) {
+                return url_.toExternalForm();
+            }
         }
         return url_.toExternalForm();
     }
