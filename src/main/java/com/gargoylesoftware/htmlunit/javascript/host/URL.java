@@ -346,7 +346,19 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewQuery(url_, search.isEmpty() ? null : search);
+
+        final String query;
+        if (search == null || "?".equals(search) || "".equals(search)) {
+            query = null;
+        }
+        else if (search.charAt(0) == '?') {
+            query = search.substring(1);
+        }
+        else {
+            query = search;
+        }
+
+        url_ = UrlUtils.getUrlWithNewQuery(url_, query);
     }
 
     /**
@@ -357,9 +369,13 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
+
         final String userInfo = url_.getUserInfo();
-        final int colonIdx = userInfo == null ? -1 : userInfo.indexOf(':');
-        return colonIdx == -1 ? "" : userInfo.substring(0, colonIdx);
+        if (userInfo == null) {
+            return "";
+        }
+
+        return StringUtils.substringBefore(userInfo, ':');
     }
 
     @JsxSetter
