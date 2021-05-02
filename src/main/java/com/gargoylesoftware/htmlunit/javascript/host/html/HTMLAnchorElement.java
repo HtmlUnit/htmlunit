@@ -668,11 +668,11 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getUsername() {
         try {
-            final String userName = getUrl().getUserInfo();
-            if (userName == null) {
+            final String userInfo = getUrl().getUserInfo();
+            if (userInfo == null) {
                 return "";
             }
-            return StringUtils.substringBefore(userName, ":");
+            return StringUtils.substringBefore(userInfo, ':');
         }
         catch (final MalformedURLException e) {
             return "";

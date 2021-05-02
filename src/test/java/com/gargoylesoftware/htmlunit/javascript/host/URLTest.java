@@ -422,9 +422,12 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"flabada", "",
-                       "https://anonymous@developer.mozilla.org/",
-                       "https://anonymous:pass@developer.mozilla.org/"},
+    @Alerts(DEFAULT = {"flabada",
+                       "", "https://anonymous@developer.mozilla.org/",
+                       "pass", "https://anonymous:pass@developer.mozilla.org/",
+                       "17", "https://anonymous:17@developer.mozilla.org/",
+                       "undefined", "https://anonymous:undefined@developer.mozilla.org/",
+                       "null", "https://anonymous:null@developer.mozilla.org/"},
             IE = {})
     public void password() throws Exception {
         final String html =
@@ -436,10 +439,25 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('https://anonymous:flabada@developer.mozilla.org');\n"
                         + "        log(u.password);\n"
+
                         + "        u.password = '';\n"
                         + "        log(u.password);\n"
                         + "        log(u.toString());\n"
+
                         + "        u.password = 'pass';\n"
+                        + "        log(u.password);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.password = 17;\n"
+                        + "        log(u.password);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.password = undefined;\n"
+                        + "        log(u.password);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.password = null;\n"
+                        + "        log(u.password);\n"
                         + "        log(u.toString());\n"
                         + "      }\n"
                         + "    }\n"
@@ -552,8 +570,13 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"?q=123", "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
-                       "", "https://developer.mozilla.org/search"},
+    @Alerts(DEFAULT = {"?q=123",
+                       "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
+                       "?a=7", "https://developer.mozilla.org/search?a=7",
+                       "?17", "https://developer.mozilla.org/search?17",
+                       "", "https://developer.mozilla.org/search",
+                       "?undefined", "https://developer.mozilla.org/search?undefined",
+                       "?null", "https://developer.mozilla.org/search?null"},
             IE = {})
     public void search() throws Exception {
         final String html =
@@ -570,7 +593,24 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.search);\n"
                         + "        log(u.toString());\n"
 
+                        + "        u.search = '?a=7';\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.search = 17;\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
                         + "        u.search = '';\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u = new URL('https://developer.mozilla.org/search?q=123');\n"
+                        + "        u.search = undefined;\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.search = null;\n"
                         + "        log(u.search);\n"
                         + "        log(u.toString());\n"
                         + "      }\n"
@@ -584,9 +624,14 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"anonymous", "user", "",
-                       "https://:flabada@developer.mozilla.org/",
-                       "https://developer.mozilla.org/"},
+    @Alerts(DEFAULT = {"anonymous",
+                       "user", "https://user:flabada@developer.mozilla.org/",
+                       "", "https://:flabada@developer.mozilla.org/",
+                       "anonymous", "anonymous", "", "",
+                       "user", "https://user:pass@developer.mozilla.org/",
+                       "17", "https://17:pass@developer.mozilla.org/",
+                       "undefined", "https://undefined:pass@developer.mozilla.org/",
+                       "null", "https://null:pass@developer.mozilla.org/"},
             IE = {})
     public void username() throws Exception {
         final String html =
@@ -598,13 +643,41 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('https://anonymous:flabada@developer.mozilla.org');\n"
                         + "        log(u.username);\n"
+
                         + "        u.username = 'user';\n"
                         + "        log(u.username);\n"
+                        + "        log(u.toString());\n"
+
                         + "        u.username = '';\n"
                         + "        log(u.username);\n"
                         + "        log(u.toString());\n"
-                        + "        var u = new URL('https://anonymous@developer.mozilla.org');\n"
-                        + "        u.username = '';\n"
+
+                        + "        u = new URL('https://anonymous@developer.mozilla.org');\n"
+                        + "        log(u.username);\n"
+
+                        + "        u = new URL('https://anonymous:@developer.mozilla.org');\n"
+                        + "        log(u.username);\n"
+
+                        + "        u = new URL('https://developer.mozilla.org:443');\n"
+                        + "        log(u.username);\n"
+
+                        + "        u = new URL('https://:pass@developer.mozilla.org:443');\n"
+                        + "        log(u.username);\n"
+
+                        + "        u.username = 'user';\n"
+                        + "        log(u.username);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.username = 17;\n"
+                        + "        log(u.username);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.username = undefined;\n"
+                        + "        log(u.username);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.username = null;\n"
+                        + "        log(u.username);\n"
                         + "        log(u.toString());\n"
                         + "      }\n"
                         + "    }\n"
