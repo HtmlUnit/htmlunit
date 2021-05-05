@@ -147,10 +147,52 @@ public class URL extends SimpleScriptable {
 
     @JsxSetter
     public void setHost(final String host) throws MalformedURLException {
-        if (url_ == null || host.isEmpty()) {
+        if (url_ == null) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewHost(url_, host);
+
+        String newHost = StringUtils.substringBefore(host, ':');
+        if (StringUtils.isEmpty(newHost)) {
+            return;
+        }
+
+        try {
+            int ip = Integer.parseInt(newHost);
+            final StringBuilder ipString = new StringBuilder();
+            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, '.');
+
+            ip = ip / 256;
+            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, '.');
+
+            ip = ip / 256;
+            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, '.');
+            ip = ip / 256;
+            ipString.insert(0, Integer.toString(ip % 256));
+
+            newHost = ipString.toString();
+        }
+        catch (final Exception e) {
+            // back to string
+        }
+
+        url_ = UrlUtils.getUrlWithNewHost(url_, newHost);
+
+        final String newPort = StringUtils.substringAfter(host, ':');
+        if (StringUtils.isNotBlank(newHost)) {
+            try {
+                url_ = UrlUtils.getUrlWithNewHostAndPort(url_, newHost, Integer.parseInt(newPort));
+            }
+            catch (final Exception e) {
+                // back to string
+            }
+        }
+        else {
+            url_ = UrlUtils.getUrlWithNewHost(url_, newHost);
+        }
+
         checkRemoveRedundantPort();
     }
 

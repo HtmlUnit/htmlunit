@@ -321,9 +321,11 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts(DEFAULT = {"developer.mozilla.org", "developer.mozilla.org", "new.host", "new.host:1234",
+    @Alerts(DEFAULT = {"developer.mozilla.org", "developer.mozilla.org",
+                       "new.host", "new.host:1234", "new.host:1234", "0.0.91.160:80",
+                       "0.0.0.17:80", "0.0.6.182:80",
                        "new.host", "new.host",
-                       "developer.mozilla.org", "developer.mozilla.org:4097"},
+                       "developer.mozilla.org", "developer.mozilla.org:4097", "developer.mozilla.org:80"},
             IE = {})
     public void host() throws Exception {
         final String html =
@@ -335,21 +337,43 @@ public class URLTest extends WebDriverTestCase {
                         + "      if (typeof window.URL === 'function') {\n"
                         + "        var u = new URL('https://developer.mozilla.org/en-US/docs/Web/API/URL/host');\n"
                         + "        log(u.host);\n"
+
                         + "        u.host = '';\n"
                         + "        log(u.host);\n"
+
                         + "        u.host = 'new.host';\n"
                         + "        log(u.host);\n"
+
                         + "        u.host = 'new.host:1234';\n"
                         + "        log(u.host);\n"
+
+                        + "        u.host = ':447';\n"
+                        + "        log(u.host);\n"
+
+                        + "        u.host = '23456:80';\n"
+                        + "        log(u.host);\n"
+
+                        + "        u.host = 17;\n"
+                        + "        log(u.host);\n"
+
+                        + "        u.host = 1718;\n"
+                        + "        log(u.host);\n"
+
                         + "        var u = new URL('https://host.com');\n"
                         + "        u.host = 'new.host:443';\n" //same port as protocol
                         + "        log(u.host);\n"
+
                         + "        var u = new URL('http://host.com');\n"
                         + "        u.host = 'new.host:80';\n" //same port as protocol
                         + "        log(u.host);\n"
+
                         + "        u = new URL('https://developer.mozilla.org/en-US/docs/Web/API/URL/host');\n"
                         + "        log(u.host);"
+
                         + "        u = new URL('https://developer.mozilla.org:4097/en-US/docs/Web/API/URL/host');\n"
+                        + "        log(u.host);"
+
+                        + "        u = new URL('https://developer.mozilla.org:80/en-US/docs/Web/API/URL/host');\n"
                         + "        log(u.host);"
                         + "      }\n"
                         + "    }\n"
