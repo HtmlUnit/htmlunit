@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+            <action type="add" dev="RhinoTeam">
+                core-js: BigInt support.
+            </action>
             <action type="add" dev="rbri">
                 Anchor.protocol, Anchor.hostname fixes for various border cases.
             </action>
