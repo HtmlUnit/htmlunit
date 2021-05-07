@@ -225,8 +225,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(window, "Continuation");
-        deleteProperties(window, "Iterator", "StopIteration");
+        deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
             deleteProperties(window, "Symbol");
