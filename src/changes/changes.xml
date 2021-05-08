@@ -8,6 +8,24 @@
 
     <body>
         <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix duplicate entries of source files in htmlunit-core-js-2.x.0-sources.jar.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: toNumeric speed improved.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Number.parseInt and Number.parseFloat are the same as the global functions.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Number.EPSILON implemented.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: String.raw implemented.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Improve LengthOfArrayLike to operate on XMLObject.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: BigInt support.
             </action>
