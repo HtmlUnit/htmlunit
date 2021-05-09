@@ -283,6 +283,10 @@ public class BrowserRunner extends Suite {
         String[] DEFAULT() default { EMPTY_DEFAULT };
     }
 
+    public enum OS {
+        Linux, Windows
+    }
+
     /**
      * Marks a test as not yet working for a particular browser (default value is all).
      * This will cause a failure to be considered as success and a success as failure forcing
@@ -300,6 +304,12 @@ public class BrowserRunner extends Suite {
         TestedBrowser[] value() default {
             IE, EDGE, FF78, FF, CHROME
         };
+
+        /**
+         * The operating systems with which the case is not yet implemented.
+         * @return the operating systems
+         */
+        OS[] os() default {};
     }
 
     /**
