@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -28,6 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * Allows to wrap event handler code as Function object.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class EventHandler extends BaseFunction {
     private final DomNode node_;
@@ -59,12 +59,16 @@ public class EventHandler extends BaseFunction {
         throws JavaScriptException {
 
         // the js object to which this event is attached has to be the scope
-        final SimpleScriptable jsObj = node_.getScriptableObject();
+        // final SimpleScriptable jsObj = node_.getScriptableObject();
+        // have changed this - the scope is now thisObj to fix
+        // https://github.com/HtmlUnit/htmlunit/issues/347
+        // but i still have not found any description about the right scope
+
         // compile "just in time"
         if (realFunction_ == null) {
-            realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_
+            realFunction_ = cx.compileFunction(thisObj, jsSnippet_, eventName_ + " event for " + node_
                 + " in " + node_.getPage().getUrl(), 0, null);
-            realFunction_.setParentScope(jsObj);
+            realFunction_.setParentScope(thisObj);
         }
 
         return realFunction_.call(cx, scope, thisObj, args);
