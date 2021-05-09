@@ -127,6 +127,12 @@
                     <li>
                         <a href="keyboard-howto.html">Keyboard navigation</a>
                     </li>
+
+                    <li>
+                        <a href="https://www.scrapingbee.com/java-webscraping-book/">The Java Web Scraping Handbook</a><br></br>
+                        A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
+                    </li>
+                    
                 </ul>
             </p>
         </section>

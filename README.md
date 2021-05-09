@@ -53,6 +53,11 @@ ses from the server should throw exceptions or should be returned as pages of th
 * Support for basic and NTLM authentication
 * Excellent JavaScript support
 
+Getting Started
+--------
+You can start here 
+* [Getting Started][7]
+* [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
 
 Contributing
 --------
@@ -97,3 +102,5 @@ This project is licensed under the Apache 2.0 License
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
 [5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
 [6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
+[7]: https://htmlunit.sourceforge.io/gettingStarted.html
+[8]: https://www.scrapingbee.com/java-webscraping-book/

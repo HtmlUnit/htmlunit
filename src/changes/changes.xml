@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+            <action type="add" dev="rbri">
+                Some links to the 'The Java Web Scraping Handbook' added.
+            </action>
+            <action type="fix" dev="rbri" issue="347">
+                No longer throw an exception when DOM event name is used as function name.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: fix duplicate entries of source files in htmlunit-core-js-2.x.0-sources.jar.
             </action>
@@ -36,7 +42,7 @@
                 URL properties hash, host, hostname, href, password, pathname, port, protocol, search,
                 username and function toJSON added.
             </action>
-            <action type="fix" dev="RBRi">
+            <action type="fix" dev="rbri">
                 core-js: Support numeric separator '_'.
             </action>
             <action type="fix" dev="rbri">
@@ -207,25 +213,25 @@
         </release>
 
         <release version="2.47.0" date="February 7, 2021" description="Bugfixes, Chrome/Edge 88, Firefox 85">
-            <action type="fix" dev="RBRi">
+            <action type="fix" dev="rbri">
                 Defer attribute of scripts was ignored.
             </action>
-            <action type="fix" dev="RBRi" issue="282">
+            <action type="fix" dev="rbri" issue="282">
                 Window.scroll()/scrollTo()/scrollBy() now triggers a scroll event.
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Reject old octal's in property names.
             </action>
-            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+            <action type="fix" dev="rbri" due-to="Atsushi Nakagawa">
                 Location.reload() reloads to the wrong address when invoked across frames.
             </action>
-            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+            <action type="fix" dev="rbri" due-to="Atsushi Nakagawa">
                 Return a rejected Promise rather than throw errors for all the methods in SubtleCrypto.
             </action>
             <action type="fix" dev="rbri">
                 InputEvent constructor fixed.
             </action>
-            <action type="fix" dev="RBRi" due-to="Atsushi Nakagawa">
+            <action type="fix" dev="rbri" due-to="Atsushi Nakagawa">
                 core-js: Make property __proto__ writable for functions also.
             </action>
             <action type="fix" dev="RhinoTeam">
