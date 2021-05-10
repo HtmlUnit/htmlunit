@@ -855,6 +855,62 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"something", "Hello World"})
+    public void innerText() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    checkChildren();\n"
+            + "    myTestDiv.innerText = 'Hello World';\n"
+            + "    checkChildren();\n"
+            + "  }\n"
+            + "  function checkChildren() {\n"
+            + "    if (myTestDiv.childNodes.length == 0)\n"
+            + "      log('0');\n"
+            + "    else\n"
+            + "      log(myTestDiv.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"something", "3", "Hello", "[object HTMLBRElement]", "World"})
+    public void innerText_LineBreak() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(myTestDiv.childNodes.item(0).data);\n"
+
+            + "    myTestDiv.innerText = 'Hello\\nWorld';\n"
+            + "    log(myTestDiv.childNodes.length);\n"
+            + "    log(myTestDiv.childNodes.item(0).data);\n"
+            + "    log(myTestDiv.childNodes.item(1));\n"
+            + "    log(myTestDiv.childNodes.item(2).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"something", "0"},
             IE = {"something", "null"})
     public void innerText_null() throws Exception {
@@ -863,12 +919,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText) {\n"
-            + "      myTestDiv.innerText = null;\n"
-            + "      checkChildren();\n"
-            + "    } else {\n"
-            + "      log('innerText not supported');\n"
-            + "    }\n"
+            + "    myTestDiv.innerText = null;\n"
+            + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"
@@ -896,12 +948,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText) {\n"
-            + "      myTestDiv.innerText = '';\n"
-            + "      checkChildren();\n"
-            + "    } else {\n"
-            + "      log('innerText not supported');\n"
-            + "    }\n"
+            + "    myTestDiv.innerText = '';\n"
+            + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"
