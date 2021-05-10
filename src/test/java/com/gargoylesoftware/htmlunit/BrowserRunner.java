@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author cdalexndr
  */
 public class BrowserRunner extends Suite {
 
@@ -283,8 +284,15 @@ public class BrowserRunner extends Suite {
         String[] DEFAULT() default { EMPTY_DEFAULT };
     }
 
+    /**
+     * Marks the os.
+     */
     public enum OS {
-        Linux, Windows
+        /** Linux */
+        Linux,
+
+        /** Windows */
+        Windows
     }
 
     /**

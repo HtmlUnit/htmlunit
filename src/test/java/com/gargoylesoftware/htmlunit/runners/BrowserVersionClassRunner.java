@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author cdalexndr
  */
 public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
@@ -421,9 +422,10 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     protected boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
-        if(notYetImplementedBrowsers == null)
+        if(notYetImplementedBrowsers == null) {
             return false;
-        return isDefinedIn(notYetImplementedBrowsers.os()) || isDefinedIn(notYetImplementedBrowsers.value());
+        }
+        return isDefinedIn(notYetImplementedBrowsers.value()) || isDefinedIn(notYetImplementedBrowsers.os());
     }
 
     private static int getTries(final FrameworkMethod method) {
