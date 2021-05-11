@@ -82,6 +82,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.StackStyle;
 import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
@@ -151,7 +152,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         initTransientFields();
 
         jsConfig_ = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-        RhinoException.useMozillaStackStyle(true);
+        RhinoException.setStackStyle(StackStyle.MOZILLA_LF);
     }
 
     /**

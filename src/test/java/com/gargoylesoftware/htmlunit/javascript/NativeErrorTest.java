@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -280,5 +281,37 @@ public class NativeErrorTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void stackLineSeparator() throws Exception {
+        final String lineSeparator = System.getProperty("line.separator");
+        try {
+            System.setProperty("line.separator", "\r\n");
+
+            final String html
+                = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  try {\n"
+                + "    throw new Error();\n"
+                + "  } catch (e) {\n"
+                + "    log(e.stack.replace('\\r', '\\\\r').replace('\\n', '\\\\n'));\n"
+                + "  }"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+            final WebDriver driver = loadPage2(html);
+            final String title = driver.getTitle();
+            assertTrue(title, title.contains("\\n"));
+            assertFalse(title, title.contains("\\r"));
+        }
+        finally {
+            System.setProperty("line.separator", lineSeparator);
+        }
     }
 }
