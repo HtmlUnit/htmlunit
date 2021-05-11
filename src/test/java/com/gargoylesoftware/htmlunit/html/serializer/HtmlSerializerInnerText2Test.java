@@ -319,7 +319,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
     public void getInnerTextWhiteSpaceStylePreWrap() throws Exception {
-
+        getInnerTextWhiteSpaceStyle("pre-wrap");
     }
 
     /**
