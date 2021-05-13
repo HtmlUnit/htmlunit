@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -32,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
+public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
 
     /**
      * Verifies getInnerText().
@@ -193,6 +194,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "var x;  \n \t   \n var y;",
             IE = "var x; var y;")
+    @HtmlUnitNYI(IE = "var x;  \n \t   \n var y;")
     public void getInnerTextWhiteSpaceScript() throws Exception {
         getInnerTextWhiteSpaceScript(null);
     }
@@ -204,6 +206,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "var x;  \n \t   \n var y;",
             IE = "var x; var y;")
+    @HtmlUnitNYI(IE = "var x;  \n \t   \n var y;")
     public void getInnerTextWhiteSpaceScriptNormal() throws Exception {
         getInnerTextWhiteSpaceScript("normal");
     }
@@ -215,6 +218,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "var x;  \n \t   \n var y;",
             IE = "var x; var y;")
+    @HtmlUnitNYI(IE = "var x;  \n \t   \n var y;")
     public void getInnerTextWhiteSpaceScriptNowrap() throws Exception {
         getInnerTextWhiteSpaceScript("nowrap");
     }
@@ -226,6 +230,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "var x;  \n \t   \n var y;",
             IE = "var x; var y;")
+    @HtmlUnitNYI(IE = "var x;  \n \t   \n var y;")
     public void getInnerTextWhiteSpaceScriptPre() throws Exception {
         getInnerTextWhiteSpaceScript("pre");
     }
@@ -237,6 +242,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "var x;  \n \t   \n var y;",
             IE = "var x; var y;")
+    @HtmlUnitNYI(IE = "var x;  \n \t   \n var y;")
     public void getInnerTextWhiteSpaceScriptPreWrap() throws Exception {
         getInnerTextWhiteSpaceScript("pre-wrap");
     }
@@ -248,6 +254,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "var x;  \n \t   \n var y;",
             IE = "var x; var y;")
+    @HtmlUnitNYI(IE = "var x;  \n \t   \n var y;")
     public void getInnerTextWhiteSpaceScriptPreLine() throws Exception {
         getInnerTextWhiteSpaceScript("pre-line");
     }
@@ -274,6 +281,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceStyle() throws Exception {
         getInnerTextWhiteSpaceStyle(null);
     }
@@ -285,6 +293,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceStyleNormal() throws Exception {
         getInnerTextWhiteSpaceStyle("normal");
     }
@@ -296,6 +305,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceStyleNowrap() throws Exception {
         getInnerTextWhiteSpaceStyle("nowrap");
     }
@@ -307,6 +317,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceStylePre() throws Exception {
         getInnerTextWhiteSpaceStyle("pre");
     }
@@ -318,6 +329,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceStylePreWrap() throws Exception {
         getInnerTextWhiteSpaceStyle("pre-wrap");
     }
@@ -329,6 +341,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceStylePreLine() throws Exception {
         getInnerTextWhiteSpaceStyle("pre-line");
     }
@@ -355,6 +368,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceNoframes() throws Exception {
         getInnerTextWhiteSpaceNoframes(null);
     }
@@ -366,6 +380,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceNoframesNormal() throws Exception {
         getInnerTextWhiteSpaceNoframes("normal");
     }
@@ -377,6 +392,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceNoframesNowrap() throws Exception {
         getInnerTextWhiteSpaceNoframes("nowrap");
     }
@@ -388,6 +404,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceNoframesPre() throws Exception {
         getInnerTextWhiteSpaceNoframes("pre");
     }
@@ -399,6 +416,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceNoframesPreWrap() throws Exception {
         getInnerTextWhiteSpaceNoframes("pre-wrap");
     }
@@ -410,6 +428,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceNoframesPreLine() throws Exception {
         getInnerTextWhiteSpaceNoframes("pre-line");
     }
@@ -436,6 +455,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpaceDiv() throws Exception {
         getInnerTextWhiteSpaceDiv(null);
     }
@@ -447,6 +471,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpaceDivNormal() throws Exception {
         getInnerTextWhiteSpaceDiv("normal");
     }
@@ -458,6 +487,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpaceDivNowrap() throws Exception {
         getInnerTextWhiteSpaceDiv("nowrap");
     }
@@ -468,6 +502,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("  A B  C\t \t  D \nEF\nG \n H  \n I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpaceDivPre() throws Exception {
         getInnerTextWhiteSpaceDiv("pre");
     }
@@ -478,6 +517,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("  A B  C\t \t  D \nEF\nG \n H  \n I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpaceDivPreWrap() throws Exception {
         getInnerTextWhiteSpaceDiv("pre-wrap");
     }
@@ -491,6 +535,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
             FF = "A B C D\nEFGH\nI",
             FF78 = "A B C D\nEFGH\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpaceDivPreLine() throws Exception {
         getInnerTextWhiteSpaceDiv("pre-line");
     }
@@ -516,6 +565,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("  A B  C\t \t  D \nEF\nG \n H  \n I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpacePre() throws Exception {
         getInnerTextWhiteSpacePre(null);
     }
@@ -527,6 +581,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpacePreNormal() throws Exception {
         getInnerTextWhiteSpacePre("normal");
     }
@@ -538,6 +597,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpacePreNowrap() throws Exception {
         getInnerTextWhiteSpacePre("nowrap");
     }
@@ -548,6 +612,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("  A B  C\t \t  D \nEF\nG \n H  \n I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpacePrePre() throws Exception {
         getInnerTextWhiteSpacePre("pre");
     }
@@ -558,6 +627,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("  A B  C\t \t  D \nEF\nG \n H  \n I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpacePrePreWrap() throws Exception {
         getInnerTextWhiteSpacePre("pre-wrap");
     }
@@ -571,6 +645,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
             FF = "A B C D\nEFGH\nI",
             FF78 = "A B C D\nEFGH\nI",
             IE = "A B C D EF G H \n I ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H   I  ",
+            IE = "  A B  C\t \t  D \nEF\nG \n H   I  ")
     public void getInnerTextWhiteSpacePrePreLine() throws Exception {
         getInnerTextWhiteSpacePre("pre-line");
     }
@@ -597,6 +676,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTextArea() throws Exception {
         getInnerTextWhiteSpaceTextArea(null);
     }
@@ -608,6 +691,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTextAreaNormal() throws Exception {
         getInnerTextWhiteSpaceTextArea("normal");
     }
@@ -619,6 +706,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTextAreaNowrap() throws Exception {
         getInnerTextWhiteSpaceTextArea("nowrap");
     }
@@ -630,6 +721,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTextAreaPre() throws Exception {
         getInnerTextWhiteSpaceTextArea("pre");
     }
@@ -641,6 +736,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTextAreaPreWrap() throws Exception {
         getInnerTextWhiteSpaceTextArea("pre-wrap");
     }
@@ -652,6 +751,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
+    @HtmlUnitNYI(CHROME = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            EDGE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
+            FF78 = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTextAreaPreLine() throws Exception {
         getInnerTextWhiteSpaceTextArea("pre-line");
     }
@@ -678,6 +781,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTitle() throws Exception {
         getInnerTextWhiteSpaceTitle(null);
     }
@@ -689,6 +793,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTitleNormal() throws Exception {
         getInnerTextWhiteSpaceTitle("normal");
     }
@@ -700,6 +805,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTitleNowrap() throws Exception {
         getInnerTextWhiteSpaceTitle("nowrap");
     }
@@ -711,6 +817,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTitlePre() throws Exception {
         getInnerTextWhiteSpaceTitle("pre");
     }
@@ -722,6 +829,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTitlePreWrap() throws Exception {
         getInnerTextWhiteSpaceTitle("pre-wrap");
     }
@@ -733,6 +841,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ",
             IE = " A B C D EF G H <br> I ")
+    @HtmlUnitNYI(IE = "  A B  C\t \t  D \nEF\nG \n H  <br> I  ")
     public void getInnerTextWhiteSpaceTitlePreLine() throws Exception {
         getInnerTextWhiteSpaceTitle("pre-line");
     }
@@ -760,6 +869,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             IE = " A B C D EF G H I  Second ")
+    @HtmlUnitNYI(CHROME = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            IE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelect() throws Exception {
         getInnerTextWhiteSpaceSelect(null);
     }
@@ -771,6 +885,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             IE = " A B C D EF G H I  Second ")
+    @HtmlUnitNYI(CHROME = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            IE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectNormal() throws Exception {
         getInnerTextWhiteSpaceSelect("normal");
     }
@@ -782,6 +901,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             IE = " A B C D EF G H I  Second ")
+    @HtmlUnitNYI(CHROME = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            IE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectNowrap() throws Exception {
         getInnerTextWhiteSpaceSelect("nowrap");
     }
@@ -793,6 +917,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             IE = "   A B  C\t \t  D \nEF\nG \n H   I  Second")
+    @HtmlUnitNYI(CHROME = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            IE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectPre() throws Exception {
         getInnerTextWhiteSpaceSelect("pre");
     }
@@ -804,6 +933,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             IE = "   A B  C\t \t  D \nEF\nG \n H   I  Second")
+    @HtmlUnitNYI(CHROME = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            IE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectPreWrap() throws Exception {
         getInnerTextWhiteSpaceSelect("pre-wrap");
     }
@@ -815,6 +949,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             IE = " A B C D EF G H I  Second ")
+    @HtmlUnitNYI(CHROME = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            EDGE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            FF78 = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ",
+            IE = "\n        A B  C\t \t  D \nEF\nG \n H   I  \n      Second\n    ")
     public void getInnerTextWhiteSpaceSelectPreLine() throws Exception {
         getInnerTextWhiteSpaceSelect("pre-line");
     }
@@ -1245,6 +1384,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first item\nA B C D EF G H\nI\nthird item\n4. item\nsome text\nlast item",
             IE = "first item\n A B C D EF G H \n I \nthird item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceOrderedList() throws Exception {
         getInnerTextWhiteSpaceOrderedList(null);
     }
@@ -1256,6 +1405,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first item\nA B C D EF G H\nI\nthird item\n4. item\nsome text\nlast item",
             IE = "first item\n A B C D EF G H \n I \nthird item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceOrderedListNormal() throws Exception {
         getInnerTextWhiteSpaceOrderedList("normal");
     }
@@ -1267,6 +1426,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first item\nA B C D EF G H\nI\nthird item\n4. item\nsome text\nlast item",
             IE = "first item\n A B C D EF G H \n I \nthird item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceOrderedListNowrap() throws Exception {
         getInnerTextWhiteSpaceOrderedList("nowrap");
     }
@@ -1280,6 +1449,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "third item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceOrderedListPre() throws Exception {
         getInnerTextWhiteSpaceOrderedList("pre");
     }
@@ -1293,6 +1472,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "third item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceOrderedListPreWrap() throws Exception {
         getInnerTextWhiteSpaceOrderedList("pre-wrap");
     }
@@ -1307,6 +1496,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
             FF = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
             FF78 = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
             IE = " first item\n  A B C D EF G H \n I \n third item\n4. item\n some text last item\n ")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceOrderedListPreLine() throws Exception {
         getInnerTextWhiteSpaceOrderedList("pre-line");
     }
@@ -1338,6 +1537,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first item\nA B C D EF G H\nI\nthird item\n4. item\nsome text\nlast item",
             IE = "first item\n A B C D EF G H \n I \nthird item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceUnorderedList() throws Exception {
         getInnerTextWhiteSpaceUnorderedList(null);
     }
@@ -1349,6 +1558,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first item\nA B C D EF G H\nI\nthird item\n4. item\nsome text\nlast item",
             IE = "first item\n A B C D EF G H \n I \nthird item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceUnorderedListNormal() throws Exception {
         getInnerTextWhiteSpaceUnorderedList("normal");
     }
@@ -1360,6 +1579,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "first item\nA B C D EF G H\nI\nthird item\n4. item\nsome text\nlast item",
             IE = "first item\n A B C D EF G H \n I \nthird item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceUnorderedListNowrap() throws Exception {
         getInnerTextWhiteSpaceUnorderedList("nowrap");
     }
@@ -1373,6 +1602,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "third item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceUnorderedListPre() throws Exception {
         getInnerTextWhiteSpaceUnorderedList("pre");
     }
@@ -1386,6 +1625,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
                 + "\n    \nthird item\n4. item\n\n    some text \n    \nlast item\n\n  ",
             IE = "first item\n  A B  C\t \t  D \nEF\nG \n H  \n I  \n"
                 + "third item\n4. item\nsome text last item")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceUnorderedListPreWrap() throws Exception {
         getInnerTextWhiteSpaceUnorderedList("pre-wrap");
     }
@@ -1400,6 +1649,16 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
             FF = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
             FF78 = "first item\nA B C D\nEFGH\nI\nthird item\n4. item\nsome text\nlast item",
             IE = " first item\n  A B C D EF G H \n I \n third item\n4. item\n some text last item\n ")
+    @HtmlUnitNYI(CHROME = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            EDGE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            FF78 = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ",
+            IE = "\n    first item\n      A B  C\t \t  D \nEF\nG \n H   I  \n"
+                + "    third item4. item\n    some text \n    last item\n  ")
     public void getInnerTextWhiteSpaceUnorderedListPreLine() throws Exception {
         getInnerTextWhiteSpaceUnorderedList("pre-line");
     }
@@ -1496,6 +1755,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0 nbsp and spaces",
             IE = "A   nbsp and spaces")
+    @HtmlUnitNYI(IE = "A \u00A0 nbsp and spaces")
     public void getInnerTextParagraphNbsp() throws Exception {
         getInnerTextFormated("<p id='tester'>A &nbsp; nbsp and spaces</p>");
     }
@@ -1507,6 +1767,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0 nbsp and spaces",
             IE = "A   nbsp and spaces")
+    @HtmlUnitNYI(IE = "A \u00A0 nbsp and spaces")
     public void getInnerTextParagraphNbspNormal() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: normal'>"
                 + "A &nbsp; nbsp and spaces</p>");
@@ -1519,6 +1780,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0 nbsp and spaces",
             IE = "A   nbsp and spaces")
+    @HtmlUnitNYI(IE = "A \u00A0 nbsp and spaces")
     public void getInnerTextParagraphNbspNowrap() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: nowrap'>"
                 + "A &nbsp; nbsp and spaces</p>");
@@ -1531,6 +1793,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0 nbsp and spaces",
             IE = "A   nbsp and spaces")
+    @HtmlUnitNYI(IE = "A \u00A0 nbsp and spaces")
     public void getInnerTextParagraphNbspPre() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: pre'>"
                 + "A &nbsp; nbsp and spaces</p>");
@@ -1543,6 +1806,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0 nbsp and spaces",
             IE = "A   nbsp and spaces")
+    @HtmlUnitNYI(IE = "A \u00A0 nbsp and spaces")
     public void getInnerTextParagraphNbspPreWrap() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: pre-wrap'>"
                 + "A &nbsp; nbsp and spaces</p>");
@@ -1555,6 +1819,7 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0 nbsp and spaces",
             IE = "A   nbsp and spaces")
+    @HtmlUnitNYI(IE = "A \u00A0 nbsp and spaces")
     public void getInnerTextParagraphNbspPreLine() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: pre-line'>"
                 + "A &nbsp; nbsp and spaces</p>");
@@ -1567,6 +1832,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0\n\u00A0 NBSPs\u00A0\u00A0",
             IE = "A  \n  NBSPs  ")
+    @HtmlUnitNYI(CHROME = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            EDGE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF78 = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            IE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0")
     public void getInnerTextParagraphMultilineNbsp() throws Exception {
         getInnerTextFormated("<p id='tester'>A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
     }
@@ -1578,6 +1848,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0\n\u00A0 NBSPs\u00A0\u00A0",
             IE = "A  \n  NBSPs  ")
+    @HtmlUnitNYI(CHROME = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            EDGE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF78 = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            IE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0")
     public void getInnerTextParagraphMultilineNbspNormal() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: normal'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
@@ -1590,6 +1865,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0\n\u00A0 NBSPs\u00A0\u00A0",
             IE = "A  \n  NBSPs  ")
+    @HtmlUnitNYI(CHROME = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            EDGE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF78 = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            IE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0")
     public void getInnerTextParagraphMultilineNbspNowrap() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: nowrap'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
@@ -1602,6 +1882,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0\n\u00A0 NBSPs\u00A0\u00A0",
             IE = "A  \n  NBSPs  ")
+    @HtmlUnitNYI(CHROME = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            EDGE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF78 = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            IE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0")
     public void getInnerTextParagraphMultilineNbspPre() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: pre'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
@@ -1614,6 +1899,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0\n\u00A0 NBSPs\u00A0\u00A0",
             IE = "A  \n  NBSPs  ")
+    @HtmlUnitNYI(CHROME = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            EDGE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF78 = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            IE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0")
     public void getInnerTextParagraphMultilineNbspPreWrap() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: pre-wrap'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
@@ -1626,6 +1916,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A \u00A0\n\u00A0 NBSPs\u00A0\u00A0",
             IE = "A  \n  NBSPs  ")
+    @HtmlUnitNYI(CHROME = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            EDGE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            FF78 = "A \u00A0\u00A0 NBSPs\u00A0\u00A0",
+            IE = "A \u00A0\u00A0 NBSPs\u00A0\u00A0")
     public void getInnerTextParagraphMultilineNbspPreLine() throws Exception {
         getInnerTextFormated("<p id='tester' style='white-space: pre-line'>"
                 + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
@@ -1638,6 +1933,11 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("I have  out of 2 stamps")
+    @HtmlUnitNYI(CHROME = " I have  out of 2 stamps",
+            EDGE = " I have  out of 2 stamps",
+            FF = " I have  out of 2 stamps",
+            FF78 = " I have  out of 2 stamps",
+            IE = " I have  out of 2 stamps")
     public void getInnerTextInputInsideP() throws Exception {
         getInnerTextFormated("<p id='tester'>"
                 + " I have <input type='number' value='2'/> out of 2 stamps</p>");
@@ -1649,6 +1949,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Sum",
             IE = "Sum\ndetail")
+    @HtmlUnitNYI(CHROME = "Sum\ndetail",
+            EDGE = "Sum\ndetail",
+            FF = "Sum\ndetail",
+            FF78 = "Sum\ndetail")
     public void getInnerTextDetails() throws Exception {
         getInnerTextFormated("<details id='tester'>"
                 + "<summary>Sum</summary>"
@@ -1662,6 +1966,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Sum",
             IE = "SumSum2\ndetail")
+    @HtmlUnitNYI(CHROME = "SumSum2\ndetail",
+            EDGE = "SumSum2\ndetail",
+            FF = "SumSum2\ndetail",
+            FF78 = "SumSum2\ndetail")
     public void getInnerTextDetailsTwoSums() throws Exception {
         getInnerTextFormated("<details id='tester'>"
                 + "<summary>Sum</summary>"
@@ -1676,6 +1984,10 @@ public class HtmlSerializerInnerText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Sum\n\ndetail",
             IE = "Sum\ndetail")
+    @HtmlUnitNYI(CHROME = "Sum\ndetail",
+            EDGE = "Sum\ndetail",
+            FF = "Sum\ndetail",
+            FF78 = "Sum\ndetail")
     public void getInnerTextDetailsOpen() throws Exception {
         getInnerTextFormated("<details id='tester' open=true>"
                 + "<summary>Sum</summary>"
