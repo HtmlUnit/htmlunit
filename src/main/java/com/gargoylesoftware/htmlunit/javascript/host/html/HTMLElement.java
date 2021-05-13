@@ -719,10 +719,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getInnerText() {
-        final StringBuilder buf = new StringBuilder();
-        // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, getDomNodeOrDie(), false, false);
-        return buf.toString();
+        return getDomNodeOrDie().getInnerText();
     }
 
     /**

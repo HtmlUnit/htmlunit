@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -1398,5 +1399,13 @@ public abstract class HtmlElement extends DomElement {
         }
 
         return newnode;
+    }
+
+    /**
+     * @return a the innterText representation of this element
+     */
+    public String getInnerText() {
+        final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText();
+        return ser.asText(this);
     }
 }
