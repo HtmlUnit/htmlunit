@@ -3267,14 +3267,24 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "false")
+    @Alerts(DEFAULT = {"exception[]", "false", "false"},
+            IE = {"false", "false", "false"})
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
+
             + "try {\n"
             + "  log(document.body.contains([]));\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log('exception[]'); }\n"
+
+            + "try {\n"
+            + "  log(document.body.contains(null));\n"
+            + "} catch(e) { log('exception null'); }\n"
+
+            + "try {\n"
+            + "  log(document.body.contains(undefined));\n"
+            + "} catch(e) { log('exception undefined'); }\n"
+
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -4196,6 +4206,33 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "<!--some comment-->", "true", "false"},
+            IE = {"-", "<!--some comment-->", "-", "-"})
+    public void replaceChildAddNewChildToDocument() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createComment('some comment');\n"
+            + "    log(document.contains ? document.contains(newnode) : '-');\n"
+
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    var oldnode = document.getElementById('inner');\n"
+            + "    outernode.replaceChild(newnode, oldnode);\n"
+            + "    log(outernode.innerHTML);\n"
+            + "    log(document.contains ? document.contains(newnode) : '-');\n"
+            + "    log(document.contains ? document.contains(oldnode) : '-');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'><div id='inner'></div></div>\n"

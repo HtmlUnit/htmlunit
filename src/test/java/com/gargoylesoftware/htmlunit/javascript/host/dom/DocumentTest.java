@@ -2686,7 +2686,39 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object Comment]")
+    @Alerts(DEFAULT = {"true", "false", "true", "true", "true", "false", "false"},
+            IE = {"-", "-", "-", "-", "-", "-", "-"})
+    public void contains() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var testnode = document.getElementById('myNode');\n"
+            + "    log(document.contains ? document.contains(testnode) : '-');\n"
+
+            + "    var newnode = document.createComment('some comment');\n"
+            + "    log(document.contains ? document.contains(newnode) : '-');\n"
+
+            + "    log(document.contains ? document.contains(document.documentElement) : '-');\n"
+            + "    log(document.contains ? document.contains(document.body) : '-');\n"
+            + "    log(document.contains ? document.contains(document.firstElementChild) : '-');\n"
+
+            + "    log(document.contains ? document.contains(null) : '-');\n"
+            + "    log(document.contains ? document.contains(undefined) : '-');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Comment]", "false"},
+            IE = {"[object Comment]", "-"})
     public void createComment() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2695,6 +2727,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var elt = document.createComment('some comment');\n"
             + "  log(elt);\n"
+            + "  log(document.contains ? document.contains(elt) : '-');\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

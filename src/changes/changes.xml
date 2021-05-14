@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+            <action type="fix" dev="rbri">
+                Document.contains(node) fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                Node.contains(node) returns false for null and undefined parameter values.
+            </action>
             <action type="fix" dev="rbri" issue="284">
                 Error.stack lines are separated by LF only.
             </action>

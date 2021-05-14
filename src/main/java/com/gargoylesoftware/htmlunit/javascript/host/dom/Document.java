@@ -4296,4 +4296,13 @@ public class Document extends Node {
     public void clear() {
         // nothing
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @Override
+    public boolean contains(final Object element) {
+        return getDocumentElement().contains(element);
+    }
 }

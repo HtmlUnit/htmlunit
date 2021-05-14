@@ -674,6 +674,10 @@ public class Node extends EventTarget {
      */
     @JsxFunction({CHROME, EDGE, FF, FF78})
     public boolean contains(final Object element) {
+        if (element == null || Undefined.isUndefined(element)) {
+            return false;
+        }
+
         if (!(element instanceof Node)) {
             if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
                 return false;
