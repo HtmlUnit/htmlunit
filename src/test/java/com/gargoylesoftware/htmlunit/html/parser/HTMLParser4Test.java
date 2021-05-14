@@ -703,16 +703,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "before1after1\nbefore2\nbefore3\nbefore4after4\nbefore5after5\nbefore6< >after6",
             IE = "before1after1\n \nbefore2 \nbefore3 \nbefore4after4\n \nbefore5after5\n \nbefore6< >after6\n ")
-    @HtmlUnitNYI(CHROME = "\n  before1after1\n  \n  before2\n  before3\n"
-                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
-            EDGE = "\n  before1after1\n  \n  before2\n  before3\n"
-                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
-            FF = "\n  before1after1\n  \n  before2\n  before3\n"
-                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
-            FF78 = "\n  before1after1\n  \n  before2\n  before3\n"
-                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n",
-            IE = "\n  before1after1\n  \n  before2\n  before3\n"
-                + "  before4after4\n  \n  before5after5\n  \n  before6< >after6\n  \n\n")
+    @HtmlUnitNYI(CHROME = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
+            EDGE = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
+            FF = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
+            FF78 = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
+            IE = "before1after1 before2 before3 before4after4 before5after5 before6< >after6")
     public void specialComments2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
