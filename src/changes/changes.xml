@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.50.0" date="Mai xx, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Optimization of the + operator.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Small optimization for the increment/decrement operator.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Small optimization for the increment/decrement operator.
+            </action>
             <action type="fix" dev="rbri">
                 Document.contains(node) fixed.
             </action>
