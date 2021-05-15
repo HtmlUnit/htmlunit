@@ -422,7 +422,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     protected boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
-        if(notYetImplementedBrowsers == null) {
+        if (notYetImplementedBrowsers == null) {
             return false;
         }
         return isDefinedIn(notYetImplementedBrowsers.value()) || isDefinedIn(notYetImplementedBrowsers.os());

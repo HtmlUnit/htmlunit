@@ -288,10 +288,10 @@ public class BrowserRunner extends Suite {
      * Marks the os.
      */
     public enum OS {
-        /** Linux */
+        /** Linux. */
         Linux,
 
-        /** Windows */
+        /** Windows. */
         Windows
     }
 
