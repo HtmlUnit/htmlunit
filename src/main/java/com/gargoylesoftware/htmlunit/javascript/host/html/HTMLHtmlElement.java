@@ -72,15 +72,6 @@ public class HTMLHtmlElement extends HTMLElement {
     }
 
     /**
-     * Overwritten to throw an exception because this is readonly.
-     * @param value the new value for the contents of this node
-     */
-    @Override
-    protected void setInnerTextImpl(final String value) {
-        throw Context.reportRuntimeError("innerText is read-only for tag 'html'");
-    }
-
-    /**
      * Returns {@code version} property.
      * @return the {@code version} property
      */

@@ -43,6 +43,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.helpers.AttributesImpl;
@@ -65,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
 import com.gargoylesoftware.htmlunit.html.HtmlBig;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlBold;
+import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
@@ -110,6 +112,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -715,15 +718,18 @@ public class HTMLElement extends Element {
 
     /**
      * Gets the innerText attribute.
+     * (see https://html.spec.whatwg.org/multipage/dom.html#the-innertext-idl-attribute)
      * @return the contents of this node as text
      */
     @JsxGetter
     public String getInnerText() {
-        return getDomNodeOrDie().getInnerText();
+        final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText();
+        return ser.asText(this.getDomNodeOrDie());
     }
 
     /**
      * Replaces all child elements of this element with the supplied text value.
+     * (see https://html.spec.whatwg.org/multipage/dom.html#the-innertext-idl-attribute)
      * @param value the new value for the contents of this element
      */
     @JsxSetter
@@ -735,20 +741,19 @@ public class HTMLElement extends Element {
         else {
             valueString = Context.toString(value);
         }
-        setInnerTextImpl(valueString);
-    }
 
-    /**
-     * The worker for setInnerText.
-     * @param value the new value for the contents of this node
-     */
-    protected void setInnerTextImpl(final String value) {
         final DomNode domNode = getDomNodeOrDie();
-
+        final SgmlPage page = domNode.getPage();
         domNode.removeAllChildren();
 
-        if (value != null && !value.isEmpty()) {
-            domNode.appendChild(new DomText(domNode.getPage(), value));
+        if (StringUtils.isNotEmpty(valueString)) {
+            final String[] parts = valueString.split("\\r?\\n");
+            for (int i = 0; i < parts.length; i++) {
+                if (i != 0) {
+                    domNode.appendChild(page.createElement(HtmlBreak.TAG_NAME));
+                }
+                domNode.appendChild(new DomText(page, parts[i]));
+            }
         }
     }
 
@@ -758,7 +763,15 @@ public class HTMLElement extends Element {
      */
     @Override
     public void setTextContent(final Object value) {
-        setInnerTextImpl(value == null ? null : Context.toString(value));
+        final DomNode domNode = getDomNodeOrDie();
+        domNode.removeAllChildren();
+
+        if (value != null) {
+            final String textValue = Context.toString(value);
+            if (StringUtils.isNotEmpty(textValue)) {
+                domNode.appendChild(new DomText(domNode.getPage(), textValue));
+            }
+        }
     }
 
     /**
