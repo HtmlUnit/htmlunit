@@ -76,7 +76,7 @@ mvn clean deploy -Dmaven.test.skip=true
                             </li>
                             <li>
                                 Build the release and store it in the local repository
-                                <source>mvn -up clean install -Dmaven.test.skip=true</source>
+                                <source>mvn -up -U clean install -Dmaven.test.skip=true</source>
                             </li>
                         </ol>
                     </li>
@@ -122,8 +122,8 @@ mvn clean deploy -Dmaven.test.skip=true
                         <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
                         <li>append
                           <ul>
-                            <li>htmlunit-2.49.0-bin.zip</li>
-                            <li>htmlunit-2.49.0-src.zip</li>
+                            <li>htmlunit-2.50.0-bin.zip</li>
+                            <li>htmlunit-2.50.0-src.zip</li>
                           </ul>
                         </li>
                         <li>do not publish the release now, we have to add a file later on</li>
