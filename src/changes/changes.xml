@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.50.0" date="May 16, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 89">
+        <release version="2.51.0" date="June xx, 2021" description="Bugfixes">
+        </release>
+
+        <release version="2.50.0" date="May 16, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 90">
             <action type="fix" dev="rbri">
                 HTMLElement.innerText implementation is now closer to the spec.
             </action>
