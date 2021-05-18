@@ -2132,6 +2132,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void close() {
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
+        ThreadDeath toThrow = null;
         final List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
@@ -2149,6 +2150,11 @@ public class WebClient implements Serializable, AutoCloseable {
         if (scriptEngine_ != null) {
             try {
                 scriptEngine_.shutdown();
+            }
+            catch(final ThreadDeath td) { 
+              // If ThreadDeath is thrown none of next clean is performed,
+              // carrying a resource leak.
+              toThrow = td;
             }
             catch (final Exception e) {
                 LOG.error("Exception while shutdown the scriptEngine", e);
@@ -2174,6 +2180,9 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         cache_.clear();
+        if(toThrow != null) {
+          throw toThrow;
+        }
     }
 
     /**
