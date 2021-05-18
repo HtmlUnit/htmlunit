@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.41.v20210516.
+            </action>
             <action type="fix" dev="rbri" due-to="Sergio Moreno">
                 Fix a possible resource leak if ThreadDeath is thrown when closing the script executor.
             </action>
