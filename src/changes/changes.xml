@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Sergio Moreno">
+                Fix a possible resource leak if ThreadDeath is thrown when closing the script executor.
+            </action>
         </release>
 
         <release version="2.50.0" date="May 16, 2021" description="Bugfixes, Firefox 88, Chrome/Edge 90">

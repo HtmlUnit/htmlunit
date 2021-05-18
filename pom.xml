@@ -1156,6 +1156,10 @@
         <contributor>
             <name>cdalexndr</name>
         </contributor>
+        <contributor>
+            <name>Sergio Moreno</name>
+            <email>sergio.moreno@blueliv.com</email>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
