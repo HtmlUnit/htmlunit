@@ -203,16 +203,6 @@ public class WebConsole implements Serializable {
     }
 
     /**
-     * Prints the passed objects using logger trace level.
-     * @param args the logging parameters
-     */
-    public void trace(final Object... args) {
-        if (logger_.isTraceEnabled()) {
-            logger_.trace(process(args));
-        }
-    }
-
-    /**
      * Prints the passed objects using logger debug level.
      * @param args the logging parameters
      */

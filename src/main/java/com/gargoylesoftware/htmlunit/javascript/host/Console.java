@@ -42,6 +42,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -219,10 +220,13 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void trace(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
+
+        final RhinoException e = ScriptRuntime.throwError(cx, funObj, null);
+
         final WebConsole webConsole = toWebConsole(thisObj);
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
-        webConsole.trace(args);
+        webConsole.info(e.getScriptStackTrace());
         webConsole.setFormatter(oldFormatter);
     }
 
