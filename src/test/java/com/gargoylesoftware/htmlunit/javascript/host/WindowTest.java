@@ -910,7 +910,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, emptyList);
-        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "image/gif", emptyList);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", MimeType.IMAGE_GIF, emptyList);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
@@ -939,7 +939,7 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
-        assertEquals("image/gif", secondPage.getWebResponse().getContentType());
+        assertEquals(MimeType.IMAGE_GIF, secondPage.getWebResponse().getContentType());
 
         assertEquals(2, events.size());
 

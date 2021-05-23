@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -136,7 +137,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         try (InputStream is = getClass().getResourceAsStream(png)) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_PNG, emptyList);
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -253,7 +254,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         try (InputStream is = getClass().getResourceAsStream("invalid.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_PNG, emptyList);
             getMockWebConnection().setDefaultResponse("Test");
         }
 
