@@ -20,7 +20,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -49,6 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
  *
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ronald Brill
  * @see DebuggerImpl
  */
 public class DebugFrameImpl extends DebugFrameAdapter {
@@ -86,7 +86,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                 sb.append("   ");
                 parent = parent.getParentScope();
             }
-            final String functionName = getFunctionName(thisObj);
+            final String functionName = getFunctionName(activation, thisObj);
             sb.append(functionName).append('(');
             final int nbParams = functionOrScript_.getParamCount();
             for (int i = 0; i < nbParams; i++) {
@@ -184,7 +184,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      *        function name if the function is anonymous
      * @return the name of the function corresponding to this frame
      */
-    private String getFunctionName(final Scriptable thisObj) {
+    private String getFunctionName(final Scriptable activation, final Scriptable thisObj) {
         if (functionOrScript_.isFunction()) {
             final String name = functionOrScript_.getFunctionName();
             if (name != null && !name.isEmpty()) {
@@ -206,14 +206,12 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                     if (id instanceof String) {
                         final String s = (String) id;
                         if (obj instanceof ScriptableObject) {
-                            Object o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, false);
+                            Function o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, activation, false);
                             if (o == null) {
-                                o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, true);
-                                if (o instanceof Callable) {
-                                    return "__defineSetter__ " + s;
-                                }
+                                o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, activation, true);
+                                return "__defineSetter__ " + s;
                             }
-                            else if (o instanceof Callable) {
+                            else {
                                 return "__defineGetter__ " + s;
                             }
                         }
