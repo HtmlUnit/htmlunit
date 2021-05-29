@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.9.0.
+            </action>
             <action type="fix" dev="rbri" issue="179">
                 Console.trace() now prints the call stack.
             </action>
