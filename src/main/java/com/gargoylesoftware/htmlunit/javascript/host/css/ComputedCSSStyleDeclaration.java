@@ -132,8 +132,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSlotElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -1194,7 +1202,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
 
         int defaultHeight;
-        if (node instanceof HtmlDivision && StringUtils.isBlank(node.getTextContent())) {
+        if ((elem.getClass() == HTMLElement.class
+                || elem instanceof HTMLDivElement
+                || elem instanceof HTMLUnknownElement
+                || elem instanceof HTMLMenuItemElement
+                || elem instanceof HTMLDataElement
+                || elem instanceof HTMLTimeElement
+                || elem instanceof HTMLOutputElement
+                || elem instanceof HTMLSlotElement
+                || elem instanceof HTMLLegendElement)
+                && StringUtils.isBlank(node.getTextContent())) {
             defaultHeight = 0;
         }
         else if (elem.getFirstChild() == null) {
