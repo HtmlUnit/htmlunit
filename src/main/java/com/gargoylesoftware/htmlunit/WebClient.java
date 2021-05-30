@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECURITY_POLICY_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_WITHOUT_HASH;
@@ -1706,6 +1707,15 @@ public class WebClient implements Serializable, AutoCloseable {
         if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
                 && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
+        }
+
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA, getBrowserVersion().getSecClientHintUserAgentHeader());
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE, "?0");
         }
 
         if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)

@@ -560,6 +560,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     HTTP_COOKIE_START_DATE_1970,
 
+    /** Browser sends Sec-ch headers. */
+    @BrowserFeature({CHROME, EDGE})
+    HTTP_HEADER_CH_UA,
+
     /** Browser sends Sec-Fetch headers. */
     @BrowserFeature({CHROME, EDGE})
     HTTP_HEADER_SEC_FETCH,

@@ -223,6 +223,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.CONNECTION,
+            HttpHeader.SEC_CH_UA,
+            HttpHeader.SEC_CH_UA_MOBILE,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -242,6 +244,9 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
+        CHROME.secClientHintUserAgentHeader_ = "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\""
+                    + CHROME.getBrowserVersionNumeric()
+                    + "\", \"Chromium\";v=\"91\"";
         // there are other issues with Chrome; a different productSub, etc.
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
@@ -266,6 +271,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.CONNECTION,
+            HttpHeader.SEC_CH_UA,
+            HttpHeader.SEC_CH_UA_MOBILE,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -285,6 +292,9 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
+        EDGE.secClientHintUserAgentHeader_ = "\" Not;A Brand\";v=\"99\", \"Microsoft Edge\";v=\""
+                + EDGE.getBrowserVersionNumeric()
+                + "\", \"Chromium\";v=\"91\"";
         // there are other issues with Chrome; a different productSub, etc.
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
@@ -459,6 +469,7 @@ public final class BrowserVersion implements Serializable {
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
     private String scriptAcceptHeader_;
+    private String secClientHintUserAgentHeader_;
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
     private int[] fontHeights_;
@@ -481,6 +492,7 @@ public final class BrowserVersion implements Serializable {
         cssAcceptHeader_ = "*/*";
         scriptAcceptHeader_ = "*/*";
         xmlHttpRequestAcceptHeader_ = "*/*";
+        secClientHintUserAgentHeader_ = "";
 
         plugins_ = new HashSet<>();
         features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
@@ -788,6 +800,14 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the value used by the browser for the {@code sec-ch-ua} header.
+     * @return the sec-ch-ua header string
+     */
+    public String getSecClientHintUserAgentHeader() {
+        return secClientHintUserAgentHeader_;
+    }
+
+    /**
      * Returns the available plugins. This makes only sense for Firefox as only this
      * browser makes this kind of information available via JavaScript.
      * @return the available plugins
@@ -924,6 +944,7 @@ public final class BrowserVersion implements Serializable {
                 .setCssAcceptHeader(version.getCssAcceptHeader())
                 .setScriptAcceptHeader(version.getScriptAcceptHeader())
                 .setXmlHttpRequestAcceptHeader(version.getXmlHttpRequestAcceptHeader())
+                .setSecClientHintUserAgentHeader(version.getSecClientHintUserAgentHeader())
                 .setHeaderNamesOrdered(version.getHeaderNamesOrdered())
                 .setFontHeights(version.fontHeights_);
 
@@ -1124,6 +1145,15 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
             workPiece_.xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param secClientHintUserAgentHeader the {@code sec-ch-ua} header value
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setSecClientHintUserAgentHeader(final String secClientHintUserAgentHeader) {
+            workPiece_.secClientHintUserAgentHeader_ = secClientHintUserAgentHeader;
             return this;
         }
 
