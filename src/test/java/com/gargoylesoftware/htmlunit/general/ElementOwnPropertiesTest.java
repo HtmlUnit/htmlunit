@@ -486,7 +486,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor(),elementTiming,firstElementChild,getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
-                + "hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
                 + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
                 + "onfullscreenchange,onfullscreenerror,onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,"
@@ -509,7 +509,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor(),elementTiming,firstElementChild,getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
-                + "hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
                 + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
                 + "onfullscreenchange,onfullscreenerror,onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,"
@@ -571,7 +571,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clientLeft,clientTop,clientWidth,constructor(),firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
                 + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
@@ -584,7 +585,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clientLeft,clientTop,clientWidth,constructor(),firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
                 + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
@@ -10408,8 +10410,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "constructor(),content",
+            CHROME = "constructor(),content,shadowRoot",
+            EDGE = "constructor(),content,shadowRoot",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(IE = "constructor")
+    @HtmlUnitNYI(CHROME = "constructor(),content",
+            EDGE = "constructor(),content",
+            IE = "constructor")
     public void template() throws Exception {
         test("template");
     }

@@ -1661,9 +1661,6 @@ public final class StyleAttributes {
         /** The style property {@code mix-blend-mode}. */
         MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff("normal")),
 
-        /** The style property {@code negative}. */
-        NEGATIVE("negative", "negative", chromeAndEdge("")),
-
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
 
@@ -2406,6 +2403,9 @@ public final class StyleAttributes {
 
         /** The style property {@code msWrapThrough}. */
         MS_WRAP_THROUGH("msWrapThrough", "-ms-wrap-through", ie("wrap")),
+
+        /** The style property {@code negative}. */
+        NEGATIVE("negative", "negative", chromeAndEdge("")),
 
         /** The style property {@code objectFit}. */
         OBJECT_FIT("objectFit", "object-fit", ff("fill"), chromeAndEdge("fill")),

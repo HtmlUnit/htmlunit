@@ -884,6 +884,36 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<b>inner HTML</b>",
+            FF = "getInnerHTML() not available",
+            FF78 = "getInnerHTML() not available",
+            IE = "getInnerHTML() not available")
+    public void getGetInnerHTML() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function doTest() {\n"
+            + "    var myNode = document.getElementById('myNode');\n"
+            + "    if (myNode.getInnerHTML) {\n"
+            + "      log(myNode.getInnerHTML());\n"
+            + "    } else {\n"
+            + "      log('getInnerHTML() not available');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "<p id='myNode'><b>inner HTML</b></p>\n"
+            + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
