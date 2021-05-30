@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91">
+            <action type="fix" dev="rbri">
+                ComputedCSSStyleDeclaration height property now returns "auto" for
+                invisible elements.
+            </action>
             <action type="add" dev="rbri">
                 A simple version of getInnerHTML added for Chrome/Edge.
             </action>

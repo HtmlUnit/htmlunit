@@ -617,6 +617,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getHeight() {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
@@ -1237,7 +1241,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     parent = parent.getParentElement();
                 }
                 final int pixelWidth = pixelValue(width);
-                final String content = node.asText();
+                final String content = node.asNormalizedText();
 
                 if (pixelWidth > 0
                         && !width.isEmpty()

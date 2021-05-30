@@ -2312,7 +2312,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "", "auto" })
-    @NotYetImplemented
     public void getHeightInvisible() throws Exception {
         final String html = "<html><head>\n"
               + "<script>\n"
@@ -2540,6 +2539,27 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
             + "</body>\n"
             + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({",", "0,0", "auto,auto"})
+    public void scriptWidthAndHeight() throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<script id='e1'>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e1 = document.getElementById('e1');\n"
+            + "    var s1 = window.getComputedStyle(e1, null);\n"
+            + "    log(e1.style.width + ',' + e1.style.height);\n"
+            + "    log(e1.offsetWidth + ',' + e1.offsetHeight);\n"
+            + "    log(s1.width + ',' + s1.height);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageVerifyTitle2(html);
     }
 }
