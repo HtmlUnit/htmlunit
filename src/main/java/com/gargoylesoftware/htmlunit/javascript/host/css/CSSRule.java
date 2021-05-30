@@ -113,7 +113,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant({FF, FF78})
+    @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short COUNTER_STYLE_RULE        = 11;
 
     /**

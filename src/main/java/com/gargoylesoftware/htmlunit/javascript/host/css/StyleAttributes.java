@@ -96,6 +96,9 @@ public final class StyleAttributes {
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
 
+        /** The style property {@code additiveSymbols}. */
+        ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
+
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), chromeAndEdgeAndFirefox("normal")),
 
@@ -938,6 +941,9 @@ public final class StyleAttributes {
         /** The style property {@code enableBackground}. */
         ENABLE_BACKGROUND("enableBackground", "enable-background", ie("accumulate")),
 
+        /** The style property {@code fallback}. */
+        FALLBACK("fallback", "fallback", chromeAndEdge("")),
+
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), ie("black"), chromeAndEdge("rgb(0, 0, 0)")),
 
@@ -1654,6 +1660,9 @@ public final class StyleAttributes {
 
         /** The style property {@code mix-blend-mode}. */
         MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff("normal")),
+
+        /** The style property {@code negative}. */
+        NEGATIVE("negative", "negative", chromeAndEdge("")),
 
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
@@ -2551,6 +2560,9 @@ public final class StyleAttributes {
         /** The style property {@code overscroll-behavior-y}. */
         OVERSCROLL_BEHAVIOR_Y_("overscroll-behavior-y", "overscroll-behavior-y", ff("auto")),
 
+        /** The style property {@code pad}. */
+        PAD("pad", "pad", chromeAndEdge("")),
+
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chromeAndEdge("0px"), ff(""), ie("")),
 
@@ -2734,11 +2746,17 @@ public final class StyleAttributes {
         /** The style property {@code position}. */
         POSITION("position", "position", chromeAndEdge("static"), ff("static"), ie("static")),
 
+        /** The style property {@code prefix}. */
+        PREFIX("prefix", "prefix", chromeAndEdge("")),
+
         /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdge("auto")),
 
         /** The style property {@code r}. */
         R("r", "r", chromeAndEdge("0px"), ff("0px")),
+
+        /** The style property {@code range}. */
+        RANGE("range", "range", chromeAndEdge("")),
 
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ff("none"), chromeAndEdge("none")),
@@ -3010,6 +3028,9 @@ public final class StyleAttributes {
         /** The style property {@code speak}. */
         SPEAK("speak", "speak", chromeAndEdge("normal")),
 
+        /** The style property {@code speakAs}. */
+        SPEAK_AS("speakAs", "speak-as", chromeAndEdge("")),
+
         /** The style property {@code speakHeader}. */
         SPEAK_HEADER("speakHeader", "speak-header"),
 
@@ -3088,8 +3109,17 @@ public final class StyleAttributes {
         /** The style property {@code styleFloat}. */
         STYLE_FLOAT("styleFloat", "style-float", ie("undefined")),
 
+        /** The style property {@code suffix}. */
+        SUFFIX("suffix", "suffix", chromeAndEdge("")),
+
+        /** The style property {@code symbols}. */
+        SYMBOLS("symbols", "symbols", chromeAndEdge("")),
+
         /** The style property {@code syntax}. */
         SYNTAX("syntax", "syntax", chromeAndEdge("")),
+
+        /** The style property {@code system}. */
+        SYSTEM("system", "system", chromeAndEdge("")),
 
         /** The style property {@code tabSize}. */
         TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8")),
