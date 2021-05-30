@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
@@ -134,6 +135,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -1017,7 +1020,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     final HTMLElement parentJS = parent.getScriptableObject();
                     width = pixelValue(parentJS, new CssValue(0, windowWidth) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
-                            return style.getWidth();
+                            return style.getCalculatedWidth(false, false) + "px";
                         }
                     }) - (getBorderHorizontal() + getPaddingHorizontal());
                 }
@@ -1044,6 +1047,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             else if (node instanceof HtmlTextArea) {
                 width = 100; // wild guess
+            }
+            else if (node instanceof HtmlImage) {
+				width = ((HtmlImage)node).getWidthOrDefault();
             }
             else {
                 // Inline elements take up however much space is required by their children.
@@ -1081,10 +1087,29 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         for (final DomNode child : children) {
-            if (child.getScriptableObject() instanceof HTMLElement) {
+        	int w = 0;
+        	if (!child.isDisplayed() || child.getScriptableObject() instanceof HTMLScriptElement) {
+        		continue;
+        	}
+        	if (child.getScriptableObject() instanceof Element) {		// check if explicit width is specified
+        		final Element e = child.getScriptableObject();
+        		final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
+        		final String widthAttr = style.getStyleAttribute(WIDTH, true).trim(); 
+        		w = style.getPixelWidth();
+        		if (!widthAttr.isEmpty() && (w > 0 || widthAttr.trim().startsWith("0"))) {		// use this width only if defined and it's a valid value
+        			width += w;
+        			continue;
+        		}
+        	}
+        	
+        	if (child.getScriptableObject() instanceof HTMLImageElement) {
+        		w = ((HtmlImage)child).getWidthOrDefault();
+        		width += w;
+        	}
+        	else if (child.getScriptableObject() instanceof HTMLElement) {
                 final HTMLElement e = child.getScriptableObject();
                 final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
-                final int w = style.getCalculatedWidth(true, true);
+                w = style.getContentWidth();
                 width += w;
             }
             else if (child.getScriptableObject() instanceof Text) {
@@ -1093,10 +1118,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     final HTMLElement e = child.getParentNode().getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final int height = getBrowserVersion().getFontHeight(style.getFontSize());
-                    width += child.getTextContent().length() * (int) (height / 1.8f);
+                    final String textContent = child.getTextContent().replaceAll("^(\s|\t|\r|\n)*|(\s|\t|\r|\n)*$", "");	// indentation and line breaks between HTML elements might be represented as Text elements with whitespace. We'll trim these when calculating width
+                    if (textContent.length() == 0)
+                    	continue;
+                    w = textContent.length() * (int) (height / 1.8f);
+                    width += w;
                 }
                 else {
-                    width += child.getTextContent().length() * getBrowserVersion().getPixesPerChar();
+                	w = child.getTextContent().length() * getBrowserVersion().getPixesPerChar();
+                    width += w;
                 }
             }
         }
@@ -1517,7 +1547,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
             final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
-            left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
+            left = parentStyle.getCalculatedWidth(true, true) - pixelValue(style.getWidth()) - pixelValue(r);
         }
         else if (FIXED.equals(p) && AUTO.equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.

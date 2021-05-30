@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NO_SRC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 
 import java.io.File;
 import java.io.IOException;
@@ -462,6 +464,22 @@ public class HtmlImage extends HtmlElement {
         }
         return height_;
     }
+    
+    public int getHeightOrDefault() {
+    	if (getPage().getWebClient().getOptions().isDownloadImages()) {
+			try {
+				return getHeight();
+			} catch (IOException e) {}
+    	}
+    	final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+    	if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+            return 30;
+        }
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+            return 16;
+        }
+        return 24;
+    }
 
     /**
      * <p>Returns the image's actual width (<b>not</b> the image's {@link #getWidthAttribute() width attribute}).</p>
@@ -476,6 +494,22 @@ public class HtmlImage extends HtmlElement {
             determineWidthAndHeight();
         }
         return width_;
+    }
+    
+    public int getWidthOrDefault() {
+    	if (getPage().getWebClient().getOptions().isDownloadImages()) {
+			try {
+				return getWidth();
+			} catch (IOException e) {}
+    	}
+    	final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+    	if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+            return 28;
+        }
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+            return 16;
+        }
+        return 24;
     }
 
     /**
