@@ -35,9 +35,10 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.42</checkstyle.version>
+        <checkstyle.version>8.43</checkstyle.version>
         <spotbugs.version>4.2.3</spotbugs.version>
         <pmd.version>6.35.0</pmd.version>
+        <archunit.version>0.19.0</archunit.version>
     </properties>
 
     <build>
@@ -1262,7 +1263,7 @@
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
-            <version>0.18.0</version>
+            <version>${archunit.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
