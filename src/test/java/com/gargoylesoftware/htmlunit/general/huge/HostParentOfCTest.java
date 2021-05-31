@@ -413,9 +413,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF78 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule", "CSSCounterStyleRule");
     }
@@ -546,9 +545,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF78 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CSSRule_CSSCounterStyleRule() throws Exception {
         test("CSSRule", "CSSCounterStyleRule");
     }
