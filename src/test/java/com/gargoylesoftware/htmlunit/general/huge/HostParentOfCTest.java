@@ -187,7 +187,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _CharacterData_ProcessingInstruction() throws Exception {
         test("CharacterData", "ProcessingInstruction");
     }
