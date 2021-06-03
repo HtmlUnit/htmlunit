@@ -388,8 +388,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NEW_LINE);
-            case Context.FEATURE_HTMLUNIT_ARRAY_PROPERTIES:
-                return false;
             default:
                 return super.hasFeature(cx, featureIndex);
         }
