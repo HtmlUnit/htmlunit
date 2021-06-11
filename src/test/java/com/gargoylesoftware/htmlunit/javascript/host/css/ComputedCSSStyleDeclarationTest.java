@@ -20,15 +20,23 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1427,6 +1435,116 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 + "<div id='div'></div>\n"
                 + "</body></html>";
         loadPageVerifyTitle2(html);
+    }
+    
+    @Alerts("40")
+    @Test
+    public void widthBlockElements() throws Exception {
+    	final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div style='display: inline-block'>\n"
+            + "  <div id='myDiv'>\n"
+        	+ "	   <div style='width: 40px'>\n"
+        	+ "	   </div>\n"
+        	+ "  </div>\n"
+        	+ "</div>";
+        loadPageVerifyTitle2(content);
+    }
+    
+    @Alerts("4")
+    @Test
+    public void widthImageElements() throws Exception {
+    	try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/4x7.jpg")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "4x7.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+    	
+    	getWebWindowOf((HtmlUnitDriver)getWebDriver()).getWebClient().getOptions().setDownloadImages(true);
+
+    	final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myImage = document.getElementById('myImage');\n"
+            + "    log(myImage.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<img id='myImage' src='4x7.jpg' >\n"
+        	+ "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+    
+    @Alerts("0")
+    @Test
+    public void widthEmptyInlineContent() throws Exception {
+    	final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block'>\n"
+        	+ "	 <div style='display: none; width: 40px'>hidden elements should have zero width</div>\n"
+            + "  <script>console.log('script elements should have zero width')</script>\n"
+        	+ "</div></body></html>";
+        loadPageVerifyTitle2(content);
+    }
+    
+    @Alerts("55")
+    @Test
+    public void widthExplicitInlineContent() throws Exception {
+    	final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block'>\n"
+            + "	 <div style='width: 55px'>"
+        	+ "	 	<div style='width: 40px'></div>\n"
+            + "  </div>"
+        	+ "</div>";
+        loadPageVerifyTitle2(content);
+    }
+    
+    @Alerts("55")
+    @Test
+    public void widthWhitespaceBetweenTags() throws Exception {
+    	final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block'>\n      "
+            + "	                   <div style='width: 55px'></div>     "
+        	+ "      </div>";
+        loadPageVerifyTitle2(content);
+    }
+    
+    @Alerts("" +  11 * (int) (16 / 1.8f))
+    @Test
+    public void widthWhitespaceSequence() throws Exception {
+    	final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block; font-size: 14px'>\n"
+            + "    Hello World          "		// browsers usually trim leading/trailing whitespace sequences, and replace mid-text whitespace them with a single space
+        	+ "</div>";
+        loadPageVerifyTitle2(content);
     }
 
     /**
