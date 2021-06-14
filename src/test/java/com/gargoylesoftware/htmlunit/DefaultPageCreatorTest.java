@@ -234,4 +234,30 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
             writer.write("\n<script>");
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void noContentTypeTitle() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", NoContentTypeTitleServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage(URL_FIRST + "test");
+        assertNotNull(page);
+    }
+
+    /**
+     * Servlet for {@link #noContentTypeTitle()}.
+     */
+    public static class NoContentTypeTitleServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final Writer writer = response.getWriter();
+            writer.write("<html><head><title>\u00d3</title></head><body></body></html>");
+        }
+    }
 }

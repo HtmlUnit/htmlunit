@@ -75,6 +75,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Antoni Reus
  */
 public class DefaultPageCreator implements PageCreator, Serializable {
 
@@ -248,7 +249,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     private static boolean isBinary(final byte[] bytes) {
         for (final byte b : bytes) {
-            if (b < 0x08
+            if ((b >= 0x00 && b < 0x08)
                 || b == 0x0B
                 || (b >= 0x0E && b <= 0x1A)
                 || (b >= 0x1C && b <= 0x1F)) {

@@ -1161,6 +1161,9 @@
             <name>Sergio Moreno</name>
             <email>sergio.moreno@blueliv.com</email>
         </contributor>
+        <contributor>
+            <name>Antoni Reus</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
