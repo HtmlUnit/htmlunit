@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.10.0.
+            </action>
             <action type="fix" dev="rbri" issue="357" due-to="Antoni Reus">
                 Page type detection was wrong if no content type header was set and some unicode
                 chars are present in the first bytes of an document.
@@ -18,9 +21,6 @@
             </action>
             <action type="add" dev="rbri">
                 A simple version of getInnerHTML added for Chrome/Edge.
-            </action>
-            <action type="update" dev="rbri">
-                Upgrade Apache commons-io to 2.9.0.
             </action>
             <action type="fix" dev="rbri" issue="179">
                 Console.trace() now prints the call stack.
