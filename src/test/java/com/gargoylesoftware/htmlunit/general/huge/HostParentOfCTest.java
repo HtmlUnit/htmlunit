@@ -22,6 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -189,6 +190,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @HtmlUnitNYI(IE = "true")
     public void _CharacterData_ProcessingInstruction() throws Exception {
         test("CharacterData", "ProcessingInstruction");
     }
