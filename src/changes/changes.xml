@@ -8,6 +8,21 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91">
+            <action type="add" dev="RhinoTeam">
+                core-js: Template support added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Object.seal/freeze/isSealed/isFrozen logic got a few fixes.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Support indexed accessor properties.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Object.values / Object.entries / Object.fromEntries added.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Refactoring of the slot implementation.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.10.0.
             </action>
