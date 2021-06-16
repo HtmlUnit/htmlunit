@@ -19,9 +19,9 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
@@ -47,6 +47,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
+
+    static final SecureRandom RANDOM = new SecureRandom();
 
     /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
@@ -84,9 +86,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final MockWebConnection mockConnection = getMockWebConnection();
         final byte[] binaryContent = new byte[4818];
-        final Random random = new Random();
         for (int i = 0; i < binaryContent.length; i++) {
-            binaryContent[i] = (byte) (random.nextInt(Byte.MAX_VALUE));
+            binaryContent[i] = (byte) (RANDOM.nextInt(Byte.MAX_VALUE));
         }
         mockConnection.setDefaultResponse(binaryContent, 200, "OK", MimeType.APPLICATION_OCTET_STREAM);
         final URL urlFoo = new URL(URL_FIRST, "foo.html");

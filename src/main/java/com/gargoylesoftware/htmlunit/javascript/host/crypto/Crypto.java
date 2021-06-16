@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -41,6 +41,8 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayVi
  */
 @JsxClass
 public class Crypto extends SimpleScriptable {
+
+    static final SecureRandom RANDOM = new SecureRandom();
 
     /**
      * Creates an instance.
@@ -76,9 +78,8 @@ public class Crypto extends SimpleScriptable {
                     + "of entropy available via this API (65536).");
         }
 
-        final Random random = new Random();
         for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {
-            array.put(i, array, random.nextInt());
+            array.put(i, array, RANDOM.nextInt());
         }
         return array;
     }
