@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
+            <action type="fix" dev="rbri">
+                AudioParam value property is writable.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: All "new Error" instances have a "stack" even if they are not thrown.
             </action>
