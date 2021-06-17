@@ -7,8 +7,18 @@
     </properties>
 
     <body>
-        <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91">
+        <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
             <action type="add" dev="RhinoTeam">
+                core-js: All "new Error" instances have a "stack" even if they are not thrown.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: A number of small spec compliance issues with all the Error classes are fixed.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Make sure that the "name" and "length" properties of BaseFunction can have 
+                their attributes be modified and be deleted if so configured.
+            </action>
+            <action type="add" dev="RhinoTeam" issue="296">
                 core-js: Template support added.
             </action>
             <action type="fix" dev="RhinoTeam">

@@ -898,10 +898,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_ERROR_CAPTURE_STACK_TRACE,
 
-    /** Javascript {@code Error.stack}. */
-    @BrowserFeature({CHROME, EDGE, FF, FF78})
-    JS_ERROR_STACK,
-
     /** Javascript {@code Error.stackTraceLimit}. */
     @BrowserFeature({CHROME, EDGE, IE})
     JS_ERROR_STACK_TRACE_LIMIT,
