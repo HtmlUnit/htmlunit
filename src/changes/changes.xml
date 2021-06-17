@@ -15,7 +15,7 @@
                 core-js: A number of small spec compliance issues with all the Error classes are fixed.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Make sure that the "name" and "length" properties of BaseFunction can have 
+                core-js: Make sure that the "name" and "length" properties of BaseFunction can have
                 their attributes be modified and be deleted if so configured.
             </action>
             <action type="add" dev="RhinoTeam" issue="296">
