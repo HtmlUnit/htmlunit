@@ -1691,7 +1691,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param height the {@code innerHeight}
      */
     @JsxSetter
-    public void getInnerHeight(final int height) {
+    public void setInnerHeight(final int height) {
         getWebWindow().setInnerHeight(height);
     }
 
