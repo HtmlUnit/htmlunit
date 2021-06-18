@@ -69,14 +69,17 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts("[object HTMLDocument]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document);\n"
+            + "    log(document);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -286,10 +289,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     public void uniqueID() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.uniqueID != undefined);\n"
+            + "    log(document.uniqueID != undefined);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -297,7 +300,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2881,6 +2884,89 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <frame />\n"
             + "</frameset>\n"
             + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myBody", "newBody"})
+    public void setBody() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(document.body.id);\n"
+
+            + "      var newBody = document.createElement('body');\n"
+            + "      newBody.id = 'newBody';\n"
+            + "      document.body = newBody;\n"
+            + "      log(document.body.id);\n"
+            + "    } catch(e) {log('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myBody", "exception"})
+    public void setBodyDiv() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(document.body.id);\n"
+
+            + "      var newDiv = document.createElement('div');\n"
+            + "      newDiv.id = 'newDiv';\n"
+            + "      document.body = newDiv;\n"
+            + "      log(document.body.id);\n"
+            + "    } catch(e) {log('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myBody", "exception"})
+    public void setBodyString() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(document.body.id);\n"
+
+            + "      var newBody = '<body id=\"newBody\" onload=\"test()\"></body>';\n"
+            + "      document.body = newBody;\n"
+            + "      log(document.body.id);\n"
+            + "    } catch(e) {log('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onload='test()'>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

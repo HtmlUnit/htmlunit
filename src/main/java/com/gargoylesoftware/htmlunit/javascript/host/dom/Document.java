@@ -65,6 +65,7 @@ import org.w3c.dom.CDATASection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.html.HTMLFieldSetElement;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -916,6 +917,27 @@ public class Document extends Node {
             }
         }
         return null;
+    }
+
+    /**
+     * Sets the {@code body} element of the document.
+     * @param htmlElement the new html element
+     */
+    @JsxSetter
+    public void setBody(final HTMLElement htmlElement) {
+        if (htmlElement instanceof HTMLBodyElement || htmlElement instanceof HTMLFieldSetElement) {
+            final Page page = getPage();
+            if (page instanceof HtmlPage) {
+                final HtmlElement body = ((HtmlPage) page).getBody();
+                if (body != null) {
+                    body.replace(htmlElement.getDomNodeOrDie());
+                }
+            }
+            return;
+        }
+        throw Context.reportRuntimeError("Failed to set the 'body' property on 'Document': "
+                + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
+                + "It must be either a 'BODY' or 'FRAMESET' element.");
     }
 
     /**
