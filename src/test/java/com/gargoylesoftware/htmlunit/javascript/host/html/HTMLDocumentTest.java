@@ -2846,4 +2846,42 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("myBody")
+    public void body() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onload='log(document.body.id)'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("myFrameset")
+    public void bodyFrameset() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<frameset id='myFrameset' onload='log(document.body.id)'>\n"
+            + "  <frame />\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
