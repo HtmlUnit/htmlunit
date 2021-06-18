@@ -58,7 +58,7 @@ public class ArchitectureTest {
      * JsxGetter/Setter/Functions are always in the javascript package.
      */
     @ArchTest
-    public static final ArchRule jsxGetterAnnotationPackages = methods()
+    public static final ArchRule jsxAnnotationPackages = methods()
             .that().areAnnotatedWith(JsxGetter.class)
                     .or().areAnnotatedWith(JsxSetter.class)
                     .or().areAnnotatedWith(JsxFunction.class)
@@ -68,12 +68,29 @@ public class ArchitectureTest {
      * JsxGetter/Setter/Functions only valid in classes annotated as JsxClass.
      */
     @ArchTest
-    public static final ArchRule jsxGetterAnnotationJsxClass = methods()
+    public static final ArchRule jsxAnnotationJsxClass = methods()
             .that().areAnnotatedWith(JsxGetter.class)
                     .or().areAnnotatedWith(JsxSetter.class)
                     .or().areAnnotatedWith(JsxFunction.class)
             .should().beDeclaredInClassesThat().areAnnotatedWith(JsxClass.class)
             .orShould().beDeclaredInClassesThat().areAnnotatedWith(JsxClasses.class);
+
+    /**
+     * Every JsxGetter has to be named get... or is....
+     */
+    @ArchTest
+    public static final ArchRule jsxGetterAnnotationStartsWithGet = methods()
+            .that().areAnnotatedWith(JsxGetter.class)
+            .should().haveNameStartingWith("get")
+            .orShould().haveNameStartingWith("is");
+
+    /**
+     * Every JsxGetter has to be named get... or is....
+     */
+    @ArchTest
+    public static final ArchRule jsxSetterAnnotationStartsWithSet = methods()
+            .that().areAnnotatedWith(JsxSetter.class)
+            .should().haveNameStartingWith("set");
 
     /**
      * Do not overwrite toString for javascript, use jsToString and define the

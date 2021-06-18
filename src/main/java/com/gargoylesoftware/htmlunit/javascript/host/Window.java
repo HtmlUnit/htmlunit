@@ -174,6 +174,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private Document document_;
     private DocumentProxy documentProxy_;
     private Navigator navigator_;
+    private Object clientInformation_;
     private WebWindow webWindow_;
     private WindowProxy windowProxy_;
     private Screen screen_;
@@ -656,16 +657,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @return the client information
      */
     @JsxGetter({CHROME, EDGE, IE})
-    public Navigator getClientInformation() {
+    public Object getClientInformation() {
+        if (clientInformation_ != null) {
+            return clientInformation_;
+        }
         return navigator_;
     }
 
     /**
-     * Special setter for IE to ignore this call.
-     * @param ignore param gets ignored
+     * @param clientInformation the new value
      */
-    @JsxSetter(IE)
-    public void setClientInformation(final Object ignore) {
+    @JsxSetter({CHROME, EDGE})
+    public void setClientInformation(final Object clientInformation) {
+        clientInformation_ = clientInformation;
     }
 
     /**
@@ -1687,7 +1691,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param height the {@code innerHeight}
      */
     @JsxSetter
-    public void setInneHeight(final int height) {
+    public void getInnerHeight(final int height) {
         getWebWindow().setInnerHeight(height);
     }
 

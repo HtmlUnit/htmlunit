@@ -9,6 +9,12 @@
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
             <action type="fix" dev="rbri">
+                Setting window.clientInformation now works correct for Chrome/Edge and IE.
+            </action>
+            <action type="fix" dev="rbri">
+                Setting window.innerHeight was broken because of an typo for a long time.
+            </action>
+            <action type="fix" dev="rbri">
                 Properties without a setter defined are no longer setable - this was a hack introduced for IE6
                 and is no longer valid.
             </action>
