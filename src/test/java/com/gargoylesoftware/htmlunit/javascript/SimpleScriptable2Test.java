@@ -46,25 +46,52 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class SimpleScriptable2Test extends WebDriverTestCase {
 
     /**
-     * This test fails on IE and FF but not by HtmlUnit because according to Ecma standard,
-     * attempts to set read only properties should be silently ignored.
-     * Furthermore document.body = document.body will work on FF but not on IE
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    public void setNonWritableProperty() throws Exception {
+    @Alerts(DEFAULT = {"text/html", "text/html"},
+            IE = {"undefined", "123456"})
+    public void setNonWritablePropertyContentType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      document.body = 123456;\n"
-            + "    } catch (e) { alert('exception'); }\n"
+            + "      log(document.contentType);\n"
+            + "      document.contentType = '123456';\n"
+            + "      log(document.contentType);\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"CSS1Compat", "CSS1Compat"})
+    public void setNonWritablePropertyCompatMode() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(document.compatMode);\n"
+            + "      document.compatMode = '123456';\n"
+            + "      log(document.compatMode);\n"
+            + "    } catch (e) { log('exception'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -74,14 +101,17 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Alerts("[object Arguments]")
     public void arguments_toString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(arguments);\n"
+            + "    log(arguments);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,15 +121,18 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Alerts("3")
     public void stringWithExclamationMark() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var x = '<!>';\n"
-            + "    alert(x.length);\n"
+            + "    log(x.length);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -110,7 +143,9 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Alerts({"x1", "x2", "x3", "x4", "x5"})
     public void arrayedMap() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var map = {};\n"
             + "    map['x1'] = 'y1';\n"
@@ -119,13 +154,14 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "    map['x4'] = 'y4';\n"
             + "    map['x5'] = 'y5';\n"
             + "    for (var i in map) {\n"
-            + "      alert(i);\n"
+            + "      log(i);\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -136,14 +172,17 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Alerts("true")
     public void parentProtoFeature() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.createElement('div').__proto__ != undefined);\n"
+            + "    log(document.createElement('div').__proto__ != undefined);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,18 +194,21 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Alerts("1")
     public void passFunctionAsParameter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function run(fun) {\n"
-            + "    fun('alert(1)');\n"
+            + "    fun('log(1)');\n"
             + "  }\n"
             + "\n"
             + "  function test() {\n"
             + "    run(eval);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -177,15 +219,18 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     public void dateGetTimezoneOffset() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var offset = Math.abs(new Date().getTimezoneOffset());\n"
             + "    var timezone = '' + (offset/60);\n"
             + "    if (timezone.length == 1)\n"
             + "      timezone = '0' + timezone;\n"
-            + "    alert(timezone);\n"
+            + "    log(timezone);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         final String timeZone = new SimpleDateFormat("Z", Locale.ROOT)
                 .format(Calendar.getInstance(Locale.ROOT).getTime());
@@ -203,7 +248,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             sb.append(hour);
         }
         setExpectedAlerts(sb.toString());
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -213,17 +258,20 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Alerts({"true", "function", "function"})
     public void callee() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var fun = arguments.callee.toString();\n"
-            + "  alert(fun.indexOf('test()') != -1);\n"
-            + "  alert(typeof arguments.callee);\n"
-            + "  alert(typeof arguments.callee.caller);\n"
+            + "  log(fun.indexOf('test()') != -1);\n"
+            + "  log(typeof arguments.callee);\n"
+            + "  log(typeof arguments.callee.caller);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -248,22 +296,17 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
         final String header = xhtml ? "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" : "";
         final String html = header
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.createElement('div'));\n"
+            + "  log(document.createElement('div'));\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
-    }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("exception")
-    public void set_ReadOnly_document_body() throws Exception {
-        set_ReadOnly("document.body");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -284,6 +327,11 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("window.length was set")
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void set_ReadOnly_window_length() throws Exception {
         set_ReadOnly("window.length");
     }
@@ -306,23 +354,26 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("document.getElementById was set")
-    public void set_ReadOnly_window_document() throws Exception {
+    public void set_ReadOnly_getElementById() throws Exception {
         set_ReadOnly("document.getElementById");
     }
 
     private void set_ReadOnly(final String expression) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    " + expression + " = '" + expression + " was set" + "';\n"
-            + "    alert(" + expression + ");\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(" + expression + ");\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -332,28 +383,31 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
+    @Alerts(DEFAULT = {"function", "true", "function length() { [native code] }", "0", "0"},
             CHROME = {"function", "true", "function get length() { [native code] }", "0", "0"},
             EDGE = {"function", "true", "function get length() { [native code] }", "0", "0"},
-            IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
+            IE = {"function", "true", " function length() { [native code] } ", "0", "0"})
     @HtmlUnitNYI(CHROME = {"function", "true", "function length() { [native code] }", "0", "0"},
             EDGE = {"function", "true", "function length() { [native code] }", "0", "0"})
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var lengthGetter = window.__lookupGetter__('length');\n"
-            + "    alert(typeof lengthGetter);\n"
-            + "    alert(!!lengthGetter);\n"
-            + "    alert(lengthGetter);\n"
-            + "    alert(lengthGetter.call(window));\n"
-            + "    alert(lengthGetter.call());\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(typeof lengthGetter);\n"
+            + "    log(!!lengthGetter);\n"
+            + "    log(lengthGetter);\n"
+            + "    log(lengthGetter.call(window));\n"
+            + "    log(lengthGetter.call());\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -2962,14 +2962,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         return Math.round(i);
     }
 
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("length".equals(name)) {
-            return false; //ignore
-        }
-        return super.isReadOnlySettable(name, value);
-    }
-
     /**
      * Encapsulates the retrieval of a style attribute, given a DOM element from which to retrieve it.
      */

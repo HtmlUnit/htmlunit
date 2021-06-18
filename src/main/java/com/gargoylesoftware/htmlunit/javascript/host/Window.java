@@ -4453,14 +4453,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         }
         return null;
     }
-
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("closed".equals(name)) {
-            return false; //ignore
-        }
-        return super.isReadOnlySettable(name, value);
-    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

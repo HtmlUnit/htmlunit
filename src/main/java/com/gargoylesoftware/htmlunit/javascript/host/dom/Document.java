@@ -4258,14 +4258,6 @@ public class Document extends Node {
         return getWindow();
     }
 
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("body".equals(name)) {
-            throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
-        }
-        return super.isReadOnlySettable(name, value);
-    }
-
     /**
      * Returns the element with the specified ID, as long as it is an HTML element; {@code null} otherwise.
      * @param id the ID to search for
