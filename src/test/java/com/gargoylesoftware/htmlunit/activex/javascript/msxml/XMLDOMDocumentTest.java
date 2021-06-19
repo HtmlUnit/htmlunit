@@ -430,7 +430,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "} catch(e) { log('exception-setEmpty'); }\n"
             // normal
             + "try {\n"
-            + "doc.firstChild = doc.createElement('foo');\n"
+            + "  doc.firstChild = doc.createElement('foo');\n"
             + "} catch(e) { log('exception-set'); }\n";
 
         tester_create(test);
