@@ -1190,7 +1190,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "盲", "兀賴賱丕賸", "屑懈褉", "鎴块棿"})
-    @NotYetImplemented
     public void _GB2312___UTF8_() throws Exception {
         charset(TestCharset.GB2312, null, null, TestCharset.UTF8, null);
     }
@@ -1200,7 +1199,6 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "盲", "兀賴賱丕賸", "屑懈褉", "鎴块棿"})
-    @NotYetImplemented
     public void _GB2312____() throws Exception {
         charset(TestCharset.GB2312, null, null, null, null);
     }
