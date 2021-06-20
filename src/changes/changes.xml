@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
+            <action type="fix" dev="rbri" issue="358" due-to="tyuxue">
+                Translate response charset GB2312 to GBK like browsers do.
+            </action>
             <action type="fix" dev="rbri">
                 Setting window.clientInformation now works correct for Chrome/Edge and IE.
             </action>

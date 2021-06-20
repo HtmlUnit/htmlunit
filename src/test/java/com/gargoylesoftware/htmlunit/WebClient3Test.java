@@ -19,6 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -540,5 +541,56 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", MimeType.APPLICATION_JAVASCRIPT);
         loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encodingCharsetGB2312() throws Exception {
+        encodingCharset("\u6211\u662F\u6211\u7684 Abc", "GB2312", "GB2312");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encodingCharsetGB2312GBKChar() throws Exception {
+        encodingCharset("\u4eb8 Abc", "GB2312", "GBK");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encodingCharsetGBK() throws Exception {
+        encodingCharset("\u6211\u662F\u6211\u7684 \u4eb8 Abc", "GBK", "GBK");
+    }
+
+    private void encodingCharset(final String title,
+            final String metaCharset, final String responseCharset) throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<meta http-equiv='Content-Type' content='text/html; charset=" + metaCharset + "'>\n"
+            + "<title>" + title + "</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final String firstResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n" + html;
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer =
+                new PrimitiveWebServer(Charset.forName(responseCharset), firstResponse, firstResponse)) {
+            final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
+            final WebDriver driver = getWebDriver();
+
+            driver.get(url);
+            assertEquals(title, driver.getTitle());
+        }
     }
 }
