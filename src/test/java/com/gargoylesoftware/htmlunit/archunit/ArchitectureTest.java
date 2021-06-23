@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.archunit;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -24,10 +25,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.tngtech.archunit.base.DescribedPredicate;
+import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
+import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 
 /**
  * Architecture tests.
@@ -84,6 +90,23 @@ public class ArchitectureTest {
             .should().haveNameStartingWith("get")
             .orShould().haveNameStartingWith("is");
 
+    private static final DescribedPredicate<JavaMethod> haveJsxGetterWithNonDefaultPropertyName =
+            new DescribedPredicate<JavaMethod>("@JsxGetter has a non default propertyName") {
+                @Override
+                public boolean apply(final JavaMethod method) {
+                    return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxGetter.class).propertyName());
+                }
+            };
+
+    /**
+     * Every JsxGetter with propertyName defined has to end in '_js'.
+     */
+    @ArchTest
+    public static final ArchRule jsxGetterAnnotationPostfix = methods()
+            .that().areAnnotatedWith(JsxGetter.class)
+            .and(haveJsxGetterWithNonDefaultPropertyName)
+            .should().haveNameEndingWith("_js");
+
     /**
      * Every JsxGetter has to be named get... or is....
      */
@@ -91,6 +114,52 @@ public class ArchitectureTest {
     public static final ArchRule jsxSetterAnnotationStartsWithSet = methods()
             .that().areAnnotatedWith(JsxSetter.class)
             .should().haveNameStartingWith("set");
+
+    private static final DescribedPredicate<JavaMethod> haveJsxSetterWithNonDefaultPropertyName =
+            new DescribedPredicate<JavaMethod>("@JsxSetter has a non default propertyName") {
+                @Override
+                public boolean apply(final JavaMethod method) {
+                    return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxSetter.class).propertyName());
+                }
+            };
+
+    /**
+     * Every JsxSetter with propertyName defined has to end in '_js'.
+     */
+    @ArchTest
+    public static final ArchRule jsxSetterAnnotationPostfix = methods()
+            .that().areAnnotatedWith(JsxSetter.class)
+            .and(haveJsxSetterWithNonDefaultPropertyName)
+            .should().haveNameEndingWith("_js");
+
+    private static final ArchCondition<JavaMethod> hasMatchingGetter =
+            new ArchCondition<JavaMethod>("every @JsxSetter needs a matching @JsxGetter") {
+                @Override
+                public void check(final JavaMethod method, final ConditionEvents events) {
+                    String getterName = "g" + method.getName().substring(1);
+                    try {
+                        method.getOwner().getMethod(getterName);
+                    }
+                    catch (final IllegalArgumentException e) {
+                        getterName = "is" + method.getName().substring(3);
+                        try {
+                            method.getOwner().getMethod(getterName);
+                        }
+                        catch (final IllegalArgumentException e2) {
+                            events.add(SimpleConditionEvent.violated(method,
+                                    "No matching JsxGetter found for " + method.getFullName()));
+                        }
+                    }
+                }
+            };
+
+    /**
+     * Every @JsxSetter needs a matching @JsxGetter.
+     */
+    @ArchTest
+    public static final ArchRule setterNeedsMatchingGetter = methods()
+            .that().areAnnotatedWith(JsxSetter.class)
+            .should(hasMatchingGetter);
 
     /**
      * Do not overwrite toString for javascript, use jsToString and define the

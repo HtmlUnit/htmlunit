@@ -143,14 +143,4 @@ public class HTMLTableSectionElement extends RowContainer {
     public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
-
-    /**
-     * Overwritten to throw an exception because this is readonly.
-     * @param value the new value for the contents of this node
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, IE})
-    public void setInnerText(final Object value) {
-        super.setInnerText(value);
-    }
 }
