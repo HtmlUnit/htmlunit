@@ -9,7 +9,7 @@
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
             <action type="fix" dev="rbri">
-                Frameset/HTMLTableSectionElement outerHTML property is setable.
+                Frameset/HTMLTableSectionElement/HTMLTableCaptionElement outerHTML property is setable.
             </action>
             <action type="fix" dev="rbri" issue="358" due-to="tyuxue">
                 Translate response charset GB2312 to GBK like browsers do.
