@@ -1259,16 +1259,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Sets the Uniform Resource Name (URN) specified in the namespace declaration.
-     * @param tagUrn the Uniform Resource Name (URN) specified in the namespace declaration
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
-     */
-    @JsxSetter(IE)
-    public void setTagUrn(final String tagUrn) {
-        throw Context.reportRuntimeError("Error trying to set tagUrn to '" + tagUrn + "'.");
-    }
-
-    /**
      * Gets the first ancestor instance of {@link HTMLElement}. It is mostly identical
      * to {@link #getParent()} except that it skips XML nodes.
      * @return the parent HTML element

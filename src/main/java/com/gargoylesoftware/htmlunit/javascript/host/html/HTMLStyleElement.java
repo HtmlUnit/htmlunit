@@ -118,16 +118,6 @@ public class HTMLStyleElement extends HTMLElement {
     }
 
     /**
-     * Sets the scoped of this style.
-     * @param scoped the new scoped
-     */
-    @JsxSetter({FF, FF78})
-    public void setScoped(final boolean scoped) {
-        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        style.setAttribute("scoped", Boolean.toString(scoped));
-    }
-
-    /**
      * Returns the {@code disabled} property.
      * @return the {@code disabled} property
      */
