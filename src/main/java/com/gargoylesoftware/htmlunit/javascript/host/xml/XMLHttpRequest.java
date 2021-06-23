@@ -1036,7 +1036,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return the {@code upload} property
      */
     @JsxGetter(value = IE, propertyName = "upload")
-    public XMLHttpRequestEventTarget getUploadIE() {
+    public XMLHttpRequestEventTarget getUploadIE_js() {
         final XMLHttpRequestEventTarget upload = new XMLHttpRequestEventTarget();
         upload.setParentScope(getParentScope());
         upload.setPrototype(getPrototype(upload.getClass()));

@@ -834,7 +834,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the {@code Methods} attribute
      */
     @JsxGetter(propertyName = "Methods", value = IE)
-    public String getMethods() {
+    public String getMethods_js() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
@@ -843,7 +843,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param methods {@code Methods} attribute
      */
     @JsxSetter(propertyName = "Methods", value = IE)
-    public void setMethods(final String methods) {
+    public void setMethods_js(final String methods) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 

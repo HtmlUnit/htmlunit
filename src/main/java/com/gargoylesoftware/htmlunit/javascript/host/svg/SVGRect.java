@@ -114,7 +114,7 @@ public class SVGRect extends SimpleScriptable {
      * @param height the height
      */
     @JsxSetter
-    public void setHeigth(final double height) {
+    public void setHeight(final double height) {
         height_ = height;
     }
 

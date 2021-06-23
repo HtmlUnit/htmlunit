@@ -1136,7 +1136,7 @@ public class Document extends Node {
      * @return the value of the {@code URL} property
      */
     @JsxGetter(propertyName = "URL")
-    public String getURL() {
+    public String getURL_js() {
         return getPage().getUrl().toExternalForm();
     }
 
@@ -1146,7 +1146,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getDocumentURI() {
-        return getURL();
+        return getURL_js();
     }
 
     /**
@@ -1154,8 +1154,8 @@ public class Document extends Node {
      * @return the value of the {@code URLUnencoded} property
      */
     @JsxGetter(value = IE, propertyName = "URLUnencoded")
-    public String getURLUnencoded() {
-        return getURL();
+    public String getURLUnencoded_js() {
+        return getURL_js();
     }
 
     /**
