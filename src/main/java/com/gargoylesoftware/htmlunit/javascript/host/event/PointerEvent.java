@@ -269,8 +269,8 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the isPrimary
      */
-    @JsxGetter
-    public boolean isPrimary() {
+    @JsxGetter(propertyName = "isPrimary")
+    public boolean isPrimary_js() {
         return isPrimary_;
     }
 
