@@ -590,4 +590,30 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"<thead id=\"thead\"><tr><td>cell1</td></tr></thead>", "new"})
+    public void outerHTML() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        log(document.getElementById('thead').outerHTML);\n"
+            + "        document.getElementById('thead').outerHTML = '<div id=\"new\">text<div>';\n"
+            + "        log(document.getElementById('new').id);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><thead id='thead'><tr><td>cell1</td></tr></thead></table>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
