@@ -1100,6 +1100,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
+     * Gets the {@code borderTop} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getBorderTop() {
+        return getStyleAttribute(BORDER_TOP);
+    }
+
+    /**
      * Sets the {@code borderTop} style attribute.
      * @param borderTop the new attribute
      */
@@ -1750,6 +1759,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             }
         }
         return ids.toArray();
+    }
+
+    /**
+     * Gets the {@code borderTop} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(IE)
+    public String getMsImeAlign() {
+        return getStyleAttribute(Definition.MS_IME_ALIGN);
     }
 
     /**
