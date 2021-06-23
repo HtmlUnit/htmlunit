@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
@@ -121,16 +120,6 @@ public class HTMLFrameSetElement extends HTMLElement {
     @JsxSetter(IE)
     public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
-    }
-
-    /**
-     * Overwritten to throw an exception.
-     * @param value the new value for replacing this node
-     */
-    @JsxSetter
-    @Override
-    public void setOuterHTML(final Object value) {
-        throw Context.reportRuntimeError("outerHTML is read-only for tag 'frameset'");
     }
 
     /**
