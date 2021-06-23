@@ -294,8 +294,8 @@ public class HTMLTableElement extends RowContainer {
      * Sets the {@code width} property.
      * @param width the {@code width} property
      */
-    @JsxSetter
-    public void setWidth(final String width) {
+    @JsxSetter(propertyName = "width")
+    public void setWidth_js(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
 
