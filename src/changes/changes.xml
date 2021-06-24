@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
+            <action type="add" dev="rbri">
+                HtmlImage.getWidthOrDefault() and HtmlImage.getHeightOrDefault() added.
+            </action>
             <action type="fix" dev="rbri">
                 Frameset/HTMLTableSectionElement/HTMLTableCaptionElement outerHTML property is setable.
             </action>
