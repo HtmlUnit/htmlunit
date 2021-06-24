@@ -55,19 +55,21 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     public void onpropertychange() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('input1').value = 'New Value';\n"
             + "  }\n"
             + "  function handler() {\n"
-            + "    alert(event.propertyName);\n"
+            + "    log(event.propertyName);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='input1' onpropertychange='handler()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -79,11 +81,12 @@ public class HtmlElement2Test extends WebDriverTestCase {
         final String html
             = "<html>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var value = document.getElementById('duplicateID').innerHTML;\n"
-            + "    alert(value.length > 10);\n"
+            + "    log(value.length > 10);\n"
             + "    document.getElementById('duplicateID').style.display = 'block';\n"
-            + "    alert(value === document.getElementById('duplicateID').innerHTML);\n"
+            + "    log(value === document.getElementById('duplicateID').innerHTML);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -91,7 +94,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "  <fieldset id='duplicateID'><span id='duplicateID'></span></fieldset>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -100,11 +103,12 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     public void onpropertychange2() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('input1').value = 'New Value';\n"
             + "  }\n"
             + "  function handler() {\n"
-            + "    alert(1);\n"
+            + "    log(1);\n"
             + "    document.getElementById('input1').dir='rtl';\n"
             + "  }\n"
             + "</script></head>\n"
@@ -112,7 +116,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "  <input id='input1' onpropertychange='handler()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -125,19 +129,20 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts({"false", "true", "a", "a", "b", "b", "b", "c"})
     public void clonedNodeAttributes() throws Exception {
         final String html = "<html><body id='a' title='b'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var x = document.body.cloneNode(true);\n"
-            + "alert(document.body == x);\n"
-            + "alert(document.getElementById('a') == document.body);\n"
-            + "alert(document.body.id);\n"
-            + "alert(x.id);\n"
-            + "alert(document.body.title);\n"
-            + "alert(x.title);\n"
+            + "log(document.body == x);\n"
+            + "log(document.getElementById('a') == document.body);\n"
+            + "log(document.body.id);\n"
+            + "log(x.id);\n"
+            + "log(document.body.title);\n"
+            + "log(x.title);\n"
             + "x.title = 'c';\n"
-            + "alert(document.body.title);\n"
-            + "alert(x.title);\n"
+            + "log(document.body.title);\n"
+            + "log(x.title);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -149,17 +154,19 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts({"true", "undefined", "undefined"})
     public void textAndXmlUndefined() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "    <input type='text' id='textfield1' onfocus='alert(1)'>\n"
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "    <input type='text' id='textfield1' onfocus='log(1)'>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "         var node = document.getElementById('textfield1');\n"
-            + "         alert(node.attributes[0].nodeName.length > 0);\n"
-            + "         alert(node.attributes[0].text);\n"
-            + "         alert(node.attributes[0].xml);\n"
+            + "         log(node.attributes[0].nodeName.length > 0);\n"
+            + "         log(node.attributes[0].text);\n"
+            + "         log(node.attributes[0].xml);\n"
             + "    </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
