@@ -20,6 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NO_SRC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 
 import java.io.File;
 import java.io.IOException;
@@ -464,6 +468,62 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
+     * Returns the value same value as the js height property.
+     * @return the value of the {@code height} property
+     */
+    public int getHeightOrDefault() {
+        final String height = getHeightAttribute();
+
+        if (DomElement.ATTRIBUTE_NOT_DEFINED != height) {
+            try {
+                return Integer.parseInt(height);
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+        }
+
+        final String src = getSrcAttribute();
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == src) {
+            final BrowserVersion browserVersion = ((HtmlPage) getPage()).getWebClient().getBrowserVersion();
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 30;
+            }
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                    || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
+                return 0;
+            }
+            return 24;
+        }
+
+        final WebClient webClient = ((HtmlPage) getPage()).getWebClient();
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
+            return 0;
+        }
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
+            return 0;
+        }
+
+        try {
+            if (webClient.getOptions().isDownloadImages()) {
+                return getHeight();
+            }
+        }
+        catch (final IOException e) {
+            // ignore and use the default below
+        }
+
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+            return 30;
+        }
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+            return 16;
+        }
+        return 24;
+    }
+
+    /**
      * <p>Returns the image's actual width (<b>not</b> the image's {@link #getWidthAttribute() width attribute}).</p>
      * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
      * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
@@ -476,6 +536,63 @@ public class HtmlImage extends HtmlElement {
             determineWidthAndHeight();
         }
         return width_;
+    }
+
+    /**
+     * Returns the value same value as the js width property.
+     * @return the value of the {@code width} property
+     */
+    public int getWidthOrDefault() {
+        final String widthAttrib = getWidthAttribute();
+
+        if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttrib) {
+            try {
+                return Integer.parseInt(widthAttrib);
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+        }
+
+        final String src = getSrcAttribute();
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == src) {
+            final BrowserVersion browserVersion = ((HtmlPage) getPage()).getWebClient().getBrowserVersion();
+
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 28;
+            }
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                    || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
+                return 0;
+            }
+            return 24;
+        }
+
+        final WebClient webClient = ((HtmlPage) getPage()).getWebClient();
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
+            return 0;
+        }
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
+            return 0;
+        }
+
+        try {
+            if (webClient.getOptions().isDownloadImages()) {
+                return getWidth();
+            }
+        }
+        catch (final IOException e) {
+            // ignore and use the default below
+        }
+
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+            return 28;
+        }
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+            return 16;
+        }
+        return 24;
     }
 
     /**

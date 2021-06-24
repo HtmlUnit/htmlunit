@@ -223,7 +223,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void determineWidthHeigthFromImage() throws Exception {
+    public void determineWidthHeightFromImage() throws Exception {
         try (InputStream is = getClass().getClassLoader().
                 getResourceAsStream("testfiles/4x7.jpg")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
