@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Alex Gorbatovsky
  */
 public class HtmlImage extends HtmlElement {
 
