@@ -156,14 +156,14 @@ public class HtmlElement2Test extends WebDriverTestCase {
         final String html
             = "<html><head></head>\n"
             + "<body>\n"
-            + "    <input type='text' id='textfield1' onfocus='log(1)'>\n"
-            + "    <script>\n"
+            + "  <input type='text' id='textfield1' onfocus='log(1)'>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "         var node = document.getElementById('textfield1');\n"
-            + "         log(node.attributes[0].nodeName.length > 0);\n"
-            + "         log(node.attributes[0].text);\n"
-            + "         log(node.attributes[0].xml);\n"
-            + "    </script>\n"
+            + "    var node = document.getElementById('textfield1');\n"
+            + "    log(node.attributes[0].nodeName.length > 0);\n"
+            + "    log(node.attributes[0].text);\n"
+            + "    log(node.attributes[0].xml);\n"
+            + "  </script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
