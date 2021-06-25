@@ -137,19 +137,17 @@ public class ArchitectureTest {
                 @Override
                 public void check(final JavaMethod method, final ConditionEvents events) {
                     String getterName = "g" + method.getName().substring(1);
-                    try {
-                        method.getOwner().getMethod(getterName);
+                    if (method.getOwner().tryGetMethod(getterName).isPresent()) {
+                        return;
                     }
-                    catch (final IllegalArgumentException e) {
-                        getterName = "is" + method.getName().substring(3);
-                        try {
-                            method.getOwner().getMethod(getterName);
-                        }
-                        catch (final IllegalArgumentException e2) {
-                            events.add(SimpleConditionEvent.violated(method,
-                                    "No matching JsxGetter found for " + method.getFullName()));
-                        }
+
+                    getterName = "is" + method.getName().substring(3);
+                    if (method.getOwner().tryGetMethod(getterName).isPresent()) {
+                        return;
                     }
+
+                    events.add(SimpleConditionEvent.violated(method,
+                            "No matching JsxGetter found for " + method.getFullName()));
                 }
             };
 
