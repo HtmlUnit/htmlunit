@@ -507,21 +507,17 @@ public class HtmlImage extends HtmlElement {
         }
 
         try {
-            if (webClient.getOptions().isDownloadImages()) {
-                return getHeight();
-            }
+            return getHeight();
         }
         catch (final IOException e) {
-            // ignore and use the default below
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 30;
+            }
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+                return 16;
+            }
+            return 24;
         }
-
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-            return 30;
-        }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
-            return 16;
-        }
-        return 24;
     }
 
     /**
@@ -579,21 +575,17 @@ public class HtmlImage extends HtmlElement {
         }
 
         try {
-            if (webClient.getOptions().isDownloadImages()) {
-                return getWidth();
-            }
+            return getWidth();
         }
         catch (final IOException e) {
-            // ignore and use the default below
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 28;
+            }
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+                return 16;
+            }
+            return 24;
         }
-
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-            return 28;
-        }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
-            return 16;
-        }
-        return 24;
     }
 
     /**

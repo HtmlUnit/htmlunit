@@ -263,11 +263,11 @@ public class HtmlImageTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"16", "16", "1"},
-            FF = {"24", "24", "1"},
-            FF78 = {"24", "24", "1"},
-            IE = {"28", "30", "1"})
-    public void doNotRetrieveImagePerDefault() throws Exception {
+    @Alerts(DEFAULT = {"16", "16", "2"},
+            FF = {"24", "24", "2"},
+            FF78 = {"24", "24", "2"},
+            IE = {"28", "30", "2"})
+    public void retrieveImagePerDefault() throws Exception {
         final String html =
                 "<html>\n"
                 + "<head></head>\n"
