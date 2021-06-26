@@ -1536,11 +1536,6 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18",
-            FF = "18",
-            FF78 = "18",
-            IE = "18")
     public void span() throws Exception {
         loadPageVerifyTitle2(test("span"));
     }
