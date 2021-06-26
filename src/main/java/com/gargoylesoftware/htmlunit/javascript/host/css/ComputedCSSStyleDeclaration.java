@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
@@ -136,6 +137,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement;
@@ -155,6 +157,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Alex Gorbatovsky
  */
 @JsxClass(isJSObject = false, value = {FF, FF78})
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
@@ -1057,6 +1060,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if (node instanceof HtmlTextArea) {
                 width = 100; // wild guess
             }
+            else if (node instanceof HtmlImage) {
+                width = ((HtmlImage) node).getWidthOrDefault();
+            }
             else {
                 // Inline elements take up however much space is required by their children.
                 width = getContentWidth();
@@ -1151,7 +1157,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return height_.intValue();
         }
 
-        final boolean isInline = "inline".equals(getDisplay()) && !(getElement() instanceof HTMLIFrameElement);
+        final Element element = getElement();
+
+        if (element instanceof HTMLImageElement) {
+            height_ = ((HtmlImage) element.getDomNodeOrDie()).getHeightOrDefault();
+            return height_;
+        }
+
+        final boolean isInline = "inline".equals(getDisplay()) && !(element instanceof HTMLIFrameElement);
         // height is ignored for inline elements
         if (isInline || super.getHeight().isEmpty()) {
             final int contentHeight = getContentHeight();

@@ -20,6 +20,12 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -30,6 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link ComputedCSSStyleDeclaration}.
@@ -39,6 +46,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Dennis Duysak
+ * @author Alex Gorbatovsky
  */
 @RunWith(BrowserRunner.class)
 public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
@@ -1372,6 +1380,41 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "7", "16", "16"},
+            FF = {"4", "7", "24", "24"},
+            FF78 = {"4", "7", "24", "24"},
+            IE = {"4", "7", "28", "30"})
+    public void widthAndHeightImageElements() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/4x7.jpg")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "4x7.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myImage = document.getElementById('myImage');\n"
+            + "    log(myImage.offsetWidth);\n"
+            + "    log(myImage.offsetHeight);\n"
+
+            + "    var myImage = document.getElementById('myImage2');\n"
+            + "    log(myImage.offsetWidth);\n"
+            + "    log(myImage.offsetHeight);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img id='myImage' src='4x7.jpg' >\n"
+            + "  <img id='myImage2' src='unknown.jpg' >\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
     }
 
     /**
