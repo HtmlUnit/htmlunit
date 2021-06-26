@@ -1390,7 +1390,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"4", "7", "24", "24"},
             FF78 = {"4", "7", "24", "24"},
             IE = {"4", "7", "28", "30"})
-    public void widthAndHeightImageElements() throws Exception {
+    public void widthAndHeightImageElement() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/4x7.jpg")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "4x7.jpg");
@@ -1413,6 +1413,55 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <img id='myImage' src='4x7.jpg' >\n"
             + "  <img id='myImage2' src='unknown.jpg' >\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void widthAndHeightEmptySpanElement() throws Exception {
+        final String content = "<html><head><script id='headScript'>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var headScript = document.getElementById('headScript');\n"
+            + "    log(headScript.offsetWidth);\n"
+            + "    log(headScript.offsetHeight);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  Ab<span id='mySpan'></span>cD\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0", "0", "0", "0", "0"})
+    public void widthAndHeightScriptElement() throws Exception {
+        final String content = "<html><head><script id='headScript'>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var headScript = document.getElementById('headScript');\n"
+            + "    log(headScript.offsetWidth);\n"
+            + "    log(headScript.offsetHeight);\n"
+
+            + "    var bodyScript = document.getElementById('bodyScript');\n"
+            + "    log(bodyScript.offsetWidth);\n"
+            + "    log(bodyScript.offsetHeight);\n"
+
+            + "    var aroundScript = document.getElementById('aroundScript');\n"
+            + "    log(aroundScript.offsetWidth);\n"
+            + "    log(aroundScript.offsetHeight);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <script id='bodyScript'>console.log('#');</script>\n"
+            + "  <span id='aroundScript'><script>console.log('#');</script></span>\n"
             + "</body></html>";
         loadPageVerifyTitle2(content);
     }

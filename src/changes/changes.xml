@@ -9,6 +9,12 @@
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Chrome/Edge 91, JS Template support">
             <action type="fix" dev="rbri" due-to="Alex Gorbatovsky">
+                Improved ComputedCSSStyleDeclaration regarding height and width for empty span's.
+            </action>
+            <action type="fix" dev="rbri" due-to="Alex Gorbatovsky">
+                Improved ComputedCSSStyleDeclaration regarding image height and width.
+            </action>
+            <action type="fix" dev="rbri" due-to="Alex Gorbatovsky">
                 Improved ComputedCSSStyleDeclaration regarding image height and width.
             </action>
             <action type="add" dev="rbri">

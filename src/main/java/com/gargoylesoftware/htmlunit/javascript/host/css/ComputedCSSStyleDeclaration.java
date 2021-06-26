@@ -1302,7 +1302,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     defaultHeight *= lineCount;
                 }
                 else {
-                    defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
+                    if (node instanceof HtmlSpan && StringUtils.isEmpty(content)) {
+                        defaultHeight = 0;
+                    }
+                    else {
+                        defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
+                    }
                 }
             }
         }
