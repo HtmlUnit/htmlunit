@@ -823,7 +823,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "28")
-    @HtmlUnitNYI(IE = "0")
     public void image() throws Exception {
         loadPageVerifyTitle2(test("image"));
     }
@@ -836,7 +835,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "28")
-    @HtmlUnitNYI(IE = "0")
     public void img() throws Exception {
         loadPageVerifyTitle2(test("img"));
     }

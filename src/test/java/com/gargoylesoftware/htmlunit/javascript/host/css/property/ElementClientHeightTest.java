@@ -883,7 +883,6 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "30")
-    @HtmlUnitNYI(IE = "0")
     public void image() throws Exception {
         loadPageVerifyTitle2(test("image"));
     }
@@ -896,7 +895,6 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "30")
-    @HtmlUnitNYI(IE = "0")
     public void img() throws Exception {
         loadPageVerifyTitle2(test("img"));
     }
