@@ -934,8 +934,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                        "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
-            FF = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
-                  "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF78 = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
@@ -1111,9 +1109,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "4.11667px",
+    @Alerts(DEFAULT = "4.05px",
             CHROME = "3.816px",
             EDGE = "3.828px",
+            FF78 = "4.11667px",
             IE = "0px")
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
@@ -1462,6 +1461,39 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <script id='bodyScript'>console.log('#');</script>\n"
             + "  <span id='aroundScript'><script>console.log('#');</script></span>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"33", "17", "0", "17"},
+            FF = {"33", "17", "0", "0"},
+            FF78 = {"33", "17", "0", "0"},
+            IE = {"33", "18", "0", "0"})
+    @HtmlUnitNYI(CHROME = {"30", "18", "0", "0"},
+            EDGE = {"30", "18", "0", "0"},
+            FF = {"30", "18", "0", "0"},
+            FF78 = {"30", "18", "0", "0"},
+            IE = {"30", "18", "0", "0"})
+    public void widthAndHeightChildDisplayNone() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outerSpan = document.getElementById('outerSpan');\n"
+            + "    log(outerSpan.offsetWidth);\n"
+            + "    log(outerSpan.offsetHeight);\n"
+
+            + "    var outerSpanContentInvisible = document.getElementById('outerSpanContentInvisible');\n"
+            + "    log(outerSpanContentInvisible.offsetWidth);\n"
+            + "    log(outerSpanContentInvisible.offsetHeight);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='outerSpan'><span>ABC</span></span>\n"
+            + "  <span id='outerSpanContentInvisible'><span style='display:none'>ABC</span></span>\n"
             + "</body></html>";
         loadPageVerifyTitle2(content);
     }

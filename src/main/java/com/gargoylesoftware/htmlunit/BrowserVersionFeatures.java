@@ -141,6 +141,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
 
+    /** Is display style 'block'. */
+    @BrowserFeature(FF78)
+    CSS_TEXTAREA_DISPLAY_BLOCK,
+
     /** 'auto' is supported when setting vertical-align style. */
     @BrowserFeature(IE)
     CSS_VERTICAL_ALIGN_SUPPORTS_AUTO,
