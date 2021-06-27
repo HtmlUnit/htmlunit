@@ -619,7 +619,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL,
 
     /** The anchor protocol property converts drive letters to uppercase. */
@@ -690,6 +690,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTHIGHT_INPUT_17,
 
+    /** ClientHeight for input is 18. */
+    @BrowserFeature(FF)
+    JS_CLIENTHIGHT_INPUT_18,
+
+    /** ClientHeight for radio button and checkbox is 10. */
+    @BrowserFeature(FF)
+    JS_CLIENTHIGHT_RADIO_CHECKBOX_10,
+
     /** ClientRectList.item throws instead of returning null if an element was not found. */
     @BrowserFeature(IE)
     JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
@@ -701,6 +709,10 @@ public enum BrowserVersionFeatures {
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
+
+    /** ClientWidth for radio button and checkbox is 10. */
+    @BrowserFeature(FF)
+    JS_CLIENTWIDTH_RADIO_CHECKBOX_10,
 
     /** Is window can be used as Console. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
@@ -1449,9 +1461,15 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132,
 
     /**
+     * Difference of window.outer/inner height is 91.
+     */
+    @BrowserFeature(FF)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91,
+
+    /**
      * Difference of window.outer/inner height is 80.
      */
-    @BrowserFeature({FF, FF78})
+    @BrowserFeature(FF78)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_80,
 
     /**

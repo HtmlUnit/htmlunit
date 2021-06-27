@@ -17,8 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_18;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_RADIO_CHECKBOX_10;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
@@ -1055,7 +1058,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = 145; // FF
             }
             else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
-                width = 13;
+                final BrowserVersion browserVersion = getBrowserVersion();
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_10)) {
+                    width = 10;
+                }
+                else {
+                    width = 13;
+                }
             }
             else if (node instanceof HtmlTextArea) {
                 width = 100; // wild guess
@@ -1229,7 +1238,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else if (elem.getFirstChild() == null) {
             if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
-                defaultHeight = 13;
+                final BrowserVersion browser = getBrowserVersion();
+                if (browser.hasFeature(JS_CLIENTHIGHT_RADIO_CHECKBOX_10)) {
+                    defaultHeight = 10;
+                }
+                else {
+                    defaultHeight = 13;
+                }
             }
             else if (node instanceof HtmlButton) {
                 defaultHeight = 20;
@@ -1238,6 +1253,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final BrowserVersion browser = getBrowserVersion();
                 if (browser.hasFeature(JS_CLIENTHIGHT_INPUT_17)) {
                     defaultHeight = 17;
+                }
+                else if (browser.hasFeature(JS_CLIENTHIGHT_INPUT_18)) {
+                    defaultHeight = 18;
                 }
                 else {
                     defaultHeight = 20;

@@ -523,6 +523,12 @@ public class Event extends SimpleScriptable {
     /** The ontransitionstart event type, triggered by {@code ontransitionstart} event handlers. */
     public static final String TYPE_ONTRANSITIONSTART = "ontransitionstart";
 
+    /** The ongamepadconnected event type, triggered by {@code ongamepadconnected} event handlers. */
+    public static final String TYPE_GAMEPAD_CONNECTED = "ongamepadconnected";
+
+    /** The ongamepaddisconnected event type, triggered by {@code ongamepaddisconnected} event handlers. */
+    public static final String TYPE_GAMEPAD_DISCONNECTED = "ongamepaddisconnected";
+
     /**
      * The mssitemodejumplistitemremoved event type, triggered
      * by {@code mssitemodejumplistitemremoved} event handlers.
