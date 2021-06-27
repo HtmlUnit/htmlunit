@@ -825,10 +825,10 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             CHROME = "19",
             EDGE = "19")
     @HtmlUnitNYI(CHROME = "0",
-        EDGE = "0",
-        FF = "0",
-        FF78 = "0",
-        IE = "0")
+            EDGE = "0",
+            FF = "0",
+            FF78 = "0",
+            IE = "0")
     public void q() throws Exception {
         test("q");
     }

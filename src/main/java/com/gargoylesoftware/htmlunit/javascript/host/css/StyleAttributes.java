@@ -188,7 +188,7 @@ public final class StyleAttributes {
         /** The style property {@code aspectRatio}. */
         ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto"), ffLatest("auto")),
 
-        /** The style property {@code aspectRatio}. */
+        /** The style property {@code aspect-ratio}. */
         ASPECT_RATIO_("aspect-ratio", "aspect-ratio", ffLatest("auto")),
 
         /** The style property {@code azimuth}. */

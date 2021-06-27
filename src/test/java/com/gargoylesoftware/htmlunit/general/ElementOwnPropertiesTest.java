@@ -2563,7 +2563,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onunhandledrejection,onunload,text,"
                 + "vLink",
             FF = "aLink,background,bgColor,constructor(),link,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onhashchange,onlanguagechange,onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,"
+                + "ongamepadconnected,ongamepaddisconnected,onhashchange,"
+                + "onlanguagechange,onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,"
                 + "onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,text,"
                 + "vLink",
             FF78 = "aLink,background,bgColor,constructor(),link,onafterprint,onbeforeprint,onbeforeunload,"
@@ -4674,7 +4675,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlanguagechange,onload(),onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,"
                 + "onpopstate,onrejectionhandled,onresize,onscroll,onstorage,onunhandledrejection,onunload,"
                 + "rows",
-            FF = "cols,constructor(),onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,"
+            FF = "cols,constructor(),onafterprint,onbeforeprint,onbeforeunload,"
+                + "ongamepadconnected,ongamepaddisconnected,onhashchange,onlanguagechange,"
                 + "onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,onpopstate,onrejectionhandled,"
                 + "onstorage,onunhandledrejection,onunload,"
                 + "rows",
@@ -10665,7 +10667,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getPredictedEvents(),height,isPrimary,pointerId,pointerType,"
                 + "pressure,tangentialPressure,tiltX,tiltY,twist,"
                 + "width",
-            FF = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+            FF = "constructor(),getCoalescedEvents(),getPredictedEvents(),"
+                + "height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             FF78 = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",

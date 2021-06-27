@@ -330,7 +330,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "636",
             EDGE = "638",
-            FF = "688",
+            FF = "677",
             FF78 = "688",
             IE = "682")
     @HtmlUnitNYI(CHROME = "605",
@@ -691,8 +691,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "680",
-            FF = "688",
+    @Alerts(CHROME = "636",
+            EDGE = "638",
+            FF = "677",
             FF78 = "688",
             IE = "682")
     @HtmlUnitNYI(CHROME = "0",
@@ -712,7 +713,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "636",
             EDGE = "638",
-            FF = "688",
+            FF = "677",
             FF78 = "688",
             IE = "682")
     @HtmlUnitNYI(CHROME = "18",
@@ -1895,7 +1896,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "17",
-            FF = "20",
+            FF = "18",
             FF78 = "20",
             IE = "19")
     @HtmlUnitNYI(IE = "20")
@@ -1926,7 +1927,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("13")
+    @Alerts(DEFAULT = "13",
+            FF = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1938,7 +1940,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "21",
-            FF = "24",
+            FF = "22",
             FF78 = "22",
             IE = "19")
     @HtmlUnitNYI(CHROME = "17",
@@ -1968,7 +1970,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "17",
-            FF = "20",
+            FF = "18",
             FF78 = "20",
             IE = "20")
     public void inputPassword() throws Exception {
@@ -1981,7 +1983,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("13")
+    @Alerts(DEFAULT = "13",
+            FF = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -2010,9 +2013,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "17",
-            FF = "20",
+            FF = "18",
             FF78 = "20",
-            IE = "20")
+            IE = "19")
     public void inputSelect() throws Exception {
         loadPageVerifyTitle2(testInput("select"));
     }
@@ -2041,7 +2044,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "17",
-            FF = "20",
+            FF = "18",
             FF78 = "20",
             IE = "19")
     @HtmlUnitNYI(IE = "20")
