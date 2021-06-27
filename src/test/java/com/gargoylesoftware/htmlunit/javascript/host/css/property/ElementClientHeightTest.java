@@ -1914,8 +1914,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "16",
             IE = "21")
-    @HtmlUnitNYI(FF = "20",
-            FF78 = "20",
+    @HtmlUnitNYI(FF78 = "20",
             IE = "20")
     public void inputButton() throws Exception {
         loadPageVerifyTitle2(testInput("button"));
@@ -1945,7 +1944,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             IE = "19")
     @HtmlUnitNYI(CHROME = "17",
             EDGE = "17",
-            FF = "20",
+            FF = "18",
             FF78 = "20",
             IE = "20")
     public void inputFile() throws Exception {
@@ -1999,8 +1998,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "16",
             IE = "21")
-    @HtmlUnitNYI(FF = "20",
-            FF78 = "20",
+    @HtmlUnitNYI(FF78 = "20",
             IE = "20")
     public void inputReset() throws Exception {
         loadPageVerifyTitle2(testInput("reset"));
@@ -2016,6 +2014,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "20",
             IE = "19")
+    @HtmlUnitNYI(IE = "20")
     public void inputSelect() throws Exception {
         loadPageVerifyTitle2(testInput("select"));
     }
@@ -2030,8 +2029,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "16",
             IE = "21")
-    @HtmlUnitNYI(FF = "20",
-            FF78 = "20",
+    @HtmlUnitNYI(FF78 = "20",
             IE = "20")
     public void inputSubmit() throws Exception {
         loadPageVerifyTitle2(testInput("submit"));
