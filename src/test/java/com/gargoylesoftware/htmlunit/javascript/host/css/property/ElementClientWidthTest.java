@@ -355,7 +355,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF = "16",
+            FF = "8",
             FF78 = "16",
             IE = "20")
     @HtmlUnitNYI(CHROME = "10",
@@ -1371,7 +1371,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            FF = "27",
+            FF = "26",
             FF78 = "27",
             IE = "23")
     @HtmlUnitNYI(CHROME = "0",
@@ -1779,7 +1779,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF = "16",
+            FF = "8",
             FF78 = "16",
             IE = "20")
     @HtmlUnitNYI(CHROME = "10",
@@ -1797,7 +1797,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("13")
+    @Alerts(DEFAULT = "13",
+            FF = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1809,7 +1810,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "253",
-            FF = "271",
+            FF = "261",
             FF78 = "240",
             IE = "228")
     @HtmlUnitNYI(CHROME = "10",
@@ -1853,7 +1854,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("13")
+    @Alerts(DEFAULT = "13",
+            FF = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -1865,7 +1867,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "47",
-            FF = "91",
+            FF = "83",
             FF78 = "48",
             IE = "55")
     @HtmlUnitNYI(CHROME = "55",
@@ -1898,7 +1900,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "54",
-            FF = "108",
+            FF = "100",
             FF78 = "94",
             IE = "101")
     @HtmlUnitNYI(CHROME = "118",

@@ -34,11 +34,6 @@ MozImageRegion
 MozMarginEnd
 MozMarginStart
 MozOrient
-MozOutlineRadius
-MozOutlineRadiusBottomleft
-MozOutlineRadiusBottomright
-MozOutlineRadiusTopleft
-MozOutlineRadiusTopright
 MozPaddingEnd
 MozPaddingStart
 MozPerspective
@@ -141,6 +136,7 @@ animationName
 animationPlayState
 animationTimingFunction
 appearance
+aspectRatio
 backfaceVisibility
 background
 backgroundAttachment

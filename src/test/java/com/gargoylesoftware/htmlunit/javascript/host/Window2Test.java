@@ -773,7 +773,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
             EDGE = {"true", "true", "130", "true", "true", "16"},
-            FF = {"true", "true", "80", "true", "true", "12"},
+            FF = {"true", "true", "91", "true", "true", "12"},
             FF78 = {"true", "true", "80", "true", "true", "12"},
             IE = {"true", "true", "86", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
@@ -884,7 +884,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"636", "1256", "619", "1239"},
             EDGE = {"638", "1256", "621", "1239"},
-            FF = {"688", "1260", "671", "1243"},
+            FF = {"677", "1260", "660", "1243"},
             FF78 = {"688", "1260", "671", "1243"},
             IE = {"682", "1256", "665", "1239"})
     @NotYetImplemented
@@ -1014,7 +1014,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF = {"10", "79"},
+            FF = {"10", "89"},
             FF78 = {"10", "79"})
     public void mozInnerScreen() throws Exception {
         final String html
@@ -1315,7 +1315,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"string string 8 number object", "string string 1 number object"},
-            IE = {"string string 9 number object", "string string 8 number object"})
+            IE = {"string string 8 number object", "string string 9 number object"})
     @NotYetImplemented(IE)
     public void onErrorExceptionInstance2() throws Exception {
         final String html

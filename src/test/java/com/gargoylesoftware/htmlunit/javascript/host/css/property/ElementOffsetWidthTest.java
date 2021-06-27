@@ -374,7 +374,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "22",
             CHROME = "16",
-            EDGE = "16")
+            EDGE = "16",
+            FF = "12")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
@@ -1294,7 +1295,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "160",
-            FF = "162",
             FF78 = "162",
             IE = "280")
     @HtmlUnitNYI(CHROME = "0",
@@ -1392,7 +1392,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "24",
-            FF = "27",
+            FF = "30",
             FF78 = "27",
             IE = "25")
     @HtmlUnitNYI(CHROME = "0",
@@ -1622,7 +1622,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "183",
             CHROME = "161",
-            EDGE = "161")
+            EDGE = "161",
+            FF = "185")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",
             FF = "100",
@@ -1780,7 +1781,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "177",
-            FF = "147",
+            FF = "149",
             FF78 = "147",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
@@ -1800,7 +1801,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "22",
             CHROME = "16",
-            EDGE = "16")
+            EDGE = "16",
+            FF = "12")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
@@ -1816,7 +1818,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("13")
+    @Alerts(DEFAULT = "13",
+            FF = "14")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1828,7 +1831,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "253",
-            FF = "271",
+            FF = "261",
             FF78 = "240",
             IE = "228")
     @HtmlUnitNYI(CHROME = "10",
@@ -1858,7 +1861,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "177",
-            FF = "147",
+            FF = "149",
             FF78 = "147",
             IE = "147")
     @HtmlUnitNYI(CHROME = "173",
@@ -1876,7 +1879,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("13")
+    @Alerts(DEFAULT = "13",
+            FF = "14")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -1888,7 +1892,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "51",
-            FF = "97",
+            FF = "87",
             FF78 = "54",
             IE = "57")
     @HtmlUnitNYI(CHROME = "55",
@@ -1907,7 +1911,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "177",
-            FF = "147",
+            FF = "149",
             FF78 = "147",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
@@ -1926,7 +1930,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "58",
-            FF = "114",
+            FF = "104",
             FF78 = "100",
             IE = "103")
     @HtmlUnitNYI(CHROME = "118",
@@ -1945,7 +1949,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "177",
-            FF = "147",
+            FF = "149",
             FF78 = "147",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
