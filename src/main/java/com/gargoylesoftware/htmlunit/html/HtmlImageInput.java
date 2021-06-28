@@ -216,6 +216,14 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public final String getSrcAttribute() {
+        return getSrcAttributeNormalized();
+    }
+
+    /**
+     * Returns the value of the {@code src} value.
+     * @return the value of the {@code src} value
+     */
+    public final String getSrc() {
         final String src = getSrcAttributeNormalized();
         if (ATTRIBUTE_NOT_DEFINED == src) {
             return src;

@@ -30,6 +30,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlImageInput2Test extends SimpleWebTestCase {
@@ -130,4 +132,24 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
         FileUtils.deleteQuietly(tempFile);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"4x7.jpg", "§§URL§§4x7.jpg"})
+    public void src() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='image' id='myImage' src='4x7.jpg' >\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlImageInput img = page.getHtmlElementById("myImage");
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], img.getSrcAttribute());
+        assertEquals(getExpectedAlerts()[1], img.getSrc());
+    }
 }

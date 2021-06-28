@@ -367,6 +367,30 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§img.gif")
+    public void src() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var img = document.getElementById('myImg');\n"
+            + "    alert(img.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img id='myImg' src='img.gif'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"1", "§§URL§§abcd/img.gif"})
     public void lineBreaksInUrl() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {

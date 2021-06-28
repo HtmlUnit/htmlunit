@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -31,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -109,18 +107,7 @@ public class HTMLImageElement extends HTMLElement {
     @JsxGetter
     public String getSrc() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
-        final String src = img.getSrcAttribute();
-        if ("".equals(src)) {
-            return src;
-        }
-        try {
-            final HtmlPage page = (HtmlPage) img.getPage();
-            return page.getFullyQualifiedUrl(src).toExternalForm();
-        }
-        catch (final MalformedURLException e) {
-            final String msg = "Unable to create fully qualified URL for src attribute of image " + e.getMessage();
-            throw Context.reportRuntimeError(msg);
-        }
+        return img.getSrc();
     }
 
     /**
