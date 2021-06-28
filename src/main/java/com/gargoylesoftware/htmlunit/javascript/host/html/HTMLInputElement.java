@@ -652,7 +652,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxGetter
     public String getSrc() {
-        return getDomNodeOrDie().getSrcAttribute();
+        return getDomNodeOrDie().getSrc();
     }
 
     /**

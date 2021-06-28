@@ -280,6 +280,14 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Returns the value of the {@code src} value.
+     * @return the value of the {@code src} value
+     */
+    public String getSrc() {
+        return getSrcAttributeNormalized();
+    }
+
+    /**
      * Sets the {@code src} attribute.
      *
      * @param src the {@code src} attribute

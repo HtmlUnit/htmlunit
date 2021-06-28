@@ -12,14 +12,13 @@
                 HtmlImage.getSrc() added.
             </action>
             <action type="add" dev="rbri" due-to="Frank Danek">
-                HtmlImageInput.getSrc() added.
+                HtmlInput.getSrc() and HtmlImageInput.getSrc() added.
             </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 INCOMPATIBLE CHANGE: HtmlImageInput.getSrcAttribute() returns the plain value of the source attribute.
                 Use HtmlImageInput.getSrc() if you need the full qualified url.
                 If your code uses HtmlImageInput.getSrcAttribute() you have to
                 replace this with HtmlImageInput.getSrc().
-                
             </action>
             <action type="fix" dev="rbri" issue="359">
                 XMLHttpRequest preserves the content type header if sending a file an the header was set from the javascript.

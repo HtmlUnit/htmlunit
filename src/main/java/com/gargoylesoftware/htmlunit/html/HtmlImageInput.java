@@ -220,9 +220,9 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * Returns the value of the {@code src} value.
-     * @return the value of the {@code src} value
+     * {@inheritDoc}
      */
+    @Override
     public final String getSrc() {
         final String src = getSrcAttributeNormalized();
         if (ATTRIBUTE_NOT_DEFINED == src) {
@@ -261,7 +261,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      */
     private void downloadImageIfNeeded() throws IOException {
         if (!downloaded_) {
-            final String src = getSrcAttribute();
+            final String src = getSrc();
             if (!"".equals(src)) {
                 final HtmlPage page = (HtmlPage) getPage();
                 final WebClient webClient = page.getWebClient();
