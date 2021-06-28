@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
+            <action type="fix" dev="rbri" issue="359">
+                XMLHttpRequest preserves the content type header if sending a file an the header was set from the javascript.
+            </action>
             <action type="fix" dev="rbri" due-to="Alex Gorbatovsky">
                 Improved ComputedCSSStyleDeclaration regarding height and width for empty span's.
             </action>

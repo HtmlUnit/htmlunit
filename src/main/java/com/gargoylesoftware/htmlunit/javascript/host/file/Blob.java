@@ -306,7 +306,9 @@ public class Blob extends SimpleScriptable {
     public void fillRequest(final WebRequest webRequest) {
         webRequest.setRequestBody(new String(getBytes(), UTF_8));
 
-        if (!getBrowserVersion().hasFeature(XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE)) {
+        final boolean contentTypeDefinedByCaller = webRequest.getAdditionalHeader(HttpHeader.CONTENT_TYPE) != null;
+        if (!contentTypeDefinedByCaller
+                && !getBrowserVersion().hasFeature(XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE)) {
             final String mimeType = getType();
             if (StringUtils.isNotBlank(mimeType)) {
                 webRequest.setAdditionalHeader(HttpHeader.CONTENT_TYPE, mimeType);
