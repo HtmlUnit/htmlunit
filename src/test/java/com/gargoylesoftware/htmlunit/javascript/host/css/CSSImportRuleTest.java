@@ -37,6 +37,436 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 public class CSSImportRuleTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object CSSImportRule]", "[object CSSImportRule]"})
+    public void scriptableToString() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(Object.prototype.toString.call(rule));\n"
+            + "  alert(rule);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "@import url(\"imp.css\");",
+            IE = "@import url( imp.css );")
+    public void cssText() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "@import url(\"imp.css\");",
+            IE = "@import url( imp.css );")
+    public void cssTextSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  try {"
+            + "    rule.cssText = '@import \"imp2.css\";';\n"
+            + "    alert(rule.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("null")
+    public void parentRule() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.parentRule);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("null")
+    public void parentRuleSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  try {"
+            + "    rule.parentRule = rule;\n"
+            + "    alert(rule.parentRule);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object CSSStyleSheet]")
+    public void parentStyleSheet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.parentStyleSheet);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object CSSStyleSheet]")
+    public void parentStyleSheetSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @media screen { p { background-color:#FFFFFF; }};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  try {"
+            + "    rule.parentStyleSheet = null;\n"
+            + "    alert(rule.parentStyleSheet);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
+            IE = {"imp.css", "@import url( imp.css );"})
+    public void href() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.href);\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
+            IE = {"imp.css", "@import url( imp.css );"})
+    public void hrefUrlRelative() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import url('imp.css');\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.href);\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"},
+            IE = {"§§URL§§imp.css", "@import url( §§URL§§imp.css );"})
+    public void hrefUrlAbsolute() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import url('" + new URL(URL_FIRST, "imp.css").toExternalForm() + "');\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.href);\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object MediaList]", "", "0", "", "@import url(\"imp.css\");"},
+            IE = {"[object MediaList]", "all", "0", "all", "@import url( imp.css );"})
+    public void mediaNone() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var mediaList = rule.media;\n"
+            + "  alert(Object.prototype.toString.call(mediaList));\n"
+            + "  alert(mediaList);\n"
+            + "  alert(mediaList.length);\n"
+            + "  for (var i = 0; i < mediaList.length; i++) {\n"
+            + "    alert(mediaList.item(i));\n"
+            + "  }\n"
+            + "  alert(mediaList.mediaText);\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
+            IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url( imp.css ) screen;"})
+    public void media() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css' screen;\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var mediaList = rule.media;\n"
+            + "  alert(Object.prototype.toString.call(mediaList));\n"
+            + "  alert(mediaList);\n"
+            + "  alert(mediaList.length);\n"
+            + "  for (var i = 0; i < mediaList.length; i++) {\n"
+            + "    alert(mediaList.item(i));\n"
+            + "  }\n"
+            + "  alert(mediaList.mediaText);\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "only screen and (color)", "print", "only screen and (color), print",
+                "@import url(\"imp.css\") only screen and (color), print;"},
+            IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
+                "@import url( imp.css ) only screen and (color), print;"})
+    public void mediaQuery() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css' only screen and (color),print;\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var mediaList = rule.media;\n"
+            + "  alert(mediaList.length);\n"
+            + "  for (var i = 0; i < mediaList.length; i++) {\n"
+            + "    alert(mediaList.item(i));\n"
+            + "  }\n"
+            + "  alert(mediaList.mediaText);\n"
+            + "  alert(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "#d { color: green; }"})
+    public void styleSheet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  alert(rule.styleSheet);\n"
+            + "  alert(rule.styleSheet.href);\n"
+            + "  alert(rule.styleSheet.cssRules[0].cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for Bug #789.
      * @throws Exception if an error occurs
      */
