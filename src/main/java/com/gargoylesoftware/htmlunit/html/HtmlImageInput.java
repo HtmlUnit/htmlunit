@@ -21,15 +21,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -55,8 +52,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlImageInput extends HtmlInput implements LabelableElement {
-
-    private static final Log LOG = LogFactory.getLog(HtmlImageInput.class);
 
     // For click with x, y position.
     private boolean wasPositionSpecified_;
@@ -209,37 +204,6 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
     @Override
     protected boolean isRequiredSupported() {
         return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final String getSrcAttribute() {
-        return getSrcAttributeNormalized();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final String getSrc() {
-        final String src = getSrcAttributeNormalized();
-        if (ATTRIBUTE_NOT_DEFINED == src) {
-            return src;
-        }
-
-        final HtmlPage page = getHtmlPageOrNull();
-        if (page != null) {
-            try {
-                return page.getFullyQualifiedUrl(src).toExternalForm();
-            }
-            catch (final MalformedURLException e) {
-                // Log the error and fall through to the return values below.
-                LOG.warn(e.getMessage(), e);
-            }
-        }
-        return src;
     }
 
     /**
