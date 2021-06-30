@@ -60,15 +60,6 @@ public class CSSMediaRule extends CSSConditionRule {
     }
 
     /**
-     * Sets the parsable textual representation of the rule.
-     * @param cssText the parsable textual representation of the rule
-     */
-    @JsxSetter(IE)
-    public void setCssText(final String cssText) {
-        Context.reportError("Not implemented.");
-    }
-
-    /**
      * Returns the media types that the imported CSS style sheet applies to.
      * @return the media types that the imported CSS style sheet applies to
      */

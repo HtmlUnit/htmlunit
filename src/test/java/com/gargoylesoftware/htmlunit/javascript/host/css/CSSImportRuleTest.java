@@ -103,7 +103,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@import url(\"imp.css\");",
             IE = "@import url( imp.css );")
-    @HtmlUnitNYI("@import url(\"imp.css\");"})
+    @HtmlUnitNYI(IE = "@import url(\"imp.css\");")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -389,11 +389,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
             IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url( imp.css ) screen;"})
-    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
-            EDGE = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
-            FF = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
-            FF78 = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
-            IE = {"[object MediaList]", "all", "1", "screen", "screen", "@import url(\"imp.css\") screen;"})
+    @HtmlUnitNYI(IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"})
     public void media() throws Exception {
         final String html
             = "<html><body>\n"
