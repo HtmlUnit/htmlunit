@@ -92,13 +92,17 @@ public class CSSGroupingRule extends CSSRule {
         final int positionInt;
         if (position == null) {
             positionInt = 0;
-        } else if (Undefined.isUndefined(position)) {
+        }
+        else if (Undefined.isUndefined(position)) {
             if (getBrowserVersion().hasFeature(JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL)) {
                 positionInt = 0;
-            } else {
-                throw ScriptRuntime.typeError("Failed to execute 'insertRule' on 'CSSGroupingRule': 2 arguments required, but only 1 present.");
             }
-        } else {
+            else {
+                throw ScriptRuntime.typeError("Failed to execute 'insertRule' on 'CSSGroupingRule':"
+                        + " 2 arguments required, but only 1 present.");
+            }
+        }
+        else {
             positionInt = ScriptRuntime.toInt32(position);
         }
 

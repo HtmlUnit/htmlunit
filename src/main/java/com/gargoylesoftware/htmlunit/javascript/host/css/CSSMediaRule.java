@@ -18,17 +18,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for a {@link CSSMediaRuleImpl}.
