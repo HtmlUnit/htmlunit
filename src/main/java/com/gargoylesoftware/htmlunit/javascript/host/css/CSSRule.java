@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">MDN doc</a>
  */
 @JsxClass
 public class CSSRule extends SimpleScriptable {
@@ -245,7 +246,7 @@ public class CSSRule extends SimpleScriptable {
      * Sets the parsable textual representation of the rule.
      * @param cssText the parsable textual representation of the rule
      */
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter(IE)
     public void setCssText(final String cssText) {
         rule_.setCssText(cssText);
     }

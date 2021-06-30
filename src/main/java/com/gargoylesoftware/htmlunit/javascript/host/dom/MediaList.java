@@ -97,14 +97,17 @@ public class MediaList extends SimpleScriptable {
 
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        if (getPrototype() != null) {
-            final BrowserVersion browserVersion = getBrowserVersion();
-            if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
-                return "";
+        if (getPrototype() != null && wrappedList_ != null) {
+            if (wrappedList_.getLength() == 0) {
+                final BrowserVersion browserVersion = getBrowserVersion();
+                if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
+                    return "";
+                }
+                if (browserVersion.hasFeature(JS_MEDIA_LIST_ALL)) {
+                    return "all";
+                }
             }
-            if (browserVersion.hasFeature(JS_MEDIA_LIST_ALL)) {
-                return "all";
-            }
+            return wrappedList_.getMediaText();
         }
         return super.getDefaultValue(hint);
     }
