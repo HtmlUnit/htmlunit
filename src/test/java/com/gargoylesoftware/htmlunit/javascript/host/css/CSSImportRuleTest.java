@@ -73,11 +73,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@import url(\"imp.css\");",
             IE = "@import url( imp.css );")
-    @HtmlUnitNYI(CHROME = "@import url(imp.css);",
-            EDGE = "@import url(imp.css);",
-            FF = "@import url(imp.css);",
-            FF78 = "@import url(imp.css);",
-            IE = "@import url(imp.css);")
+    @HtmlUnitNYI(IE = "@import url(\"imp.css\");")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -107,11 +103,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@import url(\"imp.css\");",
             IE = "@import url( imp.css );")
-    @HtmlUnitNYI(CHROME = "@import url(imp.css);",
-            EDGE = "@import url(imp.css);",
-            FF = "@import url(imp.css);",
-            FF78 = "@import url(imp.css);",
-            IE = "@import url(imp.css);")
+    @HtmlUnitNYI("@import url(\"imp.css\");"})
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -265,11 +257,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
             IE = {"imp.css", "@import url( imp.css );"})
-    @HtmlUnitNYI(CHROME = {"imp.css", "@import url(imp.css);"},
-            EDGE = {"imp.css", "@import url(imp.css);"},
-            FF = {"imp.css", "@import url(imp.css);"},
-            FF78 = {"imp.css", "@import url(imp.css);"},
-            IE = {"imp.css", "@import url(imp.css);"})
+    @HtmlUnitNYI(IE = {"imp.css", "@import url(\"imp.css\");"})
     public void href() throws Exception {
         final String html
             = "<html><body>\n"
@@ -300,11 +288,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
             IE = {"imp.css", "@import url( imp.css );"})
-    @HtmlUnitNYI(CHROME = {"imp.css", "@import url(imp.css);"},
-            EDGE = {"imp.css", "@import url(imp.css);"},
-            FF = {"imp.css", "@import url(imp.css);"},
-            FF78 = {"imp.css", "@import url(imp.css);"},
-            IE = {"imp.css", "@import url(imp.css);"})
+    @HtmlUnitNYI(IE = {"imp.css", "@import url(\"imp.css\");"})
     public void hrefUrlRelative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -335,11 +319,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"},
             IE = {"§§URL§§imp.css", "@import url( §§URL§§imp.css );"})
-    @HtmlUnitNYI(CHROME = {"§§URL§§imp.css", "@import url(§§URL§§imp.css);"},
-            EDGE = {"§§URL§§imp.css", "@import url(§§URL§§imp.css);"},
-            FF = {"§§URL§§imp.css", "@import url(§§URL§§imp.css);"},
-            FF78 = {"§§URL§§imp.css", "@import url(§§URL§§imp.css);"},
-            IE = {"§§URL§§imp.css", "@import url(§§URL§§imp.css);"})
+    @HtmlUnitNYI(IE = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"})
     public void hrefUrlAbsolute() throws Exception {
         final String html
             = "<html><body>\n"
@@ -371,11 +351,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "", "0", "", "@import url(\"imp.css\");"},
             IE = {"[object MediaList]", "all", "0", "all", "@import url( imp.css ) all;"})
-    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "0", "", "@import url(imp.css);"},
-            EDGE = {"[object MediaList]", "", "0", "", "@import url(imp.css);"},
-            FF = {"[object MediaList]", "", "0", "", "@import url(imp.css);"},
-            FF78 = {"[object MediaList]", "", "0", "", "@import url(imp.css);"},
-            IE = {"[object MediaList]", "all", "0", "", "@import url(imp.css);"})
+    @HtmlUnitNYI(IE = {"[object MediaList]", "all", "0", "", "@import url(\"imp.css\");"})
     public void mediaNone() throws Exception {
         final String html
             = "<html><body>\n"
@@ -413,11 +389,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
             IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url( imp.css ) screen;"})
-    @HtmlUnitNYI(CHROME = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(imp.css) screen;"},
-            EDGE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(imp.css) screen;"},
-            FF = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(imp.css) screen;"},
-            FF78 = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(imp.css) screen;"},
-            IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(imp.css) screen;"})
+    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
+            EDGE = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
+            FF = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
+            FF78 = {"[object MediaList]", "", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
+            IE = {"[object MediaList]", "all", "1", "screen", "screen", "@import url(\"imp.css\") screen;"})
     public void media() throws Exception {
         final String html
             = "<html><body>\n"
@@ -457,16 +433,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
                        "@import url(\"imp.css\") only screen and (color), print;"},
             IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
                   "@import url( imp.css ) only screen and (color), print;"})
-    @HtmlUnitNYI(CHROME = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                           "@import url(imp.css) only screen and (color), print;"},
-            EDGE = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                    "@import url(imp.css) only screen and (color), print;"},
-            FF = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                  "@import url(imp.css) only screen and (color), print;"},
-            FF78 = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                    "@import url(imp.css) only screen and (color), print;"},
-            IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                  "@import url(imp.css) only screen and (color), print;"})
+    @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
+                       "@import url(\"imp.css\") only screen and (color), print;"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
@@ -501,11 +469,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "#d { color: green; }"})
-    @HtmlUnitNYI(CHROME = {"[object CSSStyleSheet]", "null", "@import url(imp.css);"},
-            EDGE = {"[object CSSStyleSheet]", "null", "@import url(imp.css);"},
-            FF = {"[object CSSStyleSheet]", "null", "@import url(imp.css);"},
-            FF78 = {"[object CSSStyleSheet]", "null", "@import url(imp.css);"},
-            IE = {"[object CSSStyleSheet]", "null", "@import url(imp.css);"})
+    @HtmlUnitNYI(CHROME = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
+            EDGE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
+            FF = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
+            FF78 = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
+            IE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"})
     public void styleSheet() throws Exception {
         final String html
             = "<html><body>\n"

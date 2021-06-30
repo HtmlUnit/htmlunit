@@ -1502,6 +1502,48 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"0", "0"})
+    public void widthAndHeightChildDisplayNoneWidth() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outer = document.getElementById('outer');\n"
+            + "    log(outer.offsetWidth);\n"
+            + "    log(outer.offsetHeight);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='outer'><span style='display:none; width: 40px'>ABC</span></span>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void widthAndHeightChildDisplayNoneWidthLineBreak() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outer = document.getElementById('outer');\n"
+            + "    log(outer.offsetWidth);\n"
+            + "    log(outer.offsetHeight);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='outer'>\n"
+            + "    <span style='display:none; width: 40px'>ABC</span>\n"
+            + "  </span>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"", ""},
             IE = {"auto", "auto"})
     public void widthAndHeightDisconnected() throws Exception {

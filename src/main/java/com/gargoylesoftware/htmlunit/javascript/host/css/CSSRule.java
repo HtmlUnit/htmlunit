@@ -243,6 +243,14 @@ public class CSSRule extends SimpleScriptable {
     }
 
     /**
+     * https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText.
+     * @param cssText ignored
+     */
+    @JsxSetter
+    public void setCssText(final String cssText) {
+    }
+
+    /**
      * Returns the style sheet that contains this rule.
      * @return the style sheet that contains this rule.
      */

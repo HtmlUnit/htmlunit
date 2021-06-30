@@ -100,8 +100,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "@media screen {p { background-color: rgb(255, 255, 255) } }",
             EDGE = "@media screen {p { background-color: rgb(255, 255, 255) } }",
             FF = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }")
-    // FIXME output formatting in rule.cssText -> CSSParser
+            FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            IE = "@media screen {p { background-color: rgb(255, 255, 255) } }")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
