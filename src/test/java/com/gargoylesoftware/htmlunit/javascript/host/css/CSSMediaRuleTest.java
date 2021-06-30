@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -62,6 +64,11 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
+    @HtmlUnitNYI(CHROME = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            EDGE = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            FF = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            IE = "@media screen {p { background-color: rgb(255, 255, 255) } }")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -90,6 +97,11 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "exception")
+    @HtmlUnitNYI(CHROME = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            EDGE = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            FF = "@media screen {span { color: rgb(0, 0, 0) } }",
+            FF78 = "@media screen {span { color: rgb(0, 0, 0) } }",
+            IE = "@media screen {span { color: rgb(0, 0, 0) } }")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -105,7 +117,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
-            + "    rule.cssText = '@media screen { span { color: rgb(0, 0, 0); }';\n"
+            + "    rule.cssText = '@media screen { span { color: rgb(0, 0, 0); }}';\n"
             + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
             + "    log('exception');\n"
@@ -233,6 +245,11 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "screen"},
             IE = {"[object MediaList]", "screen", "1", "screen", "screen", "undefined"})
+    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
+            EDGE = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
+            FF = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
+            FF78 = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
+            IE = {"[object MediaList]", "all", "1", "screen", "screen", "undefined"})
     public void media() throws Exception {
         final String html
             = "<html><body>\n"
@@ -268,6 +285,10 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "only screen and (color)", "print", "only screen and (color), print",
                        "only screen and (color), print"},
             IE = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"})
+    @HtmlUnitNYI(CHROME = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"},
+            EDGE = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"},
+            FF = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"},
+            FF78 = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
@@ -300,6 +321,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @NotYetImplemented
     public void cssRules() throws Exception {
         final String html
             = "<html><body>\n"
@@ -337,6 +359,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
             FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @NotYetImplemented
     public void insertRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -464,6 +487,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
              "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
+    @NotYetImplemented
     public void insertRuleWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -531,6 +555,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "exception"},
             IE = {"1", "-1", "1", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @NotYetImplemented
     public void insertRuleEmptyWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -598,6 +623,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @NotYetImplemented
     public void insertRuleWithIndexNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -634,6 +660,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "exception"})
+    @NotYetImplemented
     public void insertRuleWithIndexNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -665,6 +692,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "exception"})
+    @NotYetImplemented
     public void insertRuleWithIndexGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"
@@ -696,6 +724,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "1", "p { background-color: rgb(255, 255, 255); }"})
+    @NotYetImplemented
     public void deleteRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -731,6 +760,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "1", "span { color: rgb(0, 0, 0); }"})
+    @NotYetImplemented
     public void deleteRuleNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -766,6 +796,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "exception"})
+    @NotYetImplemented
     public void deleteRuleNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -797,6 +828,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "exception"})
+    @NotYetImplemented
     public void deleteRuleGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"
