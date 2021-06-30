@@ -179,6 +179,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         final String props = "'" + String.join("', '", properties) + "'";
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var properties = [" + props + "];\n"
             + "\n"
@@ -235,13 +236,13 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "      result += ' 42% - ' + node.style[prop];\n"
             + "    }\n"
 
-            + "    alert(result == '' ? 'success' : result);\n"
+            + "    log(result == '' ? 'success' : result);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -325,19 +326,20 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var style = document.body.style;\n"
             + "  try {\n"
-            + "    alert(style.length);\n"
+            + "    log(style.length);\n"
             + "    style.length = 100;\n"
-            + "    alert(style.length);\n"
-            + "  } catch(e) { alert(e); }\n"
+            + "    log(style.length);\n"
+            + "  } catch(e) { log(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -350,19 +352,20 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  'use strict';\n"
             + "  var style = document.body.style;\n"
             + "  try {\n"
-            + "    alert(style.length);\n"
+            + "    log(style.length);\n"
             + "    style.length = 100;\n"
-            + "    alert(style.length);\n"
-            + "  } catch(e) { alert('Type error'); }\n"
+            + "    log(style.length);\n"
+            + "  } catch(e) { log('Type error'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
