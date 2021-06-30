@@ -242,12 +242,11 @@ public class CSSRule extends SimpleScriptable {
     }
 
     /**
-     * Sets the parsable textual representation of the rule.
-     * @param cssText the parsable textual representation of the rule
+     * https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText.
+     * @param cssText ignored
      */
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter
     public void setCssText(final String cssText) {
-        rule_.setCssText(cssText);
     }
 
     /**

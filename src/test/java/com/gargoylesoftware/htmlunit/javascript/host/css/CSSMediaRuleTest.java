@@ -99,9 +99,9 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "@media screen {p { background-color: rgb(255, 255, 255) } }",
             EDGE = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            FF = "@media screen {span { color: rgb(0, 0, 0) } }",
-            FF78 = "@media screen {span { color: rgb(0, 0, 0) } }",
-            IE = "@media screen {span { color: rgb(0, 0, 0) } }")
+            FF = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }",
+            IE = "@media screen {p { background-color: rgb(255, 255, 255) } }")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
