@@ -111,7 +111,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             EDGE = "@import url(imp.css);",
             FF = "@import url(imp.css);",
             FF78 = "@import url(imp.css);",
-            IE = "@import url(imp2.css);")
+            IE = "@import url(imp.css);")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
