@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -50,10 +51,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(Object.prototype.toString.call(rule));\n"
-            + "  alert(rule);\n"
+            + "  log(Object.prototype.toString.call(rule));\n"
+            + "  log(rule);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -61,7 +63,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -79,9 +81,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -89,7 +92,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -107,13 +110,14 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
             + "    rule.cssText = '@import \"imp2.css\";';\n"
-            + "    alert(rule.cssText);\n"
+            + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
@@ -122,7 +126,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -139,9 +143,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.parentRule);\n"
+            + "  log(rule.parentRule);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -149,7 +154,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -166,13 +171,14 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
             + "    rule.parentRule = rule;\n"
-            + "    alert(rule.parentRule);\n"
+            + "    log(rule.parentRule);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
@@ -181,7 +187,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -198,9 +204,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.parentStyleSheet);\n"
+            + "  log(rule.parentStyleSheet);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -208,7 +215,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -225,19 +232,20 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
             + "    rule.parentStyleSheet = null;\n"
-            + "    alert(rule.parentStyleSheet);\n"
+            + "    log(rule.parentStyleSheet);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -255,10 +263,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.href);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.href);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -266,7 +275,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -284,10 +293,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.href);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.href);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -295,7 +305,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -313,10 +323,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.href);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.href);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -325,7 +336,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -333,7 +344,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "", "0", "", "@import url(\"imp.css\");"},
-            IE = {"[object MediaList]", "all", "0", "all", "@import url( imp.css );"})
+            IE = {"[object MediaList]", "all", "0", "all", "@import url( imp.css ) all;"})
     public void mediaNone() throws Exception {
         final String html
             = "<html><body>\n"
@@ -343,17 +354,18 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var mediaList = rule.media;\n"
-            + "  alert(Object.prototype.toString.call(mediaList));\n"
-            + "  alert(mediaList);\n"
-            + "  alert(mediaList.length);\n"
+            + "  log(Object.prototype.toString.call(mediaList));\n"
+            + "  log(mediaList);\n"
+            + "  log(mediaList.length);\n"
             + "  for (var i = 0; i < mediaList.length; i++) {\n"
-            + "    alert(mediaList.item(i));\n"
+            + "    log(mediaList.item(i));\n"
             + "  }\n"
-            + "  alert(mediaList.mediaText);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -361,7 +373,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -379,17 +391,18 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var mediaList = rule.media;\n"
-            + "  alert(Object.prototype.toString.call(mediaList));\n"
-            + "  alert(mediaList);\n"
-            + "  alert(mediaList.length);\n"
+            + "  log(Object.prototype.toString.call(mediaList));\n"
+            + "  log(mediaList);\n"
+            + "  log(mediaList.length);\n"
             + "  for (var i = 0; i < mediaList.length; i++) {\n"
-            + "    alert(mediaList.item(i));\n"
+            + "    log(mediaList.item(i));\n"
             + "  }\n"
-            + "  alert(mediaList.mediaText);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -397,7 +410,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -417,15 +430,16 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var mediaList = rule.media;\n"
-            + "  alert(mediaList.length);\n"
+            + "  log(mediaList.length);\n"
             + "  for (var i = 0; i < mediaList.length; i++) {\n"
-            + "    alert(mediaList.item(i));\n"
+            + "    log(mediaList.item(i));\n"
             + "  }\n"
-            + "  alert(mediaList.mediaText);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -433,7 +447,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String css = "#d { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -450,11 +464,12 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.styleSheet);\n"
-            + "  alert(rule.styleSheet.href);\n"
-            + "  alert(rule.styleSheet.cssRules[0].cssText);\n"
+            + "  log(rule.styleSheet);\n"
+            + "  log(rule.styleSheet.href);\n"
+            + "  log(rule.styleSheet.cssRules[0].cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
@@ -463,7 +478,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -498,23 +513,26 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<style>@import url('" + cssRef + "');</style><div id='d'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var item = document.styleSheets.item(0);\n"
             + "  if (item.cssRules) {\n"
             + "    var r = item.cssRules[0];\n"
-            + "    alert(r);\n"
-            + "    alert(r.href);\n"
-            + "    alert(r.media);\n"
-            + "    alert(r.media.length);\n"
-            + "    alert(r.styleSheet);\n"
+            + "    log(r);\n"
+            + "    log(r.href);\n"
+            + "    log(r.media);\n"
+            + "    log(r.media.length);\n"
+            + "    log(r.styleSheet);\n"
             + "  } else {\n"
-            + "    alert('cssRules undefined');\n"
+            + "    log('cssRules undefined');\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
         final String css = "#d { color: green }";
 
         getMockWebConnection().setResponse(cssUrl, css, MimeType.TEXT_CSS);
-        loadPageWithAlerts2(html, pageUrl);
+
+        final WebDriver driver = loadPage2(html, pageUrl);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -528,16 +546,17 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<style>@import url('" + URL_SECOND + "');</style>\n"
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var d = document.getElementById('d');\n"
             + "var s = window.getComputedStyle(d, null);\n"
-            + "alert(s.color.indexOf('128') > 0);\n"
+            + "log(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
         final String css = "#d { color: rgb(0, 128, 0); }";
 
         getMockWebConnection().setResponse(URL_SECOND, css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -551,9 +570,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var d = document.getElementById('d');\n"
             + "var s = window.getComputedStyle(d, null);\n"
-            + "alert(s.color.indexOf('128') > 0);\n"
+            + "log(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
         final String css1 = "@import url('file2.css');";
@@ -565,7 +585,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlCss1, css1, MimeType.TEXT_CSS);
         getMockWebConnection().setResponse(urlCss2, css2, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html, urlPage);
+        final WebDriver driver = loadPage2(html, urlPage);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -579,9 +600,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var d = document.getElementById('d');\n"
             + "  var s = window.getComputedStyle(d, null);\n"
-            + "  alert(s.color.indexOf('128') > 0);\n"
+            + "  log(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -595,7 +617,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlCss1, css1, MimeType.TEXT_CSS);
         getMockWebConnection().setResponse(urlCss2, css2, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html, urlPage);
+        final WebDriver driver = loadPage2(html, urlPage);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -614,15 +637,16 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<div id='e'>foo</div>\n"
             + "<div id='f'>foo</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var d = document.getElementById('d');\n"
             + "var s = window.getComputedStyle(d, null);\n"
-            + "alert(s.color.indexOf('128') > 0);\n"
+            + "log(s.color.indexOf('128') > 0);\n"
             + "var e = document.getElementById('e');\n"
             + "s = window.getComputedStyle(e, null);\n"
-            + "alert(s.color.indexOf('127') > 0);\n"
+            + "log(s.color.indexOf('127') > 0);\n"
             + "var f = document.getElementById('f');\n"
             + "s = window.getComputedStyle(f, null);\n"
-            + "alert(s.color.indexOf('126') > 0);\n"
+            + "log(s.color.indexOf('126') > 0);\n"
             + "</script>\n"
             + "</body></html>";
         final String css1 = "@import url('file2.css');";
@@ -646,7 +670,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlCss4, css4, MimeType.TEXT_CSS);
         getMockWebConnection().setResponse(urlCss5, css5, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html, urlPage);
+        final WebDriver driver = loadPage2(html, urlPage);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -671,9 +696,10 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <div id='d'>foo</div>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var d = document.getElementById('d');\n"
             + "    var s = window.getComputedStyle(d, null);\n"
-            + "    alert(s.fontSize);\n"
+            + "    log(s.fontSize);\n"
             + "</script>\n"
             + "</body></html>";
         final String screenCss = "#d { font-size: 42px; }";
@@ -682,6 +708,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, screenCss, MimeType.TEXT_CSS);
         getMockWebConnection().setResponse(URL_THIRD, printCss, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

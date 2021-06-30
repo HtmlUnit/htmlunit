@@ -44,39 +44,44 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(Object.prototype.toString.call(rule));\n"
-            + "  alert(rule);\n"
+            + "  log(Object.prototype.toString.call(rule));\n"
+            + "  log(rule);\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
+    @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
+            IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
+
+            + LOG_TEXTAREA
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.cssText);\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -89,24 +94,27 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
 
+            + LOG_TEXTAREA
+
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
             + "    rule.cssText = '@media screen { span { color: rgb(0, 0, 0); }';\n"
-            + "    alert(rule.cssText);\n"
+            + "    log(rule.cssText);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -123,14 +131,15 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.parentRule);\n"
+            + "  log(rule.parentRule);\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -147,19 +156,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
             + "    rule.parentRule = rule;\n"
-            + "    alert(rule.parentRule);\n"
+            + "    log(rule.parentRule);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -176,14 +186,15 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.parentStyleSheet);\n"
+            + "  log(rule.parentStyleSheet);\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -200,19 +211,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  try {"
             + "    rule.parentStyleSheet = null;\n"
-            + "    alert(rule.parentStyleSheet);\n"
+            + "    log(rule.parentStyleSheet);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -230,22 +242,23 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var mediaList = rule.media;\n"
-            + "  alert(Object.prototype.toString.call(mediaList));\n"
-            + "  alert(mediaList);\n"
-            + "  alert(mediaList.length);\n"
+            + "  log(Object.prototype.toString.call(mediaList));\n"
+            + "  log(mediaList);\n"
+            + "  log(mediaList.length);\n"
             + "  for (var i = 0; i < mediaList.length; i++) {\n"
-            + "    alert(mediaList.item(i));\n"
+            + "    log(mediaList.item(i));\n"
             + "  }\n"
-            + "  alert(mediaList.mediaText);\n"
-            + "  alert(rule.conditionText);\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.conditionText);\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -264,20 +277,21 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var mediaList = rule.media;\n"
-            + "  alert(mediaList.length);\n"
+            + "  log(mediaList.length);\n"
             + "  for (var i = 0; i < mediaList.length; i++) {\n"
-            + "    alert(mediaList.item(i));\n"
+            + "    log(mediaList.item(i));\n"
             + "  }\n"
-            + "  alert(mediaList.mediaText);\n"
-            + "  alert(rule.conditionText);\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.conditionText);\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -295,22 +309,23 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(Object.prototype.toString.call(rules));\n"
-            + "  alert(rules);\n"
-            + "  alert(rules.length);\n"
+            + "  log(Object.prototype.toString.call(rules));\n"
+            + "  log(rules);\n"
+            + "  log(rules.length);\n"
             + "  for (var i = 0; i < rules.length; i++) {\n"
-            + "    alert(rules.item(i));\n"
-            + "    alert(rules.item(i).cssText);\n"
-            + "    alert(rules.item(i).parentRule);\n"
+            + "    log(rules.item(i));\n"
+            + "    log(rules.item(i).cssText);\n"
+            + "    log(rules.item(i).parentRule);\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -331,25 +346,26 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
-            + "    alert(rule.insertRule('span { color:#000000; }'));\n"
-            + "    alert(rules.length);\n"
+            + "    log(rule.insertRule('span { color:#000000; }'));\n"
+            + "    log(rules.length);\n"
             + "    for (var i = 0; i < rules.length; i++) {\n"
-            + "      alert(rules.item(i).cssText);\n"
-            + "      alert(rules.item(i).parentRule);\n"
+            + "      log(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -366,19 +382,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
             + "  try {\n"
             + "    rule.insertRule(null);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -395,19 +412,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
             + "  try {\n"
             + "    rule.insertRule('');\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -424,19 +442,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
             + "  try {\n"
             + "    rule.insertRule('%ab');\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -454,25 +473,26 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
-            + "    alert(rule.insertRule('span { color:#000000; }', 1));\n"
-            + "    alert(rules.length);\n"
+            + "    log(rule.insertRule('span { color:#000000; }', 1));\n"
+            + "    log(rules.length);\n"
             + "    for (var i = 0; i < rules.length; i++) {\n"
-            + "      alert(rules.item(i).cssText);\n"
-            + "      alert(rules.item(i).parentRule);\n"
+            + "      log(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -489,19 +509,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
             + "  try {\n"
             + "    rule.insertRule(null, 1);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -519,25 +540,26 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
-            + "    alert(rule.insertRule('', 1));\n"
-            + "    alert(rules.length);\n"
+            + "    log(rule.insertRule('', 1));\n"
+            + "    log(rules.length);\n"
             + "    for (var i = 0; i < rules.length; i++) {\n"
-            + "      alert(rules.item(i).cssText);\n"
-            + "      alert(rules.item(i).parentRule);\n"
+            + "      log(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -554,19 +576,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
             + "  try {\n"
             + "    rule.insertRule('%ab', 1);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -584,25 +607,26 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
-            + "    alert(rule.insertRule('span { color:#000000; }', null));\n"
-            + "    alert(rules.length);\n"
+            + "    log(rule.insertRule('span { color:#000000; }', null));\n"
+            + "    log(rules.length);\n"
             + "    for (var i = 0; i < rules.length; i++) {\n"
-            + "      alert(rules.item(i).cssText);\n"
-            + "      alert(rules.item(i).parentRule);\n"
+            + "      log(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -619,20 +643,21 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
             + "    rule.insertRule('span { color:#000000; }', 2);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -649,20 +674,21 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
             + "    rule.insertRule('span { color:#000000; }', 2);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -679,24 +705,25 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
             + "    rule.deleteRule(1);\n"
-            + "    alert(rules.length);\n"
+            + "    log(rules.length);\n"
             + "    for (var i = 0; i < rules.length; i++) {\n"
-            + "      alert(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -713,24 +740,25 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
             + "    rule.deleteRule(null);\n"
-            + "    alert(rules.length);\n"
+            + "    log(rules.length);\n"
             + "    for (var i = 0; i < rules.length; i++) {\n"
-            + "      alert(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).cssText);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -747,20 +775,21 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
             + "    rule.deleteRule(-1);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -777,19 +806,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  var rules = rule.cssRules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "  try {\n"
             + "    rule.deleteRule(2);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
