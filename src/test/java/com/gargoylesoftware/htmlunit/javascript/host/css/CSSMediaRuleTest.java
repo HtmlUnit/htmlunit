@@ -63,11 +63,11 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
-    @HtmlUnitNYI(CHROME = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            EDGE = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            FF = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            IE = "@media screen {p { background-color: rgb(255, 255, 255) } }")
+    @HtmlUnitNYI(CHROME = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            EDGE = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            FF = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            FF78 = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            IE = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}")
     // FIXME output formatting in rule.cssText -> CSSParser
     public void cssText() throws Exception {
         final String html
@@ -95,13 +95,110 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "@media screen {\n  p { }\n  div { }\n}",
+            IE = "@media screen {\n\tp {  }\n\tdiv {  }\n}")
+    @HtmlUnitNYI(IE = "@media screen {\n  p { }\n  div { }\n}")
+    public void cssText2() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  @media screen { p {} div {}};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  log(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("@media screen {\n}")
+    public void cssTextEmpty() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  @media screen {};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  log(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "@media print {\n  #navigation { display: none; }"
+                        + "\n  @media (max-width: 12cm) {\n  .note { float: none; }\n}\n}",
+            IE = "@media print {\n\t#navigation { display: none; }\n}")
+    @HtmlUnitNYI(CHROME = "@media print {\n  *#navigation { display: none }"
+                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none }\n}\n}",
+            EDGE = "@media print {\n  *#navigation { display: none }"
+                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none }\n}\n}",
+            FF = "@media print {\n  *#navigation { display: none }"
+                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none }\n}\n}",
+            FF78 = "@media print {\n  *#navigation { display: none }"
+                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none }\n}\n}",
+            IE = "@media print {\n  *#navigation { display: none }"
+                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none }\n}\n}")
+    // FIXME output formatting in rule.cssText -> CSSParser
+    public void cssTextNested() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  @media print { #navigation { display: none }"
+                    + "@media (max-width: 12cm) { .note { float: none } } }"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  log(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            EDGE = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            FF = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }",
-            IE = "@media screen {p { background-color: rgb(255, 255, 255) } }")
+    @HtmlUnitNYI(CHROME = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            EDGE = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            FF = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            FF78 = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}",
+            IE = "@media screen {\n  p { background-color: rgb(255, 255, 255) }\n}")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
