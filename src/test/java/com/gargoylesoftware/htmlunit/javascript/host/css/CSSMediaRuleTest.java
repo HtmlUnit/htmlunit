@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -69,6 +68,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             FF = "@media screen {p { background-color: rgb(255, 255, 255) } }",
             FF78 = "@media screen {p { background-color: rgb(255, 255, 255) } }",
             IE = "@media screen {p { background-color: rgb(255, 255, 255) } }")
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -245,11 +245,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "screen"},
             IE = {"[object MediaList]", "screen", "1", "screen", "screen", "undefined"})
-    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
-            EDGE = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
-            FF = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
-            FF78 = {"[object MediaList]", "", "1", "screen", "screen", "undefined"},
-            IE = {"[object MediaList]", "all", "1", "screen", "screen", "undefined"})
     public void media() throws Exception {
         final String html
             = "<html><body>\n"
@@ -285,16 +280,12 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "only screen and (color)", "print", "only screen and (color), print",
                        "only screen and (color), print"},
             IE = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"})
-    @HtmlUnitNYI(CHROME = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"},
-            EDGE = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"},
-            FF = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"},
-            FF78 = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
 
             + "<style>\n"
-            + "  @media only screen and (color), print { p { background-color:#FFFFFF; }};\n"
+            + "  @media only screen and (color),print { p { background-color:#FFFFFF; }};\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -321,7 +312,17 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+                           "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            EDGE = {"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            IE = {"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+                  "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF = {"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+                  "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF78 = {"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"})
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void cssRules() throws Exception {
         final String html
             = "<html><body>\n"
@@ -359,7 +360,12 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
             FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(FF = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                       "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"})
+    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void insertRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -487,7 +493,18 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
              "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"1", "1", "2", "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]",
+                           "span { color: rgb(0, 0, 0) }", "null"},
+            EDGE = {"1", "1", "2", "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]",
+                    "span { color: rgb(0, 0, 0) }", "null"},
+            IE = {"1", "1", "2", "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]",
+                  "span { color: rgb(0, 0, 0) }", "null"},
+            FF = {"1", "1", "2", "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]",
+                  "span { color: rgb(0, 0, 0) }", "null"},
+            FF78 = {"1", "1", "2", "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]",
+                    "span { color: rgb(0, 0, 0) }", "null"})
+    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void insertRuleWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -555,7 +572,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "exception"},
             IE = {"1", "-1", "1", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(IE = {"1", "exception"})
     public void insertRuleEmptyWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -623,7 +640,18 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                           "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            EDGE = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            IE = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                  "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                  "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"})
+    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void insertRuleWithIndexNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -646,7 +674,56 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      log(rules.item(i).parentRule);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    log('exception');\n"
+            + "    log('exception'+e);\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
+             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @HtmlUnitNYI(CHROME = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                           "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            EDGE = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            IE = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                  "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                  "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"},
+            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0) }", "null",
+                    "p { background-color: rgb(255, 255, 255) }", "[object CSSMediaRule]"})
+    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME output formatting in rule.cssText -> CSSParser
+    public void insertRuleWithIndexNaN() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @media screen { p { background-color:#FFFFFF; }};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var rules = rule.cssRules;\n"
+            + "  log(rules.length);\n"
+            + "  try {\n"
+            + "    log(rule.insertRule('span { color:#000000; }', 'abc'));\n"
+            + "    log(rules.length);\n"
+            + "    for (var i = 0; i < rules.length; i++) {\n"
+            + "      log(rules.item(i).cssText);\n"
+            + "      log(rules.item(i).parentRule);\n"
+            + "    }\n"
+            + "  } catch(e) {\n"
+            + "    log('exception'+e);\n"
             + "  }\n"
             + "</script>\n"
 
@@ -660,7 +737,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "exception"})
-    @NotYetImplemented
     public void insertRuleWithIndexNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -692,7 +768,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "exception"})
-    @NotYetImplemented
     public void insertRuleWithIndexGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"
@@ -724,7 +799,12 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "1", "p { background-color: rgb(255, 255, 255); }"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"2", "1", "p { background-color: rgb(255, 255, 255) }"},
+            EDGE = {"2", "1", "p { background-color: rgb(255, 255, 255) }"},
+            IE = {"2", "1", "p { background-color: rgb(255, 255, 255) }"},
+            FF = {"2", "1", "p { background-color: rgb(255, 255, 255) }"},
+            FF78 = {"2", "1", "p { background-color: rgb(255, 255, 255) }"})
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void deleteRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -760,7 +840,12 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "1", "span { color: rgb(0, 0, 0); }"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            EDGE = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            IE = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            FF = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            FF78 = {"2", "1", "span { color: rgb(0, 0, 0) }"})
+    // FIXME output formatting in rule.cssText -> CSSParser
     public void deleteRuleNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -795,8 +880,48 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"2", "1", "span { color: rgb(0, 0, 0); }"})
+    @HtmlUnitNYI(CHROME = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            EDGE = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            IE = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            FF = {"2", "1", "span { color: rgb(0, 0, 0) }"},
+            FF78 = {"2", "1", "span { color: rgb(0, 0, 0) }"})
+    // FIXME output formatting in rule.cssText -> CSSParser
+    public void deleteRuleNaN() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var rules = rule.cssRules;\n"
+            + "  log(rules.length);\n"
+            + "  try {\n"
+            + "    rule.deleteRule('abc');\n"
+            + "    log(rules.length);\n"
+            + "    for (var i = 0; i < rules.length; i++) {\n"
+            + "      log(rules.item(i).cssText);\n"
+            + "    }\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"2", "exception"})
-    @NotYetImplemented
     public void deleteRuleNegative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -828,7 +953,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "exception"})
-    @NotYetImplemented
     public void deleteRuleGreaterThanLength() throws Exception {
         final String html
             = "<html><body>\n"

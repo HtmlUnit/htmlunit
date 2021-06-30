@@ -101,9 +101,9 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"@import url(\"imp.css\");", "@import url(\"imp.css\");"},
-            IE = {"@import url( imp.css );", "@import url( imp.css );"})
-    @HtmlUnitNYI(IE = {"@import url(\"imp.css\");", "@import url(\"imp.css\");"})
+    @Alerts(DEFAULT = "@import url(\"imp.css\");",
+            IE = "@import url( imp.css );")
+    @HtmlUnitNYI("@import url(\"imp.css\");"})
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -116,7 +116,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  log(rule.cssText);\n"
             + "  try {"
             + "    rule.cssText = '@import \"imp2.css\";';\n"
             + "    log(rule.cssText);\n"

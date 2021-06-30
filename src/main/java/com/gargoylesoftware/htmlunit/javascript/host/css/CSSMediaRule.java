@@ -18,19 +18,25 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for a {@link CSSMediaRuleImpl}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Frank Danek
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSMediaRule">MDN doc</a>
  */
 @JsxClass
 public class CSSMediaRule extends CSSConditionRule {
@@ -51,6 +57,15 @@ public class CSSMediaRule extends CSSConditionRule {
      */
     protected CSSMediaRule(final CSSStyleSheet stylesheet, final CSSMediaRuleImpl rule) {
         super(stylesheet, rule);
+    }
+
+    /**
+     * Sets the parsable textual representation of the rule.
+     * @param cssText the parsable textual representation of the rule
+     */
+    @JsxSetter(IE)
+    public void setCssText(final String cssText) {
+        Context.reportError("Not implemented.");
     }
 
     /**

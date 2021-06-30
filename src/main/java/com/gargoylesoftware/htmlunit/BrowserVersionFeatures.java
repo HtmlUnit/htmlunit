@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSGroupingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.DateTimeFormat;
 
@@ -975,6 +976,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS,
 
+    /** The index parameter of {@link CSSGroupingRule#insertRule(String, Object)} is optional. */
+    @BrowserFeature({FF, FF78})
+    JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL,
+
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
@@ -1141,7 +1146,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_MEDIA_LIST_ALL,
 
-    /** Indicates that an empty media list is represented by the string 'all'. */
+    /** Indicates that an empty media list is represented by the string ''. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_MEDIA_LIST_EMPTY_STRING,
 
@@ -1591,7 +1596,6 @@ public enum BrowserVersionFeatures {
 
     /**
      * Method addRule returns the rule position instead of -1.
-     * (href empty) is null.
      */
     @BrowserFeature(IE)
     STYLESHEET_ADD_RULE_RETURNS_POS,

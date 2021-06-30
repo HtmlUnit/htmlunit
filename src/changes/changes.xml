@@ -8,7 +8,15 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
-            <action type="fix" dev="rbri" due-to="Frank Danek">
+            <action type="add" dev="rbri" due-to="Frank Danek" issue="360">
+                CSSConditionRule.conditionText added (for CSSMediaRule).
+            </action>
+            <action type="add" dev="rbri" due-to="Frank Danek" issue="360">
+                CSSGroupingRule.cssRules, .insertRule() and .deleteRule() added (for CSSMediaRule).
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
+                MediaList default toString() now prints the media text.
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 Assigning a value to CSSRule.cssText is a no op.
             </action>
             <action type="add" dev="rbri" due-to="Frank Danek">

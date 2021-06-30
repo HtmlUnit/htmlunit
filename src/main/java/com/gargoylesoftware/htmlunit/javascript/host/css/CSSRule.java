@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">MDN doc</a>
  */
 @JsxClass
 public class CSSRule extends SimpleScriptable {
