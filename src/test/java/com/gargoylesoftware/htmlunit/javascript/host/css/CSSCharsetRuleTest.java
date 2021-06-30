@@ -41,18 +41,19 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<style>@charset 'UTF-8';</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var rules = document.styleSheets[0].cssRules;\n"
             + "  if (!rules) {\n"
             + "    rules = document.styleSheets[0].rules;\n"
             + "  }\n"
-            + "  alert(rules.length);\n"
-            + "  alert(rules[0]);\n"
+            + "  log(rules.length);\n"
+            + "  log(rules[0]);\n"
             + "  if (rules[0]) {\n"
-            + "    alert(rules[0].encoding);\n"
+            + "    log(rules[0].encoding);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

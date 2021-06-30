@@ -405,9 +405,9 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                "@import url(\"imp.css\") only screen and (color), print;"},
+                       "@import url(\"imp.css\") only screen and (color), print;"},
             IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                "@import url( imp.css ) only screen and (color), print;"})
+                  "@import url( imp.css ) only screen and (color), print;"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
