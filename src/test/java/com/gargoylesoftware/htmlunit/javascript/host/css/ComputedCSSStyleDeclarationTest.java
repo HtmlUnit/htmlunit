@@ -1523,7 +1523,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "0"})
+    @NotYetImplemented
     public void widthAndHeightChildDisplayNoneWidthLineBreak() throws Exception {
+        //see https://github.com/HtmlUnit/htmlunit/pull/356
         final String content = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
