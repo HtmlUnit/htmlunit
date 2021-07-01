@@ -82,7 +82,7 @@ public class CSSStyleRule extends CSSRule {
         m.appendTail(sb);
 
         // ".foo" and not "*.foo"
-        selectorText = SELECTOR_REPLACE_PATTERN.matcher(sb.toString()).replaceAll("$1");
+//        selectorText = SELECTOR_REPLACE_PATTERN.matcher(sb.toString()).replaceAll("$1");
         return selectorText;
     }
 

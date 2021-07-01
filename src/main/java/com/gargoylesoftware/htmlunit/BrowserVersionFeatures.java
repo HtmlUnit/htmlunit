@@ -63,6 +63,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     CSS_BACKGROUND_RGBA,
 
+    /** {@code CSSFontFaceRule.cssText} patches for FF78. */
+    @BrowserFeature(FF78)
+    CSS_CSSTEXT_FF78_STYLE,
+
+    /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
+    @BrowserFeature(IE)
+    CSS_CSSTEXT_IE_STYLE,
+
     /** Is display style of HtmlDialog is 'none'. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_DIALOG_NONE,
@@ -74,14 +82,6 @@ public enum BrowserVersionFeatures {
     /** Is display style 'block'. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_DISPLAY_BLOCK2,
-
-    /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE,
-
-    /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
-    @BrowserFeature(IE)
-    CSS_FONTFACERULE_CSSTEXT_IE_STYLE,
 
     /** 'initial' is a valid length value. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})

@@ -243,7 +243,7 @@ public class CSSRule extends SimpleScriptable {
     }
 
     /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText.
+     * See https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText.
      * @param cssText ignored
      */
     @JsxSetter

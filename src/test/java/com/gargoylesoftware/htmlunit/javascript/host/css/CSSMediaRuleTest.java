@@ -63,7 +63,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
-    @HtmlUnitNYI(IE = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -92,7 +91,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { }\n  div { }\n}",
             IE = "@media screen {\n\tp {  }\n\tdiv {  }\n}")
-    @HtmlUnitNYI(IE = "@media screen {\n  p { }\n  div { }\n}")
     public void cssText2() throws Exception {
         final String html
             = "<html><body>\n"
@@ -157,9 +155,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
             FF78 = "@media print {\n  *#navigation { display: none; }"
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
-            IE = "@media print {\n  *#navigation { display: none; }"
-                    + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}")
-    // FIXME output formatting in rule.cssText -> CSSParser
+            IE = "@media print {\n\t*#navigation { display: none; }"
+                    + "\n\t@media (max-width: 12cm) {\n\t*.note { float: none; }\n}\n}")
     public void cssTextNested() throws Exception {
         final String html
             = "<html><body>\n"
@@ -189,7 +186,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}",
             IE = "exception")
-    @HtmlUnitNYI(IE = "@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
+    @HtmlUnitNYI(IE = "@media screen {\n\tp { background-color: rgb(255, 255, 255); }\n}")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
