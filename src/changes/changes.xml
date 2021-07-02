@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
+            <action type="fix" dev="RhinoTeam">
+                core-js: globalThis implemented.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix bug when calling function on custom global object.
+            </action>
             <action type="add" dev="rbri" due-to="Frank Danek" issue="360">
                 CSSConditionRule.conditionText added (for CSSMediaRule).
             </action>

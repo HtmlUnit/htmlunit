@@ -976,6 +976,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS,
 
+    /** Supports globalThis. */
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
+    JS_GLOBAL_THIS,
+
     /** The index parameter of {@link CSSGroupingRule#insertRule(String, Object)} is optional. */
     @BrowserFeature({FF, FF78})
     JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL,

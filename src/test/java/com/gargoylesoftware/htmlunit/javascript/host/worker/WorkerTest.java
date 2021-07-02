@@ -392,6 +392,21 @@ public class WorkerTest extends WebDriverTestCase {
         testJs(workerJs);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"object", "true"},
+            IE = {"undefined", "globalThis is undefined"})
+    public void globalThis() throws Exception {
+        final String workerJs
+            = "  try {\n"
+            + "    postMessage(typeof globalThis);\n"
+            + "    postMessage(self === globalThis);\n"
+            + "  } catch(e) { postMessage('globalThis is undefined'); }";
+        testJs(workerJs);
+    }
+
     private void testJs(final String workerJs) throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"

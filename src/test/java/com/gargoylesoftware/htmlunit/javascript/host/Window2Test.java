@@ -2606,4 +2606,25 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Window]", "true", "true"},
+            IE = "globalThis is undefined")
+    public void globalThis() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log(globalThis);\n"
+            + "    log(window === globalThis);\n"
+            + "    log(self === globalThis);\n"
+            + "  } catch(e) { log('globalThis is undefined'); }"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

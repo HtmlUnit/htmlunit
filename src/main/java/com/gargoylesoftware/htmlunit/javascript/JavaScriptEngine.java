@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
@@ -501,6 +502,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         deleteProperties(scriptable, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(scriptable, browserVersion);
+
+        if (!browserVersion.hasFeature(JS_GLOBAL_THIS)) {
+            deleteProperties(scriptable, "globalThis");
+        }
 
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
