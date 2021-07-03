@@ -180,7 +180,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @param state the new state
      */
     private void setState(final int state) {
-        if (state == OPENED
+        if (state == UNSENT
+                || state == OPENED
                 || state == HEADERS_RECEIVED
                 || state == LOADING
                 || state == DONE) {
@@ -375,6 +376,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
         fireJavascriptEvent(Event.TYPE_ABORT);
         fireJavascriptEvent(Event.TYPE_LOAD_END);
+
+        setState(UNSENT);
         aborted_ = true;
     }
 
