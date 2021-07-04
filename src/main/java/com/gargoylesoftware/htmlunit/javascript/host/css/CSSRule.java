@@ -170,6 +170,9 @@ public class CSSRule extends SimpleScriptable {
         if (rule instanceof CSSFontFaceRuleImpl) {
             return new CSSFontFaceRule(stylesheet, (CSSFontFaceRuleImpl) rule);
         }
+        if (rule instanceof CSSPageRuleImpl) {
+            return new CSSPageRule(stylesheet, (CSSPageRuleImpl) rule);
+        }
         if (rule instanceof CSSUnknownRuleImpl) {
             final CSSUnknownRuleImpl unknownRule = (CSSUnknownRuleImpl) rule;
             if (unknownRule.getCssText().startsWith("@keyframes")) {
