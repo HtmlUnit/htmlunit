@@ -97,7 +97,7 @@ mvn clean deploy -Dmaven.test.skip=true
                     </li>
                     <li>
                         Build the zip files, (clean avoids duplicated pom.xml because of Maven/Eclipse conflicts)
-                        <source>mvn -up clean site package -Dmaven.test.skip=true</source>
+                        <source>mvn -up -U clean site package -Dmaven.test.skip=true</source>
                     </li>
                     <li>
                         Upload the two zip files (htmlunit-x.y-bin.zip and htmlunit-x.y-src.zip) to
@@ -122,8 +122,8 @@ mvn clean deploy -Dmaven.test.skip=true
                         <li>fill the tag and title field with the release number (e.g. 1.1.0)</li>
                         <li>append
                           <ul>
-                            <li>htmlunit-2.50.0-bin.zip</li>
-                            <li>htmlunit-2.50.0-src.zip</li>
+                            <li>htmlunit-2.51.0-bin.zip</li>
+                            <li>htmlunit-2.51.0-src.zip</li>
                           </ul>
                         </li>
                         <li>do not publish the release now, we have to add a file later on</li>

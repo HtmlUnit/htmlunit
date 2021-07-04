@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
+        <release version="2.51.0" date="July 04, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
             <action type="fix" dev="rbri" issue="365">
                 XMLHttpRequest-abort() sets the state back to 0 and the webResponse to a network error.
             </action>
@@ -28,6 +28,9 @@
             </action>
             <action type="add" dev="rbri" due-to="Frank Danek" issue="360">
                 CSSGroupingRule.cssRules, .insertRule() and .deleteRule() added (for CSSMediaRule).
+            </action>
+            <action type="fix" dev="rbri">
+                CssParser: bring formatting closer to the browser.
             </action>
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 MediaList default toString() now prints the media text.
