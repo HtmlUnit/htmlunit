@@ -1202,6 +1202,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
 
+    /** Indicates that CSSPageRule.selectorText always returns an empty string. */
+    @BrowserFeature(IE)
+    JS_PAGERULE_SELECTORTEXT_EMPTY,
+
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */
     @BrowserFeature({FF, FF78})
