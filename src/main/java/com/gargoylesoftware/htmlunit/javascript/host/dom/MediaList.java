@@ -37,7 +37,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Frank Danek
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaList">MDN doc</a>
  */
+// FIXME according to MDN this is part of the CSSOM -> move to .host.css!
 @JsxClass
 public class MediaList extends SimpleScriptable {
 
