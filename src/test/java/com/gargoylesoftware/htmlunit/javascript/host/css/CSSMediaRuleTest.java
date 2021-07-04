@@ -89,16 +89,15 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@media screen {\n  p { }\n  div { }\n}",
-            IE = "@media screen {\n\tp {  }\n\tdiv {  }\n}")
-    public void cssText2() throws Exception {
+    @Alerts("@media screen {\n}")
+    public void cssTextEmpty() throws Exception {
         final String html
             = "<html><body>\n"
 
             + LOG_TEXTAREA
 
             + "<style>\n"
-            + "  @media screen { p {} div {}};\n"
+            + "  @media screen {};\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -117,15 +116,16 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("@media screen {\n}")
-    public void cssTextEmpty() throws Exception {
+    @Alerts(DEFAULT = "@media screen {\n  p { }\n  div { }\n}",
+            IE = "@media screen {\n\tp {  }\n\tdiv {  }\n}")
+    public void cssTextMultipleRules() throws Exception {
         final String html
             = "<html><body>\n"
 
             + LOG_TEXTAREA
 
             + "<style>\n"
-            + "  @media screen {};\n"
+            + "  @media screen { p {} div {}};\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -243,6 +243,37 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"[object CSSMediaRule]", "[object CSSMediaRule]"},
+            IE = "undefined")
+    @HtmlUnitNYI(IE = {"[object CSSMediaRule]", "[object CSSMediaRule]"})
+    // [CSSPARSER] IE does not support nested media rules at all -> inner one is ignored
+    public void parentRuleNested() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @media print { #navigation { display: none; } "
+                    + "@media (max-width: 12cm) { .note { float: none; } } }"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var ruleOuter = styleSheet.cssRules[0];\n"
+            + "  var ruleInner = ruleOuter.cssRules[1];\n"
+            + "  log(ruleInner);\n"
+            + "  log(ruleInner.parentRule);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("null")
     public void parentRuleSet() throws Exception {
         final String html
@@ -328,6 +359,46 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"[object MediaList]", "all", "1", "all", "all", "all"},
+            IE = {"[object MediaList]", "all", "1", "all", "all", "undefined"})
+    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "", "", ""},
+            EDGE = {"[object MediaList]", "", "1", "", "", ""},
+            IE = {"[object MediaList]", "", "1", "", "", "undefined"},
+            FF = {"[object MediaList]", "", "1", "", "", ""},
+            FF78 = {"[object MediaList]", "", "1", "", "", ""})
+    // FIXME [CSSPARSER] media 'all' is not displayed
+    public void mediaAll() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @media all { p { background-color:#FFFFFF; }};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var mediaList = rule.media;\n"
+            + "  log(Object.prototype.toString.call(mediaList));\n"
+            + "  log(mediaList);\n"
+            + "  log(mediaList.length);\n"
+            + "  for (var i = 0; i < mediaList.length; i++) {\n"
+            + "    log(mediaList.item(i));\n"
+            + "  }\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.conditionText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "screen"},
             IE = {"[object MediaList]", "screen", "1", "screen", "screen", "undefined"})
     public void media() throws Exception {
@@ -362,15 +433,20 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                       "only screen and (color), print"},
-            IE = {"2", "only screen and (color)", "print", "only screen and (color), print", "undefined"})
+    @Alerts(DEFAULT = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
+                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
+                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)"},
+            IE = {"2", "only screen and (color)", "print and (max-width:12cm) and (min-width:30em)",
+                  "only screen and (color), print and (max-width:12cm) and (min-width:30em)", "undefined"})
+    @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
+                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)", "undefined"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
 
             + "<style>\n"
-            + "  @media only screen and (color),print { p { background-color:#FFFFFF; }};\n"
+            + "  @media only screen and  (color ),print and ( max-width:12cm) and (min-width: 30em) { "
+                    + "p { background-color:#FFFFFF; }};\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -429,6 +505,40 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    public void cssRulesMediaNotMatching() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @media print { p { background-color:#FFFFFF; }};\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var rules = rule.cssRules;\n"
+            + "  log(Object.prototype.toString.call(rules));\n"
+            + "  log(rules);\n"
+            + "  log(rules.length);\n"
+            + "  for (var i = 0; i < rules.length; i++) {\n"
+            + "    log(rules.item(i));\n"
+            + "    log(rules.item(i).cssText);\n"
+            + "    log(rules.item(i).parentRule);\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"1", "exception"},
             FF = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
@@ -438,7 +548,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                        "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
             FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -576,7 +686,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                   "span { color: rgb(0, 0, 0); }", "null"},
             FF78 = {"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
                     "span { color: rgb(0, 0, 0); }", "null"})
-    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRuleWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -722,7 +832,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
             FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRuleWithIndexNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -770,7 +880,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
             FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    // FIXME set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int) -> CSSParser
+    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRuleWithIndexNaN() throws Exception {
         final String html
             = "<html><body>\n"
