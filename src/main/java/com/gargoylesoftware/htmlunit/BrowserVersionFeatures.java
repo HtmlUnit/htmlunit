@@ -1671,6 +1671,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     XHR_LENGTH_COMPUTABLE,
 
+    /** XMLHttpRequest triggers the load events also if the abort was signaled. */
+    @BrowserFeature({FF, FF78})
+    XHR_LOAD_ALWAYS_AFTER_DONE,
+
     /** XMLHttpRequest triggers the load start event async. */
     @BrowserFeature(IE)
     XHR_LOAD_START_ASYNC,

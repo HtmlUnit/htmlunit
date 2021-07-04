@@ -43,6 +43,7 @@ import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MiniServer;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -121,7 +122,7 @@ public final class XMLHttpRequestLifeCycleTest {
     }
 
     private enum Execution {
-        ONLY_SEND, SEND_ABORT, NETWORK_ERROR, ERROR_403, ERROR_500, TIMEOUT,
+        ONLY_SEND, SEND_ABORT, DONE_ABORT, NETWORK_ERROR, ERROR_403, ERROR_500, TIMEOUT,
         ONLY_SEND_PREFLIGHT, ONLY_SEND_PREFLIGHT_FORBIDDEN,
         WITHOUT_ORIGIN, WITHOUT_ORIGIN_PREFLIGHT,
         NETWORK_ERROR_PREFLIGHT,
@@ -370,6 +371,43 @@ public final class XMLHttpRequestLifeCycleTest {
          * @throws Exception if the test fails
          */
         @Test
+        @Alerts({"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                 "load_4_200_false", "loadend_4_200_false", "send-done: 4_200", "abort-done: 0_0"})
+        public void addEventListener_sync_abortTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.SEND_ABORT), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                           "abort-done: 0_0", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                      "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
+                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                        "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
+                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                      "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
+                      "abort-done: 0_0", "send-done: 0_0"})
+        @HtmlUnitNYI(CHROME = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                               "abort-done: 0_0", "send-done: 0_0"},
+                EDGE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                        "abort-done: 0_0", "send-done: 0_0"},
+                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                      "abort-done: 0_0", "send-done: 0_0"})
+        public void addEventListener_sync_abortAfterDoneTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.DONE_ABORT), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
@@ -608,13 +646,44 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
-                           "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0", "loadend_4_0_false",
-                           "abort-done: 0_0"},
+                           "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0_false",
+                           "loadend_4_0_false", "abort-done: 0_0"},
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
-                      "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0",
+                      "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0_false",
                       "loadend_4_0_false", "abort-done: 0_0"})
         public void addEventListener_async_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT), URL_FIRST,
+                    servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                           "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                           "progress_3_200_false", "readystatechange_4_200_true",
+                           "abort-done: 0_0"},
+                FF = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                      "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                      "progress_3_200_false", "readystatechange_4_200_true",
+                      "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false"},
+                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                        "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true",
+                        "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
+                      "send-done: 1_0", "loadstart_1_0_false", "readystatechange_2_200_true",
+                      "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
+                      "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
+                      "abort-done: 0_0"})
+        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
+                           "send-done: 1_0", "loadstart_1_0_false", "readystatechange_2_200_true",
+                           "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
+                           "abort-done: 0_0"})
+        public void addEventListener_async_abortAfterDoneTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.DONE_ABORT), URL_FIRST,
                     servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
@@ -805,6 +874,44 @@ public final class XMLHttpRequestLifeCycleTest {
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts({"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                 "load_4_200_false", "loadend_4_200_false", "send-done: 4_200", "abort-done: 0_0"})
+        public void onKeyWord_sync_abortTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.SEND_ABORT),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                           "abort-done: 0_0", "ExceptionThrown"},
+                FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                      "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
+                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                        "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
+                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                      "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
+                      "abort-done: 0_0", "send-done: 0_0"})
+        @HtmlUnitNYI(CHROME =  {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                                "abort-done: 0_0", "send-done: 0_0"},
+                EDGE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                        "abort-done: 0_0", "send-done: 0_0"},
+                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                      "abort-done: 0_0", "send-done: 0_0"})
+        public void onKeyWord_sync_abortAfterDoneTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.DONE_ABORT),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
         /**
          * @throws Exception if the test fails
          */
@@ -971,13 +1078,43 @@ public final class XMLHttpRequestLifeCycleTest {
          */
         @Test
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
-                           "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0",
+                           "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0_false",
                            "loadend_4_0_false", "abort-done: 0_0"},
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
-                      "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0",
+                      "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0_false",
                       "loadend_4_0_false", "abort-done: 0_0"})
         public void onKeyWord_async_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT),
+                    URL_FIRST, servlets_);
+            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                           "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                           "progress_3_200_false", "readystatechange_4_200_true", "abort-done: 0_0"},
+                FF = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                      "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                      "progress_3_200_false", "readystatechange_4_200_true", "abort-done: 0_0",
+                      "load_0_0_false", "loadend_0_0_false"},
+                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                        "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
+                        "progress_3_200_false", "readystatechange_4_200_true", "abort-done: 0_0",
+                        "load_0_0_false", "loadend_0_0_false"},
+                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
+                      "send-done: 1_0", "loadstart_1_0_false", "readystatechange_2_200_true",
+                      "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
+                      "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
+                      "abort-done: 0_0"})
+        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
+                           "send-done: 1_0", "loadstart_1_0_false", "readystatechange_2_200_true",
+                           "readystatechange_3_200_true", "progress_3_200_false", "readystatechange_4_200_true",
+                           "abort-done: 0_0"})
+        public void onKeyWord_async_abortAfterDoneTriggered() throws Exception {
+            final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.DONE_ABORT),
                     URL_FIRST, servlets_);
             verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
@@ -1837,10 +1974,12 @@ public final class XMLHttpRequestLifeCycleTest {
         htmlBuilder.append("      function alertEventState(event) {\n");
         htmlBuilder.append("        logText(event.type + '_' + xhr.readyState + '_'"
                                         + "+ xhr.status + '_' + (event.loaded === undefined));\n");
-        htmlBuilder.append("      }\n");
-
-        htmlBuilder.append("      function alertAbort(event) {\n");
-        htmlBuilder.append("        logText(event.type + '_' + xhr.readyState + '_' + xhr.status);\n");
+        if (Execution.DONE_ABORT.equals(execution)) {
+            htmlBuilder.append("        if (xhr.readyState === XMLHttpRequest.DONE) {\n");
+            htmlBuilder.append("          xhr.abort();\n");
+            htmlBuilder.append("          logText('abort-done: ' + xhr.readyState + '_' + xhr.status);");
+            htmlBuilder.append("        }\n");
+        }
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function logText(txt) {\n");
@@ -1857,10 +1996,7 @@ public final class XMLHttpRequestLifeCycleTest {
     }
 
     static void registerEventListener(final StringBuffer buffer, final Mode mode, final State state) {
-        String function = "alertEventState";
-        if (State.ABORT.equals(state)) {
-            function = "alertAbort";
-        }
+        final String function = "alertEventState";
 
         if (mode.isUseOnKeyword()) {
             buffer.append("        xhr.on").append(state.getEventName_()).append("=").append(function).append(";\n");

@@ -9,7 +9,7 @@
     <body>
         <release version="2.51.0" date="June xx, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
             <action type="fix" dev="rbri" issue="365">
-                XMLHttpRequest-abort() sets the state to 0.
+                XMLHttpRequest-abort() sets the state back to 0 and the webResponse to a network error.
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Various fixes for undefined.
