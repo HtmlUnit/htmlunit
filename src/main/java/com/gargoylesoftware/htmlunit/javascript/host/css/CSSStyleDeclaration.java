@@ -119,6 +119,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -154,6 +155,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Dennis Duysak
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN doc</a>
  */
 @JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable {
@@ -1268,11 +1270,16 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setCssText(final String value) {
+        String fixedValue = value;
+        if (fixedValue == null || "null".equals(fixedValue)) {
+            fixedValue = "";
+        }
+
         if (styleDeclaration_ != null) {
-            styleDeclaration_.setCssText(value);
+            styleDeclaration_.setCssText(fixedValue);
             return;
         }
-        jsElement_.getDomNodeOrDie().setAttribute("style", value);
+        jsElement_.getDomNodeOrDie().setAttribute("style", fixedValue);
     }
 
     /**
@@ -1968,6 +1975,31 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setPaddingTop(final Object paddingTop) {
         setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false);
+    }
+
+    /**
+     * Returns the CSSRule that is the parent of this style block or <code>null</code> if this CSSStyleDeclaration is
+     * not attached to a CSSRule.
+     * @return the CSSRule that is the parent of this style block or <code>null</code> if this CSSStyleDeclaration is
+     *      not attached to a CSSRule
+     */
+    @JsxGetter
+    public CSSRule getParentRule() {
+        if (null != styleDeclaration_ && getParentScope() instanceof CSSStyleSheet) {
+            final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
+            if (parentRule != null) {
+                return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Nothing.
+     * @param parentRule ignored
+     */
+    @JsxSetter
+    public void setParentRule(CSSRule parentRule) {
     }
 
     /**
