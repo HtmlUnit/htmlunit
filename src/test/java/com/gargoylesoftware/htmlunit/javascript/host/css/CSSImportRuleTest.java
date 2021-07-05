@@ -502,13 +502,15 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
                        "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
-                       "@import url(\"imp.css\") only screen and (color), print and (max-width: 12cm) and (min-width: 30em);"},
+                       "@import url(\"imp.css\") only screen and (color), "
+                               + "print and (max-width: 12cm) and (min-width: 30em);"},
             IE = {"2", "only screen and (color)", "print and (max-width:12cm) and (min-width:30em)",
                   "only screen and (color), print and (max-width:12cm) and (min-width:30em)",
                   "@import url( imp.css ) only screen and (color), print and (max-width:12cm) and (min-width:30em);"})
     @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
                        "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
-                       "@import url(\"imp.css\") only screen and (color), print and (max-width: 12cm) and (min-width: 30em);"})
+                       "@import url(\"imp.css\") only screen and (color), "
+                               + "print and (max-width: 12cm) and (min-width: 30em);"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"

@@ -617,15 +617,19 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "4", "[object CSSPageRule]",
                        "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
-                    "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
+                  "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
             FF78 = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
                     "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
     @HtmlUnitNYI(CHROME = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]",
                            "margin: 1cm;"},
-            EDGE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", "margin: 1cm;"},
-            IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", "margin: 1cm;"},
-            FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", "margin: 1cm;"},
-            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", "margin: 1cm;"})
+            EDGE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                    "0", "[object CSSPageRule]", "margin: 1cm;"},
+            IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                  "0", "[object CSSPageRule]", "margin: 1cm;"},
+            FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                  "0", "[object CSSPageRule]", "margin: 1cm;"},
+            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                    "0", "[object CSSPageRule]", "margin: 1cm;"})
     // FIXME styles not initialized??
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
     public void style() throws Exception {

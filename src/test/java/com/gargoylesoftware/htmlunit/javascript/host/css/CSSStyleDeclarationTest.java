@@ -190,7 +190,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF78 = {"background-color: rgb(255, 255, 255); color: red;",
                     "background-color: #FFFFFF;color: red;"})
     // FIXME hex colors are not transformed to rgb for direct styles
-    // FIXME add more properties to check formating rules (color handling, spaces, case-sensitivity, margin, padding, border, font, background, urls, ...)
+    // FIXME add more properties to check formating rules (color handling, spaces,
+    //       case-sensitivity, margin, padding, border, font, background, urls, ...)
     public void cssTextMultipleProperties() throws Exception {
         final String html
             = "<html><body>\n"

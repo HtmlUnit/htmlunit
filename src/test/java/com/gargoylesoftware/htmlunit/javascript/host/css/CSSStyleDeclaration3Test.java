@@ -887,7 +887,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</body></html>";
 
-            loadPageVerifyTitle2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void font(final String fontStyle, final String otherStyle) throws Exception {
@@ -1230,7 +1230,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</body></html>";
 
-            loadPageVerifyTitle2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void fontCss(final String fontStyle, final String otherStyle) throws Exception {
@@ -1593,7 +1593,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</body></html>";
 
-            loadPageVerifyTitle2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void fontComputed(final String fontStyle, final String otherStyle) throws Exception {
