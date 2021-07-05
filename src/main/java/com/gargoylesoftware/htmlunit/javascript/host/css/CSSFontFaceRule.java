@@ -21,8 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl;
@@ -40,8 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  */
 @JsxClass
 public class CSSFontFaceRule extends CSSRule {
-
-    private static final Pattern REPLACEMENT_FF78 = Pattern.compile("src: url\\(\"([^;]*)\"\\);");
 
     /**
      * Creates a new instance.
@@ -78,7 +74,7 @@ public class CSSFontFaceRule extends CSSRule {
             cssText = StringUtils.replace(cssText, "{ ", "{\n\t");
             cssText = StringUtils.replace(cssText, "; }", ";\n}\n");
             cssText = StringUtils.replace(cssText, "; ", ";\n\t");
-            cssText = REPLACEMENT_FF78.matcher(cssText).replaceFirst("src: url($1);");
+            cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url($1);");
         }
         else if (browserVersion.hasFeature(CSS_CSSTEXT_FF78_STYLE)) {
             cssText = StringUtils.replace(cssText, "{ ", "{\n  ");

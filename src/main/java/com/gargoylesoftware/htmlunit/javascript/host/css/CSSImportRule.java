@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -22,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -103,4 +105,16 @@ public class CSSImportRule extends CSSRule {
         return (CSSImportRuleImpl) getRule();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCssText() {
+        String cssText = super.getCssText();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
+            cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url( $1 );");
+        }
+        return cssText;
+    }
 }

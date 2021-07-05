@@ -364,7 +364,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "  try {"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception'+e);\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 

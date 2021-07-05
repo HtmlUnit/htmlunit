@@ -73,7 +73,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@import url(\"imp.css\");",
             IE = "@import url( imp.css );")
-    @HtmlUnitNYI(IE = "@import url(\"imp.css\");")
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -103,7 +102,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@import url(\"imp.css\");",
             IE = "@import url( imp.css );")
-    @HtmlUnitNYI(IE = "@import url(\"imp.css\");")
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -257,7 +255,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
             IE = {"imp.css", "@import url( imp.css );"})
-    @HtmlUnitNYI(IE = {"imp.css", "@import url(\"imp.css\");"})
     public void hrefSimpleRelative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -288,7 +285,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"},
             IE = {"§§URL§§imp.css", "@import url( §§URL§§imp.css );"})
-    @HtmlUnitNYI(IE = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"})
     public void hrefSimpleAbsolute() throws Exception {
         final String html
             = "<html><body>\n"
@@ -320,7 +316,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
             IE = {"imp.css", "@import url( imp.css );"})
-    @HtmlUnitNYI(IE = {"imp.css", "@import url(\"imp.css\");"})
     public void hrefUrlRelative() throws Exception {
         final String html
             = "<html><body>\n"
@@ -351,7 +346,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"},
             IE = {"§§URL§§imp.css", "@import url( §§URL§§imp.css );"})
-    @HtmlUnitNYI(IE = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"})
     public void hrefUrlAbsolute() throws Exception {
         final String html
             = "<html><body>\n"
@@ -383,7 +377,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "", "0", "", "@import url(\"imp.css\");"},
             IE = {"[object MediaList]", "all", "0", "all", "@import url( imp.css ) all;"})
-    @HtmlUnitNYI(IE = {"[object MediaList]", "all", "0", "", "@import url(\"imp.css\");"})
+    @HtmlUnitNYI(IE = {"[object MediaList]", "all", "0", "", "@import url( imp.css );"})
     public void mediaNone() throws Exception {
         final String html
             = "<html><body>\n"
@@ -549,7 +543,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             EDGE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
             FF = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
             FF78 = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
-            IE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"})
+            IE = {"[object CSSStyleSheet]", "null", "@import url( imp.css );"})
     public void styleSheet() throws Exception {
         final String html
             = "<html><body>\n"

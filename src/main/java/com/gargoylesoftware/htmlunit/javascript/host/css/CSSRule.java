@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -50,6 +52,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class CSSRule extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSRule.class);
+
+    /** RegEx to fix css text for IE. */
+    protected static final Pattern REPLACEMENT_IE = Pattern.compile("url\\(\"([^;]*)\"\\);");
+
 
     /**
      * The rule is a {@code CSSUnknownRule}.
