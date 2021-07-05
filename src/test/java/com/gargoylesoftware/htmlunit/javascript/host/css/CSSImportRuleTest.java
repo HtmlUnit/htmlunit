@@ -258,12 +258,12 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
             IE = {"imp.css", "@import url( imp.css );"})
     @HtmlUnitNYI(IE = {"imp.css", "@import url(\"imp.css\");"})
-    public void href() throws Exception {
+    public void hrefSimpleRelative() throws Exception {
         final String html
             = "<html><body>\n"
 
             + "<style>\n"
-            + "  @import 'imp.css';\n"
+            + "  @import  'imp.css';\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -286,6 +286,38 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"},
+            IE = {"§§URL§§imp.css", "@import url( §§URL§§imp.css );"})
+    @HtmlUnitNYI(IE = {"§§URL§§imp.css", "@import url(\"§§URL§§imp.css\");"})
+    public void hrefSimpleAbsolute() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import  '" + new URL(URL_FIRST, "imp.css").toExternalForm() + "';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  log(rule.href);\n"
+            + "  log(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"imp.css", "@import url(\"imp.css\");"},
             IE = {"imp.css", "@import url( imp.css );"})
     @HtmlUnitNYI(IE = {"imp.css", "@import url(\"imp.css\");"})
@@ -294,7 +326,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             = "<html><body>\n"
 
             + "<style>\n"
-            + "  @import url('imp.css');\n"
+            + "  @import url( 'imp.css' );\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -325,7 +357,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             = "<html><body>\n"
 
             + "<style>\n"
-            + "  @import url('" + new URL(URL_FIRST, "imp.css").toExternalForm() + "');\n"
+            + "  @import  url('" + new URL(URL_FIRST, "imp.css").toExternalForm() + "');\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -358,6 +390,49 @@ public class CSSImportRuleTest extends WebDriverTestCase {
 
             + "<style>\n"
             + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var mediaList = rule.media;\n"
+            + "  log(Object.prototype.toString.call(mediaList));\n"
+            + "  log(mediaList);\n"
+            + "  log(mediaList.length);\n"
+            + "  for (var i = 0; i < mediaList.length; i++) {\n"
+            + "    log(mediaList.item(i));\n"
+            + "  }\n"
+            + "  log(mediaList.mediaText);\n"
+            + "  log(rule.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object MediaList]", "all", "1", "all", "all", "@import url(\"imp.css\") all;"},
+            IE = {"[object MediaList]", "all", "1", "all", "all", "@import url( imp.css ) all;"})
+    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
+            EDGE = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
+            IE = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
+            FF = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
+            FF78 = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"})
+    // FIXME [CSSPARSER] media 'all' is not displayed
+    public void mediaAll() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css' all;\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -425,18 +500,21 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                       "@import url(\"imp.css\") only screen and (color), print;"},
-            IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                  "@import url( imp.css ) only screen and (color), print;"})
-    @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print", "only screen and (color), print",
-                       "@import url(\"imp.css\") only screen and (color), print;"})
+    @Alerts(DEFAULT = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
+                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
+                       "@import url(\"imp.css\") only screen and (color), print and (max-width: 12cm) and (min-width: 30em);"},
+            IE = {"2", "only screen and (color)", "print and (max-width:12cm) and (min-width:30em)",
+                  "only screen and (color), print and (max-width:12cm) and (min-width:30em)",
+                  "@import url( imp.css ) only screen and (color), print and (max-width:12cm) and (min-width:30em);"})
+    @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
+                       "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
+                       "@import url(\"imp.css\") only screen and (color), print and (max-width: 12cm) and (min-width: 30em);"})
     public void mediaQuery() throws Exception {
         final String html
             = "<html><body>\n"
 
             + "<style>\n"
-            + "  @import 'imp.css' only screen and (color),print;\n"
+            + "  @import 'imp.css' only screen and  (color ),print and ( max-width:12cm) and (min-width: 30em);\n"
             + "</style>\n"
 
             + "<script>\n"
@@ -476,6 +554,42 @@ public class CSSImportRuleTest extends WebDriverTestCase {
 
             + "<style>\n"
             + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  log(rule.styleSheet);\n"
+            + "  log(rule.styleSheet.href);\n"
+            + "  log(rule.styleSheet.cssRules[0].cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "#d { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "#d { color: green; }"})
+    @HtmlUnitNYI(CHROME = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
+            EDGE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
+            FF = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
+            FF78 = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
+            IE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"})
+    public void styleSheetMediaNotMatching() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css' print;\n"
             + "</style>\n"
 
             + "<script>\n"

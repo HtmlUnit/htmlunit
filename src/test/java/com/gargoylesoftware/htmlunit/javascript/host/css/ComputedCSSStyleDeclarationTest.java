@@ -52,6 +52,36 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
+            FF = {"[object CSS2Properties]", "[object CSS2Properties]"},
+            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]"})
+    public void scriptableToString() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  div { background-color: #FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv'></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var decl = window.getComputedStyle(div, null);\n"
+            + "  log(Object.prototype.toString.call(decl));\n"
+            + "  log(decl);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
