@@ -392,12 +392,8 @@ public final class XMLHttpRequestLifeCycleTest {
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
                       "abort-done: 0_0", "send-done: 0_0"})
-        @HtmlUnitNYI(CHROME = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                               "abort-done: 0_0", "send-done: 0_0"},
-                EDGE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                        "abort-done: 0_0", "send-done: 0_0"},
-                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                      "abort-done: 0_0", "send-done: 0_0"})
+        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                           "abort-done: 0_0", "send-done: 0_0"})
         public void addEventListener_sync_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.DONE_ABORT), URL_FIRST,
                     servlets_);
@@ -900,12 +896,8 @@ public final class XMLHttpRequestLifeCycleTest {
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
                       "abort-done: 0_0", "send-done: 0_0"})
-        @HtmlUnitNYI(CHROME =  {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                                "abort-done: 0_0", "send-done: 0_0"},
-                EDGE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                        "abort-done: 0_0", "send-done: 0_0"},
-                IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
-                      "abort-done: 0_0", "send-done: 0_0"})
+        @HtmlUnitNYI(IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                           "abort-done: 0_0", "send-done: 0_0"})
         public void onKeyWord_sync_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.DONE_ABORT),
                     URL_FIRST, servlets_);
@@ -1941,7 +1933,7 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         htmlBuilder.append("        xhr.open('GET', url, ").append(mode.isAsync()).append(");\n");
-        htmlBuilder.append("        logText('open-done: ' + xhr.readyState + '_' + xhr.status);");
+        htmlBuilder.append("        logText('open-done: ' + xhr.readyState + '_' + xhr.status);\n");
 
         htmlBuilder.append("        try {\n");
 
@@ -1963,23 +1955,25 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         htmlBuilder.append("           xhr.send();\n");
-        htmlBuilder.append("           logText('send-done: ' + xhr.readyState + '_' + xhr.status);");
+        htmlBuilder.append("           logText('send-done: ' + xhr.readyState + '_' + xhr.status);\n");
         if (Execution.SEND_ABORT.equals(execution)) {
             htmlBuilder.append("           xhr.abort();\n");
-            htmlBuilder.append("           logText('abort-done: ' + xhr.readyState + '_' + xhr.status);");
+            htmlBuilder.append("           logText('abort-done: ' + xhr.readyState + '_' + xhr.status);\n");
         }
         htmlBuilder.append("        } catch (e) { logText('ExceptionThrown'); }\n");
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function alertEventState(event) {\n");
-        htmlBuilder.append("        logText(event.type + '_' + xhr.readyState + '_'"
+        htmlBuilder.append("        try {\n");
+        htmlBuilder.append("          logText(event.type + '_' + xhr.readyState + '_'"
                                         + "+ xhr.status + '_' + (event.loaded === undefined));\n");
         if (Execution.DONE_ABORT.equals(execution)) {
-            htmlBuilder.append("        if (xhr.readyState === XMLHttpRequest.DONE) {\n");
-            htmlBuilder.append("          xhr.abort();\n");
-            htmlBuilder.append("          logText('abort-done: ' + xhr.readyState + '_' + xhr.status);");
-            htmlBuilder.append("        }\n");
+            htmlBuilder.append("          if (xhr.readyState === XMLHttpRequest.DONE) {\n");
+            htmlBuilder.append("            xhr.abort();\n");
+            htmlBuilder.append("            logText('abort-done: ' + xhr.readyState + '_' + xhr.status);");
+            htmlBuilder.append("          }\n");
         }
+        htmlBuilder.append("        } catch (e) { logText('ExceptionThrown abort'); }\n");
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function logText(txt) {\n");

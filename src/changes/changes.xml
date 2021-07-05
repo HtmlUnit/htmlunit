@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="365">
+                XMLHttpRequest-abort() triggers an error in Chrome/Edge if the send is aborted.
+            </action>
+        </release>
+
         <release version="2.51.0" date="July 04, 2021" description="Bugfixes, Firefox 89, Chrome/Edge 91, JS Template support">
             <action type="fix" dev="rbri" issue="365">
                 XMLHttpRequest-abort() sets the state back to 0 and the webResponse to a network error.

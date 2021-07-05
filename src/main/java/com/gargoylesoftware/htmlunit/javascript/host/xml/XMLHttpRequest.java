@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_STAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -811,6 +812,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             setState(DONE);
             fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+
+            if (!async_ && aborted_
+                    && browserVersion.hasFeature(XHR_SEND_NETWORK_ERROR_IF_ABORTED)) {
+                throw ScriptRuntime.constructError("Error",
+                        "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
+            }
 
             if (browserVersion.hasFeature(XHR_LOAD_ALWAYS_AFTER_DONE)) {
                 fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD);

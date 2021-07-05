@@ -1696,6 +1696,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE,
 
+    /** Indicates if the XMLHttpRequest.send() method will throw if aborted. */
+    @BrowserFeature({CHROME, EDGE})
+    XHR_SEND_NETWORK_ERROR_IF_ABORTED,
+
     /** Indicates that the content charset is used for response parsing. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     XHR_USE_CONTENT_CHARSET,
