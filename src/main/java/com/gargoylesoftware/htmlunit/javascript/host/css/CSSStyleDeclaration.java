@@ -1999,7 +1999,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param parentRule ignored
      */
     @JsxSetter
-    public void setParentRule(CSSRule parentRule) {
+    public void setParentRule(final CSSRule parentRule) {
     }
 
     /**

@@ -66,7 +66,7 @@ public class CSSPageRule extends CSSRule {
             return "";
         }
 
-        String selectorText = getPageRule().getSelectorText();
+        final String selectorText = getPageRule().getSelectorText();
         if (selectorText != null) {
             return selectorText.toLowerCase(Locale.ROOT);
         }
