@@ -9,6 +9,9 @@
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
+                CSSStyleDeclaration.item property added.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 CSSStyleDeclaration.length is now correct for stylesheets.
             </action>
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">

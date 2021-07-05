@@ -1461,6 +1461,20 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
+     * Returns the item in the given index.
+     * @param index the index
+     * @return the item in the given index
+     */
+    @JsxFunction
+    public Object item(final int index) {
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.getProperties().get(index);
+        }
+
+        return getStyleMap().get(index);
+    }
+
+    /**
      * Gets the {@code letterSpacing} style attribute.
      * @return the style attribute
      */
