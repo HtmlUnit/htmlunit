@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link CSSPageRule}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSPageRuleTest extends WebDriverTestCase {
@@ -62,12 +63,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@page { margin: 1cm; }",
             IE = "@page  {\n\tmargin: 1cm;\n}")
-    @HtmlUnitNYI(CHROME = "@page {margin: 1cm}",
-            EDGE = "@page {margin: 1cm}",
-            IE = "@page {margin: 1cm}",
-            FF = "@page {margin: 1cm}",
-            FF78 = "@page {margin: 1cm}")
-    // FIXME [CSSPARSER] missing leading and trailing blank and trailing ';'
     public void cssText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -96,11 +91,11 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@page { }",
             IE = "@page  {\n\t\n}")
-    @HtmlUnitNYI(CHROME = "@page {}",
-            EDGE = "@page {}",
-            IE = "@page {}",
-            FF = "@page {}",
-            FF78 = "@page {}")
+    @HtmlUnitNYI(CHROME = "@page {  }",
+            EDGE = "@page {  }",
+            IE = "@page  {\n\t }",
+            FF = "@page {  }",
+            FF78 = "@page {  }")
     // FIXME [CSSPARSER] missing blank
     public void cssTextEmpty() throws Exception {
         final String html
@@ -130,12 +125,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@page { margin-left: 4cm; margin-right: 3cm; }",
             IE = "@page  {\n\tmargin-right: 3cm; margin-left: 4cm;\n}")
-    @HtmlUnitNYI(CHROME = "@page {margin-left: 4cm; margin-right: 3cm}",
-            EDGE = "@page {margin-left: 4cm; margin-right: 3cm}",
-            IE = "@page {margin-left: 4cm; margin-right: 3cm}",
-            FF = "@page {margin-left: 4cm; margin-right: 3cm}",
-            FF78 = "@page {margin-left: 4cm; margin-right: 3cm}")
-    // FIXME [CSSPARSER] missing leading and trailing blank and trailing ';'
+    @HtmlUnitNYI(IE = "@page  {\n\tmargin-left: 4cm; margin-right: 3cm;\n}")
     public void cssTextMultipleRules() throws Exception {
         final String html
             = "<html><body>\n"
@@ -164,12 +154,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@page { margin: 1cm; }",
             IE = "@page  {\n\tmargin: 1cm;\n}")
-    @HtmlUnitNYI(CHROME = "@page {margin: 1cm}",
-            EDGE = "@page {margin: 1cm}",
-            IE = "@page {margin: 1cm}",
-            FF = "@page {margin: 1cm}",
-            FF78 = "@page {margin: 1cm}")
-    // FIXME [CSSPARSER] missing leading and trailing blank and trailing ';'
     public void cssTextSet() throws Exception {
         final String html
             = "<html><body>\n"

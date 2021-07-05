@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
+                CSSGroupingRule.insert() now sets the parent rule for the inserted rule.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
+                Various CSS formatting fixes.
+            </action>
             <action type="fix" dev="rbri" issue="365">
                 XMLHttpRequest-abort() triggers an error in Chrome/Edge if the send is aborted.
             </action>

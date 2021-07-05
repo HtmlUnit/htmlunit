@@ -56,7 +56,6 @@ public class CSSRule extends SimpleScriptable {
     /** RegEx to fix css text for IE. */
     protected static final Pattern REPLACEMENT_IE = Pattern.compile("url\\(\"([^;]*)\"\\);");
 
-
     /**
      * The rule is a {@code CSSUnknownRule}.
      */

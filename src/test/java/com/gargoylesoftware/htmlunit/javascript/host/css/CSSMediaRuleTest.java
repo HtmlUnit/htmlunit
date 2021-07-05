@@ -544,11 +544,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
             FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @HtmlUnitNYI(FF = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                       "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                    "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRule() throws Exception {
         final String html
             = "<html><body>\n"
@@ -676,17 +671,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
              "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
-    @HtmlUnitNYI(CHROME = {"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
-                           "span { color: rgb(0, 0, 0); }", "null"},
-            EDGE = {"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
-                    "span { color: rgb(0, 0, 0); }", "null"},
-            IE = {"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
-                  "span { color: rgb(0, 0, 0); }", "null"},
-            FF = {"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
-                  "span { color: rgb(0, 0, 0); }", "null"},
-            FF78 = {"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
-                    "span { color: rgb(0, 0, 0); }", "null"})
-    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRuleWithIndex() throws Exception {
         final String html
             = "<html><body>\n"
@@ -822,17 +806,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @HtmlUnitNYI(CHROME = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                           "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            EDGE = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                    "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            IE = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                  "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                  "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                    "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRuleWithIndexNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -870,17 +843,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    @HtmlUnitNYI(CHROME = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                           "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            EDGE = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                    "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            IE = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                  "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                  "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "null",
-                    "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
-    // FIXME [CSSPARSER] set rule.parentRule in CSSMediaRuleImpl.insertRule(String, int)
     public void insertRuleWithIndexNaN() throws Exception {
         final String html
             = "<html><body>\n"

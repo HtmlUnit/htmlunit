@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PAGERULE_SELECTORTEXT_EMPTY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -23,7 +24,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -98,5 +102,19 @@ public class CSSPageRule extends CSSRule {
      */
     private CSSPageRuleImpl getPageRule() {
         return (CSSPageRuleImpl) getRule();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCssText() {
+        String cssText = super.getCssText();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
+            cssText = StringUtils.replace(cssText, " { ", "  {\n\t");
+            cssText = StringUtils.replace(cssText, "; }", ";\n}");
+        }
+        return cssText;
     }
 }
