@@ -36,9 +36,9 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.44</checkstyle.version>
-        <spotbugs.version>4.2.3</spotbugs.version>
+        <spotbugs.version>4.3.0</spotbugs.version>
         <pmd.version>6.36.0</pmd.version>
-        <archunit.version>0.19.0</archunit.version>
+        <archunit.version>0.20.0</archunit.version>
     </properties>
 
     <build>
