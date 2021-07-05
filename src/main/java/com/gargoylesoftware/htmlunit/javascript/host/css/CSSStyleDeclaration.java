@@ -1453,6 +1453,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxGetter
     public int getLength() {
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.getProperties().size();
+        }
+
         return getStyleMap().size();
     }
 

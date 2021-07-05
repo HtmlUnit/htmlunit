@@ -111,8 +111,7 @@ public class CSSImportRule extends CSSRule {
     @Override
     public String getCssText() {
         String cssText = super.getCssText();
-        final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
+        if (getBrowserVersion().hasFeature(CSS_CSSTEXT_IE_STYLE)) {
             cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url( $1 );");
         }
         return cssText;

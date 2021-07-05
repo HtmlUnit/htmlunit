@@ -405,12 +405,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "1"})
-    @HtmlUnitNYI(CHROME = {"0", "1"},
-            EDGE = {"0", "1"},
-            IE = {"0", "1"},
-            FF = {"0", "1"},
-            FF78 = {"0", "1"})
-    // FIXME styles not initialized for stylesheets??
     public void length() throws Exception {
         final String html
             = "<html><body>\n"
@@ -475,12 +469,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "2"})
-    @HtmlUnitNYI(CHROME = {"0", "2"},
-            EDGE = {"0", "2"},
-            IE = {"0", "2"},
-            FF = {"0", "2"},
-            FF78 = {"0", "2"})
-    // FIXME styles not initialized for stylesheets??
     public void lengthMultipleProperties() throws Exception {
         final String html
             = "<html><body>\n"
@@ -513,12 +501,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "1"})
-    @HtmlUnitNYI(CHROME = {"0", "1"},
-            EDGE = {"0", "1"},
-            IE = {"0", "1"},
-            FF = {"0", "1"},
-            FF78 = {"0", "1"})
-    // FIXME styles not initialized for stylesheets??
     public void lengthSet() throws Exception {
         final String html
             = "<html><body>\n"

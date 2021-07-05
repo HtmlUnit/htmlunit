@@ -91,12 +91,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "@page { }",
             IE = "@page  {\n\t\n}")
-    @HtmlUnitNYI(CHROME = "@page {  }",
-            EDGE = "@page {  }",
-            IE = "@page  {\n\t }",
-            FF = "@page {  }",
-            FF78 = "@page {  }")
-    // FIXME [CSSPARSER] missing blank
     public void cssTextEmpty() throws Exception {
         final String html
             = "<html><body>\n"

@@ -112,6 +112,7 @@ public class CSSPageRule extends CSSRule {
         String cssText = super.getCssText();
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
+            cssText = StringUtils.replace(cssText, " { }", "  {\n\t\n}");
             cssText = StringUtils.replace(cssText, " { ", "  {\n\t");
             cssText = StringUtils.replace(cssText, "; }", ";\n}");
         }
