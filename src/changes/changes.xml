@@ -17,6 +17,15 @@
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 CSSGroupingRule.insert() now sets the parent rule for the inserted rule.
             </action>
+            <action type="add" dev="Frank Danek" issue="360">
+                PageRule style and selectorText property added.
+            </action>
+            <action type="fix" dev="Frank Danek" issue="360">
+                Improved PageRule support.
+            </action>
+            <action type="add" dev="Frank Danek" issue="360">
+                CSSStyleDeclaration.parentRule property added.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 Various CSS formatting fixes.
             </action>
