@@ -452,7 +452,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"},
             IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url( imp.css ) screen;"})
-    @HtmlUnitNYI(IE = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"})
     public void media() throws Exception {
         final String html
             = "<html><body>\n"
@@ -497,7 +496,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
                   "@import url( imp.css ) only screen and (color), print and (max-width:12cm) and (min-width:30em);"})
     @HtmlUnitNYI(IE = {"2", "only screen and (color)", "print and (max-width: 12cm) and (min-width: 30em)",
                        "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
-                       "@import url(\"imp.css\") only screen and (color), "
+                       "@import url( imp.css ) only screen and (color), "
                                + "print and (max-width: 12cm) and (min-width: 30em);"})
     public void mediaQuery() throws Exception {
         final String html
@@ -573,7 +572,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             EDGE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
             FF = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
             FF78 = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
-            IE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"})
+            IE = {"[object CSSStyleSheet]", "null", "@import url( imp.css ) print;"})
     public void styleSheetMediaNotMatching() throws Exception {
         final String html
             = "<html><body>\n"
