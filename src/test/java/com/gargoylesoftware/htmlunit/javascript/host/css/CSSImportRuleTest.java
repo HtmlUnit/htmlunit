@@ -415,12 +415,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "all", "1", "all", "all", "@import url(\"imp.css\") all;"},
             IE = {"[object MediaList]", "all", "1", "all", "all", "@import url( imp.css ) all;"})
-    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
-            EDGE = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
-            IE = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
-            FF = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"},
-            FF78 = {"[object MediaList]", "", "1", "", "", "@import url(\"imp.css\") ;"})
-    // FIXME [CSSPARSER] media 'all' is not displayed
     public void mediaAll() throws Exception {
         final String html
             = "<html><body>\n"

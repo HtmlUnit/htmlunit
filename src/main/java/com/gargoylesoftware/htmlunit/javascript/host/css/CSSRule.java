@@ -54,7 +54,7 @@ public class CSSRule extends SimpleScriptable {
     private static final Log LOG = LogFactory.getLog(CSSRule.class);
 
     /** RegEx to fix css text for IE. */
-    protected static final Pattern REPLACEMENT_IE = Pattern.compile("url\\(\"([^;]*)\"\\);");
+    protected static final Pattern REPLACEMENT_IE = Pattern.compile("url\\(\"([^;]*)\"\\)");
 
     /**
      * The rule is a {@code CSSUnknownRule}.

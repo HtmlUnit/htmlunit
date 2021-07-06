@@ -361,12 +361,6 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object MediaList]", "all", "1", "all", "all", "all"},
             IE = {"[object MediaList]", "all", "1", "all", "all", "undefined"})
-    @HtmlUnitNYI(CHROME = {"[object MediaList]", "", "1", "", "", ""},
-            EDGE = {"[object MediaList]", "", "1", "", "", ""},
-            IE = {"[object MediaList]", "", "1", "", "", "undefined"},
-            FF = {"[object MediaList]", "", "1", "", "", ""},
-            FF78 = {"[object MediaList]", "", "1", "", "", ""})
-    // FIXME [CSSPARSER] media 'all' is not displayed
     public void mediaAll() throws Exception {
         final String html
             = "<html><body>\n"

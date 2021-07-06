@@ -74,7 +74,7 @@ public class CSSFontFaceRule extends CSSRule {
             cssText = StringUtils.replace(cssText, "{ ", "{\n\t");
             cssText = StringUtils.replace(cssText, "; }", ";\n}\n");
             cssText = StringUtils.replace(cssText, "; ", ";\n\t");
-            cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url($1);");
+            cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url($1)");
         }
         else if (browserVersion.hasFeature(CSS_CSSTEXT_FF78_STYLE)) {
             cssText = StringUtils.replace(cssText, "{ ", "{\n  ");
