@@ -93,11 +93,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             FF = {"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"},
             FF78 = {"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"},
             IE = {"transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"})
-    @HtmlUnitNYI(CHROME = {"initial", "url(\"myimage.png\")", "initial", "initial", "initial"},
-            EDGE = {"initial", "url(\"myimage.png\")", "initial", "initial", "initial"},
-            IE = {"transparent", "url(\"myimage.png\")", "repeat", "0% 0%", "scroll"},
-            FF = {"rgba(0, 0, 0, 0)", "url(\"myimage.png\")", "repeat", "0% 0%", "scroll"},
-            FF78 = {"rgba(0, 0, 0, 0)", "url(\"myimage.png\")", "repeat", "0% 0%", "scroll"})
     public void backgroundImage() throws Exception {
         background("uRl(myImage.png)");
     }
