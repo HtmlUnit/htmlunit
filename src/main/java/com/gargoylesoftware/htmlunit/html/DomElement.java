@@ -44,8 +44,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.DOMExceptionImpl;
 import com.gargoylesoftware.css.dom.Property;
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
@@ -276,13 +280,26 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final CSSStyleDeclarationImpl cssStyle = new CSSStyleDeclarationImpl(null);
-        cssStyle.setCssText(styleAttribute);
+        try {
+            final CSSErrorHandler errorHandler = getPage().getWebClient().getCssErrorHandler();
+            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+            parser.setErrorHandler(errorHandler);
+            parser.parseStyleDeclaration(cssStyle, styleAttribute);
+        }
+        catch (final Exception e) {
+            throw new DOMExceptionImpl(
+                DOMException.SYNTAX_ERR,
+                DOMExceptionImpl.SYNTAX_ERROR,
+                e.getMessage());
+        }
+
         for (final Property prop : cssStyle.getProperties()) {
-            final StyleElement element = new StyleElement(prop.getName(),
+            final String key = prop.getName().toLowerCase(Locale.ROOT);
+            final StyleElement element = new StyleElement(key,
                     prop.getValue().getCssText(),
                     prop.isImportant() ? StyleElement.PRIORITY_IMPORTANT : "",
                     SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
-            styleMap.put(prop.getName(), element);
+            styleMap.put(key, element);
         }
 
 //        for (final String token : org.apache.commons.lang3.StringUtils.split(styleAttribute, ';')) {
