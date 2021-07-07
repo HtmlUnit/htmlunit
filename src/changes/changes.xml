@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.43.v20210629.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 CSSStyleDeclaration.item property added.
             </action>
