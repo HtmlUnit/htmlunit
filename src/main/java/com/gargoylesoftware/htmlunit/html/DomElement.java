@@ -302,23 +302,6 @@ public class DomElement extends DomNamespaceNode implements Element {
             styleMap.put(key, element);
         }
 
-//        for (final String token : org.apache.commons.lang3.StringUtils.split(styleAttribute, ';')) {
-//            final int index = token.indexOf(':');
-//            if (index != -1) {
-//                final String key = token.substring(0, index).trim().toLowerCase(Locale.ROOT);
-//                String value = token.substring(index + 1).trim();
-//                String priority = "";
-//                if (org.apache.commons.lang3.StringUtils.endsWithIgnoreCase(value, "!important")) {
-//                    priority = StyleElement.PRIORITY_IMPORTANT;
-//                    value = value.substring(0, value.length() - 10);
-//                    value = value.trim();
-//                }
-//                final StyleElement element = new StyleElement(key, value, priority,
-//                                                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
-//                styleMap.put(key, element);
-//            }
-//        }
-
         styleMap_ = styleMap;
         styleString_ = styleAttribute;
         // styleString_ = cssStyle.getCssText();
