@@ -44,12 +44,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.DOMExceptionImpl;
 import com.gargoylesoftware.css.dom.Property;
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
@@ -281,16 +277,12 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         final CSSStyleDeclarationImpl cssStyle = new CSSStyleDeclarationImpl(null);
         try {
-            final CSSErrorHandler errorHandler = getPage().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
-            parser.parseStyleDeclaration(cssStyle, styleAttribute);
+            cssStyle.setCssText(styleAttribute);
         }
         catch (final Exception e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
-                e.getMessage());
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error while parsing style value '" + styleAttribute + "'", e);
+            }
         }
 
         for (final Property prop : cssStyle.getProperties()) {
