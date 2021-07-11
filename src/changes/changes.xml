@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
+            <action type="add" dev="Frank Danek" issue="360">
+                CSS.supports() added - returns always true for now.
+            </action>
             <action type="update" dev="rbri">
                 Inline styles are now parsed by the htmlunit-cssparser.
             </action>
