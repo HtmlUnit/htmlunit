@@ -27,7 +27,7 @@
         <htmlunitdriver.version>2.51.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.9.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitneko.version>2.51.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.51.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>2.52.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.43.v20210629</jetty.version>
@@ -73,7 +73,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.2.3</version>
+                <version>4.3.0</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
