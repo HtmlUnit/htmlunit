@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -90,8 +89,8 @@ public class CSSImportRule extends CSSRule {
         if (importedStylesheet_ == null) {
             final CSSStyleSheet owningSheet = getParentStyleSheet();
             final HTMLElement ownerNode = owningSheet.getOwnerNode();
-            final CSSStyleSheetImpl importedStylesheet = getImportRule().getStyleSheet();
-            importedStylesheet_ = new CSSStyleSheet(ownerNode, importedStylesheet, owningSheet.getUri());
+            final CSSStyleSheet importedSheet = owningSheet.getImportedStyleSheet(getImportRule());
+            importedStylesheet_ = new CSSStyleSheet(ownerNode, importedSheet.getWrappedSheet(), importedSheet.getUri());
         }
         return importedStylesheet_;
     }

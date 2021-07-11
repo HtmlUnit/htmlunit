@@ -1144,7 +1144,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
 
-        return null;
+        return getUri();
     }
 
     /**
@@ -1746,20 +1746,14 @@ public class CSSStyleSheet extends StyleSheet {
             }
             else if (rule instanceof CSSImportRuleImpl) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                final MediaListImpl mediaList = importRule.getMedia();
 
-                CSSStyleSheet sheet = imports_.get(importRule);
-                if (sheet == null) {
-                    final String href = importRule.getHref();
-                    final String url = UrlUtils.resolveUrl(getUri(), href);
-                    sheet = loadStylesheet(ownerNode_, null, url);
-                    imports_.put(importRule, sheet);
-                }
+                final CSSStyleSheet sheet = getImportedStyleSheet(importRule);
 
                 if (!alreadyProcessing.contains(sheet.getUri())) {
                     final CSSRuleListImpl sheetRuleList = sheet.getWrappedSheet().getCssRules();
                     alreadyProcessing.add(sheet.getUri());
 
+                    final MediaListImpl mediaList = importRule.getMedia();
                     if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
                         index(index, sheetRuleList, alreadyProcessing);
                     }
@@ -1811,5 +1805,16 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         return matchingRules;
+    }
+
+    public CSSStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
+        CSSStyleSheet sheet = imports_.get(importRule);
+        if (sheet == null) {
+            final String href = importRule.getHref();
+            final String url = UrlUtils.resolveUrl(getUri(), href);
+            sheet = loadStylesheet(ownerNode_, null, url);
+            imports_.put(importRule, sheet);
+        }
+        return sheet;
     }
 }

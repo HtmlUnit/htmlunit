@@ -531,12 +531,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "#d { color: green; }"})
-    @HtmlUnitNYI(CHROME = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
-            EDGE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
-            FF = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
-            FF78 = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\");"},
-            IE = {"[object CSSStyleSheet]", "null", "@import url( imp.css );"})
+    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "div { color: green; }"})
     public void styleSheet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -556,7 +551,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
 
             + "</body></html>";
 
-        final String css = "#d { color: green }";
+        final String css = "div { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
         expandExpectedAlertsVariables(URL_FIRST);
@@ -567,12 +562,36 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "#d { color: green; }"})
-    @HtmlUnitNYI(CHROME = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
-            EDGE = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
-            FF = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
-            FF78 = {"[object CSSStyleSheet]", "null", "@import url(\"imp.css\") print;"},
-            IE = {"[object CSSStyleSheet]", "null", "@import url( imp.css ) print;"})
+    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "[object CSSRuleList]", "0"})
+    public void styleSheetNotAvailable() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css';\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  log(rule.styleSheet);\n"
+            + "  log(rule.styleSheet.href);\n"
+            + "  log(rule.styleSheet.cssRules);\n"
+            + "  log(rule.styleSheet.cssRules.length);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "div { color: green; }"})
     public void styleSheetMediaNotMatching() throws Exception {
         final String html
             = "<html><body>\n"
@@ -592,7 +611,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
 
             + "</body></html>";
 
-        final String css = "#d { color: green }";
+        final String css = "div { color: green }";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
 
         expandExpectedAlertsVariables(URL_FIRST);
