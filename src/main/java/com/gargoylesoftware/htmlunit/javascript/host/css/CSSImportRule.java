@@ -90,7 +90,8 @@ public class CSSImportRule extends CSSRule {
             final CSSStyleSheet owningSheet = getParentStyleSheet();
             final HTMLElement ownerNode = owningSheet.getOwnerNode();
             final CSSStyleSheet importedSheet = owningSheet.getImportedStyleSheet(getImportRule());
-            importedStylesheet_ = new CSSStyleSheet(ownerNode, importedSheet.getWrappedSheet(), importedSheet.getUri());
+            importedStylesheet_ = new CSSStyleSheet(null, ownerNode.getWindow(),
+                    importedSheet.getWrappedSheet(), importedSheet.getUri());
         }
         return importedStylesheet_;
     }

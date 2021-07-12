@@ -531,7 +531,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "div { color: green; }"})
+    @Alerts({"[object HTMLStyleElement]", "[object CSSStyleSheet]", "§§URL§§imp.css",
+             "null", "div { color: green; }"})
     public void styleSheet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -543,9 +544,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
+            + "  log(styleSheet.ownerNode);\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.styleSheet);\n"
             + "  log(rule.styleSheet.href);\n"
+            + "  log(rule.styleSheet.ownerNode);\n"
             + "  log(rule.styleSheet.cssRules[0].cssText);\n"
             + "</script>\n"
 
@@ -562,7 +565,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"[object CSSStyleSheet]", "§§URL§§imp.css", "[object CSSRuleList]", "0"})
+    @Alerts({"[object HTMLStyleElement]", "[object CSSStyleSheet]", "§§URL§§imp.css",
+             "[object CSSRuleList]", "null", "0"})
     public void styleSheetNotAvailable() throws Exception {
         final String html
             = "<html><body>\n"
@@ -574,10 +578,12 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
+            + "  log(styleSheet.ownerNode);\n"
             + "  var rule = styleSheet.cssRules[0];\n"
             + "  log(rule.styleSheet);\n"
             + "  log(rule.styleSheet.href);\n"
             + "  log(rule.styleSheet.cssRules);\n"
+            + "  log(rule.styleSheet.ownerNode);\n"
             + "  log(rule.styleSheet.cssRules.length);\n"
             + "</script>\n"
 

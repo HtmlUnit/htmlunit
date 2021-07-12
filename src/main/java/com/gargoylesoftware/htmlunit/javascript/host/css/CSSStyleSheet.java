@@ -126,6 +126,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
@@ -238,11 +239,13 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * Creates a new stylesheet representing the specified CSS stylesheet.
      * @param element the owning node
+     * @param parentScope the parent scope
      * @param wrapped the CSS stylesheet which this stylesheet host object represents
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
-    public CSSStyleSheet(final HTMLElement element, final CSSStyleSheetImpl wrapped, final String uri) {
-        setParentScope(element.getWindow());
+    public CSSStyleSheet(final HTMLElement element, final Scriptable parentScope,
+            final CSSStyleSheetImpl wrapped, final String uri) {
+        setParentScope(parentScope);
         setPrototype(getPrototype(CSSStyleSheet.class));
         wrapped_ = wrapped;
         uri_ = uri;
@@ -328,7 +331,7 @@ public class CSSStyleSheet extends StyleSheet {
             final Object fromCache = cache.getCachedObject(request);
             if (fromCache instanceof CSSStyleSheetImpl) {
                 uri = request.getUrl().toExternalForm();
-                return new CSSStyleSheet(element, (CSSStyleSheetImpl) fromCache, uri);
+                return new CSSStyleSheet(element, element.getWindow(), (CSSStyleSheetImpl) fromCache, uri);
             }
 
             uri = response.getWebRequest().getUrl().toExternalForm();
@@ -1120,16 +1123,17 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxGetter
     public String getHref() {
-        final BrowserVersion version = getBrowserVersion();
-
         if (ownerNode_ != null) {
             final DomNode node = ownerNode_.getDomNodeOrDie();
+            if (node instanceof HtmlStyle) {
+                return null;
+            }
             if (node instanceof HtmlLink) {
                 // <link rel="stylesheet" type="text/css" href="..." />
                 final HtmlLink link = (HtmlLink) node;
                 final HtmlPage page = (HtmlPage) link.getPage();
                 final String href = link.getHrefAttribute();
-                if ("".equals(href) && version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
+                if ("".equals(href) && getBrowserVersion().hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
                     return null;
                 }
                 // Expand relative URLs.
@@ -1290,6 +1294,7 @@ public class CSSStyleSheet extends StyleSheet {
 
     /**
      * Returns this stylesheet's URI (used to resolved contained @import rules).
+     * For inline styles this is the page uri.
      * @return this stylesheet's URI (used to resolved contained @import rules)
      */
     public String getUri() {
