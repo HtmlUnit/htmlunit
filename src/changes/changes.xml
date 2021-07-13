@@ -9,6 +9,9 @@
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
             <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.11.0.
+            </action>
+            <action type="update" dev="rbri">
                 SVGMatrix no longer requires java.awt.geom.AffineTransform. Hope that helps
                 a bit on android.
             </action>
