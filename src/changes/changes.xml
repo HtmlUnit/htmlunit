@@ -8,10 +8,14 @@
 
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes">
+            <action type="update" dev="rbri">
+                SVGMatrix no longer requires java.awt.geom.AffineTransform. Hope that helps
+                a bit on android.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek" issue="360">
                 CSSImportRule.styleSheet now returns the imported style sheet instead of the importing one.
             </action>
-            <action type="add" dev="Frank Danek" issue="360">
+            <action type="add" dev="rbri">
                 CSS.supports() added - returns always true for now.
             </action>
             <action type="update" dev="rbri">
