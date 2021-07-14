@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -2534,12 +2535,14 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
-            FF = {"[object WindowProperties]", "[object WindowProperties]", "[object EventTarget]",
-                "[object Object]"},
             FF78 =  {"[object WindowProperties]", "[object WindowProperties]", "[object EventTarget]",
                 "[object Object]"},
             IE = "exception")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            EDGE = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            FF = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            FF78 = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            IE = {"[object Window]", "[object EventTarget]", "[object Object]"})
     public void test__proto__() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
