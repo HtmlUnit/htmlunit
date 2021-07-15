@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
- * @author cdalexndr
+ * @author cd alexndr
  */
 public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
@@ -287,6 +287,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     return SystemUtils.IS_OS_LINUX;
                 case Windows:
                     return SystemUtils.IS_OS_WINDOWS;
+                default:
+                    break;
             }
         }
         return false;

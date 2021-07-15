@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
- * @author cdalexndr
+ * @author cd alexndr
  */
 @RunWith(BrowserRunner.class)
 public class GeolocationTest extends WebServerTestCase {
