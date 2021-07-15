@@ -570,7 +570,7 @@ public enum BrowserVersionFeatures {
     HTTP_HEADER_CH_UA,
 
     /** Browser sends Sec-Fetch headers. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     HTTP_HEADER_SEC_FETCH,
 
     /** Browser sends Upgrade-Insecure-Requests header. */
