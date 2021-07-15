@@ -2630,4 +2630,65 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "function"})
+    public void defineGetterSetter() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(typeof window.__defineGetter__);\n"
+            + "    log(typeof window.__lookupGetter__);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "function"})
+    public void defineGetterSetter_standards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(typeof window.__defineGetter__);\n"
+            + "    log(typeof window.__lookupGetter__);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello")
+    public void delegatorAnd__defineGetter__() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    window.__defineGetter__('foo', function(a) { return 'hello' });\n"
+                + "    log(window.foo);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }
