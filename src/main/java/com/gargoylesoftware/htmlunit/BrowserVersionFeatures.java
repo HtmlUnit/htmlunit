@@ -135,13 +135,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
-    /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
-     * you use CSS to attach a script to a specific element in order to implement
-     * DHTML (Dynamic HTML) components.
-     */
-    @BrowserFeature(IE)
-    CSS_SUPPORTS_BEHAVIOR_PROPERTY,
-
     /** Is display style 'block'. */
     @BrowserFeature(FF78)
     CSS_TEXTAREA_DISPLAY_BLOCK,

@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes, Firefox 90">
+            <action type="remove" dev="rbri">
+                Element behaviors and HTML components (HTCs) have been removed from the code base.
+                It was removed more than 5 years ago from IE10.
+                (https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/hh801216(v=vs.85)?redirectedfrom=MSDN)
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.11.0.
             </action>

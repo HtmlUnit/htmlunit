@@ -30,15 +30,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
@@ -49,8 +45,6 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -113,8 +107,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText;
-import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -216,24 +208,11 @@ public class HTMLElement extends Element {
 
     private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
-    private static final int BEHAVIOR_ID_UNKNOWN = -1;
-    /** BEHAVIOR_ID_CLIENT_CAPS. */
-    public static final int BEHAVIOR_ID_CLIENT_CAPS = 0;
-    /** BEHAVIOR_ID_HOMEPAGE. */
-    public static final int BEHAVIOR_ID_HOMEPAGE = 1;
-    /** BEHAVIOR_ID_DOWNLOAD. */
-    public static final int BEHAVIOR_ID_DOWNLOAD = 2;
-
-    private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
-    private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
-    private static final String BEHAVIOR_DOWNLOAD = "#default#download";
-
     /**
      * Static counter for {@link #uniqueID_}.
      */
     private static AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
-    private final Set<String> behaviors_ = new HashSet<>();
     private String uniqueID_;
 
     static {
@@ -823,371 +802,6 @@ public class HTMLElement extends Element {
             return append_;
         }
     }
-
-    /**
-     * Adds the specified behavior to this HTML element. Currently only supports
-     * the following default IE behaviors:
-     * <ul>
-     *   <li>#default#clientCaps</li>
-     *   <li>#default#homePage</li>
-     *   <li>#default#download</li>
-     * </ul>
-     * @param behavior the URL of the behavior to add, or a default behavior name
-     * @return an identifier that can be user later to detach the behavior from the element
-     */
-    public int addBehavior(final String behavior) {
-        // if behavior already defined, then nothing to do
-        if (behaviors_.contains(behavior)) {
-            return 0;
-        }
-
-        final Class<? extends HTMLElement> c = getClass();
-        if (BEHAVIOR_CLIENT_CAPS.equalsIgnoreCase(behavior)) {
-            defineProperty("availHeight", c, 0);
-            defineProperty("availWidth", c, 0);
-            defineProperty("bufferDepth", c, 0);
-            defineProperty("colorDepth", c, 0);
-            defineProperty("connectionType", c, 0);
-            defineProperty("cookieEnabled", c, 0);
-            defineProperty("cpuClass", c, 0);
-            defineProperty("height", c, 0);
-            defineProperty("javaEnabled", c, 0);
-            defineProperty("platform", c, 0);
-            defineProperty("systemLanguage", c, 0);
-            defineProperty("userLanguage", c, 0);
-            defineProperty("width", c, 0);
-            defineFunctionProperties(new String[] {"addComponentRequest"}, c, 0);
-            defineFunctionProperties(new String[] {"clearComponentRequest"}, c, 0);
-            defineFunctionProperties(new String[] {"compareVersions"}, c, 0);
-            defineFunctionProperties(new String[] {"doComponentRequest"}, c, 0);
-            defineFunctionProperties(new String[] {"getComponentVersion"}, c, 0);
-            defineFunctionProperties(new String[] {"isComponentInstalled"}, c, 0);
-            behaviors_.add(BEHAVIOR_CLIENT_CAPS);
-            return BEHAVIOR_ID_CLIENT_CAPS;
-        }
-        else if (BEHAVIOR_HOMEPAGE.equalsIgnoreCase(behavior)) {
-            defineFunctionProperties(new String[] {"isHomePage"}, c, 0);
-            defineFunctionProperties(new String[] {"setHomePage"}, c, 0);
-            defineFunctionProperties(new String[] {"navigateHomePage"}, c, 0);
-            behaviors_.add(BEHAVIOR_CLIENT_CAPS);
-            return BEHAVIOR_ID_HOMEPAGE;
-        }
-        else if (BEHAVIOR_DOWNLOAD.equalsIgnoreCase(behavior)) {
-            defineFunctionProperties(new String[] {"startDownload"}, c, 0);
-            behaviors_.add(BEHAVIOR_DOWNLOAD);
-            return BEHAVIOR_ID_DOWNLOAD;
-        }
-        else {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Unimplemented behavior: " + behavior);
-            }
-            return BEHAVIOR_ID_UNKNOWN;
-        }
-    }
-
-    /**
-     * Removes the behavior corresponding to the specified identifier from this element.
-     * @param id the identifier for the behavior to remove
-     */
-    public void removeBehavior(final int id) {
-        switch (id) {
-            case BEHAVIOR_ID_CLIENT_CAPS:
-                delete("availHeight");
-                delete("availWidth");
-                delete("bufferDepth");
-                delete("colorDepth");
-                delete("connectionType");
-                delete("cookieEnabled");
-                delete("cpuClass");
-                delete("height");
-                delete("javaEnabled");
-                delete("platform");
-                delete("systemLanguage");
-                delete("userLanguage");
-                delete("width");
-                delete("addComponentRequest");
-                delete("clearComponentRequest");
-                delete("compareVersions");
-                delete("doComponentRequest");
-                delete("getComponentVersion");
-                delete("isComponentInstalled");
-                behaviors_.remove(BEHAVIOR_CLIENT_CAPS);
-                break;
-            case BEHAVIOR_ID_HOMEPAGE:
-                delete("isHomePage");
-                delete("setHomePage");
-                delete("navigateHomePage");
-                behaviors_.remove(BEHAVIOR_HOMEPAGE);
-                break;
-            case BEHAVIOR_ID_DOWNLOAD:
-                delete("startDownload");
-                behaviors_.remove(BEHAVIOR_DOWNLOAD);
-                break;
-            default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
-                }
-        }
-    }
-
-    //----------------------- START #default#clientCaps BEHAVIOR -----------------------
-
-    /**
-     * Returns the screen's available height. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the screen's available height
-     */
-    public int getAvailHeight() {
-        return getWindow().getScreen().getAvailHeight();
-    }
-
-    /**
-     * Returns the screen's available width. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the screen's available width
-     */
-    public int getAvailWidth() {
-        return getWindow().getScreen().getAvailWidth();
-    }
-
-    /**
-     * Returns the screen's buffer depth. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the screen's buffer depth
-     */
-    public int getBufferDepth() {
-        return getWindow().getScreen().getBufferDepth();
-    }
-
-    /**
-     * Returns the screen's color depth. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the screen's color depth
-     */
-    public int getColorDepth() {
-        return getWindow().getScreen().getColorDepth();
-    }
-
-    /**
-     * Returns {@code true} if cookies are enabled. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return whether or not cookies are enabled
-     */
-    public boolean isCookieEnabled() {
-        return getWindow().getNavigator().isCookieEnabled();
-    }
-
-    /**
-     * Returns the type of CPU used. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the type of CPU used
-     */
-    public String getCpuClass() {
-        return getWindow().getNavigator().getCpuClass();
-    }
-
-    /**
-     * Returns the screen's height. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the screen's height
-     */
-    public int getHeight() {
-        return getWindow().getScreen().getHeight();
-    }
-
-    /**
-     * Returns {@code true} if Java is enabled. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return whether or not Java is enabled
-     */
-    public boolean isJavaEnabled() {
-        return getWindow().getNavigator().javaEnabled();
-    }
-
-    /**
-     * Returns the platform used. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the platform used
-     */
-    public String getPlatform() {
-        return getWindow().getNavigator().getPlatform();
-    }
-
-    /**
-     * Returns the system language. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the system language
-     */
-    public String getSystemLanguage() {
-        return getWindow().getNavigator().getSystemLanguage();
-    }
-
-    /**
-     * Returns the user language. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the user language
-     */
-    public String getUserLanguage() {
-        return getWindow().getNavigator().getUserLanguage();
-    }
-
-    /**
-     * Returns the screen's width. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the screen's width
-     */
-    public int getWidth() {
-        return getWindow().getScreen().getWidth();
-    }
-
-    /**
-     * Adds the specified component to the queue of components to be installed. Note
-     * that no components ever get installed, and this call is always ignored. Part of
-     * the <tt>#default#clientCaps</tt> default IE behavior implementation.
-     * @param id the identifier for the component to install
-     * @param idType the type of identifier specified
-     * @param minVersion the minimum version of the component to install
-     */
-    public void addComponentRequest(final String id, final String idType, final String minVersion) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Call to addComponentRequest(" + id + ", " + idType + ", " + minVersion + ") ignored.");
-        }
-    }
-
-    /**
-     * Clears the component install queue of all component requests. Note that no components
-     * ever get installed, and this call is always ignored. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     */
-    public void clearComponentRequest() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Call to clearComponentRequest() ignored.");
-        }
-    }
-
-    /**
-     * Compares the two specified version numbers. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @param v1 the first of the two version numbers to compare
-     * @param v2 the second of the two version numbers to compare
-     * @return -1 if v1 is less than v2, 0 if v1 equals v2, and 1 if v1 is more than v2
-     */
-    public int compareVersions(final String v1, final String v2) {
-        final int i = v1.compareTo(v2);
-        if (i == 0) {
-            return 0;
-        }
-        else if (i < 0) {
-            return -1;
-        }
-        else {
-            return 1;
-        }
-    }
-
-    /**
-     * Downloads all the components queued via {@link #addComponentRequest(String, String, String)}.
-     * @return {@code true} if the components are downloaded successfully
-     * Current implementation always return {@code false}
-     */
-    public boolean doComponentRequest() {
-        return false;
-    }
-
-    /**
-     * Returns the version of the specified component.
-     * @param id the identifier for the component whose version is to be returned
-     * @param idType the type of identifier specified
-     * @return the version of the specified component
-     */
-    public String getComponentVersion(final String id, final String idType) {
-        if ("{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}".equals(id)) {
-            // Yahoo Messenger.
-            return "";
-        }
-        // Everything else.
-        return "1.0";
-    }
-
-    /**
-     * Returns {@code true} if the specified component is installed.
-     * @param id the identifier for the component to check for
-     * @param idType the type of id specified
-     * @param minVersion the minimum version to check for
-     * @return {@code true} if the specified component is installed
-     */
-    public boolean isComponentInstalled(final String id, final String idType, final String minVersion) {
-        return false;
-    }
-
-    //----------------------- START #default#download BEHAVIOR -----------------------
-
-    /**
-     * Implementation of the IE behavior #default#download.
-     * @param uri the URI of the download source
-     * @param callback the method which should be called when the download is finished
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms531406.aspx">MSDN documentation</a>
-     * @throws MalformedURLException if the URL cannot be created
-     */
-    public void startDownload(final String uri, final Function callback) throws MalformedURLException {
-        final WebWindow ww = getWindow().getWebWindow();
-        final HtmlPage page = (HtmlPage) ww.getEnclosedPage();
-        final URL url = page.getFullyQualifiedUrl(uri);
-        if (!page.getUrl().getHost().equals(url.getHost())) {
-            throw Context.reportRuntimeError("Not authorized url: " + url);
-        }
-        final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                createDownloadBehaviorJob(url, callback, ww.getWebClient());
-        page.getEnclosingWindow().getJobManager().addJob(job, page);
-    }
-
-    //----------------------- END #default#download BEHAVIOR -----------------------
-
-    //----------------------- START #default#homePage BEHAVIOR -----------------------
-
-    /**
-     * Returns {@code true} if the specified URL is the web client's current
-     * homepage and the document calling the method is on the same domain as the
-     * user's homepage. Part of the <tt>#default#homePage</tt> default IE behavior
-     * implementation.
-     * @param url the URL to check
-     * @return {@code true} if the specified URL is the current homepage
-     */
-    public boolean isHomePage(final String url) {
-        try {
-            final URL newUrl = new URL(url);
-            final URL currentUrl = getDomNodeOrDie().getPage().getUrl();
-            final String home = getDomNodeOrDie().getPage().getEnclosingWindow()
-                    .getWebClient().getOptions().getHomePage();
-            final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());
-            final boolean isHomePage = home != null && home.equals(url);
-            return sameDomains && isHomePage;
-        }
-        catch (final MalformedURLException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Sets the web client's current homepage. Part of the <tt>#default#homePage</tt>
-     * default IE behavior implementation.
-     * @param url the new homepage URL
-     */
-    public void setHomePage(final String url) {
-        getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().getOptions().setHomePage(url);
-    }
-
-    /**
-     * Causes the web client to navigate to the current home page. Part of the
-     * <tt>#default#homePage</tt> default IE behavior implementation.
-     * @throws IOException if loading home page fails
-     */
-    public void navigateHomePage() throws IOException {
-        final WebClient webClient = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient();
-        webClient.getPage(webClient.getOptions().getHomePage());
-    }
-
-    //----------------------- END #default#homePage BEHAVIOR -----------------------
 
     /**
      * Returns this element's <tt>offsetHeight</tt>, which is the element height plus the element's padding

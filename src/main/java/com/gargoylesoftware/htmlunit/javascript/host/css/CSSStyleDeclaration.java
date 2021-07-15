@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_ALIGN_SUPPORTS_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
@@ -37,7 +36,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_POSITION;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BEHAVIOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
@@ -99,8 +97,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
-import java.text.MessageFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -134,7 +130,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -221,9 +216,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static final Map<String, String> CamelizeCache_
             = Collections.synchronizedMap(new HashMap<String, String>());
 
-    /** Used to parse URLs. */
-    private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
-
     /** The element to which this style belongs. */
     private Element jsElement_;
 
@@ -286,29 +278,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         WebAssert.notNull("htmlElement", element);
         jsElement_ = element;
         setDomNode(element.getDomNodeOrNull(), false);
-
-        // If an IE behavior was specified in the style, apply the behavior.
-        if (getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)
-            && element instanceof HTMLElement) {
-            final HTMLElement htmlElement = (HTMLElement) element;
-            final String behavior = getStyleAttribute(BEHAVIOR);
-            if (StringUtils.isNotBlank(behavior)) {
-                try {
-                    final Object[] url;
-                    synchronized (URL_FORMAT) {
-                        url = URL_FORMAT.parse(behavior);
-                    }
-                    if (url.length > 0) {
-                        htmlElement.addBehavior((String) url[0]);
-                    }
-                }
-                catch (final ParseException e) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("Invalid behavior: '" + behavior + "'.");
-                    }
-                }
-            }
-        }
     }
 
     /**

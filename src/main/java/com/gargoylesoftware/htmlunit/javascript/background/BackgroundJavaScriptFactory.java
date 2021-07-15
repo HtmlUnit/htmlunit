@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import java.net.URL;
-
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -111,19 +109,6 @@ public class BackgroundJavaScriptFactory {
                 runnable.run();
             }
         };
-    }
-
-    /**
-     * Creates a new instance.
-     * @param url the URL to download
-     * @param callback the callback function to call
-     * @param client the web client this if for
-     *
-     * @return JavaScriptJob the created job
-     */
-    public JavaScriptJob createDownloadBehaviorJob(final URL url,
-            final Function callback, final WebClient client) {
-        return new DownloadBehaviorJob(url, callback, client);
     }
 
     /**
