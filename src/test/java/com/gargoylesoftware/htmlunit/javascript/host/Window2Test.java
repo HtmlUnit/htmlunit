@@ -2677,11 +2677,11 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts("hello")
     public void delegatorAnd__defineGetter__() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    window.__defineGetter__('foo', function(a) { return 'hello' });\n"
+                + "    window.__defineGetter__('foo', function() { return 'hello' });\n"
                 + "    log(window.foo);\n"
                 + "  }\n"
                 + "</script></head>\n"
@@ -2691,4 +2691,25 @@ public class Window2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("worldworld")
+    public void delegatorAnd__defineSetter__() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    window.__defineSetter__('foo', function(a) { document.title = a; });\n"
+                + "    window.foo = 'world';\n"
+                + "    log(document.title);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
