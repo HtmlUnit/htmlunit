@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -257,7 +256,7 @@ public class WebConsole implements Serializable {
         }
 
         final StringBuilder sb = new StringBuilder();
-        final LinkedList<Object> args = new LinkedList<>(Arrays.asList(objs));
+        final List<Object> args = Arrays.asList(objs);
 
         final Formatter formatter = getFormatter();
 
