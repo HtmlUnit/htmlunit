@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -402,9 +402,13 @@ public class MouseEvent extends UIEvent {
     public static MouseEvent getCurrentMouseEvent() {
         final Context context = Context.getCurrentContext();
         if (context != null) {
-            final LinkedList<Event> events = (LinkedList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
-            if (events != null && !events.isEmpty() && events.getLast() instanceof MouseEvent) {
-                return (MouseEvent) events.getLast();
+            final ArrayList<Event> events = (ArrayList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
+            if (events != null && events.size() > 0) {
+                final int lastIdx = events.size() - 1;
+                final Event lastEvent = events.get(lastIdx);
+                if (lastEvent instanceof MouseEvent) {
+                    return (MouseEvent) lastEvent;
+                }
             }
         }
         return null;

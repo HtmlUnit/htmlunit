@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 import java.lang.ref.WeakReference;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -50,7 +50,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      */
     public DefaultJavaScriptExecutor(final WebClient webClient) {
         webClient_ = new WeakReference<>(webClient);
-        jobManagerList_ = new LinkedList<>();
+        jobManagerList_ = new ArrayList<>();
         shutdown_ = new AtomicBoolean();
     }
 
@@ -185,7 +185,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     }
 
     private void updateJobMangerList(final JavaScriptJobManager newJobManager) {
-        final List<WeakReference<JavaScriptJobManager>> managers = new LinkedList<>();
+        final List<WeakReference<JavaScriptJobManager>> managers = new ArrayList<>(jobManagerList_.size());
         synchronized (jobManagerList_) {
             for (final WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
                 final JavaScriptJobManager manager = weakReference.get();

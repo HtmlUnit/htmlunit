@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -814,7 +813,7 @@ public class Node extends EventTarget {
         final HTMLCollection collection = new HTMLCollection(node, false) {
             @Override
             protected List<DomNode> computeElements() {
-                final List<DomNode> children = new LinkedList<>();
+                final List<DomNode> children = new ArrayList<>();
                 for (final DomNode domNode : node.getChildNodes()) {
                     if (domNode instanceof DomElement) {
                         children.add(domNode);

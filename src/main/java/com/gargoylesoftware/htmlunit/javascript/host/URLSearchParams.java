@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -107,7 +106,7 @@ public class URLSearchParams extends SimpleScriptable {
         }
     }
 
-    private final List<NameValuePair> params_ = new LinkedList<>();
+    private final List<NameValuePair> params_ = new ArrayList<>();
 
     /**
      * Constructs a new instance.
@@ -218,7 +217,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public Scriptable getAll(final String name) {
-        final List<String> result = new LinkedList<>();
+        final List<String> result = new ArrayList<>(params_.size());
         for (final NameValuePair param : params_) {
             if (param.getName().equals(name)) {
                 result.add(param.getValue());

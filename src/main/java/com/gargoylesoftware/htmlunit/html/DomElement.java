@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -609,7 +609,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             @Override
             @SuppressWarnings("unchecked")
             protected List<E> provideElements() {
-                final List<E> res = new LinkedList<>();
+                final List<E> res = new ArrayList<>();
                 for (final HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
                     if (elem.getLocalName().equalsIgnoreCase(tagName)) {
                         res.add((E) elem);
