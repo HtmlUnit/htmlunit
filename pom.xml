@@ -38,7 +38,7 @@
         <checkstyle.version>8.44</checkstyle.version>
         <spotbugs.version>4.3.0</spotbugs.version>
         <pmd.version>6.36.0</pmd.version>
-        <archunit.version>0.20.0</archunit.version>
+        <archunit.version>0.20.1</archunit.version>
     </properties>
 
     <build>
@@ -315,7 +315,7 @@
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.14.0</version>
+                <version>1.14.1</version>
                 <executions>
                     <execution>
                         <goals>
