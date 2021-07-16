@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -256,7 +257,7 @@ public class WebConsole implements Serializable {
         }
 
         final StringBuilder sb = new StringBuilder();
-        final List<Object> args = Arrays.asList(objs);
+        final List<Object> args = new ArrayList<>(Arrays.asList(objs));
 
         final Formatter formatter = getFormatter();
 
