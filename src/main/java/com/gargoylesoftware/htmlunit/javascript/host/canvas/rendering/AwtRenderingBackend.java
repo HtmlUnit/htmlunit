@@ -1010,10 +1010,11 @@ public class AwtRenderingBackend implements RenderingBackend {
             backend.graphics2D_.setClip(clip_);
         }
     }
+
     private static Color toAwtColor(final com.gargoylesoftware.htmlunit.html.impl.Color color) {
         if (color == null) {
             return null;
         }
-        return new Color(color.getRed(), color.getBlue(), color.getBlue(), color.getAlpha());
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 }
