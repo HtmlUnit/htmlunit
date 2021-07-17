@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -76,13 +75,13 @@ public class HtmlTable extends HtmlElement {
      */
     public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();
-        final HashSet<Point> occupied = new HashSet<>();
+        final HashSet<Position> occupied = new HashSet<>();
         int row = 0;
         for (final HtmlTableRow htmlTableRow : rowIterator) {
             final HtmlTableRow.CellIterator cellIterator = htmlTableRow.getCellIterator();
             int col = 0;
             for (final HtmlTableCell cell : cellIterator) {
-                while (occupied.contains(new Point(row, col))) {
+                while (occupied.contains(new Position(row, col))) {
                     col++;
                 }
                 final int nextRow = row + cell.getRowSpan();
@@ -95,7 +94,7 @@ public class HtmlTable extends HtmlElement {
                 if (cell.getRowSpan() > 1 || cell.getColumnSpan() > 1) {
                     for (int i = 0; i < cell.getRowSpan(); i++) {
                         for (int j = 0; j < cell.getColumnSpan(); j++) {
-                            occupied.add(new Point(row + i, col + j));
+                            occupied.add(new Position(row + i, col + j));
                         }
                     }
                 }
@@ -441,5 +440,48 @@ public class HtmlTable extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.TABLE;
+    }
+
+    private static final class Position {
+
+        private final int x_;
+        private final int y_;
+
+        public Position(final int x, final int y) {
+            x_ = x;
+            y_ = y;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + x_;
+            result = prime * result + y_;
+            return result;
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+
+            final Position other = (Position) obj;
+            if (x_ != other.x_) {
+                return false;
+            }
+            if (y_ != other.y_) {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
