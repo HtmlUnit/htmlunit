@@ -444,20 +444,20 @@ public class HtmlTable extends HtmlElement {
 
     private static final class Position {
 
-        private final int x_;
-        private final int y_;
+        private final int posX_;
+        private final int posY_;
 
-        public Position(final int x, final int y) {
-            x_ = x;
-            y_ = y;
+        private Position(final int x, final int y) {
+            posX_ = x;
+            posY_ = y;
         }
 
         @Override
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + x_;
-            result = prime * result + y_;
+            result = prime * result + posX_;
+            result = prime * result + posY_;
             return result;
         }
 
@@ -474,10 +474,10 @@ public class HtmlTable extends HtmlElement {
             }
 
             final Position other = (Position) obj;
-            if (x_ != other.x_) {
+            if (posX_ != other.posX_) {
                 return false;
             }
-            if (y_ != other.y_) {
+            if (posY_ != other.posY_) {
                 return false;
             }
 
