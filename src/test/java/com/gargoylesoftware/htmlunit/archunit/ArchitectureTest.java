@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.archunit;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaMethod;
+import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
@@ -41,7 +43,7 @@ import com.tngtech.archunit.lang.SimpleConditionEvent;
  * @author Ronald Brill
  */
 @RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.gargoylesoftware.htmlunit")
+@AnalyzeClasses(packages = "com.gargoylesoftware.htmlunit", importOptions = ImportOption.DoNotIncludeTests.class)
 public class ArchitectureTest {
 
     /**
@@ -51,6 +53,16 @@ public class ArchitectureTest {
     public static final ArchRule utilsPackageRule = classes()
         .that().haveNameMatching(".*Util.?")
         .should().resideInAPackage("com.gargoylesoftware.htmlunit.util");
+
+    /**
+     * Do not use awt if not really needed (because not available on android).
+     */
+    @ArchTest
+    public static final ArchRule awtPackageRule = noClasses()
+        .that().haveNameNotMatching(".*\\.AwtRenderingBackend.*"
+                + "|.*\\.DoTypeProcessor.*|.*\\.HtmlArea.*|.*\\.AppletContextImpl.*|"
+                + ".*ComputedCSSStyleDeclaration.*")
+        .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
      * JsxClasses are always in the javascript package.
