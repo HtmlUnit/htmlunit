@@ -767,17 +767,17 @@ public class AwtRenderingBackend implements RenderingBackend {
     private static Color extractColor(final String style) {
         final String tmpStyle = style.replaceAll("\\s", "");
 
-        Color color = StringUtils.findColorRGB(tmpStyle);
+        Color color = toAwtColor(StringUtils.findColorRGB(tmpStyle));
         if (color == null) {
-            color = StringUtils.findColorRGBA(tmpStyle);
+            color = toAwtColor(StringUtils.findColorRGBA(tmpStyle));
         }
         if (color == null) {
-            color = StringUtils.findColorHSL(tmpStyle);
+            color = toAwtColor(StringUtils.findColorHSL(tmpStyle));
         }
 
         if (color == null) {
             if (tmpStyle.length() > 0 && tmpStyle.charAt(0) == '#') {
-                color = StringUtils.asColorHexadecimal(tmpStyle);
+                color = toAwtColor(StringUtils.asColorHexadecimal(tmpStyle));
             }
             else {
                 color = knownColors.get(tmpStyle.toLowerCase(Locale.ROOT));
@@ -1009,5 +1009,11 @@ public class AwtRenderingBackend implements RenderingBackend {
 
             backend.graphics2D_.setClip(clip_);
         }
+    }
+    private static Color toAwtColor(final com.gargoylesoftware.htmlunit.html.impl.Color color) {
+        if (color == null) {
+            return null;
+        }
+        return new Color(color.getRed(), color.getBlue(), color.getBlue(), color.getAlpha());
     }
 }
