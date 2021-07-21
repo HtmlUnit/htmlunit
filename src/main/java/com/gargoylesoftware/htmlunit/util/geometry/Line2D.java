@@ -21,8 +21,6 @@ package com.gargoylesoftware.htmlunit.util.geometry;
  */
 public class Line2D implements Shape2D {
 
-    private static final double epsilon = 0.0000001;
-
     private final double startX_;
     private final double startY_;
     private final double endX_;
@@ -32,10 +30,22 @@ public class Line2D implements Shape2D {
     private final double slope_;
     private final double yIntercept_;
 
+    /**
+     * Ctor.
+     * @param start the start point
+     * @param end the end point
+     */
     public Line2D(final Point2D start, final Point2D end) {
         this(start.getX(), start.getY(), end.getX(), end.getY());
     }
 
+    /**
+     * Ctor.
+     * @param x1 the x value of the start point
+     * @param y1 the y value of the start point
+     * @param x2 the x value of the end point
+     * @param y2 the y value of the end point
+     */
     public Line2D(final double x1, final double y1, final double x2, final double y2) {
         startX_ = x1;
         startY_ = y1;
@@ -54,6 +64,10 @@ public class Line2D implements Shape2D {
         }
     }
 
+    /**
+     * @param line the line to intersect this with
+     * @return the intersection point of the two lines or null if they are parallel
+     */
     public Point2D intersect(final Line2D line) {
         if (isVertical_ && line.isVertical_) {
             return null;
@@ -109,6 +123,14 @@ public class Line2D implements Shape2D {
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return Math.abs(startX_ - endX_) < epsilon && Math.abs(startY_ - endY_) < epsilon;
     }
 
     @Override

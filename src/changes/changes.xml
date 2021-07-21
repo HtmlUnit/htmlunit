@@ -9,6 +9,9 @@
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes, Firefox 90">
             <action type="update" dev="rbri">
+                Use our own simple Shape2D classes to reduce the java.awt dependencies.
+            </action>
+            <action type="update" dev="rbri">
                 Use our own simple color class to reduce the java.awt dependencies.
             </action>
             <action type="remove" dev="rbri">

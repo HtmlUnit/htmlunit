@@ -92,6 +92,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
         }
         catch (final WebDriverException e) {
+            e.printStackTrace();
             assertEquals(getExpectedAlerts()[0], "WebDriverException");
         }
     }

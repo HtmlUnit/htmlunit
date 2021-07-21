@@ -60,7 +60,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule awtPackageRule = noClasses()
         .that().haveNameNotMatching(".*\\.AwtRenderingBackend.*"
-                + "|.*\\.DoTypeProcessor.*|.*\\.HtmlArea.*|.*\\.AppletContextImpl.*|"
+                + "|.*\\.DoTypeProcessor.*|.*\\.AppletContextImpl.*|"
                 + ".*ComputedCSSStyleDeclaration.*")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 

@@ -264,7 +264,10 @@ public class HtmlArea extends HtmlElement {
     @Override
     public boolean isDisplayed() {
         final DomNode parent = getParentNode();
-        return null != parent && parent instanceof HtmlMap && parent.isDisplayed();
+        if (null != parent && parent instanceof HtmlMap && parent.isDisplayed()) {
+            return !isEmpty();
+        }
+        return false;
     }
 
     private Rectangle2D parseRect() {
@@ -349,5 +352,30 @@ public class HtmlArea extends HtmlElement {
             return true;
         }
         return super.handles(event);
+    }
+
+    private boolean isEmpty() {
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT).toLowerCase(Locale.ROOT);
+
+        if ("default".equals(shape) && getCoordsAttribute() != null) {
+            return false;
+        }
+
+        if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
+            final Shape2D rectangle = parseRect();
+            return rectangle.isEmpty();
+        }
+
+        if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
+            final Shape2D circle = parseCircle();
+            return circle.isEmpty();
+        }
+
+        if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
+            final Shape2D path = parsePoly();
+            return path.isEmpty();
+        }
+
+        return false;
     }
 }

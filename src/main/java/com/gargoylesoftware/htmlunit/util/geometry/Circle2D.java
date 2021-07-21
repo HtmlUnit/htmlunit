@@ -24,6 +24,12 @@ public class Circle2D implements Shape2D {
     private final double centerY_;
     private final double radius_;
 
+    /**
+     * Ctor.
+     * @param centerX x value of the second center
+     * @param centerY y value of the second center
+     * @param radius the radius
+     */
     public Circle2D(final double centerX, final double centerY, final double radius) {
         centerX_ = centerX;
         centerY_ = centerY;
@@ -39,6 +45,14 @@ public class Circle2D implements Shape2D {
         final double offsetY = centerY_ - y;
 
         return offsetX * offsetX + offsetY * offsetY <= radius_ * radius_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return radius_ < epsilon;
     }
 
     @Override

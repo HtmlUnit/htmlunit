@@ -25,6 +25,13 @@ public class Rectangle2D implements Shape2D {
     private double right_;
     private double bottom_;
 
+    /**
+     * Ctor.
+     * @param x1 x value of the first corner
+     * @param y1 y value of the first corner
+     * @param x2 x value of the second corner
+     * @param y2 y value of the second corner
+     */
     public Rectangle2D(final double x1, final double y1, final double x2, final double y2) {
         if (x1 < x2) {
             left_ = x1;
@@ -45,10 +52,16 @@ public class Rectangle2D implements Shape2D {
         }
     }
 
+    /**
+     * @return the x coord of the leftmost corner.
+     */
     public double getLeft() {
         return left_;
     }
 
+    /**
+     * @return the y coord of the bottom line.
+     */
     public double getBottom() {
         return bottom_;
     }
@@ -82,6 +95,14 @@ public class Rectangle2D implements Shape2D {
                 bottom_ = y;
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return Math.abs(top_ - bottom_) < epsilon || Math.abs(left_ - right_) < epsilon;
     }
 
     @Override

@@ -25,12 +25,24 @@ public class Polygon2D implements Shape2D {
     private final ArrayList<Point2D> points_;
     private final Rectangle2D boundingBox_;
 
+    /**
+     * Ctor.
+     * @see #lineTo(double, double)
+     * @param startX the x value of the first point.
+     * @param startY the Y value of the first point.
+     */
     public Polygon2D(final double startX, final double startY) {
         points_ = new ArrayList<>();
         points_.add(new Point2D(startX, startY));
         boundingBox_ = new Rectangle2D(startX, startY, startX, startY);
     }
 
+    /**
+     * Add another corner Point to the polygon.
+     * @param x the x value of the corner to be added
+     * @param y the y value of the corner to be added
+     * @return this to support fluent style construction
+     */
     public Polygon2D lineTo(final double x, final double y) {
         points_.add(new Point2D(x, y));
         boundingBox_.extend(x, y);
@@ -87,6 +99,15 @@ public class Polygon2D implements Shape2D {
         }
 
         return intersectionCount % 2 != 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        // sufficient for now
+        return points_.size() > 1;
     }
 
     @Override

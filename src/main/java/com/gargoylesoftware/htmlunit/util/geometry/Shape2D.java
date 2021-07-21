@@ -21,6 +21,9 @@ package com.gargoylesoftware.htmlunit.util.geometry;
  */
 public interface Shape2D {
 
+    /** Constant used for comparing doubles. */
+    double epsilon = 0.0000001;
+
     /**
      * @param x point x value
      * @param y point y value
@@ -28,4 +31,9 @@ public interface Shape2D {
      *         <code>false</code> otherwise.
      */
     boolean contains(double x, double y);
+
+    /**
+     * @return <code>true</code> if the Shape is empty.
+     */
+    boolean isEmpty();
 }
