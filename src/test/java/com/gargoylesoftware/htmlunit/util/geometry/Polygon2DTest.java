@@ -72,7 +72,6 @@ public class Polygon2DTest {
                     .lineTo(1, 7);
 
         assertTrue(polygon.contains(5, 5));
-
     }
 
     /**
