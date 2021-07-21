@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
-import net.sourceforge.htmlunit.corejs.javascript.ConsString;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -70,8 +69,8 @@ public class JSObject {
         if (jsResult instanceof ScriptableObject) {
             return new JSObject((ScriptableObject) jsResult);
         }
-        if (jsResult instanceof ConsString) {
-            return ((ConsString) jsResult).toString();
+        if (jsResult instanceof CharSequence) {
+            return jsResult.toString();
         }
         return jsResult;
     }
@@ -97,8 +96,8 @@ public class JSObject {
             if (jsResult instanceof ScriptableObject) {
                 return new JSObject((ScriptableObject) jsResult);
             }
-            if (jsResult instanceof ConsString) {
-                return ((ConsString) jsResult).toString();
+            if (jsResult instanceof CharSequence) {
+                return jsResult.toString();
             }
             return jsResult;
         }

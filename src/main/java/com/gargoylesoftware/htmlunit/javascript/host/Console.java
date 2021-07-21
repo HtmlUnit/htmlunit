@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.ConsString;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -98,8 +97,7 @@ public class Console extends SimpleScriptable {
 
         final Object[] data;
         final Object first = args[1];
-        if (first instanceof String
-                || first instanceof ConsString
+        if (first instanceof CharSequence
                 || first instanceof ScriptableObject && ("String".equals(((Scriptable) first).getClassName()))) {
             data = new Object[args.length - 1];
             data[0] = "Assertion failed: " + first.toString();
