@@ -1006,8 +1006,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
-
         final int width;
         final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
@@ -1027,6 +1025,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = node.getTextContent().length() * getBrowserVersion().getPixesPerChar();
             }
             else if (BLOCK.equals(display)) {
+                final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
                 if (element instanceof HTMLBodyElement) {
                     width = windowWidth - 16;
                 }
@@ -1078,11 +1077,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         else if (AUTO.equals(styleWidth)) {
-            width = windowWidth;
+            width = element.getWindow().getWebWindow().getInnerWidth();
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(element, new CssValue(0, windowWidth) {
+            width = pixelValue(element, new CssValue(0, element.getWindow().getWebWindow().getInnerWidth()) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
                     return style.getStyleAttribute(WIDTH, true);
                 }
