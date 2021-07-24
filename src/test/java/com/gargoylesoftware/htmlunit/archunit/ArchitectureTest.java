@@ -59,9 +59,18 @@ public class ArchitectureTest {
      */
     @ArchTest
     public static final ArchRule awtPackageRule = noClasses()
-        .that().haveNameNotMatching(".*\\.AwtRenderingBackend.*"
-                + "|.*\\.DoTypeProcessor.*|.*\\.AppletContextImpl.*|"
-                + ".*ComputedCSSStyleDeclaration.*")
+        .that()
+            .doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$SaveState")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$1")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.html.DoTypeProcessor")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
+            .and().doNotHaveFullyQualifiedName("com.gargoylesoftware.htmlunit.html.applets.AppletContextImpl")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
