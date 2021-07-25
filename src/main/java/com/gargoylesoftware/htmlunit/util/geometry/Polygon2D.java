@@ -106,8 +106,7 @@ public class Polygon2D implements Shape2D {
      */
     @Override
     public boolean isEmpty() {
-        // sufficient for now
-        return points_.size() > 1;
+        return points_.size() < 2;
     }
 
     @Override

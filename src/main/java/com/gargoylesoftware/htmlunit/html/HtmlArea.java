@@ -305,18 +305,27 @@ public class HtmlArea extends HtmlElement {
     private Circle2D parseCircle() {
         // browsers seem to support comma and blank
         final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
-        final String radiusString = coords[2].trim();
 
-        final int radius;
+        double centerX = 0;
+        double centerY = 0;
+        double radius = 0;
+
         try {
-            radius = Integer.parseInt(radiusString);
+            if (coords.length > 0) {
+                centerX = Double.parseDouble(coords[0].trim());
+            }
+            if (coords.length > 1) {
+                centerY = Double.parseDouble(coords[1].trim());
+            }
+            if (coords.length > 2) {
+                radius = Double.parseDouble(coords[2].trim());
+            }
+
         }
-        catch (final NumberFormatException nfe) {
-            throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
+        catch (final NumberFormatException e) {
+            LOG.warn("Invalid circle coords '" + Arrays.toString(coords) + "'", e);
         }
 
-        final double centerX = Double.parseDouble(coords[0].trim());
-        final double centerY = Double.parseDouble(coords[1].trim());
         return new Circle2D(centerX, centerY, radius);
     }
 
@@ -325,7 +334,7 @@ public class HtmlArea extends HtmlElement {
         final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
 
         try {
-            if (coords.length < 1) {
+            if (coords.length > 1) {
                 final Polygon2D path = new Polygon2D(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
 
                 for (int i = 2; i + 1 < coords.length; i += 2) {

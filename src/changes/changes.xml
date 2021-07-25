@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes, Firefox 90">
+            <action type="add" dev="rbri">
+                More detailed tests and some fixes for HtmlArea processing.
+            </action>
             <action type="update" dev="rbri">
                 core-js: Two minor code optimizations regarding ConsString handling.
             </action>
