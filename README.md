@@ -1,6 +1,6 @@
 # HtmlUnit
 
-Version 2.51.0 / July 04, 2021
+Version 2.52.0 / July 25, 2021
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -25,7 +25,7 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.51.0</version>
+        <version>2.52.0</version>
     </dependency>
 
 Overview
@@ -76,7 +76,7 @@ If you use maven please add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.52.0-SNAPSHOT</version>
+        <version>2.53.0-SNAPSHOT</version>
     </dependency>
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
@@ -96,7 +96,7 @@ License
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.51.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.52.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/job/HtmlUnit%20-%20Headless/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
