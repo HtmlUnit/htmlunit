@@ -9,6 +9,15 @@
     <body>
         <release version="2.52.0" date="August xx, 2021" description="Bugfixes, Firefox 90">
             <action type="update" dev="rbri">
+                core-js: Two minor code optimizations regarding ConsString handling.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Delegator handling required for HtmlUnit is now part of Rhino.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: Remove some no longer required changes from our Rhino fork.
+            </action>
+            <action type="update" dev="rbri">
                 Use our own simple Shape2D classes to reduce the java.awt dependencies.
             </action>
             <action type="update" dev="rbri">
