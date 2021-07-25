@@ -43,8 +43,9 @@ public class SvgTextTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -53,7 +54,7 @@ public class SvgTextTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(SvgText.class.isInstance(page.getElementById("myId")));
@@ -72,11 +73,12 @@ public class SvgTextTest extends WebDriverTestCase {
             + "    <text id='myId'/>\n"
             + "  </svg>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(window.getComputedStyle(document.getElementById('myId'), null).fontSize);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(window.getComputedStyle(document.getElementById('myId'), null).fontSize);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
