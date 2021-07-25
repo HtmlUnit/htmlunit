@@ -29,7 +29,8 @@
                 (https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/hh801216(v=vs.85)?redirectedfrom=MSDN)
             </action>
             <action type="update" dev="rbri">
-                Upgrade Apache commons-io to 2.11.0.
+                The new Apache commons-io to 2.11.0 is available but we are still at 2.20.0 because the new version seems
+                to have an regression (https://issues.apache.org/jira/browse/IO-744).
             </action>
             <action type="update" dev="rbri">
                 SVGMatrix no longer requires java.awt.geom.AffineTransform. Hope that helps
